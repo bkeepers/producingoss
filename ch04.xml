@@ -5,56 +5,144 @@
 <simplesect>
 
 <para>The first question people usually ask about free software is
-"How does it work?  What keeps the project running &mdash; who makes
-the decisions?"  I'm always dissatisfied with bland responses about
+"How does it work?  What keeps a project running &mdash; who makes the
+decisions?"  I'm always dissatisfied with bland responses about
 meritocracy, the spirit of cooperation, code speaking for itself, etc.
 The fact is, the question is not easy to answer.  Meritocracy,
-cooperation, and running code are all part of it, but these words do
-little to explain how projects actually run on a day-to-day basis, and
-they say nothing about how conflicts are resolved.</para>
+cooperation, and running code are all part of it, but they do little
+to explain how projects actually run on a day-to-day basis, and say
+nothing about how conflicts are resolved.</para>
 
-<para>This chapter tries to show some common ingredients in the
-structure of succesful projects.  Here, "success" means not just
-technical quality, but operational health and survivability.
-Operational health is the project's ongoing ability to incorporate new
-code contributions and new developers, and to handle incoming bug
-reports without falling apart.  Survivability can be described as the
-likelihood that the project would continue even if all of its founding
-members were to move on to other things.  Many projects have initial
-technical success, but without a robust developer base and social
-foundation, may be unable to handle the growth that initial success
-brings, or the departure of charismatic individuals.</para>
+<para>This chapter tries to show the structural underpinnings
+successful projects have in common.  I mean "successful" not just in
+terms of technical quality, but also operational health and
+survivability.  Operational health is the project's ongoing ability to
+incorporate new code contributions and new developers, and to be
+responsive to incoming bug reports.  Survivability is the project's
+ability to exist independently of any specific participant &mdash;
+think of it as the likelihood that the project would continue even if
+all of its founding members were to move on to other things.  It is
+not hard to achieve initial technical success, but without a robust
+developer base and social foundation, a project may be unable to
+handle the growth that initial success brings, or the departure of
+charismatic individuals.</para>
 
 <para>There are various different ways to achieve this kind of
-success.  Some ways involve a formal governance structure, by which
-new developers are invited in, bug reports routed, release made,
-debates resolved, and so on.  Other ways involve less formal
-structure, but more conscious self-restraint, to produce an atmosphere
-of fairness that people can rely on as a <foreignphrase>de
-facto</foreignphrase> form of governance.  Both ways lead to the same
-result: a sense of institutional permanence, supported by habits and
-procedures that are well-understood by everyone who participates.
-These features are even more important in self-organized systems than
-in centrally-controlled ones, because in self-organized systems,
-everyone is aware that a few bad apples can bring the whole thing
-crashing down, at least for a while.</para>
+success.  Some involve a formal governance structure, by which debates
+are resolved, new developers are invited in (and sometimes out), new
+features chosen, and so on.  Others involve less formal structure, but
+more conscious self-restraint, to produce an atmosphere of fairness
+that people can rely on as a <foreignphrase>de facto</foreignphrase>
+form of governance.  Both ways lead to the same result: a sense of
+institutional permanence, supported by habits and procedures that are
+well-understood by everyone who participates.  These features are even
+more important in self-organizing systems than in centrally-controlled
+ones, because in self-organizing systems, everyone is conscious that a
+few bad apples can bring the whole thing crashing down, at least for a
+while.</para>
 
-<para>Even free software projects which run on the Benevolent
-Dictatorship model are not truly centrally-controlled. <remark>(Talk
-about the magic of forkability here &mdash; how forakability is,
-paradoxically, what keeps things together.  Some people say it all
-boils down to who has root on the server.  Show why this is not really
-true.  Also, difference between formal governance and their daily
-practice.  Note that the less governance structure there is, the more
-careful senior developers have to be about stomping on newcomers
+<sect2 id="pfs-forkability">
+<title>Forkability</title>
+
+<para>The force that binds developers together on a free software
+project, and makes them willing to compromise on their own visions for
+the software when necessary, is the code's
+<firstterm>forkability</firstterm>: the ability of anyone to take a
+copy of the source code and use it to start a competing project.  This
+is known as <firstterm>forking</firstterm> the code, and the
+paradoxical thing is that the <emphasis>possibility</emphasis> of
+forks is usually a much greater force in free software projects than
+actual forks, which are very rare.  Because a fork is bad for everyone
+(for reasons examined in detail in <xref linkend="pfs-forks"/>), the
+more serious the threat of a fork becomes, the more willing people are
+to compromise to avoid it.  People also tend not to use fork threats
+as an extremist debating technique ("Do things my way or I'll fork the
+project!"), because everyone is aware that a fork which fails to
+seduce developers away from the original project is unlikely to
+survive long.  Observers (including not only developers, but also
+users and operating system packagers) will make their own judgement
+about which side to choose.  Anyone who contemplates initiating a fork
+knows this, and will therefore want to appear extremely reluctant to
+fork, so that if they finally do it, they can credibly claim it was
+the only route left.  Whether or not they were actually reluctant
+doesn't matter, since faked reluctance has much the same outward
+effect as real reluctance.</para>
+
+<para>Forks, or rather the potential for forks, are the reason there
+are no true dictators in free software projects.  This may seem like a
+surprising claim &mdash; certainly it's common enough to hear some
+developer referred to as the "dictator" or "tyrant" in a given open
+source project.  But this kind of tyranny is quite different from the
+normal understanding of the word.  Imagine a king who rules over a
+kingdom, but with the special proviso that any of his subjects could
+duplicate the entire kingdom at any time, and move to the copy to rule
+it as they see fit.  Would not such a king govern very differently
+from one whose subjects were bound to stay under his rule no matter
+what he did?</para>
+
+<para>This is why even projects which are not formally organized as
+democracies are, in practice, democracies when it comes to important
+decisions.  Replicability implies forkability; forkability implies
+consensus.  It may well be that everyone is willing to defer to one
+leader (the most famous example being Linus Torvalds in Linux kernel
+development), but this is because they <emphasis>choose</emphasis> to
+do so, in an entirely non-cynical, non-sinister way.  The dictator has
+no magical hold over the project; one of the key properties of any
+open source license is that it does not give one party more power than
+others in deciding how the code can changed or used.  If the dictator
+were to suddenly start making bad decisions, there would be
+restlessness, followed eventually by revolt and a fork.  Except, of
+course, things rarely get that far, because the dictator compromises
+first.</para>
+
+</sect2>
+
+<para>Just because forkability puts an upper limit on how much power
+anyone can exert in a project doesn't mean there aren't important
+differences in how projects can be governed.  You don't want every
+decision to come down to the question of who might be considering a
+fork.  That would get tiresome very quickly, and sap energy away from
+development efforts.  Below we'll look at two ways to organize
+projects such that most decisions go smoothly.  These two examples are
+the extremes; most projects fall somewhere along the range between
+them.</para>
+
+</simplesect>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-benevolant-dictator">
+<title>The Benevolent Dictator</title>
+
+<para><remark>(in progress)</remark></para>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-consensus-democracy">
+<title>Consensus-based Democracy</title>
+
+<para><remark>(in progress)</remark></para>
+
+<para><remark>Even free software projects which run on the Benevolent
+Dictatorship model are not truly centrally-controlled.  Some people
+say it all boils down to who has root on the server.  Show why this is
+not really true.  Also, difference between formal governance and their
+daily practice.  Note that the less governance structure there is, the
+more careful senior developers have to be about stomping on newcomers
 &mdash; not so much because the target will feel squished, as that
 <emphasis>other</emphasis> people will not be willing to come to their
 aid, because <emphasis>they</emphasis> will not feel protected by the
-"rule of law".  Oh, and if there ends up being a section dedicated to
-the Benevolent Dictator phenomenon, then link to it from
-above.)</remark></para>
+"rule of law".</remark></para>
 
-</simplesect>
+<para><remark>Talk importance of reconsiderability of rules.  If
+someone isn't happy with the process and opens a meta-question, it is
+important to recognize that they have a right to do that.  If someone
+makes a habit of that, then it becomes okay to ignore them (after all,
+if people agree, they'll chime in &mdash; not everything requires a
+response).</remark></para>
+
+</sect1>
 
 
 <!-- ======================== SECTION ============================== -->
@@ -327,4 +415,3 @@ local variables:
 sgml-parent-document: ("book.xml" "chapter")
 end:
 -->
-
