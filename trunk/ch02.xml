@@ -1408,11 +1408,67 @@ consciously.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-ch-2-sect-3.4">
-<title>Practice Code Review</title>
+<title>Practice Conspicuous Code Review</title>
 
-<para><remark>Talk about Greg Stein example here.  Give the example of
-bouncing a review back to Mike (or was it Ben?) to have them post it,
-so the exchange could be public.</remark></para>
+<para>One of the best ways to foster a productive development
+community is to get people looking at each others' code.  Some
+infrastructure is required to do this effectively, namely, commit
+emails must be turned on, see <xref linkend="pfs-ch-4-sect-3"/> for
+more details.  The effect of commit emails is that every time someone
+commits a change to the source code, an email goes out showing the log
+message and diffs for the change.  <firstterm>Code review</firstterm>
+is the practice of reviewing commit emails as they come in, looking
+for bugs and possible improvements.</para>
+
+<para>Code review serves several purposes simultaneously.  It's the
+most obvious example of peer-review in the open source world, and
+directly helps to maintain software quality.  Every bug that ships in
+a piece of software got there by being committed and not detected;
+therefore, the more eyes watch commits, the fewer bugs will ship.  But
+code review also serves an indirect purpose: it confirms to people
+that what they do matters, because one obviously wouldn't take time to
+review a commit unless one cared about its effect.  People do their
+best work when they know that others will take the time to evaluate
+it.</para>
+
+<para>In the Subversion project, we did not at first make a regular
+practice of code review.  There was no guarantee that every commit
+would be reviewed, though one might sometimes look over a change if
+one was particularly interested in that area of the code.  Bugs
+slipped in that really could and should have been caught.  A developer
+named Greg Stein, who knew the value of code review from past work,
+decided that he was going to set an example by reviewing every line of
+<emphasis>every single commit</emphasis> that went into the code
+repository.  Each commit anyone made was soon followed by a mail to
+the developer's list from Greg, dissecting the commit, analyzing
+possible problems, occasionally praising a clever bit of code.  Right
+away, he was catching bugs and non-optimal coding practices that would
+otherwise have slipped by without ever being noticed.  Pointedly, he
+never complained about being the only person reviewing every commit,
+even though it took a fair amount of his time, but he did sing the
+praises of code review whenever he had the chance.  Pretty soon, other
+people, myself included, started reviewing commits regularly too.
+What was our motivation?  It wasn't that Greg had guilted us into it,
+at least not openly.  But he had proven that reviewing code was a
+valuable way to spend time, that one could contribute as much to the
+project by reviewing others' changes as by writing new code.  Once he
+demonstrated that, it became expected behavior, to the point where any
+commit that didn't get any reaction would cause the committer to
+worry, and even ask on the list whether anyone had had a chance to
+review it yet.  Later, Greg got a job that didn't leave him as much
+time for Subversion, and had to stop doing regular reviews.  But by
+then, it was so ingrained for the rest of us as to seem that it had
+been going on since time immemorial.</para>
+
+<para>Start doing reviews from very first commit.  Don't worry that
+you won't find any bugs, or that you don't know enough about every
+area of the code.  There will be something to say about almost every
+commit; even where you don't find anything to question, you may find
+something to praise.  The important thing is to make it clear to every
+committer that what they do is seen and understood.  Physically, every
+developer may be working alone in a room by themselves, but
+psychologically, commit email review can make them feel they're all
+working together in the same room.</para>
 
 </sect2>
 
