@@ -1894,34 +1894,42 @@ states in between, and that accrues information over its lifetime.
 For this reason, bug trackers are also called <firstterm>issue
 trackers</firstterm>, <firstterm>artifact trackers</firstterm>,
 <firstterm>request trackers</firstterm>, <firstterm>trouble ticket
-systems</firstterm>, etc.  I'll continue using "bug tracker" for
-simplicity, but remember that they're not only for bugs.</para>
+systems</firstterm>, etc.</para>
 
-<para>The classic lifecycle for a single bug ("issue", "item",
-"ticket", "request", "artifact", whatever) looks something like this:
+<para>In this book, I'll continue to use "bug tracker" for the
+software that does the tracking, because that's what most people call
+it, but will use <firstterm>issue</firstterm> to refer to one item in
+the bug tracker's database.  This allows us to distinguish between the
+behavior or misbehavior that user encountered (that is, the bug
+itself), and tracker's <emphasis>record</emphasis> of the bug's
+discovery, diagnosis, and eventual resolution.  Keep in mind that
+although most issues are about actual bugs, issues can be used to
+track other kinds of tasks too.</para>
+
+<para>The classic issue lifecycle looks like this:
 
 <orderedlist>
-  <listitem><para>Someone files the bug.  They provide a summary, an
+  <listitem><para>Someone files the issue.  They provide a summary, an
             initial description (including a reproduction recipe, if
             applicable; see <xref linkend="pfs-ch-7-sect-1.2"/> for
             how to encourage good bug reports), and whatever other
             information the tracker asks for.  The person who files
-            the bug may be totally unknown to the project &mdash; bugs
-            or feature requests are as likely to come from the user
-            community as from the developers.</para>
+            the issue may be totally unknown to the project &mdash;
+            bug reports and feature requests are as likely to come
+            from the user community as from the developers.</para>
 
-            <para>Once filed, the bug is in what's called an
+            <para>Once filed, the issue is in what's called an
             <firstterm>open</firstterm> state.  Because no action has
             been taken yet, some trackers also label it as
             <firstterm>unverified</firstterm> and/or
             <firstterm>unstarted</firstterm> at this stage.  It is not
             assigned to anyone; or, in some systems, it is assigned to
             a dummy user to represent the lack of real assignation.
-            At this point, it is in a holding area: the bug has been
+            At this point, it is in a holding area: the issue has been
             recorded, but not yet integrated into the project's
             consciousness.</para>
   </listitem>
-  <listitem><para>Others read the bug, add comments to it, perhaps
+  <listitem><para>Others read the issue, add comments to it, perhaps
             ask the original filer for clarification on some
             points.</para>
   </listitem>
@@ -1929,27 +1937,26 @@ simplicity, but remember that they're not only for bugs.</para>
             This may be the most important moment in the its
             lifecycle.  Although the bug is not actually fixed yet,
             the fact that someone besides the original filer was able
-            to make it happen proves that the bug is genuine, and, no
-            less importantly, confirms to the original filer that
-            they've contributed to the project by reporting a real
-            bug.</para>
+            to make it happen proves that it is genuine, and, no less
+            importantly, confirms to the original filer that they've
+            contributed to the project by reporting a real bug.</para>
   </listitem>
   <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
             cause is identified, and if possible, the effort required
             to fix it is estimated.</para>
 
             <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the bug and
+            developer may "take ownership" of the issue and
             <firstterm>assign</firstterm> it to herself (<xref
             linkend="pfs-ch-7-sect-1"/> examines the assignment
-            process in more detail).  The bug's
+            process in more detail).  The issue's
             <firstterm>priority</firstterm> may also be set at this
             stage.  For example, if it is so severe that it should
             delay the next release, that fact needs to be identified
             early, and the tracker should have some way of noting
             it.</para>
   </listitem>
-  <listitem><para>The bug gets scheduled for resolution.
+  <listitem><para>The issue gets scheduled for resolution.
             Scheduling doesn't necessarily mean naming a date by which
             it will be fixed.  Sometimes it just means deciding which
             future release (not necessarily the next one) the bug
@@ -1958,37 +1965,38 @@ simplicity, but remember that they're not only for bugs.</para>
             with, if the bug is quick to fix.</para>
   </listitem>
   <listitem><para>The bug gets fixed (or the task completed, or
-            the patch applied).  The change or set of changes that
-            fixed it should be recorded in a comment in the bug, and
-            then the bug <firstterm>closed</firstterm> or marked as
+            the patch applied, or whatever).  The change or set of
+            changes that fixed it should be recorded in a comment in
+            the issue, after which the issue is
+            <firstterm>closed</firstterm> and/or marked as
             <firstterm>resolved</firstterm>.</para>
   </listitem>
 </orderedlist>
 
 </para>
 
-<para>There are two common variations on this lifecycle.  Sometimes a
-bug is closed very soon after being filed, because it turns out not to
-be a bug at all, but rather a misunderstanding on the part of the
+<para>There are two common variations on this lifecycle.  Sometimes an
+issue is closed very soon after being filed, because it turns out not
+to be a bug at all, but rather a misunderstanding on the part of the
 user.  As a project acquires more users, more and more such invalid
-bugs will come in, and developers will close them with increasingly
+issues will come in, and developers will close them with increasingly
 short-tempered responses.  Try to guard against the latter tendency.
 It does no one any good, as the individual user in each case is not
-responsible for all the previous invalid bug reports; the statistical
-trend is visible only from the developers' point of view, not the
-user's.  (In <xref linkend="pfs-ch-3-sect-5.1"/> we'll look at
-techniques for reducing the number of invalid bug reports.)</para>
+responsible for all the previous invalid issues; the statistical trend
+is visible only from the developers' point of view, not the user's.
+(In <xref linkend="pfs-ch-3-sect-5.1"/> we'll look at techniques for
+reducing the number of invalid issues.)</para>
 
-<para>The second common variation is for the bug to be closed as a
+<para>The second common variation is for the issue to be closed as a
 <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate is
-when someone files a bug that's already known to the project.
-Duplicates are not confined to open bugs: it's possible for a bug to
+when someone files an issue that's already known to the project.
+Duplicates are not confined to open issues: it's possible for a bug to
 come back after having been fixed (this is known as a
 <firstterm>regression</firstterm>), in which case the preferred course
-is usually to reopen the original bug, and close any new reports as
+is usually to reopen the original issue, and close any new reports as
 duplicates of the original one.  The bug tracking system should keep
 track of this relationship bidirectionally, so that reproduction
-information in the duplicates is available to the original bug and
+information in the duplicates is available to the original issue and
 vice versa.</para>
 
 <para>Aside from these variations, there may be other small details of
@@ -1998,41 +2006,41 @@ specific to open source software, it has implications for how open
 source projects use their bug trackers.</para>
 
 <para>As Step 1 implies, the tracker is as much a public face of the
-project as the mailing lists or web pages.  Anyone may file a bug,
-anyone may look at a bug, anyone may browse the list of currently open
-bugs.  It follows that you never know how many people are waiting to
-see progress on a given bug.  While the size and skill of the
-development community constrains the rate at which bugs can be fixed,
-the project should at least try acknowledge each bug the moment it
-appears.  Even if the bug lingers for a while, a response encourages
-the reporter to stay involved, because they feel that a human has
-registered what they have done (remember that filing a bug usually
-involves more effort than, say, posting an email).  Furthermore, once
-a bug is seen by a developer, it enters the project's consciousness,
-in the sense that that developer can be on the lookout for other
-instances of the bug, can talk about it with other developers,
-etc.</para>
+project as the mailing lists or web pages.  Anyone may file an issue,
+anyone may look at an issue, anyone may browse the list of currently
+open issues.  It follows that you never know how many people are
+waiting to see progress on a given issue.  While the size and skill of
+the development community constrains the rate at which issues can be
+resolved, the project should at least try acknowledge each issue the
+moment it appears.  Even if the issue lingers for a while, a response
+encourages the reporter to stay involved, because they feel that a
+human has registered what they have done (remember that filing an
+issue usually involves more effort than, say, posting an email).
+Furthermore, once an issue is seen by a developer, it enters the
+project's consciousness, in the sense that that developer can be on
+the lookout for other instances of the issue, can talk about it with
+other developers, etc.</para>
 
 <para>The need for timely reactions implies two things:
 
 <itemizedlist>
   <listitem>
     <para>The tracker must be connected to a mailing list, such that
-    every change to a bug, including its initial filing, causes a mail
-    to be go out describing what happened.  As with commit emails, the
-    Reply-to header on these mails should be set to the development
-    mailing list, or some other human-driven list.  While the original
-    mails are merely automated reflections of events in the bug
-    tracker, any email response is a discussion, and belongs in a
-    discussion forum.  Most active developers should be subscribed to
-    the bug event list, though it's their choice of
+    every change to an issue, including its initial filing, causes a
+    mail to be go out describing what happened.  As with commit
+    emails, the Reply-to header on these mails should be set to the
+    development mailing list, or some other human-driven list.  While
+    the original mails are merely automated reflections of events in
+    the bug tracker, any email response is a discussion, and belongs
+    in a discussion forum.  Most active developers should be
+    subscribed to the issue event list, though it's their choice of
     course.</para>
   </listitem>
   <listitem>
-    <para>The form for filing bugs should capture the reporter's
+    <para>The form for filing issues should capture the reporter's
     email address, so they can be contacted for more information.
     (However, it should not <emphasis>require</emphasis> the
-    reporter's email address, as some people prefer to report bugs
+    reporter's email address, as some people prefer to report issues
     anonymously.  See <xref linkend="pfs-ch-3-sect-7.1"/> for more on
     the importance of anonymity.)</para>
   </listitem>
@@ -2050,17 +2058,17 @@ realtime chat forums, for that matter).  This is not really the fault
 of the bug tracker, it's just that its interface was designed for
 capturing and presenting discrete states, not free-flowing
 discussions.  Second, not everyone who should be involved in
-discussing a given bug is necessarily watching the bug tracker.  Part
-of good bug management (see <xref linkend="pfs-ch-7-sect-2"/>) is to
-make sure each bug is brought to the right peoples' attention, rather
-than requiring every developer to monitor all bugs.  <xref
+discussing a given issue is necessarily watching the bug tracker.
+Part of good issue management (see <xref linkend="pfs-ch-7-sect-2"/>)
+is to make sure each issue is brought to the right peoples' attention,
+rather than requiring every developer to monitor all issues.  <xref
 linkend="pfs-ch-5-sect-4.1"/> talks about ways make sure people don't
 accidentally siphon discussions out of appropriate forums and into the
 bug tracker.</para>
 
 <para>Some bug trackers have the ability to monitor mailing lists and
-automatically log all emails that are about a known bug.  Typically
-they do this by recognizing the bug's identifying number in the
+automatically log all emails that are about a known issue.  Typically
+they do this by recognizing the issue's identifying number in the
 subject line of the mail, as part of a special string; developers
 learn to include these strings in their mails to attract the tracker's
 notice.  The bug tracker may either save the entire email, or (even
@@ -2072,8 +2080,8 @@ take advantage of it.</para>
 <sect2 id="pfs-ch-3-sect-5.1">
 <title>Pre-Filtering the Bug Tracker</title>
 
-<para>Most bug databases eventually suffer from the same problem: a
-crushing load of duplicate or invalid bugs filed by well-meaning but
+<para>Most issue databases eventually suffer from the same problem: a
+crushing load of duplicate or invalid issues filed by well-meaning but
 inexperienced or ill-informed users.  The first step in combatting
 this trend is usually to put a prominent notice on the front page of
 the bug tracker, explaining how to tell if a bug is really a bug, how
@@ -2085,77 +2093,77 @@ of users increases, the problem will eventually come back.  No
 individual user can be blamed for it.  Each one is just trying to
 contribute to the project's well-being, and even if their first bug
 report isn't helpful, you still want to encourage them to stay
-involved and file better bugs in the future.  In the meantime, though,
-the project needs to keep the bug database as free of junk as
-possible.</para>
+involved and file better issues in the future.  In the meantime,
+though, the project needs to keep the issue database as free of junk
+as possible.</para>
 
 <para>The two things that will do the most to prevent this problem
 are: make sure there are people watching the bug tracker who have
-enough knowledge to close bugs as invalid or duplicates the moment
+enough knowledge to close issues as invalid or duplicates the moment
 they come in, and require (or strongly encourage) users to confirm
 their bugs with other people before filing them in the tracker.</para>
 
 <para>The first technique seems to be used universally.  Even projects
-with huge bug databases (say, the Debian bug tracker at <ulink
-url="http://bugs.debian.org/"/>, which contained 275,913 bugs as of
+with huge issue databases (say, the Debian bug tracker at <ulink
+url="http://bugs.debian.org/"/>, which contained 275,913 issues as of
 this writing) still arrange things so that
-<emphasis>someone</emphasis> sees each bug that comes in.  It may be a
-different person depending on the category of the bug.  For example,
-the Debian project is a collection of software packages, so Debian
-automatically routes each bug report to the appropriate package
-maintainers.  Of course, users can sometimes misidentify a bug's
-category, with the result that the bug is sent to the wrong person
-first, who may then have to reroute it.  However, the important thing
-is that the burden is still shared &mdash; whether the user guesses
-right or wrong when filing, bug-watching is still distributed more or
-less evenly among the developers, so each bug is able to receive a
-timely response.</para>
+<emphasis>someone</emphasis> sees each issue that comes in.  It may be
+a different person depending on the category of the issue.  For
+example, the Debian project is a collection of software packages, so
+Debian automatically routes each issue to the appropriate package
+maintainers.  Of course, users can sometimes misidentify an issue's
+category, with the result that the issue is sent to the wrong person
+initially, who may then have to reroute it.  However, the important
+thing is that the burden is still shared &mdash; whether the user
+guesses right or wrong when filing, issue-watching is still
+distributed more or less evenly among the developers, so each issue is
+able to receive a timely response.</para>
 
 <para>The second technique is less widespread, probably because it's
-harder to automate.  The essential idea is that every new bug gets
+harder to automate.  The essential idea is that every new issue gets
 "buddied" into the database.  When a user thinks they've found a
 problem, they are asked to describe it on one of the mailing lists, or
 in an IRC channel, and get confirmation from someone that it is indeed
 a bug.  Bringing in that second pair of eyes early can prevent a lot
 of spurious reports.  Sometimes the second party is able to identify
 that the behavior is not a bug, just surprising to new users.  Or,
-they may be familiar with the symptoms from a previous bug report, and
-can prevent a duplicate filing by pointing the user to the older bug.
+they may be familiar with the symptoms from a previous issue, and can
+prevent a duplicate filing by pointing the user to the older issue.
 Often it's enough just to ask the user "Did you search the bug tracker
 to see if it's already been reported?"  Many people simply don't think
 of that, yet are happy to do the search once they know someone's
 <emphasis>expecting</emphasis> them to.</para>
 
-<para>The buddy system can really keep the bug database clean, but it
-has some disadvantages too.  Many people will file solo anyway, either
-through not seeing, or from disregarding, the instructions to find a
-buddy for new bugs.  Thus it is still necessary for volunteers to
-watch the bug database.  Furthermore, because most bug reporters don't
-understand how difficult the task of maintaining the bug database is,
-it's not fair to chide them too harshly for ignoring the guidelines.
-Thus the volunteers must be vigilant, and yet exercise restraint in
-how they bounce unbuddied bugs back to their reporters.  The goal is
-to train each reporter to use the buddying system in the future, so
-that there is an ever-growing pool of people who understand the
-bug-filtering system.  Thus, on seeing an unbuddied bug, the ideal
-steps are:
+<para>The buddy system can really keep the issue database clean, but
+it has some disadvantages too.  Many people will file solo anyway,
+either through not seeing, or through disregarding, the instructions
+to find a buddy for new issues.  Thus it is still necessary for
+volunteers to watch the issue database.  Furthermore, because most new
+reporters don't understand how difficult the task of maintaining the
+issue database is, it's not fair to chide them too harshly for
+ignoring the guidelines.  Thus the volunteers must be vigilant, and
+yet exercise restraint in how they bounce unbuddied issues back to
+their reporters.  The goal is to train each reporter to use the
+buddying system in the future, so that there is an ever-growing pool
+of people who understand the issue-filtering system.  Thus, on seeing
+an unbuddied issue, the ideal steps are:
 
 <orderedlist>
   <listitem>
-    <para>Immediately respond to the bug, politely thanking the user
+    <para>Immediately respond to the issue, politely thanking the user
           for filing, but pointing them to the buddying guidelines
           (which should of course be prominently posted on the web
           site).</para>
   </listitem>
   <listitem>
-    <para>If the bug is clearly valid and not a duplicate, approve it
+    <para>If the issue is clearly valid and not a duplicate, approve it
           anyway, and start it down the normal lifecycle.  After all,
           the reporter's now been informed about buddying, so there's
           no point wasting the work done so far by closing a valid
-          bug.</para>
+          issue.</para>
   </listitem>
   <listitem>
-    <para>Otherwise, if the bug is not clearly valid, close it, but
+    <para>Otherwise, if the issue is not clearly valid, close it, but
           ask the reporter to reopen it if they get confirmation from
           a buddy.   When they do, they should put a reference to the
           confirmation thread (e.g., a URL into the mailing list
@@ -2164,12 +2172,12 @@ steps are:
 </orderedlist>
 
 Remember that although this system will improve the signal/noise ratio
-in the bug database over time, it will never completely stop the
+in the issue database over time, it will never completely stop the
 misfilings.  The only way to prevent misfilings entirely is to close
 off the bug tracker to everyone but developers &mdash; a cure that is
 almost always worse than the disease.  It's better to accept that
-cleaning out invalid bugs will always be part of the project's routine
-maintenance, and to try to get as many people as possible to
+cleaning out invalid issues will always be part of the project's
+routine maintenance, and to try to get as many people as possible to
 help.</para>
 
 </sect2>
