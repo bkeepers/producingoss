@@ -175,7 +175,6 @@ Scanley 2.3.0 (Beta 2)
 Scanley 2.3.0 (Beta 3)
 Scanley 2.3.0</literallayout>
 </informalexample>
-</sect2>
 
 <para>Notice how when it has the "Alpha" qualifier, Scanley "2.3" is
 written as "2.3.0".  Those two numbers are equivalent&mdash;trailing
@@ -202,15 +201,147 @@ them.</para>
 they do indicate place-value significance.  All "0.X.Y" releases
 precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
 immediately precedes "3.14.159", and non-immediately precedes
-"3.14.160" as well as "3.15.anything", and so.  What these components
-actually <emphasis>mean</emphasis> is the subject of the next two
-sections.</para>
+"3.14.160" as well as "3.15.anything", and so.</para>
+
+<para>A consistent release numbering policy enables a user to look at
+two release numbers for the same piece of software and tell, just from
+the numbers, the important differences between those two releases.  In
+a typical 3-component system, the first component is
+the <firstterm>major&nbsp;number</firstterm>, the second is
+the <firstterm>minor&nbsp;number</firstterm>, and the third is the
+<firstterm>micro&nbsp;number</firstterm>.  For example, release
+"2.10.17" is the seventeenth micro release, in the tenth minor release
+line within the second major release series.  The words "line" and
+"series" are used informally here, but they mean what one would
+expect.  A major series is simply all the releases that share the same
+major number, a minor series (or minor line) consists all the releases
+that share the same minor <emphasis>and</emphasis> major number.  That
+is, "2.4.0" and "3.4.1" are not in the same minor series, of course,
+even though they both have "4" for their minor number; on the other
+hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
+not adjacent if "2.4.1" was released between them.</para>
+
+<para>The meanings of these numbers are exactly what you'd expect: an
+increment of the major number indicates that major changes happened;
+an increment of the minor number indicates minor changes; and an
+increment of the micro number indicates really trivial changes.  (Some
+projects add a fourth component, usually called the "patch" number,
+for especially fine-grained control over the meanings of their
+releases.  Confusingly, some other projects use "patch" as a synonym
+for "micro" in a three-component system.)  Various definitions have
+arisen for the various categories of changes, but the definitions tend
+to differ only in relatively unimportant ways.  You get a little
+leeway in what the components mean, but not a lot.  The next two
+sections discuss some of the most widely-used conventions.</para>
+
+</sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-release-number-simple-strategy">
 <title>The Simple Strategy</title>
 
-<para><remark>[... working here ...]</remark></para>
+<para>Most projects have rules about what kinds of changes are allowed
+into a release if one is only incrementing the micro number, different
+rules for the minor number, and still different ones for the major
+number.  There is no set standard for these rules yet, but here I will
+describe a policy that has been used successfully by multiple
+projects.  You might want to just adopt this policy in your own
+project, but even if you don't, it's still a good example of the kind
+of information release numbers should convey.  This policy is adapted
+from the numbering system used by the APR project, see
+<ulink url="http://apr.apache.org/versioning.html"/>.</para>
+
+<orderedlist>
+
+  <listitem><para>Changes to the micro number only (that is, changes
+            within the same minor line) must be both forwards- and
+            backwards-compatible.  These changes should be bug fixes
+            only, or very small enhancements to existing features.
+            New features should not be introduced in a micro
+            release.</para>
+  </listitem>
+
+  <listitem><para>Changes to the minor number (that is, within the
+            same major line) must be backwards-compatible, but not
+            necessarily forwards-compatible.  It's normal to introduce
+            new features in a minor release, but usually not too many
+            new features at once.</para>
+  </listitem>
+
+  <listitem><para>Changes to the major number mark compatibility
+            boundaries.  A new major release can be forwards- and
+            backwards-incompatible.  A major release is expected to
+            have new features, and may even have entire new feature
+            sets.</para>
+  </listitem>
+
+</orderedlist>
+
+<para>What <firstterm>backwards-compatible</firstterm>
+and <firstterm>forwards-compatible</firstterm> mean exactly depends on
+what your software does, but in context they are usually not open to
+much interpretation.  For example, if you project is a client/server
+application, then "backwards-compatible" means that upgrading the
+server to 2.6.0 should not cause any existing 2.5.4 clients to lose
+functionality or behave differently than they did before (except for
+bugs that were fixed, of course).  On the other hand, upgrading one of
+those clients to 2.6.0 along with the server might
+make <emphasis>new</emphasis> functionality available for that client,
+functionality that 2.5.4 clients don't know how to take advantage of.
+If that happens, then the upgrade is "forwards-incompatible": clearly
+you can't now downgrade that client back to 2.5.4 and keep all the
+functionality it had at 2.6.0, since some of that functionality was
+new in 2.6.0.</para>
+
+<para>This is why micro releases are essentially for bug fixes only.
+They must remain "forwards-compatible" with each other: if you upgrade
+from 2.5.3 to 2.5.4, then change your mind and downgrade, no
+functionality should be lost.  Of course, the bugs fixed in 2.5.4
+would reappear if you downgraded to 2.5.3, but you wouldn't lose any
+features, except insofar as the restored bugs prevent the use of some
+existing features.</para>
+
+<para>Client/server protocols are just one of many possible
+compatibility domains.  Another is data formats: does the software
+write data to permanent storage?  If so, the formats it reads and
+writes need to follow the compatibility guidelines promised by the
+release number policy.  Version 2.6.0 needs to be able to read the
+files written by 2.5.4, but may silently upgrade the format to
+something that 2.5.4 cannot read, because the ability to downgrade is
+not required across a minor number boundary.</para>
+
+<para>If your project distributes code libraries for other programs to
+use, then APIs are a compatibility domain: you must make sure that
+source and binary compatibility rules are spelled out in such a way
+that the informed user need never wonder whether or not it's safe to
+upgrade in place: she will be able to look at the numbers and know
+instantly.</para>
+
+<para>In this system, you don't get a chance for a full reset until
+you increment the major number.  This can often be a real
+inconvenience: there may be features you wish to add, or protocols
+that you wish to redesign, that simply cannot be done while
+maintaining compatibility.  There's no magic solution to this, except
+to try to design things in an extensible way in the first place (a
+topic easily worth its own book, and certainly outside the scope of
+this one).  But publishing a release compatibility policy, and
+adhering to it, is an inescapable part of distributing software.  One
+nasty surprise can alienate a lot of users.  The policy just described
+is good partly it's already quite widespread, but also because it's
+easy to explain and to remember, even for those not already familiar
+with it.</para>
+
+<para>It is generally understood that these rules do not apply to
+pre-1.0 releases (although your release policy should probably state
+it explicitly, just to be clear).  A project that is still in initial
+development can just release 0.1, 0.2, 0.3, and so on in sequence,
+until it's ready to release 1.0.  Micro numbers in pre-1.0 releases
+are optional.  Depending on the nature of your project and the
+differences between the releases, you might find it useful to have
+0.1.0, 0.1.1, etc, or you might not.  Conventions for pre-1.0 release
+numbers are fairly loose, mainly because people understand that strong
+compatibility constraints would hamper early development too much, and
+because early adopters tend to be forgiving anyway.</para>
 
 </sect2>
 
@@ -218,9 +349,278 @@ sections.</para>
 <sect2 id="pfs-release-number-even-odd-strategy">
 <title>The Even/Odd Strategy</title>
 
-<para><remark>[... working here ...]</remark></para>
+<para>Some projects use the parity of the minor number component to
+indicate the stability of the software: even means stable, odd means
+unstable.  This applies only to the minor number, not the major and
+micro numbers.  Increments in the micro number still indicate bug
+fixes (no new features), and increments in the major number still
+indicate big changes, new featuresets, etc.</para>
+
+<para>The advantage of this system, which has been used by the Linux
+kernel project among others, is that it offers a way to release new
+functionality for testing without subjecting production users to
+potentially unstable code.  People can see from the numbers that
+"2.4.16" is okay to install on their live web server, but that "2.5.1"
+should probably stay confined to home workstation experiments.  The
+development team handles the bug reports that come in from the
+unstable (odd-minor-numbered) series, and when things start to settle
+down after some number of micro releases in that series, they
+increment the minor number (thus making it even), reset the micro
+number back to "0", and release a presumably stable package.</para>
+
+<para>This system preserves (or at least, does not conflict with) the
+compatibility guidelines given earlier, it simply overloads the minor
+number with some extra information.  This forces the minor number to
+be incremented about twice as often as would otherwise be necessary,
+but there's no great harm in that.  The even/odd system is probably
+best for projects that have very long release cycles, and which by
+their nature have a high proportion of conservative users who value
+stability above new features.  It is not the only way to get new
+functionality tested in the wild, however.
+<xref linkend="pfs-stabilizing-and-releasing"/> describes another,
+perhaps more common, method of releasing potentially unstable code to
+the public, marked so that people have an idea of the risk/benefit
+tradeoffs immediately on seeing the release's name.</para>
 
 </sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-release-branches">
+<title>Release Branches</title>
+
+<!-- TODO: Perhaps the best arrangement would be an overall section
+     about how to do a release, in which this and some of the
+     following would be a subsection, like this:
+
+       * Making a Release
+         - Make a Release Branch (was: "Release Branches")
+         - Stabilize the Release Branch (was: "Stabilizing and Releasing")
+         - Package the Release for Distribution (was: "Packaging for
+                                                       Distribution") 
+
+     Think it over.
+-->
+
+<para>From a developer's point of view, a free software project is in
+a state of continuous release.  Developers usually run the latest
+available code at all times, because they want to spot bugs, and
+because they follow the project closely enough to be able to stay away
+from currently unstable areas of the feature space.  They often update
+their copy of the software every day, sometimes more than once a day,
+and when they check in a change, they can reasonably expect that every
+other developer will have it within twenty-four hours.</para>
+
+<para>How, then, should the project make a release?  Should it simply
+take a snapshot of the tree at a moment in time, package it up, and
+hand it to the world as, say, version "3.5.0"?  Common sense says no.
+First, there may be no moment in time when the entire development tree
+is clean and ready for release.  Newly-started features could be lying
+around in various states of completion.  Someone might have checked in
+a major change to fix a bug, but the change could be controversial and
+under debate at the moment the snapshot is taken.  If so, it wouldn't
+work to simply delay the snapshot until the debate ends, because
+another debate could start in the meantime, and then you'd have wait
+for <emphasis>that</emphasis> one to end too.  The process would not
+be guaranteed to halt.</para>
+
+<para>Second, using full-tree snapshots for releases would interfere
+with ongoing development work even if the tree could be put into a
+releaseable state.  Say this snapshot is going to be "3.5.0"; then
+presumably the next snapshot would be "3.5.1", and would contain
+mostly fixes for bugs found in the 3.5.0 release.  But if both are
+snapshots from the same tree, then what are the developers supposed to
+do in the time between the two releases?  They can't be adding new
+features; the compatibility guidelines prevent that.  But not everyone
+will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
+may have new features they're trying to complete, and will become
+irate if they are forced to choose between sitting idle or working on
+things they're not interested in, just because the project's release
+processes demand that the development tree remain unnaturally
+stable.</para>
+
+<para>The solution to these problems is to always use
+a <firstterm>release branch</firstterm>.  A release branch is just a
+branch in the version control system (see
+<xref linkend="pfs-vc-vocabulary-branch"/>), on which the code
+destined for this release can be isolated from mainline development.
+The concept of release branches is certainly not original to free
+software; many commercial development organizations use them too.
+However, in commercial environments, release branches are sometimes
+considered a luxury&mdash;a kind of formal "best practice" that can,
+in the heat of a major deadline, be dispensed with while everyone on
+the team scrambles to stabilize the main tree.</para>
+
+<para>Release branches are pretty much required in open source
+projects, however.  I have seen projects do releases without them, but
+it has always resulted in some developers sitting idle while
+others&mdash;usually a minority&mdash;work on getting the release out
+the door.  The result is usually bad in several ways.  First, overall
+development momentum is slowed.  Second, the release is of poorer
+quality than it needed to be, because there were only a few people
+working on it, and they were hurrying to finish so everyone else could
+get back to work.  Third, it divides the development team
+psychologically, by setting up a situation in which different types of
+work interfere with each other unnecessarily.  The developers sitting
+idle would probably be happy to contribute <emphasis>some</emphasis>
+of their attention to a release branch, as long as that were a choice
+they could make according to their own schedules and interests.  But
+without the branch, their choice becomes "Do I participate in the
+project today or not?"  instead of "Do I work on the release today, or
+work on that new feature I've been developing in the mainline
+code?"</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-release-branch-mechanics">
+<title>Mechanics of Release Branches</title>
+
+<para>The exact mechanics of creating a release branch will depend on
+your version control system, of course, but the general concepts are
+the same in most systems.  A branch usually sprouts from another
+branch or from the trunk.  Traditionally, the trunk is where mainline
+development goes on, unfettered by release constraints.  Therefore,
+the first release branch, the one leading to the "1.0" release,
+sprouts off the trunk.  In CVS, the command would be something like
+this</para>
+
+<screen>
+$ cvs tag -b RELEASE_1_0_X
+</screen>
+
+<para>or in Subversion, like this:</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
+</screen>
+
+<para>(While I can't give an example for every version control system,
+I'll give examples in CVS and Subversion and hope that the
+corresponding commands in other systems can be deduced from those
+two.  <remark>[These instructions work in decentralized or
+changeset-exchanging version control systems too, but in those systems
+other ways of treating a release branch are also possible.  Would be
+nice to talk to an expert to get some feedback on
+that.]</remark>)</para>
+
+<para>Notice that we branched "1.0.x" not "1.0.0".  This is because
+the same minor line&mdash;i.e., the same branch&mdash;will be used for
+all the micro releases in that line.  The actual process of
+stabilizing the branch for release is covered in
+<xref linkend="pfs-stabilizing-and-releasing"/>.  Here we are
+concerned just with the interaction between the version control system
+and the release process.  When the release branch is stabilized and
+ready, it is time to tag a snapshot from the branch:</para>
+
+<screen>
+$ cd RELEASE_1_0_X-working-copy
+$ cvs tag RELEASE_1_0_0
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
+</screen>
+
+<para>That tag represents the exact contents of the 1.0.0 release.
+The next micro release in the same line is likewise prepared on the
+1.0.x branch, and when it is ready, a tag is made for 1.0.1.  Lather,
+rinse, repeat for 1.0.2, and so on.  When it's time to start thinking
+about a 1.1.x release, make a new branch from trunk:</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_1_1_X
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
+</screen>
+
+<para>When it's time to make a 2.0 release, you can just do the same
+thing, assuming that you're continuing with the same trunk code
+line:</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_2_0_X
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/2.0.x
+</screen>
+
+<para>Of course, you may need to continue putting out releases in the
+1.x series for some time even after 2.0 work begins (see
+<xref linkend="pfs-release-lines"/>).  Since trunk now represents new
+2.0 development, you should start a new branch, based on the last 1.x
+release, to represent the 1.x maintenance line.  If the last 1.x
+release was 1.12.3, then you would do:</para>
+
+<screen>
+$ cd 1.12.3-working-copy
+$ cvs tag -b RELEASE_1_X
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/tags/1.12.3 http://.../repos/branches/1.x
+</screen>
+
+<para>After that, just use the same recipe given earlier for 1.x.y
+release branches, except that where you used to branch from trunk, you
+would now branch from the new 1.x branch.</para>
+
+</sect2>
+
+<para>This is not the only release branch strategy, of course.  In
+some circumstances it may not even be the best, though it's worked out
+pretty well for projects I've been involved in.  Use any strategy that
+seems to work, just remember the main points: the purpose of a release
+branch is to isolate release work from the fluctuations of daily
+development, and to give the project an entity around which to
+organize its release process.  That process is described in detail in
+the next section.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-stabilizing-and-releasing">
+<title>Stabilizing and Releasing</title>
+
+<para><remark>Stabilization and release preparation (i.e., avoiding the last
+minute feature rush); making sure the process terminates in a finite
+amount of time.  Point out how that releases may actually be harder in
+open source projects than in proprietary ones.</remark></para>
+
+<para><remark>Describe the change-inclusion voting system, but point
+out how it is very different from the kinds of voting talked about in
+Chapter 4.  Talk about how stabilizing a release branch is mostly a
+matter of saying "no"; the voting system is simply a means of getting
+the group to say "no" cooperatively rather than antagonistically (need
+to clarify here that "saying no" in this context doesn't refer to
+voting -1, it refers to any means by which a change ends up not being
+in the release.  It could be that it simply didn't accumulate enough
+votes; from the group's point of view, the change was "said no to",
+even though no one voted against it.</remark></para>
+
+<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
+somewhere in here.  That should probably be in reference to the
+CHANGES file, which should be described here but linked to from
+there.)</remark></para>
+
+<para><remark>(GPG-signatures, checksums.  No, MD5 and SHA-1 are not
+"broken" for these purposes.)</remark></para>
+
+<para><remark>This might also be the right place to talk about change
+annotation, as referred to from the "merge" entry in the Version
+Control Vocabulary in chapter 3.</remark></para>
 
 <para><remark>(Maybe refer here from the "Announcing" in Chapter
 2.)</remark></para>
@@ -228,41 +628,6 @@ sections.</para>
 <para><remark>(Talk about the dismayingly-prevalent code-name
 practice, i.e., "Dancing Bonobo", "Ululating Brachiator", etc, and how
 it makes life difficult and generally sucks.)</remark></para>
-
-</sect1>
-
-
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-cycles-and-branches">
-<title>Cycles and Branches</title>
-
-<para>The software development lifecycle does not terminate naturally.
-A program may die because the architecture or environment it is
-written for becomes obsolete, or because its maintainers lose
-interest, or because its users abandon it for something better.  But
-barring some external event, there is no reason the normal cycles of
-development can't go on forever.  Bug reports come in, are narrowed
-down to reproduction cases, fixed, tested, and committed.  Features
-are proposed, discussed, designed, implemented, tested and committed.
-A release is merely a means of delivering these changes to users in a
-convenient, packaged form.</para>
-
-<para>But a release is also a cycle itself.  The process of pulling a
-stable entity out from the fluctuations of daily development, testing
-it, and distributing it to the world requires a fair amount of
-organization and group cooperation.  For this cooperation to run
-smoothly, there needs to be a structure around to organize it, and a
-way for participants to tell <emphasis>where</emphasis> in the cycle
-things stand at any given moment.  As is often the case when you're
-trying to isolate the code from daily fluctuations, the appropriate
-structure is a branch (see
-<xref linkend="pfs-vc-vocabulary-branch"/>).
-
-</para>
-
-<para>Most free software projects start out in a state of continuous
-release, because developers fooo</para>
-
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-packaging">
@@ -295,60 +660,11 @@ early.</remark></para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-tool-integration">
-<title>Integrating Process With Tools</title>
-
-<para><remark>How to tie in with the revision control system and the
-bug tracker, so that they become integral parts of distributed
-development.</remark></para>
-
-</sect1>
-
-
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-testing">
-<title>Testing, Automated and Otherwise</title>
-
-<para><remark>Regression testing: choosing the right level of
-formality.  Coordinating results from human volunteers.</remark></para>
-
-</sect1>
-
-
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-releasing">
-<title>Stabilizing and Releasing</title>
-
-<para><remark>Stabilization and release preparation (i.e., avoiding the last
-minute feature rush); making sure the process terminates in a finite
-amount of time.  Point out how that releases may actually be harder in
-open source projects than in proprietary ones.</remark></para>
-
-<para><remark>Describe the change-inclusion voting system, but point
-out how it is very different from the kinds of voting talked about in
-Chapter 4.</remark></para>
-
-<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
-somewhere in here.  That should probably be in reference to the
-CHANGES file, which should be described here but linked to from
-there.)</remark></para>
-
-<para><remark>(GPG-signatures, checksums.  No, MD5 and SHA-1 are not
-"broken" for these purposes.)</remark></para>
-
-<para><remark>This might also be the right place to talk about change
-annotation, as referred to from the "merge" entry in the Version
-Control Vocabulary in chapter 3.</remark></para>
-
-</sect1>
-
-
-<!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-release-lines">
 <title>Maintaining Multiple Release Lines</title>
 
 <para><remark>Whether and how to maintain multiple release lines.  Make sure
-this gets tied in bidirectionally with revision control discussion
+this gets tied in bidirectionally with version control discussion
 (branches, arch vs cvs-style, for example).  Also, stress importance
 of training people to use the issue tracker well.  Be patient, be
 verbose, repeat yourself -- it will feel stupid, but it <emphasis>will
@@ -368,6 +684,24 @@ Ch. 6, of course.)</remark></para>
 
 </sect1>
 
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-tool-integration">
+<title>Integrating Process With Tools</title>
+
+<para><remark>(How to tie in with the version control system and the
+bug tracker, so that they become integral parts of distributed
+development.)</remark></para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-testing">
+<title>Testing, Automated and Otherwise</title>
+
+<para><remark>(Regression testing: choosing the right level of
+formality.  Coordinating results from human volunteers.)</remark></para>
+
+</sect1>
 
 </chapter>
 
