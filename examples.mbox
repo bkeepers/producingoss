@@ -779,3 +779,152 @@ the GPL.  That would be ours as well.
 To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
 For additional commands, e-mail: dev-help@subversion.tigris.org
 
+From nobody Wed Jul 14 14:35:09 2004
+X-From-Line: dev-return-50101-kfogel=collab.net@subversion.tigris.org Tue Mar 30 13:55:20 2004
+Return-Path: <dev-return-50101-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i2UJtKi72619
+	for <kfogel@localhost>; Tue, 30 Mar 2004 13:55:20 -0600 (CST)
+	(envelope-from dev-return-50101-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Tue, 30 Mar 2004 13:55:20 -0600 (CST)
+Received: (qmail 16810 invoked from network); 30 Mar 2004 20:59:07 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 30 Mar 2004 20:59:07 -0000
+Received: (qmail 11096 invoked by uid 5302); 30 Mar 2004 20:59:06 -0000
+Mailing-List: contact dev-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+list-help: <mailto:dev-help@subversion.tigris.org>
+list-unsubscribe: <mailto:dev-unsubscribe@subversion.tigris.org>
+list-post: <mailto:dev@subversion.tigris.org>
+Delivered-To: mailing list dev@subversion.tigris.org
+Received: (qmail 10900 invoked from network); 30 Mar 2004 20:59:06 -0000
+Sender: kfogel@newton.ch.collab.net
+To: dev@subversion.tigris.org
+From: kfogel@collab.net
+Reply-To: kfogel@collab.net
+X-Windows: a terminal disease.
+Date: 30 Mar 2004 13:47:50 -0600
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <85n05y3ymx.fsf@newton.ch.collab.net>
+User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.1.50
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Subject: using LGPL'd code with Subversion
+X-Spam-Status: No, hits=-2.2 required=7.0
+	tests=AWL,NO_REAL_NAME,SPAM_PHRASE_01_02,USER_AGENT,
+	      USER_AGENT_GNUS_UA
+	version=2.43
+X-Spam-Level: 
+Lines: 107
+Xref: newton.ch.collab.net mail.subversion.dev:48988
+
+As we contemplate using GNU gettext, there's some discussion of
+whether we are licence-compatible with the LGPL (in a complex way, the
+part of gettext we care about is LGPL'd, while the rest of it is
+GPL'd).  In the midst of this discussion, someone pointed out that we
+already use Neon, which is also LGPL.
+
+Before I continue, here are some references.  The LGPL v2.1:
+
+   http://www.gnu.org/licenses/lgpl.html
+
+The Subversion dev list thread:
+
+   http://tinyurl.com/3d2ey
+
+For some messages discussing license compatibility, try:
+
+   http://subversion.tigris.org/servlets/ReadMsg?list=dev&msgNo=61816
+   http://subversion.tigris.org/servlets/ReadMsg?list=dev&msgNo=61862
+
+Okay, continuing:
+
+I've just finished reading the LGPL v2.1, and I don't see any problem
+with using gettext in Subversion.  Specifically, various parts of
+sections 5 and 6 seem to apply to Subversion in an innocuous and
+non-license-shaking way.  (Note that the only part of gettext
+Subversion actually would link with at runtime is the 'intl' library,
+which is a part of gettext that is under the LGPL).  The first part of
+section 5 says:
+
+  >   5. A program that contains no derivative of any portion of the
+  > Library, but is designed to work with the Library by being compiled or
+  > linked with it, is called a "work that uses the Library".  Such a
+  > work, in isolation, is not a derivative work of the Library, and
+  > therefore falls outside the scope of this License.
+  > 
+  >   However, linking a "work that uses the Library" with the Library
+  > creates an executable that is a derivative of the Library (because it
+  > contains portions of the Library), rather than a "work that uses the
+  > library".  The executable is therefore covered by this License.
+  > Section 6 states terms for distribution of such executables.
+
+The first paragraph says we're safe for source distributions.  
+
+The second paragraph tells us that, for binary distributions, we need
+to look at section 6.  Let's go there now (the remainder of 5 is not
+important here).  Here's the beginning of section 6:
+
+  >   6. As an exception to the Sections above, you may also combine or
+  > link a "work that uses the Library" with the Library to produce a
+  > work containing portions of the Library, and distribute that work
+  > under terms of your choice, provided that the terms permit
+  > modification of the work for the customer's own use and reverse
+  > engineering for debugging such modifications.
+
+Good -- in other words, the work (executable, in our case) must be
+under a Free-ish license, but not necessarily the LGPL itself.  We
+meet that criterion easily.  Someone repackaging Subversion under a
+less permissive license might have a problem; I don't know if we
+consider that a problem ourselves.  The next pararaph lays down some
+additional requirements:
+
+  >   You must give prominent notice with each copy of the work that the
+  > Library is used in it and that the Library and its use are covered by
+  > this License.  You must supply a copy of this License.  If the work
+  > during execution displays copyright notices, you must include the
+  > copyright notice for the Library among them, as well as a reference
+  > directing the user to the copy of this License.  Also, you must do one
+  > of these things:
+
+Okay, we can do that (I'm not sure where we display such notices now,
+but we can put in a bit about gettext/intl/LGPL pretty easily).
+
+The pick-list following that offers various options, some of which are
+easy for us to meet, and we only need to meet one.  I won't detail how
+here; you can see it easily if you read over the list.
+
+So.  If anyone can think of a reason why we *would* have a problem
+using the LGPL, please offer it up now.  I am not a lawyer; the above
+is just my effort to understand the legal implications of using
+gettext and/or Neon with Subversion.
+
+Regarding Neon:
+
+I think most of the above applies to Neon as well.  But note that Neon
+actually uses LGPL v2.0 (which is the "GNU Library Public License",
+while v2.1 is now the "GNU Lesser Public License").  I have not read
+v2.0 as carefully as v2.1, but the differences do not appear to be
+great.  The main change seems to be the insertion of a new paragraph
+in section 6:
+
+  + b) Use a suitable shared library mechanism for linking with the
+  + Library.  A suitable mechanism is one that (1) uses at run time a
+  + copy of the library already present on the user's computer system,
+  + rather than copying library functions into the executable, and (2)
+  + will operate properly with a modified version of the library, if
+  + the user installs one, as long as the modified version is
+  + interface-compatible with the version that the work was made with.
+
+Not a problem (if it were a problem, we would simply choose one of the
+other options).
+
+-Karl
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: dev-help@subversion.tigris.org
+
