@@ -30,6 +30,9 @@ HTML_XSLTPROC_OPTS =
 
 all: all-html all-pdf all-ps
 
+# The web site post-commit hook runs 'make www'.
+www: html
+
 install:
 	@echo "No installation procedure yet."
 
