@@ -968,14 +968,14 @@ problem concisely.
 
  <varlistentry>
   <term><firstterm>commit</firstterm></term>
-  <listitem><para>To make a change to the project, or to put it in
-  a version control database in such a way that it can easily be
-  incorporated into a release of the project.  "Commit" can be used as
-  a verb or a noun.  As a noun, it is essentially synonymous with
-  "change".  For example: "I just committed a fix for the server crash
-  bug people have been reporting on Mac OS X.  Jay, could you please
-  review the commit and check that I'm not misusing the allocator
-  there?"</para></listitem>
+  <listitem><para>To make a change to the project; more formally, to
+  store a change in the version control database in such a way that it
+  can be incorporated into future releases of the project.  "Commit"
+  can be used as a verb or a noun.  As a noun, it is essentially
+  synonymous with "change".  For example: "I just committed a fix for
+  the server crash bug people have been reporting on Mac OS X.  Jay,
+  could you please review the commit and check that I'm not misusing
+  the allocator there?"</para></listitem>
  </varlistentry>
 
  <varlistentry>
@@ -1738,35 +1738,78 @@ line.</para>
 <sect3 id="pfs-ch-3-sect-3.3.6">
 <title>Singularity of Information</title>
 
-<para>The ability to merge changes implies an important corollary:
-never commit the same change twice.  That is, a given change should
-enter the version control system exactly once.  The change's entry
-revision (or set of revisions) is its unique identifier from then on.
-If it needs to be applied to branches other than the one on which it
-entered, then it should be merged from its original entry point to
-those other destinations &mdash; as opposed to committing a textually
-identical change, which would have the same effect on the code, but
-would make accurate bookkeeping and release management impossible.
-These practices are discussed more in <xref
-linkend="pfs-ch-6"/>.</para>
+<para>Merging has an important corollary: never commit the same change
+twice.  That is, a given change should enter the version control
+system exactly once.  The revision (or set of revisions) in which the
+change entered is its unique identifier from then on.  If it needs to
+be applied to branches other than the one on which it entered, then it
+should be merged from its original entry point to those other
+destinations &mdash; as opposed to committing a textually identical
+change, which would have the same effect in the code, but would make
+accurate bookkeeping and release management impossible.</para>
 
-<para><remark>(todo: working here)</remark></para>
+<para>The practical effects of this advice differ from one version
+control system to another.  In some systems, merges are special
+events, fundamentally distinct from commits, and carry their own
+metadata with them.  In others, the results of merges are committed
+the same way other changes are committed, and so the primary means of
+distinguishing a "merge commit" from a "new change commit" is in the
+log message.  In a merge log message, don't repeat the log message of
+the original change.  Instead, just indicate that this is a merge, and
+give the identifying revision of the original change, with at most a
+one-sentence summary of its effect.  If someone wants to see the full
+log message, they can consult the original revision or revisions.  The
+reason it's important to avoid repeating the log message is that log
+messages are sometimes edited after commit.  If a change's log message
+were repeated at each merge destination, then even if someone edited
+the original message, they'd still leave all the repeats uncorrected
+&mdash; which would only cause confusion down the road.</para>
 
-<para><remark>When reverting, don't repeat the log message, just refer
-to the change by name, and state the reason for the reversion.  Same
-with merging.  Talk about referencing the bug tracker ticket numbers
-here, or in bug tracking, or both, or in Chapter 5?</remark></para>
+<para>The same principle applies to reverting a change.  If a change
+is withdrawn from the code, then the log message for the reversion
+should merely state that some specific revision(s) is being reverted,
+<emphasis>not</emphasis> describe the actual code change thhat results
+from the reversion, since the semantics of the change can be derived
+by reading the original log message and change.  Of course, the
+reversion's log message should also state the reason why the change is
+being reverted, but it should not have any content that duplicates
+what can be derived from original change's log message.</para>
+
+<para>All of the above implies that you should use a consistent syntax
+for referring to revisions.  This is helpful not only in log messages,
+but in emails, in the bug tracker, and elsewhere.  If you're using
+CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
+where REV is a CVS revision number such as "1.76".  If you're using
+Subversion, the standard syntax for revision 1729 is "r1729" (file
+paths are not needed because of Subversion's global revision numbers).
+In Arch, the standard syntax is simply the changeset name.  I don't
+know the syntax in other systems, but there probably is one, and you
+should encourage people to use that syntax when referring to changes.
+Having change names always expressed in a standard format will make
+project bookkeeping much easier (as we will see in <xref
+linkend="pfs-ch-5"/> and <xref linkend="pfs-ch-6"/>), and since a lot
+of the bookkeeping will be done by volunteers, it needs to be as easy
+as possible.</para>
 
 </sect3>
 
 <sect3 id="pfs-ch-3-sect-3.3.7">
 <title>Authorization</title>
 
-<para><remark>Don't overdo it.  It is not important to have automated
-protections everywhere, you're doing parallel code review anyway after
-all, and any change can be reverted.  The honor system works
-fine.  It is important to distinguish between committers and
-non-committers, but that's about it.</remark></para>
+<para>Most version control systems offer a feature whereby certain
+people can be allowed/disallowed from committing in specific sub-areas
+of the repository.  Following the principle that when handed a hammer,
+people start looking around for nails, many projects use this feature
+with great precision, carefully granting people access to just those
+areas where they have been approved to commit, and making sure they
+can't commit anywhere else.  (See <xref linkend="pfs-ch-4-sect-3"/>
+for how projects decide who can commit where.)</para>
+
+<para><remark>todo: working here.  Don't overdo it.  It is not
+important to have automated protections everywhere, you're doing
+parallel code review anyway after all, and any change can be reverted.
+The honor system works fine.  It is important to distinguish between
+committers and non-committers, but that's about it.</remark></para>
 
 </sect3>
 
