@@ -1170,51 +1170,78 @@ able to provide information will increase much more slowly.
 Furthermore, even if the ratio were evenly balanced, there is still a
 fundamentaly scalability problem with the way most open source
 projects handle communications.  Consider mailing lists, for example.
-Most projects have a mailing list for users&mdash;sometimes the list's
-name is "users", or "discuss", or "help", or something else.  Whatever
-its name, the purpose of the list is always the same: to provide a
-place where people can get their questions answered, while others
-watch and (presumably) absorb knowledge from observing these
-exchanges.</para>
+Most projects have a mailing list for general user
+questions&mdash;sometimes the list's name is "users", or "discuss", or
+"help", or something else.  Whatever its name, the purpose of the list
+is always the same: to provide a place where people can get their
+questions answered, while others watch and (presumably) absorb
+knowledge from observing these exchanges.</para>
 
 <para>These mailing lists work very well up to a few thousand users
 and/or a couple of hundred posts a day.  But somewhere after that the
 system starts to break down, because every subscriber sees every post,
 and if the number of posts to the list begins to exceed what any
 individual reader can process in a day, the list becomes a burden to
-its members.  Imagine, for instance, if Microsoft had a users mailing
+its members.  Imagine, for instance, if Microsoft had such a mailing
 list for Windows XP.  Windows XP has hundreds of millions of users; if
-even one-tenth of one percent of them have questions in a given
+even one-tenth of one percent of them had questions in a given
 twenty-four hour period, then this hypothetical list would get
 hundreds of thousands of posts per day!  Such a list could never
-exist, of course; no one would stay subscribed to it.  And this
-problem is not limited to mailing lists; the same logic applies to IRC
-channels, online discussion forums, and all other systems in which
-groups hear questions from individuals.  The implications are ominous:
-the standard open source model of massively parallelized support
-simply does not scale to the levels needed for world domination.</para>
+exist, of course, because no one would stay subscribed to it.  And
+this problem is not limited to mailing lists; the same logic applies
+to IRC channels, online discussion forums, and all other systems in
+which groups hear questions from individuals.  The implications are
+ominous: the usual open source model of massively parallelized support
+simply does not scale to the levels needed for world
+domination.</para>
 
-<para>There will be no explosion when your forums reach the breaking
-point, however.  Instead, there will just be a quiet negative feedback
-effect: people unsubscribe from the lists, or leave the IRC channel,
-or at any rate stop bothering to ask questions, because they can see
-they won't be heard in all the noise.  As more and more people make
-this highly rational choice, the forums start to quiet down and become
-manageable again.  But they become manageable precisely because the
-rational people start looking elsewhere for information&mdash;while
-the irrational people stay behind and continue posting.  In other
-words, one side effect of continuing to use the same communications
-model even as the project grows, is that the average quality of both
-questions and answers tends to go down, which makes it look like new
-users are dumber than they used to be, when in fact they're probably
-not.  It's just that the cost/benefit ratio of using the massively
-parallel forums has increased, so naturally the sorts of people who
-think about cost/benefit ratios start to look elsewhere for answers
-first.</para>
+<para>There is no explosion when your forums reach the breaking point.
+There is just a quiet negative feedback effect: people unsubscribe
+from the lists, or leave the IRC channel, or at any rate stop
+bothering to ask questions, because they can see they won't be heard
+in all the noise.  As more and more people make this highly rational
+choice, the forum's activity will seem to stay at a manageable level.
+But it stays manageable precisely because the rational (or at least
+experienced) people have started looking elsewhere for
+information&mdash;while the inexperienced people stay behind and
+continue posting.  In other words, one side effect of continuing to
+use unscalable communications models as the project grows is that the
+average quality of both questions and answers tends to go down, which
+makes it look like new users are dumber than they used to be, when in
+fact they're probably not.  It's just that the benefit/cost ratio of
+using the massively parallel forums goes down, so naturally those with
+the experience to do so start to look elsewhere for answers first.
+Adjusting communications mechanisms to cope with project growth
+therefore involves two related activities:</para>
 
-<para>A major part of handling project growth, therefore, is to make
-sure that there are many <emphasis>elsewheres</emphasis>, and that
-they are kept organized and up-to-date.</para>
+<orderedlist>
+  <listitem><para>Recognizing when particular parts of a forum are
+            <emphasis>not</emphasis> suffering unbounded growth (even
+            if the forum as a whole is), and separating those parts
+            off into new, more specialized forums (i.e., don't let
+            the good be dragged down by the bad.)</para>
+  </listitem>
+  <listitem><para>Making sure there are many non-interactive sources
+            of information available, and that they are kept
+            organized, up-to-date, and easy to find.</para>
+  </listitem>
+</orderedlist>
+
+<para>In the following sections we'll look at techniques for doing
+both.  Although the most severe clogging generally happens with
+user-centric forums, the solutions are applicable to developers as
+well.  A project run by six to ten highly-involved people will operate
+very differently from a project with a hundred or more participants
+with varying degrees of involvement.  And of course, users and
+developers are not completely isolated worlds.  Population growth in
+one will affect the other; especially, dramatic increases in the
+number of users will affect the developers not only in terms of their
+daily communications burden, but in terms of how they view the
+software and their responsibilities toward it.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-splitting-forums">
+<title>Splitting Forums</title>
 
 <para><remark>[... working here ...]</remark></para>
 
@@ -1262,148 +1289,6 @@ looser in IRC, because it is really a social medium.  Don't ask people
 to go out-of-band unless they're actually interfering with stuff, and
 even then make it clear that the request is only temporary, and that
 when the channel's less busy it won't matter so much.)</remark></para>
-
-<!-- ======================== subsection ============================== -->
-<sect2 id="pfs-codifying-tradition">
-<title>Codifying Tradition</title>
-
-<para>As a project acquires history and complexity, the amount of data
-each incoming participant must absorb increases.  Those who have been
-with the project a long time were able to learn, and invent, the
-project's conventions as they went along.  They will often not be
-consciously aware of what a huge body of tradition has accummulated,
-and may seem surprised at how many missteps the newcomers seem to make
-these days.  Of course, the issue is not that the newcomers are of any
-lower quality than before; it's that they face a bigger acculturation
-burden than newcomers did in the past.</para>
-
-<para>The traditions a project accumulates are as much about how to
-communicate and preserve information as they are about coding
-standards and other technical minutae.  We've already looked at both
-sorts of standards, in <xref linkend="pfs-written-rules"/> and
-<xref linkend="pfs-developer-documentation"/> respectively, and
-examples are given there.  What this section is about is how to keep
-such guidelines up-to-date as the project evolves, especially
-guidelines about how communications are managed, because those are the
-ones that change the most as the project grows in size and
-complexity.</para>
-
-<para>First, watch for patterns in how people get confused.  If you
-see the same situations coming up over and over, especially with new
-participants, chances are there is a guideline that needs to be
-documented but isn't.  Second, don't get tired of saying the same
-things over and over again, and don't <emphasis>sound</emphasis> like
-you're tired of saying them.  You and other project veterans will have
-to repeat yourselves often; this is an inevitable side effect of the
-arrival of newcomers, which itself is simply a side effect of
-success.</para>
-
-<para>A classic example of this sort of situation, and how to resolve
-it, happened with the bug-filtering technique described in
-<xref linkend="pfs-bug-filtering"/>.  Many bogus bug reports are filed
-by inexperienced people, and each time this happens the filer must be
-educated in exactly the same way as the five hundred people before
-him.  One day, after one of the developers in the Subversion project
-had finally gotten to the end of his rope and flamed some poor user
-who didn't read the issue tracker guidelines carefully enough, another
-developer decided the pattern had gone on long enough.  He suggested
-that we reformat the issue tracker front page so that the most
-important part, the injunction to discuss the bug on the mailing lists
-or IRC channels before filing, would stand out in huge, bold red
-letters, on a yellow background, prominently placed above everything
-else on the page.  We did so (you can see the results at
-<ulink url="http://subversion.tigris.org/project_issues.html"/>), and
-the result was a noticeable drop in the rate of bogus issue filings.
-We still get them, of course&mdash;we always will&mdash;but the rate
-has slowed considerably, even as the number of users increases.  The
-outcome is not only that the bug database contains less junk, but that
-those who respond to issue filings stay in a better mood, and are more
-likely to remain friendly when responding to one of the now-rare bogus
-filings.  This improves both the project's image and the mental health
-of its volunteers.</para>
-
-<para>The lesson is that merely writing up guidelines is not enough.
-One must also put them where they'll be seen by those who need to see
-them, and format them in such a way that their status as introductory
-material is immediately clear to people unfamiliar with the
-project.</para>
-
-<para>Static web pages are not the only venue for codifying tradition.
-A certain amount of intra-group policing (in the friendly-reminder
-sense, not the handcuffs-and-jail sense) is also required.  All peer
-review, even the commit reviews described in
-<xref linkend="pfs-code-review"/>, should include reviewing people's
-conformance or non-conformance with project norms, especially with
-regard to communications conventions.</para>
-
-<para>For example, in the Subversion project we settled on a
-convention of "r12908" to mean "revision 12908 in the version control
-repository".  The lower-case "r" prefix is easy to type, and because
-it's half the height of the digits, when combined with the digits it
-makes for an easily-recognizeable block of text.  Of course, settling
-on the convention doesn't mean that everyone will begin using it
-consistently right away.  Thus when a commit mail comes in with a log
-message like this:</para>
-
-<screen>
-------------------------------------------------------------------------
-r12908 | qsimon | 2005-02-02 14:15:06 -0600 (Wed, 02 Feb 2005) | 4 lines
-
-Patch from J. Random Contributor &lt;jrcontrib@gmail.com&gt;
-
-* trunk/contrib/client-side/psvn/psvn.el:
-  Fixed some typos from revision 12828.
-------------------------------------------------------------------------
-</screen>
-
-<para>...part of reviewing that commit is to say "By the way, please
-use 'r12828', not 'revision 12828' when referring to past changes."
-This isn't just pedantry; it's as much about automatic parseability as
-about human readership.  By following the general principle that there
-should be canonical referral methods for common entities, and that
-thse referral methods should be used consistently everywhere, the
-project in effect exports certain standards.  Those standards enable
-people to write tools that present the project's communications in
-more useable ways&mdash;for example, a revision formatted as "r12828"
-could be transformed into a live link into the repository browsing
-system.  This would be harder to do if the revision were written as
-"revision 12828", both because that form could be divided across a
-line break, and because its less distinct (the word "revision" will
-often appear alone, and groups of numbers will often appear alone,
-whereas the combination "r12828" can only mean a revision number).
-Similar concerns apply to issue numbers, FAQ items (hint: use a URL
-with a named anchor, as described in
-<xref linkend="pfs-html-named-anchors-and-ids"/>), etc.</para>
-
-<para>Even for entities where there is not an obvious short, canonical
-form, people should still be encouraged to provide key pieces of
-information consistently.  For example, when referring to a mailing
-list message, don't just give the sender and subject, also give the
-archive URL <emphasis>and</emphasis> the Message-ID header.  The last
-allows people who have their own copy of the mailing list (people
-sometimes keep offline copies, for example to use on a laptop while
-traveling) to unambiguously identify the right message even if they
-don't have access to the archives.  The sender and subject wouldn't be
-enough, because the same person might make several posts in the same
-thread, even on the same day.</para>
-
-<!--
-
-<para><remark>See
-<ulink
-url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
-an example of mailing list guidelines, talk about which problems such
-guidelines can solve and which they can't.  Also, log message
-guidelines (if that gets its own section, remember to adjust the xrefs
-in Version Control Vocabulary and elsewhere in Chapter 3).  Mention
-the parseability concern; point out that it can overdone, too.
-Formatting of bug tracker numbers in log messages is an excellent
-example of where parseability is an appropriate concern.  Log message
-templates.  Make sure that commit reviews apply to log messages and
-other "meta" aspects of the commit as well as to the code
-itself.</remark></para>
-
--->
 
 </sect2>
 
@@ -1607,6 +1492,150 @@ linkend="pfs-ch-8"/> discusses how to spread that maintenance burden
 across many volunteers).</para>
 
 </sect3>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-codifying-tradition">
+<title>Codifying Tradition</title>
+
+<para>As a project acquires history and complexity, the amount of data
+each incoming participant must absorb increases.  Those who have been
+with the project a long time were able to learn, and invent, the
+project's conventions as they went along.  They will often not be
+consciously aware of what a huge body of tradition has accummulated,
+and may seem surprised at how many missteps the newcomers seem to make
+these days.  Of course, the issue is not that the newcomers are of any
+lower quality than before; it's that they face a bigger acculturation
+burden than newcomers did in the past.</para>
+
+<para>The traditions a project accumulates are as much about how to
+communicate and preserve information as they are about coding
+standards and other technical minutae.  We've already looked at both
+sorts of standards, in <xref linkend="pfs-written-rules"/> and
+<xref linkend="pfs-developer-documentation"/> respectively, and
+examples are given there.  What this section is about is how to keep
+such guidelines up-to-date as the project evolves, especially
+guidelines about how communications are managed, because those are the
+ones that change the most as the project grows in size and
+complexity.</para>
+
+<para>First, watch for patterns in how people get confused.  If you
+see the same situations coming up over and over, especially with new
+participants, chances are there is a guideline that needs to be
+documented but isn't.  Second, don't get tired of saying the same
+things over and over again, and don't <emphasis>sound</emphasis> like
+you're tired of saying them.  You and other project veterans will have
+to repeat yourselves often; this is an inevitable side effect of the
+arrival of newcomers, which itself is simply a side effect of
+success.</para>
+
+<para>A classic example of this sort of situation, and how to resolve
+it, happened with the bug-filtering technique described in
+<xref linkend="pfs-bug-filtering"/>.  Many bogus bug reports are filed
+by inexperienced people, and each time this happens the filer must be
+educated in exactly the same way as the five hundred people before
+him.  One day, after one of the developers in the Subversion project
+had finally gotten to the end of his rope and flamed some poor user
+who didn't read the issue tracker guidelines carefully enough, another
+developer decided the pattern had gone on long enough.  He suggested
+that we reformat the issue tracker front page so that the most
+important part, the injunction to discuss the bug on the mailing lists
+or IRC channels before filing, would stand out in huge, bold red
+letters, on a yellow background, prominently placed above everything
+else on the page.  We did so (you can see the results at
+<ulink url="http://subversion.tigris.org/project_issues.html"/>), and
+the result was a noticeable drop in the rate of bogus issue filings.
+We still get them, of course&mdash;we always will&mdash;but the rate
+has slowed considerably, even as the number of users increases.  The
+outcome is not only that the bug database contains less junk, but that
+those who respond to issue filings stay in a better mood, and are more
+likely to remain friendly when responding to one of the now-rare bogus
+filings.  This improves both the project's image and the mental health
+of its volunteers.</para>
+
+<para>The lesson is that merely writing up guidelines is not enough.
+One must also put them where they'll be seen by those who need to see
+them, and format them in such a way that their status as introductory
+material is immediately clear to people unfamiliar with the
+project.</para>
+
+<para>Static web pages are not the only venue for codifying tradition.
+A certain amount of intra-group policing (in the friendly-reminder
+sense, not the handcuffs-and-jail sense) is also required.  All peer
+review, even the commit reviews described in
+<xref linkend="pfs-code-review"/>, should include reviewing people's
+conformance or non-conformance with project norms, especially with
+regard to communications conventions.</para>
+
+<para>For example, in the Subversion project we settled on a
+convention of "r12908" to mean "revision 12908 in the version control
+repository".  The lower-case "r" prefix is easy to type, and because
+it's half the height of the digits, when combined with the digits it
+makes for an easily-recognizeable block of text.  Of course, settling
+on the convention doesn't mean that everyone will begin using it
+consistently right away.  Thus when a commit mail comes in with a log
+message like this:</para>
+
+<screen>
+------------------------------------------------------------------------
+r12908 | qsimon | 2005-02-02 14:15:06 -0600 (Wed, 02 Feb 2005) | 4 lines
+
+Patch from J. Random Contributor &lt;jrcontrib@gmail.com&gt;
+
+* trunk/contrib/client-side/psvn/psvn.el:
+  Fixed some typos from revision 12828.
+------------------------------------------------------------------------
+</screen>
+
+<para>...part of reviewing that commit is to say "By the way, please
+use 'r12828', not 'revision 12828' when referring to past changes."
+This isn't just pedantry; it's as much about automatic parseability as
+about human readership.  By following the general principle that there
+should be canonical referral methods for common entities, and that
+thse referral methods should be used consistently everywhere, the
+project in effect exports certain standards.  Those standards enable
+people to write tools that present the project's communications in
+more useable ways&mdash;for example, a revision formatted as "r12828"
+could be transformed into a live link into the repository browsing
+system.  This would be harder to do if the revision were written as
+"revision 12828", both because that form could be divided across a
+line break, and because its less distinct (the word "revision" will
+often appear alone, and groups of numbers will often appear alone,
+whereas the combination "r12828" can only mean a revision number).
+Similar concerns apply to issue numbers, FAQ items (hint: use a URL
+with a named anchor, as described in
+<xref linkend="pfs-html-named-anchors-and-ids"/>), etc.</para>
+
+<para>Even for entities where there is not an obvious short, canonical
+form, people should still be encouraged to provide key pieces of
+information consistently.  For example, when referring to a mailing
+list message, don't just give the sender and subject, also give the
+archive URL <emphasis>and</emphasis> the Message-ID header.  The last
+allows people who have their own copy of the mailing list (people
+sometimes keep offline copies, for example to use on a laptop while
+traveling) to unambiguously identify the right message even if they
+don't have access to the archives.  The sender and subject wouldn't be
+enough, because the same person might make several posts in the same
+thread, even on the same day.</para>
+
+<!--
+
+<para><remark>See
+<ulink
+url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
+an example of mailing list guidelines, talk about which problems such
+guidelines can solve and which they can't.  Also, log message
+guidelines (if that gets its own section, remember to adjust the xrefs
+in Version Control Vocabulary and elsewhere in Chapter 3).  Mention
+the parseability concern; point out that it can overdone, too.
+Formatting of bug tracker numbers in log messages is an excellent
+example of where parseability is an appropriate concern.  Log message
+templates.  Make sure that commit reviews apply to log messages and
+other "meta" aspects of the commit as well as to the code
+itself.</remark></para>
+
+-->
 
 </sect2>
 
