@@ -1583,8 +1583,17 @@ know are visible to others as well.</para>
 
 <para>The specifics of setting up commit emails will vary depending on
 your version control system, but most offer some sort of script or
-other packaged facility for doing it.  You may need to configure a
-couple of default behaviors, though:
+other packaged facility for doing it.  If you're having trouble
+finding out how, try looking for documentation on
+<firstterm>hooks</firstterm>, specifically a <firstterm>post-commit
+hook</firstterm>, also called the <firstterm>loginfo hook</firstterm>
+in CVS.  Post-commit hooks are a means of launching automated tasks in
+response to commits.  The hook is fed all the information about the
+triggering commit, and is then free to use that information for
+whatever it wants &mdash; for example, to send out an email.</para>
+
+<para>With pre-packaged commit email systems, you may need to
+configure a couple of default behaviors:
 
 <orderedlist>
 
@@ -1650,15 +1659,34 @@ couple of default behaviors, though:
 
 </para>
 
+<sidebar id="pfs-ch-3-sidebar-1">
+<title>CIA: Another Change Publication Mechanism</title>
 
-</sect3>
+<para>Commit emails are not the only way to propagate change news.
+Recently, another mechanism called CIA (<ulink
+url="http://cia.navi.cx/"/>) has been developed.  CIA is a realtime
+commit statistics aggregator and distributor.  The way it works is
+that you invoke the CIA notifier program from your post-commit hook.
+The notifier formats the commit information into an XML message, and
+sends to a central server (typically <literal>cia.navi.cx</literal>).
+The server then distributes the commit information to other
+forums.</para>
 
-<sect3 id="pfs-ch-3-sect-3.3.4">
-<title>CIA and Other Change Publication Mechanisms</title>
+<para>The most popular use of CIA is to send commit notifications to
+an IRC channel, so that people logged into the channel can see commits
+happening in realtime.  Though of somewhat less technical utility than
+commit emails, since observers might or might not be around when a
+commit notice pops up in IRC, this is of immense
+<emphasis>social</emphasis> utility.  People get the sense of being
+part of something alive and active, and feel that they can see
+progress being made right before their eyes.</para>
 
-<para><remark>CIA is both a static publisher and a realtime (IRC)
-publisher.  It's like a meta-hook on your commit hook.  Talk about
-RSS?</remark></para>
+<para>CIA can also be configured to send out <ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
+feeds.  See the documentation at <ulink url="http://cia.navi.cx/"/>
+for details.</para>
+
+</sidebar>
 
 </sect3>
 
