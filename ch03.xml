@@ -1,6 +1,6 @@
 <chapter id="pfs-ch-3">
 
-<title>Technical Infrastructure <!-- [ 10-20 pp ] --></title>
+<title>Technical Infrastructure</title>
 
 <simplesect>
 
@@ -943,21 +943,21 @@ minimally competently.</para>
 <para>The reason version control is so universal is that it helps with
 virtually every aspect of running a project: inter-developer
 communications, release management, bug management, code stability and
-experimental development efforts, and (not least) attribution and
-authorization of changes by particular developers.  The version
-control system provides a central coordinating force among all of
-these areas.  The core of version control is <firstterm>change
-management</firstterm>: identifying each discrete change made to the
-project's files, annotating each change with metadata like the
-change's date and author, and then replaying these facts to whoever
-asks, in whatever way they ask.  It is a communications mechanism
-where a change is the basic unit of information.</para>
+experimental development efforts, and attribution and authorization of
+changes by particular developers.  The version control system provides
+a central coordinating force among all of these areas.  The core of
+version control is <firstterm>change management</firstterm>:
+identifying each discrete change made to the project's files,
+annotating each change with metadata like the change's date and
+author, and then replaying these facts to whoever asks, in whatever
+way they ask.  It is a communications mechanism where a change is the
+basic unit of information.</para>
 
 <para>This section does not discuss all aspects of using a version
-control system.  It's such an all-encompassing concept that it must be
-addressed topically throughout the book.  Here, we will concentrate on
-choosing and setting up a version control system in a way that will
-foster cooperative development down the road.</para>
+control system.  It's so all-encompassing that it must be addressed
+topically throughout the book.  Here, we will concentrate on choosing
+and setting up a version control system in a way that will foster
+cooperative development down the road.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-3.1">
@@ -1053,22 +1053,26 @@ problem concisely.
  </varlistentry>
 
  <varlistentry>
-  <term><firstterm>revision</firstterm></term>
-  <listitem><para>This is similar to "change", but has a more
-  technical meaning: a revision is one specific incarnation of a
-  particular file or directory.  For example, if the project starts
+  <term><firstterm>revision</firstterm>,
+        <firstterm>change</firstterm>,
+        <firstterm>changeset</firstterm></term>
+  <listitem><para>A "revision" is usually one specific incarnation of
+  a particular file or directory.  For example, if the project starts
   out with revision X of file F, and then someone commits a change to
-  F, this produces revision Y of F.  Different version control systems
-  use the concept of "revision" in slightly different ways, but the
-  general idea is always the same: when it is necessary to speak
-  precisely about a file at particular points in time (say,
-  immediately before and after a bug is fixed), one talks in terms of
-  revisions.  For example: "Oh yes, she fixed that in revision X." or
-  "She fixed that in revision X of foo.c."</para>
+  F, this produces revision Y of F.  Some systems also use "revision"
+  "change", or "changeset" to refer to a set of changes committed
+  together as one conceptual unit.</para> 
+
+  <para>Sometimes these terms have distinct technical meanings in
+  different version control systems, but the general idea is always
+  the same: they give a way to speak precisely about exact points in
+  time in the history of a file or a set of files (say, immediately
+  before and after a bug is fixed).  For example: "Oh yes, she fixed
+  that in revision X." or "She fixed that in revision X of foo.c."</para>
 
   <para>When one talks about a file or collection of files without
   specifying a particular revision, it is generally assumed that one
-  means the most recent revision(s) available. </para></listitem>
+  means the most recent revision(s) available.</para></listitem>
  </varlistentry>
 
  <varlistentry>
@@ -1147,20 +1151,20 @@ problem concisely.
   seems Alfred has them all locked while he fixes their background
   images."  Not all version control systems even offer the ability to
   lock, and of those that do, not all require the locking feature to
-  be used.  This might seem surprising, until you realize that
-  parallel, simultaneous development is the norm, and that locking
-  people out of files is contrary to this ideal.</para>
+  be used.  This is because parallel, simultaneous development is the
+  norm, and locking people out of files is (usually) contrary to this
+  ideal.</para>
 
   <para>Version control systems that require locking to make commits
-  are said to use the <firstterm>lock-modify-unlock</firstterm> model;
-  those that do not are said to use the
+  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
+  Those that do not are said to use the
   <firstterm>copy-modify-merge</firstterm> model.  An excellent
   in-depth explanation and comparison of the two models may be found
   at <ulink
   url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
   general, the copy-modify-merge model is better for open source
-  development, and all the version control systems recommended in this
-  chapter support that model.</para></listitem>
+  development, and all the version control systems recommended
+  discussed in this book support that model.</para></listitem>
  </varlistentry>
 
 </variablelist>
@@ -1175,310 +1179,35 @@ problem concisely.
 <title>Choosing a Version Control System</title>
 
 <para>As of this writing, the version control system of choice in the
-free software world is
-
-<itemizedlist>
-  <listitem>
-    <para><emphasis role="bold">CVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.cvshome.org/"/></para>
-    <para><firstterm>CVS</firstterm> ("Concurrent Versions System")
-    has been around for a long time.  Most experienced developers are
-    already familiar with it, it does more or less what you need, and
-    since it's the default, you won't end up in any long debates about
-    whether or not it was the right choice.  CVS has some
-    disadvantages, too.  It doesn't provide an easy way to refer to
-    multi-file changes; it doesn't allow you to rename or copy files
-    under version control (so if you need to reorganize your code tree
-    after starting the project, it can be a real pain); it doesn't
-    handle large files or binary files very well; and some operations
-    are a slow when large numbers of files are involved.</para>
-  </listitem>
-</itemizedlist>
-
-</para>
+free software world is <firstterm>CVS</firstterm>, the "Concurrent
+Versions System" (<ulink url="http://www.cvshome.org/"/>).  CVS has
+been around for a long time.  Most experienced developers are already
+familiar with it, it does more or less what you need, and since it's
+the default, you won't end up in any long debates about whether or not
+it was the right choice.  CVS has some disadvantages, too.  It doesn't
+provide an easy way to refer to multi-file changes; it doesn't allow
+you to rename or copy files under version control (so if you need to
+reorganize your code tree after starting the project, it can be a real
+pain); it has poor merging support; it doesn't handle large files or
+binary files very well; and some operations are a slow when large
+numbers of files are involved.</para>
 
 <para>None of CVS's flaws is fatal, and it is still quite popular.
 However, in the last few years a number of new version control systems
 have appeared, and free software projects are beginning to try them
-out.  The next three systems I can recommend either because I have
-used them myself, or because people I know use them:
-
-<itemizedlist>
-
-  <listitem>
-    <para><emphasis role="bold">Arch</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://gnuarch.org/"/></para>
-    <para>GNU Arch supports both distributed and centralized
-    development.  Developers commit their changes to an "archive",
-    which may be local, and the changes can be pushed and pulled to
-    other archives as the managers of those archives see fit.  As
-    such a methodology implies, Arch has more sophisticated merge
-    support than CVS.  Arch also allows one to easily make branches
-    of archives to which one does not have commit access (perhaps
-    surprisingly, this is not a common feature of version control
-    systems).  This is only a brief summary; see the Arch web pages
-    for details.</para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">Subversion</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://subversion.tigris.org/"/></para>
-    <para>Subversion was written first and foremost to be a
-    replacement for CVS &mdash; that is, to approach version control
-    in roughly the same way CVS does, but without the problems and
-    feature omissions that most frequently annoy users of CVS.  Part
-    of Subversion's goal was that people already accustomed to CVS
-    would find the transition to Subversion relatively smooth.  There
-    is not space here to go into detail about Subversion's features,
-    see its web site for more information.  [Disclaimer: I am very
-    involved in Subversion development.  It is also the only one of
-    these three systems that I use on a regular basis.]</para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">SVK</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://svk.elixus.org/"/></para>
-    <para>Although it is built on top of Subversion, SVK probably
-    resembles Arch more than it does Subversion.  SVK supports
-    distributed (non-centralized) development, sophisticated change
-    merging, and the ability to mirror trees from non-SVK version
-    control systems.  See the website for details.</para>
-  </listitem>
-
-</itemizedlist>
-
-</para>
-
-<para><remark>(Hmm, should all these non-CVS systems be relegated to
-an Appendix?)</remark></para>
-
-<para>For the sake of both fairness and completeness, here is a
-overview of other open source version control systems.  I have no
-specific recommendations for or against any of these; the information
-here is taken from their web sites.
-
-<itemizedlist>
-
-  <listitem>
-    <para><emphasis role="bold">Aegis</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://aegis.sourceforge.net/"/></para>
-
-    <para>
-      "Aegis is a transaction-based software configuration management
-      system.  It provides a framework within which a team of
-      developers may work on many changes to a program independently,
-      and Aegis coordinates integrating these changes back into the
-      master source of the program, with as little disruption as
-      possible."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">CVSNT</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://cvsnt.org"/></para>
-
-    <para>
-      "CVSNT is an advanced multiplatform version control
-      system.  Compatible with the industry standard CVS protocol it
-      now supports many more features. ... CVSNT is Open Source,
-      Free software licensed under the GNU General Public License."
-      It's feature list includes authentication via all standard CVS
-      protocols, plus Windows specific SSPI and Active Directory;
-      secure transport support, via sserver or encrypted SSPI;
-      cross platform (runs in Windows or Unix environments); NT version
-      is fully integrated with Win32 system; MergePoint processing
-      means no more tagging to merge; under active development.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">META-CVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://users.footprints.net/~kaz/mcvs.html"/></para>
-
-    <para>
-      "Meta-CVS is a version control system built around CVS.  Although
-      it retains most of the features of CVS, including all of the
-      networking support, it is more capable than CVS, and easier to
-      use."  The features listed on META-CVS's web site include:
-      directory structure versioning, improved file type handling,
-      simpler and more user-friendly branching and merging, support
-      for symbolic links, property lists attached to versioned data,
-      improved third-party data importing, and easy upgrading from
-      stock CVS.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">OpenCM</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.opencm.org/"/></para>
-
-    <para>
-      "OpenCM is designed as a secure, high-integrity replacement for
-      CVS.   A list of the key features can be found on the features
-      page.  While not as 'feature rich' as CVS, it supports some
-      useful things that CVS lacks.  Briefly, OpenCM provides
-      first-class support for renames and configuration, cryptographic
-      authentication and access control, and first-class branches."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">monotone</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.venge.net/monotone/"/></para>
-
-    <para>
-      "monotone is a free distributed version control system.  it
-      provides a simple, single-file transactional version store, with
-      fully disconnected operation and an efficient peer-to-peer
-      synchronization protocol.  it understands history-sensitive
-      merging, lightweight branches, integrated code review and 3rd
-      party testing.  it uses cryptographic version naming and
-      client-side RSA certificates.  it has good internationalization
-      support, has no external dependencies, runs on linux, solaris,
-      OSX, and windows, and is licensed under the GNU GPL." [sic]
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">Vesta</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.vestasys.org/"/></para>
-
-    <para>
-      "Vesta is a portable SCM [Software Configuration Management]
-      system targeted at supporting development of software systems of
-      almost any size, from fairly small (under 10,000 source lines)
-      to very large (10,000,000 source lines).
-    </para>
-
-    <para>
-      Vesta is a mature system.  It is the result of over 10 years of
-      research and development at the Compaq/Digital Systems Research
-      Center, and it was in production use by Compaq's Alpha
-      microprocessor group for over two and a half years.  The Alpha
-      group had over 150 active developers at two sites thousands of
-      miles apart, on the east and west coasts of the United
-      States.  The group used Vesta to manage builds with as much as
-      130 MB of source data, each producing 1.5 GB of derived
-      data.  The builds done at the eastern site in an average day
-      produced about 10-15 GB of derived data, all managed by
-      Vesta.  Although Vesta was designed with software development in
-      mind, the Alpha group demonstrated the system's flexibility by
-      using it for hardware development, checking their hardware
-      description language files into Vesta's source code control
-      facility and building simulators and other derived objects with
-      Vesta's builder.  The members of the former Alpha group, now a
-      part of Intel, are continuing to use Vesta today in a new
-      microprocessor project."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">Stellation</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.eclipse.org/stellation/"/></para>
-
-    <para>
-      "Stellation is an advanced, extensible software configuration
-      management system, originally developed at IBM Research.  While
-      Stellation provides all of the standard functions available in
-      any SCM system, it is distinguished by a number of advanced
-      features, such as task-oriented change management, consistent
-      project versioning and lightweight branching, intended to ease
-      the development of software systems by large groups of loosely
-      coordinated developers."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">PRCS</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://prcs.sourceforge.net/"/></para>
-
-    <para>
-      "PRCS, the Project Revision Control System, is the front end to a
-      set of tools that (like CVS) provide a way to deal with sets of
-      files and directories as an entity, preserving coherent versions
-      of the entire set. ... Its purpose is similar to that of SCCS,
-      RCS, and CVS, but (according to its authors, at least), it is
-      much simpler than any of those systems."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">Darcs</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://abridgegame.org/darcs/"/></para>
-
-    <para>
-      "David's Advanced Revision Control System is yet another
-      replacement for CVS.  It is written in Haskell, and has been used
-      on Linux, MacOS X, FreeBSD, OpenBSD and Microsoft Windows.  Darcs
-      includes a cgi script, which can be used to view the contents of
-      your repository."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">SourceJammer</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://sourcejammer.org/"/></para>
-
-    <para>
-      "SourceJammer is a source control and versioning system written
-      in Java.  It consists of a server-side component that maintains
-      the files and version history, and handles check-in, check-out,
-      etc. and other commands; and a client-side component that makes
-      requests of the server and manages the files on the client-side
-      file system."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">Codeville</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://codeville.org/"/></para>
-
-    <para>
-      "Why yet another version control system? All other version
-      control systems require that you keep careful track of the
-      relationships between branches so as not have to repeatedly
-      merge the same conflicts.  Codeville is much more anarchic.  It
-      allows you to update from or commit to any repository at any
-      time with no unnecessary re-merges."
-    </para>
-
-    <para>
-      "Codeville works by creating an identifier for each change which
-      is done, and remembering the list of all changes which have been
-      applied to each file and the last change which modified each
-      line in each file.  When there's a conflict, it checks to see if
-      one of the two sides has already been applied to the other one,
-      and if so makes the other side win automatically.  When there's
-      an actual not automatically mergeable version conflict,
-      Codeville behaves in almost exactly the same way as CVS."
-    </para>
-  </listitem>
-
-  <listitem>
-    <para><emphasis role="bold">DCVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.elegosoft.com/index_dcvs.html"/></para>
-
-    <para>
-      Still under development as of this writing, but may be ready to
-      try out by the time you read this.
-    </para>
-  </listitem>
-
-</itemizedlist>
-
-</para>
-
-<para>As you can see, deciding on a version control system could
-easily become a lifelong research project.  Quite possibly, you will
-be spared the decision because it will be made for you by your hosting
+out.  <xref linkend="pfs-app-a"/> lists all the ones I know of.  As
+that list makes clear, deciding on a version control system could
+easily become a lifelong research project.  Possibly you will be
+spared the decision because it will be made for you by your hosting
 site.  But if you must choose, consult with your other developers, ask
-around to see what people have experience with, and then just pick
-one.  Any stable, production-ready version control system will do, you
-don't have to worry too much about making a drastically wrong
-decision.  If you simply can't make up your mind, then go with CVS.
-It's still the standard, and will probably continue to be so for a few
-years.  (Also, many of the other systems support one-way conversion
-from CVS, so you can change your mind later anyway.)</para>
+around to see what people have experience with, then pick one and
+don't worry too much.  Any stable, production-ready version control
+system will do, you don't have to worry too much about making a
+drastically wrong decision.  If you simply can't make up your mind,
+then go with CVS.  It's still the standard, and will probably continue
+to be so for a few years.  Also, many of the other systems support
+one-way conversion from CVS, so you can change your mind later
+anyway.</para>
 
 </sect2>
 
@@ -1518,11 +1247,11 @@ will branch the documentation too, etc.</para>
 <para>Don't keep <firstterm>generated files</firstterm> under version
 control.  They are not truly editable data, since they are produced
 programmatically from other files.  For example, some build systems
-create <filename>Makefile</filename> based on the template
-<filename>Makefile.in</filename>.  To make a change to the
-<filename>Makefile</filename>, one would edit
-<filename>Makefile.in</filename> and then regenerate; thus, only the
-template <filename>Makefile.in</filename> is an "editable file".
+create <filename>configure</filename> based on the template
+<filename>configure.in</filename>.  To make a change to the
+<filename>configure</filename>, one would edit
+<filename>configure.in</filename> and then regenerate; thus, only the
+template <filename>configure.in</filename> is an "editable file".
 Always version only the templates.  If you version the result files as
 well, people will inevitably forget to regenerate when they commit a
 change to a template, and the resulting inconsistencies will cause no
@@ -1918,9 +1647,11 @@ requests, one-time tasks, unsolicited patches &mdash; really anything
 that has distinct beginning and end states, with optional transition
 states in between, and that accrues information over its lifetime.
 For this reason, bug trackers are also called <firstterm>issue
-trackers</firstterm>, <firstterm>artifact trackers</firstterm>,
-<firstterm>request trackers</firstterm>, <firstterm>trouble ticket
-systems</firstterm>, etc.</para>
+trackers</firstterm>, <firstterm>defect trackers</firstterm>,
+<firstterm>artifact trackers</firstterm>, <firstterm>request
+trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
+etc.  See <xref linkend="pfs-app-b"/> for list of software.
+</para>
 
 <para>In this book, I'll continue to use "bug tracker" for the
 software that does the tracking, because that's what most people call
@@ -2131,7 +1862,7 @@ their bugs with other people before filing them in the tracker.</para>
 
 <para>The first technique seems to be used universally.  Even projects
 with huge issue databases (say, the Debian bug tracker at <ulink
-url="http://bugs.debian.org/"/>, which contained 275,913 issues as of
+url="http://bugs.debian.org/"/>, which contained 277,741 issues as of
 this writing) still arrange things so that
 <emphasis>someone</emphasis> sees each issue that comes in.  It may be
 a different person depending on the category of the issue.  For
@@ -2171,8 +1902,8 @@ ignoring the guidelines.  Thus the volunteers must be vigilant, and
 yet exercise restraint in how they bounce unbuddied issues back to
 their reporters.  The goal is to train each reporter to use the
 buddying system in the future, so that there is an ever-growing pool
-of people who understand the issue-filtering system.  Thus, on seeing
-an unbuddied issue, the ideal steps are:
+of people who understand the issue-filtering system.  On seeing an
+unbuddied issue, the ideal steps are:
 
 <orderedlist>
   <listitem>
