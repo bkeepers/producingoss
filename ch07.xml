@@ -14,22 +14,22 @@ When a new release is being prepared, this difference is especially
 stark: a corporation can ask its entire development team to focus on
 an upcoming release, putting aside new feature development and
 non-critical bug-fixing until the release is done.  Volunteer groups
-are less monolithic.  People work on the project for all sorts of
+are not so monolithic.  People work on the project for all sorts of
 reasons, and those not interested in helping with a given release
-still need to be able to do regular development work while the release
-is going on.  Because of this decoupling, open source release
-processes tend to take longer, but be less disruptive, than commercial
-release processes.  It's a bit like highway repair.  There are two
-ways to fix a road: you can shut it down completely, so that a repair
-crew can swarm all over it at full capacity until the problem is
-solved, or you work on a couple of lanes at a time, while leaving the
-others open to traffic.  The first way is very efficient <emphasis>for
-the repair crew</emphasis>, but not for anyone else&mdash;the road is
-entirely shut down until the job is done.  The second way involves
-much more time and trouble for the repair crew (now they have to work
-with fewer people and less equipment, in cramped conditions, with
-flaggers to slow and direct traffic, etc), but at least the road
-remains useable, even if not at full capacity.</para>
+still need to continue regular development work while the release is
+going on.  Because of this decoupling, open source release processes
+tend to take longer, but be less disruptive, than commercial release
+processes.  It's a bit like highway repair.  There are two ways to fix
+a road: you can shut it down completely, so that a repair crew can
+swarm all over it at full capacity until the problem is solved, or you
+work on a couple of lanes at a time, while leaving the others open to
+traffic.  The first way is very efficient <emphasis>for the repair
+crew</emphasis>, but not for anyone else&mdash;the road is entirely
+shut down until the job is done.  The second way involves much more
+time and trouble for the repair crew (now they have to work with fewer
+people and less equipment, in cramped conditions, with flaggers to
+slow and direct traffic, etc), but at least the road remains useable,
+even if not at full capacity.</para>
 
 <para>Open source projects tend to work the second way.  In fact, for
 a mature piece of software with several different release lines being
@@ -40,25 +40,25 @@ tolerated by the development group as a whole, so that releases get
 made on a regular schedule.</para>
 
 <para>The model that makes this possible generalizes to more than just
-releases, actually.  It's the principle of parallelizing tasks that
-are not mutually interdependent&mdash;a principle that is by no means
-unique to open source development, of course, but one which open
-source projects implement in their own particular way.  They cannot
-afford to annoy either the roadwork crew or the regular traffic too
-much, but they also cannot afford to have people dedicated to standing
-by the orange cones and flagging traffic along.  Thus they gravitate
-toward processes that have flat, constant levels of administrative
-overhead, rather than peaks and valleys of inconvenience.  Volunteers
-are willing to work with consistent, low-level overhead; that
+releases.  It's the principle of parallelizing tasks that are not
+mutually interdependent&mdash;a principle that is by no means unique
+to open source development, of course, but one which open source
+projects implement in their own particular way.  They cannot afford to
+annoy either the roadwork crew or the regular traffic too much, but
+they also cannot afford to have people dedicated to standing by the
+orange cones and flagging traffic along.  Thus they gravitate toward
+processes that have flat, constant levels of administrative overhead,
+rather than peaks and valleys.  Volunteers are generally willing to
+work with small but consistent amounts of inconvenience; the
 predictability allows them to come and go without worrying about
 whether their schedule will clash with what's happening in the
-project.  But if the project were to have a master schedule in which
-some activities excluded other activities, the result would be a lot
-of developers sitting idle a lot of the time&mdash;which would be not
-only inefficient, but boring, and therefore dangerous, in that a bored
-developer is likely to soon be a ex-developer.</para>
+project.  But if the project were subject to a master schedule in
+which some activities excluded other activities, the result would be a
+lot of developers sitting idle a lot of the time&mdash;which would be
+not only inefficient, but boring, and therefore dangerous, in that a
+bored developer is likely to soon be a ex-developer.</para>
 
-<para>Release work is usually the most noticeable, and important, task
+<para>Release work is usually the most noticeable non-development task
 that happens in parallel with development, so the methods described in
 the following sections are geared mostly toward enabling releases.
 However, note that they also apply to other parallelizable tasks, such
@@ -74,7 +74,7 @@ the entire code base, etc.</para>
 <title>Release Numbering</title>
 
 <para>Before we talk about how to make a release, let's look at how to
-name releases, which means examining what releases actually mean to
+name releases, which requires knowing what releases actually mean to
 users.  A release means that:</para>
 
 <itemizedlist>
@@ -117,8 +117,7 @@ behave in unexpected ways.</para>
 obviously the numbers should unambiguously communicate the ordering of
 releases (i.e., by looking at any two releases' numbers, one can know
 which came later), but also they should indicate as compactly as
-possible the degree and <emphasis>kind</emphasis> of changes in the
-release.</para>
+possible the degree and nature of the changes in the release.</para>
 
 <para>All that in a number?  Well, more or less, yes.  Release
 numbering strategies are one of the oldest bikeshed discussions around
@@ -133,7 +132,7 @@ you.</para>
 <sect2 id="pfs-release-number-components">
 <title>Release Number Components</title>
 
-<para>Release numbers are digits separated by dots:</para>
+<para>Release numbers are groups of digits separated by dots:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3
@@ -159,13 +158,13 @@ on a descriptive label such as "Alpha" or "Beta" (see
 Singer 5.11.4 (Beta)</literallayout>
 </informalexample>
 
-<para>It is generally understood that an Alpha or Beta qualifier means
-that this release <emphasis>precedes</emphasis> a future release that
-will have the qualified number.  Thus, "2.3.0&nbsp;(Alpha)" leads
-eventually to "2.3.0".  In order to allow several such candidate
-releases in a row, the qualifiers themselves can have qualifiers.  For
-example, here is a series of release in the order that they would be
-made available to the public:</para>
+<para>An Alpha or Beta qualifier means that this
+release <emphasis>precedes</emphasis> a future release that will have
+the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
+leads eventually to "2.3.0".  In order to allow several such candidate
+releases in a row, the qualifiers themselves can have meta-qualifiers.
+For example, here is a series of release in the order that they would
+be made available to the public:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha 1)
@@ -177,10 +176,10 @@ Scanley 2.3.0</literallayout>
 </informalexample>
 
 <para>Notice how when it has the "Alpha" qualifier, Scanley "2.3" is
-written as "2.3.0".  Those two numbers are equivalent&mdash;trailing
+written as "2.3.0".  The two numbers are equivalent&mdash;trailing
 all-zero components can always be dropped for brevity&mdash;but when a
-qualifier is attached, brevity is a lost cause anyway, so one might as
-well go for completeness instead.</para>
+qualifier is present, brevity is out the window anyway, so one might
+as well go for completeness instead.</para>
 
 <para>Other qualifiers in semi-regular use include "Stable",
 "Unstable", "Development", and "RC" (for "Release Candidate").  The
@@ -188,14 +187,15 @@ most widely used ones are still "Alpha" and "Beta", with "RC" running
 a close third place, but note that "RC" always includes a numeric
 meta-qualifier.  That is, you don't release
 "Scanley&nbsp;2.3.0&nbsp;(RC)", you release
-"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.  Those
-three labels, "Alpha", "Beta", and "RC" are pretty widely known now,
-and I don't recommend using any of the others, even though the others
-might at first glance seem like better choices because they are normal
-words, not jargon.  But people who install software from releases are
-mostly familiar with the big three, and there's no reason to do things
-gratuitously differently from the way everyone else is doing
-them.</para>
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+
+<para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
+known now, and I don't recommend using any of the others, even though
+the others might at first glance seem like better choices because they
+are normal words, not jargon.  But people who install software from
+releases are already familiar with the big three, and there's no
+reason to do things gratuitously differently from the way everyone
+else does them.</para>
 
 <para>Although the dots in release numbers are not decimal points,
 they do indicate place-value significance.  All "0.X.Y" releases
@@ -226,7 +226,7 @@ increment of the major number indicates that major changes happened;
 an increment of the minor number indicates minor changes; and an
 increment of the micro number indicates really trivial changes.  (Some
 projects add a fourth component, usually called the "patch" number,
-for especially fine-grained control over the meanings of their
+for especially fine-grained control over the differences between their
 releases.  Confusingly, some other projects use "patch" as a synonym
 for "micro" in a three-component system.)  Various definitions have
 arisen for the various categories of changes, but the definitions tend
@@ -245,7 +245,7 @@ into a release if one is only incrementing the micro number, different
 rules for the minor number, and still different ones for the major
 number.  There is no set standard for these rules yet, but here I will
 describe a policy that has been used successfully by multiple
-projects.  You might want to just adopt this policy in your own
+projects.  You may want to just adopt this policy in your own
 project, but even if you don't, it's still a good example of the kind
 of information release numbers should convey.  This policy is adapted
 from the numbering system used by the APR project, see
@@ -255,10 +255,10 @@ from the numbering system used by the APR project, see
 
   <listitem><para>Changes to the micro number only (that is, changes
             within the same minor line) must be both forwards- and
-            backwards-compatible.  These changes should be bug fixes
-            only, or very small enhancements to existing features.
-            New features should not be introduced in a micro
-            release.</para>
+            backwards-compatible.  That is, the changes should be bug
+            fixes only, or very small enhancements to existing
+            features.  New features should not be introduced in a
+            micro release.</para>
   </listitem>
 
   <listitem><para>Changes to the minor number (that is, within the
@@ -285,19 +285,19 @@ application, then "backwards-compatible" means that upgrading the
 server to 2.6.0 should not cause any existing 2.5.4 clients to lose
 functionality or behave differently than they did before (except for
 bugs that were fixed, of course).  On the other hand, upgrading one of
-those clients to 2.6.0 along with the server might
+those clients to 2.6.0, along with the server, might
 make <emphasis>new</emphasis> functionality available for that client,
 functionality that 2.5.4 clients don't know how to take advantage of.
-If that happens, then the upgrade is "forwards-incompatible": clearly
-you can't now downgrade that client back to 2.5.4 and keep all the
-functionality it had at 2.6.0, since some of that functionality was
-new in 2.6.0.</para>
+If that happens, then the upgrade is <emphasis>not</emphasis>
+"forwards-compatible": clearly you can't now downgrade that client
+back to 2.5.4 and keep all the functionality it had at 2.6.0, since
+some of that functionality was new in 2.6.0.</para>
 
 <para>This is why micro releases are essentially for bug fixes only.
 They must remain "forwards-compatible" with each other: if you upgrade
-from 2.5.3 to 2.5.4, then change your mind and downgrade, no
-functionality should be lost.  Of course, the bugs fixed in 2.5.4
-would reappear if you downgraded to 2.5.3, but you wouldn't lose any
+from 2.5.3 to 2.5.4, then change your mind and downgrade back to
+2.5.3, no functionality should be lost.  Of course, the bugs fixed in
+2.5.4 would reappear after the downgrade, but you wouldn't lose any
 features, except insofar as the restored bugs prevent the use of some
 existing features.</para>
 
@@ -308,16 +308,14 @@ writes need to follow the compatibility guidelines promised by the
 release number policy.  Version 2.6.0 needs to be able to read the
 files written by 2.5.4, but may silently upgrade the format to
 something that 2.5.4 cannot read, because the ability to downgrade is
-not required across a minor number boundary.</para>
+not required across a minor number boundary.  If your project
+distributes code libraries for other programs to use, then APIs are a
+compatibility domain too: you must make sure that source and binary
+compatibility rules are spelled out in such a way that the informed
+user need never wonder whether or not it's safe to upgrade in place:
+she will be able to look at the numbers and know instantly.</para>
 
-<para>If your project distributes code libraries for other programs to
-use, then APIs are a compatibility domain: you must make sure that
-source and binary compatibility rules are spelled out in such a way
-that the informed user need never wonder whether or not it's safe to
-upgrade in place: she will be able to look at the numbers and know
-instantly.</para>
-
-<para>In this system, you don't get a chance for a full reset until
+<para>In this system, you don't get a chance for a fresh start until
 you increment the major number.  This can often be a real
 inconvenience: there may be features you wish to add, or protocols
 that you wish to redesign, that simply cannot be done while
@@ -333,15 +331,16 @@ with it.</para>
 
 <para>It is generally understood that these rules do not apply to
 pre-1.0 releases (although your release policy should probably state
-it explicitly, just to be clear).  A project that is still in initial
-development can just release 0.1, 0.2, 0.3, and so on in sequence,
-until it's ready to release 1.0.  Micro numbers in pre-1.0 releases
-are optional.  Depending on the nature of your project and the
-differences between the releases, you might find it useful to have
-0.1.0, 0.1.1, etc, or you might not.  Conventions for pre-1.0 release
-numbers are fairly loose, mainly because people understand that strong
-compatibility constraints would hamper early development too much, and
-because early adopters tend to be forgiving anyway.</para>
+so explicitly, just to be clear).  A project that is still in initial
+development can release 0.1, 0.2, 0.3, and so on in sequence, until
+it's ready for 1.0, and the differences between those releases can be
+arbitrarily large.  Micro numbers in pre-1.0 releases are optional.
+Depending on the nature of your project and the differences between
+the releases, you might find it useful to have 0.1.0, 0.1.1, etc, or
+you might not.  Conventions for pre-1.0 release numbers are fairly
+loose, mainly because people understand that strong compatibility
+constraints would hamper early development too much, and because early
+adopters tend to be forgiving anyway.</para>
 
 </sect2>
 
@@ -356,11 +355,11 @@ micro numbers.  Increments in the micro number still indicate bug
 fixes (no new features), and increments in the major number still
 indicate big changes, new featuresets, etc.</para>
 
-<para>The advantage of this system, which has been used by the Linux
-kernel project among others, is that it offers a way to release new
-functionality for testing without subjecting production users to
+<para>The advantage of the even/odd system, which has been used by the
+Linux kernel project among others, is that it offers a way to release
+new functionality for testing without subjecting production users to
 potentially unstable code.  People can see from the numbers that
-"2.4.16" is okay to install on their live web server, but that "2.5.1"
+"2.4.21" is okay to install on their live web server, but that "2.5.1"
 should probably stay confined to home workstation experiments.  The
 development team handles the bug reports that come in from the
 unstable (odd-minor-numbered) series, and when things start to settle
@@ -368,8 +367,8 @@ down after some number of micro releases in that series, they
 increment the minor number (thus making it even), reset the micro
 number back to "0", and release a presumably stable package.</para>
 
-<para>This system preserves (or at least, does not conflict with) the
-compatibility guidelines given earlier, it simply overloads the minor
+<para>This system preserves, or at least, does not conflict with, the
+compatibility guidelines given earlier.  It simply overloads the minor
 number with some extra information.  This forces the minor number to
 be incremented about twice as often as would otherwise be necessary,
 but there's no great harm in that.  The even/odd system is probably
@@ -377,7 +376,7 @@ best for projects that have very long release cycles, and which by
 their nature have a high proportion of conservative users who value
 stability above new features.  It is not the only way to get new
 functionality tested in the wild, however.
-<xref linkend="pfs-stabilizing-and-releasing"/> describes another,
+<xref linkend="pfs-stabilizing-a-release"/> describes another,
 perhaps more common, method of releasing potentially unstable code to
 the public, marked so that people have an idea of the risk/benefit
 tradeoffs immediately on seeing the release's name.</para>
@@ -390,19 +389,6 @@ tradeoffs immediately on seeing the release's name.</para>
 <sect1 id="pfs-release-branches">
 <title>Release Branches</title>
 
-<!-- TODO: Perhaps the best arrangement would be an overall section
-     about how to do a release, in which this and some of the
-     following would be a subsection, like this:
-
-       * Making a Release
-         - Make a Release Branch (was: "Release Branches")
-         - Stabilize the Release Branch (was: "Stabilizing and Releasing")
-         - Package the Release for Distribution (was: "Packaging for
-                                                       Distribution") 
-
-     Think it over.
--->
-
 <para>From a developer's point of view, a free software project is in
 a state of continuous release.  Developers usually run the latest
 available code at all times, because they want to spot bugs, and
@@ -412,33 +398,33 @@ their copy of the software every day, sometimes more than once a day,
 and when they check in a change, they can reasonably expect that every
 other developer will have it within twenty-four hours.</para>
 
-<para>How, then, should the project make a release?  Should it simply
-take a snapshot of the tree at a moment in time, package it up, and
-hand it to the world as, say, version "3.5.0"?  Common sense says no.
-First, there may be no moment in time when the entire development tree
-is clean and ready for release.  Newly-started features could be lying
-around in various states of completion.  Someone might have checked in
-a major change to fix a bug, but the change could be controversial and
-under debate at the moment the snapshot is taken.  If so, it wouldn't
-work to simply delay the snapshot until the debate ends, because
-another debate could start in the meantime, and then you'd have wait
-for <emphasis>that</emphasis> one to end too.  The process would not
-be guaranteed to halt.</para>
+<para>How, then, should the project make a formal release?  Should it
+simply take a snapshot of the tree at a moment in time, package it up,
+and hand it to the world as, say, version "3.5.0"?  Common sense says
+no.  First, there may be no moment in time when the entire development
+tree is clean and ready for release.  Newly-started features could be
+lying around in various states of completion.  Someone might have
+checked in a major change to fix a bug, but the change could be
+controversial and under debate at the moment the snapshot is taken.
+If so, it wouldn't work to simply delay the snapshot until the debate
+ends, because another, unrelated debate could start in the meantime,
+and then you'd have wait for <emphasis>that</emphasis> one to end too.
+This process is not guaranteed to halt.</para>
 
-<para>Second, using full-tree snapshots for releases would interfere
-with ongoing development work even if the tree could be put into a
-releaseable state.  Say this snapshot is going to be "3.5.0"; then
-presumably the next snapshot would be "3.5.1", and would contain
+<para>In any case, using full-tree snapshots for releases would
+interfere with ongoing development work, even if the tree could be put
+into a releaseable state.  Say this snapshot is going to be "3.5.0";
+then presumably the next snapshot would be "3.5.1", and would contain
 mostly fixes for bugs found in the 3.5.0 release.  But if both are
 snapshots from the same tree, then what are the developers supposed to
 do in the time between the two releases?  They can't be adding new
 features; the compatibility guidelines prevent that.  But not everyone
 will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
 may have new features they're trying to complete, and will become
-irate if they are forced to choose between sitting idle or working on
+irate if they are forced to choose between sitting idle and working on
 things they're not interested in, just because the project's release
 processes demand that the development tree remain unnaturally
-stable.</para>
+quiescent.</para>
 
 <para>The solution to these problems is to always use
 a <firstterm>release branch</firstterm>.  A release branch is just a
@@ -475,16 +461,16 @@ code?"</para>
 <sect2 id="pfs-release-branch-mechanics">
 <title>Mechanics of Release Branches</title>
 
-<para>The exact mechanics of creating a release branch will depend on
-your version control system, of course, but the general concepts are
-the same in most systems.  A branch usually sprouts from another
-branch or from the trunk.  Traditionally, the trunk is where mainline
-development goes on, unfettered by release constraints.  Therefore,
-the first release branch, the one leading to the "1.0" release,
-sprouts off the trunk.  In CVS, the command would be something like
-this</para>
+<para>The exact mechanics of creating a release branch depend on your
+version control system, of course, but the general concepts are the
+same in most systems.  A branch usually sprouts from another branch or
+from the trunk.  Traditionally, the trunk is where mainline
+development goes on, unfettered by release constraints.  The first
+release branch, the one leading to the "1.0" release, sprouts off the
+trunk.  In CVS, the branch command would be something like this</para>
 
 <screen>
+$ cd trunk-working-copy
 $ cvs tag -b RELEASE_1_0_X
 </screen>
 
@@ -507,7 +493,7 @@ that.]</remark>)</para>
 the same minor line&mdash;i.e., the same branch&mdash;will be used for
 all the micro releases in that line.  The actual process of
 stabilizing the branch for release is covered in
-<xref linkend="pfs-stabilizing-and-releasing"/>.  Here we are
+<xref linkend="pfs-stabilizing-a-release"/>.  Here we are
 concerned just with the interaction between the version control system
 and the release process.  When the release branch is stabilized and
 ready, it is time to tag a snapshot from the branch:</para>
@@ -584,46 +570,230 @@ some circumstances it may not even be the best, though it's worked out
 pretty well for projects I've been involved in.  Use any strategy that
 seems to work, just remember the main points: the purpose of a release
 branch is to isolate release work from the fluctuations of daily
-development, and to give the project an entity around which to
+development, and to give the project a physical entity around which to
 organize its release process.  That process is described in detail in
 the next section.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-stabilizing-and-releasing">
-<title>Stabilizing and Releasing</title>
+<sect1 id="pfs-stabilizing-a-release">
+<title>Stabilizing a Release</title>
 
-<para><remark>Stabilization and release preparation (i.e., avoiding the last
-minute feature rush); making sure the process terminates in a finite
-amount of time.  Point out how that releases may actually be harder in
-open source projects than in proprietary ones.</remark></para>
+<para><firstterm>Stabilization</firstterm> is the process of getting a
+release branch into a releaseable state, that is, of deciding which
+changes will be in the release, which will not, and shaping the branch
+content accordingly.</para>
 
-<para><remark>Describe the change-inclusion voting system, but point
-out how it is very different from the kinds of voting talked about in
-Chapter 4.  Talk about how stabilizing a release branch is mostly a
-matter of saying "no"; the voting system is simply a means of getting
-the group to say "no" cooperatively rather than antagonistically (need
-to clarify here that "saying no" in this context doesn't refer to
-voting -1, it refers to any means by which a change ends up not being
-in the release.  It could be that it simply didn't accumulate enough
-votes; from the group's point of view, the change was "said no to",
-even though no one voted against it.</remark></para>
+<para>There's a lot of potential grief contained in that word,
+"deciding".  The last-minute feature rush is a familiar phenomenon in
+all collaborative software projects, both proprietary and free: as
+soon as developers see that a release is about to happen, they
+scramble to finish their current changes, in order not to miss the
+boat.  This of course is the exact opposite of what you want at
+release time.  It would be much better for people to work on features
+at a comfortable pace, and not worry too much about whether their
+changes make it into this release or the next one.  The more changes
+one tries to cram into a release at the last minute, the more the code
+is destabilized, and (usually) the more new bugs are created.</para>
 
-<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
-somewhere in here.  That should probably be in reference to the
-CHANGES file, which should be described here but linked to from
-there.)</remark></para>
+<para>The process of stabilizing a release is, therefore, mostly a
+process of saying "no".  The trick for open source projects is to come
+up with ways of saying "no" that a) won't result in too many hurt
+feelings or disappointed developers, yet b) won't prevent deserving
+changes from getting into the release.  There are many different ways
+to do this; it's probably not hard to come up with lots of systems
+that satisfy these criteria, once the team has focused on them as the
+important criteria.  Here I'll briefly describe two of the most
+popular systems, at the extreme ends of the spectrum, but don't let
+this discourage your project from being creative.  Plenty of other
+arrangements are possible, these are just two that I've seen work in
+practice:</para>
 
-<para><remark>(GPG-signatures, checksums.  No, MD5 and SHA-1 are not
-"broken" for these purposes.)</remark></para>
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-release-owner">
+<title>Dictatorship by Release Owner</title>
 
-<para><remark>This might also be the right place to talk about change
-annotation, as referred to from the "merge" entry in the Version
-Control Vocabulary in chapter 3.</remark></para>
+<para>The group agrees to let one person be the <firstterm>release
+owner</firstterm>.  This person has final say over what changes make
+it into the release.  Of course, it is normal and expected for there
+to be discussions and arguments, but in the end the group must grant
+the release owner sufficient authority to make final decisions.  For
+this system to work, it is necessary to choose someone with the
+technical competence to understand all the changes, and the social
+standing and people skills to navigate the discussions leading up to
+the release without causing too many hurt feelings.</para>
 
-<para><remark>(Maybe refer here from the "Announcing" in Chapter
-2.)</remark></para>
+<para>Note that the release owner need not be the same person as the
+project leader (in cases where there is a project leader at all; see
+<xref linkend="pfs-benevolant-dictator"/>).  In fact, sometimes it's
+good to make sure they're <emphasis>not</emphasis> the same person.
+The skills that make a good development leader are not necessarily the
+same as those that make a good release owner.  In something as
+important as the release process, it may be wise to have someone
+provide a counterbalance to the project leader's judgement.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-release-voting">
+<title>Change Voting</title>
+
+<para>At the opposite extreme from dictatorship by release owner,
+developers can simply vote on which changes to include in the release.
+However, since most important function of release stabilization is
+to <emphasis>exclude</emphasis> changes, it's important to design the
+voting system in such a way that getting a change into the release
+involves positive action by multiple developers.  Including a change
+should need more than just a simple majority.  Otherwise, one vote for
+and none against a given change would suffice to get that change into
+the release, and an unfortunate dynamic would be set up whereby each
+developer would vote for their own changes, yet people would be
+reluctant to vote against others' changes, because they might face
+possible retaliation.  To avoid this, the system should be arranged
+such that sub-groups of developers must act in cooperation to get any
+change into the release.  This not only means that more people review
+each change, it also makes any individual
+developer <emphasis>more</emphasis> comfortable voting against a
+change, because she knows that no particular one among those who voted
+for it would take her vote as a personal affront.  The greater the
+number of people involved, the more the discussion becomes about the
+change and less about the individuals.</para>
+
+<para>The system we use in the Subversion project seems to have struck
+a good balance, so I'll recommend it here.  In order for a change to
+be applied to the release branch, at least three developers must vote
+in favor of it, and none against.  A single "no" vote is enough to
+stop the change from being included; that is, a "no" vote in a release
+context is equivalent to a veto (see <xref linkend="pfs-veto"/>).
+Naturally, any such vote must be accompanied by a justification, and
+in theory the veto could be overridden if enough people feel it is
+unreasonable and force a special vote over it.  In practice, this has
+never happened, and I don't expect that it ever will.  People are
+conservative around releases anyway, and when someone feels strongly
+enough to veto the inclusion of a change, there's usually a good
+reason for it.</para>
+
+<para>Because the release procedure is deliberately biased toward
+conservativism, the justifications offered for vetos are sometimes
+procedural rather than technical.  For example, a person may feel that
+a change is well-written and unlikely to cause any new bugs, but vote
+against its inclusion in a micro release simply because it's too
+big&mdash;perhaps it adds a new feature, or in some subtle way fails
+to fully follow the compatibility guidelines.  I've occasionally even
+seen developers veto something because they simply had a gut feeling
+that the change needed more testing, even though they couldn't spot
+any bugs in it by inspection.  People grumbled a little bit, but the
+vetos stood and the change was not included in the release (I don't
+remember if any bugs <emphasis>were</emphasis> found in later testing,
+though).</para>
+
+<sect3 id="pfs-release-stabilization-collaboration">
+<title>Managing collaborative release stabilization</title>
+
+<para>If your project chooses a change voting system, it is imperative
+that the physical mechanics of setting up ballots and casting votes be
+as convenient as possible.  Although there is plenty of open-source
+electronic voting software available, in practice the easiest thing to
+do is just to set up a text file in the release branch,
+called <filename>STATUS</filename> or <filename>VOTES</filename> or
+something like that.  This file lists each proposed change&mdash;any
+developer can propose a change for inclusion&mdash;along with all the
+votes for and against it, plus any notes or justifications.  (Note
+that proposing a change doesn't necessarily mean voting for it,
+although the two often go together.)  A entry in such a file might
+look like this:</para>
+
+<screen>
+* r2401 (issue #49)
+  Prevent client/server handshake from happening twice.
+  Justification:
+    Avoids extra network turnaround; small change and easy to review.
+  Notes:
+    This was discussed in http://.../mailing-lists/message-7777.html
+    and other messages in that thread.
+  Votes:
+    +1: jsmith, kimf
+    -1: tmartin (breaks compatibility with some pre-1.0 servers;
+                 admittedly, those servers are buggy, but why be
+                 incompatible if we don't have to?)
+</screen>
+
+<para>In this case, the change acquired two positive votes, but was
+vetoed by tmartin, who gave the reason for the veto in a parenthetical
+note.  The exact format doesn't matter, whatever your project settles
+on is fine&mdash;perhaps tmartin's explanation for the veto should go
+up in the "Notes:" section, or perhaps the change description should
+get a "Description:" header to match the other sections.  The
+important thing is that all the information needed to evaluate the
+change be present, and that the mechanism for voting be as lightweight
+as possible.  The proposed change is referred to by its revision
+number in the repository (in this case a single revision, r2401,
+although a proposed change could just as easily consist of multiple
+revisions).  The revision refers to a change made on
+the <emphasis>trunk</emphasis>, or in rare cases to a change made on
+some branch other than the release branch.  (Because if the change
+were already on the release branch, there would be no need to vote on
+it.)  If your version control system doesn't have an obvious syntax
+for referring to individual changes, then the project should make one
+up; for voting to be practical, each change under consideration must
+be unambiguously identifiable.</para>
+
+<para>The person proposing a change is responsible for making sure
+that it applies cleanly to the release branch, that is, applies
+without conflicts (see <xref linkend="pfs-vc-vocabulary-conflict"/>).
+If there are conflicts, then the proposer should either point to an
+adjusted patch that does apply cleanly, or to a temporary branch that
+holds an adjusted version of the change, for example:</para>
+
+<screen>
+* r13222, r13223, r13232
+  Rewrite libsvn_fs_fs's auto-merge algorithm
+  Justification:
+    unacceptable performance (>50 minutes for a small commit) in
+    a repository with 300,000 revisions
+  Branch:
+    1.1.x-r13222@13517
+  Votes:
+    +1: epg, ghudson
+</screen>
+
+<para>That example is taken from life; it comes from the
+<filename>STATUS</filename> file during the Subversion 1.1.4 release
+process.  Notice how it gives the original revisions as the canonical
+handle on the change, even though there is also a branch with a
+conflict-adjusted version of the change (the branch also combines the
+three trunk revisions into one, r13517, to make it easier to merge the
+change into the release should it get approval).  The original
+revisions are provided because they're still the easiest entity to
+review, since they have the original log messages.  The temporary
+branch won't have those log messages; in order to avoid duplication of
+information (see <xref linkend="pfs-vc-singularity"/>), the branch's
+log message for r13517 should simply say "Adjust r13222, r13223, and
+r13232 for backport to 1.1.x branch."  All other information about the
+changes can be chased down at their original revisions.</para>
+
+<para>The actual process of merging (see
+<xref linkend="pfs-vc-vocabulary-merge"/>) an approved change into the
+release branch can be performed by any developer.  There does not need
+to be one person whose job it is to merge changes, and if there are a
+lot of changes, it can be better to spread the burden around.
+However, although both the voting and merging are formally
+decentralized processes, in practice there are usually one or two
+people driving the release process.  They keep track of how many
+changes are currently under consideration, how many have been
+approved, how many seem likely to be approved, etc.  If they sense
+that important changes are not getting enough attention, and might be
+left out of the release for lack of votes, they will gently nag other
+developers to review and vote.  When a batch of changes are approved,
+these people will often take it upon themselves to merge them into the
+release branch, and it's fine if others leave that task to them, as
+long as everyone understands that they are not obligated to do all the
+work unless they have explicitly committed to it.</para>
+
+</sect3>
+
+</sect2>
 
 <para><remark>(Talk about the dismayingly-prevalent code-name
 practice, i.e., "Dancing Bonobo", "Ululating Brachiator", etc, and how
@@ -643,17 +813,26 @@ important that either the version control system have a browse mode,
 or that the live web site be a checked out tree.  Note this in section
 3 on version control.</remark></para>
 
-<para><remark>Note the penalty paid by programs with complex or
-non-standard build procedures.  They suffer greatly reduced
-contribution rates.  Mozilla Firefox is a good example (name a
-specific bug annoying me right now, and how I could probably debug it
-easily, except that I can't build the danged thing).</remark></para>
-
 <para><remark>Note also that packaging comprises the project's tree
 layout.  Describe the subversion/subversion/ odd result; how this is a
 perfect example of a bikeshed discussion, so you need to make sure it
 doesn't continue forever, but also not shut it down too
 early.</remark></para>
+
+<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
+somewhere in here.  That should probably be in reference to the
+CHANGES file, which should be described here but linked to from
+there.)</remark></para>
+
+<para><remark>(GPG-signatures, checksums.  No, MD5 and SHA-1 are not
+"broken" for these purposes.)</remark></para>
+
+<para><remark>(Differentiate between release manager and release
+owner.  Talk about voting on allowing the release out the door, as a
+final sanity check.)</remark></para>
+
+<para><remark>(Maybe refer here from the "Announcing" in Chapter
+2.)</remark></para>
 
 </sect2>
 
@@ -685,21 +864,20 @@ Ch. 6, of course.)</remark></para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-tool-integration">
-<title>Integrating Process With Tools</title>
-
-<para><remark>(How to tie in with the version control system and the
-bug tracker, so that they become integral parts of distributed
-development.)</remark></para>
-
-</sect1>
-
-<!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-testing">
 <title>Testing, Automated and Otherwise</title>
 
 <para><remark>(Regression testing: choosing the right level of
 formality.  Coordinating results from human volunteers.)</remark></para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-planning">
+<title>Planning Releases</title>
+
+<para><remark>(Basically, how to integrate release management with
+the bug tracker.)</remark></para>
 
 </sect1>
 
