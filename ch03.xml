@@ -28,7 +28,7 @@ talk at once?</para>
 solution is <firstterm>parliamentary procedure</firstterm>: formal
 guidelines for how to have real-time discussions in large groups, how
 to make sure important dissents are not lost in floods of "me-too"
-agreement, how to form subcommittees, how to recognize when decisions
+comments, how to form subcommittees, how to recognize when decisions
 are made.  An important part of parliamentary procedure is specifying
 how the group interacts with its information management system.  Some
 remarks are made "for the record", others are not.  The record itself
@@ -336,8 +336,9 @@ tandem:</para>
             <para>There is not space here for detailed instructions
             on setting up spam filters.  You will have to consult
             your mailing list software's documentation for that (see
-            <xref linkend="pfs-ch-3-sect-2.5"/>).  Some list software
-            allows the use of external spam filters.  I've had good
+            <xref linkend="pfs-ch-3-sect-2.5"/>).  List software often
+            comes with some built-in spam prevention features, but you
+            may want to add some third-party filters.  I've had good
             experiences with these two:
             <ulink url="http://spamassassin.apache.org/"
                >SpamAssassin&nbsp;(http://spamassassin.apache.org/)</ulink>
@@ -355,7 +356,7 @@ tandem:</para>
             through the spam filtering software if any, the last stage
             is <firstterm>moderation</firstterm>: the mail is routed
             to a special address, where a human examines it and
-            accepts or rejects it.</para>
+            confirms or rejects it.</para>
 
             <para>Confirming a post takes one of two forms: you can
             accept the post just this once, or you can tell the list
@@ -364,8 +365,8 @@ tandem:</para>
             to reduce the future moderation burden.  Details on how
             to confirm vary from system to system, but it's usually a
             matter of replying to a special address with the command
-            "allow" (meaning allow just this one post) or "accept"
-            (accept this and future posts).</para>
+            "accept" (meaning accept just this one post) or "allow"
+            (allow this and future posts).</para>
 
             <para>Rejecting is usually done by simply ignoring the
             moderation mail.  If the list software never receives
@@ -382,16 +383,16 @@ tandem:</para>
 </orderedlist>
 
 <para>Be sure to use moderation <emphasis>only</emphasis> for
-filtering out spams and clearly off-topic messages (such as when
-someone accidentally posts to the wrong mailing list).  The moderation
-system will usually give you a way to respond directly to the sender
-of the original post, but don't use that channel to answer questions
-that really belong on the mailing list itself, even if you know the
-answer off the top of your head.  To do so would deprive the project's
-community of an accurate picture of what sorts of questions people are
-asking, and deprive them of a chance to answer questions themselves
-and/or see answers from others.  Mailing list moderation is strictly
-about keeping the list free of junk and off-topic emails, nothing
+filtering out spams and clearly off-topic messages, such as when
+someone accidentally posts to the wrong mailing list.  The moderation
+system will usually give you a way to respond directly to the sender,
+but don't use that method to answer questions that really belong on
+the mailing list itself, even if you know the answer off the top of
+your head.  To do so would deprive the project's community of an
+accurate picture of what sorts of questions people are asking, and
+deprive them of a chance to answer questions themselves and/or see
+answers from others.  Mailing list moderation is strictly about
+keeping the list free of junk and off-topic emails, nothing
 more.</para>
 
 </sect3>
@@ -424,17 +425,17 @@ harvesters often work by crawling through web pages &mdash; including
 your mailing list's online archives &mdash; and looking for sequences
 containing "@", encoding the addresses is a way of making people's
 email addresses invisible to spammers.  This does nothing to prevent
-spam sent to the mailing list, of course, but it helps avoid
-increasing the amount of spam sent directly to list users' personal
-addresses.</para>
+spam from being sent to the mailing list itself, of course, but it
+does avoid increasing the amount of spam sent directly to list users'
+personal addresses.</para>
 
 <para>Address hiding can be controversial.  Some people like it a lot,
 and will be surprised if your archives don't do it automatically.
 Other people think it's too much of an inconvenience (because humans
 also have to translate the addresses back before using them).
 Sometimes people assert that it's ineffective, because a harvester can
-as easily recognize a pattern involving "_AT_" as one involving "@";
-however, note that there's empirial evidence that address hiding
+as easily recognize a pattern involving "_AT_" as one involving "@".
+However, note that there's empirial evidence that address hiding
 <emphasis>is</emphasis> effective, see <ulink
 url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
 
@@ -586,11 +587,11 @@ or worse, mail the list! &mdash; asking how to unsubscribe.</para>
 importance of making sure discussions stay in public forums, and
 talked about how active measures are sometimes needed to prevent
 conversations from trailing off into private email threads.  And this
-present chapter is all about setting up project communications
-software to do as much of the work for you as possible.  Therefore, if
-the mailing list management software offers a way to automatically
-cause discussions to stay on the list, you would think turning that
-feature on would be the obvious choice.</para>
+chapter is all about setting up project communications software to do
+as much of the work for you as possible.  Therefore, if the mailing
+list management software offers a way to automatically cause
+discussions to stay on the list, you would think turning that feature
+on would be the obvious choice.</para>
 
 <para>Well, not quite.  There is such a feature, but it has some
 pretty severe disadvantages.  The question of whether or not to use it
@@ -661,7 +662,7 @@ the expected behavior, she may not bother to look carefully at the
 recipient address in the new message.  She composes her private,
 confidential message, one which perhaps says embarrassing things about
 someone on the list, and hits the Send key.  Unexpectedly, a few hours
-later her message appears <emphasis>on the mailing list</emphasis>!
+later her message appears <emphasis>on the mailing list!</emphasis>
 Sure, she "should" have looked carefully at the recipient field, and
 she "should not" have assumed anything about the Reply-to header.  But
 authors almost always set Reply-to to their own personal address (or
@@ -766,21 +767,13 @@ consider these qualities:
 <itemizedlist>
   <listitem><para><emphasis role="bold">Prompt updating.</emphasis>
   People will often want to refer to an archived post made within the
-  last hour or two.  If possible, the archiver should archive each post
-  instantaneously, so that by the time it appears on the mailing list
-  it's already present in the archives.  If that option isn't
-  available, then at least try to set the archiver to update itself
-  every hour or so.  (By default, some archivers run their update
-  processes once per night, but in practice that's too much lag time
-  for an active mailing list.)</para>
-  </listitem>
-  <listitem><para><emphasis role="bold">Backups.</emphasis> It should
-  be reasonably obvious how to back up the archives, and the
-  restoration recipe should not be too difficult.  In other words,
-  don't treat your archiver as a black box: you (or someone in your
-  project) should know where it's storing the messages, and how to
-  regenerate the actual archive pages from the message store if it
-  should ever become necessary.</para>
+  last hour or two.  If possible, the archiver should archive each
+  post effectively instantaneously, so that by the time a post appears
+  on the mailing list, it's already present in the archives.  If that
+  option isn't available, then at least try to set the archiver to
+  update itself every hour or so.  (By default, some archivers run
+  their update processes once per night, but in practice that's far
+  too much lag time for an active mailing list.)</para>
   </listitem>
   <listitem><para><emphasis role="bold">Referential
   stability.</emphasis>Once a message is archived at a particular URL,
@@ -788,13 +781,28 @@ consider these qualities:
   close to forever as possible.  Even if the archives are rebuilt,
   restored from backup, or otherwise fixed, any URLs that have already
   been made publically available should remain the same.  Stable
-  refernces make it possible for Internet search engines to index the
-  archives, which is a major boon to users looking for answers.</para>
+  references make it possible for Internet search engines to index the
+  archives, which is a major boon to users looking for answers.
+  Stable references are also important because mailing list posts and
+  threads are often linked to from the bug tracker (see <xref
+  linkend="pfs-ch-3-sect-4"/>) or from other project documents.</para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Backups.</emphasis> It should
+  be reasonably obvious how to back up the archives, and the
+  restoration recipe should not be too difficult.  In other words,
+  don't treat your archiver as a black box.  You (or someone in your
+  project) should know where it's storing the messages, and how to
+  regenerate the actual archive pages from the message store if it
+  should ever become necessary.  Those archives are precious, precious
+  data &mdash; a project that loses them loses its collective
+  memory.</para>
   </listitem>
   <listitem><para><emphasis role="bold">Thread Support.</emphasis>
   The archives should make it possible to go from any individual
   message to the "thread" (group of related messages) that that
-  original message is part of.</para>
+  original message is part of.  Each thread should have its own URL
+  too, separate from the URLs of the invidual messages in the
+  thread.</para>
   </listitem>
   <listitem><para><emphasis role="bold">Searchability.</emphasis> An
   archiver that doesn't support searching &mdash; on the bodies of
@@ -911,35 +919,256 @@ just didn't happen to find, so don't take this as a complete list).
 <para>A <firstterm>version control system</firstterm> (or
 <firstterm>revision control system</firstterm>) is a combination of
 technologies and practices for tracking and controlling changes to a
-project's files, in particular its source code, documentation, and web
+project's files, in particular to source code, documentation, and web
 pages.  If you have never used version control before, the first thing
 you should do is go find someone who has, and get them to join your
 project.  These days, everyone will expect at least your project's
 source code to be under version control, and probably will not take
-the project seriously if it doesn't use version control.</para>
+the project seriously if it doesn't use version control at least
+minimally competently.</para>
 
-<para>The reason version control is so universal is that it is
-intertwined with virtually every aspect of running a project:
-inter-developer communications, release management, bug management,
-code stability and experimental development efforts, and (not least)
-attribution and authorization of changes by particular developers.
-The version control system provides a central coordinating force among
-all of these areas.  The core of version control is <firstterm>change
+<para>The reason version control is so universal is that it helps with
+virtually every aspect of running a project: inter-developer
+communications, release management, bug management, code stability and
+experimental development efforts, and (not least) attribution and
+authorization of changes by particular developers.  The version
+control system provides a central coordinating force among all of
+these areas.  The core of version control is <firstterm>change
 management</firstterm>: identifying each discrete change made to the
-project's files, and accompanying each change with its date, author,
-and various other metadata.</para>
+project's files, annotating each change with metadata like the
+change's date and author, and then replaying these facts to whoever
+asks, in whatever way they ask.  Thus it is a communications
+mechanism where a change is the basic unit of information.</para>
+
+<para>This section does not discuss all aspects of using a version
+control system; it's such an all-encompassing concept that it must be
+addressed topically throughout the book.  Here, we will concentrate
+on choosing and setting up a version control system in a way that
+fosters cooperative development.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-ch-3-sect-3.1">
+<title>Version Control Vocabulary</title>
+
+<para>This book cannot teach you how to use version control if you've
+never used it before.  But it would be impossible to discuss version
+control at all without a few key terms:
+
+<variablelist>
+
+ <varlistentry>
+  <term>commit</term>
+  <listitem><para>To make a change to the project, or to put it in
+  a version control database in such a way that it can easily be
+  incorporated into a release of the project.  "Commit" can be used as
+  a verb or a noun.  When it is a noun, it is essentially synonymous
+  with "change".  For example: "I just committed a fix for the server
+  crash bug people have been reporting on Mac OS X.  Jay, could you
+  please review the commit and check that I'm not misusing the
+  allocator there?"</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>update</term>
+  <listitem><para>To ask that others' changes (commits) be
+  incorporated into your local copy of the project, that is, to bring
+  it "up-to-date".  This is a very common operation; most
+  developers keep their code as up-to-date as possible, so that if
+  they see a bug they can be pretty sure it hasn't been fixed
+  already.  For example: "Hey, I noticed the indexing code is always
+  missing the last file.  Is this a new bug?"  "Yes, but it was fixed
+  last week &mdash; try updating, it should go away."</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>repository</term>
+  <listitem><para>A database in which changes are stored.  Some
+  version control systems are centralized: there is a single, master
+  repository, which stores all changes to the project.  Others are
+  decentralized: each developer has their own repository, and changes
+  can be swapped back and forth between repositories arbitrarily
+  &mdash; the version control system keeps track of dependencies
+  between changes, and when it's time to make a release, a particular
+  set of changes is approved for that release.  The question of
+  whether centralized or decentralized is better is one of the
+  enduring holy wars of software development; try not to fall into the
+  trap of arguing about it on your project lists.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>checkout</term>
+  <listitem><para>The process of obtaining a copy of the project from
+  a repository.  A checkout usually produces a directory tree called a
+  "working copy" (see below), from which changes may be committed back
+  to the original repository.  In some decentralized version control
+  systems, each working copy is itself a repository, and changes can
+  be committed out to any repository that's willing to accept
+  them.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>working copy</term>
+  <listitem><para>A directory tree containing the project's source
+  code files, and possibly its web pages or other documents.  A
+  working copy also contains a little bit of metadata managed by the
+  version control system, telling it what repository it comes from,
+  what "revisions" (see below) of the files are present, etc.
+  Generally, each developer has their own working copy, in which they
+  make and test changes, and from which they commit
+  changes.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>revision</term>
+  <listitem><para>This is similar to "change", but has a more
+  technical meaning: a revision is the version control system's name
+  for a particular incarnation of a particular file or directory.
+  For example, if the project starts out with revision X of file F,
+  and then someone commits a change to F, this produces revision Y of
+  F.  Different version control systems will use the concept of
+  "revision" in slightly different ways, but the general idea is
+  always the same: when it is necessary to speak precisely about a
+  file at particular points in time (say, immediately before and after
+  a bug is fixed), one talks in terms of revisions.  For example: "Oh
+  yes, she fixed that in revision X." or "She fixed that in revision X
+  of foo.c."  When one talks about a file or collection of files
+  without specifying a particular revision, it is generally assumed
+  that one means the most recent revision available. </para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>log&nbsp;message</term>
+  <listitem><para>A bit of commentary attached to each commit,
+  describing the nature and purpose of the commit.  Log messages are
+  among the most important documents in any project: they are the
+  semantic bridge between the highly technical language of individual
+  code changes and the more user-oriented language of features,
+  bugfixes, and project progress.  Later in this section, we'll look
+  at ways to distribute log messages to the appropriate
+  audiences; also, <xref linkend="pfs-ch-5-sect-3"/> discusses ways to
+  encourage contributors to write concise and useful log
+  messages.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>tag</term>
+  <listitem><para>A label for a particular collection of revisions in
+  the project.  Tags are usually used to identify and preserve
+  interesting snapshots of the project at various stages in its
+  development.  For example, a tag is usually made for each public
+  release, so that one can obtain, directly from the version control
+  system, the exact set of files/revisions that comprised that
+  release.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>branch</term>
+  <listitem><para>A safe place in a repository for doing experimental
+  work, or for avoiding unwanted changes.  Commits made on a branch
+  are visible to other developers, and can be "merged" (see below)
+  back into the main project at any time, just as changes can be
+  merged from the main line to the branch; the important thing is that
+  the merges can be controlled.  Branches offer a way to isolate
+  different areas of development from each other.  For example, a
+  branch can be used not only for experimental development, but also
+  as a place in which to stabilize a new release (<xref
+  linkend="pfs-ch-6-sect-4"/>).  During the release process, regular
+  development continues uninterrupted in the active, non-branch part
+  of the repository.  Meanwhile, on the release branch, no commits are
+  allowed except those approved by the release managers.  This way,
+  releasing needn't interfere with ongoing development
+  work.</para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>merge (a.k.a. port)</term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>conflict</term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term>lock</term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term></term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term></term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term></term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+ <varlistentry>
+  <term></term>
+  <listitem><para></para></listitem>
+ </varlistentry>
+
+</variablelist>
+
+</para>
+
+</sect2>
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-ch-3-sect-3.2">
+<title>Choosing a Version Control System</title>
+
+<para>As of this writing, the version control system of choice in the
+free software world is <firstterm>CVS</firstterm> (<ulink
+url="http://www.cvshome.org/"/>).  CVS has been around for a long
+time, and most experienced developers are already familiar with it.
+It's a safe choice in that it does more or less what you need, and
+since it's the default, you won't end up in any long debates about
+whether or not it was the right choice.  CVS's has some disadvantages,
+too.  It doesn't provide an easy way to refer to multi-file changes;
+it doesn't allow you to rename 
+
+</para>
+
+</sect2>
+
+
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-ch-3-sect-3.3">
+<title>fooo</title>
+
+
+</sect2>
+
+
+* communications of changes out to the world!
+* crediting
+* reverting
+* branching/merging/releasing
+* control over all aspects of the project
+* browseability
 
 <para><remark>todo: working here</remark></para>
 
 <para><remark>Talk about the importance of doing it, describe it as a
 communications medium, list the choices, point out that CVS is the
 safe choice right now.  Talk about commit emails, setting reply-to on
-them differently from regular mailing lists.  Importance of
-browsability, either through direct browse mode, or through checked
-out working copy on web server.  See note in packaging section about
-all-caps files.  Importance of keeping the project's web pages under
-version control.  Authorization and attribution
-aspects.</remark></para>
+them differently from regular mailing lists.  Describe CIA, mention
+real-time IRC possibility too.  Importance of browsability, either
+through direct browse mode, or through checked out working copy on web
+server.  See note in packaging section about all-caps files.
+Importance of keeping the project's web pages under version control.
+Authorization and attribution aspects.</remark></para>
 
 </sect1>
 
