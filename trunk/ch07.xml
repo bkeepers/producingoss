@@ -587,28 +587,27 @@ content accordingly.</para>
 
 <para>There's a lot of potential grief contained in that word,
 "deciding".  The last-minute feature rush is a familiar phenomenon in
-all collaborative software projects, both proprietary and free: as
-soon as developers see that a release is about to happen, they
-scramble to finish their current changes, in order not to miss the
-boat.  This of course is the exact opposite of what you want at
-release time.  It would be much better for people to work on features
-at a comfortable pace, and not worry too much about whether their
-changes make it into this release or the next one.  The more changes
-one tries to cram into a release at the last minute, the more the code
-is destabilized, and (usually) the more new bugs are created.</para>
+collaborative software projects: as soon as developers see that a
+release is about to happen, they scramble to finish their current
+changes, in order not to miss the boat.  This of course is the exact
+opposite of what you want at release time.  It would be much better
+for people to work on features at a comfortable pace, and not worry
+too much about whether their changes make it into this release or the
+next one.  The more changes one tries to cram into a release at the
+last minute, the more the code is destabilized, and (usually) the more
+new bugs are created.</para>
 
 <para>The process of stabilizing a release is, therefore, mostly a
 process of saying "no".  The trick for open source projects is to come
-up with ways of saying "no" that a) won't result in too many hurt
-feelings or disappointed developers, yet b) won't prevent deserving
+up with ways of saying "no" that won't result in too many hurt
+feelings or disappointed developers, and also won't prevent deserving
 changes from getting into the release.  There are many different ways
-to do this; it's probably not hard to come up with lots of systems
-that satisfy these criteria, once the team has focused on them as the
-important criteria.  Here I'll briefly describe two of the most
-popular systems, at the extreme ends of the spectrum, but don't let
-this discourage your project from being creative.  Plenty of other
-arrangements are possible, these are just two that I've seen work in
-practice:</para>
+to do this.  It's easy to come up with lots of systems that satisfy
+these criteria, once the team has focused on them as the important
+criteria.  Here I'll briefly describe two of the most popular systems,
+at the extreme ends of the spectrum, but don't let that discourage
+your project from being creative.  Plenty of other arrangements are
+possible, these are just two that I've seen work in practice:</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-release-owner">
@@ -646,19 +645,19 @@ to <emphasis>exclude</emphasis> changes, it's important to design the
 voting system in such a way that getting a change into the release
 involves positive action by multiple developers.  Including a change
 should need more than just a simple majority.  Otherwise, one vote for
-and none against a given change would suffice to get that change into
-the release, and an unfortunate dynamic would be set up whereby each
+and none against a given change would suffice to get it into the
+release, and an unfortunate dynamic would be set up whereby each
 developer would vote for their own changes, yet people would be
 reluctant to vote against others' changes, because they might face
 possible retaliation.  To avoid this, the system should be arranged
 such that sub-groups of developers must act in cooperation to get any
 change into the release.  This not only means that more people review
-each change, it also makes any individual
-developer <emphasis>more</emphasis> comfortable voting against a
-change, because she knows that no particular one among those who voted
-for it would take her vote as a personal affront.  The greater the
-number of people involved, the more the discussion becomes about the
-change and less about the individuals.</para>
+each change, it also makes any individual developer less hesitant to
+vote against a change, because she knows that no particular one among
+those who voted for it would take her vote against as a personal
+affront.  The greater the number of people involved, the more the
+discussion becomes about the change and less about the
+individuals.</para>
 
 <para>The system we use in the Subversion project seems to have struck
 a good balance, so I'll recommend it here.  In order for a change to
@@ -685,7 +684,7 @@ seen developers veto something because they simply had a gut feeling
 that the change needed more testing, even though they couldn't spot
 any bugs in it by inspection.  People grumbled a little bit, but the
 vetos stood and the change was not included in the release (I don't
-remember if any bugs <emphasis>were</emphasis> found in later testing,
+remember if any bugs were found in later testing or not,
 though).</para>
 
 <sect3 id="pfs-release-stabilization-collaboration">
@@ -699,10 +698,10 @@ do is just to set up a text file in the release branch,
 called <filename>STATUS</filename> or <filename>VOTES</filename> or
 something like that.  This file lists each proposed change&mdash;any
 developer can propose a change for inclusion&mdash;along with all the
-votes for and against it, plus any notes or justifications.  (Note
-that proposing a change doesn't necessarily mean voting for it,
-although the two often go together.)  A entry in such a file might
-look like this:</para>
+votes for and against it, plus any notes or comments.  (Proposing a
+change doesn't necessarily mean voting for it, by the way, although
+the two often go together.)  A entry in such a file might look like
+this:</para>
 
 <screen>
 * r2401 (issue #49)
@@ -721,30 +720,30 @@ look like this:</para>
 
 <para>In this case, the change acquired two positive votes, but was
 vetoed by tmartin, who gave the reason for the veto in a parenthetical
-note.  The exact format doesn't matter, whatever your project settles
-on is fine&mdash;perhaps tmartin's explanation for the veto should go
-up in the "Notes:" section, or perhaps the change description should
-get a "Description:" header to match the other sections.  The
-important thing is that all the information needed to evaluate the
-change be present, and that the mechanism for voting be as lightweight
-as possible.  The proposed change is referred to by its revision
-number in the repository (in this case a single revision, r2401,
-although a proposed change could just as easily consist of multiple
-revisions).  The revision refers to a change made on
-the <emphasis>trunk</emphasis>, or in rare cases to a change made on
-some branch other than the release branch.  (Because if the change
-were already on the release branch, there would be no need to vote on
-it.)  If your version control system doesn't have an obvious syntax
-for referring to individual changes, then the project should make one
-up; for voting to be practical, each change under consideration must
-be unambiguously identifiable.</para>
+note.  The exact format of the entry doesn't matter, whatever your
+project settles on is fine&mdash;perhaps tmartin's explanation for the
+veto should go up in the "Notes:" section, or perhaps the change
+description should get a "Description:" header to match the other
+sections.  The important thing is that all the information needed to
+evaluate the change be reachable, and that the mechanism for casting
+votes be as lightweight as possible.  The proposed change is referred
+to by its revision number in the repository (in this case a single
+revision, r2401, although a proposed change could just as easily
+consist of multiple revisions).  The revision is assumed to refer to a
+change made on the trunk, or in rare cases to a change made on some
+branch other than the release branch.  (Because if the change were
+already on the release branch, there would be no need to vote on it.)
+If your version control system doesn't have an obvious syntax for
+referring to individual changes, then the project should make one up;
+for voting to be practical, each change under consideration must be
+unambiguously identifiable.</para>
 
-<para>The person proposing a change is responsible for making sure
-that it applies cleanly to the release branch, that is, applies
-without conflicts (see <xref linkend="pfs-vc-vocabulary-conflict"/>).
-If there are conflicts, then the proposer should either point to an
-adjusted patch that does apply cleanly, or to a temporary branch that
-holds an adjusted version of the change, for example:</para>
+<para>Those voting for a change are responsible for making sure it
+applies cleanly to the release branch, that is, applies without
+conflicts (see <xref linkend="pfs-vc-vocabulary-conflict"/>).  If
+there are conflicts, then the entry should either point to an adjusted
+patch that does apply cleanly, or to a temporary branch that holds an
+adjusted version of the change, for example:</para>
 
 <screen>
 * r13222, r13223, r13232
@@ -759,45 +758,42 @@ holds an adjusted version of the change, for example:</para>
 </screen>
 
 <para>That example is taken from life; it comes from the
-<filename>STATUS</filename> file during the Subversion 1.1.4 release
-process.  Notice how it gives the original revisions as the canonical
+<filename>STATUS</filename> file for the Subversion 1.1.4 release
+process.  Notice how it uses the original revisions as a canonical
 handle on the change, even though there is also a branch with a
 conflict-adjusted version of the change (the branch also combines the
 three trunk revisions into one, r13517, to make it easier to merge the
 change into the release should it get approval).  The original
 revisions are provided because they're still the easiest entity to
 review, since they have the original log messages.  The temporary
-branch won't have those log messages; in order to avoid duplication of
-information (see <xref linkend="pfs-vc-singularity"/>), the branch's
-log message for r13517 should simply say "Adjust r13222, r13223, and
-r13232 for backport to 1.1.x branch."  All other information about the
-changes can be chased down at their original revisions.</para>
+branch wouldn't have those log messages; in order to avoid duplication
+of information (see <xref linkend="pfs-vc-singularity"/>), the
+branch's log message for r13517 should simply say "Adjust r13222,
+r13223, and r13232 for backport to 1.1.x branch."  All other
+information about the changes can be chased down at their original
+revisions.</para>
 
 <para>The actual process of merging (see
 <xref linkend="pfs-vc-vocabulary-merge"/>) an approved change into the
 release branch can be performed by any developer.  There does not need
-to be one person whose job it is to merge changes, and if there are a
-lot of changes, it can be better to spread the burden around.
-However, although both the voting and merging are formally
-decentralized processes, in practice there are usually one or two
-people driving the release process.  They keep track of how many
-changes are currently under consideration, how many have been
-approved, how many seem likely to be approved, etc.  If they sense
-that important changes are not getting enough attention, and might be
-left out of the release for lack of votes, they will gently nag other
-developers to review and vote.  When a batch of changes are approved,
-these people will often take it upon themselves to merge them into the
-release branch, and it's fine if others leave that task to them, as
-long as everyone understands that they are not obligated to do all the
-work unless they have explicitly committed to it.</para>
+to be one person whose job it is to merge changes; if there are a lot
+of changes, it can be better to spread the burden around.  However,
+although both the voting and merging are formally decentralized
+processes, in practice there are usually one or two people driving the
+release process.  They keep track of how many changes are currently
+under consideration, how many have been approved, how many seem likely
+to be approved, etc.  If they sense that important changes are not
+getting enough attention, and might be left out of the release for
+lack of votes, they will gently nag other developers to review and
+vote.  When a batch of changes are approved, these people will often
+take it upon themselves to merge them into the release branch, and
+it's fine if others leave that task to them, as long as everyone
+understands that they are not obligated to do all the work unless they
+have explicitly committed to it.</para>
 
 </sect3>
 
 </sect2>
-
-<para><remark>(Talk about the dismayingly-prevalent code-name
-practice, i.e., "Dancing Bonobo", "Ululating Brachiator", etc, and how
-it makes life difficult and generally sucks.)</remark></para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-packaging">
