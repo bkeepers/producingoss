@@ -136,10 +136,9 @@ to the project &mdash; but only, of course, if the visitor stays long
 enough for there to be further exposure.</para>
 
 <para>So take some time to set up a good (meaning good-looking, as
-well as contentful) project web site.  There is not space here for a
-general treatise on web design, of course.  However, knowing something
-about the content may help suggest appropriate layouts for the site.
-Thus:</para>
+well as contentful) project web site.  This is not the place for a
+general treatise on web design, of course, but here are some basic
+guidelines to setting up a free software project site.</para>
 
 <itemizedlist>
 
@@ -227,7 +226,7 @@ Thus:</para>
   requires a non-standard syringe size to administer.  Likewise,
   software should conform to standard build and installation methods;
   the more it deviates from the standards, the more potential users
-  will be lost.</para>
+  and developers will be lost.</para>
 
   <para>This sounds obvious, but again, many projects don't bother to
   standardize their installation procedures until very late in the
@@ -274,7 +273,7 @@ Thus:</para>
 
 <remark>(Hmm, maybe it would be good to put an image of a good
 example project web site here, and an image of a bad one, for
-side-by-side comparison.  What do you think?)</remark>
+side-by-side comparison?)</remark>
 
 </sect1>
 
@@ -291,41 +290,190 @@ the different licenses, so you can understand how the license you
 choose affects your ability to incorporate other free software into
 yours.</para>
 
-<para>There are now a great many free software licenses to choose
-from, probably over a hundred.  Most of them we needn't consider, as
-they were written to satisfy the particular legal needs of some
-corporation or person, and probably wouldn't be appropriate for a new
-software project.  In this overview, we will restrict ourselves to the
-three or four most commonly-used licenses.  In most cases, you will
-just want to choose one of those.  There's no need to acquire deep
-expertise in software licensing if all you need to do is choose terms
-for the distribution of your own software.</para>
+<para>There are a great many free software licenses to choose from.
+Most of them we needn't consider, as they were written to satisfy the
+particular legal needs of some corporation or person, and probably
+wouldn't be appropriate for a new software project.  In this overview,
+we will restrict ourselves to the three or four most commonly-used
+licenses.  In most cases, you will just want to choose one of
+those.</para>
 
-<para>Free software licenses fall into three basic categories:</para>
+<para>If your primary goal is widespread adoption of the software by
+both users and developers, and you don't mind the possibility of it
+being used in proprietary products, then choose one of the following:
+<firstterm>MIT-style</firstterm>, <firstterm>BSD-style</firstterm>, or
+<firstterm>Apache-style</firstterm>.</para>
 
-<orderedlist>
-  <listitem>
-  <para>Those designed to ensure the software can only be used in
-        other free programs.</para>
-  </listitem>
-  <listitem>
-  <para>Those designed to protect the credit and reputation of the
-        author(s) of the software.</para>
-  </listitem>
-  <listitem>
-  <para>Those designed to allow as wide and unlimited distribution
-        of the software as possible, while still retaining copyright
-        for the original authors.</para>
-  </listitem>
-</orderedlist>
+<variablelist>
 
-<para>(Some licenses combine functions (1) and (2), but they seem to
-be rarely used.)</para>
+  <varlistentry><term>MIT-style:</term>
 
+    <listitem>
+      <para>License template at: <ulink
+      url="http://www.opensource.org/licenses/mit-license.php"/></para>
 
+      <para>The MIT license is short, simple, and very easy to
+      understand.  In fact, it is short enough to include whole right
+      here:
+      </para>
+
+      <screen>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</screen>
+
+    <para>As you can see, it places almost no restrictions on what
+    people can do with the software, so long as they reproduce the
+    copyright notice, and it carefully disclaims any liability on the
+    part of the copyright holder.  It is called "MIT-style" because
+    the Massachusetts Institute of Technology released free software
+    under this license.  However, you do not need to be affiliated
+    with MIT to use the same license text for your programs.</para>
+    </listitem>
+  </varlistentry> 
+
+  <varlistentry><term>BSD-style:</term>
+    <listitem>
+      <para>License template at: <ulink
+      url="http://www.opensource.org/licenses/bsd-license.php"/></para>
+
+      <para>The BSD license is basically like the MIT, although it
+      uses slightly different words to achieve the same effect.  (I
+      won't reproduce it here, you can find it at the above link.)
+      The main difference is that BSD-style licenses include a clause
+      explicitly disavowing the right to use the licensor's name to
+      endorse the software:</para>
+
+      <screen>Neither the name of the &lt;ORGANIZATION&gt; nor the
+names of its contributors may be used to endorse or promote products
+derived from this software without specific prior written
+permission.</screen>
+
+      <para>It's not clear that without such a clause, a recipient of
+      the software would have had the right to use the licensor's name
+      anyway, but the clause removes any possible doubt.  For
+      corporations releasing software, therefore, the BSD-style may
+      be slightly preferable to MIT-style (however, for reasons
+      detailed below, the Apache-style may be preferable to both of
+      them).  Note that a liberal copyright license does not imply
+      that recipients have any right to use or dilute your trademarks
+      &mdash; copyright law and trademark law are two different
+      beasts.</para>
+
+      <para>The name "BSD" derives from "Berkeley Software
+      Distribution", a much-revered version of the Unix operating
+      system produced by the University of California at Berkeley and
+      released under what became known as the "BSD license".</para>
+    </listitem>
+  </varlistentry> 
+
+  <varlistentry><term>Apache-style:</term>
+    <listitem>
+      <para>License template at: <ulink
+      url="http://www.apache.org/licenses/"/></para>
+
+      <para>The Apache license (version 2.0 as of this writing) is
+      longer than either the BSD or MIT, but still quite readable, and
+      the extra time needed to comprehend it is worth spending.  The
+      Apache Software Foundation (<ulink
+      url="http://www.apache.org/"/>) has taken great care to make
+      sure the license encourages their goal of "open, collaborative
+      development among individuals, industry, and nonprofit
+      organizations".  The license includes provisions for protecting
+      the trademarks and reputation of the distributing organization,
+      preventing patent entanglements, accepting code contributions,
+      and various other eventualities.  The terms of use and
+      distribution that it allows are pretty much the same as with the
+      BSD or MIT licenses, though.  It may be thought of as a more
+      legalistic and thorough version of those two.</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>If you don't want your code to be used in proprietary programs,
+then use the GNU General Public License (<ulink
+url="http://www.gnu.org/licenses/gpl.html"/>).  The GPL is probably
+the most widely recognized free software license in the world today.
+This is in itself a big advantage, since potential users and
+contributors will most likely already be familiar with it, and
+therefore won't have to spend extra time to read and understand the
+license.</para>
+
+<para>The disadvantage of the GPL is that some programmers do not like
+its viral nature.  When GPL'd code is copied or linked into another
+program, that program must (as a whole) be distributed under the GPL
+as well; thus, the GPL is contagious, and software that incorporates
+GPL'd code may end up narrowing the range of possible redistribution
+terms.  Whether this is a good or a bad thing depends on who you ask
+(I do not feel the GPL's terms are onerous, but I am also sympathetic
+to the Free Software Foundation's goals).  In any case, it's extremely
+rare for someone who would otherwise work on a project to refuse to do
+so because it is under the GPL.</para>
+
+<para>Note that the GPL's viral nature is even more significant when
+your software is a library instead of a standalone program.  The GPL
+is not contagious across high-level invocation boundaries: if a
+non-GPL'd program merely invokes a standalone GPL'd program, the
+former is not automatically placed under the restrictions of the GPL.
+However, if otherwise non-GPL'd code is linked against a GPL'd
+library, then the distribution of the program as a whole must be under
+the GPL.  In other words, one cannot write a program which depends on
+a GPL'd library and distribute the program as, say, an executable
+under some other license, even if one distributes the source code to
+the GPL'd library portion.  The entire work, source code and all, must
+be distributed under the terms of the GPL.</para>
+
+<para>These restrictions may be acceptable, if your first priority is
+ensuring that all derivative works of your work are also free.  Again,
+see <xref linkend="pfs-ch-3"/> for a more in-depth discussion of
+these issues.</para>
+
+<para>Finally, there are licenses designed to allow free distribution
+while strongly protecting the reputation of the author and the
+"artistic integrity" of the work.  The best-known example of this kind
+of license the <firstterm>Artistic
+License</firstterm><footnote><para>I refuse to comment on the
+pun.</para></footnote>, which is the license the
+<firstterm>Perl</firstterm> scripting language is distributed under.
+A template for the Artistic License is available from <ulink
+url="http://opensource.org/licenses/artistic-license.php"/>.  It
+allows free redistribution, modification, and all the usual stuff.
+But it has some extra clauses requiring anyone who modifies the
+software significantly to take steps to clarify that their version is
+different from the standard version, by putting notices of
+modification in files, and using different names for executables.  It
+also has trademark and endorsement protection clauses similar to those
+of the Apache license.</para>
 
 <sect2 id="pfs-ch-2-sect-2.1">
-<title>How to apply the license to your software.</title>
+<title>Help, I still can't decide which license to use...</title>
+
+<para>If you're still not sure what to use, then go with Apache-style
+or GNU GPL.  They're both fine licenses, you really can't go wrong,
+and the intimidating legal language will give everyone the impression
+you thought long and hard about it.</para>
+
+</sect2>
+
+<sect2 id="pfs-ch-2-sect-2.2">
+<title>How to apply a license to your software.</title>
 
 <remark>(in progress)</remark>
 <screen>
@@ -336,6 +484,9 @@ be rarely used.)</para>
 
 </sect2>
 
+<screen>
+* _Briefly_ mention the issue of getting papers from contributors.
+</screen>
 
 </sect1>
 
