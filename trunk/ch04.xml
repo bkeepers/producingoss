@@ -41,40 +41,41 @@ ones, because in self-organizing systems, everyone is conscious that a
 few bad apples can bring the whole thing crashing down, at least for a
 while.</para>
 
-<sect2 id="pfs-forkability">
+<sect1 id="pfs-forkability">
 <title>Forkability</title>
 
 <para>The force that binds developers together on a free software
-project, and makes them willing to compromise on their own visions for
-the software when necessary, is the code's
-<firstterm>forkability</firstterm>: the ability of anyone to take a
-copy of the source code and use it to start a competing project.  This
-is known as <firstterm>forking</firstterm> the code, and the
-paradoxical thing is that the <emphasis>possibility</emphasis> of
-forks is usually a much greater force in free software projects than
-actual forks, which are very rare.  Because a fork is bad for everyone
-(for reasons examined in detail in <xref linkend="pfs-forks"/>), the
-more serious the threat of a fork becomes, the more willing people are
-to compromise to avoid it.  People also tend not to use fork threats
-as an extremist debating technique ("Do things my way or I'll fork the
-project!"), because everyone is aware that a fork which fails to
-seduce developers away from the original project is unlikely to
-survive long.  Observers (including not only developers, but also
-users and operating system packagers) will make their own judgement
-about which side to choose.  Anyone who contemplates initiating a fork
-knows this, and will therefore want to appear extremely reluctant to
+project, and makes them willing to compromise when necessary, is the
+code's <firstterm>forkability</firstterm>: the ability of anyone to
+take a copy of the source code and use it to start a competing
+project, known as a <firstterm>fork</firstterm>.  The paradoxical
+thing is that the <emphasis>possibility</emphasis> of forks is usually
+a much greater force in free software projects than actual forks,
+which are very rare.  Because a fork is bad for everyone (for reasons
+examined in detail in <xref linkend="pfs-forks"/>), the more serious
+the threat of a fork becomes, the more willing people are to
+compromise to avoid it.</para>
+
+<para>People also tend not to use the threat of a fork as an extremist
+debating technique &mdash; "Do things my way or I'll fork the
+project!" &mdash; because everyone is aware that a fork which fails to
+attract developers away from the original project is unlikely to
+survive long.  All observers, not just developers but users and
+operating system packagers too, will make their own judgement about
+which side to choose.  Anyone who would contemplate initiating a fork
+knows this, and would therefore want to appear extremely reluctant to
 fork, so that if they finally do it, they can credibly claim it was
-the only route left.  Whether or not they were actually reluctant
-doesn't matter, since faked reluctance has much the same outward
-effect as real reluctance.</para>
+the only route left.  Whether they were actually reluctant or not
+doesn't matter, since fake reluctance has much the same outward effect
+as real reluctance.</para>
 
 <para>Forks, or rather the potential for forks, are the reason there
 are no true dictators in free software projects.  This may seem like a
-surprising claim &mdash; certainly it's common enough to hear some
-developer referred to as the "dictator" or "tyrant" in a given open
-source project.  But this kind of tyranny is quite different from the
-normal understanding of the word.  Imagine a king who rules over a
-kingdom, but with the special proviso that any of his subjects could
+surprising claim, considering how common it is to hear someone called
+the "dictator" or "tyrant" in a given open source project.  But the
+kind of tyranny being referred to is quite different from the
+conventional understanding of the word.  Imagine a king who rules over
+a kingdom, but with the special proviso that any of his subjects could
 duplicate the entire kingdom at any time, and move to the copy to rule
 it as they see fit.  Would not such a king govern very differently
 from one whose subjects were bound to stay under his rule no matter
@@ -86,34 +87,96 @@ decisions.  Replicability implies forkability; forkability implies
 consensus.  It may well be that everyone is willing to defer to one
 leader (the most famous example being Linus Torvalds in Linux kernel
 development), but this is because they <emphasis>choose</emphasis> to
-do so, in an entirely non-cynical, non-sinister way.  The dictator has
-no magical hold over the project; one of the key properties of any
-open source license is that it does not give one party more power than
-others in deciding how the code can changed or used.  If the dictator
+do so, in an entirely non-cynical and non-sinister way.  The dictator
+has no magical hold over the project.  A key property of all open
+source licenses is that they do not give one party more power than any
+other in deciding how the code can changed or used.  If the dictator
 were to suddenly start making bad decisions, there would be
 restlessness, followed eventually by revolt and a fork.  Except, of
 course, things rarely get that far, because the dictator compromises
 first.</para>
 
-</sect2>
-
-<para>Just because forkability puts an upper limit on how much power
-anyone can exert in a project doesn't mean there aren't important
-differences in how projects can be governed.  You don't want every
-decision to come down to the question of who might be considering a
-fork.  That would get tiresome very quickly, and sap energy away from
-development efforts.  Below we'll look at two ways to organize
+<para>But just because forkability puts an upper limit on how much
+power anyone can exert in a project doesn't mean there aren't
+important differences in how projects are governed.  You don't want
+every decision to come down to the last-resort question of who is
+considering a fork.  That would get tiresome very quickly, and sap
+energy away from real work.  Below we'll look at two ways to organize
 projects such that most decisions go smoothly.  These two examples are
-the extremes; most projects fall somewhere along the range between
+the extremes; most projects fall somewhere along a continuum between
 them.</para>
+
+<para><remark>(Andy, was that an okay context to say "Below" instead
+of "Following"?  The latter felt awkward when I tried it.  If "Below"
+is just flat-out objectionable, I can rephrase.)</remark></para>
+
+</sect1>
 
 </simplesect>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-benevolant-dictator">
-<title>The Benevolent Dictator</title>
+<title>Benevolent Dictators</title>
 
-<para><remark>(in progress)</remark></para>
+<para>The <firstterm>benevolent dictator</firstterm> model is exactly
+what it sounds like: final decision-making authority rests with one
+person, who by virtue of their personality and experience is expected
+to use it wisely.</para>
+
+<para>Although "benevolent dictator" (or <firstterm>BD</firstterm>)is
+the standard term for this role, it's probably better to think of it
+as "community-approved arbitrator" or "judge".  Generally, benevolent
+dictators do <emphasis>not</emphasis> actually make all the decisions,
+or even most of the decisions.  Rather, they try to let things work
+through consensus-based processes whenever possible.  They often
+participate in those discussions themselves, but as regular
+developers.  Only if it is clear that no consensus can be reached, or
+that the discussion is getting out of hand in ways that could damage
+people's ability to work together in the future, do they put their
+foot down and say "This is the way it's going to be."  This reluctance
+to make decisions by fiat is a trait shared by virtually all
+benevolent dictators, and is one of the reasons they manage to keep
+the role.</para>
+
+<sect2 id="pfs-benevolant-dictator-qualifications">
+<title>Who can be a good benevolent dictator?</title>
+
+<para>Being a BD requires a combination of traits.  It needs first of
+all a well-honed sensitivity to one's own influence in the project,
+which in turn encourages self-restraint.  In the early stages of a
+discussion, one should not express opinions and conclusions with so
+much certainty that others feel like it's pointless to dissent.
+People must be free to air ideas, even stupid ideas (the BD will
+inevitably post a stupid idea from time to time too, of course, but
+the BD would never worry about the BD coming down on him for
+it).</para>
+
+<para>It also requires the ability to recognize when one has made a
+bad decision and own up to it publicly; though this is simply a trait
+that <emphasis>any</emphasis> good developer on an open source project
+needs, especially if they stay with the project a long time.</para>
+
+<para>The BD need not have the most profound technical skills of
+anyone in the project.  She must be skilled enough to work on the
+project herself, and to understand and comment on any change that is
+made or proposed for the code, but that's all.  The BD position is
+neither acquired nor held by virtue of intimidating coding skills.
+What <emphasis>is</emphasis> important is experience and overall
+design sense: <remark>(working here)</remark></para>
+
+<para>
+<remark>
+<screen>
+   - root on the server != BD, and is not necessary
+   - seniority: one falls into the role from being a founder,
+     generally.  I think, however, that this is a reversal of cause
+     and effect: successful projects are started by people who, etc,
+     etc.
+</screen>
+</remark>
+</para>
+
+</sect2>
 
 </sect1>
 
