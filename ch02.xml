@@ -430,8 +430,14 @@ five minutes?</para>
   squandered.</para>
 
   <para>Boring work with a high payoff should always be done early,
-  and significantly lowering the project's barrier to entry is a very
-  high payoff.</para>
+  and significantly lowering the project's barrier to entry by
+  packaging is a very high payoff.</para>
+
+  <para>When you release a downloadable package, it is vital that you
+  give a unique version number to the release, so that people can
+  compare any two releases and know which supersedes the other.  A
+  detailed discussion of version numbering can be found in
+  <xref linkend="pfs-ch-7-sect-1.2"/>.</para>
 
   <para>The details of standardizing build and installation procedures
   are covered in <xref linkend="pfs-ch-4-sect-2"/>.</para>
@@ -611,12 +617,48 @@ five minutes?</para>
   doing.</para>
 
   <sect3 id="pfs-ch-2-sect-1.1.1">
+  <title>Maintaining a FAQ</title>
+
+  <para>A <firstterm>FAQ</firstterm> ("Frequently Asked Questions"
+  document) is a beautiful thing.  It is often the first place users
+  look when they encounter a problem, and is probably the document in
+  your project most likely to be linked to from other sites.
+  </para>
+
+  <para><remark>todo: working here</remark></para>
+
+  <para><remark>MUST be html, MUST have links for the individual
+  questions.  Delegate, delegate, delegate: get a FAQ manager, a human
+  who will be able to sort out the thread, post a proposed FAQ entry,
+  recognize approval and incorporate comments, and add it to the FAQ.
+  The perils of FAQ-o-Matic.  General theme: over-automation, or
+  attempts to automate things that really require human attention.
+  Technical infrastructure is important, but what makes a free
+  software project work is the care -- and intelligent application of
+  that care -- by the humans involved.  Search for other examples of
+  over-automation, for example, in use of bug tracking
+  systems.</remark></para>
+
+  <para><remark>Therefore, the most important property of a FAQ is not
+  that it be completed quickly, but that it be easy to
+  update.</remark></para>
+
+  <para><remark>Ah, a *perfect* example of one disadvantage of using a
+  canned site -- the handling of generated files.  You don't want them
+  in version control, because they're generated.  On the other hand,
+  you can't make arbitrary scripts run on the server, because you
+  don't own the server.  Take the Subversion FAQ as a cautionary
+  tale.</remark></para>
+
+  </sect3>
+
+  <sect3 id="pfs-ch-2-sect-1.1.2">
   <title>Availability of Documentation</title>
 
   <para>Documentation should be available from two places: online
   (directly from the web site), <emphasis>and</emphasis> in the
   downloadable distribution of the software (see <xref
-  linkend="NOT_YET_READY"/>).  It needs to be online, in browseable
+  linkend="pfs-ch-4-sect-2"/>).  It needs to be online, in browseable
   form, because people often read documentation
   <emphasis>before</emphasis> downloading software for the first time,
   as a way of helping them decide whether or not to download at all.
@@ -626,7 +668,7 @@ five minutes?</para>
 
   </sect3>
 
-  <sect3 id="pfs-ch-2-sect-1.1.2">
+  <sect3 id="pfs-ch-2-sect-1.1.3">
   <title>Developer Documentation</title>
 
   <para>Developer documentation is documentation whose purpose is to
@@ -641,17 +683,17 @@ five minutes?</para>
   earlier), but they don't have to be.</para>
 
   <para>Although technical developer documentation can be very
-  helpful, I don't think there's any reason to delay a release over
-  it.  As long as the original authors are available (and willing) to
-  answer questions about the code, that's enough to start with.  In
-  fact, having to answer the same questions over and over is a common
-  motivation for writing documentation.  But even before it's written,
-  contributors will still manage find their way around the code.  The
-  force that drives people to spend time learning a code base is that
-  the code does something useful for them.  If people have faith in
-  that, they will take the time to figure things out; if they don't
-  have that faith, no amount of developer documentation will get or
-  keep them.</para>
+  helpful, there's no reason to delay a release over it.  As long as
+  the original authors are available (and willing) to answer questions
+  about the code, that's enough to start with.  In fact, having to
+  answer the same questions over and over is a common motivation for
+  writing documentation.  But even before it's written, contributors
+  will still manage find their way around the code.  The force that
+  drives people to spend time learning a code base is that the code
+  does something useful for them.  If people have faith in that, they
+  will take the time to figure things out; if they don't have that
+  faith, no amount of developer documentation will get or keep
+  them.</para>
 
   <para>So if you only have time to write documentation for one
   audience, write it for users.  All user documentation is, in effect,
@@ -700,18 +742,45 @@ links page, a site-search feature, a donations link, etc.  None of
 these are necessities at startup time, but keep them in mind for the
 future.</para>
 
-todo: segue into the pre-packaged option:
+<sect3 id="pfs-ch-2-sect-1.1.4">
+<title>Canned Hosting</title>
 
-<para><remark>(Talk about the pre-packaged, "canned website" option,
-such as SourceForge or Berlios.de or one of those sites.  Or rather,
-refer to the relevant section in Chapter 4.)</remark></para>
+<para>There are a few organizations that provide free hosting and
+infrastructure for open-source projects: a web site, version control,
+bug tracker, download area, chat forums, regular backups, etc.  The
+details vary from site to site, but the same basic services are
+offered at all of them.  By using one of these sites, you get a lot
+for free; what you give up, obviously, is fine-grained control over
+the developer and user experience.  The hosting service decides what
+software the site runs on, and may control or at least influence the
+look and feel of the project's web pages.</para>
 
-<para><remark>(Talk about how a FAQ is premature, but not for
-long...)</remark></para>
+<para>The largest and most well-known hosting site is <ulink
+url="http://www.sourceforge.net/">SourceForge</ulink>.  When the
+question is free open source project hosting, SourceForge is the
+default answer these days.  However, there are other sites providing
+the same or similar services, for example <ulink
+url="http://savannah.gnu.org/">savannah.gnu.org</ulink> and <ulink
+url="http://www.berlios.de/">BerliOS.de</ulink>.  There are also
+organizations, such as the <ulink url="http://www.apache.org/">Apache
+Software Foundation</ulink> and <ulink
+url="http://www.tigris.org/">Tigris.org</ulink><footnote><para>Disclaimer:
+I am employed by <ulink
+url="http://www.collab.net/">CollabNet</ulink>, which sponsors
+Tigris.org, and I use Tigris regularly.</para></footnote>, that give
+free hosting to open source projects that fit well with their missions
+and their community of existing projects.</para>
+
+<para><remark>(Mention the survey by Haggen So, at
+http://www.ibiblio.org/fosphost/ and
+http://www.ibiblio.org/fosphost/exhost.htm.  It's pretty amazing!)
+</remark></para>
 
 <para><remark>(Maybe it would be good to put an image of a good
 example project web site here, and an image of a bad one, for
 side-by-side comparison?)</remark></para>
+
+</sect3>
 
 </sect2>
 
