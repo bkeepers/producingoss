@@ -33,124 +33,166 @@ over a decade in open source, and a little Googling all point to the
 same conclusion: the rate is extremely high, probably on the order 90%
 or 95%.  The number climbs higher if you include surviving but
 dysfunctional projects: those which <emphasis>are</emphasis> producing
-running code, but which are not happy places to be, or are not making
-progress as quickly or as dependably as they could.  </para>
+running code, but which are not pleasant places to be, or are not
+making progress as quickly or as dependably as they could.  </para>
 
-<para> Yet everyone goes into a project expecting success.  No one
-would take the trouble to set up a web site and mailing lists and
-design documents all in the expectation of things turning out badly.
-The collaborators who join later are not planning on failure either.
-To participate in a project, even a little, is a clear statement of
-belief in its potential.  But somewhere along the way, something goes
-wrong.  Why?  </para>
+<para>This book is about avoiding failure.  It examines not only how
+to do things right, but how to do them wrong, enabling you to
+recognize and correct problems early.  My hope is that after reading
+it, you will have a repertory of techniques not just for avoiding
+common pitfalls of open source development, but also for dealing with
+the growth and maintenance of a successful project.  Success is not a
+zero-sum game, and this book is not about winning or getting ahead of
+the competition.  Indeed, an important part of running an open source
+project is working smoothly with other, related projects.  In the long
+run, every successful project contributes to the well-being of the
+overall, worldwide body of free software.</para>
 
-<para>This book is a practical guide to running successful open source
-projects.  Its approach is to start by looking not at how to do things
-right, but at how they are often done wrong.  This is not to say, of
-course, that success consists in merely avoiding failure.  Many of the
-problems that plague free software projects are sins of omission, not
-commission, and projects must take concrete action to steer clear of
-them.  So although we will begin by examining some of the common
-causes of failure, that is only a starting point.  This is a book
-about success, and my hope is that after reading it, you will have a
-repertory of techniques not just for avoiding common pitfalls, but
-also for dealing with the growth and maintenance of a successful
-project.</para>
+</simplesect>
 
-<para>Success in free software is not a zero-sum game.  This book is
-not about winning, or getting ahead of the competition.  The success
-of your project does not detract from other projects; in the long run,
-any one project's success contributes to the well-being of the overall
-worldwide body of free software.</para>
+<para> It would be tempting to say that free software projects fail
+for the same sorts of reasons proprietary software projects do.
+Certainly, free software has no monopoly on unrealistic requirements,
+vague specifications, poor resource management, insufficient design
+phases, or any of the other hobgoblins already well-known to the
+software industry.  But these causes, being well-known, are already
+the subject of numerous books and whitepapers, and are therefore often
+accounted for in project planning.  Software development has become a
+bit like management theory, in this respect.  The language and ideas
+of management theory have penetrated into the general social
+consciousness, enough so that these days anyone coming into a
+management position starts out with some background knowledge, and an
+awareness that there's more wisdom waiting in the wings should they
+ever feel in need.  Likewise, the field of commercial software
+development has accumulated a store of knowledge about how to run
+projects, such that even novice programmers arrive knowing that
+there's more to it than just sitting down and coding.  </para>
 
+<para> There exists a similar body of knowledge for open source
+development, but it has not been as clearly spelled-out nor as widely
+propagated as that for proprietary development, because for a long
+time now the majority of paid programming work has been done in
+closed-source environments.  When a free software project runs
+aground, it is often because the developers didn't appreciate the
+unique problems of open source software development, which can be
+quite different from the better-known difficulties of closed-source
+development. </para>
+
+<para> One common mistake is unrealistic expectations about the
+benefits of open source itself.  An open license does not guarantee
+that hordes of active developers will suddenly volunteer their time to
+your project.  Nor does open-sourcing a troubled project automatically
+cure its ills.  In fact, opening up a project usually costs
+<emphasis>more</emphasis>, in the short term, than keeping it
+in-house.  Opening it up means arranging the code so it's
+comprehensible to complete strangers, setting up a development web
+site and email lists, and often writing documentation for the first
+time.  All this is a lot of work.  And of course, if any interested
+developers <emphasis>do</emphasis> show up, there is the added burden
+of answering their questions for a while before seeing any benefit
+from their presence.  As developer Jamie Zawinski said about the
+troubled early days of the Mozilla project: </para>
+
+    <blockquote>
+      <para><emphasis>Open source does work, but it is most definitely
+      not a panacea.  If there's a cautionary tale here, it is that
+      you can't take a dying project, sprinkle it with the magic pixie
+      dust of ``open source,'' and have everything magically work
+      out. Software is hard. The issues aren't that simple.</emphasis></para>
+
+      <para>(from <emphasis role="bold"><ulink
+      url="http://www.jwz.org/gruntle/nomo.html"/></emphasis>)</para>
+    </blockquote>
+
+<para>A related mistake is that of skimping on presentation and
+packaging, figuring that these can always be done later, when the
+project is well under way.  Presentation and packaging comprise a wide
+range of tasks, all centered around the theme of making the project
+palatable to the uninitiated: writing user and developer
+documentation, setting up a project web site that's informative to
+newcomers, automating as much of the software's compilation and
+installation as possible, etc.  Many programmers unfortunately treat
+this work as being of secondary importance to the code itself.  There
+are a couple of reasons for this.  First, it feels like busywork,
+because its benefits are most visible to those least familiar with the
+project, and vice versa.  After all, the people who develop the code
+don't need the packaging so much &mdash; they already know how to
+install, administer, and use the software, because they wrote it.
+Second, the skills required to do presentation and packaging well are
+often completely different from those required to write the code.
+People tend to focus on what they're good at, even if it might be
+better for the project overall to spend a little time on something
+that suits them less.  <xref linkend="pfs-ch-2"/> discusses
+presentation and packaging in detail, and explains why it's crucial
+that they be a priority from the start of the project.</para>
+
+<para>Next comes the fallacy that little or no project management is
+required in open source, or conversely, that the same management
+practices used for in-house development will work on an open source
+project.  Management in an open source project isn't always very
+visible, but in the successful projects, it's almost always going on
+in some form or another.  A small thought experiment suffices to show
+why.  An open source project consists of a random collection of
+programmers (already a notoriously independent-minded lot), who have
+most likely never met each other, and who may each have different
+personal goals in working on the project.  The thought experiment is
+simply to imagine what would happen to such a group
+<emphasis>without</emphasis> management.  Most likely it would
+collapse or drift apart very quickly; things won't simply run
+themselves, much as we might wish otherwise.  But the management,
+though it may be quite active, is often informal, subtle, and low-key.
+The only thing keeping a development group together is their shared
+belief that they can do more in concert than individually.  Thus the
+goal of most management is to ensure that they continue to believe
+this, by setting standards for communications, by making sure useful
+developers don't get marginalized due to personal idiosyncracies, and
+in general by making the project a place developers want to keep
+coming back to.  Specific techniques for doing this are discussed
+throughout the rest of this book.</para>
+
+<para>Finally, there is a general category of problems that may be
+called "failures of cultural navigation".  Ten years ago, even five,
+it would have been premature to talk about a global culture of free
+software, but not now.  A recognizable culture has slowly emerged, and
+while it is certainly not monolithic &mdash; it is at least as prone
+to internal dissent and factionalism as any geographically bound
+culture &mdash; it does have a basically consistent core.  Most
+successful open source projects exhibit some or all of the
+characteristics of this core.  They reward certain types of behaviors,
+and punish others; they create an atmosphere that encourages unplanned
+participation, sometimes at the expense of central coordination; they
+have concepts of rudeness and politeness that can differ substantially
+from those prevalent elsewhere.  Most importantly, longtime
+participants have generally internalized these standards, so that they
+share a rough consensus about expected conduct.  Unsuccessful projects
+usually deviate in significant ways from this core, albeit
+unintentionally, and often do not have a consensus about what
+constitutes reasonable default behavior.  This means that when
+problems arise, the situation can quickly deteriorate, as the
+participants may not have an already-established stock of cultural
+reflexes to fall back on for resolving differences. </para>
+
+<para> This book is a practical guide, not an anthropological study
+nor a history.  However, a working knowledge of the origins of today's
+free software culture is an essential foundation for any practical
+advice.  A person who understands the culture can travel far and wide
+in the open source world, encountering many local variations in custom
+and dialect, yet still be able to participate comfortably and
+effectively everywhere.  In contrast, a person who does not understand
+the culture will find the process of organizing or participating in a
+project difficult and full of surprises.  Since the number of people
+developing free software is still growing by leaps and bounds, there
+are many people in that latter category &mdash; this is largely a
+culture of recent immigrants, and will continue to be so for some
+time.  If you think you might be one of them, the next section helps
+provide background for discussions you'll encounter later, both in
+this book and on the Internet.  (On the other hand, if you've been
+working with open source for a while, you may already know a lot of
+its history, so feel free to skip the next section.)  </para>
 
 
 <!-- ======================== SECTION 1 ============================== -->
 <sect1 id="pfs-ch-1-sect-1">
-<title>How To Fail</title>
-
-<para> It would be tempting to say that free software projects fail
-for the same sorts of reasons proprietary software projects do.  Free
-software has no monopoly on unrealistic expectations, vague
-specifications, poor resource management, insufficiently thorough
-design phases, or any of the other hobgoblins already well-known to
-the proprietary software industry.  But these causes, being
-well-known, are frequently guarded against at the outset, and should
-account for no more than their usual share of mischief.  Just as the
-language and ideas of management theory have penetrated into the
-general social consciousness, so that anyone coming into a management
-position starts out with some background knowledge and an awareness
-that there's more wisdom waiting in the wings, likewise the field of
-commercial programming has accumulated a store of knowledge about how
-to run projects, such that even novice programmers arrive knowing that
-there's more to it than just sitting down and coding.  </para>
-
-<para> There exists a similar body of knowledge for open source
-programming, but it is not as clearly spelled-out nor as widely
-propagated, because for a long time now the majority of paid
-programming work has been done in closed-source environments.  All too
-often, when a free software project runs aground, it is because the
-developers didn't appreciate the unique aspects of open source
-software development, which can augment and, in some cases, displace
-the familiar difficulties of closed-source development.
-</para>
-
-<screen>
-* bad expectations
-* insufficient preparation
-* too much focus / too little focus
-* belief in the "magic pixie dust"
-* belief that no management is necessary, or that traditional management works
-* belief that the political and technical are separate
-* mistaking social problems for technical ones
-</screen>
-
-<para> Frequently, the problems are not technical in nature, but
-cultural and social.  Ten years ago, even five, it would have been
-premature to talk about a global culture of free software, but not
-now.  A recognizable culture has slowly emerged, and while it is
-certainly not monolithic &mdash; it is at least as prone to internal
-dissent and factionalism as any geographically bound culture &mdash;
-it does have a basically consistent core.  Most successful open source
-projects exhibit some or all of the characteristics of this core.
-They reward certain types of behaviors, and punish others; they create
-an atmosphere that encourages unplanned participation, sometimes at
-the expense of central coordination; they have concepts of rudeness
-and politeness that can differ substantially from those prevalent
-elsewhere.  Most importantly, longtime participants have generally
-internalized these standards, so that they share a rough consensus
-about expected conduct.  Unsuccessful projects usually deviate in
-significant ways from this core, albeit unintentionally, and often do
-not have a consensus about what constitutes reasonable default
-behavior.  This means that when problems arise, the situation can
-quickly deteriorate, as the participants may not have an
-already-established stock of cultural reflexes to fall back on for
-resolving differences. </para>
-
-<para> This book is a practical guide to running open source projects,
-not an anthropological study nor a history.  However, a working
-knowledge of the origins of today's free software culture is an
-essential foundation for any practical advice.  A person who
-understands the culture can travel far and wide in the open source
-world, encountering many local variations in custom and dialect, yet
-still be able to participate comfortably and effectively everywhere.
-A person who does not understand the culture will find the process of
-organizing or participating in a project difficult and full of
-surprises.  Since the number of people developing free software is
-still growing by leaps and bounds, there are many people in that
-latter category &mdash; this is largely a culture of recent
-immigrants, and will continue to be so for some time.  If you think
-you might be one of them, then the next section will help provide
-background for discussions you'll encounter later, both in this book
-and on the Internet.  (On the other hand, if you've been working with
-open source for a while, you may already know a lot of its history, so
-feel free to skip the next section.)  </para>
-
-</simplesect>
-
-
-<!-- ======================== SECTION 2 ============================== -->
-<sect1 id="pfs-ch-1-sect-2">
 <title>History</title>
 
 <para> Software sharing has been around as long as software itself.
@@ -176,10 +218,10 @@ expertise in a particular architecture or family of architectures,
 whereas today they would be more likely to acquire expertise in a
 programming language or family of languages, confident that their
 expertise will be transferable to whatever computing platform they
-happen to find themselves working with.  Since expertise tended to be
-specific to one kind of computer, the accumulation and diffusion of
+happen to find themselves working with.  Because expertise tended to
+be specific to one kind of computer, the accumulation and diffusion of
 expertise had the effect of making that computer more attractive.  It
-was therefore in the manufacturer's interests to for machine-specific
+was therefore in the manufacturer's interests for machine-specific
 code and knowledge to spread as widely as possible.  </para>
 
 <para> Second, there was no Internet.  Though there were fewer legal
@@ -193,11 +235,16 @@ course, these barriers <emphasis>were</emphasis> overcome in many
 cases.  Sometimes different groups made contact with each other
 independently, sending disks or tapes through land mail, and sometimes
 the manufacturers themselves served as central clearing houses for
-patches.  But the physical realities of data transmission meant there
-was always an impedance to sharing, an impedance proportional to the
-distance (real or organizational) that the software had to travel.
-Widespread, frictionless sharing, as we know it today, was not
-possible.  </para>
+patches.  It also helped that many of the early computer developers
+worked at universities, where publishing one's knowledge was expected.
+But the physical realities of data transmission meant there was always
+an impedance to sharing, an impedance proportional to the distance
+(real or organizational) that the software had to travel.  Widespread,
+frictionless sharing, as we know it today, was not possible.  </para>
+
+<!-- ======================== SECTION 2 ============================== -->
+<sect2 id="pfs-ch-1-sect-2.1">
+<title>The Rise of Proprietary Software and Free Software</title>
 
 <para> As the industry matured, several interrelated changes occurred
 simultaneously.  The wild diversity of hardware designs gradually gave
@@ -248,17 +295,6 @@ expected to share whatever improvements they made to the system.  As
 Stallman wrote later:
 </para>
 
-<comment> <para>Hmmm.  Look, I totally admire the whole
-semantic-not-presentational markup philosophy.  No, really.  It's
-great.  It will end world hunger, prevent nuclear proliferation, and
-make Eddie Murphy funny again.  Nevertheless, I really want italics in
-block quotes.  Not "the idea" of italics, not "the moral equivalent of
-italics", not "the font style formerly known as italic", but
-honest-to-goodness <emphasis>italics</emphasis>.  The only way I know
-to do it is &lt;emphasis&gt;&lt;/emphasis&gt; so that's what I'm
-using.  But probably there's some better, stylesheety way?</para>
-</comment>
-
     <blockquote>
       <para><emphasis>We did not call our software "free software",
       because that term did not yet exist; but that is what it was.
@@ -271,13 +307,14 @@ using.  But probably there's some better, stylesheety way?</para>
 
       <para>(from <emphasis role="bold"><ulink
       url="http://www.gnu.org/gnu/thegnuproject.html"/></emphasis>)
-      </para> </blockquote>
+      </para>
+    </blockquote>
 
 
 <para> This edenic community collapsed around Stallman shortly after
 1980, when the changes that had been happening in the rest of the
 industry finally caught up with the AI Lab.  A startup company hired
-away many of the Lab's programmers, to work on an operating system
+away many of the Lab's programmers to work on an operating system
 similar to what they had been working on at the Lab, only now under an
 exclusive license.  At the same time, the AI Lab acquired new
 equipment that came with a proprietary operating system.  </para>
@@ -325,13 +362,15 @@ of limiting the software's distribution, it prevents
 <emphasis>anyone</emphasis>, even the author, from limiting it.  For
 Stallman, this was better than simply putting his code into the public
 domain.  If it were in the public domain, any particular copy of it
-could be taken and used as part of a proprietary program.  While this
-wouldn't in any way diminish the original code's continued
-availability in the public domain, it would have still meant that
-Stallman's efforts could benefit the enemy &mdash; proprietary
-software.  The GPL was a way of sealing off the free world from the
-non-free world.  (The GNU General Public License and its relationship
-to other free software licenses are discussed in detail in <xref
+could be incorporated into a proprietary program, as has been known to
+happen to code under less restrictive licenses.  While such
+incorporation wouldn't in any way diminish the original code's
+continued availability, it would have meant that Stallman's efforts
+could benefit the enemy &mdash; proprietary software.  The GPL can
+thus be thought of as a form of protectionism for free software,
+because it prevents non-free software from taking full advantage of
+GPL'd code.  (The GNU General Public License and its relationship to
+other free software licenses are discussed in detail in <xref
 linkend="pfs-ch-3"/>.)  </para>
 
 <para> With the help of many programmers, some of whom shared
@@ -357,14 +396,13 @@ who, with the help of volunteers around the world, had completed a
 free kernel using a more conservative design.  He named it Linux, and
 when it was combined with the existing GNU programs, the result was a
 completely free operating system.  For the first time, you could boot
-up your computer and do work without once invoking a piece of
-proprietary code<footnote><para>Technically, Linux was not the first.
-A free operating system for IBM-compatible computers, called 386BSD,
-had come out shortly before Linux.  However, it was a lot harder to
-get 386BSD up and running.  The reason Linux made such a splash was
-that not only was it free, but it actually had a high chance of
-booting your computer when you installed
-it.</para></footnote>. </para>
+up your computer and do work without using proprietary
+software.<footnote><para>Technically, Linux was not the first.  A free
+operating system for IBM-compatible computers, called 386BSD, had come
+out shortly before Linux.  However, it was a lot harder to get 386BSD
+up and running.  The reason Linux made such a splash was that not only
+was it free, but it actually had a high chance of booting your
+computer when you installed it.</para></footnote></para>
 
 <para> Although Torvalds released the kernel under the GNU General
 Public License, he was much less ideologically driven than Stallman.
@@ -426,6 +464,8 @@ expert programmers to devote themselves to the project full time, but
 reaps the benefits of <emphasis>everyone's</emphasis> contributions,
 including work from unpaid volunteers and from programmers being paid
 by other corporations.  </para>
+
+</sect2>
 
 <para> As the corporate world paid more and more attention, free
 software programmers were faced with new issues of presentation.  One
@@ -580,9 +620,7 @@ seen.</para> </warning>
 
 </screen>
 
-
 </sect1>
-
 
 <!-- ======================== SECTION 3 ============================== -->
 <sect1 id="pfs-ch-1-sect-3">
