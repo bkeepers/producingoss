@@ -273,12 +273,106 @@ we'll examine a few of the most common configuration issues.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-2.1">
-<title>Moderation</title>
+<title>Spam Prevention</title>
 
-<para>(in progress)</para>
+<para>Between when this sentence was written and when it is published,
+the Internet-wide spam problem will probably double in severity
+&mdash; or at least it will feel that way.  There was a time, not so
+long ago, when one could run a mailing list without taking any
+spam-prevention measures at all.  There occasional stray post would
+still show up, but it was only a low-level annoyance.  That era is
+gone forever.  Today, a mailing list that takes no spam prevention
+measures will quickly be submerged in junk emails, to the point of
+unuseability.  Spam prevention is now mandatory.</para>
 
-<para><remark>Never misuse moderation.  It should be an anti-spam
-or anti-topic-confusion technique, nothing more.</remark></para>
+<para>We divide spam prevention into two categories: preventing spam
+posts from appearing on your mailing lists, and preventing your
+mailing list from being a source of new email addresses for spammers'
+harvesters.  Of the two, the former is more important, so we examine
+it first.</para>
+
+<sect3 id="pfs-ch-3-sect-2.1.1">
+<title>Filtering Posts</title>
+
+<para>There are three basic techniques for preventing spam posts, and
+most mailing list software offers all three.  They are best used in
+tandem:</para>
+
+<orderedlist>
+
+  <listitem><para><emphasis role="bold">Only auto-allow postings from
+            list subscribers.</emphasis></para>
+
+            <para>This is very effective, and also involves the least
+            administrative overhead, since it's usually just a
+            matter of changing a setting in the mailing list's
+            configuration.  But posts which aren't automatically
+            approved mustn't be simply discarded.  Instead, they
+            should be passed along for moderation, for two reasons.
+            First, you want to allow non-subscribers to post.  Someone
+            with a question or suggestion may not want to bother
+            subscribing to a mailing list just to make a single post
+            there.  Second, even subscribers may sometimes post from
+            an address other than the one by which they're subscribed.
+            Email addresses are neither a unique nor a reliable method
+            of identifying people, and shouldn't be treated as
+            such.</para>
+  </listitem>
+
+  <listitem><para><emphasis role="bold">Filter posts through
+            spam-filtering software.</emphasis></para>
+
+            <para>If the mailing list software makes it possible (and
+            most do), you can have posts filtered by spam-filtering
+            software.  Automatic spam-filtering is not perfect, and
+            never will be, since there is a never-ending arms race
+            between spammers and filter writers.  However, it can
+            significantly reduce the amount of spam that gets through
+            to the moderation queue, and since the length of that
+            queue is directly proportional to the amount of time some
+            human has to spend examining it, any automatic spam
+            filtering that happens will be beneficial.</para>
+            <para>There is not space here for detailed instructions
+            on setting up spam filters.  You will have to consult
+            your mailing list software's documentation for that (see
+            <xref linkend="pfs-ch-3-sect-2.5"/>).  As for the
+            filtering software itself, I've personally had good
+            experiences with two:
+            <ulink url="http://spamassassin.apache.org/"
+               >SpamAssassin&nbsp;(http://spamassassin.apache.org/)</ulink>
+            and <ulink url="http://spamprobe.sourceforge.net/"
+               >SpamProbe&nbsp;(http://spamprobe.sourceforge.net/)</ulink>
+            This is not a comment on the other open source spam
+            filters out there.  I just happen to have used those two
+            myself and been satisfied with them.</para> 
+  </listitem>
+
+  <listitem><para><emphasis role="bold">Moderation.</emphasis></para>
+            <para>For mails that aren't automatically allowed by
+            virtue of being from a list subscriber, and which make it
+            through the spam filtering software, the last stage is
+            <firstterm>moderation</firstterm>.
+            </para>
+  </listitem>
+
+</orderedlist>
+
+<para><remark>Note about not misusing moderation.  It should be an
+anti-spam technique and an anti-off-topicness technique, but nothing
+more.  Everything else should be let through.  Don't be tempted to
+answer questions directly in the moderation reply; that would deprive
+the list of an accurate picture of what sorts of questions are being
+asked, for example.  Also, it deprives others of the chance to answer
+them.</remark></para>
+
+</sect3>
+
+<sect3 id="pfs-ch-3-sect-2.1.2">
+<title>Address Hiding</title>
+
+<para><remark>note empirical evidence of effectiveness</remark></para>
+
+</sect3>
 
 </sect2>
 
@@ -322,7 +416,7 @@ Speaking of reply-to:
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-2.4">
-<title>Address Hiding</title>
+<title>Archiving</title>
 
 <para>(in progress)</para>
 
@@ -335,12 +429,18 @@ Speaking of reply-to:
 <para>(in progress)</para>
 
 <screen>
-http://cr.yp.to/ezmlm.html
-http://www.list.org/
-http://www.ecartis.org/
-http://listproc.sourceforge.net/
-http://mojo.skazat.com/  (DaDa -- GPL, even though doesn't look like it)
-SmartList (part of procmail?)
+<ulink url="http://www.list.org/"
+   >Mailman&nbsp;(http://www.list.org/)</ulink>
+<ulink url="http://cr.yp.to/ezmlm.html"
+   >EzMLM&nbsp;(http://cr.yp.to/ezmlm.html)</ulink>
+<ulink url="http://www.ecartis.org/"
+   >Ecartis&nbsp;(http://www.ecartis.org/)</ulink>
+<ulink url="http://listproc.sourceforge.net/"
+   >ListProc&nbsp;(http://listproc.sourceforge.net/)</ulink>
+<ulink url="http://mojo.skazat.com/"
+   >DaDa&nbsp;(http://mojo.skazat.com/)</ulink>
+<ulink url="http://www.procmail.org/"
+   >SmartList&nbsp;(http://www.procmail.org/)</ulink>
 </screen>
 
 </sect2>
