@@ -86,7 +86,7 @@ posts, in <xref linkend="pfs-ch-3-sect-2"/>).  Everyone involved with
 the project will need to encouraged, at the right times and in the
 right ways, to do their part to keep the project's information
 well-organized.  The more involved the contributor, the more
-specialized techniques they can be expected to learn.</para>
+specialized the techniques they can be expected to learn.</para>
 
 <para>Information management is not a problem that can be definitively
 solved.  There are too many variables.  You may finally get everything
@@ -201,7 +201,7 @@ list in digest versus message-by-message form, about providing various
 sorts of standard list and project information by means of
 auto-responders, and various other things.  A human being monitoring a
 subscription address can supply only a bare minimum of functionality,
-and even then not as reliably as software could.</para>
+and even then not as reliably and promptly as software could.</para>
 
 <para>Modern list management software usually offers at least the
 following features:</para>
@@ -213,7 +213,8 @@ following features:</para>
             what they have subscribed to, how to interact further with
             the mailing list software, and (most importantly) how to
             unsubscribe.  This automatic reply can be customized to
-            contain project-specific information, of course.</para>
+            contain project-specific information, of course, such as
+            the project's web site, FAQ location, etc.</para>
   </listitem>
 
   <listitem><para>Subscription in either digest mode or
@@ -236,13 +237,12 @@ following features:</para>
 
   <listitem><para>An administrative interface.  Among other things,
             this enables an administrator to go in and remove obsolete
-            addresses <foreignphrase>en masse</foreignphrase>.  This
-            can become urgent when a recipient's address starts
-            sending automatic "I am no longer at this address" replies
-            back to the list in response to every list post.  (Some
-            mailing list software can even detect this by itself and
-            unsubscribe the person automatically.)</para>
-  </listitem>
+            addresses easily.  This can become urgent when a
+            recipient's address starts sending automatic "I am no
+            longer at this address" replies back to the list in
+            response to every list post.  (Some mailing list software
+            can even detect this by itself and unsubscribe the person
+            automatically.)</para> </listitem>
 
   <listitem><para>Header manipulation.  Many people have sophisticated
             filtering and replying rules set up in their mailreaders.
@@ -251,39 +251,40 @@ following features:</para>
             of (more details below).</para>
   </listitem>
 
-  <listitem><para>Archiving.  The mailing list software will keep an
-            archive of all posts to the lists it manages, and make
-            that archive available via the web.  Or, alternatively, it
-            may have a way to plug in an external archiving tool such
-            as <ulink
-            url="http://www.oac.uci.edu/indiv/ehood/mhonarc.html"/>.
-            As <xref linkend="pfs-ch-5-sect-3"/> discusses, archiving
-            is crucial.</para>
+  <listitem><para>Archiving.  All posts to the managed lists are
+            stored and made available on the web; alternatively, some
+            mailing list software offers special interfaces for
+            plugging in an external archiving tool such as <ulink
+            url="http://www.mhonarc.org/"
+            >MHonArc</ulink>.  As <xref linkend="pfs-ch-5-sect-4"/>
+            discusses, archiving is crucial.</para>
   </listitem>
 
 </itemizedlist>
 
-<para>The point of all this is not to intimidate, but merely to
-emphasize that mailing list management is a problem that has been
-given a lot of thought, and mostly been solved.  You certainly don't
-need to become an expert in it.  But you should be aware that it's a
-complex subject, and one that will from time to time occupy your
-attention in the course of running a free software project.  Below
-we'll examine a few of the most common configuration issues.</para>
+<para>The point of all this is merely to emphasize that mailing list
+management is a complex problem that has been given a lot of thought,
+and mostly been solved.  You certainly don't need to become an expert
+in it.  But you should be aware that there's always room to learn
+more, and that list management will occupy your attention from time to
+time in the course of running a free software project.  Below we'll
+examine a few of the most common mailing list configuration
+issues.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-2.1">
 <title>Spam Prevention</title>
 
-<para>Between when this sentence was written and when it is published,
+<para>Between when this sentence is written and when it is published,
 the Internet-wide spam problem will probably double in severity
 &mdash; or at least it will feel that way.  There was a time, not so
 long ago, when one could run a mailing list without taking any
 spam-prevention measures at all.  There occasional stray post would
-still show up, but it was only a low-level annoyance.  That era is
-gone forever.  Today, a mailing list that takes no spam prevention
-measures will quickly be submerged in junk emails, to the point of
-unuseability.  Spam prevention is now mandatory.</para>
+still show up, but infrequently enough to be only a low-level
+annoyance.  That era is gone forever.  Today, a mailing list that
+takes no spam prevention measures will quickly be submerged in junk
+emails, to the point of unuseability.  Spam prevention is now
+mandatory.</para>
 
 <para>We divide spam prevention into two categories: preventing spam
 posts from appearing on your mailing lists, and preventing your
@@ -306,18 +307,18 @@ tandem:</para>
             <para>This is effective as far as it goes, and also
             involves very little administrative overhead, since it's
             usually just a matter of changing a setting in the mailing
-            list software's configuration.  But posts which aren't
-            automatically approved must not be simply discarded.
-            Instead, they should be passed along for moderation, for
-            two reasons.  First, you want to allow non-subscribers to
-            post.  A person with a question or suggestion should not
-            need to subscribe to a mailing list just to make a single
-            post there.  Second, even subscribers may sometimes post
-            from an address other than the one by which they're
-            subscribed.  Email addresses are neither a unique nor a
-            reliable method of identifying people, and shouldn't be
-            treated as such.</para>
-  </listitem>
+            list software's configuration.  But note that posts which
+            aren't automatically approved must not be simply
+            discarded.  Instead, they should be passed along for
+            moderation, for two reasons.  First, you want to allow
+            non-subscribers to post.  A person with a question or
+            suggestion should not need to subscribe to a mailing list
+            just to make a single post there.  Second, even
+            subscribers may sometimes post from an address other than
+            the one by which they're subscribed.  Email addresses are
+            not a reliable method of identifying people, and shouldn't
+            be treated as such.</para>
+            </listitem>
 
   <listitem><para><emphasis role="bold">Filter posts through
             spam-filtering software.</emphasis></para>
@@ -328,8 +329,8 @@ tandem:</para>
             never will be, since there is a never-ending arms race
             between spammers and filter writers.  However, it can
             greatly reduce the amount of spam that gets through to the
-            moderation queue, and since the longer that queue the more
-            time humans must spend examining it, any amount of
+            moderation queue, and since the longer that queue is the
+            more time humans must spend examining it, any amount of
             automated filtering is beneficial.</para>
 
             <para>There is not space here for detailed instructions
@@ -376,17 +377,17 @@ tandem:</para>
             from the same sender without even running them through
             moderation.  There is rarely any point doing this, since
             moderation is mostly about spam prevention, and spammers
-            tend not to send from the same address twice.</para>
+            tend not to send from the same address twice anyway.</para>
             </listitem>
 </orderedlist>
 
 <para>Be sure to use moderation <emphasis>only</emphasis> for
-filtering out spams and clearly off-topic messages (for example,
-someone posted to the wrong mailing list).  Even though the moderation
-system usually gives you a way to respond directly to the sender of
-the original post, don't use that channel to answer questions that
-really belong on the mailing list itself, even if you know the answer
-off the top of your head.  To do so would deprive the project's
+filtering out spams and clearly off-topic messages (such as when
+someone accidentally posts to the wrong mailing list).  The moderation
+system will usually give you a way to respond directly to the sender
+of the original post, but don't use that channel to answer questions
+that really belong on the mailing list itself, even if you know the
+answer off the top of your head.  To do so would deprive the project's
 community of an accurate picture of what sorts of questions people are
 asking, and deprive them of a chance to answer questions themselves
 and/or see answers from others.  Mailing list moderation is strictly
@@ -398,9 +399,9 @@ more.</para>
 <sect3 id="pfs-ch-3-sect-2.1.2">
 <title>Address Hiding in Archives</title>
 
-<para>Another common anti-spam technique is for the mailing list
-archives to obscure people's email addresses, for example by
-replacing
+<para>To prevent your mailing lists from being a source of addresses
+for spammers, a common technique is for the archives to obscure
+people's email addresses, for example by replacing
 
     <blockquote>
       <para><literal>jrandom@somedomain.com</literal></para>
@@ -415,7 +416,7 @@ with
 or
 
     <blockquote>
-      <literal>jrandom&nbsp;{AT}&nbsp;somedomain.com</literal>
+      <literal>jrandom{AT}somedomain.com</literal>
     </blockquote>
 
 or some similarly obvious (to a human) encoding.  Since spam address
@@ -423,37 +424,37 @@ harvesters often work by crawling through web pages &mdash; including
 your mailing list's online archives &mdash; and looking for sequences
 containing "@", encoding the addresses is a way of making people's
 email addresses invisible to spammers.  This does nothing to prevent
-spam sent to the mailing list, of course, but it at least avoids
-increasing the amount of spam sent directly to list users personal
+spam sent to the mailing list, of course, but it helps avoid
+increasing the amount of spam sent directly to list users' personal
 addresses.</para>
 
 <para>Address hiding can be controversial.  Some people like it a lot,
 and will be surprised if your archives don't do it automatically.
 Other people think it's too much of an inconvenience (because humans
 also have to translate the addresses back before using them).
-Occasionally someone will assert that it's ineffective, because a
-harvester can as easily recognize a pattern involving "_AT_" as one
-involving "@" (however, there's empirial evidence that address hiding
+Sometimes people assert that it's ineffective, because a harvester can
+as easily recognize a pattern involving "_AT_" as one involving "@";
+however, note that there's empirial evidence that address hiding
 <emphasis>is</emphasis> effective, see <ulink
-url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>).</para>
+url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
 
 <para>Ideally, the list management software would leave the choice up
 to each individual subscriber, either through a special yes/no header
 or a setting in that subscriber's list account preferences.  However,
-I don't know of any software which offers per-subscriber or per-poster
+I don't know of any software which offers per-subscriber or per-post
 choice in the matter, so for now the list manager must make a decision
 for everyone (assuming the archiver offers the feature at all, which
-is not always the case).  I lean very mildly toward turning it on.
-Some people are very careful to avoid posting their email addresses on
-web pages or anywhere else a spam harvester might see it, and they
-would be disappointed to have all that care thrown away by a mailing
-list archive; meanwhile, the inconvenience address hiding imposes on
-archive users is very slight, since it's trivial to transform an
-obscured address back to a valid one if you need to reach the person.
-But keep in mind that, in the end, it's still an arms race: by the
-time you read this, harvesters might well have evolved to the point
-where they can recognize most common forms of hiding, and we'll have
-to think of something else.</para>
+is not always the case).  I lean very mildly toward turning
+address-hiding on.  Some people are very careful to avoid posting
+their email addresses on web pages or anywhere else a spam harvester
+might see it, and they would be disappointed to have all that care
+thrown away by a mailing list archive; meanwhile, the inconvenience
+address hiding imposes on archive users is very slight, since it's
+trivial to transform an obscured address back to a valid one if you
+need to reach the person.  But keep in mind that, in the end, it's
+still an arms race: by the time you read this, harvesters might well
+have evolved to the point where they can recognize most common forms
+of hiding, and we'll have to think of something else.</para>
 
 </sect3>
 
@@ -514,14 +515,14 @@ this, I strongly recommend against turning the option on.  The problem
 it solves can easily be solved in much less obtrusive ways, and the
 cost of eating space in the Subject field is far too high.
 Experienced mailing list users typically scan the Subjects of the
-day's incoming list mail to decide what to read and/or respond to.  By
-prepending the list's name to the Subject, you occupy valuable real
-estate and risk pushing the far end of the Subject off the screen.
-This obscures information that people depend on to decide what mails
-to open, reducing the overall functionality of the mailing list for
+day's incoming list mail to decide what to read and/or respond to.
+Prepending the list's name to the Subject can push the right side of
+the Subject off the screen, rendering it invisible.  This obscures
+information that people depend on to decide what mails to open, thus
+reducing the overall functionality of the mailing list for
 everyone.</para>
 
-<para>Instead of munging the Subject header, tell your users to take
+<para>Instead of munging the Subject header, teach your users to take
 advantage of the other standard headers, starting with the To header,
 which should say the mailing list's name:
 
@@ -532,7 +533,7 @@ which should say the mailing list's name:
 Any mailreader that can filter on Subject should be able to filter on
 To just as easily.</para>
 
-<para>There are a few other optional, but standard, headers expected
+<para>There are a few other optional-but-standard headers expected
 for mailing lists.  You may or may not ever need to worry about these,
 but you should be aware that they exist and that some users (or users'
 mailreading software) may be counting on their presence:</para>
@@ -551,22 +552,22 @@ explanation, or if you need the really detailed, formal specification,
 see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
 </para>
 
-<para>Note the implication in these headers that if you have a mailing
-list named "list", then you also have administrative addresses
-"list-help" and "list-unsubscribe" available.  In addition to these,
-it is normal to have "list-subscribe", for joining, and "list-owner",
-for reaching the list administrators.  Depending on the list
-management software you use, these and/or various other administrative
-addresses may be set up, the documentation will have details.  Usually
-a complete explanation of all these special addresses is mailed to
-each new user as part of the automated "welcome mail" when she
-subscribes.  You yourself will probably get a copy of this welcome
-mail; if you don't, then ask someone else for a copy, so you know what
-your users are seeing when they join the list.  Keep the copy handy so
-you can answer questions about the mailing list functions, or better
-yet, put it on a web page somewhere.  That way when people lose their
-own copy of the instructions and post asking "How do I unsubscribe
-from this list?", you can just hand them the URL.</para>
+<para>Notice how these headers imply that if you have a mailing list
+named "list", then you also have administrative addresses "list-help"
+and "list-unsubscribe" available.  In addition to these, it is normal
+to have "list-subscribe", for joining, and "list-owner", for reaching
+the list administrators.  Depending on the list management software
+you use, these and/or various other administrative addresses may be
+set up, the documentation will have details.  Usually a complete
+explanation of all these special addresses is mailed to each new user
+as part of the automated "welcome mail" when she subscribes.  You
+yourself will probably get a copy of this welcome mail.  If you don't,
+then ask someone else for a copy, so you know what your users are
+seeing when they join the list.  Keep the copy handy so you can answer
+questions about the mailing list functions, or better yet, put it on a
+web page somewhere.  That way when people lose their own copy of the
+instructions and post asking "How do I unsubscribe from this list?",
+you can just hand them the URL.</para>
 
 <para>Some mailing list software offers an option to append
 unsubscription instructions to the bottom of every post.  If that
@@ -584,12 +585,12 @@ or worse, mail the list! &mdash; asking how to unsubscribe.</para>
 <para>Earlier, in <xref linkend="pfs-ch-2-sect-3.1"/>, I stressed the
 importance of making sure discussions stay in public forums, and
 talked about how active measures are sometimes needed to prevent
-conversations from trailing off into private email threads.
-Meanwhile, this chapter is all about setting up project communications
+conversations from trailing off into private email threads.  And this
+present chapter is all about setting up project communications
 software to do as much of the work for you as possible.  Therefore, if
 the mailing list management software offers a way to automatically
-encourage discussions to stay on the list, you would think turning
-that feature on would be the obvious choice.</para>
+cause discussions to stay on the list, you would think turning that
+feature on would be the obvious choice.</para>
 
 <para>Well, not quite.  There is such a feature, but it has some
 pretty severe disadvantages.  The question of whether or not to use it
@@ -615,26 +616,28 @@ look like this:
 <para>On its face, this seems like a good thing.  Because virtually
 all mailreading software pays attention to the Reply-to header, now
 when anyone responds to a post, their response will be automatically
-addressed to the entire list, not just at the person who posted.  Of
-course, the responder can still manually change where the message
-goes, but the important thing is that by default messages are directed
-to the list.  It's a perfect example of using technology to encourage
+addressed to the entire list, not just to the sender of the message
+being responded to.  Of course, the responder can still manually
+change where the message goes, but the important thing is that
+<emphasis>by default</emphasis> replies are directed to the list.
+It's a perfect example of using technology to encourage
 collaboration.</para>
 
 <para>Unfortunately, there are some disadvantages.  The first is the
-"Can't Find My Way Back Home" problem: sometimes the original sender
-will put their preferred email address in the Reply-to field, because
-they are unable to receive email at the address from which they are
-sending.  People who always read and send from the same location won't
-often encounter this circumstance, and may be surprised that it even
-exists.  But for those who have unusual email configurations, or who
-cannot control how the From address on their mails looks (perhaps
-because they send from work and do not have any influence over the IT
-department), using Reply-to may be the only way they have to ensure
-that responses reach them.  When such a person posts to a mailing list
-that they're not subscribed to, her setting of Reply-to becomes
-essential information.  If the list software overwrites it, she will
-never see the responses to her post.</para>
+<firstterm>Can't Find My Way Back Home</firstterm> problem: sometimes
+the original sender will put their "real" email address in the
+Reply-to field, because for one reason or another they are unable to
+receive email at the address from which they are sending.  People who
+always read and send from the same location don't have this problem,
+and may be surprised that it even exists.  But for those who have
+unusual email configurations, or who cannot control how the From
+address on their mails looks (perhaps because they send from work and
+do not have any influence over the IT department), using Reply-to may
+be the only way they have to ensure that responses reach them.  When
+such a person posts to a mailing list that they're not subscribed to,
+her setting of Reply-to becomes essential information.  If the list
+software overwrites it, she may never see the responses to her
+post.</para>
 
 <para>The second disadvantage has to do with expectations, and in my
 opinion is the most powerful argument against Reply-to munging.  Most
@@ -648,10 +651,11 @@ reply-to-author.  Although you want to encourage people to reply to
 the list whenever possible, there are certainly circumstances where a
 private reply is the responder's prerogative &mdash; for example, they
 may want to say something confidential to the author of the original
-message.</para>
+message, something that would be inappropriate on the public
+list.</para>
 
 <para>Now consider what happens when the list has overridden the
-author's original Reply-to.  The responder hits a key, expecting to
+original sender's Reply-to.  The responder hits a key, expecting to
 send a private message back to the original author.  Because this is
 the expected behavior, she may not bother to look carefully at the
 recipient address in the new message.  She composes her private,
@@ -661,10 +665,11 @@ later her message appears <emphasis>on the mailing list</emphasis>!
 Sure, she "should" have looked carefully at the recipient field, and
 she "should not" have assumed anything about the Reply-to header.  But
 authors almost always set Reply-to to their own personal address (or
-rather, their mail software sets it for them).  In fact, when a person
-deliberately sets Reply-to to some other address, such as the list, they
-usually make a point of mentioning this in the body of the message, so
-people won't be surprised at what happens when they reply.</para>
+rather, their mail software sets it for them), and many longtime email
+users have come to expect that.  In fact, when a person deliberately
+sets Reply-to to some other address, such as the list, she usually
+make a point of mentioning this in the body of the message, so people
+won't be surprised at what happens when they reply.</para>
 
 <para>Because of the possibly severe consequences of this unexpected
 behavior, my own preference is to configure list management software
@@ -753,7 +758,60 @@ stuck with a global setting.</para>
 <sect2 id="pfs-ch-3-sect-2.4">
 <title>Archiving</title>
 
-<para>(in progress)</para>
+<para>Most of the technical details of mailing list archiving are
+specific to the software that's running the list, and are beyond the
+scope of this book.  When choosing or configuring an archiver,
+consider these qualities:
+
+<itemizedlist>
+  <listitem><para><emphasis role="bold">Prompt updating.</emphasis>
+  People will often want to refer to an archived post made within the
+  last hour or two.  If possible, the archiver should archive each post
+  instantaneously, so that by the time it appears on the mailing list
+  it's already present in the archives.  If that option isn't
+  available, then at least try to set the archiver to update itself
+  every hour or so.  (By default, some archivers run their update
+  processes once per night, but in practice that's too much lag time
+  for an active mailing list.)</para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Backups.</emphasis> It should
+  be reasonably obvious how to back up the archives, and the
+  restoration recipe should not be too difficult.  In other words,
+  don't treat your archiver as a black box: you (or someone in your
+  project) should know where it's storing the messages, and how to
+  regenerate the actual archive pages from the message store if it
+  should ever become necessary.</para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Referential
+  stability.</emphasis>Once a message is archived at a particular URL,
+  it should remain accessible at that exact same URL forever, or as
+  close to forever as possible.  Even if the archives are rebuilt,
+  restored from backup, or otherwise fixed, any URLs that have already
+  been made publically available should remain the same.  Stable
+  refernces make it possible for Internet search engines to index the
+  archives, which is a major boon to users looking for answers.</para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Thread Support.</emphasis>
+  The archives should make it possible to go from any individual
+  message to the "thread" (group of related messages) that that
+  original message is part of.</para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Searchability.</emphasis> An
+  archiver that doesn't support searching &mdash; on the bodies of
+  messages, as well as on authors and subjects &mdash; is close to
+  useless.  Note that some archivers support searching by simply
+  farming the work out to an external search engine such as <ulink
+  url="http://www.google.com/">Google</ulink>.  This is acceptable,
+  but direct search support is usually more fine-tuned, because it
+  allows the searcher to specify that the match must appear in a
+  subject line versus the body, for example.</para>
+  </listitem>
+</itemizedlist>
+
+The above is just a technical checklist to help you evaluate and set
+up an archiver.  Getting people to actually <emphasis>use</emphasis>
+the archiver to the project's advantage is discussed in later
+chapters, in particular <xref linkend="pfs-ch-5-sect-4"/>.</para>
 
 </sect2>
 
@@ -761,37 +819,85 @@ stuck with a global setting.</para>
 <sect2 id="pfs-ch-3-sect-2.5">
 <title>Software</title>
 
-<para>(in progress)</para>
+<para>Here are some open source tools for doing list management and
+archiving.  If the site where you're hosting your project already has
+a default setup, then you may not ever have to decide on a tool at
+all.  But if you must install one yourself, these are some
+possibilities.  The ones I have actually used are Mailman, EzMLM,
+MHonArc, and Hypermail, but that doesn't mean the others aren't good
+too (and of course, there are probably other tools out there that I
+just didn't happen to find, so don't take this as a complete list).
 
-<screen>
-<ulink url="http://www.list.org/"
-   >Mailman&nbsp;(http://www.list.org/)</ulink>
-<ulink url="http://cr.yp.to/ezmlm.html"
-   >EzMLM&nbsp;(http://cr.yp.to/ezmlm.html)</ulink>
-<ulink url="http://www.ecartis.org/"
-   >Ecartis&nbsp;(http://www.ecartis.org/)</ulink>
-<ulink url="http://listproc.sourceforge.net/"
-   >ListProc&nbsp;(http://listproc.sourceforge.net/)</ulink>
-<ulink url="http://mojo.skazat.com/"
-   >DaDa&nbsp;(http://mojo.skazat.com/)</ulink>
-<ulink url="http://www.procmail.org/"
-   >SmartList&nbsp;(http://www.procmail.org/)</ulink>
-</screen>
+<variablelist>
+<varlistentry><term>List Management Software:</term>
+<listitem>
+  <itemizedlist>
+   <listitem>
+     <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.list.org/"/></para>
+     <para>(Has built-in archiver, also has hooks for plugging in
+           external archivers.)</para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.procmail.org/"/></para>
+     <para>(Meant to be used with the <ulink
+           url="http://www.procmail.org/">Procmail</ulink> mail
+           processing system.)</para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.ecartis.org/"/></para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://listproc.sourceforge.net/"/></para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">EzMLM</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://cr.yp.to/ezmlm.html"/></para>
+     <para>(Designed to work with the <ulink
+           url="http://cr.yp.to/qmail.html">Qmail</ulink> mail
+           delivery system.)</para> 
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">DaDa</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://mojo.skazat.com/"/></para>
+     <para>(Despite the web site's bizarre attempts to hide the fact,
+           this is free software, released under the GNU General
+           Public License.  It also has a built-in archiver.)</para>
+   </listitem>
+  </itemizedlist>
+</listitem>
+</varlistentry>
+<varlistentry><term>Archiving Software:</term>
+<listitem>
+  <itemizedlist>
+   <listitem>
+     <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.mhonarc.org/"/></para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.hypermail.org/"/></para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://sourceforge.net/projects/lurker"/></para>
+   </listitem>
+   <listitem>
+     <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+           url="http://www.procmail.org/"/></para>
+     <para>(Companion software to SmartList, this is a general mail
+           processing system that can, apparently, be configured as an
+           archiver.)</para>
+   </listitem>
+  </itemizedlist>
+</listitem>
+</varlistentry>
+</variablelist>
 
-</sect2>
-
-<!-- ========================== subsection =========================== -->
-<sect2 id="pfs-ch-3-sect-2.6">
-<title>Helping Users</title>
-
-<para>(in progress)</para>
-
-<para><remark>See <ulink
-url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
-an example of mailing list guidelines.</remark></para>
-
-<para><remark>Auto-retrieval of information from the
-list, as offered by the welcome message?</remark></para>
+</para>
 
 </sect2>
 
@@ -878,6 +984,25 @@ it.</remark></para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-ch-3-sect-7">
+<title>Web Site</title>
+
+<para><remark>Describe how the web site ties these functions
+together, advantages and disadvantages of maintaining the site
+yourself.  Mention searchability, give the 
+  <screen>
+  &lt;form action="http://www.google.com/search"&gt;
+  Search the Subversion web archives with Google:
+  &lt;input name=as_q size=30&gt; &lt;input value="Search" type=submit&gt;
+  &lt;input type=hidden name=as_sitesearch value="www.contactor.se"&gt;
+  &lt;/form&gt;
+  </screen>
+example.</remark></para>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-ch-3-sect-8">
 <title> What's Out There For Free? </title>
 
 <para>Describe various sites that provide some of these services for
