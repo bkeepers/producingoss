@@ -941,23 +941,28 @@ asks, in whatever way they ask.  Thus it is a communications
 mechanism where a change is the basic unit of information.</para>
 
 <para>This section does not discuss all aspects of using a version
-control system; it's such an all-encompassing concept that it must be
-addressed topically throughout the book.  Here, we will concentrate
-on choosing and setting up a version control system in a way that
-fosters cooperative development.</para>
+control system.  It's such an all-encompassing concept that it must be
+addressed topically throughout the book.  Here, we will concentrate on
+choosing and setting up a version control system in a way that will
+foster cooperative development down the road.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-3.1">
 <title>Version Control Vocabulary</title>
 
 <para>This book cannot teach you how to use version control if you've
-never used it before.  But it would be impossible to discuss version
-control at all without a few key terms:
+never used it before, but it would be impossible to discuss the
+subject without a few key terms.  These terms are useful even beyond
+the technical details of version control: they are the basic nouns and
+verbs of networked collaboration.  Even if there were no version
+control systems in the world, the problem of change management would
+remain, and these words give us a language for talking about that
+problem concisely.
 
 <variablelist>
 
  <varlistentry>
-  <term>commit</term>
+  <term><firstterm>commit</firstterm></term>
   <listitem><para>To make a change to the project, or to put it in
   a version control database in such a way that it can easily be
   incorporated into a release of the project.  "Commit" can be used as
@@ -969,19 +974,21 @@ control at all without a few key terms:
  </varlistentry>
 
  <varlistentry>
-  <term>update</term>
+  <term><firstterm>update</firstterm></term>
   <listitem><para>To ask that others' changes (commits) be
   incorporated into your local copy of the project, that is, to bring
-  it "up-to-date".  This is a very common operation; most
-  developers keep their code as up-to-date as possible, so that if
-  they see a bug they can be pretty sure it hasn't been fixed
-  already.  For example: "Hey, I noticed the indexing code is always
-  missing the last file.  Is this a new bug?"  "Yes, but it was fixed
-  last week &mdash; try updating, it should go away."</para></listitem>
+  your copy "up-to-date".  This is a very common operation; most
+  developers update their code several times a day, so that they know
+  they're running roughly the same thing the other developers are
+  running, and so that if they see a bug, they can be pretty sure it
+  hasn't been fixed already.  For example: "Hey, I noticed the
+  indexing code is always dropping the last byte.  Is this a new bug?"
+  "Yes, but it was fixed last week &mdash; try updating, it should go
+  away."</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>repository</term>
+  <term><firstterm>repository</firstterm></term>
   <listitem><para>A database in which changes are stored.  Some
   version control systems are centralized: there is a single, master
   repository, which stores all changes to the project.  Others are
@@ -996,7 +1003,7 @@ control at all without a few key terms:
  </varlistentry>
 
  <varlistentry>
-  <term>checkout</term>
+  <term><firstterm>checkout</firstterm></term>
   <listitem><para>The process of obtaining a copy of the project from
   a repository.  A checkout usually produces a directory tree called a
   "working copy" (see below), from which changes may be committed back
@@ -1007,112 +1014,150 @@ control at all without a few key terms:
  </varlistentry>
 
  <varlistentry>
-  <term>working copy</term>
-  <listitem><para>A directory tree containing the project's source
-  code files, and possibly its web pages or other documents.  A
-  working copy also contains a little bit of metadata managed by the
-  version control system, telling it what repository it comes from,
-  what "revisions" (see below) of the files are present, etc.
-  Generally, each developer has their own working copy, in which they
-  make and test changes, and from which they commit
+  <term><firstterm>working copy</firstterm></term>
+  <listitem><para>A developer's private directory tree containing the
+  project's source code files, and possibly its web pages or other
+  documents.  A working copy also contains a little bit of metadata
+  managed by the version control system, telling it what repository it
+  comes from, what "revisions" (see below) of the files are present,
+  etc.  Generally, each developer has their own working copy, in
+  which they make and test changes, and from which they commit
   changes.</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>revision</term>
+  <term><firstterm>revision</firstterm></term>
   <listitem><para>This is similar to "change", but has a more
   technical meaning: a revision is the version control system's name
-  for a particular incarnation of a particular file or directory.
-  For example, if the project starts out with revision X of file F,
-  and then someone commits a change to F, this produces revision Y of
-  F.  Different version control systems will use the concept of
-  "revision" in slightly different ways, but the general idea is
-  always the same: when it is necessary to speak precisely about a
-  file at particular points in time (say, immediately before and after
-  a bug is fixed), one talks in terms of revisions.  For example: "Oh
-  yes, she fixed that in revision X." or "She fixed that in revision X
-  of foo.c."  When one talks about a file or collection of files
-  without specifying a particular revision, it is generally assumed
-  that one means the most recent revision available. </para></listitem>
+  for a particular incarnation of a particular file or directory.  For
+  example, if the project starts out with revision X of file F, and
+  then someone commits a change to F, this produces revision Y of F.
+  Different version control systems use the concept of "revision" in
+  slightly different ways, but the general idea is always the same:
+  when it is necessary to speak precisely about a file at particular
+  points in time (say, immediately before and after a bug is fixed),
+  one talks in terms of revisions.  For example: "Oh yes, she fixed
+  that in revision X." or "She fixed that in revision X of
+  foo.c."</para>
+
+  <para>When one talks about a file or collection of files without
+  specifying a particular revision, it is generally assumed that one
+  means the most recent revision available. </para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>log&nbsp;message</term>
+  <term><firstterm>log&nbsp;message</firstterm></term>
   <listitem><para>A bit of commentary attached to each commit,
   describing the nature and purpose of the commit.  Log messages are
   among the most important documents in any project: they are the
-  semantic bridge between the highly technical language of individual
-  code changes and the more user-oriented language of features,
-  bugfixes, and project progress.  Later in this section, we'll look
-  at ways to distribute log messages to the appropriate
-  audiences; also, <xref linkend="pfs-ch-5-sect-3"/> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
+  bridge between the highly technical language of individual code
+  changes and the more user-oriented language of features, bugfixes,
+  and project progress.  Later in this section, we'll look at ways to
+  distribute log messages to the appropriate audiences; also, <xref
+  linkend="pfs-ch-5-sect-3"/> discusses ways to encourage contributors
+  to write concise and useful log messages.</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>tag</term>
-  <listitem><para>A label for a particular collection of revisions in
-  the project.  Tags are usually used to identify and preserve
-  interesting snapshots of the project at various stages in its
-  development.  For example, a tag is usually made for each public
-  release, so that one can obtain, directly from the version control
-  system, the exact set of files/revisions that comprised that
-  release.</para></listitem>
+  <term><firstterm>tag</firstterm></term>
+  <listitem><para>A label for a particular collection of files at
+  specified revisions.  Tags are usually used to preserve
+  interesting snapshots of the project.  For example, a tag is usually
+  made for each public release, so that one can obtain, directly from
+  the version control system, the exact set of files/revisions
+  comprising that release.</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>branch</term>
-  <listitem><para>A safe place in a repository for doing experimental
-  work, or for avoiding unwanted changes.  Commits made on a branch
-  are visible to other developers, and can be "merged" (see below)
-  back into the main project at any time, just as changes can be
-  merged from the main line to the branch; the important thing is that
-  the merges can be controlled.  Branches offer a way to isolate
-  different areas of development from each other.  For example, a
-  branch can be used not only for experimental development, but also
-  as a place in which to stabilize a new release (<xref
-  linkend="pfs-ch-6-sect-4"/>).  During the release process, regular
-  development continues uninterrupted in the active, non-branch part
-  of the repository.  Meanwhile, on the release branch, no commits are
+  <term><firstterm>branch</firstterm></term>
+  <listitem><para>A copy of the project, under version control but
+  isolated, so that changes made to the branch don't affect the rest
+  of the project, and vice versa, except when changes are
+  deliberately "merged" from one side to the other (see below).
+  Branches are also known as "lines of development".  Even when a
+  project has no explicit branches, development is still considered
+  to be happening on the "main branch", also known as the "main line"
+  or "<firstterm>trunk</firstterm>".</para>
+
+  <para>Commits made on a branch are still visible to all the
+  developers, but the propagation of those commits is controlled.
+  Branches offer a way to isolate different lines of development from
+  each other.  For example, they can be used for experimental
+  development that would be too destabilizing for the main trunk.  Or
+  conversely, a branch can be used as a place to stabilize a new
+  release.  During the release process, regular development would
+  continue uninterrupted in the active, non-branch part of the
+  repository.  Meanwhile, on the release branch, no changes are
   allowed except those approved by the release managers.  This way,
-  releasing needn't interfere with ongoing development
-  work.</para></listitem>
+  making a release needn't interfere with ongoing development work.
+  See <xref linkend="pfs-ch-6-sect-4"/> for more discussion of how to
+  use branches to aid the development/release cycle.</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>merge (a.k.a. port)</term>
-  <listitem><para></para></listitem>
+  <term><firstterm>merge (a.k.a. port)</firstterm></term>
+  <listitem><para>To move a change from one branch to another.  This
+  includes merging from the main trunk to some other branch, or vice
+  versa.  In fact, those are the most common kinds of merges; it is
+  rare to port a change between two non-main branches.</para>
+
+  <para>The ability to merge changes implies an important corollary:
+  never commit the same change twice.  That is, a given change should
+  enter the version control system exactly once.  The change's entry
+  revision (or set of revisions) is its unique identifier from then
+  on.  If it needs to be applied to branches other than the one on
+  which it entered, then it should be merged from its original entry
+  point to those other destinations &mdash; as opposed to committing a
+  textually identical change, which would have the same effect on the
+  code, but would make accurate bookkeeping and release management
+  impossible.  These practices are discussed more in <xref
+  linkend="pfs-ch-6"/>.</para>
+
+  <para>"Merge" has a second, related meaning: it is what the version
+  control system does when it sees that two people have changed the
+  same file but in non-overlapping ways.  Since the two changes do not
+  interfere with each other, when one of the people updates their copy
+  of the file (already containing their own changes), the other
+  person's changes will be automatically merged in.  This is very
+  common, especially on projects where multiple people are hacking on
+  the same code.  When two different changes <emphasis>do</emphasis>
+  overlap, the result is a "conflict", see below.</para>
+  </listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>conflict</term>
-  <listitem><para></para></listitem>
+  <term><firstterm>conflict</firstterm></term>
+  <listitem><para>What happens when two people try to make different
+  changes to the same place in the code.  All version control systems
+  automatically detect conflicts, and notify at least one of the
+  humans involved that their changes conflict with someone else's.  It
+  is then up to that human to <firstterm>resolve</firstterm> the
+  conflict, and to communicate that resolution to the version control
+  system.</para></listitem>
  </varlistentry>
 
  <varlistentry>
-  <term>lock</term>
-  <listitem><para></para></listitem>
- </varlistentry>
+  <term><firstterm>lock</firstterm></term>
+  <listitem><para>A way to declare an exclusive intent to change a
+  particular versioned resource (such as a file or directory).  For
+  example, "I can't commit any changes to the web pages right now, it
+  seems Alfred has them all locked while he fixes their background
+  images."  Not all version control systems even offer the ability to
+  lock, and of those that do, not all require the locking feature to
+  be used.  This might seem surprising, until you realize that
+  parallel, simultaneous development is the norm, and that locking
+  people out of files is contrary to this ideal.</para>
 
- <varlistentry>
-  <term></term>
-  <listitem><para></para></listitem>
- </varlistentry>
-
- <varlistentry>
-  <term></term>
-  <listitem><para></para></listitem>
- </varlistentry>
-
- <varlistentry>
-  <term></term>
-  <listitem><para></para></listitem>
- </varlistentry>
-
- <varlistentry>
-  <term></term>
-  <listitem><para></para></listitem>
+  <para>Version control systems that require locking to make commits
+  are said to be using the <firstterm>lock-modify-unlock</firstterm>
+  model; those that do not are said to be using the
+  <firstterm>copy-modify-merge</firstterm> model.  An excellent
+  in-depth explanation and comparison of the two models may be found
+  at <ulink
+  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
+  general, the copy-modify-merge model is better for open source
+  development, and all the version control systems recommended in this
+  chapter support that model.</para></listitem>
  </varlistentry>
 
 </variablelist>
@@ -1127,14 +1172,297 @@ control at all without a few key terms:
 <title>Choosing a Version Control System</title>
 
 <para>As of this writing, the version control system of choice in the
-free software world is <firstterm>CVS</firstterm> (<ulink
-url="http://www.cvshome.org/"/>).  CVS has been around for a long
-time, and most experienced developers are already familiar with it.
-It's a safe choice in that it does more or less what you need, and
-since it's the default, you won't end up in any long debates about
-whether or not it was the right choice.  CVS's has some disadvantages,
-too.  It doesn't provide an easy way to refer to multi-file changes;
-it doesn't allow you to rename 
+free software world is
+
+<itemizedlist>
+  <listitem>
+    <para><emphasis role="bold">CVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.cvshome.org/"/></para>
+    <para><firstterm>CVS</firstterm> (the "Concurrent Versions
+    System") has been around for a long time.  Most experienced
+    developers are already familiar with it, it does more or less what
+    you need, and since it's the default, you won't end up in any long
+    debates about whether or not it was the right choice.  CVS has
+    some disadvantages, too.  It doesn't provide an easy way to refer
+    to multi-file changes; it doesn't allow you to rename or copy
+    files under version control (so if you need to reorganize your
+    code tree after starting the project, it can be a real pain); it
+    doesn't handle large files or binary files very well; and some
+    operations are a slow when large numbers of files are
+    involved.</para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<para>None of CVS's flaws is fatal, and it is still quite popular.
+However, in the last few years a number of new systems have appeared,
+and free software projects are beginning to try them out:
+
+<itemizedlist>
+
+  <listitem>
+    <para><emphasis role="bold">Arch</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://gnuarch.org/"/></para>
+    <para><remark>Will need to paraphrase here.  From the website:</remark>
+    "Gnu arch is a modern and remarkable revision control system.  It
+    helps programmers to coordinate and share their changes to a
+    project's source code.  It helps project managers to organize,
+    track, and control multi-branch development.  It supports both
+    centralized and distributed projects."  Summarize rest of 
+    <ulink url="http://gnuarch.org/arch-overview.html"/>. </para>
+  </listitem>
+
+  <listitem>
+    <para><emphasis role="bold">Subversion</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://subversion.tigris.org/"/></para>
+    <para>
+    <screen>
+    * Versioned directories.
+    * Versioned renames.
+    * Atomic commits.
+    * Cheap branching and tagging. 
+    </screen>
+    </para>
+  </listitem>
+
+  <listitem>
+    <para><emphasis role="bold">SVK</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://svk.elixus.org/"/></para>
+    <para>
+    <screen>
+      * Distributed branches.
+      * Lightweight checkout copy management (no CVS .svn directories).
+      * Advanced MergeFeatures.
+      * Changeset signing and verification.
+      * MirrorVCP: VCP integration to support mirror/branch from alien
+          version control systems like cvs or perforce transparently. 
+    </screen>
+    </para>
+  </listitem>
+
+</itemizedlist>
+
+<screen>
+
+    * monotone  http://www.venge.net/monotone/
+
+      monotone is a free distributed version control system. it
+      provides a simple, single-file transactional version store, with
+      fully disconnected operation and an efficient peer-to-peer
+      synchronization protocol. it understands history-sensitive
+      merging, lightweight branches, integrated code review and 3rd
+      party testing. it uses cryptographic version naming and
+      client-side RSA certificates. it has good internationalization
+      support, has no external dependencies, runs on linux, solaris,
+      OSX, and windows, and is licensed under the GNU GPL.
+
+    * Darcs  http://abridgegame.org/darcs/
+
+      David's Advanced Revision Control System is yet another
+      replacement for CVS. It is written in Haskell, and has been used
+      on Linux, MacOS X, FreeBSD, OpenBSD and Microsoft Windows. Darcs
+      includes a cgi script, which can be used to view the contents of
+      your repository.
+
+    * Vesta  http://www.vestasys.org/
+
+      Vesta is a portable SCM [Software Configuration Management]
+      system targeted at supporting development of software systems of
+      almost any size, from fairly small (under 10,000 source lines)
+      to very large (10,000,000 source lines).
+
+      Vesta is a mature system. It is the result of over 10 years of
+      research and development at the Compaq/Digital Systems Research
+      Center, and it was in production use by Compaq's Alpha
+      microprocessor group for over two and a half years. The Alpha
+      group had over 150 active developers at two sites thousands of
+      miles apart, on the east and west coasts of the United
+      States. The group used Vesta to manage builds with as much as
+      130 MB of source data, each producing 1.5 GB of derived
+      data. The builds done at the eastern site in an average day
+      produced about 10-15 GB of derived data, all managed by
+      Vesta. Although Vesta was designed with software development in
+      mind, the Alpha group demonstrated the system's flexibility by
+      using it for hardware development, checking their hardware
+      description language files into Vesta's source code control
+      facility and building simulators and other derived objects with
+      Vesta's builder. The members of the former Alpha group, now a
+      part of Intel, are continuing to use Vesta today in a new
+      microprocessor project.
+
+    * Aegis  http://aegis.sourceforge.net/
+
+      Aegis is a transaction-based software configuration management
+      system. It provides a framework within which a team of
+      developers may work on many changes to a program independently,
+      and Aegis coordinates integrating these changes back into the
+      master source of the program, with as little disruption as
+      possible.
+
+    * Stellation  http://www.eclipse.org/stellation/
+
+      Stellation is an advanced, extensible software configuration
+      management system, originally developed at IBM Research. While
+      Stellation provides all of the standard functions available in
+      any SCM system, it is distinguished by a number of advanced
+      features, such as task-oriented change management, consistent
+      project versioning and lightweight branching, intended to ease
+      the development of software systems by large groups of loosely
+      coordinated developers.
+
+    * META-CVS  http://users.footprints.net/~kaz/mcvs.html
+
+      Meta-CVS is a version control system built around CVS. Although
+      it retains most of the features of CVS, including all of the
+      networking support, it is more capable than CVS, and easier to
+      use. Its main features are:
+
+      + Directory structure versioning. Under Meta-CVS, the directory
+        structure of a project is versioned in the same way as the
+        contents of its files. Concurrent changes to the directory
+        structure are permitted. It can be branched, and merged. The
+        program dynamically rearranges the structure of the sandbox as
+        you obtain updates from the repository, switch branches or
+        retrieve old revisions.
+
+      + User-friendly file type handling. Meta-CVS interactively
+        handles file types when files are imported or added. It
+        remembers, for instance, that .png files are considered binary
+        so that when new instances of them are added, they are
+        automatically treated as binary.
+
+      + Sane corner cases. Meta-CVS handles the use case when two or
+        more developers add a file of the same name to the same
+        location. It handles the case when someone removes a file that
+        someone else is modifying. It handles the case of files being
+        removed and later added with a different keyword expansion
+        mode. It handles names containing spaces. All of these cause
+        problems in CVS, but not in Meta-CVS, because Meta-CVS simply
+        avoids feeding CVS the patterns of use and troublesome inputs
+        that tickle the CVS bugs.
+
+      + Simple branching and merging. Creating a branch, switching
+        among branches and merging are simple commands that take one
+        argument. The software keeps track of what has been merged
+        where from what branch. Thus Meta-CVS makes it easy to manage
+        multiple lines of development.
+
+      + Support for symbolic links and meta-data. Symbolic links are
+        versioned objects in Meta-CVS. Files and symbolic links can
+        have attached property lists, which are versioned. One
+        standard property determines whether or not a file is
+        executable, so in this way Meta-CVS versions the execute
+        permission.
+
+      + Tracking of third party code containing moves and
+        renames. Meta-CVS has an importing feature called ``grab''
+        similar in concept to CVS vendor branches, but with
+        significant differences. When a snapshot of code is grabbed
+        onto a branch, the program analyzes the contents of apparently
+        added and removed files to determine which of them are
+        actually moves. An ordinary branch is used, not CVS vendor
+        branches, which are deprecated in Meta-CVS. Ordinary branches
+        can shoot from anywhere, not just version 1.1 of every file,
+        so third party ``grab branches'' representing multiple sources
+        are possible. The grab feature can be used to reconstruct the
+        restructuring history of old projects, provided that a
+        sequence of snapshots is available. Then it's possible to
+        apply standard version control tricks, like fix a bug in an
+        old version, and merge it to the latest, despite renamed or
+        moved files.
+
+      + Ease of deployment. The software doesn't require any
+        repository-side installation; it uses the CVS client interface
+        only. If you have write access to a remote CVS repository, you
+        can install it on your client system and create a Meta-CVS
+        module stored on the remote repository.
+
+      + CVS migration. One good way to migrate an existing project to
+        Meta-CVS is to start with a sequence of clean snapshots and
+        use mcvs grab to import them one at a time. This allows
+        Meta-CVS to unravel the directory structure changes between
+        the snapshots and represent them properly. However, it is also
+        possible to create a Meta-CVS project directly from a CVS
+        project, with a repository-side conversion tool that is built
+        into Meta-CVS. This tool allows users to preserve the detailed
+        version history of every file. The original, unmodified RCS
+        files of the CVS project are used to populate the new Meta-CVS
+        project.
+
+    * OpenCM  http://www.opencm.org/
+
+      OpenCM is designed as a secure, high-integrity replacement for
+      CVS. A list of the key features can be found on the features
+      page. While not as ``feature rich'' as CVS, it supports some
+      useful things that CVS lacks. Briefly, OpenCM provides
+      first-class support for renames and configuration, cryptographic
+      authentication and access control, and first-class branches.
+
+    * PRCS  http://prcs.sourceforge.net/
+
+      PRCS, the Project Revision Control System, is the front end to a
+      set of tools that (like CVS) provide a way to deal with sets of
+      files and directories as an entity, preserving coherent versions
+      of the entire set.  PRCS was designed primarily by Paul
+      N. Hilfinger, with input and modifications by Luigi Semenzato
+      and Joshua MacDonald. PRCS is written and maintained by Joshua
+      MacDonald.  Its purpose is similar to that of SCCS, RCS, and
+      CVS, but (according to its authors, at least), it is much
+      simpler than any of those systems.  This page is where
+      information on the latest developments in PRCS can be found. The
+      current release of PRCS is 1.3.1.  Version 1.0 was released on
+      September 3, 1996.
+
+    * SourceJammer  http://sourcejammer.org/
+
+      SourceJammer is a source control and versioning system written
+      in Java. It consists of a server-side component that maintains
+      the files and version history, and handles check-in, check-out,
+      etc. and other commands; and a client-side component that makes
+      requests of the server and manages the files on the client-side
+      file system.
+
+    * DCVS  http://www.elegosoft.com/index_dcvs.html
+
+      Still under development.
+
+    * Codeville  http://codeville.org/
+
+      Why yet another version control system? All other version
+      control systems require that you keep careful track of the
+      relationships between branches so as not have to repeatedly
+      merge the same conflicts. Codeville is much more anarchic. It
+      allows you to update from or commit to any repository at any
+      time with no unnecessary re-merges.
+
+      Codeville works by creating an identifier for each change which
+      is done, and remembering the list of all changes which have been
+      applied to each file and the last change which modified each
+      line in each file. When there's a conflict, it checks to see if
+      one of the two sides has already been applied to the other one,
+      and if so makes the other side win automatically. When there's
+      an actual not automatically mergeable version conflict,
+      Codeville behaves in almost exactly the same way as CVS.
+
+    * CVSNT  http://cvsnt.org
+
+      CVSNT is an advanced multiplatform version control
+      system. Compatible with the industry standard CVS protocol it
+      now supports many more features.
+
+      CVSNT is Open Source, Free software licensed under the GNU
+      General Public License.
+
+      + Authentication via all standard CVS protocols, plus Windows
+        specific SSPI and Active Directory *
+      + Secure transport support via sserver or encrypted SSPI
+      + Cross platform: Runs in Windows or *nix environments
+      + NT version is fully integrated with Win32 system.
+      + MergePoint processing means no more tagging to merge!
+      + Under active development
+
+</screen>
 
 </para>
 
@@ -1150,13 +1478,14 @@ it doesn't allow you to rename
 
 </sect2>
 
-
+<screen>
 * communications of changes out to the world!
 * crediting
 * reverting
 * branching/merging/releasing
 * control over all aspects of the project
 * browseability
+</screen>
 
 <para><remark>todo: working here</remark></para>
 
