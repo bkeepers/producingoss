@@ -33,18 +33,18 @@ all: all-html all-pdf all-ps
 install:
 	@echo "No installation procedure yet."
 
-all-html: book-html book-html-chunk
+all-html: html html-chunk
 
-all-pdf: book-pdf
+all-pdf: pdf
 
-all-ps: book-ps
+all-ps: ps
 
 clean:
 	@echo "Clean rule not implemented yet."
 
 
 # HTML monolithic.
-book-html: ${HTML_TARGET}
+html: ${HTML_TARGET}
 
 ${HTML_TARGET}: ${ALL_SOURCE}
 	${XSLTPROC} ${HTML_XSLTPROC_OPTS} \
@@ -52,7 +52,7 @@ ${HTML_TARGET}: ${ALL_SOURCE}
 
 
 # HTML chunked.
-book-html-chunk: ${HTML_CHUNK_TARGET}
+html-chunk: ${HTML_CHUNK_TARGET}
 
 ${HTML_CHUNK_TARGET}: ${ALL_SOURCE} ${TOP}/styles.css
 	mkdir -p ${HTML_CHUNK_DIR}
@@ -63,7 +63,7 @@ ${HTML_CHUNK_TARGET}: ${ALL_SOURCE} ${TOP}/styles.css
 
 
 # PDF.
-book-pdf: ${PDF_TARGET}
+pdf: ${PDF_TARGET}
 
 ${PDF_TARGET}: ${ALL_SOURCE}
 	${XSLTPROC} ${PDF_XSLTPROC_OPTS} \
@@ -72,7 +72,7 @@ ${PDF_TARGET}: ${ALL_SOURCE}
 
 
 # PostScript.
-book-ps: ${PS_TARGET}
+ps: ${PS_TARGET}
 
 ${PS_TARGET}: ${ALL_SOURCE}
 	${XSLTPROC} ${PS_XSLTPROC_OPTS} \
