@@ -4,15 +4,106 @@
 
 <simplesect>
 
-<para> todo chapter introduction </para>
+<para>Free software works because of technologies that support the
+selective capture and integration of information.  The more skilled
+you are at using these technologies, and at persuading others to use
+them, the more successful your project will be.  This only becomes
+more true as the project grows.  Good information management is the
+only thing that prevents open source projects from collapsing under
+the weight of Brooks' Law<footnote><para>From his book <citetitle>The
+Mythical Man Month</citetitle>, 1975.  See <ulink
+url="http://en.wikipedia.org/wiki/The_Mythical_Man-Month"/> and <ulink
+url="http://en.wikipedia.org/wiki/Brooks_Law"/></para></footnote>,
+which observes that the complexity of a project increases as the
+<emphasis>square</emphasis> of the number of participants.  When only
+a few people are involved, everyone can easily talk to everyone else.
+But when hundreds of people are involved, it is not possible for each
+person to remain constantly aware of what everyone else is doing.</para>
 
-<para>(Remember to note the temptations/perils of over-automation,
-that is, attempts to automate things that really require human
-attention.  Technical infrastructure is important, but what makes a
-free software project work is the care -- and intelligent application
-of that care -- by the humans involved.  One good example is the
-FAQ-o-Matic disaster.  Search for other examples of over-automation,
-for example, in use of bug tracking systems.)</para>
+<para>If good free software project management is about making
+everyone feel like they're all working together in the same room, the
+obvious question is: what happens when everyone in a crowded room
+tries to talk at once?  This problem is not new.  In non-metaphorical
+crowded rooms, the solution is <firstterm>parliamentary
+procedure</firstterm>: formal guidelines for how to have real-time
+discussions in large groups, how to make sure important dissents are
+not lost in floods of agreement, how to form subcommittees, how to
+recognize when decisions are made.  An important part of parliamentary
+procedure is specifying how the group interacts with its information
+management system.  Some remarks are made "for the record", others are
+not.  The record itself is subject to direct manipulation, and is
+understood to be not a literal transcript of what occurred, but a
+representation of what the group is willing to
+<emphasis>agree</emphasis> occurred.  The record is not monolithic;
+its form changes at different distances and resolutions.  It comprises
+the minutes of individual meetings, the complete collection of all
+minutes of all meetings, summaries, agendas and their annotations,
+committee reports, reports from correspondents not present, lists of
+action items, etc.</para>
+
+<para>The parts of traditional parliamentary procedure that have to do
+with keeping everyone quiet in a room while one person speaks are
+mostly dispensed with here.  Everyone can "speak" simultaneously on
+the Internet.  But in terms of information management techniques,
+well-run open source projects are parliamentary procedure on steroids.
+Since almost all communication in open source projects is in written
+form, elaborate systems have evolved for routing and labeling data
+appropriately, for minimizing repetitions so as to avoid spurious
+divergences, for storing and retrieving data, for correcting bad or
+obsolete information, and especially for associating disparate bits of
+information with each other as new connections are observed.  Active
+participants in open source projects internalize many of these
+techniques, and when necessary will perform complex manual tasks to
+implement them.  But the whole endeavor ultimately depends on
+sophisticated software support.  As much as possible, the
+communications media themselves should do the routing, labeling, and
+recording.  In practice, of course, humans must still intervene at
+many points in the process, and it's important that the software make
+such interventions convenient.  But in general, if the humans take
+care to label and route information accurately on its first entry into
+the system, then the software should make as much use of that metadata
+as possible.</para>
+
+<para>The advice in this chapter is intensely practical, based on
+experiences with specific software and usage patterns.  But the point
+is just not to teach a particular collection of techniques.  It is
+also to demonstrate, by means of many small examples, the overall
+stance that will best encourage good information management in your
+project.  This will be a combination of technical skills and people
+skills.  The software itself always requires configuration, plus a
+certain amount of ongoing maintenance and tweaking as new needs arise
+(for example, see the discussion of how to handle project growth in
+<xref linkend="pfs-ch-3-sect-4"/>).  The human community also requires
+maintenance: it's not always immediately obvious how to use these
+tools to full advantage, and in some cases there may be conflicting
+conventions between different projects (for example, see the
+discussion of setting <systemitem>Reply-to</systemitem> headers on
+outgoing mailing list posts, in <xref linkend="pfs-ch-3-sect-2"/>).
+</para>
+
+<para>Information management is not a problem that can be definitively
+solved.  There are too many variables.  You may finally get everything
+configured just the way you want it, and most of the community using
+it, but then project growth will make some of those practices
+unscalable.  Or project growth may stabilize, and the developer and
+user communities settle into a comfortable relationship with the
+technical infrastructure, but then someone will come along and invent
+a whole new information management service, and pretty soon newcomers
+will be asking why your project doesn't use it (this may be happening
+now to a lot of free software projects that predate the invention of
+the <ulink url="http://en.wikipedia.org/wiki/Wiki">Wiki</ulink>, for
+example).  Furthermore, many questions are matters of judgement,
+involving tradeoffs between, say, the convenience of those producing
+information and the convenience of those consuming it, or between the
+time required to configure information management software and the
+benefit it will bring to the project.</para>
+
+<para>Beware of the temptation to over-automate, that is, to automate
+things that really require human attention.  Technical infrastructure
+is important, but what makes a free software project work is care
+&mdash; and intelligent application of that care &mdash; by the humans
+involved.  The technical infrastructure is really about giving humans
+convenient ways to do that.</para>
 
 </simplesect>
 
@@ -44,10 +135,13 @@ Speaking of reply-to:
 <sect1 id="pfs-ch-3-sect-3">
 <title>Version Control</title>
 
-<para><remark>(Talk about the importance of doing it, describe it as a
+<para><remark>Talk about the importance of doing it, describe it as a
 communications medium, list the choices, point out that CVS is the
 safe choice right now.  Talk about commit emails, setting reply-to on
-them differently from regular mailing lists.)</remark></para>
+them differently from regular mailing lists.  Importance of
+browsability, either through direct browse mode, or through checked
+out working copy on web server.  See note in packaging section about
+all-caps files.</remark></para>
 
 </sect1>
 
@@ -58,15 +152,71 @@ them differently from regular mailing lists.)</remark></para>
 
 <para>todo</para>
 
+<para><remark>Ben points out that the way we filter the issue tracker
+is very unusual.  We've essentially subscribed all of dev@ to
+parallelize the filtering process :-).  This is not the norm, but it
+may be worth recommending.  See Debian and/or OpenOffice.org (?) for a
+different way of using the issue tracker -- they want to use it for
+everything, it seems.</remark></para>
+
+<para><remark>Note how full issue sweeps become less and less feasible
+over time.  You eventually must evolve a system for categorizing and
+prioritizing new issues based on overall context, not on an O(N)
+comparison with all the other issues in the database.  It is normal
+for the bug database to grow slowly but without bound over time.  This
+is not a sign of failure.  In general, guard against the tendency to
+draw conclusions from bug statistics (or commit statistics, for that
+matter).  They are qualitative events, and cannot be measured
+quantitatively.</remark></para>
 
 </sect1>
-<!-- ======================== SECTION ============================== -->
+
+<!-- ========================== SECTION =========================== -->
 <sect1 id="pfs-ch-3-sect-5">
+<title>IRC / Realtime Chat Systems </title>
+
+<para><remark>These are incredibly useful.  List the conventions that
+should be encouraged: set the channel topic to something useful;
+mention other related channels (users vs dev, for example); make
+channel entry show new users URLs to conventions/customs &mdash; but
+never jump on them for not seeing it or ignoring it; selective
+archiving; use of bots such as ayita and the wonderful "!m" bot in the
+MySQL on freenode.net; and of course encourage the use of pastebin
+sites such as:
+<screen>
+  http://sourcepost.sytes.net/
+  http://www.pastebin.com/ ?
+  http://www.pastebin.com/58071
+  http://sial.org/pbot/3770
+</screen>
+</remark></para>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="pfs-ch-3-sect-6">
+<title>Wikis </title>
+
+<para><remark>Wikis may be worth talking about, though they are not
+(yet?) standard on open source projects.  They can they contribute to
+FAQ maintenance; they may also be a whole new sort of forum.  Go check
+out the Subversion wiki and see if/how people are using
+it.</remark></para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-ch-3-sect-7">
 <title> What's Out There For Free? </title>
 
 <para>Describe various sites that provide some of these services for
 free, such as SourceForge, Savannah, Freenode, etc.  Evaluate
 pros/cons of each, compare with roll-your-own solutions. </para>
+
+<para><remark>(Mention the survey by Haggen So, at
+http://www.ibiblio.org/fosphost/ and
+http://www.ibiblio.org/fosphost/exhost.htm.  It's pretty amazing!)
+</remark></para>
 
 <para><remark>A *perfect* example of one disadvantage of using a
 canned site: the handling of generated files.  You don't want them in
@@ -74,20 +224,36 @@ version control, because they're generated.  On the other hand, you
 can't make arbitrary scripts run on the server, because you don't own
 the server.  Use the SVN FAQ as a cautionary tale.</remark></para>
 
-<para><remark>(Mention the survey by Haggen So, at
-http://www.ibiblio.org/fosphost/ and
-http://www.ibiblio.org/fosphost/exhost.htm.  It's pretty amazing!)
+<para><remark>Another example: HTML header overrides can affect
+stylesheet control.</remark></para>
+
+<para><remark>Yet another problem with them: they sometimes have
+gratuitous login requirements.  See the bit in
+<filename>thoughts</filename> that says:
+<screen>
+* user account mgmt on the project web site?
+  Maybe, but emphasize that login should *never* be required for read
+  access.  Everything -- code, issue tracker, etc -- should be
+  accessible anonymously.  login to file issues is barely acceptable :-).
+</screen>
 </remark></para>
 
 </sect1>
 
 <!-- ========================== SECTION =========================== -->
-<sect1 id="pfs-ch-3-sect-6">
+<sect1 id="pfs-ch-3-sect-8">
 <title>Packaging for Distribution</title>
 
-<para><remark>(Talk about the importance of adhering to the standards.
+<para><remark>Talk about the importance of adhering to the standards.
 Describe and reference them.  Use cvs2svn as an example of how *not*
-to do it.)</remark></para>
+to do it.  Talk about release numbering (and ref it from the
+"Announcing" section in Chapter 2), including importance of tight
+coupling with tarball unpackment result name.  Importance of certain
+standard all-caps files in the top-level of the project, which will
+also serve as canonical reference targets from web pages.  Therefore
+it's important that either the version control system have a browse
+mode, or that the live web site be a checked out tree.  Note this in
+section 3 on version control.</remark></para>
 
 </sect1>
 
