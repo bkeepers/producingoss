@@ -17,9 +17,9 @@ url="http://en.wikipedia.org/wiki/Brooks_Law"/></para></footnote>,
 which observes that the complexity of a project increases as the
 <emphasis>square</emphasis> of the number of participants.  When only
 a few people are involved, everyone can easily talk to everyone else.
-But when hundreds of people are involved, it is not possible for each
-person to remain constantly aware of what everyone else is doing.  If
-good free software project management is about making everyone feel
+But when hundreds of people are involved, it is no longer possible for
+each person to remain constantly aware of what everyone else is doing.
+If good free software project management is about making everyone feel
 like they're all working together in the same room, the obvious
 question is: what happens when everyone in a crowded room tries to
 talk at once?</para>
@@ -27,7 +27,7 @@ talk at once?</para>
 <para>This problem is not new.  In non-metaphorical crowded rooms, the
 solution is <firstterm>parliamentary procedure</firstterm>: formal
 guidelines for how to have real-time discussions in large groups, how
-to make sure important dissents are not lost in floods of nuanced
+to make sure important dissents are not lost in floods of "me-too"
 agreement, how to form subcommittees, how to recognize when decisions
 are made.  An important part of parliamentary procedure is specifying
 how the group interacts with its information management system.  Some
@@ -35,11 +35,11 @@ remarks are made "for the record", others are not.  The record itself
 is subject to direct manipulation, and is understood to be not a
 literal transcript of what occurred, but a representation of what the
 group is willing to <emphasis>agree</emphasis> occurred.  The record
-is not monolithic, but exists in different forms for different
-purposes.  It comprises the minutes of individual meetings, the
-complete collection of all minutes of all meetings, summaries, agendas
-and their annotations, committee reports, reports from correspondents
-not present, lists of action items, etc.</para>
+is not monolithic, but takes different forms for different purposes.
+It comprises the minutes of individual meetings, the complete
+collection of all minutes of all meetings, summaries, agendas and
+their annotations, committee reports, reports from correspondents not
+present, lists of action items, etc.</para>
 
 <para>The parts of traditional parliamentary procedure that have to do
 with keeping everyone quiet in a room while one person speaks we will
@@ -53,17 +53,18 @@ divergences, for storing and retrieving data, for correcting bad or
 obsolete information, and for associating disparate bits of
 information with each other as new connections are observed.  Active
 participants in open source projects internalize many of these
-techniques, and will often perform complex manual tasks to implement
-them.  But the whole endeavor ultimately depends on sophisticated
-software support.  As much as possible, the communications media
-themselves should do the routing, labeling, and recording, and should
-make the information available to humans in the most convenient way
-possible.  In practice, of course, humans must still intervene at many
-points in the process, and it's important that the software make such
-interventions convenient.  But in general, if the humans take care to
-label and route information accurately on its first entry into the
-system, then the software should be configured make as much use of
-that metadata as possible.</para>
+techniques, and will often perform complex manual tasks to ensure that
+information is routed correctly.  But the whole endeavor ultimately
+depends on sophisticated software support.  As much as possible, the
+communications media themselves should do the routing, labeling, and
+recording, and should make the information available to humans in the
+most convenient way possible.  In practice, of course, humans will
+still need to intervene at many points in the process, and it's
+important that the software make such interventions convenient.  But
+in general, if the humans take care to label and route information
+accurately on its first entry into the system, then the software
+should be configured to make as much use of that metadata as
+possible.</para>
 
 <para>The advice in this chapter is intensely practical, based on
 experiences with specific software and usage patterns.  But the point
@@ -75,17 +76,17 @@ and people skills.  The technical skills are essential because
 information management software always requires configuration, plus a
 certain amount of ongoing maintenance and tweaking as new needs arise
 (for example, see the discussion of how to handle project growth in
-<xref linkend="pfs-ch-3-sect-4"/>).  The people skills are because the
-human community also requires maintenance: it's not always immediately
-obvious how to use these tools to full advantage, and in some cases
-there may be conflicting conventions between different projects (for
-example, see the discussion of setting
+<xref linkend="pfs-ch-3-sect-4"/>).  The people skills are necessary
+because the human community also requires maintenance: it's not always
+immediately obvious how to use these tools to full advantage, and in
+some cases there may be conflicting conventions between different
+projects (for example, see the discussion of setting
 <systemitem>Reply-to</systemitem> headers on outgoing mailing list
 posts, in <xref linkend="pfs-ch-3-sect-2"/>).  Everyone involved with
 the project will need to encouraged, at the right times and in the
 right ways, to do their part to keep the project's information
-well-organized.  The more involved the person, the more specialized
-techniques they can be asked to learn.</para>
+well-organized.  The more involved the contributor, the more
+specialized techniques they can be expected to learn.</para>
 
 <para>Information management is not a problem that can be definitively
 solved.  There are too many variables.  You may finally get everything
@@ -119,19 +120,15 @@ convenient ways to do that.</para>
 <sect1 id="pfs-ch-3-sect-1">
 <title>What a Project Needs</title>
 
-<para>Most open source project offer, at a minimum, a certain standard
-set of tools for managing information.  Each tool in this set
-addresses a distinct need; to the extent that the needs interrelate,
-the tools must be taught to work with each other.  Before discussing
-how to make that happen, let's get an overview of the individual
-components:
+<para>Most open source project offer at least a minimum, standard set
+of tools for managing information:
 
 <itemizedlist>
    <listitem>
      <para><emphasis role="bold">Web site.</emphasis>
            Primarily a centralized, one-way conduit of information,
-           from the project out to the public.  The web site also
-           often serves as an administrative interfaces for other
+           from the project out to the public.  The web site may
+           also serve as an administrative interface for other
            project tools.</para>
    </listitem>
    <listitem>
@@ -141,26 +138,32 @@ components:
    </listitem>
    <listitem>
      <para><emphasis role="bold">Version control.</emphasis>
-           Enables developers to make code changes conveniently, and
-           revert them when necessary.  Enables everyone to watch
-           what's happening to the code.</para>
+           Enables developers to manage code changes conveniently,
+           including reverting and "change porting".  Enables everyone
+           to watch what's happening to the code.</para>
    </listitem>
    <listitem>
      <para><emphasis role="bold">Bug tracking.</emphasis>
            Enables developers to keep track of what they're working
            on, coordinate with each other, plan releases.  Enables
            everyone to query the status of bugs, and record
-           information (e.g., a reproduction recipe) about particular
+           information (e.g., reproduction recipes) about particular
            bugs.</para>
    </listitem>
    <listitem>
      <para><emphasis role="bold">Realtime chat.</emphasis>
-           A place for people to ask questions and get instant
-           answers.  Generally not archived automatically.</para>
+           A place for quick, lightweight discussions and
+           question/answer exchanges.  Not always archived
+           completely.</para>
    </listitem>
 </itemizedlist>
 
-</para>
+Each tool in this set addresses a distinct need, but their functions
+are also interrelated, and the tools must be taught to work with each
+other.  Below we will examine how they can do so, and more
+importantly, how to get people to use them.  The web site is not
+discussed until the end, since it's more glue for the other components
+than a tool unto itself.</para>
 
 </sect1>
 
@@ -168,6 +171,134 @@ components:
 <!-- ========================== SECTION =========================== -->
 <sect1 id="pfs-ch-3-sect-2">
 <title>Mailing Lists</title>
+
+<para>Mailing lists are the bread and butter of project
+communications.  If a user is exposed to any forum at all besides the
+web pages, it is most likely one of the project's mailing list.  But
+before they experience the mailing list itself, they will experience
+the mailing list interface &mdash; that is, the mechanism by which
+they join ("subscribe to") the list.  Which brings us to Rule #1 of
+mailing lists:
+
+<blockquote>
+   <para><emphasis>Don't try to manage mailing lists by hand
+   &mdash; get list management software.</emphasis></para>  
+</blockquote>
+
+It will be tempting to put this off.  Setting up mailing list
+management software might seem like overkill at first.  Meanwhile,
+managing small, low-traffic lists by hand will seem seductively easy:
+you just set up a subscription address that forwards to you, and when
+someone mails it, you add (or remove) their email address in some text
+file that holds all the addresses on the list.  What could be
+simpler?</para>
+
+<para>The trick is that good mailing list management &mdash; which
+is what people have come to expect &mdash; is not simple at all.  It's
+not just about subscribing and unsubscribing users when they request.
+It's also about moderating to prevent spam, about offering the mailing
+list in digest versus message-by-message form, about providing various
+sorts of standard list and project information by means of
+auto-responders, and various other things.  A human being monitoring a
+subscription address can supply only a bare minimum of functionality,
+and even then not as reliably as software could.</para>
+
+<para>Modern list management software usually offers the following
+features, at a minimum:</para>
+
+<itemizedlist>
+  <listitem><para>Both email- and web-based subscription.  When a user
+            subscribes, they <emphasis>promptly</emphasis> get an
+            automated welcome message in reply, telling them what
+            they have subscribed to, how to interact further with the
+            mailing list software, and (most importantly) how to
+            unsubscribe.  This automatic reply can be customized to
+            contain project-specific information, of course.</para>
+  </listitem>
+
+  <listitem><para>Subscription in either digest mode or
+            message-by-message mode.  In digest mode, the subscriber
+            receives one email per day, containing all the list
+            activity for that day.  For people who are following a
+            list loosely, without participating, digest mode is often
+            preferable, because it allows them to scan all the
+            subjects at once, and avoid the distraction of emails
+            coming in at random times.</para>
+  </listitem>
+
+  <listitem><para>Moderation features.  To "moderate" is to check
+            posts to make sure they are a)&nbsp;not&nbsp;spam, and
+            b)&nbsp;on&nbsp;topic before they go out to the entire
+            list.  Moderation necessarily involves humans, but
+            software can do a lot to make it easier.  There will be
+            more said about moderation below.</para>
+  </listitem>
+
+  <listitem><para>An administrative interface.  Among other things,
+            this enables an administrator to go in and remove obsolete
+            addresses <foreignphrase>en masse</foreignphrase>.  This
+            can become urgent when a recipient's address starts
+            sending automatic "I am no longer at this address" replies
+            back to the list in response to every list post.  (Some
+            mailing list software can even detect this by itself and
+            unsubscribe the person automatically.)</para>
+  </listitem>
+
+  <listitem><para>Header manipulation.  Many people have sophisticated
+            filtering and replying rules set up in their mailreaders;
+            mailing list software can add and manipulate certain
+            standard headers that these people can take advantage
+            of (more details below).</para>
+  </listitem>
+
+  <listitem><para>Archiving.  The mailing list software will keep an
+            archive of all posts to the lists it manages, and make
+            that archive available via the web.  Or, alternatively, it
+            may have a way to plug in an external archiving tool such
+            as <ulink
+            url="http://www.oac.uci.edu/indiv/ehood/mhonarc.html"/>.
+            As <xref linkend="pfs-ch-5-sect-3"/> discusses, archiving
+            is crucial.</para>
+  </listitem>
+
+  <listitem><para>And more...</para>
+  </listitem>
+</itemizedlist>
+
+<para>The point of all this is not give you a detailed treatise on
+mailing list software, though we'll at some of the features in more
+detail.  The main point is just to emphasize how much thought and
+standardization has been devoted to the problem of mailing list
+management.  If you're going to run mailing lists, over time you'll
+learn more about the subject than you ever wanted to.  However, you
+don't need to be an expert to get started.  Here, we'll just examine
+some of the most common configuration issues.</para>
+
+<screen>
+... in progress ...
+
+filtering: the "X-Mailing-List header".
+http://www.nisto.com/listspec/list-manager-intro.html
+See http://www.faqs.org/rfcs/rfc2369.html
+
+   Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+   Precedence: bulk
+   X-No-Archive: yes
+   list-help: &lt;mailto:users-help@subversion.tigris.org&gt;
+   list-unsubscribe: &lt;mailto:users-unsubscribe@subversion.tigris.org&gt;
+   list-post: &lt;mailto:users@subversion.tigris.org&gt;
+
+http://cr.yp.to/ezmlm.html
+http://www.list.org/
+http://www.ecartis.org/
+http://listproc.sourceforge.net/
+http://mojo.skazat.com/  (DaDa -- GPL, even though doesn't look like it)
+SmartList (part of procmail?)
+
+digests:
+http://www.faqs.org/rfcs/rfc1153.html
+
+</screen>
 
 <para><remark>
 Speaking of reply-to:
@@ -183,6 +314,9 @@ or anti-topic-confusion technique, nothing more.</remark></para>
 <para><remark>See <ulink
 url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
 an example of mailing list guidelines.</remark></para>
+
+<para><remark>Auto-retrieval of information from the
+list, as offered by the welcome message?</remark></para>
 
 </sect1>
 
@@ -208,6 +342,9 @@ version control.</remark></para>
 <title>Bug Tracker</title>
 
 <para>todo</para>
+
+<para><remark>issues, artifacts, trouble tickets, requests, any other
+synonyms?</remark></para>
 
 <para><remark>Ben points out that the way we filter the issue tracker
 is very unusual.  We've essentially subscribed all of dev@ to
