@@ -1241,7 +1241,7 @@ used them myself, or because people I know use them:
 </para>
 
 <para><remark>(Hmm, should all these non-CVS systems be relegated to
-an Appendix, and merely referred to from here?)</remark></para>
+an Appendix?)</remark></para>
 
 <para>For the sake of both fairness and completeness, here is a
 overview of other open source version control systems.  I have no
@@ -1699,17 +1699,15 @@ them, and they become increasingly important as a project acquires
 more developers.</para>
 
 <para>Branches are valuable because they turn a scarce resource
-&mdash; working space in the project's code &mdash; into an abundant
-one.  Normally, all developers are working together in the same
-sandbox, building the same castle.  When someone wants to add a new
+&mdash; working room in the project's code &mdash; into an abundant
+one.  Normally, all developers work together in the same sandbox,
+constructing the same castle.  When someone wants to add a new
 drawbridge, but can't convince everyone else that it would be an
-improvement, branching make it possible for her to go off in a private
+improvement, branching makes it possible for her to go to an isolated
 corner and try it out.  If the effort succeeds, she can invite the
-other developers to examine the result (the corner is only "private"
-in the sense that it doesn't affect work on the main castle; it's
-still visible to anyone who wanders over to look).  If everyone agrees
-that the result is good, they can tell the version control system to
-move ("merge") the drawbridge from the branch castle over to the main
+other developers to examine the result.  If everyone agrees that the
+result is good, they can tell the version control system to move
+("merge") the drawbridge from the branch castle over to the main
 castle.</para>
 
 <para>It's easy to see how this ability helps collaborative
@@ -1718,19 +1716,20 @@ feeling like they're interfering with others' work.  And equally
 importantly, there are times when code needs to be isolated from the
 usual development churn, in order to get a bug fixed or a release
 stabilized (see <xref linkend="pfs-ch-6-sect-4"/> and <xref
-linkend="pfs-ch-6-sect-5"/>) without worrying about a moving
+linkend="pfs-ch-6-sect-5"/>) without worrying about tracking a moving
 target.</para>
 
 <para>Use branches liberally, and encourage others to use them.  But
 also make sure that a given branch is only active for exactly as long
 as needed.  Every active branch is a slight drain on the community's
-attention.  Even those who are not working in them directly still
-maintain a peripheral awareness of what's going on in the branches.
-Such awareness is desirable, of course, and commit emails should be
-sent for branch commits just as for any other commit.  But you don't
-want the development community to fracture into mutually isolated
-subgroups.  With a few exceptions, the eventual goal of most branches
-should be to merge their changes back into the main line.</para>
+attention.  Even those who are not working in a branch still maintain
+a peripheral awareness of what's going on there.  Such awareness is
+desirable, of course, and commit emails should be sent out for branch
+commits just as for any other commit.  But branches should not become
+a mechanism by which the development community fractures into mutually
+isolated subgroups.  With rare exceptions, the eventual goal of most
+branches should be to merge their changes back into the main
+line.</para>
 
 </sect3>
 
@@ -1753,16 +1752,18 @@ events, fundamentally distinct from commits, and carry their own
 metadata with them.  In others, the results of merges are committed
 the same way other changes are committed, and so the primary means of
 distinguishing a "merge commit" from a "new change commit" is in the
-log message.  In a merge log message, don't repeat the log message of
-the original change.  Instead, just indicate that this is a merge, and
-give the identifying revision of the original change, with at most a
-one-sentence summary of its effect.  If someone wants to see the full
-log message, they can consult the original revision or revisions.  The
-reason it's important to avoid repeating the log message is that log
-messages are sometimes edited after commit.  If a change's log message
-were repeated at each merge destination, then even if someone edited
-the original message, they'd still leave all the repeats uncorrected
-&mdash; which would only cause confusion down the road.</para>
+log message.  In a merge's log message, don't repeat the log message
+of the original change.  Instead, just indicate that this is a merge,
+and give the identifying revision of the original change, with at most
+a one-sentence summary of its effect.  If someone wants to see the
+full log message, they can consult the original revision.</para>
+
+<para>The reason it's important to avoid repeating the log message is
+that log messages are sometimes edited after commit.  If a change's
+log message were repeated at each merge destination, then even if
+someone edited the original message, they'd still leave all the
+repeats uncorrected &mdash; which would only cause confusion down the
+road.</para>
 
 <para>The same principle applies to reverting a change.  If a change
 is withdrawn from the code, then the log message for the reversion
@@ -1771,8 +1772,8 @@ should merely state that some specific revision(s) is being reverted,
 from the reversion, since the semantics of the change can be derived
 by reading the original log message and change.  Of course, the
 reversion's log message should also state the reason why the change is
-being reverted, but it should not have any content that duplicates
-what can be derived from original change's log message.</para>
+being reverted, but it should not duplicate anything from the original
+change's log message.</para>
 
 <para>All of the above implies that you should use a consistent syntax
 for referring to revisions.  This is helpful not only in log messages,
@@ -1781,14 +1782,13 @@ CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
 where REV is a CVS revision number such as "1.76".  If you're using
 Subversion, the standard syntax for revision 1729 is "r1729" (file
 paths are not needed because of Subversion's global revision numbers).
-In Arch, the standard syntax is simply the changeset name.  I don't
-know the syntax in other systems, but there probably is one, and you
-should encourage people to use that syntax when referring to changes.
-Consistently expressing change names in a standard format will make
-project bookkeeping much easier (as we will see in <xref
-linkend="pfs-ch-5"/> and <xref linkend="pfs-ch-6"/>), and since a lot
-of the bookkeeping will be done by volunteers, it needs to be as easy
-as possible.</para>
+In Arch, the standard syntax is simply the changeset name.  Whatever
+the appropriate change syntax is for your system, encourage people to
+use that syntax when referring to changes.  Consistent expression of
+change names makes project bookkeeping much easier (as we will see in
+<xref linkend="pfs-ch-5"/> and <xref linkend="pfs-ch-6"/>), and since
+a lot of the bookkeeping will be done by volunteers, it needs to be as
+easy as possible.</para>
 
 </sect3>
 
@@ -1843,8 +1843,8 @@ them to stay within the stated limits.</para>
 <para>The Subversion project has operated on the honor system way for
 more than four years, with 33 full and 43 partial committers as of
 this writing.  The only distinction the system actually enforces is
-between committers and non-committers; all other divisions exist
-solely in the minds of the humans.  Yet we've never had a problem with
+between committers and non-committers; further subdivisions are
+maintained solely by humans.  Yet we've never had a problem with
 someone deliberately committing outside their domain.  Once or twice
 there's been an innocent misunderstanding about the extent of
 someone's commit privileges, but it's always been resolved quickly and
@@ -1859,9 +1859,12 @@ must rely on hard authorization controls.  But such situations are
 rare.  Even when there are millions of lines of code and hundreds or
 thousands of developers, a commit to any given code module should
 still be reviewed by those who work on that module, and they can
-recognize if someone committed there who wasn't supposed to.</para>
+recognize if someone committed there who wasn't supposed to.  If
+regular commit review <emphasis>isn't</emphasis> happening, then the
+project has bigger problems to deal with than the authorization system
+anyway.</para>
 
-<para>So don't spend too much time fiddling with your version control
+<para>So don't spend too much time fiddling with the version control
 authorization system, unless you have a specific reason to.  It
 usually won't bring much tangible benefit, and there are advantages to
 relying on human controls instead.</para>
@@ -1880,19 +1883,19 @@ relying on human controls instead.</para>
 <para>Bug tracking is a broad topic; various aspects of it are
 discussed throughout this book.  Here I'll try to concentrate mainly
 on setup and technical considerations, but to get to those, we have to
-start with a policy question: exactly what sorts of information should
-be in a bug tracker?</para>
+start with a policy question: exactly what kind of information should
+be kept in a bug tracker?</para>
 
-<para>The term <firstterm>bug tracker</firstterm> is misleading.  They
-can also track new feature requests, one-time tasks, unsolicited
-patches &mdash; really anything that has distinct beginning and end
-states, with optional transition states in between, and that accrues
-information over its lifetime.  For this reason, bug trackers are
-sometimes known as <firstterm>issue trackers</firstterm>,
-<firstterm>artifact trackers</firstterm>, <firstterm>request
-trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
-etc.  I'll continue using "bug tracker", for simplicity, but remember
-that they're not only for bugs.</para>
+<para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
+tracking systems are also frequently used to track new feature
+requests, one-time tasks, unsolicited patches &mdash; really anything
+that has distinct beginning and end states, with optional transition
+states in between, and that accrues information over its lifetime.
+For this reason, bug trackers are also called <firstterm>issue
+trackers</firstterm>, <firstterm>artifact trackers</firstterm>,
+<firstterm>request trackers</firstterm>, <firstterm>trouble ticket
+systems</firstterm>, etc.  I'll continue using "bug tracker" for
+simplicity, but remember that they're not only for bugs.</para>
 
 <para>The classic lifecycle for a single bug ("issue", "item",
 "ticket", "request", "artifact", whatever) looks something like this:
@@ -1900,107 +1903,162 @@ that they're not only for bugs.</para>
 <orderedlist>
   <listitem><para>Someone files the bug.  They provide a summary, an
             initial description (including a reproduction recipe, if
-            applicable <remark>(there should be a bit on good
-            techniques for getting people to provide repro recipes,
-            but not in this chapter.  Figure out where, add the stub,
-            then reference from here)</remark>), and whatever other
+            applicable; see <xref linkend="pfs-ch-7-sect-1.2"/> for
+            how to encourage good bug reports), and whatever other
             information the tracker asks for.  The person who files
             the bug may be totally unknown to the project &mdash; bugs
             or feature requests are as likely to come from the user
-            community as from the developers. <remark>Note here, or in
-            the discussion below, that this means the bug tracker is
-            as much a face of the project as the mailing lists, in
-            some ways more so because someone who has gone to the
-            effort of filing a bug will appreciate hearing back from
-            the developers.  Even if the bug is rejected, or not
-            fixed, a response still does a lot of good, in encouraging
-            that person to stay involved.  Which has a technical
-            implication: the bug itself should make it easy to reach
-            the person who filed it &mdash; get an email
-            address!</remark></para>
+            community as from the developers.</para>
 
             <para>Once filed, the bug is in what's called an
-            <firstterm>open</firstterm> state.  Because it is newly
-            created, and nothing has been done about it yet, some
-            trackers also label it as <firstterm>unverified</firstterm>
-            and/or <firstterm>unstarted</firstterm> at this stage.  It
-            is not assigned to anyone; or, in some systems, it is
-            assigned to a dummy user representing the lack of real
-            assignation.</para>
-
-            <para>At this point, think of the bug as in a holding
-            area.  It has been recorded, but has not yet been
-            integrated into the project's consciousness.</para>
+            <firstterm>open</firstterm> state.  Because no action has
+            been taken yet, some trackers also label it as
+            <firstterm>unverified</firstterm> and/or
+            <firstterm>unstarted</firstterm> at this stage.  It is not
+            assigned to anyone; or, in some systems, it is assigned to
+            a dummy user to represent the lack of real assignation.
+            At this point, it is in a holding area: the bug has been
+            recorded, but not yet integrated into the project's
+            consciousness.</para>
   </listitem>
-  <listitem><para>Others read the bug, add comments to it, often
-            asking the original filer for clarification on some
-            points.  If some developer "takes ownership" of the
-            bug during this stage, she may
+  <listitem><para>Others read the bug, add comments to it, perhaps
+            ask the original filer for clarification on some
+            points.</para>
+  </listitem>
+  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
+            This may be the most important moment in the its
+            lifecycle.  Although the bug is not actually fixed yet,
+            the fact that someone besides the original filer was able
+            to make it happen proves that the bug is genuine, and, no
+            less importantly, confirms to the original filer that
+            they've contributed to the project by reporting a real
+            bug.</para>
+  </listitem>
+  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
+            cause is identified, and if possible, the effort required
+            to fix it is estimated.</para>
+
+            <para>In this stage, or sometimes the previous one, a
+            developer may "take ownership" of the bug and
             <firstterm>assign</firstterm> it to herself.  The bug's
-            <firstterm>priority</firstterm> is also estimated in this
-            stage.  If it is so severe that it should delay the next
-            release, for example, that fact needs to be identified
-            early, and the tracker should have some way of noting
-            it.</para>
-
-            <para><remark>(All this implies a bug-event email
-            notification list, similar to commit emails, otherwise
-            those other people could never find out about the original
-            filing.)</remark></para>
-
-            <para><remark>(Somewhere, note the social conventions that
-            govern automated and third-party assignation.)</remark></para>
-
-            <para><remark>(Note also the danger of the bug tracker
-            turning into a discussion forum, when mailing lists should
-            really be used.  We should mention the danger here; later
-            in Chapter 5 it should be discussed in more depth.  Keep
-            the mathematical analogy in mind, though this may not be
-            the best way to describe it in words: the question is, is
-            the discussion potentially divergent or convergent?  If
-            it's stuff like getting more technical details from the
-            original reporter, or pointing out a gotcha with a
-            proposed solution, then it's convergent.  If it's a
-            philosophical questioning of the bug's justification for
-            being, or if the bug is one specific case that reveals a
-            much wider problem, then the discussion might end up
-            divergent, which means it should be on the development
-            mailing list, and the URL to the thread should be recorded
-            in the bug when the discussion dies down.  Note that those
-            involved with the bug may find this laborious, but this is
-            a writer-responsible culture: more important to make
-            things easy for the tens or hundreds of people who may
-            read the bug than for the 3 or 5 people writing to
-            it.)</remark></para>
+            <firstterm>priority</firstterm> may also be set.  For
+            example, if it is so severe that it should delay the next
+            release, that fact needs to be identified early, and the
+            tracker should have some way of noting it.</para>
   </listitem>
-  <listitem><para>The bug is scheduled for resolution.
+  <listitem><para>The bug gets scheduled for resolution.
             Scheduling doesn't necessarily mean naming a date by which
-            it will be fixed; more often it means deciding which
-            future release the bug should be fixed by, or
-            occasionally deciding that it need not block any
-            particular release.  Scheduling is sometimes dispensed
+            it will be fixed.  Sometimes it just means deciding which
+            future release (not necessarily the next one) the bug
+            should be fixed by, or deciding that it need not block any
+            particular release.  Scheduling may also be dispensed
             with, if the bug is quick to fix.</para>
-
   </listitem>
-  <listitem><para>The bug is fixed (or the task completed, or
-            whatever).  The change or set of changes that fixed it
-            should be recorded in a comment in the bug, and then the
-            bug <firstterm>closed</firstterm> or marked as 
+  <listitem><para>The bug gets fixed (or the task completed, or
+            the patch applied).  The change or set of changes that
+            fixed it should be recorded in a comment in the bug, and
+            then the bug <firstterm>closed</firstterm> or marked as
             <firstterm>resolved</firstterm>.</para>
   </listitem>
 </orderedlist>
 
-The exact details of this lifecycle may vary depending on the tracking
-software, but the basic concepts are the same.</para>
+</para>
 
-<para><remark>Note the two most common variations of the classic
-lifecycle: the bug is marked as a duplicate, or it is reopened after
-being closed.  Also, dependency tracking.  (Some of this stuff is not
-really free-software-specific, though.  If there's really no special
-aspect to mention w.r.t. open source, then leave it out.  The main
-theme should emphasize the importance of getting people comfortable
-using all features of the tracker.  It can't just be one or two
-people; otherwise, the project cannot grow.</remark></para>
+<para>There are two common variations on this lifecycle.  Sometimes a
+bug is closed very soon after being filed, because it turns out not to
+be a bug at all, but rather a misunderstanding on the part of the
+user.  As a project acquires more users, more and more such invalid
+bugs will come in, and developers will close them with increasingly
+short-tempered responses.  Try to guard against the latter tendency.
+It does no one any good, as the individual user in each case is not
+responsible for all the previous invalid bug reports; the statistical
+trend is visible only from the developers' point of view, not the
+user's.  (In <xref linkend="pfs-ch-3-sect-5.1"/> we'll look at a
+technique for reducing the number of invalid bug reports.)</para>
+
+<para>The second common variation is for the bug to be closed as a
+<firstterm>duplicate</firstterm> soon after step 1.  A duplicate is
+when someone files a bug that's already known to the bug tracker.
+Duplicates are not confined to open bugs: it's possible for a bug to
+come back after having been fixed (this is known as a
+<firstterm>regression</firstterm>), in which case the preferred course
+is usually to reopen the original bug, and close any new reports as
+duplicates of the original one.  The bug tracking system should keep
+track of this relationship bidirectionally, so that reproduction
+information in the duplicates is available to the original bug and
+vice versa.</para>
+
+<para>Aside from these variations, there may be other small details of
+the lifecycle that vary depending on the tracking software.  But the
+basic shape is the same, and while the lifecycle itself is not
+specific to open source software, it has implications for how open
+source projects use their bug trackers.</para>
+
+<para>First, as step 1 implies, the tracker is as much a public face
+of the project as the mailing lists or web pages.  Anyone may file a
+bug, anyone may look at a bug, anyone may browse the list of currently
+open bugs.  It follows that you never know how many people may be
+waiting to see progress on a given bug.  While the size and skill of
+the development community constrains the rate at which bugs can be
+fixed, the project should at least try acknowledge each bug the moment
+it appears.  Even if the bug lingers for a while, a response
+encourages people to stay involved, because they feel that a human has
+registered what they have done (remember that filing a bug usually
+involves more effort than, say, posting an email).  Furthermore, once
+a bug is seen by a developer, it enters the project's consciousness,
+in the sense that that developer can be on the lookout for other
+instances of the bug, can talk about it with other developers,
+etc.</para>
+
+<para>The need for timely reactions implies two things:
+
+<itemizedlist>
+  <listitem>
+    <para>The tracker should be connected to a mailing list, such that
+    every change to a bug, including its initial filing, causes a mail
+    to be go out describing what happened.  As with <xref
+    linkend="pfs-ch-3-sect-3.3.3">commit emails</xref>, the Reply-to
+    header on these mails should be set to the development mailing
+    list, or some other human-driven list.  While the original mails
+    are merely automated reflections of events in the bug tracker, any
+    email response is a discussion, and belongs in a discussion
+    forum.  Most active developers should be subscribed to the bug
+    event list, though it's their choice of course.</para></listitem>
+
+  <listitem>
+    <para>The form for filing bugs should capture the reporter's
+    email address, so they can be contacted for more information.
+    (However, it should not <emphasis>require</emphasis> the
+    reporter's email address, as some people prefer to report bugs
+    anonymously.) <remark>(need forward ref to section indicating
+    that anonymity is always okay; need other forward ref to the web
+    site section discussing user accounts)</remark>
+    </para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<para><remark>(Ref <xref linkend="pfs-ch-7-sect-1"/> for inquiry vs
+assignment.)</remark></para>
+
+<para><remark>Note also the danger of the bug tracker turning into a
+discussion forum, when mailing lists should really be used.  We should
+mention the danger here; later in Chapter 5 it should be discussed in
+more depth.  Keep the mathematical analogy in mind, though this may
+not be the best way to describe it in words: the question is, is the
+discussion potentially divergent or convergent?  If it's stuff like
+getting more technical details from the original reporter, or pointing
+out a gotcha with a proposed solution, then it's convergent.  If it's
+a philosophical questioning of the bug's justification for being, or
+if the bug is one specific case that reveals a much wider problem,
+then the discussion might end up divergent, which means it should be
+on the development mailing list, and the URL to the thread should be
+recorded in the bug when the discussion dies down.  Note that those
+involved with the bug may find this laborious, but this is a
+writer-responsible culture: more important to make things easy for the
+tens or hundreds of people who may read the bug than for the 3 or 5
+people writing to it.</remark></para>
 
 <para><remark>How much to reproduce data in the tracker?  Link to the
 mail thread, or cut-and-paste it, or summarize it with some pasting
@@ -2013,16 +2071,11 @@ exist here, because archives are static data anyway.</remark></para>
 (tigris.org fails in this regard -- requiring an email address for
 contact is okay, but requiring account creation is not)</remark></para>
 
-<para><remark>make sure the tracker sends out good summary emails.
-Set their reply-to: to dev, for the same reasons as
-commit-mails.</remark></para>
-
 <para><remark>access methods: email manipulation, automatic
 email-to-description logging, etc.</remark></para>
 
-<para><remark>Scheduling bugs.  Technical assignation versus actual
-acceptance of responsibility &mdash; make sure to clarify the
-difference early on.</remark></para>
+<sect2 id="pfs-ch-3-sect-5.1">
+<title>Pre-Filtering the Bug Tracker</title>
 
 <para><remark>Ben points out that the way we filter the issue tracker
 is very unusual.  We've essentially subscribed all of dev@ to
@@ -2043,6 +2096,8 @@ is not a sign of failure.  In general, guard against the tendency to
 draw conclusions from bug statistics (or commit statistics, for that
 matter).  They are qualitative events, and cannot be measured
 quantitatively.</remark></para>
+
+</sect2>
 
 </sect1>
 
