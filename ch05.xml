@@ -182,69 +182,6 @@ don't think he'll mind, but it's nice to ask.)</remark></para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-ch-5-sect-6">
-<title>Open-sourcing an Already-Established Project</title>
-
-<para>If you're opening up an existing project, one that already has
-active developers accustomed to working in a closed-source
-environment, make sure everyone understands that a big change is
-coming &mdash; and make sure that you understand how it's going to
-feel from their point of view.</para>
-
-<para>Try to imagine how the situation looks to them: formerly, all
-code and design decisions were made with a group of other programmers
-who knew the software more or less equally well, who all received the
-same pressures from the same management, and who all know each others'
-strengths and weaknesses.  Now you're asking them to expose their code
-to the scrutiny of random strangers, who will form judgements based
-only on the code, with no awareness of what business pressures may
-have forced certain decisions.  These strangers will ask lots of
-questions, questions that jolt the existing developers into realizing
-that the documentation they slaved so hard over is
-<emphasis>still</emphasis> inadequate (this is inevitable).  To top it
-all off, the newcomers are unknown, faceless entities.  If one of your
-developers already feels insecure about their skills, imagine how that
-will be exacerbated when newcomers point out flaws in code the
-developer wrote, and worse, do so in front of the developer's
-colleagues.  Unless you have a team of perfect coders, this is
-unavoidable &mdash; in fact, it will probably happen to all of them at
-first.  This is not because they're bad programmers; it's just that
-any program above a certain size has bugs, and peer review will spot
-some of those bugs (see <xref linkend="pfs-ch-2-sect-3.4"/>).  Of
-course, the newcomers themselves won't be subject to much peer review
-at first, since they can't contribute code until they get up to speed.
-To your developers, it can feel like all the criticism is incoming,
-never outgoing.  Thus there is the danger of a siege mentality taking
-hold among the old hands.</para>
-
-<para>The best way to prevent this is to warn everyone about what's
-coming, explain it, tell them that the initial discomfort is perfectly
-normal, and reassure them that it's going to get better.  Some of
-these warnings should take place privately, before the project is
-opened.  But you may also find it helpful to remind people on the
-public lists that this is a new way of development for the project,
-and that it will take some time to adjust.  The very best thing you
-can do is lead by example.  If you don't see your developers answering
-enough newbie questions, then just telling them to answer more isn't
-going to help.  They may not have a good sense of what warrants a
-response and what doesn't yet; or, it could be that they don't have a
-feel for how to prioritize coding work against the new burden of
-"community management".  The way to get them to participate is to
-participate yourself.  Be on the mailing lists, and make sure to
-answer some questions publically yourself.  When you don't have the
-domain expertise to field a question, then visibly hand it off to a
-developer who does &mdash; and watch to make sure they follow up with
-an answer, or at least a response.</para>
-
-<para>(On an unrelated note: when opening up a formerly private
-codebase, you should also make sure your legal department has
-exercised due diligence.  If the software contains code owned by other
-parties, they'll need to sign off on opening it up.  See <xref
-linkend="pfs-ch-3"/>.)</para>
-
-</sect1>
-
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-ch-5-sect-7">
 <title> Contracting </title>
 
 <para> Contracting.  You may have funding, but that doesn't mean it's
@@ -256,6 +193,72 @@ will accept it!  [Tell the story of CVS pserver here?]  </para>
 
 </sect1>
 
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-ch-5-sect-7">
+<title>Avoid Holy Wars</title>
+
+<para>A <firstterm>Holy War</firstterm> is a dispute, usually over a
+relatively minor issue, which has no hope of being resolved on the
+merits of the arguments, but where people feel passionate enough to
+continue arguing anyway in the hope that their side will
+prevail.</para>
+
+<para>Once a holy war has started, it generally cannot be resolved to
+everyone's satisfaction.  It does no good to point out, in the midst
+of a holy war, that a holy war is going on.  Everyone knows that
+already.  Unfortunately, a common feature of holy wars is disagreement
+on the very question of <emphasis>whether</emphasis> the dispute is
+resolveable by continued discussion.  Viewed from above, it is clear
+that neither side is changing the other's mind.  Viewed from inside,
+the other side is being obtuse and not thinking clearly, but they
+might come around if browbeaten enough.  Now, I am
+<emphasis>not</emphasis> saying there's never a right side in a holy
+war.  Sometimes there is &mdash; in the holy wars I've participated
+in, it's always been my side, of course.  But it doesn't matter,
+because there's no algorithm for convincingly demonstrating that one
+side or the other is right.</para>
+
+<para>A common, but unsatisfactory, way people try to resolve holy
+wars is to say "We've already spent far more time and energy
+discussing this than it's worth!  Can we please just drop it?"  The
+problem with this is that it is often equivalent to allowing one side
+(the status quo) to declare victory by inaction.  In other cases, the
+status quo is known to be unacceptable: everyone agrees that some
+decision must be made, some action taken.  Dropping the subject would
+be worse for everyone than simply giving up the argument would be for
+anyone.  But since that dilemma applies to all equally, it's still
+possible to end up arguing forever about what to do.</para>
+
+<para>So how should you handle a holy war?</para>
+
+<para>The first answer is, try to set things up so they don't happen.
+This is not as hopeless as it sounds:</para>
+
+<para><remark>(finish) This is done by anticipating standard holy
+wars: languages, licences (<xref linkend="pfs-ch-3-sect-3"/>),
+reply-to munging.  Regarding language holy wars: most important thing
+is, choose a language that you and the the other initial developers
+are comfortable with, and defend the language on *those* grounds,
+*not* on the grounds that it's better than some other possible
+language.  Never ever let the conversation degenerate into an academic
+comparison of programming languages (this seems to happen especially
+often when someone brings up Perl); that's one of many examples of a
+death topic that should be stopped before it gets
+started.</remark></para>
+
+<para><remark>When a holy war can't be avoided, decide early how much
+you care, and then be willing to publicly give up.  When you do so,
+say that you're backing out because the holy war isn't worth it, but
+don't be bitter and <emphasis>don't</emphasis> take the opportunity
+for a last parting shot at the opposing side's arguments.  Giving up
+is only effective when done gracefully.</remark></para>
+
+<para>For more historical background on holy wars, see <ulink
+url="http://catb.org/~esr/jargon/html/H/holy-wars.html"/>, and the
+paper by Danny Cohen that popularized the term, <ulink
+url="http://www.ietf.org/rfc/ien/ien137.txt"/>.</para>
+
+</sect1>
 
 </chapter>
 
