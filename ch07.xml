@@ -1180,12 +1180,12 @@ and approved by some minimum number of developers, usually three or
 more.  Approval is not simply a matter of inspecting the release for
 obvious flaws; ideally, the developers download the tarball, build and
 install it onto a clean system, run the regression test suite (see
-<xref linkend="pfs-testing"/>), and do some manual testing.  Assuming
-it passes these checks, as well as any other release checklist
-criteria the project may have, the developers then digitally sign the
-tarball using GnuPG (<ulink url="http://www.gnupg.org/"/>), PGP
-(<ulink url="http://www.pgpi.org/"/>), or some other program capable
-of producing PGP-compatible signatures.</para>
+<xref linkend="pfs-automated-testing"/>), and do some manual testing.
+Assuming it passes these checks, as well as any other release
+checklist criteria the project may have, the developers then digitally
+sign the tarball using GnuPG (<ulink url="http://www.gnupg.org/"/>),
+PGP (<ulink url="http://www.pgpi.org/"/>), or some other program
+capable of producing PGP-compatible signatures.</para>
 
 <para>In most projects, the developers just use their personal digital
 signatures, instead of a shared project key, and as many developers as
@@ -1244,50 +1244,51 @@ is the removal of the qualifier from the version number.</para>
 <para>In most other respects, a candidate release should be treated
 the same as a real release.  The <emphasis>alpha</emphasis>,
 <emphasis>beta</emphasis>, or <emphasis>rc</emphasis> qualifier is
-enough to warn especially conservative users to wait until the real
-release, and of course the announcement emails for the candidate
-releases should point out that their purpose is to solicit
-feedback.  But other than that, give candidate releases the same
-amount of care as regular releases.  After all, you want people to
-use the candidates (because use is the only way to uncover bugs), and
-also because you never know which candidate release will end up
-becoming the final, official release.</para>
+enough to warn conservative users to wait until the real release, and
+of course the announcement emails for the candidate releases should
+point out that their purpose is to solicit feedback.  But other than
+that, give candidate releases the same amount of care as regular
+releases.  After all, you want people to use the candidates, because
+exposure is the best way to uncover bugs, and also because you never
+know which candidate release will end up becoming the official
+release.</para>
 
 </sect2>
 
 <sect2 id="pfs-release-announcement">
 <title>Announcing a Releases</title>
 
-<para>Announcing a release is like announcing any other event, the
-mechanics of which were covered in <xref linkend="pfs-publicity"/>.
-There are a few specific things one should make sure to do for
-releases, though.</para>
+<para>Announcing a release is like announcing any other event, and
+should use the procedures described in
+<xref linkend="pfs-publicity"/>.  There are a few specific things to
+do for releases, though.</para>
 
 <para>Whenever you give the URL to the downloadable release tarball,
 make sure to also give the MD5/SHA1 checksums, and pointers to the
 digital signatures file.  Since the announcement happens in multiple
 forums (mailing list, news page, etc), this means users can get the
-checksums from multiple sources, giving the most security-conscious
-users extra assurance that the checksums themselves have not been
-tampered with.  Giving the link to the digital signature files
-multiple times doesn't make those signatures more secure, but it does
-reassure people (especially those who don't follow the project
-closely) that the project takes security seriously.</para>
+checksums from multiple sources, which gives the most
+security-conscious among them extra assurance that the checksums
+themselves have not been tampered with.  Giving the link to the
+digital signature files multiple times doesn't make those signatures
+more secure, but it does reassure people (especially those who don't
+follow the project closely) that the project takes security
+seriously.</para>
 
-<para>In the announcement email itself, and on news pages that contain
-more than just a blurb about the release, make sure to include the
-relevant portion of the CHANGES file, so people can see why it might
-be in their interests to upgrade.  This is as important with candidate
+<para>In the announcement email, and on news pages that contain more
+than just a blurb about the release, make sure to include the relevant
+portion of the CHANGES file, so people can see why it might be in
+their interests to upgrade.  This is as important with candidate
 releases as with final releases; the presence of bugfixes and new
 features is an important part of tempting people to try out a
 candidate release.</para>
 
 <para>Finally, don't forget to thank the development team, the
 testers, and all the people who took the time to file good bug
-reports.  In general, it's best not to single out anyone by name, but
-if there's someone who is individually responsible for a huge piece
-work, the value of which is widely recognized by everyone in the
-project, then it's okay to mention that in the announcement email.
+reports.  Don't single out anyone by name, though, unless there's
+someone who is individually responsible for a huge piece work the
+value of which is widely recognized by everyone in the
+project&mdash;that would be okay to mention in the announcement email.
 Just be wary of sliding down the slippery slope of credit inflation
 (see <xref linkend="pfs-credit-abuse"/>).</para>
 
@@ -1299,22 +1300,85 @@ Just be wary of sliding down the slippery slope of credit inflation
 <sect1 id="pfs-release-lines">
 <title>Maintaining Multiple Release Lines</title>
 
-<para><remark>Whether and how to maintain multiple release lines.  Make sure
-this gets tied in bidirectionally with version control discussion
-(branches, arch vs cvs-style, for example).  Also, stress importance
-of training people to use the issue tracker well.  Be patient, be
-verbose, repeat yourself -- it will feel stupid, but it <emphasis>will
-pay off</emphasis>.</remark></para>
+<para>Most mature projects maintain multiple release lines in
+parallel.  For example, after 1.0.0 comes out, that line should
+continue with micro (bugfix) releases 1.0.1, 1.0.2, etc, until the
+project explicitly decides to end the line.  Note that merely
+releasing 1.1.0 is not sufficient reason to end the 1.0.x line.  For
+example, some users make it a policy never to upgrade to the first
+release in a new minor or major series&mdash;they let others shake the
+bugs out of, say 1.1.0, and wait until 1.1.1.  This isn't necessarily
+selfish (remember, they're forgoing the bugfixes and new features
+too), it's just that for whatever reason, they've decided to be very
+careful with upgrades.  Accordingly, if the project learns of a major
+bug in 1.0.3 right before it's about to release 1.1.0, it would be a
+bit severe to just put the bugfix in 1.1.0 and tell all the old 1.0.x
+users they should upgrade.  Why not release both 1.1.0 and 1.0.4, so
+everyone can be happy?</para>
+
+<para>After the 1.1.x line is well under way (say, around 1.1.3 or
+so), you can declare 1.0.x to be at <firstterm>end of
+life</firstterm>.  This should be announced.  The announcement could
+stand alone, or it could be mentioned as part of a 1.1.x release
+announcement, but however you do it, users need to know that the old
+line is being phased out, so they can make upgrade decisions.</para>
+
+<para>For each release, make sure to have a <firstterm>target
+version</firstterm> available in the bug tracker, so people filing
+bugs will be able to do so against the proper release.  Don't forget
+to have a "development" or "latest" target for the most recent
+development sources, since some people&mdash;not only active
+developers&mdash;will often be staying ahead of even the official
+releases.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-security-releases">
 <title>Security Releases</title>
 
-<para><remark>(Special kind of release, contains exactly one change or
-changeset, is never announced until ready, and does not continue the
-line afterwards, since the fix is presumed to be folded into all later
-release on all other lines.  Refer back to appropriate place in
-Ch. 6, of course, like pfs-security.)</remark></para>
+<para>Most of the details of handling security bugs were covered in
+<xref linkend="pfs-security"/>, but there are some special details to
+discuss for doing security releases.</para>
+
+<para>A <firstterm>security release</firstterm> is a release made
+solely to close a security vulnerability.  The code that fixes the bug
+cannot be made public until the release is available, which means not
+only that the fixes cannot be committed to the repository until the
+day of the release, but also that the release cannot be publicly
+tested before it goes out the door.  Obviously, the developers can
+examine the fix among themselves, and test the release privately, but
+widespread real-world testing is not possible.</para>
+
+<para>Because of this lack of testing, a security release should
+always consist of some existing release plus the fixes for the
+security bug, with <emphasis>no other changes</emphasis>.  This
+conservativism dovetails nicely with that of users who may need to
+deploy the security fix, but whose upgrade policy prefers that they
+not deploy any other changes at the same time.</para>
+
+<para>Making a security release sometimes involves some minor
+deception.  For example, the project may have been working on a 1.1.3
+release, with certain bug fixes to 1.1.2 already publicly declared,
+when a security report comes in.  Naturally, the developers cannot
+talk about the security problem until they make the fix available;
+until then, they must continue to talk publicly as though 1.1.3 will
+be what it's always been planned to be.  But then when 1.1.3 actually
+comes out, it will differ from 1.1.2 only in the security fixes, and
+all those other fixes will have been deferred to 1.1.4 (which of
+course will now <emphasis>also</emphasis> contain the security
+fix, as will all other future releases).</para>
+
+<para>You could add an extra component to an existing release to
+indicate that it contains security changes only.  For example, people
+would be able to tell just from the numbers that 1.1.2.1 is a security
+release against 1.1.2, and they would know that any release "higher"
+than that (e.g., 1.1.3, 1.2.0, etc) contains the same security fixes.
+For those in the know this system conveys a lot of information.  On
+the other hand, for those not following the project closely, it can be
+a bit confusing to see a three-component release number most of the
+time with an occasional four-component one thrown in seemingly
+randomly.  Most projects I've looked at choose consistency and simply
+use the next regularly scheduled number for security releases, even
+when it means shifting other planned releases by one.</para>
 
 </sect2>
 
@@ -1324,28 +1388,180 @@ Ch. 6, of course, like pfs-security.)</remark></para>
 <sect1 id="pfs-releases-and-daily-development">
 <title>Releases and Daily Development</title>
 
-<para><remark>(Maybe discuss how development goes on in parallel with
-releases.  Importance of logical change boundaries, to make change
-porting manageable.)</remark></para>
+<para>Maintaining parallel releases simultaneously has implications
+for how daily development is done.  In particular, it makes
+practically mandatory a discipline that would be recommended anyway:
+have each commit be a single logical change, and never mix unrelated
+changes in the same commit.  If a change is too big or too disruptive
+to do in one commit, then break it across N commits, where each commit
+is a well-partitioned subset of the overall change, and includes
+nothing unrelated to the overall change.</para>
+
+<para>Here's an example of an ill-thought-out commit:</para>
+
+<screen>
+------------------------------------------------------------------------
+r6228 | jrandom | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 lines
+
+Fix Issue #1729: Make indexing gracefully warn the user when a file
+is changing as it is being indexed.
+
+* ui/repl.py
+  (ChangingFile): New exception class.
+  (DoIndex): Handle new exception.
+
+* indexer/index.py
+  (FollowStream): Raise new exception if file changes during indexing.
+  (BuildDir): Unrelatedly, remove some obsolete comments, reformat
+  some code, and fix the error check when creating a directory.
+
+Other unrelated cleanups:
+
+* www/index.html: Fix some typos, set next release date.
+------------------------------------------------------------------------
+</screen>
+
+<para>The problem with it becomes apparent as soon as someone needs to
+port the <function>BuildDir</function> error check fix over to a
+branch for an upcoming maintenance release.  The porter doesn't want
+any of the other changes&mdash;for example, the fix to issue #1729
+wasn't approved for the maintenance branch at all, and the
+<filename>index.html</filename> tweaks would simply be irrelevant
+there.  But she cannot easily grab just the
+<function>BuildDir</function> change via the version control tool's
+merge functionality, because the version control system was told that
+that change is logically grouped with all these other unrelated
+things.  In fact, the problem would become apparent even before the
+merge.  Merely listing the change for voting would become problematic:
+instead of just giving the revision number, the proposer would have to
+make a special patch or change branch just to isolate the portion of
+the commit being proposed.  That would be a lot of work for others to
+suffer through, and all because the original committer couldn't be
+bothered to break things into logical groups.</para>
+
+<para>In fact, that commit really should have been
+<emphasis>four</emphasis> separate commits: one to fix issue
+#1729, another to remove obsolete comments and reformat code in
+<function>BuildDir</function>, another to fix the error check in
+<function>BuildDir</function>, and finally one to tweak
+<filename>index.html</filename>.  The third of those commits would be
+the one proposed for the maintenance release branch.</para>
+
+<para>Of course, release stabilization is not the only reason why
+having each commit be one logical change is desirable.
+Psychologically, a semantically unified commit is easier to review,
+and easier to revert if necessary (reversion is really a special kind
+of merge anyway).  But the requirement that really motivates the
+practice is that changes need to be merged, usually to and from
+release branches, and a little discipline up-front on everyone's part
+can save the project a lot of headache later.</para>
 
 <!-- ======================== subsection ============================== -->
-<sect2 id="pfs-testing">
-<title>Testing, Automated and Otherwise</title>
-
-<para><remark>(Regression testing: choosing the right level of
-formality.  Coordinating results from human volunteers.  Importance of
-the don't-break-the-build concept.)</remark></para>
-
-</sect2>
-
-<!-- ======================== SECTION ============================== -->
 <sect2 id="pfs-planning">
 <title>Planning Releases</title>
 
-<para><remark>(Basically, how to integrate release management with the
-bug tracker.  Don't wait too long between releases, because then
-developers feel that any given release is too important, and are
-crushed when their code doesn't make it in.)</remark></para>
+<para>One area where open source project have historically differed
+from proprietary projects is in release planning.  Proprietary
+projects usually have firmer deadlines.  Sometimes it's because
+customers were promised that an upgrade would be available by a
+certain date, or because the new release needs to be coordinated with
+some other effort for marketing purposes, or because the venture
+capitalists who invested in the whole thing need to see some results
+before they put in any more funding.  Free software projects, on the
+other hand, were until recently mostly motivated by amateurism in the
+most literal sense: they were written for the love of it.  No one felt
+the need to ship before all the features were ready, and why should
+they?  It wasn't as if anyone's job was on the line.</para>
+
+<para>Nowadays, many open source projects are funded by corporations,
+and are correspondingly more and more influenced by deadline-conscious
+corporate culture.  This is in many ways a good thing, but it can
+cause conflicts between the priorities of those developers who are
+being paid and those who are volunteering their time.  When these
+conflicts happens it all, it's often around the issue of when and how
+to schedule releases.  The developers who are under pressure will
+naturally want to just <emphasis>say</emphasis> when the releases will
+be, and have everyone's activities fall into line.  But the volunteers
+may have other agendas&mdash;perhaps features they want to complete,
+or some testing they want to have done&mdash;that they feel the
+release should wait on.</para>
+
+<para>There is no general solution to this problem except discussion
+and compromise, of course.  But you can minimize the frequency and
+degree of friction caused, by decoupling the proposed
+<emphasis>existence</emphasis> of a given release from the date when
+it would go out the door.  That is, try to steer discussion toward the
+subject of which releases the project will be making in the near- to
+medium-term future, and what features will be in them, without at
+first mentioning anything about dates, except for rough guesses with
+wide margins of error.  By nailing down feature sets early, you reduce
+the complexity of the discussion centered around any individual
+release, and therefore improve predictability.  This also creates a
+kind of inertial bias against anyone who proposes to expand the
+definition of a release by adding new features or other complicatinos.
+If the release's contents are fairly well-defined, then the onus is on
+the proposer to justify the expansion, even though the date of the
+release may not have been set yet.</para>
+
+<para>In his multi-volume biography of Thomas Jefferson,
+<citetitle>Jefferson and His Time</citetitle>, Dumas Malone tells the
+story of how Jefferson handled the first meeting held to decide the
+organization of the future University of Virginia.  The University had
+been Jefferson's idea in the first place, but (as is the case
+everywhere, not just in open source projects) many other parties had
+climbed on board quickly, each with their own interests and agendas.
+When they gathered at that first meeting to hash things out, Jefferson
+made sure to show up with meticulously prepared architectural
+drawings, detailed budgets for construction and operation, a proposed
+curriculum, and the names of specific faculty he wanted to import from
+Europe.  No one else in the room was even remotely as prepared; the
+group essentially had to capitulate to Jefferson's vision, and the
+University was eventually founded more or less in accordance with his
+plans.  The fact that construction went far over-budget, and that many
+of his ideas did not, for various reasons, work out in the end, were
+all things Jefferson probably knew perfectly well would happen.  His
+purpose was strategic: to show up at the meeting with something so
+substantive that everyone else would have to fall into the role of
+simply proposing modifications to it, so that the overall shape, and
+therefore schedule, of the project would be roughly as he
+wanted.</para>
+
+<para><remark>[I don't have copy of Malone's biography here,
+unfortunately, but I'll try to find one and insert some of the actual
+text, since he tells this story well.  It would be a very short
+excerpt, nothing to worry about as far as copyright goes, by the
+way.]</remark></para>
+
+<para>In the case of a free software project, there is no single
+"meeting", but instead a series of small proposals made mostly by
+means of the issue tracker.  If you have some credibility in the
+project to start with, and you start assigning various features,
+enhancements, and bugs to target releases in the issue tracker,
+according to some overall plan, people will mostly go along with it.
+Once you've got things laid out more or less as you want them, the
+conversations about actual release <emphasis>dates</emphasis> will go
+much more smoothly.</para>
+
+<para>It is crucial, of course, to never present any individual
+decision as written in stone.  In the comments associated with each
+assignment of an issue to a specific future release, invite
+discussion, dissent, and be genuinely willing to be persuaded whenever
+possible.  Never exercise control merely for the sake of exercising
+control: the more deeply others participate in the release planning
+process (see <xref linkend="pfs-delegation"/>), the easier it will be
+to persuade them to share your priorities on the issues that really
+count for you.</para>
+
+<para>The other thing the project in general can do to lower tensions
+around release planning is to make releases fairly often.  When
+there's a long time between releases, the importance of any individual
+release is magnified in everyone's minds; people are that much more
+crushed when their code doesn't make it in, because they know how long
+it might be until the next chance.  Depending on the complexity of
+the release process and the nature of your project, somewhere between
+every three months and every six months is usually about right,
+though maintenance lines may put out micro releases a bit faster if
+there is demand for it.</para>
 
 </sect2>
 
