@@ -165,6 +165,11 @@ importantly, how to get people to use them.  The web site is not
 discussed until the end, since it's more glue for the other components
 than a tool unto itself.</para>
 
+<para><remark>(Somewhere above, need to indicate that the
+canned-hosting sites take care of a lot of the decision-making.  You
+still need to know why the tools are important, and how to configure
+them, but you're relieved of the need to choose them.</remark></para>
+
 </sect1>
 
 
@@ -1019,31 +1024,30 @@ problem concisely.
   <listitem><para>A developer's private directory tree containing the
   project's source code files, and possibly its web pages or other
   documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling it what repository it
-  comes from, what "revisions" (see below) of the files are present,
-  etc.  Generally, each developer has their own working copy, in
-  which they make and test changes, and from which they commit
-  changes.</para></listitem>
+  managed by the version control system, telling the working copy what
+  repository it comes from, what "revisions" (see below) of the files
+  are present, etc.  Generally, each developer has their own working
+  copy, in which they make and test changes, and from which they
+  commit.</para></listitem>
  </varlistentry>
 
  <varlistentry>
   <term><firstterm>revision</firstterm></term>
   <listitem><para>This is similar to "change", but has a more
-  technical meaning: a revision is the version control system's name
-  for a particular incarnation of a particular file or directory.  For
-  example, if the project starts out with revision X of file F, and
-  then someone commits a change to F, this produces revision Y of F.
-  Different version control systems use the concept of "revision" in
-  slightly different ways, but the general idea is always the same:
-  when it is necessary to speak precisely about a file at particular
-  points in time (say, immediately before and after a bug is fixed),
-  one talks in terms of revisions.  For example: "Oh yes, she fixed
-  that in revision X." or "She fixed that in revision X of
-  foo.c."</para>
+  technical meaning: a revision is one specific incarnation of a
+  particular file or directory.  For example, if the project starts
+  out with revision X of file F, and then someone commits a change to
+  F, this produces revision Y of F.  Different version control systems
+  use the concept of "revision" in slightly different ways, but the
+  general idea is always the same: when it is necessary to speak
+  precisely about a file at particular points in time (say,
+  immediately before and after a bug is fixed), one talks in terms of
+  revisions.  For example: "Oh yes, she fixed that in revision X." or
+  "She fixed that in revision X of foo.c."</para>
 
   <para>When one talks about a file or collection of files without
   specifying a particular revision, it is generally assumed that one
-  means the most recent revision available. </para></listitem>
+  means the most recent revision(s) available. </para></listitem>
  </varlistentry>
 
  <varlistentry>
@@ -1247,11 +1251,13 @@ used them myself, or because people I know use them:
 
 </para>
 
-<para>For the sake of completeness, and so you can see what sorts of
-features are in vogue, here is a overview of other open source version
-control systems.  I have no specific recommendations for or against
-any of these, and for the most part am just quoting their own web
-sites.
+<para><remark>(Hmm, should these non-CVS systems be relegated to an
+Appendix, and merely referred to from here?)</remark></para>
+
+<para>For the sake of both fairness and completeness, here is a
+overview of other open source version control systems.  I have no
+specific recommendations for or against any of these; the information
+here is taken from their web sites.
 
 <itemizedlist>
 
@@ -1465,15 +1471,15 @@ sites.
 </para>
 
 <para>As you can see, deciding on a version control system could
-easily become a lifelong research project.  Quite possibly, the choice
-will be made for you, by your hosting site, in which case you can
-breathe a sigh of relief and eat what's put in front of you.  If you
-must make a decision, consult with your other developers, ask around
-to see what people have experience with, and then just pick one.  Any
-stable, production-ready version control system will do, you don't
-have to worry too much about making a drastically wrong decision.  If
-you simply can't make up your mind, then go with CVS.  It's still the
-standard, and will probably continue to be for a few years.</para>
+easily become a lifelong research project.  Quite possibly, you will
+be spared the decision because it will be made for you by your hosting
+site.  But if you must choose, consult with your other developers, ask
+around to see what people have experience with, and then just pick
+one.  Any stable, production-ready version control system will do, you
+don't have to worry too much about making a drastically wrong
+decision.  If you simply can't make up your mind, then go with CVS.
+It's still the standard, and will probably continue to be so for a few
+years.</para>
 
 </sect2>
 
@@ -1483,36 +1489,114 @@ standard, and will probably continue to be for a few years.</para>
 <title>Version Control Functionality</title>
 
 <para>The recommendations in this section are not targeted toward a
-particular version control system, and should be possible to implement
-in whatever system you end up with.  Consult your specific system's
-documentation for how to do so.</para>
+particular version control system, and should be simple to implement
+in any of them.  Consult your specific system's documentation for
+details.</para>
 
 <sect3 id="pfs-ch-3-sect-3.3.1">
-<title>Version Everything and the Kitchen Sink</title>
+<title>Version Everything</title>
 
-<para><remark>Importance of keeping the project's web pages under
-version control, as an example.  But also design notes, research
-results, etc.  Any piece of information worth writing down is worth
-versioning (any piece of information that can change, that is &mdash;
-a posted email cannot change, for example, therefore versioning
-doesn't make sense for list archives).</remark></para>
+<para>Keep not only your project's source code under version control,
+but also its web pages, documentation, FAQ, design notes, and anything
+else that people might want to edit.  Keep them right next to the
+source code, in the same repository tree.  Any piece of information
+worth writing down is worth versioning &mdash; that is, any piece of
+information that could change.  Things that don't change should be
+archived, not versioned: for example an email, once posted, does not
+change, therefore versioning it wouldn't make sense (unless it becomes
+part of some larger, evolving document).</para>
+
+<para>The reason to version everything together is so that people only
+have to learn one mechanism for submitting changes.  Often a
+contributor will start out making edits to the web pages or
+documentation, and move to small code contributions later, for
+example.  When the project uses the same system for the submissions of
+all kinds of contributions, people only have to learn the ropes once.
+Versioning everything together also means that new features can be
+committed together with their documentation updates, branching the
+code can branch the documentation too, etc.</para>
+
+<para>The rule that all editable data should be kept under version
+control has one unfortunate exception: the bug tracker, which holds
+plenty of editable data, but which for technical reasons generally
+cannot store that data in the main version control system.  (Some
+trackers have primitive versioning features of their own, however,
+independent of the project's main repository.)</para>
 
 </sect3>
 
 <sect3 id="pfs-ch-3-sect-3.3.2">
 <title>Browseability</title>
 
-<para><remark>Importance of browsability, either through direct browse
-mode, or through checked out working copy on web server.  See note in
-packaging section about all-caps files.</remark></para>
+<para>The project's repository should be browseable on the Web.  This
+means not only the ability to see the latest revisions of the
+project's files, but to go back in time and look at earlier revisions,
+view the differences between revisions, read log messages for selected
+changes, etc.</para>
+
+<para>Browseability is important because it is a lightweight portal to
+project data.  If the repository cannot be viewed through a web
+browser, then someone wanting to inspect a particular file (say, to
+see if a certain bugfix had made it into the code) would first have to
+install version control client software locally.  Suddenly their
+simple query has turned from a five-minute task into a half-hour or
+longer task, and probably become less user-friendly too.</para>
+
+<para>Browseability also means there are canonical URLs for viewing
+specific revisions of files, and for viewing the latest revision at
+any given time.  This can be very useful in technical discussions or
+when pointing people to documentation.  For example, instead of saying
+"For tips on debugging the server, see the HACKING file in the top of
+your working copy," one can say "For tips on debugging the server, see
+http://.../HACKING", giving a URL that always points to the latest
+revision of the HACKING file.  The URL is better because it is
+completely unambiguous, and avoids the question of whether the
+addressee has a up-to-date working copy at all.</para>
+
+<para>Some version control systems come with built-in web-publishing
+mechanisms, others rely on third-party tools to do it.  Three such
+tools are <firstterm>ViewCVS</firstterm> (<ulink
+url="http://viewcvs.sourceforge.net/"/>),
+<firstterm>CVSWeb</firstterm> (<ulink
+url="http://www.freebsd.org/projects/cvsweb.html"/>), and
+<firstterm>WebSVN</firstterm> (<ulink
+url="http://websvn.tigris.org/"/>).  The first works with both CVS and
+Subversion, the second with CVS only, and the third with Subversion
+only.</para>
 
 </sect3>
 
 <sect3 id="pfs-ch-3-sect-3.3.3">
 <title>Commit Emails</title>
 
-<para><remark>Talk about why they're important; mention setting
-reply-to on them differently from regular mailing lists.</remark></para>
+<para>Every commit to the repository should generate an email showing
+who made the change, when, what files and directories changed, and how
+they changed.  The email should go to a special mailing list devoted
+to commit emails, separate from the mailing lists to which humans
+post.  Developers and other interested parties should be encouraged to
+subscribe to the commits list.  It is the most effective way to keep
+up with what's happening in the project at the code level.  Aside from
+the obvious technical benefits of peer review, commit emails help
+create a sense of community, because they establish a shared
+environment in which people can react to events (commits) that they
+know are visible to others as well.</para>
+
+<para>The specifics of setting up commit emails will vary depending on
+your version control system, but most offer some sort of script or
+other packaged facility for doing it.  You may need to configure a
+couple of default behaviors, though.</para>
+
+<screen>
+  * Include diffs, not URLs to diffs!  Except when the message size
+    would be huge, then URL is better.
+
+  * Set reply-to to the dev list, not the commit email list.  Why?
+    Partly because not everyone subscribes to the commit email list,
+    but also because once it's a matter of discussion, it belongs on
+    the human list, not the bot list.
+</screen>
+
+<para>todo: working here...</para>
 
 </sect3>
 
