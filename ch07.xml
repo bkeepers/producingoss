@@ -779,27 +779,42 @@ r13223, and r13232 for backport to 1.1.x branch."  All other
 information about the changes can be chased down at their original
 revisions.</para>
 
+</sect3>
+
+<sect3 id="pfs-release-manager">
+<title>Release Manager</title>
+
 <para>The actual process of merging (see
-<xref linkend="pfs-vc-vocabulary-merge"/>) an approved change into the
+<xref linkend="pfs-vc-vocabulary-merge"/>) approved changes into the
 release branch can be performed by any developer.  There does not need
 to be one person whose job it is to merge changes; if there are a lot
-of changes, it can be better to spread the burden around.  However,
-although both the voting and merging are formally decentralized
-processes, in practice there are usually one or two people driving the
-release process.  They keep track of how many changes are currently
-under consideration, how many have been approved, how many seem likely
-to be approved, etc.  If they sense that important changes are not
-getting enough attention, and might be left out of the release for
-lack of votes, they will gently nag other developers to review and
-vote.  When a batch of changes are approved, these people will often
-take it upon themselves to merge them into the release branch, and
-it's fine if others leave that task to them, as long as everyone
-understands that they are not obligated to do all the work unless they
-have explicitly committed to it.</para>
+of changes, it can be better to spread the burden around.</para>
+
+<para>However, although both voting and merging happen in a
+decentralized fashion, in practice there are usually one or two people
+driving the release process.  This role is sometimes formally blessed
+as <firstterm>release manager</firstterm>, but it is quite different
+from a release owner who has final say over the changes.  Release
+managers keep track of how many changes are currently under
+consideration, how many have been approved, how many seem likely to be
+approved, etc.  If they sense that important changes are not getting
+enough attention, and might be left out of the release for lack of
+votes, they will gently nag other developers to review and vote.  When
+a batch of changes are approved, these people will often take it upon
+themselves to merge them into the release branch, and it's fine if
+others leave that task to them, as long as everyone understands that
+they are not obligated to do all the work unless they have explicitly
+committed to it.  When the time comes to put the release out the door
+(see <xref linkend="pfs-releasing"/>), the release managers also take
+care of the logistics of creating the final release packages,
+collecting digital signatures, uploading the packages, and making the
+public announcement.</para>
 
 </sect3>
 
 </sect2>
+
+</sect1>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="pfs-packaging">
@@ -832,22 +847,26 @@ too.</para>
 transporting directory trees.  For Unix and Unix-like operating
 systems, the convention is to use TAR format, compressed
 by <command>compress</command>, <command>gzip</command>,
-<command>bzip</command> or <command>bzip2</command>.
-<firstterm>TAR</firstterm> stands for "Tape ARchive", because the
-format writes out a directory tree as a linear data stream, which
-makes it ideal for saving directory trees to tape; the same property
-makes it the the standard for distributing directory trees as a single
-file.  Producing compressed tar files (or
-<firstterm>tarballs</firstterm>) is pretty easy.  The details are
-beyond the scope of this book, but you someone in your project will
-likely know how to do it.  See the documentation for
-the <command>tar</command> command and for the compression commands
-given earlier.</para>
+<command>bzip</command> or <command>bzip2</command>.  For MS Windows,
+the standard method for distributing directory trees
+is <firstterm>zip</firstterm> format, which happens to do compression
+as well, so there is no need to compress the archive after creating
+it.</para>
 
-<para>For MS Windows, the standard method for distributing directory
-trees is <firstterm>zip</firstterm> format, which happens to do
-compression as well, so there is no need to compress the archive after
-creating it.</para>
+   <sidebar id="pfs-packaging-tar">
+   <title>TAR files</title>
+
+   <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
+   because tar format represents a directory tree as a linear data
+   stream, which makes it ideal for saving directory trees to tape.
+   The same property also makes it the the standard for distributing
+   directory trees as a single file.  Producing compressed tar files
+   (or <firstterm>tarballs</firstterm>) is pretty easy.  On some
+   systems, the <command>tar</command> command can produce a
+   compressed archive itself; on others, a separate compression
+   program is used.</para>
+
+   </sidebar>
 
 </sect2>
 
@@ -885,32 +904,62 @@ and install the software for all the operating systems it supports.
 As mentioned in <xref linkend="pfs-license-quickstart-applying"/>,
 there should also be a <filename>COPYING</filename> or
 <filename>LICENSE</filename> file, giving the software's terms of
-distribution.  Finally, there should be
-a <filename>CHANGES</filename> (or sometimes
-<filename>NEWS</filename>) file, explaining what's new in this
-release.  Usually the <filename>CHANGES</filename> file just
-accummulates entries describing every release, in reverse
-chronological order, so that the entry for this release appears at the
-top of the file.</para>
+distribution.</para>
+
+<para>There should also be a <filename>CHANGES</filename> file
+(sometimes called <filename>NEWS</filename>), explaining what's new in
+this release.  The <filename>CHANGES</filename> file accummulates
+changelists for all releases, in reverse chronological order, so that
+the list for this release appears at the top of the file.  Completing
+that list is usually the last thing done on a stabilizing release
+branch; some projects write the list piecemeal as they're developing,
+others prefer to save it all up for the end and have one person write
+it, getting information by combing the version control logs.  The list
+looks something like this:</para>
+
+<screen>
+Version 2.5.0
+(20 December 2004, from /branches/2.5.x)
+http://svn.scanley.org/repos/svn/tags/2.5.0/
+
+ New features, enhancements:
+    * Added regular expression queries (issue #53)
+    * Added support for UTF8 and UTF16 documents.
+    * Documentation translated into Polish, Russian, Malagasy
+    * ...
+
+ Bugfixes:
+    * fixed reindexing bug (issue #945)
+    * fixed some query bugs (issues #815, #1007, #1008)
+    * ...
+</screen>
+
+<para>The list can be as long as necessary, but don't bother to
+include every little bugfix and feature enhancement.  Its purpose is
+simply to give users an overview of what they would gain by upgrading
+to the new release.  In fact, the changelist is customarily included
+in the announcement email (see <xref linkend="pfs-releasing"/>), so
+write it with that audience in mind.</para>
 
 <para>The actual layout of the source code inside the tree should be
 the same as, or as similar as possible to, the source code layout one
-would get by checking out the project from its version control
-repository directly.  Usually there are a few differences, for example
+would get by checking out the project directly from its version
+control repository.  Usually there are a few differences, for example
 because the package contains some generated files needed for
 configuration and compilation (see
 <xref linkend="pfs-packaging-build-install"/>), or because it includes
 third-party software that is not maintained by the project, but which
-is required and which users are not likely to have already.  Even if
-the distributed tree corresponds exactly to some developement tree in
-the version control repository, the distribution itself should not be
-a working copy (see <xref linkend="pfs-vc-vocabulary-working-copy"/>).
-It is supposed to represent a static reference point, a particular
-release of the software.  If it were a working copy, the danger would
-be that the user might update it, and afterwards think that they still
-have the release when in fact they have something different.</para>
+is required and which users are not likely to have already.  But even
+if the distributed tree corresponds exactly to some developement tree
+in the version control repository, the distribution itself should not
+be a working copy (see <xref linkend="pfs-vc-vocabulary-working-copy"/>).
+The release is supposed to represent a static reference point, a
+particular, unchangeable configuration of source files.  If it were a
+working copy, the danger would be that the user might update it, and
+afterwards think that they still have the release when in fact they
+have something different.</para>
 
-<para>Remember that the package is the same no matter what the
+<para>Remember that the package is the same regardless of the
 packaging.  The release&mdash;that is, the precise entity referred to
 when someone says "Scanley&nbsp;2.5.0"&mdash;is the tree created by
 unpacking a zipfile or tarball.  So the project might offer all of
@@ -941,7 +990,7 @@ hit the shift key, but plenty of projects ship capitalized packages).
 The important thing is that the directory created by unpacking the
 tarball use the same capitalization.  There should be no surprises:
 the user must be able to predict with perfect accuracy the name of the
-directory that will be created when they unpack a distribution.</para>
+directory that will be created when she unpacks a distribution.</para>
 
 </sect3>
 <sect3 id="pfs-release-prereleases">
@@ -988,12 +1037,10 @@ systems is that the user types:</para>
 it can and prepares for the build process, the second command builds
 the software in place (but does not install it), and the last command
 installs it on the system.  (The first two commands are done as a
-regular user, the latter as root.)</para>
-
-<para>There is not space here to go into the details of setting up
-this system, but see the excellent <citetitle>GNU Autoconf, Automake,
-and Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.
-It is published as treeware, and its content is freely available
+regular user, the latter as root.)  For more details about setting up
+this system, see the excellent <citetitle>GNU Autoconf, Automake, and
+Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
+is published as treeware, and its content is also freely available
 online at <ulink url="http://sources.redhat.com/autobook/"/>.</para>
 
 <para>You can deviate from this standard if you really need to.
@@ -1027,7 +1074,7 @@ system.</para>
 
 <para>Using "the standard method", whatever that may mean in your
 project's context, is really the main thing.  Be willing to put in a
-lot of extra energy in order to make your project conform to the
+lot of extra effort in order to make your project conform to the
 relevant build or installation standards.  Building and installing is
 an entry point: it's okay for things to get harder after that, if they
 absolutely must, but it would be a shame for the user's or developer's
@@ -1122,29 +1169,73 @@ can.</para>
 
 </sect1>
 
-</sect1>
-
 <!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-releasing">
 <title>Releasing</title>
 
-<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
-somewhere in here.  That should probably be in reference to the
-CHANGES file, which should be described here but linked to from
-there.)</remark></para>
+<para>Once the source tarball is produced from the stabilized release
+branch, the public part of the release process begins.  But first,
+before the tarball is made available to the world at large, it should
+be tested and approved by some minimum number of developers, usually
+three or more.  Approval is not simply a matter of inspecting the
+release for obvious flaws; ideally, the developers download the
+tarball, build and install it onto a clean system, and run the
+regression test suite (see <xref linkend="pfs-testing"/>).  Assuming
+it passes these checks, as well as any other release checklist
+criteria the project may have, the developers then digitally sign the
+tarball using GnuPG (<ulink url="http://www.gnupg.org/"/>), PGP
+(<ulink url="http://www.pgpi.org/"/>), or some other program capable
+of producing PGP-compatible signatures.</para>
 
-<para><remark>(GPG-signatures, checksums.  No, MD5 and SHA-1 are not
-"broken" for these purposes.)</remark></para>
+<para>In most projects, the developers just use their personal digital
+signatures, and as many developers as want to may sign (there is a
+minimum number, but not a maximum).  The more developers sign, the
+more testing the release has undergone, and also the greater the
+likelihood that a security-conscious user can find a digital trust
+path from themselves to the tarball.</para>
 
-<para><remark>(Differentiate between release manager and release
-owner.  Talk about voting on allowing the release out the door, as a
-final sanity check.)</remark></para>
+<para>Once approved, the release (that is, all tarballs, .zip files,
+and whatever other formats are being distributed) should be placed
+into the project's download area, accompanied by the digital
+signatures, and by MD5/SHA1 checksums (see
+<ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
+There are various standards for doing this.  One way is to accompany
+each released package with a file giving the corresponding digital
+signatures, and another file giving the checkum.  For example, if one
+of the released packages is <filename>scanley-2.5.0.tar.gz</filename>,
+then next to it place a file
+<filename>scanley-2.5.0.tar.gz.asc</filename> containing the digital
+signature for that tarball, and another file
+<filename>scanley-2.5.0.tar.gz.md5</filename> containing its MD5
+checksum, and optionally another,
+<filename>scanley-2.5.0.tar.gz.sha1</filename>, containing the SHA1
+checksum.  A different way is to collect all the signatures for all
+the released packages into a single file,
+<filename>scanley-2.5.0.sigs</filename>; the same may be done with the
+checksums.</para>
+
+<para>It doesn't really matter which way you do it, just keep to a
+simple scheme, describe it clearly, and be consistent from release to
+release.  The purpose of all this signing and checksumming is to give
+users a way to verify that the copy they receive has not been
+maliciously tampered with.  Users are about to run this code on their
+computers&mdash;if the code has been tampered with, an attacker could
+suddenly have a back door to all their data.  See
+<xref linkend="pfs-security-releases"/> for more about paranoia.</para>
+
+<para><remark>[... working here ...]</remark></para>
 
 <para><remark>(Maybe refer here from the "Announcing" in Chapter
 2.)</remark></para>
 
 <para><remark>(Talk about leading up to the release w/ candidate
 releases, for major releases.)</remark></para>
+
+<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
+somewhere in here.  That should probably be in reference to the
+CHANGES file, which should be described here but linked to from
+there.)</remark></para>
 
 </sect1>
 
@@ -1174,20 +1265,33 @@ Ch. 6, of course.)</remark></para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-testing">
+<sect1 id="pfs-releases-and-daily-development">
+<title>Releases and Daily Development</title>
+
+<para><remark>(Maybe discuss how development goes on in parallel with
+releases.  Importance of logical change boundaries, to make change
+porting manageable.)</remark></para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-testing">
 <title>Testing, Automated and Otherwise</title>
 
 <para><remark>(Regression testing: choosing the right level of
-formality.  Coordinating results from human volunteers.)</remark></para>
+formality.  Coordinating results from human volunteers.  Importance of
+the don't-break-the-build concept.)</remark></para>
 
-</sect1>
+</sect2>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-planning">
+<sect2 id="pfs-planning">
 <title>Planning Releases</title>
 
-<para><remark>(Basically, how to integrate release management with
-the bug tracker.)</remark></para>
+<para><remark>(Basically, how to integrate release management with the
+bug tracker.  Don't wait too long between releases, because then
+developers feel that any given release is too important, and are
+crushed when their code doesn't make it in.)</remark></para>
+
+</sect2>
 
 </sect1>
 
