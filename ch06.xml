@@ -1163,6 +1163,61 @@ necessary support from key people first.</para>
 <sect1 id="pfs-growth">
 <title>Handling Growth</title>
 
+<para>The price of success is heavy in the open source world.  As your
+software gets more popular, the number of people who show up looking
+for information will increase dramatically, while the number of people
+able to provide information will increase much more slowly.
+Furthermore, even if the ratio were evenly balanced, there is still a
+fundamentaly scalability problem with the way most open source
+projects handle communications.  Consider mailing lists, for example.
+Most projects have a mailing list for users&mdash;sometimes the list's
+name is "users", or "discuss", or "help", or something else.  Whatever
+its name, the purpose of the list is always the same: to provide a
+place where people can get their questions answered, while others
+watch and (presumably) absorb knowledge from observing these
+exchanges.</para>
+
+<para>These mailing lists work very well up to a few thousand users
+and/or a couple of hundred posts a day.  But somewhere after that the
+system starts to break down, because every subscriber sees every post,
+and if the number of posts to the list begins to exceed what any
+individual reader can process in a day, the list becomes a burden to
+its members.  Imagine, for instance, if Microsoft had a users mailing
+list for Windows XP.  Windows XP has hundreds of millions of users; if
+even one-tenth of one percent of them have questions in a given
+twenty-four hour period, then this hypothetical list would get
+hundreds of thousands of posts per day!  Such a list could never
+exist, of course; no one would stay subscribed to it.  And this
+problem is not limited to mailing lists; similar logic applies to IRC
+channels, online discussion forums, and all other systems in which
+groups hear questions from individuals.  The implications are ominous:
+the standard open source model of massively parallelized support
+simply does not scale to the levels needed for world domination.</para>
+
+<para>There is no explosion when your forums reach the breaking point.
+There isn't really a breaking point at all.  There is instead a quiet
+negative feedback effect: people unsubscribe from the lists, or leave
+the IRC channel, or at any rate stop bothering to ask questions,
+because they can see they won't be heard in all the noise.  As more
+and more people make this highly rational choice, the forums start to
+quiet down and become manageable again.  But they become manageable
+precisely because the rational people start looking elsewhere for
+information&mdash;while the irrational people stay behind and continue
+posting.  In other words, one side effect of continuing to use the
+same communications model even as the project grows, is that the
+average quality of both questions and answers tends to go down, which
+makes it look like new users are dumber than they used to be, when in
+fact they're probably not.  It's just that the cost/benefit ratio of
+using the massively parallel forums has increased, so naturally the
+sorts of people who think about cost/benefit ratios start to look
+elsewhere for answers first.</para>
+
+<para>A major part of handling project growth, therefore, is to make
+sure that there are many <emphasis>elsewheres</emphasis>, and that
+they are kept organized and up-to-date.</para>
+
+<para><remark>[... working here ...]</remark></para>
+
 <para><remark>Dividing into multiple forums.  Key is to make sure the
 purpose of each forum is clear, consciously steer people (e.g.,
 mailing list crossposts, irc channel redirects) to the right place,
@@ -1222,7 +1277,7 @@ these days.  Of course, the issue is not that the newcomers are of any
 lower quality than before; it's that they face a bigger acculturation
 burden than newcomers did in the past.</para>
 
-<para>These traditions a project accumulates are as much about how to
+<para>The traditions a project accumulates are as much about how to
 communicate and preserve information as they are about coding
 standards and other technical minutae.  We've already looked at both
 sorts of standards, in <xref linkend="pfs-written-rules"/> and
@@ -1236,18 +1291,17 @@ complexity.</para>
 <para>First, watch for patterns in how people get confused.  If you
 see the same situations coming up over and over, especially with new
 participants, chances are there is a guideline that needs to be
-documented but isn't.</para>
-
-<para>Second, don't get tired of saying the same things over and over
-again, and don't <emphasis>sound</emphasis> like you're tired of
-saying them.  You and other project veterans will have to repeat
-yourselves often; this is an inevitable side effect of the arrival of
-newcomers, which itself is simply a side effect of success.</para>
+documented but isn't.  Second, don't get tired of saying the same
+things over and over again, and don't <emphasis>sound</emphasis> like
+you're tired of saying them.  You and other project veterans will have
+to repeat yourselves often; this is an inevitable side effect of the
+arrival of newcomers, which itself is simply a side effect of
+success.</para>
 
 <para>A classic example of this sort of situation, and how to resolve
 it, happened with the bug-filtering technique described in
 <xref linkend="pfs-bug-filtering"/>.  Many bogus bug reports are filed
-by inexperienced people, and each time this happens the person must be
+by inexperienced people, and each time this happens the filer must be
 educated in exactly the same way as the five hundred people before
 him.  One day, after one of the developers in the Subversion project
 had finally gotten to the end of his rope and flamed some poor user
@@ -1278,7 +1332,7 @@ project.</para>
 A certain amount of intra-group policing (in the friendly-reminder
 sense, not the handcuffs-and-jail sense) is also required.  All peer
 review, even the commit reviews described in
-<xref linkend="pfs-code-review"/>, should include review of people's
+<xref linkend="pfs-code-review"/>, should include reviewing people's
 conformance or non-conformance with project norms, especially with
 regard to communications conventions.</para>
 
@@ -1286,8 +1340,8 @@ regard to communications conventions.</para>
 convention of "r12908" to mean "revision 12908 in the version control
 repository".  The lower-case "r" prefix is easy to type, and because
 it's half the height of the digits, when combined with the digits it
-makes for an easily-recognizeable bit of text.  Of course, settling on
-the convention doesn't necessarily mean that everyone begins using it
+makes for an easily-recognizeable block of text.  Of course, settling
+on the convention doesn't mean that everyone will begin using it
 consistently right away.  Thus when a commit mail comes in with a log
 message like this:</para>
 
@@ -1353,12 +1407,8 @@ itself.</remark></para>
 
 </sect2>
 
-
-</sect1>
-
-
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-using-archives">
+<sect2 id="pfs-using-archives">
 <title>Conspicuous Use of Archives</title>
 
 <!-- <remark>get Brian B's story of the FreeBSD IRC archives
@@ -1441,8 +1491,7 @@ themselves a) that they went nowhere, and b) that you did your
 homework, and therefore are probably saying something now that has not
 been said before.</para>
 
-<!-- ======================== subsection ============================== -->
-<sect2 id="pfs-all-as-archives">
+<sect3 id="pfs-all-as-archives">
 <title>Treat All Resources Like Archives</title>
 
 <para>All of the preceding advice applies to more than just mailing
@@ -1556,6 +1605,8 @@ lists tend to have this functionality natively, while other formats
 may require some extra effort on the maintainer's part (<xref
 linkend="pfs-ch-8"/> discusses how to spread that maintenance burden
 across many volunteers).</para>
+
+</sect3>
 
 </sect2>
 
