@@ -150,6 +150,15 @@ of tools for managing information:
            information (e.g., reproduction recipes) about particular
            bugs.</para>
    </listitem>
+<!--
+   <listitem>
+     <para><emphasis role="bold">Discussion Forums.</emphasis>
+           <remark>Basically, bulletin board systems.  These are not
+           as widespread as one would expect, and where they are
+           found, they're not used as much as one would expect.  Why?
+           Are they worth mentioning at all?<remark></para>
+   </listitem>
+-->
    <listitem>
      <para><emphasis role="bold">Real-Time chat.</emphasis>
            A place for quick, lightweight discussions and
@@ -1506,6 +1515,19 @@ everything together also means that new features can be committed
 together with their documentation updates, that branching the code
 will branch the documentation too, etc.</para>
 
+<para>Don't keep <firstterm>generated files</firstterm> under version
+control.  They are not truly editable data, since they are produced
+programmatically from other files.  For example, some build systems
+create <filename>Makefile</filename> based on the template
+<filename>Makefile.in</filename>.  To make a change to the
+<filename>Makefile</filename>, one would edit
+<filename>Makefile.in</filename> and then regenerate; thus, only the
+template <filename>Makefile.in</filename> is an "editable file".
+Always version only the templates.  If you version the result files as
+well, people will inevitably forget to regenerate when they commit a
+change to a template, and the resulting inconsistencies will cause no
+end of confusion.</para>
+
 <para>The rule that all editable data should be kept under version
 control has one unfortunate exception: the bug tracker.  Bug databases
 hold plenty of editable data, but for technical reasons generally
@@ -1590,19 +1612,19 @@ configure a couple of default behaviors:
 
   <listitem>
   <para>Some commit mailers don't include the actual change
-  <firstterm>diff</firstterm> in the email, instead providing a URL to
-  view the change on the web using the repository browsing system.
+  <firstterm>diff</firstterm> in the email, but instead provide a URL
+  to view the change on the web using the repository browsing system.
   While it's good to provide the URL, so change can be referred to
   later, it is also <emphasis>very</emphasis> important that the
   commit email include the diffs themselves.  Reading email is already
   part of people's routine, so if the content of the change is visible
   right there in the commit email, developers can review the commit on
-  the spot, without leaving their email reader.  If they have to click
+  the spot, without leaving their mailreader.  If they have to click
   on a URL to review the change, most won't do it, because that
   requires a new action, instead of a continuation of what they were
-  already doing.  Furthermore, if the reviewer wants to respond to the
-  change, it's vastly easier to hit reply-with-text and simply
-  annotate the quoted text, than it is to visit a web page and
+  already doing.  Furthermore, if the reviewer wants to ask something
+  about the change, it's vastly easier to hit reply-with-text and
+  simply annotate the quoted text, than it is to visit a web page and
   laboriously cut-and-paste parts of the diff from web browser to
   email client.</para>
 
@@ -2045,8 +2067,8 @@ other developers, etc.</para>
     email address, so they can be contacted for more information.
     (However, it should not <emphasis>require</emphasis> the
     reporter's email address, as some people prefer to report issues
-    anonymously.  See <xref linkend="pfs-ch-3-sect-7.1"/> for more on
-    the importance of anonymity.)</para>
+    anonymously.  See <xref linkend="pfs-ch-3-sect-7.1.1"/> for more
+    on the importance of anonymity.)</para>
   </listitem>
 </itemizedlist>
 
@@ -2476,78 +2498,154 @@ various points of view.</para>
 <sect1 id="pfs-ch-3-sect-7">
 <title>Web Site</title>
 
-<para><remark>Describe how the web site ties these functions
-together, advantages and disadvantages of maintaining the site
-yourself.  Mention searchability, give the 
-  <screen>
-  &lt;form action="http://www.google.com/search"&gt;
-  Search the Subversion web archives with Google:
-  &lt;input name=as_q size=30&gt; &lt;input value="Search" type=submit&gt;
-  &lt;input type=hidden name=as_sitesearch value="www.contactor.se"&gt;
-  &lt;/form&gt;
-  </screen>
-example.</remark></para>
+<para>There is not much to say about setting up the project web site
+from a technical point of view: writing web pages is fairly simple,
+and most of the important things to say about layout and arrangement
+were covered in the previous chapter.  The web site's main function is
+to present a clear and welcoming overview of the project, and to bind
+together the other tools (the version control system, bug tracker,
+etc).  Even if you don't have the expertise to set up a web server
+yourself, it's usually not hard to find someone who does and is
+willing to help out.  Nonetheless, to save time and effort, people
+often prefer to use one of the <firstterm>canned hosting</firstterm>
+sites, which offer prepackaged, templatized web sites with all the
+accompanying tools needed to run a free software project.</para>
 
 <sect2 id="pfs-ch-3-sect-7.1">
 <title>Canned Hosting</title>
 
-<para>Describe various sites that provide some of these services for
-free, such as SourceForge, Savannah, Freenode, etc.  Evaluate
-pros/cons of each, compare with roll-your-own solutions. </para>
+<para>There are two main advantages to using a canned site.  The first
+is server capacity and bandwith: their servers are beefy boxes sitting
+on really fat pipes.  No matter how successful your project gets,
+you're not going to run out of disk space or swamp the network
+connection.  The second advantage is simplicity.  They have already
+chosen a bug tracker, a version control system, a mailing list manager
+and archiver, and everything else you need to run a site.  They've
+configured the tools, and are taking care of backups for all the data
+stored in the tools.  You don't need to make many decisions.  All you
+have to do is fill in a form, press a button, and suddenly you've got
+a project web site.</para>
 
-<para><remark>(Mention the survey by Haggen So, at
-http://www.ibiblio.org/fosphost/ and
-http://www.ibiblio.org/fosphost/exhost.htm.  It's pretty amazing!)
-</remark></para>
+<para>These are pretty significant benefits.  The disadvantage, of
+course, is that you must accept <emphasis>their</emphasis> choices and
+configurations, even if something different would be better for your
+project.  Usually canned sites are adjustable within certain narrow
+parameters, but you will never get the fine-grained control you would
+have if you set up the site yourself and had full administrative
+access to the server.</para>
 
-<para><remark>A *perfect* example of one disadvantage of using a
-canned site: the handling of generated files.  You don't want them in
-version control, because they're generated.  On the other hand, you
-can't make arbitrary scripts run on the server, because you don't own
-the server.  Use the SVN FAQ as a cautionary tale.</remark></para>
+<para>A perfect example is the handling of generated files.  Certain
+project web pages may be generated files &mdash; for example, there
+are systems for keeping FAQ data in an easy-to-edit master format,
+from which HTML and PDF and other presentation formats can be
+generated.  As explained in <xref linkend="pfs-ch-3-sect-3.3.1"/>, you
+wouldn't want to version the generated formats, only the master file.
+But when your web site is hosted on someone else's server, it may be
+impossible to set up a custom hook to regenerate the HTML version of
+the FAQ whenever the master file is changed.  The only workaround is
+to version the generated formats too, so that they show up on the web
+site.</para>
 
-<para><remark>Another example: HTML header overrides can affect
-stylesheet control.</remark></para>
+<para>There can be larger consequences as well.  You may not have as
+much control over presentation as you would wish.  Some of the canned
+hosting sites allow you to customize your web pages, but the default
+layout usually ends up showing through in various awkward ways.  For
+example, some projects that host themselves at SourceForge have
+completely customized home pages, but still point developers to their
+"SourceForge page" for more information.  The SourceForge page is what
+would be the project's home page, had the project not customized, and
+contains links to the bug tracker, the CVS repository, downloads, etc.
+Unfortunately, a SourceForge page also contains a great deal of
+extraneous noise.  The top is banner add, often an animated image.
+The left side is a vertical arrangement of links of little relevance
+to someone interested in the project.  The right side is often another
+advertisement.  Only the center of the page is devoted to truly
+project-specific material, and even that is arranged in a confusing
+way that often makes visitors unsure of what to click on next.</para>
 
-<para><remark>Yet another problem with them: they sometimes have
-gratuitous login requirements.  See the bit in
-<filename>thoughts</filename> that says:
-<screen>
-* user account mgmt on the project web site?
-  Maybe, but emphasize that login should *never* be required for read
-  access.  Everything -- code, issue tracker, etc -- should be
-  accessible anonymously.  login to file issues is barely acceptable :-).
-</screen>
-</remark></para>
+<para>Behind every individual aspect of SourceForge's design, there is
+no doubt a good reason &mdash; good from SourceForge's point of view,
+such as the advertisements.  But from an individual project's point of
+view, the result can be a less-than-ideal web page.  I don't mean to
+pick on SourceForge; similar concerns apply to many of the canned
+hosting sites.  The point is that there's a tradeoff.  You get relief
+from the technical burdens of running a project site, but only at the
+price of accepting someone else's way of running it.</para>
 
-<para><remark>(Note that some of these problems can be worked around,
-by hosting some of the pages off-site.  You can use the big hosting
-site for its strengths &mdash; bandwidth, list software, version
-control, bug tracker &mdash; and direct traffect to a
-smaller-but-more-hands-on site for stuff that isn't access as often as
-the front page and the major services.)</remark></para>
+<para>Only you can decide which way is best for your project.  If you
+choose a canned site, leave open the option of switching to your own
+servers later, by using a custom domain name for the project's "home
+address".  You can forward the URL to the canned site, or have a fully
+customized home page at the public URL and hand off to the canned site
+for sophisticated functionality.  Just make sure to arrange things
+such that if you later decide to use a different hosting solution, the
+project's address doesn't need to change.</para>
 
-</sect2>
-
-
-<sect2 id="pfs-ch-3-sect-7.2">
+<sect3 id="pfs-ch-3-sect-7.1.1">
 <title>Anonymity and Involvement</title>
 
-<para><remark>Make sure to allow anonymous and semi-anonymous bug
-logging (for example, tigris.org fails in this regard -- requiring an
-email address for contact is okay, but requiring account creation is
-not).  This is a good general example of the perils of user
-accounts.  Accounts force people to have a greater level of initial
-involvement than they really want; this can lose you a lot of
-bug-reports/emails (if subscription required to
-post)/etc.</remark></para>
+<para>A problem which is not strictly limited to the canned sites, but
+is most often found there, is the abuse of user login functionality.
+The site allows each visitor to register themselves with a username
+and password.  From then on it keeps a profile for that user, and
+project administrators can assign the user certain permissions, for
+example, the right to commit to the repository.</para>
+
+<para>The ability to assign different permissions to different users
+through a web-based interface is extremely useful, and in fact it's
+one of the prime advantages of canned hosting.  The problem is that
+sometimes user login is required for tasks that ought to be permitted
+to anonymous visitors, specifically the ability to file issues in the
+bug tracker, and to comment on existing issues.  By require a
+logged-in username for such actions, the project raises the
+involvement bar for what should be quick, convenient tasks.  Of
+course, one wants to be able to contact someone who's entered data
+into the issue tracker, but having a field where they can enter their
+email address (if they want to) is sufficient.  If a new user spots a
+bug and wants to report it, they'll only be annoyed at having to fill
+out an account creation form before they can enter data into the bug.
+tracker.  They may simply decide not to file the bug at all.</para>
+
+<para>The advantages of user management generally outweigh the
+disadvantages.  But if you can choose which actions can be done
+anonymously, make sure not only that <emphasis>all</emphasis>
+read-only actions are permitted to non-logged-in visitors, but also
+some data entry actions, especially in the bug tracker and, if you
+have them, wiki pages.</para>
+
+</sect3>
+
+<sect3 id="pfs-ch-3-sect-7.1.2">
+<title>Choosing a Canned Hosting Site</title>
+
+<para>The largest and most well-known hosting site is <ulink
+url="http://www.sourceforge.net/">SourceForge</ulink>.  Two other
+sites providing the same or similar services are <ulink
+url="http://savannah.gnu.org/">savannah.gnu.org</ulink> and <ulink
+url="http://www.berlios.de/">BerliOS.de</ulink>.  A few organizations,
+such as the <ulink url="http://www.apache.org/">Apache Software
+Foundation</ulink> and <ulink
+url="http://www.tigris.org/">Tigris.org</ulink><footnote><para>Disclaimer:
+I am employed by <ulink
+url="http://www.collab.net/">CollabNet</ulink>, which sponsors
+Tigris.org, and I use Tigris regularly.</para></footnote>, give free
+hosting to open source projects that fit well with their missions and
+their community of existing projects.</para>
+
+<para>Haggen So did a thorough evaluation of various canned hosting
+sites, as part of the research for his Ph.D. thesis
+<citetitle>Construction of an Evaluation Model for Free/Open Source
+Project Hosting (FOSPHost) sites</citetitle>.  The results are at
+<ulink url="http://www.ibiblio.org/fosphost/"/>, and see especially
+the very readable comparison chart at <ulink
+url="http://www.ibiblio.org/fosphost/exhost.htm"/>.</para>
+
+</sect3>
 
 </sect2>
 
 </sect1>
 
-
-fooo
 
 <!-- ======================== SECTION ============================== -->
 
