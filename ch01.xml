@@ -1,6 +1,6 @@
 <chapter id="pfs-ch-1">
 
-<title>Introduction [ 10-15 pp ]</title>
+<title>Introduction <!-- [ 10-15 pp ] --></title>
 
 <simplesect>
 
@@ -62,23 +62,22 @@ about expected conduct.  Unsuccessful projects usually deviate in one
 or more ways from this core, albeit unintentionally, and may not have
 a consensus about what constitutes reasonable default behavior.  This
 means that when problems arise, the situation can quickly deteriorate,
-as the participants do not have an already-established core of
-cultural reflexes to fall back on when resolving differences. </para>
+as the participants may not have an already-established core of
+cultural reflexes to fall back on for resolving differences. </para>
 
-<para> This book is mainly about the benefits of adhering to these
-core practices, and the consequences of deviating from them.  It is
-meant to be a practical guide, not an anthropological study.  However,
-a working knowledge of the origins and current state of open source
-culture is an essential foundation for any practical advice.  A person
-who understands the culture can travel far and wide in the open source
+<para> This book is a practical guide to running open source projects,
+not an anthropological study nor a history.  However, a working
+knowledge of the origins of today's free software culture is an
+essential foundation for any practical advice.  A person who
+understands the culture can travel far and wide in the open source
 world, encountering many local variations in custom and dialect, yet
 still be able to participate comfortably and effectively everywhere.
 A person who does not understand the culture will find the process of
 organizing or participating in a project difficult and full of
-surprises.  Since the number of people using and developing free
-software is growing rapidly, there are many people in the latter
-category.  This is largely a culture of recent immigrants, and will
-continue to be so for some time.  If you think you might be in that
+surprises.  Since the number of people developing free software is
+still growing rapidly, there are many people in the latter category at
+any given time.  This is largely a culture of recent immigrants, and
+will continue to be so for a while.  If you think you might be in that
 category, then the next section will help provide background for
 discussions you'll encounter later, both in this book and on the
 Internet.  (On the other hand, if you've been working with open source
@@ -95,32 +94,37 @@ to skip the next section.)  </para>
 <para> Software sharing has been around as long as software itself.
 In the early days of computers, manufacturers felt that any
 competitive advantages were to be had mainly in hardware innovation,
-and therefore didn't pay much attention to software as a business
-asset.  Many of the customers for these early machines were scientists
-or technicians, who were able to write their own software, and the
-manufacturers saw no reason to prevent them from doing so.  They even
-let customers to modify the manufacturer's own software, which was
-shipped with the machine.  Customers sometimes distributed their
-patches back not only to the manufacturer, but to other owners of
-similar machines.  </para>
+and didn't pay much attention to software as a business asset.  Many
+of the customers for these early machines were scientists or
+technicians, who were able to modify and extend the software the
+manufacturers shipped with the machine.  Customers sometimes
+distributed their patches back not only to the manufacturer, but to
+other owners of similar machines.  Manufacturers often tolerated and
+even encouraged this: any improvement made to the software probably
+just made the machine more attractive to other potential customers.
+</para>
 
 <para> Although this early period resembled today's free software
 culture in many ways, it differed in two crucial respects.  First,
-there was as yet little standardization of hardware.  It was a time of
-flourishing innovation, and the diversity of computing architectures
-meant that everything was incompatible with everything else.  Software
-written for one machine would generally not work on another, so
-programmers tended to acquire expertise in a particular architecture
-or family of architectures (whereas today they would be more likely to
-acquire expertise in a programming language or family of languages,
-confident that their expertise will be transferable to whatever
-computing platform they happen to find themselves working with).
-</para>
+there was as yet little standardization of hardware, so software
+written for one machine would generally not work on another.  It was a
+time of flourishing innovation in computer design, and the diversity
+of computing architectures meant that everything was incompatible with
+everything else.  Programmers therefore tended to acquire expertise in
+a particular architecture or family of architectures (whereas today
+they would be more likely to acquire expertise in a programming
+language or family of languages, confident that their expertise will
+be transferable to whatever computing platform they happen to find
+themselves working with).  Since code and expertise tended to be
+particular to one kind of computer, they had the effect of making that
+computer more valuable &mdash; thus it was in the manufacturer's
+interests to for that code and knowledge to spread as widely as
+possible.  </para>
 
-<para> Second, there was no Internet.  Thus, though there were few
-legal restrictions on sharing, there were still technical ones: the
-means of getting data from place to place were inconvenient and
-cumbersome by today's standards.  There were some small, local
+<para> Second, there was no Internet.  Though there were fewer legal
+restrictions on sharing than today, there were more technical ones:
+the means of getting data from place to place were inconvenient and
+cumbersome, relatively speaking.  There were some small, local
 networks, good for sharing information among employees at the same
 research lab or company.  But there remained barriers to overcome if
 one wanted to share with everyone, no matter where they were.  Of
@@ -129,7 +133,7 @@ cases.  Sometimes different groups made contact with each other
 independently, sending disks or tapes through land mail, and sometimes
 the manufacturers themselves served as central clearing houses for
 patches.  But the physical realities of data transmission meant there
-was always an impedance to sharing, and it was proportional to the
+was always an impedance to sharing, an impedance proportional to the
 distance (real or organizational) that the software had to travel.
 Frictionless widespread sharing was not possible, the way it is today.
 </para>
@@ -138,33 +142,200 @@ Frictionless widespread sharing was not possible, the way it is today.
 simultaneously.  The wild diversity of hardware designs gradually gave
 way to a few clear winners &mdash; winners through superior
 technology, superior marketing, or some combination thereof.  At the
-same time, the development of so-called "high level", or portable,
-programming languages meant that one could write a program once, in
-one language, and have it automatically translated ("compiled") to run
-on different kinds of computers.  The implications of this were not
-lost on the hardware manufacturers: a customer could undertake a major
+same time, the development of so-called "high level" programming
+languages meant that one could write a program once, in one language,
+and have it automatically translated ("compiled") to run on different
+kinds of computers.  The implications of this were not lost on the
+hardware manufacturers: a customer could now undertake a major
 software engineering effort without necessarily locking themselves
-into one particular computer architecture.  When combined with the
-fact that the performance differences between different computers were
-gradually narrowing, as the less efficient designs were weeded out,
-any manufacturer that treated its hardware as its only asset could
-look forward to a future of declining profit margins.  Meanwhile, with
-the advent of high level programming languages, and the ubiquity of
-the most successful computer architectures, selling software began to
-look like a viable business.  </para>
+into one particular computer architecture.  When this was combined
+with the fact that the performance differences between different
+computers were gradually narrowing, as the less efficient designs were
+weeded out, a manufacturer that treated its hardware as its only asset
+could look forward to a future of declining profit margins.  Raw
+computing power was becoming a fungible good, while software was
+becoming the differentiator.  Selling software, or at least treating
+it as an integral part of hardware sales, began to look like a good
+strategy.  </para>
 
-<para> Thus, at roughly the same time that the smaller local networks
-were connecting together to form the Internet, software began to be
-worth money, to some degree independently of the machine it might run
-on. </para>
+<para> Naturally, this meant that manufacturers had to start enforcing
+the copyrights on their code more strictly.  If users simply continued
+to share and modify code freely among themselves, they might
+independently reimplement some of the improvements now being sold as
+"added value" by the supplier.  Worse, shared code could get into the
+hands of competitors.  The irony is that all this was happening around
+the time the Internet was getting off the ground.  Just when truly
+unobstructed software sharing was finally about to become technically
+possible, changes in the computer business made it economically
+undesirable, at least from the point of view of any single company.
+The suppliers clamped down, either denying users access to the code
+that ran their machines, or insisting on non-disclosure agreements
+that made effective sharing impossible.  </para>
+
+<para> As the world of unrestricted code swapping slowly faded away,
+its disappearance caused a political idea to crystallize in the mind
+of at least one programmer.  Richard Stallman worked in the Artificial
+Intelligence Lab at the Massachusetts Institute of Technology in the
+1970s and early 80s, during what turned out to be a golden age and a
+golden location for code sharing.  The AI Lab had a strong "hacker
+ethic"<footnote><para>Stallman uses the word "hacker" in the sense of
+"someone who loves to program and enjoys being clever about it", not
+the relatively new meaning of "someone who breaks into
+computers".</para></footnote>, and people were not only encouraged but
+expected to share whatever improvements they made to the system.
+</para>
+
+<para> This edenic community collapsed around Stallman shortly after
+1980.  A startup company hired away many of the AI Lab programmers, to
+work on an operating system similar to what they had been working on
+before, only now under an exclusive license.  At the same time, the
+Lab acquired new equipment that came with a proprietary operating
+system.  Stallman began to see a larger pattern to what was happening:
+</para>
+
+    <blockquote>
+      <!-- Okay, I admire the whole semantic-not-presentational
+           markup philosophy.  It's great.  It will end world hunger,
+           prevent nuclear proliferation, and make Eddie Murphy funny
+           again.  Nevertheless, *I want italics* in my blockquotes,
+           dang it.  Not "the idea" of italics, not "the moral
+           equivalent of italics", not "the font style formerly known
+           as italic", but honest-to-goodness italics.  Every time.
+           If <emphasis></emphasis> is how to do it, then that's what
+           we'll use. --> 
+
+      <para><emphasis>The modern computers of the era, such as the VAX
+      or the 68020, had their own operating systems, but none of them
+      were free software: you had to sign a nondisclosure agreement
+      even to get an executable copy.</emphasis> </para>
+
+      <para><emphasis>This meant that the first step in using a
+      computer was to promise not to help your neighbor. A cooperating
+      community was forbidden. The rule made by the owners of
+      proprietary software was, "If you share with your neighbor, you
+      are a pirate. If you want any changes, beg us to make them."
+      </emphasis> </para>
+
+      <para>(from <emphasis role="bold"><systemitem class="url"
+      >http://www.gnu.org/gnu/thegnuproject.html</systemitem></emphasis>)
+      </para>
+
+    </blockquote>
+
+<para> By some quirk of personality, he decided to resist the trend.
+Instead of continuing to work at the now-decimated AI Lab, or taking a
+job write code at one of the new companies, where it would be kept
+locked in a box, he resigned from the Lab and started the GNU Project
+and the Free Software Foundation.  The goal of GNU<footnote><para>It
+stands for "GNU's Not Unix", and the "GNU" in that expansion stands
+for... the same thing.</para></footnote> was to develop a completely
+free and open computer operating system and body of application
+software, in which users would never be prevented from hacking or from
+sharing their modifications.  He was, in essence, setting out to
+recreate what had been destroyed at the AI Lab, but on a world-wide
+scale and without the vulnerabilities that had made the AI Lab's
+culture susceptible to disintegration.  </para>
+
+<para> In addition to writing software, Stallman devised a copyright
+license whose terms guaranteed that his code would be perpetually
+free.  The GNU General Public License is a clever piece of legal judo:
+it says that the code may copied and modified without restriction, and
+that both copies and derivative works (i.e., modified versions) must
+be distributed under the same license as the original, with no
+additional restrictions.  In effect, it uses copyright law to achieve
+an effect opposite to that of traditional copyright: instead of
+controlling the software's distribution, it prevents
+<emphasis>anyone</emphasis>, even the author, from controlling it.
+For Stallman, this was better than simply putting his code into the
+public domain.  If it were in the public domain, any particular copy
+of it could be taken and used as part of a proprietary program.  While
+this wouldn't in any way diminish the original code's continued
+availability in the public domain, it would have still meant that
+Stallman's efforts could benefit the enemy &mdash; proprietary
+software.  The GPL was a way of sealing off the free world from the
+non-free world.  (The GNU General Public License and its relationship
+to other free software licenses are discussed in detail in <xref
+linkend="pfs-ch-3"/>.)
+</para>
+
+<para> With the help of many programmers, some of whom shared
+Stallman's ideology and some of whom simply wanted to see a lot of
+free code available, the GNU Project began releasing free replacements
+for many of the most critical components of an operating system.
+Because of the now-widespread standardization in computer hardware and
+software, it was possible to use the GNU replacements on otherwise
+non-free systems, and many people did.  The GNU text editor (Emacs)
+and C compiler (GCC) were particularly successful, gaining large and
+loyal followings simply because of their technical merits.  By about
+1990, GNU had produced most of a free operating system, except for the
+kernel &mdash; the part that the machine actually boots up, and that
+is resposible for managing memory, disk, and other system resources.
+</para>
+
+<para> Unfortunately, the project had chosen a kernel design that
+turned out to be harder to implement than expected.  The ensuing delay
+prevented the Free Software Foundation from making the first release
+of an entirely free operating system.  The final piece was put into
+place instead by Linus Torvalds, a Finnish computer science student
+who, with the help of volunteers around the world, had completed a
+free kernel using a fairly conservative design.  He named it Linux,
+and when it was combined with the existing GNU programs, the result
+was a completely free operating system: for the first time, you could
+boot up your computer and do work without once invoking a piece of
+proprietary code<footnote><para>Technically, Linux may not have been
+the first.  A free operating system for IBM-compatible computers,
+called 386BSD, had come out shortly before Linux.  However, it was a
+lot harder to get 386BSD up and running.  The reason Linux made such a
+splash was that not only was it free, but it actually had a high
+chance of booting your computer when you installed it.</para></footnote>
+</para>
+
+<para> Although he released the kernel under the GNU General Public
+License, Torvalds was less ideologically driven than Stallman.  He
+preferred to work on free software, but did not consider proprietary
+software a social evil, and was even willing to use it himself on
+occasion.  The appearance of the Linux kernel was one early sign of a
+trend that would eventually grow to become very significant: the
+participation of people who liked free software, like writing free
+software, liked cooperating with other people who like writing free
+software, but who ultimately did not look on it as a moral position.
+</para>
+
+<para> This broadening of the free software movement was probably
+inevitable, but it was helped along by a factor that a lot of people
+were noticing: free software was <emphasis>better</emphasis>.  In some
+cases, it was demonstrably technically superior to the nearest
+non-free alternative; in other cases, it was at least comparable, and
+of course it always cost less.  So while only a few people were
+motivated to run free software purely for philosophical reasons, a
+great many people were happy to run it if it would actually do a
+better job.  This tendency to produce good code was not confined to
+the GNU Project nor to Linux's band of volunteers.  It was happening,
+not universally but with at least some frequency, in projects around
+the world.  It turned out that having hordes of people hack on the
+same piece of software in parallel could result in very high-quality
+code.  </para>
+
+<para> Businesses that depended on software, but didn't sell it
+themselves and therefore had no fear of lost royalties, slowly began
+to take notice, and began funding free software projects.  The arrival
+of money led to one of the enduring tensions of free software scene:
+...  </para>
 
 <screen>
 
-- Segue into Stallman (explain about origin myths: how this may be
-  an oversimplified view, but nevertheless this history is so well
-  known that it is a useful cultural token).
+- Explain about the dual goal behind the creation of the term "Open
+  Source" (which btw is openly acknowledged by OSI, so refer to the
+  appropriate URL): avoid the confusion of "free beer" vs "free
+  speech", and *also* avoid the overtly ideological overtones of 
 
-- Follow outline from here?
+- Explain how it has turned out to be significant for the later
+  history of open source that it *started* as an overtly political
+  position, but then (on average) depoliticized a bit as it achieved
+  worldly success.  Both sides have had to find common ground, since
+  most projects included a few of each.
+
+- Follow outline from here.
 
 </screen>
 
@@ -279,16 +450,6 @@ and NPR and whatnot may be running breathless articles and ads
 Segue into the myth-dispelling portion of the outline.
 
 [Then basically follow the outline.]
-</screen>
-
-
-<screen> In twelve years, I've seen a lot of free software projects
-fail.  This is not because I have an especially sensitive nose for
-finding failures.  It's because most projects fail.  Failure is the
-norm.  If I had to summarize the most common reasons for failure,
-they would be:
-
-Technical reasons would come last.  [refer to Aramis here?]
 </screen>
 
 
