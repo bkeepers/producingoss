@@ -342,6 +342,13 @@ loose, mainly because people understand that strong compatibility
 constraints would hamper early development too much, and because early
 adopters tend to be forgiving anyway.</para>
 
+<para>Remember that all these injunctions only apply to this
+particular three-component system.  Your project could easily come up
+with a different three-component system, or even decide it doesn't
+need such fine granularity and use a two-component system instead.
+The important thing is to decide early, publish exactly what the
+components mean, and stick to it.</para>
+
 </sect2>
 
 <!-- ========================== subsection =========================== -->
@@ -795,25 +802,245 @@ have explicitly committed to it.</para>
 
 </sect2>
 
+<!-- ========================== SECTION =========================== -->
+<sect1 id="pfs-packaging">
+<title>Packaging</title>
+
+<para>The canonical form for distribution of free software is as
+source code.  This is true regardless of whether the software normally
+runs in source form (i.e., can be interpreted, like Perl, Python, PHP,
+etc) or needs to be compiled first (like C, C++, Java, etc).  With
+compiled software, most users will probably not compile the sources
+themselves, but will instead install from pre-built binary packages
+(see <xref linkend="pfs-binary-packages"/>).  However, those binary
+packages are still derived from a master source distribution.  The
+point of the source package is to unambiguously define the release.
+When the project distributes "Scanley&nbsp;2.5.0", what it means,
+specifically, is "The tree of source code files that, when compiled
+(if necessary) and installed, produces Scanley 2.5.0."</para>
+
+<para>There is are fairly strict standard for how source releases
+should look.  One will occasionally see deviations from this standard,
+but they are the exception not the rule.  Unless there is a compelling
+reason to do otherwise, your project should follow this standard
+too.</para>
+
 <!-- ========================== subsection =========================== -->
-<sect2 id="pfs-packaging">
-<title>Packaging for Distribution</title>
+<sect2 id="pfs-packaging-format">
+<title>Format</title>
 
-<para><remark>Talk about the importance of adhering to the standards.
-Describe and reference them.  Use cvs2svn as an example of how *not*
-to do it.  Importance of tight link between release numbering and
-tarball unpackment result name.  Importance of certain standard
-all-caps files in the top-level of the project, which will also serve
-as canonical reference targets from web pages.  Therefore it's
-important that either the version control system have a browse mode,
-or that the live web site be a checked out tree.  Note this in section
-3 on version control.</remark></para>
+<para>The source code should be shipped in the standard formats for
+transporting directory trees.  For Unix and Unix-like operating
+systems, the convention is to use TAR format, compressed
+by <command>compress</command>, <command>gzip</command>,
+<command>bzip</command> or <command>bzip2</command>.
+<firstterm>TAR</firstterm> stands for "Tape ARchive", because the
+format writes out a directory tree as a linear data stream, which
+makes it ideal for saving directory trees to tape; the same property
+makes it the the standard for distributing directory trees as a single
+file.  Producing compressed tar files (or
+<firstterm>tarballs</firstterm>) is pretty easy.  The details are
+beyond the scope of this book, but you someone in your project will
+likely know how to do it.  See the documentation for
+the <command>tar</command> command and for the compression commands
+given earlier.</para>
 
-<para><remark>Note also that packaging comprises the project's tree
-layout.  Describe the subversion/subversion/ odd result; how this is a
-perfect example of a bikeshed discussion, so you need to make sure it
-doesn't continue forever, but also not shut it down too
-early.</remark></para>
+<para>For MS Windows, the standard method for distributing directory
+trees is <firstterm>zip</firstterm> format, which happens to do
+compression as well, so there is no need to compress the archive after
+creating it.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-packaging-name-and-layout">
+<title>Name and layout</title>
+
+<para>The name of the package should consist of the software's name
+plus the release number, plus the format suffixes appropriate for the
+archive type.  For example, Scanley 2.5.0, packaged for Unix using GNU
+Zip (gzip) compression, would look like this:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.gz</literallayout>
+</informalexample>
+
+<para>or for Windows:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<para>Either of these archives, when unpacked, should create a single
+new directory tree named <filename>scanley-2.5.0</filename> in the
+current directory.  Underneath the new directory, the source code
+should be arranged in a layout ready for compilation (if compilation
+is needed) and installation.  In the top level of new directory tree,
+there should be a plain text <firstterm>README</firstterm> file
+explaining what the software does and what release this is, and giving
+pointers to other resources, such as the project's web site, other
+files of interest, etc.  Among those other files should be an
+<firstterm>INSTALL</firstterm> file, sibling to
+the <firstterm>README</firstterm>, giving instructions on how to build
+and install the software for all the operating systems it supports.
+As mentioned in <xref linkend="pfs-license-quickstart-applying"/>,
+there should also be a <filename>COPYING</filename> or
+<filename>LICENSE</filename> file, giving the software's terms of
+distribution.  Finally, there should be
+a <filename>CHANGES</filename> (or sometimes
+<filename>NEWS</filename>) file, explaining what's new in this
+release.  Usually the <filename>CHANGES</filename> file just
+accummulates entries describing every release, in reverse
+chronological order, so that the entry for this release appears at the
+top of the file.</para>
+
+<para>The actual layout of the source code inside the tree should be
+the same as, or as similar as possible to, the source code layout one
+would get by checking out the project from its version control
+repository directly.  Usually there are a few differences, for example
+because the package contains some generated files needed for
+configuration and compilation (see
+<xref linkend="pfs-packaging-build-install"/>), or because it includes
+third-party software that is not maintained by the project, but which
+is required and which users are not likely to have already.  Even if
+the distributed tree corresponds exactly to some developement tree in
+the version control repository, the distribution itself should not be
+a working copy (see <xref linkend="pfs-vc-vocabulary-working-copy"/>).
+It is supposed to represent a static reference point, a particular
+release of the software.  If it were a working copy, the danger would
+be that the user might update it, and afterwards think that they still
+have the release when in fact they have something different.</para>
+
+<sect3 id="pfs-release-capitalization">
+<title>To capitalize or not to capitalize</title>
+
+<para>When referring to a project by name, people generally capitalize
+it as a proper noun, and capitalize acronyms if there are any:
+"MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", etc.  Whether this
+capitalization is reproduced in the package name is up to the project.
+Either <filename>Scanley-2.5.0.tar.gz</filename> or
+<filename>scanley-2.5.0.tar.gz</filename> would be fine, for example
+(I personally prefer the latter, because I don't like to make people
+hit the shift key, but plenty of projects ship capitalized packages).
+The important thing is that the directory created by unpacking the
+tarball use the same capitalization.  There should be no surprises:
+the user must be able to predict with perfect accuracy the name of the
+directory that will be created when they unpack a distribution.</para>
+
+</sect3>
+<sect3 id="pfs-release-prereleases">
+<title>Pre-releases</title>
+
+<para>When shipping a pre-release or candidate release, the qualifier
+is truly a part of the release number, so include it in the name of
+the package's name.  For example, the ordered sequence of alpha and
+beta releases given earlier in
+<xref linkend="pfs-release-number-components"/> would result in
+package names like this:</para>
+
+<informalexample>
+<literallayout>scanley-2.3.0-alpha1.tar.gz
+scanley-2.3.0-alpha2.tar.gz
+scanley-2.3.0-beta1.tar.gz
+scanley-2.3.0-beta2.tar.gz
+scanley-2.3.0-beta3.tar.gz
+scanley-2.3.0.tar.gz</literallayout>
+</informalexample>
+
+<para>The first would upack into a directory
+named <filename>scanley-2.3.0-alpha1</filename>, the second into and
+<filename>scanley-2.3.0-alpha2</filename>, and so on.</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-packaging-build-install">
+<title>Compilation and Installation</title>
+
+<para>For software requiring compilation, the standard under Unix-like
+systems is that the user types:</para>
+
+<screen>
+   $ ./configure
+   $ make
+   # make install
+</screen>
+
+<para>The first command autodetects as much about the environment as
+it can and prepares for the build process, the second command builds
+the software in place (but does not install it), and the last command
+installs it on the system.  (The first two commands are done as a
+regular user, the latter as root.)</para>
+
+<para>There is not space here to go into the details of setting up
+this system, but see the excellent <citetitle>GNU Autoconf, Automake,
+and Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.
+It is published as treeware, and its content is freely available
+online at <ulink url="http://sources.redhat.com/autobook/"/>.</para>
+
+<para>You can deviate from this standard if you really need to.
+Usually when projects do, it's because they predate the recipe's
+solidification as a standard, or because the recipe doesn't fit their
+particular needs (for example, Perl module distributions have a
+different, but equally well-documented, standard for building and
+installing).  However, if you can possibly arrange your project to fit
+the standard, you should do so.  Those three commands are practically
+spinal reflexes for a lot of system administrators now.  If they see
+in your project's <filename>INSTALL</filename> file that this familiar
+invocation is all they need to do, that instantly raises their faith
+that your project is generally aware of conventions, and that it is
+likely to have gotten other things right as well.  Also, as discussed
+in <xref linkend="pfs-downloads"/>, having a standard build procedure
+pleases potential developers too.</para>
+
+<para>On Windows, the standards for building and installing are a bit
+less settled.  For projects requiring compilation, the general
+convention seems to be to ship a tree that can fit into the
+workspace/project model of the standard Microsoft development
+environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc).
+Depending on the nature of your software, it may be possible to offer
+a Unix-like build option on Windows via the Cygwin
+(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
+if you're using a language or programming framework that comes with
+its own build and install conventions, such as Perl or Python, then
+you should simply use whatever the standard method is for that
+framework, whether on Windows, Unix, Mac OS X, or any other operating
+system.</para>
+
+<para>Using "the standard method", whatever that may mean in your
+project's context, is really the main thing.  Be willing to put in a
+lot of extra energy in order to make your project conform to the
+relevant build or installation standards.  Building and installing is
+an entry point: it's okay for things to get harder after that, if they
+absolutely must, but it would be a shame for the user's or developer's
+very first interaction with the software to require unexpected
+steps.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-binary-packages">
+<title>Binary Packages</title>
+
+<para>who is responsible for binaries, and whence are they
+distributed?</para>
+
+<para>either provided via their operating system or obtained manually
+from the web site</para>
+
+.MSI installers, or self-installing .exe
+
+</sect2>
+
+</sect1>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-releasing">
+<title>Releasing</title>
 
 <para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
 somewhere in here.  That should probably be in reference to the
@@ -829,8 +1056,6 @@ final sanity check.)</remark></para>
 
 <para><remark>(Maybe refer here from the "Announcing" in Chapter
 2.)</remark></para>
-
-</sect2>
 
 </sect1>
 
