@@ -1805,11 +1805,67 @@ areas where they have been approved to commit, and making sure they
 can't commit anywhere else.  (See <xref linkend="pfs-ch-4-sect-3"/>
 for how projects decide who can commit where.)</para>
 
-<para><remark>todo: working here.  Don't overdo it.  It is not
-important to have automated protections everywhere, you're doing
-parallel code review anyway after all, and any change can be reverted.
-The honor system works fine.  It is important to distinguish between
-committers and non-committers, but that's about it.</remark></para>
+<para>There is probably little harm done by exercising such tight
+control, but there are benefits to a more relaxed policy too.  Some
+projects simply use an honor system: when a person is granted commit
+access, even for a sub-area of the repository, what they actually
+receive is a password that allows them to commit anywhere in the
+project.  They're just asked to keep their commits in their area.
+There are several advantages to this.  First, it means that as
+developers expand into other areas (which they usually will if they
+stay with the project), there is no administrative overhead to
+granting them wider privileges.  Once the decision is made, the person
+can just start committing in the new area right away.</para>
+
+<para>Second, expansion can be done in a more fine-grained manner.
+Generally, a committer in area X who wants to expand to area Y will
+start posting patches against Y and asking for review.  If someone who
+already has commit access to area Y sees such a patch and approves of
+it, they can just tell the submitter to commit the change directly
+(mentioning the reviewer/approver's name in the log message, of
+course).  That way, the commit will come from the person who actually
+wrote the change, which is preferable from both an information
+management standpoint and from a crediting standpoint.</para>
+
+<para>Last, and perhaps most important, using the honor system
+encourages an atmosphere of trust and mutual respect.  Giving someone
+commit access to a subdomain is a statement about their technical
+preparedness &mdash; it says "We see you have expertise to make
+commits in a certain domain, so go for it."  But imposing strict
+authorization controls is more personal: "Not only are we asserting a
+limit on your expertise, we're also a bit suspicious about your
+<emphasis>intentions</emphasis>."  That's not the sort of statement
+you want to make if you can avoid it.  Bringing someone into the
+project as a committer is an opportunity to initiate them into a
+circle of mutual trust.  A good way to do that is to give them more
+power than they're supposed to use, then inform them that it's up to
+them to stay within the stated limits.</para>
+
+<para>The Subversion project has operated on the honor system way for
+more than four years, with 33 full and 43 partial committers as of
+this writing.  The only distinction the system actually enforces is
+between committers and non-committers; all other divisions exist
+solely in the minds of the humans.  Yet we've never had a problem with
+someone deliberately committing outside their domain.  Once or twice
+there's been an innocent misunderstanding about the extent of
+someone's commit privileges, but it's always been resolved quickly and
+amiably.  Remember that there is no real risk here: in an active
+project, all commits are reviewed anyway, so if someone commits where
+they're not supposed to, others will notice it and say something.  If
+a change needs to be undone, that's simple enough &mdash; everything's
+under version control anyway, so just revert.</para>
+
+<para>Obviously, in situations where self-policing is impractical, you
+must rely on hard authorization controls.  But such situations are
+rare.  Even when there are millions of lines of code and hundreds or
+thousands of developers, a commit to any given code module should
+still be reviewed by those who work on that module, and they can
+recognize if someone committed there who wasn't supposed to.</para>
+
+<para>So don't spend too much time fiddling with your version control
+authorization system, unless you have a specific reason to.  It
+usually won't bring much tangible benefit, and there are advantages to
+relying on human controls instead.</para>
 
 </sect3>
 
