@@ -303,74 +303,157 @@ tandem:</para>
   <listitem><para><emphasis role="bold">Only auto-allow postings from
             list subscribers.</emphasis></para>
 
-            <para>This is very effective, and also involves the least
-            administrative overhead, since it's usually just a
-            matter of changing a setting in the mailing list's
-            configuration.  But posts which aren't automatically
-            approved mustn't be simply discarded.  Instead, they
-            should be passed along for moderation, for two reasons.
-            First, you want to allow non-subscribers to post.  Someone
-            with a question or suggestion may not want to bother
-            subscribing to a mailing list just to make a single post
-            there.  Second, even subscribers may sometimes post from
-            an address other than the one by which they're subscribed.
-            Email addresses are neither a unique nor a reliable method
-            of identifying people, and shouldn't be treated as
-            such.</para>
+            <para>This is effective as far as it goes, and also
+            involves very little administrative overhead, since it's
+            usually just a matter of changing a setting in the mailing
+            list software's configuration.  But posts which aren't
+            automatically approved must not be simply discarded.
+            Instead, they should be passed along for moderation, for
+            two reasons.  First, you want to allow non-subscribers to
+            post.  A person with a question or suggestion should not
+            need to subscribe to a mailing list just to make a single
+            post there.  Second, even subscribers may sometimes post
+            from an address other than the one by which they're
+            subscribed.  Email addresses are neither a unique nor a
+            reliable method of identifying people, and shouldn't be
+            treated as such.</para>
   </listitem>
 
   <listitem><para><emphasis role="bold">Filter posts through
             spam-filtering software.</emphasis></para>
 
-            <para>If the mailing list software makes it possible (and
-            most do), you can have posts filtered by spam-filtering
+            <para>If the mailing list software makes it possible (most
+            does), you can have posts filtered by spam-filtering
             software.  Automatic spam-filtering is not perfect, and
             never will be, since there is a never-ending arms race
             between spammers and filter writers.  However, it can
-            significantly reduce the amount of spam that gets through
-            to the moderation queue, and since the length of that
-            queue is directly proportional to the amount of time some
-            human has to spend examining it, any automatic spam
-            filtering that happens will be beneficial.</para>
+            greatly reduce the amount of spam that gets through to the
+            moderation queue, and since the longer that queue the more
+            time humans must spend examining it, any amount of
+            automated filtering is beneficial.</para>
+
             <para>There is not space here for detailed instructions
             on setting up spam filters.  You will have to consult
             your mailing list software's documentation for that (see
-            <xref linkend="pfs-ch-3-sect-2.5"/>).  As for the
-            filtering software itself, I've personally had good
-            experiences with two:
+            <xref linkend="pfs-ch-3-sect-2.5"/>).  Some list software
+            allows the use of external spam filters.  I've had good
+            experiences with these two:
             <ulink url="http://spamassassin.apache.org/"
                >SpamAssassin&nbsp;(http://spamassassin.apache.org/)</ulink>
             and <ulink url="http://spamprobe.sourceforge.net/"
                >SpamProbe&nbsp;(http://spamprobe.sourceforge.net/)</ulink>
-            This is not a comment on the other open source spam
-            filters out there.  I just happen to have used those two
-            myself and been satisfied with them.</para> 
+            This is not a comment on the many other open source spam
+            filters out there, some of which are apparently also
+            quite good.  I just happen to have used those two myself
+            and been satisfied with them.</para>
   </listitem>
 
   <listitem><para><emphasis role="bold">Moderation.</emphasis></para>
             <para>For mails that aren't automatically allowed by
             virtue of being from a list subscriber, and which make it
-            through the spam filtering software, the last stage is
-            <firstterm>moderation</firstterm>.
-            </para>
-  </listitem>
+            through the spam filtering software if any, the last stage
+            is <firstterm>moderation</firstterm>: the mail is routed
+            to a special address, where a human examines it and
+            accepts or rejects it.</para>
 
+            <para>Confirming a post takes one of two forms: you can
+            accept the post just this once, or you can tell the list
+            software to allow this and all future posts from the same
+            sender.  You almost always want to do the latter, in order
+            to reduce the future moderation burden.  Details on how
+            to confirm vary from system to system, but it's usually a
+            matter of replying to a special address with the command
+            "allow" (meaning allow just this one post) or "accept"
+            (accept this and future posts).</para>
+
+            <para>Rejecting is usually done by simply ignoring the
+            moderation mail.  If the list software never receives
+            confirmation that something is a valid post, then it won't
+            pass that post on to the list, so simply dropping the
+            moderation mail achieves the desired effect.  Sometimes
+            you also have the option of responding with a "reject" or
+            "deny" command, to automatically disapprove future mails
+            from the same sender without even running them through
+            moderation.  There is rarely any point doing this, since
+            moderation is mostly about spam prevention, and spammers
+            tend not to send from the same address twice.</para>
+            </listitem>
 </orderedlist>
 
-<para><remark>Note about not misusing moderation.  It should be an
-anti-spam technique and an anti-off-topicness technique, but nothing
-more.  Everything else should be let through.  Don't be tempted to
-answer questions directly in the moderation reply; that would deprive
-the list of an accurate picture of what sorts of questions are being
-asked, for example.  Also, it deprives others of the chance to answer
-them.</remark></para>
+<para>Be sure to use moderation <emphasis>only</emphasis> for
+filtering out spams and clearly off-topic messages (for example,
+someone posted to the wrong mailing list).  Even though the moderation
+system usually gives you a way to respond directly to the sender of
+the original post, don't use that channel to answer questions that
+really belong on the mailing list itself, even if you know the answer
+off the top of your head.  To do so would deprive the project's
+community of an accurate picture of what sorts of questions people are
+asking, and deprive them of a chance to answer questions themselves
+and/or see answers from others.  Mailing list moderation is strictly
+about keeping the list free of junk and off-topic emails, nothing
+more.</para>
 
 </sect3>
 
 <sect3 id="pfs-ch-3-sect-2.1.2">
-<title>Address Hiding</title>
+<title>Address Hiding in Archives</title>
 
-<para><remark>note empirical evidence of effectiveness</remark></para>
+<para>Another common anti-spam technique is for the mailing list
+archives to obscure people's email addresses, for example by
+replacing
+
+    <blockquote>
+      <para><literal>jrandom@somedomain.com</literal></para>
+    </blockquote>
+
+with
+
+    <blockquote>
+      <literal>jrandom_AT_somedomain.com</literal>
+    </blockquote>
+
+or
+
+    <blockquote>
+      <literal>jrandom&nbsp;{AT}&nbsp;somedomain.com</literal>
+    </blockquote>
+
+or some similarly obvious (to a human) encoding.  Since spam address
+harvesters often work by crawling through web pages &mdash; including
+your mailing list's online archives &mdash; and looking for sequences
+containing "@", encoding the addresses is a way of making people's
+email addresses invisible to spammers.  This does nothing to prevent
+spam sent to the mailing list, of course, but it at least avoids
+increasing the amount of spam sent directly to list users personal
+addresses.</para>
+
+<para>Address hiding can be controversial.  Some people like it a lot,
+and will be surprised if your archives don't do it automatically.
+Other people think it's too much of an inconvenience (because humans
+also have to translate the addresses back before using them).
+Occasionally someone will assert that it's ineffective, because a
+harvester can as easily recognize a pattern involving "_AT_" as one
+involving "@" (however, there's empirial evidence that address hiding
+<emphasis>is</emphasis> effective, see <ulink
+url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>).</para>
+
+<para>Ideally, the list management software would leave the choice up
+to each individual subscriber, either through a special yes/no header
+or a setting in that subscriber's list account preferences.  However,
+I don't know of any software which offers per-subscriber or per-poster
+choice in the matter, so for now the list manager must make a decision
+for everyone (assuming the archiver offers the feature at all, which
+is not always the case).  I lean very mildly toward turning it on.
+Some people are very careful to avoid posting their email addresses on
+web pages or anywhere else a spam harvester might see it, and they
+would be disappointed to have all that care thrown away by a mailing
+list archive; meanwhile, the inconvenience address hiding imposes on
+archive users is very slight, since it's trivial to transform an
+obscured address back to a valid one if you need to reach the person.
+But keep in mind that, in the end, it's still an arms race: by the
+time you read this, harvesters might well have evolved to the point
+where they can recognize most common forms of hiding, and we'll have
+to think of something else.</para>
 
 </sect3>
 
@@ -378,27 +461,119 @@ them.</remark></para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-ch-3-sect-2.2">
-<title>Header Management</title>
+<title>Identification and Header Management</title>
 
-<para>(in progress)</para>
+<para>List subscribers often want to put mails from the list into a
+project-specific folder, separate from their other mail.  Their
+mailreading software can do this automatically by examining the mail's
+<firstterm>headers</firstterm>.  The headers are the fields at the top
+of the mail that indicate the sender, recipient, subject, date, and
+various other things about the message.  Certain headers are
+well-known and effectively mandatory:
 
 <screen>
-filtering: the "X-Mailing-List header".
-http://www.nisto.com/listspec/list-manager-intro.html
-See http://www.faqs.org/rfcs/rfc2369.html
-
-   Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
-   Precedence: bulk
-   X-No-Archive: yes
-   list-help: &lt;mailto:users-help@subversion.tigris.org&gt;
-   list-unsubscribe: &lt;mailto:users-unsubscribe@subversion.tigris.org&gt;
-   list-post: &lt;mailto:users@subversion.tigris.org&gt;
-
-digests?
-http://www.faqs.org/rfcs/rfc1153.html
-
-X-NoArchive: What is this for?
+     From: ...
+     To: ...
+     Subject: ...
+     Date: ...
 </screen>
+
+Others are optional, though still quite standard.  For example, emails
+are not strictly required to have the
+
+<screen>
+     Reply-to: sender@email.address.here
+</screen>
+
+header, but most do, because it gives recipients a foolproof way to
+reach the author (it is especially useful when the author had to send
+from an address other than the one to which replies should be
+directed).</para>
+
+<para>Some mailreading software offers an easy-to-use interface for
+filing mails based on patterns in the Subject header.  This leads
+people to request that the mailing list add an automatic prefix to all
+Subjects, so they can set their readers to look for that prefix and
+automatically file the mails in the right folder.  The idea is that
+the original author would write:
+
+<screen>
+     Subject: Making the 2.5 release.
+</screen>
+
+but the mail would show up on the list looking like this:
+
+<screen>
+     Subject: [discuss@lists.example.org] Making the 2.5 release.
+</screen>
+
+</para>
+
+<para>Although most list management software offers the option to do
+this, I strongly recommend against turning the option on.  The problem
+it solves can easily be solved in much less obtrusive ways, and the
+cost of eating space in the Subject field is far too high.
+Experienced mailing list users typically scan the Subjects of the
+day's incoming list mail to decide what to read and/or respond to.  By
+prepending the list's name to the Subject, you occupy valuable real
+estate and risk pushing the far end of the Subject off the screen.
+This obscures information that people depend on to decide what mails
+to open, reducing the overall functionality of the mailing list for
+everyone.</para>
+
+<para>Instead of munging the Subject header, tell your users to take
+advantage of the other standard headers, starting with the To header,
+which should say the mailing list's name:
+
+<screen>
+     To: &lt;discuss@lists.example.org&gt;
+</screen>
+
+Any mailreader that can filter on Subject should be able to filter on
+To just as easily.</para>
+
+<para>There are a few other optional, but standard, headers expected
+for mailing lists.  You may or may not ever need to worry about these,
+but you should be aware that they exist and that some users (or users'
+mailreading software) may be counting on their presence:</para>
+
+<screen>
+   list-help: &lt;mailto:discuss-help@lists.example.org&gt;
+   list-unsubscribe: &lt;mailto:discuss-unsubscribe@lists.example.org&gt;
+   list-post: &lt;mailto:discuss@lists.example.org&gt;
+   Delivered-To: mailing list discuss@lists.example.org
+   Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
+</screen>
+
+<para>For the most part they are self-explanatory.  See <ulink
+url="http://www.nisto.com/listspec/list-manager-intro.html"/> for more
+explanation, or if you need the really detailed, formal specification,
+see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
+</para>
+
+<para>Note the implication in these headers that if you have a mailing
+list named "list", then you also have administrative addresses
+"list-help" and "list-unsubscribe" available.  In addition to these,
+it is normal to have "list-subscribe", for joining, and "list-owner",
+for reaching the list administrators.  Depending on the list
+management software you use, these and/or various other administrative
+addresses may be set up, the documentation will have details.  Usually
+a complete explanation of all these special addresses is mailed to
+each new user as part of the automated "welcome mail" when she
+subscribes.  You yourself will probably get a copy of this welcome
+mail; if you don't, then ask someone else for a copy, so you know what
+your users are seeing when they join the list.  Keep the copy handy so
+you can answer questions about the mailing list functions, or better
+yet, put it on a web page somewhere.  That way when people lose their
+own copy of the instructions and post asking "How do I unsubscribe
+from this list?", you can just hand them the URL.</para>
+
+<para>Some mailing list software offers an option to append
+unsubscription instructions to the bottom of every post.  If that
+option is available, turn it on.  It only causes a couple of extra
+lines per message, in a harmless location, and it can save you a lot
+of time, by cutting down on the number of people who mail you &mdash;
+or worse, mail the list! &mdash; asking how to unsubscribe.</para>
 
 </sect2>
 
@@ -406,13 +581,171 @@ X-NoArchive: What is this for?
 <sect2 id="pfs-ch-3-sect-2.3">
 <title>The Great Reply-to Debate</title>
 
-<para>(in progress)</para>
+<para>Earlier, in <xref linkend="pfs-ch-2-sect-3.1"/>, I stressed the
+importance of making sure discussions stay in public forums, and
+talked about how active measures are sometimes needed to prevent
+conversations from trailing off into private email threads.
+Meanwhile, this chapter is all about setting up project communications
+software to do as much of the work for you as possible.  Therefore, if
+the mailing list management software offers a way to automatically
+encourage discussions to stay on the list, you would think turning
+that feature on would be the obvious choice.</para>
 
-<para><remark>
-Speaking of reply-to:
-<ulink url="http://www.unicom.com/pw/reply-to-harmful.html"/>
-<ulink url="http://www.metasystema.org/essays/reply-to-useful.mhtml"/>
-</remark></para>
+<para>Well, not quite.  There is such a feature, but it has some
+pretty severe disadvantages.  The question of whether or not to use it
+is one of the hottest debates in mailing list management &mdash;
+admittedly, not a controversy that's likely to make the evening news
+in your city, but it can flare up from time to time on mailing lists.
+Below, I will describe the feature, give the major arguments on both
+sides, and make the best recommendation I can.</para>
+
+<para>The feature itself is very simple: the mailing list software
+can, if you wish, automatically set the Reply-to header on every post,
+to redirect replies to the mailing list.  That is, no matter what the
+original sender puts in Reply-to (or even if they don't include one at
+all), by the time the list subscribers see the post, the header will
+look like this:
+
+<screen>
+     Reply-to: discuss@lists.example.org
+</screen>
+
+</para>
+
+<para>On its face, this seems like a good thing.  Because virtually
+all mailreading software pays attention to the Reply-to header, now
+when anyone responds to a post, their response will be automatically
+addressed to the entire list, not just at the person who posted.  Of
+course, the responder can still manually change where the message
+goes, but the important thing is that by default messages are directed
+to the list.  It's a perfect example of using technology to encourage
+collaboration.</para>
+
+<para>Unfortunately, there are some disadvantages.  The first is the
+"Can't Find My Way Back Home" problem: sometimes the original sender
+will put their preferred email address in the Reply-to field, because
+they are unable to receive email at the address from which they are
+sending.  People who always read and send from the same location won't
+often encounter this circumstance, and may be surprised that it even
+exists.  But for those who have unusual email configurations, or who
+cannot control how the From address on their mails looks (perhaps
+because they send from work and do not have any influence over the IT
+department), using Reply-to may be the only way they have to ensure
+that responses reach them.  When such a person posts to a mailing list
+that they're not subscribed to, her setting of Reply-to becomes
+essential information.  If the list software overwrites it, she will
+never see the responses to her post.</para>
+
+<para>The second disadvantage has to do with expectations, and in my
+opinion is the most powerful argument against Reply-to munging.  Most
+experienced mail users are accustomed to two basic methods of
+replying: <firstterm>reply-to-all</firstterm>, and
+<firstterm>reply-to-author</firstterm>.  All modern mailreading
+software has separate keys for these two actions.  Users know that to
+reply to everyone (that is, including the list), they should choose
+reply-to-all, and to reply privately to the author, they should choose
+reply-to-author.  Although you want to encourage people to reply to
+the list whenever possible, there are certainly circumstances where a
+private reply is the responder's prerogative &mdash; for example, they
+may want to say something confidential to the author of the original
+message.</para>
+
+<para>Now consider what happens when the list has overridden the
+author's original Reply-to.  The responder hits a key, expecting to
+send a private message back to the original author.  Because this is
+the expected behavior, she may not bother to look carefully at the
+recipient address in the new message.  She composes her private,
+confidential message, one which perhaps says embarrassing things about
+someone on the list, and hits the Send key.  Unexpectedly, a few hours
+later her message appears <emphasis>on the mailing list</emphasis>!
+Sure, she "should" have looked carefully at the recipient field, and
+she "should not" have assumed anything about the Reply-to header.  But
+authors almost always set Reply-to to their own personal address (or
+rather, their mail software sets it for them).  In fact, when a person
+deliberately sets Reply-to to some other address, such as the list, they
+usually make a point of mentioning this in the body of the message, so
+people won't be surprised at what happens when they reply.</para>
+
+<para>Because of the possibly severe consequences of this unexpected
+behavior, my own preference is to configure list management software
+to never touch the Reply-to header.  This is one instance where using
+technology to encourage collaboration has, it seems to me, potentially
+dangerous side-effects.  However, there are also some powerful
+arguments on the other side of this debate.  Whichever way you choose,
+you will occasionally get people posting to your list asking why you
+didn't choose the other way.  Since this is not something you ever
+want as the main topic of discussion on your list, it might be good to
+have a canned response ready, of the sort that's more likely to stop
+discussion than encourage it.  Make sure you do
+<emphasis>not</emphasis> insist that your decision, whichever it is,
+is obviously the only right and sensible one (even if you think that's
+the case).  Instead, point out that this is a very old debate, there
+are good arguments on both sides, that no choice is going to satisfy
+all users, and that therefore you just made the best decision you
+could.  Politely ask that the subject not be revisited unless someone
+has something genuinely new to say, then stay out of the thread and
+hope it dies a natural death.</para>
+
+<para>Someone may suggest a vote to choose one way or the other.  You
+can do that if you want, but I personally do not feel that counting
+heads is a satisfactory solution in this case.  The penalty for
+someone who is surprised by the behavior is so huge (accidentally
+sending a private mail to a public list), and the inconvenience for
+everyone else is fairly slight (occasionally having to remind someone
+to respond to the whole list instead of just to you), that it's not
+clear the majority, even though they are the majority, should be able
+to put the minority at such risk.</para>
+
+<para>I have not addressed all aspects of this issue here, just the
+ones that seemed of overriding importance.  For a full discussion, see
+these two canonical documents, which are the ones people always cite
+when they're having this debate:
+
+<itemizedlist>
+  <listitem>
+     <para><emphasis role="bold">Leave Reply-to alone</emphasis>,
+     <emphasis>by Chip Rosenthal</emphasis></para>
+     <para><ulink
+        url="http://www.unicom.com/pw/reply-to-harmful.html"/></para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">Set Reply-to to list</emphasis>,
+     <emphasis>by Simon Hill</emphasis></para>
+     <para><ulink
+        url="http://www.metasystema.org/essays/reply-to-useful.mhtml"/></para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<para>Despite the mild preference indicated above, I do not feel there
+is a "right" answer to this question, and I happily participate in
+many lists that <emphasis>do</emphasis> set Reply-to.  The most
+important thing you can do is settle on one way or the other early,
+and try not to get entangled in debates about it after that.</para>
+
+<sect3>
+<title>Two Fantasies</title>
+
+<para>Someday, someone will get the bright idea to implement a
+<firstterm>reply-to-list</firstterm> key in a mailreader.  It would
+use some of the custom list headers mentioned earlier to figure out
+the address of the mailing list, and then address the reply directly
+to the list only, leaving off any other recipient addresses, since
+most are probably subscribed to the list anyway.  Eventually, other
+mailreaders will pick up the feature, and this whole debate will go
+away.  (Actually, I've heard that <ulink
+url="http://www.mutt.org/">Mutt</ulink> does offer this feature.  Now
+if only others would copy it...)</para>
+
+<para>Another solution would be for Reply-to munging to be a
+per-subscriber preference.  Those who want the list to set Reply-to
+for them could ask for that, and those who don't would ask for it to
+be left alone.  However, I don't know of any list management software
+that offers this on a per-subscriber basis.  For now, we seem to be
+stuck with a global setting.</para>
+
+</sect3>
 
 </sect2>
 
@@ -575,6 +908,13 @@ gratuitous login requirements.  See the bit in
   accessible anonymously.  login to file issues is barely acceptable :-).
 </screen>
 </remark></para>
+
+<para><remark>(Note that some of these problems can be worked around,
+by hosting some of the pages off-site.  You can use the big hosting
+site for its strengths &mdash; bandwidth, list software, version
+control, bug tracker &mdash; and direct traffect to a
+smaller-but-more-hands-on site for stuff that isn't access as often as
+the front page and the major services.)</remark></para>
 
 </sect1>
 
