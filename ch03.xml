@@ -1877,17 +1877,130 @@ relying on human controls instead.</para>
 <sect1 id="pfs-ch-3-sect-4">
 <title>Bug Tracker</title>
 
-<para>The name <firstterm>bug tracker</firstterm> is misleading.  Bug
-trackers can be used to track any issue that has distinct beginning
-and end states, perhaps with transition states in between.  For this
-reason, bug trackers are sometimes called <firstterm>issue
-trackers</firstterm>, <firstterm>artifact trackers</firstterm>,
-<firstterm>request trackers</firstterm>, <firstterm>trouble ticket
-systems</firstterm>, etc.  I'll stick with "bug tracker" here, but
-keep in mind that they're not just for bugs.</para>
+<para>Bug tracking is a broad topic; various aspects of it are
+discussed throughout this book.  Here I'll try to concentrate mainly
+on setup and technical considerations, but to get to those, we have to
+start with a policy question: exactly what sorts of information should
+be in a bug tracker?</para>
 
-<para><remark>First question is: what to store in the bug
-tracker and what not?</remark></para>
+<para>The term <firstterm>bug tracker</firstterm> is misleading.  They
+can also track new feature requests, one-time tasks, unsolicited
+patches &mdash; really anything that has distinct beginning and end
+states, with optional transition states in between, and that accrues
+information over its lifetime.  For this reason, bug trackers are
+sometimes known as <firstterm>issue trackers</firstterm>,
+<firstterm>artifact trackers</firstterm>, <firstterm>request
+trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
+etc.  I'll continue using "bug tracker", for simplicity, but remember
+that they're not only for bugs.</para>
+
+<para>The classic lifecycle for a single bug ("issue", "item",
+"ticket", "request", "artifact", whatever) looks something like this:
+
+<orderedlist>
+  <listitem><para>Someone files the bug.  They provide a summary, an
+            initial description (including a reproduction recipe, if
+            applicable <remark>(there should be a bit on good
+            techniques for getting people to provide repro recipes,
+            but not in this chapter.  Figure out where, add the stub,
+            then reference from here)</remark>), and whatever other
+            information the tracker asks for.  The person who files
+            the bug may be totally unknown to the project &mdash; bugs
+            or feature requests are as likely to come from the user
+            community as from the developers. <remark>Note here, or in
+            the discussion below, that this means the bug tracker is
+            as much a face of the project as the mailing lists, in
+            some ways more so because someone who has gone to the
+            effort of filing a bug will appreciate hearing back from
+            the developers.  Even if the bug is rejected, or not
+            fixed, a response still does a lot of good, in encouraging
+            that person to stay involved.  Which has a technical
+            implication: the bug itself should make it easy to reach
+            the person who filed it &mdash; get an email
+            address!</remark></para>
+
+            <para>Once filed, the bug is in what's called an
+            <firstterm>open</firstterm> state.  Because it is newly
+            created, and nothing has been done about it yet, some
+            trackers also label it as <firstterm>unverified</firstterm>
+            and/or <firstterm>unstarted</firstterm> at this stage.  It
+            is not assigned to anyone; or, in some systems, it is
+            assigned to a dummy user representing the lack of real
+            assignation.</para>
+
+            <para>At this point, think of the bug as in a holding
+            area.  It has been recorded, but has not yet been
+            integrated into the project's consciousness.</para>
+  </listitem>
+  <listitem><para>Others read the bug, add comments to it, often
+            asking the original filer for clarification on some
+            points.  If some developer "takes ownership" of the
+            bug during this stage, she may
+            <firstterm>assign</firstterm> it to herself.  The bug's
+            <firstterm>priority</firstterm> is also estimated in this
+            stage.  If it is so severe that it should delay the next
+            release, for example, that fact needs to be identified
+            early, and the tracker should have some way of noting
+            it.</para>
+
+            <para><remark>(All this implies a bug-event email
+            notification list, similar to commit emails, otherwise
+            those other people could never find out about the original
+            filing.)</remark></para>
+
+            <para><remark>(Somewhere, note the social conventions that
+            govern automated and third-party assignation.)</remark></para>
+
+            <para><remark>(Note also the danger of the bug tracker
+            turning into a discussion forum, when mailing lists should
+            really be used.  We should mention the danger here; later
+            in Chapter 5 it should be discussed in more depth.  Keep
+            the mathematical analogy in mind, though this may not be
+            the best way to describe it in words: the question is, is
+            the discussion potentially divergent or convergent?  If
+            it's stuff like getting more technical details from the
+            original reporter, or pointing out a gotcha with a
+            proposed solution, then it's convergent.  If it's a
+            philosophical questioning of the bug's justification for
+            being, or if the bug is one specific case that reveals a
+            much wider problem, then the discussion might end up
+            divergent, which means it should be on the development
+            mailing list, and the URL to the thread should be recorded
+            in the bug when the discussion dies down.  Note that those
+            involved with the bug may find this laborious, but this is
+            a writer-responsible culture: more important to make
+            things easy for the tens or hundreds of people who may
+            read the bug than for the 3 or 5 people writing to
+            it.)</remark></para>
+  </listitem>
+  <listitem><para>The bug is scheduled for resolution.
+            Scheduling doesn't necessarily mean naming a date by which
+            it will be fixed; more often it means deciding which
+            future release the bug should be fixed by, or
+            occasionally deciding that it need not block any
+            particular release.  Scheduling is sometimes dispensed
+            with, if the bug is quick to fix.</para>
+
+  </listitem>
+  <listitem><para>The bug is fixed (or the task completed, or
+            whatever).  The change or set of changes that fixed it
+            should be recorded in a comment in the bug, and then the
+            bug <firstterm>closed</firstterm> or marked as 
+            <firstterm>resolved</firstterm>.</para>
+  </listitem>
+</orderedlist>
+
+The exact details of this lifecycle may vary depending on the tracking
+software, but the basic concepts are the same.</para>
+
+<para><remark>Note the two most common variations of the classic
+lifecycle: the bug is marked as a duplicate, or it is reopened after
+being closed.  Also, dependency tracking.  (Some of this stuff is not
+really free-software-specific, though.  If there's really no special
+aspect to mention w.r.t. open source, then leave it out.  The main
+theme should emphasize the importance of getting people comfortable
+using all features of the tracker.  It can't just be one or two
+people; otherwise, the project cannot grow.</remark></para>
 
 <para><remark>How much to reproduce data in the tracker?  Link to the
 mail thread, or cut-and-paste it, or summarize it with some pasting
@@ -1917,6 +2030,9 @@ parallelize the filtering process :-).  This is not the norm, but it
 may be worth recommending.  See Debian and/or OpenOffice.org (?) for a
 different way of using the issue tracker -- they want to use it for
 everything, it seems.</remark></para>
+
+<para><remark>Bug tracker guidelines: success and non-success
+of.</remark></para>
 
 <para><remark>Note how full issue sweeps become less and less feasible
 over time.  You eventually must evolve a system for categorizing and
