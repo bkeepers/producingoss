@@ -49,7 +49,7 @@ clean:
 # HTML monolithic.
 html: ${HTML_TARGET}
 
-${HTML_TARGET}: ${ALL_SOURCE}
+${HTML_TARGET}: ${ALL_SOURCE} ${TOP}/styles.css
 	${XSLTPROC} ${HTML_XSLTPROC_OPTS} \
            --output ${HTML_TARGET} ${XSL_HTML} ${XML_ROOT}
 
