@@ -68,24 +68,201 @@ the entire code base, etc.</para>
 
 </simplesect>
 
+<!-- ========================== SECTION =========================== -->
 
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-cycles">
-<title>Cycles</title>
+<sect1 id="pfs-release-numbering">
+<title>Release Numbering</title>
 
-<para><remark>Common development cycle patterns in free
-software.</remark></para>
+<para>Before we talk about how to make a release, let's look at how to
+name releases, which means examining what releases actually mean to
+users.  A release means that:</para>
 
+<itemizedlist>
+
+  <listitem><para>Old bugs have been fixed.  This is probably the one
+            thing users can count on being true of every release.</para>
+  </listitem>
+
+  <listitem><para>New bugs have been added.  This too can usually
+            be counted on, except sometimes in the case of security
+            releases or other one-offs (see
+            <xref linkend="pfs-security-releases"/>).</para>
+  </listitem>
+
+  <listitem><para>New features may have been added.</para>
+  </listitem>
+
+  <listitem><para>New configuration options may have been addded, or
+            the meanings of old options may have changed subtly.  The
+            installation procedures may have changed slightly since
+            the last release too, though one always hopes not.</para>
+  </listitem>
+
+  <listitem><para>Incompatible changes may have been introduced, such
+            that the data formats used by older versions of the
+            software are no longer useable without undergoing some
+            sort of (possibly manual) one-way conversion step.</para>
+  </listitem>
+
+</itemizedlist>
+
+<para>As you can see, not all of these are good things.  This is why
+experienced users approach new releases with some trepidation,
+especially when the software is mature and was already mostly doing
+what they wanted (or thought they wanted).  Even the arrival of new
+features is not an unmixed blessing: it may mean the software will now
+behave in unexpected ways.</para>
+
+<para>The purpose of release numbering, therefore, is twofold:
+obviously the numbers should unambiguously communicate the ordering of
+releases (i.e., by looking at any two releases' numbers, one can know
+which came later), but also they should indicate as compactly as
+possible the degree and <emphasis>kind</emphasis> of changes in the
+release.</para>
+
+<para>All that in a number?  Well, more or less, yes.  Release
+numbering strategies are one of the oldest bikeshed discussions around
+(see <xref linkend="pfs-bikeshed"/>), and the world is unlikely to
+settle on a single, complete standard anytime soon.  However, a few
+good strategies have emerged, along with one universally agreed-on
+principle: <emphasis>be consistent</emphasis>.  Pick a numbering
+scheme, document it, and stick with it.  Your users will thank
+you.</para>
 
 <!-- ========================== subsection =========================== -->
+<sect2 id="pfs-release-number-components">
+<title>Release Number Components</title>
 
-<sect2 id="pfs-version-numbering">
-<title>Version Numbering</title>
+<para>Release numbers are digits separated by dots:</para>
 
-<para><remark>talk about how to do release numbers right, refer here from the
-      "Announcing" in Chapter 2</remark></para>
+<informalexample>
+<literallayout>Scanley 2.3
+Singer 5.11.4</literallayout>
+</informalexample>
+
+<para>...and so on.  The dots are <emphasis>not</emphasis> decimal
+points, they are merely separators; "5.3.9" would be followed by
+"5.3.10".  A few projects have occasionally hinted otherwise, most
+famously the Linux kernel with its "0.95", "0.96"... "0.99" sequence
+leading up to Linux 1.0, but the convention that the dots are not
+decimals is now firmly established and should be considered a
+standard.  There is no limit to the number of components (digit
+portions containing no dots), but most projects do not go beyond three
+or four components.  The reasons why will become clear later.</para>
+
+<para>In addition to the numeric components, projects sometimes tack
+on a descriptive label such as "Alpha" or "Beta" (see
+<xref linkend="pfs-alpha-and-beta"/>), for example:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha)
+Singer 5.11.4 (Beta)</literallayout>
+</informalexample>
+
+<para>It is generally understood that an Alpha or Beta qualifier means
+that this release <emphasis>precedes</emphasis> a future release that
+will have the qualified number.  Thus, "2.3.0&nbsp;(Alpha)" leads
+eventually to "2.3.0".  In order to allow several such candidate
+releases in a row, the qualifiers themselves can have qualifiers.  For
+example, here is a series of release in the order that they would be
+made available to the public:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha 1)
+Scanley 2.3.0 (Alpha 2)
+Scanley 2.3.0 (Beta 1)
+Scanley 2.3.0 (Beta 2)
+Scanley 2.3.0 (Beta 3)
+Scanley 2.3.0</literallayout>
+</informalexample>
+</sect2>
+
+<para>Notice how when it has the "Alpha" qualifier, Scanley "2.3" is
+written as "2.3.0".  Those two numbers are equivalent&mdash;trailing
+all-zero components can always be dropped for brevity&mdash;but when a
+qualifier is attached, brevity is a lost cause anyway, so one might as
+well go for completeness instead.</para>
+
+<para>Other qualifiers in semi-regular use include "Stable",
+"Unstable", "Development", and "RC" (for "Release Candidate").  The
+most widely used ones are still "Alpha" and "Beta", with "RC" running
+a close third place, but note that "RC" always includes a numeric
+meta-qualifier.  That is, you don't release
+"Scanley&nbsp;2.3.0&nbsp;(RC)", you release
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.  Those
+three labels, "Alpha", "Beta", and "RC" are pretty widely known now,
+and I don't recommend using any of the others, even though the others
+might at first glance seem like better choices because they are normal
+words, not jargon.  But people who install software from releases are
+mostly familiar with the big three, and there's no reason to do things
+gratuitously differently from the way everyone else is doing
+them.</para>
+
+<para>Although the dots in release numbers are not decimal points,
+they do indicate place-value significance.  All "0.X.Y" releases
+precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
+immediately precedes "3.14.159", and non-immediately precedes
+"3.14.160" as well as "3.15.anything", and so.  What these components
+actually <emphasis>mean</emphasis> is the subject of the next two
+sections.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-release-number-simple-strategy">
+<title>The Simple Strategy</title>
+
+<para><remark>[... working here ...]</remark></para>
 
 </sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="pfs-release-number-even-odd-strategy">
+<title>The Even/Odd Strategy</title>
+
+<para><remark>[... working here ...]</remark></para>
+
+</sect2>
+
+<para><remark>(Maybe refer here from the "Announcing" in Chapter
+2.)</remark></para>
+
+<para><remark>(Talk about the dismayingly-prevalent code-name
+practice, i.e., "Dancing Bonobo", "Ululating Brachiator", etc, and how
+it makes life difficult and generally sucks.)</remark></para>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="pfs-cycles-and-branches">
+<title>Cycles and Branches</title>
+
+<para>The software development lifecycle does not terminate naturally.
+A program may die because the architecture or environment it is
+written for becomes obsolete, or because its maintainers lose
+interest, or because its users abandon it for something better.  But
+barring some external event, there is no reason the normal cycles of
+development can't go on forever.  Bug reports come in, are narrowed
+down to reproduction cases, fixed, tested, and committed.  Features
+are proposed, discussed, designed, implemented, tested and committed.
+A release is merely a means of delivering these changes to users in a
+convenient, packaged form.</para>
+
+<para>But a release is also a cycle itself.  The process of pulling a
+stable entity out from the fluctuations of daily development, testing
+it, and distributing it to the world requires a fair amount of
+organization and group cooperation.  For this cooperation to run
+smoothly, there needs to be a structure around to organize it, and a
+way for participants to tell <emphasis>where</emphasis> in the cycle
+things stand at any given moment.  As is often the case when you're
+trying to isolate the code from daily fluctuations, the appropriate
+structure is a branch (see
+<xref linkend="pfs-vc-vocabulary-branch"/>).
+
+</para>
+
+<para>Most free software projects start out in a state of continuous
+release, because developers fooo</para>
+
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-packaging">
@@ -176,6 +353,18 @@ this gets tied in bidirectionally with revision control discussion
 of training people to use the issue tracker well.  Be patient, be
 verbose, repeat yourself -- it will feel stupid, but it <emphasis>will
 pay off</emphasis>.</remark></para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-security-releases">
+<title>Security Releases</title>
+
+<para><remark>(Special kind of release, contains exactly one change or
+changeset, is never announced until ready, and does not continue the
+line afterwards, since the fix is presumed to be folded into all later
+release on all other lines.  Refer back to appropriate place in
+Ch. 6, of course.)</remark></para>
+
+</sect2>
 
 </sect1>
 
