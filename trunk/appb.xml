@@ -1,0 +1,239 @@
+<appendix id="pfs-app-b">
+<title>Bug Trackers</title>
+
+<simplesect>
+
+<para>No matter what bug tracker a project uses, some developers
+always like to complain about it.  This seems to be more true of bug
+trackers than of any other standard development tool.  I think it's
+because bug trackers are so visual and so interactive that it's easy
+to imagine the improvements one would make (if one only had the time),
+and to describe those improvements out loud.  Take the inevitable
+complaints with a grain of salt &mdash; many of the trackers below are
+pretty good.</para>
+
+<para>Throughout these listings, the word "issue" is used to refer to
+the items the trackers track.  But remember that each system may have
+its own terminology, in which the corresponding term might be
+"artifact" or "bug" or something else.</para>
+
+<sect2 id="pfs-app-b-sect-1">
+<title><emphasis role="bold">Bugzilla</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.bugzilla.org/"/></title>
+
+<para>Bugzilla is very popular, actively maintained, and seems to make
+its users pretty happy.  I've been using a modified variant of it in
+my work for four years now, and like it.  It's not highly
+customizeable, but in a odd way that may be one of its features:
+Bugzilla installations tend to look pretty much the same wherever they
+are found, which means many developers are already accustomed to its
+interface and will feel they are in familiar territory.</para>
+
+<!--
+<para>Bugzilla offers the obvious (yet somehow not widespread)
+innovation of using the same search box to find issues by both
+identifying number and by search.  If you enter a number into the
+search box, Bugzilla fetches the corresponding issue.  If you enter
+anything other than a pure number, Bugzilla finds all issues that
+matching that search.</para>
+-->
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-2">
+<title><emphasis role="bold">GNATS</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.gnu.org/software/gnats/"/></title>
+
+<para>GNU GNATS is one of the oldest open source bug trackers, and is
+widely used.  It's biggest strengths are interface diversity (it can
+be used not just through a web browser, but also through email or
+command-line tools), and plaintext issue storage.  The fact that all
+issue data is stored in text files on disk makes it easier to write
+custom tools to trawl and parse the data (for example, to generate
+statistical reports).  GNATS can also absorb emails automatically by
+various means, and add them to the appropriate issues based on
+patterns in the email headers, which makes logging user/developer
+conversations very easy.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-3">
+<title><emphasis role="bold">RT (RequestTracker)</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.bestpractical.com/rt/"/></title>
+
+<para>RT's website says "RT is an enterprise-grade ticketing system
+which enables a group of people to intelligently and efficiently
+manage tasks, issues, and requests submitted by a community of users,"
+and that about sums it up.  RT has a fairly polished web interface,
+and seems to have a pretty wide installed base.  The interface is a
+bit visually complex, but that becomes less distracting as you get
+used to it.  RT is licenced under the GNU GPL (for some reason their
+web site doesn't make this clear).</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-4">
+<title><emphasis role="bold">Trac</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://trac.edgewall.com/"/></title>
+
+<para>Trac is a bit more than a bug tracker: it's really an integrated
+wiki and bug tracking system.  It uses wiki-style to link between
+issues, files, version control changesets, and plain wiki pages.  It's
+fairly simple to set up, and integrates with Subversion (see
+<xref linkend="pfs-app-a"/>).</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-5">
+<title><emphasis role="bold">Roundup</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://roundup.sourceforge.net/"/></title>
+
+<para>Roundup is pretty easy to install (only Python 2.1 or higher
+is required), and simple to use.  It has a web, email, and
+command-line interfaces.  The issue data templates and web interface
+are customizeable, as is some of its state-transition logic.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-6">
+<title><emphasis role="bold">Mantis</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.mantisbt.org/"/></title>
+
+<para>Mantis is a web-based bug tracking system, written in PHP, and
+using MySQL database for storage.  It has the features you'd expect.
+Personally, I find the web interface clean, intuitive, and easy on the
+eyes.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-7">
+<title><emphasis role="bold">Scarab</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://scarab.tigris.org/"/></title>
+
+<para>Scarab is meant to be a highly customizable, full-featured bug
+tracker, offering more or less the union of the features offered by
+other bug trackers; data entry, queries, reports, notifications to
+interested parties, collaborative accumulation of comments, and
+dependency tracking.</para>
+
+<para>It is customizable through administrative web pages.  You can
+have multiple "modules" (projects) active in a single Scarab
+installation.  Within a given module, you can create new issue types
+(defects, enhancements, tasks, support requests, etc), and add
+arbitrary attributes, to tune the tracker to your project's specific
+requirements.</para>
+
+<para>As of late 2004, Scarab was getting close to its 1.0
+release.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-8">
+<title><emphasis role="bold">DBTS (Debian Bug Tracking System)</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.chiark.greenend.org.uk/~ian/debbugs/"/></title>
+
+<para>The Debian Bug Tracking System is unusual in that all input and
+manipulation of issues is done via email: each issue gets its own
+dedicated email address.  The DBTS scales pretty well: <ulink
+url="http://bugs.debian.org/"/> has 277,741 issues, for example.</para>
+
+<para>Since interaction is done via regular mail clients, an
+environment which is familiar and easily accessible to most people,
+the DBTS is good for handling high volumes of incoming reports that
+need quick classificiation and response.  There are disadvantages too,
+of course.  Developers must invest the time needed to learn the email
+command system, and users must write their bug reports without a
+web-form to guide them in choosing what information to write.  There
+are tools available to help users send better bug reports, such as the
+command-line <command>reportbug</command> program or the
+<systemitem>debbugs-el</systemitem> package for Emacs.  But most
+people won't use these tools, they'll just write email manually, and
+they may or may not follow the bug reporting guidelines posted by your
+project.</para>
+
+<para>The DBTS has a read-only web interface, for viewing and
+querying issues.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-9">
+<title><emphasis role="bold">Trouble-Ticket Trackers</emphasis></title>
+
+<para>These are more oriented toward help desk ticket tracking than
+software bug tracking.  You'll probably do better with a regular bug
+tracker, but these are listed for the sake of completeness, and
+because there could conceivably be unusual projects for which a
+trouble-ticket system might be more appropriate than a traditional bug
+tracker.</para>
+
+<para>
+<itemizedlist>
+  <listitem><para><emphasis role="bold">WebCall</emphasis
+            >&nbsp;&mdash;&nbsp;<ulink
+            url="http://myrapid.com/webcall/"/></para>
+  </listitem>
+  <listitem><para><emphasis role="bold">Teacup</emphasis
+            >&nbsp;&mdash;&nbsp;<ulink
+            url="http://www.altara.org/teacup.html"/></para>
+            <para>(Teacup doesn't appear to be under active
+                  development anymore, but the downloads are still
+                  available.  Note that it has both web and email
+                  interfaces.)</para>
+  </listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-10">
+<title><emphasis role="bold">Bluetail Ticket Tracker</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://btt.sourceforge.net/"/></title>
+
+<para>BTT is somewhere between a standard trouble ticket tracker and a
+bug tracker.  It offers privacy features that are somewhat unusual
+among open-source bug trackers: users of the system are categorized as
+Staff, Friend, Customer or Anonymous, and makes more or less data
+available depending on one's category.  It offers some email
+integration, a command-line interface, and mechanisms for converting
+emails into tickets.  It also has features for maintaining information
+not associated with any specific ticket, such as internal
+documentation or FAQs.</para>
+
+</sect2>
+
+<sect2 id="pfs-app-b-sect-11">
+<title><emphasis role="bold">Scmbug</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.public.asu.edu/~makrists/scmbug/"/></title>
+
+<para><remark>(Scmbug is not really far enough along yet to warrant a
+listing here.  I'll check it again when we get close to publication
+and see how it's looking; if it's still not ready, we should pull this
+entry.)</remark></para>
+
+<para>Scmbug is not actually a bug-tracker in its own right.  It is a
+system for integrating version control systems with bug trackers.
+It's goal is to be universal &mdash; able to glue any version control
+system with any bug-tracking system.  As of this writing, it was
+still in a pre-Alpha development stage.</para>
+
+<para>It currently supports CVS, Subversion, and Arch for version
+control systems, and Bugzilla and GNATS for bug trackers.</para>
+
+<para>The official Scmbug home page listed above turns out to be a raw
+directory listing, and appears to be kept in a personal account at a
+university, which does not bode well for the URL's permanence
+(although it says nothing about the software's permanence).
+As a backup reference, here is Scmbug's Freshmeat page: <ulink
+url="http://freshmeat.net/projects/scmbug"/>.</para>
+
+</sect2>
+
+</simplesect>
+
+</appendix>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "appendix")
+end:
+-->
