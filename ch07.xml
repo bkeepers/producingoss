@@ -1174,13 +1174,13 @@ can.</para>
 <title>Releasing</title>
 
 <para>Once the source tarball is produced from the stabilized release
-branch, the public part of the release process begins.  But first,
-before the tarball is made available to the world at large, it should
-be tested and approved by some minimum number of developers, usually
-three or more.  Approval is not simply a matter of inspecting the
-release for obvious flaws; ideally, the developers download the
-tarball, build and install it onto a clean system, and run the
-regression test suite (see <xref linkend="pfs-testing"/>).  Assuming
+branch, the public part of the release process begins.  But before the
+tarball is made available to the world at large, it should be tested
+and approved by some minimum number of developers, usually three or
+more.  Approval is not simply a matter of inspecting the release for
+obvious flaws; ideally, the developers download the tarball, build and
+install it onto a clean system, run the regression test suite (see
+<xref linkend="pfs-testing"/>), and do some manual testing.  Assuming
 it passes these checks, as well as any other release checklist
 criteria the project may have, the developers then digitally sign the
 tarball using GnuPG (<ulink url="http://www.gnupg.org/"/>), PGP
@@ -1188,11 +1188,11 @@ tarball using GnuPG (<ulink url="http://www.gnupg.org/"/>), PGP
 of producing PGP-compatible signatures.</para>
 
 <para>In most projects, the developers just use their personal digital
-signatures, and as many developers as want to may sign (there is a
-minimum number, but not a maximum).  The more developers sign, the
-more testing the release has undergone, and also the greater the
-likelihood that a security-conscious user can find a digital trust
-path from themselves to the tarball.</para>
+signatures, instead of a shared project key, and as many developers as
+want to may sign (i.e., there is a minimum number, but not a maximum).
+The more developers sign, the more testing the release undergoes, and
+also the greater the likelihood that a security-conscious user can
+find a digital trust path from themselves to the tarball.</para>
 
 <para>Once approved, the release (that is, all tarballs, .zip files,
 and whatever other formats are being distributed) should be placed
@@ -1215,27 +1215,83 @@ the released packages into a single file,
 <filename>scanley-2.5.0.sigs</filename>; the same may be done with the
 checksums.</para>
 
-<para>It doesn't really matter which way you do it, just keep to a
+<para>It doesn't really matter which way you do it.  Just keep to a
 simple scheme, describe it clearly, and be consistent from release to
 release.  The purpose of all this signing and checksumming is to give
 users a way to verify that the copy they receive has not been
 maliciously tampered with.  Users are about to run this code on their
 computers&mdash;if the code has been tampered with, an attacker could
 suddenly have a back door to all their data.  See
-<xref linkend="pfs-security-releases"/> for more about paranoia.</para>
+<xref linkend="pfs-security-releases"/> for more about
+paranoia.</para>
 
-<para><remark>[... working here ...]</remark></para>
+<sect2 id="pfs-candidate-releases">
+<title>Candidate Releases</title>
 
-<para><remark>(Maybe refer here from the "Announcing" in Chapter
-2.)</remark></para>
+<para>For important releases containing many changes, many projects
+prefer to put out <firstterm>release candidates</firstterm> first,
+e.g., <filename>scanley-2.5.0-beta1</filename> before
+<filename>scanley-2.5.0</filename>.  The purpose of a candidate is to
+subject the code to wide testing before blessing it as an official
+release.  If problems are found, they are fixed on the release branch
+and a new candidate release is rolled out
+(<filename>scanley-2.5.0-beta2</filename>).  The cycle continues until
+no unacceptable bugs are left, at which point the last candidate
+release becomes the official release&mdash;that is, the only
+difference between the last candidate release and the real release
+is the removal of the qualifier from the version number.</para>
 
-<para><remark>(Talk about leading up to the release w/ candidate
-releases, for major releases.)</remark></para>
+<para>In most other respects, a candidate release should be treated
+the same as a real release.  The <emphasis>alpha</emphasis>,
+<emphasis>beta</emphasis>, or <emphasis>rc</emphasis> qualifier is
+enough to warn especially conservative users to wait until the real
+release, and of course the announcement emails for the candidate
+releases should point out that their purpose is to solicit
+feedback.  But other than that, give candidate releases the same
+amount of care as regular releases.  After all, you want people to
+use the candidates (because use is the only way to uncover bugs), and
+also because you never know which candidate release will end up
+becoming the final, official release.</para>
 
-<para><remark>(Note: link to <xref linkend="pfs-publicity"/> from
-somewhere in here.  That should probably be in reference to the
-CHANGES file, which should be described here but linked to from
-there.)</remark></para>
+</sect2>
+
+<sect2 id="pfs-release-announcement">
+<title>Announcing a Releases</title>
+
+<para>Announcing a release is like announcing any other event, the
+mechanics of which were covered in <xref linkend="pfs-publicity"/>.
+There are a few specific things one should make sure to do for
+releases, though.</para>
+
+<para>Whenever you give the URL to the downloadable release tarball,
+make sure to also give the MD5/SHA1 checksums, and pointers to the
+digital signatures file.  Since the announcement happens in multiple
+forums (mailing list, news page, etc), this means users can get the
+checksums from multiple sources, giving the most security-conscious
+users extra assurance that the checksums themselves have not been
+tampered with.  Giving the link to the digital signature files
+multiple times doesn't make those signatures more secure, but it does
+reassure people (especially those who don't follow the project
+closely) that the project takes security seriously.</para>
+
+<para>In the announcement email itself, and on news pages that contain
+more than just a blurb about the release, make sure to include the
+relevant portion of the CHANGES file, so people can see why it might
+be in their interests to upgrade.  This is as important with candidate
+releases as with final releases; the presence of bugfixes and new
+features is an important part of tempting people to try out a
+candidate release.</para>
+
+<para>Finally, don't forget to thank the development team, the
+testers, and all the people who took the time to file good bug
+reports.  In general, it's best not to single out anyone by name, but
+if there's someone who is individually responsible for a huge piece
+work, the value of which is widely recognized by everyone in the
+project, then it's okay to mention that in the announcement email.
+Just be wary of sliding down the slippery slope of credit inflation
+(see <xref linkend="pfs-credit-abuse"/>).</para>
+
+</sect2>
 
 </sect1>
 
@@ -1258,7 +1314,7 @@ pay off</emphasis>.</remark></para>
 changeset, is never announced until ready, and does not continue the
 line afterwards, since the fix is presumed to be folded into all later
 release on all other lines.  Refer back to appropriate place in
-Ch. 6, of course.)</remark></para>
+Ch. 6, of course, like pfs-security.)</remark></para>
 
 </sect2>
 
