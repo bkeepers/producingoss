@@ -1584,19 +1584,72 @@ know are visible to others as well.</para>
 <para>The specifics of setting up commit emails will vary depending on
 your version control system, but most offer some sort of script or
 other packaged facility for doing it.  You may need to configure a
-couple of default behaviors, though.</para>
+couple of default behaviors, though:
 
-<screen>
-  * Include diffs, not URLs to diffs!  Except when the message size
-    would be huge, then URL is better.
+<orderedlist>
 
-  * Set reply-to to the dev list, not the commit email list.  Why?
-    Partly because not everyone subscribes to the commit email list,
-    but also because once it's a matter of discussion, it belongs on
-    the human list, not the bot list.
-</screen>
+  <listitem>
+  <para>Some commit mailers don't include the actual change
+  <firstterm>diff</firstterm> in the email, but instead provide a URL
+  to view the change in the repository browsing system (just as
+  described in <xref linkend="pfs-ch-3-sect-3.3.2"/>).  While it's
+  good to have the URL, to refer to the change later, it is
+  <emphasis>very</emphasis> important that the commit email also
+  include the diffs themselves.  Reading email is already part of
+  people's routine, so if the content of the change is visible right
+  there in the commit email, developers will review the commit on the
+  spot, without leaving their email reader.  But if they have to click
+  on a URL to review the change, most won't do it, because it requires
+  a new action, instead of a continuation of what they were already
+  doing.  Furthermore, if the reviewer wants to respond to the change,
+  it's vastly easier to hit reply-with-text and simply annotate the
+  quoted text, than it is to visit a web page and laboriously
+  cut-and-paste parts of the diff from web browser to email
+  client.</para>
 
-<para>todo: working here...</para>
+  <para>(Of course, if the diff is huge, such as when a large body
+  of new code has been added to the repository, then it makes sense
+  to omit the diff and offer only a URL.  Most commit mailers can do
+  this kind of limiting automatically.  If yours can't, then I still
+  think it's better to include diffs and live with the occasional huge
+  email, than to leave the diffs off entirely.  Convenient reviewing
+  and commenting is a cornerstone of cooperative development, and too
+  important to do without.)</para>
+  </listitem>
+
+  <listitem><para>The commit emails should set their Reply-to header
+  to the regular development list, not the commit email list.  That
+  is, when someone reviews a commit and writes a response, their
+  response should be automatically directed toward the human
+  development list, where technical issues are normally discussed.
+  There are a few reasons for this.  First, you want to keep all
+  technical discussion on one list, because that's where people expect
+  them to happen, and because that way there's only one archive to
+  search.  Second, there might be interested parties not subscribed to
+  the commit email list.  Third, the commit email list advertises
+  itself as a service for watching commits, not for watching commits
+  <emphasis>and</emphasis> occasional technical discussions.  Those who
+  subscribe to the commit email list did not sign up for anything but
+  commit emails; sending them other material via that list would
+  violate an implied contract.  Fourth, people often write programs
+  that read the commit email list and process the results (for
+  display on a web page, for example).  Those programs are prepared to
+  handle commit emails, but not human-written mails.</para>
+
+  <para>Note that this advice to set Reply-to does not contradict the
+  recommendations in <xref linkend="pfs-ch-3-sect-2.3"/>.  It's
+  always okay for the <emphasis>sender</emphasis> of a message to set
+  Reply-to.  In this case, the sender is the version control system
+  itself, and it sets Reply-to to indicate that the appropriate place
+  for replies is the development mailing list, not the commit
+  list.</para>
+
+  </listitem>
+
+</orderedlist>
+
+</para>
+
 
 </sect3>
 
