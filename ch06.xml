@@ -6,7 +6,7 @@
 
 <para>The ability to communicate clearly in written form is perhaps
 the most important skill one can have in an open source environment.
-In the long run it matters more than technical talents.  A great
+In the long run it matters more than programming talent.  A great
 programmer with lousy communications skills can only get one thing
 done at a time, and even then may have trouble convincing others to
 pay attention.  But a lousy programmer with good communications skills
@@ -300,20 +300,147 @@ when the channel's less busy it won't matter so much.)</remark></para>
 <sect1 id="pfs-using-archives">
 <title>Conspicuous Use of Archives</title>
 
-<para><remark>The importance of having all communications be logged
-and be searchable, with stable references.  Describe the misery that
-results when this is not available -- for example, the pain of the
-contactor.se/~dast "route around" that resulted from the lossage of
-the native tigris.org mail archiver.  Written guidelines vs precedence
-is like the distinction between English statutory law and common law.
-Good archiving is essential for the same reason.  It's like an oral
-tradition with a video camera constantly running.</remark></para>
+<para>Typically, all communications in an open source project (with
+the exception of chat room conversations) are archived.  The archives
+are public and searchable, and have referential stability: that is,
+once a given piece of information is recorded at a particular address,
+it stays at that address forever.</para>
 
-<para><remark>Perfect example: a named anchor for *every* FAQ
-item.</remark></para>
+<para>Use those archives as much as possible, and as conspicuously as
+possible.  Even when you know the answer to some question off the top
+of your head, if you think there's a reference in the archives that
+contains the answer, spend the time to dig it up and present it.
+Every time you do that in a publically visible way, some people learn
+for the first time that the archives are there, and that searching in
+them can produce answers.  Also, by referring to the archives instead
+of rewriting the advice, you reinforce the social norm against
+duplicating information.  Why have the same answer in two different
+places?  When the number of places it can be found is kept to a
+minimum, people who have found it before are more likely to remember
+what to search for to find it again.</para>
 
-<remark>(Also, get Brian B's story of the FreeBSD IRC archives
-here.)</remark>
+<para>There are times when duplicating information makes sense,
+however.  For example, suppose there's a response already in the
+archives, not from you, saying:</para>
+
+<screen>
+   It appears that your Scanley indexes have become frobnicated.  To
+   unfrobnicate them, run these steps:
+   
+   1. Shut down the Scanley server.
+   2. Run the 'defrobnicate' program that ships with Scanley.
+   3. Start up the server.
+</screen>
+
+<para>Then, months later, you see another post indicating that
+someone's indexes have become frobnicated.  You search the archives
+and come up with the old response above, but you realize it's missing
+some steps (perhaps by mistake, or perhaps because the software has
+changed since that post was written).  The classiest way to handle
+this is to post a new, more complete set of instructions, and
+explicitly obsolete the old post by mentioning it:</para>
+
+<screen>
+   It appears that your Scanley indexes have become frobnicated.  We
+   saw this problem back in July, and J. Random posted a solution at
+   http://blahblahblah/blah.  Below is a more complete description of
+   how to unfrobnicate your indexes, based on J. Random's instructions
+   but extending them a bit:
+
+   1. Shut down the Scanley server.
+   2. Become the user the Scanley server normally runs as.
+   3. As that user, run the 'defrobnicate' program on the indexes.
+   4. Run Scanley by hand to see if the indexes work now.
+   5. Restart the server.
+</screen>
+
+<para>(In an ideal world, it would be possible to attach a note to the
+<emphasis>old</emphasis> post, saying that there is newer information
+available and pointing to the new post.  However, I don't know of any
+archiving software that offers an "obsoleted by" feature, perhaps
+because it would be mildly tricky to implement in a way that doesn't
+violate the archives' integrity as a verbatim record.)</para>
+
+<para>Archives are probably most often searched for answers to
+technical questions, but their importance to the project goes well
+beyond that.  If a project's formal guidelines are its statutory law,
+the archives are its common law: a record of all decisions made and
+how they were arrived at.  In any recurring discussion, it's pretty
+much obligatory nowadays to start with an archive search.  This allows
+you to begin the discussion with a summary of the current state of
+things, anticipate objections, prepare rebuttals, and possibly
+discover angles you hadn't thought of.  Also, the other participants
+will <emphasis>expect</emphasis> you to have done an archive search.
+Even if the previous discussions went nowhere, you should include
+pointers to them when you re-raise the topic, so people can see for
+themselves a) that they went nowhere, and b) that you did your
+homework, and therefore are probably saying something now that has not
+been said before.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-all-as-archives">
+<title>Treat All Resources Like Archives</title>
+
+<para>All of the preceding advice applies to more than just mailing
+list archives.  Having particular pieces of information at stable,
+conveniently findable addresses is an organizing principle for all of
+the project's information.  Let's take the project FAQ as a case
+study.  How do people use a FAQ?</para>
+
+<orderedlist>
+  <listitem>
+    <para>They want to search it for specific words and phrases.</para>
+  </listitem>
+  <listitem>
+    <para>They want to browse it, soaking up information without
+          necessarily looking for the answer to a specific question.</para>
+  </listitem>
+  <listitem>
+    <para>They expect search engines such as Google to know about the
+          FAQ's content, so searches results can include FAQ
+          entries.</para>
+  </listitem>
+  <listitem>
+    <para>They want to be able to refer other people to specific
+          answers within the FAQ.</para>
+  </listitem>
+  <listitem>
+    <para>They want to be able to add new material to the FAQ, but
+          this happens much less often than the looking up of
+          answers&mdash;FAQs are far more often read from than written
+          to.</para>
+  </listitem>
+</orderedlist>
+
+<para>Point 1 implies that the FAQ should be available in some sort of
+textual format.  Points 2 and 3 imply that the FAQ should be available
+as an HTML page, with point 2 additionally indicating that the HTML
+should be designed for readability (i.e., you'll want some control
+over its look and feel), and should have a table of contents.  Point 4
+means that each individual entry in the FAQ should be assigned an HTML
+<firstterm>named anchor</firstterm>, a tag that allows people to reach
+a particular location on the page.</para>
+
+  <sidebar id="pfs-html-named-anchors">
+  <para>An HTML <firstterm>named anchor</firstterm> is a special
+  variant of the usual HTML anchor
+  (<literal>&lt;a&gt;...&lt;/a&gt;</literal>).  A named anchor gives a
+  label to a location in a page, by attaching a "name" attribute to an
+  anchor there: <literal>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</literal>.
+  Once a page has a ...(working here)...</para>
+
+  <para><remark>(todo: mention that id attributes are the modern way,
+  and the title tag trick)</remark></para>
+  </sidebar>
+
+<para><remark>Regarding FAQ maintenance: must be html, must have links
+for the individual questions (as per chapter 6, sec 4.1).  Ref
+<xref linkend="pfs-delegation"/>.</remark></para>
+
+</sect2>
+
+<para><remark>(Also, get Brian B's story of the FreeBSD IRC archives
+here.)</remark></para>
 
 <para><remark>Redundancy example: ChangeLogs in CVS, 'cvs log', 'svn
 log', CIA logs, etc.  Same information, different presentations.
