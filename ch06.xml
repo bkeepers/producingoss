@@ -326,6 +326,9 @@ when the channel's less busy it won't matter so much.)</remark></para>
 <sect1 id="pfs-using-archives">
 <title>Conspicuous Use of Archives</title>
 
+<!-- <remark>get Brian B's story of the FreeBSD IRC archives
+     here?</remark> -->
+
 <para>Typically, all communications in an open source project (with
 the exception of chat room conversations) are archived.  The archives
 are public and searchable, and have referential stability: that is,
@@ -411,30 +414,31 @@ been said before.</para>
 list archives.  Having particular pieces of information at stable,
 conveniently findable addresses is an organizing principle for all of
 the project's information.  Let's take the project FAQ as a case
-study.  How do people use a FAQ?</para>
+study.</para>
+
+<para>How do people use a FAQ?</para>
 
 <orderedlist>
   <listitem>
-    <para>They want to search it for specific words and phrases.</para>
+    <para>They want to search in it for specific words and phrases.</para>
   </listitem>
   <listitem>
     <para>They want to browse it, soaking up information without
-          necessarily looking for the answer to a specific question.</para>
+          necessarily looking for answers to specific questions.</para>
   </listitem>
   <listitem>
     <para>They expect search engines such as Google to know about the
-          FAQ's content, so searches results can include FAQ
-          entries.</para>
+          FAQ's content, so that searches can result in FAQ entries.</para>
   </listitem>
   <listitem>
-    <para>They want to be able to refer other people to specific
-          answers within the FAQ.</para>
+    <para>They want to be able to refer other people directly to specific
+          items in the FAQ.</para>
   </listitem>
   <listitem>
     <para>They want to be able to add new material to the FAQ, but
-          this happens much less often than the looking up of
-          answers&mdash;FAQs are far more often read from than written
-          to.</para>
+          note that this happens much less often than answers are
+          looked up&mdash;FAQs are far more often read from than
+          written to.</para>
   </listitem>
 </orderedlist>
 
@@ -445,34 +449,84 @@ should be designed for readability (i.e., you'll want some control
 over its look and feel), and should have a table of contents.  Point 4
 means that each individual entry in the FAQ should be assigned an HTML
 <firstterm>named anchor</firstterm>, a tag that allows people to reach
-a particular location on the page.</para>
+a particular location on the page.  Point 5 means the source files for
+the FAQ should be available in a convenient way (see <xref
+linkend="pfs-version-everything"/>), in a format that's easy to edit.</para>
 
-  <sidebar id="pfs-html-named-anchors">
-  <para>An HTML <firstterm>named anchor</firstterm> is a special
-  variant of the usual HTML anchor
-  (<literal>&lt;a&gt;...&lt;/a&gt;</literal>).  A named anchor gives a
-  label to a location in a page, by attaching a "name" attribute to an
-  anchor there: <literal>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</literal>.
-  Once a page has a ...(working here)...</para>
+  <sidebar id="pfs-html-named-anchors-and-ids">
+  <title>Named Anchors and ID Attributes</title>
 
-  <para><remark>(todo: mention that id attributes are the modern way,
-  and the title tag trick)</remark></para>
+  <para>There are two ways to get a browser to jump to a specific
+  location within a web page: named anchors, and id attributes.</para>
+
+  <para>A <firstterm>named anchor</firstterm> is just a normal HTML
+  anchor element (<literal>&lt;a&gt;...&lt;/a&gt;</literal>), but with
+  a "name" attribute:</para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&gt;...&lt;/a&gt;</screen>
+
+  <para>More recent versions of HTML support a generic <firstterm>id
+  attribute</firstterm>, which can be attached to any HTML element,
+  not just to <literal>&lt;a&gt;</literal>.  For example:</para>
+
+  <screen>&lt;p&nbsp;id="mylabel"&gt;...&lt;/p&gt;</screen>
+
+  <para>Both named anchors and id attributes are used in the same
+  way.  One appends a hash mark and the label to a URL, to cause the
+  browser to jump straight to that spot in the page:</para>
+
+  <screen>http://myproject.example.com/faq.html#mylabel</screen>
+
+  <para>Virtually all browsers support named anchors; most modern
+  browsers support the id attribute.  To play it safe, I would
+  recommend using either named anchors alone, or named anchors
+  <emphasis>and</emphasis> id attributes together (with the same label
+  for both in a given pair, of course).  For reasons mysterious to me,
+  doing named anchors as self-closing tags does not seem to work.  So
+  even if there's no text inside the element, you should still write
+  it in two-sided form:</para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
+
+  <para>...though normally there would be some text, such as the title
+  of a section.</para>
+
+  <para>Whether you use a named anchor or id attribute or both,
+  remember that the label will not be visible to someone who browses
+  to that location without using the label.  But such a person might
+  want to discover the label for a particular location, so they can
+  mail the URL for a FAQ answer to a friend, for example.  To help
+  them do this, add a <firstterm>title attribute</firstterm> to the
+  same element(s) where you added the "name" and/or "id" attribute,
+  for example:</para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&nbsp;title="#mylabel"&gt;...&lt;/a&gt;</screen>
+
+  <para>When the mouse pointer is held over the text inside the
+  title-attributed element, most browsers will pop up a tiny box
+  showing the title.  I usually include the hash-mark, to remind the
+  user that this is what they would put at the end of the URL to jump
+  straight to this location next time.</para>
+
   </sidebar>
 
-<para><remark>Regarding FAQ maintenance: must be html, must have links
-for the individual questions (as per chapter 6, sec 4.1).  Ref
-<xref linkend="pfs-delegation"/>.</remark></para>
+<para>Tuning the FAQ like this is just one example of how to make a
+resource presentable.  The same properties&mdash;direct searchability,
+availability to major Internet search engines, browseability,
+referential stability, and (where applicable) editability&mdash;apply
+to other web pages, the source code tree, the bug tracker, etc.  It
+just happens that most mailing list archiving software long ago
+recognized the importance of these properties, which is why mailing
+lists tend to have this functionality natively, while other formats
+may require some extra effort on the maintainer's part (<xref
+linkend="pfs-ch-8"/> discusses how to spread that maintenance burden
+across many volunteers).</para>
 
 </sect2>
 
-<para><remark>(Also, get Brian B's story of the FreeBSD IRC archives
-here.)</remark></para>
+</sect1>
 
-<para><remark>Redundancy example: ChangeLogs in CVS, 'cvs log', 'svn
-log', CIA logs, etc.  Same information, different presentations.
-Mention cvs2cl for CVS here?</remark></para>
-
-<sect2 id="pfs-bug-tracker-usage">
+<sect1 id="pfs-bug-tracker-usage">
 <title>No Conversations in the Bug Tracker</title>
 
 <para><remark>Note the danger of the bug tracker turning into a
@@ -498,8 +552,6 @@ but then link to thread for details?  The overriding concern should
 be convenience of readers.  So, paste all you want, *and* link to the
 thread.  Remember, the usual problem of data duplication does not
 exist here, because archives are static data anyway.</remark></para>
-
-</sect2>
 
 </sect1>
 
