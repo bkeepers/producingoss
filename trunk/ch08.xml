@@ -344,17 +344,17 @@ happening as much as it should.</para>
 <para>Watch out for participants who try to stake out exclusive
 ownership of certain areas of the project, and who seem to want to do
 all the work in those areas, to the extent of taking over work that
-others try to do.  Such territoriality may feel healthy at first:
-after all, on the surface it looks like someone taking on more
-responsibility for a particular area, and often correlates with
-increased activity within that area by the person staking the claim.
-But in the long run, it is destructive.  When people sense a "no
-trespassing" sign, they stay away.  This results in reduced review in
-that area, and greater fragility, because the lone developer becomes a
-single point of failure.  Worse, it fractures the cooperative,
-egalitarian spirit of the project.  The theory must always be that any
-developer is welcome to help out on any task at any time.  Of course,
-in practice things work a bit differently: people do have areas where
+others try to do.  Such behavior may even seem healthy at first: after
+all, on the surface it looks like someone taking on more
+responsibility for a particular area, and correlates with increased
+activity within that area, by the person staking the claim.  But in
+the long run, it is destructive.  When people sense a "no trespassing"
+sign, they stay away.  This results in reduced review in that area,
+and greater fragility, because the lone developer becomes a single
+point of failure.  Worse, it fractures the cooperative, egalitarian
+spirit of the project.  The theory must always be that any developer
+is welcome to help out on any task at any time.  Of course, in
+practice things work a bit differently: people do have areas where
 they are more and less influential, and non-experts voluntarily defer
 to experts in certain domains of the project.  But the key is that
 this is all voluntary: informal authority is granted based on
@@ -362,9 +362,15 @@ competence and proven judgement, but it should never be actively
 <emphasis>taken</emphasis>.  Even if the person desiring the authority
 really is competent, it is still crucial that she hold that authority
 informally, through the consensus of the group, and that the authority
-never cause her to exclude others from working in that area.
-(Rejecting someone's work for technical reasons is an entirely
-different matter, of course.)</para>
+never cause her to exclude others from working in that area.</para>
+
+<para>Rejecting or editing someone's work for technical reasons is an
+entirely different matter, of course.  But there the decisive factor
+is the content of the work, not who happened to act as gatekeeper.  It
+could have been anyone.  It may be that the same person happens to do
+most of the reviewing for a given area, but as long as they never try
+to prevent someone else from doing that work too, things are probably
+okay.</para>
 
 <para>In order to combat incipient territorialism, or even the
 appearance of it, many projects have taken the step of banning the
@@ -377,7 +383,7 @@ the developer community as a whole is responsible for them, and never
 be divided up into little fiefdoms.</para>
 
 <para>People sometimes argue in favor of author or maintainer tags in
-source files, on the grounds that they give visible credit to those
+source files, on the grounds that this gives visible credit to those
 who have done the most work there.  There are two problems with this
 argument.  First, the tags inevitably raise the awkward question of
 how much work one must do to get one's own name listed there too.
@@ -386,49 +392,49 @@ having done work in the past does not imply ownership of the area
 where the work was done, but it's difficult if not impossible to avoid
 such an implication when individual names are listed at the tops of
 source files.  In any case, credit information can already be obtained
-from the version control logs and other out-of-band recording
-mechanisms like mailing list archives, so no information is lost by
-banning it from the source files themselves.</para>
+from the version control logs and other out-of-band mechanisms like
+mailing list archives, so no information is lost by banning it from
+the source files themselves.</para>
 
 <para>If your project decides to keep individual names out of source
 files, make sure not to go overboard.  For instance, many projects
 have <filename>contrib/</filename> area where small tools and helper
 scripts are kept, often written by people who are otherwise not
-associated with the project.  It's okay for those files to contain
+associated with the project.  It's fine for those files to contain
 author names, because they are not really maintained by the project as
 a whole.  On the other hand, if a contributed tool starts getting
-hacked on by other people in in the project, eventually you may want
-to move it to a less separate location and, assuming the original
-author approves, remove the author's name, so that the code looks like
-any other community-maintained resource.  If the author is sensitive
-about this, compromise solutions are fine, for example:</para>
+hacked on by other people in the project, eventually you may want to
+move it to a less separated location and, assuming the original author
+approves, remove the author's name, so that the code looks like any
+other community-maintained resource.  If the author is sensitive about
+this, compromise solutions are acceptable, for example:</para>
 
 <blockquote>
 <programlisting>
 # indexclean.py: Remove old data from a Scanley index.
 #
-# Original Author: K. Maru &lt;kobayashi\@yetanotheremailservice.com&gt;
+# Original Author: K. Maru &lt;kobayashi@yetanotheremailservice.com&gt;
 # Now Maintained By: The Scanley Project &lt;http://www.scanley.org/&gt; and K. Maru.
 # 
 # ...
 </programlisting>
 </blockquote>
 
-<para>The important thing is to remember that there is a continuum
-between what lies outside the core project and what lies inside it.
-The main source code files for the software are clearly inside, and
-should be considered as maintained by the community.  On the other
-hand, companion tools or pieces of documentation may be the work of
-single individuals, who maintain them essentially alone, even though
-the works may be associated with or even distributed with the project.
-There is no need to apply a one-size-fits-all rule to every file, as
-long as the principle that community-maintained resources are not to
-be made into individual territories is maintained.</para>
+<para>But it would be better to such compromises, if possible, and
+most authors are willing to be persuaded, because they're happy that
+their contribution is being made a more integral part of the
+project.</para>
 
-<para><remark>(Another example: inclusion of internal issue numbers in
-scarab commits.  Though not strictly about money, it is about the
-relationship between internal/profit-driven, and external/volunteer
-development.)</remark></para>
+<para>The important thing is to remember that there is a continuum
+between the core and the periphery of any project.  The main source
+code files for the software are clearly part of the core, and should
+be considered as maintained by the community.  On the other hand,
+companion tools or pieces of documentation may be the work of single
+individuals, who maintain them essentially alone, even though the
+works may be associated with, and even distributed with, the project.
+There is no need to apply a one-size-fits-all rule to every file, as
+long as the principle that community-maintained resources are not
+allowed to become individual territories is maintained.</para>
 
 </sect2>
 
@@ -436,19 +442,98 @@ development.)</remark></para>
 <sect2 id="pfs-automation">
 <title>The Automation Ratio</title>
 
-<para><remark>Never let a human do what a machine could do.  As a rule
-of thumb, I think it's worth spending 10x the amount of time needed
-for one manual operation on automating that operation.  For example,
-handling redundancy (ChangeLogs in CVS, 'cvs log', 'svn log', CIA
-logs, etc).  Same information, different presentations.  What if some
-pages have to be autogenerated?  Make it bone-simple, and make a
-pre-commit hook to check that the regeneration happened.  Whatever
-time you have to spend on this, it's worth it.  The badness that can
-result if you don't do it is destructive not only because of the
-wasted time, but because of the bad feelings and griping that ensue
-when humans forget (as they inevitably will) to do what the machine
-should have been doing for them anyway.  (Mention cvs2cl for CVS
-here?)</remark></para>
+<para>Try not to let humans do what machines could do instead.  As a
+rule of thumb, automating a common task is worth about 10 times the
+effort a developer would spend doing that task manually one time.  For
+very frequent or very complex tasks, that ratio could easily go up to
+20 or even higher.</para>
+
+<para>This is one place where thinking of yourself as a "project
+manager", rather than just another developer, can be the right
+attitude.  Sometimes individual developers are too wrapped up in
+low-level work to see the big picture and realize that everyone is
+wasting a lot of effort performing automatable tasks manually.  Even
+those who do realize it may not take the time to solve the problem:
+because each individual performance of the task does not feel like a
+huge burden, no one ever gets annoyed enough to do anything about it.
+What makes automation compelling is multiplying that small burden by
+the number of times each developer incurs it, and then
+multiplying <emphasis>that</emphasis> by the number of
+developers.</para>
+
+<para>Here I am using the term "automation" broadly, to mean not only
+repeated actions where one or two variables change each time, but any
+sort of technical infrastructure that assists humans.
+<xref linkend="pfs-ch-3"/> describes the minimum standard automation
+required to run a project these days, but each project may have its
+own special problems too.  For example, a group working on
+documentation might want to a have a web site displaying the most
+up-to-date version of the documents at all times.  Since documentation
+is often written in a markup language like XML, creating displayable
+or downloadable documents may involve a compilation step, often quite
+intricate.  Arranging a web site where document regeneration happens
+automatically on every commit might be complicated and
+time-consuming&mdash;but it would be worth it, even if it costs you a
+day or more to set up.  The overall benefits of having up-to-date
+pages available at all times are huge, even though the cost
+of <emphasis>not</emphasis> having them might seem like only a small
+annoyance at any single moment, to any single developer.</para>
+
+<para>The badness that results from failing to take such steps is not
+merely wasted time, but the griping and frustration that ensue when
+humans make missteps (as they inevitably will) trying to run
+complicated procedures manually.  Multi-step, deterministic operations
+are exactly what computers were invented for; save your humans for
+more interesting things.</para>
+
+<sect3 id="pfs-automated-testing">
+<title>Automated Testing</title>
+
+<para>Setting up automatic test runs is helpful for any software
+project, but especially so for open-source projects, because automated
+testing (especially regression testing) allows developers to feel
+comfortable changing code in areas they are unfamiliar with.  Since
+detection of breakage is so hard to do by hand&mdash;one essentially
+has to guess where one might have broken something, and try various
+experiments to prove that one didn't&mdash;having automated ways to
+detect such breakage saves the project a <emphasis>lot</emphasis> of
+time.</para>
+
+  <sidebar id="pfs-regression-testing">
+  <title>Regression Testing</title>
+
+  <para><firstterm>Regression testing</firstterm> means testing for
+  the reappearance of bugs.  The purpose of regression testing to
+  reduce the chances that fixing one bug will break something else; as
+  a software project gets bigger and more complicated, the chances of
+  such unexpected side-effects increase steadily.  Good design can
+  reduce the rate at which these chances increase, but it cannot
+  eliminate the problem entirely.</para>
+
+  <para>As a result, many projects have a <firstterm>test
+  suite</firstterm>, a separate program that invokes the project's
+  software in ways that have been known in the past to stimulate
+  specific bugs.  Since those bugs have been fixed, the test suite
+  should be unable to make them happen again; however, if one makes a
+  change that unfixes one or more of the bugs, the next test suite run
+  will notice the bug's reappearance, that is, the
+  <firstterm>regression</firstterm>.</para>
+
+  <para><remark>[... working here ...]</remark></para>
+
+  <para><remark>
+  <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>
+  </remark></para>
+
+  </sidebar>
+
+<para><remark>[... working here ...] Regression testing: choosing the
+right level of formality.  Coordinating results from human volunteers.
+Spend any effort to make tests easier to write, it will pay back
+manyfold.  Importance of the don't-break-the-build
+concept.</remark></para>
+
+</sect3>
 
 </sect2>
 
@@ -473,16 +558,6 @@ this paragraph, in "pfs-packaging" (?  svn blame -r265 ch07.html will
 say for sure), regarding importance of standardized build procedures,
 especially in chapter 2.  Search for those and update them to point to
 here instead.]</remark></para>
-
-<sect3 id="pfs-automated-testing">
-<title>Automated Testing</title>
-
-<para><remark>(Regression testing: choosing the right level of
-formality.  Coordinating results from human volunteers.  Spend any
-effort to make tests easier to write, it will pay back manyfold.
-Importance of the don't-break-the-build concept.)</remark></para>
-
-</sect3>
 
 </sect2>
 
