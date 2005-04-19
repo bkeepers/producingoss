@@ -443,45 +443,44 @@ allowed to become individual territories is maintained.</para>
 <title>The Automation Ratio</title>
 
 <para>Try not to let humans do what machines could do instead.  As a
-rule of thumb, automating a common task is worth about 10 times the
+rule of thumb, automating a common task is worth at least 10 times the
 effort a developer would spend doing that task manually one time.  For
 very frequent or very complex tasks, that ratio could easily go up to
 20 or even higher.</para>
 
-<para>This is one place where thinking of yourself as a "project
-manager", rather than just another developer, can be the right
-attitude.  Sometimes individual developers are too wrapped up in
-low-level work to see the big picture and realize that everyone is
-wasting a lot of effort performing automatable tasks manually.  Even
-those who do realize it may not take the time to solve the problem:
-because each individual performance of the task does not feel like a
-huge burden, no one ever gets annoyed enough to do anything about it.
-What makes automation compelling is multiplying that small burden by
-the number of times each developer incurs it, and then
-multiplying <emphasis>that</emphasis> by the number of
-developers.</para>
+<para>Thinking of yourself as a "project manager", rather than just
+another developer, may be a useful attitude here.  Sometimes
+individual developers are too wrapped up in low-level work to see the
+big picture and realize that everyone is wasting a lot of effort
+performing automatable tasks manually.  Even those who do realize it
+may not take the time to solve the problem: because each individual
+performance of the task does not feel like a huge burden, no one ever
+gets annoyed enough to do anything about it.  What makes automation
+compelling is that that small burden is multiplied by the number of
+times each developer incurs it, and then <emphasis>that</emphasis>
+number is multiplied by the number of developers.</para>
 
 <para>Here I am using the term "automation" broadly, to mean not only
 repeated actions where one or two variables change each time, but any
-sort of technical infrastructure that assists humans.
-<xref linkend="pfs-ch-3"/> describes the minimum standard automation
-required to run a project these days, but each project may have its
-own special problems too.  For example, a group working on
-documentation might want to a have a web site displaying the most
-up-to-date version of the documents at all times.  Since documentation
-is often written in a markup language like XML, creating displayable
-or downloadable documents may involve a compilation step, often quite
-intricate.  Arranging a web site where document regeneration happens
-automatically on every commit might be complicated and
-time-consuming&mdash;but it would be worth it, even if it costs you a
-day or more to set up.  The overall benefits of having up-to-date
-pages available at all times are huge, even though the cost
+sort of technical infrastructure that assists humans.  The minimum
+standard automation required to run a project these days was described
+in <xref linkend="pfs-ch-3"/>, but each project may have its own
+special problems too.  For example, a group working on documentation
+might want to a have a web site displaying the most up-to-date
+versions of the documents at all times.  Since documentation is often
+written in a markup language like XML, there may be a compilation
+step, often quite intricate, involved in creating displayable or
+downloadable documents.  Arranging a web site where such compilation
+happens automatically on every commit can be complicated and
+time-consuming&mdash;but it is worth it, even if it costs you a day or
+more to set up.  The overall benefits of having up-to-date pages
+available at all times are huge, even though the cost
 of <emphasis>not</emphasis> having them might seem like only a small
 annoyance at any single moment, to any single developer.</para>
 
 <para>The badness that results from failing to take such steps is not
 merely wasted time, but the griping and frustration that ensue when
-humans make missteps (as they inevitably will) trying to run
+humans make missteps (as they inevitably will) in trying to perform
 complicated procedures manually.  Multi-step, deterministic operations
 are exactly what computers were invented for; save your humans for
 more interesting things.</para>
@@ -489,49 +488,130 @@ more interesting things.</para>
 <sect3 id="pfs-automated-testing">
 <title>Automated Testing</title>
 
-<para>Setting up automatic test runs is helpful for any software
-project, but especially so for open-source projects, because automated
-testing (especially regression testing) allows developers to feel
-comfortable changing code in areas they are unfamiliar with.  Since
-detection of breakage is so hard to do by hand&mdash;one essentially
-has to guess where one might have broken something, and try various
-experiments to prove that one didn't&mdash;having automated ways to
-detect such breakage saves the project a <emphasis>lot</emphasis> of
-time.</para>
+<para>Automated test runs are helpful for any software project, but
+especially so for open-source projects, because automated testing
+(especially regression testing) allows developers to feel comfortable
+changing code in areas they are unfamiliar with, and thus encourages
+exploratory development.  Since detection of breakage is so hard to do
+by hand&mdash;one essentially has to guess where one might have broken
+something, and try various experiments to prove that one
+didn't&mdash;having automated ways to detect such breakage saves the
+project a <emphasis>lot</emphasis> of time.</para>
 
   <sidebar id="pfs-regression-testing">
   <title>Regression Testing</title>
 
   <para><firstterm>Regression testing</firstterm> means testing for
   the reappearance of bugs.  The purpose of regression testing to
-  reduce the chances that fixing one bug will break something else; as
-  a software project gets bigger and more complicated, the chances of
-  such unexpected side-effects increase steadily.  Good design can
-  reduce the rate at which these chances increase, but it cannot
-  eliminate the problem entirely.</para>
+  reduce the chances that code changes will break the software in
+  unexpected way.  As a software project gets bigger and more
+  complicated, the chances of such unexpected side-effects increase
+  steadily.  Good design can reduce the rate at which the chances
+  increase, but it cannot eliminate the problem entirely.</para>
 
   <para>As a result, many projects have a <firstterm>test
   suite</firstterm>, a separate program that invokes the project's
   software in ways that have been known in the past to stimulate
-  specific bugs.  Since those bugs have been fixed, the test suite
-  should be unable to make them happen again; however, if one makes a
-  change that unfixes one or more of the bugs, the next test suite run
-  will notice the bug's reappearance, that is, the
-  <firstterm>regression</firstterm>.</para>
+  specific bugs.  If the test suite succeeds in making one of these
+  bugs happen, this is known as a <firstterm>regression</firstterm>,
+  meaning that someone's change unexpectedly unfixed a
+  previously-fixed bug.</para>
 
-  <para><remark>[... working here ...]</remark></para>
-
-  <para><remark>
-  <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>
-  </remark></para>
+  <para>See also
+  <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>.</para>
 
   </sidebar>
 
-<para><remark>[... working here ...] Regression testing: choosing the
-right level of formality.  Coordinating results from human volunteers.
-Spend any effort to make tests easier to write, it will pay back
-manyfold.  Importance of the don't-break-the-build
-concept.</remark></para>
+<para>Regression testing is not a panacea.  For one thing, it works
+best for programs with batch-style interfaces.  Software that is
+operated primarily through graphical user interfaces is much harder to
+drive programmatically.  Another problem is that the regression test
+suite framework itself can often be quite complex, with a learning
+curve and maintenance burden all its own.  Reducing this complexity is
+one of the most useful things you can do, even though it may take a
+considerable amount of time.  The easier it is to add new tests to the
+suite, the more developers will do so, and the fewer bugs will survive
+to release.  Effort spent making tests easier to write will be paid
+back manyfold over the lifetime of the project.</para>
+
+<para>Many projects have a <firstterm>"Don't break the
+build!"</firstterm> rule, meaning, don't commit a change that makes
+the software unable to compile or run.  Being the person who broke the
+build is usually cause for mild embarrassment and ribbing.  Projects
+with regression test suites often have a corollary rule: don't commit
+any change that causes tests to fail.  Such failures are easiest to
+spot if there are automatic nightly runs of the entire test suite,
+with the results mailed out to the development list or to a dedicated
+test-results mailing list; that's another example of a worthwhile
+automation.</para>
+
+<para>Some projects go even further, requiring that new a test
+accompany every bugfix or new feature.  Whether this is a good idea or
+not depends on many factors: the nature of the software, the makeup of
+the development team, and the difficulty of writing new tests.  For
+many years, the CVS (<ulink url="http://www.cvshome.org/"/>) project
+had a hard rule that no non-trivial change could be committed to the
+source code without a corresponding addition to the regression suite,
+to test that the change worked.  This was a good policy in theory,
+since CVS is version control software and therefore properly
+conservative about the possibility of munging or mishandling the
+user's data.  The problem in practice was that CVS's regression test
+suite is a single huge shell script (amusingly named
+<filename>sanity.sh</filename>), hard to read and even more harder to
+modify or extend.  The difficulty of adding new tests, combined with
+the requirement that patches be accompanied by new tests, meant that
+CVS effectively discouraged a lot of code contributions.  More than
+once I saw people start on and even complete a patch to CVS itself,
+but give up when told of the requirement to add a new test to
+<filename>sanity.sh</filename>.  Worse, I knew from conversations with
+experienced developers that they occasionally didn't bother to fix
+minor bugs because the trouble to write a new test would be too great.
+(Not having worked on CVS in a while, I don't know how strictly the
+developer community enforces the test requirement these days, although
+it is still listed in the official documentation.)</para>
+
+<para>It is normal in many projects for developers spend more time
+writing a new regression test than they spent fixing the original bug.
+But CVS carried this phenomenon to an extreme: one might spend hours
+trying to design one's test properly, and still get it wrong, because
+there are just too many unpredictable complexities involved in
+changing a 35,000 line Bourne shell script.  Even longtime CVS
+developers often grumbled when they had to add a new test.</para>
+
+<para>This situation was due to a failure on all our parts to consider
+the automation ratio.  It is true that designing and implementing a
+new test framework would have been a major
+effort.<footnote><para>Although note that there would be no need to
+convert all the existing tests to the new framework; the two could
+happily exist side by side, with old tests converted over only as they
+needed to be changed.</para></footnote> But neglecting to do so has
+cost the project much more, over the years.  How many bugfixes and new
+features are <emphasis>not</emphasis> in CVS today, because of the
+impediment of an awkward test suite?  We may not know the exact
+number, but it is surely many times greater than the number of
+bugfixes or new features the developers might forgo in order to come
+up with a new test system (or integrate an off-the-shelf system).
+That task would only take a finite amount of time, while the penalty
+of using the current test suite will continue forever if nothing is
+done.</para>
+
+<para>The lesson to draw is not that having strict requirements to
+write tests is bad, nor that writing your test system in Bourne shell
+script is necessarily bad.  It might work fine, depending on how you
+design it and and what it needs to test.  But if you see the test
+system becoming a significant impediment to development, do something
+about it.</para>
+
+<para>Most volunteer developers are willing to take the extra time to
+write regression tests, when the test system is comprehensible and
+easy to work with.  Accompanying changes with tests is understood to
+be the responsible thing to do, and it's also an easy opportunity for
+collaboration: often two developers will divide up the work for a
+bugfix, with one writing the fix itself, and the other writing the
+test.  The latter developer may often end up with more work, and since
+writing a test is already less satisfying than fixing an actual bug,
+it is imperative that the test suite not make the experience more
+painful than it has to be.</para>
 
 </sect3>
 
