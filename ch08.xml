@@ -595,12 +595,12 @@ That task would only take a finite amount of time, while the penalty
 of using the current test suite will continue forever if nothing is
 done.</para>
 
-<para>The lesson to draw is not that having strict requirements to
-write tests is bad, nor that writing your test system in Bourne shell
-script is necessarily bad.  It might work fine, depending on how you
-design it and and what it needs to test.  But if you see the test
-system becoming a significant impediment to development, do something
-about it.</para>
+<para>The point is not that having strict requirements to write tests
+is bad, nor that writing your test system in Bourne shell script is
+necessarily bad.  It might work fine, depending on how you design it
+and and what it needs to test.  The point is simply that when the test
+system becomes a significant impediment to development, something must
+be done.</para>
 
 <para>Most volunteer developers are willing to take the extra time to
 write regression tests, when the test system is comprehensible and
@@ -618,47 +618,161 @@ painful than it has to be.</para>
 </sect2>
 
 <!-- ======================== subsection ============================== -->
-<sect2 id="pfs-division-of-labor">
-<title>Design to Support Division of Labor</title>
-
-<para><remark>How to make the project's architecture support division
-among many workers.  (Example: According to Tim [via Andy], Linus said
-that he found it easier to get volunteers because he knew how to break
-down the functionality or source code into chunks that different
-people could handle.)  This will tie into material in Chapter
-5(a).</remark></para>
-
-<para><remark>Note the penalty paid by programs with complex or
-non-standard build procedures.  They suffer greatly reduced
-contribution rates.  Mozilla Firefox is a good example (name a
-specific bug annoying me right now, and how I could probably debug it
-easily, except that I can't build the danged thing).  [NOTE: there may
-be some sections earlier in the book that refer to the old location of
-this paragraph, in "pfs-packaging" (?  svn blame -r265 ch07.html will
-say for sure), regarding importance of standardized build procedures,
-especially in chapter 2.  Search for those and update them to point to
-here instead.]</remark></para>
-
-</sect2>
-
-<!-- ======================== subsection ============================== -->
 <sect2 id="pfs-users-to-volunteers">
 <title>Treat Every User as a Potential Volunteer</title>
 
-<para><remark>For example: take the time to teach people how to write
-a good bug report, and do so publicly at least some of the time.
-Corollary: don't get angry at people who file useless reports.  Just
-tell them why the report isn't useful, how they can fix it, and then
-wait for the next iteration.  Same goes for complaints about missing
-features: don't say "talk to the hand", but do point out that it'll
-get done faster if they submit a patch (and then make sure to actually
-follow up and review patches obtained this way).  [If this gets its
-own subsection, then fix up ref in ch 3 bug tracking.]</remark></para>
+<para>Each interaction with a user is an opportunity to get a new
+volunteer.  When a user takes the time to post to one of the project's
+mailing lists, or to file a bug report, she has already tagged herself
+as having more potential for involvement than most users (from whom
+the project will never hear at all).  Follow up on that potential: if
+she described a bug, thank her for the report and her if she wants to
+try fixing it.  If she wrote to say that an important question was
+missing from the FAQ, or that the program's documentation was
+deficient in some way, then freely acknowledge the problem (assuming
+it really exists) and see if she's interested in writing the missing
+material herself.</para>
 
-<para><remark>This strategy depends in part of having a lot of the
-"teaching materials" already prepared, such as the all-caps files
-(link to live example here), etc.  Make sure to link to them from
-appropriate spots.</remark></para>
+<para>The goal in investing in active users is not merely to turn them
+into developers or documentation writers.  Even training people to
+write good bug reports can pay off in the long run, if you don't
+spend <emphasis>too</emphasis> much time per person, and if they go on
+to submit more bug reports in the future&mdash;which they are more
+likely to do if they got a constructive reaction to their first
+report.  A constructive reaction need not be a fix for the bug,
+although that's always the ideal; it can also be a solicitation for
+more information, or even just a confirmation that the behavior
+<emphasis>is</emphasis> a bug.  People want to be listened to.
+Secondarily, they want their bugs fixed.  You may not always be able
+to give them the latter in a timely fashion, but you (or rather, the
+project as a whole) can give them the former.</para>
+
+<para>A corollary of this is that developers should not express anger
+at people who file well-intended but vague bug reports.  This is one
+of my personal pet peeves; I see developers do it all the time on
+various open source mailing lists, and the harm it does is palpable.
+Some hapless newbie will post a useless report:</para>
+
+<blockquote>
+   <para>Hi, I can't get Scanley to run.  Every time I start it up, it
+   just errors.  Is anyone else seeing this problem?</para>
+</blockquote>
+
+<para>And some developer&mdash;who has seen this kind of report a
+thousand times, and hasn't stopped to think that the newbie has
+not&mdash;will respond like this:</para>
+
+<blockquote>
+   <para>What are we supposed to do with so little information?
+   Sheesh.  Give us at least some details, like the version of
+   Scanley, your operating system, and the error.</para>
+</blockquote>
+
+<para>This developer has failed to see things from the user's point of
+view, and also failed to consider the effect such a reaction might
+have on all the <emphasis>other</emphasis> people watching the
+exchange.  Naturally a user who has no programming experience, and no
+prior experience reporting bugs, will not know how to write a bug
+report.  What is the right way to handle such a person?  Educate them!
+And do it in such a way that they come back for more:</para>
+
+<blockquote>
+   <para>Sorry you're having trouble.  We'll need more information in
+   order to figure out what's happening here.  Please tell us the
+   version of Scanley, your operating system, and the exact text of
+   the error.  The very best thing you can do is send a transcript
+   show the exact commands you ran, and the output they produced.
+   See http://www.scanley.org/how_to_report_a_bug.html for more.</para> 
+</blockquote>
+
+<para>This way of responding is far more effective, in terms of
+extracting the needed information from the user, because it is written
+to the user's point of view.  First, it expresses sympathy:
+<emphasis>You had a problem; we feel your pain</emphasis>.  (This is
+not necessary in every bug report response, it depends on the severity
+of the problem and how upset the user seemed.)  Second, instead of
+belittling her for not knowing how to report a bug, it tells her how,
+and in enough detail to be actually useful&mdash;for example, many
+users don't realize that "show us the error" means "show us the exact
+text of the error, with no omissions or abridgements".  The first time
+you work with such a user, you need to be specific about that.
+Finally, it offers a pointer to much more detailed and complete
+instructions for reporting bugs.  If you have successfully engaged
+with the user, she will often take the time to read that document and
+do what it says.  This means, of course, that you have to have the
+document prepared in advance.  It should give clear instructions about
+what kind of information your development team wants to see in every
+bug report.  Ideally, it should also evolve over time in response to
+the particular sorts of omissions and misreports users tend to make
+for your project.</para>
+
+<para>The Subversion project's bug reporting instructions are a fairly
+standard example of the form, see <xref linkend="pfs-app-d"/>.  Notice
+how they close with an invitation to provide a patch to fix the bug.
+This is not because such an invitation will lead to a greater
+patch/report ratio&mdash;most users who are capable of fixing bugs
+already know that a patch would be welcome, and don't need to be told.
+The invitation's real purpose is to emphasize to all readers,
+especially those new to the project or new to free software in
+general, that the project runs on volunteer contributions.  In a
+sense, the project's current developers are no more responsible for
+fixing the bug than is the person who reported it.  This is an
+important point that many new users will not be familiar with.  Once
+they realize it, they're more likely to help make the fix happen, if
+not by contributing code then by providing a more thorough
+reproduction recipe, or by offering to test fixes that other people
+post.  The goal is to make every user realize that there is
+no <emphasis>innate</emphasis> difference between themselves and the
+people who work on the project&mdash;that it's a question of how much
+time and effort one puts in, not a question of who one is.</para>
+
+<para>The admonition against responding angrily does not apply to rude
+users.  Sometimes people post bug reports or complaints that,
+regardless of their informational content, express contempt or
+sneering disappointment at the project for whatever failing the user
+happens to be posting about.  Often such people are alternately
+insulting and flattering, such as the person who posted this to a
+Subversion mailing list:</para>
+
+<blockquote>
+<screen>
+Why is it that after almost 6 days there still aren't any binaries posted
+for the windows platform?!?  It's the same story every time and it's pretty
+frustrating.  Why aren't these things automated so that they could be
+available immediately??  When you post an "RC" build, I think the idea is
+that you want users to test the build, but yet you don't provide any way of
+doing so.  Why even have a soak period if you provide no means of testing??
+</screen> 
+</blockquote>
+
+<para>Initial response to this rather inflammatory post was
+surprisingly restrained: people pointed out that the project had a
+published policy of not providing official binaries, and said, with
+varying degrees of annoyance, that he ought to volunteer to produce
+them himself if they were so important to him.  Believe it or not, his
+next post started with these lines:</para>
+
+<blockquote>
+<screen>
+First of all, let me say that I think Subversion is awesome and I really
+appreciate the efforts of everyone involved.  [...]
+</screen> 
+</blockquote>
+
+<para>... and he then went on berate the project again for not
+providing binaries, while still not volunteering to do anything about
+it himself.  After that, about fifty people just jumped all over him,
+and I can't say I really minded.  The "zero-tolerance" policy toward
+rudeness advocated in <xref linkend="pfs-prevent-rudeness"/> applies
+to people with whom the project has (or would like to have) a
+sustained interaction.  But when someone makes it clear from the start
+that they are going to be a fountain of bile, there is no point making
+them feel welcome.</para>
+
+<para>Such situations are fortunately quite rare, and they are
+noticeably rarer in projects that make an effort to engage users
+constructively (and courteously) from their very first
+interaction.</para>
 
 </sect2>
 
