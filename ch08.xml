@@ -434,7 +434,7 @@ individuals, who maintain them essentially alone, even though the
 works may be associated with, and even distributed with, the project.
 There is no need to apply a one-size-fits-all rule to every file, as
 long as the principle that community-maintained resources are not
-allowed to become individual territories is maintained.</para>
+allowed to become individual territories is upheld.</para>
 
 </sect2>
 
@@ -496,7 +496,9 @@ exploratory development.  Since detection of breakage is so hard to do
 by hand&mdash;one essentially has to guess where one might have broken
 something, and try various experiments to prove that one
 didn't&mdash;having automated ways to detect such breakage saves the
-project a <emphasis>lot</emphasis> of time.</para>
+project a <emphasis>lot</emphasis> of time.  It also makes people much
+more relaxed about refactoring large swaths of code, and therefore
+contributes to the software's long-term maintainability.</para>
 
   <sidebar id="pfs-regression-testing">
   <title>Regression Testing</title>
@@ -531,8 +533,8 @@ curve and maintenance burden all its own.  Reducing this complexity is
 one of the most useful things you can do, even though it may take a
 considerable amount of time.  The easier it is to add new tests to the
 suite, the more developers will do so, and the fewer bugs will survive
-to release.  Effort spent making tests easier to write will be paid
-back manyfold over the lifetime of the project.</para>
+to release.  Any effort spent making tests easier to write will be
+paid back manyfold over the lifetime of the project.</para>
 
 <para>Many projects have a <firstterm>"Don't break the
 build!"</firstterm> rule, meaning, don't commit a change that makes
@@ -546,37 +548,38 @@ test-results mailing list; that's another example of a worthwhile
 automation.</para>
 
 <para>Some projects go even further, requiring that new a test
-accompany every bugfix or new feature.  Whether this is a good idea or
-not depends on many factors: the nature of the software, the makeup of
-the development team, and the difficulty of writing new tests.  For
-many years, the CVS (<ulink url="http://www.cvshome.org/"/>) project
-had a hard rule that no non-trivial change could be committed to the
-source code without a corresponding addition to the regression suite,
-to test that the change worked.  This was a good policy in theory,
-since CVS is version control software and therefore properly
-conservative about the possibility of munging or mishandling the
-user's data.  The problem in practice was that CVS's regression test
-suite is a single huge shell script (amusingly named
-<filename>sanity.sh</filename>), hard to read and even harder to
-modify or extend.  The difficulty of adding new tests, combined with
-the requirement that patches be accompanied by new tests, meant that
-CVS effectively discouraged a lot of code contributions.  More than
-once I saw people start on and even complete a patch to CVS itself,
-but give up when told of the requirement to add a new test to
-<filename>sanity.sh</filename>.  Worse, I knew from conversations with
-experienced developers that they occasionally didn't bother to fix
-minor bugs because the trouble to write a new test would be too great.
-(Not having worked on CVS in a while, I don't know how strictly the
-developer community enforces the test requirement these days, although
-it is still listed in the official documentation.)</para>
+accompany <emphasis>every</emphasis> bugfix or new feature.  Whether
+this is a good idea or not depends on many factors: the nature of the
+software, the makeup of the development team, and the difficulty of
+writing new tests.  For many years, the CVS
+(<ulink url="http://www.cvshome.org/"/>) project had a hard rule that
+no non-trivial change could be committed to the source code without a
+corresponding addition to the regression suite, to test that the
+change worked.  This was a good policy in theory, since CVS is version
+control software and therefore properly conservative about the
+possibility of munging or mishandling the user's data.  The problem in
+practice was that CVS's regression test suite is a single huge shell
+script (amusingly named <filename>sanity.sh</filename>), hard to read
+and even harder to modify or extend.  The difficulty of adding new
+tests, combined with the requirement that patches be accompanied by
+new tests, meant that CVS effectively discouraged a lot of code
+contributions.  More than once I saw people start on and even complete
+a patch to CVS itself, but give up when told of the requirement to add
+a new test to <filename>sanity.sh</filename>.  Worse, I knew from
+conversations with experienced developers that they occasionally
+didn't bother to fix minor bugs because the trouble to write a new
+test would be too great.  (Not having worked on CVS in a while, I
+don't know how strictly the developer community enforces the test
+requirement these days, although it is still listed in the official
+documentation.)</para>
 
-<para>It is normal in many projects for developers spend more time
-writing a new regression test than they spent fixing the original bug.
-But CVS carried this phenomenon to an extreme: one might spend hours
-trying to design one's test properly, and still get it wrong, because
-there are just too many unpredictable complexities involved in
-changing a 35,000 line Bourne shell script.  Even longtime CVS
-developers often grumbled when they had to add a new test.</para>
+<para>It is normal to spend more time writing a new regression test
+than on fixing the original bug.  But CVS carried this phenomenon to
+an extreme: one might spend hours trying to design one's test
+properly, and still get it wrong, because there are just too many
+unpredictable complexities involved in changing a 35,000 line Bourne
+shell script.  Even longtime CVS developers often grumbled when they
+had to add a new test.</para>
 
 <para>This situation was due to a failure on all our parts to consider
 the automation ratio.  It is true that designing and implementing a
@@ -587,13 +590,12 @@ happily exist side by side, with old tests converted over only as they
 needed to be changed.</para></footnote> But neglecting to do so has
 cost the project much more, over the years.  How many bugfixes and new
 features are <emphasis>not</emphasis> in CVS today, because of the
-impediment of an awkward test suite?  We may not know the exact
-number, but it is surely many times greater than the number of
-bugfixes or new features the developers might forgo in order to come
-up with a new test system (or integrate an off-the-shelf system).
-That task would only take a finite amount of time, while the penalty
-of using the current test suite will continue forever if nothing is
-done.</para>
+impediment of an awkward test suite?  We cannot know the exact number,
+but it is surely many times greater than the number of bugfixes or new
+features the developers might forgo in order to come up with a new
+test system (or integrate an off-the-shelf system).  That task would
+only take a finite amount of time, while the penalty of using the
+current test suite will continue forever if nothing is done.</para>
 
 <para>The point is not that having strict requirements to write tests
 is bad, nor that writing your test system in Bourne shell script is
@@ -626,17 +628,20 @@ volunteer.  When a user takes the time to post to one of the project's
 mailing lists, or to file a bug report, she has already tagged herself
 as having more potential for involvement than most users (from whom
 the project will never hear at all).  Follow up on that potential: if
-she described a bug, thank her for the report and her if she wants to
-try fixing it.  If she wrote to say that an important question was
+she described a bug, thank her for the report and ask her if she wants
+to try fixing it.  If she wrote to say that an important question was
 missing from the FAQ, or that the program's documentation was
 deficient in some way, then freely acknowledge the problem (assuming
-it really exists) and see if she's interested in writing the missing
-material herself.</para>
+it really exists) and ask if she's interested in writing the missing
+material herself.  Naturally, much of the time the user will demur,
+but it doesn't cost much to ask, and every time you do, it reminds the
+other listeners in that forum that getting involved in the project is
+something anyone can do.</para>
 
-<para>The goal in investing in active users is not merely to turn them
-into developers or documentation writers.  Even training people to
-write good bug reports can pay off in the long run, if you don't
-spend <emphasis>too</emphasis> much time per person, and if they go on
+<para>Don't limit your goals to acquiring new developers and
+documentation writers.  For example, even training people to write
+good bug reports pays off in the long run, if you don't spend
+<emphasis>too</emphasis> much time per person, and if they go on
 to submit more bug reports in the future&mdash;which they are more
 likely to do if they got a constructive reaction to their first
 report.  A constructive reaction need not be a fix for the bug,
@@ -728,11 +733,10 @@ time and effort one puts in, not a question of who one is.</para>
 
 <para>The admonition against responding angrily does not apply to rude
 users.  Sometimes people post bug reports or complaints that,
-regardless of their informational content, express contempt or
-sneering disappointment at the project for whatever failing the user
-happens to be posting about.  Often such people are alternately
-insulting and flattering, such as the person who posted this to a
-Subversion mailing list:</para>
+regardless of their informational content, show a sneering contempt at
+the project for whatever failing the user happens to be posting about.
+Often such people are alternately insulting and flattering, such as
+the person who posted this to a Subversion mailing list:</para>
 
 <blockquote>
 <screen>
@@ -759,10 +763,10 @@ appreciate the efforts of everyone involved.  [...]
 </screen> 
 </blockquote>
 
-<para>... and he then went on berate the project again for not
+<para>... and then he went on berate the project again for not
 providing binaries, while still not volunteering to do anything about
-it himself.  After that, about fifty people just jumped all over him,
-and I can't say I really minded.  The "zero-tolerance" policy toward
+it.  After that, about fifty people just jumped all over him, and I
+can't say I really minded.  The "zero-tolerance" policy toward
 rudeness advocated in <xref linkend="pfs-prevent-rudeness"/> applies
 to people with whom the project has (or would like to have) a
 sustained interaction.  But when someone makes it clear from the start
@@ -771,7 +775,7 @@ them feel welcome.</para>
 
 <para>Such situations are fortunately quite rare, and they are
 noticeably rarer in projects that make an effort to engage users
-constructively (and courteously) from their very first
+constructively and courteously from their very first
 interaction.</para>
 
 </sect2>
