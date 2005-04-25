@@ -797,12 +797,28 @@ structure.</para>
 
 <para>Sometimes such management roles are formalized, sometimes they
 happen spontaneously.  In the Subversion project, we have a patch
-manager, a translation manager, documentation managers, issue
-managers, a release manager, and various mailing list moderators.
-Some of these roles we made a conscious decision to initiate, others
-just happened by themselves.  Below we'll examine them in detail, as
-well as one role that we don't have but which I wish we did (and maybe
-by the time you read this, we will), that of FAQ manager.</para>
+manager, a translation manager, documentation managers, issue managers
+(albeit unofficial), and a release manager.  Some of these roles we
+made a conscious decision to initiate, others just happened by
+themselves; as the project grows I expect more roles to be added.
+Below we'll examine these roles, and a couple of others, in detail
+(except for release manager, which was already covered in
+<xref linkend="pfs-release-manager"/> and
+<xref linkend="pfs-release-owner"/>).</para>
+
+<para>As you read the role descriptions, notice that none of them
+requires exclusive control over the domain in question.  The issue
+manager does not prevent other people from making changes in the
+issues database; the FAQ manager does not insist on being the only
+person to edit the FAQ; and so on.  These roles are all about
+responsibility without monopoly.  An important part of each domain
+manager's job to notice when other people are working in that domain,
+and train them to do the things the way the manager does, so that
+the multiple efforts reinforce rather than conflict.</para>
+
+<para><remark>(Possibly discuss how to find people for these roles?
+Generally it's just open solicitation.  But sometimes one must
+arbitrate between competitors for the same role.)</remark></para>
 
 <sect2 id="pfs-patch-manager">
 <title>Patch Manager</title>
@@ -858,6 +874,12 @@ version, and to the mailing list thread around it, so that there is a
 permanent record for developers to follow up on later.  If the patch
 addresses an existing issue, then he annotates that issue with the
 relevant information, instead of opening a new issue.</para>
+
+<para><remark>[Switched pronoun gender here partly because in
+Subversion, the manager is in fact a "he" not a "she", and partly to
+make a contrast with the earlier use of "she" to mean the person
+submitting the patch.  Is it too confusing?  I can make them all "she"
+if that would be better.]</remark></para>
 
 <para>When a patch gets no reaction at all, the patch manager waits a
 few days, then follows up asking if anyone is going to review it.
@@ -1025,10 +1047,10 @@ being committed.</para>
 <para>Given the exigencies of handling documentation patches, and the
 fact that the code base needs to be constantly monitored so the
 documentation can be kept up-to-date, it makes sense to have one
-person, or a small team, dedicated to managing the documentation.
-They can keep a record of exactly where and how the documentation lags
-behind the software, and they can have practiced procedures for
-handling large quantities of patches in an integrated way.</para>
+person, or a small team, dedicated to the task.  They can keep a
+record of exactly where and how the documentation lags behind the
+software, and they can have practiced procedures for handling large
+quantities of patches in an integrated way.</para>
 
 <para>Of course, this does not preclude other people in the project
 from applying documentation patches on the fly, especially small ones,
@@ -1052,89 +1074,139 @@ whatever is necessary to keep the documentation healthy.</para>
 <sect2 id="pfs-issue-manager">
 <title>Issue Manager</title>
 
-<para><remark>Point out how this was never formalized, MaxB just
-started doing it, until pretty soon he was doing more than I was (and
-I had considered myself the semi-official manager!).  Depending on the
-level of sophistication in use of the issue tracker, the issue
-manager might decide on the meanings of certain fields, make new
-keywords, make summaries consistent, etc.  There's probably no end to
-what can be done, it's just a question of what's important.  Note
-that interface expertise can be an issue here.  Someone who knows,
-say, Bugzilla intimately may be in a position to do more interesting
-things than someone who doesn't.</remark></para>
+<para>The number of issues in a project's bug tracker grows in
+proportion to the number of people using the software.  Therefore,
+even as you fix bugs and ship an increasingly robust program, you
+should still expect the number of open issues to grow essentially
+without bound.  The frequency of duplicate issues will also increase,
+as will the frequency of incomplete or poorly-described issues.</para>
 
-<para><remark>Regarding bug management: full issue sweeps become less
-and less feasible over time.  You eventually must evolve a system for
-categorizing and prioritizing new issues based on overall context, not
-on an O(N^2) comparison with all the other issues in the database.  It
-is normal for the bug database to grow slowly but without bound over
-time.  This is not a sign of failure.  In general, guard against the
-tendency to draw conclusions from bug statistics (or commit
-statistics, for that matter).  They are qualitative events, and cannot
-be measured quantitatively.</remark></para>
+<para>Issue managers help alleviate these problems by watching what
+goes into the database, and periodically sweeping through it looking
+for specific problems.  Probably their most common action is to fix up
+incoming issues, either because the reporter didn't set some of the
+form fields correctly, or because the issue is a duplicate of one
+already in the database.  Obviously, the more familiar an issue
+manager is with the project's bug database, the more efficiently she
+will be able to detect duplicate issues&mdash;this is one of the main
+advantages of having a few people specialize in the bug database,
+instead of everyone trying to do it <foreignphrase>ad
+hoc</foreignphrase>.  When the group tries to do it in a decentralized
+manner, no single individual acquires a deep expertise in the content
+of the database.</para>
 
-</sect2>
+<para>Issue managers can also help map between issues and individual
+developers.  When there are a lot of bug reports coming in, not every
+developer may read the issue notification mailing list with equal
+attention.  However, if someone who knows the development team is
+keeping an eye on all incoming issues, then she can discreetly direct
+certain developers' attention to specific bugs when appropriate.  Of
+course, this has to be done with a sensitivity to everything else
+going on in development, and to the recipient's desires and
+temperament.  Therefore, it is often best for issue managers to be
+developers themselves.</para>
 
-<sect2 id="pfs-release-manager-stub">
-<title>Release Manager</title>
+<para>Depending on how your project uses the issue tracker, issue
+managers can also shape the database to reflect the project's
+priorities.  For example, in Subversion we schedule issues into
+specific future releases, so that when someone asks "When will bug X
+be fixed?" we can say "Two releases from now," even if we can't give
+an exact date.  The releases are represented in the issue tracker as
+target milestones, a field available in
+IssueZilla.<footnote><para>IssueZilla is the issue tracker we use; it
+is a descendant of BugZilla.</para></footnote> As a rule, every
+Subversion release has one major new feature and a list of specific
+bug fixes.  We assign the appropriate target milestone to all the
+issues planned for that release (including the new feature&mdash;it
+gets an issue too), so that people can view the bug database through
+the lens of release scheduling.  These targets rarely remain static,
+however.  As new bugs come in, priorities sometimes get shifted
+around, and issues must be moved from one milestone to another so that
+each release remains manageable.  This again is best done by people
+who have an overall sense of what's in the database, and how various
+issues are related to each other.</para>
 
-<para><remark>Michael Price, then Jostein Chr. Andersen, then Ben
-Reser.  Don't say too much, just point out which sort of release
-manager we use, then link to the appropriate sections.  (Also link to
-the <xref linkend="pfs-redelegation"/> example.)</remark></para>
-
-</sect2>
-
-<sect2 id="pfs-mailing-list-manager">
-<title>Mailing List Moderators</title>
-
-<para><remark>Note the interface conundrum here: it's more convenient
-to get moderation mails by email, but that makes it harder to
-parallelize, since it's "mail" style not "news" style.  If the posts
-appear somewhere in a centralized list, you have the inconvenience of
-having to go visit that list, but at least the list is up-to-date
-w.r.t. whatever other moderation others have done.  Sigh.  (Gnus is
-actually the best candidate, since it can do both mail and news, heh
-:-) However, note that if done as news, there would have to be a
-global reject mark -- once something is evaluated as spam, no one
-should ever have to look at it again.)</remark></para>
+<para>Another thing issue managers do is notice when issues become
+obsolete.  Sometimes a bug is fixed accidentally as part of an
+unrelated change to the software; or sometimes the project changes its
+mind about whether or not a certain behavior is buggy.  Finding
+obsoleted issues is not easy: the only way to do it systematically is
+by making a sweep over all the issues in the database.  Full sweeps
+become less and less feasible over time, however, as the number of
+issues grows.  After a certain point, the only way to keep the
+database sane to use a divide-and-conquer approach: categorize issues
+immediately on arrival and direct them to the appropriate developer's
+or team's attention.  The recipient then takes charge of the issue for
+the rest of its lifetime, shepherding it to resolution or oblivion as
+necessary.  When the database is that large, the issue manager becomes
+more of an overall coordinator, spending less time looking at each
+issue herself and more time getting it into the right person's
+hands.</para>
 
 </sect2>
 
 <sect2 id="pfs-faq-manager">
 <title>FAQ Manager</title>
 
-<para><remark>When discussing managerial aspects of FAQ maintenance,
-refer to the Chapter 6 FAQ material at <xref
-linkend="pfs-all-as-archives"/>.  Delegate, delegate, delegate: get a
-FAQ manager, a human who will be able to follow and sort out a thread,
-post a proposed FAQ entry, recognize approval/disapproval and
-incorporate comments, and add it to the FAQ.  Comment on the disaster
-that is FAQ-o-Matic, at least when it is misapplied.  See <ulink
-url="http://osdir.com/Article1722.phtml"/>.  (Does it mention <ulink
-url="http://www.bestpractical.com/rtfm/"/>?)</remark></para>
+<para>FAQ maintenance is a surprisingly difficult problem.  Unlike
+most other documents in a project, whose content is planned out in
+advance by the authors, a FAQ is a wholly reactive document (see
+<xref linkend="pfs-starting-a-faq"/>).  No matter how big it gets, you
+still never know what the next addition will be.  And because it is
+always added to piecemeal, it is very easy for the document as a whole
+to become incoherent and disorganized, and even to contain duplicate
+or semi-duplicate entries.  Even when it does not have any obvious
+problems like that, there are often interdependencies between items,
+links that should be made but aren't, because the related items were
+added a year apart.</para>
+
+<para>The role of a FAQ manager is twofold.  First, to maintain the
+overall quality of the FAQ, by staying familiar with at least the
+topics of all the questions in it, so that when people add new items
+that are duplicates of or related to existing items, the appropriate
+adjustments can be made.  Second, to watch the project mailing lists
+and other forums for recurring problems or questions, and to write new
+FAQ entries based on this input.  This latter task can actually be
+quite complex: one must be able to follow a thread, recognize the core
+questions raised in it, post a proposed FAQ entry, incorporate
+comments from others (since it's impossible for the FAQ manager to be
+an expert in every topic covered by the FAQ), and sense when the
+process is finished so the item can at last be added.</para>
+
+<para>The FAQ manager usually also becomes the default expert in FAQ
+formatting.  There are a lot of little details involved in keeping a
+FAQ in shape (see <xref linkend="pfs-all-as-archives"/>); when random
+people edit the FAQ, they will sometimes forget some of these details.
+That's okay, as long as the FAQ manager is there to clean up after
+them.</para>
+
+<para>Various free software is available to help with the process of
+FAQ maintenance.  It's fine to use it, as long as it doesn't
+compromise the quality of the FAQ, but beware of over-automation.
+Some projects try to fully automate the process of FAQ maintenance,
+allowing everyone to contribute and edit FAQ items in a manner similar
+to a Wiki (see <xref linkend="pfs-wikis"/>).  I've seen this happen
+particularly with Faq-O-Matic
+(<ulink
+url="http://faqomatic.sourceforge.net/fom-serve/cache/1.html"/>),
+though it may be that the cases I saw are simply abuses that go beyond
+what Faq-O-Matic was originally intended for.  In any case, while
+complete decentralization of FAQ maintenance does, of course, reduce
+the workload for the project, it also results in a poorer FAQ.
+There's no one person with a broad view of the entire FAQ, no one to
+notice when certain items need updating or become obsolete entriely,
+no one keeping watch for interdependencies between items.  The result
+is a FAQ that often fails to provide users what they were looking for,
+and in the worst cases misleads them.  Use whatever tools you need to
+to maintain your project's FAQ, but never let the convenience of the
+tools seduce you into compromising the quality of the FAQ.</para>
+
+<para>See <ulink url="http://osdir.com/Article1722.phtml"/> for
+descriptions and evaluations of some FAQ maintenance tools.</para>
 
 </sect2>
-
-<sect2 id="pfs-website-manager">
-<title>Web Site Manager</title>
-
-<para><remark>(Should this even be discussed?  We don't have one, we
-seem to do fine without one.  Yet it seems a natural role; do any
-other projects have it?)</remark></para>
-
-</sect2>
-
-<para><remark>(Note how it's possible to train volunteers to adhere to
-very complex development guidelines, if you do it amiably and always
-being understanding of slips.  Tell the you-know-who story: remember
-being amazed at how they claimed they could never get their paid
-employees to adhere to the log message guidelines that we've gotten
-virtually all Subversion developers (50+!) to adhere to
-<emphasis>voluntarily</emphasis>.</remark></para>
 
 </sect1>
-
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="pfs-committers">
@@ -1157,6 +1229,14 @@ order of appearance means nothing, that there are many contributors
 not listed, and that committers' levels of activity varies widely, so
 checking the logs is the only way to really know what someone's
 done.</remark></para>
+
+<para><remark>(Note how it's possible to train volunteers to adhere to
+very complex development guidelines, if you do it amiably and always
+being understanding of slips.  Tell the you-know-who story: remember
+being amazed at how they claimed they could never get their paid
+employees to adhere to the log message guidelines that we've gotten
+virtually all Subversion developers (50+!) to adhere to
+<emphasis>voluntarily</emphasis>.</remark></para>
 
 </sect1>
 
@@ -1271,18 +1351,9 @@ appear as non-vindictive as possible.  In war, it sometimes make
 strategic sense to force people to choose sides; in free software, it
 does not.)</remark></para>
 
-<!-- ======================== subsection ============================== -->
-<sect2 id="pfs-forks-case-studies">
-<title>Case Studies</title>
-
-<para>todo</para>
-
-<screen>Should these really be their own section?
-        [ Case study #1: The GDB maintainership structure debate. ]
-        [ Case study #2: FSF Emacs / XEmacs fork (?maybe?) ]
-</screen>
-
-</sect2>
+<para><remark>(Use the you-know-where maintainership thing as an
+example of why it's necessary to take outside-world realities into
+account.)</remark></para>
 
 </sect1>
 
