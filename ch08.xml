@@ -1189,20 +1189,22 @@ to a Wiki (see <xref linkend="pfs-wikis"/>).  I've seen this happen
 particularly with Faq-O-Matic
 (<ulink
 url="http://faqomatic.sourceforge.net/fom-serve/cache/1.html"/>),
-though it may be that the cases I saw are simply abuses that go beyond
-what Faq-O-Matic was originally intended for.  In any case, while
-complete decentralization of FAQ maintenance does, of course, reduce
-the workload for the project, it also results in a poorer FAQ.
-There's no one person with a broad view of the entire FAQ, no one to
-notice when certain items need updating or become obsolete entriely,
-no one keeping watch for interdependencies between items.  The result
-is a FAQ that often fails to provide users what they were looking for,
-and in the worst cases misleads them.  Use whatever tools you need to
-to maintain your project's FAQ, but never let the convenience of the
+though it may be that the cases I saw were simply abuses that went
+beyond what Faq-O-Matic was originally intended for.  In any case,
+while complete decentralization of FAQ maintenance does reduce the
+workload for the project, it also results in a poorer FAQ.  There's no
+one person with a broad view of the entire FAQ, no one to notice when
+certain items need updating or become obsolete entriely, no one
+keeping watch for interdependencies between items.  The result is a
+FAQ that often fails to provide users what they were looking for, and
+in the worst cases misleads them.  Use whatever tools you need to to
+maintain your project's FAQ, but never let the convenience of the
 tools seduce you into compromising the quality of the FAQ.</para>
 
-<para>See <ulink url="http://osdir.com/Article1722.phtml"/> for
-descriptions and evaluations of some FAQ maintenance tools.</para>
+<para>See Sean Michael Kerner's article <citetitle>The FAQs on
+FAQs</citetitle>, at
+<ulink url="http://osdir.com/Article1722.phtml"/>, for descriptions
+and evaluations of open source FAQ maintenance tools.</para>
 
 </sect2>
 
@@ -1212,31 +1214,227 @@ descriptions and evaluations of some FAQ maintenance tools.</para>
 <sect1 id="pfs-committers">
 <title>Committers</title>
 
-<para><remark>Criteria for adding/removing committers.  Note the
-Hippocratic principle.  Refer to the voting system and secrecy
-requirements in <xref linkend="pfs-electorate"/>.  Describe how to
-boot a committer if absolutely must, but stress importance of not
-getting into that situation in the first place.  How to treat dormant
-committers: the high school diploma example: your diploma does not
-expire, why should commit access?  Commit access is not so much about
-knowledge as about judgement and overall techical compentence.  If
-someone is away from the project for a long time, that doesn't mean
-they lose their judgement, so if/when they come back, they'll
-presumably know what they don't know, and commit more conservatively
-if that's warranted.  Therefore, removing committers for inactivity is
-not necessary.  The committers list should stress, however, that the
-order of appearance means nothing, that there are many contributors
-not listed, and that committers' levels of activity varies widely, so
-checking the logs is the only way to really know what someone's
-done.</remark></para>
+<para>As the only formally distinct class of people found in all open
+source projects, committers deserve special attention here.
+Committers are the unavoidable intrusion of discrimination into a
+system which is otherwise as non-discriminatory as possible.  But
+"discrimination" is not meant as a pejorative here: the function
+committers perform is utterly necessary, and I do not think a project
+could succeed without it.  Quality control requires, well, control.
+There are always many people who feel competent to make changes to a
+program, and some smaller number who actually are.  The project cannot
+rely on people's own judgement; it must impose standards and grant
+commit access only to those who meet them<footnote><para>Note that the
+commit access means something a bit different in decentralized version
+control systems, where anyone can set up a repository that is linked
+into the project, and give themselves commit access to that
+repository.  Nevertheless, the <emphasis>concept</emphasis> of commit
+access still applies: "commit access" is just a shorthand for "the
+right to make changes the code that will ship in the group's next
+release of the software".  In centralized version control systems,
+this means having direct commit access; in decentralized ones, it
+means having one's changes pulled into the main distribution by
+default.  It is the same idea either way; the mechanics by which it is
+realized are not terribly important.</para></footnote>.  On the other
+hand, having people who can commit changes directly working
+side-by-side with people who cannot sets up an obvious power dynamic.
+That dynamic must be managed so that it does not harm the
+project.</para>
 
-<para><remark>(Note how it's possible to train volunteers to adhere to
-very complex development guidelines, if you do it amiably and always
-being understanding of slips.  Tell the you-know-who story: remember
-being amazed at how they claimed they could never get their paid
-employees to adhere to the log message guidelines that we've gotten
-virtually all Subversion developers (50+!) to adhere to
-<emphasis>voluntarily</emphasis>.</remark></para>
+<para>In <xref linkend="pfs-electorate"/>, we already discussed the
+mechanics of adding new committers.  Here we will look at the
+standards by which potential new committers should be judged, and how
+this process should be presented to the larger community.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-choosing-committers">
+<title>Choosing Committers</title>
+
+<para>In the Subversion project, we choose committers primarily on the
+Hippocratic Principle: <emphasis>first, do no harm</emphasis>.  Our
+main criterion is not technical skill or even knowledge of the code,
+but merely that the committer show good judgement.  Judgement can mean
+simply knowing what not to take on.  A person might post only small
+patches, fixing fairly simple problems in the code; but if the patches
+apply cleanly, do not contain bugs, and are mostly in accord with the
+project's log message and coding conventions, and there are enough
+patches to show a clear pattern, then an existing committer will
+usually propose that person for commit access.  If at least three
+people say yes, and no one objects, then the offer is made.  True, we
+might have no evidence that the person is able to solve complex
+problems in all areas of the code base, but that does not matter: the
+person has made it clear that they are capable of judging their own
+abilities anyway.  Technical skills can be learned (and taught), but
+judgement for the most part cannot.  Therefore, it is the one thing
+you want to make sure a person has before you give them commit
+access.</para>
+
+<para>When a new committer proposal does provoke a discussion, it is
+usually not about technical ability, but rather about the person's
+behavior on the mailing lists or in IRC.  Sometimes someone shows
+technical skill and an ability to work within the project's formal
+guidelines, yet is also consistently belligerent or uncooperative in
+public forums.  That's a serious concern, and if the person doesn't
+seem to shape up over time, even in response to hints, then we won't
+add them as a committer no matter how skilled they are.  In a
+volunteer group, social skills, the ability to "play well in the
+sandbox", are as important as raw technical ability.</para>
+
+<para>Because everything is under version control, the real penalty
+for adding a committer you shouldn't have is not so much the problems
+it could cause in the code (review would spot those quickly anyway),
+but that it might eventually force the project to revoke the person's
+commit access, an action which is never pleasant and can sometimes be
+confrontational.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-revoking-committers">
+<title>Revoking Commit Access</title>
+
+<para>The first thing to be said about revoking commit access is: try
+not to be in that situation in the first place.  Depending on whose
+access is being revoked, and why, the discussions around such an
+action can be very divisive.  Even when not divisive, they will be a
+time-consuming distraction from productive work.</para>
+
+<para>However, if you must do it, the discussion should be opened
+privately among the same people who would be in a position to vote for
+<emphasis>granting</emphasis> that person whatever flavor of commit
+access they currently have.  The person herself herself should not be
+included.  This contradicts the usual injunction against secrecy, but
+in this case it's necessary.  First, no one would be able to speak
+freely otherwise.  Second, if the motion fails, you don't necessarily
+want the person to know it was ever considered, because that could
+open up questions ("Who was on my side?  Who was against me?") that
+lead to the worst sort of factionalism.  In certain rare
+circumstances, the group may want someone to know that revocation of
+their commit access is or was being considered, as a warning, but this
+openness should be a decision the group makes.  No one should ever, on
+their own initiative, reveal information from a discussion and ballot
+that others assumed were secret.</para>
+
+<para>Once someone's access is revoked, that fact is unavoidably
+public (see <xref linkend="pfs-commit-access-openness"/>), so try to
+be as tactful as you can in how it is presented to the outside
+world.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-partial-committers">
+<title>Partial Commit Access</title>
+
+<para>Some projects offer gradations of commit access.  For example,
+there might be contributors whose commit access gives them free rein
+in the documentation, but who do not commit to the code itself.
+Common areas for partial commit access include documentation,
+translations, binding code to other programming languages,
+specification files for packaging (e.g., RedHat RPM spec files,
+etc), and other places where a mistake will not result in a problem for
+the core project.</para>
+
+<para>Since commit access is not only about committing, but about
+being part of an electorate (see <xref linkend="pfs-electorate"/>),
+the question naturally arises: what can the partial committers vote
+on?  There is no one right answer, it depends on what sorts of partial
+commit domains your project has.  In Subversion we've kept things
+fairly simple: a partial committer can vote on matters confined
+exclusively to that committer's domain, and not on anything else.
+Importantly, we do have a mechanism for casting advisory votes
+(essentially, the committer writes "+0" instead of "+1" on the
+ballot).  There's no reason to silence people entirely just because
+their vote isn't formally binding.</para>
+
+<para>Full committers can vote on anything, just as they can commit
+anywhere, and only full committers vote on adding new committers of
+any kind.  In practice, though, the ability to add new partial
+committers is usually delegated: any full committer can "sponsor" a
+new partial committer, and partial committers in a domain can often
+essentially choose new committers for that same domain (this is
+especially helpful in making translation work run smoothly).</para>
+
+<para>Your project may need a slightly different arrangement than the
+above, depending on the nature of the work, but the same general
+principles apply to all projects.  Each committer should be able to
+vote on matters that fall within the scope of her commit access, and
+not on matters outside that, and votes on procedural questions should
+default to the full committers, unless there's some reason (as decided
+by the full committers) to widen the electorate.</para>
+
+<para>Regarding enforcement of partial commit access: it's often
+best <emphasis>not</emphasis> to have the version control system
+enforce partial commit domains, even if it can.  See
+<xref linkend="pfs-vc-authz"/> for the reasons why.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-dormant-committers">
+<title>Dormant Committers</title>
+
+<para>Some projects automatically remove people's commit access if
+they go a certain amount of time (say, a year) without committing
+anything.  I think this is usually unhelpful and even
+counterproductive, for two reasons.</para>
+
+<para>First, it may tempt some people into committing acceptable but
+unnecessary changes, just to prevent their commit access from
+expiring.  But second, it doesn't really serve any purpose.  If the
+main criterion for granting commit access is good judgement, then why
+assume someone's judgement would deteriorate just because they're away
+from the project for a while?  Even if they completely vanish for
+years, not looking at the code nor following development discussions,
+when they reappear they'll
+<emphasis>know</emphasis> how out of touch they are, and act
+accordingly.  You trusted their judgement before, so why not trust it
+always?  If high school diplomas do not expire, then commit access
+certainly shouldn't.</para>
+
+<para>Sometimes a committer may ask to be removed, or to be explicitly
+marked as dormant in the list of committers (see
+<xref linkend="pfs-commit-access-openness"/> for more about that
+list).  In these cases the project should accede to the person's
+wishes, of course.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="pfs-commit-access-openness">
+<title>Avoid Mystery</title>
+
+<para>Although the discussions around adding any particular new
+committer must be confidential, the rules and procedures themselves
+need not be secret.  In fact, it's best to publish them, so people
+realize that the committers are not some mysterious Star Chamber,
+closed off to mere mortals, but that anyone can join simply by posting
+good patches and knowing how to handle themselves in the community.
+In the Subversion project, we put this information right in the
+developer guidelines document, since the people most likely to be
+interested in how commit access is granted are those thinking of
+contributing code to the project.</para>
+
+<para>In addition to publishing the procedures, publish the
+actual <emphasis>list</emphasis> of committers.  The traditional place
+for this is a file called <filename>MAINTAINERS</filename>
+or <filename>COMMITTERS</filename> in the top level of the project's
+source code tree.  It should list all the full committers first,
+followed by the various partial commit domains and the members of each
+domain.  Each person should be listed by name and email address,
+though the address can be encoded to prevent spam (see
+<xref linkend="pfs-address-hiding"/>) if the person prefers
+that.</para>
+
+<para>Since the distinction between full commit and partial commit
+access is obvious and well-defined, it is proper for the list to make
+that distinction too.  But beyond that, the list should not try to
+indicate the informal distinctions that inevitably arise in a project,
+such as who is particularly influential and how.  It is a public
+record, not an acknowledgements file.  List committers either in
+alphabetical order, or in the order in which they arrived.</para>
+
+</sect2>
 
 </sect1>
 
