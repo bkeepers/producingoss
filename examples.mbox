@@ -928,6 +928,87 @@ other options).
 To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
 For additional commands, e-mail: dev-help@subversion.tigris.org
 
+From nobody Thu Dec  2 11:27:27 2004
+X-From-Line: users-return-22133-kfogel=collab.net@subversion.tigris.org Thu Dec  2 11:22:00 2004
+Return-Path: <users-return-22133-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id iB2HLxU84418
+	for <kfogel@localhost>; Thu, 2 Dec 2004 11:22:00 -0600 (CST)
+	(envelope-from users-return-22133-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Thu, 02 Dec 2004 11:22:00 -0600 (CST)
+Received: (qmail 15477 invoked from network); 2 Dec 2004 16:44:39 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 2 Dec 2004 16:44:39 -0000
+Received: (qmail 27823 invoked by uid 5302); 2 Dec 2004 16:44:09 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 27602 invoked from network); 2 Dec 2004 16:44:08 -0000
+Date: Thu, 2 Dec 2004 10:43:00 -0600
+From: Steve Greenland <steveg@lsli.com>
+To: <users@subversion.tigris.org>
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <20041202164300.GA20257@lsli.com>
+References: <5.2.0.9.2.20041201164509.02112860@mail2.jpl.nasa.gov> <2325BEAF-4418-11D9-B183-000A95D699A0@collab.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2325BEAF-4418-11D9-B183-000A95D699A0@collab.net>
+User-Agent: Mutt/1.5.6+20040722i
+Subject:  Re: post-commit script to set keywords/prop-set hit and miss
+X-Spam-Checker-Version: SpamAssassin 3.0.1 (2004-10-22) on 
+	laswell.sfo.collab.net
+X-Spam-Report: 
+	* -2.8 ALL_TRUSTED Did not pass through any untrusted hosts
+	*  0.1 AWL AWL: From: address is in the auto white-list
+X-Spam-Status: No, score=-2.7 required=5.0 tests=ALL_TRUSTED,AWL 
+	autolearn=disabled version=3.0.1
+X-Spam-Level: 
+Lines: 35
+Xref: newton.ch.collab.net mail.subversion.users:21254
+
+On Wed, Dec 01, 2004 at 10:10:44PM -0600, Ben Collins-Sussman wrote:
+> 
+> On Dec 1, 2004, at 6:51 PM, Jennifer Kesterson wrote:
+> 
+> > We wrote a post-commit hook script to set keywords and EOL styles in 
+> >the current repository on files that don't have them set.
+> 
+> Yikes, this is a *really bad* strategy.
+
+And you're going to continue to see people attempt it until server-side
+default properties are available.
+
+Yes, I've read the relevant entry in the issue tracker, I understand
+that there are non-trivial issues to be solved, and no, I don't have the
+time to contribute it. I'm not try to criticize here, just explain why
+this pops up on a regular basis: trying to enforce a consistent set of
+client configurations across a large and/or diverse set of developers
+is difficult, especially if those configurations change over time, or
+are different for different projects/repositories. 
+
+It might be worth adding a big warning and
+explanation to the "post-commit" hook entry in
+http://svnbook.red-bean.com/en/1.0/ch05s02.html#svn-ch-5-sect-2.1.
+
+Steve
+
+-- 
+"Outlook not so good." That magic 8-ball knows everything! I'll ask
+about Exchange Server next.
+                           -- (Stolen from the net)
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
 From nobody Wed Jan 12 09:27:51 2005
 X-From-Line: sussman@red-bean.com Wed Jan 12 09:25:12 2005
 Return-path: <sussman@red-bean.com>
