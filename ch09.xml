@@ -1,13 +1,191 @@
 <chapter id="pfs-ch-9">
 
-<title>Licenses, Copyrights, and Patents <!-- [ 7-15 pp ] --></title>
+<title>Licenses, Copyrights, and Patents</title>
 
 <simplesect>
 
-<para><remark>say why it matters</remark></para>
+<para>The license you select probably won't have a major impact on the
+adoption of your project, as long as the license is open source.
+Users generally choose software based on quality and features, not on
+the details of the license.  Nevertheless, you still need a basic
+understanding of free software licensing issues, both to ensure that
+the project's license is compatible with its goals, and to be able to
+discuss licensing decisions with other people.</para>
 
-<para><remark>early on, explode the "this is open source but not free"
-misusage</remark></para>
+<para><remark>(Note to self: find the right place to put an "I am not
+a lawyer!"  disclaimer, and put it there!)</remark></para>
+
+<para>The first thing you will notice in any licensing discussion is
+that there seem to be many different words for the same
+thing: <firstterm>free&nbsp;software</firstterm>,
+<firstterm>open&nbsp;source</firstterm>,
+<firstterm>FOSS</firstterm>, <firstterm>F/OSS</firstterm>, and
+<firstterm>FLOSS</firstterm>.  Let's start by sorting those
+out.</para>
+
+</simplesect>
+
+<sect1 id="pfs-licenses-terminology">
+<title>Terminology</title>
+
+<para><firstterm>Free software</firstterm> is software that can be
+freely shared and modified, including in source code form.  The term
+was first coined by Richard Stallman, who codified it in the GNU
+General Public License (GPL), and who founded the Free Software
+Foundation (<ulink url="http://www.fsf.org/"/>) to promote the
+concept.  Although "free software" means pretty much the same thing as
+"open source", the FSF, among others, prefers the former term because
+it emphasizes the idea of freedom, and the concept of
+freely-redistributable software as primarily a social movement rather
+than a technical one.  The FSF acknowledges that the term is
+ambiguous&mdash;it could mean "free" as in "zero-cost", instead of
+"free" as in "freedom"&mdash;but feels that it's still the best term,
+all things considered, and that the other possibilities in English
+have their own ambiguities.</para>
+
+<para><firstterm>Open source software</firstterm> is simply free
+software under another name.  But the different name reflects an
+important philosophical difference.  The term "open source" was coined
+by the Open Source Initiative
+(<ulink url="http://www.opensource.org/"/>) as a deliberate
+alternative to "free software", in order to make such software a more
+palatable choice for corporations, by presenting it as a development
+methodology instead of as a political movement.  While any license
+that is free is also open source, and vice versa (with a few minor
+exceptions), people tend to pick one term and stick with it.  In
+general, those who prefer "free software" are more likely to have a
+philosophical or moral stance on the issue, while those who prefer
+"open source" either don't view it as a matter of freedom, or are not
+interested in advertising the fact that they do.  See
+<xref linkend="pfs-free-vs-open-source"/> for a more detailed history
+of this schism.</para>
+
+<para>The Free Software Foundation has an excellent&mdash;utterly
+unobjective, but nuanced and quite fair&mdash;exegesis of the two
+terms, at
+<ulink
+url="http://www.fsf.org/licensing/essays/free-software-for-freedom.html"/>.
+The Open Source Initiative's take on it is spread across two pages:
+<ulink
+url="http://www.opensource.org/advocacy/case_for_hackers.php#marketing"/>
+and
+<ulink
+url="http://www.opensource.org/advocacy/free-notfree.php"/>.</para>
+
+<para>Where there are two of anything, there will soon be three, and
+that is exactly what has happened with terms for free software.  The
+academic world, perhaps wanting precision and inclusiveness over
+elegance, seems to have settled on <firstterm>FOSS</firstterm>, or
+sometimes <firstterm>F/OSS</firstterm>, standing for "Free / Open
+Source Software".  Another variant, which seems to be gaining
+momentum, is <firstterm>FLOSS</firstterm>, which stands for "Free /
+Libre Open Source Software" ("libre" is familiar across many languages
+and does not suffer from ambiguities of "free"; see
+<ulink url="http://en.wikipedia.org/wiki/FLOSS"/> for more).</para>
+
+<para>All these terms mean essentially the same thing: software which
+can be modified and redistributed by everyone, sometimes, but not
+always, with the requirement that derivative works also be freely
+redistributable.</para>
+
+<para>There are two widely-used tests for whether a given license is
+truly open source (free, libre, etc).  The first
+is <firstterm>DFSG-compliance</firstterm>, that is, compliance with
+the Debian Free Software Guidelines
+(<ulink url="http://www.debian.org/social_contract#guidelines"/>).
+The Debian Project's mission is to maintain an entirely free operating
+system, such that someone installing it need never doubt that they
+have the right to modify and redistribute any or all of the system.
+The Debian Free Software Guidelines are simply the requirements that
+any software package's license must meet in order to be included in
+Debian.  Because the Debian Project spent a good deal of time thinking
+about how to construct such a test, the guidelines they came up with
+have proven very robust (see
+<ulink url="http://en.wikipedia.org/wiki/DFSG"/>), and as far as I'm
+aware no serious objection to them has been raised either by the Free
+Software Foundation or the Open Source Initiative.  Knowing that a
+given license is <firstterm>DFSG-compliant</firstterm> means knowing
+that it guarantees all the important freedoms (such as forkability
+even against the original author's wishes) required to sustain the
+dynamics of an open source project.  All of the licenses discussed in
+this chapter are DFSG-compliant.</para>
+
+<para>The other widely-used test is approval by the Open Source
+Initiative; licenses meeting this test are called
+<firstterm>OSI-approved</firstterm>.  The OSI's definition of open
+source software is based on the Debian Free Software Guidelines; any
+license that meets one definition almost always meets the other as
+well.  There have been a few exceptions over the years, but only
+involving niche licenses and not of any relevance here.  Unlike the
+Debian Project, the OSI maintains a list of all licenses it has ever
+approved, at <ulink url="http://www.opensource.org/licenses/"/>, so
+that being "OSI-approved" is an unambiguous state: a license either is
+or isn't on their list.</para>
+
+<para>The Free Software Foundation also maintains a list of licenses
+at
+<ulink
+url="http://www.fsf.org/licensing/licenses/license-list.html"/>.  The
+FSF categorizes licenses not only by whether they are free, but
+whether they are compatible with the GNU General Public License.  GPL
+compatibility is an important topic, and is covered in
+<ulink url="pfs-license-compatibility"/>.</para>
+
+<para>There are a few other terms that come up often in licensing
+conversations:</para>
+
+<para><firstterm>Proprietary software</firstterm> is the opposite of
+free software.  Sometimes people use "commercial software" as their
+antonym of choice, but properly speaking this is not accurate.  Free
+software can be sold, as long as the buyers are not restricted from
+giving away copies themselves, and there are many other ways to
+commercialize it as well, by selling support, services, and
+certification; multi-million dollar companies are built on free
+software today.  There is simply nothing inherently anti-commercial
+nor anti-corporate about it.  On the other hand,
+it <emphasis>is</emphasis> anti-proprietary by its nature, and that is
+the main way in which it differs from traditional, royalty-based
+software licensing.</para>
+
+<para>The other term that gets bandied about a lot
+is <firstterm>public domain</firstterm>.  The public domain is a
+specific legal state: works in the public domain have no copyright
+holder, thus, there is no one who has the right to restrict copying of
+those works.  Being in the public domain is not the same having no
+author.  Everything has an author, and even if a work's author or
+authors choose to put it in the public domain, that doesn't change the
+fact of who wrote it.  It comes down to the difference
+between <emphasis>ownership</emphasis>, which is about control over
+distribution, and <emphasis>authorship</emphasis>, which is really
+about credit and reputation.  There is no necessary legal connection
+between the two.  When someone writes a work for hire, for example, in
+most jurisdictions whoever paid for the work (usually a corporation)
+is the copyright holder but not actually the author.  If you look in
+the front of many books, you will see that often the publisher owns
+the copyright, even though the author's name is on the cover.</para>
+
+<para>When a work is in the public domain, material from it can be
+incorporated into a copyrighted work, and thereafter that copy of the
+material is covered under the same copyright as the whole work.  But
+this does not affect the availability of the original work, which
+remains in the public domain.  Thus, releasing something into the
+public domain is technically one way to make it "free", according to
+the guidelines of most free software certifying
+organizations.  <remark>(Rest of this paragraph, and section, are now
+pending response from the debian-legal list, because some material on
+debian.org implies that public domain is not DFSG-compliant, which
+makes no sense to me at all.)</remark></para>
+
+</sect1>
+
+<para><remark>Have a subsection on why it's important not to create a
+new license if you can avoid it.  Point to
+<ulink
+url="http://www.opensource.org/docs/policy/licenseproliferation.php"/>.
+</remark></para>
+
+<para><remark>(somewhere above, explode the bogus "open source but not
+free" distinction)</remark></para>
 
 <para><remark>Note: the material excised from <xref
 linkend="pfs-license-quickstart"/> in r147 should be incorporated into this
@@ -17,7 +195,7 @@ Also, point to Andrew St. Laurent's licensing book at <ulink
 url="http://www.oreilly.com/catalog/osfreesoft/"/>.</remark></para>
 
 <screen>
-Some rough categories:
+What is a license for?  What sorts of things can it do?  Some rough categories:
    * Viral copyleft:
        - GPL
 
@@ -57,6 +235,7 @@ Links:
 
    http://creativecommons.org/license/
       See list of licenses on the left.
+      Note that not all of these are truly free.
 
    Humor... sort of:
    http://www.panix.com/~kingdon/licenses.html
@@ -131,21 +310,8 @@ the software in a proprietary value-add.</remark></para>
 non-GPL free license will not put off any.  Nevertheless, I sometimes
 use the GPL for personal programs</remark></para>
 
-------------------------------------
+Take down of the GPL-is-not-free argument, quickly.
 </screen>
-
-
-</simplesect>
-
-
-<!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-legal">
-<title>Basic Legal Primer</title>
-
-<para> the difference between copyright, public domain, and
-distribution rights. </para>
-
-</sect1>
 
 
 <!-- ======================== SECTION ============================== -->
