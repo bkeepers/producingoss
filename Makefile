@@ -4,12 +4,12 @@ SVNVERSION = svnversion
 XSLTPROC = xsltproc
 
 TOP = .
-HTML_TARGET = ${TOP}/book.html
+HTML_TARGET = ${TOP}/pfs-book.html
 HTML_CHUNK_DIR = ${TOP}/html-chunk
 HTML_CHUNK_TARGET = ${HTML_CHUNK_DIR}/index.html  # created last
-PDF_TARGET = ${TOP}/book.pdf
-PS_TARGET = ${TOP}/book.ps
-FO_TARGET = ${TOP}/book.fo
+PDF_TARGET = ${TOP}/pfs-book.pdf
+PS_TARGET = ${TOP}/pfs-book.ps
+FO_TARGET = ${TOP}/pfs-book.fo
 XML_ROOT = ${TOP}/book.xml
 ALL_SOURCE = ${TOP}/*.xml
 
