@@ -17,19 +17,19 @@ non-critical bug-fixing until the release is done.  Volunteer groups
 are not so monolithic.  People work on the project for all sorts of
 reasons, and those not interested in helping with a given release
 still need to continue regular development work while the release is
-going on.  Because of this decoupling, open source release processes
-tend to take longer, but be less disruptive, than commercial release
-processes.  It's a bit like highway repair.  There are two ways to fix
-a road: you can shut it down completely, so that a repair crew can
-swarm all over it at full capacity until the problem is solved, or you
-work on a couple of lanes at a time, while leaving the others open to
-traffic.  The first way is very efficient <emphasis>for the repair
-crew</emphasis>, but not for anyone else&mdash;the road is entirely
-shut down until the job is done.  The second way involves much more
-time and trouble for the repair crew (now they have to work with fewer
-people and less equipment, in cramped conditions, with flaggers to
-slow and direct traffic, etc), but at least the road remains useable,
-even if not at full capacity.</para>
+going on.  Because of development doesn't stop, open source release
+processes tend to take longer, but be less disruptive, than commercial
+release processes.  It's a bit like highway repair.  There are two
+ways to fix a road: you can shut it down completely, so that a repair
+crew can swarm all over it at full capacity until the problem is
+solved, or you work on a couple of lanes at a time, while leaving the
+others open to traffic.  The first way is very efficient <emphasis>for
+the repair crew</emphasis>, but not for anyone else&mdash;the road is
+entirely shut down until the job is done.  The second way involves
+much more time and trouble for the repair crew (now they have to work
+with fewer people and less equipment, in cramped conditions, with
+flaggers to slow and direct traffic, etc), but at least the road
+remains useable, even if not at full capacity.</para>
 
 <para>Open source projects tend to work the second way.  In fact, for
 a mature piece of software with several different release lines being
@@ -130,6 +130,11 @@ you.</para>
 <!-- ========================== subsection =========================== -->
 <sect2 id="pfs-release-number-components">
 <title>Release Number Components</title>
+
+<para>This section describes the formal conventions of release
+numbering, in detail and assuming very little prior knowledge.  It is
+intended as a reference; if you're already familiar with the
+conventions, just skip this section.</para>
 
 <para>Release numbers are groups of digits separated by dots:</para>
 
@@ -293,10 +298,10 @@ back to 2.5.4 and keep all the functionality it had at 2.6.0, since
 some of that functionality was new in 2.6.0.</para>
 
 <para>This is why micro releases are essentially for bug fixes only.
-They must remain "forwards-compatible" with each other: if you upgrade
-from 2.5.3 to 2.5.4, then change your mind and downgrade back to
-2.5.3, no functionality should be lost.  Of course, the bugs fixed in
-2.5.4 would reappear after the downgrade, but you wouldn't lose any
+They must remain compatible in both directions: if you upgrade from
+2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
+functionality should be lost.  Of course, the bugs fixed in 2.5.4
+would reappear after the downgrade, but you wouldn't lose any
 features, except insofar as the restored bugs prevent the use of some
 existing features.</para>
 
@@ -422,8 +427,8 @@ interfere with ongoing development work, even if the tree could be put
 into a releaseable state.  Say this snapshot is going to be "3.5.0";
 then presumably the next snapshot would be "3.5.1", and would contain
 mostly fixes for bugs found in the 3.5.0 release.  But if both are
-snapshots from the same tree, then what are the developers supposed to
-do in the time between the two releases?  They can't be adding new
+snapshots from the same tree, what are the developers supposed to do
+in the time between the two releases?  They can't be adding new
 features; the compatibility guidelines prevent that.  But not everyone
 will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
 may have new features they're trying to complete, and will become
@@ -486,23 +491,24 @@ $ cvs tag -b RELEASE_1_0_X
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
 </screen>
 
-<para>(While I can't give an example for every version control system,
-I'll give examples in CVS and Subversion and hope that the
-corresponding commands in other systems can be deduced from those
+<para>(All these examples assume a three-component release numbering
+system.  While I can't show the exact commands for every version
+control system, I'll give examples in CVS and Subversion and hope that
+the corresponding commands in other systems can be deduced from those
 two.  <remark>[These instructions work in decentralized or
 changeset-exchanging version control systems too, but in those systems
 other ways of treating a release branch are also possible.  Would be
 nice to talk to an expert to get some feedback on
 that.]</remark>)</para>
 
-<para>Notice that we branched "1.0.x" not "1.0.0".  This is because
-the same minor line&mdash;i.e., the same branch&mdash;will be used for
-all the micro releases in that line.  The actual process of
-stabilizing the branch for release is covered in
-<xref linkend="pfs-stabilizing-a-release"/>.  Here we are
-concerned just with the interaction between the version control system
-and the release process.  When the release branch is stabilized and
-ready, it is time to tag a snapshot from the branch:</para>
+<para>Notice that we created branch "1.0.x", not "1.0.0".  This is
+because the same minor line&mdash;i.e., the same branch&mdash;will be
+used for all the micro releases in that line.  The actual process of
+stabilizing the branch for release is covered in <xref
+linkend="pfs-stabilizing-a-release"/>.  Here we are concerned just
+with the interaction between the version control system and the
+release process.  When the release branch is stabilized and ready, it
+is time to tag a snapshot from the branch:</para>
 
 <screen>
 $ cd RELEASE_1_0_X-working-copy
@@ -515,11 +521,12 @@ $ cvs tag RELEASE_1_0_0
 $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
 </screen>
 
-<para>That tag represents the exact contents of the 1.0.0 release.
-The next micro release in the same line is likewise prepared on the
-1.0.x branch, and when it is ready, a tag is made for 1.0.1.  Lather,
-rinse, repeat for 1.0.2, and so on.  When it's time to start thinking
-about a 1.1.x release, make a new branch from trunk:</para>
+<para>That tag now represents the exact state of the project's source
+tree in the 1.0.0 release.  The next micro release in the same line is
+likewise prepared on the 1.0.x branch, and when it is ready, a tag is
+made for 1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When
+it's time to start thinking about a 1.1.x release, make a new branch
+from trunk:</para>
 
 <screen>
 $ cd trunk-working-copy
@@ -649,23 +656,24 @@ centralized system of manage releases.</para>
 
 <para>At the opposite extreme from dictatorship by release owner,
 developers can simply vote on which changes to include in the release.
-However, since most important function of release stabilization is
+However, since the most important function of release stabilization is
 to <emphasis>exclude</emphasis> changes, it's important to design the
 voting system in such a way that getting a change into the release
 involves positive action by multiple developers.  Including a change
-should need more than just a simple majority.  Otherwise, one vote for
-and none against a given change would suffice to get it into the
-release, and an unfortunate dynamic would be set up whereby each
-developer would vote for their own changes, yet would be reluctant to
-vote against others' changes, for fear of possible retaliation.  To
-avoid this, the system should be arranged such that sub-groups of
-developers must act in cooperation to get any change into the release.
-This not only means that more people review each change, it also makes
-any individual developer less hesitant to vote against a change,
-because she knows that no particular one among those who voted for it
-would take her vote against as a personal affront.  The greater the
-number of people involved, the more the discussion becomes about the
-change and less about the individuals.</para>
+should need more than just a simple majority (see <xref
+linkend="pfs-electorate"/>).  Otherwise, one vote for and none against
+a given change would suffice to get it into the release, and an
+unfortunate dynamic would be set up whereby each developer would vote
+for their own changes, yet would be reluctant to vote against others'
+changes, for fear of possible retaliation.  To avoid this, the system
+should be arranged such that sub-groups of developers must act in
+cooperation to get any change into the release.  This not only means
+that more people review each change, it also makes any individual
+developer less hesitant to vote against a change, because she knows
+that no particular one among those who voted for it would take her
+vote against as a personal affront.  The greater the number of people
+involved, the more the discussion becomes about the change and less
+about the individuals.</para>
 
 <para>The system we use in the Subversion project seems to have struck
 a good balance, so I'll recommend it here.  In order for a change to
@@ -708,7 +716,7 @@ something like that.  This file lists each proposed change&mdash;any
 developer can propose a change for inclusion&mdash;along with all the
 votes for and against it, plus any notes or comments.  (Proposing a
 change doesn't necessarily mean voting for it, by the way, although
-the two often go together.)  A entry in such a file might look like
+the two often go together.)  An entry in such a file might look like
 this:</para>
 
 <screen>
@@ -765,10 +773,10 @@ adjusted version of the change, for example:</para>
     +1: epg, ghudson
 </screen>
 
-<para>That example is taken from life; it comes from the
+<para>That example is taken from real life; it comes from the
 <filename>STATUS</filename> file for the Subversion 1.1.4 release
-process.  Notice how it uses the original revisions as a canonical
-handle on the change, even though there is also a branch with a
+process.  Notice how it uses the original revisions as canonical
+handles on the change, even though there is also a branch with a
 conflict-adjusted version of the change (the branch also combines the
 three trunk revisions into one, r13517, to make it easier to merge the
 change into the release should it get approval).  The original
@@ -952,7 +960,7 @@ configuration and compilation (see
 <xref linkend="pfs-packaging-build-install"/>), or because it includes
 third-party software that is not maintained by the project, but which
 is required and which users are not likely to have already.  But even
-if the distributed tree corresponds exactly to some developement tree
+if the distributed tree corresponds exactly to some development tree
 in the version control repository, the distribution itself should not
 be a working copy (see <xref linkend="pfs-vc-vocabulary-working-copy"/>).
 The release is supposed to represent a static reference point, a
@@ -1042,8 +1050,9 @@ installs it on the system.  (The first two commands are done as a
 regular user, the latter as root.)  For more details about setting up
 this system, see the excellent <citetitle>GNU Autoconf, Automake, and
 Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
-is published as treeware, and its content is also freely available
-online at <ulink url="http://sources.redhat.com/autobook/"/>.</para>
+is published as treeware by New Riders, and its content is also freely
+available online at <ulink
+url="http://sources.redhat.com/autobook/"/>.</para>
 
 <para>You can deviate from this standard if you really need to.
 Usually when projects do, it's because they predate the recipe's
@@ -1058,7 +1067,7 @@ invocation is all they need to do, that instantly raises their faith
 that your project is generally aware of conventions, and that it is
 likely to have gotten other things right as well.  Also, as discussed
 in <xref linkend="pfs-downloads"/>, having a standard build procedure
-pleases potential developers too.</para>
+pleases potential developers.</para>
 
 <para>On Windows, the standards for building and installing are a bit
 less settled.  For projects requiring compilation, the general
@@ -1066,16 +1075,15 @@ convention seems to be to ship a tree that can fit into the
 workspace/project model of the standard Microsoft development
 environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc).
 Depending on the nature of your software, it may be possible to offer
-a Unix-like build option on Windows via the Cygwin
-(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
-if you're using a language or programming framework that comes with
-its own build and install conventions, such as Perl or Python, then
-you should simply use whatever the standard method is for that
-framework, whether on Windows, Unix, Mac OS X, or any other operating
-system.</para>
+a Unix-like build option on Windows via the Cygwin (<ulink
+url="http://www.cygwin.com/"/>) environment.  And of course, if you're
+using a language or programming framework that comes with its own
+build and install conventions, such as Perl or Python, you should
+simply use whatever the standard method is for that framework, whether
+on Windows, Unix, Mac OS X, or any other operating system.</para>
 
 <para>Using "the standard method", whatever that may mean in your
-project's context, is really the main thing.  Be willing to put in a
+project's context, is really the key goal.  Be willing to put in a
 lot of extra effort in order to make your project conform to the
 relevant build or installation standards.  Building and installing is
 an entry point: it's okay for things to get harder after that, if they
@@ -1097,9 +1105,9 @@ necessarily mean "compiled"; it just means any pre-configured form of
 the package that allows a user to install it on their computer without
 going through the usually source-based build and install procedures.
 On RedHat GNU/Linux it is the RPM system; on Debian GNU/Linux it is
-<command>apt-get</command> command and the <literal>.deb</literal>
-packages; on MS Windows it's usually <literal>.MSI</literal> files or
-self-installing <literal>.exe</literal> files.</para>
+the APT (<filename>.deb</filename>) system; on MS Windows it's usually
+<literal>.MSI</literal> files or self-installing
+<literal>.exe</literal> files.</para>
 
 <para>Whether these binary packages are assembled by people closely
 associated with the project, or by distant third parties, users are
@@ -1158,7 +1166,7 @@ developers want that too, of course, but they also need to ensure that
 they know what versions of the software are out there, so they can
 receive coherent bug reports and make compatibility guarantees.
 Sometimes these goals conflict.  When they do, it's good to keep in
-mind that the project has no contol over the packagers, and that the
+mind that the project has no control over the packagers, and that the
 bonds of obligation run both ways.  It's true that the project is
 doing the packagers a favor simply by producing the software.  But the
 packagers are also doing the project a favor, by taking on a mostly
@@ -1199,21 +1207,20 @@ find a digital trust path from themselves to the tarball.</para>
 <para>Once approved, the release (that is, all tarballs, .zip files,
 and whatever other formats are being distributed) should be placed
 into the project's download area, accompanied by the digital
-signatures, and by MD5/SHA1 checksums (see
-<ulink
+signatures, and by MD5/SHA1 checksums (see <ulink
 url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
 There are various standards for doing this.  One way is to accompany
 each released package with a file giving the corresponding digital
 signatures, and another file giving the checkum.  For example, if one
 of the released packages is <filename>scanley-2.5.0.tar.gz</filename>,
-then next to it place a file
+place in the same directory a file
 <filename>scanley-2.5.0.tar.gz.asc</filename> containing the digital
-signature for that tarball, and another file
+signature for that tarball, another file
 <filename>scanley-2.5.0.tar.gz.md5</filename> containing its MD5
 checksum, and optionally another,
 <filename>scanley-2.5.0.tar.gz.sha1</filename>, containing the SHA1
-checksum.  A different way is to collect all the signatures for all
-the released packages into a single file,
+checksum.  A different way to provide checking is to collect all the
+signatures for all the released packages into a single file,
 <filename>scanley-2.5.0.sigs</filename>; the same may be done with the
 checksums.</para>
 
@@ -1266,7 +1273,7 @@ should use the procedures described in
 do for releases, though.</para>
 
 <para>Whenever you give the URL to the downloadable release tarball,
-make sure to also give the MD5/SHA1 checksums, and pointers to the
+make sure to also give the MD5/SHA1 checksums and pointers to the
 digital signatures file.  Since the announcement happens in multiple
 forums (mailing list, news page, etc), this means users can get the
 checksums from multiple sources, which gives the most
@@ -1282,8 +1289,8 @@ than just a blurb about the release, make sure to include the relevant
 portion of the CHANGES file, so people can see why it might be in
 their interests to upgrade.  This is as important with candidate
 releases as with final releases; the presence of bugfixes and new
-features is an important part of tempting people to try out a
-candidate release.</para>
+features is important in tempting people to try out a candidate
+release.</para>
 
 <para>Finally, don't forget to thank the development team, the
 testers, and all the people who took the time to file good bug
@@ -1328,7 +1335,7 @@ line is being phased out, so they can make upgrade decisions.</para>
 <para>For each release, make sure to have a <firstterm>target
 version</firstterm> available in the bug tracker, so people filing
 bugs will be able to do so against the proper release.  Don't forget
-to have a "development" or "latest" target for the most recent
+to have a target called "development" or "latest" for the most recent
 development sources, since some people&mdash;not only active
 developers&mdash;will often be staying ahead of even the official
 releases.</para>
@@ -1395,9 +1402,9 @@ for how daily development is done.  In particular, it makes
 practically mandatory a discipline that would be recommended anyway:
 have each commit be a single logical change, and never mix unrelated
 changes in the same commit.  If a change is too big or too disruptive
-to do in one commit, then break it across N commits, where each commit
-is a well-partitioned subset of the overall change, and includes
-nothing unrelated to the overall change.</para>
+to do in one commit, break it across N commits, where each commit is a
+well-partitioned subset of the overall change, and includes nothing
+unrelated to the overall change.</para>
 
 <para>Here's an example of an ill-thought-out commit:</para>
 
@@ -1452,17 +1459,16 @@ the one proposed for the maintenance release branch.</para>
 <para>Of course, release stabilization is not the only reason why
 having each commit be one logical change is desirable.
 Psychologically, a semantically unified commit is easier to review,
-and easier to revert if necessary (reversion is really a special kind
-of merge anyway).  But the requirement that really motivates the
-practice is that changes need to be merged, usually to and from
-release branches, and a little discipline up-front on everyone's part
-can save the project a lot of headache later.</para>
+and easier to revert if necessary (in some version control systems,
+reversion is really a special kind of merge anyway).  A little
+discipline up-front on everyone's part can save the project a lot of
+headache later.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-planning">
 <title>Planning Releases</title>
 
-<para>One area where open source project have historically differed
+<para>One area where open source projects have historically differed
 from proprietary projects is in release planning.  Proprietary
 projects usually have firmer deadlines.  Sometimes it's because
 customers were promised that an upgrade would be available by a
@@ -1479,14 +1485,14 @@ they?  It wasn't as if anyone's job was on the line.</para>
 and are correspondingly more and more influenced by deadline-conscious
 corporate culture.  This is in many ways a good thing, but it can
 cause conflicts between the priorities of those developers who are
-being paid and those who are volunteering their time.  When these
-conflicts happens it all, it's often around the issue of when and how
-to schedule releases.  The developers who are under pressure will
-naturally want to just <emphasis>say</emphasis> when the releases will
-be, and have everyone's activities fall into line.  But the volunteers
-may have other agendas&mdash;perhaps features they want to complete,
-or some testing they want to have done&mdash;that they feel the
-release should wait on.</para>
+being paid and those who are volunteering their time.  These conflicts
+happen often around the issue of when and how to schedule releases.
+The developers who are under pressure will naturally want to just pick
+a date when the releases will occur, and have everyone's activities
+fall into line.  But the volunteers may have other
+agendas&mdash;perhaps features they want to complete, or some testing
+they want to have done&mdash;that they feel the release should wait
+on.</para>
 
 <para>There is no general solution to this problem except discussion
 and compromise, of course.  But you can minimize the frequency and
@@ -1497,13 +1503,13 @@ subject of which releases the project will be making in the near- to
 medium-term future, and what features will be in them, without at
 first mentioning anything about dates, except for rough guesses with
 wide margins of error.  By nailing down feature sets early, you reduce
-the complexity of the discussion centered around any individual
-release, and therefore improve predictability.  This also creates a
-kind of inertial bias against anyone who proposes to expand the
-definition of a release by adding new features or other complicatinos.
-If the release's contents are fairly well-defined, then the onus is on
-the proposer to justify the expansion, even though the date of the
-release may not have been set yet.</para>
+the complexity of the discussion centered on any individual release,
+and therefore improve predictability.  This also creates a kind of
+inertial bias against anyone who proposes to expand the definition of
+a release by adding new features or other complicatinos.  If the
+release's contents are fairly well-defined, the onus is on the
+proposer to justify the expansion, even though the date of the release
+may not have been set yet.</para>
 
 <para>In his multi-volume biography of Thomas Jefferson,
 <citetitle>Jefferson and His Time</citetitle>, Dumas Malone tells the
@@ -1519,10 +1525,10 @@ curriculum, and the names of specific faculty he wanted to import from
 Europe.  No one else in the room was even remotely as prepared; the
 group essentially had to capitulate to Jefferson's vision, and the
 University was eventually founded more or less in accordance with his
-plans.  The fact that construction went far over-budget, and that many
-of his ideas did not, for various reasons, work out in the end, were
-all things Jefferson probably knew perfectly well would happen.  His
-purpose was strategic: to show up at the meeting with something so
+plans.  The facts that construction went far over-budget, and that
+many of his ideas did not, for various reasons, work out in the end,
+were all things Jefferson probably knew perfectly well would happen.
+His purpose was strategic: to show up at the meeting with something so
 substantive that everyone else would have to fall into the role of
 simply proposing modifications to it, so that the overall shape, and
 therefore schedule, of the project would be roughly as he
@@ -1554,16 +1560,16 @@ process (see <xref linkend="pfs-share-management"/>), the easier it will be
 to persuade them to share your priorities on the issues that really
 count for you.</para>
 
-<para>The other thing the project in general can do to lower tensions
-around release planning is to make releases fairly often.  When
-there's a long time between releases, the importance of any individual
-release is magnified in everyone's minds; people are that much more
-crushed when their code doesn't make it in, because they know how long
-it might be until the next chance.  Depending on the complexity of
-the release process and the nature of your project, somewhere between
-every three months and every six months is usually about right,
-though maintenance lines may put out micro releases a bit faster if
-there is demand for it.</para>
+<para>The other way the project can lower tensions around release
+planning is to make releases fairly often.  When there's a long time
+between releases, the importance of any individual release is
+magnified in everyone's minds; people are that much more crushed when
+their code doesn't make it in, because they know how long it might be
+until the next chance.  Depending on the complexity of the release
+process and the nature of your project, somewhere between every three
+months and every six months is usually about the right gap between
+releases, though maintenance lines may put out micro releases a bit
+faster if there is demand for it.</para>
 
 </sect2>
 
