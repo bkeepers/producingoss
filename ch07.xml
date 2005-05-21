@@ -132,9 +132,9 @@ you.</para>
 <title>Release Number Components</title>
 
 <para>This section describes the formal conventions of release
-numbering, in detail and assuming very little prior knowledge.  It is
-intended as a reference; if you're already familiar with the
-conventions, just skip this section.</para>
+numbering in detail, and assumes very little prior knowledge.  It is
+intended mainly as a reference.  If you're already familiar with these
+conventions, you can skip this section.</para>
 
 <para>Release numbers are groups of digits separated by dots:</para>
 
@@ -539,42 +539,15 @@ $ cvs tag -b RELEASE_1_1_X
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
 </screen>
 
-<para>When it's time to make a 2.0 release, you can just do the same
-thing, assuming that you're continuing with the same trunk code
-line:</para>
-
-<screen>
-$ cd trunk-working-copy
-$ cvs tag -b RELEASE_2_0_X
-</screen>
-
-<para>or</para>
-
-<screen>
-$ svn copy http://.../repos/trunk http://.../repos/branches/2.0.x
-</screen>
-
-<para>Of course, you may need to continue putting out releases in the
-1.x series for some time even after 2.0 work begins (see
-<xref linkend="pfs-release-lines"/>).  Since trunk now represents new
-2.0 development, you should start a new branch, based on the last 1.x
-release, to represent the 1.x maintenance line.  If the last 1.x
-release was 1.12.3, then you would do:</para>
-
-<screen>
-$ cd 1.12.3-working-copy
-$ cvs tag -b RELEASE_1_X
-</screen>
-
-<para>or</para>
-
-<screen>
-$ svn copy http://.../repos/tags/1.12.3 http://.../repos/branches/1.x
-</screen>
-
-<para>After that, just use the same recipe given earlier for 1.x.y
-release branches, except that where you used to branch from trunk, you
-would now branch from the new 1.x branch.</para>
+<para>Maintenance would continue in parallel along both 1.0.x and
+1.1.x, and releases made independently from both lines.  In fact, it
+is not unusual to publish near-simultaneous releases from two
+different lines.  The older series is recommended for more
+conservative site administrators, who may not want to make the big
+jump to (say) 1.1 without careful preparation.  Meanwhile, more
+adventurous people usually take the most recent release on the highest
+line, to make sure they're getting the latest features, even at the
+risk of greater instability.</para>
 
 </sect2>
 
@@ -610,17 +583,34 @@ next one.  The more changes one tries to cram into a release at the
 last minute, the more the code is destabilized, and (usually) the more
 new bugs are created.</para>
 
-<para>The process of stabilizing a release is, therefore, mostly a
-process of saying "no".  The trick for open source projects is to come
-up with ways of saying "no" that won't result in too many hurt
-feelings or disappointed developers, and also won't prevent deserving
-changes from getting into the release.  There are many different ways
-to do this.  It's pretty easy to design systems that satisfy these
-criteria, once the team has focused on them as the important criteria.
-Here I'll briefly describe two of the most popular systems, at the
-extreme ends of the spectrum, but don't let that discourage your
-project from being creative.  Plenty of other arrangements are
-possible, these are just two that I've seen work in practice.</para>
+<para>Most software engineers agree in theory on rough criteria for
+what changes should be allowed into a release line during its
+stabilization period.  Obviously, fixes for severe bugs can go in,
+especially for bugs without workarounds.  Documentation updates are
+fine, as are fixes to error messages (except when they are considered
+part of the interface and must remain stable).  Many projects also
+allow certain kinds of low-risk or non-core changes to go in during
+stabilization, and may have formal guidelines for measuring risk.  But
+no amount of formalization can obviate the need for human judgement.
+There will always be cases where the project simply has to make a
+decision about whether a given change can go into a release.  The
+danger is that since each person wants to see their own favorite
+changes admitted into the release, then there will be plenty of people
+motivated to allow changes, and not enough people motivated to bar
+them.</para>
+
+<para>Thus, the process of stabilizing a release is mostly about
+creating mechanisms for saying "no".  The trick for open source
+projects in particular, is to come up with ways of saying "no" that
+won't result in too many hurt feelings or disappointed developers, and
+also won't prevent deserving changes from getting into the release.
+There are many different ways to do this.  It's pretty easy to design
+systems that satisfy these criteria, once the team has focused on them
+as the important criteria.  Here I'll briefly describe two of the most
+popular systems, at the extreme ends of the spectrum, but don't let
+that discourage your project from being creative.  Plenty of other
+arrangements are possible, these are just two that I've seen work in
+practice.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-release-owner">
@@ -635,6 +625,18 @@ this system to work, it is necessary to choose someone with the
 technical competence to understand all the changes, and the social
 standing and people skills to navigate the discussions leading up to
 the release without causing too many hurt feelings.</para>
+
+<para>A common pattern is for the release owner to say "I don't think
+there's anything wrong with this change, but we haven't had enough
+time to test it yet, so it shouldn't go into this release."  It helps
+a lot of the release owner has broad technical knowledge of the
+project, and can give reasons why the change could be potentially
+destabilizing (for example, its interactions with other parts of the
+software, or portability concerns).  People will sometimes ask such
+decisions to be justified, or will argue that a change is not as risky
+as it looks.  These conversations need not be confrontational, as long
+as the release owner is able to consider all the arguments objectively
+and not reflexively dig in his heels.</para>
 
 <para>Note that the release owner need not be the same person as the
 project leader (in cases where there is a project leader at all; see
@@ -746,13 +748,12 @@ votes be as lightweight as possible.  The proposed change is referred
 to by its revision number in the repository (in this case a single
 revision, r2401, although a proposed change could just as easily
 consist of multiple revisions).  The revision is assumed to refer to a
-change made on the trunk, or in rare cases to a change made on some
-branch other than the release branch.  (Because if the change were
-already on the release branch, there would be no need to vote on it.)
-If your version control system doesn't have an obvious syntax for
-referring to individual changes, then the project should make one up;
-for voting to be practical, each change under consideration must be
-unambiguously identifiable.</para>
+change made on the trunk; if the change were already on the release
+branch, there would be no need to vote on it.  If your version control
+system doesn't have an obvious syntax for referring to individual
+changes, then the project should make one up.  For voting to be
+practical, each change under consideration must be unambiguously
+identifiable.</para>
 
 <para>Those voting for a change are responsible for making sure it
 applies cleanly to the release branch, that is, applies without
@@ -815,10 +816,11 @@ these people will often take it upon themselves to merge them into the
 release branch, and it's fine if others leave that task to them, as
 long as everyone understands that they are not obligated to do all the
 work unless they have explicitly committed to it.  When the time comes
-to put the release out the door (see <xref linkend="pfs-releasing"/>),
-the release managers also take care of the logistics of creating the
-final release packages, collecting digital signatures, uploading the
-packages, and making the public announcement.</para>
+to put the release out the door (see
+<xref linkend="pfs-testing-and-releasing"/>), the release managers
+also take care of the logistics of creating the final release
+packages, collecting digital signatures, uploading the packages, and
+making the public announcement.</para>
 
 </sect3>
 
@@ -948,8 +950,9 @@ http://svn.scanley.org/repos/svn/tags/2.5.0/
 include every little bugfix and feature enhancement.  Its purpose is
 simply to give users an overview of what they would gain by upgrading
 to the new release.  In fact, the changelist is customarily included
-in the announcement email (see <xref linkend="pfs-releasing"/>), so
-write it with that audience in mind.</para>
+in the announcement email (see
+<xref linkend="pfs-testing-and-releasing"/>), so write it with that
+audience in mind.</para>
 
 <para>The actual layout of the source code inside the tree should be
 the same as, or as similar as possible to, the source code layout one
@@ -1180,8 +1183,8 @@ can.</para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="pfs-releasing">
-<title>Releasing</title>
+<sect1 id="pfs-testing-and-releasing">
+<title>Testing and Releasing</title>
 
 <para>Once the source tarball is produced from the stabilized release
 branch, the public part of the release process begins.  But before the
@@ -1327,10 +1330,20 @@ everyone can be happy?</para>
 
 <para>After the 1.1.x line is well under way (say, around 1.1.3 or
 so), you can declare 1.0.x to be at <firstterm>end of
-life</firstterm>.  This should be announced.  The announcement could
-stand alone, or it could be mentioned as part of a 1.1.x release
-announcement, but however you do it, users need to know that the old
-line is being phased out, so they can make upgrade decisions.</para>
+life</firstterm>.  This should be announced officially.  The
+announcement could stand alone, or it could be mentioned as part of a
+1.1.x release announcement, but however you do it, users need to know
+that the old line is being phased out, so they can make upgrade
+decisions.</para>
+
+<para>Some projects set a window of time during which they pledge to
+support the previous release line.  In an open source context,
+"support" means accepting bug reports against that line, and making
+maintenance releases when significant bugs are found.  Other projects
+don't give a definite amount of time, but watch incoming bug reports
+to gauge how many people are still using the older line.  When the
+percentage drops below a certain point, they declare end of life for
+the line and stop supporting it.</para>
 
 <para>For each release, make sure to have a <firstterm>target
 version</firstterm> available in the bug tracker, so people filing
