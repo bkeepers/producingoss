@@ -30,6 +30,10 @@ HTML_XSLTPROC_OPTS =
 
 all: all-html all-pdf all-ps
 
+upload: all
+	scp pfs-book.pdf kfogel@sp.red-bean.com:/www/pfs/pfs-book.pdf
+	scp pfs-book.ps kfogel@sp.red-bean.com:/www/pfs/pfs-book.ps
+
 # The web site post-commit hook runs 'make www'.
 www: html
 
