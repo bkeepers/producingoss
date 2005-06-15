@@ -13,16 +13,17 @@ prevents open source projects from collapsing under the weight of
 Brooks' Law<footnote><para>From his book <citetitle>The Mythical Man
 Month</citetitle>, 1975.  See <ulink
 url="http://en.wikipedia.org/wiki/The_Mythical_Man-Month"/> and <ulink
-url="http://en.wikipedia.org/wiki/Brooks_Law"/></para></footnote>,
-which observes that the complexity of a project increases as the
-<emphasis>square</emphasis> of the number of participants.  When only
-a few people are involved, everyone can easily talk to everyone else.
-But when hundreds of people are involved, it is no longer possible for
-each person to remain constantly aware of what everyone else is doing.
-If good free software project management is about making everyone feel
-like they're all working together in the same room, the obvious
-question is: what happens when everyone in a crowded room tries to
-talk at once?</para>
+url="http://en.wikipedia.org/wiki/Brooks_Law"/>.</para></footnote>,
+which states that adding manpower to a late software project makes it
+later.  Fred Brooks observed that the complexity of a project
+increases as the <emphasis>square</emphasis> of the number of
+participants.  When only a few people are involved, everyone can easily
+talk to everyone else, but when hundreds of people are involved, it is
+no longer possible for each person to remain constantly aware of what
+everyone else is doing.  If good free software project management is
+about making everyone feel like they're all working together in the
+same room, the obvious question is: what happens when everyone in a
+crowded room tries to talk at once?</para>
 
 <para>This problem is not new.  In non-metaphorical crowded rooms, the
 solution is <firstterm>parliamentary procedure</firstterm>: formal
@@ -1387,10 +1388,11 @@ mailing list devoted to commit emails, separate from the mailing lists
 to which humans post.  Developers and other interested parties should
 be encouraged to subscribe to the commits list, as it is the most
 effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review,
-commit emails help create a sense of community, because they establish
-a shared environment in which people can react to events (commits)
-that they know are visible to others as well.</para>
+code level.  Aside from the obvious technical benefits of peer review
+(see <xref linkend="pfs-code-review"/>), commit emails help create a
+sense of community, because they establish a shared environment in
+which people can react to events (commits) that they know are visible
+to others as well.</para>
 
 <para>The specifics of setting up commit emails will vary depending on
 your version control system, but usually there's a script or other
@@ -1405,7 +1407,7 @@ information to do anything&mdash;for example, to send out an
 email.</para>
 
 <para>With pre-packaged commit email systems, you may want to
-modify some of the default behaviors:
+modify some of the default behaviors:</para>
 
 <orderedlist>
 
@@ -1468,8 +1470,6 @@ modify some of the default behaviors:
   </listitem>
 
 </orderedlist>
-
-</para>
 
 <sidebar id="pfs-cia">
 <title>CIA: Another Change Publication Mechanism</title>
@@ -1780,7 +1780,12 @@ track other kinds of tasks too.</para>
   </listitem>
   <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
             cause is identified, and if possible, the effort required
-            to fix it is estimated.</para>
+            to fix it is estimated.  Make sure these things get
+            recorded in the issue; if the person who diagnosed the
+            bug suddenly has to step away from the project for a
+            while (as can often happen with volunteer developers),
+            someone else should be able to pick up where she left
+            off.</para>
 
             <para>In this stage, or sometimes the previous one, a
             developer may "take ownership" of the issue and
@@ -1822,13 +1827,17 @@ It does no one any good, as the individual user in each case is not
 responsible for all the previous invalid issues; the statistical trend
 is visible only from the developers' point of view, not the user's.
 (In <xref linkend="pfs-bug-filtering"/> we'll look at techniques for
-reducing the number of invalid issues.)</para>
+reducing the number of invalid issues.)  Also, if different users are
+experiencing the same misunderstanding over and over, it might mean
+that that aspect of the software needs to be redesigned.  This sort of
+pattern is easiest to notice when there is an issue manager monitoring
+the bug database, see <xref linkend="pfs-issue-manager"/>.</para>
 
-<para>The second common variation is for the issue to be closed as a
-<firstterm>duplicate</firstterm> soon after Step 1.  A duplicate is
-when someone files an issue that's already known to the project.
-Duplicates are not confined to open issues: it's possible for a bug to
-come back after having been fixed (this is known as a
+<para>The second common lifecycle variation is for the issue to be
+closed as a <firstterm>duplicate</firstterm> soon after Step 1.  A
+duplicate is when someone files an issue that's already known to the
+project.  Duplicates are not confined to open issues: it's possible
+for a bug to come back after having been fixed (this is known as a
 <firstterm>regression</firstterm>), in which case the preferred course
 is usually to reopen the original issue, and close any new reports as
 duplicates of the original one.  The bug tracking system should keep
@@ -1897,12 +1906,13 @@ of the bug tracker, it's just that its interface was designed for
 capturing and presenting discrete states, not free-flowing
 discussions.  Second, not everyone who should be involved in
 discussing a given issue is necessarily watching the bug tracker.
-Part of good issue management (see <xref linkend="pfs-share-management"/>)
-is to make sure each issue is brought to the right peoples' attention,
-rather than requiring every developer to monitor all issues.  <xref
-linkend="pfs-bug-tracker-usage"/> talks about ways make sure people
-don't accidentally siphon discussions out of appropriate forums and
-into the bug tracker.</para>
+Part of good issue management (see
+<xref linkend="pfs-share-management"/>) is to make sure each issue is
+brought to the right peoples' attention, rather than requiring every
+developer to monitor all issues.  In
+<xref linkend="pfs-bug-tracker-usage"/> we'll look at ways to make
+sure people don't accidentally siphon discussions out of appropriate
+forums and into the bug tracker.</para>
 
 <para>Some bug trackers can monitor mailing lists and automatically
 log all emails that are about a known issue.  Typically they do this
