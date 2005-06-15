@@ -518,11 +518,13 @@ $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
 </screen>
 
 <para>That tag now represents the exact state of the project's source
-tree in the 1.0.0 release.  The next micro release in the same line is
-likewise prepared on the 1.0.x branch, and when it is ready, a tag is
-made for 1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When
-it's time to start thinking about a 1.1.x release, make a new branch
-from trunk:</para>
+tree in the 1.0.0 release (this is useful in case anyone ever needs to
+get an old version after the packaged distributions and binaries have
+been taken down.)  The next micro release in the same line is likewise
+prepared on the 1.0.x branch, and when it is ready, a tag is made for
+1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
+start thinking about a 1.1.x release, make a new branch from
+trunk:</para>
 
 <screen>
 $ cd trunk-working-copy
@@ -980,10 +982,18 @@ scanley-2.5.0.gz
 scanley-2.5.0.zip</literallayout>
 </informalexample>
 
-<para>...but the source tree created by unpacking them must be
-<emphasis>exactly</emphasis> the same.  That source tree is the
-distribution; the form in which it is downloaded is merely a matter of
-convenience.</para>
+<para>...but the source tree created by unpacking them must be the
+same.  That source tree is the distribution; the form in which it is
+downloaded is merely a matter of convenience.  Certain trivial
+differences between source packages are allowable: for example, in the
+Windows package, text files should have lines ending with CRLF
+(Carriage Return and Line Feed), while Unix pacakges should just use
+LF.  The trees may be arranged slightly differently between source
+packages destined for different operating systems, too, if those
+operating systems require different sorts of layouts for compilation.
+However, these are all basically trivial transformations.  The basic
+source files should be the same across all the packagings of a given
+release.</para>
 
 <sect3 id="pfs-release-capitalization">
 <title>To capitalize or not to capitalize</title>
@@ -1324,13 +1334,12 @@ bit severe to just put the bugfix in 1.1.0 and tell all the old 1.0.x
 users they should upgrade.  Why not release both 1.1.0 and 1.0.4, so
 everyone can be happy?</para>
 
-<para>After the 1.1.x line is well under way (say, around 1.1.3 or
-so), you can declare 1.0.x to be at <firstterm>end of
-life</firstterm>.  This should be announced officially.  The
-announcement could stand alone, or it could be mentioned as part of a
-1.1.x release announcement, but however you do it, users need to know
-that the old line is being phased out, so they can make upgrade
-decisions.</para>
+<para>After the 1.1.x line is well under way, you can declare 1.0.x to
+be at <firstterm>end of life</firstterm>.  This should be announced
+officially.  The announcement could stand alone, or it could be
+mentioned as part of a 1.1.x release announcement, but however you do
+it, users need to know that the old line is being phased out, so they
+can make upgrade decisions accordingly.</para>
 
 <para>Some projects set a window of time during which they pledge to
 support the previous release line.  In an open source context,

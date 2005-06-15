@@ -257,7 +257,7 @@ transferred.  To pick the most obvious example, an incoming developer
 can't inherit commit access from an outgoing one (see
 <xref linkend="pfs-money-vs-love"/> later in this chapter), so if the
 new developer doesn't already have commit access, he will have to
-submit patches until he does.  Commit access is only the most
+submit patches until he does.  But commit access is only the most
 measurable manifestation of lost influence.  A long-time developer
 also knows all the old arguments that have been hashed and rehashed on
 the discussion lists&mdash;a new developer, having no memory of those
@@ -278,29 +278,32 @@ experienced developers should be available for questioning, and should
 be reading every post the newcomer makes to the development lists,
 even if they're in threads that the experienced developers normally
 wouldn't pay attention to.  This will help the group spot potential
-rocks before the newcomer runs aground.</para>
+rocks before the newcomer runs aground.  Private, behind-the-scenes
+encouragement and pointers can also help a lot, especially if the
+newcomer is not accustomed to massively parallel peer review of his
+code.</para>
 
-<para>For example, when CollabNet hires a new developer to work on
-Subversion, we sit down together and pick some open bugs for the new
-person to cut his teeth on.  We'll discuss the technical outlines of
-the solutions, and then assign at least one experienced developer to
-(publicly) review the patch that the new developer will (also
-publicly) post.  We typically don't even look at the patch before
-the main development list sees it, although we could if there were
-some reason to.  The important thing is that the new developer go
-through the process of public review, learning the code base while
-simultaneously becoming accumstomed to receiving critiques from
-complete strangers.  But we try to coordinate the timing so that our
-own review comes immediately after the posting of the patch.  That way
-the first review the list sees is ours, which can help set the tone
-for the others' reviews.  It also contributes to the idea that this
-new person is to be taken seriously: if others see that we're putting
-in the time to give detailed reviews, with thorough explanations and
-references into the archives where appropriate, they'll appreciate
-that a form of training is going on, and that it probably signifies a
-long-term investment.  This can make them more positively disposed
-toward that developer, at least to the degree of spending a little
-extra time answering questions and reviewing patches.</para>
+<para>When CollabNet hires a new developer to work on Subversion, we
+sit down together and pick some open bugs for the new person to cut
+his teeth on.  We'll discuss the technical outlines of the solutions,
+and then assign at least one experienced developer to (publicly)
+review the patch that the new developer will (also publicly) post.  We
+typically don't even look at the patch before the main development
+list sees it, although we could if there were some reason to.  The
+important thing is that the new developer go through the process of
+public review, learning the code base while simultaneously becoming
+accumstomed to receiving critiques from complete strangers.  But we
+try to coordinate the timing so that our own review comes immediately
+after the posting of the patch.  That way the first review the list
+sees is ours, which can help set the tone for the others' reviews.  It
+also contributes to the idea that this new person is to be taken
+seriously: if others see that we're putting in the time to give
+detailed reviews, with thorough explanations and references into the
+archives where appropriate, they'll appreciate that a form of training
+is going on, and that it probably signifies a long-term investment.
+This can make them more positively disposed toward that developer, at
+least to the degree of spending a little extra time answering
+questions and reviewing patches.</para>
 
 </sect1>
 
@@ -330,16 +333,16 @@ there should be an organized effort to keep them in check.</para>
 simply striving to appear that way.  Under certain circumstances,
 having your developers behave in concert can be quite useful, and they
 should be prepared to coordinate behind the scenes when necessary.
-For example, when making a proposal that is likely to be controversial
-(but not truly divisive), having several people chime in with
-agreement early on can usually help it along, by giving the impression
-of a growing consensus.  Others will feel that the proposal has
-momentum, and that if they were to object they'd be stopping that
-momentum.  This won't prevent someone who is truly uncomfortable from
-objecting (and, needless to say, any objections should be listened
-to).  But it is enough to inhibit the sort of people who like to
-object just to stay in shape; see <xref linkend="pfs-bikeshed"/>
-for more about them.</para>
+For example, when making a proposal that is likely to be
+controversial, having several people chime in with agreement early on
+can usually help it along, by giving the impression of a growing
+consensus.  Others will feel that the proposal has momentum, and that
+if they were to object they'd be stopping that momentum.  This won't
+prevent someone who is truly uncomfortable from objecting (and,
+needless to say, any objections should be listened to).  But it is
+enough to inhibit the sort of people who like to object just to stay
+in shape; see <xref linkend="pfs-bikeshed"/> for more about
+them.</para>
 
 </sect1>
 
@@ -506,10 +509,62 @@ it.</para>
 other volunteer developer, without commit access.  He sent patches to
 the public mailing list, where they could be, and were, reviewed by
 everyone.  We also said on the list that we were doing things this way
-deliberately, so there could be no missing the point.  After a while,
-someone (I can't remember if it was a CollabNet developer or not)
-proposed Mike for commit access, and he was accepted, as everyone knew
-he would be.</para>
+deliberately, so there could be no missing the point.  After a couple
+of weeks of solid activity by Mike, someone (I can't remember if it
+was a CollabNet developer or not) proposed him for commit access, and
+he was accepted, as everyone knew he would be.</para>
+
+<!--
+
+The relevant dates for Mike Pilato are:
+
+   http://subversion.tigris.org/servlets/ReadMsg?list=dev&msgNo=2943
+
+   From: "C. Michael Pilato" <cmpilato@collab.net>
+   To: "dev@subversion.tigris.org" <dev@subversion.tigris.org>
+   Subject: Introducing...me.
+   Message-ID: <Pine.LNX.4.21.0101121604240.1653-100000@pascal>
+   Date: Fri, 12 Jan 2001 16:04:44 -0800 (PST)
+
+followed by:
+
+   2001-01-30 15:35  C. Michael Pilato <cmpilato@collab.net>
+
+        * configure.in (1.49), subversion/clients/win32/svn_com/svn_com.dsp
+        (1.3), subversion/include/svn_path.h (1.26),
+        subversion/libsvn_subr/path.c (1.29):
+
+        Fixes path inconsistencies on Windows.  More generally, actually
+        makes use of the "style" parameter passed to the path library
+        functions to choose the right path delimeter ('/' or '\' at this
+        time).  
+        
+        * config.hw (SVN_PATH_LOCAL_SEPARATOR): 
+          Added this #define for Windows usage.  
+        
+        * configure.in (SVN_PATH_LOCAL_SEPARATOR): 
+          Added this #define for those systems that use autoconf.  
+        
+        * svn_com.dsp: 
+          Added the subversion root directory to the include path so
+          config.h can be found by the inclusion of the path headers.  
+        
+        * svn_path.h (SVN_PATH_REPOS_SEPARATOR, SVN_PATH_URL_SEPARATOR): 
+          Added url separator define, and changed naming of repos to be an
+          exported symbol.  
+        
+        * path.c (get_separator_from_style): 
+          Added new function for choosing an appropriate path separator,
+          given a subversion path style.  Also changed a variety of
+          functions in this module to make use of this new function instead of
+          simply using SVN_PATH_REPOS_SEPARATOR.  
+
+   2001-01-30 12:23   Karl Fogel <kfogel@collab.net>
+
+        * AUTHORS (1.9):
+
+        Added Mark Murphy, Bill Tutt, C. Michael Pilato.  
+-->
 
 <para>That kind of consistency gets you a credibility that money could
 never buy.  And credibility is a valuable currency to have in
@@ -521,13 +576,13 @@ directions the project takes, presents a wider target than most.  By
 being scrupulous to observe all project guidelines right from the
 start, the funder makes itself the same size as everyone else.</para>
 
-<para>(See also Danese Cooper's blog at <ulink
-url="http://blogs.sun.com/roller/page/DaneseCooper/20040916"/> for a
-similar story about commit access.  Cooper is Sun Microsystem's "Open
-Source Diva"&mdash;I think that's her official title&mdash;and in the
-blog entry, she describes how the Tomcat development community got Sun
-to hold its own developers to the same commit-access standards as the
-non-Sun developers.)</para>
+<para>(See also Danese Cooper's blog at
+<ulink url="http://blogs.sun.com/roller/page/DaneseCooper/20040916"/>
+for a similar story about commit access.  Cooper was then Sun
+Microsystem's "Open Source Diva"&mdash;I believe that was her official
+title&mdash;and in the blog entry, she describes how the Tomcat
+development community got Sun to hold its own developers to the same
+commit-access standards as the non-Sun developers.)</para>
 
 <para>The need for the funders to play by the same rules as everyone
 else means that the Benevolent Dictatorship governance model (see
