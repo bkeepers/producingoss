@@ -95,7 +95,7 @@ from forming an immediate first impression.  The site's appearance
 signals whether care was taken in organizing the project's
 presentation.  Humans have extremely sensitive antennae for detecting
 the investment of care.  Most of us can tell in one glance whether a
-web site was slapped together quickly or was given serious thought.
+web site was thrown together quickly or was given serious thought.
 This is the first piece of information your project puts out, and the
 impression it creates will carry over to the rest of the project by
 association.</para>
@@ -407,7 +407,8 @@ statement might say:</para>
   services for large collections of text files.</emphasis></para>
   </blockquote>
 
-<para>The features and requirements list would give the details:</para>
+<para>The features and requirements list would give the details,
+clarifying the mission statement's scope:</para>
 
   <blockquote>
     <para><emphasis>Features:</emphasis></para>
@@ -435,7 +436,7 @@ statement might say:</para>
 
 <para>With this information, readers can quickly get a feel for
 whether this software has any hope of working for them, and they can
-consider getting involved as a developer too.</para>
+consider getting involved as developers too.</para>
 
 </sect2>
 
@@ -473,16 +474,16 @@ pleasant surprises produce the best kind of word-of-mouth.</para>
 <sidebar id="pfs-alpha-and-beta">
   <title>Alpha and Beta</title>
   <para>The term <firstterm>alpha</firstterm> usually means a first
-  release with which users can get real work done and which has all
+  release, with which users can get real work done and which has all
   the intended functionality, but which also has known bugs.  The main
   purpose of alpha software is to generate feedback, so the developers
   know what to work on.  The next stage, <firstterm>beta</firstterm>,
   means the software has had all the serious bugs fixed, but has not
-  yet been tested enough to vet for real release.  The purpose of beta
+  yet been tested enough to certify for release.  The purpose of beta
   software is to either become the official release, assuming no bugs
   are found, or provide detailed feedback to the developers so they
-  can reach the official release pretty quickly.  The difference
-  between alpha and beta is very much a matter of judgement.</para>
+  can reach the official release quickly.  The difference between
+  alpha and beta is very much a matter of judgement.</para>
 </sidebar>
 
 </sect2>
@@ -636,7 +637,7 @@ gulf.</para>
 <title>Developer Guidelines</title>
 
 <para>If someone is considering contributing to the project, the first
-thing they'll look for is developer guidelines.  These are not so much
+thing she'll look for is developer guidelines.  These are not so much
 technical as social.  Developer guidelines explain how the developers
 interact with each other and with the users, and ultimately how things
 get done.</para>
@@ -718,7 +719,7 @@ documentation.</para>
 <para>A good way to ensure basic initial documentation gets done is to
 limit its scope in advance.  That way writing it at least won't feel
 like an open-ended task.  A good rule of thumb is that it should meet
-the following minimal criteria:
+the following minimal criteria:</para>
 
 <itemizedlist>
   <listitem><para>Tell the reader clearly how much technical
@@ -730,9 +731,10 @@ the following minimal criteria:
             diagnostic test or simple command to confirm that
             they've set things up correctly.  Startup
             documentation is in some ways more important than
-            actual usage documentation.  Once someone has gone to
-            the trouble of installing the software, they'll
-            probably be persistent in figuring out how to use it.
+            actual usage documentation.  The more effort someone has
+            invested in installing and getting started with the
+            software, the more persistent she'll be in figuring out
+            advanced functionality that's not well-documented.
             When people abandon, they abandon early; therefore,
             it's the earliest stages, like installation, that need
             the most support.</para>
@@ -758,8 +760,6 @@ the following minimal criteria:
             requests for volunteer help.</para>
   </listitem>
 </itemizedlist>
-
-</para>
 
 <para>The last point is of wider importance, actually, and can be
 applied to the entire project, not just the documentation.  An
@@ -1331,13 +1331,17 @@ will be maintained by everyone.</para>
 <para>One of the best ways to foster a productive development
 community is to get people looking at each others' code.  Some
 infrastructure is required to do this effectively; in particular,
-commit emails must be turned on; see <xref
-linkend="pfs-commit-emails"/> for more details.  The effect of
+commit emails must be turned on; see
+<xref linkend="pfs-commit-emails"/> for more details.  The effect of
 commit emails is that every time someone commits a change to the
 source code, an email goes out showing the log message and diffs for
 the change.  <firstterm>Code review</firstterm> is the practice of
 reviewing commit emails as they come in, looking for bugs and possible
-improvements.</para>
+improvements.<footnote><para>This is how code review
+is usually done in open source projects, at any rate.  In more
+centralized projects, "code review" can also mean multiple people
+sitting down together and going over printouts of source
+code fooo.</para></footnote></para>
 
 <para>Code review serves several purposes simultaneously.  It's the
 most obvious example of peer-review in the open source world, and
@@ -1388,15 +1392,28 @@ time for Subversion, and had to stop doing regular reviews.  But by
 then, the habit was so ingrained for the rest of us as to seem that it
 had been going on since time immemorial.</para>
 
-<para>Start doing reviews from very first commit.  Don't worry that
-you won't find any bugs, or that you don't know enough about every
-area of the code.  There will be something to say about almost every
-commit; even where you don't find anything to question, you may find
-something to praise.  The important thing is to make it clear to every
-committer that what they do is seen and understood.  Naturally, code
-does not absolve programmers of the responsibility to review and test
-their changes before committing; no one should depend on code review
-to catch things he should have caught on his own.</para>
+<para>Start doing reviews from very first commit.  The sorts of
+problems that are easiest to catch by reviewing diffs are security
+vulnerabilities, memory leaks, insufficient comments or API
+documentation, off-by-one errors, caller/callee discipline mismatches,
+and other problems that require a minimum of surrounding context to
+spot.  However, even larger-scale issues such as failure to abstract
+repeated patterns to a single location become spottable after one has
+been doing reviews regularly, because the memory of past diffs informs
+the review of present diffs.</para>
+
+<!-- todo: Andrew Stellman suggested putting a checklist of what to
+     look for in code review here.  That might be a good idea. -->
+
+<para>Don't worry that you might not find anything to comment on, or
+that you don't know enough about every area of the code.  There will
+usually be something to say about almost every commit; even where you
+don't find anything to question, you may find something to praise.
+The important thing is to make it clear to every committer that what
+they do is seen and understood.  Of course, code review does not
+absolve programmers of the responsibility to review and test their
+changes before committing; no one should depend on code review to
+catch things he ought to have caught on his own.</para>
 
 </sect2>
 
