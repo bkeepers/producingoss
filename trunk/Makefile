@@ -4,12 +4,12 @@ SVNVERSION = svnversion
 XSLTPROC = xsltproc
 
 TOP = .
-HTML_TARGET = ${TOP}/pfs-book.html
+HTML_TARGET = ${TOP}/pfs.html
 HTML_CHUNK_DIR = ${TOP}/html-chunk
 HTML_CHUNK_TARGET = ${HTML_CHUNK_DIR}/index.html  # created last
-PDF_TARGET = ${TOP}/pfs-book.pdf
-PS_TARGET = ${TOP}/pfs-book.ps
-FO_TARGET = ${TOP}/pfs-book.fo
+PDF_TARGET = ${TOP}/pfs.pdf
+PS_TARGET = ${TOP}/pfs.ps
+FO_TARGET = ${TOP}/pfs.fo
 XML_ROOT = ${TOP}/book.xml
 ALL_SOURCE = ${TOP}/*.xml
 
@@ -31,8 +31,8 @@ HTML_XSLTPROC_OPTS =
 all: all-html all-pdf all-ps
 
 upload: all
-	scp pfs-book.pdf kfogel@sp.red-bean.com:/www/pfs/pfs-book.pdf
-	scp pfs-book.ps kfogel@sp.red-bean.com:/www/pfs/pfs-book.ps
+	scp pfs.pdf kfogel@sp.red-bean.com:/www/pfs/pfs.pdf
+	scp pfs.ps kfogel@sp.red-bean.com:/www/pfs/pfs.ps
 
 # The web site post-commit hook runs 'make www'.
 www: html
