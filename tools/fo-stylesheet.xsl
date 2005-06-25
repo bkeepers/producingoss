@@ -2,6 +2,7 @@
 
   <xsl:import href="xsl/fo/docbook.xsl"/>
 
+  <xsl:param name="alignment">left</xsl:param>
   <xsl:param name="fop.extensions" select="1" />
   <xsl:param name="variablelist.as.blocks" select="1" />
 
