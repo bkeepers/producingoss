@@ -959,6 +959,37 @@ in the announcement email (see
 <xref linkend="pfs-testing-and-releasing"/>), so write it with that
 audience in mind.</para>
 
+   <sidebar id="pfs-changelog">
+   <title>CHANGES versus ChangeLog</title>
+   <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
+   lists every change ever made to a project&mdash;that is, every
+   revision committed to the version control system.  There are
+   various formats for ChangeLog files; the details of the formats
+   aren't important here, as they all contain the same information:
+   the date of the change, its author, and a brief summary (or just
+   the log message for that change).</para>
+
+   <para>A CHANGES file is different.  It too is a list of changes,
+   but only the ones thought important for a certain audience to see,
+   and often with metadata like the exact date and author stripped
+   off.  To avoid confusion, don't use the terms interchangeably.
+   Some projects use "NEWS" instead of "CHANGES", but although this
+   avoids potential for confusion with "ChangeLog", it is a bit of a
+   misnomer, since the CHANGES file retains change information for
+   all releases, and thus has a lot of old news in addition to the new
+   news at the top.</para>
+
+   <para>ChangeLog files may be slowly disappearing anyway.  They were
+   helpful in the days when CVS was the only choice of version
+   control system, because change data was not easy to extract from
+   CVS.  However, with more recent version control systems, the data
+   that used to be kept in the ChangeLog can be requested from the
+   version control repository at any time, making it pointless for the
+   project to keep a static file containing that data&mdash;in fact,
+   worse than pointless, since the ChangeLog would merely duplicate
+   the log messages already stored in the repository.</para>
+   </sidebar>
+
 <para>The actual layout of the source code inside the tree should be
 the same as, or as similar as possible to, the source code layout one
 would get by checking out the project directly from its version
@@ -1050,8 +1081,11 @@ named <filename>scanley-2.3.0-alpha1</filename>, the second into and
 <sect2 id="pfs-packaging-build-install">
 <title>Compilation and Installation</title>
 
-<para>For software requiring compilation, the standard under Unix-like
-systems has long been that the user should only need to type:</para>
+<para>For software requiring compilation or installation from source,
+there are usually standard procedures that experienced users expect to
+be able to follow.  For example, for programs written in C, C++, or
+certain other compiled languages, the standard under Unix-like systems
+is for the user to type:</para>
 
 <screen>
    $ ./configure
@@ -1059,33 +1093,39 @@ systems has long been that the user should only need to type:</para>
    # make install
 </screen>
 
-<para><remark>[discuss ant.apache.org here]</remark></para>
-
 <para>The first command autodetects as much about the environment as
 it can and prepares for the build process, the second command builds
 the software in place (but does not install it), and the last command
-installs it on the system.  (The first two commands are done as a
-regular user, the latter as root.)  For more details about setting up
+installs it on the system.  The first two commands are done as a
+regular user, the third as root.  For more details about setting up
 this system, see the excellent <citetitle>GNU Autoconf, Automake, and
 Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
 is published as treeware by New Riders, and its content is also freely
-available online at <ulink
-url="http://sources.redhat.com/autobook/"/>.</para>
+available online at
+<ulink url="http://sources.redhat.com/autobook/"/>.</para>
 
-<para>You can deviate from this standard if you really need to.
-Usually when projects do, it's because they predate the recipe's
-solidification as a standard, or because the recipe doesn't fit their
-particular needs (for example, Perl module distributions have a
-different, but equally well-documented, standard for building and
-installing).  However, if you can possibly arrange your project to fit
-the standard, you should do so.  Those three commands are practically
-spinal reflexes for a lot of system administrators now.  If they see
-in your project's <filename>INSTALL</filename> file that this familiar
-invocation is all they need to do, that instantly raises their faith
-that your project is generally aware of conventions, and that it is
-likely to have gotten other things right as well.  Also, as discussed
-in <xref linkend="pfs-downloads"/>, having a standard build procedure
-pleases potential developers.</para>
+<para>This is not the only standard, though it is one of the most
+widespread.  The Ant (<ulink url="http://ant.apache.org/"/>) build
+system is gaining popularity, especially with projects written in
+Java, and it has its own standard procedures for building and
+installing.  Also, certain programming languages, such as Perl and
+Python, recommend that the same method be used for most programs
+written in that language (for example, Perl modules use the
+command <command>perl&nbsp;Makefile.pl</command>).  If it's not
+obvious to you what the applicable standards are for your project, ask
+an experienced developer; you can safely assume
+that <emphasis>some</emphasis> standard applies, even if you don't
+know what it is at first.</para>
+
+<para>Whatever the appropriate standards for you project are, don't
+deviate from them unless you absolutely must.  The standard
+installation procedures are practically spinal reflexes for a lot of
+system administrators now.  If they see familiar invocations
+documented in your project's <filename>INSTALL</filename> file, that
+instantly raises their faith that your project is generally aware of
+conventions, and that it is likely to have gotten other things right
+as well.  Also, as discussed in <xref linkend="pfs-downloads"/>,
+having a standard build procedure pleases potential developers.</para>
 
 <para>On Windows, the standards for building and installing are a bit
 less settled.  For projects requiring compilation, the general
@@ -1093,21 +1133,19 @@ convention seems to be to ship a tree that can fit into the
 workspace/project model of the standard Microsoft development
 environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc).
 Depending on the nature of your software, it may be possible to offer
-a Unix-like build option on Windows via the Cygwin (<ulink
-url="http://www.cygwin.com/"/>) environment.  And of course, if you're
-using a language or programming framework that comes with its own
-build and install conventions, such as Perl or Python, you should
+a Unix-like build option on Windows via the Cygwin
+(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
+if you're using a language or programming framework that comes with
+its own build and install conventions, e.g. Perl or Python, you should
 simply use whatever the standard method is for that framework, whether
 on Windows, Unix, Mac OS X, or any other operating system.</para>
 
-<para>Using "the standard method", whatever that may mean in your
-project's context, is really the key goal.  Be willing to put in a
-lot of extra effort in order to make your project conform to the
-relevant build or installation standards.  Building and installing is
-an entry point: it's okay for things to get harder after that, if they
-absolutely must, but it would be a shame for the user's or developer's
-very first interaction with the software to require unexpected
-steps.</para>
+<para>Be willing to put in a lot of extra effort in order to make your
+project conform to the relevant build or installation standards.
+Building and installing is an entry point: it's okay for things to get
+harder after that, if they absolutely must, but it would be a shame
+for the user's or developer's very first interaction with the software
+to require unexpected steps.</para>
 
 </sect2>
 
