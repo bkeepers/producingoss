@@ -35,7 +35,7 @@ upload: all
 	scp pfs.ps kfogel@sp.red-bean.com:/www/pfs/pfs.ps
 
 # The web site post-commit hook runs 'make www'.
-www: html xmldist
+www: all-html xmldist
 
 install:
 	@echo "No installation procedure yet."
