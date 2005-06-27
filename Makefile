@@ -46,9 +46,11 @@ all-pdf: pdf
 
 all-ps: ps
 
+xmldist: 
+	tar zcvf pfs-xml.tar.gz README *.xml
+
 clean:
 	@echo "Clean rule not implemented yet."
-
 
 # HTML monolithic.
 html: ${HTML_TARGET}
