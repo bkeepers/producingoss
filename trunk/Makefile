@@ -47,7 +47,7 @@ all-pdf: pdf
 all-ps: ps
 
 xmldist: 
-	tar zcvf pfs-xml.tar.gz README *.xml
+	tar zcvf pfs-xml.tar.gz *.xml
 
 clean:
 	@echo "Clean rule not implemented yet."
