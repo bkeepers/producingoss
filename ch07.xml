@@ -16,7 +16,7 @@ an upcoming release, putting aside new feature development and
 non-critical bug-fixing until the release is done.  Volunteer groups
 are not so monolithic.  People work on the project for all sorts of
 reasons, and those not interested in helping with a given release
-still need to continue regular development work while the release is
+still want to continue regular development work while the release is
 going on.  Because development doesn't stop, open source release
 processes tend to take longer, but be less disruptive, than commercial
 release processes.  It's a bit like highway repair.  There are two
@@ -29,7 +29,7 @@ entirely shut down until the job is done.  The second way involves
 much more time and trouble for the repair crew (now they have to work
 with fewer people and less equipment, in cramped conditions, with
 flaggers to slow and direct traffic, etc), but at least the road
-remains useable, even if not at full capacity.</para>
+remains useable, albeit not at full capacity.</para>
 
 <para>Open source projects tend to work the second way.  In fact, for
 a mature piece of software with several different release lines being
@@ -109,8 +109,8 @@ users.  A release means that:</para>
 experienced users approach new releases with some trepidation,
 especially when the software is mature and was already mostly doing
 what they wanted (or thought they wanted).  Even the arrival of new
-features is not an unmixed blessing: it may mean the software will now
-behave in unexpected ways.</para>
+features is not an unmixed blessing, in that it may mean the software
+will now behave in unexpected ways.</para>
 
 <para>The purpose of release numbering, therefore, is twofold:
 obviously the numbers should unambiguously communicate the ordering of
@@ -544,8 +544,8 @@ $ cvs tag -b RELEASE_1_1_X
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
 </screen>
 
-<para>Maintenance would continue in parallel along both 1.0.x and
-1.1.x, and releases made independently from both lines.  In fact, it
+<para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
+and releases can be made independently from both lines.  In fact, it
 is not unusual to publish near-simultaneous releases from two
 different lines.  The older series is recommended for more
 conservative site administrators, who may not want to make the big
@@ -652,8 +652,8 @@ same as those that make a good release owner.  In something as
 important as the release process, it may be wise to have someone
 provide a counterbalance to the project leader's judgement.</para>
 
-<para>See <xref linkend="pfs-release-manager"/> for another, less
-centralized system of manage releases.</para>
+<para>Contrast the release owner role with the less dictatorial role
+described in <xref linkend="pfs-release-manager"/>.</para>
 
 </sect2>
 
@@ -760,12 +760,12 @@ changes, then the project should make one up.  For voting to be
 practical, each change under consideration must be unambiguously
 identifiable.</para>
 
-<para>Those voting for a change are responsible for making sure it
-applies cleanly to the release branch, that is, applies without
-conflicts (see <xref linkend="pfs-vc-vocabulary-conflict"/>).  If
-there are conflicts, then the entry should either point to an adjusted
-patch that does apply cleanly, or to a temporary branch that holds an
-adjusted version of the change, for example:</para>
+<para>Those proposing or voting for a change are responsible for
+making sure it applies cleanly to the release branch, that is, applies
+without conflicts (see <xref linkend="pfs-vc-vocabulary-conflict"/>).
+If there are conflicts, then the entry should either point to an
+adjusted patch that does apply cleanly, or to a temporary branch that
+holds an adjusted version of the change, for example:</para>
 
 <screen>
 * r13222, r13223, r13232
@@ -911,12 +911,12 @@ new directory tree named <filename>scanley-2.5.0</filename> in the
 current directory.  Underneath the new directory, the source code
 should be arranged in a layout ready for compilation (if compilation
 is needed) and installation.  In the top level of new directory tree,
-there should be a plain text <firstterm>README</firstterm> file
+there should be a plain text <filename>README</filename> file
 explaining what the software does and what release this is, and giving
 pointers to other resources, such as the project's web site, other
 files of interest, etc.  Among those other files should be an
-<firstterm>INSTALL</firstterm> file, sibling to
-the <firstterm>README</firstterm>, giving instructions on how to build
+<filename>INSTALL</filename> file, sibling to
+the <filename>README</filename>, giving instructions on how to build
 and install the software for all the operating systems it supports.
 As mentioned in <xref linkend="pfs-license-quickstart-applying"/>,
 there should also be a <filename>COPYING</filename> or
@@ -969,25 +969,26 @@ audience in mind.</para>
    the date of the change, its author, and a brief summary (or just
    the log message for that change).</para>
 
-   <para>A CHANGES file is different.  It too is a list of changes,
-   but only the ones thought important for a certain audience to see,
-   and often with metadata like the exact date and author stripped
-   off.  To avoid confusion, don't use the terms interchangeably.
-   Some projects use "NEWS" instead of "CHANGES", but although this
-   avoids potential for confusion with "ChangeLog", it is a bit of a
-   misnomer, since the CHANGES file retains change information for
-   all releases, and thus has a lot of old news in addition to the new
-   news at the top.</para>
+   <para>A <filename>CHANGES</filename> file is different.  It too is
+   a list of changes, but only the ones thought important for a
+   certain audience to see, and often with metadata like the exact
+   date and author stripped off.  To avoid confusion, don't use the
+   terms interchangeably.  Some projects use "NEWS" instead of
+   "CHANGES", but although this avoids potential for confusion with
+   "ChangeLog", it is a bit of a misnomer, since the CHANGES file
+   retains change information for all releases, and thus has a lot of
+   old news in addition to the new news at the top.</para>
 
-   <para>ChangeLog files may be slowly disappearing anyway.  They were
-   helpful in the days when CVS was the only choice of version
-   control system, because change data was not easy to extract from
-   CVS.  However, with more recent version control systems, the data
-   that used to be kept in the ChangeLog can be requested from the
-   version control repository at any time, making it pointless for the
-   project to keep a static file containing that data&mdash;in fact,
-   worse than pointless, since the ChangeLog would merely duplicate
-   the log messages already stored in the repository.</para>
+   <para><filename>ChangeLog</filename> files may be slowly
+   disappearing anyway.  They were helpful in the days when CVS was
+   the only choice of version control system, because change data was
+   not easy to extract from CVS.  However, with more recent version
+   control systems, the data that used to be kept in the ChangeLog can
+   be requested from the version control repository at any time,
+   making it pointless for the project to keep a static file
+   containing that data&mdash;in fact, worse than pointless, since the
+   ChangeLog would merely duplicate the log messages already stored in
+   the repository.</para>
    </sidebar>
 
 <para>The actual layout of the source code inside the tree should be
@@ -1025,7 +1026,7 @@ same.  That source tree is the distribution; the form in which it is
 downloaded is merely a matter of convenience.  Certain trivial
 differences between source packages are allowable: for example, in the
 Windows package, text files should have lines ending with CRLF
-(Carriage Return and Line Feed), while Unix pacakges should just use
+(Carriage Return and Line Feed), while Unix pacakges should use just
 LF.  The trees may be arranged slightly differently between source
 packages destined for different operating systems, too, if those
 operating systems require different sorts of layouts for compilation.
@@ -1118,11 +1119,11 @@ that <emphasis>some</emphasis> standard applies, even if you don't
 know what it is at first.</para>
 
 <para>Whatever the appropriate standards for you project are, don't
-deviate from them unless you absolutely must.  The standard
-installation procedures are practically spinal reflexes for a lot of
-system administrators now.  If they see familiar invocations
-documented in your project's <filename>INSTALL</filename> file, that
-instantly raises their faith that your project is generally aware of
+deviate from them unless you absolutely must.  Standard installation
+procedures are practically spinal reflexes for a lot of system
+administrators now.  If they see familiar invocations documented in
+your project's <filename>INSTALL</filename> file, that instantly
+raises their faith that your project is generally aware of
 conventions, and that it is likely to have gotten other things right
 as well.  Also, as discussed in <xref linkend="pfs-downloads"/>,
 having a standard build procedure pleases potential developers.</para>
@@ -1159,9 +1160,9 @@ system's software distribution mechanism, or obtained manually from
 the project web site or from some third party.  Here "binary" doesn't
 necessarily mean "compiled"; it just means any pre-configured form of
 the package that allows a user to install it on their computer without
-going through the usually source-based build and install procedures.
-On RedHat GNU/Linux it is the RPM system; on Debian GNU/Linux it is
-the APT (<filename>.deb</filename>) system; on MS Windows it's usually
+going through the usual source-based build and install procedures.  On
+RedHat GNU/Linux it is the RPM system; on Debian GNU/Linux it is the
+APT (<filename>.deb</filename>) system; on MS Windows it's usually
 <literal>.MSI</literal> files or self-installing
 <literal>.exe</literal> files.</para>
 
@@ -1179,14 +1180,14 @@ base their binary packages on an official source release.  Sometimes
 packagers are tempted to pull a later incarnation of the code from the
 repository, or include selected changes that were committed after the
 release was made, in order to provide users with certain bug fixes or
-other improvements.  The packager thinks he is doing his users a
-favor by giving them the more recent code, but actually this practice
-can cause a great deal of confusion.  Projects are prepared to receive
+other improvements.  The packager thinks he is doing his users a favor
+by giving them the more recent code, but actually this practice can
+cause a great deal of confusion.  Projects are prepared to receive
 reports of bugs found in released versions, and bugs found in recent
 trunk and major branch code (that is, found by people who deliberately
 run bleeding edge code).  When a bug report comes in from these
 sources, the responder will often be able to confirm that the bug is
-known to be present in that release, and perhaps that it has since
+known to be present in that snapshot, and perhaps that it has since
 been fixed and that the user should upgrade, or perhaps wait for the
 next release.  If it is a previously unknown bug, having the precise
 release makes it easier to reproduce and easier to categorize in the
@@ -1321,7 +1322,7 @@ release.</para>
 </sect2>
 
 <sect2 id="pfs-release-announcement">
-<title>Announcing a Releases</title>
+<title>Announcing Releases</title>
 
 <para>Announcing a release is like announcing any other event, and
 should use the procedures described in
@@ -1398,12 +1399,12 @@ percentage drops below a certain point, they declare end of life for
 the line and stop supporting it.</para>
 
 <para>For each release, make sure to have a <firstterm>target
-version</firstterm> available in the bug tracker, so people filing
-bugs will be able to do so against the proper release.  Don't forget
-to have a target called "development" or "latest" for the most recent
-development sources, since some people&mdash;not only active
-developers&mdash;will often be staying ahead of even the official
-releases.</para>
+version</firstterm> or <firstterm>target milestone</firstterm>
+available in the bug tracker, so people filing bugs will be able to do
+so against the proper release.  Don't forget to also have a target
+called "development" or "latest" for the most recent development
+sources, since some people&mdash;not only active developers&mdash;will
+often stay ahead of the official releases.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="pfs-security-releases">
@@ -1500,8 +1501,8 @@ Other unrelated cleanups:
 <para>The problem with it becomes apparent as soon as someone needs to
 port the <function>BuildDir</function> error check fix over to a
 branch for an upcoming maintenance release.  The porter doesn't want
-any of the other changes&mdash;for example, the fix to issue #1729
-wasn't approved for the maintenance branch at all, and the
+any of the other changes&mdash;for example, perhaps the fix to issue
+#1729 wasn't approved for the maintenance branch at all, and the
 <filename>index.html</filename> tweaks would simply be irrelevant
 there.  But she cannot easily grab just the
 <function>BuildDir</function> change via the version control tool's
@@ -1603,13 +1604,13 @@ wanted.</para>
 
 <para>In the case of a free software project, there is no single
 "meeting", but instead a series of small proposals made mostly by
-means of the issue tracker.  If you have some credibility in the
+means of the issue tracker.  But if you have some credibility in the
 project to start with, and you start assigning various features,
 enhancements, and bugs to target releases in the issue tracker,
-according to some overall plan, people will mostly go along with it.
-Once you've got things laid out more or less as you want them, the
-conversations about actual release <emphasis>dates</emphasis> will go
-much more smoothly.</para>
+according to some announced overall plan, people will mostly go along
+with it.  Once you've got things laid out more or less as you want
+them, the conversations about actual release
+<emphasis>dates</emphasis> will go much more smoothly.</para>
 
 <para>It is crucial, of course, to never present any individual
 decision as written in stone.  In the comments associated with each
