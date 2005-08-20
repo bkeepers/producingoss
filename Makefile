@@ -4,12 +4,12 @@ SVNVERSION = svnversion
 XSLTPROC = xsltproc
 
 TOP = .
-HTML_TARGET = ${TOP}/pfs.html
+HTML_TARGET = ${TOP}/producingoss.html
 HTML_CHUNK_DIR = ${TOP}/html-chunk
 HTML_CHUNK_TARGET = ${HTML_CHUNK_DIR}/index.html  # created last
-PDF_TARGET = ${TOP}/pfs.pdf
-PS_TARGET = ${TOP}/pfs.ps
-FO_TARGET = ${TOP}/pfs.fo
+PDF_TARGET = ${TOP}/producingoss.pdf
+PS_TARGET = ${TOP}/producingoss.ps
+FO_TARGET = ${TOP}/producingoss.fo
 XML_ROOT = ${TOP}/book.xml
 ALL_SOURCE = ${TOP}/*.xml
 
@@ -31,8 +31,10 @@ HTML_XSLTPROC_OPTS =
 all: all-html all-pdf all-ps
 
 upload: all
-	scp pfs.pdf kfogel@sp.red-bean.com:/www/pfs/pfs.pdf
-	scp pfs.ps kfogel@sp.red-bean.com:/www/pfs/pfs.ps
+	scp producingoss.pdf \
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf
+	scp producingoss.ps \
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps
 
 # The web site post-commit hook runs 'make www'.
 www: all-html xmldist
@@ -47,7 +49,7 @@ all-pdf: pdf
 all-ps: ps
 
 xmldist: 
-	tar zcvf pfs-xml.tar.gz *.xml
+	tar zcvf producingoss-xml.tar.gz *.xml
 
 clean:
 	@echo "Clean rule not implemented yet."
