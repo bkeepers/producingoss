@@ -28,7 +28,7 @@ HTML_XSLTPROC_OPTS =
 # PDF_XSLTPROC_OPTS = --stringparam page.height 9in --stringparam page.width 6.4in
 # PS_XSLTPROC_OPTS = --stringparam page.height 9in --stringparam page.width 6.4in
 
-all: all-html all-pdf all-ps
+all: all-html all-pdf all-ps xmldist
 
 upload: all
 	scp producingoss.pdf \
