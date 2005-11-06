@@ -32,9 +32,13 @@ all: all-html all-pdf all-ps xmldist
 
 upload: all
 	scp producingoss.pdf \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf.NEW
+	ssh kfogel@sp.red-bean.com \
+          "(cd /www/producingoss && mv producingoss.pdf.NEW producingoss.pdf)"
 	scp producingoss.ps \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps.NEW
+	ssh kfogel@sp.red-bean.com \
+          "(cd /www/producingoss && mv producingoss.ps.NEW producingoss.ps)"
 
 # The web site post-commit hook runs 'make www'.
 www: all-html xmldist
