@@ -2,24 +2,18 @@
 
 # run-fop: Attempt to run fop (or fop.sh), fail articulately otherwise.
 #
-# Usage:    run-fop.sh BOOK_TOP [FOP_ARGS...]
+# Usage:    run-fop.sh [FOP_ARGS...]
 #
-# This script is meant to be invoked by ../../Makefile.
-# 
-# The first argument is the top of the book tree, and the
-# remaining arguments are passed along to `fop'.
+# This script is meant to be invoked by book translation Makefiles.
+# Arguments are passed along to `fop'.
 
-BOOK_TOP=${1}
-
-if [ "${BOOK_TOP}X" = X ]; then
-  echo "usage:  run-fop.sh BOOK_TOP [FOP_ARGS...]"
-  exit 1
+# If the user has a .foprc, source it.
+if [ -f ${HOME}/.foprc ]; then
+  . ${HOME}/.foprc
 fi
 
-shift
-
 # The fop of last resort.
-DESPERATION_FOP_DIR=${BOOK_TOP}/tools/fop
+DESPERATION_FOP_DIR="`dirname \"$0\"`/../fop"
 DESPERATION_FOP_PGM=${DESPERATION_FOP_DIR}/fop.sh
 
 if [ "${FOP_HOME}X" = X ]; then
@@ -34,6 +28,7 @@ fi
 # different systems seem to package it different ways.
 SAVED_IFS=${IFS}
 IFS=:
+PATH=${PATH}:${FOP_HOME}
 for dir in ${PATH}; do
    if [ -x ${dir}/fop -a "${FOP_PGM}X" = X ]; then
      FOP_PGM=${dir}/fop
@@ -52,3 +47,4 @@ echo "(Using '${FOP_PGM}' for FOP)"
 # FOP is noisy on stdout, and -q doesn't seem to help, so stuff that
 # garbage into /dev/null.
 ${FOP_PGM} $@ | grep -v "\[ERROR\]"
+
