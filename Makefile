@@ -21,7 +21,11 @@ upload: all
 # The web site post-commit hook runs 'make www'.
 www: all-html xmldist
 
-xmldist: 
-	tar zcvf producingoss-xml.tar.gz *.xml
+xmldist:
+	rm -rf producingoss-xml
+	mkdir producingoss-xml
+	cp COPYING README Makefile *.xml producingoss-xml
+	tar zcvf producingoss-xml.tar.gz producingoss-xml
+	rm -rf producingoss-xml
 
 include tools/Makefile.base-rules
