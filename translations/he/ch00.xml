@@ -39,251 +39,212 @@
 לסגור אותו לחלוטין. לכולם יש כח אין-סופי; ולכולם אין כח כלל. מצב זה יוצר
 דינאמיקה מעניינת ביותר.</para>
 
-<para>That is why I wanted to write this book.  Free software projects
-have evolved a distinct culture, an ethos in which the liberty to make
-the software do anything one wants is a central tenet, and yet the
-result of this liberty is not a scattering of individuals each going
-their own separate way with the code, but enthusiastic collaboration.
-Indeed, competence at cooperation itself is one of the most highly
-valued skills in free software.  To manage these projects is to engage
-in a kind of hypertrophied cooperation, where one's ability not only
-to work with others but to come up with new ways of working together
-can result in tangible benefits to the software.  This book attempts
-to describe the techniques by which this may be done.  It is by no
-means complete, but it is at least a beginning.</para>
+<para>זאת הסיבה שרציתי לכתוב את הספר הזה. פרוייקטי תוכנה חופשית פיתחו
+תרבות ייחודית, אתוס לפיו החופש ליצור את התוכנה בכדי שתעשה כל מה שאתה
+רוצה הוא עיקרון מרכזי, ועם זאת התוצאה של החופש הזה היא שיתוף פעולה
+נלהב בין אנשים, במקום התפזרותם איש איש וכיוונו הוא. אכן, היכולת לשיתוף
+פעולה בעצמה היא אחת מהתכונות המוערכות ביותר בתוכנה חופשית. ניהול פרוייקטים
+כאלו, פירושו לקחת חלק בשיתוף פעולה מתעצם, בו יכולתו של אדם לא רק לעבוד
+במשותף עם אנשים אחרים, אלא גם למצוא דרכים חדשות לעבוד במשותף, יכולה
+להסתכם בייתרונות מוחשיים לתוכנה עצמה. ספר זה מנסה לתאר את השיטות לפיהן
+ניתן לבצע זאת. ללא כל ספק, אינו שלם, אך הוא לפחות התחלה.</para>
 
-<para>Good free software is a worthy goal in itself, and I hope that
-readers who come looking for ways to achieve it will be satisfied with
-what they find here.  But beyond that I also hope to convey something
-of the sheer pleasure to be had from working with a motivated team of
-open source developers, and from interacting with users in the
-wonderfully direct way that open source encourages.  Participating in
-a successful free software project is
-<emphasis>fun</emphasis>, and ultimately that's what keeps the whole
-system going.</para>
+<para>תוכנה חופשית טובה היא מטרה ראויה לכשעצמה, ואני תקווה שקוראים
+אשר מחפשים דרכים להשיג אותה יהיה שבעי רצון ממה שימצאו כאן. אך מעבר לכך
+אני מקווה גם להעביר דבר מה מהעונג המתקבל מעבודה עם קבוצה חדורת מוטיבציה
+של מפתחי קוד פתוח, ומההתקשרות עם משתמשים בצורה הישירה הכה נפלאה שקוד
+פתוח מעודד. השתתפות בפרוייקט תוכנה חופשית מצליח זה 
+<emphasis>כיף</emphasis>, ובסופו של דבר, זה מה שמניע את כל המערכת.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="audience">
-<title>Who Should Read This Book?</title>
+<title>למי מיועד ספר זה?</title>
 
-<para>This book is meant for software developers and managers who are
-considering starting an open source project, or who have started one
-and are wondering what to do now.  It should also be helpful for
-people who just want to participate in an open source project but have
-never done so before.</para>
+<para>ספר זה מיועד למפתחי תוכנה ומנהלים אשר שוקלים להתחיל פרוייקט
+קוד פתוח, או שהתחילו אחד ותוהים מה לעשות כעת. כמו-כן, ספר זה יהיה
+שימושי גם עבור אנשים אשר פשוט מעוניינים להשתתף בפרוייקט קוד פתוח
+אך מעולם לא עשו זאת בעבר.</para>
 
-<para>The reader need not be a programmer, but should know basic
-software engineering concepts such as source code, compilers, and
-patches.</para>
+<para>אין הקורא צריך להיות מתכנת, אך כדאי שיכיר מספר מונחים בסיסיים
+בהנדסת תוכנה כגון, קוד מקור, מהדרים, ומהם טלאים.</para>
 
-<para>Prior experience with open source software, as either a user or
-a developer, is not necessary.  Those who have worked in free software
-projects before will probably find at least some parts of the book a
-bit obvious, and may want to skip those sections.  Because there's
-such a potentially wide range of audience experience, I've made an
-effort to label sections clearly, and to say when something can be
-skipped by those already familiar with the material.</para>
+<para>אין כל צורך בנסיון קודם עם קוד פתוח, הן כמשתמש או כמפתח. אלה
+אשר עבדו בעבר בפרוייקים של תוכנה חופשית סביר כי ימצאו לפחות חלקים
+מהספר ברורים מאליהם, ואולי אף ירצו לדלג על חלקים אלה. מאחר ונסיונו
+של קהל היעד הפוטנציאלי כה מגוון ורחב, הקדשתי תשומת לב רבה לבהירות
+הכותרות שנתתי לחלקיו השונים של הספר, וכן לציון האם קוראים המכירים
+את החומר יכולים לדלג על נושא זה או אחר.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="sources">
-<title>Sources</title>
+<title>מקורות</title>
 
-<para>Much of the raw material for this book came from five years of
-working with the Subversion project
-(<ulink url="http://subversion.tigris.org/"/>).  Subversion is an open
-source version control system, written from scratch, and intended to
-replace CVS as the <foreignphrase>de facto</foreignphrase> version
-control system of choice in the open source community.  The project
-was started by my employer, CollabNet
-(<ulink url="http://www.collab.net/"/>), in early 2000, and thank
-goodness CollabNet understood right from the start how to run it as a
-truly collaborative, distributed effort.  We got a lot of volunteer
-developer buy-in early on; today there are 50-some developers on
-the project, of whom only a few are CollabNet employees.</para>
+<para>מרבית חומר הגלם עבור ספר זה נבע מחמש שנות עבודה עם פרוייקט
+Subversion.(<ulink url="http://subversion.tigris.org/"/>).
+Subversion היא מערכת ניהול גרסאות בקוד פתוח, אשר פותחה מאפס, ומיועדת
+להחליף את CVS כבחירה <foreignphrase>דה פקטו</foreignphrase> למערכת
+ניהול גרסאות של קהילת הקוד הפתוח. הפרוייקט נוצר על-ידי המעסיקים
+שלי, CollabNet (<ulink url="http://www.collab.net/"/> ), בתחילת שנת 2000
+ותודה לאל ש CollabNet הבינו כבר מתחילתו כיצד לנהל אותו כמאמץ שיתופי מבוזר
+אמיתי. מוקדם מאד זכינו להתעניינות רבה בקר מפתחים מתנדבים; כיום ישנם
+כ - 50 ומשהו מפתחים בפרוייקט, מהם רק מעטים מועסקים על-ידי CollabNet.</para>
 
-<para>Subversion is in many ways a classic example of an open source
-project, and I ended up drawing on it more heavily than I originally
-expected.  This was partly a matter of convenience: whenever I needed
-an example of a particular phenomenon, I could usually call one up
-from Subversion right off the top of my head.  But it was also a
-matter of verification.  Although I am involved in other free software
-projects to varying degrees, and talk to friends and acquaintances
-involved in many more, one quickly realizes when writing for print
-that all assertions need to be fact-checked.  I didn't want to make
-statements about events in other projects based only on what I could
-read in their public mailing list archives.  If someone were to try
-that with Subversion, I knew, she'd be right about half the time and
-wrong the other half.  So when drawing inspiration or examples from a
-project with which I didn't have direct experience, I tried to first
-talk to an informant there, someone I could trust to explain what was
-really going on.</para>
+<para>מהרבה היבטים, Subversion הוא דוגמא קלאסית לפרוייקט קוד פתוח,
+ובסופו של דבר משכתי מנסיוני בפרוייקט הרבה מעבר ממה שתכננתי במקור. במידה
+מסויימת היה זה עניין של נוחות: כל אימת שנזקקתי לדוגמא לתופעה מסויימת,
+בדרך-כלל מצאתי אחת ללא כל מאמץ ב Subversion. אך עם זאת גם עניין אימות
+המידע שיחק תפקיד. למרות שאני לוקח חלק בפרוייקטי תוכנה חופשית אחרים במידה
+זו או אחרת, ומשוחח עם חברים ומכרים המעורבים ברבים נוספים, כשאתה כותב
+לדפוס, אתה מבין במהרה שיש לבדוק את העובדות מאחורי כל טענה שלך. לא רציתי
+להצהיר הצהרות בנוגע לאירועים בפרוייקטים אחרים בהתבסס רק על מה שקראתי
+ברשימות הדיוור הציבוריות שלהם. אם מישהו היה מנסה זאת עם Subversion, ידעתי
+שהוא היה צודק במחצית מהמקרים וטועה בחצי השני. לכן, כאשר שאלתי דוגמאות
+מפרוייקטים בהם לא היתה לי מעורבות ישירה, ניסיתי קודם לשוחח עם מישהו
+בפרוייקט, עליו יכולתי לסמוך שיסביר בדיוק מה קורה שם.</para>
 
-<para>Subversion has been my job for the last 5 years, but I've been
-involved in free software for 12.  Other projects that influenced this
-book include:</para>
+<para>אמנם Subversion היה העבודה שלי במשך 5 השנים האחרונות, אך אני
+מעורב בתוכנה חופשית כבר 12 שנה. פרוייקטים אחרים אשר השפיעו על ספר
+זה:</para>
 
 <itemizedlist>
-  <listitem><para>The GNU Emacs text editor project at the Free
-            Software Foundation, in which I maintain a few small
-            packages.</para>
+  <listitem><para>עורך המלל Emacs של GNU תחת קרן התוכנה החופשית,
+            אשר בו אני מתחזק מספר חבילות קטנות.</para>
   </listitem>
-  <listitem><para>Concurrent Versions System (CVS), which I worked on
-            intensely in 1994&ndash;1995 with Jim Blandy, but have been
-            involved with only intermittently since.</para>
+  <listitem><para>מערכת גרסאות מקבילית (CVS), אשר עבדתי עליה במהלך
+            1994&ndash;1995 יחד עם ג'ים בלנדי, ואשר מאז הייתי מעורב
+            בה לפרקים בלבד.</para>
   </listitem>
-  <listitem><para>The collection of open source projects known as the
-            Apache Software Foundation, especially the Apache Portable
-            Runtime (APR) and Apache HTTP Server.</para> 
+  <listitem><para>אסופת פרוייקטי הקוד הפתוח הידוע בשם קרן התוכנה
+            של אפאצ'י (Apache), בייחוד ב - Apache Portable
+            Runtime (APR) ובשרת ה - HTTP של אפאצ'י.</para> 
   </listitem>
-  <listitem><para>OpenOffice.org, the Berkeley Database from
-            Sleepycat, and MySQL Database; I have not been
-            involved with these projects personally, but have observed
-            them and, in some cases, talked to people there.</para> 
+  <listitem><para>פרוייקט OpenOffice.org, מסד הנתונים של ברקלי
+            מ - Sleepycat, ומסד הנתונים MySQL; לא לקחתי חלק
+            בפרוייקטים אלה באופן אישי, אך צפיתי בהם ובמקרים
+            מסויימים, שוחחתי עם אנשים בהם.</para> 
   </listitem>
-  <listitem><para>GNU Debugger (GDB) (likewise).</para>
+  <listitem><para>מנפה הבאגים (GDB) של GNU (כנ"ל).</para>
   </listitem>
-  <listitem><para>The Debian Project (likewise).</para>
+  <listitem><para>פרוייקט דביאן (כנ"ל)</para>
   </listitem>
 </itemizedlist>
 
-<para>This is not a complete list, of course.  Like most open source
-programmers, I keep loose tabs on many different projects, just to
-have a sense of the general state of things.  I won't name all of them
-here, but they are mentioned in the text where appropriate.</para>
+<para>כמובן, אין זו רשימה מלאה. כמו רוב תכנתי הקוד הפתוח, אני
+בקשר רופף עם מספר רב של פרוייקטים שונים, ולו בשביל לקבל תחושה של
+המצב הכללי של הדברים בפרוייקטים. לא אנקוב בשמות כולם כאן, אך הם
+מצויינים במלל, היכן שצריך.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="acknowledgments">
-<title>Acknowledgments</title>
+<title>תודות</title>
 
-<para>This book took four times longer to write than I thought it
-would, and for much of that time felt rather like a grand piano
-suspended above my head wherever I went.  Without help from many
-people, I would not have been able to complete it while staying
-sane.</para>
+<para>כתיבת הספר נמשכה פי ארבע ממה שהערכתי שהיא תמשך, ולאורך רב
+הזמן הזה הרגשתי כאילו פסנתר כנף מרחף לי מעל הראש בכל מקום אליו
+הלכתי. ללא עזרה מאנשים רבים, לא הייתי מסיים את הספר בעודי
+שפוי.</para>
 
-<para>Andy Oram, my editor at O'Reilly, was a writer's dream.  Aside
-from knowing the field intimately (he suggested many of the topics),
-he has the rare gift of knowing what one meant to say and helping one
-find the right way to say it.  It has been an honor to work with him.
-Thanks also to Chuck Toporek for steering this proposal to Andy right
-away.</para>
+<para>אנדי אורם, העורך שלי ב O'Reilly, היה חלומו של כל כותב. מעבר
+לידיעתו את השטח באופן אינטימי (הוא הציע רבים מהנושאים), הוא ניחן
+בכשרון הנדיר של הבנת מה שהתכוונת לומר וסיוע במציאת הדרך הנכונה לומר
+זאת. היה זה כבוד לעבוד איתו. תודה גם לצ'אק טופורק על העברת ההצעה
+הזו לאנדי, באופן מיידי.</para>
 
-<para>Brian Fitzpatrick reviewed almost all of the material as I wrote
-it, which not only made the book better, but kept me writing when I
-wanted to be anywhere in the world but in front of the computer.  Ben
-Collins-Sussman and Mike Pilato also checked up on progress, and were
-always happy to discuss&mdash;sometimes at length&mdash;whatever topic
-I was trying to cover that week.  They also noticed when I slowed
-down, and gently nagged when necessary.  Thanks, guys.</para>
+<para>בראין פיצפטריק עבר על כמעט כל החומר בזמן שכתבתי אותו, מה שלא
+רק הסתכם בלגרום לספר להיות טוב יותר, אלא גם גרם לי להמשיך לכתוב כאשר
+רציתי להיות בכל מקום בעולם, רק לא מול המחשב. בן קולינס-סוסמן ומייק
+פילאטו גם כן עקבו אחר ההתקדמות, ותמיד שמחו לדון&mdash;לעיתים
+ארוכות&mdash;בנושא אותו ניסיתי לכסות באותו שבוע. גם הם הבחינו מתי
+שהאטתי, ונתנו דחיפה עדינה כשהיה צורך. תודה חבר'ה.</para>
 
-<para>Biella Coleman was writing her dissertation at the same time
-I was writing this book.  She knows what it means to sit down and
-write every day, and provided an inspiring example as well as a
-sympathetic ear.  She also has a fascinating anthropologist's-eye view
-of the free software movement, giving both ideas and references that I
-was able use in the book.  Alex Golub&mdash;another anthropologist
-with one foot in the free software world, and also finishing his
-dissertation at the same time&mdash;was exceptionally supportive early
-on, which helped a great deal.</para>
+<para>ביילה קולמן כתבה את התזה שלה באותה עת שכתבתי את הספר. היא
+יודעת מה המשמעות של לשבת ולכתוב כל יום, וסיפקה דוגמא מעוררת השראה
+כמו גם אוזן קשבת. כמו-כן היא יש לה השקפה אנתרופולוגית מרתקת על
+תנועת התוכנה החופשית, אשר סיפקה הן רעיונות והן התייחסויות שיכלתי
+לעשות בהם שימוש בספר. אלכס גולוב&mdash;אנתרופולוג נוסף עם רגל אחת
+בתוך עולם התוכנה החופשית, אשר גם סיים את התזה שלו באותה
+עת&mdash;תמך בי בצורה יוצאת דופן בשלבים המוקדמים, מה שסייע בעדי
+מאד.</para>
 
-<para>Micah Anderson somehow never seemed too oppressed by his own
-writing gig, which was inspiring in a sick, envy-generating sort of
-way, but he was ever ready with friendship, conversation, and (on at
-least one occasion) technical support.  Thanks, Micah!</para>
+<para>מיכה אנדרסון מעולם לא נראה עמוס מדי על-ידי הכתיבה של עצמו,
+אשר נתנה לי השראה בצורה חולנית, מעוררת-קנאה, תמיד היה שם כידיד,
+כאיש-שיחה וכן (לפחות בפעם אחת) כתומך טכני. תודה מיכה!</para>
 
-<para>Jon Trowbridge and Sander Striker gave both encouragement and
-concrete help&mdash;their broad experience in free software provided
-material I couldn't have gotten any other way.</para>
+<para>ג'ון טרוברידג' וסנדר סטרייקר נתנו גם עידוד וגם עזרה
+ממוקדת&mdash;נסיונם הרחב בתוכנה חופשית תרם חומרים שלא הייתי
+משיג בשום דרך אחרת.</para>
 
-<para>Thanks to Greg Stein not only for friendship and well-timed
-encouragement, but for showing the Subversion project how important
-regular code review is in building a programming community.  Thanks
-also to Brian Behlendorf, who tactfully drummed into our heads the
-importance of having discussions publicly; I hope that principle is
-reflected throughout this book.</para>
+<para>תודה לגרג שטיין לא רק על הידידות והעידוד המתוזמן היטב,
+אלא גם על שהראה לפרוייקט Subversion עד כמה חשוב תהליך בחינת קוד
+קבוע לבניית קהילת תכנות. תודה גם לבראין בהלנדורף, אשר בטקט רב
+טיפטף לראשים שלנו את החשיבות של קיום דיונים בפומבי; אני מקווה
+שעקרון זה משתקף לאורך הספר.</para>
 
-<para>Thanks to Benjamin "Mako" Hill and Seth Schoen, for various
-conversations about free software and its politics; to Zack Urlocker
-and Louis Suarez-Potts for taking time out of their busy schedules to
-be interviewed; to Shane on the Slashcode list for allowing his post
-to be quoted; and to Haggen So for his enormously helpful comparison
-of canned hosting sites.</para>
+<para>תודה לבנג'מין "מאקו" היל וסת' שון, עבור מספר שיחות אודות
+תוכנה חופשית והפוליטיקה שלה; לזאק אורלוקר ולואיס סוארז-פוטס על הזמן
+שהקדישו לי לראיונות במסגרת לוח הזמנים העמוס שלהם; לשיין ברשימת
+התפוצה של Slashcode על שאישר לי לצטט את הודעתו שם; ולהאגן סו עבור
+השוואתו המועילה ביותר בין אתרי אירוח זמינים.</para>
 
-<para>Thanks to Alla Dekhtyar, Polina, and Sonya for their unflagging
-and patient encouragement.  I'm very glad that I will no longer have
-to end (or rather, try unsuccessfully to end) our evenings early to go
-home and work on "The Book."</para>
+<para>תודה לאלה דקטייר, פולינה וסוניה על העידוד הסבלני והבלתי נלאה.
+אני מאד שמח שלא אצטרך עוד לסיים (או לנסות לסיים ללא הצלחה) את הערבים
+שלנו מוקדם בכדי לחזור הביתה ולעבוד על "הספר".</para>
 
-<para>Thanks to Jack Repenning for friendship, conversation, and a
-stubborn refusal to ever accept an easy wrong analysis when a harder
-right one is available.  I hope that some of his long experience with
-both software development and the software industry rubbed off on this
-book.</para>
+<para>תודה לג'ק רפנינג על הידידות, השיחות והסירוב העיקש לקבל ניתוח
+קל ומוטעה, בזמן שאחד מסובך אך נכון קיים בנמצא. אני מקווה שחלק מנסיונו
+הרב, הן בפיתוח תוכנה והן בתעשיית התוכנה, השתלשל לתוך הספר הזה.</para>
 
-<para>CollabNet was exceptionally generous in allowing me a flexible
-schedule to write, and didn't complain when it went on far longer than
-originally planned.  I don't know all the intricacies of how
-management arrives at such decisions, but I suspect Sandhya Klute, and
-later Mahesh Murthy, had something to do with it&mdash;my thanks to
-them both.</para>
+<para>CollabNet היו נדיבים ביותר כשאיפשרו לי לוח זמנים גמיש בכדי לכתוב,
+ולא התלוננו כאשר זה נמשך הרבה יותר ממה שתוכנן בתחילה. אינני בקיא בכל
+הדקויות אשר מביאות הנהלה להחלטות כאלו, אך אני חושד שלסנדיה קלוט ומאוחר
+יותר למאהש מורת'י, היתה יד בדבר&mdash;תודי לשניהם.</para>
 
-<para>The entire Subversion development team has been an inspiration
-for the past five years, and much of what is in this book I learned
-from working with them.  I won't thank them all by name here, because
-there are too many, but I implore any reader who runs into a
-Subversion committer to immediately buy that committer the drink of
-his choice&mdash;I certainly plan to.</para>
+<para>כל צוות הפיתוח של Subversion היווה מקור השראה במהלך חמש השנים
+האחרונות, ורבות ממה שמופיע בספר זה למדתי מעבודתי עימם. לא אודה לכולם
+בשמותיהם כאן, מאחר והם רבים מידי, אך אני מבקש מכל קורא אשר נפגש עם
+אחד מהתורמים ל Subversion להזמין את אותו תורם מיידית למשקה לפי
+בחירתו&mdash;אני בהחלט מתכוון לעשות כך.</para>
 
-<para>Many times I ranted to Rachel Scollon about the state of the
-book; she was always willing to listen, and somehow managed to make
-the problems seem smaller than before we talked.  That helped a
-lot&mdash;thanks.</para>
+<para>פעמים רבות התרעמתי לרייצ'ל סקולון על מצב הספר; היא תמיד
+האזינה לי, ואיכשהו הצליחה לגרום לבעיות להראות קטנות משנראו לפני
+ששוחחנו. זה עזר המון&mdash;תודה.</para>
 
-<para>Thanks (again) to Noel Taylor, who must surely have wondered why
-I wanted to write another book given how much I complained the last
-time, but whose friendship and leadership of Golos&aacute; helped keep
-music and good fellowship in my life even in the busiest times.
-Thanks also to Matthew Dean and Dorothea Samtleben, friends and
-long-suffering musical partners, who were very understanding as my
-excuses for not practicing piled up.  Megan Jennings was constantly
-supportive, and genuinely interested in the topic even though it was
-unfamiliar to her&mdash;a great tonic for an insecure writer.  Thanks,
-pal!</para>
+<para>תודה (פעם נוספת) לנואל טיילור, שלבטח תהה מדוע רציתי לכתוב ספר
+נוסף בהתחשב בכמות התלונות שהיו לי בפעם הקודמת, אך שחברותו והנחייתו
+חסרת הפשרות עזרה לשמור על המוזיקה והאחווה בחיי גם בזמנים העמוסים ביותר.
+תודה גם למת'יו דין ודורותיאה סאמלבן, חברים ושותפים מוזיקליים למודי-סבל,
+אשר גילו הבנה רבה בעוד שהתירוצים שלי שלא להתאמן נערמו. מייגן ג'נינגס
+תמכה בקביעות, ובאמת התעניינה בנושא הספר למרות שכלל לא היה מוכר
+לה&mdash;חיזוק מעולה לכותב חסר ביטחון. תודה חברה!</para>
 
-<para>I had four knowledgeable and diligent reviewers for this book:
-Yoav Shapira, Andrew Stellman, Davanum Srinivas, and Ben Hyde.  If I
-had been able to incorporate all of their excellent suggestions, this
-would be a better book.  As it was, time constraints forced me to pick
-and choose, but the improvements were still significant.  Any errors
-that remain are entirely my own.</para>
+<para>ארבעה אנשים ברי-ידע רב וסבלנות קראו את הספר וביצעו הגהה: יואב
+שפירא, אנדרו סטלמן, דאוונום סריניווס ובן הייד. אילו יכלתי לשלב את כל
+עצותייהם המעולות, היה הספר טוב יותר. בסופו של דבר, אילוצי זמן הכריחו
+אותי לברור ולבחור מהן, אך השיפורים עודם משמעותיים. כל השגיאות שנשארו
+הינן שלי בלבד.</para>
 
-<para>My parents, Frances and Henry, were wonderfully supportive as
-always, and as this book is less technical than the previous one, I
-hope they'll find it somewhat more readable.</para>
+<para>הוריי, פרנסיס והנרי, שהיו תומכים בצורה מופלאה כתמיד, והיות
+שספר זה פחות טכני מהקודם, אני מקווה שימצאו אותו קריא עבורם.</para>
 
-<para>Finally, I would like to thank the dedicatees, Karen Underhill
-and Jim Blandy.  Karen's friendship and understanding have meant
-everything to me, not only during the writing of this book but for the
-last seven years.  I simply would not have finished without her help.
-Likewise for Jim, a true friend and a hacker's hacker, who first
-taught me about free software, much as a bird might teach an airplane
-about flying.</para>
+<para>ולבסוף, ברצוני להודות לאלה עבורם הספר מוקדש, קארן אנדרהיל
+וג'ים בלאנדי. החברות של קארן והבנתה היוו עבורי הכל, לא רק במשך כתיבת
+ספר זה, כי אם במשך שבע השנים האחרונות. פשוט לא הייתי מסיים ללא עזרתה.
+כמו-כן עם ג'ים, חבר אמת וההאקר של ההאקרים, אשר לימד אותי לראשונה אודות
+תוכנה חופשעת, כמו שציפור עשויה ללמד מטוס כיצד לעוף.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="disclaimer">
-<title>Disclaimer</title>
+<title>הסרת אחריות</title>
 
-<para>The thoughts and opinions expressed in this book are my own.
-They do not necessarily represent the views of CollabNet or of the
-Subversion project.</para>
+<para>המחשבות והדעות המובעות בספר זה הן שלי בלבד. אין הן
+מייצגות בהכרח את השקפת CollabNet או זו של פרוייקט Subversion.</para>
 
 </sect1>
 
@@ -294,3 +255,4 @@ local variables:
 sgml-parent-document: ("book.xml" "chapter")
 end:
 -->
+
