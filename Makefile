@@ -1,31 +1,91 @@
-include tools/Makefile.base-vars
-TOOLS_DIR = tools
-NAME = producingoss
-OUTNAME = $(NAME)
-XML_SOURCE = book.xml
-# Suppress svnversion for now
-VERSION_SOURCE = 
+SHELL = /bin/sh
+SVN = svn
+SVNVERSION = svnversion
+XSLTPROC = xsltproc
 
-all: html html-chunk pdf ps xmldist
+TOP = .
+HTML_TARGET = ${TOP}/producingoss.html
+HTML_CHUNK_DIR = ${TOP}/html-chunk
+HTML_CHUNK_TARGET = ${HTML_CHUNK_DIR}/index.html  # created last
+PDF_TARGET = ${TOP}/producingoss.pdf
+PS_TARGET = ${TOP}/producingoss.ps
+FO_TARGET = ${TOP}/producingoss.fo
+XML_ROOT = ${TOP}/book.xml
+ALL_SOURCE = ${TOP}/*.xml
+
+XSL_FO = ${TOP}/tools/fo-stylesheet.xsl
+XSL_HTML = ${TOP}/tools/html-stylesheet.xsl
+XSL_HTML_CHUNK = ${TOP}/tools/chunk-stylesheet.xsl
+
+RUN_FOP = ${TOP}/tools/bin/run-fop.sh
+
+# Book xsltproc options for HTML output
+# Note: --stringparam arguments no longer go here; 
+# see tools/html-stylesheet.xsl and tools/chunk-stylesheet.xsl
+HTML_XSLTPROC_OPTS = 
+
+# Book xsltproc options for PDF and PostScript output
+# PDF_XSLTPROC_OPTS = --stringparam page.height 9in --stringparam page.width 6.4in
+# PS_XSLTPROC_OPTS = --stringparam page.height 9in --stringparam page.width 6.4in
+
+all: all-html all-pdf all-ps xmldist
 
 upload: all
 	scp producingoss.pdf \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf.NEW
-	ssh kfogel@sp.red-bean.com \
-          "(cd /www/producingoss && mv producingoss.pdf.NEW producingoss.pdf)"
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf
 	scp producingoss.ps \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps.NEW
-	ssh kfogel@sp.red-bean.com \
-          "(cd /www/producingoss && mv producingoss.ps.NEW producingoss.ps)"
+            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps
 
 # The web site post-commit hook runs 'make www'.
 www: all-html xmldist
 
-xmldist:
-	rm -rf producingoss-xml
-	mkdir producingoss-xml
-	cp COPYING README Makefile *.xml producingoss-xml
-	tar zcvf producingoss-xml.tar.gz producingoss-xml
-	rm -rf producingoss-xml
+install:
+	@echo "No installation procedure yet."
 
-include tools/Makefile.base-rules
+all-html: html html-chunk
+
+all-pdf: pdf
+
+all-ps: ps
+
+xmldist: 
+	tar zcvf producingoss-xml.tar.gz *.xml
+
+clean:
+	@echo "Clean rule not implemented yet."
+
+# HTML monolithic.
+html: ${HTML_TARGET}
+
+${HTML_TARGET}: ${ALL_SOURCE} ${TOP}/styles.css
+	${XSLTPROC} ${HTML_XSLTPROC_OPTS} \
+           --output ${HTML_TARGET} ${XSL_HTML} ${XML_ROOT}
+
+
+# HTML chunked.
+html-chunk: ${HTML_CHUNK_TARGET}
+
+${HTML_CHUNK_TARGET}: ${ALL_SOURCE} ${TOP}/styles.css
+	mkdir -p ${HTML_CHUNK_DIR}
+	${XSLTPROC} ${HTML_XSLTPROC_OPTS} \
+           --output ${HTML_CHUNK_DIR}/    \
+            ${XSL_HTML_CHUNK} ${XML_ROOT}
+	cp ${TOP}/styles.css ${HTML_CHUNK_DIR}
+
+
+# PDF.
+pdf: ${PDF_TARGET}
+
+${PDF_TARGET}: ${ALL_SOURCE}
+	${XSLTPROC} ${PDF_XSLTPROC_OPTS} \
+	   --output ${FO_TARGET} ${XSL_FO} ${XML_ROOT}
+	${RUN_FOP} ${TOP} -fo ${FO_TARGET} -pdf ${PDF_TARGET}
+
+
+# PostScript.
+ps: ${PS_TARGET}
+
+${PS_TARGET}: ${ALL_SOURCE}
+	${XSLTPROC} ${PS_XSLTPROC_OPTS} \
+	   --output ${FO_TARGET} ${XSL_FO} ${XML_ROOT}
+	${RUN_FOP} ${TOP} -fo ${FO_TARGET} -ps ${PS_TARGET}
