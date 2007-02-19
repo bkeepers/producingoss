@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-"""Usage: 'make-ad-sense.py BOOK-HTML-DIR'
+"""Usage: 'make-ad-sense.py HTML-DIR_or_HTML-FILE'
 
-Add AdSense bits to BOOK-HTML-DIR/*.html.  Note that if you run this
-twice, it will dumbly add the bits again, resulting in weirdness."""
+Add AdSense bits to HTML-DIR/*.html or to HTML-FILE.  Note that if you
+run this twice, it will dumbly add the bits again, resulting in weirdness."""
 
 import sys
 import os
@@ -107,12 +107,22 @@ def add_adsense_css(file):
 
 def main():
     if len(sys.argv) != 2:
-        die("Usage: %s BOOK-DIR" % (os.path.basename(sys.argv[0])))
-    book_dir = sys.argv[1]
+        die("Usage: %s HTML-DIR_or_HTML-FILE" % (os.path.basename(sys.argv[0])))
+
+    # Were we invoked on a file or a directory?
+    target = sys.argv[1]
+    if os.path.isfile(target):
+      book_dir = os.path.dirname(target)
+      targets = [os.path.basename(target)]
+    else:
+      book_dir = target
+      targets = os.listdir(book_dir)
+
     stylesheet = os.path.join(book_dir, 'styles.css')
     if not os.path.exists(stylesheet):
         die("Book stylesheet is missing.")
-    for child in os.listdir(sys.argv[1]):
+
+    for child in targets:
         if child[-5:] == '.html':
             try:
                 add_adsense_left_html(os.path.join(book_dir, child))
