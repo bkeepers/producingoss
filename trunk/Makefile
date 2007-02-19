@@ -19,7 +19,7 @@ upload: all
           "(cd /www/producingoss && mv producingoss.ps.NEW producingoss.ps)"
 
 # The web site post-commit hook runs 'make www'.
-www: all-html xmldist
+www: all-html xmldist adsense
 
 xmldist:
 	rm -rf producingoss-xml
@@ -27,5 +27,9 @@ xmldist:
 	cp COPYING README Makefile *.xml producingoss-xml
 	tar zcvf producingoss-xml.tar.gz producingoss-xml
 	rm -rf producingoss-xml
+
+adsense:
+	tools/make-ad-sense.py producingoss.html
+	tools/make-ad-sense.py html-chunk
 
 include tools/Makefile.base-rules
