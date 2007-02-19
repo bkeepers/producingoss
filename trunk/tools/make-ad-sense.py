@@ -13,20 +13,15 @@ import re
 adsense_left_data = """
 <div id="adsense_left">
 <script type="text/javascript"><!--
-// Text Ad: Skyscraper (120x600)
-google_ad_client = "pub-0505104349866057";
+google_ad_client = "pub-5862978179091956";
 google_ad_width = 120;
 google_ad_height = 600;
 google_ad_format = "120x600_as";
+google_ad_type = "text_image";
 google_ad_channel = "";
-google_color_border = "ffffff";
-google_color_bg = "ffffff";
-google_color_link = "0000ff";
-google_color_url = "008000";
-google_color_text = "000000";
 //--></script>
 <script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 
@@ -35,20 +30,15 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 adsense_bottom_data = """
 <div id="adsense_bottom">
 <script type="text/javascript"><!--
-// Text Ad: Medium Rectangle (300x250)
-google_ad_client = "pub-0505104349866057";
-google_ad_width = 300;
-google_ad_height = 250;
-google_ad_format = "300x250_as";
+google_ad_client = "pub-5862978179091956";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text_image";
 google_ad_channel = "";
-google_color_border = "ffffff";
-google_color_bg = "ffffff";
-google_color_link = "0000ff";
-google_color_url = "000000";
-google_color_text = "000000";
 //--></script>
 <script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 
