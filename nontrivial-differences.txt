@@ -1,0 +1,491 @@
+Index: ch02.xml
+===================================================================
+--- ch02.xml	(.../tags/printing-1)	(revision 491)
++++ ch02.xml	(.../trunk)	(revision 491)
+@@ -267,7 +267,7 @@
+             manners, as well as good legal sense.  You don't want to
+             create identity confusion.  It's hard enough to keep track
+             of everything that's available on the Net already, without
+-            different things have the same name.</para>
++            different things having the same name.</para>
+ 
+             <para>The resources mentioned earlier in
+             <xref linkend="look-around"/> are useful in
+@@ -674,7 +677,7 @@
+ that says it's a tyranny will do fine as long as the tyrant is
+ competent and trusted.</para>
+   
+-<para>See <ulink url="http://svn.collab.net/repos/svn/trunk/HACKING"/>
++<para>See <ulink url="http://svn.collab.net/repos/svn/trunk/www/hacking.html"/>
+ for an example of particularly thorough developer guidelines, or
+ <ulink url="http://www.openoffice.org/dev_docs/guidelines.html"/> for
+ broader guidelines that focus more on governance and the spirit of
+@@ -863,7 +866,7 @@
+ developer documentation tells them how to get along with the code
+ itself.  The two are often packaged together in one document for
+ convenience (as with the <ulink
+-url="http://svn.collab.net/repos/svn/trunk/HACKING"/> example given
++url="http://svn.collab.net/repos/svn/trunk/www/hacking.html"/> example given
+ earlier), but they don't have to be.</para>
+ 
+ <para>Although developer documentation can be very helpful, there's no
+@@ -1352,13 +1355,14 @@
+ <xref linkend="commit-emails"/> for more details.  The effect of
+ commit emails is that every time someone commits a change to the
+ source code, an email goes out showing the log message and diffs for
+-the change.  <firstterm>Code review</firstterm> is the practice of
+-reviewing commit emails as they come in, looking for bugs and possible
+-improvements.<footnote><para>This is how code review is usually done
+-in open source projects, at any rate.  In more centralized projects,
+-"code review" can also mean multiple people sitting down together and
+-going over printouts of source code, looking for specific problems and
+-patterns.</para></footnote></para>
++the change (see <xref linkend="vc-vocabulary-diff"/>, in
++<xref linkend="vc-vocabulary"/>).  <firstterm>Code review</firstterm>
++is the practice of reviewing commit emails as they come in, looking
++for bugs and possible improvements.<footnote><para>This is how code
++review is usually done in open source projects, at any rate.  In more
++centralized projects, "code review" can also mean multiple people
++sitting down together and going over printouts of source code, looking
++for specific problems and patterns.</para></footnote></para>
+ 
+ <para>Code review serves several purposes simultaneously.  It's the
+ most obvious example of peer review in the open source world, and
+Index: ch03.xml
+===================================================================
+--- ch03.xml	(.../tags/printing-1)	(revision 491)
++++ ch03.xml	(.../trunk)	(revision 491)
+@@ -713,7 +713,7 @@
+ carefully at the recipient address in the new message.  He composes
+ his private, confidential message, one which perhaps says embarrassing
+ things about someone on the list, and hits the send key.
+-Unexpectedly, a few hours later his message appears <emphasis>on the
++Unexpectedly, a few minutes later his message appears <emphasis>on the
+ mailing list!</emphasis> True, in theory he should have looked
+ carefully at the recipient field, and should not have assumed anything
+ about the Reply-to header.  But authors almost always set Reply-to to
+@@ -855,7 +855,7 @@
+             archive URL, or at least the message-specific portion of
+             the URL, in a header when it distributes the message to
+             recipients.  That way people who have a copy of the
+-            message would be able to know to its archive location
++            message would be able to know its archive location
+             without having to actually visit the archives, which would
+             be helpful because any operation that involves one's web
+             browser is automatically time-consuming.  Whether any
+@@ -793,8 +793,11 @@
+ most are probably subscribed to the list anyway.  Eventually, other
+ mail readers will pick up the feature, and this whole debate will go
+ away.  (Actually, the <ulink url="http://www.mutt.org/">Mutt</ulink>
+-mail reader does offer this feature.  Now, if only others would copy
+-it.)</para>
++mail reader does offer this feature.<footnote><para>Shortly after this
++book appeared, Michael Bernstein wrote me to say: "There are other
++email clients that implement a reply-to-list function besides
++Mutt. For example, Evolution has this function as a keyboard shortcut,
++but not a button (Ctrl+L)."<para></footnote>)</para>
+ 
+ <para>An even better solution would be for Reply-to munging to be a
+ per-subscriber preference.  Those who want the list to set Reply-to
+@@ -1347,10 +1347,14 @@
+ <filename>configure</filename>, one would edit
+ <filename>configure.in</filename> and then regenerate; thus, only the
+ template <filename>configure.in</filename> is an "editable file."
+-Always version only the templates.  If you version the result files as
++Just version the templates&mdash;if you version the result files as
+ well, people will inevitably forget to regenerate when they commit a
+ change to a template, and the resulting inconsistencies will cause no
+-end of confusion.</para>
++end of confusion.<footnote><para>For a different opinion on the
++question of versioning <filename>configure</filename> files, see
++Alexey Makhotkin's post "<citetitle>configure.in and version
++control</citetitle>" at
++<ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>.</para></footnote></para>
+ 
+ <para>The rule that all editable data should be kept under version
+ control has one unfortunate exception: the bug tracker.  Bug databases
+@@ -1382,13 +1386,13 @@
+ revisions of files, and for viewing the latest revision at any given
+ time.  This can be very useful in technical discussions or when
+ pointing people to documentation.  For example, instead of saying "For
+-tips on debugging the server, see the HACKING file in the top of your
++tips on debugging the server, see the www/hacking.html file in your
+ working copy," one can say "For tips on debugging the server, see
+-<emphasis>http://svn.collab.net/repos/svn/trunk/HACKING</emphasis>,"
+-giving a URL that always points to the latest revision of the HACKING
+-file.  The URL is better because it is completely unambiguous, and
+-avoids the question of whether the addressee has an up-to-date working
+-copy.</para>
++<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>,"
++giving a URL that always points to the latest revision of
++the <filename>hacking.html</filename> file.  The URL is better because
++it is completely unambiguous, and avoids the question of whether the
++addressee has an up-to-date working copy.</para>
+ 
+ <para>Some version control systems come with built-in
+ repository-browsing mechanisms, while others rely on third-party tools
+@@ -1811,7 +1815,7 @@
+             points.</para>
+   </listitem>
+   <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
+-            This may be the most important moment in the its
++            This may be the most important moment in its
+             life cycle.  Although the bug is not actually fixed yet,
+             the fact that someone besides the original filer was able
+             to make it happen proves that it is genuine, and, no less
+Index: ch04.xml
+===================================================================
+--- ch04.xml	(.../tags/printing-1)	(revision 491)
++++ ch04.xml	(.../trunk)	(revision 491)
+@@ -349,7 +349,7 @@
+ (because, of course, you will then find yourself in a debate about
+ which voting system to use to decide the voting system!).  One reason
+ approval voting is a good choice is that it's very hard for anyone to
+-to object to&mdash;it's about as fair as a voting system can be.</para>
++object to&mdash;it's about as fair as a voting system can be.</para>
+ 
+ <para>Finally, conduct votes in public.  There is no need for secrecy
+ or anonymity in a vote on matters that have been debated publicly
+@@ -625,8 +625,8 @@
+ are.</para>
+ 
+ <para>Two good examples of project guidelines are the Subversion
+-HACKING file, at <ulink
+-url="http://svn.collab.net/repos/svn/trunk/HACKING"/>, and the Apache
++<filename>hacking.html</filename> file, at <ulink
++url="http://svn.collab.net/repos/svn/trunk/www/hacking.html"/>, and the Apache
+ Software Foundation governance documents, at <ulink
+ url="http://www.apache.org/foundation/how-it-works.html"/> and <ulink
+ url="http://www.apache.org/foundation/voting.html"/>.  The ASF is
+Index: ch05.xml
+===================================================================
+--- ch05.xml	(.../tags/printing-1)	(revision 491)
++++ ch05.xml	(.../trunk)	(revision 491)
+@@ -14,7 +14,7 @@
+ be made clear from context.</para>
+ 
+ <para>Corporate funding of free software development is not a new
+-phenemenon.  A lot of development has always been informally
++phenomenon.  A lot of development has always been informally
+ subsidized.  When a system administrator writes a network analysis
+ tool to help her do her job, then posts it online and gets bug fixes
+ and feature contributions from other system administrators, what's
+@@ -575,7 +575,7 @@
+ 
+ <para>That kind of consistency gets you a credibility that money could
+ never buy.  And credibility is a valuable currency to have in
+-technical discussions: it's immunization against having ones motives
++technical discussions: it's immunization against having one's motives
+ questioned later.  In the heat of argument, people will sometimes look
+ for non-technical ways to win the battle.  The project's primary
+ funder, because of its deep involvement and obvious concern over the
+@@ -1005,6 +1005,27 @@
+ technical enough to talk to the coding team, but not so expert in the
+ software that they can't empathize with regular users anymore.</para>
+ 
++<para>A medium-level user is probably the right person to write good
++documentation.  In fact, after the first edition of this book was
++published, I received the following email from an open source
++developer named Dirk Reiners:</para>
++
++<screen>
++One comment on Money::Documentation and Usability: when we had some 
++money to spend and decided that a beginner's tutorial was the most 
++critical piece that we needed we hired a medium-level user to write it. 
++He had gone through the induction to the system recently enough to 
++remember the problems, but he had gotten past them so he knew how to 
++describe them. That allowed him to write something that needed only 
++minor fixes by the core developers for the things that he hadn't gotten 
++right, but still covering the 'obvious' stuff devs would have missed.
++
++His case was even better, as it had been his job to introduce a bunch of 
++other people (students) to the system, so he combined the experience of 
++many people, which is something that was just a lucky occurrence and is 
++probably hard to get in most cases.
++</screen>
++
+ </sect2>
+ 
+ <!-- ======================== subsection =========================== -->
+Index: ch06.xml
+===================================================================
+--- ch06.xml	(.../tags/printing-1)	(revision 491)
++++ ch06.xml	(.../trunk)	(revision 491)
+@@ -52,9 +52,9 @@
+ mechanisms a priority for everyone in the project.<footnote><para>There
+ has been some interesting academic research on this topic; for example,
+ see <citetitle>Group Awareness in Distributed Software
+-Development</citetitle> by Gutwin, Penner, and Schneider, at <ulink
+-url="http://hci.usask.ca/publications/2004/awareness-cscw04/"
+-/>.</para></footnote></para>
++Development</citetitle> by Gutwin, Penner, and Schneider (this used to
++be available online, but seems to have disappeared, at least
++temporarily; use a search engine to find it).</para></footnote></para>
+ 
+ </simplesect>
+ 
+@@ -405,11 +405,11 @@
+ intent is not to insult the recipient, but to quickly rule out the
+ most obvious (and perhaps most common) explanations.  Recipients who
+ understand this and react accordingly win points for taking a
+-broad-minded point of view without prompting.  But recipients who react
+-badly should not be reprimanded, either.  It's just a collision of
+-cultures, not anyone's fault.  Explain amiably that your question (or
+-criticism) had no hidden meanings; it was just meant to get (or
+-transmit) information as efficiently as possible, nothing more.</para>
++broad-minded view without prompting.  But recipients who react badly
++should not be reprimanded, either.  It's just a collision of cultures,
++not anyone's fault.  Explain amiably that your question (or criticism)
++had no hidden meanings; it was just meant to get (or transmit)
++information as efficiently as possible, nothing more.</para>
+ 
+ <para>So what is rude?</para>
+ 
+@@ -1457,10 +1457,9 @@
+   browsers support the id attribute.  To play it safe, I would
+   recommend using either named anchors alone, or named anchors
+   <emphasis>and</emphasis> id attributes together (with the same label
+-  for both in a given pair, of course).  For reasons mysterious to me,
+-  doing named anchors as self-closing tags does not seem to work.  So
+-  even if there's no text inside the element, you should still write
+-  it in two-sided form:</para>
++  for both in a given pair, of course).  Named anchors cannot be
++  self-closing&mdash;even if there's no text inside the element, you
++  must still write it in two-sided form:</para>
+ 
+   <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
+ 
+Index: ch07.xml
+===================================================================
+--- ch07.xml	(.../tags/printing-1)	(revision 491)
++++ ch07.xml	(.../trunk)	(revision 491)
+@@ -708,7 +708,7 @@
+ reason for it.</para>
+ 
+ <para>Because the release procedure is deliberately biased toward
+-conservativism, the justifications offered for vetoes are sometimes
++conservatism, the justifications offered for vetoes are sometimes
+ procedural rather than technical.  For example, a person may feel that
+ a change is well-written and unlikely to cause any new bugs, but vote
+ against its inclusion in a micro release simply because it's too
+@@ -1036,7 +1036,7 @@
+ 
+ <informalexample>
+ <literallayout>scanley-2.5.0.tar.bz2
+-scanley-2.5.0.gz
++scanley-2.5.0.tar.gz
+ scanley-2.5.0.zip</literallayout>
+ </informalexample>
+ 
+@@ -1454,7 +1454,7 @@
+ security bug, with <emphasis>no other changes</emphasis>.  This is
+ because the more changes you ship without testing, the more likely
+ that one of them will cause a new bug, perhaps even a new security
+-bug!  This conservativism is also friendly to administrators who may
++bug!  This conservatism is also friendly to administrators who may
+ need to deploy the security fix, but whose upgrade policy prefers that
+ they not deploy any other changes at the same time.</para>
+ 
+Index: ch08.xml
+===================================================================
+--- ch08.xml	(.../tags/printing-1)	(revision 491)
++++ ch08.xml	(.../trunk)	(revision 491)
+@@ -1021,13 +1021,14 @@
+   <sidebar id="i7n">
+   <title>Internationalization Versus Localization</title>
+   
+-  <firstterm>Internationalization</firstterm>
++  <para><firstterm>Internationalization</firstterm>
+   (<firstterm>I18N</firstterm>) and <firstterm>localization</firstterm>
+   (<firstterm>L10N</firstterm>) both refer to the process of adapting
+   a program to work in linguistic and cultural environments other than
+   the one for which it was originally written.  The terms are often
+   treated as interchangeable, but in fact they are not quite the same
+-  thing.  As <ulink url="http://en.wikipedia.org/wiki/G11n"/> writes:
++  thing.  As <ulink url="http://en.wikipedia.org/wiki/G11n"/>
++  writes:</para>
+ 
+   <blockquote>
+      <para>The distinction between them is subtle but important:
+@@ -1468,7 +1469,7 @@
+ problems in all areas of the code base, but that does not matter: the
+ person has made it clear that he is capable of at least judging
+ his own abilities.  Technical skills can be learned (and taught),
+-but judgment, for the most part, cannot.  Therefore, it is the one
++but judgement, for the most part, cannot.  Therefore, it is the one
+ thing you want to make sure a person has before you give him commit
+ access.</para>
+ 
+Index: appd.xml
+===================================================================
+--- appd.xml	(.../tags/printing-1)	(revision 491)
++++ appd.xml	(.../trunk)	(revision 491)
+@@ -9,97 +9,103 @@
+ <xref linkend="managing-volunteers"/></phrase> for why it is
+ important that a project have such instructions.  The original
+ document is located at
+-<ulink url="http://svn.collab.net/repos/svn/trunk/BUGS"/>.</para>
++<ulink url="http://svn.collab.net/repos/svn/trunk/www/bugs.html"/>.</para>
+ 
+ <screen>
+-                        REPORTING BUGS
+-                        ==============
++                       Reporting Bugs in Subversion
+ 
+-This document tells how and where to report bugs.  It is not a list of
+-all outstanding bugs -- we use an online issue tracker for that, see
++This document tells how and where to report bugs. (It is not a list of
++all outstanding bugs — you can get that here instead.)
+ 
+-   http://subversion.tigris.org/project_issues.html
++Where To Report A Bug
++---------------------
+ 
+-If you're about to report a bug, please take a look at the guidelines
+-in the section "How To Report A Bug" below.
++    * If the bug is in Subversion itself, send mail to
++      users@subversion.tigris.org. Once it's confirmed as a bug,
++      someone, possibly you, can enter it into the issue tracker. (Or
++      if you're pretty sure about the bug, go ahead and post directly
++      to our development list, dev@subversion.tigris.org. But if
++      you're not sure, it's better to post to users@ first; someone
++      there can tell you whether the behavior you encountered is
++      expected or not.)
+ 
+-Where To Report A Bug:
+-======================
++    * If the bug is in the APR library, please report it to both of
++      these mailing lists: dev@apr.apache.org, dev@subversion.tigris.org.
+ 
+-   * If the bug is in Subversion itself, send mail to
+-     users@subversion.tigris.org.  Once it's confirmed as a bug,
+-     someone, possibly you, can enter it into the issue tracker at
+-     http://subversion.tigris.org/servlets/ProjectIssues
++    * If the bug is in the Neon HTTP library, please report it to:
++      neon@webdav.org, dev@subversion.tigris.org.
+ 
+-   * If the bug is in the APR library, please report it to both of
+-     these mailing lists: dev@apr.apache.org, dev@subversion.tigris.org
++    * If the bug is in Apache HTTPD 2.0, please report it to both of
++      these mailing lists: dev@httpd.apache.org,
++      dev@subversion.tigris.org. The Apache httpd developer mailing
++      list is high-traffic, so your bug report post has the
++      possibility to be overlooked. You may also file a bug report at
++      http://httpd.apache.org/bug_report.html.
+ 
+-   * If the bug is in the Neon HTTP library, please report it to:
+-     neon@webdav.org, dev@subversion.tigris.org
++    * If the bug is in your rug, please give it a hug and keep it snug.
+ 
+-   * If the bug is in Apache httpd 2.0, please report it to both of
+-     these mailing lists: dev@httpd.apache.org, dev@subversion.tigris.org
+-     The Apache httpd developer mailing list is high-traffic, so your
+-     bug report post has the possibility to be overlooked.  You may also 
+-     file a bug report at:
+-     http://httpd.apache.org/bug_report.html
++How To Report A Bug
++-------------------
+ 
+-   * If the bug is in your rug, please give it a hug and keep it snug.
+-
+-How To Report A Bug:
+-====================
+-
+-First, make sure it's a bug.  If Subversion does not behave the way
+-you expect, look in the documentation and mailing list archives for
+-evidence that it should behave the way you expect.  Of course, if it's
++First, make sure it's a bug. If Subversion does not behave the way you
++expect, look in the documentation and mailing list archives for
++evidence that it should behave the way you expect. Of course, if it's
+ a common-sense thing, like Subversion just destroyed your data and
+ caused smoke to pour out of your monitor, then you can trust your
+-judgement.  But if you're not sure, go ahead and ask on the users
+-mailing list first, users@subversion.tigris.org.
++judgement. But if you're not sure, go ahead and ask on the users
++mailing list first, users@subversion.tigris.org, or ask in IRC,
++irc.freenode.net, channel #svn.
+ 
+ Once you've established that it's a bug, the most important thing you
+-can do is come up with a simple description and reproduction recipe.
+-For example, if the bug, as you initially found it, involves five
+-files over ten commits, try to make it happen with just one file and
+-one commit.  The simpler the reproduction recipe, the more likely a
++can do is come up with a simple description and reproduction
++recipe. For example, if the bug, as you initially found it, involves
++five files over ten commits, try to make it happen with just one file
++and one commit. The simpler the reproduction recipe, the more likely a
+ developer is to successfully reproduce the bug and fix it.
+ 
+ When you write up the reproduction recipe, don't just write a prose
+-description of what you did to make the bug happen.  Instead, give a
++description of what you did to make the bug happen. Instead, give a
+ literal transcript of the exact series of commands you ran, and their
+-output.  If there are files involved, be sure to include the names of
+-the files, and even their content if you think it might be relevant.
+-The very best thing is to package your reproduction recipe as a
+-script, that helps us a lot.
++output. Use cut-and-paste to do this. If there are files involved, be
++sure to include the names of the files, and even their content if you
++think it might be relevant. The very best thing is to package your
++reproduction recipe as a script, that helps us a lot.
+ 
+-  [Quick sanity check: you *are* running the most recent version of
+-  Subversion, right? :-) Possibly the bug has already been fixed; you
+-  should test your reproduction recipe against the most recent
+-  Subversion development tree.  Also, make sure your APR tree is
+-  up-to-date.]
++<emphasis>Quick sanity check: you *are* running the most recent version of
++Subversion, right? :-) Possibly the bug has already been fixed; you
++should test your reproduction recipe against the most recent
++Subversion development tree.</emphasis>
+ 
+ In addition to the reproduction recipe, we'll also need a complete
+-description of the environment in which you reproduced the bug.
+-That means:
++description of the environment in which you reproduced the bug. That
++means:
+ 
+-   - Your operating system
+-   - The release and/or revision of Subversion
+-   - The compiler and configuration options you built Subversion with
+-   - Any private modifications you made to your Subversion
+-   - The version of Berkeley DB you're running Subversion with
+-   - Anything else that could possibly be relevant.  Err on the side
+-     of too much information, rather than too little.
++    * Your operating system
++    * The release and/or revision of Subversion
++    * The compiler and configuration options you built Subversion with
++    * Any private modifications you made to your Subversion
++    * The version of Berkeley DB you're running Subversion with, if any
++    * Anything else that could possibly be relevant. Err on the side
++      of too much information, rather than too little.
+ 
+-Once you have all this, you're ready to write the report.  Start out
+-with a clear description of what the bug is.  That is, say how you
++Once you have all this, you're ready to write the report. Start out
++with a clear description of what the bug is. That is, say how you
+ expected Subversion to behave, and contrast that with how it actually
+-behaved.  While the bug may seem obvious to you, it may not be so
+-obvious to someone else, so it's best to avoid a guessing game.
++behaved. While the bug may seem obvious to you, it may not be so
++obvious to someone else, so it's best to avoid a guessing game. Follow
++that with the environment description, and the reproduction recipe. If
++you also want to include speculation as to the cause, and even a patch
++to fix the bug, that's great — see
++http://svn.collab.net/repos/svn/trunk/www/hacking.html#patches for
++instructions on sending patches.
+ 
+-Follow that with the environment description, and the reproduction
+-recipe.  If you also want to include speculation as to the cause, and
+-even a patch to fix the bug, that's great!  See the HACKING file for
+-more information about writing patches.
++Post all of this information to dev@subversion.tigris.org, or if you
++have already been there and been asked to file an issue, then go to
++the Issue Tracker and follow the instructions there.
++
++Thanks. We know it's a lot of work to file an effective bug report,
++but a good report can save hours of a developer's time, and make the
++bug much more likely to get fixed.
+ </screen>
+ 
+ </simplesect>
