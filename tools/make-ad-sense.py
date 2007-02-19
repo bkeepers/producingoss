@@ -102,8 +102,13 @@ def add_adsense_bottom_html(file):
         return
     raise Exception, "Never found <div class=\"nav_footer\"> tag in file '%s'" % (file)
 
-def add_adsense_css(file):
-    open(file, 'a').write(adsense_css)
+def maybe_add_adsense_css(target):
+    """Maybe add AdSense CSS to the stylesheet TARGET."""
+    if not os.path.exists(target):
+        die("File '%s' is missing." % target)
+    contents = open(target).read()
+    if contents.find("Added for AdSense Support") < 0:
+      open(target, 'a').write(adsense_css)
 
 def main():
     if len(sys.argv) != 2:
@@ -118,10 +123,6 @@ def main():
       book_dir = target
       targets = os.listdir(book_dir)
 
-    stylesheet = os.path.join(book_dir, 'styles.css')
-    if not os.path.exists(stylesheet):
-        die("Book stylesheet is missing.")
-
     for child in targets:
         if child[-5:] == '.html':
             try:
@@ -132,7 +133,8 @@ def main():
                 add_adsense_bottom_html(os.path.join(book_dir, child))
             except:
                 pass
-    add_adsense_css(stylesheet)
+    maybe_add_adsense_css(os.path.join(book_dir, 'styles.css'))
+
 
 if __name__ == "__main__":
     main()
