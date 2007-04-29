@@ -551,80 +551,90 @@ müssen uns wieder etwas neues ausdenken.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="header-management">
-<title>Identification and Header Management</title>
+<title>Identifizierung und Handhabung des Nachrichten Kopfs</title>
 
-<para>List subscribers often want to put mails from the list into a
-project-specific folder, separate from their other mail.  Their
-mail reading software can do this automatically by examining the mail's
-<firstterm>headers</firstterm>.  The headers are the fields at the top
-of the mail that indicate the sender, recipient, subject, date, and
-various other things about the message.  Certain headers are
-well known and effectively mandatory:</para>
-
-<screen>
-From: ...
-To: ...
-Subject: ...
-Date: ...
-</screen>
-
-<para>Others are optional, though still quite standard.  For example,
-emails are not strictly required to have the</para>
+<para>Die Nutzer des Verteilers, wollen oft die Nachrichten davon in
+Projekt spezifische Ordner, von ihren anderen Emails getrennt
+sortieren. Ihre Email Software kann dies automatisch durchführen,
+indem es die <firstterm>Header</firstterm> der Emails liest. Header
+sind die Felder im Kopf der Email den Absender, Empfänger, Betreff, 
+Datum und verschiedene andere Informationen über die Nachricht angeben.
+Bestimmte Header sind weit verbreitet und effektiv gesehen 
+Pflicht Angaben:</para>
 
 <screen>
-Reply-to: sender@email.address.here
+From (Von): ...
+To (An): ...
+Subject (Betreff): ...
+Date (Datum): ...
 </screen>
 
-<para>header, but most do, because it gives recipients a foolproof way
-to reach the author (it is especially useful when the author had to
-send from an address other than the one to which replies should be
-directed).</para>
-
-<para>Some mail reading software offers an easy-to-use interface for
-filing mails based on patterns in the Subject header.  This leads
-people to request that the mailing list add an automatic prefix to all
-Subjects, so they can set their readers to look for that prefix and
-automatically file the mails in the right folder.  The idea is that
-the original author would write:</para>
+<para>Andere sind Optional, wenn auch fast standard. Emails müssen
+zum Beispiel wenn man es genau nimmt, nicht den
+</para>
 
 <screen>
-Subject: Making the 2.5 release.
+Reply-to (Antwort An): absender@email.adresse.hier
 </screen>
 
-<para>but the mail would show up on the list looking like this:</para>
+<para>Header angeben, haben es aber trotzdem, da es den Empfängern
+eine narrensichere Möglichkeit gibt, den Author zu erreichen (was
+besonders nützlich ist, wenn der Author die Email von einer anderen
+Adresse senden musste, als die an der Antworten gerichtet sein
+sollten).</para>
+
+<para>Manche Email Programme bieten einfach zu nutzende Schnittstellen,
+um Emails, mit unterschiedlichen Mustern im Betreff, anders ab zu
+legen. Was zu Anfragen führt, dass die Software des Nachrichten
+Verteilers einen automatischen Präfix vor jedem Betreff setzen soll,
+damit Ihr Email Programm danach suchen kann, und es automatisch in den
+richtigen Ordner ablegen kann. Die Idee ist, dass der Author folgendes
+schreiben würde:</para>
 
 <screen>
-Subject: [discuss@lists.example.org] Making the 2.5 release.
+Betreff: Erstelle die Version 2.5.
 </screen>
 
-<para>Although most list management software offers the option to do
-this, I strongly recommend against turning the option on.  The problem
-it solves can easily be solved in much less obtrusive ways, and the
-cost of eating space in the Subject field is far too high.
-Experienced mailing list users typically scan the Subjects of the
-day's incoming list mail to decide what to read and/or respond to.
-Prepending the list's name to the Subject can push the right side of
-the Subject off the screen, rendering it invisible.  This obscures
-information that people depend on to decide what mails to open, thus
-reducing the overall functionality of the mailing list for
-everyone.</para>
-
-<para>Instead of munging the Subject header, teach your users to take
-advantage of the other standard headers, starting with the To header,
-which should say the mailing list's name:</para>
+<para>die Nachricht aber wie folgt vom Verteiler verschickt würde:
+</para>
 
 <screen>
-To: &lt;discuss@lists.example.org&gt;
+Betreff: [diskussion@verteiler.beispiel.org] Erstelle die Version 2.5.
 </screen>
 
-<para>Any mail reader that can filter on Subject should be able to filter on
-To just as easily.</para>
+<para>Obwohl die meiste Verteiler Software diese Möglichkeit bietet,
+empfehle ich diese Option nicht an zu schalten. Das Problem welches es
+löst, kann viel einfacher auf eine sehr viel weniger aufdringliche Art
+gelöst werden, und der Preis den man durch verlorenen Platz im Betreff
+verliert ist viel zu hoch. Erfahrene Nutzer von Nachrichten Verteiler,
+suchen die Betreff Zeilen der im laufe des Tages eingetroffenen Emails
+ab, und entscheiden anhand dessen, ob sie eine Nachricht lesen oder
+darauf eine Antwort schreiben. Den Namen des Verteilers vor dem
+eigentlichen Betreff zu setzen kann die rechte Seite des Betreffs über
+den Bildschirmrand hinaus schieben, und damit unsichtbar macht. Die
+Informationen, auf die sich die Leser Verlassen, um zu entscheiden,
+welche Nachrichten Sie öffnen sollen, geht damit zum Teil verloren
+und verringert dadurch insgesamt, für jeden den Nutzen des Verteilers.
+</para>
 
-<para>There are a few other optional-but-standard headers expected for
-mailing lists.  Filtering on these is even more reliable than using
-the "To" or "Cc" headers; since these headers are added to each post
-by the mailing list management software itself, some users may be
-counting on their presence:</para>
+<para>Anstatt die Betreffzeile zu verunstalten, bringen Sie Ihren
+Nutzern bei, andere standardmäßig angegebene Header zu verwenden,
+angefangen mit dem To (de. An) Header, welches die Adresse des 
+Verteilers angeben sollte:</para>
+
+<screen>
+An: &lt;diskussion@verteiler.beispiel.org&gt;
+</screen>
+
+<para>Jede Email Software die nach Betreff filtern kann, sollte auch
+in der Lage sein, ebenso einfach nach dem To Header filtern können.
+</para>
+
+<para>Es gibt ein paar weitere optionale, aber standardmäßig vorhandene
+Header, die für Nachrichten Verteiler erwartet werden. Nach ihnen zu
+filtern ist noch zuverlässiger als die "To" oder "Cc" Header; da diese
+Header von der Verteiler Software zu jedem Nachrichten Kopf hinzugefügt
+werden, verlassen sich unter Umständen manche Nutzer auf sie:</para>
 
 <screen>
 list-help: &lt;mailto:discuss-help@lists.example.org&gt;
@@ -634,28 +644,31 @@ Delivered-To: mailing list discuss@lists.example.org
 Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
 </screen>
 
-<para>For the most part, they are self-explanatory.  See <ulink
-url="http://www.nisto.com/listspec/list-manager-intro.html"/> for more
-explanation, or if you need the really detailed, formal specification,
-see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
+<para>Zum größten Teil sind diese selbst erklärend. Siehe <ulink
+url="http://www.nisto.com/listspec/list-manager-intro.html"/> für eine
+weiter gehende Erklärung, oder <ulink 
+url="http://www.faqs.org/rfcs/rfc2369.html"/> wenn Sie die 
+ausführliche formale Spezifikation brauchen.
 </para>
 
-<para>Notice how these headers imply that if you have a mailing list
-named "list", then you also have administrative addresses "list-help"
-and "list-unsubscribe" available.  In addition to these, it is normal
-to have "list-subscribe", for joining, and "list-owner", for reaching
-the list administrators.  Depending on the list management software
-you use, these and/or various other administrative addresses may be
-set up; the documentation will have details.  Usually a complete
-explanation of all these special addresses is mailed to each new user
-as part of an automated "welcome mail" on subscribing.  You yourself
-will probably get a copy of this welcome mail.  If you don't, then ask
-someone else for a copy, so you know what your users are seeing when
-they join the list.  Keep the copy handy so you can answer questions
-about the mailing list functions, or better yet, put it on a web page
-somewhere.  That way when people lose their own copy of the
-instructions and post to ask "How do I unsubscribe from this list?",
-you can just hand them the URL.</para>
+<para>Beachten Sie auch, dass diese Header auch implizieren, dass wenn
+Sie einen Verteiler mit dem Namen "list" haben, Sie auch administrative
+Adressen mit den Namen "list-help" und "list-unsubscribe" zur
+Verfügung stellen. Zusätzlich dazu, ist es üblich eine Adresse namens
+"list-subscribe", um dem Verteiler bei zu treten und "list-owner", 
+um seine Administratoren zu erreichen. Je nachdem welche Software Sie
+für Ihren Verteiler verwenden, werden diese und verschiedene Andere
+eingerichtet sein; die Dokumentation wird dazu weiter Angaben haben.
+Eine komplette Liste all dieser speziellen Adressen wird für gewöhnlich
+jedem Nutzer, als Teil der "Willkommens Nachricht", bei der Anmeldung
+zugeschickt. Sie werden selber wahrscheinlich eine Kopie dieser Email
+bekommen. Wenn nicht, dann bitten Sie jemand anderen um eine Kopie,
+damit Sie wissen was Ihre Nutzer sehen, wenn sie dem Verteiler
+beitreten. Behalten Sie es in Griffweite, um Fragen bezüglich den
+Funktionen des Verteilers beantworten zu können, besser noch, stellen
+Sie es irgendwo auf Ihre Webseite, sodass wenn Leute ihre eigene Kopie
+der Anleitung verlieren, und Fragen "Wie kann ich mich Abmelden?", Sie
+einfach auf eine URL weisen können.</para>
 
 <para>Some mailing list software offers an option to append
 unsubscription instructions to the bottom of every post.  If that
