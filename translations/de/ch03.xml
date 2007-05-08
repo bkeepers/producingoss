@@ -1,4 +1,4 @@
-<chapter id="technical-infrastructure">
+
 
 <title>Technische Infrastruktur</title>
 
@@ -670,152 +670,167 @@ Sie es irgendwo auf Ihre Webseite, sodass wenn Leute ihre eigene Kopie
 der Anleitung verlieren, und Fragen "Wie kann ich mich Abmelden?", Sie
 einfach auf eine URL weisen können.</para>
 
-<para>Some mailing list software offers an option to append
-unsubscription instructions to the bottom of every post.  If that
-option is available, turn it on.  It causes only a couple of extra
-lines per message, in a harmless location, and it can save you a lot
-of time, by cutting down on the number of people who mail you&mdash;or
-worse, mail the list!&mdash;asking how to unsubscribe.</para>
+<para>Manche Verteiler Software bietet die Option, an jede Nachricht,
+eine Anleitung zum abmelden anzuhängen. Wenn diese Option verfügbar
+ist, schalten Sie sie an. Es verbraucht nur ein paar zusätzliche
+Zeilen pro Nachricht, an einer harmlosen Stelle, und kann viel Zeit
+ersparen, indem es die Anzahl der Nutzer reduziert, die an Sie&mdash;
+oder schlimmer noch, an den Verteiler&mdash; Anfragen schicken wie
+man sich abmelden kann.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="reply-to">
-<title>The Great Reply-to Debate</title>
+<title>Die Große Reply-to Debatte</title>
 
-<para>Earlier, in <xref linkend="avoid-private-discussions"/>, I stressed the
-importance of making sure discussions stay in public forums, and
-talked about how active measures are sometimes needed to prevent
-conversations from trailing off into private email threads;
-furthermore, this chapter is all about setting up project
-communications software to do as much of the work for you as possible.
-Therefore, if the mailing list management software offers a way to
-automatically cause discussions to stay on the list, you would think
-turning that feature on would be the obvious choice.</para>
+<para>Vorhin, bei <xref linkend="avoid-private-discussions"/>, habe
+ich betont, wie wichtig es ist Diskussionen in den öffentlichen Foren
+zu halten und erwähnte, dass aktive Maßnahmen manchmal nötig sind, um
+zu Sie daran zu hindern in private Unterhaltungen ab zu gleiten;
+desweiteren, geht es in diesem Kapitel darum, die 
+Kommunikationssoftware so weit zu konfigurieren, dass es einem
+möglichst viel Arbeit abnimmt. Es wäre deshalb anzunehmen, dass wenn
+die Verteiler Software eine Möglichkeit bietet, alle Nachrichten auf
+den Verteiler zu halten, sie anzuschalten, die offensichtliche Wahl
+wäre.</para>
 
-<para>Well, not quite.  There is such a feature, but it has some
-pretty severe disadvantages.  The question of whether or not to use it
-is one of the hottest debates in mailing list
-management&mdash;admittedly, not a controversy that's likely to make
-the evening news in your city, but it can flare up from time to time
-in free software projects.  Below, I will describe the feature, give
-the major arguments on both sides, and make the best recommendation I
-can.</para>
+<para>Nun ja, nicht ganz. Es gibt solch eine Funktion, allerdings hat
+es ein paar schwerwiegende Nachteile. Die Frage ob man sie benutzen
+soll oder nicht, ist einer der am heißesten debattierten, bei der
+Verwaltung von Nachrichten Verteilern&mdash;zugegebenermaßen, nicht
+unbedingt eine Kontroverse die es auf die Titelseite ihres lokalen
+Nachrichtenblatts schaffen würde, aber Sie kann von Zeit zu Zeit
+in einem freien Software Projekt aufflammen. Unten werde ich die
+Funktion beschreiben, die Hauptargumente beider Seiten erläutern und
+die beste Empfehlung geben, die ich kann.</para>
 
-<para>The feature itself is very simple: the mailing list software
-can, if you wish, automatically set the Reply-to header on every post
-to redirect replies to the mailing list.  That is, no matter what the
-original sender puts in the Reply-to header (or even if they don't
-include one at all), by the time the list subscribers see the post,
-the header will contain the list address:</para>
+<para>Die Funktion selbst ist relativ einfach: Wenn Sie wollen, kann
+die Verteiler Software automatisch, den Reply-to (de. Antwort an)
+Header auf die Adresse des Verteilers setzen. Was so viel heißt,
+dass egal was der Author der Nachricht in den Reply-to Header
+schreibt (bzw. wenn Sie es gar nicht erst mitschicken), wird bei den
+Empfängern in dem Header, die Adresse des Verteilers zu sehen sein:
+</para>
 
 <screen>
 Reply-to: discuss@lists.example.org
 </screen>
 
-<para>On its face, this seems like a good thing.  Because virtually
-all mail reading software pays attention to the Reply-to header, now
-when anyone responds to a post, their response will be automatically
-addressed to the entire list, not just to the sender of the message
-being responded to.  Of course, the responder can still manually
-change where the message goes, but the important thing is that
-<emphasis>by default</emphasis> replies are directed to the list.
-It's a perfect example of using technology to encourage
-collaboration.</para>
+<para>Oberflächlich betrachten, erscheint dies eine gute Sache zu
+sein. Praktisch jede Email Software beachtet den Reply-to Header,
+jetzt, wenn jemand auf eine Nachricht antwortet, wird Ihre Nachricht
+an den gesamten Verteiler gerichtet sein, und nicht nur den Author
+der ursprünglichen Nachricht. Natürlich kann der Antwortende immer 
+noch händisch den Empfänger ändern, wichtig ist aber, dass
+<emphasis>standardmäßig</emphasis> Antworten an den Verteiler
+gerichtet sind. Es ist ein perfektes Beispiel dafür, Technologie dazu
+zu nutzen um Zusammenarbeit zu unterstützen.</para>
 
-<para>Unfortunately, there are some disadvantages.  The first is known
-as the <firstterm>Can't Find My Way Back Home</firstterm> problem:
-sometimes the original sender will put their "real" email address in
-the Reply-to field, because for one reason or another they send email
-from a different address than where they receive it.  People who
-always read and send from the same location don't have this problem,
-and may be surprised that it even exists.  But for those who have
-unusual email configurations, or who cannot control how the From
-address on their mails looks (perhaps because they send from work and
-do not have any influence over the IT department), using Reply-to may
-be the only way they have to ensure that responses reach them.  When
-such a person posts to a mailing list that he's not subscribed to, his
-setting of Reply-to becomes essential information.  If the list
-software overwrites it, he may never see the responses to his post.</para>
+<para>Leider, gibt es ein paar Nachteile. Das Erste ist bekannt als
+das <firstterm>Ich Finde den Weg Nachhause Nicht</firstterm> Problem:
+Manchmal wird der ursprüngliche Absender seine "echte" Email Adresse
+in den Reply-to Header setzen, da sie aus bestimmte Gründen die
+Nachricht von einer anderen Adresse absenden, als sie Antworten
+empfangen möchten. Wer immer von der gleichen Adresse sendet und
+Empfängt, wird dieses Problem nicht haben, und viele sind überrascht,
+dass es das Problem überhaupt gibt. Für jene mit ungewöhnlichen Email
+Konfigurationen, oder die keinen Einfluss auf das aussehen ihrer 
+Emails haben (vielleicht weil sie von der Arbeit aus versenden und
+keinen Einfluss auf die IT-Abteilung haben), kann der Reply-to Header,
+die einzige Möglichkeit sein, sicherzustellen, dass Antworten den Weg
+zu ihnen finden. Wenn eine solche Person, an einen Verteiler schreibt,
+bei dem er nicht angemeldet ist, wird ihre Reply-to Einstellung zu
+einer unabdingbaren Information. Wenn die Verteiler Software sie
+überschreibt, kann es passieren, dass sie niemals die Reaktionen auf
+ihre Nachricht zu Gesicht bekommt.</para>
 
-<para>The second disadvantage has to do with expectations, and in my
-opinion is the most powerful argument against Reply-to munging.  Most
-experienced mail users are accustomed to two basic methods of
-replying: <firstterm>reply-to-all</firstterm> and
-<firstterm>reply-to-author</firstterm>.  All modern mail reading
-software has separate keys for these two actions.  Users know that to
-reply to everyone (that is, including the list), they should choose
-reply-to-all, and to reply privately to the author, they should choose
-reply-to-author.  Although you want to encourage people to reply to
-the list whenever possible, there are certainly circumstances where a
-private reply is the responder's prerogative&mdash;for example, they
-may want to say something confidential to the author of the original
-message, something that would be inappropriate on the public
-list.</para>
+<para>Der Zweite Nachteil hat mit Annahmen zu tun, was meiner Meinung
+nach das stärkste Argument gegen die Verunstaltung von Reply-to ist.
+Die meisten erfahrenen Email Nutzer, sind an zwei grundsätzliche Arten
+zu antworten gewohnt: <firstterm>reply-to-all (de. Antwort-an-alle)
+</firstterm> und <firstterm>reply-to-author (de. Antwort-an-Author)
+</firstterm>. Alle modernen Email Programme bieten diese beiden 
+separaten Möglichkeiten an. Nutzer wissen, dass um an alle eine
+Antwort zu schicken(d.H. inklusive jene auf dem Verteiler), sie die
+reply-to-all wählen sollten, und um eine private Nachricht an den
+Author zu schicken, Sie reply-to-author wählen sollten. Auch wenn Sie
+wo immer möglich zu offenen Diskussionen ermutigen sollten, gibt es
+doch Situationen, bei denen der Antwortende eine private Nachricht
+vorzieht&mdash;zum Beispiel wenn sie etwas vertrauensvolles an den
+Author schreiben wollen, was unangemessen für den öffentlichen
+Verteiler wäre.</para>
 
-<para>Now consider what happens when the list has overridden the
-original sender's Reply-to.  The responder hits the reply-to-author
-key, expecting to send a private message back to the original author.
-Because that's the expected behavior, he may not bother to look
-carefully at the recipient address in the new message.  He composes
-his private, confidential message, one which perhaps says embarrassing
-things about someone on the list, and hits the send key.
-Unexpectedly, a few minutes later his message appears <emphasis>on the
-mailing list!</emphasis> True, in theory he should have looked
-carefully at the recipient field, and should not have assumed anything
-about the Reply-to header.  But authors almost always set Reply-to to
-their own personal address (or rather, their mail software sets it for
-them), and many longtime email users have come to expect that.  In
-fact, when a person deliberately sets Reply-to to some other address,
-such as the list, he usually makes a point of mentioning this in the
-body of the message, so people won't be surprised at what happens when
-they reply.</para>
+<para>Wenn man nun in Erwägung zieht, was passiert wenn der Verteiler
+den ursprünglichen Reply-to Eintrag bearbeitet und der antwortende
+auf den reply-to-author Knopf drückt, in der Erwartung eine private
+Nachricht an den Absender zu schicken. Aufgrund von dem Erwarteten
+Verhalten, wird er unter Umständen nicht nochmal auf die Adresse des
+Empfängers in der neuen Nachricht achten. Er hat dabei vielleicht eine
+geheime, vertrauensvolle Nachricht verfasst, eine die Peinliche Sachen
+über ein Mitglied des Verteilers sagt und drückt nun auf absenden.
+Seine Nachricht taucht nun unerwartet, ein paar Minuten später 
+<emphasis>auf dem Verteiler auf!</emphasis> Zugegeben, theoretisch
+hätte er sorgfältig auf das Empfänger Feld achten sollen, und keine
+Annahmen über den Reply-to Header machen sollen. Autoren setzen aber
+fast immer Reply-to auf ihre eigene persönliche Adresse (oder vielmehr
+tut dies ihre Email Software), und viele die schon seit langem Email
+benutzen, erwarten es mittlerweile. Das geht sogar so weit, dass wenn
+jemand absichtlich reply-to auf irgend eine andere Adresse setzt, als
+den Verteiler, er es explizit in dem Nachrichtentext erwähnt, damit
+Leute sich nicht darüber wundern was passiert wenn sie antworten.
+</para>
 
-<para>Because of the possibly severe consequences of this unexpected
-behavior, my own preference is to configure list management software
-to never touch the Reply-to header.  This is one instance where using
-technology to encourage collaboration has, it seems to me, potentially
-dangerous side-effects.  However, there are also some powerful
-arguments on the other side of this debate.  Whichever way you choose,
-you will occasionally get people posting to your list asking why you
-didn't choose the other way.  Since this is not something you ever
-want as the main topic of discussion on your list, it might be good to
-have a canned response ready, of the sort that's more likely to stop
-discussion than encourage it.  Make sure you do
-<emphasis>not</emphasis> insist that your decision, whichever it is,
-is obviously the only right and sensible one (even if you think that's
-the case).  Instead, point out that this is a very old debate, there
-are good arguments on both sides, no choice is going to satisfy
-all users, and therefore you just made the best decision you
-could.  Politely ask that the subject not be revisited unless someone
-has something genuinely new to say, then stay out of the thread and
-hope it dies a natural death.</para>
+<para>Aufgrund der möglicherweise schwerwiegenden Folgen dieses
+unerwarteten Verhaltens, bevorzuge icht es die Verteiler Software so
+zu konfigurieren, dass sie niemals den reply-to header anfassen. Es
+ist ein Beispiel, bei dem die Nutzung von Techniken um zur 
+Zusammenarbeit zu ermutigen, wie es mir erscheint, potentiell
+gefährliche Nebenwirkungen. EWs gibt jedoch auch starke Argumente auf
+der Gegenseite dieser Debatte. Welchen Weg Sie auch wählen, werden Sie
+ab und zu Leute bekommen die danach fragen, warum Sie den anderen Weg
+nicht gewählt haben. Da Sie sowas niemals zu dem Hauptthema einer
+Diskussion auf ihrem Verteiler werden lassen wollen, kann es 
+angebracht sein, hierfür eine vorher formulierte Antwort parat zu
+haben, derart formuliert, dass sie die Diskussion eher beendet als
+anfeuert. Stellen Sie klar, dass Sie <emphasis>nicht</emphasis> darauf
+bestehen, dass Ihre Entscheidung, welche auch immer, offensichtlich die
+einzig Richtige und sinnvolle ist (selbst wenn Sie denken, dass dies der
+Fall ist). Statt dessen, deuten Sie darauf hin, wie alt diese Debatte
+ist, dass es gute Argumente auf beiden Steiten gibt, keine Entscheidung
+alle zufriedenstellen wird und dass Sie einfach die Ihnen best
+mögliche Entscheidung getroffen haben. Bitten Sie höfflich darum das
+Thema nicht weiter zu führen, es sei denn jemand hat etwas wirklich
+neues zu sagen. Halten Sie sich danach aus dem Thread und hoffen Sie,
+dass es eines natürlichen Todes stirbt.</para>
 
-<para>Someone may suggest a vote to choose one way or the other.  You
-can do that if you want, but I personally do not feel that counting
-heads is a satisfactory solution in this case.  The penalty for
-someone who is surprised by the behavior is so huge (accidentally
-sending a private mail to a public list), and the inconvenience for
-everyone else is fairly slight (occasionally having to remind someone
-to respond to the whole list instead of just to you), that it's not
-clear that the majority, even though they are the majority, should be
-able to put the minority at such risk.</para>
+<para>Jemand wird vielleicht vorschlagen eine Wahl darüber zu halten.
+Wenn Sie möchten, können Sie das tun, ich persönlich finde es in
+diesem Fall jedoch als unzureichend einfach Köpfe zu zählen.
+Für jemand der ein gewisses Verhalten erwartet, wäre die Strafe
+unangemessen hoch (versehentlich eine private Nachricht an den
+Verteiler senden), und die Unbequemlichkeit für die übrigen Teilnehmer
+ist relativ gering (ab und zu jemand daran erinnern an den ganzen
+Verteiler zu antworten statt nur an Ihnen), weshalb es nicht klar ist,
+dass die Mehrheit, auch wenn sie die Mehrheit ist, eine Minderheit in
+solch eine Gefahr bringen sollte.</para>
 
-<para>I have not addressed all aspects of this issue here, just the
-ones that seemed of overriding importance.  For a full discussion, see
-these two canonical documents, which are the ones people always cite
-when they're having this debate:
+<para>Ich habe nicht alle Aspekte dieses Themas hier angesprochen,
+sondern nur die vorrangig wichtigen. Für eine vollständige, 
+Untersuchung dies Themas, verweise ich auf folgende zwei annerannte
+Dokumente, die bei dieser Debatte immer wieder zitiert werden:
 
 <itemizedlist>
   <listitem>
-     <para><emphasis role="bold">Leave Reply-to alone</emphasis>,
-     <emphasis>by Chip Rosenthal</emphasis></para>
+     <para><emphasis role="bold">Lasse Reply-to in ruhe</emphasis>,
+     <emphasis>von Chip Rosenthal</emphasis></para>
      <para><ulink
         url="http://www.unicom.com/pw/reply-to-harmful.html"/></para>
   </listitem>
   <listitem>
-     <para><emphasis role="bold">Set Reply-to to list</emphasis>,
-     <emphasis>by Simon Hill</emphasis></para>
+     <para><emphasis role="bold">Setze Reply-to auf den Verteiler
+	</emphasis>,
+     <emphasis>von Simon Hill</emphasis></para>
      <para><ulink
         url="http://www.metasystema.net/essays/reply-to.mhtml"/></para>
   </listitem>
@@ -823,31 +838,35 @@ when they're having this debate:
 
 </para>
 
-<para>Despite the mild preference indicated above, I do not feel there
-is a "right" answer to this question, and happily participate in many
-lists that <emphasis>do</emphasis> set Reply-to.  The most important
-thing you can do is settle on one way or the other early, and try not
-to get entangled in debates about it after that.</para>
+<para>Trotz meiner angedeuteten leichten Präferenz, denke ich nicht,
+dass es auf diese Frage eine "richtige" Antwort gibt, und bin gerne
+auch auf vielen Verteilern, die Reply-to <emphasis>setzen</emphasis>.
+Das wichtigste was Sie machen können, ist sich frühzeitig auf den
+einen oder anderen Weg festzulegen, und zu versuchen sich nachher
+nicht zu Debatten darüber verleiten zu lassen.</para>
 
 <sect3 id="reply-fantasies">
-<title>Two fantasies</title>
+<title>Zwei Fantasien</title>
 
-<para>Someday, someone will get the bright idea to implement a
-<firstterm>reply-to-list</firstterm> key in a mail reader.  It would
-use some of the custom list headers mentioned earlier to figure out
-the address of the mailing list, and then address the reply directly
-to the list only, leaving off any other recipient addresses, since
-most are probably subscribed to the list anyway.  Eventually, other
-mail readers will pick up the feature, and this whole debate will go
-away.  (Actually, the <ulink url="http://www.mutt.org/">Mutt</ulink>
-mail reader does offer this feature.<footnote><para>Shortly after this
-book appeared, <ulink url="http://www.michaelbernstein.com/"
->Michael Bernstein</ulink> wrote me to say: "There are other email
-clients that implement a reply-to-list function besides Mutt. For
-example, Evolution has this function as a keyboard shortcut, but not a
-button (Ctrl+L)."</para></footnote>)</para>
+<para>Eines Tages, wird jemand die geniale Idee einfallen ein
+<firstterm>reply-to-list</firstterm> Schlüssel in einer Email Software
+zu implementieren. Es würde irgend welche der vorher erwähnten
+spezifisch Header, um die Adresse des Nachrichten Verteilers
+herauszufinden und direkt bzw. nur an den Verteiler zu antworten, 
+ohne irgend welche sonstige Adressen zu benutzen, da diese höchst 
+wahrscheinlich sowieso bei dem Verteiler angemeldet sind. Mit der
+Zeit werden andere Email Programme diese Funktion mit übernehmen und
+diese ganze Debatte wird verschwinden. (Tatsächlich hat die Email
+Software <ulink url="http://www.mutt.org/">Mutt</ulink> eine solche
+Funktion.<footnote><para> Kurz nachdem dieses Buch erschien, schrieb
+mir <ulink url="http://www.michaelbernstein.com/">Michael Bernstein
+</ulink> um zu sagen: "Es gibt weitere Email Programme abgesehen von
+Mutt, die eine reply-to-list Funktion implementiert haben. Zum
+Beispiel, stellt Evolution diese Funktion über die Tastenkombination
+(Strg+L) zur Verfügung, jedoch nicht als Knopf."</para></footnote>)
+</para>
 
-<para>An even better solution would be for Reply-to munging to be a
+<para>Eine noch bessere Lösung wäre es, An even better solution would be for Reply-to munging to be a
 per-subscriber preference.  Those who want the list to set Reply-to
 munged (either on others' posts or on their own posts) could ask for
 that, and those who don't would ask for Reply-to to be left alone.
