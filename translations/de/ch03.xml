@@ -866,13 +866,14 @@ Beispiel, stellt Evolution diese Funktion über die Tastenkombination
 (Strg+L) zur Verfügung, jedoch nicht als Knopf."</para></footnote>)
 </para>
 
-<para>Eine noch bessere Lösung wäre es, An even better solution would be for Reply-to munging to be a
-per-subscriber preference.  Those who want the list to set Reply-to
-munged (either on others' posts or on their own posts) could ask for
-that, and those who don't would ask for Reply-to to be left alone.
-However, I don't know of any list management software that offers this
-on a per-subscriber basis.  For now, we seem to be stuck with a global
-setting.</para>
+<para>Eine noch bessere Lösung wäre es, die Änderung von Reply-to,
+jedem Benutzer selber zu überlassen. Diejenigen, die wollen, dass der
+Verteiler ihre Reply-to Header ändern (entweder bei ihren eigenen
+Nachrichten oder bei denen von Anderen) könnten darum bitten, und
+solche die es nicht wollen, könnten darum bitten das es in ruhe
+gelassen wird. Ich kenne jedoch keine Verteiler Software die sowas für
+jeden Benutzer einzeln einstellen lässt. Es scheint, dass wir zur Zeit
+mit einer Globalen Einstellung leben müssen.</para>
 
 </sect3>
 
@@ -880,109 +881,111 @@ setting.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="archiving">
-<title>Archiving</title>
+<title>Archivierung</title>
 
-<para>The technical details of setting up mailing list archiving are
-specific to the software that's running the list, and are beyond the
-scope of this book.  When choosing or configuring an archiver,
-consider these qualities:</para>
+<para>Die technischen Details zu der Einrichtung eines Verteiler 
+Archivs sind für die Software, welche der Verteiler benutzt spezifisch
+und liegen nicht im Rahmen von diesem Buch. Wenn Sie ein Programm zur
+Archivierung wählen oder konfigurieren, sollten Sie auf folgende 
+Qualitäten achten:</para>
 
 <variablelist>
 
-  <varlistentry><term>Prompt updating</term>
+  <varlistentry><term>Zeitnahe Aktualisierung</term>
     <listitem>
-      <para>People will often want to refer to an archived post made
-            within the last hour or two.  If possible, the archiver
-            should archive each post instantaneously, so that by the
-            time a post appears on the mailing list, it's already
-            present in the archives.  If that option isn't available,
-            then at least try to set the archiver to update itself
-            every hour or so.  (By default, some archivers run their
-            update processes once per night, but in practice that's
-            far too much lag time for an active mailing list.)</para>
+      <para>Teilnehmer werden oft auf eine archivierte Nachricht die
+	in den vor ein oder zwei stunden gemacht wurde verweisen
+	wollen. Wenn möglich sollte die Software jede Nachricht
+	sofort archivieren, sodass in dem Moment, indem es vom
+	Verteiler versandt wird, es in dem Archiv vorhanden ist. Wenn
+	diese Option nicht verfügbar ist, versuchen Sie die Software
+	zumindest so einzustellen, dass es sich ca. jede Stunde 
+	aktualisiert. (Standardmäßig, lässt mache Software die
+	Aktualisierung ein Mal jede Nacht laufen, was aber in der
+	Praxis eine viel zu große Verzögerung, für einen aktiven
+	Nachrichten Verteiler verursacht.)</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Referential stability</term>
+  <varlistentry><term>Referentielle Stabilität</term>
     <listitem>
-      <para>Once a message is archived at a particular URL, it should
-            remain accessible at that exact same URL forever, or as
-            close to forever as possible.  Even if the archives are
-            rebuilt, restored from backup, or otherwise fixed, any
-            URLs that have already been made publicly available
-            should remain the same.  Stable references make it
-            possible for Internet search engines to index the
-            archives, which is a major boon to users looking for
-            answers.  Stable references are also important because
-            mailing list posts and threads are often linked to from
-            the bug tracker (see
-            <xref
-            linkend="bug-tracker"/>)<phrase output="printed">
-            later in this chapter</phrase> or
-            from other project documents.</para>
+      <para>Sobald eine Nachricht bei einer bestimmten URL archiviert
+	wurde, sollte sie von genau dieser URL immer abrufbar sein,
+	oder zumindest so nahe daran wie möglich. Selbst wenn die
+	Archive neu aufgebaut werden, aus einem Backup wieder 
+	eingespielt werden, oder sonstwie repariert werden, sollten
+	alle öffentlich bekannt gemachten URLs weiterhin gleich 
+	bleiben. Stabile Referenzen ermöglichen es Suchmaschinen die
+	Archive zu indexieren, was für Nutzer die nach Antworten
+	suchen ein großer Segen ist. Stabile Referenzen sind auch
+	deshalb wichtig, da Nachrichten oftmals vom Bug Tracker aus
+	(siehe <xref linkend="bug-tracker"/>)<phrase output="printed">
+	später in diesem Kapitel</phrase> oder von anderen Dokumenten
+	des Projekts verlinkt sind.</para>
 
-      <para>Ideally, mailing list software would include a message's
-            archive URL, or at least the message-specific portion of
-            the URL, in a header when it distributes the message to
-            recipients.  That way people who have a copy of the
-            message would be able to know its archive location
-            without having to actually visit the archives, which would
-            be helpful because any operation that involves one's web
-            browser is automatically time-consuming.  Whether any
-            mailing list software actually offers this feature, I don't
-            know; unfortunately, the ones I have used do not.
-            However, it's something to look for (or, if you write
-            mailing list software, it's a feature to consider
-            implementing, please).</para>
+      <para>Idealerweise, würde die Software des Nachrichten 
+	Verteilers eine URL der jeweiligen Nachricht im Archiv, mit 
+	ihr im Header versenden, oder zumindest den URL Teil, spezifisch
+	zur Nachricht. So können diejenigen, die eine Kopie der
+	Nachricht erhalten haben, wissen wo es im Archiv zu finden ist,
+	ohne die Archive selbst aufsuchen zu müssen, was hilfreich wäre,
+	weil jeder Vorgang der mit dem Browser zu tun hat, automatisch
+	zeitaufwändig ist. Ich weiß nicht ob, irgend eine Verteiler
+	Software diese Funktion anbietet; diejenigen die ich benutzt
+	habe, können es leider nicht. Es ist allerdings etwas nach dem
+	man suchen sollte (oder falls Sie Nachrichten Verteiler 
+	Software schreiben, wäre es bitte eine Funktion die Sie zur
+	Implementierung erwägen könnten).</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Backups</term>
+  <varlistentry><term>Sicherungskopien</term>
     <listitem>
-      <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult.  In other words, don't treat your archiver as a
-            black box.  You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary.  Those archives are precious
-            data&mdash;a project that loses them loses a good part of
-            its collective memory.</para>
+      <para>Es sollte einigermaßen offensichtlich sein, wie man die
+	Archive sichert, und der Vorgang um sie wieder her zu stellen,
+	sollte nicht zu schwierig sein. Mit anderen Worten, behandeln
+	Sie Ihr Archiv nicht wie eine Blackbox. Sie (oder jemand aus
+	Ihrem Projekt) sollte wissen wo es die Nachrichten speichert,
+	und wie die Seiten des Archivs wiederherzustellen sind, falls
+	es jemals nötig werden sollte. Diese Archive sind wertvolle
+	Daten&mdash;ein Projekt welche sie verliert, verliert auch
+	einen großen Teil seiner kollektiven Erinnerung.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Thread support</term>
+  <varlistentry><term>Thread Unterstützung</term>
     <listitem>
-      <para>It should be possible to go from any individual message to
-            the <firstterm>thread</firstterm> (group of related
-            messages) that that original message is part of.  Each
-            thread should have its own URL too, separate from the URLs
-            of the individual messages in the thread.</para>
+      <para>Es sollte möglich sein, von jeder individuellen Nachricht
+	aus, zum dem <firstterm>thread</firstterm> (eine Gruppe
+	verwandter Nachrichten) zu gehen, von dem die ursprüngliche
+	Nachricht ein ein Teil ist. Jeder Thread sollte auch seine
+	eigene URL haben, separat von den URLs der individuellen
+	Nachrichten in dem Thread.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Searchability</term>
+  <varlistentry><term>Durchsuchbarkeit</term>
     <listitem>
-      <para>An archiver that doesn't support searching&mdash;on the
-            bodies of messages, as well as on authors and
-            subjects&mdash;is close to useless.  Note that some archivers 
-            support searching by simply farming the work out to an
-            external search engine such as <ulink
-            url="http://www.google.com/">Google</ulink>.  This is
-            acceptable, but direct search support is usually more
-            fine-tuned, because it allows the searcher to specify that
-            the match must appear in a subject line versus the body,
-            for example.</para>
+      <para>Ein Archiv welches die Durchsuchung der Nachrichten&mdash;
+	sowohl des Textkörpers als auch der Betreffzeile&mdash; ist
+	nahezu nutzlos. Beachte, dass manche Archive die Suchfunktion
+	unterstützen, indem sie einfach die Arbeit an externe
+	Suchmaschinen wie <ulink url="http://www.google.com/">Google
+	</ulink> auslagern. Das ist zwar akzeptable aber eine direkte 
+	Suchfunktion ist für gewöhnlich besser abgestimmt, da es dem
+	Suchenden erlaubt zu spezifizieren, ob zum Beispiel nur die
+	Betreffzeile durchsucht werden soll oder der gesamte Text.
+	</para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 
-<para>The above is just a technical checklist to help you evaluate and
-set up an archiver.  Getting people to
-actually <emphasis>use</emphasis> the archiver to the project's
-advantage is discussed in later chapters, in particular
-<xref linkend="using-archives"/>.</para>
+<para>Obiges ist nur eine Checkliste, um Ihnen dabei zu unterstützen
+eine Software für die Archivierung zu evaluieren und einzurichten.
+Leute dazu zu bringen es tatsächlich zu <emphasis>benutzen
+</emphasis>, zum Vorteil des Projekts wird in späteren Kapiteln
+behandelt, spezifisch in <xref linkend="using-archives"/>.</para>
 
 </sect2>
 
@@ -990,55 +993,29 @@ advantage is discussed in later chapters, in particular
 <sect2 id="mailing-list-software">
 <title>Software</title>
 
-<para>Here are some open source tools for doing list management and
-archiving.  If the site where you're hosting your project already has
-a default setup, then you may not ever have to decide on a tool at
-all.  But if you must install one yourself, these are some
-possibilities.  The ones I have actually used are Mailman, Ezmlm,
-MHonArc, and Hypermail, but that doesn't mean the others aren't good
-too (and of course, there are probably other tools out there that I
-just didn't happen to find, so don't take this as a complete
-list).</para>
+<para>Hier sind einige Open Source Programme für die Verwaltung eines
+Verteilers und zur Archivierung. Wenn die Seite die Ihr Projekt
+benutzt, bereits eine standardmäßige Einrichtung hat, werden Sie sich
+unter Umständen niemals für eines entscheiden müssen. Wenn Sie sie
+aber selber einrichten müssen, sind diese einige Möglichkeiten. Die
+die ich tatsächlich benutzt habe, sind Mailman, Etmlm, MHonArc, und 
+Hypermail, was aber nicht bedeutet, dass Andere nicht auch gut sind
+(und natürlich, gibt es auch wahrscheinlich andere Programme die ich
+nur nicht gefunden habe, also betrachten Sie diese nicht als eine
+vollständige Liste.</para>
 
-<para>Mailing list management software:</para>
+<para>Nachrichten Verteiler Software:</para>
 
 <itemizedlist>
  <listitem>
    <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.list.org/"/></para>
-   <para>(Has built-in archiver, and hooks for plugging in
-         external archivers.)</para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.procmail.org/"/></para>
-   <para>(Meant to be used with the Procmail mail processing system.)</para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.ecartis.org/"/></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://listproc.sourceforge.net/"/></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://cr.yp.to/ezmlm.html"/></para>
-   <para>(Designed to work with the <ulink
-         url="http://cr.yp.to/qmail.html">Qmail</ulink> mail
-         delivery system.)</para> 
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://mojo.skazat.com/"/></para>
-   <para>(Despite the web site's bizarre attempts to hide the fact,
-         this is free software, released under the GNU General
-         Public License.  It also has a built-in archiver.)</para>
+   <para>(Hat einen eingebauten Archivierer und Möglichkeiten um externe
+	einzubinden.)</para>
  </listitem>
 </itemizedlist>
 
-<para>Mailing list archiving software:</para>
+<para>Software zur Archivierung:</para>
 
 <itemizedlist>
  <listitem>
@@ -1056,9 +1033,9 @@ list).</para>
  <listitem>
    <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.procmail.org/"/></para>
-   <para>(Companion software to SmartList, this is a general mail
-         processing system that can, apparently, be configured as an
-         archiver.)</para>
+   <para>(Belgelit Software zu SmartList, welches ein allgemeines 
+	System für Mail Verarbeitung ist und anscheinend auch als
+	Archivierer konfiguriert werden kann.)</para>
  </listitem>
 </itemizedlist>
 
@@ -1069,131 +1046,147 @@ list).</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
-<title>Version Control</title>
+<title>Versionsverwaltung</title>
 
-<para>A <firstterm>version control system</firstterm> (or
-<firstterm>revision control system</firstterm>) is a combination of
-technologies and practices for tracking and controlling changes to a
-project's files, in particular to source code, documentation, and web
-pages.  If you have never used version control before, the first thing
-you should do is go find someone who has, and get them to join your
-project.  These days, everyone will expect at least your project's
-source code to be under version control, and probably will not take
-the project seriously if it doesn't use version control with at least
-minimal competence.</para>
+<para>Ein System für die <firstterm>Versionsverwaltung</firstterm>
+(en. Version Control) ist eine Kombination verschiedener Technologien 
+und Verfahren um Änderung an den Dateien eines Projekts, insbesondere
+den Quellcode, die Dokumentation und die Webseiten, zu verfolgen und
+verwalten. Wenn Sie noch nie Versionsverwaltung benutzt haben, ist
+das Erste was Sie tun sollen, jemand finden, der es bereits getan hat
+und sie dazu bringen dem Projekt beizutreten. Heutzutage, wird jeder
+erwarten, dass zumindest Ihr Quellcode und Versionsverwaltung steht,
+und keiner wird Ihr Projekt ernst nehmen, wenn es Versionsverwaltung
+nicht wenigstens mit einem minimum an Kompetenz benutzt.</para>
 
-<para>The reason version control is so universal is that it helps with
-virtually every aspect of running a project: inter-developer
-communications, release management, bug management, code stability and
-experimental development efforts, and attribution and authorization of
-changes by particular developers.  The version control system provides
-a central coordinating force among all of these areas.  The core of
-version control is <firstterm>change management</firstterm>:
-identifying each discrete change made to the project's files,
-annotating each change with metadata like the change's date and
-author, and then replaying these facts to whoever asks, in whatever
-way they ask.  It is a communications mechanism where a change is the
-basic unit of information.</para>
+<para>Der Grund warum Versionsverwaltung so Allgegenwärtig ist, ist
+dass es beim betrieb eines Projekts, in nahezu jedem Aspekt Hilft: 
+Kommunikation zwischen Entwickler, Veröffentlichung neuer Versionen,
+Bug Verwaltung, Code Stabilität und experimentelle Entwicklungen sowie
+die Zuordnung und Authorization von Änderungen von bestimmten 
+Entwicklern. Das Versionsverwaltungssystem bereitet eine zentrale Kraft
+für all diese Bereiche. Der Kern der Versionsverwaltung ist die
+Verwaltung von Änderungen (en. <firstterm>change management</firstterm>:
+jede einzelne Änderung die an den Dateien eines Projkets identifizieren,
+ihnen Metadaten anzuhängen wie Datum der Änderung und den Author, und
+diese Tatsachen jedem der Fragt, egal wie danach gefragt wird
+wiederzugeben. Es ist ein Mechanismus zur Kommunikation, bei dem eine
+Änderung die grundlegende Einheit für Information ist.</para>
 
-<para>This section does not discuss all aspects of using a version
-control system.  It's so all-encompassing that it must be addressed
-topically throughout the book.  Here, we will concentrate on choosing
-and setting up a version control system in a way that will foster
-cooperative development down the road.</para>
+<para>Dieser Abschnitt behandelt nicht jeden Aspekt der Benutzung eines
+Versionsverwaltungssystems. Es ist derart Umfassend, dass es im 
+Buch durchweg immer wieder angesprochen werden muss. Hier werden wie
+uns darauf konzentrieren, ein Versionsverwaltungssystem derart 
+auszuwählen und einzurichten, dass es später die gemeinschaftliche
+Entwicklung unterstützen wird.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
-<title>Version Control Vocabulary</title>
+<title>Vokabular der Versionsverwaltung</title>
 
-<para>This book cannot teach you how to use version control if you've
-never used it before, but it would be impossible to discuss the
-subject without a few key terms.  These terms are useful independently
-of any particular version control system: they are the basic nouns and
-verbs of networked collaboration, and will be used generically
-throughout the rest of this book.  Even if there were no version
-control systems in the world, the problem of change management would
-remain, and these words give us a language for talking about that
-problem concisely.
+<para>Dieses Buch kann Ihnen nicht beibringen Versionsverwaltung zu
+benutzen, wenn Sie es noch nie zuvor benutzt haben, aber es wäre
+unmöglich das Thema zu behandeln, ohne ein paar spezifische Begriffe.
+Diese Begriffe sind unabhängig vom Versionsverwaltungssystem nützlich:
+Sie sind die grundsätzlichen Nomen und Verben der Zusammenarbeit im
+Netzwerk und sie werden allgemein im verlaufe des Buches benutzen.
+Selbst wenn es keine Versionsverwaltung gäbe, gäbe es immer noch das
+Problem der Verwaltung von Änderungen und diese Wörter geben uns eine
+Sprache um präzise und prägnant über das Problem zu reden.</para>
 
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
   <term><firstterm>commit</firstterm></term>
-  <listitem><para>To make a change to the project; more formally, to
-  store a change in the version control database in such a way that it
-  can be incorporated into future releases of the project.  "Commit"
-  can be used as a verb or a noun.  As a noun, it is essentially
-  synonymous with "change".  For example: "I just committed a fix for
-  the server crash bug people have been reporting on Mac OS X.  Jay,
-  could you please review the commit and check that I'm not misusing
-  the allocator there?"</para></listitem>
+  <listitem><para>Eine Änderung an dem Projekt vornehmen; formeller
+	gesagt, eine Änderung in der Datenbank der Versionsverwaltung
+	zu speichern, derart, dass es in Zukünftige Versionen des
+	Projekts eingebunden werden kann. "Commit" (de. festlegen)
+	kann sowohl als Nomen, als auch als Verb benutzt werden. Als
+	Nomen, ist es im wesentlichen synonym mit Änderung. Zum 
+	Beispiel: "Ich habe habe eben einen Fix für den Bug der von
+	Nutzern von Max OS X, server Abstürze verursacht hat committed,
+	Jay könntest du dir bitte den Commit anschauen und überprüfen,
+	dass ich nicht den Allocator dort nicht missbrauche?"</para>
+	</listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
   <term><firstterm>log&nbsp;message</firstterm></term>
-  <listitem><para>A bit of commentary attached to each commit,
-  describing the nature and purpose of the commit.  Log messages are
-  among the most important documents in any project: they are the
-  bridge between the highly technical language of individual code
-  changes and the more user-oriented language of features, bugfixes,
-  and project progress.  Later in this section, we'll look at ways to
-  distribute log messages to the appropriate audiences; also, <xref
-  linkend="codifying-tradition"/><phrase output="printed"> in
-  <xref linkend="communications"/></phrase> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
+  <listitem><para>Ein Kommentar der an jedem Commit angehängt wird,
+	der die Art der Änderung und sein Nutzen beschreibt. Log
+	Nachrichten sind mitunter die wichtigsten Dokumente in einem
+	Projekt: Sie sind die Brücke zwischen der äußerst technischen
+	Sprache der einzelnen Code Änderungen und der eher Nutzer
+	orientierten Sprache der Funktionen, Bugfixes und Projekt
+	Fortschritt. Später in diesem Abschnitt werden wir uns Wege
+	anschauen, log Nachrichten an das richtige Publikum zu 
+	verteilen; sowie, <xref linkend="codifying-tradition"/>
+	<phrase output="printed"> im Kapitel <xref
+	linkend="communications"/></phrase> welches in Methoden
+	beschreibt Beteiligte dazu anzuregen kurze prägnante und
+	nützliche log Nachrichten zu schreiben.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
   <term><firstterm>update</firstterm></term>
-  <listitem><para>To ask that others' changes (commits) be
-  incorporated into your local copy of the project; that is, to bring
-  your copy "up-to-date".  This is a very common operation; most
-  developers update their code several times a day, so that they know
-  they're running roughly the same thing the other developers are
-  running, and so that if they see a bug, they can be pretty sure it
-  hasn't been fixed already.  For example: "Hey, I noticed the
-  indexing code is always dropping the last byte.  Is this a new bug?"
-  "Yes, but it was fixed last week&mdash;try updating, it should go
-  away."</para></listitem>
+  <listitem><para>Danach zu fragen, dass die Änderungen (commits) in
+	der eigenen lokalen Kopie des Projekts eingebunden werden; bzw.
+	Ihre Kopie zu aktualisieren. Dies ist ein sehr häufiger 
+	Vorgang; die meisten Entwickler aktualisieren ihren Code
+	mehrmals am Tag um sicherzustellen, dass sie die ungefähr das
+	Selbe am laufen haben, wie die Anderen Entwickler, und so dass
+	falls Sie einen Fehler finden, sie sich ziemlich sicher sein
+	können das es bisher noch nicht behoben wurde. Zum Beispiel:
+	"Hallo, ich habe bemerkt, dass der Code für die Indexierung
+	immer das letzte Byte falle lässt. Ist das ein neuer Bug?"
+	"Ja, aber es wurde letzte Woche behoben&mdash;versuch mal
+	einen Update zu machen, dann sollte es verschwinden."</para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
-  <term><firstterm>repository</firstterm></term> <listitem><para>A
-  database in which changes are stored.  Some version control systems
-  are centralized: there is a single, master repository, which stores
-  all changes to the project.  Others are decentralized: each
-  developer has his own repository, and changes can be swapped back
-  and forth between repositories arbitrarily.  The version control
-  system keeps track of dependencies between changes, and when it's
-  time to make a release, a particular set of changes is approved for
-  that release.  The question of whether centralized or decentralized
-  is better is one of the enduring holy wars of software development;
-  try not to fall into the trap of arguing about it on your project
-  lists.</para></listitem>
+  <term><firstterm>repository</firstterm></term> <listitem><para>Eine
+	Datenbank in dem Änderungen gespeichert werden. Manche
+	Versionsverwaltungssysteme sind zentralisiert: Es gibt eine
+	Haupt repository, welche alle Änderungen am Projekt speichert.
+	Andere sind dezentralisiert: jeder Entwickler hat seine eigene
+	repository, und Änderungen können beliebig hin und her 
+	getauscht werden. Das Versionsverwaltungssystem verfolgt die
+	Abhängigkeiten zwischen den Änderungen und wenn es Zeit wird
+	einen Release zu machen, wird einem bestimmter Satz von 
+	Änderungen für die neue Version zugestimmt. Die Frage welche
+	der beiden besser ist, ist eine der andauernden Heiligen
+	Kriege der Software Entwicklung; Versuchen Sie nicht in die
+	Falle zu treten, sich auf Ihren Nachrichten Verteiler darüber
+	zu streiten.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
   <term><firstterm>checkout</firstterm></term>
-  <listitem><para>The process of obtaining a copy of the project from
-  a repository.  A checkout usually produces a directory tree called a
-  "working copy" (see below), from which changes may be committed back
-  to the original repository.  In some decentralized version control
-  systems, each working copy is itself a repository, and changes can
-  be pushed out to (or pulled into) any repository that's willing
-  to accept them.</para></listitem>
+  <listitem><para>Der Vorgang, eine Kopie des Projekts vom Repository
+	zu beschaffen. Ein Checkout produziert für gewöhnlich eine
+	Verzeichnisstruktur welches als "working copy" (siehe unten) 
+	bezeichnet wird, von dem aus Änderungen wieder zurück an die
+	Repository committed werden können. Bei manchen 
+	dezentralisierten Versionsverwaltungssystemen ist jede Working
+	Copy selbst eine Repository, und Änderungen können an jede
+	Repository hoch-(oder herunter-) geladen werden, die bereit
+	ist sie anzunehmen.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
   <term><firstterm>working copy</firstterm></term>
-  <listitem><para>A developer's private directory tree containing the
-  project's source code files, and possibly its web pages or other
-  documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling the working copy what
-  repository it comes from, what "revisions" (see below) of the files
-  are present, etc.  Generally, each developer has his own working
-  copy, in which he makes and tests changes, and from which he
-  commits.</para></listitem>
+  <listitem><para>(de. Arbeitskopie) Der private Verzeichnisbaum eines
+	Entwicklers, welches die Source Code Dateien des Projekts und
+	möglicherweise seine Webseiten oder andere Dokumente beinhaltet.
+	Eine Arbeitskopie enthält auch ein wenig Metadaten, die von dem
+	Versionsverwaltungssystem benutzt werden, um zu Kennzeichen 	
+	woher von welchem Repository sie kommt, welche "revision" (siehe
+	Unten) der Dateien vorliegen, usw. Im allgemeinen hat jeder
+	Entwickler seine eigene Arbeitskopie, in welcher er seine
+	Änderungen macht und testet, und von dem aus er committed.
+	</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
