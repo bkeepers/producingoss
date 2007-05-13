@@ -1193,136 +1193,154 @@ Sprache um präzise und prägnant über das Problem zu reden.</para>
   <term><firstterm>revision</firstterm>,
         <firstterm>change</firstterm>,
         <firstterm>changeset</firstterm></term>
-  <listitem><para>A "revision" is usually one specific incarnation of
-  a particular file or directory.  For example, if the project starts
-  out with revision 6 of file F, and then someone commits a change to
-  F, this produces revision 7 of F.  Some systems also use
-  "revision", "change", or "changeset" to refer to a set of changes
-  committed together as one conceptual unit.</para> 
+  <listitem><para>Eine "revision" ist für gewöhnlich eine bestimmte
+	Version von einer Datei oder einem Verzeichnisses. Wenn das
+	Projekt zum Beispiel mit der revision 6 der Datei D anfängt, 
+	und dann jemand eine Änderung an D committed, entsteht die
+	revision 7 von D. Manche Systeme benutzen "revision", "change"
+	(de. Änderung) oder "changeset" (de. Satz von Änderungen) auch
+	um einen ganzen Satz an Änderungen die zusammen committed
+	wurden als Einheit zu bezeichnen.</para> 
 
-  <para>These terms occasionally have distinct technical meanings in
-  different version control systems, but the general idea is always
-  the same: they give a way to speak precisely about exact points in
-  time in the history of a file or a set of files (say, immediately
-  before and after a bug is fixed).  For example: "Oh yes, she fixed
-  that in revision 10" or "She fixed that in revision 10 of
-  foo.c."</para>
+	<para>Diese Begriffe haben ab und zu eine Bestimmte technische
+	Bedeutung bei verschiedenen Versionsverwaltungssystemen, im
+	allgemeinen ist die Idee immer die gleiche: Sie ermöglichen
+	es genau über bestimmte Zeitpunkte in der Geschichte der Datei
+	zu reden (wie, direkt vor und nachdem ein Bug behoben wurde).
+	Beispielsweise: "Ja, sie hat das in revision 10 behoben" oder
+	"Sie hat das in revision 10 von foo.c behoben."</para>
 
-  <para>When one talks about a file or collection of files without
-  specifying a particular revision, it is generally assumed that one
-  means the most recent revision(s) available.</para></listitem>
+	<para>Wenn man von einer Datei oder einer Sammlung von Dateien
+	spricht ohne eine bestimmte revision anzugeben, wird im
+	Allgemeinen angenommen, dass man von der aktuellsten revision
+	spricht.</para></listitem>
  </varlistentry>
 
   <sidebar id="version-vs-revision">
-  <title>"Version" Versus "Revision"</title>
-  <para>The word <firstterm>version</firstterm> is sometimes used as a
-  synonym for "revision", but I will not use it that way in this
-  book, because it is too easily confused with "version" in the sense
-  of a version of a piece of software&mdash;that is, the release or
-  edition number, as in "Version 1.0".  However, since the phrase
-  "version control" is already standard, I will continue to use it as
-  a synonym for "revision control" and "change control".</para>
+  <title>"Version" kontra "Revision"</title>
+  <para>Das Wort <firstterm>Version</firstterm> wird manchmal als
+	synonym für "revision" benutzt, ich werde es jedoch in diesem
+	Buch nicht auf diese Art verwenden, da es zu leicht zu
+	verwechseln ist mit "version" im sinne einer bestimmten
+	Version einer Software&mdash;also, mit einer Versionsnummer
+	wie "Version 1.0". Da jedoch, der Begriff Versionsverwaltung
+	bereits geläufig ist, werden ich es weiterhin benutzen.</para>
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
   <term><firstterm>diff</firstterm></term>
-  <listitem><para>A textual representation of a change.  A diff shows
-  which lines were changed and how, plus a few lines of surrounding
-  context on either side.  A developer who is already familiar with
-  some code can usually read a diff against that code and understand
-  what the change did, and even spot bugs.</para></listitem>
+  <listitem><para>(kurz für difference de. Unterschied) Eine textuelle
+	Representation einer Änderung. Ein diff zeigt welche Zeilen
+	geändert wurden und wie, sowie ein paar zusätzliche umgebende
+	Zeilen um einen Bezug zu haben. Ein Entwickler der bereits ein
+	wenig mit dem Code vertraut ist, kann für gewöhnlich ein diff
+	lesen und verstehen was die Änderung gemacht hat und sogar ein
+	Bugs bemerken.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
   <term><firstterm>tag</firstterm></term>
-  <listitem><para>A label for a particular collection of files at
-  specified revisions.  Tags are usually used to preserve
-  interesting snapshots of the project.  For example, a tag is usually
-  made for each public release, so that one can obtain, directly from
-  the version control system, the exact set of files/revisions
-  comprising that release.  Common tag names are things like
-  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
-  etc.</para></listitem>
+  <listitem><para>(de. Etikett) Eine Kennzeichnung einer bestimmen
+	Sammlung von Dateien an bestimmten Revisionen. Tags werden
+	üblicherweise benutzt um interessante Revisionen des Projekts
+	zu erhalten. Für jede neue öffentliche Version wird zum Beispiel
+	ein neuer "Tag" gemacht, damit man sich genau den selben Satz
+	von Dateien/Revisionen aus dem Versionsverwaltungssystem
+	beschaffen kann. Häufige "Tag" Bezeichnungen sind sowas wie
+	<literal>Version_1_0</literal>, <literal>Auslieferung_00456
+	</literal>, usw.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
   <term><firstterm>branch</firstterm></term>
-  <listitem><para>A copy of the project, under version control but
-  isolated, so that changes made to the branch don't affect the rest
-  of the project, and vice versa, except when changes are
-  deliberately "merged" from one side to the other (see below).
-  Branches are also known as "lines of development".  Even when a
-  project has no explicit branches, development is still considered
-  to be happening on the "main branch", also known as the "main line"
-  or "<firstterm>trunk</firstterm>".</para>
+  <listitem><para>(de. Ast) Eine Kopie des Projekts, welche zwar unter
+	Versionsverwaltung steht aber isoliert is, damit Änderungen 
+	nicht das Übrige Projekt beeinflussen und umgekehrt, außer
+	wenn Änderungen absichtlich von einer Seite zur Anderen
+	"gemerged" werden (siehe unten). Ein Branch kann man auch als
+	Entwicklungszweig bezeichnen. Selbst wenn ein Projekt nicht
+	explizit irgend welche Branches hat, betrachtet man dennoch
+	den "main branch" auch "main line" oder "<firstterm>trunk
+	</firstterm>" als den Zweig auf dem die Entwicklung stattfindet.  
+	</para>
 
-  <para>Branches offer a way to isolate different lines of development
-  from each other.  For example, a branch can be used for experimental
-  development that would be too destabilizing for the main trunk.  Or
-  conversely, a branch can be used as a place to stabilize a new
-  release.  During the release process, regular development would
-  continue uninterrupted in the main branch of the repository;
-  meanwhile, on the release branch, no changes are allowed except
-  those approved by the release managers.  This way, making a release
-  needn't interfere with ongoing development work.  See <xref
-  linkend="branches"/><phrase output="printed"> later in this
-  chapter</phrase> for a more detailed discussion of
-  branching.</para></listitem>
+	<para>Branches bieten eine Möglichkeit verschiedene Linien der
+	Entwicklung von einander zu trennen. Ein Branch kann zum
+	Beispiel für Experimentelle Entwicklung benutzt werden, die
+	für den Haupt Branch zu instabil wären. Oder umgekehrt kann
+	ein Branch als Ort benutzt werden um eine neue Version zu 
+	stabilisieren. Während der Entwicklung, würde die reguläre
+	Entwicklung im Haupt Branch ohne Unterbrechung weitergehen
+	können; währenddessen werden auf dem Branch der neuen Version
+	keine Änderungen mehr zugelassen, außer sie werden von einem 
+	Release Manager genehmigt. Auf diese Art, muss eine neue
+	Version nicht die laufende Entwicklungsarbeit stören. Siehe
+	<xref linkend="branches"/><phrase output="printed">später in
+	diesem Kapitel</phrase> für eine detailliertere Erörterung 
+	von Branching.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
-  <term><firstterm>merge (a.k.a. port)</firstterm></term>
-  <listitem><para>To move a change from one branch to another.  This
-  includes merging from the main trunk to some other branch, or vice
-  versa.  In fact, those are the most common kinds of merges; it is
-  rare to port a change between two non-main branches.  See <xref
-  linkend="vc-singularity"/> for more about this kind of
-  merging.</para>
+  <term><firstterm>merge (auch port)</firstterm></term>
+  <listitem><para>(de. Zusammenführung) Eine Änderung von einem Branch
+	in einen Anderen übernehmen. Was auch merging von dem trunk in
+	einen anderen Branch oder umgekehrt bedeuten kann. Tatsächlich
+	sind das sogar die häufigsten Merges; es ist selten eine
+	Änderung zwischen zwei Branches zu mergen, die nicht beide
+	Haupt-Zweige sind. Siehe <xref linkend="vc-singularity"/>
+	für mehr zu dieser Art von merging.</para>
 
-  <para>"Merge" has a second, related meaning: it is what the version
-  control system does when it sees that two people have changed the
-  same file but in non-overlapping ways.  Since the two changes do not
-  interfere with each other, when one of the people updates their copy
-  of the file (already containing their own changes), the other
-  person's changes will be automatically merged in.  This is very
-  common, especially on projects where multiple people are hacking on
-  the same code.  When two different changes <emphasis>do</emphasis>
-  overlap, the result is a "conflict"; see below.</para>
+	<para>"Merge" hat eine zweite, verwandte Bedeutung: Es ist das,
+	was das Versionsverwaltungssystem macht, wenn zwei Leute die
+	gleiche Datei bearbeitet haben, aber derart, dass sie sich nicht
+	überlappen. Da die Änderungen nicht mit einander kollidieren,
+	sobald einer der beiden seine Kopie der Datei aktualisiert
+	(welches bereits ihre eigenen Änderungen enthält), werden die
+	Änderungen der anderen Person gemerged. Das kommt sehr häufig
+	vor, besonders in Projekten, bei dem mehrere Entwickler am
+	gleichen Code hacken. Wenn zwei verschiedene Änderungen
+	<emphasis>doch</emphasis> überlappen, gibt es einen
+	"conflict"; siehe unten.</para>
   </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
   <term><firstterm>conflict</firstterm></term>
-  <listitem><para>What happens when two people try to make different
-  changes to the same place in the code.  All version control systems
-  automatically detect conflicts, and notify at least one of the
-  humans involved that their changes conflict with someone else's.  It
-  is then up to that human to <firstterm>resolve</firstterm> the
-  conflict, and to communicate that resolution to the version control
-  system.</para></listitem>
+  <listitem><para>Was geschieht wenn zwei Personen gleichzeitig
+	unterschiedliche Änderungen an der gleichen Stelle im Code
+	vornehmen. Alle Versionsverwaltungssysteme erkennen Konflikte
+	automatisch, und benachrichtigen mindestens einer der 
+	beteiligten Menschen, dass ihre Änderungen mit denen eines
+	Anderen Kollidieren. Es ist dann die Aufgabe des Menschen den
+	Konflikt zu beseitigen (en. resolve) und es an das
+	Versionsverwaltungssystem zu vermitteln.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
   <term><firstterm>lock</firstterm></term>
-  <listitem><para>A way to declare an exclusive intent to change a
-  particular file or directory.  For example, "I can't commit any
-  changes to the web pages right now.  It seems Alfred has them all
-  locked while he fixes their background images."  Not all version
-  control systems even offer the ability to lock, and of those that
-  do, not all require the locking feature to be used.  This is because
-  parallel, simultaneous development is the norm, and locking people
-  out of files is (usually) contrary to this ideal.</para>
+  <listitem><para>(de. Schloss/Sperre) Eine Möglichkeit eine exklusive
+	Absicht auf eine Datei oder ein Verzeichnis zu erklären. Zum
+	Beispiel: "Ich kann gerade keine Änderungen an den Webseiten 
+	committen. Es scheint das Alfred all gesperrt hat (en. locked)
+	während er die Hintergrundbilder repariert". Nicht alle
+	Versionsverwaltungssysteme bieten überhaupt die Möglichkeit
+	zur Sperrung überhaupt an, und von denen die es tun, erfordern
+	nicht alle, dass sie auch benutzt wird. Das liegt daran, dass
+	parallele, gleichzeitige Entwicklung der Normalfall ist, und
+	Personen eine Datei für andere zu Sperren (gewöhnlicherweise)
+	diesem Ideal entgegensteht.</para>
 
-  <para>Version control systems that require locking to make commits
-  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
-  Those that do not are said to use the
-  <firstterm>copy-modify-merge</firstterm> model.  An excellent
-  in-depth explanation and comparison of the two models may be found
-  at <ulink
-  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
-  general, the copy-modify-merge model is better for open source
-  development, and all the version control systems discussed in this
-  book support that model.</para></listitem>
+  <para>Von Versionsverwaltungssystemen die einen lock erfordern um einen
+	commit zu machen, sagt man, dass sie das
+	<firstterm>lock-modify-unlock</firstterm> Modell benutzen. Solche
+	die es nicht erfordern nutzen das <firstterm>copy-modify-merge
+	</firstterm> Modell. Eine ausgezeichnete tiefgehende Erklärung
+	und Vergleich der beiden Modelle kann man bei <ulink
+	url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>
+	finden. Im allgemeinen, ist die copy-modify-merge Methode besser
+	für die Open Source Entwicklung, und alle 
+	Versionsverwaltungssysteme in diesem Buch unterstützen es.</para>
+	</listitem>
  </varlistentry>
 
 </variablelist>
@@ -1334,22 +1352,24 @@ Sprache um präzise und prägnant über das Problem zu reden.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-choosing">
-<title>Choosing a Version Control System</title>
+<title>Die Wahl eines Versionsverwaltungssystems</title>
 
-<para>As of this writing, the version control system of choice in the
-free software world is the <firstterm>Concurrent Versions
-System</firstterm> or <firstterm>CVS</firstterm>
-(<ulink url="http://www.cvshome.org/"/>).  CVS has
-been around for a long time.  Most experienced developers are already
-familiar with it, it does more or less what you need, and since it's
-the default, you won't end up in any long debates about whether or not
-it was the right choice.  CVS has some disadvantages, however.  It
-doesn't provide an easy way to refer to multi-file changes; it doesn't
-allow you to rename or copy files under version control (so if you
-need to reorganize your code tree after starting the project, it can
-be a real pain); it has poor merging support; it doesn't handle large
-files or binary files very well; and some operations are slow when
-large numbers of files are involved.</para>
+<para>Bis dato, ist das Versionsverwaltungssystem der Wahl in der Welt
+der freien Software das <firstterm>Concurrent Versions System
+</firstterm> oder auch <firstterm>CVS</firstterm> (<ulink 
+url="http://www.cvshome.org/"/>). CVS gibt es schon seit langem. Die
+meisten Erfahrenen Entwickler sind bereits damit vertraut, es erledigt
+die Aufgabe mehr oder weniger gut und da es der Standard ist, werden
+Sie keine langen Debatten darüber führen müssen ob es die richtige
+Wahl war. CVS hat jedoch einige Nachteile. Es bietet keine einfache
+Möglichkeit an sich auf Änderungen an mehreren Dateien gleichzeitig
+zu beziehen; es erlaubt es nicht Dateien umzubenennen oder zu kopieren
+die unter Versionsverwaltung stehen (was besonders nervt, wenn Sie Ihr
+Code neu organisieren wollen, nachdem Sie das Projekt gestartet haben);
+es bietet nur dürftige Unterstützung für Merging an; es kann nicht
+sonderlich gut mit großen oder binären Dateien umgehen; und manche
+Vorgänge sind langsam, wenn sie mit großen Dateimengen zu tun haben.
+</para>
 
 <para>None of CVS's flaws is fatal, and it is still quite popular.
 However, in the last few years a number of new version control systems
