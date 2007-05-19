@@ -651,42 +651,148 @@ url="http://www.opensource.org/licenses/bsd-license.php"/>.</para>
 <sect1 id="copyright-assignment">
 <title>Copyright Assignment and Ownership</title>
 
-<para>Most projects have a single legal entity own the copyright on
-the entire code base.  This is done for various reasons.  If the terms
-of the copyright ever need to be defended or enforced in court, it's
-much easier if a single entity has the right to do so; otherwise, all
-of the contributors would have to cooperate, and some might not have
-time or even be reachable when the issue arises.  Also, if the code is
-the target of a copyright infringement suit, you wouldn't want the
-individual developers to be personally exposed to liability.</para>
+<para>There are three ways to handle copyright ownership of free code
+contributed to by many people.  The first is to ignore the issue of
+copyright entirely (I don't recommend this).  The second is to collect
+a <firstterm>contributor license agreement</firstterm>
+(<firstterm>CLA</firstterm>) from each person who works on the
+project, explicitly granting the project the right to use that
+person's code.  This is usually enough for most projects, and the nice
+thing is that in some jurisdictions, CLAs can be sent in by email.
+The third way is to get actual copyright assignments from
+contributors, so that the project (i.e., some legal entity, usually a
+nonprofit) is the copyright owner for everything.  This is the most
+legally airtight way, but it's also the most burdensome for
+contributors; only a few projects insist on it.</para>
 
-<para>Remember that centralized ownership of the copyright does not
-make the code any less free.  Open source licenses do not give the
-copyright holder the right to retroactively proprietize all copies of
-the code.  Even if the copyright-holding entity suddenly turned around
-and started distributing all the code under a restrictive license, it
-wouldn't cause a problem for the public project.  The other developers
-would simply start a fork based on the latest free copy of the code,
-and continue as if nothing had happened.  Because they know they can
-do this, most developers do not object when asked to assign copyright
-to some sponsoring organization.</para>
+<para>Note that even under centralized copyright ownership, the code
+remains free, because open source licenses do not give the copyright
+holder the right to retroactively proprietize all copies of the code.
+So even if the project, as a legal entity, were to suddenly turn
+around and started distributing all the code under a restrictive
+license, that wouldn't cause a problem for the public community.  The
+other developers would simply start a fork based on the latest free
+copy of the code, and continue as if nothing had happened.  Because
+they know they can do this, most contributors cooperate when asked to
+sign a CLA or an assignment of copyright.</para>
+
+<sect2 id="copyright-assignment-none">
+<title>Doing Nothing</title>
+
+<para>Most projects never collect CLAs or copyright assignments from
+their contributors.  Instead, they accept code whenever it seems
+reasonably clear that the contributor intended it to be incorporated
+into the project.</para>
+
+<para>Under normal circumstances, this is okay.  But every now and
+then, someone may decide to sue for copyright infringement, alleging
+that they are the true owner of the code in question and that they
+never agreed to its being distributed by the project under an open
+source license.  For example, the SCO Group did something like this to
+the Linux project, see
+<ulink url="http://en.wikipedia.org/wiki/SCO-Linux_controversies"/>
+for details.  When this happens, the project will have no
+documentation showing that the contributor formally granted the right
+to use the code, which could make some legal defenses more
+difficult.</para>
+
+</sect2>
+
+<sect2 id="copyright-assignment-cla">
+<title>Contributor License Agreements</title>
+
+<para>CLAs probably offer the best tradeoff between safety and
+convenience.  A CLA is typically an electronic form that a developer
+fills out and sends in to the project.  In many jurisdictions, email
+submission is enough.  A secure digital signature may or may not be
+required; consult a lawyer to find out what method would be best for
+your project.</para>
+
+<para>Most projects use two slightly different CLAs, one for
+individuals, and one for corporate contributors.  But in both types,
+the core language is the same: the contributor grants the
+project <emphasis>"...perpetual, worldwide, non-exclusive, no-charge,
+royalty-free, irrevocable copyright license to reproduce, prepare
+derivative works of, publicly display, publicly perform, sublicense,
+and distribute [the] Contributions and such derivative
+works."</emphasis> Again, you should have a lawyer approve any CLA,
+but if you get all those adjectives into it, you're probably
+fine.</para>
+
+<para>When you request CLAs from contributors, make sure to emphasize
+that you are <emphasis>not</emphasis> asking for actual copyright
+assignment.  In fact, many CLAs start out by reminding the reader of
+this:</para>
+
+<blockquote>
+<para><emphasis>This is a license agreement only; it does not transfer
+copyright ownership and does not change your rights to use your own
+Contributions for any other purpose.</emphasis></para>
+</blockquote>
+
+<para>Here are some examples:</para>
+
+<itemizedlist>
+  <listitem><para>Individual contributor CLAs:</para>
+    <itemizedlist>
+      <listitem><para><ulink
+        url="http://apache.org/licenses/icla.txt"/>
+      </para></listitem>
+      <listitem><para><ulink
+        url="http://code.google.com/legal/individual-cla-v1.0.html"/>
+      </para></listitem>
+<!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/individual-cla.txt"/>
+      </para></listitem>  -->
+    </itemizedlist>
+  </listitem>
+  <listitem><para>Corporate contributor CLAs:</para>
+    <itemizedlist>
+      <listitem><para><ulink
+        url="http://apache.org/licenses/cla-corporate.txt"/>
+      </para></listitem>
+      <listitem><para><ulink
+        url="http://code.google.com/legal/corporate-cla-v1.0.html"/>
+      </para></listitem>
+<!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/corporate-cla.txt"/>
+      </para></listitem>  -->
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="copyright-assignment-transfer">
+<title>Transfer of Copyright</title>
+
+<para>Copyright transfer means that the contributor assigns to the
+project copyright ownership on her contributions.  Ideally, this is
+done on paper and either faxed or snail-mailed to the project.</para>
+
+<para>Some projects insist on full assignment because having a single
+legal entity own the copyright on the entire code base can be useful
+if the terms of the open source license ever need to be enforced in
+court.  If no single entity has the right to do it, all the
+contributors might have to cooperate, but some might not have time or
+even be reachable when the issue arises.</para>
 
 <para>Different organizations apply different amounts of rigor to the
-task of collecting copyright assignments.  For most, simply getting an
-informal statement from a contributor on the public list is
-enough&mdash;something to the effect of "I hereby assign copyright in
-this code to the project, to be licensed under the same terms as the
-rest of the code."  At least one lawyer I've talked to says that's
-really enough, presumably because it happens in a context where
-copyright assignment is normal and expected anyway, and because it
-represents a <foreignphrase>bona fide</foreignphrase> effort on the
-project's part to ascertain the developer's true intentions.  On the
-other hand, the Free Software Foundation goes to the opposite extreme:
-they require contributors to physically sign and mail in a piece of
-paper containing a formal statement of copyright assignment, sometimes
-for just one contribution, sometimes for current and future
-contributions.  If the developer is employed, the FSF asks that the
-employer sign it too.</para>
+task of collecting assignments.  Some simply get an informal statement
+from a contributor on a public list mailing list&mdash;something to
+the effect of "I hereby assign copyright in this code to the project,
+to be licensed under the same terms as the rest of the code."  At
+least one lawyer I've talked to says that's really enough, presumably
+because it happens in a context where copyright assignment is normal
+and expected anyway, and because it represents a <foreignphrase>bona
+fide</foreignphrase> effort on the project's part to ascertain the
+developer's true intentions.  On the other hand, the Free Software
+Foundation goes to the opposite extreme: they require contributors to
+physically sign and mail in a piece of paper containing a formal
+statement of copyright assignment, sometimes for just one
+contribution, sometimes for current and future contributions.  If the
+developer is employed, the FSF asks that the employer sign it
+too.</para>
 
 <para>The FSF's paranoia is understandable.  If someone violates the
 terms of the GPL by incorporating some of their software into a
@@ -695,7 +801,11 @@ they want their copyrights to be as airtight as possible when that
 happens.  Since the FSF is copyright holder for a lot of popular
 software, they view this as a real possibility.  Whether your
 organization needs to be similarly scrupulous is something only you
-can decide, in consultation with lawyers.</para>
+can decide, in consultation with lawyers.  In general, unless there's
+some specific reason why your project needs full copyright assignment,
+just go with CLAs; they're easier for everyone.</para>
+
+</sect2>
 
 </sect1>
 
@@ -935,7 +1045,10 @@ substance or interpretation of international patent law will do that.
 To learn more about the problem, and how it's being fought, go to
 <ulink url="http://www.nosoftwarepatents.com/"/>.  The Wikipedia
 article <ulink url="http://en.wikipedia.org/wiki/Software_patent"/>
-also has a lot of useful information on software patents.</para>
+also has a lot of useful information on software patents.  I've also
+written a blog post summarizing the arguments against software
+patents, at
+<ulink url="http://www.rants.org/2007/05/01/how-to-tell-that-software-patents-are-a-bad-idea/"/>.</para>
 
 </sect1>
 
