@@ -128,9 +128,127 @@ people may have made:</p>
    $ svn update
 </pre>
 
-<pre>
-</pre>
+<hr>
 
+<p>Here are more detailed instructions, for translators who don't have
+prior Subversion experience.  (These are taken from an email I posted
+to the translators mailing list, and are written for a translator
+working under Microsoft Windows.  -Karl Fogel).</p>
+
+<pre>
+   Subversion (<a href="http://subversion.tigris.org/">http://subversion.tigris.org/</a>, also called "SVN") is a
+   version control system, which is used to keep track of all changes to
+   the book.  The "master copy" of the book is stored, as XML files, in a
+   central repository here:
+   
+      <a href="http://svn.red-bean.com/repos/producingoss/trunk/">http://svn.red-bean.com/repos/producingoss/trunk/</a>
+   
+   You can browse the repository with your web browser; Subversion also
+   knows how to request a copy of the book from that location.  In
+   SVN-speak, we say "check out" for "request a copy".  It's like
+   checking out a book from the library.  To check out, you first install
+   Subversion software (the Subversion "client") on your own computer,
+   and have that client request a copy of the book from the repository.
+   
+   The client you should use is TortoiseSVN (I'm assuming you're on a
+   Windows machine).  TortoiseSVN is at <a href="http://tortoisesvn.tigris.org/">http://tortoisesvn.tigris.org/</a>.
+   It self-installs like other Windows software.
+   
+   (Using TortoiseSVN is pretty easy -- you can press F1 at any time, also
+   there are manuals in various languages at http://tortoisesvn.net/support.
+   I've only read the English, but I highly recommend it, see
+   <a href="http://tortoisesvn.net/docs/release/TortoiseSVN_en/index.html">http://tortoisesvn.net/docs/release/TortoiseSVN_en/index.html</a>, especially
+   <a href="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-basics.html">http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-basics.html</a>
+   for a basic introduction to SVN.)
+   
+   Fortunately, you don't need to read all those manuals right now.  I'll
+   just tell you how to get started :-).
+   
+   After installing TortoiseSVN, use Windows Explorer to choose a folder
+   where you want to put your copy of the book (this will be called your
+   "working copy").  Right click to pop up the context menu, and select
+   
+      TortoiseSVN --&gt; Checkout
+   
+   This will bring up a dialog box, asking you for a URL and a checkout
+   directory.  For the URL, use
+   
+      <a href="http://svn.red-bean.com/repos/producingoss/trunk/">http://svn.red-bean.com/repos/producingoss/trunk/</a>
+   
+   and for the checkout folder, pick any name you want (TortoiseSVN will
+   create this folder on your local disk).  I recommend
+   
+      ProducingOSS
+   
+   or something like that.
+   
+   Note that you'll only do this checkout process once.  After that,
+   you'll be using:
+   
+      TortoiseSVN --&gt; Update
+   
+   whenever you want to pull changes from the repository into your
+   working copy.  (This is to stay up-to-date with what the other
+   translators are doing, especially in your language.)
+   
+   The initial checkout may take a while, because it gets both the
+   English and all the translation folders.  (Technically, there are ways
+   to limit it to just your language folder, but I'm assuming you have a
+   reasonable amount of disk space and prefer to keep things simple, so
+   let's just check out the entire book tree.)
+   
+   Let's say you have checked out into the folder "ProducingOSS".  Inside
+   that folder you'll see things like this:
+   
+      ProducingOSS\ch00.xml
+      ProducingOSS\ch01.xml
+      ProducingOSS\ch02.xml
+      ...
+      ProducingOSS\ch09.xml
+      ProducingOSS\translations\es\ch00.xml
+      ProducingOSS\translations\es\ch01.xml
+      ProducingOSS\translations\es\...
+      ...
+      ProducingOSS\translations\pl\ch00.xml
+      ProducingOSS\translations\pl\ch01.xml
+      ProducingOSS\translations\pl\...
+      ...
+   
+   etc, etc.
+   
+   The only files you need to worry about are the ones at the top (the
+   English .xml files), and the files in your language folder,
+   translations\es.  Most of the files in translations\es will still be
+   in English -- they are direct copies of the English files, and they
+   need to be translated.
+   
+   So just edit one in your favorite text editor, translating as much as
+   you want.  When you're done with a session, it's time to send your
+   changes back to the repository -- that is, to "commit" your changes.
+   Committing stores your changes permanently, and makes them available
+   to all the other translators.  Committing also causes an email to be
+   sent to this mailing list, showing everyone what you translated; this
+   makes it easier for people to review each others' work and get a sense
+   of general progress.
+   
+   In TortoiseSVN, you commit by right-clicking and choosing
+   
+      TortoiseSVN --&gt; Commit
+   
+   It will ask you for a message (known as a "log message"), a short note
+   that explains what you changed.  You can just say "Translated 9 more
+   paragraphs" or whatever.  Your log message can be in the language
+   you're translating to, or in English, that's the choice of you and
+   your language team.
+   
+   Periodically, you should also do
+   
+      TortoiseSVN --&gt; Update
+   
+   to pull changes from the repository into your working copy.  I
+   recommend doing this right before you sit down to do some translation,
+   that's often enough.
+</pre>
 
 </div>
 
