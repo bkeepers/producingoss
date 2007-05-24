@@ -1846,29 +1846,32 @@ Bereich committed hat. Es gab ein zwei mal Missverständnisse über das
 Ausmaß der Commit Berechtigungen, was jedoch immer schnell und
 freundlich aufgelöst wurde.</para>
 
-<para>Obviously, in situations where self-policing is impractical, you
-must rely on hard authorization controls.  But such situations are
-rare.  Even when there are millions of lines of code and hundreds or
-thousands of developers, a commit to any given code module should
-still be reviewed by those who work on that module, and they can
-recognize if someone committed there who wasn't supposed to.  If
-regular commit review <emphasis>isn't</emphasis> happening, then the
-project has bigger problems to deal with than the authorization system
-anyway.</para>
+<para>Offensichtlich, muss man sich auf strikte authorisation verlassen
+können, wenn Selbstkontrolle nicht sinnvoll ist. Solche Situationen
+sind jedoch selten. Selbst bei Millionen von Code Zeilen und hunderten
+oder tausenden Entwicklern, sollte ein Commit zu irgend einem 
+beliebigen Modul immer noch von denen Überprüft werden, die für diesen
+Modul zuständig sind, die auch erkennen können ob jemand an eine Stelle
+committed hat, an die er nicht sollte. Wenn Commits <emphasis>nicht
+</emphasis> regelmäßig überprüft werden, dann hat das Projekt, ohnehin
+schwerwiegendere Probleme als das authorizations System.</para>
 
-<para>In summary, don't spend too much time fiddling with the version
-control authorization system, unless you have a specific reason to.  It
-usually won't bring much tangible benefit, and there are advantages to
-relying on human controls instead.</para>
+<para>Insgesamt, sollte man nicht all zu viel Zeit damit verbringen,
+die authorization des Versionsverwaltungssystems auszutüfteln, es sei
+denn Sie haben einen ganz bestimmten Grund dazu. Es wird für gewöhnlich
+wenig handfesten Nutzen bringen, und sich statt dessen auf Kontrolle 
+durch Menschen zu verlassen hat seine Vorteile.</para>
 
-<para>None of this should be taken to mean that the restrictions
-themselves are unimportant, of course.  It would be bad for a project
-to encourage people to commit in areas where they're not qualified.
-Furthermore, in many projects, full (unrestricted) commit access has a
-special status: it implies voting rights on project-wide questions.
-This political aspect of commit access is discussed more in <xref
-linkend="electorate"/><phrase output="printed"> in
-<xref linkend="social-infrastructure"/></phrase>.</para>
+<para>Natürlich sollte man nichts hiervon so auffassen, das die 
+Beschränkungen selber unwichtig sind. Es wäre schlecht für das Projekt,
+Teilnehmer dazu anzuregen, an Bereiche zu comitten, für die sie nicht
+qualifiziert sind. Desweiteren, hat voller (uneingeschränkter) Zugriff
+auf die Repository in vielen Projekten, einen besonderen Status: Es
+wird dadurch impliziert, das der Teilnehmen, das Recht hat, über
+Fragen die das ganze Projekt betreffen mitzubestimmen. Dieses 
+politische Aspekt von commit Berechtigungen, wird weiter in <xref
+linkend="electorate"/><phrase output="printed"> im Kapitel <xref 
+linkend="social-infrastructure"/></phrase> behandelt.</para>
 
 </sect3>
 
@@ -1881,196 +1884,211 @@ linkend="electorate"/><phrase output="printed"> in
 <sect1 id="bug-tracker">
 <title>Bug Tracker</title>
 
-<para>Bug tracking is a broad topic; various aspects of it are
-discussed throughout this book.  Here I'll try to concentrate mainly
-on setup and technical considerations, but to get to those, we have to
-start with a policy question: exactly what kind of information should
-be kept in a bug tracker?</para>
+<para>Das "Bug tracking" ist ein breites Thema von dem viele Aspekte
+im Verlauf dieses Buchs besprochen werden. Ich werden versuchen mich
+hier auf den Aufbau und technische Überlegungen zu konzentrieren. Bevor
+wir dazu kommen, müssen wir aber mit einer Grundsätzlichen Frage 
+anfangen: Welche Art von Informationen sollten genau, im Bug Tracker
+gehalten werden?</para>
 
-<para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
-tracking systems are also frequently used to track new feature
-requests, one-time tasks, unsolicited patches&mdash;really anything
-that has distinct beginning and end states, with optional transition
-states in between, and that accrues information over its lifetime.
-For this reason, bug trackers are also called <firstterm>issue
-trackers</firstterm>, <firstterm>defect trackers</firstterm>,
-<firstterm>artifact trackers</firstterm>, <firstterm>request
-trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
-etc.  See <xref linkend="bug-trackers"/> for a list of software.
+<para>Der Begriff <firstterm>Bug Tracker</firstterm> ist irreführend.
+Bug Tracking Systeme werden häufig auch verwendet, um Anfragen für
+neue Funktionen , einmalige Aufgaben, unaufgeforderte Patches&mdash;im
+Prinzip alles zu verfolgen(en. to track), was einen eindeutigen Anfangs- 
+und Endzustand hat, zwischendurch mit optionalen Übergangszuständen,
+und bei denen im seinem Verlauf Informationen anfallen. Aus diesem 
+Grund werden Bug Tracker auch <firstterm>Issue Tracker</firstterm>,
+<firstterm>Defect Trackers</firstterm>, <firstterm>Artifact Trackers
+</firstterm>, <firstterm>Request Trackers</firstterm>, <firstterm>
+Trouble Ticket Systems</firstterm>, usw. genannt. Eine Liste von
+Software finden sie in <xref linkend="bug-trackers"/>.</para>
+
+<para>In diesem Buch werde ich weiterhin "Bug Tracker" für die
+Software benutzen, welche jegliche vorher erwähnten Angelegenheiten
+verfolgt, da es weithin so bezeichnet wird, ein einzelnes Element in
+der Datenbank des Bug Trackers werde ich jedoch als <firstterm>issue
+</firstterm> (de. Angelegenheit) bezeichnen. So können wir zwischen
+einem Verhalten oder Fehlverhalten, welches ein Nutzer beobachtet hat,
+(also den Bug selbst) und seiner <emphasis>Aufzeichnung</emphasis> von
+der Entdeckung, Diagnose und seiner Lösung im Tracker. Behalten Sie im
+Hinterkopf, dass auch wenn die meisten Issues sich um Bugs drehen,
+Issues auch benutzt werden können um andere Aufgaben zu verfolgen.
 </para>
 
-<para>In this book, I'll continue to use "bug tracker" for the
-software that does the tracking, because that's what most people call
-it, but will use <firstterm>issue</firstterm> to refer to a single
-item in the bug tracker's database.  This allows us to distinguish
-between the behavior or misbehavior that the user encountered (that is,
-the bug itself), and the tracker's <emphasis>record</emphasis> of the
-bug's discovery, diagnosis, and eventual resolution.  Keep in mind
-that although most issues are about actual bugs, issues can be used to
-track other kinds of tasks too.</para>
-
-<para>The classic issue life cycle looks like this:
+<para>Der klassische Verlauf eines Issues sieht folgendermaßen aus:
 
 <orderedlist>
-  <listitem><para>Someone files the issue.  They provide a summary, an
-            initial description (including a reproduction recipe, if
-            applicable; see
-            <xref
-            linkend="users-to-volunteers"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase> for
-            how to encourage good bug reports), and whatever other
-            information the tracker asks for.  The person who files
-            the issue may be totally unknown to the project&mdash;bug
-            reports and feature requests are as likely to come from
-            the user community as from the developers.</para>
+  <listitem><para>Die Issue wird von jemandem gemeldet. Sie geben eine
+	Zusammenfassung an, eine anfängliche Beschreibung 
+	(einschließlich wie man den Fehler reproduziert, falls 
+	anwendbar, siehe <xref linkend="users-to-volunteers"/><phrase
+	output="printed"> im Kapitel <xref 
+	linkend="managing-volunteers"/></phrase> in der beschrieben
+	wird, wie man zu guten Bug Meldungen ermutigen kann), und
+	welche andere Informationen der Tracker verlangt. Die Person,
+	die den Bug meldet, kann dem Projekt völlig unbekannt sein
+	&mdash;Bug Meldungen und Anfragen für Funktion können genau
+	so aus der Nutzer Gemeinschaft kommen, wie von den Entwicklern.
+	</para>
 
-            <para>Once filed, the issue is in what's called an
-            <firstterm>open</firstterm> state.  Because no action has
-            been taken yet, some trackers also label it as
-            <firstterm>unverified</firstterm> and/or
-            <firstterm>unstarted</firstterm>.  It is not assigned to
-            anyone; or, in some systems, it is assigned to a fake
-            user to represent the lack of real assignation.  At this
-            point, it is in a holding area: the issue has been
-            recorded, but not yet integrated into the project's
-            consciousness.</para>
+	<para>Sobald die Issue gemeldet ist, sagt man, dass es in einem
+	<firstterm>offenen</firstterm> Zustand ist. Da bisher nichts
+	unternommen wurde, kennzeichnen manche Tracker solche auch als
+	<firstterm>unverified</firstterm> (de. nicht bestätigt) oder
+	<firstterm>unstarted</firstterm> (de. nicht angefangen). Es 
+	ist, noch niemandem Zugewiesen; oder, bei manchen Systemen,
+	wird es einem erfundenen Benutzer zugewiesen, um zu 
+	kennzeichnen, dass es nicht wirklich jemandem zugewiesen wurde.
+	Zu diesem Zeitpunkt, steht es in einem Wartebereich: Die Issue
+	wurde Aufgezeichnet, jedoch nicht im Bewusstsein des Projekts
+	aufgenommen.</para>
   </listitem>
-  <listitem><para>Others read the issue, add comments to it, and
-            perhaps ask the original filer for clarification on some
-            points.</para>
+  <listitem><para>Die Issue wird von Anderen gelesen, die Kommentare
+	hinzufügen, und dem Meldenden vielleicht darum bitten einige
+	Punkte zu klären.</para>
   </listitem>
-  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
-            This may be the most important moment in its
-            life cycle.  Although the bug is not actually fixed yet,
-            the fact that someone besides the original filer was able
-            to make it happen proves that it is genuine, and, no less
-            importantly, confirms to the original filer that they've
-            contributed to the project by reporting a real bug.</para>
+  <listitem><para>Der Bug wird <firstterm>reproduziert</firstterm>.
+	Dieser Augenblick mag der Wichtigste in seinem Lebenszyklus
+	sein. Auch wenn der Bug noch nicht behoben wurde, ist die
+	Tatsache, dass jemand außer derjenige der es Gemeldet hat, es
+	geschafft hat den Bug zu finden, beweist, dass er echt ist, und
+	was nicht unwesentlich ist, bestätigt es dem Melder, dass Sie
+	indem sie einen echten Bug gemeldet haben, etwas zum Projekt 
+	beigetragen haben.</para>
   </listitem>
-  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
-            cause is identified, and if possible, the effort required
-            to fix it is estimated.  Make sure these things get
-            recorded in the issue; if the person who diagnosed the
-            bug suddenly has to step away from the project for a
-            while (as can often happen with volunteer developers),
-            someone else should be able to pick up where she left
-            off.</para>
+  <listitem><para>Der Bug wird <firstterm>untersucht</firstterm>: seine
+	Ursache wird identifiziert, und wenn möglich, wird der Aufwand
+	um ihn zu beheben, geschätzt. Stellen Sie sicher, dass diese
+	Sachen in dem Issue erfasst werden; wenn die Person die den Bug
+	untersucht hat, plötzlich eine weile lang vom Projekt wegtreten
+	muss (was häufig passieren kann bei freiwilligen Entwicklern), 
+	sollte jemand anders in der Lage sein, die Arbeit wieder 
+	aufzunehmen.</para>
 
-            <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the issue and
-            <firstterm>assign</firstterm> it to herself (<xref
-            linkend="delegation-assignment"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase>
-            examines the assignment process in more detail).  The issue's
-            <firstterm>priority</firstterm> may also be set at this
-            stage.  For example, if it is so severe that it should
-            delay the next release, that fact needs to be identified
-            early, and the tracker should have some way of noting
-            it.</para>
+	<para>In dieser Phase, oder manchmal in einer früheren, kann
+	ein Entwickler die Issue in Besitz nehmen, und sie sich selbst
+	<firstterm>zuweisen</firstterm> (en. assign) (In <xref
+	linkend="delegation-assignment"/><phrase output="printed"> im
+	Kapitel <xref linkend="managing-volunteers"/></phrase> wird der
+	Vorgang des Zuweisens genauer untersucht. Die <firstterm>
+	Priorität</firstterm> kann in dieser Phase auch bestimmt 
+	werden. Wenn es zum Beispiel so schwerwiegend ist, das es die
+	nächste Version verzögern würde, muss diese Tatsache frühzeitig
+	erkannt werden, und der Tracker sollte eine Möglichkeit haben
+	das zu erfassen.</para>
   </listitem>
-  <listitem><para>The issue gets scheduled for resolution.
-            Scheduling doesn't necessarily mean naming a date by which
-            it will be fixed.  Sometimes it just means deciding which
-            future release (not necessarily the next one) the bug
-            should be fixed by, or deciding that it need not block any
-            particular release.  Scheduling may also be dispensed
-            with, if the bug is quick to fix.</para>
+  <listitem><para>Es wird geplant wann die Issue aufgelöst werden soll,
+	wobei dabei nicht unbedingt ein Datum genant wird bis wann es
+	behoben werden soll. Manchmal bedeutet es einfach zu 
+	entscheiden welcher zukünftige Version (nicht unbedingt die
+	Nächste) der Bug behoben sein soll, oder dass es keine 
+	bestimmte Version blockieren soll. Wenn der Bug schnell
+	behoben werden kann, kann man die Planung auch weg lassen.
+	</para>
   </listitem>
-  <listitem><para>The bug gets fixed (or the task completed, or
-            the patch applied, or whatever).  The change or set of
-            changes that fixed it should be recorded in a comment in
-            the issue, after which the issue is
-            <firstterm>closed</firstterm> and/or marked as
-            <firstterm>resolved</firstterm>.</para>
+  <listitem><para>Der Bug wird behoben (oder die Aufgabe wird erledigt,
+	oder der Patch angewandt, oder was auch immer). Die Änderung
+	oder der Satz von Änderungen die es behoben haben sollte in
+	einem Kommentar der Issue protokolliert werden, worauf sie
+	<firstterm>geschlossen</firstterm> wird und/oder als
+	<firstterm>gelöst</firstterm> (en. resolved) markiert wird.
+	</para>
   </listitem>
 </orderedlist>
 
 </para>
 
-<para>There are some common variations on this life cycle.  Sometimes
-an issue is closed very soon after being filed, because it turns out
-not to be a bug at all, but rather a misunderstanding on the part of
-the user.  As a project acquires more users, more and more such
-invalid issues will come in, and developers will close them with
-increasingly short-tempered responses.  Try to guard against the
-latter tendency.  It does no one any good, as the individual user in
-each case is not responsible for all the previous invalid issues; the
-statistical trend is visible only from the developers' point of view,
-not the user's.  (In
-<xref linkend="bug-filtering"/><phrase output="printed"> later
-in this chapter,</phrase> we'll look at
-techniques for reducing the number of invalid issues.)  Also, if
-different users are experiencing the same misunderstanding over and
-over, it might mean that that aspect of the software needs to be
-redesigned.  This sort of pattern is easiest to notice when there is
-an issue manager monitoring the bug database; see
-<xref linkend="issue-manager"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>.</para>
+<para>Es gibt einige häufige Abweichungen von diesem Lebenszyklus.
+Manchmal wird eine Issue frühzeitig nachdem sie gemeldet wurde
+geschlossen, da es sich herausstellt, dass es sich nicht um einen
+Bug handelt, sondern um ein Missverständnis, seitens des Benutzers.
+Sowie ein Projekt mehr Benutzer aufnimmt, werden immer mehr solcher
+ungültiger Issues hereinkommen, und Entwickler werden sie mit zunehmend
+gereizten Bemerkungen schließen. Versuchen Sie der letzteren Neigung
+entgegenzuwirken. Es hilft niemandem, da der einzelne Nutzer in 
+jedem Einzelfall nicht für alle vorhergehenden ungültigen Issues
+verantwortlich ist; die statistische Zunahmen ist lediglich aus der
+Sicht der Entwickler erkennbar, nicht aus der der Nutzer. (In
+<xref linkend="bug-filtering"/><phrase output="printed"> später
+in diesem Kapitel,</phrase> werden wir die Methoden untersuchen,
+wie man die Anzahl der ungültigen Issues verringern kann). Wenn
+verschiedene Nutzer immer wieder das selbe Missverständnis haben,
+kann kann das ein Hinweis darauf sein, dass ein bestimmter Bereich
+der Software überdacht werden muss. Diese Muster können am einfachsten
+durch einen Issue Manager, der die Bug Datenbank überwacht, bemerkt
+werden; siehe <xref linkend="issue-manager"/><phrase output="printed">
+im Kapitel <xref linkend="managing-volunteers"/></phrase>.</para>
 
-<para>Another common life cycle variation is for the issue to be closed
-as a <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate
-is when someone files an issue that's already known to the project.
-Duplicates are not confined to open issues: it's possible for a bug to
-come back after having been fixed (this is known as a
-<firstterm>regression</firstterm>), in which case the preferred course
-is usually to reopen the original issue and close any new reports as
-duplicates of the original one.  The bug tracking system should keep
-track of this relationship bidirectionally, so that reproduction
-information in the duplicates is available to the original issue, and
-vice versa.</para>
+<para>Eine weitere häufige Abweichung von diesem Lebenszyklus ist,
+das die Issue als <firstterm>Duplikat</firstterm> bald nach dem ersten
+Schritt geschlossen wird. Ein Duplikat, ist wenn jemand eine Issue
+meldet, welches dem Projekt bereits bekannt ist. Duplikate beschränken
+sich nicht auf offene Issues: Es ist auch Möglich, dass ein Bug wieder
+auftaucht, nachdem es behoben wurde (dies wird als <firstterm>regression
+</firstterm> (de. Rückgang/Rückentwicklung) bezeichnet). In einem 
+solchen Fall ist die bevorzugte Vorgehensweise, die ursprüngliche Issue
+wieder zu eröffnen, und alle neuen Meldungen als Duplikate des
+Originals zu schließen. Der Bug Tracker sollte diese Beziehung in beiden
+Richtungen verfolgen können, damit Informationen zur Reproduktion für
+die ursprüngliche Issue verfügbar ist, und umgekehrt.</para>
 
-<para>A third variation is for the developers to close the issue,
-thinking they have fixed it, only to have the original reporter reject
-the fix and reopen it.  This is usually because the developers simply
-don't have access to the environment necessary to reproduce the bug,
-or because they didn't test the fix using the exact same reproduction
-recipe as the reporter.</para>
+<para>Eine dritte Variante ist, dass die Entwickler eine Issue 
+schließen, mit der Annahme das sie es behoben haben, um anschließend
+vom Meldenden den Fix abgewiesen zu bekommen, und sie erneut zu öffnen.
+Meistens geschieht das, wenn die Entwickler nicht die nötige Umgebung
+haben, um den Bug zu reproduzieren, oder da sie den Fix nicht mit genau
+der selben Anleitung zur Reproduktion getestet haben, wie der Meldende.
+</para>
 
-<para>Aside from these variations, there may be other small details of
-the life cycle that vary depending on the tracking software.  But the
-basic shape is the same, and while the life cycle itself is not
-specific to open source software, it has implications for how open
-source projects use their bug trackers.</para>
+<para>Abgesehen von diesen Abweichungen, kann es andere kleine Details
+im Lebenszyklus geben, die sich abhängig von der Bug Tracker Software
+unterscheiden. Die grundsätzliche Form ist jedoch die gleiche, und
+obwohl der Lebenszyklus nicht spezifisch für Open Source Software ist,
+hat es Auswirkungen darauf, wie Open Source Projekte ihre Bug Tracker
+nutzen.</para>
 
-<para>As Step 1 implies, the tracker is as much a public face of the
-project as the mailing lists or web pages.  Anyone may file an issue,
-anyone may look at an issue, and anyone may browse the list of currently
-open issues.  It follows that you never know how many people are
-waiting to see progress on a given issue.  While the size and skill of
-the development community constrains the rate at which issues can be
-resolved, the project should at least try to acknowledge each issue the
-moment it appears.  Even if the issue lingers for a while, a response
-encourages the reporter to stay involved, because she feels that a
-human has registered what she has done (remember that filing an
-issue usually involves more effort than, say, posting an email).
-Furthermore, once an issue is seen by a developer, it enters the
-project's consciousness, in the sense that that developer can be on
-the lookout for other instances of the issue, can talk about it with
-other developers, etc.</para>
+<para>Wie der erste Schritt andeutet, ist der Bug Tracker der 
+Öffentlichkeit genau so sehr ein Bild des Projekts wie seine
+Nachrichten Verteiler oder seine Webseiten. Jeder kann eine Issue 
+melden, jeder kann sich eine Issue anschauen, und jeder kann die Liste
+der derzeit offenen Issues anschauen. Daraus folgt, dass Sie niemals
+wissen können wieviele Leute darauf warten, Fortschritte für eine
+bestimmte Issue zu sehen. Auch wenn die Größe und Erfahrung der
+Entwicklergemeinschaft die Geschwindigkeit einschränken kann, mit der
+die Issues gelöst werden, sollte das Projekt zumindest versuchen,
+jede Issue, sobald sie gemeldet wird, zu bestätigen. Selbst wenn
+die Issue eine weile lang daliegt, ermutigt eine Reaktion den
+Meldenden dazu an weiterhin beteiligt zu bleiben, da sie das Gefühl
+bekommt, dass ein Mensch erfasst hat, was sie getan hat (bedenken
+Sie, das eine Issue zu melden für gewöhnlich einen größeren Aufwand
+bedeutet, als sagen wie eine Email zu schreiben). Desweiteren, tritt
+die Issue, sobald es von einem Entwickler bemerkt wird, im Bewusstsein
+des Projekts, womit gemeint ist, dass dieser Entwickler darauf achten
+kann, ob die Issue noch irgendwo auftaucht, mit anderen Entwicklern
+darüber reden kann, usw.</para>
 
-<para>The need for timely reactions implies two things:
+<para>Die Notwendigkeit zeitiger Reaktionen impliziert zweierlei:
 
 <itemizedlist>
   <listitem>
-    <para>The tracker must be connected to a mailing list, such that
-    every change to an issue, including its initial filing, causes a
-    mail to go out describing what happened.  This mailing list
-    is usually different from the regular development list, since not
-    all developers may want to receive automated bug mails, but (just
-    as with commit mails) the Reply-to header should be set to the
-    development mailing list.</para>
+    <para>Der Tracker muss an einem Email Verteiler angeschlossen sein,
+	damit jede Änderung an einem Issue, inklusive seine erste
+	Meldung, eine Email verursacht die beschreibt was passiert ist.
+	Dieser Verteiler ist normalerweise ein anderer als der
+	gewöhnliche Entwickler Verteiler, da nicht alle Entwickler
+	automatisierte Bug Emails empfangen wollen, der Reply-to Header
+	sollte aber (genau wie bei Commit Emails) auf den Entwicklungs 
+	Verteiler verweisen.</para>
   </listitem>
   <listitem>
-    <para>The form for filing issues should capture the reporter's
-    email address, so she can be contacted for more information.
-    (However, it should not <emphasis>require</emphasis> the
-    reporter's email address, as some people prefer to report issues
-    anonymously.  See
-    <xref linkend="anonymity"/><phrase output="printed"> later
-    in this chapter</phrase> for more on the importance of
-    anonymity.)</para>
+    <para>Das Formular um Issues zu melden, sollte die Email Adresse
+	des Meldenden erfassen, damit sie für weitere Informationen
+	erreicht werden kann. (Es sollte die Email Adresse jedoch 
+	nicht <emphasis>benötigen</emphasis>, da manche Leute es
+	vorziehen anonym Issues zu melden. Siehe <xref 
+	linkend="anonymity"/><phrase output="printed"> später in diesem
+	Kapitel</phrase> welches die Wichtigkeit von Anonymität 
+	behandelt.)</para>
   </listitem>
 </itemizedlist>
 
@@ -2079,112 +2097,120 @@ other developers, etc.</para>
 <sect2 id="bug-tracker-mailing-list-interaction">
 <title>Interaction with Mailing Lists</title>
 
-<para>Make sure the bug tracker doesn't turn into a discussion forum.
-Although it is important to maintain a human presence in the bug
-tracker, it is not fundamentally suited to real-time discussion.
-Think of it rather as an archiver, a way to organize facts and
-references to other discussions, primarily those that take place on
-mailing lists.</para>
+<para>Stellen Sie sicher, das der Bug Tracker nicht zu einem
+Diskussionsforum wird. Obwohl es wichtig ist, auf dem Bug Tracker 
+menschliche Anwesenheit zu erhalten, ist es nicht grundsätzlich für
+Diskussionen in Echtzeit geeignet. Betrachten Sie es eher als ein
+Archiv, eine Art Tatsachen und Verweise auf andere Diskussionen, die
+hauptsächlich auf Verteiler stattfinden, zu organisieren.</para>
 
-<para>There are two reasons to make this distinction.  First, the bug
-tracker is more cumbersome to use than the mailing lists (or than
-real-time chat forums, for that matter).  This is not because bug
-trackers have bad user interface design, it's just that their
-interfaces were designed for capturing and presenting discrete states,
-not free-flowing discussions.  Second, not everyone who should be
-involved in discussing a given issue is necessarily watching the bug
-tracker.  Part of good issue management (see
-<xref linkend="share-management"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>) is to make sure
-each issue is brought to the right peoples' attention, rather than
-requiring every developer to monitor all issues.  In
-<xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
-sure people don't accidentally siphon discussions out of appropriate
-forums and into the bug tracker.</para>
+<para>Es gibt Zwei Gründe diese Unterscheidung zu machen. Erstens, ist
+es umständlicher den Bug Tracker zu benutzen als einen Email Verteiler
+(oder wenn wir dabei sind Echtzeit Foren wie Chats). Das liegt nicht
+daran, dass Bug Tracker einen schlechte Bedienoberfläche haben, 
+sondern daran, dass ihre Oberflächen darauf ausgelegt sind separate
+Zustände zu erfassen und darzustellen, nicht frei verlaufende 
+Diskussionen. Zweitens, beobachtet nicht jeder den Bug Tracker, der
+auch an der Diskussion eines Issues beteiligt sein sollte. Ein Teil
+guter Issue Management (siehe <xref 
+linkend="share-management"/><phrase output="printed"> im Kapitel <xref
+linkend="managing-volunteers"/></phrase>) besteht darin sicher zu 
+stellen, dass jede Issue eher zu der Aufmerksamkeit der richtigen 
+Leute gebracht wird, als dass jeder Entwickler alle Issues überwachen
+muss.</para>
 
-<para>Some bug trackers can monitor mailing lists and automatically
-log all emails that are about a known issue.  Typically they do this
-by recognizing the issue's identifying number in the subject line of
-the mail, as part of a special string; developers learn to include
-these strings in their mails to attract the tracker's notice.  The bug
-tracker may either save the entire email, or (even better) just record
-a link to the mail in the regular mailing list archive.  Either way,
-this is a very useful feature; if your tracker has it, make sure
-both to turn it on and to remind people to take advantage of
-it.</para>
+<para>Manch Bug Tracker können Email Verteiler überwachen und 
+automatisch alle Emails protokollieren, die sich um eine bekannte Issue
+drehen. Typischerweise erkennen sie das an der Identifikationsnummer
+der Issue, in der Betreffzeile der Email, als teil einer bestimmten
+Zeichenfolge; Entwickler lernen es diese Zeichenfolgen in ihren Emails
+zu benutzen, um die Aufmerksamkeit des Bug Trackers zu erregen. Der
+Tracker kann entweder die Email als ganzes speichern, oder (besser 
+noch) einen Link zu dem gewöhnlichen Archiv des Verteilers. So oder 
+so, ist dies eine sehr nützliche Funktion; wenn Ihr Tracker sie hat,
+vergewissern Sie sich, dass es an geschaltet ist, und erinnern Sie
+die Teilnehmer daran es zu ihrem Vorteil zu nutzen.</para>
 
 </sect2>
 
 <sect2 id="bug-filtering">
-<title>Pre-Filtering the Bug Tracker</title>
+<title>Vorherige Filterung des Bug Trackers</title>
 
-<para>Most issue databases eventually suffer from the same problem: a
-crushing load of duplicate or invalid issues filed by well-meaning but
-inexperienced or ill-informed users.  The first step in combatting
-this trend is usually to put a prominent notice on the front page of
-the bug tracker, explaining how to tell if a bug is really a bug, how
-to search to see if it's already been filed, and finally, how to
-effectively report it if one still thinks it's a new bug.</para>
+<para>Die meiste Issue Datenbanken leiden irgendwann an dem gleichen
+Problem: Eine erstickende Anzahl doppelter oder ungültiger Issues die
+von wohlwollenden aber unerfahrenen oder schlecht informierten Nutzern
+gemeldet werden. Der erste Schritt dieser Entwicklung entgegenzuwirken
+ist gewöhnlicherweise, einen hervorstehende Hinweis auf der Hauptseite
+des Trackers zu setzen, welche erklärt, woran man erkennen kann ob ein
+Bug wirklich ein Bug ist, wie man danach suchen kann ob ein Bug 
+bereits gemeldet wurde, und letztendlich wie man effektiv eine Meldung
+machen kann, wenn man immer noch denkt, dass es ein neuer Bug ist.
+</para>
 
-<para>This will reduce the noise level for a while, but as the number
-of users increases, the problem will eventually come back.  No
-individual user can be blamed for it.  Each one is just trying to
-contribute to the project's well-being, and even if their first bug
-report isn't helpful, you still want to encourage them to stay
-involved and file better issues in the future.  In the meantime,
-though, the project needs to keep the issue database as free of junk
-as possible.</para>
+<para>Der Geräuschpegel sollte dadurch für eine Weile reduziert sein,
+sowie die Anzahl der Nutzer zunimmt, wird das Problem jedoch 
+wiederkehren. Kein einzelner Nutzer ist daran Schuld. Jeder versucht
+nur zum Wohl des Projekts beizutragen, und auch wenn ihre erste
+Meldung nicht hilfreich ist, sollten Sie dennoch dazu ermutigen
+sich weiterhin zu beteiligen und zukünftig bessere Issues zu melden.
+In der Zwischenzeit, muss das Projekt die Issue Datenbank so frei von
+Müll halten wie möglich.</para>
 
-<para>The two things that will do the most to prevent this problem
-are: making sure there are people watching the bug tracker who have
-enough knowledge to close issues as invalid or duplicates the moment
-they come in, and requiring (or strongly encouraging) users to confirm
-their bugs with other people before filing them in the tracker.</para>
+<para>Die zwei Sachen welche am meisten dazu beitragen werden sind:
+sicherzustellen, dass Leute den Bug Tracker beobachten, die genügend 
+wissen, um ungültige oder doppelte Issues in dem Moment zu schließen,
+indem sie gemeldet werden, und von Nutzern erfordern (oder 
+nachdrücklich dazu anregen) ihre Bugs durch andere zu bestätigen vor
+sie eine Meldung im Tracker machen.</para>
 
-<para>The first technique seems to be used universally.  Even projects
-with huge issue databases (say, the Debian bug tracker at
-<ulink url="http://bugs.debian.org/"/>, which contained 315,929 issues
-as of this writing) still arrange things so that
-<emphasis>someone</emphasis> sees each issue that comes in.  It may be
-a different person depending on the category of the issue.  For
-example, the Debian project is a collection of software packages, so
-Debian automatically routes each issue to the appropriate package
-maintainers.  Of course, users can sometimes misidentify an issue's
-category, with the result that the issue is sent to the wrong person
-initially, who may then have to reroute it.  However, the important
-thing is that the burden is still shared&mdash;whether the user
-guesses right or wrong when filing, issue watching is still
-distributed more or less evenly among the developers, so each issue is
-able to receive a timely response.</para>
+<para>Die erste Methode scheint universell angewandt zu werden. Selbst
+Projekte mit riesigen Issue Datenbanken (wie der Debian Bug Tracker bei
+<ulink url="http://bugs.debian.org/"/>, welche 315,929 Issues zum
+Zeitpunkt des Schreibens hatte) organisieren sich so, dass <emphasis>
+irgendjemand</emphasis> jede Issue die hereinkommt sieht. Es kann eine
+andere Person sein, abhängig von der Kategorie des Issues. Das Debian
+Projekt ist zum Beispiel eine Sammlung von Software Paketen, also
+leitet Debian automatisch jede Issue die entsprechenden Zuständigen für
+das Packet. Natürlich, kann es manchmal vorkommen, das Nutzer eine 
+Issue falsch kategorisieren, mit dem Ergebnis, dass das Issue zunächst
+an die falsche Person geschickt wird, welche es dann möglicherweise
+wieder umleiten muss. Das wichtige ist aber, dass diese Last trotzdem
+verteilt ist&mdash;ob der Nutzer bei der Meldung richtig oder falsch
+rät, ist die Beobachtung der Issues dennoch mehr oder weniger 
+gleichmäßig auf die Entwickler aufgeteilt, womit jede Issue eine
+zeitige Antwort erhalten kann.</para>
 
-<para>The second technique is less widespread, probably because it's
-harder to automate.  The essential idea is that every new issue gets
-"buddied" into the database.  When a user thinks he's found a problem,
-he is asked to describe it on one of the mailing lists, or in an IRC
-channel, and get confirmation from someone that it is indeed a bug.
-Bringing in that second pair of eyes early can prevent a lot of
-spurious reports.  Sometimes the second party is able to identify that
-the behavior is not a bug, or is fixed in recent releases.  Or she may
-be familiar with the symptoms from a previous issue, and can prevent a
-duplicate filing by pointing the user to the older issue.  Often it's
-enough just to ask the user "Did you search the bug tracker to see if
-it's already been reported?"  Many people simply don't think of that,
-yet are happy to do the search once they know someone's
-<emphasis>expecting</emphasis> them to.</para>
+<para>Die zweite Technik ist weniger verbreitet, wahrscheinlich, da
+es schwerer zu automatisieren ist. Der grundsätzliche Gedanke ist, dass
+jede Issue einem "Buddy" zugeordnet wird. Wenn ein Nutzer denkt, das er
+ein Problem gefunden hat, wird er darum gebeten, es auf einem der Email
+Verteiler oder im IRC zu beschreiben, und sich von jemandem bestätigen
+zu lassen, dass es sich auch wirklich um einen Bug handelt. Ein zweites
+Paar Augen frühzeitig einzubeziehen, kann viele störende Meldungen
+verhindern. Manchmal kann die zweite Partei sehen, dass das Verhalten
+kein Bug ist, oder dass es in einer neuern Version behoben wurde. Sie
+kann auch mit den Symptomen aus einem früheren Issue vertraut sein, und
+kann einen doppelten Eintrag verhindern, indem sie den Nutzer auf die
+ältere Issue hinweist. Oftmals reicht es auch den Nutzer zu fragen
+"Hast du im Bug Tracker geschaut ob es bereits gemeldet wurde?" Viele
+denken einfach nicht daran, haben jedoch kein problem damit wenn sie
+wissen, das jemand es von ihnen <emphasis>erwartet</emphasis>.</para>
 
-<para>The buddy system can really keep the issue database clean, but
-it has some disadvantages too.  Many people will file solo anyway,
-either through not seeing, or through disregarding, the instructions
-to find a buddy for new issues.  Thus it is still necessary for
-volunteers to watch the issue database.  Furthermore, because most new
-reporters don't understand how difficult the task of maintaining the
-issue database is, it's not fair to chide them too harshly for
-ignoring the guidelines.  Thus the volunteers must be vigilant, and
-yet exercise restraint in how they bounce unbuddied issues back to
-their reporters.  The goal is to train each reporter to use the
-buddying system in the future, so that there is an ever-growing pool
-of people who understand the issue-filtering system.  On seeing an
-unbuddied issue, the ideal steps are:</para>
+<para>Das Buddy System kann die Issue Datenbank wirklich sauber halten,
+hab aber auch einige Nachteile. Viele machen trotzdem eine alleine
+Meldungen, weil sie entweder die Anweisungen sich einen Buddy für neue
+Issues zu suchen nicht sehen, oder nicht beachten. Von daher ist es
+immer noch nötig, dass die Issue Datenbank von freiwilligen überwacht
+wird. Desweiteren, da die meisten neuen Meldenden nicht verstehen, wie
+schwer die Aufgabe ist, die Issue Datenbank in stand zu halten, ist es
+nicht gerechtfertigt sie all zu rau dafür zu schelten, dass sie die
+Richtlinien ignoriert haben. Die Freiwilligen müssen deshalb wachsam 
+sein, und dennoch Zurückhaltung dabei üben, wie sie Issues ohne einen
+Buddy wieder an den Meldenden zurückweisen. Das Ziel ist es, jeden
+der Meldungen macht, beizubringen zukünftig das Buddy System zu 
+verwenden, damit es eine immer größere Gemeinschaft gibt, die das
+System Issues zu filtern verstehen. Bei der Sichtung eines Issues ohne
+einen Buddy sind die optimalen Schritte:</para>
 
 <orderedlist>
   <listitem>
@@ -2605,7 +2631,6 @@ price of accepting someone else's way of running it.</para>
 project.  If you choose a canned site, leave open the option of
 switching to your own servers later, by using a custom domain name for
 the project's "home address".  You can forward the URL to the canned
-site, or have a fully customized home page at the public URL and hand
 users off to the canned site for sophisticated functionality.  Just
 make sure to arrange things such that if you later decide to use a
 different hosting solution, the project's address doesn't need to
