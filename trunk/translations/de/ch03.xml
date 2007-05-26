@@ -2327,41 +2327,41 @@ weiteres, siehe http://svn110.notlong.com/.
 </screen>
 
 <para>Das ist zwar knapp, aber es sagt neue, was sie wissen müssen.
-That's terse, but it tells newcomers what they need to know.  It
-says exactly what the channel is for, gives the project home page (in
-case someone wanders into the channel without having first been to the
-project web site), mentions a related channel, and gives some guidance
-about pasting.</para>
+Es sagt genau wofür der Channel ist, gibt einen Link zu der Webseite
+des Projekts (falls jemand an den Channel vorbei kommt ohne vorher drauf
+gewesen zu sein), erwähnt einen verwanden Channel, und gibt ein wenig
+Anleitung, wie über sich beim Einfügen verhalten soll.</para>
 
 <sidebar id="paste-sites">
-<title>Paste Sites</title>
+<title>Paste Seiten</title>
 
-<para>An IRC channel is a shared space: everyone can see what everyone
-else is saying.  Normally, this is a good thing, as it allows people
-to jump into a conversation when they think they have something to
-contribute, and allows spectators to learn by watching.  But it
-becomes problematic when someone has to provide a large quantity of
-information at once, such as a debugging session transcript, because
-pasting too many lines of output into the channel will disrupt other
-conversations.</para>
+<para>Der Platz in einem IRC Channel wird geteilt: jeder sieht was
+der andere sagt. Normalerweise ist das etwas gutes, da es Leuten
+erlaubt an eine Unterhaltung zu beteiligen, wenn meinen etwas 
+beitragen zu können, und erlaubt es Beobachtern durch zuschauen etwas
+zu lernen. Wenn jemand aber eine Menge Informationen auf einmal 
+bereitstellen muss, wie ein Protokoll von einer Debugging Session,
+wird das problematisch, da eine derart große Anzahl an Zeilen andere
+Unterhaltungen stören würde.</para>
 
-<para>The solution is to use one of the
-<firstterm>pastebin</firstterm> or <firstterm>pastebot</firstterm>
-sites.  When requesting a large amount of data from someone, ask them
-not to paste it into the channel, but instead to go to (for example)
-<ulink url="http://pastebin.ca/"/>, paste their data into the form
-there, and tell the resulting new URL to the IRC channel.  Anyone can
-then visit the URL and view the data.</para>
+<para>Die Lösung ist eine der <firstterm>pastebin</firstterm> oder
+auch <firstterm>pastebot</firstterm> Seiten zu benutzen. Wenn man eine
+große Menge Daten von jemand anfragt, bitten Sie darum, es nicht in den
+Channel zu ein zu fügen, sondern (zum Beispiel) auf <ulink 
+url="http://pastebin.ca/"/>, ihre Daten abzulegen, und die 
+resultierende URL in den Channel zu kopieren. So kann sich jeder die
+Daten anschauen der möchte.</para>
 
-<para>There are a number of free paste sites available now, too many
-for a comprehensive list, but here are some of the ones I've seen used:
+<para>Es gibt eine Vielzahl verfügbarer Seiten, zu viele um eine
+Umfassende Liste erstellen zu können, hier sind jedoch einige von denen
+ich gesehen habe, dass sie benutzt werden:
 <ulink url="http://www.nomorepasting.com/"/>,
 <ulink url="http://pastebin.ca/"/>,
 <ulink url="http://nopaste.php.cd/"/>
 <ulink url="http://rafb.net/paste/"/>
 <ulink url="http://sourcepost.sytes.net/"/>,
 <ulink url="http://extraball.sunsite.dk/notepad.php"/>,
-and
+und
 <ulink url="http://www.pastebin.com/"/>.</para>
 
 </sidebar>
@@ -2369,74 +2369,76 @@ and
 <sect2 id="bots">
 <title>Bots</title>
 
-<para>Many technically-oriented IRC channels have a non-human member,
-a so-called <firstterm>bot</firstterm> that is capable of storing and
-regurgitating information in response to specific commands.
-Typically, the bot is addressed just like any other member of the
-channel, that is, the commands are delivered by "speaking to" the bot.
-For example:</para>
+<para>Viele technisch orientierte IRC Channels haben einen nicht 
+Menschlichen Teilnehmer, ein sogenannter <firstterm>Bot</firstterm> der
+in der Lage ist als Reaktion auf bestimmte Befehle Informationen zu 
+speichern und wiederzugeben. Typischerweise, wird der Bot genau wie
+jeder andere im Channel angesprochen, was soviel heißt, dass die 
+Befehle übermittelt werden, indem man mit dem Bot "redet". Zum 
+Beispiel:</para>
 
 <screen>
 &lt;kfogel&gt; ayita: learn diff-cmd = http://subversion.tigris.org/faq.html#diff-cmd
 &lt;ayita&gt;  Thanks!
 </screen>
 
-<para>That told the bot (who is logged into the channel as ayita) to
-remember a certain URL as the answer to the query "diff-cmd".  Now we
-can address ayita, asking the bot to tell another user about
-diff-cmd:</para>
+<para>Das hat den Bot (der als ayita im Channel eingeloggt ist) gesagt,
+dass er sich eine bestimmte URL merken soll als Antwort auf die Anfrage
+"diff-cmd". Jetzt können wir ayita ansprechen und darum bitten einen
+anderen Nutzer etwas über diff-cmd zu erzählen:</para>
 
 <screen>
 &lt;kfogel&gt; ayita: tell jrandom about diff-cmd
-&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+&lt;ayita&gt;  hmustermann: http://subversion.tigris.org/faq.html#diff-cmd
 </screen>
 
-<para>The same thing can be accomplished via a convenient shorthand:</para>
+<para>Das gleich kann mittels eines bequemen Kürzels erreicht werden:
+</para>
 
 <screen>
-&lt;kfogel&gt; !a jrandom diff-cmd
-&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+&lt;kfogel&gt; !a hmustermann diff-cmd
+&lt;ayita&gt;  hmustermann: http://subversion.tigris.org/faq.html#diff-cmd
 </screen>
 
-<para>The exact command set and behaviors differ from bot to bot.  The
-above example is with <literal>ayita</literal>
-(<ulink url="http://hix.nu/svn-public/alexis/trunk/"/>), of which
-there is usually an instance running in <literal>#svn</literal> at
-freenode.  Other bots include Dancer
-(<ulink url="http://dancer.sourceforge.net/"/>) and Supybot
-(<ulink url="http://supybot.com/"/>).  Note that no special server
-privileges are required to run a bot.  A bot is a client program;
-anyone can set one up and direct it to listen to a particular
-server/channel.</para>
+<para>Der genaue Befehl und das Verhalten unterscheidet sich von Bot zu
+Bot. Das obige Beispiel mit <literal>ayita</literal> (<ulink 
+url="http://hix.nu/svn-public/alexis/trunk/"/>), von der für gewöhnlich
+eine Instanz in <literal>#svn</literal> auf freenode läuft. Andere Bots
+sind unter anderem (<ulink url="http://dancer.sourceforge.net/"/>) und
+Supybot (<ulink url="http://supybot.com/"/>). Beachten Sie, dass man
+keine besonderen Rechte auf dem Server haben muss um einen Bot zu
+betreiben. Ein Bot ist eine Nutzanwendung; jeder kann einen Einrichten 
+und es anweisen, einen bestimmten Server/Channel zu betreten.</para>
 
-<para>If your channel tends to get the same questions over and over,
-I highly recommend setting up a bot.  Only a small percentage of
-channel users will acquire the expertise needed to manipulate the bot,
-but those users will answer a disproportionately high percentage of
-questions, because the bot enables them to respond so much more
-efficiently.</para>
+<para>Wenn in Ihrem Channel die Tendenz auftritt, dass immer wieder die
+gleichen Fragen gestellt werden, empfehlen ich Ihnen dringend einen Bot
+einzurichten. Nur ein kleiner Anteil der Nutzer im Channel werden die
+Kenntnisse erlangen einen Bot steuern, die die es tun, werden aber einen
+um so größeren Anteil der Fragen beantworten können, da der Bot es Ihnen 
+ermöglicht, viel effektiver antworten zu können.</para>
 
 </sect2>
 
 <sect2 id="irc-archiving">
-<title>Archiving IRC</title>
+<title>Archivierung von IRC</title>
 
-<para>Although it is possible to archive everything that happens in an
-IRC channel, it's not necessarily expected.  IRC conversations may be
-nominally public, but many people think of them as informal,
-semi-private conversations.  Users may be careless with grammar, and
-often express opinions (for example, about other software or other
-programmers) that they wouldn't want preserved forever in an online
-archive.</para>
+<para>Auch wenn es möglich ist alles in einem Channel zu archivieren,
+wird das nicht unbedingt erwartet. Unterhaltungen im IRC sind im
+Grunde genommen öffentlich, aber viele betrachten es sie als informell,
+halbwegs private Unterhaltungen. Nutzer können neigen dazu achtlos mit
+ihrer Grammatik sein und äußern Meinungen (zum Beispiel über andere
+Software oder Entwickler) welche Sie nicht in einem Online Archiv
+erhalten haben möchten.</para>
 
-<para>Of course, there will sometimes be <emphasis>excerpts</emphasis>
-that should be preserved, and that's fine.  Most IRC clients can log a
-conversation to a file at the user's request, or failing that, one can
-always just cut and paste the conversation from IRC into a more
-permanent forum (most often the bug tracker).  But indiscriminate
-logging may make some users uneasy.  If you do archive everything,
-make sure you state so clearly in the channel topic, and give a URL to
-the archive.</para>
+<para>Es wird natürlich manchmal <emphasis>Auszüge</emphasis> geben,
+die erhalten werden sollte, und das ist in Ordnung. Die Meißten IRC
+Anwendungen können, wenn der Nutzer das möchte, Unterhaltungen in eine
+Datei mit protokollieren, oder wenn das nicht geht, kann immer noch die
+Unterhaltung aus dem IRC selbst heraus kopieren und in ein beständigeres
+Forum (was meißtens der Bug Tracker ist) einfügen. Alles mit zu 
+protokollieren kann aber manche Nutzer unruhig machen. Wenn sie doch
+alles archivieren, stellen Sie sicher, dass es klar im Channel Topic
+erklärt wird, und geben Sie die URL des Archivs an.</para>
 
 </sect2>
 
@@ -2446,254 +2448,272 @@ the archive.</para>
 <sect1 id="wikis">
 <title>Wikis</title>
 
-<para>A <firstterm>wiki</firstterm> is a web site that allows any
-visitor to edit or extend its content; the term "wiki" (from a
-Hawaiian word meaning "quick" or "super-fast") is also used to refer
-to the software that enables such editing.  Wikis were invented in
-1995, but their popularity has really started to take off since 2000
-or 2001, boosted partly by the success of Wikipedia (<ulink
-url="http://www.wikipedia.org/"/>), a wiki-based free-content
-encyclopedia.  Think of a wiki as falling somewhere between IRC and
-web pages: wikis don't happen in realtime, so people get a chance to
-ponder and polish their contributions, but they are also very easy to
-add to, involving less interface overhead than editing a regular web
-page.</para>
+<para>Ein <firstterm>Wiki</firstterm> ist eine Webseite die es jedem
+Besucher erlaubt ihren Inhalt zu bearbeiten; der Begriff "wiki" (aus
+dem Hawaiischen Wort für "schnell" oder "super-schnell") wird auch
+benutzt um die Software zu bezeichnen, die diese Bearbeitung möglich
+macht. Wikis wurden 1995 erfunden, ihre Popularität stieg aber erst
+2000 oder 2001 an, zum Teil unterstützt durch den Erfolg von Wikipedia
+(<ulink url="http://www.wikipedia.org/"/>), eine auf wiki basierende
+freies Lexikon. Sie können eine wiki irgendwo zwischen IRC und 
+Webseiten einordnen: Wikis finden nicht in Echtzeit statt, also haben
+Leute die Möglichkeit ihre Beiträge zu überdenken und zu polieren, es
+ist aber auch sehr leicht zu ihnen beizutragen, da der Aufwand sie zu
+bearbeiten geringer ist als bei einer gewöhnlichen Webseite.</para>
 
-<para>Wikis are not yet standard equipment for open source projects,
-but they probably will be soon.  As they are relatively new
-technology, and people are still experimenting with different ways of
-using them, I will just offer a few words of caution here&mdash;at
-this stage, it's easier to analyze misuses of wikis than to analyze
-their successes.</para>
+<para>Wikis gehören noch nicht zur Standardausstattung für Open Source
+Projekte, werden es aber wahrscheinlich bald sein. Sie sind eine 
+relativ neu Technologie, und es wird noch mit verschiedene Arten der
+Nutzung experimentiert. Ich werde hier ein paar Worte zur Vorsicht 
+sagen&mdash;zu diesem Zeitpunkt, ist es einfacher die schlechte Arten
+Wikis zu nutzen als ihre Erfolge.</para>
 
-<para>If you decide to run a wiki, put a lot of effort into having a
-clear page organization and pleasing visual layout, so that visitors
-(i.e., potential editors) will instinctively know how to fit in their
-contributions.  Equally important, post those standards on the wiki
-itself, so people have somewhere to go for guidance.  Too often, wiki
-administrators fall victim to the fantasy that because hordes of
-visitors are individually adding high quality content to the site,
-the sum of all these contributions must therefore also be of high
-quality.  That's not how web sites work.  Each individual page or
-paragraph may be good when considered by itself, but it will not be
-good if embedded in a disorganized or confusing whole.  Too often,
-wikis suffer from:</para>
+<para>Wenn Sie sich dazu entschließen eine Wiki zu betreiben, 
+investieren Sie eine Menge Aufwand, in eine klare Organization der
+Seiten und ein visuell angenehmes Layout, damit Besucher (also 
+potentielle Teilnehmer) instinktiv wissen werden, wo sie ihre Beiträge
+einordnen sollen. Gleichermaßen wichtig ist es, diese Richtlinien in 
+die Wiki zu schreiben, damit Teilnehmer etwas zur Orientierung haben.
+Viel zu oft fallen Administratoren der Fantasie zum Opfer, dass da
+eine Horde Besucher jeder Einzeln qualitativ hochwertige Beiträge
+leistet, der Inhalt der im gesamten auch qualitativ hochwertig sein
+muss. So funktionieren Webseiten nicht. Jede individuelle Seite oder
+Paragraph, kann für sich gut sein, aber es wird niemals gut, innerhalb
+von einem schlecht organisiertem oder verwirrendem ganzen eingebettet
+wird. All zu oft leide wikis unter:</para>
 
 <itemizedlist>
   <listitem>
-     <para><emphasis role="bold">Lack of navigational principles.</emphasis>
-     A well-organized web site makes visitors feel like they know
-     where they are at any time.  For example, if the pages are
-     well-designed, people can intuitively tell the difference
-     between a "table of contents" region and a "content" region.
-     Contributors to a wiki will respect such differences too, but
-     only if the differences are present to begin with.</para>
+     <para><emphasis role="bold">Ein Mangel an prinzipien der 
+	Orientierung.</emphasis> Ein gut organisierte Webseite gibt
+	dem Besucher das Gefühl, zu jeder Zeit zu wissen, wo sie sind.
+	Wenn die Seiten zum Beispiel gut aufgemacht sind, kann man
+	intuitiv den Unterschied zwischen einem Bereich für das 
+	"Inhaltsverzeichnis" und dem für den "Inhalt" erkennen. 
+	Teilnehmer der Wiki werden solche Unterschiede auch 
+	respektieren, aber nur dann, wenn die Unterschiede schon zu
+	Anfang vorhanden sind.</para>
   </listitem>
   <listitem>
-     <para><emphasis role="bold">Duplication of information.</emphasis>
-     Wikis frequently end up with different pages saying similar
-     things, because the individual contributors did not notice the
-     duplications.  This can be partly a consequence of the lack of
-     navigational principles noted above, in that people may not find
-     the duplicate content if it is not where they expect it to
-     be.</para>
+     <para><emphasis role="bold">Verdoppelung von Informationen.
+	</emphasis> Häufig passiert es in Wikis, dass irgendwann 
+	verschiedene Seiten ähnliche Sachen sagen, da die einzelnen
+	Teilnehmer nicht die Verdoppelungen gemerkt haben. Zum Teil
+	kann das am Fehlen der oben erwähnten Prinzipien der
+	Orientierung liegen, insofern, dass Personen vielleicht nicht
+	die doppelten Inhalte gefunden haben wenn es nicht dort ist,
+	wo sie es erwarten.</para>
   </listitem>
   <listitem>
-     <para><emphasis role="bold">Inconsistent target audience.</emphasis>
-     To some degree this problem is inevitable when there are so many
-     authors, but it can be lessened if there are written guidelines
-     about how to create new content.  It also helps to aggressively
-     edit new contributions at the beginning, as an example, so that
-     the standards start to sink in.</para>
+     <para><emphasis role="bold">Inkonsistente Zielgruppe.</emphasis>
+	Zu einem gewissen Grad ist dieses Problem bei so vielen Autoren
+	unvermeidbar, kann aber verringert werden, wenn es schriftliche
+	Richtlinien gibt, wie man die Inhalte erstellt. Es hilft auch
+	neue Beiträge am Anfang aggressiv zu bearbeiten, damit die
+	Normen sich eine Wirkung hinterlassen.</para>
   </listitem>
 </itemizedlist>
 
-<para>The common solution to all these problems is the same: have
-editorial standards, and demonstrate them not only by posting them,
-but by editing pages to adhere to them.  In general, wikis will
-amplify any failings in their original material, since contributors
-imitate whatever patterns they see in front of them.  Don't just
-set up the wiki and hope everything falls into place.  You must also
-prime it with well-written content, so people have a template to
-follow.</para>
+<para>Die Gemeinsame Lösung für all diese Probleme ist die gleiche: 
+Redaktionelle Normen, und sie nicht nur durch ihre Bekanntmachung
+durchzusetzen, sondern indem man Seiten bearbeitet und sie selber
+befolgt. Im Allgemeinen, werden Wikis alle Schwächen im Ausgangsmaterial
+verstärken, da die Teilnehmer alle Muster die sie vor sich finden
+nachmachen werden. Richten Sie nicht nur die Wiki ein und hoffen Sie
+darauf, dass alles sich zusammenfügt. Sie müssen es auch mit gut 
+geschriebenen Inhalten angefangen werden, damit Besucher eine Vorlage
+als Beispiel haben.</para>
 
-<para>The shining example of a well-run wiki is Wikipedia, though this
-may be partly 
-because the content (encyclopedia entries) is naturally well-suited to
-the wiki format.  But if you examine Wikipedia closely, you'll see
-that its administrators laid a <emphasis>very</emphasis> thorough
-foundation for cooperation.  There is extensive documentation on how
-to write new entries, how to maintain an appropriate point of view,
-what sorts of edits to make, what edits to avoid, a dispute resolution
-process for contested edits (involving several stages, including
-eventual arbitration), and so forth.  They also have authorization
-controls, so that if a page is the target of repeated inappropriate
-edits, they can lock it down until the problem is resolved.  In other
-words, they didn't just throw some templates onto a web site and hope
-for the best.  Wikipedia works because its founders thought carefully
-about how to get thousands of strangers to tailor their writing to a
-common vision.  While you may not need the same level of preparedness
-to run a wiki for a free software project, the spirit is worth
-emulating.</para>
+<para>Das leuchtende Beispiel einer gut betriebenen Wiki ist die
+Wikipedia, obwohl das zum Teil daran liegen mag, dass der Inhalt
+(Lexikon Einträge) von Natur aus für das Wiki Format geeignet sind.
+Wenn Sie die Wikipedia aber genauer Untersuche, werden Sie feststellen,
+dass die Administratoren eine <emphasis>äußerst</emphasis> gründliche
+Basis für die Zusammenarbeit ausgelegt haben. Es gibt eine ausführliche
+Dokument wie man neue Einträge schreiben soll, wie man einen 
+angemessenen Standpunkt bewahrt, welche Art von Änderungen man machen
+soll und welche man vermeiden soll, ein Verfahren um Konflikte im
+Bezug auf sich widersprechende Bearbeitungen aufzulösen (mit mehreren
+schritten mitunter letztendlich auch ein Schiedsgericht), und so 
+weiter. Sie haben auch eine Verwaltung für die Authorisation, damit
+sie eine Seite so lange von der Bearbeitung ausschießen können, sollte 
+es zum Ziel mehrfacher unangemessener Bearbeitungen werden, bis das
+Problem aufgelöst wurde. Mit anderen Worten, schmissen sie nicht 
+einfach ein paar Vorlagen auf eine Webseite und drückten die Daumen.
+Wikipedia funktioniert deshalb, weil die Gründer sorgfältig darüber
+nachdachten, wie man Tausende Fremde dazu bringt, ihren Schreibstil 
+einer gemeinsamen Vision anzupassen. Auch wenn sie nicht den gleichen
+Grad an Vorbereitung haben müssen um in einem freien Software Projekt
+eine Wiki zu betreiben, ist es Wert, den Geist nachzuahmen.</para>
 
-<para>For more information about wikis, see
-<ulink url="http://en.wikipedia.org/wiki/Wiki"/>.  Also, the first
-wiki remains alive and well, and contains a lot of discussion about
-running wikis: see <ulink
+<para>Weitere Informationen über Wikis finden Sie unter <ulink 
+url="http://en.wikipedia.org/wiki/Wiki"/>. Das erste Wiki ist
+weiterhin wohlauf und beinhaltet viele Material darüber wie man
+Wikis betreibt: siehe <ulink
 url="http://www.c2.com/cgi/wiki?WelcomeVisitors"/>, 
-<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorks"/>, and
-<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorksNot"/> for
-various points of view.</para>
+<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorks"/>, und
+<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorksNot"/> für 
+verschiedene Ansichten.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="web-site">
-<title>Web Site</title>
+<title>Webseite</title>
 
-<para>There is not much to say about setting up the project web site
-from a technical point of view: setting up a web server and writing
-web pages are fairly simple tasks, and most of the important things to
-say about layout and arrangement were covered in the previous chapter.
-The web site's main function is to present a clear and welcoming
-overview of the project, and to bind together the other tools (the
-version control system, bug tracker, etc.).  If you don't have the
-expertise to set up a web server yourself, it's usually not hard to
-find someone who does and is willing to help out.  Nonetheless, to
-save time and effort, people often prefer to use one of the canned
-hosting sites.</para>
+<para>Es gibt aus teschnischer Sicht nicht viel darüber zu sagen
+wie man die Webseite für das Projekt einrichtet: Einen Web Server
+aufzubauen und Webseiten zu schreiben sind relativ einfache Aufgaben,
+und die wichtigsten Sachen im Bezug auf das Layout und die Anordnung
+wurden bereits im vorherigen Kapitel abgedeckt. Die Hauptfunktion
+der Webseite ist es, eine klare und einladende Übersicht des Projekts
+zu geben und die anderen Werkzeuge einzubinden (das 
+Versionsverwaltungssystem, Bug Tracker, usw). Wenn Sie nicht die
+Kenntnisse haben um selber einen Webserver einzurichten, ist es
+normalerweise kein Umstand, jemand zu finden der es kann und bereit
+ist zu helfen. Trotzdem ziehen es manche von Hosting Bündel zu nutzen,
+um sich Zeit und Mühe zu sparen.</para>
 
 <sect2 id="canned-hosting">
-<title>Canned Hosting</title>
+<title>Hosting Bündel</title>
 
-<para>There are two main advantages to using a canned site.  The first
-is server capacity and bandwidth: their servers are beefy boxes sitting
-on really fat pipes.  No matter how successful your project gets,
-you're not going to run out of disk space or swamp the network
-connection.  The second advantage is simplicity.  They have already
-chosen a bug tracker, a version control system, a mailing list manager,
-an archiver, and everything else you need to run a site.  They've
-configured the tools, and are taking care of backups for all the data
-stored in the tools.  You don't need to make many decisions.  All you
-have to do is fill in a form, press a button, and suddenly you've got
-a project web site.</para>
+<para>Es gibt zwei hauptsächliche Vorteile bei der Nutzung von Hosting
+Bündeln. Das Erste ist ihre Server Kapazität und ihre Bandbreite: Ihre
+Server sind starke Kisten an dicken Leitungen. Egal wie erfolgreich Ihr
+Projekt wird, wird es Ihnen wird niemals der Festplatten Platz ausgehen
+oder die Netzwerkverbindung verstopfen. Der zweite Vorteil ist seine
+Einfachheit. Sie haben bereits einen Bug Tracker, ein 
+Versionsverwaltungssystem, einen Email Verteiler System, eine Archiv
+System, und alles andere was Sie benötigen um eine Seite zu betreiben.
+Sie haben die Programme konfiguriert, und kümmern sich um die Sicherung
+aller Daten in diesen Programmen. Sie müssen nicht viele Entscheidungen
+treffen. Sie müssen lediglich ein Formular ausfüllen, einen Knopf 
+drücken, und plötzlich haben Sie eine Projekt Webseite.</para>
 
-<para>These are pretty significant benefits.  The disadvantage, of
-course, is that you must accept <emphasis>their</emphasis> choices and
-configurations, even if something different would be better for your
-project.  Usually canned sites are adjustable within certain narrow
-parameters, but you will never get the fine-grained control you would
-have if you set up the site yourself and had full administrative
-access to the server.</para>
+<para>Das sind ziemlich erhebliche Vorteile. Der Nachteil ist 
+natürlich, dass Sie sich mit <emphasis>deren</emphasis> Auswahl und
+Konfiguration abfinden müssen, selbst wenn etwas Anderes für Ihr
+Projekt besser wäre. Für gewöhnlich lassen sich diese Seiten innerhalb
+enger Grenzen einstellen, aber Sie werden niemals die fein granulierte
+Kontrolle bekommen welches Sie erhalten, wenn Sie selber die Seite
+aufbauen und vollen administrativen Zugriff auf den Server hätten.
+</para>
 
-<para>A perfect example of this is the handling of generated files.
-Certain project web pages may be generated files&mdash;for example,
-there are systems for keeping FAQ data in an easy-to-edit master
-format, from which HTML, PDF, and other presentation formats can be
-generated.  As explained in
+<para>Ein perfektes Beispiel hierfür ist die Handhabung generierter
+Dateien. Bestimmte Webseiten des Projekts können generierte Dateien
+sein&mdasch;es gibt z.B. Systeme um die Daten für eine FAQ in ein
+leicht zu bearbeitendes Quellformat zu halten, von dem aus HTML, PDF
+und andere Darstellungsformate generiert werden kann. Wie vorhin in
 <xref linkend="version-everything"/><phrase output="printed">
-earlier in this chapter</phrase>,
-you wouldn't want to version the generated formats, only the master
-file.  But when your web site is hosted on someone else's server, it
-may be impossible to set up a custom hook to regenerate the online
-HTML version of the FAQ whenever the master file is changed.  The only
-workaround is to version the generated formats too, so that they show
-up on the web site.</para>
+früher in diesem Kapitel</phrase> beschrieben, wollen Sie nicht die
+generierten Formate in der Versionsverwaltung haben, sondern nur die
+Quelldatei. Wenn Ihre Webseite aber auf den Server von jemand anderem
+betrieben wird, kann es unmöglich sein ein eigenes Script einzubinden,
+welches die HTML Version automatisch neu erstellt, sobald etwas an der
+Quelldatei geändert wird. Die einzige Abhilfe ist es, die generierten
+Formate mit in der Versionsverwaltung zu halten, damit Sie auch auf der
+Webseite auftauchen.</para>
 
-<para>There can be larger consequences as well.  You may not have as
-much control over presentation as you would wish.  Some of the canned
-hosting sites allow you to customize your web pages, but the site's
-default layout usually ends up showing through in various awkward
-ways.  For example, some projects that host themselves at SourceForge
-have completely customized home pages, but still point developers to
-their "SourceForge page" for more information.  The SourceForge page
-is what would be the project's home page, had the project not used a
-custom home page.  The SourceForge page has links to the bug tracker,
-the CVS repository, downloads, etc.  Unfortunately, a SourceForge page
-also contains a great deal of extraneous noise.  The top is a banner
-ad, often an animated image.  The left side is a vertical arrangement
-of links of little relevance to someone interested in the project.
-The right side is often another advertisement.  Only the center of the
-page is devoted to truly project-specific material, and even that is
-arranged in a confusing way that often makes visitors unsure of what
-to click on next.</para>
+<para>Es kann auch größere Folgen geben. Sie werden vielleicht nicht
+so viel Kontrolle auf die Präsentation wie Sie es sich wünschen würden.
+Aufmachung Ihrer There can be larger consequences as well. Manche
+Hosting Seiten erlauben es Ihnen Ihre Webseiten anzupassen, man erkennt
+aber meißtens auf unbequeme Art, dass der Vorgegebene Aufbau an 
+verschiedenen Stellen durchkommt. Manche Projekte die sich auf 
+SourceForge hosten lassen, haben komplett eigens angepasste Webseiten,
+weisen Entwickler aber immer noch auf ihre "SourceForge Seite" für 
+weitere Informationen. Die SourceForge Seite ist was die Webseite des
+Projekts gewesen wäre wenn das Projekt keine angepasste Seite benutzt
+hätte. Auf der SourceForge Seite sind Links zum Bug Tracker, dem CVS
+Repository, Downloads, usw. Eine SourceForge Seite beinhaltet
+unglücklicherweise auch eine ganze Menge belangloses Rauschen. Oben ist
+ein Werbeplakat, oftmals ein animiertes Bild. Links ist eine vertikale
+Anordnung von Links die für jemandem der an das Projekt interessiert is 
+von wenig Bedeutung sein dürften. Rechts ist oft noch mehr Werbung.
+Lediglich der Mittlere Bereich der Seite ist dem Projekt spezifischen
+Material gewidmet, und selbst das ist auf eine verwirrende Art 
+angeordnet, welches Nutzer unsicher macht, worauf sie als nächstes 
+klicken sollen.</para>
 
-<para>Behind every individual aspect of SourceForge's design, there is
-no doubt a good reason&mdash;good from SourceForge's point of view,
-such as the advertisements.  But from an individual project's point of
-view, the result can be a less-than-ideal web page.  I don't mean to
-pick on SourceForge; similar concerns apply to many of the canned
-hosting sites.  The point is that there's a tradeoff.  You get relief
-from the technical burdens of running a project site, but only at the
-price of accepting someone else's way of running it.</para>
+<para>Hinter jedem einzelnen Aspekt, gibt es ohne Zweifel einen guten
+Grund;gut aus sich von SourceForge, wie die Werbung. Aus der 
+Perspektive eines einzelnen Projekts aber kann das Ergebnis eine 
+weniger als optimale Webseite sein. Es ist nicht meine Absicht auf
+SourcForge rum zu hacken; ähnliche Bedenken lassen sich auf viele
+Seiten anwenden, die Gebündeltes Hosting anbieten. Das wesentliche ist,
+dass man einen Kompromiss eingeht. Es werden Ihnen die technischen
+Bürden eine Projekt Webseite zu betreiben genommen, dafür müssen Sie
+akzeptieren das jemand anderes bestimmt wie es betrieben wird.</para>
 
-<para>Only you can decide whether canned hosting is best for your
-project.  If you choose a canned site, leave open the option of
-switching to your own servers later, by using a custom domain name for
-the project's "home address".  You can forward the URL to the canned
-users off to the canned site for sophisticated functionality.  Just
-make sure to arrange things such that if you later decide to use a
-different hosting solution, the project's address doesn't need to
-change.</para>
+<para>Sie alleine können entscheiden ob ein Hosting Bündel das Beste
+ist für Ihr Projekt. Wenn Sie eine solche Seite wählen, halten Sie sich
+die Option offen, im nachhinein auf Ihre eigenen Server wechseln zu
+können, indem Sie einen gesonderten Domain-Namen als Adresse verwenden.
+Sie können diese URL für komplizierte Funktionen an die Hosting Seite 
+leiten lassen. Stellen Sie nur sicher, alles so anzuordnen, dass wenn 
+Sie sich später entscheiden eine andere Lösung zu verwenden, Sie nicht
+die Adresse des Projekts ändern müssen.</para>
 
 <sect3 id="canned-hosting-choosing">
-<title>Choosing a canned hosting site</title>
+<title>Die Wahl eines Hosting Bündels</title>
 
-<para>The largest and most well-known hosting site is <ulink
-url="http://www.sourceforge.net/">SourceForge</ulink>.  Two other
-sites providing the same or similar services are <ulink
-url="http://savannah.gnu.org/">savannah.gnu.org</ulink> and <ulink
-url="http://www.berlios.de/">BerliOS.de</ulink>.  A few organizations,
-such as the <ulink url="http://www.apache.org/">Apache Software
-Foundation</ulink> and <ulink
-url="http://www.tigris.org/">Tigris.org</ulink><footnote><para>Disclaimer:
-I am employed by <ulink
-url="http://www.collab.net/">CollabNet</ulink>, which sponsors
-Tigris.org, and I use Tigris regularly.</para></footnote>, give free
-hosting to open source projects that fit well with their missions and
-their community of existing projects.</para>
+<para>Die größte und bekannteste Hosting Seite ist <ulink
+url="http://www.sourceforge.net/">SourceForge</ulink>.  Zwei weitere
+Seiten die bieten gleiche oder ähnliche Dienste anbieten sind <ulink
+url="http://savannah.gnu.org/">savannah.gnu.org</ulink> und <ulink
+url="http://www.berlios.de/">BerliOS.de</ulink>. Ein paar 
+Organisationen, wie die <ulink url="http://www.apache.org/">Apache 
+Software Foundation</ulink> und <ulink url="http://www.tigris.org/">
+Tigris.org</blink><footnote><para>Haftungsausschluss: Ich bin bei 
+<ulink url="http://www.collab.net/">CollabNet</ulink> angestellt,
+welches ein Sponsor von Tigris.org ist, und ich nutze regelmäßig 
+Tigris.</para></footnote>, biete kostenloses Hosting für Open Source
+Projekte an, welche gut zu ihrer Mission und ihrer Gemeinschaft 
+vorhandener Projekte passen.</para>
 
-<para>Haggen So did a thorough evaluation of various canned hosting
-sites, as part of the research for his Ph.D. thesis,
-<citetitle>Construction of an Evaluation Model for Free/Open Source
-Project Hosting (FOSPHost) sites</citetitle>.  The results are at
-<ulink url="http://www.ibiblio.org/fosphost/"/>, and see especially
-the very readable comparison chart at <ulink
+<para>Als Teil der Nachforschungen für seine Diplomarbeit, hat Haggen
+So eine gründliche Evaluierung verschiedener Hosting Seiten gemacht,
+<citetitle>Aufbau eines Modells zur Evaluierung von Freie/Open Source
+Projekt Hosting (FOSPHost) Seiten</citetitle>. Die Ergebnisse finden
+Sie bei <ulink url="http://www.ibiblio.org/fosphost/"/>, insbesondere
+die sehr leserliche Vergleichstabelle bei <ulink
 url="http://www.ibiblio.org/fosphost/exhost.htm"/>.</para>
 
 </sect3>
 
 <sect3 id="anonymity">
-<title>Anonymity and involvement</title>
+<title>Anonymität und Beteiligung</title>
 
-<para>A problem that is not strictly limited to the canned sites, but
-is most often found there, is the abuse of user login functionality.
-The functionality itself is simple enough: the site allows each
-visitor to register herself with a username and password.  From
-then on it keeps a profile for that user, and project administrators
-can assign the user certain permissions, for example, the right to
-commit to the repository.</para>
+<para>Ein Problem welches sich nicht zwangsläufig auf Gebündelte Seiten
+beschränkt, dort aber am häufigsten anzutreffen ist, ist der Missbrauch
+der login Funktionalität. Die Funktion selber ist relativ Einfach: Die
+Seite erlabt jedem Benutzer sich mit einem Namen und Passwort zu 
+registrieren. Ab da speichert es ein Profil für diesen Nutzer, und die
+Administratoren von Projekten können dem Nutzer bestimmte Rechte 
+einräumen, wie das Recht an die Repository zu committen.</para>
 
-<para>This can be extremely useful, and in fact it's one of the prime
-advantages of canned hosting.  The problem is that sometimes user
-login ends up being required for tasks that ought to be permitted to
-unregistered visitors, specifically the ability to file issues in the
-bug tracker, and to comment on existing issues.  By requiring a
-logged-in username for such actions, the project raises the
-involvement bar for what should be quick, convenient tasks.  Of
-course, one wants to be able to contact someone who's entered data
-into the issue tracker, but having a field where she can enter her
-email address (if she wants to) is sufficient.  If a new user spots a
-bug and wants to report it, she'll only be annoyed at having to fill
-out an account creation form before she can enter the bug into the
-tracker.  She may simply decide not to file the bug at all.</para>
+<para>Das kann äußerst nützlich sein, und es ist tatsächlich eines der
+wesentlichen Vorteile gebündeltes Hosting zu benutzen. Das Problem ist,
+dass Nutzer sich manchmal für Aufgaben einloggen müssen, die eigentlich
+auch für nicht registrierte Nutzer erlaubt sein sollte, insbesondere um
+Issues im Bug Tracker zu Melden. Indem man eine Anmeldung für solche
+Aufgaben voraussetzt, hebt das Projekt die Grenze für die Teilnahme für
+Sachen an, die schnell und bequem gehen sollten. Natürlich möchte man
+jemand erreichen können, der Daten in den Issue Tracker eingetragen 
+hat, es reicht aber ein Feld zu haben, indem Sie ihre Email Adresse
+(wenn sie es möchte) eingeben kann. Wenn ein neuer Nutzer einen Bug
+findet, und ihn melden will, wird sie durch die Anforderung ein Konto
+erstellen zu müssen, um einen Eintrag in den Tracker zu machen nur 
+verärgert sein. Sie wird sich vielleicht einfach entscheiden den Bug
+überhaupt nicht zu melden.</para>
 
-<para>The advantages of user management generally outweigh the
-disadvantages.  But if you can choose which actions can be done
-anonymously, make sure not only that <emphasis>all</emphasis>
-read-only actions are permitted to non-logged-in visitors, but also
-some data entry actions, especially in the bug tracker and, if you
-have them, wiki pages.</para>
+<para>Die Vorteile einer Nutzerverwaltung wiegen im allgemeinen
+schwerer als die Nachteile. Wenn Sie aber auswählen können, welche
+Abläufe anonym gemacht werden können, stellen Sie nicht nur sicher,
+dass <emphasis>alle</emphasis> schreibgeschützte Abläufe für nicht
+angemeldete Besucher erlaubt sind, sonder auch manche Abläufe um Daten
+einzugeben, insbesondere im Bug Tracker und falls vorhanden auf den
+Wiki Seiten.</para>
 
 </sect3>
 
