@@ -58,7 +58,11 @@ dist:
           tmp/producingoss-`cat tmp/vn`
 	@for d in ??; do cp -a $${d} tmp/producingoss-`cat tmp/vn`/; done
 	@find tmp -name ".svn" | xargs rm -rf
+	@find tmp -name "*.ps" | xargs rm -rf
 	@(cd tmp; tar zcvf producingoss-`cat vn`.tar.gz producingoss-`cat vn`)
+	@if [ -f tmp/producingoss-`cat tmp/vn`.tar.gz ]; then \
+           rm -rf producingoss-*.tar.gz;                      \
+        fi
 	@mv tmp/producingoss-`cat tmp/vn`.tar.gz .
 	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`.tar.gz/g" \
           < download.html.tmpl > download.html
