@@ -60,7 +60,7 @@ dist:
 	@find tmp -name ".svn" | xargs rm -rf
 	@find tmp -name "*.ps" | xargs rm -rf
 	@(cd tmp; tar zcvf producingoss-`cat vn`.tar.gz producingoss-`cat vn`)
-	@(cd tmp; zip producingoss-`cat vn`.zip producingoss-`cat vn`)
+	@(cd tmp; zip -r producingoss-`cat vn`.zip producingoss-`cat vn`)
 	@if [ -f tmp/producingoss-`cat tmp/vn`.tar.gz ]; then \
            rm -rf producingoss-*.tar.gz;                      \
         fi
