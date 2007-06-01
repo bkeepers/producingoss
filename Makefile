@@ -60,10 +60,15 @@ dist:
 	@find tmp -name ".svn" | xargs rm -rf
 	@find tmp -name "*.ps" | xargs rm -rf
 	@(cd tmp; tar zcvf producingoss-`cat vn`.tar.gz producingoss-`cat vn`)
+	@(cd tmp; zip producingoss-`cat vn`.zip producingoss-`cat vn`)
 	@if [ -f tmp/producingoss-`cat tmp/vn`.tar.gz ]; then \
            rm -rf producingoss-*.tar.gz;                      \
         fi
+	@if [ -f tmp/producingoss-`cat tmp/vn`.zip ]; then \
+           rm -rf producingoss-*.zip;                      \
+        fi
 	@mv tmp/producingoss-`cat tmp/vn`.tar.gz .
-	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`.tar.gz/g" \
+	@mv tmp/producingoss-`cat tmp/vn`.zip .
+	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`/g" \
           < download.html.tmpl > download.html
 	@rm -rf tmp
