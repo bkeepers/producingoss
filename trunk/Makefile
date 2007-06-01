@@ -53,7 +53,7 @@ dist:
           echo "";                                                         \
           exit 1;                                                          \
         fi
-	@cat "1." > tmp/vn
+	@echo -n "1." > tmp/vn
 	@cat tmp/rev >> tmp/vn
 	@mkdir tmp/producingoss-`cat tmp/vn`
 	@cp COPYING README styles.css Makefile lang-makefile \
