@@ -41,7 +41,6 @@ dist:
 	@rm -rf tmp
 	@mkdir tmp
 	@svnversion -n . > tmp/vn
-	@echo -n "605" > tmp/vn
 	@if cat tmp/vn | grep --silent ":"; then                           \
           echo -n "Cannot make dist from a mixed-revision working copy: "; \
           cat tmp/vn;                                                      \
