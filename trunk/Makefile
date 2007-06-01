@@ -61,6 +61,6 @@ dist:
 	@find tmp -name ".svn" | xargs rm -rf
 	@(cd tmp; tar zcvf producingoss-`cat vn`.tar.gz producingoss-`cat vn`)
 	@mv tmp/producingoss-`cat tmp/vn`.tar.gz .
-	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`.tar.gz/" \
+	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`.tar.gz/g" \
           < download.html.tmpl > download.html
 	@rm -rf tmp
