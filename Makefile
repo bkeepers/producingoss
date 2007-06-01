@@ -40,19 +40,21 @@ upload: all
 dist:
 	@rm -rf tmp
 	@mkdir tmp
-	@svnversion -n . > tmp/vn
-	@if cat tmp/vn | grep --silent ":"; then                           \
+	@svnversion -n . > tmp/rev
+	@if cat tmp/rev | grep --silent ":"; then                          \
           echo -n "Cannot make dist from a mixed-revision working copy: "; \
-          cat tmp/vn;                                                      \
+          cat tmp/rev;                                                     \
           echo "";                                                         \
           exit 1;                                                          \
         fi
-	@if cat tmp/vn | grep --silent "M"; then                           \
+	@if cat tmp/rev | grep --silent "M"; then                          \
           echo -n "Cannot make dist from a modified working copy: ";       \
-          cat tmp/vn;                                                      \
+          cat tmp/rev;                                                     \
           echo "";                                                         \
           exit 1;                                                          \
         fi
+	@cat "1." > tmp/vn
+	@cat tmp/rev >> tmp/vn
 	@mkdir tmp/producingoss-`cat tmp/vn`
 	@cp COPYING README styles.css Makefile lang-makefile \
           tmp/producingoss-`cat tmp/vn`
