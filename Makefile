@@ -7,7 +7,7 @@ ${LANGUAGES}:
 all:
 	@for name in ${LANGUAGES}; do                \
           cd $${name}; make -f ../lang-makefile all; \
-        cd ..;                                       \
+          cd ..;                                     \
         done
 
 # The web site post-commit hook runs 'make www'.
@@ -15,26 +15,26 @@ www: lang-www dist
 lang-www:
 	@for name in ${LANGUAGES}; do                \
           cd $${name}; make -f ../lang-makefile www; \
-        cd ..;                                       \
+          cd ..;                                     \
         done
 
 clean:
 	@for name in ${LANGUAGES}; do                  \
           cd $${name}; make -f ../lang-makefile clean; \
-        cd ..;                                         \
+          cd ..;                                       \
         done
 
 upload: all
-	@for name in ${LANGUAGES}; do cd $${name};                        \
-          scp producingoss.pdf                                            \
-            kfogel@sp.red-bean.com:/www/producingoss/poss-new.pdf;        \
-          ssh kfogel@sp.red-bean.com                                      \
-            "(cd /www/producingoss && mv poss-new.pdf producingoss.pdf)"; \
-          scp producingoss.ps                                             \
-            kfogel@sp.red-bean.com:/www/producingoss/poss-new.ps;         \
-          ssh kfogel@sp.red-bean.com                                      \
-            "(cd /www/producingoss && mv poss-new.ps producingoss.ps)";   \
-        cd ..;                                                            \
+	@for d in ${LANGUAGES}; do cd $${d};                                \
+          scp producingoss.pdf                                              \
+            kfogel@sp.red-bean.com:/www/producingoss/$${d}/pnew.pdf;        \
+          ssh kfogel@sp.red-bean.com                                        \
+            "(cd /www/producingoss/$${d} && mv pnew.pdf producingoss.pdf)"; \
+          scp producingoss.ps                                               \
+            kfogel@sp.red-bean.com:/www/producingoss/$${d}/pnew.ps;         \
+          ssh kfogel@sp.red-bean.com                                        \
+            "(cd /www/producingoss/$${d} && mv pnew.ps producingoss.ps)";   \
+          cd ..;                                                            \
         done
 
 dist:
