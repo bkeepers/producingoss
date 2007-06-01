@@ -1,35 +1,66 @@
-include tools/Makefile.base-vars
-TOOLS_DIR = tools
-NAME = producingoss
-OUTNAME = $(NAME)
-XML_SOURCE = book.xml
-# Suppress svnversion for now
-VERSION_SOURCE = 
+LANGUAGES=de en fr he ja pl zh
 
-all: html html-chunk pdf ps xmldist
+.PHONY: ${LANGUAGES}
+${LANGUAGES}: 
+	@cd $@; make -f ../lang-makefile all; cd ..
 
-upload: all
-	scp producingoss.pdf \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.pdf.NEW
-	ssh kfogel@sp.red-bean.com \
-          "(cd /www/producingoss && mv producingoss.pdf.NEW producingoss.pdf)"
-	scp producingoss.ps \
-            kfogel@sp.red-bean.com:/www/producingoss/producingoss.ps.NEW
-	ssh kfogel@sp.red-bean.com \
-          "(cd /www/producingoss && mv producingoss.ps.NEW producingoss.ps)"
+all:
+	@for name in ${LANGUAGES}; do                \
+          cd $${name}; make -f ../lang-makefile all; \
+        cd ..;                                       \
+        done
 
 # The web site post-commit hook runs 'make www'.
-www: all-html xmldist adsense
+www: lang-www dist
+lang-www:
+	@for name in ${LANGUAGES}; do                \
+          cd $${name}; make -f ../lang-makefile www; \
+        cd ..;                                       \
+        done
 
-xmldist:
-	rm -rf producingoss-xml
-	mkdir producingoss-xml
-	cp COPYING README Makefile *.xml producingoss-xml
-	tar zcvf producingoss-xml.tar.gz producingoss-xml
-	rm -rf producingoss-xml
+clean:
+	@for name in ${LANGUAGES}; do                  \
+          cd $${name}; make -f ../lang-makefile clean; \
+        cd ..;                                         \
+        done
 
-adsense:
-	tools/make-ad-sense.py producingoss.html
-	tools/make-ad-sense.py html-chunk
+upload: all
+	@for name in ${LANGUAGES}; do cd $${name};                        \
+          scp producingoss.pdf                                            \
+            kfogel@sp.red-bean.com:/www/producingoss/poss-new.pdf;        \
+          ssh kfogel@sp.red-bean.com                                      \
+            "(cd /www/producingoss && mv poss-new.pdf producingoss.pdf)"; \
+          scp producingoss.ps                                             \
+            kfogel@sp.red-bean.com:/www/producingoss/poss-new.ps;         \
+          ssh kfogel@sp.red-bean.com                                      \
+            "(cd /www/producingoss && mv poss-new.ps producingoss.ps)";   \
+        cd ..;                                                            \
+        done
 
-include tools/Makefile.base-rules
+dist:
+	@rm -rf tmp
+	@mkdir tmp
+	@svnversion -n . > tmp/vn
+	@echo -n "605" > tmp/vn
+	@if cat tmp/vn | grep --silent ":"; then                           \
+          echo -n "Cannot make dist from a mixed-revision working copy: "; \
+          cat tmp/vn;                                                      \
+          echo "";                                                         \
+          exit 1;                                                          \
+        fi
+	@if cat tmp/vn | grep --silent "M"; then                           \
+          echo -n "Cannot make dist from a modified working copy: ";       \
+          cat tmp/vn;                                                      \
+          echo "";                                                         \
+          exit 1;                                                          \
+        fi
+	@mkdir tmp/producingoss-`cat tmp/vn`
+	@cp COPYING README styles.css Makefile lang-makefile \
+          tmp/producingoss-`cat tmp/vn`
+	@for d in ??; do cp -a $${d} tmp/producingoss-`cat tmp/vn`/; done
+	@find tmp -name ".svn" | xargs rm -rf
+	@(cd tmp; tar zcvf producingoss-`cat vn`.tar.gz producingoss-`cat vn`)
+	@mv tmp/producingoss-`cat tmp/vn`.tar.gz .
+	@sed -e "s/REPLACEME/producingoss-`cat tmp\/vn`.tar.gz/" \
+          < download.html.tmpl > download.html
+	@rm -rf tmp

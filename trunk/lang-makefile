@@ -1,0 +1,32 @@
+# This is meant to be invoked from one of the language-specific
+# subdirs, e.g.: 'cd zh && make -f ../lang-makefile ...'
+
+include ../tools/Makefile.base-vars
+TOOLS_DIR = ../tools
+NAME = producingoss
+OUTNAME = $(NAME)
+XML_SOURCE = book.xml
+STYLESHEET = ../styles.css
+HTML_CHUNK_DIR = .
+# Suppress svnversion for now
+VERSION_SOURCE = 
+
+all: html html-chunk pdf ps
+
+# The web site post-commit hook runs 'make www'.
+www: all-html adsense
+
+adsense:
+	../tools/make-ad-sense.py producingoss.html
+	../tools/make-ad-sense.py .
+
+include ../tools/Makefile.base-rules
+
+# This overrides the 'clean' rule from tools/Makefile.base-vars,
+# but instead of removing $(HTML_CHUNK_DIR), it removes *.html.
+clean:
+	@echo "KFF"
+	rm -f $(VERSION_SOURCE)
+	rm -f $(HTML_TARGET) $(FO_TARGET)
+	rm -f $(PDF_TARGET) $(PS_TARGET) 
+	rm -rf *.html
