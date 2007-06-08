@@ -1,133 +1,245 @@
-<chapter id="初步">
+<chapter id="Introduction">
 
 <title>初步</title>
 
 <simplesect>
 
-<para>大部分自由软件计划是失败的</para>
+<para>大部分自由软件计划是失败的。</para>
 
-<para>人们总不太喜欢听太多失败的故事，只有成功的计划才能吸引我们的注意力。 林林总总的自由
-软件的数量是惊人的 <footnote><para>SourceForge.net, 一个著名的代码存
-放站点。截至到2004年4月中旬，总共有79225个计划注册。 虽然这只是选择使用SourcdForge的
-计划数量，但已经非常接近互联网上全部自由软件计划的数量了。</para></footnote> 尽管只有一
-小部分的计划成功了，但这仍然只是那些广为认知的计划的一部分。有太多的计划由于不为人知，即使
-失败了我们也不会听到。我们无法用一个确定的时间点来宣判一个计划的死刑，人们只是停止工作无所事事。
-即使我们知道一个计划的最后一个变动是何时添加的，但是在当时那些做这些工作的人通常并不知道这会
-是最后的晚餐。我们甚至无法明确地定义何时一个计划才算是断气了，是停止活动6个月之后？ 是用户数
-量停止增长并且人数还少于开发者的数量时？ 当一个计划的开发者发现他们只是在重复别人的工作，而决定
-放弃计划，如何看待？ 然后他们决定加入另一个计划，并且在计划中使用之前的一些工作成果，如何看待？
-原先的计划死亡了，或者只是搬了一次家？ </para>
+<para>We tend not to hear very much about the failures.  Only
+successful projects attract attention, and there are so many free
+software projects in total<footnote><para>SourceForge.net, one popular
+hosting site, had 79,225 projects registered as of mid-April 2004.
+This is nowhere near the total number of free software projects on the
+Internet, of course; it's just the number that chose to use
+SourceForge.</para></footnote> that even though only a small
+percentage succeed, the result is still a lot of visible projects.  We
+also don't hear about the failures because failure is not an event.
+There is no single moment when a project ceases to be viable; people
+just sort of drift away and stop working on it.  There may be a moment
+when a final change is made to the project, but those who made it
+usually didn't know at the time that it was the last one.  There is
+not even a clear definition of when a project is expired.  Is it when
+it hasn't been actively worked on for six months?  When its user base
+stops growing, without having exceeded the developer base?  What if
+the developers of one project abandon it because they realized they
+were duplicating the work of another&mdash;and what if they join that
+other project, then expand it to include much of their earlier effort?
+Did the first project end, or just change homes?</para>
 
-<para>因为是如此复杂，得出一个精确的失败率是不可能的。但是十多年以来流传于SourcdForge.net
-或是用Google搜索的得到的开源运动传闻，都指向同一个结论：这个比率是非常高的，
-也许能到达90~95%。如果把那些虽然存活但是内忧外患的计划算在内，这个比率还将更高。这些计划通常
-仍然在生产代码，但已不再是开发者的乐园了，要么是进展缓慢要么是互相之间失去信任。 </para>
+<para>Because of such complexities, it's impossible to put a precise
+number on the failure rate.  But anecdotal evidence from over a decade
+in open source, some casting around on SourceForge.net, and a little
+Googling all point to the same conclusion: the rate is extremely high,
+probably on the order of 90&ndash;95%.  The number climbs higher if you
+include surviving but dysfunctional projects: those
+which <emphasis>are</emphasis> producing running code, but which are
+not pleasant places to be, or are not making progress as quickly or as
+dependably as they could.</para>
 
-<para>这本书和避免失败有关。 它不仅演示了如何才是正确的做事方法，而且告诉你如何是错的，以便你
-及时发现和纠正错误。 我希望在读过此书之后， 你不仅能对如何避免开发过程中的常见陷阱有丰富的技术储备，
-而且对如何使一个成功的计划得到成长和维护有深入的了解。成功不是一场零和游戏，此书也不是教你如在在竞争
-中获胜或是领先的。相反，运作一个开源计划的重要部分就是流畅地同计划中的其他人合作。在更高的层次上，每
-一个成功的计划都为在世界范围内自由软件的成长作出一份贡献。 </para>
+<para>This book is about avoiding failure.  It examines not only how
+to do things right, but how to do them wrong, so you can recognize and
+correct problems early.  My hope is that after reading it, you will
+have a repertory of techniques not just for avoiding common pitfalls
+of open source development, but also for dealing with the growth and
+maintenance of a successful project.  Success is not a zero-sum game,
+and this book is not about winning or getting ahead of the
+competition.  Indeed, an important part of running an open source
+project is working smoothly with other, related projects.  In the long
+run, every successful project contributes to the well-being of the
+overall, worldwide body of free software.</para>
 
 </simplesect>
 
 <simplesect>
 
-<para>如果说导致自由软件计划失败的原因同私有软件是相同类型的，那是不公平的。实际上，
-在自由软件内不会有诸如建立在不切实际的需求上的垄断，含混不清的规范，可怜的代码管理，
-设计阶段不足等等笼罩在传统软件工业上的幽灵。有关这些主题的书已经是汗牛充栋， 我不打
-算重复。 我想做的是描述自由软件独有的问题。 当一个自由软件计划开始运转，最常见的问题是
-开发者（或是经理）难以识别开源软件开发过程中的独特问题，尽管他们可能已经在那些闭源软件的
-常见问题上摔打了多年。 </para>
+<para>It would be tempting to say that free software projects fail for
+the same sorts of reasons proprietary software projects do.
+Certainly, free software has no monopoly on unrealistic requirements,
+vague specifications, poor resource management, insufficient design
+phases, or any of the other hobgoblins already well known to the
+software industry.  There is a huge body of writing on these topics,
+and I will try not to duplicate it in this book.  Instead, I will
+attempt to describe the problems peculiar to free software.  When a
+free software project runs aground, it is often because the developers
+(or the managers) did not appreciate the unique problems of open
+source software development, even though they might have been quite
+prepared for the better-known difficulties of closed-source
+development.</para>
 
-<para>一个最常见的错误就急于从开源的形式本身获得好处，但这是不切实际的。 一纸开放
-协议不会一下子让成群的活跃开发者自愿地把他们的时间交给你的计划， 开源一个原本问题多多的
-计划也不能自动地修正这些问题。 实际上很可能相反， 相比不开源，开放一个计划短期内会带来一系列
-全新的复杂问题和代价。 开放意味着要让完全陌生的人读懂代码，建立一个开发网站和邮件列表， 
-通常还会第一次需要写文档。 这些事情的工作量是相当大的。 当然如果有开发者表示出了兴趣， 在
-他们为你的计划带来好处之前回答他们的问题也是一个额外的负担。 如同开发者Jamie Zawinski
-回忆Mozilla计划早期的混乱状况所说： </para>
+<para>One of the most common mistakes is unrealistic expectations
+about the benefits of open source itself.  An open license does not
+guarantee that hordes of active developers will suddenly volunteer
+their time to your project, nor does open-sourcing a troubled project
+automatically cure its ills.  In fact, quite the opposite: opening up
+a project can add whole new sets of complexities, and cost
+<emphasis>more</emphasis> in the short term than simply keeping it
+in-house.  Opening up means arranging the code to be comprehensible to
+complete strangers, setting up a development web site and email lists,
+and often writing documentation for the first time.  All this is a lot
+of work.  And of course, if any interested developers
+<emphasis>do</emphasis> show up, there is the added burden of
+answering their questions for a while before seeing any benefit from
+their presence.  As developer Jamie Zawinski said about the troubled
+early days of the Mozilla project:</para>
 
     <blockquote>
-      <para><emphasis>开源的确行， 但它绝不是万能药。  我对你的忠告是：你不能指望在一个垂死
-                项目上洒一点“开源的精灵魔粉”就能让所有事情奇迹办地运转起来。 做软件是困难的。问题
-                不会那么简单。 </emphasis></para>
+      <para><emphasis>Open source does work, but it is most definitely
+      not a panacea.  If there's a cautionary tale here, it is that
+      you can't take a dying project, sprinkle it with the magic pixie
+      dust of "open source," and have everything magically work
+      out. Software is hard.  The issues aren't that simple.</emphasis></para>
 
       <para>(from <emphasis role="bold"><ulink
       url="http://www.jwz.org/gruntle/nomo.html"/></emphasis>)</para>
     </blockquote>
 
-<para>一个相关的错误是对简报和打包的轻视，特别是当一个项目顺利运转时总认为这些以后再做
-不迟。 简报和打包有很多的目的，所有的一切都是为了减低进入的门槛。使计划对那些后来者有吸引
-力意味着编写用户和开发者文档， 建立为新来者提供信息的网站， 尽可能自动化软件的编译和安装工
-作，以及其他。很不幸地很多程序员认为相比代码这些工作都是次要的。导致这种情况的原因有很多。
-首先， 他们感觉这些都是无用功，因为对这些少部分的人来说，它的贡献是可见的，反之亦然。毕竟
-这些编写代码的人并不真需要打包。他们知道如何安装，管理和使用这些软件，因为代码就是他们编写的。
-其次，简报和打包所需要的技术通常和写代码完全不同。人们总是倾向于专注自己所擅长的，即使另外
-的工作能对整个计划起到事半功倍的作用。
-   <xref
-linkend="getting-started"/> 将详细讨论简报和打包，并且解释从计划的一开始就确定这些工作
-的优先地位的重要性。</ para>
+<para>A related mistake is that of skimping on presentation and
+packaging, figuring that these can always be done later, when the
+project is well under way.  Presentation and packaging comprise a wide
+range of tasks, all revolving around the theme of reducing the barrier
+to entry.  Making the project inviting to the uninitiated means
+writing user and developer documentation, setting up a project web
+site that's informative to newcomers, automating as much of the
+software's compilation and installation as possible, etc.  Many
+programmers unfortunately treat this work as being of secondary
+importance to the code itself.  There are a couple of reasons for
+this.  First, it can feel like busywork, because its benefits are most
+visible to those least familiar with the project, and vice versa.
+After all, the people who develop the code don't really need the
+packaging.  They already know how to install, administer, and use the
+software, because they wrote it.  Second, the skills required to do
+presentation and packaging well are often completely different from
+those required to write code.  People tend to focus on what they're
+good at, even if it might serve the project better to spend a little
+time on something that suits them less.  <xref
+linkend="getting-started"/> discusses presentation and packaging
+in detail, and explains why it's crucial that they be a priority from
+the very start of the project.</para>
 
-<para>接下来的一个谬误是认为开源几乎或完全不需要项目管理，或者照搬商业开发的那一套管理模式也能
-在开源中做得很好。管理在一个开源计划中总是不显眼的，但在成功的计划中，它通常在幕后起到推动的作用
-。一个简单的心理试验就足够显示为什么。 想像一个开源计划有这样几个懒散的程序员──都有着的
-坏名声──他们中的大部分人从来没有互相见过面，为这个计划工作只是出于他们的个人目的。心理试验能很
-简单地预测如果<emphasis>没有</emphasis>管理，在这样一个团体中会发生什么。除非发生奇迹，否
-则他们很快就会四分五裂。 事情不会如我们希望的那样自己运转。管理偶尔会相当活跃，但是大部分时候是日常
-的，微妙的，低调的。只有一件事情能把开发者团结在一起，就是他们相信团队合作比单干能做得更多。因此管理
-的最重要的目标是确保他们继续相信这一点，做得这点需要使他们坐下来交流，需要让能干的开发者不会因为个性
-而受到排斥，总之要使计划成为开发者的留恋之地。我们将在后面讨论这些工作需要的具体技术。
- </para>
+<para>Next comes the fallacy that little or no project management is
+required in open source, or conversely, that the same management
+practices used for in-house development will work equally well on an
+open source project.  Management in an open source project isn't
+always very visible, but in the successful projects, it's usually
+happening behind the scenes in some form or another.  A small thought
+experiment suffices to show why.  An open source project consists of a
+random collection of programmers&mdash;already a notoriously
+independent-minded category&mdash;who have most likely never met each
+other, and who may each have different personal goals in working on
+the project.  The thought experiment is simply to imagine what would
+happen to such a group <emphasis>without</emphasis> management.
+Barring miracles, it would collapse or drift apart very quickly.
+Things won't simply run themselves, much as we might wish otherwise.
+But the management, though it may be quite active, is often informal,
+subtle, and low-key.  The only thing keeping a development group
+together is their shared belief that they can do more in concert than
+individually.  Thus the goal of management is mostly to ensure that
+they continue to believe this, by setting standards for
+communications, by making sure useful developers don't get
+marginalized due to personal idiosyncracies, and in general by making
+the project a place developers want to keep coming back to.  Specific
+techniques for doing this are discussed throughout the rest of this
+book.</para>
 
-<para>最后还有一种类型的问题也许我们可以称之为“文化引导失败”。十年之前，甚至五年之前，谈论
-自由软件运动的整体文化都为时过早，但现在不是了。一种清晰的文化正在慢慢浮现，虽然它不是一个整体──
-如同很多的地域约束文化，它倾向于持在内部异议和社团活动──它有一个基本的坚固核心。大部分成功的开源计
-划展示了这个核心中的部分特质。他们奖励符合这种文化的行为，惩罚相反的。他们创造了一种鼓励计划外的参与
-的氛围，甚至不惜中心协调时间的代价。他们对粗野和礼貌的概念使得他们能大体地判断行为的价值。最重要的是，
-长期的参与已经内化了这些标准，所以他们对产品的大体期望能不谋而合。虽非故意，不成功的计划通常是脱离了
-这个核心的重要方面，无法就那些是合理的默认行为上达成一致。这意味着一旦问题出现，由于参与者缺乏通过弥
-补分歧而对问题做出反馈的现成文化储备，形式会迅速恶化 。 </para>
+<para>Finally, there is a general category of problems that may be
+called "failures of cultural navigation."  Ten years ago, even five,
+it would have been premature to talk about a global culture of free
+software, but not anymore.  A recognizable culture has slowly emerged,
+and while it is certainly not monolithic&mdash;it is at least as prone
+to internal dissent and factionalism as any geographically bound
+culture&mdash;it does have a basically consistent core.  Most
+successful open source projects exhibit some or all of the
+characteristics of this core.  They reward certain types of behaviors,
+and punish others; they create an atmosphere that encourages unplanned
+participation, sometimes at the expense of central coordination; they
+have concepts of rudeness and politeness that can differ substantially
+from those prevalent elsewhere.  Most importantly, longtime
+participants have generally internalized these standards, so that they
+share a rough consensus about expected conduct.  Unsuccessful projects
+usually deviate in significant ways from this core, albeit
+unintentionally, and often do not have a consensus about what
+constitutes reasonable default behavior.  This means that when
+problems arise, the situation can quickly deteriorate, as the
+participants lack an already established stock of cultural reflexes to
+fall back on for resolving differences. </para>
 
-<para>此书是一本实用的指南，而不是一篇人类学论文或是史书。然而了解今天的自由软件文化的发源对任何
-一个实际的建议都是必要的基础。一个对理解这种文化的人能开源世界任意驰骋，即使遇到很多的各地风俗和
-方言，仍然可以自信和有效地参与。相反，一个没能很好理解这种文化的人将会在组织或是参与一个计划的过程
-中处处遇到困难和意外。由于自由软件的开发人员的数量仍然在飞速增长，其中有很多人属于后一种情况──这
-多半是一种新近加入的文化，并且会持续一段时间。如果你自认为是其中的一员，下一节为你在以后将在本书或
-是互联网上遇到的讨论提供了背景材料。（另一方面，如果你已经在开源中工作了一段时间，你也许早已了解了
-这段历史，你可以选择跳过这一节。） </para>
+<para>This book is a practical guide, not an anthropological study or
+a history.  However, a working knowledge of the origins of today's
+free software culture is an essential foundation for any practical
+advice.  A person who understands the culture can travel far and wide
+in the open source world, encountering many local variations in custom
+and dialect, yet still be able to participate comfortably and
+effectively everywhere.  In contrast, a person who does not understand
+the culture will find the process of organizing or participating in a
+project difficult and full of surprises.  Since the number of people
+developing free software is still growing by leaps and bounds, there
+are many people in that latter category&mdash;this is largely a
+culture of recent immigrants, and will continue to be so for some
+time.  If you think you might be one of them, the next section
+provides background for discussions you'll encounter later, both in
+this book and on the Internet.  (On the other hand, if you've been
+working with open source for a while, you may already know a lot of
+its history, so feel free to skip the next section.)</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="history">
-<title>历史</title>
+<title>History</title>
 
-<para>软件分享自有计算机的哪天存在了。 在计算机工业的早期，厂商认为竞争的优势在于对硬件的
-创新，因此并不太认真把软件当成商业资产看待。 这些早期机器用户许多都是科学家或是技师， 他们有
-能力自己修改和扩展随机附送的软件。 有时用户不仅将补丁反馈给厂商， 而且分发给相似机器的其他用
-户。 厂商经常允许甚至鼓励这么做：在他们眼里无论是都从源代码着手， 对软件的改经都使得机器对其
-他的潜在消费者更有吸引力。 </para>
+<para>Software sharing has been around as long as software itself.  In
+the early days of computers, manufacturers felt that competitive
+advantages were to be had mainly in hardware innovation, and therefore
+didn't pay much attention to software as a business asset.  Many of
+the customers for these early machines were scientists or technicians,
+who were able to modify and extend the software shipped with the
+machine themselves.  Customers sometimes distributed their patches
+back not only to the manufacturer, but to other owners of similar
+machines.  The manufacturers often tolerated and even encouraged this:
+in their eyes, improvements to the software, from whatever source,
+just made the machine more attractive to other potential
+customers.</para>
 
-<para>虽然今天的自由软件文化在很多方面都和早期相似， 但是有两点重要的不同。 首先，当时几乎
-没有硬件的标准。那是一个计算机设计创新的黄金时代， 但是繁多的计算机架构也意味着所有的事情都无法
-同其他的兼通。因此，为一台机器编写的软件一般无法在另一台上工作。 在一种特定的架构或是架构族上
-程序员需要专门的知识（今天程序员更多的是学习一种编程语言或是语言类型的专门知识， 他们对他们
-的专业知识能移植任何一台遇到的机器上非常自信）。 因为个人的专门知识总是针对一种特定类型的
-计算机，这些专门知识的积累能 让计算机对他们以及同事变得越来越有趣。 这就是为什么厂商对让特定
-机器的代码和知识尽可能广的得到传播感兴趣的原因。 </para>
+<para>Although this early period resembled today's free software
+culture in many ways, it differed in two crucial respects.  First,
+there was as yet little standardization of hardware&mdash;it was a
+time of flourishing innovation in computer design, but the diversity
+of computing architectures meant that everything was incompatible with
+everything else.  Thus, software written for one machine would
+generally not work on another.  Programmers tended to acquire
+expertise in a particular architecture or family of architectures
+(whereas today they would be more likely to acquire expertise in a
+programming language or family of languages, confident that their
+expertise will be transferable to whatever computing hardware they
+happen to find themselves working with).  Because a person's expertise
+tended to be specific to one kind of computer, their accumulation of
+expertise had the effect of making that computer more attractive to
+them and their colleagues.  It was therefore in the manufacturer's
+interests for machine-specific code and knowledge to spread as widely
+as possible.</para>
 
-<para>其次，当时没有互联网。虽然当时对分享的法律约束比今天少，但是技术约束更多。也就是说，
-和说话相比，把数据从地方移到另一个地方是笨重不便的。在一些公司和实验室里员工之间可以通过
-一些不错小型的局域网共享信息。但当一个人想同不限地点的所有人分享时，问题还是存在。克服这
-些问题的途径有很多。有时独立的团体之间会互相联系，通过邮局寄送磁盘或是磁带。有时厂商扮演了
-补丁的中心票据交换所的角色。厂商还会帮助在大学里的早期计算机开发者，那里的气氛是鼓励知识的
-传播的。但是数据传输所必须的物理媒体意味着分享总会遇到阻力，和（实际上的或是组织上的）距离
-成正比的阻力。 </para>
+<para>Second, there was no Internet.  Though there were fewer legal
+restrictions on sharing than today, there were more technical ones:
+the means of getting data from place to place were inconvenient and
+cumbersome, relatively speaking.  There were some small, local
+networks, good for sharing information among employees at the same
+research lab or company.  But there remained barriers to overcome if
+one wanted to share with everyone, no matter where they were.  These
+barriers <emphasis>were</emphasis> overcome in many cases.  Sometimes
+different groups made contact with each other independently, sending
+disks or tapes through land mail, and sometimes the manufacturers
+themselves served as central clearing houses for patches.  It also
+helped that many of the early computer developers worked at
+universities, where publishing one's knowledge was expected.  But the
+physical realities of data transmission meant there was always an
+impedance to sharing, an impedance proportional to the distance (real
+or organizational) that the software had to travel.  Widespread,
+frictionless sharing, as we know it today, was not possible.</para>
 
 <!-- ========================== subsection ========================== -->
 <sect2 id="propertization">
-<title> 自由软件同私有软件的兴起</title>
+<title>The Rise of Proprietary Software and Free Software</title>
 
 <para>As the industry matured, several interrelated changes occurred
 simultaneously.  The wild diversity of hardware designs gradually gave
