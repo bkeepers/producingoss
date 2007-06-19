@@ -66,40 +66,42 @@ url="http://en.wikipedia.org/wiki/Brooks_Law"/>。</para></footnote>指出，
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="tools-needed">
-<title>What a Project Needs</title>
+<title>一个项目需要什么</title>
 
-<para>Most open source projects offer at least a minimum, standard set
-of tools for managing information:</para>
+<para>大部分开源 项目至少提供了最低限度的标准工具纪用于管理信息： </para>
 
 <variablelist>
 
-   <varlistentry><term>Web site</term>
+   <varlistentry><term>网站</term>
      <listitem>
-     <para>Primarily a centralized, one-way conduit of
+     <para>主要是一个用于公开发布项目信息的集中式的单向管道。有也把网站作为项目中的其他
+                    工具的管理接口使用。Primarily a centralized, one-way conduit of
            information from the project out to the public.  The web
            site may also serve as an administrative interface for
            other project tools.</para>
      </listitem>
    </varlistentry>
 
-   <varlistentry><term>Mailing lists</term>
+   <varlistentry><term>邮件列表</term>
      <listitem>
-       <para>Usually the most active communications forum in the
+       <para>通常会是项目中最活跃的通讯手段，“可记录的媒介”。Usually the most active communications forum in the
              project, and the "medium of record."</para> 
      </listitem>
    </varlistentry>
 
-   <varlistentry><term>Version control</term>
+   <varlistentry><term>版本控制</term>
      <listitem>
-       <para>Enables developers to manage code changes conveniently,
+       <para>帮助开发者方便地管理代码的变更，包括复原和对变更的记录。使得每一个人能看到代码的变化。Enables developers to manage code changes conveniently,
              including reverting and "change porting".  Enables
              everyone to watch what's happening to the code.</para>
      </listitem>
    </varlistentry>
 
-   <varlistentry><term>Bug tracking</term>
+   <varlistentry><term>Bug追踪</term>
      <listitem>
-       <para>Enables developers to keep track of what they're working
+       <para>使得开发者们在所工作的项目上追踪bug，互相协调，并且规划发布时间。使得每个人都能查询
+              bug的状况并且记录有关实际bug的信息（即，修补方法）。不仅能用于对bug的追踪，
+                                  而且能用于任务，发布，新特性等等。nables developers to keep track of what they're working
              on, coordinate with each other, and plan releases.  Enables
              everyone to query the status of bugs and record
              information (e.g., reproduction recipes) about particular
@@ -119,9 +121,10 @@ of tools for managing information:</para>
    </varlistentry>
 -->
 
-   <varlistentry><term>Real-time chat</term>
+   <varlistentry><term>即时聊天</term>
      <listitem>
-       <para>A place for quick, lightweight discussions and
+       <para>一个用于快速，方便的讨论和交替问答的地方。缺点是并不总是能完整地
+                                存档。A place for quick, lightweight discussions and
              question/answer exchanges.  Not always archived
              completely.</para>
      </listitem>
@@ -129,14 +132,18 @@ of tools for managing information:</para>
 
 </variablelist>
 
-<para>Each tool in this set addresses a distinct need, but their functions
+<para>这个工具集中的每一样满足一个特定的需求，但它们的功能都是相关的，这些工具必须能同
+时使用。下面我们将检验它们分别能做什么，重要的是如何让人们使用。网站将放在最后讨论，因为
+先前它将更多的扮演其他部分的黏合剂的角色。Each tool in this set addresses a distinct need, but their functions
 are also interrelated, and the tools must be made to work together.
 Below we will examine how they can do so, and more importantly, how to
 get people to use them.  The web site is not discussed until the end,
 since it acts more as glue for the other components than as a tool
 unto itself.</para>
 
-<para>You may be able to avoid a lot of the headache of choosing and
+<para>通过使用封装主站，一个提供打包的模板化的网页部分的服务器并且附带了一个自由软件
+项目所需的全部工具，你也许能避免很多选择何种工具和如何配置的头疼事。参见这章后面对封装
+主站的优缺点的讨论。You may be able to avoid a lot of the headache of choosing and
 configuring these tools by using a <firstterm>canned
 hosting</firstterm> site: a server that offers prepackaged,
 templatized web areas with all the accompanying tools needed to run a
@@ -150,9 +157,11 @@ disadvantages of canned hosting.</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="mailing-lists">
-<title>Mailing Lists</title>
+<title>邮件列表</title>
 
-<para>Mailing lists are the bread and butter of project
+<para>邮件列表有如项目通讯中的面包和黄油。如果用户在除了网页之外的地方浏览，最有可
+能的是项目的某一个邮件列表。不过在体验邮件列表本身之前，他们将接触邮件列表的界面──
+他们所加入（“订阅到”）的列表的结构。有此带出了邮件列表的第一号法则：Mailing lists are the bread and butter of project
 communications.  If a user is exposed to any forum besides the web
 pages, it is most likely to be one of the project's mailing lists.
 But before they experience the mailing list itself, they will
@@ -161,11 +170,14 @@ by which they join ("subscribe to") the list.  This brings us to Rule
 #1 of mailing lists:</para>
 
 <blockquote>
-   <para><emphasis>Don't try to manage mailing lists by hand&mdash;get
-   list management software.</emphasis></para>
+   <para><emphasis>不要试图亲手管理邮件列表──让软件来做。 </emphasis></para>
 </blockquote>
 
-<para>It will be tempting to put this off.  Setting up mailing list
+<para>抛弃这一条也不错？设置软件来管理邮件列表看起来有些小题大做了。首先，
+手动管理小型低流量的邮件列表似乎是理所当然的：你只需设置一个指向自己的订阅地址，
+然后当有人订阅了，你把他们的电邮地址加入一个保存了所有地址的文档文件中，或是删除。
+还有比着更简单的吗？
+It will be tempting to put this off.  Setting up mailing list
 management software might seem like overkill at first.  Managing
 small, low-traffic lists by hand will seem seductively easy: you just
 set up a subscription address that forwards to you, and when someone
@@ -173,7 +185,10 @@ mails it, you add (or remove) their email address in some text file
 that holds all the addresses on the list.  What could be
 simpler?</para>
 
-<para>The trick is that good mailing list management&mdash;which is
+<para>问题在于，人们所期望的优秀列表管理并非是如此容易的。它不仅只是按用户的需求订阅
+或是退订而已。它还包括防止垃圾邮件，提供邮件列表是摘要还是完整的选择，通过自动应答机提
+供标准列表和项目信息和其他的许多事情。一个由人监控的订阅地址只能支持最小数量的简陋功能
+，并且在可靠性和反应速度上还不如软件。The trick is that good mailing list management&mdash;which is
 what people have come to expect&mdash;is not simple at all.  It's not
 just about subscribing and unsubscribing users when they request.
 It's also about moderating to prevent spam, offering the mailing list
@@ -183,14 +198,16 @@ things.  A human being monitoring a subscription address can supply
 only a bare minimum of functionality, and even then not as reliably
 and promptly as software could.</para>
 
-<para>Modern list management software usually offers at least the
+<para>现代化的列表管理软件至少提供了以下这些特性。Modern list management software usually offers at least the
 following features:</para>
 
 <variablelist>
 
-  <varlistentry><term>Both email- and web-based subscription</term>
+  <varlistentry><term>同时通过邮件和网页订阅Both email- and web-based subscription</term>
     <listitem>
-      <para>When a user subscribes to a list, she should
+      <para>当一名用户订阅一个列表，她<i>应当</i>能立即收到一条表示欢迎的回复，告知她订阅了
+      什么，下一步该如何使用邮件列表软件，并且（也是最重要的）如何退订。当然，这个回复还能被定制
+      地加入诸如项目的站点，常见问题和回单等等项目的具体信息。When a user subscribes to a list, she should
             <emphasis>promptly</emphasis> get an automated welcome
             message in reply, telling her what she has subscribed
             to, how to interact further with the mailing list
@@ -201,10 +218,12 @@ following features:</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Subscription in either digest mode or
+  <varlistentry><term>可选择摘要或是完整的订阅模式Subscription in either digest mode or
                       message-by-message mode</term>
     <listitem>
-      <para>In digest mode, the subscriber receives one email per day,
+      <para>选择摘要模式，订阅者每天会收到一封包含当天所有列表活动的邮件。对那些并不紧跟列表，或是没有
+      参与的用户，摘要模式更合适他们。因为它允许他们在任何时刻一次检索所有的项目，剔除那些他们所不感兴趣的邮件。
+      In digest mode, the subscriber receives one email per day,
             containing all the list activity for that day.  For people
             who are following a list loosely, without participating,
             digest mode is often preferable, because it allows them to
@@ -213,9 +232,10 @@ following features:</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Moderation features</term>
+  <varlistentry><term>延时特性Moderation features</term>
     <listitem>
-      <para>To "moderate" is to check posts to make sure they are
+      <para>在查看整个列表之前“延时”地检查邮件有两点目的，1，确保不是垃圾邮件；2，确保在主题上。
+      延时必须有人的参与，但是软件能帮大忙使之变得容易。我们后面还将谈到延时。To "moderate" is to check posts to make sure they are
             a)&nbsp;not&nbsp;spam, and b)&nbsp;on&nbsp;topic, before
             they go out to the entire list.  Moderation necessarily
             involves humans, but software can do a lot to make it
@@ -224,9 +244,11 @@ following features:</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Administrative interface</term>
+  <varlistentry><term>管理界面Administrative interface</term>
     <listitem>
-      <para>Among other things, this enables an administrator to go in
+      <para>联合其他一些事情，这个特性能让管理员容易地进入列表，删除一个废弃的地址。
+      当一个订阅者的地址开始自动地对每一封列表邮件发出“我已不在这个地址”时，情况就变得
+      非常紧急了。（有些邮件列表管理软件甚至能依靠自身捕获这些并且自动完成退订。）Among other things, this enables an administrator to go in
             and remove obsolete addresses easily.  This can become
             urgent when a recipient's address starts sending automatic
             "I am no longer at this address" replies back to the list
@@ -236,18 +258,20 @@ following features:</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Header manipulation</term>
+  <varlistentry><term>邮件头处理Header manipulation</term>
     <listitem>
-      <para>Many people have sophisticated filtering and replying
+      <para>许多人在自己的电邮客户端中设置了负责的过滤和回复规则。为了利用这些优势，邮件列表
+      管理软件能为这些人添加和处理某一中标准的邮件头（更多详细参阅下方）。Many people have sophisticated filtering and replying
             rules set up in their mail readers.  Mailing list software
             can add and manipulate certain standard headers for these
             people to take advantage of (more details below).</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Archiving</term>
+  <varlistentry><term>归档Archiving</term>
     <listitem>
-      <para>All posts to the managed lists are stored and made
+      <para>所有发往被管理的列表的邮件都被保存在网页上，并且能够被访问。游戏邮件列表软件以插件的形式
+                           提供了扩展的归档工具，比如MHonArc  All posts to the managed lists are stored and made
             available on the web; alternatively, some mailing list
             software offers special interfaces for plugging in an
             external archiving tool such as MHonArc
@@ -261,7 +285,10 @@ following features:</para>
 
 </variablelist>
 
-<para>The point of all this is merely to emphasize that mailing list
+<para>所有这些的要点是强调邮件列表管理是一个已经耗费了许多心力的负责问题。你绝对
+无须成为一个专家，但你应该知道，虽然其中大部分已被解决，但总还有进步的空间。在运作
+一个自由软件项目的过程中列表的管理将一次又一次地占据你的精力。下面我们将回答几个有关
+邮件列表配置的最常见问题。The point of all this is merely to emphasize that mailing list
 management is a complex problem that has been given a lot of thought,
 and mostly been solved.  You certainly don't need to become an expert
 in it.  But you should be aware that there's always room to learn
@@ -272,9 +299,13 @@ issues.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="spam-prevention">
-<title>Spam Prevention</title>
+<title>垃圾邮件防护Spam Prevention</title>
 
-<para>Between when this sentence is written and when it is published,
+<para>就在这个句子从动笔到完成的时间间隔里，因特网上的垃圾邮件问题的严重程度翻了
+一倍──或至少给人的感觉是如此。有那么一段时间，就在不久之前，当时可以完全无须任何
+的垃圾邮件防护措就能运转一个邮件列表。偶尔会有那么几封，但是非产罕见只构成小小
+的烦恼。好日子已经一去不复返了。今天一个没有垃圾防护措施的邮件列表很快就会被乱七八
+糟的邮件淹没。为了不可用性的关键，垃圾防护需要：Between when this sentence is written and when it is published,
 the Internet-wide spam problem will probably double in
 severity&mdash;or at least it will feel that way.  There was a time,
 not so long ago, when one could run a mailing list without taking any
@@ -285,25 +316,30 @@ takes no spam prevention measures will quickly be submerged in junk
 emails, to the point of unusability.  Spam prevention is
 mandatory.</para>
 
-<para>We divide spam prevention into two categories: preventing spam
+<para>垃圾防护分为两种类型：防止垃圾邮件出现在你的邮件列表中，防止你的邮件列表成
+为垃圾制造者的地址收割机获取新地址的源头。前者更重要，所以我们首先回答。We divide spam prevention into two categories: preventing spam
 posts from appearing on your mailing lists, and preventing your
 mailing list from being a source of new email addresses for spammers'
 harvesters.  The former is more important, so we examine it
 first.</para>
 
 <sect3 id="spam-filtering">
-<title>Filtering posts</title>
+<title>过滤邮件Filtering posts</title>
 
-<para>There are three basic techniques for preventing spam posts, and
+<para>垃圾邮件防护有三种最基本的技术，大部分的邮件列表软件都会提供。最好能串联使用：There are three basic techniques for preventing spam posts, and
 most mailing list software offers all three.  They are best used in
 tandem:</para>
 
 <orderedlist>
 
-  <listitem><para><emphasis role="bold">Only auto-allow postings from
+  <listitem><para><emphasis role="bold">只自动允许列表订阅者的邮件Only auto-allow postings from
             list subscribers.</emphasis></para>
 
-            <para>This is effective as far as it goes, and also
+            <para>简单而有效，因为它通常只需要在在邮件列表软件的配置中做一点小小
+            的改动，所以只需要很少的管理投入。但注意，那些非自动允许的邮件不能简单地销毁了事。
+            有两个原因，首先你需要允许非订阅者的邮件。仅仅想问一个为问题或是提供建议的人不应该
+            只为了发一封邮件而需要订阅整个列表。其次，有时甚至订阅者都有可能从非订阅时用的地址发出一封
+            邮件。邮件地址不是鉴别人的可靠方法，它不该被如此对待。This is effective as far as it goes, and also
             involves very little administrative overhead, since it's
             usually just a matter of changing a setting in the mailing
             list software's configuration.  But note that posts which
@@ -315,14 +351,17 @@ tandem:</para>
             just to make a single post there.  Second, even
             subscribers may sometimes post from an address other than
             the one by which they're subscribed.  Email addresses are
-            not a reliable method of identifying people, and shouldn't
+            not a  method of identifying people, and shouldn't
             be treated as such.</para>
             </listitem>
 
-  <listitem><para><emphasis role="bold">Filter posts through
+  <listitem><para><emphasis role="bold">通过垃圾过滤软件过滤邮件Filter posts through
             spam-filtering software.</emphasis></para>
 
-            <para>If the mailing list software makes it possible (most
+            <para>如果邮件列表软件允许（大部分是），你能用垃圾过滤软件来获得过滤后的邮件。
+            由于在垃圾制造者和过滤器编写者之间进行着一场永不停息的军备竞赛。自动垃圾过滤从来不是也永远不会是完美的。
+            但是通过延时序列它能极大地减少垃圾邮件的数量，而如果由人手来处理的话将花费更多的时间。一定数量的自动过滤
+            总是有益的。If the mailing list software makes it possible (most
             do), you can have posts filtered by spam-filtering
             software.  Automatic spam-filtering is not perfect, and
             never will be, since there is a never-ending arms race
@@ -332,7 +371,9 @@ tandem:</para>
             more time humans must spend examining it, any amount of
             automated filtering is beneficial.</para>
 
-            <para>There is not space here for detailed instructions
+            <para>这里没有空间来详细地介绍垃圾过滤的设置。你应该查阅你的邮件列表软件的文档
+            寻求答案，在此章的后面。列表软件通常会内建一些垃圾防护功能，但也许你想要添加一些第三方的
+            过滤器。推荐你两个我曾使用过的，There is not space here for detailed instructions
             on setting up spam filters.  You will have to consult
             your mailing list software's documentation for that (see
             <xref
@@ -344,22 +385,28 @@ tandem:</para>
             SpamAssassin
             (<ulink url="http://spamassassin.apache.org/"/>)
             and SpamProbe
-            (<ulink url="http://spamprobe.sourceforge.net/"/>).  This
+            (<ulink url="http://spamprobe.sourceforge.net/"/>). 这并非是对众多的其他开元垃圾过滤器
+            的不敬，其中的一些显然也是非常好的。只是这两个是我曾经亲身使用过的，并且它们是我很满意。 This
             is not a comment on the many other open source spam
             filters out there, some of which are apparently also quite
             good.  I just happen to have used those two myself and
             been satisfied with them.</para>
   </listitem>
 
-  <listitem><para><emphasis role="bold">Moderation.</emphasis></para>
-            <para>For mails that aren't automatically allowed by
+  <listitem><para><emphasis role="bold">延时Moderation.</emphasis></para>
+            <para>一封从订阅者那里发出的邮件通过了垃圾过滤软件，但是没有被自动许可。
+            如果有的话，最后一个阶段将是“延时”。邮件将被发送到一个特殊的地址，那里会由人来
+            检查，决定是许可还是拒绝。For mails that aren't automatically allowed by
             virtue of being from a list subscriber, and which make it
             through the spam filtering software, if any, the last stage
             is <firstterm>moderation</firstterm>: the mail is routed
             to a special address, where a human examines it and
             confirms or rejects it.</para>
 
-            <para>Confirming a post takes one of two forms: you can
+            <para>许可一个邮件有两种形式：你可以只是这一次接受它，或你可以告诉列表软件
+            为这一封以后之后同一个发送者的所有邮件开绿灯。为了减少以后的延时负担，绝大部分人会选择
+            后者。具体如何许可在不同的系统之间有很大的差异，但是通常的形式是向一个特殊的地址发送一条带有
+            命令“accept”（代表这一次许可）或是“allow”（允许这次以及以后的邮件）回复。的Confirming a post takes one of two forms: you can
             accept the post just this once, or you can tell the list
             software to allow this and all future posts from the same
             sender.  You almost always want to do the latter, in order
@@ -369,7 +416,10 @@ tandem:</para>
             "accept" (meaning accept just this one post) or "allow"
             (allow this and future posts).</para>
 
-            <para>Rejecting is usually done by simply ignoring the
+            <para>拒绝通常只需简单的忽略所延时邮件即可。如果列表软件没有收到对无效邮件的认可，它不会
+            让邮件通过并出现在列表上。所以简单地扔掉延时邮件就能达到目的。有时你还有另外的选择，返回“reject”或是
+            “deny”命令来杜绝以后来自同一个发送者的邮件通过延时程序。但这么做通常没什么意义，因为大部分需要
+            延时处理的都是垃圾邮件，而垃圾邮件制造者不太会从同一个地址两次发出垃圾邮件。Rejecting is usually done by simply ignoring the
             moderation mail.  If the list software never receives
             confirmation that something is a valid post, then it won't
             pass that post on to the list, so simply dropping the
@@ -383,7 +433,11 @@ tandem:</para>
             </listitem>
 </orderedlist>
 
-<para>Be sure to use moderation <emphasis>only</emphasis> for
+<para>确保延时只被用在过滤垃圾邮件和明显是和主题无关的消息上比如有时会由人意外地在
+一个错误的邮件列表中发送了邮件。延时系统通常给你一个直接同发送者联系的途径，但是不要
+用这种方式来回答问题，即使那些答案就在你的头脑之中。如果这么做了，将会剥夺社区了解
+人们正在问那些类型的问题的总体形式，剥夺它们自己回答问题的机会，剥夺它们从别人那里获得
+答案的机会。邮件列表管理除了严格确保列表中没有垃圾和同主题无关的邮件，没有其他了。Be sure to use moderation <emphasis>only</emphasis> for
 filtering out spams and clearly off-topic messages, such as when
 someone accidentally posts to the wrong mailing list.  The moderation
 system will usually give you a way to respond directly to the sender,
@@ -399,7 +453,7 @@ more.</para>
 </sect3>
 
 <sect3 id="address-hiding">
-<title>Address hiding in archives</title>
+<title>隐藏归档中的地址Address hiding in archives</title>
 
 <para>To prevent your mailing lists from being a source of addresses
 for spammers, a common technique is for the archives to obscure
