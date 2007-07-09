@@ -1573,86 +1573,96 @@ die FAQ des Projekts als Fallstudie betrachten.</para>
   </listitem>
 </orderedlist>
 
-<para>Point 1 implies that the FAQ should be available in some sort of
-textual format.  Points 2 and 3 imply that the FAQ should be available
-as an HTML page, with point 2 additionally indicating that the HTML
-should be designed for readability (i.e., you'll want some control
-over its look and feel), and should have a table of contents.  Point 4
-means that each individual entry in the FAQ should be assigned an HTML
-<firstterm>named anchor</firstterm>, a tag that allows people to reach
-a particular location on the page.  Point 5 means the source files for
-the FAQ should be available in a convenient way (see <xref
-linkend="version-everything"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>), in a format
-that's easy to edit.</para>
+<para>Punkt 1 impliziert, dass die FAQ in irgend einem textuellen 
+Format zur verfügung stehen sollte. Punkte 2 und 3 implizieren, dass
+die FAQ als HTML Seite zur verfügung stehen sollte, zusätzlich
+impliziert Punkt 2, dass diese HTML Datei auf eine lesbare Art 
+aufgebaut sein soll, (d.H. Sie werden etwas Einfluss auf sein 
+Aussehen), und sollte ein Inhaltsverzeichniss haben. Punkt 4 bedeutet,
+dass jeder einzelne Eintrag in der FAQ einen HTML <firstterm>benannten
+Verweis (en. "anchor")</firstterm> zugewiesen haben sollte, ein tag 
+welches es Leute erlaubt, eine bestimmte Stelle in der Seite auf eine
+bequeme Art zu erreichen (siehe <xref
+linkend="version-everything"/><phrase output="printed"> im Kapitel 
+<xref linkend="technical-infrastructure"/></phrase>), in einem Format
+welches leicht zu bearbeiten ist.</para>
 
   <sidebar id="html-named-anchors-and-ids">
-  <title>Named Anchors and ID Attributes</title>
+  <title>Benannte Verweise und ID Attribute</title>
 
-  <para>There are two ways to get a browser to jump to a specific
-  location within a web page: named anchors and id attributes.</para>
+  <para>Es gibt zwei Möglichkeiten einen Browser dazu zu bringen an
+  einer bestimmte Stelle in einer Webseite zu springen: benannte
+  Verweise und id Attribute.</para>
 
-  <para>A <firstterm>named anchor</firstterm> is just a normal HTML
-  anchor element (<literal>&lt;a&gt;...&lt;/a&gt;</literal>), but with
-  a "name" attribute:</para>
+  <para>Ein <firstterm>benannter Verweis</firstterm> is lediglich ein
+  normaler HTML Verweis (<literal>&lt;a&gt;...&lt;/a&gt;</literal>),
+  aber mit ein "name" Attribut:</para>
 
-  <screen>&lt;a&nbsp;name="mylabel"&gt;...&lt;/a&gt;</screen>
+  <screen>&lt;a&nbsp;name="meinEtikett"&gt;...&lt;/a&gt;</screen>
 
-  <para>More recent versions of HTML support a generic <firstterm>id
-  attribute</firstterm>, which can be attached to any HTML element,
-  not just to <literal>&lt;a&gt;</literal>.  For example:</para>
+  <para>Neuere Versionen von HTML unterstützen eine generisches
+  <firstterm>id Attribut</firstterm>, welches an jedem HTML Element
+  angehängt werden kann, nicht nur an <literal>&lt;a&gt;</literal>.
+  Zum Beispiel:</para>
 
-  <screen>&lt;p&nbsp;id="mylabel"&gt;...&lt;/p&gt;</screen>
+  <screen>&lt;p&nbsp;id="meinEtikett"&gt;...&lt;/p&gt;</screen>
 
-  <para>Both named anchors and id attributes are used in the same
-  way.  One appends a hash mark and the label to a URL, to cause the
-  browser to jump straight to that spot in the page:</para>
+  <para>Sowohl benannte Verweise als auch id attribute werden auf die
+  gleiche Art benutzt. Eines hängt eine Raute und den Bezeichner an 
+  eine URL, um den Browser dazu zu bringen direkt zu der Stelle in der
+  Seite zu springen:</para>
 
-  <screen>http://myproject.example.com/faq.html#mylabel</screen>
+  <screen>http://meinprojekt.beispiel.de/faq.html#meinEtikett</screen>
 
-  <para>Virtually all browsers support named anchors; most modern
-  browsers support the id attribute.  To play it safe, I would
-  recommend using either named anchors alone, or named anchors
-  <emphasis>and</emphasis> id attributes together (with the same label
-  for both in a given pair, of course).  Named anchors cannot be
-  self-closing&mdash;even if there's no text inside the element, you
-  must still write it in two-sided form:</para>
+  <para>Praktisch alle Browser unterstützen benannte Verweise; die
+  meisten modernen Browser unterstützen das id Attribut. Um sicher zu
+  gehen, würde ich Ihnen empfehelen, entweder nur benannte Verweise zu
+  benutzen, oder benannte Verweise <emphasis>und</emphasis> id 
+  attribute zusammen (natürlich mit dem gleichen Bezeichner für beide
+  bei einem gegebenen Paar). Benannte Verweise können sich nicht nicht
+  selber Abschließen&mdash;slebst wenn es keinen Text in dem Element
+  gibt, müssen Sie es trotzdem in der vollständigen form Ausschreiben:
+  </para>
 
-  <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
+  <screen>&lt;a&nbsp;name="meinEtikett"&gt;&lt;/a&gt;</screen>
 
-  <para>...though normally there would be some text, such as the title
-  of a section.</para>
+  <para>...obwohl es normalerweise etwas Text, wie den Titel von dem
+  Abschnitt geben würde.</para>
 
-  <para>Whether you use a named anchor, or an id attribute, or both,
-  remember that the label will not be visible to someone who browses
-  to that location without using the label.  But such a person might
-  want to discover the label for a particular location, so they can
-  mail the URL for a FAQ answer to a friend, for example.  To help
-  them do this, add a <firstterm>title attribute</firstterm> to the
-  same element(s) where you added the "name" and/or "id" attribute,
-  for example:</para>
+  <para>Ob Sie einen benannten Verweis benutzen oder ein id Attribut,
+  oder beides, denken Sie daran, dass der Bezeichner nicht für 
+  jemandem sichtbar ist, der zu der Stelle blättert, ohne den
+  Bezeichner zu benutzen. Solch eine Person mag aber vielleicht die
+  Bezeichner für eine bestimmte Stelle herausfinden wollen, um zum
+  Beispiel die URL an einem Freund als Antwort zu schicken. Um ihnen
+  dabei zu helfen, fügen Sie einen <firstterm>Title Attribut
+  </firstterm> an das selbe Element bei dem Sie das "name" und/oder
+  id atttribute hizugefügt haben:</para>
 
-  <screen>&lt;a&nbsp;name="mylabel"&nbsp;title="#mylabel"&gt;...&lt;/a&gt;</screen>
+  <screen>&lt;a&nbsp;name="meinEtikett"&nbsp;
+  title="#meinEtikett"&gt;...&lt;/a&gt;</screen>
 
-  <para>When the mouse pointer is held over the text inside the
-  title-attributed element, most browsers will pop up a tiny box
-  showing the title.  I usually include the hash-sign, to remind the
-  user that this is what she would put at the end of the URL to jump
-  straight to this location next time.</para>
+  <para>Wenn der Mauszeiger über den Text innerhalb von dem Element,
+  auf dem das Title Attribut angewandt wurden, platziert wird, werden
+  die meisten Browser einen kleinen Kasten Aufklappen, in dem der Title
+  angezeigt wird. Ich füge normalerweise das Raute Zeichen hinzu, um
+  die Leute daran zu erinnern, es am Ende der URL zu platzieren um beim
+  nächsten mal direkt an dieser Stelle zu springen.</para>
 
   </sidebar>
 
-<para>Formatting the FAQ like this is just one example of how to make
-a resource presentable.  The same properties&mdash;direct
-searchability, availability to major Internet search engines,
-browsability, referential stability, and (where applicable)
-editability&mdash;apply to other web pages, the source code tree, the
-bug tracker, etc.  It just happens that most mailing list archiving
-software long ago recognized the importance of these properties, which
-is why mailing lists tend to have this functionality natively, while
-other formats may require some extra effort on the maintainer's part
-(<xref linkend="managing-volunteers"/> discusses how to spread
-that maintenance burden across many volunteers).</para>
+<para>Die FAQ zu formatieren, ist ledigleich eines der Beispiele, wie
+Sie eine Resource vorzeigbar machen können. Die gleichen Eigenschaften
+&mdash;direkte durchsuchbarkeit, verfügbarkeit für größere 
+Suchmaschinen, stabile Referenzen, und (wo möglich) bearbeitbarkeit
+&mdash;gelten für andere Webseiten, den Quellcode Baum, den Bug 
+Tracker, usw. Es ist zufällig so, dass die meiste Software zur 
+Archivierung von Email Verteilern schon lange erkannt haben, wie 
+wichtig diese Eigenschaften sind, wesshalb Email Verteiler dazu neigen
+diese Funktionen von sich aus eingebaut zu haben, während andere
+Formate unter Umständen etwas zusätzliche Mühe seitens des wartenden
+(<xref linkend="managing-volunteers"/> behandelt, wie Sie diese Bürde 
+der Wartung über viele Entwickler verteilen können).</para>
 
 </sect3>
 
@@ -1660,192 +1670,211 @@ that maintenance burden across many volunteers).</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="codifying-tradition">
-<title>Codifying Tradition</title>
+<title>Festschreiben von Traditionen</title>
 
-<para>As a project acquires history and complexity, the amount of data
-each incoming participant must absorb increases.  Those who have been
-with the project a long time were able to learn, and invent, the
-project's conventions as they went along.  They will often not be
-consciously aware of what a huge body of tradition has accumulated, and
-may be surprised at how many missteps recent newcomers seem to make.
-Of course, the issue is not that the newcomers are of any lower
-quality than before; it's that they face a bigger acculturation burden
-than newcomers did in the past.</para>
+<para>Während das Projekt Geschichte und Komplexität ansammelt, nimmt
+die Menge an Daten zu, die ein neuer Teilnehmer sich aneignen muss.
+Solche die schon seit langen bei dem Projekt sind, konnten die 
+Konventionen des Projekts im laufe der Zeit lernen und erfinden. Sie
+werden sich oft nicht der riesigen Menge an Traditionen die sich
+angesammelt hat bewusst sein, und mögen überrascht sein, wie viele
+Fehlschritte neue Mitglieder scheinbar machen. Natürlich, liegt das
+nicht daran, dass die Neuen von einer schlechteren Qualität sind als
+vorher; es ist lediglich, dass Sie einer größeren bürde der kulturellen
+Anpassung als in der Vergangenheit gegenüberstehen.</para>
 
-<para>The traditions a project accumulates are as much about how to
-communicate and preserve information as they are about coding
-standards and other technical minutae.  We've already looked at both
-sorts of standards, in
+<para>Die Traditionen, die ein Projekt ansammelt haben genau soviel
+damit zu tun, wie man komunizieren und Informationen bewahren, wie es
+um die Festhaltung von Standards und andere technische Kleinigkeiten 
+geht. Wir haben uns bereits beide Standards im Kapitel
 <xref linkend="developer-documentation"/><phrase output="printed"> 
-in <xref linkend="getting-started"/></phrase> and
-<xref linkend="written-rules"/><phrase output="printed"> in
-<xref linkend="social-infrastructure"/></phrase> respectively, and
-examples are given there.  What this section is about is how to keep
-such guidelines up-to-date as the project evolves, especially
-guidelines about how communications are managed, because those are the
-ones that change the most as the project grows in size and
-complexity.</para>
+sowie <xref linkend="getting-started"/></phrase> und 
+<xref linkend="written-rules"/><phrase output="printed"> im Kapitel
+<xref linkend="social-infrastructure"/></phrase> jeweils, und mit
+Beispielen angeschaut. In diesem Abschnitt, geht es darum, wie man
+solche Richtlinien aktuell hällt, während das Projekt sich weiter
+entwickelt, insbesondere Richtlinien darüber, wie Kommunikation
+gehandhabt wird, denn das sind diejenigen die sich am meisten ändern
+wärend das Projekt an Größe und Komplexität zunimmt.</para>
 
-<para>First, watch for patterns in how people get confused.  If you
-see the same situations coming up over and over, especially with new
-participants, chances are there is a guideline that needs to be
-documented but isn't.  Second, don't get tired of saying the same
-things over and over again, and don't <emphasis>sound</emphasis> like
-you're tired of saying them.  You and other project veterans will have
-to repeat yourselves often; this is an inevitable side effect of the
-arrival of newcomers.</para>
+<para>Erstens, halten Sie ausschau danach, wie Leute verwirrt werden.
+Wenn Sie die gleichen Situationen immer wieder auftauchen sehen,
+insbesondere bei neue Beteiligten, ist die Wahrscheinlichteit groß,
+dass eine Richtlinie dokumentiert werden muss, es aber noch nicht
+ist. Zweitens, werden Sie nicht müde die gleichen Sachen immer wieder
+zu sagen, und <emphasis>klingen</emphasis> Sie nicht, als würden Sie
+langsam davon müde werden. Sie und die anderen Verteranen im Projekt
+werden sich oft wiederholen müssen; es ist ein unausweichliche
+Nebenwirkung von dem Ankommen von Neuankömmlinge.</para>
 
-<para>Every web page, every mailing list message, and every IRC channel
-should be considered advertising space&mdash;not for commercial
-advertisements, but for ads about your project's own resources.  What
-you put in that space depends on the demographics of those likely to
-read it.  An IRC channel for user questions, for example, is likely to
-get people who have never interacted with the project
-before&mdash;often someone who has just installed the software, and
-has a question he'd like answered immediately (after all, if it
-could wait, he'd have sent it to a mailing list instead, which would
-probably use less of his total time, although it would take longer
-for an answer to come back).  People usually don't make a permanent
-investment in the IRC channel; they'll show up, ask their question,
-and leave.</para>
+<para>Jede Webseite, jede Nachrich im Email Verteiler, und jeder IRC
+Kanal sollte als eine Werbefläche betrachtet werden&mdash;nicht für
+kommerzielle Werbung, sondern für Werbung über die Resourcen Ihres 
+eigenen Projekts. Was Sie auf dieser Fläche anbringen, hängt ab von der
+Demographie von denen die es wahrscheinlich lesen werden. Ein IRC Kanal
+für Benutzer Fragen zum Beispiel, wird wahrscheinlich Leute anlocken,
+die noch nie zuvor mit dem Projekt zu tun hatten&mdash;oftmals jemand
+der eben erst die Software installiert hat, und eine Frage hat, die er
+gleich beantwortet haben möchte (schließlich hätte er es statt dessen
+an den Email Verteiler schicken können, wenn es hätte warten können,
+was wahrscheinlich weniger von seiner Zeit insgesamt in anspruch 
+genommen hätte, obwohl es länger gedauert hätte, bis er eine Antwort
+erhalten hätte). Leute machen für gewöhnlich keine permanente 
+Investition in einem IRC Kanal; sie tauchen auf, stellen ihre Frage und
+gehen wieder.</para>
 
-<para>Therefore, the channel topic should be aimed at people looking
-for technical answers about the software <emphasis>right
-now</emphasis>, rather than at, say, people who might get involved
-with the project in a long term way and for whom community interaction
-guidelines might be more appropriate.  Here's how a really busy
-channel handles it (compare this with the earlier example in
-<xref linkend="irc"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>):</para>
+<para>Desshalb, sollte das Thema des Kanals auf Leute abgesehen sein,
+die technische Fragen <emphasis>genau jetzt</emphasis>über die Software
+haben, eher als sagen wir, Leute die sich vielleicht auf längere Sicht
+an dem Projekt beteiligen wollen und für die Richtlinien für den Umgang
+innerhalb der Gemeinschaft eher angebracht wären. Ein wirklich
+betriebsammer Kanal handhabt es folgendermaßen (Vergleichen Sie es, mit
+dem früheren Beispiel in <xref linkend="irc"/><phrase output="printed">
+im Kapitel <xref linkend="technical-infrastructure"/></phrase>):</para>
 
 <screen>
-You are now talking on #linuxhelp
+Sie reden jetzt in #linuxhelp
 
-Topic for #linuxhelp is Please READ
+Das Thema für #linuxhelp ist Bitte LESEN Sie 
 http://www.catb.org/~esr/faqs/smart-questions.html &amp;&amp;
-http://www.tldp.org/docs.html#howto BEFORE asking questions | Channel
-rules are at http://www.nerdfest.org/lh_rules.html | Please consult
-http://kerneltrap.org/node/view/799 before asking about upgrading to a
-2.6.x kernel | memory read possible: http://tinyurl.com/4s6mc -&gt;
-update to 2.6.8.1 or 2.4.27 | hash algo disaster: http://tinyurl.com/6w8rf
-| reiser4 out
+http://www.tldp.org/docs.html#howto BEVOR Sie Fragen stellen | Regeln
+für den Kanal finden Sie bei http://www.nerdfest.org/lh_rules.html |
+Bitte schauen Sie sich http://kerneltrap.org/node/view/799 bevor Sie
+Fragen über einen Upgrade nach Kernel 2.6.x stellen | Speicher Abfrage
+möglich: http://tinyurl.com/4s6mc -&gt; update nach 2.6.8.1 oder 
+2.4.27 | hash algo Katastrophe: http://tinyurl.com/6w8rf
+| reiser4 weg
 </screen>
 
-<para>With mailing lists, the "ad space" is a tiny footer appended to
-every message.  Most projects put subscription/unsubscription
-instructions there, and perhaps a pointer to the project's home page
-or FAQ page as well.  You might think that anyone subscribed to the
-list would know where to find those things, and they probably
-do&mdash;but many more people than just subscribers see those mailing
-list messages.  An archived post may be linked to from many places;
-indeed, some posts become so widely known that they eventually have
-more readers off the list than on it.</para>
+<para>Bei Email Verteiler ist die "Werbefläche" eine kleine Fußnote,
+die an jeder Nachricht angehängt wird. Die meisten Projekte schreiben
+Anweisungen zur Anmeldung/Abmeldung dort, und vielleicht einen Hinweis
+auf die Webseite des Projekts oder auch von der FAQ. Sie denken 
+vielleicht, das jeder der an dem Veriteiler angemeldet ist, wissen
+würde, wie man diese Informationen findet, und das ist wahrscheinlich
+auch der Fall&mdash;aber viel mehr Leute als nur die angemeldeten
+sehen diese Nachrichten des Verteilers. Auf eine archivierte Nachricht,
+kann von vielen Stellen aus verwiesen werden; tatsächlich werden manche
+Nachrichten derart bekannt, dass sie letztendlich mehr Leser erhällt,
+als der gesamte Verteiler angemeldete Nutzer hat.</para>
 
-<para>Formatting can make a big difference.  For example, in the
-Subversion project, we were having limited success using the
-bug-filtering technique described in
-<xref linkend="bug-filtering"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>.  Many bogus
-bug reports were still being filed by inexperienced people, and each
-time it happened, the filer had to be educated in exactly the same way
-as the 500 people before him.  One day, after one of our developers had
-finally gotten to the end of his rope and flamed some poor user who
-didn't read the issue tracker guidelines carefully enough, another
-developer decided this pattern had gone on long enough.  He suggested
-that we reformat the issue tracker front page so that the most
-important part, the injunction to discuss the bug on the mailing lists
-or IRC channels before filing, would stand out in huge, bold red
-letters, on a bright yellow background, centered prominently above
-everything else on the page.  We did so (you can see the results at
-<ulink url="http://subversion.tigris.org/project_issues.html"/>), and
-the result was a noticeable drop in the rate of bogus issue filings.
-We still get them, of course&mdash;we always will&mdash;but the rate
-has slowed considerably, even as the number of users increases.  The
-outcome is not only that the bug database contains less junk, but that
-those who respond to issue filings stay in a better mood, and are more
-likely to remain friendly when responding to one of the now-rare bogus
-filings.  This improves both the project's image and the mental health
-of its volunteers.</para>
+<para>Formatierung kann einen großen Unterschied machen. In dem 
+Subverison Projekt zum Beispiel, hatten wir eingeschränkten Erfolg
+bei der Verwendung der Methode zur Filterung von Bugs, beschrieben in
+<xref linkend="bug-filtering"/><phrase output="printed"> im Kapite 
+<xref linkend="technical-infrastructure"/></phrase>. Viele falsche Bug
+Meldungen wurden immer noch von unerfahrenen Personen eingereicht, und
+jedes mal, als das geschah, musste der Absender auf genau die gleiche
+Art aufgeklärt werden, wie die 500 Personen vor ihm. Eines tages,
+nahdem bei einem unserer Entwickler schließlich der Faden gerissen war,
+und irgend einen armen Nutzer zugeflamed hatte, der die Richtlinien
+für den Bug Tracker nicht sorgfältig genug gelesen hatte, entschied
+sich ein anderer Entwickler, dass dieses Muster schon viel zu lange
+gelaufen war. Er schlug vor, dass wir die erste Seite des Bug Trackers
+neu formatieren sollten, so dass der wichtigste Teil, die Vorgabe den
+Bug zuerst auf dem Email Verteiler oder im IRC zu diskutieren, vor
+man einen Bug meldet, in riesigen, fetten, roten Buchstaben auf einem
+gelben Hintergrund, in der Mitte der Seite über alles andere stehen
+würde. Das machten wir (Sie können das Ergebnis bei folgender Seite
+sehen <ulink url="http://subversion.tigris.org/project_issues.html"/>),
+und das Ergebnis, war ein merklicher Abfall in der Anzahl der falschen
+Bug Meldungen. Wir bekommen sie natürlich immer noch 
+&mdash;das wird immer der Fall sein&mdash;aber die Menge ist wesentlich
+weniger geworden, selbst wärend die Anahl der Nutzer zunimmt. Die Folge
+ist, dass die Bug Datenbank nicht nur weniger Müll enthällt, sondern,
+dass diejenigen die auf diese Meldungen reagieren, besser gelaunt
+bleiben und eher freundlich bleiben, wenn sie auf einer der
+nunmehr seltenen Falschmeldungen reagieren. Das verbessert sowohl das
+Erscheinungsbild des Projekts als auch die psychische Verfassung seiner
+Freiwilligen.</para>
 
-<para>The lesson for us was that merely writing up the guidelines was
-not enough.  We also had to put them where they'd be seen by those who
-need them most, and format them in such a way that their status as
-introductory material would be immediately clear to people unfamiliar
-with the project.</para>
+<para>Die Lektion die wir hierraus ziehen konnten war, dass es nicht
+ausreichte, die Richtlinien einfach nur nieder zu schreiben. Wir 
+mussten sie auch dort platzieren wo sie von denjenigen gefunden werden,
+die sie am meisten brauchen, und sie so formatieren, dass ihr status
+als Einführungsmaterial sofort für Personen klar wird, die noch nicht
+mit dem Projekt vertraut sind.</para>
 
-<para>Static web pages are not the only venue for advertising the
-project's customs.  A certain amount of interactive policing (in the
-friendly-reminder sense, not the handcuffs-and-jail sense) is also
-required.  All peer review, even the commit reviews described in
-<xref linkend="code-review"/><phrase output="printed"> in
-<xref linkend="getting-started"/></phrase>, should include review
-of people's conformance or non-conformance with project norms,
-especially with regard to communications conventions.</para>
+<para>Statische Webseiten sind nicht die einzige Ort um für die Bräuche
+des Projekts zu werben. Eine bestimmte Menge an interaktiver Kontrolle
+(im sinne von freundlichen Hinweisen, nicht grober Zurechtweisung) ist
+auch notwendig. Jede Überprüfungm auch die Überprüfung von Commits,
+beschrieben in <xref linkend="code-review"/><phrase output="printed">
+im Kapitel <xref linkend="getting-started"/></phrase>, sollten auch
+eine Evaluierung in wiefern es mit den Normen des Projekts
+übereinstimmt oder nicht, insbesondere im Bezug auf Konventionen über
+die Kommunikation.</para>
 
-<para>Another example from the Subversion project: we settled on a
-convention of "r12908" to mean "revision 12908 in the version control
-repository."  The lower-case "r" prefix is easy to type, and because
-it's half the height of the digits, it makes an easily-recognizable
-block of text when combined with the digits.  Of course, settling on
-the convention doesn't mean that everyone will begin using it
-consistently right away.  Thus, when a commit mail comes in with a log
-message like this:</para>
+<para>Ein weiteres Beispiel aus dem Subversion Projekt: Wie einigten
+uns auf die Konvention wonach "r12908" für "revision 12908 in der
+Repository der Versionsverwaltung." Das klein geschriebene vorangehende
+"r" ist einfach zu schreiben und da es lediglich die halbe höhe der
+Zahlen ist, ergibt es einen leicht zu ekennnenden Textblock, wenn man
+es mit den Zahlen kombiniert. Sich auf diese Konventien zu einigen,
+bedeutet natürlich nicht, dass jeder gleich anfangen wird, sie gleich
+zu benutzen. Desshalb, wenn eine Commit Email mit folgendem Kommentar
+eintrifft:</para>
 
 <screen>
 ------------------------------------------------------------------------
-r12908 | qsimon | 2005-02-02 14:15:06 -0600 (Wed, 02 Feb 2005) | 4 lines
+r12908 | qsimon | 02-02-2005 14:15:06 -0600 (Mit, 02 Feb 2005) | 4 Zeilen
 
-Patch from J. Random Contributor &lt;jrcontrib@gmail.com&gt;
+Patch vom Freiwilligen H. Mustermann &lt;hmustermann@gmail.com&gt;
 
 * trunk/contrib/client-side/psvn/psvn.el:
-  Fixed some typos from revision 12828.
+  Einige Rechtschreibfehler in revision 12828 behoben.
 ------------------------------------------------------------------------
 </screen>
 
-<para>...part of reviewing that commit is to say "By the way, please
-use 'r12828', not 'revision 12828' when referring to past changes."
-This isn't just pedantry; it's important as much for automatic
-parsability as for human readership.</para>
+<para>...gehört es zur Überprüfung des Commits, zu sagen "Übrigens,
+benutze bitte die 'r12828', nicht die 'revision 12828' schreibweise um
+auf vergangene Änderungen zu verweisen." Das ist nicht einfach nur
+pedantisch; es ist genau so wichtig um es automatisch parsen zu können,
+wie für die menschliche Leserschaft.</para>
 
-<para>By following the general principle that there should be
-canonical referral methods for common entities, and that these
-referral methods should be used consistently everywhere, the project
-in effect exports certain standards.  Those standards enable people to
-write tools that present the project's communications in more useable
-ways&mdash;for example, a revision formatted as "r12828" could be
-transformed into a live link into the repository browsing system.
-This would be harder to do if the revision were written as "revision
-12828", both because that form could be divided across a line break,
-and because it's less distinct (the word "revision" will often appear
-alone, and groups of numbers will often appear alone, whereas the
-combination "r12828" can only mean a revision number).  Similar
-concerns apply to issue numbers, FAQ items (hint: use a URL with a
-named anchor, as described in
-<xref linkend="html-named-anchors-and-ids"/>), etc.</para>
+<para>Indem Sie das allgemeine Prinzip verfolgen, dass es kanonische
+Methoden geben sollte, um auf häufige Entitäten zu verweisen und dass
+man diese verweis Methoden überall auf eine konsistente Art verwenden
+sollte, exportiert das Projekt in Wirklicheit gewisse Standards. Diese
+Standards ermöglichen es andere, Werkzeuge zu schreiben, welche die
+Kommunikationen des Projekts auf andere brauchbarere Arten zu
+presentieren&mdash;zum Beispiel könnte eine Revision mit dem Format
+"r12828" in einen Link zu der Seite des Repositorys verwandelt werden.
+Das wäre schwieriger, wenn die Revision als "revision 12828" 
+geschrieben würde, sowohl weil diese Form durch einen Zeilenumbruch
+getrennt werden könnte, und weil es weniger eindeutig ist (das Wort
+"revision" wird häufig alleine erscheinen, und gruppen von Zahlen
+erscheinen heufig alleine, wohingegen die Kombination "r12828 sich nur
+auf eine Revisionsnummer beziehen kann). Ähnliche Bedenken gelten für
+die Meldungsnummern im Bug Tracker, FAQ Einträge (tipp: Benutzen Sie
+eine URL mit einem benannten Verweis, wie in <xref 
+linkend="html-named-anchors-and-ids"/> beschrieben), usw.</para>
 
-<para>Even for entities where there is not an obvious short, canonical
-form, people should still be encouraged to provide key pieces of
-information consistently.  For example, when referring to a mailing
-list message, don't just give the sender and subject; also give the
-archive URL <emphasis>and</emphasis> the Message-ID header.  The last
-allows people who have their own copy of the mailing list (people
-sometimes keep offline copies, for example to use on a laptop while
-traveling) to unambiguously identify the right message even if they
-don't have access to the archives.  The sender and subject wouldn't be
-enough, because the same person might make several posts in the same
-thread, even on the same day.</para>
+<para>Selbst bei Einträgen, wo es keinen offensichtlichen kurze,
+kanonische Form gibt, sollten Leute dazu ermutigt werden, wesentliche
+Informationen einheitlich anzugeben. Wenn man zum Beispiel auf eine
+Nachricht im Email Verteiler verweist, geben Sie nicht nur den
+Absender und die Überschrift an; geben Sie auch die URL im Archiv
+<emphasis>und</emphasis> den Message-ID header an. Letzteres erlaubt
+es Leute die ihre eigene Kopie des Email Verteilers haben, (manche
+Leute halten offline Kopieen, zum Beispiel auf einem Laptop für die
+Nutzung auf Reisen) eindeutig die richige Nachricht zu identifizieren,
+selbst wenn sie keinen Zugriff auf die Archive haben. Der Absender und
+die Überschrift würden dazu nicht ausreichen, weil die selbe Person
+vielleicht mehrere Nachrichten im selben Thread schreibt, sogar am
+selben Tag.</para>
 
-<para>The more a project grows, the more important this sort of
-consistency becomes.  Consistency means that everywhere people look,
-they see the same patterns being followed, so they know to follow
-those patterns themselves.  This, in turn, reduces the number of
-questions they need to ask.  The burden of having a million readers is
-no greater than that of having one; scalability problems start to
-arise only when a certain percentage of those readers ask questions.
-As a project grows, therefore, it must reduce that percentage by
-increasing the density and accessibility of information, so that any
-given person is more likely to find what he needs without having to
-ask.</para>
+<para>Je mehr ein Projekt wächst, desto wichtiger wird diese Art von
+Konsistenz. Konsistent bedeutet, dass überall wo Leute hinschauen,
+sie die gleichen Muster in verwendung sehen, also wissen sie auch sie
+selber zu befolgen. Das wiederum, verringert die Anzahl der Fragen die
+sie stellen müssen. Die Bürde millionen Leser zu haben ist nicht
+größer, als die einen zu haben; Probleme der Skalierbarkeit fangen nur
+dann aufzutreten, wann ein gewisser Prozentsatz dieser Leser Fragen
+stellen. Wärend ein Projekt wächst, muss es desshalb diesen 
+Prozentsatz verringern, indem es die Dichte und Verfügbarkeit von
+Informationen erhöht, damit jede beliebige Person eher das findet,
+wonach sie sucht, ohne fragen zu müssen.</para>
 
 <!--
 
@@ -1877,135 +1906,154 @@ Project Roles examples in <xref linkend="share-management"/>.
 </sect1>
 
 <sect1 id="bug-tracker-usage">
-<title>No Conversations in the Bug Tracker</title>
+<title>Keine Unterhaltungen auf dem Bug Tracker</title>
 
-<para>In any project that's making active use of its bug tracker,
-there is always a danger of the tracker turning into a discussion
-forum itself, even though the mailing lists would really be better.
-Usually it starts off innocently enough: someone annotates an issue
-with, say, a proposed solution, or a partial patch.  Someone else sees
-this, realizes there are problems with the solution, and attaches
-another annotation pointing out the problems.  The first person
-responds, again by appending to the issue...and so it goes.</para>
+<para>Bei jedem Projekt, welches aktiv seinen Bug Tracker benutzt,
+gibt es immer die Gefahr, dass dieser Tracker sich selbst in ein 
+Diskussionsforum verwandelt, obwohl der Email Verteiler in
+wirklichkeit besser wäre. Für gewöhnlich, fängt es ganz unschuldig an:
+Jemand hängt einen Kommentar an eine Meldung, sagen wir mit einem
+Lösungsvorschlag, oder einem unvolständigen Patch. Jemand anderes
+sieht das und bemerkt, dass es Probleme mit der Lösung gibt, und hängt
+einen weiteren Kommentar an um sie zu schildern. Die erste Person
+antwortet wiederrum, auch wieder mit einem Kommentar an der Meldung...
+und so geht es weiter.</para>
 
-<para>The problem with this is, first, that the bug tracker is a
-pretty cumbersome place to have a discussion, and second, that other
-people may not be paying attention&mdash;after all, they expect
-development discussion to happen on the development mailing list, so
-that's where they look for it.  They may not be subscribed to the
-issue changes list at all, and even if they are, they may not follow it
-very closely.</para>
+<para>Das Problem dabei ist, erstens, dass der Bug Tracker eine 
+ziemlich Mühseliger Ort ist um eine Unterhaltung zu haben, und zweitens,
+dass andere Leute vielleicht nicht zuschauen&mdash;schließlich erwarten
+Sie, dass Diskussionen über die Entwicklung auf dem Entwickler 
+Verteiler stattfinden, also ist das der Ort an dem sie suchen. Es mag
+sein, dass sie überhaupt nicht bei dem Verteiler für Änderungen im Bug
+Tracker angemeldet sind, und wenn sie es sind, kann es sein, dass sie
+es nicht sonderlich gründlich verfolgen.</para>
 
-<para>But exactly where in the process did something go wrong?  Was it
-when the original person attached her solution to the
-issue&mdash;should she have posted it to the list instead?  Or was it
-when the second person responded in the issue, instead of on the
-list?</para>
+<para>Aber wo genau bei dem Ablauf ging etwas schief? War es als die
+ursprüngliche Person ihre Lösung an der Meldung anhing&mdash;hätte
+sie lieber eine Nachricht an den Verteiler schreiben sollen? Oder war
+es als die zweite Person in der Meldung reagierte, anstatt an den
+Verteiler?</para>
 
-<para>There isn't one right answer, but there is a general principle:
-if you're just adding data to an issue, then do it in the tracker, but
-if you're starting a <emphasis>conversation</emphasis>, then do it on
-the mailing list.  You may not always be able to tell which is the
-case, but just use your best judgement.  For example, when attaching a
-patch that contains a potentially controversial solution, you might be
-able to anticipate that people are going to have questions about it.
-So even though you would normally attach the patch to the issue
-(assuming you don't want to or can't commit the change directly), in
-this case you might choose to post it to a mailing list instead.  At
-any rate, there eventually will come a point in the exchange where one
-party or the other can tell that it is about to go from mere appending
-of data to an actual conversation&mdash;in the example that started
-this section, that would be the second respondent, who on realizing
-that there were problems with the patch, could predict that a real
-conversation is about to ensue, and therefore that it should be held
-in the appropriate medium.</para>
+<para>Es gibt keine eine richtige Antwort, aber es gibt eine allgemeine
+Regel: Wenn Sie lediglich Daten an einer Meldung anhängen, dann machen
+Sie es auf dem Tracker, wenn Sie aber eine <emphasis>Unterhaltung
+</emphasis> anfangen, dann machen Sie es auf dem Email Verteiler. Es
+mag sein, dass Sie nicht immer erkennen können, was der Fall ist, 
+nutzen Sie aber einfach Ihre Urteilsvermögen. Wenn Sie zum Beispiel,
+einen Patch anhängen, welches eine möglicherweise kontroverse Lösung
+beinhaltet, kann es sein, dass Sie vorrausahnen können, das Leute
+Fragen darüber haben werden. Obwohl Sie also normalerweise den Patch
+an die Meldung anhängen würden (angenommen Sie wollen nicht oder lönnen
+nicht direkt einen Commit der Änderung machen), wäre es in diesem Fall
+vieleicht eher angemessen statt dessen, eine Nachricht an den Email
+Verteiler zu schicken. In jedem Fall wird es aber einen Punkt geben,
+an dem die eine oder andere Partei erkennen kann, dass es gleich von
+dem einfachen Anhängen von Informationen zu einer echten Unterhaltung
+übergeht&mdash;in dem Beispiel mit dem dieser Abschnitt anfing, wäre
+das die Zweite Person, welche in dem Moment, wo er bemerkt, dass es
+Probleme mit dem Patch gibt, hätte vorrausahnen können, dass eine echte
+Diskussion sich gleich entwickelt, und desshalb in dem angemessenen
+Medium gehalten werden sollte.</para>
 
-<para>To use a mathematical analogy, if the information looks like it
-will be quickly convergent, then put it directly in the bug tracker;
-if it looks like it will be divergent, then a mailing list or IRC
-channel would be a better place.</para>
+<para>Um einen Vergleich zur Mathematik zu führen, wenn die 
+Information danach aussieht, als würde es schnell konvergieren, dann
+stellen Sie es gleich in den Bug Tracker; wenn es danach aussieht
+als würde es divergieren, dann wäre ein Email Verteiler oder ein
+IRC Kanal der bessere Ort.</para>
 
-<para>This doesn't mean there should never be any exchanges in the
-bug tracker.  Asking for more details of the reproduction recipe
-from the original reporter tends to be a highly convergent process,
-for instance.  The person's response is unlikely to raise new issues;
-it's simply going to flesh out information already filed.  There's no
-need to distract the mailing list with that process; by all means,
-take care of it with a series of comments in the tracker.  Likewise,
-if you're fairly sure that the bug has been misreported (i.e., is not
-a bug), then you can simply say so right in the issue.  Even pointing
-out a minor problem with a proposed solution is fine, assuming the
-problem is not a showstopper for the entire solution.</para>
+<para>Das bedeutet nicht, dass es niemals Austausche auf dem Bug 
+Tracker geben sollte. Dem Meldenden nach weiteren Details einer
+Anleitung zur Reproduktion zu fragen, neigt beispielsweise dazu ein im
+hohen maße konvergenter Ablauf zu sein. Die Rückmeldung wird 
+wahrscheinlich keine neuen Probleme hervorbringen, es wird lediglich
+die Informationen erweitern, die bereits erfasst wurden. Es gibt
+keinen Grund den Email Verteiler mit diesem Vorgang abzulenken; Sie
+können es durchaus in den Kommentaren des Bug Trackers erledigen.
+Gleichermaßen gilt, wenn Sie sich ziemlich sicher sind, dass der Bug
+fälschlicherweise gemeldet wurde (d.h. kein Bug ist), dann können Sie
+es gleich in der Meldung sagen. Selbst auf ein kleines Problem bei einer
+vorgeschlagenen Lösung hinzuweisen ist in Ordnung, angenommen es ist
+kein Problem welches die Lösung gänzlich verhindert.</para>
 
-<para>On the other hand, if you're raising philosophical issues about
-the bug's scope or the software's proper behavior, you can be pretty
-sure other developers will want to be involved.  The discussion is
-likely to diverge for a while before it converges, so do it on the
-mailing list.</para>
+<para>Wenn Sie andererseits philosophische Angelegenheiten über den
+Ramen der Meldung oder das Verhalten der Anwendung aufbringen, können
+Sie sich sicher sein, dass andere Entwickler beteiligt sein wollen.
+Die Diskussion wird wahrscheinlich eine weile lang divergieren, bevor
+es konvergiert, also schreiben Sie an den Email Verteiler.</para>
 
-<para>Always link to the mailing list thread from the issue, when you
-choose to post to the mailing list.  It's still important for someone
-following the issue to be able to reach the discussion, even if the
-issue itself isn't the forum of discussion.  The person who starts the
-thread may find this laborious, but open source is fundamentally a
-writer-responsible culture: it's much more important to make things
-easy for the tens or hundreds of people who may read the bug than for
-the three or five people writing about it.</para>
+<para>Verlinken Sie immer von der Meldung auf den Thread im Email
+Verteiler. Es ist immer noch wichtig für jemand der die Meldung
+verfolgt, in der Lage zu sein, die Diskussion zu erreichen, selbst wenn
+die Meldung selber nicht das Forum der Diskussion ist. Die Person die
+den Thread anfängt, mag das ein wenig aufwendig finden, aber in Open
+Source Kultur hat im allgemeinen der Author die Verantwortung: Es ist
+viel wichtiger Sachen für duntzende oder hunderte Leute die den Bug
+möglicherweise lesen als für die drei oder fünf die darüber schreiben.
+</para>
 
-<para>It's fine to take important conclusions or summaries from the
-list discussion and paste them into the issue, if that will make
-things convenient for readers.  A common idiom is to start a list
-discussion, put a link to the thread in the issue, and then when the
-discussion finishes, paste the final summary into the issue (along
-with a link to the message containing that summary), so someone
-browsing the issue can easily see what conclusion was reached without
-having to click to somewhere else.  Note that the usual "two masters"
-data duplication problem does not exist here, because both archives
-and issue comments are usually static, unchangeable data
-anyway.</para>
+<para>Es ist in Ordnung, wichtige Schlussfolgerungen oder 
+Zusammenfassungen aus der Verteiler Diskussion in die Meldung zu
+übertragen, wenn das es für die Leser einfacher macht. Ein häufiger
+Ablauf ist es, eine Email Diskussion anzufangen, einen Link an den
+Thread in der Meldung zu schreiben, und dann sobald die Diskussion
+zuende ist, die finale Zusammenfassung in die Meldung zu kopieren
+(zusammen mit einem Link zu der Nachricht welche die Zusammenfassung
+beinhaltet), damit jemand die sich die Meldung anschaut, leicht
+erkennen kann, welche Lösung beschlossen wurde, ohne irgendwo anders
+hinclicken zu müssen. Man merke an, dass die gewöhnliche Problematik
+doppelter Informationen hier nicht gibtm da sowohl Archive als auch
+Kommentare in einer Meldung, im allgemeinen sowieso statische, 
+unveränderliche Daten sind.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="publicity">
-<title>Publicity</title>
+<title>Öffentlichkeit</title>
 
-<para>In free software, there is a fairly smooth continuum between
-purely internal discussions and public relations statements.  This is
-partly because the target audience is always ill-defined: given that
-most or all posts are publicly accessible, the project doesn't have
-full control over the impression the world gets.  Someone&mdash;say, a
-<ulink url="slashdot.org"/> editor&mdash;may draw millions of readers'
-attention to a post that no one ever expected to be seen outside the
-project.  This is a fact of life that all open source projects live
-with, but in practice, the risk is usually small.  In general, the
-announcements that the project most wants publicized are the ones that
-will be most publicized, assuming you use the right mechanisms to
-indicate relative newsworthiness to the outside world.</para>
+<para>Bei freier Software gibt es einen relativ glatten Übergang
+zwischen rein internen Diskussionen und öffentlichen Bekanntmachungen.
+Das liegt zum Teil daran, dass die Zielgruppe immer schlecht bestimmbar
+ist: Angesichts, dass die meisten oder alle Nachrichten öffentlich
+zugänglich sind, hat das Projekt nicht die volle Kontrolle darüber,
+welchen Eindruck die Öffentlichkeit bekommt. Jemand&mdash;sagen wir
+ein <ulink url="heise.de"/> Mitarbeiter&mdash; kann die Aufmerksamkeit
+von millionen Leser auf eine Nachricht richten, von dem keiner vermutet
+hätte, dass sie jemals außerhalb von dem Projekt gesehen werden würde.
+Das ist eine Tatsache des Lebens, womit alle Open Source Projekte
+leben müssen, in der Praxis aber, ist das Risiko für gewöhnlich klein.
+Im algemeinen, sind die Bekanntgaben die das Projekt am ehesten
+öffentlich verbreiten will, diejenigen die auch am ehesten bekannt
+werden, angenommen Sie nutzen die richtigen Mechanismen darauf 
+hinzuweisen, wie berichtenswert es ist für die Öffentlichkeit ist.
+</para>
 
-<para>For major announcements, there tend to be four or five main
-channels of distribution, on which announcements should be made as
-nearly simultaneously as possible:</para>
+<para>Für großere Bekanntgaben, gibt es allgemein vier Hauptkanäle der
+Verbreitung, auf den Melungen so gleichzeitig wie möglich gemacht 
+werden sollten:</para>
 
 <orderedlist>
 
-  <listitem><para>Your project's front page is probably seen by more
-            people than any other part of the project.  If you have a
-            really major announcement, put a blurb there.  The blurb
-            should be a very brief synopsis that links to the press
-            release (see below) for more information.</para>
+  <listitem><para>Die erste Seite Ihres Projekts wird wahrscheinlich
+	    von mehr leuten gesehen, als irgend ein anderer Teil des
+	    Projekts. Wenn Sie eine wirklich große Ankündigung haben,
+	    schreiben Sie einen paar kurzen Sätze dorthin. Sie sollten
+	    eine kurze Zusammenfassung sein die auf die Pressemitteilung
+	    (siehe unten) für weitere Informationen verweist.</para>
   </listitem>
 
-  <listitem><para>At the same time, you should also have a "News" or
-            "Press Releases" area of the web site, where the
-            announcement can be written up in detail.  Part of the
-            purpose of a press release is to provide a single,
-            canonical "announcement object" that other sites can link
-            to, so make sure it is structured accordingly: either as
-            one web page per release, as a discrete blog entry, or
-            as some other kind of entity that can be linked to while
-            still being kept distinct from other press releases in the
-            same area.</para>
+  <listitem><para>Gleichzeitig, sollten Sie auch einen "Nachrichten"
+	    oder "Pressemitteilungen" Bereich auf der Webseite haben
+	    wo die Bekanntgabe im detail erläutert werden kann. Der
+	    Sinn von einer Pressemitteilung liegt zum Teil darin, ein
+	    einziges kanonisches "Bekanntgabe Objekt" zu haben, auf
+	    dem andere Seite verlinken können, also stellen Sie sicher,
+	    dass es entsprechend strukturiert ist: entweder als eine
+	    Webseite für jede neue Version, als diskreten Eintrag in
+	    einem Blog, oder als irgend eine andere Art Entität auf
+	    dem verlinkt werden kann, und trotzdem eindeutig zu
+	    unterscheiden ist, von anderen Veröffentlichungen im
+	    selben Bereich.</para>
   </listitem>
 
   <listitem><para>If your project has an RSS feed, make sure the
