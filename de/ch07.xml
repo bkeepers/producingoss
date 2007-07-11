@@ -1,176 +1,199 @@
 <chapter id="development-cycle">
 
-<title>Packaging, Releasing, and Daily Development</title>
+<title>Paket Erstellung, Veröffentlichung, und Tägliche Entwicklung
+</title>
 
 <simplesect>
 
-<para>This chapter is about how free software projects package and
-release their software, and how overall development patterns organize
-around those goals.</para>
+<para>In diesem Kapitel geht es darum, wie freie Software Projekte
+ihre Software Pakete erstellen und veröffentlichen, und wie sich
+allgemein Muster der Entwicklung um diese Ziele organisieren.</para>
 
-<para>A major difference between open source projects and proprietary
-ones is the lack of centralized control over the development team.
-When a new release is being prepared, this difference is especially
-stark: a corporation can ask its entire development team to focus on
-an upcoming release, putting aside new feature development and
-non-critical bug fixing until the release is done.  Volunteer groups
-are not so monolithic.  People work on the project for all sorts of
-reasons, and those not interested in helping with a given release
-still want to continue regular development work while the release is
-going on.  Because development doesn't stop, open source release
-processes tend to take longer, but be less disruptive, than commercial
-release processes.  It's a bit like highway repair.  There are two
-ways to fix a road: you can shut it down completely, so that a repair
-crew can swarm all over it at full capacity until the problem is
-solved, or you can work on a couple of lanes at a time, while leaving the
-others open to traffic.  The first way is very efficient <emphasis>for
-the repair crew</emphasis>, but not for anyone else&mdash;the road is
-entirely shut down until the job is done.  The second way involves
-much more time and trouble for the repair crew (now they have to work
-with fewer people and less equipment, in cramped conditions, with
-flaggers to slow and direct traffic, etc.), but at least the road
-remains useable, albeit not at full capacity.</para>
+<para>Ein großer Unterschied zwischen Open Source und proprietäre
+Projekte ist der Mangel einer zentralen Kontrolle über die 
+Entwicklermannschaft. Wenn eine neue Version vorbereitet wird, ist der
+Unterschied besonders gravierend: Ein Unternehmen kann seine komplette
+Entwicklermannschaft darum bitten sich auf die bevorstehenden Version
+zu konzentrieren, die Entwicklung neuer Funktionen und die Behebung
+nicht kritischer Bugs beiseite zu stellen, bis die neue Version
+fertig ist. Gruppen von Freiwilligen sind nicht derart monolitisch.
+Sie arbeiten aus allen möglichen Gründen an dem Projekt, und 
+diejenigen, die nicht daran interesiert sind, bei einer bestimmten
+Version zu helfen, wollen immer noch ihre normale Entwicklung 
+weiterführen, während die neue Version vorbereitet wird. Da die
+Entwicklung niemals aufhört, neigen die Abläufe bei neuen Versionen
+von Open Source Projekten länger zu dauern, verursachen aber weniger
+Unruhe, als beim erstellen einer neuen Komerziellen Version. Es ist
+ein wenig wie die Reparatur einer Autobahn. Es gibt zwei Möglichkeiten
+eine Straße zu reparieren: Sie können sie komplett absperren, damit
+die Reparaturmannschaft mit voller Kapazität herumschwirren kann, bis
+das Problem gelöst ist, oder Sie können ein paar Spuren nacheinander
+eines nach dem anderen bearbeiten, während die anderen für den Verkehr
+offen bleiben. Die erste Methode ist sehr effizient <emphasis>für die
+Reparaturmannschaft</emphasis>, aber für keinen anderen&mdash;die
+Straße ist komplett blockiert, bis die Arbeit erledigt ist. Die
+zweite Methode verursacht mehr Zeit und Kopfschmerzen für die
+Reparaturmannschaft (jetzt müssen sie mit weniger Leute und Mittel,
+unter eingeengten Bedingungen arbeiten, mit Richtungsweiser um den
+Verkehr zu verlangsamen und zu lenken, usw.), die Straße bleibt aber
+zumindest weiterhin benutzbar, wenn auch nicht mit der vollen
+Kapazität.</para>
 
-<para>Open source projects tend to work the second way.  In fact, for
-a mature piece of software with several different release lines being
-maintained simultaneously, the project is sort of in a permanent state
-of minor road repair.  There are always a couple of lanes closed; a
-consistent but low level of background inconvenience is always being
-tolerated by the development group as a whole, so that releases get
-made on a regular schedule.</para>
+<para>Open Source Projekte tendieren dazu nach der zweiten Methode zu
+arbeiten. Bei einer ausgereiften Software ist es sogar so, dass mehrere
+verschiedene Versionslinien gleichzeitig gepflegt werden, das Projekt
+befindet sich in einer Art ständigen Straßenreparatur. Es sind immer
+ein paar Spuren geschlossen; beständige aber geringe Umstände im
+Hintergrund werden die ganze Zeit über von den Entwicklern als ganzes
+tolleriert, damit die neuen Version nach einem regelmäßigen Plan fertig
+werden.</para>
 
-<para>The model that makes this possible generalizes to more than just
-releases.  It's the principle of parallelizing tasks that are not
-mutually interdependent&mdash;a principle that is by no means unique
-to open source development, of course, but one which open source
-projects implement in their own particular way.  They cannot afford to
-annoy either the roadwork crew or the regular traffic too much, but
-they also cannot afford to have people dedicated to standing by the
-orange cones and flagging traffic along.  Thus they gravitate toward
-processes that have flat, constant levels of administrative overhead,
-rather than peaks and valleys.  Volunteers are generally willing to
-work with small but consistent amounts of inconvenience; the
-predictability allows them to come and go without worrying about
-whether their schedule will clash with what's happening in the
-project.  But if the project were subject to a master schedule in
-which some activities excluded other activities, the result would be a
-lot of developers sitting idle a lot of the time&mdash;which would be
-not only inefficient but boring, and therefore dangerous, in that a
-bored developer is likely to soon be an ex-developer.</para>
+<para>Das Modell welches das ermöglicht, lässt sich auf mehr als nur
+neue Versionen veralgemeinern. Es ist das Prinzip Aufgaben zu
+parallelisieren, welche nicht von einander abhängen&mdash;ein Prinzip
+welches sich natürlich keinesfalls auf Open Source Entwicklung 
+beschränkt, eines welche Open Source Projekte aber auf ihre eigene
+bestimmte Art implementieren. Sie können es sich nicht leisten
+ihre Straßenbau Truppe oder den gewöhnlichen Verkehr zu sehr zu nerven,
+aber sie können es sich auch nicht leisten Leute dafür abzustellen,
+bei den Orangenen Kegeln zu stehen und den Verkehr zu dirigieren.
+Sie streben deshalb eher zu Abläufe die einen flachen, konstanten Grad
+an Mehraufwand haben, als Höhen und Tiefen. Freiwillige sind im
+Allgemeinen eher dazu bereit mit kleinen gleichbleibenden Mengen an
+Unbequemlichkeiten zu arbeiten; die Berechenbarkeit erlaubt es ihnen
+zu kommen und zu gehen, ohne sich darüber Sorgen zu machen, ob ihr
+Terminkalender mit dem was im Projekt passiert kollidiert. Wenn das
+Projekt aber eine einem Produktionsplan unterliegen würde, wäre das
+Ergebniss, eine Menge Entwickler die die meiste Zeit untätig
+herumsitzen&mdash;was nicht nur ineffizient wäre, sondern auch 
+langweilig und dadurch gefährlich, insofern, dass ein gelangweilter
+Entwickler wahrscheinlich bald ein Ex-Entwickler sein wird.</para>
 
-<para>Release work is usually the most noticeable non-development task
-that happens in parallel with development, so the methods described in
-the following sections are geared mostly toward enabling releases.
-However, note that they also apply to other parallelizable tasks, such
-as translations and internationalization, broad API changes made
-gradually across the entire code base, etc.</para>
+<para>Arbeit an neuen Versionen ist für gewöhnlich die am ehensten
+bemerkbare Aufgabe die nicht zur Entwicklung gehört, welche neben der
+Entwicklung herläuft, also sind die Methoden die in den folgenden
+Abschnitten folgen meistens darauf ausgelegt neue Versionen zu
+ermöglichen. Beachten Sie jedoch, dass sie auch für andere Aufgaben
+gelten, die sich parallelisieren lassen, wie Übersetzungen und 
+Lokalisierung, weitgreifende Änderungen an den Schnittstellen die nach
+und nach über den gesamten Quellcode gemacht werden, usw.</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 
 <sect1 id="release-numbering">
-<title>Release Numbering</title>
+<title>Versions Nummerierung</title>
 
-<para>Before we talk about how to make a release, let's look at how to
-name releases, which requires knowing what releases actually mean to
-users.  A release means that:</para>
+<para>Vor wir uns darüber unterhalten, wie man eine neue Version macht,
+lasst uns anschauen, wie man diese Versionen benennet, wozu wir wissen
+müssen was eine neue Version für die Benutzer tatsächlich bedeutet. 
+Eine neue Version bedeutet, dass:</para>
 
 <itemizedlist>
 
-  <listitem><para>Old bugs have been fixed.  This is probably the one
-            thing users can count on being true of every release.</para>
+  <listitem><para>Alte Bugs behoben wurden. Das ist wahscheinlich eines
+	der Sachen auf den sich die Benutzer für jede neue Version
+	verlassen können.</para>
   </listitem>
 
-  <listitem><para>New bugs have been added.  This too can usually
-            be counted on, except sometimes in the case of security
-            releases or other one-offs (see
-            <xref linkend="security-releases"/><phrase
-            output="printed"> later in this chapter</phrase>).</para>
+  <listitem><para>Neue Bugs wurden hinzugefügt. Darauf kann man sich
+	für gewöhnlich auch verlassen, außer in manchen Fällen, bei
+	der Behebung von Sicherheitslücken oder andere Einmalige
+	Änderungen (siehe <xref linkend="security-releases"/><phrase
+        output="printed"> später in diesem Kapitel</phrase>).</para>
   </listitem>
 
-  <listitem><para>New features may have been added.</para>
+  <listitem><para>Neue Funktionen können hinzugefügt worden sein.</para>
   </listitem>
 
-  <listitem><para>New configuration options may have been added, or
-            the meanings of old options may have changed subtly.  The
-            installation procedures may have changed slightly since
-            the last release too, though one always hopes not.</para>
+  <listitem><para>Neue Konfigurationseinstellung können hinzugefügt
+	worden sein, oder die Bedeutung alter Einstellungen sich ein
+	klein wenig geändert haben. Die Instalationsabläufe können
+	sich auch seit der letzten Version leicht geändert haben,
+	auch wenn man immer hofft, dass das nicht der Fall ist.</para>
   </listitem>
 
-  <listitem><para>Incompatible changes may have been introduced, such
-            that the data formats used by older versions of the
-            software are no longer useable without undergoing some
-            sort of (possibly manual) one-way conversion step.</para>
+  <listitem><para>Nicht kompatibele Änderungen können eingeführt worden
+	sein, wie die Formatierung der Daten welche von älterer 
+	Software benutzt werden nicht weiter ohne irgend einer
+	(möglicherweise händischen) Einweg-Konvertierung benutzt werden
+	können.</para>
   </listitem>
 
 </itemizedlist>
 
-<para>As you can see, not all of these are good things.  This is why
-experienced users approach new releases with some trepidation,
-especially when the software is mature and was already mostly doing
-what they wanted (or thought they wanted).  Even the arrival of new
-features is a mixed blessing, in that it may mean the software
-will now behave in unexpected ways.</para>
+<para>Wie sie sehen, ist nicht alles davon etwas gutes. Deshalb gehen
+erfahrene Benutzer immer mit ein wenig Angst an neue Versionen heran,
+ganz besonders, wenn die Software ausgereift ist und vorher schon
+zum größten Teil das gemacht hat, was sie wollten (oder dachten das
+sie wollten). Selbst der Einbau neuer Funktionen hat insofern nicht nur
+Vorteile, dass es bedeuten könnte, dass sich die Software jetzt 
+unerwartet verhällt.</para>
 
-<para>The purpose of release numbering, therefore, is twofold:
-obviously the numbers should unambiguously communicate the ordering of
-releases (i.e., by looking at any two releases' numbers, one can know
-which came later), but also they should indicate as compactly as
-possible the degree and nature of the changes in the release.</para>
+<para>Der Sinn einer Versionsnummer ist deshalb zweifältig: 
+Offensichtlich sollte die Nummer unzweideutig die Reihenfolge der
+Versionen mitteilen (d.h. wenn man sich zwei Versionsnummern anschaut,
+kann man unterscheiden, welches die später kam), sie sollten aber auch
+so kompakt wie möglich den Grad und Art der Änderungen in der Version
+andeuten.</para>
 
-<para>All that in a number?  Well, more or less, yes.  Release
-numbering strategies are one of the oldest bikeshed discussions around
-(see <xref linkend="bikeshed"/><phrase output="printed"> in
-<xref linkend="communications"/></phrase>), and the world is
-unlikely to settle on a single, complete standard anytime soon.
-However, a few good strategies have emerged, along with one
-universally agreed-on principle: <emphasis>be consistent</emphasis>.
-Pick a numbering scheme, document it, and stick with it.  Your users
-will thank you.</para>
+<para>Das alles in einer Zahl? Nun, im Grunde genommen, ja. Die 
+Strategieen für Versions Nummern sind eines der ältesten 
+Fahrradschuppen Diskussionen die es gibt (siehe <xref 
+linkend="bikeshed"/><phrase output="printed"> im Kapitel <xref 
+linkend="communications"/></phrase>), und ist unwahrscheinlich, dass
+sich die Welt auf einen, vollständigen Standard in der irgendwann in 
+der nächsten Zeit einigt. Ein paar gute Strategieen sind aber 
+entstanden, zusammen mit dem universell anerkannten Prinzip: <emphasis>
+konsistent zu sein</emphasis>. Wählen Sie ein Nummerierungsschema und
+bleiben Sie dabei. Ihre Nutzer werden es Ihnen danken.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-components">
-<title>Release Number Components</title>
+<title>Die Komponenten der Versions Nummer</title>
 
-<para>This section describes the formal conventions of release
-numbering in detail, and assumes very little prior knowledge.  It is
-intended mainly as a reference.  If you're already familiar with these
-conventions, you can skip this section.</para>
+<para>Dieser Abschnitt beschreibt im Detail die formalen Konventionen
+der Nummerierung von Versionen, und geht von sehr wenig Vorwissen aus.
+Es ist hauptächlich als eine Referenz gedacht. Wenn Sie bereits mit
+diesen Konventionen vertraut sind, können Sie diesen Abschnitt
+überspringen.</para>
 
-<para>Release numbers are groups of digits separated by dots:</para>
+<para>Eine Versionsnummer ist eine Gruppe von Zahlen die durch punkte
+getrennt sind:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3
 Singer 5.11.4</literallayout>
 </informalexample>
 
-<para>...and so on.  The dots are <emphasis>not</emphasis> decimal
-points, they are merely separators; "5.3.9" would be followed by
-"5.3.10".  A few projects have occasionally hinted otherwise, most
-famously the Linux kernel with its "0.95", "0.96"... "0.99" sequence
-leading up to Linux 1.0, but the convention that the dots are not
-decimals is now firmly established and should be considered a
-standard.  There is no limit to the number of components (digit
-portions containing no dots), but most projects do not go beyond three
-or four.  The reasons why will become clear later.</para>
+<para>...und so weiter. Die Punkte sind <emphasis>keine</emphasis>
+Decimalzeichen, sie sind lediglich Trennzeichen; nach "5.3.9" käme
+"5.3.10". Ein paar wenige Projekte haben ab und zu auf was anderes
+hingedeutet, am bekanntesten der Linux Kernel mit seiner "0.95", 
+"0.96"... "0.99" Reihe die zu Linux 1.0 hinführte, die Konventeion,
+dass die Punkte keine Dezimalzeichen sind, ist jetzt aber fest
+etabliert und sollte als Standart betrachtet werden. Es gibt keine
+Grenze bei der Anzahl der Komponenten (Zeichen Anteile die keine
+Punkte enthalten), aber die meisten Projekte gehen nicht über drei
+oder vier hinaus. Die Gründe dafür werden später klar.</para>
 
-<para>In addition to the numeric components, projects sometimes tack
-on a descriptive label such as "Alpha" or "Beta" (see
-<xref linkend="alpha-and-beta"/>), for example:</para>
+<para>Zusätzlich zu den numerischen Komponennten, hängen Projekte
+manchmal erläuternde Kennschrift wie "Alpha" oder "Beta" an (siehe
+<xref linkend="alpha-and-beta"/>), als Beispiel:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha)
 Singer 5.11.4 (Beta)</literallayout>
 </informalexample>
 
-<para>An Alpha or Beta qualifier means that this
-release <emphasis>precedes</emphasis> a future release that will have
-the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
-leads eventually to "2.3.0".  In order to allow several such candidate
-releases in a row, the qualifiers themselves can have meta-qualifiers.
-For example, here is a series of releases in the order that they would
-be made available to the public:</para>
+<para>Ein Alpha oder Beta Vermerk bedeutet, dass diese Version einer
+zukünftigen <emphasis>vorrausgeht</emphasis> welches die selbe Zahl 
+haben wird, jedoch ohne den Vermerk. Deshalb führt "2.3.0&nbsp;(Alpha)"
+letztendlich zu "2.3.0". Um mehrere solche Kandidaten in einer
+Folge zu ermöglichen, können die Vermerke selber Meta Vermerke haben.
+Hier ist als Beispiel eine Serie von Versionen, in der Reihenfolge
+mit der sie veröffentlicher werden würden:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha 1)
@@ -181,130 +204,139 @@ Scanley 2.3.0 (Beta 3)
 Scanley 2.3.0</literallayout>
 </informalexample>
 
-<para>Notice that when it has the "Alpha" qualifier, Scanley "2.3" is
-written as "2.3.0".  The two numbers are equivalent&mdash;trailing
-all-zero components can always be dropped for brevity&mdash;but when a
-qualifier is present, brevity is out the window anyway, so one might
-as well go for completeness instead.</para>
+<para>Beachten Sie, dass es mit dem "Alpha" Vermerk, Scanley "2.3" als
+"2.3.0" geschrieben wird. Die beiden Zahlen sind gleich&mdash;folgende
+Nullanteile können der Kürze halber immer weggelassen werden&mdash;wenn
+ein Vermerk aber vorhanden ist, ist die Kürze eh schon nicht gegeben,
+also kann man genau so gut vollständigkeit ausschreiben.</para>
 
-<para>Other qualifiers in semi-regular use include "Stable",
-"Unstable", "Development", and "RC" (for "Release Candidate").  The
-most widely used ones are still "Alpha" and "Beta", with "RC" running
-a close third place, but note that "RC" always includes a numeric
-meta-qualifier.  That is, you don't release
-"Scanley&nbsp;2.3.0&nbsp;(RC)", you release
-"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+<para>Andere Vermerke die mehr oder weniger oft benutzt werden sind 
+"Stable" (de. stabil), "Unstable" (de. nicht stabil), "Development"
+(de. Entwicklerversion), und "RC" (für "Release Candidate")
+(de. Kandidat für eine Finale Version). Die am weitesten verbreiteten
+sind immer noch "Alpha" und "Beta", mit "RC" nahe an dritter Stelle,
+beachten Sie aber, dass zu "RC" immer einen Meta-Vermerk gehört. Sie
+veröffentlichen als nicht
+"Scanley&nbsp;2.3.0&nbsp;(RC)", sondern 
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", gefolgt von RC2, usw.</para>
 
-<para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
-known now, and I don't recommend using any of the others, even though
-the others might at first glance seem like better choices because they
-are normal words, not jargon.  But people who install software from
-releases are already familiar with the big three, and there's no
-reason to do things gratuitously differently from the way everyone
-else does them.</para>
+<para>Diese dre Vermerke, "Alpha", "Beta", und "RC", sind mittlerweile
+relativ gut bekannt, und ich empfehle nicht irgend welche andere zu
+benutzen, auch wenn andere auf dem ersten Blick passender erscheinen
+da sie normale Wörter sind, und kein Jargon. Diejenigen die neue
+Software versionen installieren, sind aber bereits mit den großen
+dreien vertraut, und es gibt keinen Grund die Sache grundlos anders von
+allen anderen zu machen.</para>
 
-<para>Although the dots in release numbers are not decimal points,
-they do indicate place-value significance.  All "0.X.Y" releases
-precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
-immediately precedes "3.14.159", and non-immediately precedes
-"3.14.160" as well as "3.15.anything", and so.</para>
+<para>Obwohl die Punkte in Versionsnummer keine Dezimalzeichen sind,
+deuten sie doch eine Stelle-Wert Bedeutung an. Alle "0.X.Y" Versionen
+gehen "1.0" vorraus (was natürlich gleichbedeutend ist mit "1.0.0").
+"3.14.158" geht direkt "3.14.159" vorraus, und indirekt "3.14.160",
+sowie "3.15.irgendwas" und ähnliches vorrausgeht.</para>
 
-<para>A consistent release numbering policy enables a user to look at
-two release numbers for the same piece of software and tell, just from
-the numbers, the important differences between those two releases.  In
-a typical three-component system, the first component is
-the <firstterm>major&nbsp;number</firstterm>, the second is
-the <firstterm>minor&nbsp;number</firstterm>, and the third is the
-<firstterm>micro&nbsp;number</firstterm>.  For example, release
-"2.10.17" is the seventeenth micro release in the tenth minor release
-line within the second major release series.  The words "line" and
-"series" are used informally here, but they mean what one would
-expect.  A major series is simply all the releases that share the same
-major number, and a minor series (or minor line) consists of all the releases
-that share the same minor <emphasis>and</emphasis> major number.  That
-is, "2.4.0" and "3.4.1" are not in the same minor series,
-even though they both have "4" for their minor number; on the other
-hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
-not adjacent if "2.4.1" was released between them.</para>
+<para>Eine konsistente Richtlinie für die Numerierung der Versionen
+ermöglicht es den Benutzer zwei Versions Nummern der selben Software
+anzuschauen und alleine durch die Zahlen, die wichtigen Unterschiede
+zwischen ihnen zu unterscheiden. Bei einer typischen System aus drei
+Komponenten, ist die erste Komponente die
+<firstterm>major&nbsp;Nummer</firstterm>, die zweite ist die 
+<firstterm>minor&nbsp;Nummer</firstterm>, und die dritte ist die
+<firstterm>micro&nbsp;Nummer</firstterm>. Version
+"2.10.17" ist zum Beispiel die siebzehnte micro Version in der zehnten
+minor Reihe innerhalb der zweiten major Versions Serie. Die Worte
+"Reihe" (en. line) und "Serie" (en. series) werden hier informell
+verwendet, sie bedeuten aber was man erwarten würde. Eine major Serie
+ist lediglich alle Versionen die die gleich major Nummer teilen und
+eine minor Serie (oder Reihe) besteht aus allen Versionen welche die
+gleiche minor <emphasis>und</emphasis> major Nummer teilen. "2.4.0" und
+"3.4.1" sind also nicht in der selben minor Reihe, obwohl sie beide "4"
+als minor Nummer haben; andererseits sind, "2.4.0" und "2.4.2" in der
+selben Reihe, obwohl sie nicht auf einander folgen, wenn "2.4.1" 
+zwischendurch veröffentlicht wurde.</para>
 
-<para>The meanings of these numbers are exactly what you'd expect: an
-increment of the major number indicates that major changes happened;
-an increment of the minor number indicates minor changes; and an
-increment of the micro number indicates really trivial changes.  Some
-projects add a fourth component, usually called
-the <firstterm>patch&nbsp;number</firstterm>, for especially
-fine-grained control over the differences between their releases
-(confusingly, other projects use "patch" as a synonym for "micro" in a
-three-component system).  There are also projects that use the last
-component as a <firstterm>build&nbsp;number</firstterm>, incremented
-every time the software is built and representing no change other than
-that build.  This helps the project link every bug report with a
-specific build, and is probably most useful when binary packages are
-the default method of distribution.</para>
+<para>Die Bedeutung dieser Zahlen ist genau das, was man erwarten 
+würde: Eine Erhöhung der major Nummer deutet auf große Änderungen hin;
+eine Erhöhung der minor Nummer deutet auf kleine Änderungen hin; und
+eine Erhöhung der micro Nummer deutet auf wirklich triviale Änderungen.
+Manche Projekte fügen eine vierte Komponennte hinzu, gewöhnlich als
+<firstterm>patch&nbsp;Nummer</firstterm> bezeichnet, für besonders
+fein granulierte Kontrolle über die Unterschiede zwischen ihren 
+Versionen (verwirrenderweise, benutzen andere Projekte "patch" als
+synonym für "micro" bei einem System mit drei Komponenten). Es gibt
+auch Projekte, welche die letzte Komponente als 
+<firstterm>build&nbsp;Nummer</firstterm> verwenden, welches jedes mal
+hochgezählt wird, wenn ein neuer Build der Software gemacht wird und 
+keine andere Änderung außer diesen Build representiert. Das hilft dem
+Projekt jede Bug Meldung mit einem bestimmten Build in verbindung zu
+brinden, und ist wahrscheinlich am nützlichsten wenn binären Pakete die
+übliche Methode der Verteilung ist.</para>
 
-<para>Although there are many different conventions for how many
-components to use, and what the components mean, the differences tend
-to be minor&mdash;you get a little leeway, but not a lot.  The next
-two sections discuss some of the most widely used conventions.</para>
+<para>Obwohl es viele verschiedene Konventionen gibt, wieviele
+Komponenten man verwenden soll, und was die Komponenten bedeutet,
+neigen die Unterschiede dazu unwesentlich zu sein&mdash;Sie haben
+ein wenig Spielraum aber nicht viel. Die nächsten beiden Abschnitte
+besprechen einige der am meisten benutzten Konventionen.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-simple-strategy">
-<title>The Simple Strategy</title>
+<title>Die Einfache Strategie</title>
 
-<para>Most projects have rules about what kinds of changes are allowed
-into a release if one is only incrementing the micro number, different
-rules for the minor number, and still different ones for the major
-number.  There is no set standard for these rules yet, but here I will
-describe a policy that has been used successfully by multiple
-projects.  You may want to just adopt this policy in your own
-project, but even if you don't, it's still a good example of the kind
-of information release numbers should convey.  This policy is adapted
-from the numbering system used by the APR project, see
+<para>Die meisten Projekte haben Regeln darüber, welche Arten von
+Änderungen bei einer neuen Version erlaubt sind wenn man nur eine
+micro Nummer erhöht, andere wenn man die minor Nummer erhöht und
+wieder andere bei der major Nummer. Es gibt noch keinen Satz von Normen
+für diese Regeln, ich werde hier aber eine Regelung beschreiben, die
+schon bei mehreren Projekten erfolgreich verwendet worden ist. Sie
+können diese Regelung für Ihr Projekt einfach übernehmen, aber selbst
+wenn Sie das nicht tun, ist es trotzdem ein Gutes Beispiel für 
+die Art von Informationen die Versionsnummern ausdrücken sollten.
+Diese Regelung basiert auf das Nummer System welches von dem
+APR Projekt benutzt wird, siehe 
 <ulink url="http://apr.apache.org/versioning.html"/>.</para>
 
 <orderedlist>
 
-  <listitem><para>Changes to the micro number only (that is, changes
-            within the same minor line) must be both forward- and
-            backward-compatible.  That is, the changes should be bug
-            fixes only, or very small enhancements to existing
-            features.  New features should not be introduced in a
-            micro release.</para>
+  <listitem><para>Änderungen an der micro Nummer (d.h Änderungen
+	innerhalb der selben minor Reihe) müssen sowohl aufwärts,
+	als auch abwäertskompatibel sein. D.h. die Änderungen sollten
+	nur Bug Fixes sein, oder sehr kleine Verbesserungen an
+	bestehenden Funktionen. Neue Funktionen sollten bei micro
+	Versionen nicht eingeführt werden.</para>
   </listitem>
 
-  <listitem><para>Changes to the minor number (that is, within the
-            same major line) must be backward-compatible, but not
-            necessarily forward-compatible.  It's normal to introduce
-            new features in a minor release, but usually not too many
-            new features at once.</para>
+  <listitem><para>Änderungen an der minor Nummer (d.h, innerhalb der
+	selben major Reihe) müssen abwärtskompatibel sein, aber nicht
+	unbedingt aufwärtskompatibel. Es ist normal neue Funktionen
+	in einer minor Version einzuführen, für gewöhnlich aber nicht
+	zu viele auf einmal.</para>
   </listitem>
 
-  <listitem><para>Changes to the major number mark compatibility
-            boundaries.  A new major release can be forward- and
-            backward-incompatible.  A major release is expected to
-            have new features, and may even have entire new feature
-            sets.</para>
+  <listitem><para>Änderungen an der major Nummer kennzeichnen Grenzen
+	der Kompatibilität. Eine neue major Version kann zu 
+	vorhergehenden und folgenden Versionen inkompatibel sein. Von
+	einer major Version werden neue Funktionen erwartet, und sogar
+	ganze Sammlungen von Funktionen.</para>
   </listitem>
 
 </orderedlist>
 
-<para>What <firstterm>backward-compatible</firstterm>
-and <firstterm>forward-compatible</firstterm> mean, exactly, depends on
-what your software does, but in context they are usually not open to
-much interpretation.  For example, if your project is a client/server
-application, then "backward-compatible" means that upgrading the
-server to 2.6.0 should not cause any existing 2.5.4 clients to lose
-functionality or behave differently than they did before (except for
-bugs that were fixed, of course).  On the other hand, upgrading one of
-those clients to 2.6.0, along with the server, might
-make <emphasis>new</emphasis> functionality available for that client,
-functionality that 2.5.4 clients don't know how to take advantage of.
-If that happens, then the upgrade is <emphasis>not</emphasis>
-"forward-compatible": clearly you can't now downgrade that client
-back to 2.5.4 and keep all the functionality it had at 2.6.0, since
-some of that functionality was new in 2.6.0.</para>
+<para>Was <firstterm>abwärtskompatibel</firstterm> und <firstterm>
+aufwärtskompatibel</firstterm> genau bedeuten, hängt davon ab, was
+Ihre Software macht, im Kontext sind sie aber für gewöhnlich nicht
+sonderlich frei interpretierbar. Wenn Ihr Projekt zum Beispiel eine
+Client-Server Anwendung ist, dann bedeutet "abwärtskompatibel", dass
+eine Aktuelisierung auf 2.6.0 keine existierende 2.5.4 Clients 
+Funktionen verlieren oder sich anders als vorher verhalten (natürlich
+abgesehen von den Bugs die behoben wurden). Eine Aktuelisierung einer
+dieser Clients auf 2.6.0 zu aktuelisieren könnte ihm andererseits
+<emphasis>neue</emphasis> Funktionen zur Verfügung stellen, bei dem
+die 2.5.4 Clients nicht wissen wie sie genutzt werden sollen. Wenn
+das passiert, dann ist die Aktuelisierung <emphasis>nicht</emphasis>
+"aufwertskompatibel": Sie können diesen Client nicht zurück auf 
+2.5.4 setzen und alle Funktionen aus 2.6.0 behalten, da manche dieser
+Funktionen bei 2.6.0 neu waren.</para>
 
 <para>This is why micro releases are essentially for bug fixes only.
 They must remain compatible in both directions: if you upgrade from
