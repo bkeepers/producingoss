@@ -157,7 +157,7 @@ y estándar set de herramientas para manejar información:</para>
      <listitem>
        <para>
 	Permite a los desarrolladores realizar cambios al código
-	convenientemente, incluso retroceder y "CHANGE PORTING".
+	convenientemente, incluso retroceder y exportar cambios.
 	Le permite a todos mirar lo que está sucediendo con el
 	código.</para>
      </listitem>
@@ -244,7 +244,7 @@ elimina) su dirección de correo en algún tipo de fichero de texto
 que almacena todas las direcciones de la lista. ¿Qué podría ser
 más sencillo?</para>
 
-<para>El truco está en que hacer un buen manejo de las listas
+<para>El truco está en hacer un buen manejo de las listas
 de correo&mdash;lo cual no es lo que la gente espera&mdash;
 no es nada sencillo. No es solo sobre suscribir y desuscribir
 usuarios cuando lo solicitan. Tambien es sobre moderar para prevenir
@@ -385,7 +385,7 @@ en tandem:</para>
 		mensajes de los suscriptores a la lista.
             	</emphasis></para>
 
-            <para>This is effective as far as it goes, and also
+            <para>
 		Esto es efectivo hasta cierto punto y necesita
 		de poca administración ya que usualmente es sólo
 		cuestión de cambiar algunos puntos en la configuración
@@ -452,46 +452,49 @@ en tandem:</para>
 		los mensajes futuros).</para>
 
             <para>Rejecting is usually done by simply ignoring the
-            moderation mail.  If the list software never receives
-            confirmation that something is a valid post, then it won't
-            pass that post on to the list, so simply dropping the
-            moderation mail achieves the desired effect.  Sometimes
-            you also have the option of responding with a "reject" or
-            "deny" command, to automatically disapprove future mails
-            from the same sender without even running them through
-            moderation.  There is rarely any point doing this, since
-            moderation is mostly about spam prevention, and spammers
-            tend not to send from the same address twice anyway.</para>
+		Rechazar un mensaje se hace simplemente ignorando
+		el correo de moderación. Si la aplicación nunca
+		recibe confirmación de que algo es un mensaje valido
+		entonces no pasará a la lista, así que con solo
+		ignorar el correo de moderación creará el efecto deseado.
+		En algunos casos, existe la opción de responder con los
+		comandos "rechazar" o "denegar" para que automaticamente
+		se desaprueben los mensajes del remitente sin siquiera
+		pasarlos por la moderación. Raramente existe una razón
+		para hacer esto ya que la moderación es por lo general
+		para prevenir el spam y los spammers no suelen utilizar
+		una misma dirección dos veces.</para>
             </listitem>
 </orderedlist>
 
-<para>Be sure to use moderation <emphasis>only</emphasis> for
-filtering out spams and clearly off-topic messages, such as when
-someone accidentally posts to the wrong mailing list.  The moderation
-system will usually give you a way to respond directly to the sender,
-but don't use that method to answer questions that really belong on
-the mailing list itself, even if you know the answer off the top of
-your head.  To do so would deprive the project's community of an
-accurate picture of what sorts of questions people are asking, and
-deprive them of a chance to answer questions themselves and/or see
-answers from others.  Mailing list moderation is strictly about
-keeping the list free of junk and off-topic emails, nothing
-more.</para>
+<para>Hay que asegurarse de que la moderación <emphasis>sólo</emphasis>
+se utiliza para filtrar el spam y mensajes fuera de contexto, como
+cuando alguien envia un correo a la lista equivocada. El sistema de
+moderación por lo general ofrece una manera de responder directamente
+al remitente pero es mejor no utilizarlo para responder a preguntas
+que realmente pertenecen a la lista, incluso si se sabe la respuesta
+inmediatamente. De hacer esto, se privaria a la comunidad del proyecto
+de una visión exacta de que tipo de preguntas la gente hace y privarlos
+de la oportunidad de responder ellos mismos a preguntas y/o ver las
+respuestas de otros. La moderación de las listas debe ser estrictamente
+para mantenerlas libres de basura y de correos fuera de contexto,
+nada más.</para>
 
 </sect3>
 
 <sect3 id="address-hiding">
-<title>Address hiding in archives</title>
+<title>Ocultar las direcciones en los archivos</title>
 
-<para>To prevent your mailing lists from being a source of addresses
-for spammers, a common technique is for the archives to obscure
-people's email addresses, for example by replacing</para>
+<para>Para prevenir que los spammers utilicen las listas de correo
+como una fuente de direcciones, una técnica muy común es la de ocultar
+las direcciones de correo de la gente en el registro, reemplazandolas
+como por ejemplo:</para>
 
     <blockquote>
       <para><literal>jrandom@somedomain.com</literal></para>
     </blockquote>
 
-<para>with</para>
+<para>por</para>
 
     <blockquote>
       <para><literal>jrandom_AT_somedomain.com</literal></para>
@@ -503,42 +506,47 @@ people's email addresses, for example by replacing</para>
       <para><literal>jrandomNOSPAM@somedomain.com</literal></para>
     </blockquote>
 
-<para>or some similarly obvious (to a human) encoding.  Since spam
-address harvesters often work by crawling through web
-pages&mdash;including your mailing list's online archives&mdash;and
-looking for sequences containing "@", encoding the addresses is a way
-of making people's email addresses invisible or useless to spammers.
-This does nothing to prevent spam from being sent to the mailing list
-itself, of course, but it does avoid increasing the amount of spam
-sent directly to list users' personal addresses.</para>
+<para>o algo similar igual de obvio (para un humano). Ya que los
+recolectores de direcciones por lo general funcionan reptando por
+paginas web&mdash;incluyendo el archivo de nuestra lista de correo&mdash;
+y buscando secuencias conteniendo "@", modificar las direcciones
+es una forma para que sean invisibles o inutiles para los spammers.
+Esto no hace nada para prevenir que se envie spam desde la lista,
+por supuesto, pero si evita que se incremente la cantidad de spam
+enviado directamente a las cuentas personales de los usuarios de
+la lista.</para>
 
-<para>Address hiding can be controversial.  Some people like it a lot,
-and will be surprised if your archives don't do it automatically.
-Other people think it's too much of an inconvenience (because humans
-also have to translate the addresses back before using them).
-Sometimes people assert that it's ineffective, because a harvester
-could in theory compensate for any consistent encoding pattern.
-However, note that there is empirical evidence that address hiding
-<emphasis>is</emphasis> effective, see <ulink
+<para>El ocultar las direcciones puede ser algo controversial. A algunas
+personas les puede gustar mucho y se sorprenderan si el registro no lo
+hace automaticamente. Otras pueden pensar que es demasiado inconveniente
+(porque los humanos tambien tenemos que traducir las direcciones antes
+de utilizarlas). Algunas veces las personas afirman que es inefectivo,
+porque los recolectores en teoria pueden compensar cualquier patrón
+de modificación consistente. No obstante, hay que señalar que existe
+evidencia empírica de que ocultar las direcciones <emphasis>es</emphasis>
+efectivo, como se puede ver en <ulink
 url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
 
-<para>Ideally, the list management software would leave the choice up
-to each individual subscriber, either through a special yes/no header
-or a setting in that subscriber's list account preferences.  However,
-I don't know of any software which offers per-subscriber or per-post
-choice in the matter, so for now the list manager must make a decision
-for everyone (assuming the archiver offers the feature at all, which
-is not always the case).  I lean very mildly toward turning
-address hiding on.  Some people are very careful to avoid posting
-their email addresses on web pages or anywhere else a spam harvester
-might see it, and they would be disappointed to have all that care
-thrown away by a mailing list archive; meanwhile, the inconvenience
-address hiding imposes on archive users is very slight, since it's
-trivial to transform an obscured address back to a valid one if you
-need to reach the person.  But keep in mind that, in the end, it's
-still an arms race: by the time you read this, harvesters might well
-have evolved to the point where they can recognize most common forms
-of hiding, and we'll have to think of something else.</para>
+<para>Lo ideal sería que la aplicación administrativa de la lista
+diese la posibilidad de escoger a cada individuo, utilizando una cabecera si/no
+especial o configurandolo en las preferencias de la cuenta del
+suscriptor. Sin embargo, no conozco ninguna aplicación que permita hacer
+esto para cada suscriptor o para cada mensaje, así que por ahora el
+administrador de la lista debe tomar la decisión en nombre de todos
+(asumiendo que el archivador ofrece ésta característica, lo cual no
+es siempre así). Yo me inclino ligeramente hacia ocultar las direcciones.
+Algunas personas son muy cuidadosas para evitar enviar sus
+direcciones de correo electrónico en paginas web o en cualquier lugar
+donde un recolector de spam pueda verla, y podrian ser decepcionante
+que todo ese cuidado sea perdido gracias al registro de la lista de correo.
+Mientras tanto, la inconveniencia al ocultar las direcciones que impone en
+los usuarios del registro es muy pequeña, dada la trivialidad de transformar
+las direcciones al formato correcto si se necesita contactar con esa
+persona. Pero hay que seguir pensando en que, al final, sigue siendo
+una lucha sin fin: para cuando haya leido esto, los recolectores
+podrian haber evolucionado hasta el punto de reconocer la mayoria
+de formas comunmente utilizadas para ocultar y tendremos que pensar
+en algo más.</para>
 
 </sect3>
 
@@ -546,15 +554,16 @@ of hiding, and we'll have to think of something else.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="header-management">
-<title>Identification and Header Management</title>
+<title>Identificación y Administración de cabeceras</title>
 
-<para>List subscribers often want to put mails from the list into a
-project-specific folder, separate from their other mail.  Their
-mail reading software can do this automatically by examining the mail's
-<firstterm>headers</firstterm>.  The headers are the fields at the top
-of the mail that indicate the sender, recipient, subject, date, and
-various other things about the message.  Certain headers are
-well known and effectively mandatory:</para>
+<para>Por lo general, los suscriptores de las listas mueven estos
+correos a una carpeta específica para el proyecto, separados de su
+otro correo personal. Sus clientes de correo hacen esto automaticamente
+al exáminar las <firstterm>cabeceras</firstterm> de los mensajes.
+La cabecera son los campos que se encuentran en la parte superior de los
+correos, los cuales indican el remitente, destinatario, asunto, fecha
+e información variada sobre el mensaje. Cabeceras certeras son bien
+conocidas y obligatorias:</para>
 
 <screen>
 From: ...
@@ -563,63 +572,63 @@ Subject: ...
 Date: ...
 </screen>
 
-<para>Others are optional, though still quite standard.  For example,
-emails are not strictly required to have the</para>
+<para>Otras son opcionales, aunque de cierta manera estándar. Por ejemplo,
+no es estrictamente requerido que un correo electrónico tenga la cabecera
 
 <screen>
 Reply-to: sender@email.address.here
 </screen>
 
-<para>header, but most do, because it gives recipients a foolproof way
-to reach the author (it is especially useful when the author had to
-send from an address other than the one to which replies should be
-directed).</para>
+<para>pero muchas lo tienen, porque da al destinatario una manera a prueba
+de errores de responder al remitente (es especialmente útil cuando el
+remitente ha tenido que enviar un correo desde una dirección diferente
+a la cual las respuestas deben ser dirigídas).</para>
 
-<para>Some mail reading software offers an easy-to-use interface for
-filing mails based on patterns in the Subject header.  This leads
-people to request that the mailing list add an automatic prefix to all
-Subjects, so they can set their readers to look for that prefix and
-automatically file the mails in the right folder.  The idea is that
-the original author would write:</para>
-
-<screen>
-Subject: Making the 2.5 release.
-</screen>
-
-<para>but the mail would show up on the list looking like this:</para>
+<para>Algunos clientes de correo ofrecen una interfaz fácil de usar para
+rellenar correos basados en patrones en la cabecera Asunto. Esto lleva
+a que la gente pida que la lista de correo añada automaticamente un prefijo
+a todos los Asuntos, de forma que puedan configurar sus clientes para que
+busquen esos prefijos y archivar los correos en el directorio correcto.
+La ídea es que el autor original escribiria:</para>
 
 <screen>
-Subject: [discuss@lists.example.org] Making the 2.5 release.
+Asunto: Trabajando en la versión 2.5
 </screen>
 
-<para>Although most list management software offers the option to do
-this, I strongly recommend against turning the option on.  The problem
-it solves can easily be solved in much less obtrusive ways, and the
-cost of eating space in the Subject field is far too high.
-Experienced mailing list users typically scan the Subjects of the
-day's incoming list mail to decide what to read and/or respond to.
-Prepending the list's name to the Subject can push the right side of
-the Subject off the screen, rendering it invisible.  This obscures
-information that people depend on to decide what mails to open, thus
-reducing the overall functionality of the mailing list for
-everyone.</para>
+<para>pero el correo apareceria en la lista asi:</para>
 
-<para>Instead of munging the Subject header, teach your users to take
-advantage of the other standard headers, starting with the To header,
-which should say the mailing list's name:</para>
+<screen>
+Asunto: [discuss@lists.example.org] Trabajando en la versión 2.5
+</screen>
+
+<para>Aunque la mayoria de las aplicaciones de administración de listas
+ofrecen la opción de hacer esto, yo recomiendo no utilizarla. El problema
+que resuelve puede ser resuelto de otras formas menos intrusivas y los
+costes de utilizar espacio en el campo del Asunto son demasiado grandes.
+Los usuarios experimentados de las listas de correos revisan el asunto
+de los correos entrantes del día para decidir acerca de qué van a leer
+y qué van a responder. Fijar el nombre de la lista al Asunto puede
+mover hacia la derecha el verdadero Asunto y fuera de la pantalla,
+haciendolo invisible. Esto oculta información necesaria para aquellos
+quienes dependen en la decisión de cuales correos van a abrir, reduciendo
+la funcionalidad conjunta de la lista para todos.</para>
+
+<para>En lugar de sobrecargar el Asunto, hay que enseñar a los usuarios
+para que saquen ventajas de otras cabeceras estándar, empezando con el
+campo "Para", el cual debería contener el nombre de la lista de correos:</para>
 
 <screen>
 To: &lt;discuss@lists.example.org&gt;
 </screen>
 
-<para>Any mail reader that can filter on Subject should be able to filter on
-To just as easily.</para>
+<para>Cualquier cliente de correo capaz de filtrar los mensajes basandose en
+el Asunto debe ser capaz de filtrar utilizando el campo Para facilmente.</para>
 
-<para>There are a few other optional-but-standard headers expected for
-mailing lists.  Filtering on these is even more reliable than using
-the "To" or "Cc" headers; since these headers are added to each post
-by the mailing list management software itself, some users may be
-counting on their presence:</para>
+<para>Existen otras cabeceras opcionales pero estándar para las listas
+de correo. Filtrar utilizandolos es incluso más fiable que utilizar
+las cabeceras "Para" o "Cc" dado que estas cabeceras son añadidas
+a todos los mensajes por el programa de administración de la lista, así
+que algunos usuarios estan contando con su presencia:</para>
 
 <screen>
 list-help: &lt;mailto:discuss-help@lists.example.org&gt;
@@ -629,35 +638,37 @@ Delivered-To: mailing list discuss@lists.example.org
 Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
 </screen>
 
-<para>For the most part, they are self-explanatory.  See <ulink
-url="http://www.nisto.com/listspec/list-manager-intro.html"/> for more
-explanation, or if you need the really detailed, formal specification,
-see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
-</para>
+<para>La mayoria se explican en si mismos. En <ulink 
+url="http://www.nisto.com/listspec/list-manager-intro.html"/> se explican
+mejor o en <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/> para
+una especificación formal más detallada.</para>
 
-<para>Notice how these headers imply that if you have a mailing list
-named "list", then you also have administrative addresses "list-help"
-and "list-unsubscribe" available.  In addition to these, it is normal
-to have "list-subscribe", for joining, and "list-owner", for reaching
-the list administrators.  Depending on the list management software
-you use, these and/or various other administrative addresses may be
-set up; the documentation will have details.  Usually a complete
-explanation of all these special addresses is mailed to each new user
-as part of an automated "welcome mail" on subscribing.  You yourself
-will probably get a copy of this welcome mail.  If you don't, then ask
-someone else for a copy, so you know what your users are seeing when
-they join the list.  Keep the copy handy so you can answer questions
-about the mailing list functions, or better yet, put it on a web page
-somewhere.  That way when people lose their own copy of the
-instructions and post to ask "How do I unsubscribe from this list?",
-you can just hand them the URL.</para>
+<para>Hay que señalar como estas cabeceras implican que si se tiene
+una lista de correos llamada "list" entonces se tienen tambien unas
+direcciones administrativas "list-help" y "list-unsubscribe". Además
+de estas, es normal tener "list-subscribe" para unirse y "list-owner"
+para contactar con el administrador de la lista. Dependiendo en la
+aplicación administrativa que se use, estas y/o otras direcciones
+administrativas varias pueden ser configuradas; la documentación
+deberia detallar esto. A menudo una explicación completa de todas
+estas direcciones especiales es enviada a cada nuevo suscriptor
+como parte de un mensaje de bienvenida automático. Probablemente
+usted mismo reciba una copia de esto correo de bienvenida. Si no lo
+ha recibido, pidale una copia a alguien, de manera que pueda saber
+qué estan recibiendo los nuevos suscriptores. Mantenga la copia
+a mano de manera que pueda responder preguntas acerca del funcionamiento
+de la lista, o mejor aun, ponerlo en una página web en alguna
+parte. Así, cuando alguien pierda su copia de las instrucciones
+y pregunte cómo pueden eliminarse de la lista, se les facilita
+la URL.</para>
 
-<para>Some mailing list software offers an option to append
-unsubscription instructions to the bottom of every post.  If that
-option is available, turn it on.  It causes only a couple of extra
-lines per message, in a harmless location, and it can save you a lot
-of time, by cutting down on the number of people who mail you&mdash;or
-worse, mail the list!&mdash;asking how to unsubscribe.</para>
+<para>Algunas aplicaciones para listas de correos ofrecen la opción
+de agregar al final de cada mensaje las instrucciones para
+eliminar la suscripción. Si ésta opción está disponible, utilicela.
+Solo causa algunas lineas extra por mensaje en un sitio inofensivo
+y puede ahorrar mucho tiempo al reducir el número de gente que escriba
+&mdash;o peor aún, que escriban a la lista&mdash;preguntando cómo
+eliminar la suscripción.</para>
 
 </sect2>
 
