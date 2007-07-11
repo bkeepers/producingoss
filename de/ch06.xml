@@ -2454,134 +2454,147 @@ zusetzlichen Tag oder zwei für die Aktuelisierung zu haben, damit
 Sie bereits geschützt sind, wenn die Lücke öffentlich bekannt wird.
 </para>
 
-<para>Pre-notification simply means sending mails to those
-administrators before the go-public date, telling them of the
-vulnerability and how to fix it.  You should send pre-notification
-only to people you trust to be discreet with the information.  That
-is, the qualification for receiving pre-notification is twofold: the
-recipient must run a large, important server where a compromise would
-be a serious matter, <emphasis>and</emphasis> the recipient must be
-known to be someone who won't blab about the security problem before
-the go-public date.</para>
+<para>Vorankündigung bedeutet lediglich eine Email an diese 
+Administratoren zu senden, vor dem Veröffentlichungsdatum, in dem Sie
+ihnen über die Lücke bescheid geben und wie sie es beheben können. Sie
+sollten eine Vorankündigung nur an Personen schicken, die Sie diese
+diskrete Information anvertrauen können. Die Qualifikation um eine
+Vorankündigung zu erhalten hat also zwei Bedingungnen: Der Empfänger
+muss eine große Instalation im Betrieb haben, wichtige Server bei dem
+eine Kompromitierung etwas ernstes wäre, <emphasis>und</emphasis> der
+Empfänger muss jemanden sein, der sich über das Sicherheitsproblem vor
+dem Veröffentlichungsdatum verplappert.</para>
 
-<para>Send each pre-notification mail individually (one at a time) to
-each recipient.  Do <emphasis>not</emphasis> send to the entire list
-of recipients at once, because then they would see each others'
-names&mdash;meaning that you would essentially be alerting each
-recipient to the fact that each <emphasis>other</emphasis> recipient
-may have a security hole in her server.  Sending it to them all via
-blind CC (BCC) isn't a good solution either, because some admins
-protect their inboxes with spam filters that either block or reduce
-the priority of BCC'd mail, since so much spam is sent via BCC these
-days.</para>
+<para>Senden Sie jede Email mit einer Vorankündigung einzeln (eines
+nach dem anderen) an jedem Empfänger. Senden Sie <emphasis>nicht
+</emphasis> an die komplette Liste von Empfängern auf ein mal, da sie
+dann ihre gegenseitigen Namen sehen würden&mdash;was zur Folge hat,
+dass Sie im Grunde genommen jedem Empfänger über die Tatsache 
+aufmerksam machen, dass jeder <emphasis>andere</emphasis> Empfänger
+möglicherweise die Sicherheitslücke auf seinem Empfänger hat. Es an
+alle mittels einem blinden CC (BCC) zu schicken ist auch keine gute
+Lösung, da manche Administratoren ihre Email Konten mit Spam Filtern
+schützen, die entweder BCC Emails blockieren, oder ihre Priorität
+reduzieren, da heutzutage sehr viel Spam mit BCC verschickt wird.
+</para>
 
-<para>Here's a sample pre-notification mail:</para>
+<para>Hier ist ein Beispiel Email für eine Vorankündigung:</para>
 
 <screen>
-From: Your Name Here
-To: admin@large-famous-server.com
-Reply-to: Your Name Here (not the security list's address)
-Subject: Confidential Scanley vulnerability notification.
+Von: Ihr Name Hier
+An: admin@grosser-bekannter-server.de
+Antwort-an: Ihr Name Hier (nicht die Adresse des Sicherheits Verteilers)
+Betreff: Vertrauliche Meldung einer Scanly Sicherheitslücke.
 
 
-This email is a confidential pre-notification of a security alert
-in the Scanley server.
+Diese Email ist eine vertrauliche Vorankündigung einer 
+Sicherheitsmeldung in dem Scanley Server.
 
-Please *do not forward* any part of this mail to anyone.  The public
-announcement is not until May 19th, and we'd like to keep the
-information embargoed until then.
+Bitte leiten Sie keinen Teil dieser Email an irgend jemand weiter. Die
+öffentliche Bekanntgabe wird nicht vor dem 19ten Mai stattfinden, und
+wir würden die Information gerne bis dann unter Verschluss halten.
 
-You are receiving this mail because (we think) you run a Scanley
-server, and would want to have it patched before this security hole is
-made public on May 19th.
+Sie erhalten diese Email da (wir denken, dass) Sie einen Scanley Server
+betreiben, und wir ihn lieber gepatched hätten, vor die Sicherheitslücke
+am 19ten Mai bekannt gegeben wird.
 
-References:
+Verweise:
 ===========
 
-   CAN-2004-1771: Scanley stack overflow in queries
+   CAN-2004-1771: Scanley Speicher überlauf in Abfragen
 
-Vulnerability:
+Sicherheitslücke:
 ==============
 
-   The server can be made to run arbitrary commands if the server's
-   locale is misconfigured and the client sends a malformed query.
+   Der Server kann dazu gebracht werden beliebige Befehle auszuführen,
+   wenn die Locale des Servers falsch konfiguriert ist und der Client
+   eine fehlerhafte Abfrage macht.
 
-Severity:
+Sicherheitsgrad:
 =========
 
-   Very severe, can involve arbitrary code execution on the server.
+   Sehr ernst, kann die Ausführung von beliebigen Code auf dem Server
+   zur Folge haben.
 
-Workarounds:
+Provisorische Lösungen:
 ============
 
-   Setting the 'natural-language-processing' option to 'off' in
-   scanley.conf closes this vulnerability.
+   Die 'verarbeitung-natürlicher-sprache' Einstellung in der 
+   scanley.conf auf 'aus' zu stellen, schließt die Sicherheitslücke.
 
 Patch:
 ======
 
-   The patch below applies to Scanley 3.0, 3.1, and 3.2.
+   Der folgende Patch gilt für Scanley 3.0, 3.1, und 3.2.
 
-   A new public release (Scanley 3.2.1) will be made on or just before
-   May 19th, so that it is available at the same time as this
-   vulnerability is made public.  You can patch now, or just wait for
-   the public release.  The only difference between 3.2 and 3.2.1 will
-   be this patch.
+   Eine neu Version (Scanley 3.2.1) wird am oder kurz vor dem 19ten Mai
+   veröffentlicht werden, damit es zur gleichen Zeit verfügbar istm wie
+   die Bekanntgabe der Lücke. Sie können dem Patch jetzt anwenden oder
+   einfach auf die neue Version warten. Der einzige Unterschied 
+   zwischen 3.2 und 3.2.1 wird diese Patch sein.
 
-[...patch goes here...]
+[...Patch folgt hier...]
 </screen>
 
-<para>If you have a CAN number, include it in the pre-notification (as
-shown above), even though the information is still embargoed and
-therefore the MITRE page will show nothing.  Including the CAN number
-allows the recipient to know with certainty that the bug they were
-pre-notified about is the same one they later hear about through
-public channels, so they don't have to worry whether further action is
-necessary or not, which is precisely the point of CAN/CVE
-numbers.</para>
+<para>Wenn Sie eine CAN Nummer habe, geben Sie sie bei der 
+Vorankündigung mit an (wie oben gezeigt), selbst wenn die Information
+unter Verschluss steht und die MITRE Seite desshalb leer sein wird. Die
+CAN Nummer erlaubt es dem Empfänger mit sicherheit zu wissen, dass der
+Bug über den sie eine Vorankündigung bekommen haben, der gleiche ist
+von dem sie später durch öffentliche Kanäle erfahren, also müssen sie
+sich keine Sorgen darüber machen, ob weitere Schritte notwendig sind,
+was genau der Sinn einer CAN/CVE Nummer ist.</para>
 
 </sect3>
 
 <sect3 id="security-announcing">
-<title>Distribute the fix publicly</title>
+<title>Verteilen Sie den Fix öffentlich</title>
 
-<para>The last step in handling a security bug is to distribute the
-fix publicly.  In a single, comprehensive announcement, you should
-describe the problem, give the CAN/CVE number if any, describe how to
-work around it, and how to permanently fix it.  Usually "fix" means
-upgrading to a new version of the software, though sometimes it can
-mean applying a patch, particularly if the software is normally run in
-source form anyway.  If you do make a new release, it should differ
-from some existing release by exactly the security patch.  That way,
-conservative admins can upgrade without worrying about what else they
-might be affecting; they also don't have to worry about future upgrades,
-because the security fix will be in all future releases as a matter of
-course.  (Details of release procedures are discussed in
-<xref linkend="security-releases"/><phrase output="printed"> in
-<xref linkend="development-cycle"/></phrase>.)</para>
+<para>Der letzte Schritt bei der Handhabung einer Sicherheitslücke, ist
+den fix öffentlich zu verteilen. Sie sollten in einer einzigen, 
+umfangreichen Meldung, das Problem beschreiben, die CAN/CVE Nummer
+angeben, falls vorhanden, beschreiben wie das Problem zu umgehen ist,
+und wie es permanent 'gefixed' werden kann. 'Fix' bedeutet für
+gewöhnlich auf eine neuere Version der Software zu aktuelisieren,
+obwohl es manchmal die Anwendung von einem Patch bedeuten kann,
+insbesondere wenn die Software sowieso meistens vom Quellcode Format
+aus betrieben wird. Wenn Sie doch eine neue Version machen, sollte
+es sich von einer existierenden Version durch genau diesen
+sicherheits-Patch unterscheiden. So können konservative 
+Administratoren, aktuelisieren, ohne sich sorgen zu machen, was sie
+noch beeinflussen könnten; sie müssen sich also keine Sorgen über
+zukünftige Upgrades machen, da der sicherheits Patch als Folge in
+allen zukünftigen Versionen enthalten sein wird. (Details der
+Abläufe für neue Versionen werden in 
+<xref linkend="security-releases"/><phrase output="printed"> im Kapitel
+<xref linkend="development-cycle"/></phrase> behandelt.)</para>
 
-<para>Whether or not the public fix involves a new release, do the
-announcement with roughly the same priority as you would a new
-release: send a mail to the project's <literal>announce</literal>
-list, make a new press release, update the Freshmeat entry, etc.
-While you should never try to play down the existence of a security
-bug out of concern for the project's reputation, you may certainly set
-the tone and prominence of a security announcement to match the actual
-severity of the problem.  If the security hole is just a minor
-information exposure, not an exploit that allows the user's entire
-computer to be taken over, then it may not warrant a lot of fuss.  You
-may even decide not to distract the <literal>announce</literal> list
-with it.  After all, if the project cries wolf every time, users might
-end up thinking the software is less secure than it actually is, and
-also might not believe you when you have a really big problem to
-announce.  See
-<ulink url="http://cve.mitre.org/about/terminology.html"/> for a good
-introduction to the problem of judging severity.</para>
+<para>Ob der öffentliche Fix eine neue Version zur Folge hat oder 
+nicht, machen Sie die Meldung mit ungefähr der der gleichen Priorität
+wie Sie eine neue Version machen würden: Senden Sie eine Email an den
+<literal>announce</literal> Verteiler des Projekts, machen Sie eine
+neue Pressemitteilung, aktuelisieren Sie den Freshmeat Eintrag, usw.
+Während Sie nie versuchen sollten, die Existenz einer Sicherheitslücke
+herunterzuspielen, aus Sorge um den Ruf des Projekts, können Sie
+durchaus den Ton und die Gewichtung der Sicherheitsmeldung anpassen,
+um den Ernst des Problems zu entsprechen. Wenn die Sicherheitslücke
+nur eine kleine Offenlegung von Informationen ist, nicht eine Lücke
+die es erlaubt den kompletten Computer des Anwenders zu übernehmen,
+mag es keinen all zu großen Wirbel gerechtfertigen. Sie können sich
+sogar Entscheiden den <literal>announce</literal> Verteiler damit
+abzulenken. Wenn das Projekt schließlich jedes mal Wolf schreit, 
+werden sich die Nutzer denken, dass die Software weniger sicher ist,
+als das tatsächlich der Fall ist, und es möglicherweise nicht glauben
+wenn Sie wirklich ein riesiges Problem ankündigen müssen. Siehe
+<ulink url="http://cve.mitre.org/about/terminology.html"/> als eine
+gute Einführung zu dem Problem der Beurteilung wie schwerwiegend eine
+Sicherheitslück ist.</para>
 
-<para>In general, if you're unsure how to treat a security problem,
-find someone with experience and talk to them about it.  Assessing and
-handling vulnerabilities is very much an acquired skill, and it's easy
-to make missteps the first few times.</para>
+<para>Im allgemeinen, wenn Sie sich nicht sicher sind, wie Sie ein
+Sicherheitsproblem behandeln sollen, suchen Sie sich jemand erfahrenes
+und reden Sie darüber. Lücken zu handhaben und zu bewerten ist 
+größtenteils eine angelernte Fähigkeit und es ist leiche die ersten 
+paar Male Fehler zu machen.</para>
 
 </sect3>
 
