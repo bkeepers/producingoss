@@ -451,7 +451,7 @@ en tandem:</para>
 		se aceptará éste mensaje) o "permitir" (permitir éste y todos
 		los mensajes futuros).</para>
 
-            <para>Rejecting is usually done by simply ignoring the
+            <para>
 		Rechazar un mensaje se hace simplemente ignorando
 		el correo de moderación. Si la aplicación nunca
 		recibe confirmación de que algo es un mensaje valido
@@ -516,7 +516,7 @@ por supuesto, pero si evita que se incremente la cantidad de spam
 enviado directamente a las cuentas personales de los usuarios de
 la lista.</para>
 
-<para>El ocultar las direcciones puede ser algo controversial. A algunas
+<para>Ocultar las direcciones puede ser algo controversial. A algunas
 personas les puede gustar mucho y se sorprenderan si el registro no lo
 hace automaticamente. Otras pueden pensar que es demasiado inconveniente
 (porque los humanos tambien tenemos que traducir las direcciones antes
@@ -674,125 +674,128 @@ eliminar la suscripción.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="reply-to">
-<title>The Great Reply-to Debate</title>
+<title>El gran debate del Reply-To</title>
 
-<para>Earlier, in <xref linkend="avoid-private-discussions"/>, I stressed the
-importance of making sure discussions stay in public forums, and
-talked about how active measures are sometimes needed to prevent
-conversations from trailing off into private email threads;
-furthermore, this chapter is all about setting up project
-communications software to do as much of the work for you as possible.
-Therefore, if the mailing list management software offers a way to
-automatically cause discussions to stay on the list, you would think
-turning that feature on would be the obvious choice.</para>
+<para>Antes en <xref linkend="avoid-private-discussions"/> hice incapie
+en la importancia de asegurar que las discusiones se mantengan en foros
+publicos y hable acerca de porque a veces tomar medidas activas es necesario
+para prevenir que algunas conversaciones deriven a hilos privados. Este capítulo
+es acerca de todo lo relacionado con preparar el software de comunicación
+del proyecto para que realice la mayor cantidad de trabajo posible. Asi que,
+si la aplicación para la administración de las listas de correo ofrece una
+manera automática de encausar las discusiones a la lista, habría que
+pensar que habilitarla es la opción correcta.</para>
 
-<para>Well, not quite.  There is such a feature, but it has some
-pretty severe disadvantages.  The question of whether or not to use it
-is one of the hottest debates in mailing list
-management&mdash;admittedly, not a controversy that's likely to make
-the evening news in your city, but it can flare up from time to time
-in free software projects.  Below, I will describe the feature, give
-the major arguments on both sides, and make the best recommendation I
-can.</para>
+<para>Bueno, quizas no. Existe tal característica, pero tiene algunas
+desventajas muy importantes. Usarla o no es uno de los debates más
+calientes en la administración de las listas de correo&mdash;admitamoslo,
+no es una controversia que vaya a aparecer en las noticias, pero se puede
+iniciar de vez en cuando en los proyectos de software libre. A continuación,
+voy a describir esta característica, proponer los argumentos de cada
+posición y hacer la mejor recomendación que puedo.</para>
 
-<para>The feature itself is very simple: the mailing list software
-can, if you wish, automatically set the Reply-to header on every post
-to redirect replies to the mailing list.  That is, no matter what the
-original sender puts in the Reply-to header (or even if they don't
-include one at all), by the time the list subscribers see the post,
-the header will contain the list address:</para>
+<para>Esta característica en si misma es muy sencilla: la aplicación
+para las listas puede, si lo deseamos, automaticamente establecer
+la cabecera Reply-To en todos los mensajes para dirijir todas las
+respuestas a la lista. Así que, sin importar lo que escriba el
+remitente en este campo (o si ni siquiera lo establecen) para
+cuando los suscriptores a la lista vean el mensaje, éste contendra
+la dirección de la lista en la cabecera:
 
 <screen>
 Reply-to: discuss@lists.example.org
 </screen>
 
-<para>On its face, this seems like a good thing.  Because virtually
-all mail reading software pays attention to the Reply-to header, now
-when anyone responds to a post, their response will be automatically
-addressed to the entire list, not just to the sender of the message
-being responded to.  Of course, the responder can still manually
-change where the message goes, but the important thing is that
-<emphasis>by default</emphasis> replies are directed to the list.
-It's a perfect example of using technology to encourage
-collaboration.</para>
+<para>Esto puede parecer algo bueno, porque virtualmente todos
+los clientes de correo prestan atención a esta cabecera y ahora
+cada vez que alguien responda a algún mensaje, su respuesta
+será automaticamente dirigida a la lista, no sólo a quien ha
+enviado el mensaje que se responde. Por supuesto que el remitente
+puede manualmente modíficar esto, pero lo importante es que
+<emphasis>por defecto</emphasis> las respuestas son enviadas a
+la lista. Este es un ejemplo perfecto de como utilizar la tecnologia
+para animar la colaboración.</para>
 
-<para>Unfortunately, there are some disadvantages.  The first is known
-as the <firstterm>Can't Find My Way Back Home</firstterm> problem:
-sometimes the original sender will put their "real" email address in
-the Reply-to field, because for one reason or another they send email
-from a different address than where they receive it.  People who
-always read and send from the same location don't have this problem,
-and may be surprised that it even exists.  But for those who have
-unusual email configurations, or who cannot control how the From
-address on their mails looks (perhaps because they send from work and
-do not have any influence over the IT department), using Reply-to may
-be the only way they have to ensure that responses reach them.  When
-such a person posts to a mailing list that he's not subscribed to, his
-setting of Reply-to becomes essential information.  If the list
-software overwrites it, he may never see the responses to his post.</para>
+<para>Desafortunadamente, existen algunas desventajas. La primera es
+conocida como el problema <firstterm>No puedo llegar a casa</firstterm>:
+a veces, el remitente original establece su dirección de correo
+real en el campo Reply-To porque por alguna razón u otra envian
+correos utilizando una dirección diferente a la que utilizan
+para recibirlos. Las personas que envian y reciben correos desde el
+mismo sitio no tienen éste problema y quizas se sorprendan de que
+siquiera existe. Pero para quienes utilizan configuraciones de correo
+inusuales o quienes no pueden controlar como se forma el campo
+From de su dirección de correo electrónico (quizas porque envian
+correos desde sus trabajos y no tienen ninguna influencia sobre
+el departamente de sistemas) el utilizar el campo Reply-To quizas
+sea la única manera que tienen para asegurarse de que las respuestas
+a sus mensajes les llegan (encuentran el camino a casa). Asi que si
+la aplicación de las listas sobre escribe esto, esta persona
+puede que nunca vea las respuestas a sus mensajes.</para>
 
-<para>The second disadvantage has to do with expectations, and in my
-opinion is the most powerful argument against Reply-to munging.  Most
-experienced mail users are accustomed to two basic methods of
-replying: <firstterm>reply-to-all</firstterm> and
-<firstterm>reply-to-author</firstterm>.  All modern mail reading
-software has separate keys for these two actions.  Users know that to
-reply to everyone (that is, including the list), they should choose
-reply-to-all, and to reply privately to the author, they should choose
-reply-to-author.  Although you want to encourage people to reply to
-the list whenever possible, there are certainly circumstances where a
-private reply is the responder's prerogative&mdash;for example, they
-may want to say something confidential to the author of the original
-message, something that would be inappropriate on the public
-list.</para>
+<para>La segunda desventaja se refiere a las expectativas y en mi
+opinión, el argumento más fuerte en contra del cambio del Reply-To.
+La mayoria de los usuarios experimentados de correo electrónico
+estan acostumbrados a dos metodos básicos de responder:
+<firstterm>Responder a todos</firstterm> y <firstterm>Responder
+al remitente</firstterm>. Todos los clientes de correo tienen
+botones separados para estas dos acciones. Sus usuarios saben que
+para responder a todos los incluidos en la lista, deben escoger,
+responder a todos y que para responder sólo al remitente en privado,
+deben seleccionar Responder al remitente. Aunque se desee animar
+a que la gente responda a la lista siempre que sea posible, existen
+ciertas circunstancias cuando un mensaje privado al remitente es
+prerrogativo&mdash;por ejemplo, desean compartir información
+confidencial, algo que sería inapropiado para una lista pública.</para>
 
-<para>Now consider what happens when the list has overridden the
-original sender's Reply-to.  The responder hits the reply-to-author
-key, expecting to send a private message back to the original author.
-Because that's the expected behavior, he may not bother to look
-carefully at the recipient address in the new message.  He composes
-his private, confidential message, one which perhaps says embarrassing
-things about someone on the list, and hits the send key.
-Unexpectedly, a few minutes later his message appears <emphasis>on the
-mailing list!</emphasis> True, in theory he should have looked
-carefully at the recipient field, and should not have assumed anything
-about the Reply-to header.  But authors almost always set Reply-to to
-their own personal address (or rather, their mail software sets it for
-them), and many longtime email users have come to expect that.  In
-fact, when a person deliberately sets Reply-to to some other address,
-such as the list, he usually makes a point of mentioning this in the
-body of the message, so people won't be surprised at what happens when
-they reply.</para>
+<para>Ahora consideremos lo que sucede cuando la lista sobre escribe
+la cabecera Reply-To original del remitente. Quien responde pulsa
+la opción de Responder al remitente, con la esperanza de enviar
+un mensaje privado al autor original. Porque esta es la conducta
+esperada y quizas esta persona no se moleste en examinar
+cuidadosamente la dirección del destinatario en el nuevo mensaje. Redacta
+su correo privado, un mensaje confidencial, uno que puede diga algo
+embarazoso acerca de alguien de la lista y pulsa el botón de enviar.
+Inesperadamente el mensaje <emphasis>llega a la lista</emphasis>
+unos minutos despues. Cierto, en teoria deberia haber revisado
+cuidadosamente el destinatario y no debería haber asumido nada
+acerca del campo Reply-To. Pero por lo general este campo se
+compone con su dirección de correo personal (o en su lugar, los clientes
+de correo lo hacen) y muchos usuarios asiduos del correo electrónico
+dan esto por seguro. De hecho, cuando alguien determina
+deliberadamente el campo Reply-To a alguna otra dirección, como la de
+la lista, usualmente señalan esto en el contenido del mensaje, de forma
+que quienes respondan no se sorprendan de lo que sucede cuando lo hacen.</para>
 
-<para>Because of the possibly severe consequences of this unexpected
-behavior, my own preference is to configure list management software
-to never touch the Reply-to header.  This is one instance where using
-technology to encourage collaboration has, it seems to me, potentially
-dangerous side-effects.  However, there are also some powerful
-arguments on the other side of this debate.  Whichever way you choose,
-you will occasionally get people posting to your list asking why you
-didn't choose the other way.  Since this is not something you ever
-want as the main topic of discussion on your list, it might be good to
-have a canned response ready, of the sort that's more likely to stop
-discussion than encourage it.  Make sure you do
-<emphasis>not</emphasis> insist that your decision, whichever it is,
-is obviously the only right and sensible one (even if you think that's
-the case).  Instead, point out that this is a very old debate, there
-are good arguments on both sides, no choice is going to satisfy
-all users, and therefore you just made the best decision you
-could.  Politely ask that the subject not be revisited unless someone
-has something genuinely new to say, then stay out of the thread and
-hope it dies a natural death.</para>
+<para>Dada la posibilidad de consecuencias muy severas de esta conducta
+inesperada, mi preferencia es la de configurar la aplicación de la lista
+para que nunca toque la cabecera Reply-To. Este caso de cuando se utiliza
+la tecnologia para animar la colaboración tiene, a mi parecer, efectos
+colaterales potencialmente peligrosos. Por otro lado, existen argumentos
+concretos del otro lado de este debate. Sea lo que sea que se escoja,
+puede que en ocasiones algunas personas pregunten por qué no se ha
+escojido el otro camino. Dado que esto no es algo que se quiere sea
+el principal tema de discusión en la lista, puede ser conveniente
+tener una respuesta preparada del tipo que sea más propensa a poner
+fin a la discusion en lugar de animarla. Hay que asegurarse de
+<emphasis>no</emphasis> insistir en que esta decisión, sea cual sea,
+es obviamente la única correcta (incluso cuando se crea que esto es
+así). En cambio, hay que señalar que este es un viejo debate, que
+existen buenos argumentos de cada lado, que ninguna decisión iba a
+satisfacer a todos los usuarios y que por esto se ha tomado la mejor
+decisión que se podía. Amablemente se pide que el tema no
+vuelva a surgir a menos que alguien tenga algo realmente nuevo que decir,
+entonces hay que mantenerse alejado y esperar a que muera
+por causas naturales.</para>
 
-<para>Someone may suggest a vote to choose one way or the other.  You
-can do that if you want, but I personally do not feel that counting
-heads is a satisfactory solution in this case.  The penalty for
-someone who is surprised by the behavior is so huge (accidentally
-sending a private mail to a public list), and the inconvenience for
-everyone else is fairly slight (occasionally having to remind someone
-to respond to the whole list instead of just to you), that it's not
-clear that the majority, even though they are the majority, should be
-able to put the minority at such risk.</para>
+<para>Alguien podria sugerir una votación. Se puede permitir esto si se
+quiere, pero personalmente no creo que contar manos sea una solución
+satisfactoria en este caso. El castigo para alguien que se vea sorprendido
+por este comportamiente es demasiado (accidentalmente enviar un correo
+privado a la lista publica) y las molestias para todos los demás es
+pequeña (ocasionalmente recordarle a alguien que deben responder a la
+lista) por esto no está claro de que la mayoria, aunque sean la mayoria,
+deban poner a una minoria bajo ese riesgo.</para>
 
 <para>I have not addressed all aspects of this issue here, just the
 ones that seemed of overriding importance.  For a full discussion, see
@@ -846,7 +849,12 @@ munged (either on others' posts or on their own posts) could ask for
 that, and those who don't would ask for Reply-to to be left alone.
 However, I don't know of any list management software that offers this
 on a per-subscriber basis.  For now, we seem to be stuck with a global
-setting.</para>
+setting.<footnote><para>Since I wrote that, I've learned that there is
+at least one list management system that offers this
+feature: <ulink url="http://siesta.unixbeard.net/">Siesta</ulink>.
+See also this article about it:
+<ulink url="http://www.perl.com/pub/a/2004/02/05/siesta.html"
+/></para></footnote></para>
 
 </sect3>
 
