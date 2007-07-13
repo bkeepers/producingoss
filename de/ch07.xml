@@ -338,101 +338,115 @@ das passiert, dann ist die Aktuelisierung <emphasis>nicht</emphasis>
 2.5.4 setzen und alle Funktionen aus 2.6.0 behalten, da manche dieser
 Funktionen bei 2.6.0 neu waren.</para>
 
-<para>This is why micro releases are essentially for bug fixes only.
-They must remain compatible in both directions: if you upgrade from
-2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
-functionality should be lost.  Of course, the bugs fixed in 2.5.4
-would reappear after the downgrade, but you wouldn't lose any
-features, except insofar as the restored bugs prevent the use of some
-existing features.</para>
+<para>Deshalb sind micro Versionen im weseltlichen ausschließlich zur
+Behebung von Fehler. Sie müssen in beiden Richtungen kompatibel bleiben:
+Wenn Sie von 2.5.3 auf 2.5.4 aktuelisieren, Ihre Meinung dann ändern
+und wieder zurück auf 2.5.3 wechseln, sollten keine Funktionen
+verloren gehen. Die Fehler die 2.5.4 behoben wurden würden natürlich
+wieder auftauchen, aber Sie würden keine Funktionen verlieren, außer
+insofern, dass die wiederhergestellten Fehler, die Nutzung
+existierender Funktionen verhindert.</para>
 
-<para>Client/server protocols are just one of many possible
-compatibility domains.  Another is data formats: does the software
-write data to permanent storage?  If so, the formats it reads and
-writes need to follow the compatibility guidelines promised by the
-release number policy.  Version 2.6.0 needs to be able to read the
-files written by 2.5.4, but may silently upgrade the format to
-something that 2.5.4 cannot read, because the ability to downgrade is
-not required across a minor number boundary.  If your project
-distributes code libraries for other programs to use, then APIs are a
-compatibility domain too: you must make sure that source and binary
-compatibility rules are spelled out in such a way that the informed
-user need never wonder whether or not it's safe to upgrade in place.
-She will be able to look at the numbers and know instantly.</para>
+<para>Client/Server Protokolle sind nur eines vieler möglicher
+Kompatibilitätsbereiche. Ein weiteres sind Datenformate: Schreibt die
+Software auf ein permanentes Speichermedium? Wenn ja, müssen die
+Formate die es liest und schreibt die Kompatibilitätsrichtlinien die
+von den durch die Versionsnumeriertung versprochenen Richtlinien 
+befolgen. Version 2.6.0 muss in der Lage sein die Dateien die von
+2.5.4 geschrieben wurden zu lesen, kann aber im Stillen das Format
+auf etwas erweitern, welches 2.5.4 nicht lesen kann, da die Fähigkeit
+auf eine verherige Version zu wechseln, nicht über die Grenze einer
+major Nummer erforderlich ist. Wenn Ihr Projekt Code Bibliotheken,
+für die Nutzung durch andere Anwendungen, vertreibt, dann sind die
+Schnittstellen auch Bereich indem die Kompatibilität gewahrt werden
+muss: Sie müssen dafür sorgen, dass die Regeln für die kompatibilität
+von Quellcode und Binärdateien, derart formuliert sind, dass ein
+informierter Nutzer sich niemals fragen muss, ob es sicher ist zu
+aktuelisieren. Er wird in der lage sein die Zahlen anzusehen, und
+es sofort zu wissen.</para>
 
-<para>In this system, you don't get a chance for a fresh start until
-you increment the major number.  This can often be a real
-inconvenience: there may be features you wish to add, or protocols
-that you wish to redesign, that simply cannot be done while
-maintaining compatibility.  There's no magic solution to this, except
-to try to design things in an extensible way in the first place (a
-topic easily worth its own book, and certainly outside the scope of
-this one).  But publishing a release compatibility policy, and
-adhering to it, is an inescapable part of distributing software.  One
-nasty surprise can alienate a lot of users.  The policy just described
-is good partly because it's already quite widespread, but also because
-it's easy to explain and to remember, even for those not already familiar
-with it.</para>
+<para>Bei diesem System, bekommen Sie keine gelegenheit für einen
+sauberen Neuanfang, bis sie die major Nummer hochzählen. Das kan oft
+lästig sein: Es mag Funktionen geben, die Sie hinzufügen wollen, oder
+Protokolle, die Sie neu entwerfen wollen, was einfach nicht gemacht
+werden können, wärend Sie die Kompatibilität wahren. Es gibt hierfür
+keine magische Lösung, außer zu versuchen alles von vorn herein so zu
+entwerfen, dass es sich leicht erweitern lässt (ein Thema welches man
+leicht ein ganzes Buch widmen könnte, und sicherlich außerhalb des
+Rahmens von diesem). Die Kompatibilitätsrichtlinien zu veröffentlichen
+und sich an ihnen zu halten, ist ein unausweichlicher Teil beim
+Vertrieb von Software. Eine böse Überraschung kann viele Nutzer
+abschrecken. Die eben beschriebene Richtlinie ist zum Teil deshalb gut,
+da sie bereits ziemlich weit verbreitet ist, aber auch weil sie leicht
+zu erklären und zu behalten ist, welbst solche, die noch nicht damit
+vertraut sind.</para>
 
-<para>It is generally understood that these rules do not apply to
-pre-1.0 releases (although your release policy should probably state
-so explicitly, just to be clear).  A project that is still in initial
-development can release 0.1, 0.2, 0.3, and so on in sequence, until
-it's ready for 1.0, and the differences between those releases can be
-arbitrarily large.  Micro numbers in pre-1.0 releases are optional.
-Depending on the nature of your project and the differences between
-the releases, you might find it useful to have 0.1.0, 0.1.1, etc., or
-you might not.  Conventions for pre-1.0 release numbers are fairly
-loose, mainly because people understand that strong compatibility
-constraints would hamper early development too much, and because early
-adopters tend to be forgiving anyway.</para>
+<para>Ist ist allgemein annerkannt, das diese Regeln nicht für 
+Versionen vor 1.0 gelten (obwohl Ihre Versionsrichtlinien, um
+Misverständnisse zu vermeiden, das trotzdem explizit sagen sollte). 
+Ein Projektwelche sich noch in der Anfangsentwicklung befindet, kann
+0.1, 0.2, 0.3, usw. in einer Reihe veröffentlichen, bis es für 1.0
+bereit ist, und die Unterchiede zwischen den Versionen können
+beliebig groß sein. Micro Nummern in einer pre-1.0 Version sind
+optional. Abhängig von der Natur Ihres Projekts, und die Unterschiede
+zwischen den Versionen, werden Sie es nützlich finden, 0.1.0, 0.1.1,
+usw. zu haben oder nicht. Konventionen für pre-1.0 Versionsnummern sind
+relativ locker, hauptsächlich deshalb, weil Leute verstehen, dass 
+strenge Einschränkungen für kompatibilität die frühe Entwicklung zu 
+sehr behindern würde, und weil Personen die ein Produkte in ihren
+frühen Phasen benutzen, sowieso etwas nachsichtig sind.</para>
 
-<para>Remember that all these injunctions only apply to this
-particular three-component system.  Your project could easily come up
-with a different three-component system, or even decide it doesn't
-need such fine granularity and use a two-component system instead.
-The important thing is to decide early, publish exactly what the
-components mean, and stick to it.</para>
+<para>Denken Sie daran, dass all diese Vorschriften nur für dieses
+bestimmte drei-komponenten System gelten. Ihr Projekt kann sich ganz
+leich ein anderes drei-komponenten System ausdenkten, oder sich gar 
+entscheiden, dass es keine derart feine Granularität benötigt und ein
+statt desen ein zwei-komponenten System verwenden. Das wichtige ist,
+sich frühzeitig zu entscheiden, genau zu veröffentlichen, was die
+Komponenten bedeuten, und dabei zu bleiben.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-even-odd-strategy">
-<title>The Even/Odd Strategy</title>
+<title>Die Gerade/Ungerade Strategie</title>
 
-<para>Some projects use the parity of the minor number component to
-indicate the stability of the software: even means stable, odd means
-unstable.  This applies only to the minor number, not the major and
-micro numbers.  Increments in the micro number still indicate bug
-fixes (no new features), and increments in the major number still
-indicate big changes, new feature sets, etc.</para>
+<para>Manche Projekte benutzen die Parität der minor Nummer Komponente
+um auf die stabilität der Software zu deuten: Gerade bedeutet Stabil,
+Ungerade bedeutet Instabil. Das gilt nur für die minor Nummer, nicht
+für die major oder micro Nummern. Eine Erhöhung in der micro Nummer
+deutet immer noch auf Fehlerbehebungen hin (keine neuen Funktionen),
+und eine Erhöhung der major Nummer deutet auf große Änderungen,
+neue Funktionen, usw. hin.</para>
 
-<para>The advantage of the even/odd system, which has been used by the
-Linux kernel project among others, is that it offers a way to release
-new functionality for testing without subjecting production users to
-potentially unstable code.  People can see from the numbers that
-"2.4.21" is okay to install on their live web server, but that "2.5.1"
-should probably stay confined to home workstation experiments.  The
-development team handles the bug reports that come in from the
-unstable (odd-minor-numbered) series, and when things start to settle
-down after some number of micro releases in that series, they
-increment the minor number (thus making it even), reset the micro
-number back to "0", and release a presumably stable package.</para>
+<para>Der Vorteil vom Gerade/Ungerade System, welches unter anderem vom
+Linux Kernel Projekt verwendet wurde ist, dass es eine Möglichkeit
+anbietet, neue Funktionen zum Test anzubieten, ohne die Nutzer in
+Produktivsystemen möglicherweise instabilen Code auszusetzen. Leute
+können durch die Zahlen erkennen, dass es sicher ist "2.4.21" auf ihren
+im Einsatz befindliche Webserver zu installieren, aber dass "2.5.1"
+wahrscheinlich für Experimente auf dem heimischen Rechner beschränkt
+bleiben. Die Entwicklermannschaft befasst sich mit dem Bug Meldungen
+die aus der Instabilen (Ungerade numerierten) Reihe kommen, und wenn
+sich die Sache nach ein paar micro Versionen langsam legt, erhöhen sie
+die minor Nummer (wodurch sie gerade gemacht wird), setzen die micro
+Nummer wieder auf "0", und veröffentlichen ein vermutlich stabiles 
+Paket.</para>
 
-<para>This system preserves, or at least, does not conflict with, the
-compatibility guidelines given earlier.  It simply overloads the minor
-number with some extra information.  This forces the minor number to
-be incremented about twice as often as would otherwise be necessary,
-but there's no great harm in that.  The even/odd system is probably
-best for projects that have very long release cycles, and which by
-their nature have a high proportion of conservative users who value
-stability above new features.  It is not the only way to get new
-functionality tested in the wild, however.
-<xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase> describes another, perhaps more common,
-method of releasing potentially unstable code to the public, marked so
-that people have an idea of the risk/benefit trade-offs immediately on
-seeing the release's name.</para>
+<para>Dieses System bewahrt, oder zumindest tritt es nicht im Konflikt
+mit den vorhin erwähnten Kompatibilitsrichtlinien. Es fügt der minor
+Nummer lediglich ein paar Informationen hinzu. Das zwingt die minor
+Nummer dazu ungefähr doppelt so oft erhöht zu werden, als das sonst
+der Fall wäre, was aber kein großer schaden ist. Das Gerade/Ungerade
+System ist wahrscheinlich am besten für Projekte geeignet, die sehr
+lange Entwicklungszyklen haben, und von Natur aus einen großen Anteil
+konservativer Nutzer haben, die mehr Wert auf stabilität als auf
+neue Funktionen setzen. Es ist jedoch nicht die einzige Möglichkeit
+neue Funktionen im freien getested zu bekommen. <xref
+linkend="stabilizing-a-release"/><phrase output="printed"> später in
+diesem Kapitel</phrase> beschreibt eine weitere, vielleicht 
+gebräuchlichere Art, möglicherweise Instabilen Code zu veröffentlichen,
+derart markiert, dass Leute eine Vorstellung von dem Risiko/Nutzen
+Kompromiss haben, gleich wenn Sie den Namen der Version sehen.</para>
 
 </sect2>
 
@@ -440,119 +454,133 @@ seeing the release's name.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="release-branches">
-<title>Release Branches</title>
+<title>Versionszweige</title>
 
-<para>From a developer's point of view, a free software project is in
-a state of continuous release.  Developers usually run the latest
-available code at all times, because they want to spot bugs, and
-because they follow the project closely enough to be able to stay away
-from currently unstable areas of the feature space.  They often update
-their copy of the software every day, sometimes more than once a day,
-and when they check in a change, they can reasonably expect that every
-other developer will have it within 24 hours.</para>
+<para>Aus der Sicht eines Entwicklers, ist ein freies Software Projekt,
+in einem ständigen Zustand der Veröffentlichung. Entwickler betreiben
+für gewöhnlich zu jeder Zeit die aktuellste Version, da sie Fehler
+entdecken wollen, und da sie das Projekt dicht genug verfolgen, um von
+derzeit instabilen Bereichen des Funktionsumfangs fern zu bleiben. Sie
+aktuelisieren ihre Kopie der Software für gewöhnlich jeden tag, 
+manchmal öfter, und wenn Sie eine Änderung abschicken, können sie
+halbwegs erwarten, dass jeder andere Entwickler es innerhalb von 24
+Stunden haben wird.</para>
 
-<para>How, then, should the project make a formal release?  Should it
-simply take a snapshot of the tree at a moment in time, package it up,
-and hand it to the world as, say, version "3.5.0"?  Common sense says
-no.  First, there may be no moment in time when the entire development
-tree is clean and ready for release.  Newly-started features could be
-lying around in various states of completion.  Someone might have
-checked in a major change to fix a bug, but the change could be
-controversial and under debate at the moment the snapshot is taken.
-If so, it wouldn't work to simply delay the snapshot until the debate
-ends, because another, unrelated debate could start in the meantime,
-and then you'd have wait for <emphasis>that</emphasis> one to end too.
-This process is not guaranteed to halt.</para>
+<para>Wie sollte das Projekt dann eine formale Veröffentlung machen?
+Sollte es einfach eine Momentaufnahme vom derzeitigen Zustand des
+Quellcode Baums machen, und es der Welt als, sagen wir, "3.5.0" 
+überreichen? Die Vernunft sagt nein. Erstens gäbe es möglicherweise
+keinen einzelnen Zeitpunkt, bei dem der ganze Quellcode Baum bereit
+für eine neue Version ist. Neu angefangene Funktionen könnten an
+verschiedenen Stellen, in verschiedenen Zuständen der
+Fertigstellung herumliegen. Jemand könnte eine riesige Änderung
+committed haben, um einen Fehler zu beheben, die Änderung könnte aber
+kontrovers sein und zu der Zeit debatiert werden indem die 
+Momentaufnahme gemacht wird. Wenn das der Fall ist, würde es nicht so
+einfach funktionieren, die Momentaufnahme zu verzögern, bis die
+Debatte beendet ist, da eine andere, nicht im Zusammenhang stehende
+Debatte in der Zwischenzeit anfangen könnte, und dann müssten Sie
+wieder <emphasis>darauf</emphasis> warten. Man kann nicht garantieren,
+dass dieser Ablauf aufhören wird.</para>
 
-<para>In any case, using full-tree snapshots for releases would
-interfere with ongoing development work, even if the tree could be put
-into a releasable state.  Say this snapshot is going to be "3.5.0";
-presumably, the next snapshot would be "3.5.1", and would contain
-mostly fixes for bugs found in the 3.5.0 release.  But if both are
-snapshots from the same tree, what are the developers supposed to do
-in the time between the two releases?  They can't be adding new
-features; the compatibility guidelines prevent that.  But not everyone
-will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
-may have new features they're trying to complete, and will become
-irate if they are forced to choose between sitting idle and working on
-things they're not interested in, just because the project's release
-processes demand that the development tree remain unnaturally
-quiescent.</para>
+<para>In jedem Fall, würde die Nutzung von Momentaufnahmen des 
+kompletten Quellcode Baums als eine neue Version, die fortlaufenden
+Entwicklung behindern, selbst wenn der Quellcode in einem für die
+Veröffentlichung geeigneten Zustand gebracht werden könnte. Sagen wir,
+dass diese Momentaufnahme "3.5.0" sein wird; wäre die nächste Version
+vermutlich Bug Fixes beinhalten, die in 3.5.0 gefunden wurden. Wenn
+beide Momentaufnahmen aber vom gleichen Baum sein sollen, was sollen
+die Entwickler in der Zeit zwischen den beiden Versionen machen? Sie
+können keine neuen Funktionen hinzufügen; dass verbieten die
+Kompatibilitätsrichtlinien. Aber nicht alle werden enthusiastisch
+darüber sein Fehler in dem Code von 3.5.0 zu beheben. Manche werden
+neue Funktionen haben, die sie versuchen fertigzustellen, und würden
+wütend werden, wenn sie dazu gezwungen wären zu wählen zwischen,
+untätig herum zu sitzen oder an Sachen zu arbeiten, die sie nicht
+interesieren, nur weil der Ablauf des Projekts beim Erstellen einer
+neuen Version erfordert, dass die Entwicklung an dem Codebaum
+unnatürlich ruhig bleibt.</para>
 
-<para>The solution to these problems is to always use
-a <firstterm>release branch</firstterm>.  A release branch is just a
-branch in the version control system (see
-<xref linkend="vc-vocabulary-branch"/>), on which the code
-destined for this release can be isolated from mainline development.
-The concept of release branches is certainly not original to free
-software; many commercial development organizations use them too.
-However, in commercial environments, release branches are sometimes
-considered a luxury&mdash;a kind of formal "best practice" that can,
-in the heat of a major deadline, be dispensed with while everyone on
-the team scrambles to stabilize the main tree.</para>
+<para>Die Lösung für diese Probleme ist, immer einen
+<firstterm>Versionszweig</firstterm> (en. release branch) zu benutzen.
+Ein Release Branch, ist lediglich ein Zweig in dem
+Versionsverwaltungssystem, (siehe <xref
+linkend="vc-vocabulary-branch"/>), bei dem der Code welcher für diese
+Version bestimmt ist, von der hauptsächlichen Entwicklung getrennt
+werden kann. Diesen Zweigen sind sicherlich kein originäres Konzept
+der freien Software; viele Kommerzielle Unternehmen die Software
+Entwickeln, benutzen sie auch. In Komerziellen Umgebungen werden
+Versionszweige jedoch manchmal als ein Luxus betrachtet&mdash;eine
+Art formales "optimales Verfahren" (en. "best practice") welches unter
+dem Druck eines wichtigen Termins entfallen kann, während alle 
+Entwickler sich dabei beeilen, den Hauptast stabil zu bekommen.</para>
 
-<para>Release branches are pretty much required in open source
-projects, however.  I have seen projects do releases without them, but
-it has always resulted in some developers sitting idle while
-others&mdash;usually a minority&mdash;work on getting the release out
-the door.  The result is usually bad in several ways.  First, overall
-development momentum is slowed.  Second, the release is of poorer
-quality than it needed to be, because there were only a few people
-working on it, and they were hurrying to finish so everyone else could
-get back to work.  Third, it divides the development team
-psychologically, by setting up a situation in which different types of
-work interfere with each other unnecessarily.  The developers sitting
-idle would probably be happy to contribute <emphasis>some</emphasis>
-of their attention to a release branch, as long as that were a choice
-they could make according to their own schedules and interests.  But
-without the branch, their choice becomes "Do I participate in the
-project today or not?"  instead of "Do I work on the release today, or
-work on that new feature I've been developing in the mainline
-code?"</para>
+<para>Versionszweige sind jedoch bei Open Source Projekten so ziemlich
+eine Notwendigkeit. Ich habe Projekte gesehen, die neue Versionen ohne
+sie machen, das Ergebnis war jedoch immer, dass einige Entwickler 
+untätig herumsaßen, während einige andere&mdash;für gewöhnlich eine
+Minderheit&mdash;daran arbeiten die Version fertigzustellen. Dieses
+Ergebnis ist gewöhnlicherweise auf verschieden Arten schlecht. Erstens,
+verlangsamt sich die Geschwindigkeit der Entwicklung insgesamt. 
+Zweitens, ist die neue Version von einer schlechteren Qualität als es
+hätte sein müssen, da nur wenige daran gearbeitet haben, und die 
+hatten es eilig, damit alle anderen wieder an die Arbeit gehen konnten.
+Drittens, spaltet es psychologisch die Entwicklermannschaft, indem es
+eine Situation aufbaut, bei dem verschiedene Arten der Arbeit sich
+gegenseitig unnötig stören. Die Entwickler die untätig herumsitzen,
+wären wahrscheinlich froh <emphasis>etwas</emphasis> von ihrer
+Aufmerksamkeit zu dem Versionszweig beizutragen, solange es eine
+Wahl bleibt, die sie abhängig von ihren Interessen und Zeitplänen
+treffen könnten. Ohne den Zweig, beschränkt sich ihre Auswahl jedoch
+auf "Nehme ich heute an dem Projekt teil oder nicht?" anstatt "Arbeite
+ich heute an der neuen Version, oder an der neuen Funktion in dem
+Hauptzweig, dass ich Entwickele?".</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-branch-mechanics">
-<title>Mechanics of Release Branches</title>
+<title>Mechanik von Versionszweigen</title>
 
-<para>The exact mechanics of creating a release branch depend on your
-version control system, of course, but the general concepts are the
-same in most systems.  A branch usually sprouts from another branch or
-from the trunk.  Traditionally, the trunk is where mainline
-development goes on, unfettered by release constraints.  The first
-release branch, the one leading to the "1.0" release, sprouts off the
-trunk.  In CVS, the branch command would be something like this</para>
+<para>Die genaue Mechanik der Erstellung eines Versionszweiges, hängt
+natürlich von Ihrem Versionsverwaltungssystems ab, die allgemeinen
+Konzepte sind aber in den meisten Systemen gleich. Ein Zweig sprießt
+für gewöhnlich aus einem anderen Zweig under dem Stamm. Traditionell,
+wird die Entwicklung in dem Stamm betrieben, ungestört von den
+Einschränkungen einer neuen Version. Der erste Zweig, welcher zu der
+Version "1.0" führt, sprießt vom Stamm ab. Bei CVS sähe der Befehl
+für einen Zweig ungefähr wie folgt aus:</para>
 
 <screen>
 $ cd trunk-working-copy
-$ cvs tag -b RELEASE_1_0_X
+$ cvs tag -b VERSION_1_0_X
 </screen>
 
-<para>or in Subversion, like this:</para>
+<para>Oder in Subversion, wie folgt:para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
 </screen>
 
-<para>(All these examples assume a three-component release numbering
-system.  While I can't show the exact commands for every version
-control system, I'll give examples in CVS and Subversion and hope that
-the corresponding commands in other systems can be deduced from those
-two.)</para>
+<para>(All diese Beispiele gehen von dem drei-komponenten System für
+die Nummerierung der Version aus. Obwohl ich nicht die genauen Befehle
+für jedes Versionsverwaltungssystem geben kann, sind hier Beispiel für
+CVS und Subversion und ich hoffe, dass die entsprechenden Befehle von
+den beiden abgeleitet werden können.)</para>
 
-<para>Notice that we created branch "1.0.x" (with a literal "x")
-instead of "1.0.0".  This is because the same minor line&mdash;i.e.,
-the same branch&mdash;will be used for all the micro releases in that
-line.  The actual process of stabilizing the branch for release is
-covered in
-<xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase>.  Here we are
-concerned just with the interaction between the version control system
-and the release process.  When the release branch is stabilized and
-ready, it is time to tag a snapshot from the branch:</para>
+<para>Beachten Sie, dass wir den Zweig "1.0.x" (mit dem Buchstaben "x")
+anstatt "1.0.0" erzeugt haben. Das liegt daran, dass die selbe minor
+Reihe&mdash;d.h. der selbe Ast&mdash;für alle micro Versionen in der
+Reihe benutzt werden wird. Der eigentliche Vorgang den Zweig für die
+Veröffentlichung stabil zu machen, wird in <xref
+linkend="stabilizing-a-release"/><phrase output="printed"> später in
+diesem Kapitel</phrase> behandelt. Hier geht es nur um die
+Wechselwirkung zwischen dem Versionsverwaltungssystem und dem Ablauf
+beim erstellen der neuen Version. Sobald der Versionszweig in einem
+Stabilen zustand gebracht wurde und bereitist, wird es Zeit eine
+Momentaufnahme von dem Zweig zu machen:</para>
 
 <screen>
-$ cd RELEASE_1_0_X-working-copy
-$ cvs tag RELEASE_1_0_0
+$ cd VERSION_1_0_X-working-copy
+$ cvs tag VERSION_1_0_0
 </screen>
 
 <para>or</para>
@@ -561,319 +589,357 @@ $ cvs tag RELEASE_1_0_0
 $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
 </screen>
 
-<para>That tag now represents the exact state of the project's source
-tree in the 1.0.0 release (this is useful in case anyone ever needs to
-get an old version after the packaged distributions and binaries have
-been taken down).  The next micro release in the same line is likewise
-prepared on the 1.0.x branch, and when it is ready, a tag is made for
-1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
-start thinking about a 1.1.x release, make a new branch from
-trunk:</para>
+<para>Dieser Tag representiert jetzt genau den Zustand, in dem der
+Quellcode des Projekts war bei der Version 1.0.0 (das ist nützlich, 
+falls Sie je eine ältere Version brauchen, nachdem die Veröffentlichten
+Packete nicht mehr zur Verfügung stehen). Die nächste micro Version in
+der selben Reihe, wird gleichermaßen in dem 1.0.x Zweig vorbereitet, und
+wenn es brereit ist, wird ein Tag für 1.0.1. gemacht. Gleiches gilt für
+1.0.2, usw. Wenn es Zeit wird, über eine neue 1.1.x Version nachzudenken,
+machen Sie einen neuen Zweig vom Stamm:</para>
 
 <screen>
 $ cd trunk-working-copy
-$ cvs tag -b RELEASE_1_1_X
+$ cvs tag -b VERSION_1_1_X
 </screen>
 
-<para>or</para>
+<para>oder</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
 </screen>
 
-<para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
-and releases can be made independently from both lines.  In fact, it
-is not unusual to publish near-simultaneous releases from two
-different lines.  The older series is recommended for more
-conservative site administrators, who may not want to make the big
-jump to (say) 1.1 without careful preparation.  Meanwhile, more
-adventurous people usually take the most recent release on the highest
-line, to make sure they're getting the latest features, even at the
-risk of greater instability.</para>
+<para>Die Wartung kann parallel dazu in den Versionen 1.0.x und 1.1.x,
+weitergehen, und neue Versionen können in beiden Reihen unabhängig von
+einander veröffentlicht werden. Es ist sogar nicht einmal ungewöhnlich
+zwei Versionen aus verschiedenen Reihen zur gleichen Zeit zu 
+veröffentlichen. Die ältere Reihe wird für die Konservativeren Server
+Administratoren empfohlen, die vielleicht nicht den großen Sprung nach
+(sagen wir) 1.1 machen wollen, ohne sorgfältige Vorbereitung. In der
+Zwischenzeit, nehmen die eher abenteuerlustigen Personen die neuste
+Version der höchsten Reihe, um sicher zu sein, dass sie all die neusten
+Funktionen bekommen, selbst mit dem Risiko einer höheren Instabilität.
+</para>
 
 </sect2>
 
-<para>This is not the only release branch strategy, of course.  In
-some circumstances it may not even be the best, though it's worked out
-pretty well for projects I've been involved in.  Use any strategy that
-seems to work, but remember the main points: the purpose of a release
-branch is to isolate release work from the fluctuations of daily
-development, and to give the project a physical entity around which to
-organize its release process.  That process is described in detail in
-the next section.</para>
+<para>Das ist natürlich nicht die einzige Strategie für neue 
+Versionszweige. Unter manchen Umständen mag es nicht einmal die beste
+sein, obwohl es für die Projekte mit denen ich zu tun hatte ziemlich
+gut funktioniert hat. Benutzen Sie irgend eine Strategie die zu
+funktionieren scheint, bedenken Sie aber die wichtigsten Punkte: Der
+Sinn eines Versionszweiges ist, die Arbeit an der neuen Version von den
+Schwankungen der täglichen Entwicklung zu trennen, und dem Projekt eine
+Physikalische Entität zu geben, um den es die Abläufe bei der
+Veröffentlichung organisieren kann. Diese Abläufe werden im nächsten
+Abschnitt detailliert beschrieben.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="stabilizing-a-release">
-<title>Stabilizing a Release</title>
+<title>Stabilisierung Einer Neuen Version</title>
 
-<para><firstterm>Stabilization</firstterm> is the process of getting a
-release branch into a releasable state; that is, of deciding which
-changes will be in the release, which will not, and shaping the branch
-content accordingly.</para>
+<para><firstterm>Stabilisierung</firstterm> ist der Vorgang, den Zweig
+einer neue Version in einem Zustand zu bringen, der für die
+Veröffentlichung geeignet ist; mit andern Worden, zu entscheiden,
+welche Änderungen in der Version sein werden, welche nicht, und den
+Inhalt vom Zweig entsprechend zu gestalten.</para>
 
-<para>There's a lot of potential grief contained in that word,
-"deciding".  The last-minute feature rush is a familiar phenomenon in
-collaborative software projects: as soon as developers see that a
-release is about to happen, they scramble to finish their current
-changes, in order not to miss the boat.  This, of course, is the exact
-opposite of what you want at release time.  It would be much better
-for people to work on features at a comfortable pace, and not worry
-too much about whether their changes make it into this release or the
-next one.  The more changes one tries to cram into a release at the
-last minute, the more the code is destabilized, and (usually) the more
-new bugs are created.</para>
+<para>Es gibt eine menge möglichen Kummer in diesem Wort "entscheiden".
+Der Ansturm neuer Funktionen in der letzten Minute ist ein bekanntes
+Phenomen bei gemeinschaftlichen Software Projekten: Sobald Entwickler
+sehen, dass eine neue Version gleich gemacht wird, beeilen sie sich
+ihre derzeitigen Änderungen fertig zu bekommen, um den Zug nicht zu
+verpassen. Das ist natürlich genau das Gegenteil, von dem was Sie
+zum Zeitpunkt einer neuen Version haben wollen. Es wäre viel besser,
+wenn Leute in einem gemütlichen Tempo an neue Funktionen arbeiten,
+und sich nicht all zu viele sorgen darüber machen ob Ihre Änderungen
+es in diese Version oder die nächste schaffen. Je mehr Änderungen man
+versucht in eine neue Version in der letzten Minute zu quetschen, 
+desto mehr Code wird instabil gemacht, und (für gewöhnlich) desto mehr
+neue Bugs werden erzeugt.</para>
 
-<para>Most software engineers agree in theory on rough criteria for
-what changes should be allowed into a release line during its
-stabilization period.  Obviously, fixes for severe bugs can go in,
-especially for bugs without workarounds.  Documentation updates are
-fine, as are fixes to error messages (except when they are considered
-part of the interface and must remain stable).  Many projects also
-allow certain kinds of low-risk or non-core changes to go in during
-stabilization, and may have formal guidelines for measuring risk.  But
-no amount of formalization can obviate the need for human judgement.
-There will always be cases where the project simply has to make a
-decision about whether a given change can go into a release.  The
-danger is that since each person wants to see their own favorite
-changes admitted into the release, then there will be plenty of people
-motivated to allow changes, and not enough people motivated to bar
-them.</para>
+<para>Die meisten Programmierer sind sich theoretisch über grobe
+Kriterien einig, welche Änderungen in eine Versionsreihe hereingelassen
+werden sollten, währen der Stabilisierungsphase. Offensichtlich, können
+Fixes für schwerwiegende Bugs reingehen, insbesondere wenn es keine
+Möglichkeit gibt sie zu umgehen. Aktuelisierungen der Dokumentation 
+sind in Ordnung, genau so wie der Text von Fehlermeldungen (außer wenn
+man sie als einen Teil der Schnittstelle betrachtet und stabil bleiben
+müssen). Viele Projekte erlauben also bestimmte Arten risikoarme
+nicht grundsätzlich Änderungen, wärend der Stabilisierungsphase
+einzubinden, und können formale Richtlinien darüber haben, um das 
+Risiko einzustufen. Keine menge an formalisierung kann jedoch die
+Notwendigkeit menschlichen Urteils obsolet machen. Es wird immer
+Fälle geben, bei dem das Projekt eine Entscheidung treffen muss, ob
+eine bestimmte Änderung in eine neue Version gehen kann. Die Gefahr
+ist, dass da jede Person ihre eingen Lieblingsängerungen aufgenommen
+haben will, wird es eine Menge Leute geben, die motiviert sind
+Änderungen zu erlauben, und nicht genügend die motiviert sind, sie
+zu verhindern.</para>
 
-<para>Thus, the process of stabilizing a release is mostly about
-creating mechanisms for saying "no".  The trick for open source
-projects, in particular, is to come up with ways of saying "no" that
-won't result in too many hurt feelings or disappointed developers, and
-also won't prevent deserving changes from getting into the release.
-There are many different ways to do this.  It's pretty easy to design
-systems that satisfy these criteria, once the team has focused on them
-as the important criteria.  Here I'll briefly describe two of the most
-popular systems, at the extreme ends of the spectrum, but don't let
-that discourage your project from being creative.  Plenty of other
-arrangements are possible; these are just two that I've seen work in
-practice.</para>
+<para>Der Ablauf, eine neue Version zu stabilisieren dreht sich deshalb
+größtenteils darum, "nein" zu sagen. Der Trick insbesondere für Open 
+Source Projekte, ist sich Wege auszudenken "nein" zu sagen, zu finden,
+die nicht in all zu viele verletzte Gefühle oder enttäuschte Entwickler
+endet, und die auch nicht verhindern, dass Änderungen die es verdienen
+in neue Versionen aufgenommen werden. Es gibt viele verschiedene Wege
+das zu erreichen. Es ist ziemlich leicht Systeme zu entwerfen, welche
+diese Kriterien gererecht werden, nachdem sich die Mannschauft auf sie
+als die wichtigsten Kriterien konzentriert hat. Ich werde hier knapp
+zwei der verbreitetsten Systeme beschreiben, die an den extremen Enden
+des Spektrums liegen, lassen Sie das Ihr Projekt aber nicht davon
+abhalten kreativ zu sein. Eine Menge anderer Reglungen sind möglich;
+diese sind lediglich zwei von denen ich gesehen habe, dass sie in der
+Praxis funktionieren.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-owner">
-<title>Dictatorship by Release Owner</title>
+<title>Diktatur durch den Versionsherr</title>
 
-<para>The group agrees to let one person be the <firstterm>release
-owner</firstterm>.  This person has final say over what changes make
-it into the release.  Of course, it is normal and expected for there
-to be discussions and arguments, but in the end the group must grant
-the release owner sufficient authority to make final decisions.  For
-this system to work, it is necessary to choose someone with the
-technical competence to understand all the changes, and the social
-standing and people skills to navigate the discussions leading up to
-the release without causing too many hurt feelings.</para>
+<para>Die Gruppe einigt sich darauf, dass eine Person der 
+<firstterm>Versionsherr </firstterm> (en. release owner) sein wird.
+Diese Person hat das letzte Wort darüber, welche Änderungen es in die
+neue Version schaffen. Es ist natürlich normal und wird erwartet, dass
+es Diskussionen und Auseinandersetzungen gibt, letztendlich muss die
+Gruppe der Person die nötige Autotität geben um endgültige 
+Entscheidungen zu treffen. Damit dieses System funktionoiert, ist es
+nötig, jemand zu wählen, der die nötige technische Kompetenz hat um
+alle Änderungen zu verstehen, und den sozialen Stand und Fähigkeiten
+im Umgang mit Menschen um die Diskussionen zu führen, die einer neuen
+Version vorrausgehen, ohne zu viele verletzte Gefühle zu verursachen.
+</para>
 
-<para>A common pattern is for the release owner to say "I don't think
-there's anything wrong with this change, but we haven't had enough
-time to test it yet, so it shouldn't go into this release."  It helps
-a lot if the release owner has broad technical knowledge of the
-project, and can give reasons why the change could be potentially
-destabilizing (for example, its interactions with other parts of the
-software, or portability concerns).  People will sometimes ask such
-decisions to be justified, or will argue that a change is not as risky
-as it looks.  These conversations need not be confrontational, as long
-as the release owner is able to consider all the arguments objectively
-and not reflexively dig in his heels.</para>
+<para>Ein häufiges Muster ist, dass der Versionsherr sagt "Ich denke
+nicht, dass es irgend etwas an dieser Änderung auszustzen gibt, aber
+wir haben noch nicht genug Zeit gehabt, um es zu testen, also sollte
+es nicht in diese Version gehen". Es hilft eine Menge wenn der
+Versionsherr ein breites technisches Wissen über das Projekt hat, und
+Gründe angeben kann, warum eine Änderung möglicherweise 
+destabilisierend sein könnte (zum Beispiel seine Wechselwirkung mit
+andern Teilen der Software oder Bedenken im Bezug auf die 
+Kompatibilität). Manche werden nach einer Rechtfertigung für solche
+Entscheidungen fragen, oder arumentieren, dass eine Änderung nicht so
+geförlich ist wie sie aussieht. Diese Unterhaltungen müssen nicht
+konfrontierend sein, so lange der Versionsherr alle Argumente objekiv
+in erwägung ziehen kann, und nicht aus reflex auf seinen Standpunkt
+beharrt.</para>
 
-<para>Note that the release owner need not be the same person as the
-project leader (in cases where there is a project leader at all; see
-<xref linkend="benevolent-dictator"/><phrase output="printed">
-in <xref linkend="social-infrastructure"/></phrase>).  In fact,
-sometimes it's
-good to make sure they're <emphasis>not</emphasis> the same person.
-The skills that make a good development leader are not necessarily the
-same as those that make a good release owner.  In something as
-important as the release process, it may be wise to have someone
-provide a counterbalance to the project leader's judgement.</para>
+<para>Beachten Sie, dass der Versionsherr nicht die gleiche Person sein
+muss, wie der Projektleiter (bei solchen Fällen wo es überhapt einen
+Projektleiter gibt; siehe <xref
+linkend="benevolent-dictator"/><phrase output="printed"> im Kapitel
+<xref linkend="social-infrastructure"/></phrase>). Manchmal ist es
+sogar gut, wenn sie <emphasis>nicht</emphasis> ein und die selbe
+Person sind. Die Fähigkeiten die einen gute Projektleiter ausmachen,
+sind nicht unbedingt die gleichen, die einen guten Versionsherr
+ausmachen. Bei etwas derart wichigem wie die veröffentlichung neuer
+Versionen, kann es klug sein, jemanden zu haben, der ein Gegengewicht
+zu dem Urteil vom Projektleiter bildet.</para>
 
-<para>Contrast the release owner role with the less dictatorial role
-described in
-<xref linkend="release-manager"/><phrase output="printed"> later
-in this chapter</phrase>.</para>
+<para>Vergkeuchen Sie die Rolle des Versionsverwalters mit der weniger
+diktatorischen Rolle beschrieben in <xref linkend="release-manager"/>
+<phrase output="printed"> später in diesem Kapitel</phrase>.</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-voting">
-<title>Change Voting</title>
+<title>Abstimmung über Änderungen</title>
 
-<para>At the opposite extreme from dictatorship by release owner,
-developers can simply vote on which changes to include in the release.
-However, since the most important function of release stabilization is
-to <emphasis>exclude</emphasis> changes, it's important to design the
-voting system in such a way that getting a change into the release
-involves positive action by multiple developers.  Including a change
-should need more than just a simple majority (see <xref
-linkend="electorate"/><phrase output="printed"> in
-<xref linkend="social-infrastructure"/></phrase>).  Otherwise,
-one vote for and none against a given change would suffice to get it
-into the release, and an
-unfortunate dynamic would be set up whereby each developer would vote
-for her own changes, yet would be reluctant to vote against others'
-changes, for fear of possible retaliation.  To avoid this, the system
-should be arranged such that subgroups of developers must act in
-cooperation to get any change into the release.  This not only means
-that more people review each change, it also makes any individual
-developer less hesitant to vote against a change, because she knows
-that no particular one among those who voted for it would take her
-vote against as a personal affront.  The greater the number of people
-involved, the more the discussion becomes about the change and less
-about the individuals.</para>
+<para>Bei dem anderen extrem, von der Diktatur durch den Versionsherr,
+können Entwickler einfach darüber abstimmen, welche Änderungen in einer
+neun Version aufgenommen werden. Da die wichtigste Aufgabe bei der
+stabilisierung einer neun Version der <emphasis>Außschluss</emphasis>
+von Änderungen ist, ist es wichtig, das Wahlsystem so zu gestalten,
+dass eine Änderung in eine Version zu bekommen die Zustimmung mehrer
+Entwickler bedarf. Eine Änderung aufzunehmen, sollte mehr als eine
+einfache Mehrheit erfordern (siehe <xref linkend="electorate"/><phrase
+output="printed"> im Kapitel <xref linkend="social-infrastructure"/>
+</phrase>). Andererseits würde eine Stimme für eine Änderung und keine
+dagegen ausreichen, es in die Version zu bekommen und eine unglückliche
+Dynamik würde einsetzen, bei dem jeder Entwickler für seine eigenen
+Änderungen stimmen würde, jedoch widerwilleig gegen die Änderungen
+anderer stimmen würde, aus Angst vor einer möglichen Vergeltung. Um das
+zu vermeiden, sollte das System derart ausgelegt sein das Untergruppen
+von Entwickler zusammen agieren müssen um irgend eine Änderung in eine
+Version zu bekommen. Das bedeutet nicht nur, dass mehr Personen jede
+Änderung überprüfen, es macht auch jeden Entwickler weniger zögerlich
+gegen eine Änderung zu stimmen, da kein bestimmter Entwicklern der
+dafür gestimmt hat, seine gegenstimme es als einen persönlichen Angriff
+betrachten würde. Je mehr Leute beteiligt sind, desto mehr dreht sich 
+die Entscheidung um die Änderung und weniger um die Individuen.</para>
 
-<para>The system we use in the Subversion project seems to have struck
-a good balance, so I'll recommend it here.  In order for a change to
-be applied to the release branch, at least three developers must vote
-in favor of it, and none against.  A single "no" vote is enough to
-stop the change from being included; that is, a "no" vote in a release
-context is equivalent to a veto (see <xref linkend="veto"/>).
-Naturally, any such vote must be accompanied by a justification, and
-in theory the veto could be overridden if enough people feel it is
-unreasonable and force a special vote over it.  In practice, this has
-never happened, and I don't expect that it ever will.  People are
-conservative around releases anyway, and when someone feels strongly
-enough to veto the inclusion of a change, there's usually a good
-reason for it.</para>
+<para>Das System welches wir beim Subversion Projekt benutzen, scheint
+ein gutes Gleichgewicht getroffen zu haben, also werde ich es hier
+empfehlen. Damit eine Änderung auf einen Versionszweig angewandt werden
+kann, müssen mindestens drei Entwickler dafür stimmen, und keiner 
+dagegen. Eine einzige Gegenstimme reicht aus, um zu verhindern, dass 
+eine Änderung angewandt wird; in dem Kontext einer neuen Version heißt
+das also, dass eine Gegenstimme gleichbedeutend mit einem Veto ist
+(siehe <xref linkend="veto"/>). Jede solche Gegenstimme muss natürlich
+von einener Rechtfertigung begleitet werden, und theoretisch kann das
+Veto aufgehoben werden, wenn genügend der Meinung sind, dass 
+unvernünftig ist und eine besondere Abstimmung darüber erzwingen. In
+der Praxis, ist das nie vorgekommen und ich erwarte nicht, dass es das
+jemals wird. Bei einer neuen Version sind sowieso alle schon konservativ
+eingestellt, und wenn jemand es als dringend genug erachtet, ein Veto
+einzulegen, dann gibt es für gewöhnlich einen guten Grund dafür.</para>
 
-<para>Because the release procedure is deliberately biased toward
-conservatism, the justifications offered for vetoes are sometimes
-procedural rather than technical.  For example, a person may feel that
-a change is well-written and unlikely to cause any new bugs, but vote
-against its inclusion in a micro release simply because it's too
-big&mdash;perhaps it adds a new feature, or in some subtle way fails
-to fully follow the compatibility guidelines.  I've occasionally even
-seen developers veto something because they simply had a gut feeling
-that the change needed more testing, even though they couldn't spot
-any bugs in it by inspection.  People grumbled a little bit, but the
-vetoes stood and the change was not included in the release (I don't
-remember if any bugs were found in later testing or not,
-though).</para>
+<para>Da da der Ablauf eine neue Version zu erstellen, absichtlich eine
+konservative Voreingenommenheit hat, sind die Rechtfertigungen die bei
+Vetos angeboten werden manchmal eher formal als technisch orientiert.
+Eine Person kann zum Beispiel das Gefühl haben, dass eine Änderung gut
+geschrieben ist und wahrscheinlich keine neuen Fehler verursachen wird,
+aber gegen die Aufnahme der Änderung in einer micro Version stimmt,
+einfach weil es zu groß ist&mdash;vielleicht fügt es eine neue Funktion
+hinzu, oder auf irgend eine subtile Art, die Kompatibilitätsrichtlinien
+nicht befolgt. Ich habe gelegentlich sogar Entwickler gesehen, die ein
+Veto eingelegt haben, einfach nur aus einem Bauchgefühl heraus, dass
+die Änderung mehr getestet werden musste, auch wenn sie bei der
+überprüfung keine Fehler entdecken konnten. Leute murrten ein wenig,
+aber die Vetos blieben in Kraft, und die Änderung wurde bei der Version
+nicht aufgenommen (ich kann mich allerdings nicht daran erinnern ob bei
+den weiteren Tests irgend welche Fehler gefunden wurden oder nicht).</para>
 
 <sect3 id="release-stabilization-collaboration">
-<title>Managing collaborative release stabilization</title>
+<title>Verwaltung der Gemeinschaftlichen Stabilisierung
+einer Neuen Version</title>
 
-<para>If your project chooses a change voting system, it is imperative
-that the physical mechanics of setting up ballots and casting votes be
-as convenient as possible.  Although there is plenty of open source
-electronic voting software available, in practice the easiest thing to
-do is just to set up a text file in the release branch,
-called <filename>STATUS</filename> or <filename>VOTES</filename> or
-something like that.  This file lists each proposed change&mdash;any
-developer can propose a change for inclusion&mdash;along with all the
-votes for and against it, plus any notes or comments.  (Proposing a
-change doesn't necessarily mean voting for it, by the way, although
-the two often go together.)  An entry in such a file might look like
-this:</para>
+<para>Wenn Ihr Projekt sich für ein System entscheidet bei dem über
+Änderungen abgestimmt wird, ist es unabdingbar, dass die physikalischen
+Mechanismen, die Wahl zusammen zu stellen und Stimmen, so bequem wie
+möglich ist. Obwohl es eine menge Open Source Software für 
+elektronische Wahlen zur verfügung steht, ist in der Praxis, am
+einfachsten, eine Text Datei im Versionszweig zu erstellen, mit dem
+Namen <filename>STATUS</filename> oder <filename>VOTES</filename> oder
+etwas ähnliches. Diese Datei listet jede vorgeschlagene Änderung auf
+&mdash;alle Entwickler können eine neue Änderung für die Aufnahme
+vorschlagen&mdash;zusammen mit allen Stimmen dafür oder dagegen, mit
+zusätzlichen Anmerkungen oder Komentare. (Eine Änderung vorzuschlagen
+bedeutet im übrigen nicht unbedingt dafür zu stimmen, auch wenn die
+beiden oftmals hand in hand gehen.) Ein Eintrag in einer solchen Datei,
+könnte wie folgt aussehen:</para>
 
 <screen>
-* r2401 (issue #49)
-  Prevent client/server handshake from happening twice.
-  Justification:
-    Avoids extra network turnaround; small change and easy to review.
-  Notes:
-    This was discussed in http://.../mailing-lists/message-7777.html
-    and other messages in that thread.
-  Votes:
+* r2401 (Meldung #49)
+  Verhindern, dass der client/server handshake zwei mal durchgeführt
+  wird.
+  
+  Rechtfertigung:
+    Vermeidet überflüssogen Netzwerkverkehr; kleine Änderung und leich
+    zu überprüfen.
+  Anmerkungen:
+    Wurde in http://.../mailing-lists/message-7777.html und anderen
+    Nachrichten in dem Thread besprochen.
+  Stimmen:
     +1: jsmith, kimf
-    -1: tmartin (breaks compatibility with some pre-1.0 servers;
-                 admittedly, those servers are buggy, but why be
-                 incompatible if we don't have to?)
+    -1: tmartin (Bricht die Kompatibilität mit manchen pre-1.0 Server;
+                 zugegeben, diese Server sind Buggy, aber warum sollen
+                 wird inkompatibel sein, wenn es nicht sein muss?)
 </screen>
 
-<para>In this case, the change acquired two positive votes, but was
-vetoed by tmartin, who gave the reason for the veto in a parenthetical
-note.  The exact format of the entry doesn't matter; whatever your
-project settles on is fine&mdash;perhaps tmartin's explanation for the
-veto should go up in the "Notes:" section, or perhaps the change
-description should get a "Description:" header to match the other
-sections.  The important thing is that all the information needed to
-evaluate the change be reachable, and that the mechanism for casting
-votes be as lightweight as possible.  The proposed change is referred
-to by its revision number in the repository (in this case a single
-revision, r2401, although a proposed change could just as easily
-consist of multiple revisions).  The revision is assumed to refer to a
-change made on the trunk; if the change were already on the release
-branch, there would be no need to vote on it.  If your version control
-system doesn't have an obvious syntax for referring to individual
-changes, then the project should make one up.  For voting to be
-practical, each change under consideration must be unambiguously
-identifiable.</para>
+<para>In diesem Fall, erhielt die Änderung zwei positive Stimmen, 
+wurde aber durch den Veto von tmartin aufgehalten, der den Grund für
+seinen Einspruch in Klammern angegeben hat. Das genau Format von diesem
+Eintrag macht keinen Unterschied; egal worauf sich Ihr Projekt einigt,
+es ist in Ordnung&mdash;vielleicht sollte die Erklärung von tmartin für
+seinen Einspruch in den "Anmerkungen:" Bereich gehen, oder vielleicht
+sollte die Beschreibung der Änderung eine "Beschreibung:" Überschrift 
+bekommen um den anderen Abschnitten zu entsprechen. Dass wichtige ist,
+dass alle Information, die nötig ist, um die Änderung zu evaluiern
+zur verfügung stehen und dass die mechanismen um Stimmen abzugeben, so
+einfach wie möglich sind. Die vorgeschlagene Änderung wird anhand 
+seiner Revisionsnummer in der Repository gekennzeichnet (in diesem
+Fall eine einzige Revision, r2401, obwohl eine vorgeschlagene Änderung
+genau so gut aus mehreren Änderungen bestehen könnte). Von der Revision
+wird angenommen, dass sie sich auf den Stamm bezieht; wenn die Änderung
+bereits im Versionszweig wäre, gäbe es keinen Grund darüber 
+abzustimmen. Wenn Ihr Versionsverwaltungssystem keine offensichtliche
+Syntax hat, um auf einzelne Revisionen zu verweisen, sollte das Projekt
+eins erfinden. Damit Abstimmungen durchgeführt werden können, müssen
+Änderungen die in Frage stehen, eindeutig zu identifizieren sein.
+</para>
 
-<para>Those proposing or voting for a change are responsible for
-making sure it applies cleanly to the release branch, that is, applies
-without conflicts (see <xref linkend="vc-vocabulary-conflict"/>).
-If there are conflicts, then the entry should either point to an
-adjusted patch that does apply cleanly, or to a temporary branch that
-holds an adjusted version of the change, for example:</para>
+<para>Diejenigen die einen Vorschlag einreichen, oder dafür abstimmen,
+sind dafür verantwortlich, dass es sauber auf den Versionszweig
+angewandt werden kann, d.h. ohne Konflikte (siehe <xref 
+linkend="vc-vocabulary-conflict"/>) angewandt werden kann. Wenn es
+Konflikte gibt, sollte der Eintrag entweder auf einen angepassten
+Zweig verweisen, auf dem sich der Patch sauber anwenden lässt, oder
+auf einen temporären Zweig welcher eine angepasste Version der
+Änderung beinhaltet, zum Beispiel:</para>
 
 <screen>
 * r13222, r13223, r13232
-  Rewrite libsvn_fs_fs's auto-merge algorithm
-  Justification:
-    unacceptable performance (>50 minutes for a small commit) in
-    a repository with 300,000 revisions
-  Branch:
+  Überarbeitung vom auto-merge Algorithmus in libsvn_fs_fs
+  Rechtfertigung:
+    Nicht akzeptabele Performance (>50 Minuter für einen kleinen 
+    commit) bei einer Repository mit 300,000 Revisionen
+  Zweig:
     1.1.x-r13222@13517
-  Votes:
+  Stimmen:
     +1: epg, ghudson
 </screen>
 
-<para>That example is taken from real life; it comes from the
-<filename>STATUS</filename> file for the Subversion 1.1.4 release
-process.  Notice how it uses the original revisions as canonical
-handles on the change, even though there is also a branch with a
-conflict-adjusted version of the change (the branch also combines the
-three trunk revisions into one, r13517, to make it easier to merge the
-change into the release, should it get approval).  The original
-revisions are provided because they're still the easiest entity to
-review, since they have the original log messages.  The temporary
-branch wouldn't have those log messages; in order to avoid duplication
-of information (see
-<xref linkend="vc-singularity"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>), the
-branch's log message for r13517 should simply say "Adjust r13222,
-r13223, and r13232 for backport to 1.1.x branch."  All other
-information about the changes can be chased down at their original
-revisions.</para>
+<para>Dieses Beispiel stammt aus dem echten Leben; es stammt aus der
+<filename>STATUS</filename> Datei für Version 1.1.4 von Subversion.
+Beachten Sie, wie es die ursprünglichen Revisionen als kanonische
+Verweise auf die Änderung benutztm obwohl es auch einen Zweig gibt,
+indem die aufgrund von Konflikten angepasste Version der Änderung 
+enthalten ist (der Zweig kombiniert auch die drei Revisionen im
+Stamm zu einer, r13517, um dem Merge zum Zweig der neuen Version
+zu erleichtern, sollte ihm zugestimmt werden). Die ursprünglichen
+Revisionen werden angegeben, da sie trotzdem noch am einfachsten zu
+überprüfen sind, da sie die ursprünglichen commit Kommentare enthalten.
+Der vorübergehende Zweig hätte diese Kommentar nicht; um eine
+verdopplung der Informationen zu vermeiden (siehe <xref
+linkend="vc-singularity"/><phrase output="printed"> im Kapitel
+<xref linkend="technical-infrastructure"/></phrase>), der Commit
+Kommentar für r13517 einfach sagen "Anpassung von r13222, r13223,
+und r13232 für die Portierung auf den 1.1.x Zweig." Alle anderen
+Information über die Änderung kann bei ihren ursprünglichen
+Revisionen gefunden werden.</para>
 
 </sect3>
 
 <sect3 id="release-manager">
-<title>Release manager</title>
+<title>Versionsverwalter</title>
 
-<para>The actual process of merging (see
-<xref linkend="vc-vocabulary-merge"/>) approved changes into the
-release branch can be performed by any developer.  There does not need
-to be one person whose job it is to merge changes; if there are a lot
-of changes, it can be better to spread the burden around.</para>
+<para>Der eigentliche merge Vorgang (siehe <xref 
+linkend="vc-vocabulary-merge"/>) angenommerner Änderungen in den
+Versionszweig kann von jedem Entwickler durchgeführt werden. Es muss
+keine eine Person geben, dessen Aufgabe es ist die Änderungen zu
+mergen; wenn es eine Menge Änderungen gibt, kann es besser sein, die
+Bürde zu verteilen.</para>
 
-<para>However, although both voting and merging happen in a
-decentralized fashion, in practice there are usually one or two people
-driving the release process.  This role is sometimes formally blessed
-as <firstterm>release manager</firstterm>, but it is quite different
-from a release owner (see
-<xref linkend="release-owner"/><phrase output="printed"> earlier
-in this chapter</phrase>) who has
-final say over the changes.  Release managers keep track of how many
-changes are currently under consideration, how many have been
-approved, how many seem likely to be approved, etc.  If they sense
-that important changes are not getting enough attention, and might be
-left out of the release for lack of votes, they will gently nag other
-developers to review and vote.  When a batch of changes are approved,
-these people will often take it upon themselves to merge them into the
-release branch; it's fine if others leave that task to them, as
-long as everyone understands that they are not obligated to do all the
-work unless they have explicitly committed to it.  When the time comes
-to put the release out the door (see
-<xref linkend="testing-and-releasing"/><phrase output="printed">
-later in this chapter</phrase>), the release managers
-also take care of the logistics of creating the final release
-packages, collecting digital signatures, uploading the packages, and
-making the public announcement.</para>
+<para>Obwohl sowohl Wahlen als auch die Merges auf eine 
+dezentralisierte Art passieren, gibt es in der Praxis ein oder zwei
+Personen welche die Veröffentlichung vorantreiben. Diese Rolle wird
+manchmal als <firstterm>Versionsverwalter</firstterm> (en. release
+manager) gesegnet, ist aber sehr unterschiedlich von einem
+Versionsherr (siehe <xref linkend="release-owner"/><phrase
+output="printed"> früher in diesem Kapitel</phrase>) der das letzte
+Wort über die Änderungen hat. Versionsverwalter halten einen
+Überblick darüber, wie viele Änderungen derzeit in betracht gezogen
+werden, wie vielen zugestimmt wurde, und wie vielen wahrscheinlich
+zugestimmt wird, usw. Wenn sie das Gefühl bekommen, dass wichtige
+Änderungen nicht die nötige Aufmerksamkeit bekommen, und aus einer
+Version gelassen werden könnten, aufgrund von Stimmenmangel, werden
+sie sanft andere Entwickler nerven, damit sie die Änderungen 
+überprüfen und darüber abzustimmen. Wenn ein Satz von Änderungen
+Zustimmung erhalten haben, werden diese Personen es oft auf sich
+nehmen, sie in den Versionszweig aufzunehmen; es ist in Ordnunge wenn
+andere ihnen die Aufgabe überlassen, so lange jeder versteht, dass sie
+keiner Obligation unterliegen, die ganze Arbeit zu übernehmen, es sei
+denn sie haben sich explizit dazu verpflichtet. Wenn die Zeit kommt,
+die neue Version zu veröffentlichen (siehe <xref 
+linkend="testing-and-releasing"/><phrase output="printed"> später
+in diesem Kapitel</phrase>), kümmern sich die Versionsverwalter auch um
+die logistische Arbeit, die erstellung der Pakete, das sammeln der 
+digitalen Signaturen, das Hochladen der Pakete, und die öffentliche
+Bekanntgabe.</para>
 
 </sect3>
 
@@ -883,54 +949,55 @@ making the public announcement.</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="packaging">
-<title>Packaging</title>
+<title>Erstellung der Pakete</title>
 
-<para>The canonical form for distribution of free software is as
-source code.  This is true regardless of whether the software normally
-runs in source form (i.e., can be interpreted, like Perl, Python, PHP,
-etc.) or needs to be compiled first (like C, C++, Java, etc.).  With
-compiled software, most users will probably not compile the sources
-themselves, but will instead install from pre-built binary packages
-(see <xref linkend="binary-packages"/><phrase output="printed">
-later in this chapter</phrase>).  However, those binary
-packages are still derived from a master source distribution.  The
-point of the source package is to unambiguously define the release.
-When the project distributes "Scanley&nbsp;2.5.0", what it means,
-specifically, is "The tree of source code files that, when compiled
-(if necessary) and installed, produces Scanley 2.5.0."</para>
+<para>Die kanonische Form freie Software zu verteilen ist in Form von
+Quellcode. Das gilt unabhängig davon ob die Software normalerweise mit
+dem Quellcode betrieben wird (d.h. kann interpretiert werden, wie Perl,
+Python, PHP, usw.) oder ob es vorher kompiliert werden muss (wie C,
+C++, Java, usw.). Bei kompilierter Software, werden die meisten Nutzer
+nicht unbedingt die Quellen selber kompilieren wollen, werden aber 
+statt dessen von den vorkompilierten binären Packeten installieren
+(siehe <xref linkend="binary-packages"/><phrase output="printed">
+später in diesem Kapitel</phrase>). Diese binären Pakete leiten sich
+jedoch trotzdem von der ursprünglichen Quellcode Distribution ab. Der
+Sinn der Quell Pakete ist, die neue Version eindeutig zu definieren.
+Wenn das Projekt "Scanley&nbsp;2.5.0" veröffentlicht, meint es
+spezifisch gesehen, "Die Quellcode Dateien, welche wenn sie kompiliert
+(falls nötig) und installiert wurden, Scanley 2.5.0 erzeugen".</para>
 
-<para>There is a fairly strict standard for how source releases
-should look.  One will occasionally see deviations from this standard,
-but they are the exception, not the rule.  Unless there is a compelling
-reason to do otherwise, your project should follow this standard
-too.</para>
+<para>Es gibt einen ziemlich strikten Standard darüber, wie Quellcode
+Distributionen auszusehen haben. Man wird ab und zu Abweichungen davon
+sehen, sie sind aber die Ausnahne, nicht die Regel. Wenn es keinen 
+zwingenden Grund gibt es anders zu machen, sollte sich Ihr Projekt auch
+an diesen Standard halten.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-format">
 <title>Format</title>
 
-<para>The source code should be shipped in the standard formats for
-transporting directory trees.  For Unix and Unix-like operating
-systems, the convention is to use TAR format, compressed
-by <command>compress</command>, <command>gzip</command>,
-<command>bzip</command> or <command>bzip2</command>.  For MS Windows,
-the standard method for distributing directory trees
-is <firstterm>zip</firstterm> format, which happens to do compression
-as well, so there is no need to compress the archive after creating
-it.</para>
+<para>Der Quellcode sollte in den Standardformaten für die Übertragung
+von Verzeichnissen verteilt werden. Bei Unix und Unix-ähnlichen
+Betriebssystemen, ist die Konvention, das TAR Format zu benutzen, 
+komprimiert mit <command>compress</command>, <command>gzip</command>,
+<command>bzip</command> oder <command>bzip2</command>. Bei MS Windows,
+ist die Standard Methode für die Veröffentlichung von Verzeichnissen
+das <firstterm>zip</firstterm> Format, welches zufällig auch 
+komprimiert, also gibt es keinen Grund es zu komprimieren, nach der
+Erstellung.</para>
 
    <sidebar id="packaging-tar">
-   <title>TAR Files</title>
+   <title>TAR Dateien</title>
 
-   <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
-   because tar format represents a directory tree as a linear data
-   stream, which makes it ideal for saving directory trees to tape.
-   The same property also makes it the standard for distributing
-   directory trees as a single file.  Producing compressed tar files
-   (or <firstterm>tarballs</firstterm>) is pretty easy.  On some
-   systems, the <command>tar</command> command can produce a
-   compressed archive itself; on others, a separate compression
-   program is used.</para>
+   <para><firstterm>TAR</firstterm> steht für "Tape&nbsp;ARchive",
+   da das TAR Format ein Verzeichniss als einen linearen Datenstrom
+   representiert, ist es ideal für die Speicherung auf Datenbändern.
+   Die gleiche Eigenschaft, macht es zum Standard für die Verteilung
+   von Verzeichnissen als eine einzige Datei. Komprimierte TAR Dateien
+   (auch<firstterm>tarballs</firstterm>) ist relativ einfach. Auf
+   manchen Systemen, kann der <command>tar</command> Befehl von sich
+   aus ein komprimieres Archiv erstellen; auf anderen, wird eine
+   separate Anwendung benutzt.</para>
 
    </sidebar>
 
@@ -938,107 +1005,113 @@ it.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-name-and-layout">
-<title>Name and Layout</title>
+<title>Name und Aufbau</title>
 
-<para>The name of the package should consist of the software's name
-plus the release number, plus the format suffixes appropriate for the
-archive type.  For example, Scanley 2.5.0, packaged for Unix using GNU
-Zip (gzip) compression, would look like this:</para>
+<para>Der Name des Pakets sollte aus dem Namen der Software bestehen,
+gefolgt von der Versionsnummer und den Dateiendungen für die 
+entsprechenden Archiv typen. Scanley 2.5.0, als Paket für Unix mit der
+GNU Zip (gzip) Kompression, würde zum Beispiel so aussehen:</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.tar.gz</literallayout>
 </informalexample>
 
-<para>or for Windows using zip compression:</para>
+<para>oder für Windows mit zip Kompression:</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.zip</literallayout>
 </informalexample>
 
-<para>Either of these archives, when unpacked, should create a single
-new directory tree named <filename>scanley-2.5.0</filename> in the
-current directory.  Underneath the new directory, the source code
-should be arranged in a layout ready for compilation (if compilation
-is needed) and installation.  In the top level of new directory tree,
-there should be a plain text <filename>README</filename> file
-explaining what the software does and what release this is, and giving
-pointers to other resources, such as the project's web site, other
-files of interest, etc.  Among those other files should be an
-<filename>INSTALL</filename> file, sibling to
-the <filename>README</filename> file, giving instructions on how to build
-and install the software for all the operating systems it supports.
-As mentioned in
-<xref linkend="license-quickstart-applying"/><phrase output="printed">
-in <xref linkend="getting-started"/></phrase>, there should also
-be a <filename>COPYING</filename> or <filename>LICENSE</filename>
-file, giving the software's terms of distribution.</para>
+<para>Beide dieser Archive erzeugen, wenn man sie entpackt, eine 
+einziges neues Verzeichniss namens <filename>scanley-2.5.0</filename>
+in dem derzeitigen Ordner. Im neuen Verzeichnis, sollten die Dateien
+des Quellcodes so ausgelegt sein, welches für die Kompilierung (wenn
+die Kompilierung nötig ist) und installation bereit ist. In der
+obersten Verzeichnissebene, sollte es eine Klartext Datei mit dem Namen
+<filename>README</filename> geben, welches erklärt, was die Software
+macht, was diese Paket ist, und hinweise Auf andere Resourcen, wie die
+Webseite des Projekts, andere Dateien die von interesse sind, usw.
+Unter diesen anderen Dateien sollte eine <filename>INSTALL</filename>
+Datei sein, welches Anweisungen gibt, wie man einen Build der Software
+machen kann, und sie installieren kann, für alle Betriebssysteme die es
+unterstützt. Wie in <xref linkend="license-quickstart-applying"/>
+<phrase output="printed"> im Kapitel <xref linkend="getting-started"/>
+</phrase> erwähnt, sollte es auch eine <filename>COPYING</filename> oder
+<filename>LICENSE</filename> Datei geben, welche die Bedingungen 
+enthällt, unter denen die Software vertrieben werden kann.</para>
 
-<para>There should also be a <filename>CHANGES</filename> file
-(sometimes called <filename>NEWS</filename>), explaining what's new in
-this release.  The <filename>CHANGES</filename> file accumulates
-changelists for all releases, in reverse chronological order, so that
-the list for this release appears at the top of the file.  Completing
-that list is usually the last thing done on a stabilizing release
-branch; some projects write the list piecemeal as they're developing,
-others prefer to save it all up for the end and have one person write
-it, getting information by combing the version control logs.  The list
-looks something like this:</para>
+<para>Es sollte auch eine <filename>CHANGES</filename> Datei geben
+(manchmal <filename>NEWS</filename>) genannt, welches erklärt, was in
+dieser Version neu ist. Die <filename>CHANGES</filename> Datei Listed
+die Änderungen aller Versionen auf, in chronologisch umgekehrter 
+Richtung, sodass die Liste für diese Version in der Datei oben 
+erscheint. Diese Liste zu verfollständigen, ist üblicherweise das 
+Letzte was auf einem stabilisierenden Versionszweig gemacht wird; 
+manche Projekte schreiben diese Liste in Stücken wärend sie entwickeln,
+andere bevorzugen es, alles bis zum schluss aufzusparen, und es dann
+von einer Person schreiben zu lassen, indem Informationen aus den
+Commit Kommentaren der Versionsverwaltung gesammelt werden. Die Liste
+sieht in etwa so aus:</para>
 
 <screen>
 Version 2.5.0
-(20 December 2004, from /branches/2.5.x)
+(20 Dezember 2004, von /branches/2.5.x)
 http://svn.scanley.org/repos/svn/tags/2.5.0/
 
- New features, enhancements:
-    * Added regular expression queries (issue #53)
-    * Added support for UTF-8 and UTF-16 documents
-    * Documentation translated into Polish, Russian, Malagasy
+ Neue Funktionen, Erweiterungen:
+    * Neue Abfragen mit regulären Ausdrücken (Meldung #53)
+    * Unterstützung für UTF-8 und UTF-16 Dokumente 
+    * Documentation in Polnisch, Russisch, Malaysisch
     * ...
 
  Bugfixes:
-    * fixed reindexing bug (issue #945)
-    * fixed some query bugs (issues #815, #1007, #1008)
+    * neuindexierungs Bug behoben (Meldung #945)
+    * Einige Abfragefehler behoben (Meldung #815, #1007, #1008)
     * ...
 </screen>
 
-<para>The list can be as long as necessary, but don't bother to
-include every little bugfix and feature enhancement.  Its purpose is
-simply to give users an overview of what they would gain by upgrading
-to the new release.  In fact, the changelist is customarily included
-in the announcement email (see
-<xref linkend="testing-and-releasing"/><phrase output="printed">
-later in this chapter</phrase>), so write it with that
-audience in mind.</para>
+<para>Die Liste kann so lange wie nötig sein, Sie brauchen sich aber
+nicht darum kümmern, dass jeder kleiner Bugfix und Funktioserweiterung
+aufgelistet wird. Sein Sinn ist es einfach, den Nutzern einen Überblick
+zu geben, inwiefern sie davon profitieren würden auf die neue Version
+zu aktuelisieren. Die Änderungsliste wird üblicherweise in der
+Ankündigungs-Email aufgenommen (siehe <xref
+linkend="testing-and-releasing"/><phrase output="printed"> später in
+diesem Kapitel</phrase>), schreiben Sie es also mit dem Publikum im
+Hinterkopf.</para>
 
    <sidebar id="changelog">
-   <title>CHANGES Versus ChangeLog</title>
-   <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
-   lists every change ever made to a project&mdash;that is, every
-   revision committed to the version control system.  There are
-   various formats for ChangeLog files; the details of the formats
-   aren't important here, as they all contain the same information:
-   the date of the change, its author, and a brief summary (or just
-   the log message for that change).</para>
+   <title>CHANGES Kontra ChangeLog</title>
+   <para>Traditionell, listet eine Datei namens <firstterm>ChangeLog
+   </firstterm> jede Änderung die je an einem Projekt gemach wurde auf,
+   &mdash;das heißt, jeden Commit der in das Versionsverwaltungssystem
+   aufgenommen wurde. Es gibt verschiedene Formate für ChangeLog 
+   Dateien; die Details der Formate sind an dieser Stelle nicht 
+   wichtig, da sie alle die gleichen Informationen beinhalten: Das 
+   Datum der Änderung, sein Author, und eine kurze Zusammenfassung
+   (oder einfach nur den Commit Kommentar für diese Änderng).</para>
 
-   <para>A <filename>CHANGES</filename> file is different.  It too is
-   a list of changes, but only the ones thought important for a
-   certain audience to see, and often with metadata like the exact
-   date and author stripped off.  To avoid confusion, don't use the
-   terms interchangeably.  Some projects use "NEWS" instead of
-   "CHANGES"; although this avoids the potential for confusion with
-   "ChangeLog", it is a bit of a misnomer, since the CHANGES file
-   retains change information for all releases, and thus has a lot of
-   old news in addition to the new news at the top.</para>
+   <para>Eine <filename>CHANGES</filename> Datei ist anders. Es ist
+   auch eine Liste von Änderungen, aber nur solche, von denen man
+   denkt, dass sie wichtig genug sind, dass ein bestimmtes Publikum sie
+   sieht, und ohne mit Metadaten wie das genau Datum und der Author.
+   Um verwirrung zu vermeiden, vertauschen Sie die Begriffe nicht. 
+   Manche Projekte benutzen "NEWS" anstatt von "CHANGES"; obwohl das
+   die mögliche Verwirrung mit "ChangeLog" vermeidet, ist es etwas
+   falsch bezeichnet, da die CHANGES Datei die Änderungs Informationen
+   über alle Versionen enthällt, und desshalb eine Menge alte
+   Informationen zusätzlich zu denen ganz oben enthällt.</para>
 
-   <para>ChangeLog files may be slowly disappearing anyway.  They were
-   helpful in the days when CVS was the only choice of version control
-   system, because change data was not easy to extract from CVS.
-   However, with more recent version control systems, the data that
-   used to be kept in the ChangeLog can be requested from the version
-   control repository at any time, making it pointless for the project
-   to keep a static file containing that data&mdash;in fact, worse
-   than pointless, since the ChangeLog would merely duplicate the log
-   messages already stored in the repository.</para>
+   <para>ChangeLog Dateien mögen sowieso langsam am verschwinden sein.
+   Sie waren zu einer Zeit hilfreich, als CVS die einzige Wahl für die
+   Versionsverwaltung war, weil Daten über Änderungen nicht leich aus
+   CVS zu bekommen waren. Bei neueren Systemen können die Daten die 
+   ehemals in dem ChangeLog geschrieben wurden, jedoch jederzeit von
+   dem Versionsverwaltungssystem angefordert werden, was es Sinnlos
+   für das Projekt macht, eine Statistik Datei darüber zu halten&mdash;
+   es ist sogar mehr als sinnlos, da die ChangeLog lediglich die 
+   Meldungen die bereits in der Repository gespeichert sind duplizieren
+   würde.</para>
    </sidebar>
 
 <para>The actual layout of the source code inside the tree should be
