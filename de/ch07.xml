@@ -1114,30 +1114,31 @@ Hinterkopf.</para>
    würde.</para>
    </sidebar>
 
-<para>The actual layout of the source code inside the tree should be
-the same as, or as similar as possible to, the source code layout one
-would get by checking out the project directly from its version
-control repository.  Usually there are a few differences, for example
-because the package contains some generated files needed for
-configuration and compilation (see
-<xref linkend="packaging-build-install"/><phrase output="printed">
-later in this chapter</phrase>), or because it includes
-third-party software that is not maintained by the project, but that
-is required and that users are not likely to already have.  But even
-if the distributed tree corresponds exactly to some development tree
-in the version control repository, the distribution itself should not
-be a working copy (see <xref linkend="vc-vocabulary-working-copy"/>).
-The release is supposed to represent a static reference point&mdash;a
-particular, unchangeable configuration of source files.  If it were a
-working copy, the danger would be that the user might update it, and
-afterward think that he still has the release when in fact he has
-something different.</para>
+<para>Der tatsächliche Aufbau der Quellcode Dateiem sollte der gleiche
+sein, oder zumindest so ähnlich wie möglich zu dem sein, den man aus
+der Versionsverwaltung herunterladen kann. Für gewöhnlich gibt es ein
+paar Unterschiede, zum Beispiel weil das Paket ein paar generierte
+Dateien enthällt, die für die Konfiguration und Kompilierung benötigt
+werden (siehe <xref linkend="packaging-build-install"/><phrase 
+output="printed"> später in diesem Kapitel</phrase>), oder weil es
+Software von dritten Parteien enthällt, welches nicht von dem
+Projekt gepflegt wird, welches aber benötigt wird und die Benutzer
+wahrscheinlich nicht haben. Aber selbst wenn das Veröffentlichte
+Verzeichniss nicht genau dem Verzeichniss eines Entwicklungszweiges
+in der Versionsverwaltung entspricht, sollte die Distribution selbst,
+eine Arbeiskopie (siehe <xref linkend="vc-vocabulary-working-copy"/>)
+sein. Die Veröffentlichung soll einen statischen Referenzpunkt
+representieren&mdash;eine bestimmte, unveränderliche Konfiguration von
+Quellcode Dateien. Wenn es eine Arbeitskopie wäre, gäbe es die Gefahr,
+dass der Nutzer es aktuelisieren würde, und nacher denken, dass er die
+neue Version hat, wärend er tatsächlich etwas anderes hat.</para>
 
-<para>Remember that the package is the same regardless of the
-packaging.  The release&mdash;that is, the precise entity referred to
-when someone says "Scanley&nbsp;2.5.0"&mdash;is the tree created by
-unpacking a zip file or tarball.  So the project might offer all of
-these for download:</para>
+<para>Denken Sie daran, dass das Paket das gleiche ist, unabhängig von
+seiner Verpakung. Die Version&mdash;also genau die Entität, die gemeint
+ist, wenn jemand "Scanley&nbsp;2.5.0"&mdash; sagt, ist das 
+Verzeichniss, welches erstellt wird wenn die zip Datei oder der Tarball
+entpackt wird. Das Projekt könnte also all diese zum Herunterladen
+anbiedten:</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.tar.bz2
@@ -1145,45 +1146,49 @@ scanley-2.5.0.tar.gz
 scanley-2.5.0.zip</literallayout>
 </informalexample>
 
-<para>...but the source tree created by unpacking them must be the
-same.  That source tree is the distribution; the form in which it is
-downloaded is merely a matter of convenience.  Certain trivial
-differences between source packages are allowable: for example, in the
-Windows package, text files should have lines ending with CRLF
-(Carriage Return and Line Feed), while Unix packages should use just
-LF.  The trees may be arranged slightly differently between source
-packages destined for different operating systems, too, if those
-operating systems require different sorts of layouts for compilation.
-However, these are all basically trivial transformations.  The basic
-source files should be the same across all the packagings of a given
-release.</para>
+<para>...aber der Quellcode Baum, der beim entpaken entsteht, muss der
+gleiche sein. Dieser Quellcode Baum ist die veröffentlichte Version;
+die Form in der es heruntergeladen wird, ist lediglich eine Sache der
+Bequemlichkeit. Bestimmte unwesentliche Unterschiede zwischen den
+Quellcode Paketen sind zulässig: Zum Beispiel sollten in dem Windows
+Paket die Text Dateien mit CRLF (Carriage Return und Line Feed) enden,
+wärend Unix Pakete nur LF verwenden sollten. Die Verzeichnisse können
+auch leicht Unterschiedlich zwischen den verschiedenen Betriebssystemen
+angeordnet sein, wenn diese Betriebssysteme verschiedene Anordnungen
+für die Kompilierung erfordern. Das sind jedoch alles im wesentlichen
+triviale Transformationen. Die wesentlichen Quellcode Dateien sollten
+über alle Pakete für eine Version die gleichen sein.</para>
 
 <sect3 id="release-capitalization">
-<title>To capitalize or not to capitalize</title>
+<title>Groß Schreiben oder Nicht Groß Schreiben</title>
 
-<para>When referring to a project by name, people generally capitalize
-it as a proper noun, and capitalize acronyms if there are any:
-"MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", etc.  Whether this
-capitalization is reproduced in the package name is up to the project.
-Either <filename>Scanley-2.5.0.tar.gz</filename> or
-<filename>scanley-2.5.0.tar.gz</filename> would be fine, for example
-(I personally prefer the latter, because I don't like to make people
-hit the shift key, but plenty of projects ship capitalized packages).
-The important thing is that the directory created by unpacking the
-tarball use the same capitalization.  There should be no surprises:
-the user must be able to predict with perfect accuracy the name of the
-directory that will be created when she unpacks a distribution.</para>
+<para>Wenn man einen bestimmten Projektnamen nennt, schreiben es Leute
+im allgemeinen groß, wie bei einem Nomen <footnote><para>anmk. des 
+Übersetzers: Im Englischen werden Eigennamen (en. proper noun) auch
+groß geschrieben</para></footnote> und schreiben Abkürzungen groß wenn
+welche Vorhanden sind: "MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", usw. Ob
+das in dem Paket namen mit übernommen wird, ist dem Projekt überlassen.
+Sowohl <filename>Scanley-2.5.0.tar.gz</filename> als auch 
+<filename>scanley-2.5.0.tar.gz</filename> wären zum Beispiel in Ordnung
+(Ich persönlich bevorzuge letzteres, da ich es nicht mag, Leute zu
+zwingen die Umschalttaste zu drücken, aber eine Menge Projekte
+veröffentlichen Pakete mit Großschreibung). Das Wichtige ist, dass das
+Verzeichnis welches beim Entpacken des Tarballs erstellt wird, die
+gleiche Schreibweise verwendet. Es sollte keine Überraschungen geben:
+Der Nutzer muss den Namen des Verzeichnisses welches erstellt werden
+wird, wenn Sie eine Veröffentlichung entpakt, mit absoluter Genauigkeit
+vorhersagen können.</para>
 
 </sect3>
 <sect3 id="release-prereleases">
-<title>Pre-releases</title>
+<title>Vorveröffentlichungen</title>
 
-<para>When shipping a pre-release or candidate release, the qualifier
-is truly a part of the release number, so include it in the name of
-the package's name.  For example, the ordered sequence of alpha and
-beta releases given earlier in
-<xref linkend="release-number-components"/> would result in
-package names like this:</para>
+<para>Wenn Sie eine Vorveröffentlichung machen, ist der Vermerk ein
+echter Bestandteil der Versionsnummer, nehmen Sie es also mit in den
+Namen des Pakets auf. Die geordnete Folge von Alpha und Beta Versionen,
+die vorher in diesem Kapitel in <xref 
+linkend="release-number-components"/> verwendet wurde, würde zum 
+Beispiel folgende Paket namenen haben:</para>
 
 <informalexample>
 <literallayout>scanley-2.3.0-alpha1.tar.gz
@@ -1194,9 +1199,9 @@ scanley-2.3.0-beta3.tar.gz
 scanley-2.3.0.tar.gz</literallayout>
 </informalexample>
 
-<para>The first would unpack into a directory
-named <filename>scanley-2.3.0-alpha1</filename>, the second into
-<filename>scanley-2.3.0-alpha2</filename>, and so on.</para>
+<para>Das erste würde zum Beispiel zu einem Verzeichnis namens
+<filename>scanley-2.3.0-alpha1</filename> entpaken, dass zweite nach
+<filename>scanley-2.3.0-alpha2</filename>, usw.</para>
 
 </sect3>
 
@@ -1204,13 +1209,14 @@ named <filename>scanley-2.3.0-alpha1</filename>, the second into
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-build-install">
-<title>Compilation and Installation</title>
+<title>Kompilierung und Installation</title>
 
-<para>For software requiring compilation or installation from source,
-there are usually standard procedures that experienced users expect to
-be able to follow.  For example, for programs written in C, C++, or
-certain other compiled languages, the standard under Unix-like systems
-is for the user to type:</para>
+<para>Bei Software, die eine Kompilierung oder Installation aus den
+Quellen erfordert, gibt es für gewöhnlich Standardverfahren, welche
+erfahrene Nutzer erwarten anwenden zu können. Bei Programmen die in
+C, C++, oder bestimmte andere Kompilierte Sprachen, ist es in
+Unix-ähnlichen Systemen zum Beispiel für den Nutzer Üblich folgendes
+einzugeben:</para>
 
 <screen>
    $ ./configure
@@ -1218,89 +1224,99 @@ is for the user to type:</para>
    # make install
 </screen>
 
-<para>The first command autodetects as much about the environment as
-it can and prepares for the build process, the second command builds
-the software in place (but does not install it), and the last command
-installs it on the system.  The first two commands are done as a
-regular user, the third as root.  For more details about setting up
-this system, see the excellent <citetitle>GNU Autoconf, Automake, and
-Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
-is published as treeware by New Riders, and its content is also freely
-available online at
-<ulink url="http://sources.redhat.com/autobook/"/>.</para>
+<para>Der erste Befehl erkennt automatisch, soviel von der Umgebung
+wie möglich, und bereitet den Build Vorgang vor, der zweite Befehl
+kompiliert die Software im derzeitigen Pfad (installiert es jedoch
+nicht), und der letzte Befehl installiert es auf das System. Die ersten
+beiden Befehle werden als ganz normalen Nutzer ausgeführt, der dritte
+als root. Für weitere Details über die Einrichtung dieses Systems,
+siehe das ausgezeichnete <citetitle>GNU Autoconf, Automake, und 
+Libtool</citetitle> Buch von Vaughan, Elliston, Tromey, und Taylor. Es
+ist als treeware durch New Riders veröffentlicht worden, und sein
+Inhalt ist unter <ulink url="http://sources.redhat.com/autobook/"/>.
+frei zugänglich.</para>
 
-<para>This is not the only standard, though it is one of the most
-widespread.  The Ant (<ulink url="http://ant.apache.org/"/>) build
-system is gaining popularity, especially with projects written in
-Java, and it has its own standard procedures for building and
-installing.  Also, certain programming languages, such as Perl and
-Python, recommend that the same method be used for most programs
-written in that language (for example, Perl modules use the
-command <command>perl&nbsp;Makefile.pl</command>).  If it's not
-obvious to you what the applicable standards are for your project, ask
-an experienced developer; you can safely assume
-that <emphasis>some</emphasis> standard applies, even if you don't
-know what it is at first.</para>
+<para>Das ist nicht der einzige Standard, obwohl es eines der am
+weitesten verbreitetsten ist. Das Ant (<ulink 
+url="http://ant.apache.org/"/>) Build System nimmt an Beliebtheit
+zu, insbesondere bei Projekten, die in Java geschrieben sind, und hat
+seine eigenen Abläufe für den Build und die Installation. Desweiteren,
+empfehlen bestimmte Programiersprachen, wie Perl und Python, dass die
+gleiche Methode für die meisten Programme die in dieser Sprache
+geschrieben werden, benutzt werden (Perl Module benutzten zum Beispiel
+den <command>perl&nbsp;Makefile.pl</command> Befehl). Wenn es für Sie
+nicht offensichlich ist, welche Standards für Ihr Projekt gelten, 
+fragen Sie einen erfahrenen Entwickler; Sie können mit sicherheit
+davon ausgehen, dass <emphasis>irgend ein</emphasis> Standard gilt,
+selbst wenn Sie zuerst nicht wissen was es ist.</para>
 
-<para>Whatever the appropriate standards for you project are, don't
-deviate from them unless you absolutely must.  Standard installation
-procedures are practically spinal reflexes for a lot of system
-administrators now.  If they see familiar invocations documented in
-your project's <filename>INSTALL</filename> file, that instantly
-raises their faith that your project is generally aware of
-conventions, and that it is likely to have gotten other things right
-as well.  Also, as discussed in
-<xref linkend="downloads"/><phrase output="printed"> in
-<xref linkend="getting-started"/></phrase>, having a standard
-build procedure pleases potential developers.</para>
+<para>Was immer die entsprechenden Standards für Ihr Projekt auch sein
+mögen, weichen Sie nicht von Ihnen ab, es sei denn es ist zwingend
+notwendig. Standardabläfe bei der Installation sind mittlerweile 
+praktisch Reflexe im Rückenmark vieler System Administratoren. Wenn sie
+bekannte Anweisungen in der <filename>INSTALL</filename> Datei von
+Ihrem Projekt erkennen, hebt es gleich ihr vertrauen darin, dass Ihr
+Projekt sich allgemein über Konventionen im klaren ist, und dass es
+wahrscheinlich ist, dass Sie auch andere Sachen richtig gemacht haben.
+Wie in 
+<xref linkend="downloads"/><phrase output="printed"> im Kapitel 
+<xref linkend="getting-started"/></phrase> beschrieben, erfreute es
+auch mögliche zukünftige Entwickler, wenn Sie standard Build Verfahren
+benutzen.</para>
 
-<para>On Windows, the standards for building and installing are a bit
-less settled.  For projects requiring compilation, the general
-convention seems to be to ship a tree that can fit into the
-workspace/project model of the standard Microsoft development
-environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc.).
-Depending on the nature of your software, it may be possible to offer
-a Unix-like build option on Windows via the Cygwin
-(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
-if you're using a language or programming framework that comes with
-its own build and install conventions&mdash;e.g., Perl or
-Python&mdash;you should simply use whatever the standard method is for
-that framework, whether on Windows, Unix, Mac OS X, or any other
-operating system.</para>
+<para>Unter Windows, sind die Standards um einen Build zu machen und zu
+installieren wengier festgelegt. Bei Projekten die eine Kompilation
+erfordern, scheind die allgemeine Konvention zu sein, ein Verzeichniss
+zu Veröffentlichen, welches in dem Standardmodell für 
+Arbeitsumgebungen/Projekte von den Entwicklungsumgebungen von Microsoft
+(Developer Studio, Visual Studio, VS.NET, MSVC++, usw.). Abhängig von
+der Natur Ihrer Software, kann es möglich sein eine Unix ähnlichen
+Build Option mittels der Cygwin (<ulink 
+url="http://www.cygwin.com/"/>) Umgebung auf Windows anzubieten. Und
+wenn Sie natürlich eine Sprache oder einen programmier Framework
+verwenden, welches seine eigenen Konventionen für die Instalation hat,
+&mdash;z.B, Perl oder Python&mdash; sollte Sie einfach die 
+Standardmethode für diesen Framework benutzen, ob auf Windows, Unix,
+Mac OS X oder jedem anderen Betriebssystem.</para>
 
-<para>Be willing to put in a lot of extra effort in order to make your
-project conform to the relevant build or installation standards.
-Building and installing is an entry point: it's okay for things to get
-harder after that, if they absolutely must, but it would be a shame
-for the user's or developer's very first interaction with the software
-to require unexpected steps.</para>
+<para>Seien Sie bereit, eine Menge zusätzliche Mühe einzusetzen, um Ihr
+Projekt auf die relevanten Build und Installationsstandards, konform zu
+machen. Der Build und die Installation sind eine Eingangspunkte: Es ist
+in Ordnung, wenn Sachen danach schwieriger werden, wenn es absolut der
+Fall sein muss, es wäre aber schade wenn die erste Interaktion von dem
+Benutzer oder Entwickler mit der Software unerwartete Schritte 
+erfordern würden.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="binary-packages">
-<title>Binary Packages</title>
+<title>Binäre Pakete</title>
 
-<para>Although the formal release is a source code package, most users
-will install from binary packages, either provided by their operating
-system's software distribution mechanism, or obtained manually from
-the project web site or from some third party.  Here "binary" doesn't
-necessarily mean "compiled"; it just means any pre-configured form of
-the package that allows a user to install it on his computer without
-going through the usual source-based build and install procedures.  On
-RedHat GNU/Linux, it is the RPM system; on Debian GNU/Linux, it is the
-APT (<filename>.deb</filename>) system; on MS Windows, it's usually
-<literal>.MSI</literal> files or self-installing
-<literal>.exe</literal> files.</para>
+<para>Auch wenn die formal veröffentlichte Version ein Quellcode Paket
+ist, werden die meisten Nutzer von binären Paketen installieren, die
+entweder von dem Installationsprogramm ihres Betriebssystems angeboten
+wird, händisch von der Webseite Ihres Projekts besorgt wurden oder von
+irgend einer anderen dritten Partei. "Binär" bedeutet in diesem 
+Zusammenhang nicht unbedingt "kompiliert"; es bedeutet lediglich irgend
+eine vorkonfigurierte Form des Pakets, welches es dem Nutzer erlaubt es
+auf seinen Computer zu installieren, ohne durch die üblichen Build und
+Installations-Abläufe der Quellcode basierenden Pakete. Auf
+RedHat GNU/Linux, ist es das RPM System; auf Debian GNU/Linux, ist es
+das APT (<filename>.deb</filename>) System; unter MS Windows, sind es
+üblicherweise <literal>.MSI</literal> Dateien oder selbst instalierende
+<literal>.exe</literal> Dateien.</para>
 
-<para>Whether these binary packages are assembled by people closely
-associated with the project, or by distant third parties, users are
-going to <emphasis>treat</emphasis> them as equivalent to the
-project's official releases, and will file issues in the project's bug
-tracker based on the behavior of the binary packages.  Therefore, it
-is in the project's interest to provide packagers with clear
-guidelines, and work closely with them to see to it that what they
-produce represents the software fairly and accurately.</para>
+<para>Ob diese binären Pakete von Personen die nahe an dem Projekt 
+sind, zusammengestellt werden, oder entfernte dritte Pariteien, die
+Nutzer werden sie als gleichwertig zu den offiziellen 
+Veröffentlichungen des Projekts <emphasis>behandeln</emphasis>, und
+werden Meldungen auf den Bug Tracker einreichen, auf der Grundlage des
+Verhaltens dieser binärpakete. Desshalb ist es im Interesse des 
+Projekts denjenigen die Pakete schnüren, klare Richtlinien zu geben,
+und eng mit ihnen zusammen zu arbeiten, um dafür zu sorgen, dass was
+sie produzieren, die Software ordentlich und genau representiert.
+</para>
 
 <para>The main thing packagers need to know is that they should always
 base their binary packages on an official source release.  Sometimes
