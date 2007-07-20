@@ -861,139 +861,130 @@ Hay un artículo sobre este en <ulink url="http://www.perl.com/pub/a/2004/02/05/
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="archiving">
-<title>Archiving</title>
-
-<para>The technical details of setting up mailing list archiving are
-specific to the software that's running the list, and are beyond the
-scope of this book.  When choosing or configuring an archiver,
-consider these qualities:</para>
+<title>Archivo</title>
+<para>Los detalles técnicos para configurar un archivo para
+la lista de correos son específicos de la aplicación utilizada y estan
+fuera del alcance de este libro. Al escoger o configurar un archivador,
+es conveniente considerar lo siguiente:</para>
 
 <variablelist>
 
-  <varlistentry><term>Prompt updating</term>
+  <varlistentry><term>Actualización rápida</term>
     <listitem>
-      <para>People will often want to refer to an archived post made
-            within the last hour or two.  If possible, the archiver
-            should archive each post instantaneously, so that by the
-            time a post appears on the mailing list, it's already
-            present in the archives.  If that option isn't available,
-            then at least try to set the archiver to update itself
-            every hour or so.  (By default, some archivers run their
-            update processes once per night, but in practice that's
-            far too much lag time for an active mailing list.)</para>
+	<para>A menudo la gente querra ser referida a un mensaje enviado
+	durante la ultima hora o dos. Si es posible, el archivador deberá
+	archivar cada mensaje instantaneamente, de tal manera de que cuando
+	el mensaje aparezca en la lista de correos, ya esté en el archivo.
+	Si esa opción no esta disponible entonces al menos hay que intentar
+	configurar el archivado para que se realice cada hora o así. (Por
+	defecto, algunos archivadores ejecutan el proceso de actualización
+	cada noche, pero en la práctica esta demora es demasiado larga
+	para una lista de correos.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Referential stability</term>
+  <varlistentry><term>Estabilidad referencial</term>
     <listitem>
-      <para>Once a message is archived at a particular URL, it should
-            remain accessible at that exact same URL forever, or as
-            close to forever as possible.  Even if the archives are
-            rebuilt, restored from backup, or otherwise fixed, any
-            URLs that have already been made publicly available
-            should remain the same.  Stable references make it
-            possible for Internet search engines to index the
-            archives, which is a major boon to users looking for
-            answers.  Stable references are also important because
-            mailing list posts and threads are often linked to from
-            the bug tracker (see
+	<para>Una vez que un mensaje es archivado bajo una URL en
+	particular, debe ser accesible desde esa URL para siempre.
+	Incluso si el archivo es reconstruido o restaurado de un
+	respaldo, cualquier URL que haya sido hecha publica debe
+	permanecer igual. Las referencias estables hacen posible
+	que los buscadores de Internet sean capaces de indexar el
+	archivo, lo cual es una gran ventaja para los usuarios que
+	buscan respuestas. Las referencias estables son tambien
+	importantes porque los mensajes de la lista y los hilos
+	son enlazados desde el gestor de fallos (
             <xref
             linkend="bug-tracker"/>)<phrase output="printed">
-            later in this chapter</phrase> or
-            from other project documents.</para>
+            más adelante en este capítulo</phrase> o
+            en la documentación de otros proyectos.</para>
 
-      <para>Ideally, mailing list software would include a message's
-            archive URL, or at least the message-specific portion of
-            the URL, in a header when it distributes the message to
-            recipients.  That way people who have a copy of the
-            message would be able to know its archive location
-            without having to actually visit the archives, which would
-            be helpful because any operation that involves one's web
-            browser is automatically time-consuming.  Whether any
-            mailing list software actually offers this feature, I don't
-            know; unfortunately, the ones I have used do not.
-            However, it's something to look for (or, if you write
-            mailing list software, it's a feature to consider
-            implementing, please).</para>
+	<para>Lo ideal sería que la aplicación de la lista de correos
+	incluya la URL del mensaje archivado o al menos la porción
+	de la URL específica del mensaje en una cabecera cuando este
+	es distribuido. De esta manera la gente que haya recibido el
+	mensaje podrá conocer su lugar en el archivo sin la necesidad
+	de visitar el archivo, lo cual es de gran ayuda, ya que cualquier
+	actividad que implique el uso del navegador web es automaticamente
+	un consumo de tiempo. Que alguna aplicación de listas de
+	correos ofrece esta posibilidad no lo sé. Desafortunadamente,
+	los que he utilizado no la tienen. Pero esto es algo que hay
+	que buscar (o si desarrolla una aplicación de listas, esta es
+	una caracteristica que debe considerar implementar, por favor).</para> 
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Backups</term>
+  <varlistentry><term>Respaldos (Backups)</term>
     <listitem>
-      <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult.  In other words, don't treat your archiver as a
-            black box.  You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary.  Those archives are precious
-            data&mdash;a project that loses them loses a good part of
-            its collective memory.</para>
+	<para>Debe ser razonablemente obvio como respaldar el archivo
+	y la receta para restaurarlo no deben ser muy complicada.
+	En otras palabras, no hay que tratar el archivo como una caja
+	negra. Debe conocer donde se almacenan los mensajes y como
+	restaurar las páginas del archivo del almacen si alguna vez
+	es necesario. Estos archivos contienen datos muy preciados&mdash;un
+	proyecto que los pierde, pierde buena parte de su memoria
+	colectiva.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Thread support</term>
+  <varlistentry><term>Soporte de los hilos</term>
     <listitem>
-      <para>It should be possible to go from any individual message to
-            the <firstterm>thread</firstterm> (group of related
-            messages) that that original message is part of.  Each
-            thread should have its own URL too, separate from the URLs
-            of the individual messages in the thread.</para>
+	<para>Desde cualquier mensaje debe ser posible ir al <firstterm>hilo</firstterm>
+	(grupo de mensajes relacionados) al que pertenece el mensaje. Cada
+	hilo debe tener su propia URL tambien, separado del URL de los
+	mensajes del hilo.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Searchability</term>
+  <varlistentry><term>Busquedas</term>
     <listitem>
-      <para>An archiver that doesn't support searching&mdash;on the
-            bodies of messages, as well as on authors and
-            subjects&mdash;is close to useless.  Note that some archivers 
-            support searching by simply farming the work out to an
-            external search engine such as <ulink
-            url="http://www.google.com/">Google</ulink>.  This is
-            acceptable, but direct search support is usually more
-            fine-tuned, because it allows the searcher to specify that
-            the match must appear in a subject line versus the body,
-            for example.</para>
+	<para>Un archivo que no permita busquedas&mdash;tanto en el cuerpo
+	de los mensajes como por autor o según el asunto&mdash;es casí
+	inutil. Hay que señalar que algunos archivadores permiten busquedas
+	al remitir la labor a un buscador externo como 
+	<ulink url="http://www.google.com/">Google</ulink>. Esto es
+	aceptable, pero por lo general, las busquedas directas son más
+	finas, porque permiten a quien busca, específicar que los
+	resultados sean mostrados, por ejemplo, según el asunto y no
+	según el cuerpo del mensaje.
     </listitem>
   </varlistentry>
 
 </variablelist>
 
-<para>The above is just a technical checklist to help you evaluate and
-set up an archiver.  Getting people to
-actually <emphasis>use</emphasis> the archiver to the project's
-advantage is discussed in later chapters, in particular
-<xref linkend="using-archives"/>.</para>
-
+<para>Lo anterior es sólo una lista técnica para ayudar a evaluar y
+configurar un archivador. Hacer que la gente de hecho <emphasis>utilice</emphasis>
+el archivo como ventaja para el proyecto es discutido en capitulos posteriores
+en particular en <xref linkend="using-archives"/>.</para>
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="mailing-list-software">
 <title>Software</title>
 
-<para>Here are some open source tools for doing list management and
-archiving.  If the site where you're hosting your project already has
-a default setup, then you may not ever have to decide on a tool at
-all.  But if you must install one yourself, these are some
-possibilities.  The ones I have actually used are Mailman, Ezmlm,
-MHonArc, and Hypermail, but that doesn't mean the others aren't good
-too (and of course, there are probably other tools out there that I
-just didn't happen to find, so don't take this as a complete
-list).</para>
+<para>Aquí hay algunas herramientas open source para la gestión de
+las listas de correo y su archivo. Si el hosting del proyecto ya
+tiene una configuración por defecto, quizas no sea necesario siquiera
+decidir cual herramienta utilizar. Pero si se tiene que instalar una,
+existen algunas posibilidades. Las que he utilizado son Mailman, Ezmlm,
+MHonArc e Hypermail, lo cual no significa que no haya otras que sean
+igual de buenas (y por supuesto, probablemente existan otras que no
+he logrado encontrar, asi que no considere esto como una lista completa).</para>
 
-<para>Mailing list management software:</para>
+<para>Aplicaciones de gestión de listas de correo:</para>
 
 <itemizedlist>
  <listitem>
    <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.list.org/"/></para>
-   <para>(Has built-in archiver, and hooks for plugging in
-         external archivers.)</para>
+	<para>(Tiene un archivador incorporado y la posibilidad de
+	conectarse a archivadores externos.)</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.procmail.org/"/></para>
-   <para>(Meant to be used with the Procmail mail processing system.)</para>
+   <para>(Para ser utilizado con el sistema de procesamiento de correos Procmail.)</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
