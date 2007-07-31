@@ -917,7 +917,7 @@ es conveniente considerar lo siguiente:</para>
 
   <varlistentry><term>Respaldos (Backups)</term>
     <listitem>
-	<para>Debe ser razonablemente obvio como respaldar el archivo
+	<para>Debe ser obvio como respaldar el archivo
 	y la receta para restaurarlo no deben ser muy complicada.
 	En otras palabras, no hay que tratar el archivo como una caja
 	negra. Debe conocer donde se almacenan los mensajes y como
@@ -997,20 +997,20 @@ he logrado encontrar, asi que no considere esto como una lista completa).</para>
  <listitem>
    <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://cr.yp.to/ezmlm.html"/></para>
-   <para>(Designed to work with the <ulink
-         url="http://cr.yp.to/qmail.html">Qmail</ulink> mail
-         delivery system.)</para> 
+   <para>(Diseñado para funcionar con<ulink
+         url="http://cr.yp.to/qmail.html">Qmail</ulink>
+         .)</para> 
  </listitem>
  <listitem>
    <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://mojo.skazat.com/"/></para>
-   <para>(Despite the web site's bizarre attempts to hide the fact,
-         this is free software, released under the GNU General
-         Public License.  It also has a built-in archiver.)</para>
+   <para>(A pesar del bizarro intento de su sitio web, 
+	es un software libre, liberado bajo la licencia GNU GPL.
+	Tambien tiene un archivador incluido.)</para>
  </listitem>
 </itemizedlist>
 
-<para>Mailing list archiving software:</para>
+<para>Software para el archivo de las listas de correo:</para>
 
 <itemizedlist>
  <listitem>
@@ -1028,9 +1028,10 @@ he logrado encontrar, asi que no considere esto como una lista completa).</para>
  <listitem>
    <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.procmail.org/"/></para>
-   <para>(Companion software to SmartList, this is a general mail
-         processing system that can, apparently, be configured as an
-         archiver.)</para>
+   <para>
+	(Software que acompaña a SmartList, un sistema de procesado
+	general de correos que puede, aparentemente, ser configurado
+	como un archivo.)</para>
  </listitem>
 </itemizedlist>
 
@@ -1041,199 +1042,222 @@ he logrado encontrar, asi que no considere esto como una lista completa).</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
-<title>Version Control</title>
+<title>Control de Versiones</title>
 
-<para>A <firstterm>version control system</firstterm> (or
-<firstterm>revision control system</firstterm>) is a combination of
-technologies and practices for tracking and controlling changes to a
-project's files, in particular to source code, documentation, and web
-pages.  If you have never used version control before, the first thing
-you should do is go find someone who has, and get them to join your
-project.  These days, everyone will expect at least your project's
-source code to be under version control, and probably will not take
-the project seriously if it doesn't use version control with at least
-minimal competence.</para>
+<para>Un <firstterm>sistema de control de versiones</firstterm> (o
+<firstterm>sistema de control de revisiones</firstterm>) es una combinación
+de tecnologias y practicas para seguir y controlar los cambios
+realizados en los ficheros del proyecto, en particular en el código
+fuente, en la documentación y en las páginas web. Si nunca antes se ha
+utilizado un control de versiones, lo primero que hay que hacer es conseguir
+a alguien que sí lo haya hecho y hacer que se una al proyecto. Hoy en día
+todo el mundo espera que al menos el código fuente del proyecto este
+bajo un control de versiones y probablemente no se tomen el proyecto
+seriamente si no se utiliza este sistema con un mínimo de competencia.</para>
 
-<para>The reason version control is so universal is that it helps with
-virtually every aspect of running a project: inter-developer
-communications, release management, bug management, code stability and
-experimental development efforts, and attribution and authorization of
-changes by particular developers.  The version control system provides
-a central coordinating force among all of these areas.  The core of
-version control is <firstterm>change management</firstterm>:
-identifying each discrete change made to the project's files,
-annotating each change with metadata like the change's date and
-author, and then replaying these facts to whoever asks, in whatever
-way they ask.  It is a communications mechanism where a change is the
-basic unit of information.</para>
+<para>La razón por la cual el control de versiones es universal es porque
+ayuda virtualmente en todos los aspectos de dirigir un proyecto: comunicación
+entre los desarrolladores, manejo de los lanzamientos, administración de fallos,
+estabilidad entre el código y los esfuerzos de desarrollo experimental y 
+atribución y autorización en los cambios de los desarrolladores. El sistema
+de control de versiones permite a una fuerza coordinadora central 
+abarcar todas estas areas. El núcleo del sistema es la<firstterm>
+gestión de cambios</firstterm>: identificar cada cambio a los ficheros
+del proyecto, anotar cada cambio con metadata como la fecha y el autor
+de la modificación y disponer esta información para quien sea y como sea.
+Es un mecanismo de comunicación donde el cambio es la únidad básica de
+información.</para>
 
-<para>This section does not discuss all aspects of using a version
-control system.  It's so all-encompassing that it must be addressed
-topically throughout the book.  Here, we will concentrate on choosing
-and setting up a version control system in a way that will foster
-cooperative development down the road.</para>
+<para>Aun no hemos discutido todos los aspectos de utilizar un sistema
+de control de versiones ya que es un tema tan extenso que será
+introducido según el tópico a lo largo de este libro. Ahora, vamos a
+concentrarnos en seleccionar y configurar un sistema de control de versiones
+de forma que fomentemos un desarrollo cooperativo.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
-<title>Version Control Vocabulary</title>
+<title>Vocabulario</title>
 
-<para>This book cannot teach you how to use version control if you've
-never used it before, but it would be impossible to discuss the
-subject without a few key terms.  These terms are useful independently
-of any particular version control system: they are the basic nouns and
-verbs of networked collaboration, and will be used generically
-throughout the rest of this book.  Even if there were no version
-control systems in the world, the problem of change management would
-remain, and these words give us a language for talking about that
-problem concisely.
+<para>En este libro no podemos enseñar como utilizar el control de
+versiones si nunca antes lo ha utilizado, pero sería imposible continuar
+sin conocer algunos terminos clave. Estos son utiles independientemente
+del sistema particular utilizado: son definiciones basicas y verbos sobre
+la colaboración en red y serán utilizados a lo largo del libro. Incluso
+si no existiera ningún sistema de control de versiones, el problema del
+control de los cambios aun existiria y estas palabras nos dan un lenguaje
+para hablar acerca de este problema consistentemente.</para>
 
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
   <term><firstterm>commit</firstterm></term>
-  <listitem><para>To make a change to the project; more formally, to
-  store a change in the version control database in such a way that it
-  can be incorporated into future releases of the project.  "Commit"
-  can be used as a verb or a noun.  As a noun, it is essentially
-  synonymous with "change".  For example: "I just committed a fix for
-  the server crash bug people have been reporting on Mac OS X.  Jay,
-  could you please review the commit and check that I'm not misusing
-  the allocator there?"</para></listitem>
+  <listitem><para>
+	Realizar un cambio en el proyecto. Formalmente, almacenar
+	un cambio en la base de datos del control de versiones de
+	forma que pueda ser incorporado en lanzamientos futuros del
+	proyecto. "Commit" puede ser utilizado como un verbo o como
+	un sustantivo. Como un sustantivo, es escencialmente un
+	sinonimo de "cambio". Por ejemplo: "He commited una reparación
+	para un fallo reportado en Mac OS X que hacia que el servidor
+	se colgara. Jóse ¿podrias por favor revisarlo y verificar que
+	no estoy utilizando mal el ALLOCATOR?"
+  </para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
-  <term><firstterm>log&nbsp;message</firstterm></term>
-  <listitem><para>A bit of commentary attached to each commit,
-  describing the nature and purpose of the commit.  Log messages are
-  among the most important documents in any project: they are the
-  bridge between the highly technical language of individual code
-  changes and the more user-oriented language of features, bugfixes,
-  and project progress.  Later in this section, we'll look at ways to
-  distribute log messages to the appropriate audiences; also, <xref
-  linkend="codifying-tradition"/><phrase output="printed"> in
-  <xref linkend="communications"/></phrase> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
+  <term><firstterm>Mensaje de&nbsp;registro</firstterm></term>
+  <listitem><para>
+	Un pequeño comentario añadido a cada commit que describe
+	el tipo y el proposito del commit. Los mensajes de
+	registro forman parte de los documentos más importantes
+	de cualquier proyecto ya que son un puente entre el
+	lenguaje altamente técnico de los cambios individuales
+	en el código y el lenguaje más orientado al usuario de
+	caracteristicas, resolución de fallos y progreso del
+	proyecto. Más adelante vamos a ver la forma de distribuir
+	estos mensajes a la audiencia apropiada y tambien
+	<xref linkend="codifying-tradition"/><phrase output="printed">
+	en <xref linkend="communications"/></phrase> discutimos
+	como ENCOURAGE a los voluntarios para que escriban mensajes
+	de registro utiles y concisos.
+	</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
   <term><firstterm>update</firstterm></term>
-  <listitem><para>To ask that others' changes (commits) be
-  incorporated into your local copy of the project; that is, to bring
-  your copy "up-to-date".  This is a very common operation; most
-  developers update their code several times a day, so that they know
-  they're running roughly the same thing the other developers are
-  running, and so that if they see a bug, they can be pretty sure it
-  hasn't been fixed already.  For example: "Hey, I noticed the
-  indexing code is always dropping the last byte.  Is this a new bug?"
-  "Yes, but it was fixed last week&mdash;try updating, it should go
-  away."</para></listitem>
+  <listitem><para>
+	Solicitar los cambios (commits) que han realizado
+	otros en la copia local del proyecto, esto actualiza
+	esta copia a la ultima versión. Es una operación muy
+	común ya que la mayoria de los desarrolladores actualizan
+	su código varias veces al día y así saben que estan
+	ejecutando casi lo mismo que los otros desarrolladores, asi
+	que si se descubre un fallo es muy posible que este aun
+	no haya sido resuelto. Por ejemplo: "Hey, he notado
+	que el código del índice está fallando en el último
+	byte. ¿Es esto un nuevo fallo?" "Sí, pero fue resuelto
+	la semana pasada&mdash;prueba actualizar para resolverlo."
+ 	</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
-  <term><firstterm>repository</firstterm></term> <listitem><para>A
-  database in which changes are stored.  Some version control systems
-  are centralized: there is a single, master repository, which stores
-  all changes to the project.  Others are decentralized: each
-  developer has his own repository, and changes can be swapped back
-  and forth between repositories arbitrarily.  The version control
-  system keeps track of dependencies between changes, and when it's
-  time to make a release, a particular set of changes is approved for
-  that release.  The question of whether centralized or decentralized
-  is better is one of the enduring holy wars of software development;
-  try not to fall into the trap of arguing about it on your project
-  lists.</para></listitem>
+  <term><firstterm>repositorio</firstterm></term> <listitem><para>
+	Una base de datos en la que los cambios son almacenados. Algunas
+	versiones de sistemas de control de versiones son centralizados,
+	es decir, existe un único repositorio maestro, el cual almacena
+	todos los cambios en el proyecto. Otros sistemas son descentralizados,
+	cada desarrollador tiene su propio repositorio y los cambios pueden
+	ser intercambiados entre repositorios arbitrariamente. El sistema
+	de control de versiones mantiene un registro de las dependencias
+	entre estos cambios y cuando llega el momento de realizar un
+	lanzamiento, un conjunto particular de cambios es aprobado
+	para ese lanzamiento. La cuestión de cual sistema es mejor
+	es otra de las guerras santas del desarrollo de software.
+	Intentad no caer en la trampa de discutir sobre esto en las
+	listas de correo del proyecto.
+	</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
   <term><firstterm>checkout</firstterm></term>
-  <listitem><para>The process of obtaining a copy of the project from
-  a repository.  A checkout usually produces a directory tree called a
-  "working copy" (see below), from which changes may be committed back
-  to the original repository.  In some decentralized version control
-  systems, each working copy is itself a repository, and changes can
-  be pushed out to (or pulled into) any repository that's willing
-  to accept them.</para></listitem>
+  <listitem><para>
+	El proceso de obtener una copia del proyecto desde el repositorio.
+	Por lo general, un checkout produce un árbol de directorios
+	llamado "copia funcional" desde el cual los cambios serán
+	enviados de vuelta al repositorio original. En algunas versiones
+	descentralizadas de sistemas de control, cada copia funcional
+	es en si mismo un repositorio y los cambios son empujados (o
+	atraidos) a cualquier repositorio que este dispuesto a aceptarlos.
+	</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
-  <term><firstterm>working copy</firstterm></term>
-  <listitem><para>A developer's private directory tree containing the
-  project's source code files, and possibly its web pages or other
-  documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling the working copy what
-  repository it comes from, what "revisions" (see below) of the files
-  are present, etc.  Generally, each developer has his own working
-  copy, in which he makes and tests changes, and from which he
-  commits.</para></listitem>
+  <term><firstterm>copia funcional</firstterm></term>
+  <listitem><para>
+	El árbol de directorios privado de cada desarrollador que
+	que contiene el código fuente del proyecto y posiblemente
+	las páginas web u otros documentos. Una copia funcional
+	tambien contiene un pequeña cantidad de metadata administrada
+	por el sistema de control de versiones, informando a la copia
+	funcional cual es repositorio central de procedencia, la
+	revisión de los ficheros presentes, etc. Generalmente, cada
+	desarrollador tiene su propia copia funciona en la cual
+	realiza y prueba los cambios y desde la cual envia sus
+	commits (cambios).</para></listitem>
+
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
   <term><firstterm>revision</firstterm>,
-        <firstterm>change</firstterm>,
-        <firstterm>changeset</firstterm></term>
-  <listitem><para>A "revision" is usually one specific incarnation of
-  a particular file or directory.  For example, if the project starts
-  out with revision 6 of file F, and then someone commits a change to
-  F, this produces revision 7 of F.  Some systems also use
-  "revision", "change", or "changeset" to refer to a set of changes
-  committed together as one conceptual unit.</para> 
+        <firstterm>cambio</firstterm>,
+        <firstterm>conjunto de cambios</firstterm></term>
+  <listitem><para>
+	Una revisión es usualmente una encarnación específica de un
+	fichero o directorio en particular. Por ejemplo, si el proyecto
+	se inicia en la revisión 6 del fichero F y alguien envia un
+	cambio al fichero F, esto produce la revisión 7 de F. Algunos
+	sistemas tambien utilizan revisión (revision), cambio (change)
+	o conjunto de cambios (changeset) para referirse a un conjunto
+	de cambios enviados juntos como una únidad conceptual.</para>
 
-  <para>These terms occasionally have distinct technical meanings in
-  different version control systems, but the general idea is always
-  the same: they give a way to speak precisely about exact points in
-  time in the history of a file or a set of files (say, immediately
-  before and after a bug is fixed).  For example: "Oh yes, she fixed
-  that in revision 10" or "She fixed that in revision 10 of
-  foo.c."</para>
+<para>Estos conceptos pueden tener distintos significados tecnicos
+en cada sistema de control de versiones, pero en general, la ídea es
+siempre la misma: dar un sistema para comunicar de manera precisa la
+historia de cambios en un fichero o conjunto de ficheros (inmediatamente
+antes y despues de que se ha corregido un fallo). Por ejemplo: "Eso
+se ha resuelto en la revisión 10" o "Se ha corregido eso en la revisión
+10 del fichero foo.c."</para>
 
-  <para>When one talks about a file or collection of files without
-  specifying a particular revision, it is generally assumed that one
-  means the most recent revision(s) available.</para></listitem>
- </varlistentry>
+<para>Cuando se habla sobre ficheros o una colección de ficheros sin
+específicar una revisión en particular, por lo general se asume que
+nos referimos a la revisión disponible más reciente.</para></listitem>
+</varlistentry>
 
   <sidebar id="version-vs-revision">
-  <title>"Version" Versus "Revision"</title>
-  <para>The word <firstterm>version</firstterm> is sometimes used as a
-  synonym for "revision", but I will not use it that way in this
-  book, because it is too easily confused with "version" in the sense
-  of a version of a piece of software&mdash;that is, the release or
-  edition number, as in "Version 1.0".  However, since the phrase
-  "version control" is already standard, I will continue to use it as
-  a synonym for "revision control" and "change control".</para>
+  <title>"Versión" Versus "Revisión"</title>
+<para>El termino <firstterm>versión</firstterm> es a veces utilizado
+como un sinonimo para "revisión", pero aquí no voy a utilizarla de esta
+forma, ya que se puede confundir facilmente con "versión" en el sentido
+de una versión de un programa&mdash;así que, el número de lanzamiento
+o edición como en "Versión 1.0". Y aunque la frase "control de versiones"
+es un estándar, continuare utilizandolo como sinonimo para "control
+de revisiones" y para "control de cambios".</para>
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
   <term><firstterm>diff</firstterm></term>
-  <listitem><para>A textual representation of a change.  A diff shows
-  which lines were changed and how, plus a few lines of surrounding
-  context on either side.  A developer who is already familiar with
-  some code can usually read a diff against that code and understand
-  what the change did, and even spot bugs.</para></listitem>
+  <listitem><para>
+Una representación contextual de un cambio. Un diff muestra las lineas
+que han sido modíficadas, como y además, algunas lineas contextuales
+rodeandolas a cada lado. Un desarrollador familiarizado con el código
+puede, con leer un diff de ese código, entender lo que hace el cambio
+e incluso detectar fallos.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
-  <term><firstterm>tag</firstterm></term>
-  <listitem><para>A label for a particular collection of files at
-  specified revisions.  Tags are usually used to preserve
-  interesting snapshots of the project.  For example, a tag is usually
-  made for each public release, so that one can obtain, directly from
-  the version control system, the exact set of files/revisions
-  comprising that release.  Common tag names are things like
-  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
-  etc.</para></listitem>
+  <term><firstterm>etiqueta (tag)</firstterm></term>
+  <listitem><para>
+Una etiqueta para una colección particular de ficheros en una revisión
+especfífica. Los tags son utilizados para preservar capturas interesantes
+del proyecto. Por ejemplo, un tag es hecho para cada lanzamiento público,
+de forma que cada persona pueda obtener, directamente desde el sistema
+de control de versiones, el conjunto exacto de ficheros/revisiones
+que componen el lanzamiento. Algunos tags comunes son como 
+<literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
+etc.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
-  <term><firstterm>branch</firstterm></term>
-  <listitem><para>A copy of the project, under version control but
-  isolated, so that changes made to the branch don't affect the rest
-  of the project, and vice versa, except when changes are
-  deliberately "merged" from one side to the other (see below).
-  Branches are also known as "lines of development".  Even when a
-  project has no explicit branches, development is still considered
-  to be happening on the "main branch", also known as the "main line"
-  or "<firstterm>trunk</firstterm>".</para>
+  <term><firstterm>rama (branch)</firstterm></term>
+  <listitem><para>
+Es una copia del proyecto, bajo el control de versiones, pero aislado,
+de forma que los cambios realizados en esta rama no afecten al resto
+del proyecto y vice versa, excepto cuando los cambios sean
+deliberadamente "unidos" de un lado al otro. Las ramas tambien son
+conocidas como "lineas de desarrollo". Incluso cuando un proyeto
+no tiene ramas específicas se considera que el desarrollo se esta
+produciendo en la rama principal, tambien conocida como "línea
+primaria" o "<firstterm>trunk</firstterm>".</para>
 
   <para>Branches offer a way to isolate different lines of development
   from each other.  For example, a branch can be used for experimental
@@ -1245,63 +1269,82 @@ problem concisely.
   those approved by the release managers.  This way, making a release
   needn't interfere with ongoing development work.  See <xref
   linkend="branches"/><phrase output="printed"> later in this
-  chapter</phrase> for a more detailed discussion of
-  branching.</para></listitem>
- </varlistentry>
+
+<para>Las ramas o branches, permiten aislar diferentes lineas de
+desarrollo de si mismas. Por ejemplo, una rama puede ser utilizada
+para un desarrollo experimental que sería demasiado inestable para
+la rama principal. O al contrario, una rama puede ser utilizada
+como sitio para estabilizar una versión para lanzamiento. Durante
+el proceso de lanzamiento, el desarrollo regular se mantendria ininterrumpida
+en la rama principal. Mientras tanto, en la rama de lanzamiento,
+ningún cambio es aceptado excepto aquellos aprobados por el
+responsable del lanzamiento. De esta manera, realizar un lanzamiento
+no tiene porque interferir con el trabajo de desarrollo que se está
+realizando. Para más información <xref linkend="branches"/><phrase output="printed">
+más adelante en el capítulo</phrase> para una discusión más
+detallada sobre las ramas.</para></listitem>
+</varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
-  <term><firstterm>merge (a.k.a. port)</firstterm></term>
-  <listitem><para>To move a change from one branch to another.  This
-  includes merging from the main trunk to some other branch, or vice
-  versa.  In fact, those are the most common kinds of merges; it is
-  rare to port a change between two non-main branches.  See <xref
-  linkend="vc-singularity"/> for more about this kind of
-  merging.</para>
-
-  <para>"Merge" has a second, related meaning: it is what the version
-  control system does when it sees that two people have changed the
-  same file but in non-overlapping ways.  Since the two changes do not
-  interfere with each other, when one of the people updates their copy
-  of the file (already containing their own changes), the other
-  person's changes will be automatically merged in.  This is very
-  common, especially on projects where multiple people are hacking on
-  the same code.  When two different changes <emphasis>do</emphasis>
-  overlap, the result is a "conflict"; see below.</para>
+  <term><firstterm>merge</firstterm></term>
+  <listitem><para>
+	Mover un cambio de una rama a otra, lo que incluye unir desde
+	la rama principal a otra rama o vice versa. De hecho, estos
+	son las uniones más comunes y es rara la ocasión en la que
+	esto se hace entre dos ramas no principales. Para más
+	información sobre los merge <xref linkend="vc-singularity"/>.
+	</para>
+	
+<para>"Merge" tiene otro significado: es lo que hace el sistema de control
+de versiones cuando se encuentra con que dos personas han realizado
+cambios en un mismo fichero sin relación alguna. Ya que estos cambios
+no interfieren entre ellos, cuando alguna de estas personas actualizan
+su copia del fichero (el cual ya contiene los cambios) los cambios
+de la otra persona serán unidos automaticamente. Esto sucede muy a
+menudo, especialmente en proyectos con multiples personas realizando
+cambios en el mismo código. Cuando dos cambios diferentes estan
+relacionados, el resultado es un "conflicto".</para>
   </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
-  <term><firstterm>conflict</firstterm></term>
-  <listitem><para>What happens when two people try to make different
-  changes to the same place in the code.  All version control systems
-  automatically detect conflicts, and notify at least one of the
-  humans involved that their changes conflict with someone else's.  It
-  is then up to that human to <firstterm>resolve</firstterm> the
-  conflict, and to communicate that resolution to the version control
-  system.</para></listitem>
+  <term><firstterm>conflicto</firstterm></term>
+  <listitem><para>
+	Sucede cuando dos o más personas intentan realizar diferentes
+	cambios en la misma porción de código. Todos los sistemas
+	de control de versiones detectan estos conflictos automaticamente
+	y notifican a al menos uno de los humanos involucrados de que
+	sus cambios entran en conflicto con los de alguien más. Es
+	entonces tarea de esta personas <firstterm>resolver</firstterm>
+	el conflicto y comunicar esa resolución al sistema de control
+	de versiones.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
-  <term><firstterm>lock</firstterm></term>
-  <listitem><para>A way to declare an exclusive intent to change a
-  particular file or directory.  For example, "I can't commit any
-  changes to the web pages right now.  It seems Alfred has them all
-  locked while he fixes their background images."  Not all version
-  control systems even offer the ability to lock, and of those that
-  do, not all require the locking feature to be used.  This is because
-  parallel, simultaneous development is the norm, and locking people
-  out of files is (usually) contrary to this ideal.</para>
+  <term><firstterm>bloqueo (lock)</firstterm></term>
+  <listitem><para>
+	Declaración de un intento exclusivo para cambiar un fichero
+	o directorio en particular. Por ejemplo, "No puedo enviar
+	cambios a las paginas web ahora mismo, ya que parece que
+	Alfredo las tiene bloqueadas mientras arregla sus
+	imagenes de fondo." No todos los sistemas de control de
+	versiones ofrecen la posibilidad del bloqueo y aquellos
+	que sí lo permiten, no es necesario que se utilice. Esto
+	es porque el desarrollo paralelo y simultaneo es la norma
+	y bloquear a la gente para que no puedan modifícar los
+	ficheros es contrario a la ídea del sistema.</para>
 
-  <para>Version control systems that require locking to make commits
-  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
-  Those that do not are said to use the
-  <firstterm>copy-modify-merge</firstterm> model.  An excellent
-  in-depth explanation and comparison of the two models may be found
-  at <ulink
-  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
-  general, the copy-modify-merge model is better for open source
-  development, and all the version control systems discussed in this
-  book support that model.</para></listitem>
+<para>El modelo del sistema de control de versiones que requiere el bloqueo
+de ficheros suele ser llamado <firstterm>bloqueo-modificación-desbloque</firstterm>
+y el modelo que no requiere del bloqueo es llamado 
+<firstterm>copia-modificación-unión</firstterm>. Una excelente explicación
+en profundidad y comparaciones puede ser encontrada en
+<ulink url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>. En
+general, el modelo de copia-modificación-unión es el mejor
+para el desarrollo open source y todos los sistemas de control
+de versiones discutidos en este libro soportan este modelo.
+</para></listitem>
+
  </varlistentry>
 
 </variablelist>
@@ -1313,278 +1356,295 @@ problem concisely.
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-choosing">
-<title>Choosing a Version Control System</title>
+<title>Escoger un sistema de control de versiones</title>
 
-<para>As of this writing, the two most popular version control systems
-in the free software world are <firstterm>Concurrent Versions
-System</firstterm> (<firstterm>CVS</firstterm>,
+<para>Hasta ahora, los dos sistemas de control de versiones más
+populares en el mundo del software libre son <firstterm>Concurrent
+Versions System</firstterm> (<firstterm>CVS</firstterm>),
 <ulink url="http://www.cvshome.org/"/>)
-and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
+y <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
 <ulink url="http://subversion.tigris.org/"/>).</para>
 
-<para>CVS has been around for a long time.  Most experienced
-developers are already familiar with it, it does more or less what you
-need, and since it's been popular for a long time, you probably won't
-end up in any long debates about whether or not it was the right
-choice.  CVS has some disadvantages, however.  It doesn't provide an
-easy way to refer to multi-file changes; it doesn't allow you to
-rename or copy files under version control (so if you need to
-reorganize your code tree after starting the project, it can be a real
-pain); it has poor merging support; it doesn't handle large files or
-binary files very well; and some operations are slow when large
-numbers of files are involved.</para>
+<para>CVS lleva largo tiempo y los desarrolladores más experimentados
+ya estan familiarizados con el. Hace más o menos lo necesario
+y ya que ha sido popular durante mucho tiempo es probable que no
+se termine discutiendo su utilización. A pesar de todo, CVS tiene
+algunas desventajas. No ofrece facilidad para referenciar cambios
+en multiples ficheros, no permite renombrar o copiar ficheros dentro
+del sistema de control (asi que puede ser muy doloroso reorganizar el
+código despues de iniciar el proyecto), el soporte para las uniones
+es algo pobre, no trabaja muy bien con ficheros muy grandes o 
+con ficheros binarios y algunas operaciones son lentas cuando muchos
+ficheros estan involucrados.</para>
 
-<para>None of CVS's flaws is fatal, and it is still quite popular.
-However, in the last few years the more recent Subversion has been
-gaining ground, especially in newer
-projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"/> and
+<para>Ninguno de estos fallos de CVS son fatales y sigue siendo muy
+popular. Sin embargo, durante los ultimos años Subversion ha venido
+ganando terreno, especialmente con nuevos proyectos.
+<footnote><para>Más información en <ulink url="http://cia.vc/stats/vcs"/>
+y para evidencia sobre su crecimiento en
 <ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
-for evidence of this growth.</para></footnote>.  If you're starting a
-new project, I recommend Subversion.</para>
+.</para></footnote>. Si esta iniciando un nuevo proyecto, recomiendo
+Subversion.</para>
 
-<para>On the other hand, since I'm involved in the Subversion project,
-my objectivity might reasonably by questioned.  And in the last few
-years a number of new open-source version control systems have
-appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
-in rough order of popularity.  As the list makes clear, deciding on a
-version control system could easily become a lifelong research
-project.  Possibly you will be spared the decision because it will be
-made for you by your hosting site.  But if you must choose, consult
-with your other developers, ask around to see what people have
-experience with, then pick one and run with it.  Any stable,
-production-ready version control system will do; you don't have to
-worry too much about making a drastically wrong decision.  If you
-simply can't make up your mind, then go with Subversion.  It's fairly
-easy to learn, and is likely to remain a standard for at least a few
-years.</para>
+<para>Por otra parte, dado que estoy involucrado en el proyecto
+Subversion, mi objetividad puede ser razonablemente cuestionable y
+durante los ultimos años han ido surgiendo un número de nuevos sistemas de control
+de versiones open source. Podemos encontrar una lista de todos los
+sistemas que conozco 
+en <xref linkend="vc-systems"/> según su popularidad. Como muestra
+esta lista, escoger un sistema de control de versiones puede convertirse
+en una interminable tarea de investigación. Posiblemente esta decision
+ya haya sido tomada por el sitio donde hospedamos el proyecto,
+liberandonos de esta carga, pero si es necesario tomar una decisión,
+lo mejor es consultar con otros desarrolladores, indagar un poco
+para tener una ídea de las distintas experiencias que haya tenido
+la gente y luego escoger uno y mantenerse con este. Cualquier
+sistema de control de versiones estable y listo para entornos
+de producción será suficiente, no hay que preocuparse demasiado
+sobre tomar una decisión equivocada. Si simplemente no se puede
+decidir, entonces la opción es Subversion. Es relativamente
+fácil de aprender y es probable que se mantenga como el estándar
+por unos años más.</para>
+
 
 </sect2>
 
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-using">
-<title>Using the Version Control System</title>
+<title>Utilizando el sistema de control de versiones</title>
 
-<para>The recommendations in this section are not targeted toward a
-particular version control system, and should be simple to implement
-in any of them.  Consult your specific system's documentation for
-details.</para>
+<para>Las recomendaciones realizadas en esta sección no estan
+enfocadas hacia un sistema de control de versiones en particular
+y deberia ser sencillo implementarlas en cualquiera. La documentación
+específica del sistema debe ofrecer los detalles necesarios.</para>
 
 <sect3 id="version-everything">
-<title>Version everything</title>
+<title>Versiones de todo</title>
 
-<para>Keep not only your project's source code under version control,
-but also its web pages, documentation, FAQ, design notes, and anything
-else that people might want to edit.  Keep them right next to the
-source code, in the same repository tree.  Any piece of information
-worth writing down is worth versioning&mdash;that is, any piece of
-information that could change.  Things that don't change should be
-archived, not versioned.  For example, an email, once posted, does not
-change; therefore, versioning it wouldn't make sense (unless it becomes
-part of some larger, evolving document).</para>
+<para>No solo hay que mantener el código del proyecto bajo el control
+de versiones tambien las paginas web, documentación, FAQ, notas de 
+diseño y cualquier cosa que pueda ser necesario editar. Todo esto
+hay que mantenerlo cerca del código, en el mismo árbol que el
+repositorio. Se deben mantener versiones de cualquier pieza de
+información que pueda cambiar y archivar la que no cambie. 
+Por ejemplo, un correo electrónico,
+una vez enviado, no cambia, por lo tanto, mantener versiones de este
+no tiene sentido (a menos que se convierta en una parte importante
+de la documentación).</para>
 
-<para>The reason versioning everything together in one place is
-important is so people only have to learn one mechanism for submitting
-changes.  Often a contributor will start out making edits to the web
-pages or documentation, and move to small code contributions later,
-for example.  When the project uses the same system for all kinds of
-submissions, people only have to learn the ropes once.  Versioning
-everything together also means that new features can be committed
-together with their documentation updates, that branching the code
-will branch the documentation too, etc.</para>
+<para>La razón de mantener versiones de todo en un mismo sitio, es
+para que la gente sólo tenga que aprender un sistema para realizar
+cambios. A menudo, un voluntario se iniciara modificando algunas
+paginas web o partes de la documentación, para luego pasar a realizar
+pequeñas contribuciones al código, por ejemplo. Cuando el proyecto
+utiliza el mismo sistema para todo tipo de cambios, las personas sólo
+tendrán que aprender THE ROPES una vez. Mantener las versiones juntas
+significa que nuevas caracteristicas pueden ser añadidas junto
+a la actualización de la documentación, y que al crear ramas del
+código, se crearan ramas de la documentación, etc.</para>
 
-<para>Don't keep <firstterm>generated files</firstterm> under version
-control.  They are not truly editable data, since they are produced
-programmatically from other files.  For example, some build systems
-create <filename>configure</filename> based on the template
-<filename>configure.in</filename>.  To make a change to the
-<filename>configure</filename>, one would edit
-<filename>configure.in</filename> and then regenerate; thus, only the
-template <filename>configure.in</filename> is an "editable file."
-Just version the templates&mdash;if you version the result files as
-well, people will inevitably forget to regenerate when they commit a
-change to a template, and the resulting inconsistencies will cause no
-end of confusion.<footnote><para>For a different opinion on the
-question of versioning <filename>configure</filename> files, see
-Alexey Makhotkin's post "<citetitle>configure.in and version
-control</citetitle>" at
+<para>No hace falta mantener los <firstterm>ficheros generados</firstterm>
+bajo el sistema de control de versiones ya que no son datos editables
+generados por otros programas. Por ejemplo, algunos sistemas de
+compilado generan los ficheros <filename>configure</filename> basandose
+en una plantilla <filename>configure.in</filename>. Para realizar
+cambios al fichero <filename>configure</filename> bastaria con
+modíficar <filename>configure.in</filename> y volver a generarlo.
+Entonces, sólo el fichero <filename>configure.in</filename> es
+un fichero editable. Sólo es necesario mantener versiones de las
+plantillas&mdash;si se hace con los ficheros generados, la gente
+se olvidará de volver a generarlos cuando realicen algún cambio
+en las plantillas y las resultantes inconsistencias crearan una
+mayor confusión. <footnote><para>Alexey Mathotkin tiene una
+opinión diferente sobre el tema de controlar las versiones de los
+ficheros <filename>configure</filename> en un artículo llamado
+"<citetitle>configure.in and version control</citetitle>" en
 <ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>.</para></footnote></para>
 
-<para>The rule that all editable data should be kept under version
-control has one unfortunate exception: the bug tracker.  Bug databases
-hold plenty of editable data, but for technical reasons generally
-cannot store that data in the main version control system.  (Some
-trackers have primitive versioning features of their own, however,
-independent of the project's main repository.)</para>
+<para>La regla de que todos los datos editables deben ser mantenidos
+bajo el control de versiones tiene una excepción desafortunada: el
+gestor de fallos. La base de datos de fallos almacena una gran cantidad
+de datos editables pero generalmente, por razones tecnicas, no se puede
+mantener bajo el control de versiones principal. (Algunos gestores
+tienen caracteristicas primitivas de control de versiones, pero
+independiente de repositorio principal del proyecto.)</para>
 
 </sect3>
 
 <sect3 id="vc-browsing">
-<title>Browsability</title>
+<title>Navegabilidad</title>
 
-<para>The project's repository should be browsable on the Web.  This
-means not only the ability to see the latest revisions of the
-project's files, but to go back in time and look at earlier revisions,
-view the differences between revisions, read log messages for selected
-changes, etc.</para>
+<para>El repositorio del proyecto debe ser accesible desde Internet.
+Esto no solo significa la habilidad de visualizar la ultima revisión
+de los ficheros del proyecto, pero permitir volver atras en el tiempo
+y ver en revisiones anteriores, mirar las diferencias entre revisiones,
+leer los mensajes de registro para cambios específicos, etc.</para>
 
-<para>Browsability is important because it is a lightweight portal to
-project data.  If the repository cannot be viewed through a web
-browser, then someone wanting to inspect a particular file (say, to
-see if a certain bugfix had made it into the code) would first have to
-install version control client software locally, which could turn
-their simple query from a two-minute task into a half-hour or longer
-task.</para>
+<para>La navegabilidad es importante porque es un ligero portal a los
+datos del proyecto. Si el repositorio no es accesible desde un navegador
+web entonces alguien que desea inspeccionar un fichero en particular (por
+ejemplo, para mirar si una mejora ha sido incluida en el código) tendrá
+que instalar el mismo programa utilizado por el sistema de control
+de versiones, lo cual convierte una simple consulta de dos minutos en
+una tarea de medio hora o más.</para>
 
-<para>Browsability also implies canonical URLs for viewing specific
-revisions of files, and for viewing the latest revision at any given
-time.  This can be very useful in technical discussions or when
-pointing people to documentation.  For example, instead of saying "For
-tips on debugging the server, see the www/hacking.html file in your
-working copy," one can say "For tips on debugging the server, see
-<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>,"
-giving a URL that always points to the latest revision of
-the <filename>hacking.html</filename> file.  The URL is better because
-it is completely unambiguous, and avoids the question of whether the
-addressee has an up-to-date working copy.</para>
+<para>Tambien implica URLs CANONICAL para visualizar revisiones
+específicas de un fichero y para la ultima revisión en cualquier
+momento. Esto puede ser muy útil durante discusiones tecnicas o para
+indicar alguna documentación a la gente. Por ejemplo, en lugar de
+decir "Para ayudas sobre como encontrar fallos en el servidor,
+mirad el fichero www/hacking.html en vuestra copia funcional" se puede
+decir "Para ayudas sobre como encontrar fallos en el servidor,
+mirad <emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>,"
+dando una URL que siempre lleva a la ultima revisión del fichero
+<filename>hacking.html</filename>. La URL es mejor porque no es nada
+ambigua y evita la cuestión de si existe una copia funcional
+actualizada.</para>
 
-<para>Some version control systems come with built-in
-repository-browsing mechanisms, while others rely on third-party tools
-to do it.  Three such tools are <firstterm>ViewCVS</firstterm> (<ulink
+<para>Algunos sistemas de control de versiones incluyen un mecanismo
+que permite la navegación del repositorio, mientras que otros
+dependen de herramientas de terceros. Tres de estas herramientas son
+<firstterm>ViewCVS</firstterm> (<ulink
 url="http://viewcvs.sourceforge.net/"/>),
 <firstterm>CVSWeb</firstterm> (<ulink
 url="http://www.freebsd.org/projects/cvsweb.html"/>), and
 <firstterm>WebSVN</firstterm> (<ulink
-url="http://websvn.tigris.org/"/>).  The first works with both CVS and
-Subversion, the second with CVS only, and the third with Subversion
-only.</para>
+url="http://websvn.tigris.org/"/>).
+La primera trabaja muy bien con CVS y con Subversion, la segunda
+sñolo con CVS y la tercera sólo con Subversion.</para>
 
 </sect3>
 
 <sect3 id="commit-emails">
-<title>Commit emails</title>
+<title>Correos de cambios</title>
 
-<para>Every commit to the repository should generate an email showing
-who made the change, when they made it, what files and directories
-changed, and how they changed.  The email should go to a special
-mailing list devoted to commit emails, separate from the mailing lists
-to which humans post.  Developers and other interested parties should
-be encouraged to subscribe to the commits list, as it is the most
-effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review
-(see <xref linkend="code-review"/>), commit emails help create a
-sense of community, because they establish a shared environment in
-which people can react to events (commits) that they know are visible
-to others as well.</para>
+<para>Cada commit al repositorio deberia generar un correo electrónico
+mostrando quien ha hecho el cambio, cuando, cuales ficheros y directorios
+han cambiado y como. Este correo debe ser dirigido a una lista de correos
+separada de las listas a las que envian los humanos. Los desarrolladores
+y todos aquellos interesados deben ser animados para suscribirse a las
+lista de commits ya que es la manera más efectiva de mantenerse al día con
+lo que sucede en el proyecto al nivel del código. Aparte de los obvios
+beneficios tecnicos de la revisión por la comunidad (<xref linkend="code-review"/>),
+los correos con los cambios ayudan a crear un sentido de comunidad
+porque establecen un ambiente compartido en el que la gente puede 
+reaccionar ante diferentes eventos (commits) que saben son visibles
+a otros tambien.</para>
 
-<para>The specifics of setting up commit emails will vary depending on
-your version control system, but usually there's a script or other
-packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm>,
-specifically a <firstterm>post-commit hook</firstterm>, also called
-the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
-a general means of launching automated tasks in response to commits.
-The hook is triggered by an individual commit, is fed all the
-information about that commit, and is then free to use that
-information to do anything&mdash;for example, to send out an
-email.</para>
+<para>La configuración específica para habilitar estos correos varia
+dependiendo de la versión del sistema de control de versiones pero
+a menudo existe un script o páquete que facilita esto. Si se tiene
+algún problema para encontrar estos, intente buscar en la documentación
+el tema relacionado con los <firstterm>hooks</firstterm>,
+especificamente el <firstterm>post-commit hook</firstterm>, tambien
+llamado <firstterm>loginfo hook</firstterm> en CVS. Los
+Post-commit hooks son tareas automatizadas que se ejecutan como
+respuesta a los cambios enviados (commits). El hook es ejecutado
+por un cambio individual, se rellena con la información acerca del
+cambio y luego es liberada esa información para ser utilizada como
+se desee&mdash;por ejemplo, para enviar un correo electrónico.</para>
 
-<para>With pre-packaged commit email systems, you may want to
-modify some of the default behaviors:</para>
+<para>Con los sistemas de correos con cambios ya listos para usar,
+quizas sea necesario modificar alguna de las siguientes conductas:</para>
 
 <orderedlist>
 
   <listitem>
-  <para>Some commit mailers don't include the actual diffs in the
-  email, but instead provide a URL to view the change on the web using
-  the repository browsing system.  While it's good to provide the URL,
-  so the change can be referred to later, it is also
-  <emphasis>very</emphasis> important that the commit email include
-  the diffs themselves.  Reading email is already part of people's
-  routine, so if the content of the change is visible right there in
-  the commit email, developers will review the commit on the spot,
-  without leaving their mail reader.  If they have to click on a URL to
-  review the change, most won't do it, because that requires a new
-  action instead of a continuation of what they were already doing.
-  Furthermore, if the reviewer wants to ask something about the
-  change, it's vastly easier to hit reply-with-text and simply
-  annotate the quoted diff than it is to visit a web page and
-  laboriously cut-and-paste parts of the diff from web browser to
-  email client.</para>
+	<para>Algunos de estos sistemas no incluyen el diff en el correo
+	que envian sino que enlazan con una URL para poder ver el cambio
+	en la web utilizando el sistema de navegación del repositorio.
+	Aunque esta bien dar una URL para que se pueda revisar el cambio
+	luego, tambien es <emphasis>muy</emphasis> importante que el
+	correo del commit incluya los diff. Leer el correo electrónico
+	ya es parte de la rutina de la gente, así que si el contenido es
+	visible allí mismo en el correo, los desarrolladores podrán
+	revisar el commit en el mismo sitio sin la necesidad de abandonar
+	sus clientes de correo. Si tienen que seguir un enlace a una
+	página de revisiones, muchos no lo pulsarán, ya que esto requiere
+	de una nueva acción en lugar de una continuación de lo que ya
+	estaban haciendo. Por si fuera poco, si el lector desea preguntar
+	algo acerca del cambio, es mucho más fácil responder al mensaje
+	incluyendo el texto original y simplemente realizar anotaciones
+	en el diff, en lugar de tener que visitar una página web y
+	tomarse la molestia de copiar y pegar partes del diff en el
+	navegador web al cliente de correo.</para>
 
-  <para>(Of course, if the diff is huge, such as when a large body of
-  new code has been added to the repository, then it makes sense to
-  omit the diff and offer only the URL.  Most commit mailers can do
-  this kind of limiting automatically.  If yours can't, then it's
-  still better to include diffs, and live with the occasional huge
-  email, than to leave the diffs off entirely.  Convenient reviewing
-  and commenting is a cornerstone of cooperative development, much
-  too important to do without.)</para>
+	<para>(Por supuesto que si el diff es gigantesco, como cuando
+	una gran parte de código nuevo ha sido añadido al repositorio,
+	entonces tiene sentido omitir la parte del diff y ofrecer
+	sólo la URL. Muchos de los sistemas permiten hacen esto
+	automaticamente. Si el utilizado en el proyecto no es capaz
+	de hacer esto, entonces sigue siendo mejor incluir los diffs
+	completos. La conveniencia de la revisión y los comentarios
+	es una piedra angular del desarrollo cooperativo, algo demasiado
+	importante para olvidar.)</para>
   </listitem>
 
-  <listitem><para>The commit emails should set their Reply-to header
-  to the regular development list, not the commit email list.  That
-  is, when someone reviews a commit and writes a response, their
-  response should be automatically directed toward the human
-  development list, where technical issues are normally discussed.
-  There are a few reasons for this.  First, you want to keep all
-  technical discussion on one list, because that's where people expect
-  it to happen, and because that way there's only one archive to
-  search.  Second, there might be interested parties not subscribed to
-  the commit email list.  Third, the commit email list advertises
-  itself as a service for watching commits, not for watching commits
-  <emphasis>and</emphasis> occasional technical discussions.  Those who
-  subscribed to the commit email list did not sign up for anything but
-  commit emails; sending them other material via that list would
-  violate an implicit contract.  Fourth, people often write programs
-  that read the commit email list and process the results (for
-  display on a web page, for example).  Those programs are prepared to
-  handle consistently-formatted commit emails, but not inconsistent
-  human-written mails.</para>
+  <listitem>
+	<para>Los correos con los cambios deben tener su cabecera
+	Reply-To direccionada hacia la lista regular de desarrollo, no
+	a la lista de los cambios, de esta manera cuando alguien revise
+	un cambio y escriba una respuesta, esta debe ser dirigida
+	automaticamente a la lista de desarrolladores, donde los temas
+	técnicos son discutidos normalmente. Existen varias razones para
+	esto, primero, se quiere mantener todas las discusiones tecnicas
+	en la lista, porque es allí donde la gente espera que sucedan y
+	porque así ésta es la única lista que será necesario archivar.
+	Segundo, puede que existan partes interesadas no suscritas a la
+	lista de cambios. Tercero, la lista de cambios es publicitada
+	como una lista para los commits y no como una lista para los
+	commits y las discusiones tecnicas ocasionadas. Quienes se han
+	suscrito sólo a la lista de cambios, no se han suscrito a nada
+	más que commits, al enviarles correos con material sin relación
+	utilizando ésta via, es una violación del contrato implicito.
+	Cuarto, algunas personas escriben programas que procesan los
+	correos con los cambios (para publicarlos en una página web,
+	por ejemplo). Estos programas estan preparados para manejar
+	correos con un formato consistente y son incapaces de trabajar
+	con correos escritos por humanos.</para>
 
-  <para>Note that this advice to set Reply-to does not contradict the
-  recommendations in
-  <xref linkend="reply-to"/><phrase output="printed"> earlier in
-  this chapter</phrase>.  It's
-  always okay for the <emphasis>sender</emphasis> of a message to set
-  Reply-to.  In this case, the sender is the version control system
-  itself, and it sets Reply-to in order to indicate that the
-  appropriate place for replies is the development mailing list, not
-  the commit list.</para>
-
+	<para>Hay que señalar que ésta recomendación no contradice
+	las recomendaciones anteriores en 
+	<xref linkend="reply-to"/><phrase output="printed"></phrase>.
+	Siempre esta bien que el remitente del mensaje configure
+	la cabecera Reply-to. En este caso, el remitente es el
+	sistema de control de versiones y su Reply-to lo configura
+	de tal manera que indique que el lugar apropiado para responder
+	es la lista de desarrollo y no la lista de cambios</para>
   </listitem>
 
 </orderedlist>
 
 <sidebar id="cia">
-<title>CIA: Another Change Publication Mechanism</title>
+<title>CIA: Otro mecanismo de publicación de cambios</title>
 
-<para>Commit emails are not the only way to propagate change news.
-Recently, another mechanism called CIA (<ulink
-url="http://cia.navi.cx/"/>) has been developed.  CIA is a real-time
-commit statistics aggregator and distributor.  The most popular use of
-CIA is to send commit notifications to IRC channels, so that people
-logged into those channels see the commits happening in real time.
-Though of somewhat less technical utility than commit emails, since
-observers might or might not be around when a commit notice pops up in
-IRC, this technique is of immense <emphasis>social</emphasis> utility.
-People get the sense of being part of something alive and active, and
-feel that they can see progress being made right before their
-eyes.</para>
+<para>Los correos con los cambios no son la única forma de propagar
+las noticias de los cambios. Recientemente, otro mecanismo llamado CIA
+(<ulink url="http://cia.navi.cx/"/>) ha sido desarrollador. Este es un
+distribuidor y AGGREGATOR de estádisticas de cambios. El uso más popular
+de CIA es el de enviar notificaciones de los commits a un cánal IRC de
+forma que las personas en el canal pueden ver los commits en tiempo
+real. Aunque es una utilidad menos técnica que los correos electrónicos,
+ya que los observadores puede que esten o no conectados cuando las alertas
+sobre nuevos cambios llegan al canal, esta técnica tiene una inmensa
+utiidad <emphasis>social</emphasis>. La gente tiene la sensación de
+pertenecer a algo vivo y activo, y siente que pueden ver el progreso
+que se está haciendo ante sus propios ojos.</para> 
 
-<para>The way it works is that you invoke the CIA notifier program
-from your post-commit hook.  The notifier formats the commit
-information into an XML message, and sends to a central server
-(typically <literal>cia.navi.cx</literal>).  That server then
-distributes the commit information to other forums.</para>
+<para>El programa de notificaciones del CIA es invocado por el
+post-commit hook, da formato al commit en un mensaje XML y lo envia
+al servidor central (por lo general <literal>cia.navi.cx</literal>).
+Este servidor luego distribuye la información a los otros
+foros.</para>
 
-<para>CIA can also be configured to send out <ulink
-url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
-feeds.  See the documentation at <ulink url="http://cia.navi.cx/"/>
-for details.</para>
+<para>CIA tambien puede ser configurado para enviar
+<ulink url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">
+feeds RSS</ulink>. Más detalles en la documentación en
+<ulink url="http://cia.navi.cx/"/>.</para>
 
-<para>To see an example of CIA in action, point your IRC
-client at <literal>irc.freenode.net</literal>, channel
+<para>Para ver un ejemplo de CIA en acción conectese a
+<literal>irc.freenode.net</literal>, y al canal
 <literal>#commits</literal>.</para>
 
 </sidebar>
@@ -1592,202 +1652,212 @@ client at <literal>irc.freenode.net</literal>, channel
 </sect3>
 
 <sect3 id="branches">
-<title>Use branches to avoid bottlenecks</title>
+<title>Las ramas para evitar cuellos de botella</title>
 
-<para>Non-expert version control users are sometimes a bit afraid of
-branching and merging.  This is probably a side effect of CVS's
-popularity: CVS's interface for branching and merging is somewhat
-counterintuitive, so many people have learned to avoid those
-operations entirely.</para>
+<para>Los usuarios inexpertos del control de versiones pueden sentirse
+temerosos de crear ramas y uniones. Esto sea probablemente un efecto
+colateral de la popularidad de CVS: su interfaz de ramas y uniones puede
+ser poco intuitivo, así que muchas personas han aprendido a evitar
+estas operaciones por completo.</para>
 
-<para>If you are among those people, resolve right now to conquer any
-fears you may have and take the time to learn how to do branching and
-merging.  They are not difficult operations, once you get used to
-them, and they become increasingly important as a project acquires
-more developers.</para>
+<para>Si se encuentra entre estas personas, decidase ahora mismo a
+conquistar cualquier miedo que pueda tener y tomese el tiempo de aprender
+cómo funcionan las ramas y las uniones. No son operaciones muy complicadas
+una vez que se acostumbra a ellas y se vuelven muy importantes mientras
+el proyecto adquiere más desarrolladores.</para>
 
-<para>Branches are valuable because they turn a scarce
-resource&mdash;working room in the project's code&mdash;into an
-abundant one.  Normally, all developers work together in the same
-sandbox, constructing the same castle.  When someone wants to add a
-new drawbridge, but can't convince everyone else that it would be an
-improvement, branching makes it possible for her to go to an isolated
-corner and try it out.  If the effort succeeds, she can invite the
-other developers to examine the result.  If everyone agrees that the
-result is good, they can tell the version control system to move
-("merge") the drawbridge from the branch castle over to the main
-castle.</para>
+<para>Las ramas son muy importantes porque convierten un recurso
+escaso&mdash;espacio de trabajo en el código del proyecto&mdash;en uno
+abundante. Normalmente, todos los desarrolladores trabajan juntos
+en la misma caja de arena, contruyendo el mismo castillo. Cuando alguien
+desea añadir un nuevo puente levadiso, pero no puede convencer a los
+demás de que sería una mejora, entonces las ramas hacen posible que vaya
+a una esquina aislada donde probar su puente. Si el esfuerzo tiene exito,
+puede invitar a otros desarrolladores para que evaluen el resultado. Si
+todos estan de acuerdo en que el resultado es bueno, pueden hacer que
+el sistema de control de versiones mueva ("merge") el puente levadiso
+de la rama del castillo a la rama principal del castillo.</para>
 
-<para>It's easy to see how this ability helps collaborative
-development.  People need the freedom to try new things without
-feeling like they're interfering with others' work.  Equally
-importantly, there are times when code needs to be isolated from the
-usual development churn, in order to get a bug fixed or a release
-stabilized (see <xref linkend="stabilizing-a-release"/> and
-<xref linkend="release-lines"/><phrase output="printed"> in
-<xref linkend="development-cycle"/></phrase>) without worrying
-about tracking a moving target.</para>
+<para>Es fácil ver como esta habilidad ayuda al desarollo colaborativo,
+ya que la gente necesita de cierta libertad para probar cosas nuevas
+sin sentirse que estan interfiriendo con el trabajo de otros. Igual
+de importante es cuando el código debe ser aislado del CHURN usual
+de desarrollo de manera que un fallo sea reparado o un lanzamiento
+sea estabilizado (más en <xref linkend="stabilizing-a-release"/> y
+en <xref linkend="release-lines"/><phrase output="printed"> en
+<xref linkend="development-cycle"/></phrase>) sin la preocupación
+de seguir un blanco en movimiento.</para>
 
-<para>Use branches liberally, and encourage others to use them.  But
-also make sure that a given branch is only active for exactly as long
-as needed.  Every active branch is a slight drain on the community's
-attention.  Even those who are not working in a branch still maintain
-a peripheral awareness of what's going on in it.  Such awareness is
-desirable, of course, and commit emails should be sent out for branch
-commits just as for any other commit.  But branches should not become
-a mechanism for dividing the development community.  With rare
-exceptions, the eventual goal of most branches should be to merge
-their changes back into the main line and disappear.</para>
+<para>Hay que utilizar las ramas libremente y fomentar su uso entre
+otros. Pero tambien hay que asegurarse de que una rama en particular
+se mantenga activa exactamente durante el tiempo que sea necesaria.
+Incluso quienes no trabajan en la rama principal mantienen una visión
+periferica de lo que está sucediendo en ésta. Esta visión es deseable,
+por supuesto, y los correos con cambios deben salir de estas ramas
+como de cualquier otra. Pero las ramas no deben convertirse en un
+mecanismo que divida a la comunidad de desarrolladores. Con raras
+excepciones, el objetivo eventual de la mayoria de las ramas debe
+de ser su unión a la rama principal y desaparecer.</para>
 
 </sect3>
 
 <sect3 id="vc-singularity">
-<title>Singularity of information</title>
+<title>Singularidad de la información</title>
 
-<para>Merging has an important corollary: never commit the same change
-twice.  That is, a given change should enter the version control
-system exactly once.  The revision (or set of revisions) in which the
-change entered is its unique identifier from then on.  If it needs to
-be applied to branches other than the one on which it entered, then it
-should be merged from its original entry point to those other
-destinations&mdash;as opposed to committing a textually identical
-change, which would have the same effect in the code, but would make
-accurate bookkeeping and release management impossible.</para>
+<para>Las uniones tienen un corolario importante: nunca se debe enviar
+el mismo cambio dos veces, es decir, un cambio dado sólo debe ser
+introducido al sistema de control de versiones solo una vez. La revisión
+(o conjunto de revisiones) en la que el cambio es introducido es su
+identificador único desde ese momento. Si debe ser aplicado a otras
+ramas aparte de la cual en la que ha sido hecho, entonces deberá ser unido
+desde su punto de entrada original a sus otros destinos &mdash;al
+contrario de enviar cambios textualmente identicos, que tendrian el
+mismo efecto en el código, pero harian del mantenimiento eficaz y de
+la gestión de lanzamientos una tarea imposible.</para>
 
-<para>The practical effects of this advice differ from one version
-control system to another.  In some systems, merges are special
-events, fundamentally distinct from commits, and carry their own
-metadata with them.  In others, the results of merges are committed
-the same way other changes are committed, so the primary means of
-distinguishing a "merge commit" from a "new change commit" is in the
-log message.  In a merge's log message, don't repeat the log message
-of the original change.  Instead, just indicate that this is a merge,
-and give the identifying revision of the original change, with at most
-a one-sentence summary of its effect.  If someone wants to see the
-full log message, she should consult the original revision.</para>
+<para>Los efectos prácticos de este consejo difieren entre sistemas
+de control de veriones. En algunos sistemas, las uniones son eventos
+especiales, fundamentalmente distintos de los commits y acarrean sus
+metadatos propios. En otros, el resultado de las uniones son enviadas
+de la misma manera que los cambios son enviados asi que la mejor manera
+de distiguir una unión de un nuevo cambio es leyendo los mensajes de
+registro. El mensaje de registro de una unión no repite el mensaje
+de registro del cambio original, en cambio, sólo indica que es una
+unión y da la identificación de la revisión del cambio original, con
+como mucho una línea de sumario del sus efectos. Si alguien desea ver
+el mensaje de registro completo, deberá consultar la revisión original.</para>
 
-<para>The reason it's important to avoid repeating the log message is
-that log messages are sometimes edited after they've been committed.
-If a change's log message were repeated at each merge destination,
-then even if someone edited the original message, she'd still leave
-all the repeats uncorrected&mdash;which would only cause confusion
-down the road.</para>
+<para>La razón por la cual es importante evitar la repetición de los
+mensajes de registro es que estos pueden ser editados despues de que
+se hayan enviado. Si un mensaje de registro es repetido en el destino
+de cada unión, entonces incluso si alguien edita el mensaje original,
+deja todos los otros mensajes sin corregir&mdash;lo cual sólo puede
+causar confusión a largo plazo.</para>
 
-<para>The same principle applies to reverting a change.  If a change
-is withdrawn from the code, then the log message for the reversion
-should merely state that some specific revision(s) is being reverted,
-<emphasis>not</emphasis> describe the actual code change that results
-from the reversion, since the semantics of the change can be derived
-by reading the original log message and change.  Of course, the
-reversion's log message should also state the reason why the change is
-being reverted, but it should not duplicate anything from the original
-change's log message.  If possible, go back and edit the original
-change's log message to point out that it was reverted.</para>
+<para>El mismo principio se aplica al retirar un cambio. Si esto llegara
+a suceder, entonces el mensaje de registro para la retirada solo debe
+indicar que una revisión en particular está siendo retirada, 
+no debe describir el cambio en el código resultante, pues la semantica
+del cambio se puede intuir al leer el mensaje de registro original del
+cambio. Por supuesto, el mensaje de registro del retiro tambien debe
+indicar la razón por la cual ese cambio ha sido retirado, pero no debe
+duplicar nada del mensaje de registro del cambio original. Si es posible,
+hay que volver y editar el mensaje de registro original para señalar
+que ha sido retirado.</para>
 
-<para>All of the above implies that you should use a consistent syntax
-for referring to revisions.  This is helpful not only in log messages,
-but in emails, the bug tracker, and elsewhere.  If you're using
-CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
-where REV is a CVS revision number such as "1.76".  If you're using
-Subversion, the standard syntax for revision 1729 is "r1729" (file
-paths are not needed because Subversion uses global revision numbers).
-In other systems, there is usually a standard syntax for expressing
-the changeset name.  Whatever the appropriate syntax is for your
-system, encourage people to use it when referring to changes.
-Consistent expression of change names makes project bookkeeping much
-easier (as we will see in <xref linkend="communications"/> and
-<xref linkend="development-cycle"/>), and since a lot of the
-bookkeeping will be done by volunteers, it needs to be as easy as
-possible.</para>
+<para>Todo lo anterior implica que se debe utilizar una sintaxis 
+consistente al referirnos a las revisiones. Esto es de gran ayuda
+no sólo en los mensajes de registro, sino en los correos electrónicos,
+en el gestor de fallos y en todas partes. Si se esta utilizando
+CVS, recomiendo "<literal>directorio/al/fichero/del/proyecto/rama:REV</literal>",
+donde REV es un número de revisión en CVS como "1.76". Si se esta
+utilizando Subversion, la sintaxis estándar para la revisión
+1729 es "r1729" (el directorio de los ficheros no es necesario
+porque Subversion utiliza números globales para las revisiones). En
+otros sistemas, existe por lo general una sintaxis estándar para
+expresar el nombre del conjunto de cambios. Cualquiera que sea
+la sintaxis apropiada para el sistema utilizado, hay que animar
+a la gente a que lo utilicen al referirse a algún cambio. El
+uso consistente en el nombre de los cambios permiten que el
+mantenimiento del proyecto sea mucho más sencillo (como ya
+veremos en <xref linkend="communications"/> y en 
+<xref linkend="development-cycle"/>), y dado que mucho de este
+mantenimiento será realizado por voluntarios, debe ser lo más
+sencillo posible.</para>
 
-<para>See also
+<para>Más información en
 <xref
 linkend="releases-and-daily-development"/><phrase
-output="printed"> in
+output="printed"> 
 <xref linkend="development-cycle"/></phrase>.</para>
 
 </sect3>
 
 <sect3 id="vc-authz">
-<title>Authorization</title>
+<title>Autorizaciones</title>
 
-<para>Most version control systems offer a feature whereby certain
-people can be allowed or disallowed from committing in specific
-sub-areas of the repository.  Following the principle that when handed
-a hammer, people start looking around for nails, many projects use
-this feature with abandon, carefully granting people access to just
-those areas where they have been approved to commit, and making sure
-they can't commit anywhere else.  (See
-<xref linkend="committers"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase> for how projects
-decide who can commit where.)</para>
+<para>Muchos de los sistemas de control de versiones ofrecen la posibilidad
+por la cual a ciertas personas se les permite o no, realizar cambios
+en areas específicas del repositorio. Siguiendo el principio de que
+cuando a las personas se les entrega un martillo empiezan a buscar
+clavos para golpear, muchos proyectos utilizan esta caracteristica
+con ABANDON, permitiendo cuidadosamente el acceso solo a las areas
+donde tienen permiso de enviar cambio y asegurandose de que no lo puedan
+hacer en ningún otro sitio. (Más información en 
+<xref linkend="committers"/><phrase output="printed">
+<xref linkend="managing-volunteers"/></phrase> sobre como
+los proyectos deciden quienes pueden hacer cambios y donde.)</para>
 
-<para>There is probably little harm done by exercising such tight
-control, but a more relaxed policy is fine too.  Some projects simply
-use an honor system: when a person is granted commit access, even for
-a sub-area of the repository, what they actually receive is a password
-that allows them to commit anywhere in the project.  They're just
-asked to keep their commits in their area.  Remember that there is no
-real risk here: in an active project, all commits are reviewed anyway.
-If someone commits where they're not supposed to, others will
-notice it and say something.  If a change needs to be undone, that's
-simple enough&mdash;everything's under version control anyway, so
-just revert.</para>
+<para>Probablemente hayan pequeños daños implementar un control
+así de estricto, pero una política un poco más relajada tambien
+esta bien. Algunos proyectos utilizan un sistema basado en el honor:
+cuando a una persona se le permite la posibilidad de realizar cambios,
+aunque sea a una pequeña area del repositorio, lo que reciben es una
+contraseña que les permite realizar cambios en cualquier otro sitio
+del repositorio y sólo se les pide que mantengan sus cambios en su
+area. Hay que recordar que no existe ningún peligro aquí: de todas formas,
+en un proyecto activo, todos los cambios son revisados. Si alguien hace
+un cambio donde no debía, alguien más se dará cuenta y dirá algo. Es muy
+sencillo si un cambio debe ser rectificado&mdash;todo está bajo el control
+de versiones de todas formas, así que sólo hay que volver atras.</para> 
 
-<para>There are several advantages to the relaxed approach.  First, as
-developers expand into other areas (which they usually will if they
-stay with the project), there is no administrative overhead to
-granting them wider privileges.  Once the decision is made, the person
-can just start committing in the new area right away.</para>
+<para>Existen varias ventajas en tal aproximación tan relajada.
+Primero, mientras los desarrolladores se vayan expandiendo en las
+diferentes areas (lo cual harán a menudo si siguen en el proyecto),
+no es necesario un trabajo administrativo extra de tener que dar y
+quitar privilegios. Una vez que la decisión es tomada, la persona
+puede empezar a enviar sus cambios a la nueva area sin problemas.</para>
 
-<para>Second, expansion can be done in a more fine-grained manner.
-Generally, a committer in area X who wants to expand to area Y will
-start posting patches against Y and asking for review.  If someone who
-already has commit access to area Y sees such a patch and approves of
-it, they can just tell the submitter to commit the change directly
-(mentioning the reviewer/approver's name in the log message, of
-course).  That way, the commit will come from the person who actually
-wrote the change, which is preferable from both an information
-management standpoint and from a crediting standpoint.</para>
+<para>Segundo, la expansión se puede filtrar mejor, ya que generalmente,
+quienes realizan cambios en el area X y desean expandirse al area Y
+sólo tienen que empezar a enviar sus cambios contra Y y solicitar
+su revisión. Si alguien con acceso a cambios al area Y recibe alguno
+de estos parches y lo aprueba, puede pedir que el cambio sea enviado
+directamente (mencionando el nombre de quien ha revisado/aprobado el
+cambio en el mensaje de registro). De esta manera, el commit vendrá
+de quien ha hecho el cambio, lo cual es preferible desde un punto de
+vista administrativo y de credibilidad.</para> 
 
-<para>Last, and perhaps most important, using the honor system
-encourages an atmosphere of trust and mutual respect.  Giving someone
-commit access to a subdomain is a statement about their technical
-preparedness&mdash;it says: "We see you have expertise to make commits
-in a certain domain, so go for it."  But imposing strict authorization
-controls says: "Not only are we asserting a limit on your expertise,
-we're also a bit suspicious about
-your <emphasis>intentions</emphasis>."  That's not the sort of
-statement you want to make if you can avoid it.  Bringing someone into
-the project as a committer is an opportunity to initiate them into a
-circle of mutual trust.  A good way to do that is to give them more
-power than they're supposed to use, then inform them that it's up to
-them to stay within the stated limits.</para>
+<para>Por úlimo, y quizas la razón más importante, al utilizar
+un sistema basado en el honor, se crea una atmosfera de confianza
+y respeto mutuo. Al darle a alguien permiso para enviar cambio a
+un subdominio se hace una declaración acerca de su preparación
+técnica&mdash;la cual dice: "Hemos visto que tienes la capacidad
+para realizar cambios en cierto dominio, así que a por ello". Pero
+imponer controles estrictos en las autorizaciones dice: "No sólo
+estamos juzgando tus limitadas capacidades, sino que tambien
+sospechamos de tus <emphasis>intenciones</emphasis>." Este no
+es el tipo de declaraciones que se desean hacer si pueden ser
+evitadas. Incluir a alguien dentro del grupo de desarrolladores
+del proyecto es una oportunidad de iniciarlos en un circulo de
+confianza mutua. Una buena manera de hacer esto es dar más
+poder del que se supone deben tener e informarles que es su
+responsabilidad mantenerse dentro de los límites impuestos.</para>
 
-<para>The Subversion project has operated on the honor system way for
-more than four years, with 33 full and 43 partial committers as of
-this writing.  The only distinction the system actually enforces is
-between committers and non-committers; further subdivisions are
-maintained solely by humans.  Yet we've never had a problem with
-someone deliberately committing outside their domain.  Once or twice
-there's been an innocent misunderstanding about the extent of
-someone's commit privileges, but it's always been resolved quickly and
-amiably.</para>
+<para>El proyecto Subversion ha operado bajo este sistema por más
+de cuatro años, con 33 desarrolladores con privilegios completos
+y 43 con privilegios parciales. La única distinción que el sistema
+fuerza esta entre quienes envian cambios y quienes no, otras divisiones
+son mantenidas sólo por humanos. Incluso así, nunca hemos tenido
+ningún problema con que alguien realice un cambio deliberado fuera
+de su dominio. Una que otra vez han habido inocentes mal entendidos
+sobre la extensión de los privilegios de alguna persona, pero siempre
+es resuelto rápida y amigablemente.</para>
 
-<para>Obviously, in situations where self-policing is impractical, you
-must rely on hard authorization controls.  But such situations are
-rare.  Even when there are millions of lines of code and hundreds or
-thousands of developers, a commit to any given code module should
-still be reviewed by those who work on that module, and they can
-recognize if someone committed there who wasn't supposed to.  If
-regular commit review <emphasis>isn't</emphasis> happening, then the
-project has bigger problems to deal with than the authorization system
-anyway.</para>
+<para>Obviamente, en situaciones donde esto es poco práctico se debe
+depender en controles estrictos en las autorizaciones, pero dadas
+situaciones son raras. Incluso cuando hay millones de lineas de
+código y ciento o miles de desarrolladores, un commit hecho a
+cualquier módulo del código sigue siendo revisado por quienes
+trabajan en dicho módulo y son quienes pueden reconocer si quien
+lo ha intentado hacer puede hacerlo. Si una revisión regular no
+está sucediendo entonces el proyecto tiene problemas más importantes
+con los cuales lidiar que el sistema de autorizaciones.</para>
 
-<para>In summary, don't spend too much time fiddling with the version
-control authorization system, unless you have a specific reason to.  It
-usually won't bring much tangible benefit, and there are advantages to
-relying on human controls instead.</para>
+<para>Para concluir, no hace falta pasar mucho tiempo con las
+autorizaciones del sistema de control de versiones a menos que se
+tenga una razón en específico. Usualmente esto no trae beneficios
+tangibles y confiar en el control humano tiene sus ventajas.</para>
 
 <para>None of this should be taken to mean that the restrictions
 themselves are unimportant, of course.  It would be bad for a project
@@ -1797,6 +1867,8 @@ special status: it implies voting rights on project-wide questions.
 This political aspect of commit access is discussed more in <xref
 linkend="electorate"/><phrase output="printed"> in
 <xref linkend="social-infrastructure"/></phrase>.</para>
+
+<para>Nada de debe ser tomado como 
 
 </sect3>
 
