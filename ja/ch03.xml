@@ -2158,8 +2158,12 @@ list).</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
+<!--
 <title>Version Control</title>
+-->
+<title>バージョン管理</title>
 
+<!--
 <para>A <firstterm>version control system</firstterm> (or
 <firstterm>revision control system</firstterm>) is a combination of
 technologies and practices for tracking and controlling changes to a
@@ -2170,7 +2174,23 @@ project.  These days, everyone will expect at least your project's
 source code to be under version control, and probably will not take
 the project seriously if it doesn't use version control with at least
 minimal competence.</para>
+-->
+<para>
+  <firstterm>バージョン管理システム</firstterm>（あるいは
+  <firstterm>リビジョン管理システム</firstterm>）は、
+  プロジェクト内のさまざまなファイルの変更履歴を管理するための
+  テクノロジーや習慣を組み合わせたものです。
+  たとえば、ソースコードやドキュメント、
+  ウェブページなどがバージョン管理の対象となります。
+  もしこれまでにバージョン管理システムを使ったことがないのなら、
+  まずはバージョン管理システムを使ったことのある人を探して
+  プロジェクトに引きずり込みましょう。いまどきのプロジェクトなら、
+  少なくともソースコードくらいはバージョン管理されていて当然です。
+  また、たかがバージョン管理程度のことすらできていないプロジェクトなど、
+  誰もまともに取り合ってくれないかもしれません。
+</para>
 
+<!--
 <para>The reason version control is so universal is that it helps with
 virtually every aspect of running a project: inter-developer
 communications, release management, bug management, code stability and
@@ -2183,17 +2203,45 @@ annotating each change with metadata like the change's date and
 author, and then replaying these facts to whoever asks, in whatever
 way they ask.  It is a communications mechanism where a change is the
 basic unit of information.</para>
+-->
+<para>
+  バージョン管理がこれほどまで一般的になった理由は、
+  プロジェクトを運営していく上でいろいろな場面で役立つということです。
+  開発者どうしのコミュニケーション、リリース管理、バグ管理、
+  コードの安定性の確保、安心して新機能を実験できる環境、
+  各開発者の権限の管理など、
+  あらゆる場面でバージョン管理が利用できます。
+  バージョン管理システムは、これらの内容を一まとめにして管理します。
+  その中心となる機能が、<firstterm>変更管理</firstterm>です。
+  これは、プロジェクト内のファイルが変更されるたびに
+  その変更についてのメタデータ（更新日や更新者など）
+  を収集する仕組みです。
+  そして、あとからその変更の内容を再現できるようにするのです。
+  つまり、変更が発生した単位で情報を管理する仕組みといえます。
+</para>
 
+<!--
 <para>This section does not discuss all aspects of using a version
 control system.  It's so all-encompassing that it must be addressed
 topically throughout the book.  Here, we will concentrate on choosing
 and setting up a version control system in a way that will foster
 cooperative development down the road.</para>
+-->
+<para>
+  このセクションでは、バージョン管理システムのあらゆる機能を説明するわけにはいきません。
+  あまりにもさまざまな機能があるので、本書ではすべてを紹介することができないのです。
+  ここでは、使用するバージョン管理システムを選択して
+  実際に稼動させるところまでに絞って説明していきます。
+</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
+<!--
 <title>Version Control Vocabulary</title>
+-->
+<title>バージョン管理に関する用語集</title>
 
+<!--
 <para>This book cannot teach you how to use version control if you've
 never used it before, but it would be impossible to discuss the
 subject without a few key terms.  These terms are useful independently
@@ -2203,11 +2251,26 @@ throughout the rest of this book.  Even if there were no version
 control systems in the world, the problem of change management would
 remain, and these words give us a language for talking about that
 problem concisely.
+-->
+<para>
+  本書では、まだバージョン管理システムを使ったことがない人に対して
+  その基本的な使い方を解説することはできません。
+  しかし、いくつかのキーワードを知っていなければ、
+  これ以降の議論についていけなくなるでしょう。
+  ここで説明するキーワードは、どのバージョン管理システムでも共通に使われるものです。
+  これらの言葉については、これ以降でもとくに説明せずに使用していきます。
+  たとえこの世にバージョン管理システムがなかったとしても、
+  変更の管理をどうするかという問題が消えてなくなることはありません。
+  この問題について語る際には、ここで取り上げたキーワードを知っていると便利です。
 
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
+<!--
   <term><firstterm>commit</firstterm></term>
+-->
+  <term><firstterm>コミット</firstterm></term>
+<!--
   <listitem><para>To make a change to the project; more formally, to
   store a change in the version control database in such a way that it
   can be incorporated into future releases of the project.  "Commit"
@@ -2216,10 +2279,28 @@ problem concisely.
   the server crash bug people have been reporting on Mac OS X.  Jay,
   could you please review the commit and check that I'm not misusing
   the allocator there?"</para></listitem>
+-->
+  <listitem>
+    <para>
+      プロジェクトに変更を加えること。もう少しかしこまって言うと、
+      変更した内容をバージョン管理データベースに格納し、
+      そのプロジェクトが次に公開するリリースに反映されるようにすること。
+      "コミット" は、動詞としても名詞としても用いられます。
+      名詞として使った場合の意味は、"変更" とほぼ同じです。
+      たとえば次のように使用します。"Mac OS X
+      上でサーバがクラッシュするバグを修正してコミットした。
+      ジェイ、悪いけどこのコミットの内容をチェックしてくれないかな？
+      もしかしたらメモリを確保する方法を間違っているかもしれないし"
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
+<!--
   <term><firstterm>log&nbsp;message</firstterm></term>
+-->
+  <term><firstterm>ログメッセージ</firstterm></term>
+<!--
   <listitem><para>A bit of commentary attached to each commit,
   describing the nature and purpose of the commit.  Log messages are
   among the most important documents in any project: they are the
@@ -2231,10 +2312,31 @@ problem concisely.
   <xref linkend="communications"/></phrase> discusses ways to
   encourage contributors to write concise and useful log
   messages.</para></listitem>
+-->
+  <listitem>
+    <para>
+      各コミットに添付されたコメントで、
+      そのコミットの内容や目的を説明するもの。
+      ログメッセージは、そのプロジェクトのドキュメントの中で
+      最も重要なものです。これは、実際に変更したコードの内容を
+      人間が読んでわかりやすい言葉 ("機能追加"、"バグ対応"、
+      あるいはプロジェクトの進捗状況など)
+      に変換する意味合いがあります。
+      このセクションの後半では、
+      ログメッセージを適切なメンバーに配信する方法を説明します。また、
+      <phrase output="printed"><xref linkend="communications"/></phrase>
+      の <xref linkend="codifying-tradition"/> では
+      各メンバーにいかにして有用なログメッセージを書いてもらうかを説明します。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
+<!--
   <term><firstterm>update</firstterm></term>
+-->
+  <term><firstterm>アップデート</firstterm></term>
+<!--
   <listitem><para>To ask that others' changes (commits) be
   incorporated into your local copy of the project; that is, to bring
   your copy "up-to-date".  This is a very common operation; most
@@ -2245,9 +2347,27 @@ problem concisely.
   indexing code is always dropping the last byte.  Is this a new bug?"
   "Yes, but it was fixed last week&mdash;try updating, it should go
   away."</para></listitem>
+-->
+  <listitem>
+    <para>
+      他のメンバーの変更 (コミット) をローカル環境に取り込むこと。
+      つまり、ローカル環境を "最新版" にすること。
+      これは非常に頻繁に行われる操作です。
+      ほとんどの開発者は、自分のコードを一日に何度もアップデートします。
+      それにより、自分の開発環境を他のメンバーとほぼ同じ状態に保つようにするのです。
+      また、もし何かバグを見つけたときに、
+      おそらくまだそれは修正されていないものであろうことを予想できるようにします。
+      たとえば次のように使用します。"ねぇ、このコードって、
+      いちばん最後のバイトを読んでいないように見えるんだけど……。
+      バグじゃない？"
+      "うん。でもそれは先週修正したよ。
+      最新版にアップデートしたらバグはなくなるはずだ。"
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
+<!--
   <term><firstterm>repository</firstterm></term> <listitem><para>A
   database in which changes are stored.  Some version control systems
   are centralized: there is a single, master repository, which stores
@@ -2260,9 +2380,28 @@ problem concisely.
   is better is one of the enduring holy wars of software development;
   try not to fall into the trap of arguing about it on your project
   lists.</para></listitem>
+-->
+  <term><firstterm>リポジトリ</firstterm></term>
+  <listitem>
+    <para>
+      変更内容を格納するデータベース。
+      たとえば中央管理方式のバージョン管理システムでは、
+      マスタリポジトリがひとつだけ存在します。
+      すべての変更内容がここに格納されることになります。
+      分散管理方式の場合は、各開発者が個別にリポジトリを所有します。
+      他のリポジトリとの間のデータ交換が、任意のタイミングで発生します。
+      バージョン管理システムは、各変更の内容を記録しています。
+      リリース時期には、特定の時点の内容をリリース用として指定します。
+      中央管理方式と分散管理方式のどちらがよいかについて語りだすと、
+      終わりのない宗教戦争に巻き込まれてしまいます。
+      プロジェクトのメーリングリストでは、
+      できるだけこの問題には触れないようにしましょう。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
+<!--
   <term><firstterm>checkout</firstterm></term>
   <listitem><para>The process of obtaining a copy of the project from
   a repository.  A checkout usually produces a directory tree called a
@@ -2271,9 +2410,23 @@ problem concisely.
   systems, each working copy is itself a repository, and changes can
   be pushed out to (or pulled into) any repository that's willing
   to accept them.</para></listitem>
+-->
+  <term><firstterm>チェックアウト</firstterm></term>
+  <listitem>
+    <para>
+      リポジトリからプロジェクトの内容を取得する処理。
+      チェックアウトを行うと、いわゆる「作業コピー」
+      （次の項を参照ください）と呼ばれるディレクトリツリーが作成されます。
+      このツリーに変更を加えた結果をコミットし、元のリポジトリに反映させます。
+      分散型のバージョン管理システムの中には、
+      作業コピーそのものがリポジトリでもあるというものもあります。
+      その変更内容を、他のリポジトリとの間でやりとりしたりする構造になっています。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
+<!--
   <term><firstterm>working copy</firstterm></term>
   <listitem><para>A developer's private directory tree containing the
   project's source code files, and possibly its web pages or other
@@ -2283,19 +2436,53 @@ problem concisely.
   are present, etc.  Generally, each developer has his own working
   copy, in which he makes and tests changes, and from which he
   commits.</para></listitem>
+-->
+  <term><firstterm>作業コピー</firstterm></term>
+  <listitem>
+    <para>
+      開発者がローカル環境に保持するディレクトリツリーで、
+      この中にはプロジェクトのソースコードやウェブページ、
+      その他のドキュメントが格納されることになります。
+      作業コピーには、バージョン管理システムが使用するメタデータも含まれています。
+      このメタデータの中には、取得元のリポジトリの場所や現在の
+      "リビジョン"（次の項を参照ください）などについての情報が格納されています。
+      一般に、個々の開発者は自分の作業コピーを取得してそこで開発を行います。
+      そして、変更した内容のテストを済ませたうえで
+      それをコミットします。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
+<!--
   <term><firstterm>revision</firstterm>,
         <firstterm>change</firstterm>,
         <firstterm>changeset</firstterm></term>
+-->
+  <term><firstterm>リビジョン</firstterm>、
+        <firstterm>チェンジ</firstterm>、
+        <firstterm>チェンジセット</firstterm></term>
+<!--
   <listitem><para>A "revision" is usually one specific incarnation of
   a particular file or directory.  For example, if the project starts
   out with revision 6 of file F, and then someone commits a change to
   F, this produces revision 7 of F.  Some systems also use
   "revision", "change", or "changeset" to refer to a set of changes
   committed together as one conceptual unit.</para> 
+-->
+  <listitem>
+    <para>
+      "リビジョン" とは、指定したファイルやディレクトリの
+      特定の時点の状態のことです。
+      たとえば、あるプロジェクトのファイル F のリビジョンが 6
+      であった場合に、誰かがファイル F を変更してコミットすると、
+      F のリビジョンは 7 となります。
+      システムによっては、一度に行われたある特定の変更群を称して
+      "リビジョン"、"チェンジ" あるいは "チェンジセット"
+      とするものもあります。
+    </para> 
 
+<!--
   <para>These terms occasionally have distinct technical meanings in
   different version control systems, but the general idea is always
   the same: they give a way to speak precisely about exact points in
@@ -2303,14 +2490,39 @@ problem concisely.
   before and after a bug is fixed).  For example: "Oh yes, she fixed
   that in revision 10" or "She fixed that in revision 10 of
   foo.c."</para>
+-->
+    <para>
+      バージョン管理システムによっては、
+      これらの用語を明確に定義しているものもあります。
+      しかし、一般的な考え方はどれも同じです。
+      一連の流れの中の特定の時点
+      (バグ修正が行われた箇所など)
+      を指定する方法を用意しているわけです。
+      たとえば、次のように使用します。
+      "ああ、それなら彼女がリビジョン 10 で修正したよ。"
+      あるいは
+      "彼女は foo.c のリビジョン10でそれを修正したよ。"
+    </para>
 
+<!--
   <para>When one talks about a file or collection of files without
   specifying a particular revision, it is generally assumed that one
   means the most recent revision(s) available.</para></listitem>
  </varlistentry>
+-->
+    <para>
+      特定のリビジョンを指定せずに話を進めている場合は、
+      一般に最新のリビジョンについて語っているものと考えていいでしょう。
+    </para>
+  </listitem>
+ </varlistentry>
 
   <sidebar id="version-vs-revision">
+<!--
   <title>"Version" Versus "Revision"</title>
+-->
+  <title>"バージョン"？それとも"リビジョン"？</title>
+<!--
   <para>The word <firstterm>version</firstterm> is sometimes used as a
   synonym for "revision", but I will not use it that way in this
   book, because it is too easily confused with "version" in the sense
@@ -2318,19 +2530,47 @@ problem concisely.
   edition number, as in "Version 1.0".  However, since the phrase
   "version control" is already standard, I will continue to use it as
   a synonym for "revision control" and "change control".</para>
+-->
+  <para>
+    "リビジョン" と同じような意味で <firstterm>バージョン</firstterm>
+    という言葉を使う人もいますが、本書の中ではこの使い方はしません。
+    "バージョン" といってしまうと、ソフトウェアのリリース時の版番号
+    (たとえば "バージョン 1.0 をリリースしました" などと使用)
+    と混同されてしまうからです。
+    しかし、"バージョン管理" という言葉は既に市民権を得てしまっているので、
+    この言葉は使うようにします (本来なら "リビジョン管理"
+    や "変更管理" と言いたいところです)。
+  </para>
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
+<!--
   <term><firstterm>diff</firstterm></term>
   <listitem><para>A textual representation of a change.  A diff shows
   which lines were changed and how, plus a few lines of surrounding
   context on either side.  A developer who is already familiar with
   some code can usually read a diff against that code and understand
   what the change did, and even spot bugs.</para></listitem>
+-->
+  <term><firstterm>差分</firstterm></term>
+  <listitem>
+    <para>
+      変更内容を表すテキスト。
+      変更があった箇所とその前後数行について、
+      変更前と変更後の状態を表示します。
+      元のコードになじみがある人なら、
+      差分を見ればどこをどう変更したのかがわかります。
+      時にはバグを見つけたりすることもできるでしょう。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
+<!--
   <term><firstterm>tag</firstterm></term>
+-->
+  <term><firstterm>タグ</firstterm></term>
+<!--
   <listitem><para>A label for a particular collection of files at
   specified revisions.  Tags are usually used to preserve
   interesting snapshots of the project.  For example, a tag is usually
@@ -2339,10 +2579,28 @@ problem concisely.
   comprising that release.  Common tag names are things like
   <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
   etc.</para></listitem>
+-->
+  <listitem>
+    <para>
+      指定したリビジョンを構成するファイルにつけるラベル。タグは、
+      プロジェクトの特筆すべき時点の状態を保護するために使用することが多くなります。
+      特筆すべき点とは、たとえば一般向けのリリースなどがあげられます。
+      リリースごとにタグをつけておけば、
+      そのリリースとまったく同じ内容のファイル群を
+      バージョン管理システムから簡単に取得できるようになります。
+      タグの名前としてよく用いられるのは、
+      <literal>Release_1_0</literal> や
+      <literal>Delivery_00456</literal> といったものです。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
+<!--
   <term><firstterm>branch</firstterm></term>
+-->
+  <term><firstterm>ブランチ</firstterm></term>
+<!--
   <listitem><para>A copy of the project, under version control but
   isolated, so that changes made to the branch don't affect the rest
   of the project, and vice versa, except when changes are
@@ -2351,7 +2609,21 @@ problem concisely.
   project has no explicit branches, development is still considered
   to be happening on the "main branch", also known as the "main line"
   or "<firstterm>trunk</firstterm>".</para>
+-->
+  <listitem>
+    <para>
+      プロジェクトの一部でありバージョン管理下に存在するが、
+      他とは隔離されている部分。ブランチに対して適用した変更は
+      その他の部分に対しては影響をおよぼしません。また逆も同様です。
+      ただし、明示的に "マージ" した場合は別です (以下を参照ください)。
+      ブランチは、"開発ライン" と呼ばれることもあります。
+      明示的にブランチを作成していない場合でも、
+      "メインブランチ" で開発を進めているものと考えます。このブランチのことは
+      "メインライン" あるいは "<firstterm>トランク (trunk)</firstterm>"
+      と呼ばれることもあります
+    </para>
 
+<!--
   <para>Branches offer a way to isolate different lines of development
   from each other.  For example, a branch can be used for experimental
   development that would be too destabilizing for the main trunk.  Or
@@ -2364,17 +2636,47 @@ problem concisely.
   linkend="branches"/><phrase output="printed"> later in this
   chapter</phrase> for a more detailed discussion of
   branching.</para></listitem>
+-->
+  <para>
+    ブランチを使用すると、複数の開発ラインを別々に管理できるようになります。
+    たとえば、本流の開発ラインとは別に実験的な開発用のブランチを作成し、
+    本流を不安定にさせる可能性があるような開発はそちらで行うということができます。
+    あるいは逆に、新しいリリース用の安定版ブランチを作成するといった使用法もあります。
+    この方式の場合、リリースが間近に迫っても、
+    通常の開発は本流ブランチ上で途切れなく続けられます。
+    一方、リリース用ブランチではリリース作業に入った段階でコミットを停止し、
+    リリース管理者が許可しない限りはコミットをしないようにします。
+    この方式を採用すると、リリース前にいったん開発を中断する必要がなくなります。
+    ブランチについての詳細は、<phrase output="printed">本章の後半</phrase>
+    にある <xref linkend="branches"/> をご覧ください。
+  </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
+<!--
   <term><firstterm>merge (a.k.a. port)</firstterm></term>
+-->
+  <term><firstterm>マージ (あるいはポート)</firstterm></term>
+<!--
   <listitem><para>To move a change from one branch to another.  This
   includes merging from the main trunk to some other branch, or vice
   versa.  In fact, those are the most common kinds of merges; it is
   rare to port a change between two non-main branches.  See <xref
   linkend="vc-singularity"/> for more about this kind of
   merging.</para>
+-->
+  <listitem>
+    <para>
+      変更内容を、あるブランチから別のブランチに移動すること。
+      本流の変更内容を他のブランチに適用したり、その逆を行ったりすることも含みます。
+      実際のところ、ほとんどのマージ作業はこのパターンです。
+      本流以外の２つのブランチ間でのマージはほとんどありません。
+      この手のマージについては
+      <xref linkend="vc-singularity"/> をご覧ください。
+    </para>
 
+<!--
   <para>"Merge" has a second, related meaning: it is what the version
   control system does when it sees that two people have changed the
   same file but in non-overlapping ways.  Since the two changes do not
@@ -2385,9 +2687,23 @@ problem concisely.
   the same code.  When two different changes <emphasis>do</emphasis>
   overlap, the result is a "conflict"; see below.</para>
   </listitem>
+-->
+    <para>
+      "マージ" にはもうひとつの意味もあります。
+      ひとつのファイルに対して複数人が別々の箇所を変更したときに、
+      バージョン管理システムが行う処理のことです。
+      お互いの変更が相手の変更を邪魔することはないので、
+      手元で修正済みのファイルをアップデートすると、
+      相手の変更内容が自動的にマージされ（取り込まれ）ます。
+      これは、複数の人が同じファイルをハックしている場合によくあることです。
+      万一お互いが変更した箇所が重なっていた場合は、次に説明する
+      "コンフリクト" 状態になります。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
+<!--
   <term><firstterm>conflict</firstterm></term>
   <listitem><para>What happens when two people try to make different
   changes to the same place in the code.  All version control systems
@@ -2396,10 +2712,26 @@ problem concisely.
   is then up to that human to <firstterm>resolve</firstterm> the
   conflict, and to communicate that resolution to the version control
   system.</para></listitem>
+-->
+  <term><firstterm>コンフリクト</firstterm></term>
+  <listitem>
+    <para>
+      ひとつのコードの同じ箇所を異なる人が変更しようとした際に起こる現象。
+      バージョン管理システムは、コンフリクトの発生を自動的に検出します。
+      そして、変更しようとしたユーザに対してそれを通知します。
+      発生したコンフリクトを <firstterm>解決</firstterm>
+      するのは、変更しようとした人たち自身の責任です。
+      解決したあとで、それをバージョン管理システムに通知します。
+    </para>
+  </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
+<!--
   <term><firstterm>lock</firstterm></term>
+-->
+  <term><firstterm>ロック</firstterm></term>
+<!--
   <listitem><para>A way to declare an exclusive intent to change a
   particular file or directory.  For example, "I can't commit any
   changes to the web pages right now.  It seems Alfred has them all
@@ -2408,7 +2740,20 @@ problem concisely.
   do, not all require the locking feature to be used.  This is because
   parallel, simultaneous development is the norm, and locking people
   out of files is (usually) contrary to this ideal.</para>
+-->
+  <listitem>
+    <para>
+      特定のファイルやディレクトリを、他人に変更されないように宣言する方法。
+      たとえば "ウェブページの変更内容をコミットしようとしたけどできない。
+      たぶん、Alfred が背景画像を修正する間、すべてのファイルをロックしているんだろう"
+      というように使います。
+      中にはロック機能を持っていないバージョン管理システムもあります。
+      また、その機能を持っていたとしても、実際にそれが必要となることはあまりないでしょう。
+      いろんな人が同時に平行して開発を進めるというのが普通の状況なのであり、
+      ロックして他人を締め出すというのはこの理想に相反するものです。
+    </para>
 
+<!--
   <para>Version control systems that require locking to make commits
   are said to use the <firstterm>lock-modify-unlock</firstterm> model.
   Those that do not are said to use the
@@ -2419,6 +2764,20 @@ problem concisely.
   general, the copy-modify-merge model is better for open source
   development, and all the version control systems discussed in this
   book support that model.</para></listitem>
+-->
+    <para>
+      コミットするにはロックが必要となるバージョン管理システムのことを、
+      「<firstterm>ロック - 修正 - ロック解除 (lock-modify-unlock)</firstterm> モデル」
+      といいます。一方、ロックが必要でない方式のことは
+      「<firstterm>コピー - 修正 - マージ (copy-modify-merge)</firstterm> モデル」
+      といいます。２つの方式について深く掘り下げて比較したすばらしい文書が
+      <ulink url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>
+      （<ulink url="http://subversion.bluegate.org/doc/ch02s02.html">日本語訳</ulink>）
+      にあります。一般に、オープンソース開発においては
+      コピー - 修正 - マージ モデルの方が適しています。
+      本書で扱うバージョン管理システムは、すべてこの方式を採用しています。
+    </para>
+  </listitem>
  </varlistentry>
 
 </variablelist>
@@ -2430,15 +2789,29 @@ problem concisely.
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-choosing">
+<!--
 <title>Choosing a Version Control System</title>
+-->
+<title>バージョン管理システムの選択</title>
 
+<!--
 <para>As of this writing, the two most popular version control systems
 in the free software world are <firstterm>Concurrent Versions
 System</firstterm> (<firstterm>CVS</firstterm>,
 <ulink url="http://www.cvshome.org/"/>)
 and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
 <ulink url="http://subversion.tigris.org/"/>).</para>
+-->
+<para>
+  本書の執筆時点では、
+  フリーソフトウェアの世界で最もよく使われているバージョン管理システムは
+  <firstterm>Concurrent Versions System</firstterm>
+  (<firstterm>CVS</firstterm>, <ulink url="http://www.cvshome.org/"/>)
+  と <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
+  <ulink url="http://subversion.tigris.org/"/>) の２つです。
+</para>
 
+<!--
 <para>CVS has been around for a long time.  Most experienced
 developers are already familiar with it, it does more or less what you
 need, and since it's been popular for a long time, you probably won't
@@ -2450,7 +2823,24 @@ reorganize your code tree after starting the project, it can be a real
 pain); it has poor merging support; it doesn't handle large files or
 binary files very well; and some operations are slow when large
 numbers of files are involved.</para>
+-->
+<para>
+  CVS には長い歴史があります。
+  ベテランの開発者はすでに CVS についてはよくご存知でしょう。
+  これまでにも CVS がいろいろな場面で役に立ってきたはずです。
+  CVS の時代があまりにも長く続いてきたので、
+  本当にそれが最適な選択肢だったのかどうかなんて聞くだけ野暮というものでしょう。
+  しかし、CVS には欠点もあります。
+  まず、複数のファイルを一括して変更したときに、それを追いかける簡単な手段がありません。
+  また、バージョン管理下にあるファイルの名前を変えたりコピーしたりすることができません
+  （プロジェクトをいったん開始した後でコードツリーの構成を変更したい場合は、
+  泣きながら大変な作業をこなすことになるでしょう)。
+  そして、マージ機能はかなりお粗末なものです。
+  巨大なファイルやバイナリファイルの扱いも不得意です。
+  そして、大量のファイルを一括して操作しようとすると非常に時間がかかることがあります。
+</para>
 
+<!--
 <para>None of CVS's flaws is fatal, and it is still quite popular.
 However, in the last few years the more recent Subversion has been
 gaining ground, especially in newer
@@ -2458,9 +2848,26 @@ projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"/> and
 <ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
 for evidence of this growth.</para></footnote>.  If you're starting a
 new project, I recommend Subversion.</para>
+-->
+<para>
+  CVS のこれらの欠点は決して致命的なものではありませんが、
+  無視できるものでもありません。
+  ここ数年、新たに立ち上げられたプロジェクトでは
+  Subversion を採用することが多くなってきました
+  <footnote>
+    <para>
+      その証拠としては
+      <ulink url="http://cia.vc/stats/vcs"/> や
+      <ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
+      があります。
+    </para>
+  </footnote>。
+  これから新たにプロジェクトを立ち上げるのなら、Subversion をお勧めします。
+</para>
 
+<!--
 <para>On the other hand, since I'm involved in the Subversion project,
-my objectivity might reasonably by questioned.  And in the last few
+my objectivity might reasonably be questioned.  And in the last few
 years a number of new open-source version control systems have
 appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
 in rough order of popularity.  As the list makes clear, deciding on a
@@ -2474,22 +2881,56 @@ worry too much about making a drastically wrong decision.  If you
 simply can't make up your mind, then go with Subversion.  It's fairly
 easy to learn, and is likely to remain a standard for at least a few
 years.</para>
+-->
+<para>
+  一方、私が Subversion プロジェクトにかかわっていることもあり、
+  私の意見の客観性に疑問を持たれる方もいるかもしれません。
+  ここ数年、新たなオープンソースのバージョン管理システムがいくつか登場しています。
+  <xref linkend="vc-systems"/> に、
+  私が知っているものを挙げておきます。
+  このリストを見てもわかるように、バージョン管理システムにどれを採用するかを決めるには、
+  下手したら一生かかってしまうかも知れません。
+  もしかしたら、あなたには選択の余地がないかも知れません。
+  というのは、ホスティングサイトを使用する場合は
+  ホスティングサイト側でバージョン管理システムが設定されているかもしれないからです。
+  もしあなたが自分で選択しなければならない立場になったのなら、
+  まず周りの意見をよく聞いてからどれかひとつを選択し、
+  そして動かしてみましょう。
+  最近のバージョン管理システムは、どれもそれなりに機能します。
+  どれを選んだとしても、致命的な被害を受けることはないでしょう。
+  もしまだ迷っているのなら、Subversion を使ってみましょう。
+  これは簡単に習得でき、少なくとも今後数年は標準的に使われることでしょう。
+</para>
 
 </sect2>
 
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-using">
+<!--
 <title>Using the Version Control System</title>
+-->
+<title>バージョン管理システムの使用法</title>
 
+<!--
 <para>The recommendations in this section are not targeted toward a
 particular version control system, and should be simple to implement
 in any of them.  Consult your specific system's documentation for
 details.</para>
+-->
+<para>
+  この章で説明する内容は、特定のバージョン管理システムに固有のものではありません。
+  どのシステムを選択した場合にも適用できるはずです。
+  詳細は、各システムのドキュメントを調べるようにしましょう。
+</para>
 
 <sect3 id="version-everything">
+<!--
 <title>Version everything</title>
+-->
+<title>すべてをバージョン管理する</title>
 
+<!--
 <para>Keep not only your project's source code under version control,
 but also its web pages, documentation, FAQ, design notes, and anything
 else that people might want to edit.  Keep them right next to the
@@ -2499,7 +2940,21 @@ information that could change.  Things that don't change should be
 archived, not versioned.  For example, an email, once posted, does not
 change; therefore, versioning it wouldn't make sense (unless it becomes
 part of some larger, evolving document).</para>
+-->
+<para>
+  ソースコードだけでなく、ウェブページやドキュメント、FAQ、設計メモなどなど、
+  編集する可能性のあるものはすべてバージョン管理下におくようにしましょう。
+  これらは、同一リポジトリツリー内でソースコードの隣に置いておきます。
+  書き残した情報は、すべてバージョン管理する価値があります。
+  つまり、あらゆる情報は変化する可能性があるということです。
+  今後変わりようのない内容については、
+  バージョン管理ではなくアーカイブしなければなりません。
+  たとえば、メーリングリストに投稿されたメールの内容は、変わることがありません。
+  このようなものをバージョン管理しても無意味です
+  (もちろん、それが巨大な文書の一部となる場合などは別ですが)。
+</para>
 
+<!--
 <para>The reason versioning everything together in one place is
 important is so people only have to learn one mechanism for submitting
 changes.  Often a contributor will start out making edits to the web
@@ -2509,7 +2964,20 @@ submissions, people only have to learn the ropes once.  Versioning
 everything together also means that new features can be committed
 together with their documentation updates, that branching the code
 will branch the documentation too, etc.</para>
+-->
+<para>
+  すべてを同じ場所でバージョン管理する理由は、
+  そうしておけば作業に参加する人がひとつのことを覚えるだけですむようになるからです。
+  たとえば、最初はウェブページやドキュメントの修正から参加しはじめたメンバーが、
+  後にコードそのものの修正にも参加するようになるといったことがあります。
+  すべてを同じ仕組みでバージョン管理しておけば、
+  このような場合に新たにその使用法を学ぶ必要がなくなるのです。
+  また、新機能を追加すると同時にドキュメントも更新したり、
+  コードのブランチを作成すると同時にドキュメントのブランチも作成したり
+  といった際にも便利です。
+</para>
 
+<!--
 <para>Don't keep <firstterm>generated files</firstterm> under version
 control.  They are not truly editable data, since they are produced
 programmatically from other files.  For example, some build systems
@@ -2526,25 +2994,72 @@ question of versioning <filename>configure</filename> files, see
 Alexey Makhotkin's post "<citetitle>configure.in and version
 control</citetitle>" at
 <ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>.</para></footnote></para>
+-->
+<para>
+  <firstterm>自動生成されるファイル</firstterm> はバージョン管理する必要がありません。
+  これらのファイルは純粋に編集可能なデータではなく、
+  別のファイルの内容をもとにして自動生成されるものだからです。
+  たとえば、ビルドシステムでよく用いられるファイル <filename>configure</filename>
+  は、テンプレート <filename>configure.in</filename>
+  の内容をもとにして自動生成されるものです。もし <filename>configure</filename>
+  を変更したいのなら、<filename>configure.in</filename>
+  を編集してから再生成するということになります。つまり、この場合で言う
+  「真に編集可能なファイル」は、テンプレートである <filename>configure.in</filename>
+  だけということになります。バージョン管理するのはテンプレートだけにします。
+  生成した結果までバージョン管理してしまうと、
+  テンプレートを修正した際にファイルを再生成することを忘れてしまうかも知れません。
+  そうすると、ファイルの整合性が取れなくなってしまって混乱の元となります。
+  <footnote>
+    <para>
+      <filename>configure</filename> ファイルをバージョン管理するか否かについては、
+      別の見方もあります。Alexey Makhotkin の記事 "<citetitle>configure.in and version
+      control</citetitle>" が、次の URL で見られます。
+      <ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>
+    </para>
+  </footnote>
+</para>
 
+<!--
 <para>The rule that all editable data should be kept under version
 control has one unfortunate exception: the bug tracker.  Bug databases
 hold plenty of editable data, but for technical reasons generally
 cannot store that data in the main version control system.  (Some
 trackers have primitive versioning features of their own, however,
 independent of the project's main repository.)</para>
+-->
+<para>
+  「編集可能なデータはすべてバージョン管理下におかなければならない」
+  という規則には、残念ながらひとつだけ例外があります。
+  それがバグトラッカーです。
+  バグデータベースは編集可能なデータを大量に保持していますが、
+  技術的な理由により、このデータをバージョン管理することはできません
+  (バグトラッカーの中には、ちょっとしたバージョン管理機能を独自に実装しているものもあります。
+  しかし、これはプロジェクトのメインリポジトリとは独立したものとなります)。
+</para>
 
 </sect3>
 
 <sect3 id="vc-browsing">
+<!--
 <title>Browsability</title>
+-->
+<title>ウェブで閲覧できるようにする</title>
 
+<!--
 <para>The project's repository should be browsable on the Web.  This
 means not only the ability to see the latest revisions of the
 project's files, but to go back in time and look at earlier revisions,
 view the differences between revisions, read log messages for selected
 changes, etc.</para>
+-->
+<para>
+  プロジェクトのリポジトリは、ウェブ上からも閲覧できるようにしなければなりません。
+  これは、ただ単に最新のリビジョンが見られればいいというレベルのものではありません。
+  前のリビジョンにさかのぼったりリビジョン間の差分を見たり、
+  変更時のログメッセージを見たりといった機能も含みます。
+</para>
 
+<!--
 <para>Browsability is important because it is a lightweight portal to
 project data.  If the repository cannot be viewed through a web
 browser, then someone wanting to inspect a particular file (say, to
@@ -2552,7 +3067,20 @@ see if a certain bugfix had made it into the code) would first have to
 install version control client software locally, which could turn
 their simple query from a two-minute task into a half-hour or longer
 task.</para>
+-->
+<para>
+  これは、そのプロジェクトのデータに関する便利な入り口となるので、
+  ブラウザビリティ（閲覧のしやすさ）が重要となります。
+  もしウェブブラウザ経由での閲覧ができなければ、
+  そのプロジェクトの特定のファイルを調べたい人
+  （あのバグ修正はどんな風に行われたのかな？など）はまず
+  バージョン管理システムのクライアントソフトウェアを
+  インストールするところから始めなければならなくなってしまいます。
+  ウェブで見られれば２分ですむことなのに、
+  それがないために30分がかりの作業になってしまうということになります。
+</para>
 
+<!--
 <para>Browsability also implies canonical URLs for viewing specific
 revisions of files, and for viewing the latest revision at any given
 time.  This can be very useful in technical discussions or when
@@ -2564,7 +3092,23 @@ giving a URL that always points to the latest revision of
 the <filename>hacking.html</filename> file.  The URL is better because
 it is completely unambiguous, and avoids the question of whether the
 addressee has an up-to-date working copy.</para>
+-->
+<para>
+  ブラウザビリティの中には、特定のファイルの特定のリビジョンが特定の
+  URL で見られること、そして特定のファイルの（その時点での）
+  最新リビジョンも特定の URL で見られることといった内容も含まれます。
+  こうしておくと、技術的な議論の際にその場所を示しやすくなるので便利です。
+  たとえば「サーバをデバッグするためのヒントは、作業コピーにある
+  www/hacking.html をごらんください」という代わりに
+  「サーバをデバッグするためのヒントは
+  <emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>
+  をごらんください」と言えるのです。
+  これは、常に <filename>hacking.html</filename>
+  の最新リビジョンを指す URL です。URL を指定するほうが、
+  あいまい性を排除するという点でよいでしょう。
+</para>
 
+<!--
 <para>Some version control systems come with built-in
 repository-browsing mechanisms, while others rely on third-party tools
 to do it.  Three such tools are <firstterm>ViewCVS</firstterm> (<ulink
@@ -2575,12 +3119,29 @@ url="http://www.freebsd.org/projects/cvsweb.html"/>), and
 url="http://websvn.tigris.org/"/>).  The first works with both CVS and
 Subversion, the second with CVS only, and the third with Subversion
 only.</para>
+-->
+<para>
+  バージョン管理システムの中には、
+  リポジトリをウェブで閲覧するための仕組みが組み込まれているものもあります。
+  また、サードパーティのツールを使ってこの機能を実現しているものもあります。
+  サードパーティのツールとして有名なのは
+  <firstterm>ViewCVS</firstterm> (<ulink url="http://viewcvs.sourceforge.net/"/>)、
+  <firstterm>CVSWeb</firstterm> (<ulink url="http://www.freebsd.org/projects/cvsweb.html"/>)、
+  そして
+  <firstterm>WebSVN</firstterm> (<ulink url="http://websvn.tigris.org/"/>)
+  です。ViewCVS は CVS と Subversion の両方に対応しています。
+  一方、CVSWeb は CVS 専用、WebSVN は Subversion 専用です。
+</para>
 
 </sect3>
 
 <sect3 id="commit-emails">
+<!--
 <title>Commit emails</title>
+-->
+<title>コミットメール</title>
 
+<!--
 <para>Every commit to the repository should generate an email showing
 who made the change, when they made it, what files and directories
 changed, and how they changed.  The email should go to a special
@@ -2593,7 +3154,26 @@ code level.  Aside from the obvious technical benefits of peer review
 sense of community, because they establish a shared environment in
 which people can react to events (commits) that they know are visible
 to others as well.</para>
+-->
+<para>
+  コミットが行われるたびに、その内容をメールで送信するようにします。
+  メールには「だれが」「いつ」「どのファイルやディレクトリを」「どのように」
+  変更したのかを記述します。
+  このメールの送信先は独立したメーリングリストとし、
+  人間が投稿する普通のメーリングリストとは独立させましょう。
+  コミットメールを受け取りたいひとだけがそのメーリングリストに参加することになります。
+  開発者やそのたプロジェクトに興味のある人たちには、
+  このメーリングリストへの加入を勧めましょう。
+  今そのプロジェクトに何が起こっているのかをコードレベルで知るために、
+  このメーリングリストは最適な手段となります。
+  ピアレビューの技術的な有用性については改めて語るまでもありません
+  (<xref linkend="code-review"/> をご覧ください)
+  が、コミットメールもコミュニティにおいては有用なものとなります。
+  すべてのイベント（コミット）の内容が共有されることで、
+  他のメンバーがそれに反応したりといったことがしやすくなるのです。
+</para>
 
+<!--
 <para>The specifics of setting up commit emails will vary depending on
 your version control system, but usually there's a script or other
 packaged facility for doing it.  If you're having trouble finding it,
@@ -2605,13 +3185,35 @@ The hook is triggered by an individual commit, is fed all the
 information about that commit, and is then free to use that
 information to do anything&mdash;for example, to send out an
 email.</para>
+-->
+<para>
+  コミットメールの設定方法は、使用するバージョン管理システムによって異なります。
+  しかし、通常はそれ用のスクリプトやパッケージが用意されているはずです。
+  もし見つからなければ、使用しているシステムのドキュメントで
+  <firstterm>フック（hooks）</firstterm>、あるいは
+  <firstterm>コミット後フック（post-commit hook）</firstterm>
+  といったキーワードで探してみましょう。ちなみに CVS では
+  <firstterm>loginfo フック（loginfo hook）</firstterm>
+  と言うようです。
+  コミットがあるたびに自動で特定の作業をさせる際に使用するのが
+  コミット後フックです。これは各コミットの直後に呼び出され、
+  そのコミットに関する情報を受け取って任意の作業を行うことができます。
+  そう。たとえばメールを送信したりなど。
+</para>
 
+<!--
 <para>With pre-packaged commit email systems, you may want to
 modify some of the default behaviors:</para>
+-->
+<para>
+  用意されているメール送信の仕組みを使用していると、
+  そのデフォルトの動作をちょっと変更したくなってくるかもしれません。
+</para>
 
 <orderedlist>
 
   <listitem>
+<!--
   <para>Some commit mailers don't include the actual diffs in the
   email, but instead provide a URL to view the change on the web using
   the repository browsing system.  While it's good to provide the URL,
@@ -2628,7 +3230,28 @@ modify some of the default behaviors:</para>
   annotate the quoted diff than it is to visit a web page and
   laboriously cut-and-paste parts of the diff from web browser to
   email client.</para>
+-->
+  <para>
+    コミットメールシステムの中には、実際の差分そのものは本文に含めず、
+    それをウェブで見るための URL だけを記載するというものがあります。
+    もちろん URL は大事です。後から変更内容を確認するのにも便利ですしね。
+    でも、差分の内容そのものをメールの本文に含めておくことも
+    <emphasis>非常に</emphasis> 重要です。多くの人にとって、
+    メールを読むという作業は日常のルーチンワークとして組み込まれているでしょう。
+    変更の内容が直接メールに書かれていれば、
+    一連の流れの中で自然にコミットをレビューすることができます。
+    いちいちメールソフトを終了してブラウザに切り替える必要がなくなるのです。
+    変更を確認するには URL をクリックする必要があるとなれば、
+    ほとんどの人はクリックなどしてくれないでしょう。
+    だって、これまでずっとメールを読んでいたのに、
+    いきなり別の操作が必要となるのですから。
+    さらに、変更点をレビューした人がその内容について質問をしたいときに、
+    そのメールに「返信」すれば自動的に変更内容が得られるので便利です。
+    さもないと、ウェブページを開いて変更点を
+    カット＆ペーストするという大変な手間がかかってしまいます。
+  </para>
 
+<!--
   <para>(Of course, if the diff is huge, such as when a large body of
   new code has been added to the repository, then it makes sense to
   omit the diff and offer only the URL.  Most commit mailers can do
@@ -2637,8 +3260,21 @@ modify some of the default behaviors:</para>
   email, than to leave the diffs off entirely.  Convenient reviewing
   and commenting is a cornerstone of cooperative development, much
   too important to do without.)</para>
+-->
+  <para>
+    (もちろん、新たにリポジトリにコードを追加したなどで変更点が大量にある場合は、
+    差分を省略して URL だけにするというのもわかります。
+    コミットメールのシステムの多くは、
+    何らかの制限値を設定してこの処理を自動化してくれるようになっています。
+    もしそんな機能がついていなかったとしましょう。そんな場合でも、
+    差分をまったく記載しないよりは常に差分を含めるようにするほうがずっとマシです。
+    たまに巨大なメールが送信されることになりますが、許容範囲です。
+    共同開発においては、みんなが他人の変更をレビューしたりコメントしたりすることが重要です。
+    そのための努力は、いくらしてもしすぎることはありません)
+  </para>
   </listitem>
 
+<!--
   <listitem><para>The commit emails should set their Reply-to header
   to the regular development list, not the commit email list.  That
   is, when someone reviews a commit and writes a response, their
@@ -2658,7 +3294,33 @@ modify some of the default behaviors:</para>
   display on a web page, for example).  Those programs are prepared to
   handle consistently-formatted commit emails, but not inconsistent
   human-written mails.</para>
+-->
+  <listitem>
+  <para>
+    コミットメールの Reply-to ヘッダは、コミットメール用のメーリングリストではなく
+    開発者向けのメーリングリストにしておきましょう。
+    そうすると、コミットメールの内容をレビューして何らかのコメントをしたくなった人が
+    「返信」すると、それが自動的に開発者向けメーリングリストに流れることになります。
+    こうしておくべき理由はいくつかあります。
+    まず、技術的な議論はひとつの場所に集約するということ。
+    技術的な議論を行う場として最適なのは、開発者向けメーリングリストです。
+    次に、コミットメール用のメーリングリストに参加していないメンバーにも
+    議論の内容を伝えるということ。
+    ３つ目に、コミットメール用のメーリングリストはあくまでも
+    コミットの内容をチェックするだけのものであり、
+    決して「コミットの内容のチェックがメインだけど、
+    たまに技術的な議論もある」というものであってはいけないからです。
+    コミットメール用のメーリングリストに登録する人たちは、
+    コミット内容のメールだけが送られてくることを期待しています。
+    それ以外の内容が送られると、暗黙の了解を裏切ってしまうことになります。
+    最後に、コミットメールの内容を処理して（ウェブページなどに）
+    結果を出力するプログラムを作成するような人のことを考えるということ。
+    この種のプログラムは、
+    コミットメールのようなお決まりのパターンのメールに関してはうまく動作します。
+    しかし、人間が書いたメールを処理させると変な結果になってしまうでしょう。
+  </para>
 
+<!--
   <para>Note that this advice to set Reply-to does not contradict the
   recommendations in
   <xref linkend="reply-to"/><phrase output="printed"> earlier in
@@ -2668,14 +3330,30 @@ modify some of the default behaviors:</para>
   itself, and it sets Reply-to in order to indicate that the
   appropriate place for replies is the development mailing list, not
   the commit list.</para>
+-->
+  <para>
+    ここでお勧めした Reply-to の設定は、決して
+    <phrase output="printed">本章の前半で述べた</phrase>
+    <xref linkend="reply-to"/> の内容と矛盾するものではないことに注意しましょう。
+    先ほども、メッセージの <emphasis>送信者</emphasis> 自身が
+    Reply-to を設定するぶんには特に問題はないとしています。今回の場合、
+    メッセージの送信者はバージョン管理システムです。
+    バージョン管理システム自身で Reply-to
+    を指定して開発者向けメーリングリスト向けに返信させようとしているのですから、
+    さきほどの説明とは矛盾しません。
+  </para>
 
   </listitem>
 
 </orderedlist>
 
 <sidebar id="cia">
+<!--
 <title>CIA: Another Change Publication Mechanism</title>
+-->
+<title>CIA: 変更点を公開するためのもうひとつの方法</title>
 
+<!--
 <para>Commit emails are not the only way to propagate change news.
 Recently, another mechanism called CIA (<ulink
 url="http://cia.navi.cx/"/>) has been developed.  CIA is a real-time
@@ -2688,41 +3366,104 @@ IRC, this technique is of immense <emphasis>social</emphasis> utility.
 People get the sense of being part of something alive and active, and
 feel that they can see progress being made right before their
 eyes.</para>
+-->
+<para>
+  変更点を公開する方法は、コミットメールだけではありません。
+  最近、CIA (<ulink url="http://cia.navi.cx/"/>)
+  と呼ばれる別の仕組みが開発されました。
+  CIA は、コミットの状況をリアルタイムで収集し、配信するものです。
+  CIA の最も一般的な使用法は、コミットの通知を
+  IRC チャネルに送信するというものです。
+  そのチャネルに参加していれば、
+  コミットがあるたびに即時にそれを知ることができます。
+  メールに比べたら、技術的に劣っているかもしれません。
+  だって、IRC にコミット通知を送ったとしても
+  それを見ている人がいるかどうかがわからないわけですから。
+  それでも、この仕組みは <emphasis>社会的な面で</emphasis>
+  面白いものです。参加している人たちは
+  そこで何かが起こっていることが感じられ、
+  開発の進行状況をまさに目の前で見られるというわけです。
+</para>
 
+<!--
 <para>The way it works is that you invoke the CIA notifier program
 from your post-commit hook.  The notifier formats the commit
 information into an XML message, and sends to a central server
 (typically <literal>cia.navi.cx</literal>).  That server then
 distributes the commit information to other forums.</para>
+-->
+<para>
+  この仕組みを使用するには、コミット後のフックで
+  CIA の通知用プログラム (CIA notifier) を実行します。
+  このプログラムは、コミットに関する情報を XML
+  形式に変換して中央サーバ (通常は <literal>cia.navi.cx</literal>)
+  に送ります。するとサーバがその情報を別のフォーラムに配信するのです。
+</para>
 
+<!--
 <para>CIA can also be configured to send out <ulink
 url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
 feeds.  See the documentation at <ulink url="http://cia.navi.cx/"/>
 for details.</para>
+-->
+<para>
+  CIA を設定することで、
+  <ulink url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
+  フィードを送信させることもできます。詳細は
+  <ulink url="http://cia.navi.cx/"/> のドキュメントをご確認ください。
+</para>
 
+<!--
 <para>To see an example of CIA in action, point your IRC
 client at <literal>irc.freenode.net</literal>, channel
 <literal>#commits</literal>.</para>
+-->
+<para>
+  CIA が実際に動作している例を見るには、IRC クライアントで
+  <literal>irc.freenode.net</literal> のチャネル <literal>#commits</literal>
+  に行ってみましょう。
+</para>
 
 </sidebar>
 
 </sect3>
 
 <sect3 id="branches">
+<!--
 <title>Use branches to avoid bottlenecks</title>
+-->
+<title>ブランチの活用</title>
 
+<!--
 <para>Non-expert version control users are sometimes a bit afraid of
 branching and merging.  This is probably a side effect of CVS's
 popularity: CVS's interface for branching and merging is somewhat
 counterintuitive, so many people have learned to avoid those
 operations entirely.</para>
+-->
+<para>
+  バージョン管理システムにあまり慣れていないユーザは、
+  ブランチの作成やマージ作業を怖がる傾向があるようです。
+  おそらく、これは CVS の悪評の副作用でしょう。
+  CVS のブランチ作成処理やマージ処理は直感的とは言えず、
+  多くの人がそれを避けるようにしています。
+</para>
 
+<!--
 <para>If you are among those people, resolve right now to conquer any
 fears you may have and take the time to learn how to do branching and
 merging.  They are not difficult operations, once you get used to
 them, and they become increasingly important as a project acquires
 more developers.</para>
+-->
+<para>
+  もしあなたもその中のひとりだというのなら、
+  怖がる気持ちを乗り越えてブランチ作成やマージについて勉強してみましょう。
+  いったん作業に慣れてしまえば、そんなに難しいものではありません。
+  また、プロジェクトに参加するメンバーが増えれば増えるほどこの作業の重要性も増します。
+</para>
 
+<!--
 <para>Branches are valuable because they turn a scarce
 resource&mdash;working room in the project's code&mdash;into an
 abundant one.  Normally, all developers work together in the same
@@ -2734,7 +3475,24 @@ other developers to examine the result.  If everyone agrees that the
 result is good, they can tell the version control system to move
 ("merge") the drawbridge from the branch castle over to the main
 castle.</para>
+-->
+<para>
+  ブランチを使用すると、限られた資源（プロジェクトのソースコード中の作業場所）
+  を有効活用できるので便利です。
+  通常は、すべての開発者がひとつの砂場の上で作業をします。
+  みんなでひとつのお城を作っていこうとしているわけです。
+  あるとき、ひとりのメンバーが「ここに跳ね橋をつけましょうよ」と言い出しました。
+  でも、他のメンバーは、それがそのお城にとって本当に有用なのかどうかがわかりません。
+  そのメンバー用に砂場の一角を隔離し、彼女にはそこで作業をしてもらう。
+  ブランチを作成するとは、そういうことになります。
+  もしうまい具合に跳ね橋が出来上がったら、
+  彼女は他のメンバーを呼び寄せてそれを見てもらいます。
+  みんなが納得するようなできばえであることがわかれば、
+  バージョン管理システムを使ってその跳ね橋をみんなのお城に移植
+  （"マージ"）するのです。
+</para>
 
+<!--
 <para>It's easy to see how this ability helps collaborative
 development.  People need the freedom to try new things without
 feeling like they're interfering with others' work.  Equally
@@ -2744,7 +3502,21 @@ stabilized (see <xref linkend="stabilizing-a-release"/> and
 <xref linkend="release-lines"/><phrase output="printed"> in
 <xref linkend="development-cycle"/></phrase>) without worrying
 about tracking a moving target.</para>
+-->
+<para>
+  共同作業を進めるうえでこの機能がいかに有用かは、
+  言うまでもないことでしょう。この機能を使えば、
+  「他の人に迷惑がかからないかな？」
+  なんて気にせずに思う存分新しいことを試せるのです。
+  同じくらい重要なこととして、
+  バグ修正や安定版リリースのためのブランチを本流から隔離する
+  (<phrase output="printed"><xref linkend="development-cycle"/> の</phrase>
+  <xref linkend="stabilizing-a-release"/> と
+  <xref linkend="release-lines"/> を参照ください) ということがあります。
+  そうすれば、それぞれの流れを追いやすくなります。
+</para>
 
+<!--
 <para>Use branches liberally, and encourage others to use them.  But
 also make sure that a given branch is only active for exactly as long
 as needed.  Every active branch is a slight drain on the community's
@@ -2755,12 +3527,30 @@ commits just as for any other commit.  But branches should not become
 a mechanism for dividing the development community.  With rare
 exceptions, the eventual goal of most branches should be to merge
 their changes back into the main line and disappear.</para>
+-->
+<para>
+  偏見を捨て、ブランチを積極的に使うようにしましょう。
+  そして、他のメンバーにもブランチの使用を推奨しましょう。
+  しかし、不要になったブランチはいつまでも残しておかないようにしましょう。
+  ブランチが増えれば増えるほど、コミュニティ内での注目が散らばってしまいます。
+  そのブランチとは直接関係のない開発者であっても、
+  周りで起こっていることを気にせずにはいられないでしょう。
+  無理もありません。もちろん、
+  ブランチに対するコミットであってもコミットメールは同じように送ります。
+  しかし、ブランチは開発者のコミュニティを分断する仕組みとなるべきではありません。
+  わずかな例外を除いては、
+  初期の目的を達成して本流にマージした時点でブランチを削除するようにしましょう。
+</para>
 
 </sect3>
 
 <sect3 id="vc-singularity">
+<!--
 <title>Singularity of information</title>
+-->
+<title>情報の一元管理</title>
 
+<!--
 <para>Merging has an important corollary: never commit the same change
 twice.  That is, a given change should enter the version control
 system exactly once.  The revision (or set of revisions) in which the
@@ -2770,7 +3560,20 @@ should be merged from its original entry point to those other
 destinations&mdash;as opposed to committing a textually identical
 change, which would have the same effect in the code, but would make
 accurate bookkeeping and release management impossible.</para>
+-->
+<para>
+  ブランチが重要だということは、当然マージ処理も重要になってくるということです。
+  同じコミットを２回繰り返すなんていうことがないようにしましょう。
+  つまり、ある変更がバージョン管理システムに投入されるのは１回だけにしておくということです。
+  そうしておくことで、ある変更に対応するリビジョン（あるいはリビジョン群）
+  が一意に決まるようになります。その変更と同じ内容を別のブランチにも適用したい場合は、
+  そのブランチ上でもまったく同じように手を加えてそれをコミットするというのではなく、
+  最初の変更をマージするようにしましょう。
+  手作業で同じように修正したものをコミットしても結果は同じですが、
+  そうすると正確なリリース管理ができなくなります。
+</para>
 
+<!--
 <para>The practical effects of this advice differ from one version
 control system to another.  In some systems, merges are special
 events, fundamentally distinct from commits, and carry their own
@@ -2782,14 +3585,43 @@ of the original change.  Instead, just indicate that this is a merge,
 and give the identifying revision of the original change, with at most
 a one-sentence summary of its effect.  If someone wants to see the
 full log message, she should consult the original revision.</para>
+-->
+<para>
+  この件に関する実際のアドバイスは、
+  使用するバージョン管理システムによって異なります。
+  あるシステムでは、「マージ」は特別な処理として扱われ、
+  通常のコミットとは別のものとなります。
+  そして独自のメタデータを保持します。
+  また、システムによっては、
+  マージした結果を通常のコミットと同様に適用するものもあります。
+  このようなシステムでは、「マージした結果のコミット」と
+  「新しい変更のコミット」の区別はログメッセージで行います。
+  マージした際のログメッセージには、
+  元の変更の際のログをそのまま繰り返してはいけません。
+  そうではなく、「この変更はマージである」ことと、
+  どのリビジョンをマージしたのかを簡単に記述するようにします。
+  実際の変更内容を知りたければ、
+  マージ元のログメッセージを見るようにするわけです。
+</para>
 
+<!--
 <para>The reason it's important to avoid repeating the log message is
 that log messages are sometimes edited after they've been committed.
 If a change's log message were repeated at each merge destination,
 then even if someone edited the original message, she'd still leave
 all the repeats uncorrected&mdash;which would only cause confusion
 down the road.</para>
+-->
+<para>
+  ログメッセージの重複を避けるのがなぜそんなに大事なのかというと、
+  ログメッセージは後から修正される可能性があるからです。
+  同じ内容のログを繰り返し記述していると、
+  だれかが元のログメッセージを修正したときに
+  コピー先のメッセージがそのままになってしまう可能性があります。
+  後から見たら、これは非常にややこしい状況になります。
+</para>
 
+<!--
 <para>The same principle applies to reverting a change.  If a change
 is withdrawn from the code, then the log message for the reversion
 should merely state that some specific revision(s) is being reverted,
@@ -2800,7 +3632,21 @@ reversion's log message should also state the reason why the change is
 being reverted, but it should not duplicate anything from the original
 change's log message.  If possible, go back and edit the original
 change's log message to point out that it was reverted.</para>
+-->
+<para>
+  同じ原則は、変更を取り消す (revert) 際にもあてはまります。
+  ある修正が廃案になったときのログメッセージは、
+  単にそれが revert されたということだけを記述します。
+  実際に何をどのように戻したのかまでを書いては
+  <emphasis>いけません</emphasis>。だってそれは、
+  もともとその変更を行った際のログを見ればわかることなんですから。
+  もちろん「なぜ」取り消したのかという理由の説明は必要でしょう。
+  しかし、元の変更の際のログメッセージを一言一句書き写す必要はありません。
+  できれば、元の変更の際のログメッセージも修正し、
+  それが結局取り消されたことを記述しておくとよいでしょう。
+</para>
 
+<!--
 <para>All of the above implies that you should use a consistent syntax
 for referring to revisions.  This is helpful not only in log messages,
 but in emails, the bug tracker, and elsewhere.  If you're using
@@ -2816,18 +3662,50 @@ easier (as we will see in <xref linkend="communications"/> and
 <xref linkend="development-cycle"/>), and since a lot of the
 bookkeeping will be done by volunteers, it needs to be as easy as
 possible.</para>
+-->
+<para>
+  これまで説明してきたことからも何となくお分かりでしょうが、
+  特定のリビジョンを参照する際の表記方法は統一しておいたほうがいいでしょう。
+  これは、ログメッセージだけでなくメールやバグトラッカーなどでも同じです。
+  CVS を使っているのなら、
+  "<literal>path/to/file/in/project/tree:REV</literal>"
+  という形式をお勧めします。ここで、REV は CVS のリビジョン番号
+  (たとえば "1.76" など) を指します。
+  Subversion を使っているのなら、(たとえばリビジョン 1729 の場合の)
+  標準の表記法は "r1729" となります (ファイルのパスは不要です。
+  Subversion はリポジトリ全体でリビジョン番号を管理するからです)。
+  それ以外のシステムでもきっと、
+  チェンジセットを表すための標準形式があることでしょう。
+  ともかく、メンバーには標準の形式を使ってもらうようにしましょう。
+  この表記法を統一しておくと、後からプロジェクトの流れを追うのが簡単になり
+  (<xref linkend="communications"/> や
+  <xref linkend="development-cycle"/> で説明します) ます。
+  これらの管理を行うのはたいていはボランティアなので、
+  できるだけ簡単に進められるようにしておくことが重要です。
+</para>
 
+<!--
 <para>See also
 <xref
 linkend="releases-and-daily-development"/><phrase
 output="printed"> in
 <xref linkend="development-cycle"/></phrase>.</para>
+-->
+<para>
+  <phrase output="printed"><xref linkend="development-cycle"/></phrase>
+  の <xref linkend="releases-and-daily-development"/>
+  もごらんください。
+</para>
 
 </sect3>
 
 <sect3 id="vc-authz">
+<!--
 <title>Authorization</title>
+-->
+<title>承認</title>
 
+<!--
 <para>Most version control systems offer a feature whereby certain
 people can be allowed or disallowed from committing in specific
 sub-areas of the repository.  Following the principle that when handed
@@ -2838,7 +3716,21 @@ they can't commit anywhere else.  (See
 <xref linkend="committers"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase> for how projects
 decide who can commit where.)</para>
+-->
+<para>
+  たいていのバージョン管理システムには、
+  特定のユーザに対してリポジトリ内の特定の場所だけのコミットを許可したり
+  逆に拒否したりといったことをする機能があります。
+  「ハンマーを与えられたら、人はみんな周囲の釘を探すようになる」
+  という原則どおり、多くのプロジェクトでこの機能が使われてきました。
+  アクセス権を注意深く管理し、特定の場所にだけコミット権を与えて
+  他の場所は触らせないようにするといった具合です
+  (<phrase output="printed"><xref linkend="managing-volunteers"/></phrase>
+  の <xref linkend="committers"/> で、
+  コミット権の管理方法について説明しています)。
+</para>
 
+<!--
 <para>There is probably little harm done by exercising such tight
 control, but a more relaxed policy is fine too.  Some projects simply
 use an honor system: when a person is granted commit access, even for
@@ -2850,13 +3742,40 @@ If someone commits where they're not supposed to, others will
 notice it and say something.  If a change needs to be undone, that's
 simple enough&mdash;everything's under version control anyway, so
 just revert.</para>
+-->
+<para>
+  このように厳格に管理してしまえば、悪影響が出る可能性を減らせることでしょう。
+  しかし、もうすこし緩やかな方針でもかまいません。
+  プロジェクトによっては、緩やかな方針を採用しているものもあります。
+  たとえリポジトリの一部分のみへのコミット権を与えられたユーザであっても、
+  設定上はリポジトリ全体を変更できる権限を与えるというものです。
+  ただ「コミットするのはこの範囲だけにしておいてね」とお願いするだけです。
+  こうしたところで、実害はないことを覚えておきましょう。
+  ふつうのプロジェクトなら、すべてのコミットは何らかの形でレビューされます。
+  誰かが予期せぬコミットをしたら、
+  それを見つけた人が何かコメントすることでしょう。
+  その変更を取り消すべきだと判断したのなら、やることは簡単です。
+  すべてバージョン管理されているのだから、
+  単にその変更を取り消せばいいだけのことです。
+</para>
 
+<!--
 <para>There are several advantages to the relaxed approach.  First, as
 developers expand into other areas (which they usually will if they
 stay with the project), there is no administrative overhead to
 granting them wider privileges.  Once the decision is made, the person
 can just start committing in the new area right away.</para>
+-->
+<para>
+  緩やかな方針にしておく利点はいくつかあります。
+  まず、ある開発者の権限を拡張する
+  （プロジェクトに長年かかわっていると、よくあることです）
+  場合に一切手間がかからないということです。
+  単に「今日からは、ここもコミットしていいよ」というだけで、
+  後はすぐにコミットできるようになります。
+</para>
 
+<!--
 <para>Second, expansion can be done in a more fine-grained manner.
 Generally, a committer in area X who wants to expand to area Y will
 start posting patches against Y and asking for review.  If someone who
@@ -2866,7 +3785,20 @@ it, they can just tell the submitter to commit the change directly
 course).  That way, the commit will come from the person who actually
 wrote the change, which is preferable from both an information
 management standpoint and from a crediting standpoint.</para>
+-->
+<para>
+  次に、より緻密な方法で権限の拡張ができるようになります。
+  一般に、エリア X のコミッターがエリア Y にもコミットしたいと考えた場合は、
+  まず Y に対するパッチを投稿してレビューしてもらうことになります。
+  すでに Y へのコミット権を持つメンバーがそのパッチをレビューして承認したら、
+  パッチを投稿した人に対して「直接コミットしてもいいよ」と伝えます
+  (もちろん、誰がレビューして承認したのかという情報は
+  ログメッセージに残しておきます)。
+  この方法だと、実際にパッチを書いた人がコミットをすることになります。
+  これは、情報管理の面でも功績をたたえる意味でも重要です。
+</para>
 
+<!--
 <para>Last, and perhaps most important, using the honor system
 encourages an atmosphere of trust and mutual respect.  Giving someone
 commit access to a subdomain is a statement about their technical
@@ -2880,7 +3812,25 @@ the project as a committer is an opportunity to initiate them into a
 circle of mutual trust.  A good way to do that is to give them more
 power than they're supposed to use, then inform them that it's up to
 them to stay within the stated limits.</para>
+-->
+<para>
+  最後に、最も重要なのが、この緩やかな方式を採用すると
+  お互いに信頼し、尊重しあう空気が生まれるということです。
+  この方式の場合、「君はこの部分にコミットする能力があることがわかった。
+  ぜひコミットしてくれ」というようにとられます。
+  厳格に管理してしまうと「君のできることには制限があるんだ」
+  ということを強調するだけでなく
+  「間違って変なことをしてしまわないかどうかが心配なんだ」
+  と疑っているように感じられてしまいます。
+  できればこのようなことは避けたいでしょう。
+  だれかを新たにコミッターとして迎え入れるということは、
+  みんなの信頼の輪の中に新しいメンバーを加えるということです。
+  その際には、本来必要なもの以上の力を与え、
+  「それをどう使うかはあなたしだい。でもこれ以上のことはしないでね」
+  としたほうがいいでしょう。
+</para>
 
+<!--
 <para>The Subversion project has operated on the honor system way for
 more than four years, with 33 full and 43 partial committers as of
 this writing.  The only distinction the system actually enforces is
@@ -2890,7 +3840,19 @@ someone deliberately committing outside their domain.  Once or twice
 there's been an innocent misunderstanding about the extent of
 someone's commit privileges, but it's always been resolved quickly and
 amiably.</para>
+-->
+<para>
+  Subversion プロジェクトでは、かれこれ 4 年以上この「緩やかな管理」
+  方式を採用しています。本書の執筆時点で、フルコミッターは 33 人、
+  一部にだけコミット権限のあるメンバーが 43 人います。
+  この管理方式では、システムが管理するのは「コミッターかそうでないか」
+  だけです。その詳細 (どの部分にコミット権があるかなど) は人間が管理します。
+  今のところ、コミット権のない部分について故意にコミットするなどといった
+  問題は発生していません。コミット権に関する誤解が生じたことも何度かありましたが、
+  いつも速やかに円満解決していました。
+</para>
 
+<!--
 <para>Obviously, in situations where self-policing is impractical, you
 must rely on hard authorization controls.  But such situations are
 rare.  Even when there are millions of lines of code and hundreds or
@@ -2900,12 +3862,32 @@ recognize if someone committed there who wasn't supposed to.  If
 regular commit review <emphasis>isn't</emphasis> happening, then the
 project has bigger problems to deal with than the authorization system
 anyway.</para>
+-->
+<para>
+  このような自己管理方式が明らかに現実的でない場面もあるでしょう。
+  当然、そんな場合は厳格な管理が必要となります。
+  とはいえ、そんな状況はまれです。
+  たとえ何千人の開発者が何百万行のコードを扱っていたとしても、
+  そのコードに対するすべてのコミットはだれか他の人によるレビューを受けます。
+  おかしなコミットがあればすぐに指摘されるでしょう。
+  もしコミットをレビューしあう習慣が<emphasis>できていない</emphasis>のなら、
+  それは認証システムがどうのこうのいう以前の問題です。
+</para>
 
+<!--
 <para>In summary, don't spend too much time fiddling with the version
 control authorization system, unless you have a specific reason to.  It
 usually won't bring much tangible benefit, and there are advantages to
 relying on human controls instead.</para>
+-->
+<para>
+  まとめると、よっぽどの理由がない限りは
+  バージョン管理システム上のアクセス権限にあまり気を使う必要はないということです。
+  厳密に管理したところで得られる具体的なメリットはあまりありません。
+  それより人間による管理に頼ったほうが得られるものは多いでしょう。
+</para>
 
+<!--
 <para>None of this should be taken to mean that the restrictions
 themselves are unimportant, of course.  It would be bad for a project
 to encourage people to commit in areas where they're not qualified.
@@ -2914,6 +3896,16 @@ special status: it implies voting rights on project-wide questions.
 This political aspect of commit access is discussed more in <xref
 linkend="electorate"/><phrase output="printed"> in
 <xref linkend="social-infrastructure"/></phrase>.</para>
+-->
+<para>
+  もちろん、制限をすること自体が無意味だといっているわけではありません。
+  権限のないところへコミットさせるようなことは、あまりしたくないでしょう。
+  さらに、多くのプロジェクトでは「フルコミッター (制限のないコミッター)」
+  には何らかの特権 (たとえばプロジェクトの運営に関する投票に参加できるなど)
+  が与えられています。コミット権の扱いに関する政治的な意味合いについては
+  <phrase output="printed"><xref linkend="social-infrastructure"/></phrase>
+  の <xref linkend="electorate"/> で詳しく説明します。
+</para>
 
 </sect3>
 
