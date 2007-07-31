@@ -40,7 +40,7 @@ cat <<EOF
 EOF
 
 # start book
-echo "<book id=\"poss\">"
+grep "<book id=" book.xml
 
 # add entities
 while (($#))
