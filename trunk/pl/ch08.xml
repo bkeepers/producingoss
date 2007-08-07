@@ -606,54 +606,58 @@ pisanie testów daje mniej satysfakcji niż faktyczne naprawienie błędów,
 to nakazem jest, aby zestaw testów nie był bardziej męczący niż to 
 konieczne.</para>
 
-<para>Some projects go even further, requiring that a new test
-accompany <emphasis>every</emphasis> bugfix or new feature.  Whether
-this is a good idea or not depends on many factors: the nature of the
-software, the makeup of the development team, and the difficulty of
-writing new tests.  The CVS (<ulink url="http://www.cvshome.org/"/>)
-project has long had such a rule.  It is a good policy in theory,
-since CVS is version control software and therefore very risk-averse
-about the possibility of munging or mishandling the user's data.  The
-problem in practice is that CVS's regression test suite is a single
-huge shell script (amusingly named <filename>sanity.sh</filename>),
-hard to read and hard to modify or extend.  The difficulty of adding
-new tests, combined with the requirement that patches be accompanied
-by new tests, means that CVS effectively discourages patches.  When I
-used to work on CVS, I sometimes saw people start on and even complete
-a patch to CVS's own code, but give up when told of the requirement to
-add a new test to <filename>sanity.sh</filename>.</para>
+<para>Niektóre projekty idą w tym jeszcze dalej, wymagając aby 
+<emphasis>każdej</emphasis> poprawce lub nowej funkcji towarzyszył nowy 
+test. To, czy jest to dobry pomysł, czy nie, zależy od kilku czynników: 
+od natury danego oprogramowania, organizacji zespołu oraz trudności 
+pisania nowych testów. Projekt CVS (<ulink 
+url="http://www.cvshome.org/"/>) ma takie wymogi od dawna. Teoretycznie 
+jest to dobra zasada, ponieważ CVS to system kontroli wersji i z tego 
+powodu stara się unikać ryzyka zamazania lub niewłaściwego potraktowania 
+danych użytkownika. W praktyce problem z zestawem testów regresji w CVS 
+polega na tym, że jest to jeden ogromny skrypt powłoki (jak na ironię 
+nazwany <filename>sanity.sh</filename>, czyli "rozsądek"), który trudno 
+jest rozczytać, modyfikować czy rozszerzać. Trudność w dodawaniu nowych 
+testów w połączeniu z wymaganiem, aby do łatek były dołączane nowe 
+testy, powoduje że CVS praktycznie zniechęca twórców łatek. Kiedy 
+pracowałem nad CVS, czasem byłem świadkiem tego jak ludzie zaczynali, a 
+nawet ukończali łatki do kodu projektu CVS, ale rezygnowali gdy 
+dowiedzieli się o konieczności dodawania nowego testu do 
+<filename>sanity.sh</filename>.</para>
 
-<para>It is normal to spend more time writing a new regression test
-than on fixing the original bug.  But CVS carried this phenomenon to
-an extreme: one might spend hours trying to design one's test
-properly, and still get it wrong, because there are just too many
-unpredictable complexities involved in changing a 35,000-line Bourne
-shell script.  Even longtime CVS developers often grumbled when they
-had to add a new test.</para>
+<para>To normalne, że więcej czasu spędza się na pisaniu nowego testu 
+regresji, niż na poprawianiu pierwotnego błędu. Ale CVS doprowadziło to 
+zjawisko do absurdu: można spędzić wiele godzin na właściwym 
+przygotowanie swoich testów, a i tak nie osiągnąć celu, ponieważ zmiany 
+w skrypcie Basha o długości 35 tysięcy wierszy wywołują po prostu zbyt 
+wiele nieprzewidywalnych skutków. Nawet doświadczeni programiści CVS 
+zwykle narzekali, kiedy musieli dodać nowy test.</para>
 
-<para>This situation was due to a failure on all our parts to consider
-the automation ratio.  It is true that switching to a real test
-framework&mdash;whether custom-built or off-the-shelf&mdash;would have
-been a major effort.<footnote><para>Note that there would be no need
-to convert all the existing tests to the new framework; the two could
-happily exist side by side, with old tests converted over only as they
-needed to be changed.</para></footnote> But neglecting to do so has
-cost the project much more, over the years.  How many bugfixes and new
-features are <emphasis>not</emphasis> in CVS today, because of the
-impediment of an awkward test suite?  We cannot know the exact number,
-but it is surely many times greater than the number of bugfixes or new
-features the developers might forgo in order to develop a new test
-system (or integrate an off-the-shelf system).  That task would only
-take a finite amount of time, while the penalty of using the current
-test suite will continue forever if nothing is done.</para>
+<para>Taka sytuacja jest wynikiem nie uwzględnienia współczynnika 
+automatyzacji we wszystkich naszych działaniach. To prawda, że 
+przejście do prawdziwego systemu testów - czy to własnej produkcji, czy 
+też już przez kogoś napisanego - byłoby trudnym zadaniem.
+<footnote><para>Zauważ, że nie trzeba by było konwertować istniejących 
+testów do nowego systemu; oba mogłyby spokojnie istnieć obok siebie, 
+stare testy byłyby przenoszone tylko wtedy, gdy zachodziłaby potrzeba 
+dokonania w nich zmian.</para></footnote> Ale odmowa wykonania go 
+kosztuje projekt o wiele więcej, i to przez całe lata. Jak wiele 
+poprawek i nowych funkcji <emphasis>nie ma</emphasis> dziś w CVS z 
+powodu zawalidrogi w postaci niewygodnego zestawu testów? Nie wiemy tego 
+dokładnie, ale na pewno jest to wielokrotnie więcej niż liczba poprawek 
+lub nowych funkcji, bez których programiści musieliby się się obyć w 
+celu stworzenia nowego systemu testów (lub integracji jakiegoś gotowego 
+systemu). To zadanie zabrałoby tylko skończoną ilość czasu, podczas gdy 
+negatywne konsekwencje używania obecnego zestawu testów nie ustaną 
+nigdy, jeśli się tego nie zrobi.</para>
 
-<para>The point is not that having strict requirements to write tests
-is bad, nor that writing your test system as a Bourne shell script is
-necessarily bad.  It might work fine, depending on how you design it
-and what it needs to test.  The point is simply that when the test
-system becomes a significant impediment to development, something must
-be done.  The same is true for any routine process that turns into a
-barrier or a bottleneck.</para>
+<para>Problem nie w tym, że posiadanie ścisłych wymagań co do pisania 
+testów jest złe, ani w tym, że pisanie systemu testów w postaci skryptu
+Basha jest zawsze niewłaściwe. Może to być dobre wyjście, w zależności 
+od tego jak go zaprojektujesz i co chcesz testować. Rzecz po prostu w 
+tym, że gdy system testów staje się znaczącą przeszkodą w rozwoju kodu, 
+to trzeba coś z tym zrobić. Odnosi się to do wszystkich rutynowych 
+czynności, które stają się barierą lub wąskim gardłem projektu.</para>
 
 </sect3>
 
