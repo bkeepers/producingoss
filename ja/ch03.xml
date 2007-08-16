@@ -4451,7 +4451,7 @@ about pasting.</para>
 -->
 
 <para>
-    これは簡単ですが、新顔のユーザーが知る必要があることを伝えています。
+    これは簡単ですが、新顔のユーザーが知る必要がある情報を伝えています。
     チャンネルの目的を正確に伝え、
     プロジェクトのホームページを示し(ユーザによっては、
     プロジェクトのウェブサイトを訪れたことがないとチャンネル内で迷子になってしまいます。)
@@ -4474,7 +4474,7 @@ conversations.</para>
 
 <para>
     IRCチャンネルは共有スペースです。誰でも他人の発言を見ることができます。
-    これは貢献したいと思うときに会話に割って入れるし、
+    これは貢献したいと思うときに会話に割って入れますし、
     他のメンバはやりとりを見て学ぶことができるので普段はよい状態です。
     しかしデバッグセッションのコピーのように、
     大量の情報を一度に流さなければならない場合は問題になります。
@@ -4497,7 +4497,7 @@ then visit the URL and view the data.</para>
     大量のデータを他人から見てほしいと頼まれる時は、
     チャンネルに貼り付けないで、
     (たとえば) <ulink url="http://pastebin.ca/"/> に行き、
-    フォームにデータを入力して生成されたURLをチャンネルに伝えるてくれるように頼みましょう。
+    フォームにデータを入力して生成されたURLをチャンネルに伝えるように頼みましょう。
     そうすれば、そのURLを誰でも訪れてデータを見ることができます。
 </para>
 
@@ -4515,9 +4515,9 @@ and
 -->
 
 <para>
-    今はたくさんの無料な貼り付けサイトが利用できますし、
+    今ではたくさんの無料な貼り付けサイトが利用できますし、
     まとめて示すには数が多すぎますが、
-    私が使われているのを見たことがあるサイトのうちのいくつかを以下に示します:
+    私が使われているのを見たことがあるサイトのうち、いくつかを以下に示します:
 <ulink url="http://www.nomorepasting.com/"/>,
 <ulink url="http://pastebin.ca/"/>,
 <ulink url="http://nopaste.php.cd/"/>,
@@ -4530,35 +4530,60 @@ and
 <sect2 id="bots">
 <title>ボット</title>
 
+<!--
 <para>Many technically-oriented IRC channels have a non-human member,
 a so-called <firstterm>bot</firstterm>, that is capable of storing and
 regurgitating information in response to specific commands.
 Typically, the bot is addressed just like any other member of the
 channel, that is, the commands are delivered by "speaking to" the bot.
 For example:</para>
+-->
+
+<para>
+    多くの技術指向なIRCチャンネルには、
+    いわゆる <firstterm>ボット</firstterm> と呼ばれる人間でないメンバーがいます。
+    これは特定のコマンドに反応して情報を保存したり、
+    表示したりできます。
+    通常は、ボットは他のチャンネルにいるメンバーと同じように扱われます。
+    つまり、コマンドはボットに "話しかける" ことで伝えます。
+    たとえば次のようなものです :
+</para>
 
 <screen>
 &lt;kfogel&gt; ayita: learn diff-cmd = http://subversion.tigris.org/faq.html#diff-cmd
 &lt;ayita&gt;  Thanks!
 </screen>
 
+<!--
 <para>That told the bot (who is logged into the channel as ayita) to
 remember a certain URL as the answer to the query "diff-cmd".  Now we
 can address ayita, asking the bot to tell another user about
 diff-cmd:</para>
+-->
 
+<para>
+    これはボット(ayita としてチャンネルにログインしています)に "diff-cmd" という問い合わせの答えとしてあるURLを覚えておくように伝えています。
+    では、ayita に話しかけて、他のユーザに diff-cmd に関する情報を伝えるように頼んでみましょう :
+</para>
 <screen>
 &lt;kfogel&gt; ayita: tell jrandom about diff-cmd
 &lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
 </screen>
 
+<!--
 <para>The same thing can be accomplished via a convenient shorthand:</para>
+-->
+
+<para>
+    便利な短縮コマンドを使っても同じことが実現できます。
+</para>
 
 <screen>
 &lt;kfogel&gt; !a jrandom diff-cmd
 &lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
 </screen>
 
+<!--
 <para>The exact command set and behaviors differ from bot to bot.  The
 above example is with <literal>ayita</literal>
 (<ulink url="http://hix.nu/svn-public/alexis/trunk/"/>), of which
@@ -4569,13 +4594,32 @@ freenode.  Other bots include Dancer
 privileges are required to run a bot.  A bot is a client program;
 anyone can set one up and direct it to listen to a particular
 server/channel.</para>
+-->
 
+<para>
+    正確なコマンドとそれに対する振舞いはボットによって異なります。
+    上の例は Freenode の <literal>#svn</literal> で通常動いている <literal>ayita</literal>(<ulink url="http://hix.nu/svn-public/alexis/trunk/"/>) のものです。
+    他にも Dancer(<ulink url="http://dancer.sourceforge.net/"/>) や Supybot(<ulink url="http://supybot.com/"/>) といったボットがいます。
+    ボットを動かすのに、特別なIRCサーバ上の権限は必要ないということを覚えておいて下さい。
+    ボットはクライアントプログラムですので、誰でもセットアップして特定の IRCサーバ/チャンネル 上で待機させることができます。
+</para>
+
+<!--
 <para>If your channel tends to get the same questions over and over,
 I highly recommend setting up a bot.  Only a small percentage of
 channel users will acquire the expertise needed to manipulate the bot,
 but those users will answer a disproportionately high percentage of
 questions, because the bot enables them to respond so much more
 efficiently.</para>
+-->
+
+<para>
+    仮にあなたのチャンネルで同じ質問が繰り返される傾向があるなら、
+    ボットをセットアップすることを強くお勧めします。
+    ボットを管理するのに必要な技量を身に付けるのはほんの一握りのメンバになるでしょう。
+    しかし、ボットが効率的に反応するのを助けてくれるので、
+    彼らは高い割合の偏った質問に答えていくのです。
+</para>
 
 </sect2>
 
