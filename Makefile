@@ -1,4 +1,4 @@
-LANGUAGES=de en fr he ja pl zh ml es
+LANGUAGES=de en es fr he ja ml pl pt-pt zh
 
 .PHONY: ${LANGUAGES}
 ${LANGUAGES}: 
