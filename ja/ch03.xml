@@ -3928,9 +3928,9 @@ be kept in a bug tracker?</para>
 
 <para>
     バグ追跡 が扱う範囲は多岐にわたります。
-    この本では バグ追跡についての様々な側面を議論しています。
+    この本ではバグ追跡についての様々な側面を議論しています。
     ここでは バグ追跡システムをセットアップすることと、
-    その作業に関する技術的な考察をすることに集中しようと思います。
+    その作業に関する技術的な考察に集中しようと思います。
     その話題に入る前に、バグ追跡の方針に関する質問から始めましょう。
     : 具体的にどの情報をバグ追跡システムに保存すべきなのでしょうか?
 </para>
@@ -3989,9 +3989,14 @@ track other kinds of tasks too.</para>
 
 <!--
 <para>The classic issue life cycle looks like this:
+-->
+
+<para>問題の典型的なライフサイクルは次のようなものです。:
 
 <orderedlist>
-  <listitem><para>Someone files the issue.  They provide a summary, an
+  <listitem>
+            <!--
+            <para>Someone files the issue.  They provide a summary, an
             initial description (including a reproduction recipe, if
             applicable; see
             <xref
@@ -4003,7 +4008,18 @@ track other kinds of tasks too.</para>
             the issue may be totally unknown to the project&mdash;bug
             reports and feature requests are as likely to come from
             the user community as from the developers.</para>
+            -->
 
+            <para>誰かが問題をバグデータベースに記録します。
+            この記録には、問題の要点、問題の説明(もしあれば、
+            問題を再現させるための手順も。
+            ユーザに優れたバグ報告をさせる方法については、
+            <phrase output="printed"><xref linkend="managing-volunteers"/></phrase> の <xref linkend="users-to-volunteers"/> を参照してください)
+            、バグ追跡システムが求めているその他の情報が全て含まれています。
+            問題を報告した人は、プロジェクトについて全く知らないかもしれません。&mdash;
+            ユーザーのコミュニティと開発者達から、同じくらいの割合でバグ報告や機能要望があがってきます。</para>
+
+            <!--
             <para>Once filed, the issue is in what's called an
             <firstterm>open</firstterm> state.  Because no action has
             been taken yet, some trackers also label it as
@@ -4014,87 +4030,41 @@ track other kinds of tasks too.</para>
             point, it is in a holding area: the issue has been
             recorded, but not yet integrated into the project's
             consciousness.</para>
-  </listitem>
-  <listitem><para>Others read the issue, add comments to it, and
-            perhaps ask the original filer for clarification on some
-            points.</para>
-  </listitem>
-  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
-            This may be the most important moment in its
-            life cycle.  Although the bug is not actually fixed yet,
-            the fact that someone besides the original filer was able
-            to make it happen proves that it is genuine, and, no less
-            importantly, confirms to the original filer that they've
-            contributed to the project by reporting a real bug.</para>
-  </listitem>
-  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
-            cause is identified, and if possible, the effort required
-            to fix it is estimated.  Make sure these things get
-            recorded in the issue; if the person who diagnosed the
-            bug suddenly has to step away from the project for a
-            while (as can often happen with volunteer developers),
-            someone else should be able to pick up where she left
-            off.</para>
-
-            <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the issue and
-            <firstterm>assign</firstterm> it to herself (<xref
-            linkend="delegation-assignment"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase>
-            examines the assignment process in more detail).  The issue's
-            <firstterm>priority</firstterm> may also be set at this
-            stage.  For example, if it is so severe that it should
-            delay the next release, that fact needs to be identified
-            early, and the tracker should have some way of noting
-            it.</para>
-  </listitem>
-  <listitem><para>The issue gets scheduled for resolution.
-            Scheduling doesn't necessarily mean naming a date by which
-            it will be fixed.  Sometimes it just means deciding which
-            future release (not necessarily the next one) the bug
-            should be fixed by, or deciding that it need not block any
-            particular release.  Scheduling may also be dispensed
-            with, if the bug is quick to fix.</para>
-  </listitem>
-  <listitem><para>The bug gets fixed (or the task completed, or
-            the patch applied, or whatever).  The change or set of
-            changes that fixed it should be recorded in a comment in
-            the issue, after which the issue is
-            <firstterm>closed</firstterm> and/or marked as
-            <firstterm>resolved</firstterm>.</para>
-  </listitem>
-</orderedlist>
-
-</para>
--->
-
-<para>問題の典型的なライフサイクルは次のようなものです。:
-
-<orderedlist>
-  <listitem><para>誰かが問題をバグデータベースに記録します。
-            この記録には、問題の要点、問題の説明(もしあれば、問題を再現させるための手順;
-            ユーザに優れたバグ報告をさせる方法については、
-            <phrase output="printed"><xref linkend="managing-volunteers"/></phrase> の <xref linkend="users-to-volunteers"/> を参照してください)
-            、バグ追跡システムが求めているその他の情報が全て含まれています。
-            問題を報告した人は、プロジェクトについて全く知らないかもしれません。&mdash;
-            ユーザーのコミュニティと開発者達から、同じくらいの割合でバグ報告や機能要望があがってきます。</para>
+            -->
 
             <para>いったん問題が報告されると、その問題は <firstterm>open</firstterm>な状態にあるといいます。
             なぜなら、それに対して何らアクションがとられていないからです。
-            バグ追跡システムによっては、
+            システムによっては、
             <firstterm>unverified</firstterm> とか <firstterm>unstarted</firstterm> といったラベルを付与するものもあります。
             まだ誰もこの問題を担当していません。システムによっては、
             担当が決まっていないことを表すためにダミーの担当者をあてがうものもあります。
             この時点では、問題は一時的な領域に置かれています。つまり、
             システムに記録されてはいるが、プロジェクトがまだ関心を持っていないということです。</para>
   </listitem>
-  <listitem><para>
+  <listitem>
+            <!--
+            <para>Others read the issue, add comments to it, and
+            perhaps ask the original filer for clarification on some
+            points.</para>
+            -->
+
+            <para>
             誰か他の人が問題を読み、コメントを付けます。
             おそらく問題を報告をした人に、不明な点について説明を求めるでしょう。
             </para>
   </listitem>
-  <listitem><para>
+  <listitem>
+            <!--
+            <para>The bug gets <firstterm>reproduced</firstterm>.
+            This may be the most important moment in its
+            life cycle.  Although the bug is not actually fixed yet,
+            the fact that someone besides the original filer was able
+            to make it happen proves that it is genuine, and, no less
+            importantly, confirms to the original filer that they've
+            contributed to the project by reporting a real bug.</para>
+            -->
+
+            <para>
             問題はやがて <firstterm>reproduced</firstterm> という状態になります。
             これは問題のライフサイクルの中で最も重要なものかもしれません。これは、
             まだ解決されたわけではないが、
@@ -4105,7 +4075,9 @@ track other kinds of tasks too.</para>
             プロジェクトに貢献したと確認することでもあります。
             </para>
   </listitem>
-  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
+  <listitem>
+            <!--
+            <para>The bug gets <firstterm>diagnosed</firstterm>: its
             cause is identified, and if possible, the effort required
             to fix it is estimated.  Make sure these things get
             recorded in the issue; if the person who diagnosed the
@@ -4113,7 +4085,17 @@ track other kinds of tasks too.</para>
             while (as can often happen with volunteer developers),
             someone else should be able to pick up where she left
             off.</para>
+            -->
 
+            <para>
+            そして <firstterm>diagnosed</firstterm> という状態になります。
+            問題の原因が特定され、可能なら解決に必要な労力が見積もられます。
+            これらのことは必ず追跡システムに記録するようにしましょう。    
+            原因を調べた人が突然しばらくプロジェクトを離れなければならない（これはボランティアの開発者にはよくあることです）場合に、
+            誰かがその穴を埋められるようにしておくべきだからです。
+            </para>
+
+            <!--
             <para>In this stage, or sometimes the previous one, a
             developer may "take ownership" of the issue and
             <firstterm>assign</firstterm> it to herself (<xref
@@ -4126,6 +4108,19 @@ track other kinds of tasks too.</para>
             delay the next release, that fact needs to be identified
             early, and the tracker should have some way of noting
             it.</para>
+            -->
+
+            <para>
+            この段階、もしくはひとつ前の段階で、
+            ある開発者が問題の "所有権を得て" 自分自身を <firstterm>アサイン</firstterm> するかもしれません。
+            (アサインの手続きをさらに詳細に調べるには
+            <phrase output="printed"><xref linkend="managing-volunteers"/>の</phrase>、
+            <xref linkend="delegation-assignment"/> を参照してください)
+            この段階で、問題に<firstterm>優先度</firstterm> も割り当てられるかもしれません。
+            たとえば、とても深刻なので解決は次のリリースにまわすべき場合、
+            その事実は早い段階で確認する必要があります。
+            よって、追跡システムはそれを記録する何らかの方法を備えるべきということになります。
+            </para>
   </listitem>
   <listitem><para>The issue gets scheduled for resolution.
             Scheduling doesn't necessarily mean naming a date by which
@@ -4145,7 +4140,6 @@ track other kinds of tasks too.</para>
 </orderedlist>
 
 </para>
-
 
 <para>There are some common variations on this life cycle.  Sometimes
 an issue is closed very soon after being filed, because it turns out
