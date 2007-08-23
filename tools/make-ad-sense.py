@@ -72,13 +72,11 @@ def die(msg):
 
 def adsense_in_file(fname):
     """Return non-False iff file FNAME already contains adsense bits."""
-    # Just scan the whole file, this doesn't need to be efficient.
-    found = False
     f = file(fname)
     for line in f:
         if (line.find(adsense_id) >= 0):
-            found = True
-    return found
+            return True
+    return False
 
 def add_adsense_left_html(file):
     lines = open(file, 'r').readlines()
