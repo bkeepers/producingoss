@@ -2,18 +2,20 @@
 
 """Usage: 'make-ad-sense.py HTML-DIR_or_HTML-FILE'
 
-Add AdSense bits to HTML-DIR/*.html or to HTML-FILE.  Note that if you
-run this twice, it will dumbly add the bits again, resulting in weirdness."""
+Add AdSense bits to HTML-DIR/*.html or to HTML-FILE, but only if the
+bits are not already there."""
 
 import sys
 import os
 import os.path
 import re
 
+adsense_id = "pub-5862978179091956"
+
 adsense_left_data = """
 <div id="adsense_left">
 <script type="text/javascript"><!--
-google_ad_client = "pub-5862978179091956";
+google_ad_client = "%s";
 google_ad_width = 120;
 google_ad_height = 600;
 google_ad_format = "120x600_as";
@@ -25,12 +27,12 @@ google_ad_channel = "";
 </script>
 </div>
 
-"""
+""" % adsense_id
 
 adsense_bottom_data = """
 <div id="adsense_bottom">
 <script type="text/javascript"><!--
-google_ad_client = "pub-5862978179091956";
+google_ad_client = "%s";
 google_ad_width = 728;
 google_ad_height = 90;
 google_ad_format = "728x90_as";
@@ -42,7 +44,7 @@ google_ad_channel = "";
 </script>
 </div>
 
-"""
+""" % adsense_id
 
 adsense_css = """
 /* Added for AdSense Support */
@@ -67,6 +69,16 @@ body
 def die(msg):
     sys.stderr.write(msg + "\n")
     sys.exit(1)
+
+def adsense_in_file(fname):
+    """Return non-False iff file FNAME already contains adsense bits."""
+    # Just scan the whole file, this doesn't need to be efficient.
+    found = False
+    f = file(fname)
+    for line in f:
+        if (line.find(adsense_id) >= 0):
+            found = True
+    return found
 
 def add_adsense_left_html(file):
     lines = open(file, 'r').readlines()
@@ -124,7 +136,7 @@ def main():
       targets = os.listdir(book_dir)
 
     for child in targets:
-        if child[-5:] == '.html':
+        if child[-5:] == '.html' and not adsense_in_file(child):
             try:
                 add_adsense_left_html(os.path.join(book_dir, child))
             except:
