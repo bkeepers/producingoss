@@ -1329,8 +1329,8 @@ prägnant über das Problem zu reden.
   eine Datei für andere zu sperren (üblichicherweise) diesem Ideal
   widerspricht.</para>
 
-  <para>Eine Versionsverwaltungs die einen Lock erfordern um ein 
-  Commit zu machen, benutzt das sogenannte 
+  <para>Eine Versionsverwaltung die einen Lock erfordert um ein Commit
+  zu machen, benutzt das sogenannte 
   <firstterm>lock-modify-unlock</firstterm> Verfahren. Solche die es 
   nicht erfordern nutzen das <firstterm>copy-modify-merge</firstterm>
   Verfahren. Eine ausgezeichnete tiefgehende Erklärung und Vergleich 
@@ -1353,281 +1353,283 @@ prägnant über das Problem zu reden.
 <sect2 id="vc-choosing">
 <title>Wahl einer Versionsverwaltung</title>
 
-<para>Zum Zeitpungkt dieses Schreibens sind die zwei verbreitetsten 
-Systeme für die Versionsverwaltung in der Welt der freien Software 
-das <firstterm>Concurrent Versions System</firstterm> oder auch 
+<para>Zum Zeitpunkt dieses Schreibens sind die zwei verbreitetsten 
+Systeme für Versionsverwaltung in der Welt der freien Software das 
+<firstterm>Concurrent Versions System</firstterm> oder auch 
 <firstterm>CVS</firstterm> (<ulink url="http://www.cvshome.org/"/>)
 und <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
 <ulink url="http://subversion.tigris.org/"/>).</para>
 
-<para>CVS gibt es schon lange. Die meisten erfahrenen Entwickler sind 
-bereits damit vertraut, es erledigt die Aufgabe mehr oder weniger gut 
+<para>CVS gibt es schon lange. Die meisten erfahrenen Entwickler sind
+bereits damit vertraut, es erledigt die Aufgabe mehr oder weniger gut
 und da es die Norm ist, werden Sie keine lange Debatten darüber führen
-müssen ob es die richtige Wahl war. CVS hat jedoch einige Nachteile. 
-Es bietet keine einfache Möglichkeit an sich auf Änderungen an mehreren Dateien gleichzeitig
-zu beziehen; es erlaubt es nicht Dateien umzubenennen oder zu kopieren
-die unter Versionsverwaltung stehen (was besonders nervt, wenn Sie Ihr
-Code neu organisieren wollen, nachdem Sie das Projekt gestartet haben);
-es bietet nur dürftige Unterstützung für Merging an; es kann nicht
-sonderlich gut mit großen oder binären Dateien umgehen; und manche
-Vorgänge sind langsam, wenn sie mit großen Dateimengen zu tun haben.
-</para>
+müssen ob es die richtige Wahl war. CVS hat jedoch einige Nachteile.
+Es bietet keine einfache Möglichkeit an, Änderungen über mehrere
+Dateien abzufragen; es erlaubt nicht Dateien in der Repository
+umzubenennen oder zu kopieren (was besonders nervt, wenn Sie Ihr Code 
+neu organisieren wollen, nachdem Sie das Projekt gestartet haben); es 
+bietet nur dürftige Merge-Unterstützung an; es kann nicht sonderlich 
+gut mit großen oder binären Dateien umgehen; und manche Vorgänge sind
+bei vielen Dateien sehr langsam.</para>
 
-<para>Keiner der Fehler von CVS ist fatal, und es ist immer noch 
-ziemlich beliebt. In den letzten Jahren sind jedoch ein paar neue
-Versionsverwaltungssysteme erschienen, und freie Software Projekte
-fangen an sie aus zu probieren. <xref linkend="vc-systems"/> listet
-alle mir bekannten auf. Wie diese Liste klar macht, kann die
-Entscheidung für ein Versionsverwaltungssystem zu einer lebenslangen
-Forschungsprojekt werden. Möglicherweise wird Ihnen die Entscheidung
-erspart bleiben weil es von Ihrer Hosting Seite gemacht für Sie
-getroffen wurde. Wenn Sie sich aber für eine entscheiden müssen,
-befragen Sie andere Entwickler, finden Sie heraus womit Andere bereits
-Erfahrung haben, wählen Sie eine aus und halten Sie sich daran. Jedes
-stabile, ausgereifte Versionsverwaltungssystem reicht aus; Sie müssen
-sich keine Sorgen darüber machen, dass Sie eine furchtbar schlechte
-Entscheidung treffen werden. Wenn Sie sich einfach nicht entscheiden
-können, dann nehmen Sie CVS. Es ist immer noch die Norm und wird es
-auch wahrscheinlich ein paar Jahre lang bleiben. Viele andere Systeme
-unterstützen auch die Konvertierung in eine Richtung von CVS, also
-können Sie sich später auch umentscheiden.</para>
+<para>Kein Fehler von CVS ist fatal und es ist immer noch ziemlich 
+beliebt. In den vergangenen Jahren hat das neuere Subversion an Boden
+gewonnen, inbesondere bei neuen Projekten.<footnote><para>Siehe
+<ulink url="http://cia.vc/stats/vcs"/> und <ulink 
+url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
+für beweise für dieses Wachstum.</para></footnote>. Wenn Sie ein neues
+Projekt anfangen, empfehle ich Ihnen Subversion.</para>
+
+<para>Da ich andererseits auch an dem Subversion Projekt arbeite,
+könnte man meine objektivität berechtigt in Frage stellen. In den
+letzden Jahren sind ein paar neue Versionsverwaltungssysteme 
+erschienen. <xref linkend="vc-systems"/> listet alle mir bekannten 
+auf. Wie diese Liste klar macht kann die Entscheidung für eine 
+Versionsverwaltung zu einem lebenslangen Forschungsprojekt werden. 
+Möglicherweise wird Ihnen die Entscheidung erspart bleiben weil sie 
+von Ihrer Hosting-Seite bereits getroffen wurde. Wenn Sie sich aber 
+für eines entscheiden müssen, fragen Sie andere Entwickler, finden 
+Sie heraus womit Andere bereits Erfahrung haben, suchen Sie sich 
+eines aus und bleiben Sie dabei. Jede stabile, ausgereifte 
+Versionsverwaltung reicht aus; Sie müssen sich keine Sorgen darüber 
+machen, dass Sie eine furchtbar schlechte Entscheidung treffen werden.
+Wenn Sie sich einfach nicht entscheiden können, dann nehmen Sie CVS. 
+Es ist immer noch die Norm und wird es auch wahrscheinlich ein paar 
+Jahre lang bleiben. Viele andere Systeme unterstützen auch die 
+Konvertierung in eine Richtung von einem CVS Archiv, Sie können sich 
+also später auch umentscheiden.</para>
 
 </sect2>
 
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-using">
-<title>Nutzung des Versionsverwaltungssystems</title>
+<title>Nutzung einer Versionsverwaltung</title>
 
-<para>Die Empfehlungen in diesem Abschnitt sind nicht auf ein
-bestimmtes Versionsverwaltungssystem ausgelegt, und sollten in jeder
-von ihnen einfach zu implementieren sein. Für weitere Details, 
-schlagen Sie in der Dokumentation Ihres Systems nach.</para>
+<para>Die Empfehlungen in diesem Abschnitt sind nicht auf eine
+bestimmte Versionsverwaltung abgestimmt und sollten in allen Systemen
+einfach zu implementieren sein. Für weitere Details, schlagen Sie in 
+der Dokumentation Ihrer Versionsverwaltung nach.</para>
 
 <sect3 id="version-everything">
-<title>Versioniere Alles</title>
+<title>Versioniere alles</title>
 
-<para>Halten Sie nicht nur den Quellcode Ihres Projekts under
-Versionsverwaltung, sondern auch die Webseiten, Dokumentation, FAQ,
-Designnotizen, und alles andere, welches jemand vielleicht bearbeiten
-möchte. Behalten Sie alles direkt bei dem Quellcode, in der selben
-repository. Jedes Stück Information, welches es sich lohnt nieder zu
-schreiben, ist es auch wert versioniert zu werden&mdash;also, jedes
-Stück Information welches sich Ändern könnte. Sachen die sich nicht
-Ändern, sollten archiviert und nicht versioniert werden. Eine Email
-ändert sich zum Beispiel nicht, nachdem sie abgeschickt wurde; 
-deshalb würde es keinen Sinn machen es zu versionieren (es sei denn es
-wird zum Teil einer größeren, sich entwickelnden Dokument).</para>
+<para>Benutzen Sie die Versionsverwaltung nicht nur für den Quellcode 
+Ihres Projekts, sondern auch die Webseite, Dokumentation, FAQ, 
+Entwurfsskizen und alles andere, was jemand vielleicht bearbeiten
+möchte. Behalten Sie alles direkt neben dem Quellcode, in der selben
+Repository. Jede Information die sich lohnt niederzuschreiben, ist es 
+auch wert in der Repository zu sein&mdash;also, jede Information die
+sich ändern könnte. Sachen die sich nicht ändern, sollten archiviert 
+und nicht versioniert werden. Eine E-Mail ändert sich beispielsweise
+nicht, wenn sie einmal abgeschickt wurde; deshalb würde es keinen 
+Sinn machen es zu versionieren (es sei denn es wird zu einem Teil 
+einer größeren, sich entwickelnden Dokument).</para>
 
 <para>Der Grund warum es wichtig ist alles an einem Ort zu 
-versionieren ist, ist der, dass Personen nur eine Methode lernen
-müssen um Änderungen einzureichen. Oftmals, wird ein Beteiligter 
-damit anfangen Änderungen an den Webseiten oder der Dokumentation zu
-machen, und gehen später dazu über kleine Beiträge zum Quellcode zu
-machen. Wenn das Projekt das selbe System für alle Beiträge
-verwendet, müssen Leute nur eine Methode lernen. Alles zusammen zu
-versionieren, bedeutet auch, dass neue Funktionen gleich mit ihren 
-zugehörigen Aktualisierungen an der Doku committed werden können,
-dass ein Branch des Codes auch ein Branch der Doku zur Folge hat, usw.
-</para>
+versionieren ist, dass Personen nur eine Methode lernen müssen um 
+Änderungen einzureichen. Oftmals, wird ein Beteiligter damit anfangen 
+Änderungen an der Webseite oder der Dokumentation zu machen, und gehen
+später dazu über kleine Beiträge am Quellcode zu machen. Wenn das 
+Projekt dasselbe System für alle Beiträge verwendet, müssen Beteiligte
+nur eine Methode lernen. Alles zusammen zu versionieren, bedeutet 
+auch, dass neue Funktionen gleich zusammen mit ihrer zugehörigen 
+Aktualisierungen an der Doku eingereicht werden können, sodass ein 
+Zweig für den Code auch ein Zweig für die Doku mit sich bringt, 
+usw.</para>
 
-<para>Behalten Sie <firstterm>generierte Dateien</firstterm> nicht
-unter Versionsverwaltung. Sie sind nicht wirklich bearbeitbare Daten,
-da sie aus anderen Dateien erzeugt werden. Manche build systeme
-erzeugen zum Beispiel <filename>configure</filename> aus der Vorlage
-<filename>configure.in</filename>. Um eine Änderung an <filename>
-configure</filename> vorzunehmen, würde man <filename>configure.in
-</filename> bearbeiten und es daraus neu erzeugen; weßhalb lediglich
-die Vorlage <filename>configure.in</filename> "bearbeitbar" ist.
-Versionieren Sie lediglich die Vorlage&mdash;wenn Sie die erzeugten
-Dateien auch versionieren, wird man zwangsläufig vergessen sie neu
-zu erzeugen, sobald man eine Änderung an einer Vorlage committed.
-Die daraus resultierende Inkonsistenzen werden endlose Verwirrung 
-stiften. <footnote><para>Eine andere Meinung im Bezug auf die 
+<para>Behalten Sie keine <firstterm>generierte Dateien</firstterm> in
+der Repository. Sie sind nicht wirklich bearbeitbare Daten, da sie aus
+anderen Daten erzeugt werden. Manche Build-Systeme erzeugen
+beispielsweise <filename>configure</filename> aus der Vorlage
+<filename>configure.in</filename>. Um eine Änderung an 
+<filename>configure</filename> vorzunehmen, würde man 
+<filename>configure.in</filename> bearbeiten und es daraus neu 
+erzeugen lassen; weßhalb lediglich die Vorlage 
+<filename>configure.in</filename> "bearbeitbar" ist. Versionieren Sie 
+lediglich die Vorlage&mdash;wenn Sie die erzeugten Dateien auch 
+versionieren, wird man zwangsläufig vergessen sie neu zu erzeugen
+nachdem man eine Änderung an einer Vorlagen eingespielt hat. Die 
+daraus resultierende Inkonsistenz wird endlose Verwirrung 
+stiften.<footnote><para>Eine andere Meinung im Bezug auf die 
 Versionierung von <filename>configure</filename> Dateien, kann man in 
 "<citetitle>configure.in and version control</citetitle>" bei 
 <ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>
-von Alexey Makhotkin finden.</para></footnote></para>
+von Alexey Makhotkin nachlesen.</para></footnote></para>
 
-<para>Zu der Regel, dass alle bearbeitbare Dateien unter 
-Versionsverwaltung gestellt sein sollten, gibt es eine Ausnahme: den
-Bug Tracker. Bug Datenbanken enthalten eine Menge bearbeitbarer Daten,
-können aber aus technischen Gründen diese Daten im allgemeinen nicht
-im Versionsverwaltungssystem speichern. (Manche Tracker haben eigene
-primitive Versionierungs Funktionen, jedoch unabhängig von der
-Haupt Repository des Projekts.)</para>
+<para>Zu der Regel, dass alle bearbeitbare Dateien in der Repository
+sein sollten, gibt es eine Ausnahme: den Bug-Tracker. Eine 
+Bug-Datenbank enthällt eine Menge bearbeitbarer Daten, kann aber aus
+technischen Gründen diese Daten im allgemeinen nicht in der Repository
+speichern. (Manche Tracker haben eigene primitive Funktionen zur
+Versionierung, die allerdings von der Versionsverwaltung des Projekts 
+getrennt ist.)</para>
 
 </sect3>
 
 <sect3 id="vc-browsing">
-<title>Durchsuchbarkeit</title>
+<title>Suchfunktion</title>
 
-<para>Die Repository des Projekts sollte vom Web aus durchsuchbar
-sein. Das bedeutet nicht nur die neuste Version der einzelnen Dateien
-einsehen zu können, sondern auch in der Zeit zurück zu gehen und
-frühere Versionen der Dateien zu sehen, die Unterschiede zwischen
-den verschiedenen Versionen der Dateien sehen zu können, die log
-Nachrichten bestimmter Änderungen lesen zu können, usw.</para>
+<para>Man sollte die Versionsverwaltung des Projekts mit einem Browser
+durchsuchen können. Das bedeutet nicht nur die neuste Version der 
+einzelnen Dateien einsehen zu können, sondern auch in der Zeit zurück 
+zu gehen und frühere Revisionen der Dateien zu sehen, die Unterschiede
+zwischen den verschiedenen Versionen der Dateien sehen zu können, die 
+commit-logs bestimmter Änderungen lesen zu können, usw.</para>
 
-<para>Wenn sich Ihr Projekt durchsuchen lässt, entsteht eine
-leichtgewichtiges Portal zu Ihren Daten. Wenn die Repository nicht aus
-dem Web durchsucht werden kann, dann wird jemand der eine bestimmte
-Datei untersuchen will (sagen wir, um nachzuschauen ob ein bestimmter
-Bugfix es in den Code geschafft hat), müsste zuerst lokal einen Client
-für die Versionsverwaltung installieren, was ihre einfache Anfrage von
-zwei Minuten zu einer halbstündigen Aufgabe machen könnte.</para>
+<para>Es ist wichtig Ihr Projekt durchsuchen zu können, da es ein 
+leicht zugängliches Portal für Ihre Daten bereitstellt. Wenn die 
+Repository nicht aus dem Web durchsucht werden kann, dann wird jemand 
+der eine bestimmte Datei untersuchen will (sagen wir, um nachzuschauen
+ob ein bestimmter Bugfix es in den Code geschafft hat), müsste zuerst
+lokal die Software der Versionsverwaltung installieren, wodurch eine
+einfache zweiminutige Anfrage zu einer halbstündigen Aufgabe machen 
+könnte.</para>
 
-<para>Mit Durchsuchbarkeit meint man auch implizit feststehende URLs 
-für Bestimmte Versionen von Dateien und um die derzeit neuste Version 
-zu sehen. Was sehr nützlich sein in technischen Diskussionen sein kann,
-oder wenn man Personen zu einer bestimmten Dokumentation weisen will.
-Man könnte zum Beispiel anstatt "Tipps, wie du den Server debuggen 
-kannst, findest du in der www/hacking.html Datei in deiner Arbeitskopie",
-"Tipps, wie du den Server debuggen kannst, findest du bei <emphasis>
-http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>"
-sagen, womit man eine URL gibt, die immer auf die neuste Version der
-Datei zeigt. Die URL ist besser, da sie nicht mehrdeutig ist, und die
-Frage vermeidet, ob der Angesprochene eine aktuelle Arbeitskopie hat.
-</para>
+<para>Mit einer Suchfunktion werden auch beständige URLs für bestimmte 
+Revisionen der Dateien und der aktuellsten Revisionen impliziert. Das
+kann bei technischen Diskussionen sehr nützlich sein, oder wenn man 
+auf die Dokumentation verweisen will. Man könnte zum Beispiel anstatt 
+"Tipps, wie du den Server debuggen kannst, findest du in der 
+www/hacking.html Datei deiner lokalen Arbeistverzeichniss", "Tipps, 
+wie du den Server debuggen kannst, findest du bei 
+<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>"
+sagen, eine URL die immer auf die aktuellste Version der Datei zeigt. 
+Die URL ist besser, da sie nicht mehrdeutig ist und die Frage 
+vermeidet, ob die Angesprochene die Projektdaten heruntergeladen 
+hat.</para>
 
 <para>Manche Versionsverwaltungssysteme haben eine eingebaute Funktion
-um die Repository online zu durchsuchen, während andere sich auf
-Software von dritten Parteien hierfür verlassen. Drei Beispiele 
-hierfür sind <firstterm>ViewCVS</firstterm> (<ulink
-url="http://viewcvs.sourceforge.net/"/>), <firstterm>CVSWeb</firstterm>
+um die Repository online zu durchsuchen, andere verlassen sich hierfür
+auf zusätzliche Software. Drei Beispiele hierfür sind 
+<firstterm>ViewCVS</firstterm> 
+(<ulink url="http://viewcvs.sourceforge.net/"/>), 
+<firstterm>CVSWeb</firstterm> 
 (<ulink url="http://www.freebsd.org/projects/cvsweb.html"/>), und
-<firstterm>WebSVN</firstterm> (<ulink
-url="http://websvn.tigris.org/"/>). Ersteres funktioniert sowohl mit
-CVS als auch Subversion, das Zweite nur mit CVS und Letzteres nur mit
-Subversion.</para>
+<firstterm>WebSVN</firstterm> 
+(<ulink url="http://websvn.tigris.org/"/>). Ersteres funktioniert 
+sowohl mit CVS als auch Subversion, das Zweite nur mit CVS und 
+Letzteres nur mit Subversion.</para>
 
 </sect3>
 
 <sect3 id="commit-emails">
-<title>Commit Emails</title>
+<title>Commit E-Mail</title>
 
-<para>Jeder Commit zu der Repository sollte eine Email erzeugen, die
-zeigt, wer sie gemacht hat, wann sie es gemacht haben, welche Dateien
-und Verzeichnisse sich geändert haben und inwiefern sie sich geändert
-haben. Die Email sollte an einem speziellen Verteiler gehen, separat
-von der zu dem die Beteiligten Nachrichten schicken. Entwickler und
-andere interessierte Beteiligte sollten dazu ermutigt werden sich auf
-dem Commit Verteiler anzumelden, da es die effektivste Art ist sich
-über die Ereignisse auf Code Ebene des Projekts am laufenden zu halten.
-Abgesehen von den offensichtlichen technischen Vorteilen welches die
-Überprüfung durch andere Entwickler bringt (see 
-<xref linkend="code-review"/>), können die Commit Emails dazu 
-beitragen einen Gemeinschaftssinn entstehen zu lassen, da sie eine
-gemeinsame Umgebung schaffen, in dem Personen auf Ereignisse(Commits)
-von denen sie wissen das Andere sie auch wahrnehmen, reagieren können. 
-</para>
+<para>Jeder Commit an die Repository sollte eine E-Mail erzeugen, die
+zeigt, wer den Commit gemacht hat, wann er gemacht wurde, welche 
+Dateien und Verzeichnisse sich geändert haben und was sich an ihnen
+geändert hat. Die E-Mail sollte an einem bestimmten Verteiler gehen, 
+einem anderen als den Verteiler der Entwickler. Diese und andere 
+interessierte Beteiligte sollten ermutigt werden sich auf den Commit 
+Verteiler anzumelden, da es die effektivste Art ist sich über die 
+Ereignisse auf Code Ebene des Projekts am laufenden zu halten.
+Abgesehen von den offensichtlichen technischen Vorteilen der 
+Überprüfung durch andere Entwickler (siehe 
+<xref linkend="code-review"/>), können die Commit E-Mails dazu 
+beitragen eine Gemeinschaft aufzubauen, da sie eine gemeinsame 
+Umgebung schaffen indem Personen auf Ereignisse(Commits) reagieren 
+können von denen sie wissen das Andere sie auch wahrnehmen.</para>
 
-<para>Wie man spezifisch Commit Emails einrichtet, hängt von Ihrem 
-Versionsverwaltungssystem ab, für gewöhnlich gibt es aber hierfür
-einen Script oder eine andere gebündelte Möglichkeit. Wenn Sie
-Schwierigkeiten bekommen es zu finden, dann schauen Sie in Ihrer
-Dokumentation nach <firstterm>hooks</firstterm>, insbesondere nach
-<firstterm>post-commit hook</firstterm>, bei CVS auch <firstterm>
-loginfo hook</firstterm> genannt. Diese Commit hooks sind eine
-allgemeine Möglichkeit, nach als Reaktion auf jeden Commit befehle
-Aufzurufen. Der Hook wir von einem einzelnen Commit ausgelöst, ihm
-werden alle Informationen über den Commit übergeben, und es ist ihm
-dann freigestellt, was er damit anfängt&mdash; zum Beispiel eine
-Email abzuschicken.</para>
+<para>Wie man Commit E-Mails einrichtet, hängt von Ihrer 
+Versionsverwaltung ab, meistens gibt es aber hierfür einen Script oder
+eine andere Einrichtung bei ihrer Software. Wenn Sie Schwierigkeiten 
+bekommen es zu finden, schlagen Sie in Ihrer Dokumentation den Begriff
+<firstterm>hooks</firstterm>, insbesondere auch 
+<firstterm>post-commit hook</firstterm> nach, bei CVS auch 
+<firstterm>loginfo hook</firstterm> genannt. Diese Commit hooks sind 
+eine allgemeine Möglichkeit, Befehle nach jedem Commit zu schalten.
+Der Hook wird von einem Commit ausgelöst, ihm werden alle 
+Informationen über den Commit geben und es ist ihm dann freigestellt, 
+was er damit anfängt&mdash;wie z.B. eine E-Mail abschicken.</para>
 
-<para>Bei gebündelten Systemen für Commit Emails, werden Sie unter
-Umständen, einige standardmäßige Verhalten Ändern wollen:</para>
+<para>Bei fertig eingerichteten Systemen für Commit E-Mails, werden 
+Sie möglicherweise, das übliche Verhalten ändern wollen:</para>
 
 <orderedlist>
 
   <listitem>
-  <para>Manchmal beinhalten die Commit Emails nicht die tatsächlichen
-	Diffs und geben anstatt dessen eine URL an, bei dem man die 
-	Änderungen über das Web Portal der Repository einsehen kann.
-	Obwohl es gut ist eine URL zu geben, auf die man später	
-	verweisen kann, ist es auch <emphasis>sehr</emphasis> wichtig,
-	dass die Diffs selber auch mit in den Emails enthalten sind.
-	Emails zu lesen, gehört schon zum Alltag der Leute, wenn also
-	die Änderungen gleich in der Email zu lesen sind, werden
-	Entwickler sie gleich auf der Stelle untersuchen, ohne ihre
-	Email Software verlassen zu müssen. Wenn sie erst auf eine URL
-	klicken müssen, werden es die Meisten bleiben lassen, da es
-	eine weitere Aktion erfordert anstatt einer Fortsetzung von
-	dem was sie bereits angefangen hatten. Desweiteren, wenn der
-	Entwickler etwas über die Änderung fragen will, geht es viel
-	schneller auf die Email zu antworten, und eine Bemerkung an
-	entsprechender Stelle zu schreiben, als eine Webseite zu
-	besuchen und mühselig den Diff aus dem Web browser heraus
-	in das Email Programm zu kopieren.</para>
+  <para>Manchmal beinhalten die Commit E-Mails nicht die tatsächlichen
+  Diffs und geben stattdessen eine URL an, bei dem man die Änderungen 
+  über das Web Portal der Repository einsehen kann. Obwohl es gut ist 
+  eine URL anzugeben, auf der man später verweisen kann, ist es auch 
+  <emphasis>sehr</emphasis> wichtig, dass die Diffs in den
+  Nachrichten enthalten sind. E-Mails zu lesen gehört schon zum 
+  Alltag der Leute, wenn also die Änderungen gleich in der E-Mail zu 
+  lesen sind, werden Entwickler sie auf der Stelle untersuchen, ohne 
+  ihre E-Mail Anwendung verlassen zu müssen. Wenn sie erst auf eine 
+  URL klicken müssen werden es die Meisten bleiben lassen, da es eine 
+  weitere Aktion erfordert anstatt fortzusetzen was sie bereits 
+  angefangen hatten. Desweiteren geht es bei Fragen über die Änderung 
+  viel schneller einfach auf die E-Mail zu antworten und eine 
+  Bemerkung an entsprechender Stelle zu schreiben als eine Webseite 
+  zu besuchen und mühselig den Diff aus dem Webbrowser heraus in die
+  E-Mail zu kopieren.</para>
 
-  <para>(Wenn der Diff natürlich riesig ist, wie zum Beispiel wenn eine
-	große Menge von neuem Code dem Repository hinzugefügt wurde,
-	macht es natürlich Sinn den Diff weg zu lassen und nur die URL
-	anzubieten. Die meisten Systeme für Commit Emails können diese
-	Art der Limitierung automatisch. Wenn Ihres es nicht kann, ist
-	es immer noch besser, die Diffs mitzuschicken und mit 
-	gelegentlich riesigen Emails zu leben, als die Diffs komplett 
-	aus zu schalten. Bequeme Möglichkeiten zur Überprüfung und
-	Bewertung sind ein Eckstein der gemeinschaftlichen Entwicklung,
-	und deshalb unerlässlich.)</para>
+  <para>(Wenn der Diff natürlich riesig ist, wie z.B. wenn eine große 
+  Menge neuer Code in die Repository eingefügt wurde, macht es 
+  natürlich Sinn den Diff wegzulassen und nur die URL anzubieten. Die 
+  meisten Systeme für Commit E-Mails können diese Art verkürzung 
+  automatisch. Wenn Ihres es nicht kann, ist es immer noch besser, die
+  Diffs mitzuschicken und gelegentlich mit riesigen E-Mails zu leben, 
+  als die Diffs komplett auszuschalten. Bequeme Möglichkeiten zur 
+  Überprüfung und Bewertung sind ein Eckstein der gemeinschaftlichen 
+  Entwicklung und deshalb unerlässlich.)</para>
   </listitem>
 
-  <listitem><para>Der Reply-to Header der Commit Emails sollte an den
-	Email Verteiler für Entwickler gehen, nicht an den Commit
-	Verteiler. Wenn also jemand sich eine Commit Email durchgelesen
-	und bewertet hat, und daraufhin eine Antwort schreibt, sollte
-	die Antwort an den Entwickler Verteiler für Menschen gehen, wo
-	technische Angelegenheiten normalerweise diskutiert werden. Es
-	gibt hierfür ein paar Gründe. Erstens, wollen Sie alle 
-	technischen Diskussionen auf einen Verteiler behalten, Leute
-	erwarten nämlich, dass sie dort gehalten werden und so auch nur
-	ein Archiv durchsucht werden muss. Zweitens, wird der Commit
-	Verteiler als Dienst beworben um Commits zu verfolgen, und
-	nicht um Commits zu verfolgen <emphasis>und</emphasis>
-	gelegentlich auch technische Diskussionen. Diejenigen die sich
-	auf den Commit Verteiler angemeldet haben, wollen nichts 
-	anderes als Commit Emails; wenn ihnen also anderes Material
-	mittels diesem Verteiler zugesandt wird, brich das ein 
-	unausgesprochenes Übereinkommen. Viertens, schreiben Beteiligte
-	oft Programme, welche die Commit Emails lesen und verarbeiten
-	(um sie zum Beispiel auf einer Webseite anzuzeigen). Diese
-	Programme sind auf konsistent formatierte Commit Emails
-	ausgelegt, nicht jedoch auf inkonsistente von Menschen 
-	geschriebene Emails.</para>
+  <listitem><para>Der Reply-to Header der Commit E-Mails sollte auf
+  den E-Mail Verteiler der Entwickler weisen, nicht an den Commit 
+  Verteiler. Wenn also jemand eine Commit E-Mail durchgelesen und 
+  bewertet hat und daraufhin eine Antwort schreibt, sollte die Antwort
+  an den Verteiler der Entwickler gehen auf dem technische 
+  Angelegenheiten üblicherweise stattfinden. Es gibt hierfür ein paar 
+  Gründe. Erstens wollen Sie alle technischen Diskussionen auf einem 
+  Verteiler behalten, Leute erwarten nämlich, dass sie dort gehalten 
+  werden und so auch nur ein Archiv durchsucht werden muss. Zweitens
+  könnte es interesierte Parteien geben die nicht bei dem Commit
+  Verteiler angemeldet sind. Drittens wird der Commit Verteiler als 
+  Dienst verstanden um Commits zu verfolgen und nicht um Commits zu 
+  verfolgen <emphasis>und</emphasis> gelegentlich auch technische 
+  Diskussionen. Wer sich auf den Commit Verteiler angemeldet hat, 
+  will nichts anderes als Commit E-Mails; wenn ihnen also anderes 
+  Material von diesem Verteiler zugesandt wird, bricht das ein 
+  ungesprochenes Übereinkommen. Viertens schreiben Beteiligte oft 
+  Programme um die Commit E-Mails zu lesen und zu verarbeiten (z.B. um
+  sie auf einer Webseite anzuzeigen). Diese Programme sind auf eine 
+  konsistente formatierung ausgelegt, nicht jedoch auf inkonsistente 
+  von Menschen geschriebene E-Mails.</para>
 
-  <para>Bemerke, dass dieser Ratschlag, Reply-to unzuschreiben nicht
-	den Empfehlungen aus <xref linkend="reply-to"/>
-	<phrase output="printed"> in einem Früheren Abschnitt dieses
-	Kapitels</phrase> widerspricht. Es ist immer in Ordnung, wenn
-	der <emphasis>Absender</emphasis> einer Nachricht Reply-to
-	setzt. In diesem Fall, ist der Absender das 
-	Versionsverwaltungssystem selbst, und es setzt Reply-to um
-	anzudeuten, dass der angemessene Ort für Antworten der
-	Entwickler Verteiler ist, und nicht der Commit Verteiler.</para>
+  <para>Beachten SIe dass dieser Ratschlag, Reply-to umzuschreiben 
+  nicht den Empfehlungen aus <xref linkend="reply-to"/> 
+  <phrase output="printed"> in einem früheren Abschnitt dieses Kapitels
+  </phrase> widerspricht. Es ist immer in Ordnung, wenn der 
+  <emphasis>Absender</emphasis> einer Nachricht Reply-to setzt. In 
+  diesem Fall ist der Absender die Versionsverwaltungs selber und es 
+  setzt Reply-to um anzudeuten, dass der angemessene Ort für Antworten
+  der Entwickler Verteiler ist und nicht der Commit Verteiler.</para>
 
   </listitem>
 
 </orderedlist>
 
 <sidebar id="cia">
-<title>CIA: Eine andere Möglichkeit Änderungen bekannt zu machen</title>
+<title>CIA: Eine weitere Commit Benachrichtigung</title>
 
-<para>Commit Emails sind nicht die einzige Möglichkeit um Nachrichten
+<para>Commit E-Mails sind nicht die einzige Möglichkeit um Nachrichten
 über Änderungen zu verbreiten. Neulich wurde eine weiter Möglichkeit
-namens CIA (<ulink url="http://cia.navi.cx/"/>) entwickelt. CIA
-fasst Commit Statistiken zusammen und Verbreitet sie in Echtzeit. 
-Die verbreitetste Art CIA zu benutzen ist, Commit Benachrichtigungen
-an IRC zu senden, damit Leute die sich in IRC angemeldet haben, in
-Echtzeit mitbekommen, wann Änderungen Committed werden. Obwohl sie
-nicht ganz so nützlich ist wie Commit Emails, da Beteiligte vielleicht
-oder vielleicht auch nicht anwesend sein könnten wenn eine Commit
-Nachricht auftaucht, ist diese Methode von immensem <emphasis>sozialen
-</emphasis> nutzen. Leute bekommen das Gefühl ein Teil von etwas 
-lebendig und aktivem zu sein, und dass der Fortschritt vor ihren
-Augen geschieht.</para>
+namens CIA (<ulink url="http://cia.navi.cx/"/>) entwickelt. CIA fasst 
+Commit-Statistiken zusammen und Verbreitet sie in Echtzeit. Die 
+verbreitetste Verwendung von CIA ist Commit Benachrichtigungen an
+IRC-Kanäle zu senden, damit die Leute dort in Echtzeit mitbekommen, 
+wann Änderungen gemacht werden. Obwohl sie nicht ganz so nützlich ist 
+wie Commit E-Mails da Beteiligte vielleicht oder vielleicht auch nicht
+während einem Commit im IRC anwesend sind, ist diese Methode trotzdem
+von immensem <emphasis>sozialen</emphasis> nutzen. Leute bekommen das 
+Gefühl ein Teil von etwas lebendig und aktivem zu sein und dass der 
+Fortschritt vor ihren Augen gemacht wird.</para>
 
-<para>Es funktioniert so, dass Sie die CIA Anwendung vom post-commit
-hook aus aufrufen. Es formatiert die Commit Information in eine XML
+<para>Es funktioniert indem Sie die CIA Anwendung vom post-commit hook
+aus aufrufen. Es formatiert die Commit Information in eine XML
 Nachricht, und sendet es an einen zentralen Server (typischer weise 
 <literal>cia.navi.cx</literal>). Der Commit Server verteilt diese
 Information dann an andere Foren.</para>
