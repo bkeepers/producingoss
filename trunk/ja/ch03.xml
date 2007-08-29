@@ -3932,7 +3932,7 @@ be kept in a bug tracker?</para>
     ここでは バグ追跡システムをセットアップすることと、
     その作業に関する技術的な考察に集中しようと思います。
     その話題に入る前に、バグ追跡の方針に関する質問から始めましょう。
-    : 具体的にどの情報をバグ追跡システムに保存すべきなのでしょうか?
+    具体的にどの情報をバグ追跡システムに保存すべきなのでしょうか?
 </para>
 
 <!--
@@ -4066,7 +4066,7 @@ track other kinds of tasks too.</para>
 
             <para>
             問題はやがて <firstterm>reproduced</firstterm> という状態になります。
-            これは問題のライフサイクルの中で最も重要なものかもしれません。これは、
+            これは問題のライフサイクルの中で最も重要かもしれません。これは、
             まだ解決されたわけではないが、
             報告した人以外の誰かが問題を再現でき、
             この問題が本物だと証明したことをいいます。
@@ -4112,7 +4112,7 @@ track other kinds of tasks too.</para>
 
             <para>
             この段階か、もうひとつ前の段階で、
-            開発者が問題の "所有権を得て" 自分自身を <firstterm>アサイン</firstterm> するかもしれません。
+            開発者が問題を "自分が解決することにして"、 自分自身を <firstterm>アサイン</firstterm> するかもしれません。
             (アサインの手続きをさらに詳細に調べるには
             <phrase output="printed"><xref linkend="managing-volunteers"/>の</phrase>、
             <xref linkend="delegation-assignment"/> を参照してください)
@@ -4187,7 +4187,7 @@ an issue manager monitoring the bug database; see
 -->
 
 <para>
-    このライフサイクルには共通のバリエーションがいくつかあります。
+    問題のライフサイクルには共通のバリエーションがいくつかあります。
     問題によっては、バグではなくユーザー側が誤解していたという理由ですぐにクローズされることがあります。
     プロジェクトが多くのユーザを獲得するにつれ、
     バグではない問題が報告される回数も増えていき、
@@ -4344,7 +4344,7 @@ other developers, etc.</para>
 
     <para>
         問題を報告するときの記入フォームは、
-        報告する人の電子メールアドレスの入力欄にフォーカスを当てておくべきです。
+        報告する人の電子メールアドレスの欄にフォーカスを当てておくべきです。
         (しかし、匿名で報告したいと思う人もいるので、
         電子メールアドレスを <emphasis>必須</emphasis> にすべきではありません。
         匿名の重要性については、
@@ -4358,13 +4358,24 @@ other developers, etc.</para>
 <sect2 id="bug-tracker-mailing-list-interaction">
 <title>メーリングリストを使って交流する</title>
 
+<!--
 <para>Make sure the bug tracker doesn't turn into a discussion forum.
 Although it is important to maintain a human presence in the bug
 tracker, it is not fundamentally suited to real-time discussion.
 Think of it rather as an archiver, a way to organize facts and
 references to other discussions, primarily those that take place on
 mailing lists.</para>
+-->
 
+<para>
+    バグ追跡システムがディスカッションフォーラムにならないようにしましょう。
+    バグ追跡システムに人間が顔を出し続けることは大事ですが、
+    それがリアルタイムに行なわれる議論に合っているわけではありません。
+    バグ追跡システムは、起こった事実や他の議論に対する参照、
+    メーリングリストで起きた議論をまとめるアーカイバと考えるようにしましょう。
+</para>
+
+<!--
 <para>There are two reasons to make this distinction.  First, the bug
 tracker is more cumbersome to use than the mailing lists (or than
 real-time chat forums, for that matter).  This is not because bug
@@ -4380,7 +4391,24 @@ requiring every developer to monitor all issues.  In
 <xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
 sure people don't accidentally siphon discussions out of appropriate
 forums and into the bug tracker.</para>
+-->
 
+<para>
+    こうした区別をするのはふたつの理由があります。
+    ひとつめは、バグ追跡システムがメーリングリストに比べて（ついでにいうと、リアルタイムに会話ができるチャットシステムと比べても）使いにくいからです。
+    これはバグ追跡システムのインターフェイス設計が悪いからではなく、
+    単にメーリングリストやチャットシステムが、連続していない状態、つまり自由に流れていく議論を取り込めるように設計されているからです。
+    ふたつめは、ある議論に参加している人が、
+    バグ追跡システムを見ているとは限らないからです。
+    よい問題管理のやり方(<phrase output="printed"><xref linkend="managing-volunteers"/>の、</phrase> <xref linkend="share-management"/> を参照してください)は、
+    開発者全員に起こっている問題全部を追いかけさせるのではなく、
+    適切な人の注意をひくようにすることです。
+    <phrase output="printed"><xref linkend="communications"/>の</phrase> <xref linkend="bug-tracker-usage"/>では、
+    適切なフォーラム以外に偶然議論が波及しないようにする方法や、
+    バグ追跡システムに議論を持ち込まないようにする方法を見ていきます。
+</para>
+
+<!--
 <para>Some bug trackers can monitor mailing lists and automatically
 log all emails that are about a known issue.  Typically they do this
 by recognizing the issue's identifying number in the subject line of
@@ -4391,6 +4419,21 @@ a link to the mail in the regular mailing list archive.  Either way,
 this is a very useful feature; if your tracker has it, make sure
 both to turn it on and to remind people to take advantage of
 it.</para>
+-->
+
+<para>
+    バグ追跡システムによっては、メーリングリストをモニタし、
+    既知の問題に関する電子メールを全て自動的に記録するものがあります。
+    通常、こうしたシステムはメールの件名の行にある問題の番号を、
+    特別な文字列として認識することでこれを行います。
+    開発者達は、バグ追跡システムの注意を引くために、
+    電子メールにこうした文字列を含めることができるようになります。
+    バグ追跡システムに電子メール全体を記録させてもいいですし、
+    (よりよいのは)通常のメーリングリストのアーカイブにあるメールへのリンクを記録させてもよいでしょう。
+    どちらの方法でも、これはとても役に立つ機能です。
+    あなたが使っているバグ追跡システムにこの機能があるなら、
+    それを有効にして人々が利用するように知らせておきましょう。
+</para>
 
 </sect2>
 
