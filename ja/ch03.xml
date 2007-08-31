@@ -3977,7 +3977,7 @@ track other kinds of tasks too.</para>
 
 <para>
     この本では "バグ追跡システム" という用語を、
-    物事を追跡するソフトウェアを指すものとします。
+    バグを追跡するソフトウェアを指すものとします。
     なぜなら、殆どの人がバグ追跡システムと呼んでいるからです。
     しかし、バグ追跡システムのデータベースに登録される個々のアイテムを指すものとして、
     <firstterm>問題</firstterm> という用語を使います。
@@ -4032,10 +4032,10 @@ track other kinds of tasks too.</para>
             consciousness.</para>
             -->
 
-            <para>いったん問題が報告されると、その問題は <firstterm>open</firstterm> な状態にあるといいます。
+            <para>いったん問題が報告されると、その問題は <firstterm>保留中</firstterm> の状態にあるといいます。
             なぜなら、それに対して何らアクションがとられていないからです。
             システムによっては、
-            <firstterm>unverified</firstterm> とか <firstterm>unstarted</firstterm> といったラベルを付与するものもあります。
+            <firstterm>未確認</firstterm> とか <firstterm>未着手</firstterm> といったラベルを付与するものもあります。
             まだ誰もこの問題を担当していません。システムによっては、
             担当が決まっていないことを表すためにダミーの担当者を割り当てるものもあります。
             この時点では、問題は一時的な領域に置かれています。つまり、
@@ -4065,7 +4065,7 @@ track other kinds of tasks too.</para>
             -->
 
             <para>
-            問題はやがて <firstterm>reproduced</firstterm> という状態になります。
+            問題はやがて <firstterm>再現済み</firstterm> という状態になります。
             これは問題のライフサイクルの中で最も重要かもしれません。これは、
             まだ解決されたわけではないが、
             報告した人以外の誰かが問題を再現でき、
@@ -4088,7 +4088,7 @@ track other kinds of tasks too.</para>
             -->
 
             <para>
-            そして <firstterm>diagnosed</firstterm> という状態になります。
+            そして <firstterm>診断済み</firstterm> という状態になります。
             問題の原因が特定され、可能なら解決に必要な労力が見積もられます。
             これらのことは必ず追跡システムに記録するようにしましょう。    
             原因を調べた人が突然しばらくプロジェクトを離れなければならない（これはボランティアの開発者にはよくあることです）場合に、
@@ -4112,8 +4112,8 @@ track other kinds of tasks too.</para>
 
             <para>
             この段階か、もうひとつ前の段階で、
-            開発者が問題を "自分が解決することにして"、 自分自身を <firstterm>アサイン</firstterm> するかもしれません。
-            (アサインの手続きをさらに詳細に調べるには
+            開発者が問題を "自分が解決することにして"、 自分自身を <firstterm>担当者にする</firstterm> するかもしれません。
+            (担当者を決める手続きをさらに詳細に調べるには
             <phrase output="printed"><xref linkend="managing-volunteers"/>の</phrase>、
             <xref linkend="delegation-assignment"/> を参照してください)
             この段階で、問題に<firstterm>優先度</firstterm> も割り当てられるかもしれません。
@@ -4155,8 +4155,8 @@ track other kinds of tasks too.</para>
             <para>
             問題が解決されます。（タスクが終了したり、
             パッチが適用されたりとか、そういったものです）
-            行った変更は、問題が<firstterm>クローズされた</firstterm>り、
-            <firstterm>resolved</firstterm> とマークされたあとに、
+            行った変更は、問題の<firstterm>処理が完了</firstterm>したり、
+            <firstterm>解決済み</firstterm> とマークされたあとに、
             コメントとして記録するようにしましょう。
             </para>
   </listitem>
@@ -4188,12 +4188,12 @@ an issue manager monitoring the bug database; see
 
 <para>
     問題のライフサイクルには共通のバリエーションがいくつかあります。
-    問題によっては、バグではなくユーザー側が誤解していたという理由ですぐにクローズされることがあります。
+    問題によっては、バグではなくユーザー側が誤解していたという理由ですぐに処理済みとされることがあります。
     プロジェクトが多くのユーザを獲得するにつれ、
     バグではない問題が報告される回数も増えていき、
-    開発者は次第にぶっきらぼうな返事をして問題をクローズしていくようになります。
+    開発者は次第にぶっきらぼうな返事をして問題を処理済みとするようになります。
     こういう風潮にならないよう努力しましょう。
-    ぶっきらぼうにクローズしてもいいことは何もありません。
+    ぶっきらぼうに問題を処理済みにしてもいいことは何もありません。
     バグではない問題を報告したユーザ－は、以前報告された問題には何の責任もないのですから。
     それに報告される問題が統計的にどういった傾向にあるかは、
     開発者のみわかることで、ユーザーにはわからないことです。
@@ -4222,12 +4222,12 @@ vice versa.</para>
 
 <para>
     別のバリエーションとして、
-    1. のすぐ後で問題が <firstterm>重複している</firstterm> としてクローズされる場合があります。
+    1. のすぐ後で問題が <firstterm>重複している</firstterm> として 処理済み とされる場合があります。
     重複した問題は、プロジェクトが既に認識している問題を誰かがまた報告すると発生します。
-    重複した状態は open されている問題で発生するとは限りません。
-    解決したあとで再び報告される(この状態を <firstterm>regression</firstterm> と呼びます)こともあります。
+    重複した状態は 保留中 の問題で発生するとは限りません。
+    解決したあとで再び報告される(この状態を <firstterm>リグレッション（回帰）</firstterm> と呼びます)こともあります。
     こういう場合は、重複の元となった問題を reopen の状態にして、
-    重複した問題はクローズしてしまうのが普通は望ましいでしょう。
+    重複した問題は 処理済み としてしまうのが普通は望ましいでしょう。
     バグ追跡システムは、
     問題を再現する情報ははじめに報告された問題で見られるように（逆も同様）、
     問題同士の関連を追跡しているはずです。
@@ -4243,8 +4243,8 @@ recipe as the reporter.</para>
 -->
 
 <para>
-    開発者が問題をクローズする3つ目のバリエーションは、
-    問題を解決したと思い込んでクローズするパターンです。
+    開発者が問題を処理済みとする3つ目のバリエーションは、
+    問題を解決したと思い込んで処理済みにするパターンです。
     これは結局、問題を報告した人がそれを拒んで reopen する結果になります。
     これは開発者が単にバグを再現するのに必要な環境にアクセスできないか、
     問題を再現する手順に正確に従ってテストをしなかったために発生します。
@@ -4287,7 +4287,7 @@ other developers, etc.</para>
 <para>
     1. が暗に示すとおり、
     バグ追跡システムはメーリングリストやウェブページと同様プロジェクトの顔です。
-    誰でも問題を報告し、調べることができますし、現在 open されている問題の一覧を見ることができます。
+    誰でも問題を報告し、調べることができますし、現在保留中とされている問題の一覧を見ることができます。
     よって、報告されている問題の進捗を何人の人が知りたがっているのかが、
     開発者にはわからないということになります。
     問題が解決される割合は開発者コミュニティの規模やスキルに左右されますが、
@@ -4495,7 +4495,7 @@ their bugs with other people before filing them in the tracker.</para>
 <para>
     この問題を避けるために何より実行すべきことがふたつあります。
     バグではない問題や、
-    重複したバグ報告を報告されたらすぐにクローズできる十分な知識がある人にバグ報告システムを見張ってもらうこと。
+    重複したバグ報告を報告されたらすぐに 処理済み とマークできる十分な知識がある人にバグ報告システムを見張ってもらうこと。
     そしてバグ報告システムにバグを報告する前に、
     他の人とバグかどうかを確認するようユーザーに求める（または強く勧める）ことです。
 </para>
@@ -4553,7 +4553,8 @@ yet are happy to do the search once they know someone's
 <para>
     ふたつめのテクニックは広く使われているわけではありませんが、
     これはおそらく自動化が難しいからでしょう。
-    アイディアの要点は、新しく報告されてくる問題をデータベースに登録する前に"仲間を"巻き込むことです。
+    アイディアの要点は、新しく報告されてくる問題をデータベースに登録する前に、
+    "仲間を" 巻き込むことです。
     ユーザーが問題を見つけたと思ったときは、
     メーリングリストかIRCで説明するように求めます。
     そうすることで、誰かが本当にバグかどうかを確認するのです。
@@ -4594,37 +4595,60 @@ unbuddied issue, the ideal steps are:</para>
     さらに、ほとんどの新しい報告者はバグデータベースを維持するのがどれだけ難しいかを知らないので、
     ガイドラインを無視しているからといって厳しく注意するのはフェアではありません。
     よってボランティアは、
-    誰かに見てもらっていないバグ報告を報告者にどう差し戻すのかについては、
+    誰にも見てもらっていないバグ報告を報告者にどう差し戻すのかについては、
     用心深く、なおかつ慎重でなければなりません。
-    これは、問題をフィルタする仕組みを理解する人々をますます増やすために、
-    報告者にゆくゆくは仲間を巻き込んでバグ報告をしてもらうことが目的です。
-    誰かに見てもらっていないバグ報告を見つけたら、
+    これは、問題をフィルタする仕組みを理解する人々を増やせるように、
+    ゆくゆくは仲間を巻き込んでバグ報告をしてもらうことが目的です。
+    誰にも見てもらっていないバグ報告を見つけたら、
     とるべき理想的な対処のステップは次のようなものです。
 </para>
 
 <orderedlist>
   <listitem>
+    <!--
     <para>Immediately respond to the issue, politely thanking the user
           for filing, but pointing them to the buddying guidelines
           (which should, of course, be prominently posted on the web
           site).</para>
+    -->
+    <para>
+    すぐにバグ報告に応答し、
+    ユーザーがバグ報告をしてくれたことに丁寧にお礼を言います。
+    しかし、バグかどうかを誰かに見てもらうガイドラインがあることを指摘します。（これはもちろん、ウェブサイトに目立つように投稿すべきです）
+    </para>
   </listitem>
   <listitem>
+    <!--
     <para>If the issue is clearly valid and not a duplicate, approve it
           anyway, and start it down the normal life cycle.  After all,
           the reporter's now been informed about buddying, so there's
           no point wasting the work done so far by closing a valid
           issue.</para>
+    -->
+    <para>
+    報告された問題が明らかに正しいもので重複していない場合は、
+    とりあえずそれを受け入れて通常のライフサイクルを開始します。
+    結局、報告した人はバグかどうかを誰かに見てもらうべきだと言われているので、
+    正しいバグ報告を処理済みとするまで労力を無駄にする点はありません。
+    </para>
   </listitem>
   <listitem>
+    <!--
     <para>Otherwise, if the issue is not clearly valid, close it, but
           ask the reporter to reopen it if they get confirmation from
           a buddy.   When they do, they should put a reference to the
           confirmation thread (e.g., a URL into the mailing list
           archives).</para>
+    -->
+    <para>
+    そうでない場合、つまり報告された明らかに正しくない場合は処理済みとマークしましょう。
+    しかし、報告した人には誰かにバグであるかを確認した上で報告したのなら、reopen して欲しいと伝えます。
+    それで reopen する場合、報告した人は確認をとったスレッドへの参照（e.g. メーリングリストアーカイブへのURLなど）を掲載するはずです。
+    </para>
   </listitem>
 </orderedlist>
 
+<!--
 <para>Remember that although this system will improve the signal/noise
 ratio in the issue database over time, it will never completely stop
 the misfilings.  The only way to prevent misfilings entirely is to
@@ -4633,10 +4657,19 @@ is almost always worse than the disease.  It's better to accept that
 cleaning out invalid issues will always be part of the project's
 routine maintenance, and to try to get as many people as possible to
 help.</para>
+-->
 
-<para>See also
-<xref linkend="issue-manager"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>.</para>
+<para>
+    この方法はいずれバグ追跡システムの S/N比を改善してくれるでしょう。
+    しかし、間違ったバグ報告は決してなくならないことを覚えておいてください。
+    間違ったバグ報告を根絶する唯一の方法は、
+    開発者以外の人にはバグ追跡システムを使わせないことです &mdash;
+    しかし、この方法でよい結果が出ることはほとんどありません。
+    間違ったバグ報告を取り除くことがプロジェクトのルーチンワークであることを受け入れ、
+    できるだけ多くの人達の助けを得ようとした方がよいでしょう。
+</para>
+
+<para><<phrase output="printed"><xref linkend="managing-volunteers"/> の </phrase>xref linkend="issue-manager"/> も参照してください。</para>
 
 </sect2>
 
