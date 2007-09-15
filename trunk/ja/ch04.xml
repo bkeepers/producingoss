@@ -16,15 +16,16 @@ nothing about how conflicts are resolved.</para>
 -->
 
 <para>
-    通常、フリーソフトウェアについて人々がする最初の質問は "プロジェクトはどういう仕組みで動くの？ プロジェクトを維持しているものは何？ 誰に決定権があるの？" といったものです。
-    私は、実力主義や、協力の精神、自己説明的なコード、
-    などについて当たり障りなく答えて、いつも釈然としない思いがします。
-    実のところ、こうした質問に答えるのは簡単ではありません。
-    実力主義、協力、そして動くコードは全て答えの一部ではありますが、
+    通常、フリーソフトウェアについて人々がする最初の質問は "プロジェクトはどういう仕組みで動くの？
+    プロジェクトを維持しているものは何？ 誰に決定権があるの？" といったものです。 
+    私は、実力主義や、協力の精神、自己説明的なコード、 などについて当たり障りなく答えて、
+    いつも釈然としない思いがします。 実のところ、こうした質問に答えるのは簡単ではありません。
+    実力主義、協力、そして動くコードは全て答えの一部ではありますが、 
     日々の単位でプロジェクトがどう動いているかについて殆ど説明していませんし、
-    プロジェクト内で起こる衝突をどうやって解決するのかについては何も触れていません。
+    プロジェクト内で起こる衝突をどうやって解決するのかについては何も触れていません。 
 </para>
 
+<!--
 <para>This chapter tries to show the structural underpinnings
 successful projects have in common.  I mean "successful" not just in
 terms of technical quality, but also operational health and
@@ -38,7 +39,25 @@ things.  Technical success is not hard to achieve, but without a
 robust developer base and social foundation, a project may be unable
 to handle the growth that initial success brings, or the departure of
 charismatic individuals.</para>
+-->
 
+<para>
+    この章では、成功しているオープンソースプロジェクトが共通して持っている構造的な基盤を示そうと思います。
+    "成功している" というのは、ただ技術的に質が高いだけではなく、
+    プロジェクトが健全に運営されており、生き残る力が強いことを言います。
+    新しいコードや開発者を受け入れたり、
+    バグレポートに素早く反応することを継続できていれば、
+    プロジェクトは健全に運営されているといえます。
+    特定の個人やスポンサーにも依存しなくてもプロジェクトを続けられれば、
+    生き残る力が強いといえます。&mdash; プロジェクトを立ち上げたメンバー全員が他に移ったとしても、
+    プロジェクトが存続するか、といったことを考えてみてください。
+    技術的に成功することは難しくありません。
+    しかし開発者の層が薄かったり、社会的な基盤が弱かったりすると、
+    プロジェクトが初期段階で成功して膨張したり、
+    カリスマ的な人がいなくなったときに、対処できないかもしれません。
+</para>
+     
+<!--
 <para>There are various ways to achieve this kind of success.  Some
 involve a formal governance structure, by which debates are resolved,
 new developers are invited in (and sometimes out), new features
@@ -51,10 +70,28 @@ well understood by everyone who participates.  These features are even
 more important in self-organizing systems than in centrally-controlled
 ones, because in self-organizing systems, everyone is conscious that a
 few bad apples can spoil the whole barrel, at least for a while.</para>
+-->
+
+<para>
+    これらの観点から成功を収める方法はたくさんあります。   
+    議論をまとめたり、新しい開発者を勧誘したり（時には追い出したり）、
+    新しい機能を企画するなどの、
+    型にはまった管理の仕組みに関するものもあれば、
+    型にはまっているものではありませんが、
+    <foreignphrase>デファクト</foreignphrase> な統率の方法だと人々が信頼できる公平な雰囲気を作り出すために、
+    より意識的に自制することも含まれます。
+    参加している人達がよく理解している習慣や手続きに支えられて、
+    組織がずっと続いていくという意味で、
+    どちらのやり方も行き着くところは同じです。
+    これらの方法は、中央集権的な組織より、自然に発展していく組織でより重要になります。
+    なぜならそうした組織では、
+    よくないものが全体に影響することを少なくともしばらくは皆が意識しているからです。
+</para>
 
 <sect1 id="forkability">
-<title>forkできること</title>
+<title>コードが派生する可能性</title>
 
+<!--
 <para>The indispensable ingredient that binds developers together on a
 free software project, and makes them willing to compromise when
 necessary, is the code's <firstterm>forkability</firstterm>: the
@@ -68,7 +105,22 @@ actual forks, which are very rare.  Because a fork is bad for everyone
 <xref linkend="managing-volunteers"/></phrase>), the more serious
 the threat of a fork becomes, the more willing people are to
 compromise to avoid it.</para>
+-->
 
+<para>
+    開発者をフリーソフトウェアプロジェクトにつなぎ止め、
+    必要な時に妥協してもらうのに不可欠な要素は、
+    コードを <firstterm>派生させることができる</firstterm> ことです。
+    逆説的なのは、コードが派生する <emphasis>可能性</emphasis> の方が、
+    まれながら実際に派生することよりも、
+    フリーソフトウェアプロジェクトにとって大きな力になるということです。
+    コードが派生することは万人にとってよくないことなので、
+    (詳細な理由は、<phrase output="printed"><xref linkend="managing-volunteers"/></phrase> の <xref linkend="forks"/> で述べています。)
+    派生する恐れが大きくなればなるほど、
+    人々はそれを避けようとして妥協する可能性が大きくなります。
+</para>
+
+<!--
 <para>Forks, or rather the potential for forks, are the reason there
 are no true dictators in free software projects.  This may seem like a
 surprising claim, considering how common it is to hear someone called
@@ -79,7 +131,19 @@ his entire kingdom at any time and move to the copy to rule as they
 see fit.  Would not such a king govern very differently from one whose
 subjects were bound to stay under his rule no matter what he
 did?</para>
+-->
 
+<para>
+    コードが派生すること、いやむしろ派生する可能性と言った方がよいでしょう。
+    この可能性こそが、フリーソフトウェアプロジェクトには本当の意味での独裁者が存在しない理由になっています。
+    これはオープンソースプロジェクトで "独裁者" とか "暴君" と呼ばれる人がいるとよく聞くことを思えば、突飛な主張かもしれません。
+    しかし、この手の "圧政" という言葉は特別なもので、伝統的に理解されている圧政の意味とは違うものです。
+    いつでも自分の王国をコピーでき、
+    いいように支配するためにそのコピーを持ち歩ける家来がいる王様を想像してみてください。
+    そんな王様が、自分が何をしようと家来が自分の支配下にいると決まっている王様と同じ振舞いをするでしょうか？ するはずがないですよね。
+</para>
+
+<!--
 <para>This is why even projects that are not formally organized as
 democracies are, in practice, democracies when it comes to important
 decisions.  Replicability implies forkability; forkability implies
@@ -94,7 +158,25 @@ were to suddenly start making bad decisions, there would be
 restlessness, followed eventually by revolt and a fork.  Except, of
 course, things rarely get that far, because the dictator compromises
 first.</para>
+-->
 
+<para>
+    そんなわけで、民主主義に従って組織化されていないプロジェクトでさえ、
+    重要な決定をする段になると民主主義の仕組みを使います。
+    コードを複製できるということは、コードを派生できるということです。
+    コードを派生できるということは、妥協を生むことを意味しています。
+    全員がひとりのリーダーに従うこと（もっとも有名な例が、Linux kernel 開発の Linus Torvalds です。）もあるかもしれませんが、
+    これは 完全にひねくれているわけでもなく、悪意があるわけでもなく、彼らがそうすることを <emphasis>選んでいる</emphasis> からです。
+    独裁者がプロジェクトを魔法のように支配しているわけではないのです。
+    オープンソースライセンス全てに当てはまる、鍵となる性質は、
+    コードの変更のしかたや、使用方法について、特定の集団を差別しないということです。
+    仮に独裁者が突然よくない決断をしはじめたとしましょう。
+    その場合不穏な空気が漂い、結局反乱が起きてコードが派生してしまいます。
+    もちろん、そういった場合は独裁者がはじめに謝罪するので、
+    実際にコードが派生してしまうことは滅多にありません。
+</para>
+
+<!--
 <para>But just because forkability puts an upper limit on how much
 power anyone can exert in a project doesn't mean there aren't
 important differences in how projects are governed.  You don't want
@@ -104,6 +186,16 @@ energy away from real work.  The next two sections examine different
 ways to organize projects such that most decisions go smoothly.  These
 two examples are somewhat idealized extremes; many projects fall
 somewhere along a continuum between them.</para>
+-->
+
+<para>
+    しかし、コードを派生できることがプロジェクトで権力を行使することに歯止めをかけているからといって、
+    プロジェクトを統率するやり方に重大な違いがあるわけではありません。
+    決断をするたびに、誰かコードを派生させようと思ってる人いる？ と質問したくはないはずです。
+    そんなことをすればすぐに疲れてしまい、仕事をすると活力が失われていきます。
+    次のふたつの節では、ほとんどの決断を円滑に行えるようにプロジェクトを統率する方法を調べていきます。そこではふたつ例をあげていますが、いささか極度に理想的なものです。
+    多くのプロジェクトは、そのふたつの状態の間のどこかに位置しているのです。
+</para>
 
 </sect1>
 
