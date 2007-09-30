@@ -349,7 +349,7 @@ or four.  The reasons why will become clear later.</para>
     標準となっているはずです。
     バージョン番号の構成要素（ドットを除いた数字の部分）の数に制限はありませんが、
     殆どのプロジェクトでは3つか4つにとどめています。
-    その理由は後で明らかにしていきます。
+    その理由は後に明らかにしていきます。
 </para>
 
 <!--
@@ -417,6 +417,7 @@ as well go for completeness instead.</para>
     よって、"2.3" という簡潔な記述ではなく、"2.3.0" と完全な形で表記する方がよいでしょう。
 </para>
 
+<!--
 <para>Other qualifiers in semi-regular use include "Stable",
 "Unstable", "Development", and "RC" (for "Release Candidate").  The
 most widely used ones are still "Alpha" and "Beta", with "RC" running
@@ -424,7 +425,19 @@ a close third place, but note that "RC" always includes a numeric
 meta-qualifier.  That is, you don't release
 "Scanley&nbsp;2.3.0&nbsp;(RC)", you release
 "Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+-->
 
+<para>
+    比較的よく使われる他の識別子には "Stable", "Unstable",
+    "Development", そして "RC"（リリース候補 という意味）があります。
+    もっとも広く使われているのは 未だ "Alpha" と "Beta" で、
+    "RC" が3番目あたりの位置にきますが、
+    "RC" の後には常に数字のメタ修飾子が付くことに注意してください。
+    つまり、"Scanley&nbsp;2.3.0&nbsp;(RC)" をリリースするのではなく、
+    "Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)" をリリースしてから RC2 を、という具合です。
+</para>
+
+<!--
 <para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
 known now, and I don't recommend using any of the others, even though
 the others might at first glance seem like better choices because they
@@ -432,13 +445,34 @@ are normal words, not jargon.  But people who install software from
 releases are already familiar with the big three, and there's no
 reason to do things gratuitously differently from the way everyone
 else does them.</para>
+-->
 
+<para>
+    "Alpha", "Beta", "RC" という3つのラベルは今や広く知られているので、
+    たとえ他のラベルが、内輪の用語ではなく、
+    普通の用語だからという理由で一見よい選択のように見えても、
+    他のラベルを使うのはお薦めしません。
+    ソフトウェアをインストールする人々はこの3つのラベルに既に馴染んでいますし、
+    根拠無しに他のプロジェクトがやっていることと違ったことをする理由はありません。
+</para>
+
+<!--
 <para>Although the dots in release numbers are not decimal points,
 they do indicate place-value significance.  All "0.X.Y" releases
 precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
 immediately precedes "3.14.159", and non-immediately precedes
 "3.14.160" as well as "3.15.anything", and so.</para>
+-->
 
+<para>
+    リリース番号にあるドットは小数点ではありませんが、
+    数字の位置には重要な意味があります。
+    バージョン "1.0"（これはもちろん、"1.0.0" と等しいです） より前のリリースは全て "0.X.Y" というリリースです。
+    "3.14.158" のすぐ後は、"3.14.159" であって、
+    "3.14.160" や、"3.15.XXXXXX" などではないのです。
+</para>
+
+<!--
 <para>A consistent release numbering policy enables a user to look at
 two release numbers for the same piece of software and tell, just from
 the numbers, the important differences between those two releases.  In
@@ -456,7 +490,32 @@ is, "2.4.0" and "3.4.1" are not in the same minor series,
 even though they both have "4" for their minor number; on the other
 hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
 not adjacent if "2.4.1" was released between them.</para>
+-->
 
+<para>
+    リリース番号を付ける一貫したポリシーがあれば、
+    ユーザーは同じソフトウェアのふたつのリリース番号を見て、
+    数字だけでふたつの重要な違いを区別できるようになります。
+    3つの数字からなる典型的なリリース番号では、
+    はじめの数字は <firstterm>メジャー番号</firstterm>、
+    ふたつめは <firstterm>マイナー番号</firstterm>、
+    そして三つめは <firstterm>マイクロ番号</firstterm> になります。
+    たとえば、バージョン "2.10.17" は 2番目のメジャーリリースシリーズのうち、
+    10番目のマイナーリリースラインであり、
+    そのライン上での17番目のリリースということになります。
+    "ライン" と "シリーズ" という言葉は、ここではくだけた使い方をしていますが、
+    文字通りの意味です。メジャーシリーズというのは、
+    単に同じメジャー番号を共有するリリース全てを指し、
+    マイナーシリーズ（またはマイナーライン）は、
+    同じメジャー番号 <emphasis>と</emphasis> マイナー番号を共有する全てのリリースを指します。
+    つまり、"2.4.0" と "3.4.1" は "4" というマイナー番号は同じですが、
+    同じマイナーシリーズではありません。
+    一方、"2.4.0" と "2.4.2" は 、
+    "2.4.1" がそれらの間にリリースされる場合には隣り合うリリースにはなりませんが、
+    同じマイナーシリーズに属しています。
+</para>
+
+<!--
 <para>The meanings of these numbers are exactly what you'd expect: an
 increment of the major number indicates that major changes happened;
 an increment of the minor number indicates minor changes; and an
@@ -471,17 +530,45 @@ every time the software is built and representing no change other than
 that build.  This helps the project link every bug report with a
 specific build, and is probably most useful when binary packages are
 the default method of distribution.</para>
+-->
 
+<para>
+    これらの数字の意味は、あなたが期待する通りの意味になります。
+    つまり、メジャー番号をひとつ増やすことは、大きな変更が行われたことを示しています。
+    マイナー番号をひとつ増やすことは、小さな変更が行われたことを意味しています。
+    そしてマイクロ番号をひとつ増やすことは、
+    本当につまらない変更が行われたということになります。
+    プロジェクトによっては、特にリリース間の違いをきめ細かく管理するために、
+    <firstterm>パッチ番号</firstterm> と通常呼ばれる4番目の番号を追加しているところもあります。
+    （混乱しやすいのですが、"パッチ番号" を、
+    3番目のマイクロ番号と同じ意味で用いているプロジェクトもあります。）
+    最後の数字を <firstterm>ビルド番号</firstterm> として用いるプロジェクトもあります。
+    ビルド番号はソフトウェアがビルドされるたびにひとつ増えていき、
+    ビルド以外の変更がないことを表しています。
+    ビルド番号はバグレポートを特定のビルド番号に結びつけるのに役立ちますし、
+    バイナリパッケージを通常配布しているプロジェクトで、恐らくもっとも役に立つでしょう。
+</para>
+
+<!--
 <para>Although there are many different conventions for how many
 components to use, and what the components mean, the differences tend
 to be minor&mdash;you get a little leeway, but not a lot.  The next
 two sections discuss some of the most widely used conventions.</para>
+-->
+
+<para>
+    いくつ数字を使うのか、それぞれの数字が何を意味するのかについては、
+    多くの異なる規約がありますが、その違いの多くはマイナー番号に関するものです。
+    &mdash; マイナー番号については裁量の余地がありますが、そう多くはありません。
+    次の2つのセクションでは、
+    もっとも広く使われている規約のうち、いくつかを議論します。
+</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-simple-strategy">
-<title>The Simple Strategy</title>
+<title>単純なやり方</title>
 
 <para>Most projects have rules about what kinds of changes are allowed
 into a release if one is only incrementing the micro number, different
@@ -596,7 +683,7 @@ components mean, and stick to it.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-even-odd-strategy">
-<title>The Even/Odd Strategy</title>
+<title>奇数/偶数 に意味を持たせるやり方</title>
 
 <para>Some projects use the parity of the minor number component to
 indicate the stability of the software: even means stable, odd means
