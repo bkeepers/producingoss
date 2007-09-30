@@ -1,6 +1,6 @@
 <chapter id="development-cycle">
 
-<title>パッケージの作成、リリース、そして日々の開発</title>
+<title>パッケージの作成、リリース、日々の開発</title>
 
 <simplesect>
 
@@ -305,18 +305,29 @@ will thank you.</para>
 <sect2 id="release-number-components">
 <title>リリース番号の構成要素</title>
 
+<!--
 <para>This section describes the formal conventions of release
 numbering in detail, and assumes very little prior knowledge.  It is
 intended mainly as a reference.  If you're already familiar with these
 conventions, you can skip this section.</para>
+-->
 
-<para>Release numbers are groups of digits separated by dots:</para>
+<para>
+    このセクションではリリース番号を付ける規約を説明しますが、
+    読者に前提となる知識が殆どないことを想定しています。
+    主に参考資料として読まれることを意図していますが、
+    あなたが既にこうした規約に馴染んでいるのなら、飛ばして読んでも構いません。
+
+</para>
+
+<para>リリース番号はドットで区切られた数字の集まりです。</para>
 
 <informalexample>
 <literallayout>Scanley 2.3
 Singer 5.11.4</literallayout>
 </informalexample>
 
+<!--
 <para>...and so on.  The dots are <emphasis>not</emphasis> decimal
 points, they are merely separators; "5.3.9" would be followed by
 "5.3.10".  A few projects have occasionally hinted otherwise, most
@@ -326,16 +337,40 @@ decimals is now firmly established and should be considered a
 standard.  There is no limit to the number of components (digit
 portions containing no dots), but most projects do not go beyond three
 or four.  The reasons why will become clear later.</para>
+-->
 
+<para>
+    ... などです。ドットは 小数点では <emphasis>なく</emphasis>、
+    単なる区切りです。"5.3.9" の次は "5.3.10" となります。
+    プロジェクトによっては、ドットを小数点ととしてあらわすところもあります。
+    もっとも有名な Linux Kernel では、Linux 1.0 に至るまでに、
+    "0.95", "0.96" ... "0.99" と番号が続きますが、
+    ドットが小数点ではないという規約は今や確固としたものとして確立され、
+    標準となっているはずです。
+    バージョン番号の構成要素（ドットを除いた数字の部分）の数に制限はありませんが、
+    殆どのプロジェクトでは3つか4つにとどめています。
+    その理由は後で明らかにしていきます。
+</para>
+
+<!--
 <para>In addition to the numeric components, projects sometimes tack
 on a descriptive label such as "Alpha" or "Beta" (see
 <xref linkend="alpha-and-beta"/>), for example:</para>
+-->
+
+<para>
+    数字の部分に加えて、
+    "Alpha" とか "Beta"（<xref linkend="alpha-and-beta"/> を参照してください） といった、
+    バージョンの状態を説明するラベルを付加するプロジェクトもあります。
+    たとえば次のようなものです。
+</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha)
 Singer 5.11.4 (Beta)</literallayout>
 </informalexample>
 
+<!--
 <para>An Alpha or Beta qualifier means that this
 release <emphasis>precedes</emphasis> a future release that will have
 the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
@@ -343,6 +378,18 @@ leads eventually to "2.3.0".  In order to allow several such candidate
 releases in a row, the qualifiers themselves can have meta-qualifiers.
 For example, here is a series of releases in the order that they would
 be made available to the public:</para>
+-->
+
+<para>
+    Alpha や Beta といった識別子は、
+    同じバージョン番号ながら、
+    こうした識別子がつかないものが将来リリースされることをあらわします。
+    よって、"2.3.0&nbsp;(Alpha)" は結局 "2.3.0" になります。
+    このような、複数の最終リリースの候補となるものを一行であらわすために、
+    識別子そのものが メタ識別子 を持つことができます。
+    たとえば、一般の人が利用できるようになるまでの順番で、
+    一連のリリースを以下に示します。
+</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha 1)
@@ -353,11 +400,22 @@ Scanley 2.3.0 (Beta 3)
 Scanley 2.3.0</literallayout>
 </informalexample>
 
+<!--
 <para>Notice that when it has the "Alpha" qualifier, Scanley "2.3" is
 written as "2.3.0".  The two numbers are equivalent&mdash;trailing
 all-zero components can always be dropped for brevity&mdash;but when a
 qualifier is present, brevity is out the window anyway, so one might
 as well go for completeness instead.</para>
+-->
+
+<para>
+    "Alpha" という識別子がついているときに、
+    Scanley "2.3" は "2.3.0" と記されていることに注意してください。
+    "2.3" と "2.3.0" は等しいものです。 &mdash;
+    つまり、番号にくっついているゼロの部分は簡潔にするためにいつでも省略できます。&mdash;
+    しかし、識別子があるときは、簡潔さはもはや問題ではありません。
+    よって、"2.3" という簡潔な記述ではなく、"2.3.0" と完全な形で表記する方がよいでしょう。
+</para>
 
 <para>Other qualifiers in semi-regular use include "Stable",
 "Unstable", "Development", and "RC" (for "Release Candidate").  The
