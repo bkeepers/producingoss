@@ -3050,40 +3050,86 @@ been said before.</para>
 </para>
 
 <sect3 id="all-as-archives">
+<!--
 <title>Treat all resources like archives</title>
+-->
+<title>全リソースをアーカイブと同様に扱う</title>
 
+<!--
 <para>All of the preceding advice applies to more than just mailing
 list archives.  Having particular pieces of information at stable,
 conveniently findable addresses should be an organizing principle for
 all of the project's information.  Let's take the project FAQ as a
 case study.</para>
+-->
+<para>
+  これまでのアドバイスは、単なるメーリングリストのアーカイブだけにあてはまるものではありません。
+  特定の情報は常に同じ場所で得られるようにする、
+  見つけやすい場所に置くなどといった原則は、
+  プロジェクトのすべての情報に対して同様にあてはまるものです。
+  プロジェクトの FAQ を例にして考えてみましょう。
+</para>
 
+<!--
 <para>How do people use a FAQ?</para>
+-->
+<para>人は FAQ をどのように使うのでしょう?</para>
 
 <orderedlist>
   <listitem>
+<!--
     <para>They want to search in it for specific words and phrases.</para>
+-->
+    <para>
+      適当な単語やフレーズを入力して検索できればいいですね。
+    </para>
   </listitem>
   <listitem>
+<!--
     <para>They want to browse it, soaking up information without
           necessarily looking for answers to specific questions.</para>
+-->
+    <para>
+      単に特定の質問に対する答えを探すというだけでなく、
+      全体をざっと眺めたいこともあるでしょう。
+    </para>
   </listitem>
   <listitem>
+<!--
     <para>They expect search engines such as Google to know about the
           FAQ's content, so that searches can result in FAQ entries.</para>
+-->
+    <para>
+      Google のようなサーチエンジンでも
+      FAQ の内容を見つけられるようにしてほしいと思うことでしょう。
+    </para>
   </listitem>
   <listitem>
+<!--
     <para>They want to be able to refer other people directly to specific
           items in the FAQ.</para>
+-->
+    <para>
+      FAQ の特定の項目を直接指し示せるようにもしたいものです。
+    </para>
   </listitem>
   <listitem>
+<!--
     <para>They want to be able to add new material to the FAQ, but
           note that this happens much less often than answers are
           looked up&mdash;FAQs are far more often read from than
           written to.</para>
+-->
+    <para>
+      FAQ に新たな内容を追加できるようにもしたいでしょう。
+      しかし、注意すべきなのは、FAQ への新たな内容の追加は
+      FAQ の検索よりもはるかに頻度の低いものであるということです。
+      FAQ は、書き込むよりも読まれるほうが圧倒的に多いものです。
+    </para>
   </listitem>
 </orderedlist>
 
+<!--
 <para>Point 1 implies that the FAQ should be available in some sort of
 textual format.  Points 2 and 3 imply that the FAQ should be available
 as an HTML page, with point 2 additionally indicating that the HTML
@@ -3096,31 +3142,79 @@ the FAQ should be available in a convenient way (see <xref
 linkend="version-everything"/><phrase output="printed"> in
 <xref linkend="technical-infrastructure"/></phrase>), in a format
 that's easy to edit.</para>
+-->
+<para>
+  1. は、つまり FAQ が何らかのテキスト形式でなければならないということです。
+  2. と 3. が言わんとしていることは、FAQ が
+  HTML ページとして存在しなければならないということです。
+  2. はさらに、HTML が読みやすい形式であること
+  (つまり、その見栄えを変更できること)
+  や目次を持っていることも要求しています。
+  4. を満たすには、FAQ の各項目に HTML の
+  <firstterm>名前付きアンカー</firstterm> を指定しておく必要があります。
+  それによって、ページ内の特定の場所に直接到達できるようになります。
+  5. が意味するところは、FAQ のソースファイルの取得が容易であり
+  (<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase>
+  の <xref linkend="version-everything"/> をごらんください)、
+  また編集しやすいものでなければならないということです。
+</para>
 
   <sidebar id="html-named-anchors-and-ids">
+<!--
   <title>Named Anchors and ID Attributes</title>
+-->
+  <title>名前付きアンカーと ID 属性</title>
 
+<!--
   <para>There are two ways to get a browser to jump to a specific
   location within a web page: named anchors and id attributes.</para>
+-->
+  <para>
+    ウェブページ内の特定の場所に直接移動させるには、
+    名前付きアンカーを使う方法と id 属性を使う方法の二通りがあります。
+  </para>
 
+<!--
   <para>A <firstterm>named anchor</firstterm> is just a normal HTML
   anchor element (<literal>&lt;a&gt;...&lt;/a&gt;</literal>), but with
   a "name" attribute:</para>
+-->
+  <para>
+    <firstterm>名前付きアンカー</firstterm> は単なる HTML の
+    アンカー要素 (<literal>&lt;a&gt;...&lt;/a&gt;</literal>)
+    と同じで、そこに "name" 属性を追加したものです。
+  </para>
 
   <screen>&lt;a&nbsp;name="mylabel"&gt;...&lt;/a&gt;</screen>
 
+<!--
   <para>More recent versions of HTML support a generic <firstterm>id
   attribute</firstterm>, which can be attached to any HTML element,
   not just to <literal>&lt;a&gt;</literal>.  For example:</para>
+-->
+  <para>
+    最近のバージョンの HTML では、より汎用的な <firstterm>id
+    属性</firstterm> をサポートしており、<literal>&lt;a&gt;</literal>
+    だけでなく任意の HTML 要素で使用することができます。
+    たとえば次のように使用します。
+  </para>
 
   <screen>&lt;p&nbsp;id="mylabel"&gt;...&lt;/p&gt;</screen>
 
+<!--
   <para>Both named anchors and id attributes are used in the same
   way.  One appends a hash mark and the label to a URL, to cause the
   browser to jump straight to that spot in the page:</para>
+-->
+  <para>
+    名前付きアンカーと id 属性の使用法は、どちらも同じです。
+    URL の最後にハッシュマーク (#) に続けてラベルを指定すると、
+    ブラウザはページ内のその場所に直接移動するようになります。
+  </para>
 
   <screen>http://myproject.example.com/faq.html#mylabel</screen>
 
+<!--
   <para>Virtually all browsers support named anchors; most modern
   browsers support the id attribute.  To play it safe, I would
   recommend using either named anchors alone, or named anchors
@@ -3128,12 +3222,31 @@ that's easy to edit.</para>
   for both in a given pair, of course).  Named anchors cannot be
   self-closing&mdash;even if there's no text inside the element, you
   must still write it in two-sided form:</para>
+-->
+  <para>
+    名前付きアンカーは事実上すべてのブラウザがサポートしており、
+    最近のブラウザのほとんどは id 属性にも対応しています。
+    万全を期すなら、名前付きアンカーだけを用いるか
+    名前付きアンカーと id 属性を <emphasis>併用</emphasis> する
+    (もちろん、そのときは両者に同じラベルを指定する)
+    ことをおすすめします。名前付きアンカーについては、
+    開始要素と終了要素をひとつにまとめることはできません。
+    たとえ要素内のテキストが存在しない場合でも、
+    以下のように開始要素と終了要素を別々に書かなければなりません。
+  </para>
 
   <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
 
+<!--
   <para>...though normally there would be some text, such as the title
   of a section.</para>
+-->
+  <para>
+    ……とはいえ、普通はここには (セクションのタイトルなど)
+    何らかのテキストが入るものです。
+  </para>
 
+<!--
   <para>Whether you use a named anchor, or an id attribute, or both,
   remember that the label will not be visible to someone who browses
   to that location without using the label.  But such a person might
@@ -3142,17 +3255,37 @@ that's easy to edit.</para>
   them do this, add a <firstterm>title attribute</firstterm> to the
   same element(s) where you added the "name" and/or "id" attribute,
   for example:</para>
+-->
+  <para>
+    名前付きアンカーを使うにしても id 属性を使うにしても、
+    ラベルを指定してアクセスしない限りはブラウザ上でそのラベルは見えないことに注意しましょう。
+    しかし、たとえば FAQ の特定の回答をメールで示したい場合など、
+    その場所のラベルが何なのかを知りたいこともあるでしょう。
+    このような場合のために、"name" や "id" 属性を指定した場合は
+    <firstterm>title 属性</firstterm> も同じ要素に指定しておくとよいでしょう。
+    たとえば次のようにします。
+  </para>
 
   <screen>&lt;a&nbsp;name="mylabel"&nbsp;title="#mylabel"&gt;...&lt;/a&gt;</screen>
 
+<!--
   <para>When the mouse pointer is held over the text inside the
   title-attributed element, most browsers will pop up a tiny box
   showing the title.  I usually include the hash-sign, to remind the
   user that this is what she would put at the end of the URL to jump
   straight to this location next time.</para>
+-->
+  <para>
+    title 属性を指定した要素内のテキストの上をマウスポインタが通過すると、
+    たいていのブラウザでは title 属性の内容をポップアップ表示します。
+    私は、この title 属性の内容にハッシュマークも含めるよう心がけています。
+    それを見たユーザが、URL の最後にそれをつなげれば
+    直接この場所に到達できるということに気づきやすくするためです。
+  </para>
 
   </sidebar>
 
+<!--
 <para>Formatting the FAQ like this is just one example of how to make
 a resource presentable.  The same properties&mdash;direct
 searchability, availability to major Internet search engines,
@@ -3164,6 +3297,24 @@ is why mailing lists tend to have this functionality natively, while
 other formats may require some extra effort on the maintainer's part
 (<xref linkend="managing-volunteers"/> discusses how to spread
 that maintenance burden across many volunteers).</para>
+-->
+<para>
+  ここでは FAQ についてのみ取り上げましたが、
+  これは、リソースの体裁を整えるほんの一例にすぎません。
+  ここで取り上げた内容 (直接検索できること、
+  主要なサーチエンジンから検索できること、閲覧しやすいこと、
+  特定の場所を参照しやすいこと、適切に編集しやすいこと)
+  は、ウェブページ全般やソースツリー、
+  バグ追跡システムなどでも当てはまるものばかりです。
+  メーリングリストのアーカイブ用ソフトウェアの多くは、
+  これらの項目の重要性に大昔から気づいていました。
+  そのため、メーリングリストのアーカイブ用ソフトウェアの多くは
+  これらの機能を自前で搭載しています。
+  その他の形式の文書については、
+  担当者がそれなりに手間をかける必要があるかもしれません
+  (このような作業をボランティアに任せていくための方法については
+  <xref linkend="managing-volunteers"/> で説明します)。
+</para>
 
 </sect3>
 
