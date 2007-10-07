@@ -15,7 +15,6 @@ around those goals.</para>
     ソフトウェアをパッケージングしてリリースする方法と、
     開発パターン全体がこうした目標にどう繋がっているのかについて述べていきます。
 </para>
-
 <!--
 <para>A major difference between open source projects and proprietary
 ones is the lack of centralized control over the development team.
@@ -383,7 +382,7 @@ be made available to the public:</para>
 <para>
     Alpha や Beta といった識別子は、
     同じバージョン番号ながら、
-    こうした識別子がつかないものが将来リリースされることをあらわします。
+    こうした識別子がつかないものが将来リリースされることを示しています。
     よって、"2.3.0&nbsp;(Alpha)" は結局 "2.3.0" になります。
     このような、複数の最終リリースの候補となるものを一行であらわすために、
     識別子そのものが メタ識別子 を持つことができます。
@@ -684,7 +683,7 @@ some of that functionality was new in 2.6.0.</para>
     一方、サーバを 2.6.0 にアップグレードするとともに、クライアントも2.6.0にすると、
     <emphasis>新しい</emphasis> 機能がクライアントで使えるようになるかもしれませんが、
     2.5.4で使えていたクライアントの機能は 2.6.0 でどのように扱われるかわかりません。
-    こういうことが起こると、このクライアントのアップグレードは前方互換性が <emphasis>ない</emphasis> ことになります。
+    こういうことが起こると、このクライアントのアップグレードには 前方互換性が <emphasis>ない</emphasis> ことになります。
     つまり、クライアントを 2.5.4 にダウングレードしても、
     2.6.0で使えていた全ての機能は使えないということになります。
     なぜなら、2.6.0 の機能には新機能が含まれているからです。
@@ -737,10 +736,8 @@ She will be able to look at the numbers and know instantly.</para>
     なぜなら、マイナー番号をまたがるとダウングレードできる必要はないからです。
     あなたのプロジェクトが他のプログラムで使われているライブラリを配布しているとすると、
     その API も互換性の問題が起こる領域に入ります。
-    新しいバージョンに古いバージョンを置き換える形でアップグレードしても安全かどうかを、
+    新しいバージョンに古いバージョンを置き換える形でアップグレードしても安全かどうか、詳しいユーザーがわかるように、
     ソース、バイナリレベルでの互換性に関するルールを詳しく説明しておかなければなりません。
-    これは、古いバージョンを置き換える形でアップグレードしても安全かどうかを、
-    詳しいユーザーが疑問に思わないようにするためです。
     詳しいユーザーは、バージョン番号をみれば互換性があるかどうかがすぐにわかるでしょう。
 </para>
 
@@ -829,13 +826,27 @@ components mean, and stick to it.</para>
 <sect2 id="release-number-even-odd-strategy">
 <title>奇数/偶数 に意味を持たせるやり方</title>
 
+<!--
 <para>Some projects use the parity of the minor number component to
 indicate the stability of the software: even means stable, odd means
 unstable.  This applies only to the minor number, not the major and
 micro numbers.  Increments in the micro number still indicate bug
 fixes (no new features), and increments in the major number still
 indicate big changes, new feature sets, etc.</para>
+-->
 
+<para>
+    プロジェクトによっては、マイナー番号の偶数/奇数をソフトウェアの安定度を示すのに使うことがあります。
+    つまり、偶数は安定版で、奇数は不安定版ということです。
+    これはマイナー番号にのみ当てはまることで、
+    メジャー番号とマイクロ番号には当てはまりません。
+    マイクロ番号をひとつ増やすことは、
+    バグフィックスが行われたこと（新機能はない）を示しますし、
+    メジャー番号をひとつ増やすことは、
+    大きな変更が行われたか、新機能が揃っていることを表しています。
+</para>
+
+<!--
 <para>The advantage of the even/odd system, which has been used by the
 Linux kernel project among others, is that it offers a way to release
 new functionality for testing without subjecting production users to
@@ -847,7 +858,25 @@ unstable (odd-minor-numbered) series, and when things start to settle
 down after some number of micro releases in that series, they
 increment the minor number (thus making it even), reset the micro
 number back to "0", and release a presumably stable package.</para>
+-->
 
+<para>
+    数あるプロジェクトの中でも、
+    特に Linux Kernel プロジェクトで使われてきたこの仕組みの利点は、
+    製品版を使うユーザーが潜在的に不安定なコードの影響を受けることなく、
+    新しい機能をテスト用にリリースできることです。
+    ユーザーは、リリース番号から、
+    "2.4.21" は現在動いているWebサーバのマシンにインストールしていいが、
+    "2.5.1" は多分家のワークステーションの実験用に限るべきだろう、
+    ということがわかります。
+    開発チームは不安定版（マイナー番号が奇数のもの）に関するバグレポートを扱い、
+    不安定版でいくつかのマイクロ番号のリリースを重ねて安定してきたら、
+    マイナー番号をひとつ増やし（つまり、マイナー番号が奇数になります）、
+    マイクロ番号を "0" にリセットします。
+    そして恐らくは、安定版のパッケージをリリースしていくことになるでしょう。
+</para>
+
+<!--
 <para>This system preserves, or at least, does not conflict with, the
 compatibility guidelines given earlier.  It simply overloads the minor
 number with some extra information.  This forces the minor number to
@@ -862,6 +891,22 @@ later in this chapter</phrase> describes another, perhaps more common,
 method of releasing potentially unstable code to the public, marked so
 that people have an idea of the risk/benefit trade-offs immediately on
 seeing the release's name.</para>
+-->
+
+<para>
+    この仕組みは少なくとも、以前説明した互換性のガイドラインと衝突しないことを保証します。
+    これはマイナー番号にいくらか追加情報を付加したものです。
+    これによって、他の仕組みよりマイナー番号がひとつ増える回数が２倍多くなりますが、
+    大きな害はありません。
+    奇数/偶数に意味を持たせる仕組みは、
+    リリースサイクルがとても長いプロジェクトでもっとも有効でしょうし、
+    プロジェクトの性質上、新機能よりも安定性に重きを置く保守的なユーザの割合が高いところでも有効です。
+    この仕組みが、新機能を大胆にテストする唯一の方法ではありません。
+    <phrase output="printed">この章の後半の</phrase> <xref linkend="stabilizing-a-release"/> でも説明していますが、
+    潜在的に不安定なコードをリリースするもっと一般的な方法は、
+    ユーザーがリスクと利益のトレードオフをリリース名からすぐに把握できるように、
+    リリースにマークを付けることです。
+</para>
 
 </sect2>
 
