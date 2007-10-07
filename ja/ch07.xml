@@ -570,6 +570,7 @@ two sections discuss some of the most widely used conventions.</para>
 <sect2 id="release-number-simple-strategy">
 <title>単純なやり方</title>
 
+<!--
 <para>Most projects have rules about what kinds of changes are allowed
 into a release if one is only incrementing the micro number, different
 rules for the minor number, and still different ones for the major
@@ -580,33 +581,82 @@ project, but even if you don't, it's still a good example of the kind
 of information release numbers should convey.  This policy is adapted
 from the numbering system used by the APR project, see
 <ulink url="http://apr.apache.org/versioning.html"/>.</para>
+-->
+
+<para>
+    ほとんどのプロジェクトには、たとえマイクロ番号をひとつ増やすだけの場合であっても、
+    どんな修正をリリースに取り込むかについてのルールがあります。
+    マイナー番号を増やす場合にはまた違ったルールがありますし、
+    メジャー番号を増やす場合はさらにルールが違います。
+    こうしたルールに決まった基準はありませんが、
+    複数のプロジェクトでうまく使われてきたルールをここで説明します。
+    あなたのプロジェクトでこのルールを単純に採用してもよいのですが、
+    たとえそうしなくても、これはリリース番号が伝える情報をうまく表現する見本になります。
+    このルールは、APRプロジェクトで使われているものです。
+    <ulink url="http://apr.apache.org/versioning.html"/> を参照してください。
+</para>
 
 <orderedlist>
-
-  <listitem><para>Changes to the micro number only (that is, changes
+  <listitem>
+            <!--
+            <para>Changes to the micro number only (that is, changes
             within the same minor line) must be both forward- and
             backward-compatible.  That is, the changes should be bug
             fixes only, or very small enhancements to existing
             features.  New features should not be introduced in a
             micro release.</para>
+            -->
+
+            <para>
+                マイクロ番号だけに影響する（つまり、
+                同じマイナーライン上で行う）変更は、
+                前方互換性と後方互換性の両方がなければなりません。
+                つまり、変更はバグ修正のみか、
+                既にある機能に対するわずかな改善にとどめるべきです。
+                新機能は、マイクロ番号を変更するリリースに取り込んではいけません。
+            </para>
   </listitem>
 
-  <listitem><para>Changes to the minor number (that is, within the
+  <listitem>
+            <!--
+            <para>Changes to the minor number (that is, within the
             same major line) must be backward-compatible, but not
             necessarily forward-compatible.  It's normal to introduce
             new features in a minor release, but usually not too many
             new features at once.</para>
+            -->
+
+            <para>
+                マイナー番号に影響する（つまり、
+                同じメジャーラインで行う）変更には、
+                後方互換性がなければなりませんが、前方互換性は必ずしも必要ありません。
+                マイナー番号を変更するリリースでは、
+                新機能を取り込むのが普通ですが、
+                一度にたくさん取り込んだりはしません。
+            </para>
   </listitem>
 
-  <listitem><para>Changes to the major number mark compatibility
+  <listitem>
+            <!--
+            <para>Changes to the major number mark compatibility
             boundaries.  A new major release can be forward- and
             backward-incompatible.  A major release is expected to
             have new features, and may even have entire new feature
             sets.</para>
+            -->
+
+            <para>
+                互換性を維持するには限度があり、
+                メジャー番号に影響する変更がその境目となります。
+                新しいメジャーリリースには前方互換性も後方互換性もありません。
+                メジャーリリースには新機能が含まれているはずですが、
+                全ての機能が新しくなっている場合さえあります。
+            </para>
   </listitem>
 
 </orderedlist>
 
+<!--
 <para>What <firstterm>backward-compatible</firstterm>
 and <firstterm>forward-compatible</firstterm> mean, exactly, depends on
 what your software does, but in context they are usually not open to
@@ -622,7 +672,25 @@ If that happens, then the upgrade is <emphasis>not</emphasis>
 "forward-compatible": clearly you can't now downgrade that client
 back to 2.5.4 and keep all the functionality it had at 2.6.0, since
 some of that functionality was new in 2.6.0.</para>
+-->
 
+<para>
+    <firstterm>後方互換性</firstterm> と <firstterm>前方互換性</firstterm> の正確な意味は、
+    ソフトウェアが実現することに依存しますが、解釈の余地がないのが普通です。
+    たとえば、あなたのプロジェクトがクライアント/サーバ アプリケーションを作っているとすると、
+    "後方互換性" とは、サーバを 2.6.0 にアップグレードしても
+    既にあるバージョン 2.5.4 のクライアントが以前と異なる振舞い（もちろんバグを直した場合は別です）をしたり、
+    動かなくなる機能があったりしてはいけないということです。
+    一方、サーバを 2.6.0 にアップグレードするとともに、クライアントも2.6.0にすると、
+    <emphasis>新しい</emphasis> 機能がクライアントで使えるようになるかもしれませんが、
+    2.5.4で使えていたクライアントの機能は 2.6.0 でどのように扱われるかわかりません。
+    こういうことが起こると、このクライアントのアップグレードは前方互換性が <emphasis>ない</emphasis> ことになります。
+    つまり、クライアントを 2.5.4 にダウングレードしても、
+    2.6.0で使えていた全ての機能は使えないということになります。
+    なぜなら、2.6.0 の機能には新機能が含まれているからです。
+</para>
+
+<!--
 <para>This is why micro releases are essentially for bug fixes only.
 They must remain compatible in both directions: if you upgrade from
 2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
@@ -630,7 +698,19 @@ functionality should be lost.  Of course, the bugs fixed in 2.5.4
 would reappear after the downgrade, but you wouldn't lose any
 features, except insofar as the restored bugs prevent the use of some
 existing features.</para>
+-->
 
+<para>
+    こういうわけで、マイクロリリースは本来バグフィックスのためだけに存在します。
+    マイクロリリースでは前方、後方互換性の両方を維持しなければなりません。
+    つまり、2.5.3 から 2.5.4 にアップグレードしたあとで気が変わって 2.5.3 に戻したとしても、
+    特定の機能が失われてはいけません。
+    もちろん、2.5.4 で直したバグはダウングレードするとまた再現するでしょうが、
+    そのバグがあっても既に動いている機能が使えていれば、
+    機能が失われたことにはならないのです。
+</para>
+
+<!--
 <para>Client/server protocols are just one of many possible
 compatibility domains.  Another is data formats: does the software
 write data to permanent storage?  If so, the formats it reads and
@@ -644,7 +724,27 @@ compatibility domain too: you must make sure that source and binary
 compatibility rules are spelled out in such a way that the informed
 user need never wonder whether or not it's safe to upgrade in place.
 She will be able to look at the numbers and know instantly.</para>
+-->
 
+<para>
+    クライアント/サーバ 間のプロトコルは、
+    互換性の問題が起きる可能性がある分野のひとつです。
+    別の分野として、データフォーマットがあります。
+    ソフトウェアがデータを永続的なストレージに保存するでしょうか？
+    もしそうなら、読み書きを行うフォーマットはリリース番号のルールで決まっている互換性のガイドラインに従う必要があります。
+    バージョン 2.6.0 は 2.5.4 が保存したファイルを読み込める必要がありますが、
+    2.5.4 が読めないフォーマットに黙ってアップグレードしているかもしれません。
+    なぜなら、マイナー番号をまたがるとダウングレードできる必要はないからです。
+    あなたのプロジェクトが他のプログラムで使われているライブラリを配布しているとすると、
+    その API も互換性の問題が起こる領域に入ります。
+    新しいバージョンに古いバージョンを置き換える形でアップグレードしても安全かどうかを、
+    ソース、バイナリレベルでの互換性に関するルールを詳しく説明しておかなければなりません。
+    これは、古いバージョンを置き換える形でアップグレードしても安全かどうかを、
+    詳しいユーザーが疑問に思わないようにするためです。
+    詳しいユーザーは、バージョン番号をみれば互換性があるかどうかがすぐにわかるでしょう。
+</para>
+
+<!--
 <para>In this system, you don't get a chance for a fresh start until
 you increment the major number.  This can often be a real
 inconvenience: there may be features you wish to add, or protocols
@@ -658,7 +758,24 @@ nasty surprise can alienate a lot of users.  The policy just described
 is good partly because it's already quite widespread, but also because
 it's easy to explain and to remember, even for those not already familiar
 with it.</para>
+-->
 
+<para>
+    このしくみでは、メジャー番号を増やすまで過去のしがらみなしに再出発する機会はありません。
+    このため不便な状況になることもたびたびあります。
+    自分が本当に追加したいと思っている新機能があったり、
+    プロトコルを再設計したいと思ったとしても、互換性を維持している間はそう簡単にできません。
+    最初から拡張可能な方法で設計すること（このトピックに関しては一冊本を書く価値がありますし、
+    この本の範囲外でしょう）以外に、この問題に対する魔法の解は存在しません。
+    しかし、リリース間の互換性に関するルールを示し、
+    それを守ることはソフトウェアを配布するにあたって不可欠です。
+    不愉快な思いを一度させてしまうと、多くのユーザが離れていってしまいます。
+    ここまで説明してきた互換性に関するルールは、
+    広く知られているだけでなく、まだそういったルールに馴染みがない人にも説明しやすく、
+    覚えてもらいやすいという点で優れています。
+</para>
+
+<!--
 <para>It is generally understood that these rules do not apply to
 pre-1.0 releases (although your release policy should probably state
 so explicitly, just to be clear).  A project that is still in initial
@@ -671,13 +788,40 @@ you might not.  Conventions for pre-1.0 release numbers are fairly
 loose, mainly because people understand that strong compatibility
 constraints would hamper early development too much, and because early
 adopters tend to be forgiving anyway.</para>
+-->
 
+<para>
+    互換性に関するルールは、バージョン 1.0 以前には適用されないことが一般に知られています。
+    （しかし、はっきりさせておくために、
+    リリースポリシーではこのことを明示的に宣言しておくべきです）
+    開発の初期段階にあるプロジェクトは、 バージョン 0.1, 0.2, 0.3 といった順で、
+    1.0 の準備ができるまでリリースを行うことができますし、
+    リリース間の差異は適宜大きくすることができます。
+    バージョン 1.0以前は、マイクロ番号を使うかどうかは任意です。
+    プロジェクトの性質とリリース間の差異によっては、
+    0.1.0, 0.1.1 といった番号があれば便利かもしれませんし、そうでないかもしれません。
+    バージョン 1.0 以前のリリース番号のルールはかなりルーズです。
+    これは互換性に関する制約をきつくすると初期段階の開発を著しく妨げることや、
+    早くから使っている人はどちらにせよ寛大な傾向にあることが主な理由です。
+</para>
+
+<!--
 <para>Remember that all these injunctions only apply to this
 particular three-component system.  Your project could easily come up
 with a different three-component system, or even decide it doesn't
 need such fine granularity and use a two-component system instead.
 The important thing is to decide early, publish exactly what the
 components mean, and stick to it.</para>
+-->
+
+<para>
+    こうした制約は、ここで説明した３つの数字を使った番号の付け方にだけ当てはまります。
+    あなたのプロジェクトでは、３つの番号を使って、
+    これとは違った番号の付け方を簡単に思い付くでしょう。
+    もしくは、細かい粒度は必要ないので、代わりに２つの番号を使おうと決めることもできるでしょう。
+    重要なのは、こういうことは早めに決めておいて、
+    それぞれの数字が意味するところを正確に皆に知らせ、それを守ることです。
+</para>
 
 </sect2>
 
