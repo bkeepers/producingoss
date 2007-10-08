@@ -914,8 +914,9 @@ seeing the release's name.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="release-branches">
-<title>Release Branches</title>
+<title>リリースブランチ</title>
 
+<!--
 <para>From a developer's point of view, a free software project is in
 a state of continuous release.  Developers usually run the latest
 available code at all times, because they want to spot bugs, and
@@ -924,7 +925,19 @@ from currently unstable areas of the feature space.  They often update
 their copy of the software every day, sometimes more than once a day,
 and when they check in a change, they can reasonably expect that every
 other developer will have it within 24 hours.</para>
+-->
 
+<para>
+    開発者の視点から見ると、
+    フリーソフトウェアプロジェクトは継続してソフトウェアをリリースしている状態です。
+    開発者は通常、最新の利用可能なコードをいつも実行しています。なぜなら、
+    バグを発見したいですし、機能の不安定な領域を避けるのに十分間近なところでプロジェクトの状態を追いかけているからです。
+    彼らは毎日ソフトウェアのコピーを更新していますが、
+    一日に一回以上更新することもあります。
+    よって変更をコミットするときには、24時間以内には他の開発者もそのコピーを取得すると期待することができます。
+</para>
+
+<!--
 <para>How, then, should the project make a formal release?  Should it
 simply take a snapshot of the tree at a moment in time, package it up,
 and hand it to the world as, say, version "3.5.0"?  Common sense says
@@ -937,7 +950,24 @@ If so, it wouldn't work to simply delay the snapshot until the debate
 ends, because another, unrelated debate could start in the meantime,
 and then you'd have wait for <emphasis>that</emphasis> one to end too.
 This process is not guaranteed to halt.</para>
+-->
 
+<para>
+    では、プロジェクトはどうやって正式なリリース作業を行うべきなのでしょうか。
+    ある時点のソースツリーのスナップショットを取得してパッケージにまとめ、
+    世界中にたとえばバージョン "3.5.0" として配布すべきなのでしょうか。
+    常識的に答えはNOです。第一、開発ツリー全体が綺麗になっていて、
+    リリースの準備ができている瞬間なんて多分ありません。
+    開発を始めた新機能のコードが、様々な完成度でそこらじゅうに転がっているでしょう。
+    バグを直すために大きな変更をコミットする人もいますが、
+    その変更は議論の余地があり、スナップショットをとったときには議論中の場合もあります。
+    その場合、議論が終わるまでスナップショットの取得を送らせてもうまくいきません。
+    なぜなら、別の関係ない議論がその間に始まってしまう可能性がありますし、
+    そうなると <emphasis>その議論も</emphasis> 終わるまで待たねばならなくなります。
+    このプロセスはいつ終わるのか保証できません。
+</para>
+
+<!--
 <para>In any case, using full-tree snapshots for releases would
 interfere with ongoing development work, even if the tree could be put
 into a releasable state.  Say this snapshot is going to be "3.5.0";
@@ -952,7 +982,26 @@ irate if they are forced to choose between sitting idle and working on
 things they're not interested in, just because the project's release
 processes demand that the development tree remain unnaturally
 quiescent.</para>
+-->
 
+<para>
+    とにかく、ソースツリーの完全なスナップショットを使ってしまうと、
+    たとえツリーをリリースできる状態にもっていけたとしても、
+    現在進行している開発を妨げてしまいがちです。
+    たとえば、現在のスナップショットを仮に "3.5.0" とし、
+    次のスナップショットが "3.5.1" になるとして、
+    リリース 3.5.0 で見つかったバグの修正が殆ど含まれているとしましょう。
+    しかし、この両方のスナップショットが同じツリーにあると、
+    開発者はいつこのふたつのリリースの間に何をすべきでしょうか？
+    互換性に関するガイドラインがあるため、新機能を追加することはできません。
+    しかし、開発者全員が 3.5.0 のコードに入っているバグを熱心に修正するとは限りません。
+    開発者の中には新機能の実装を完成させようとしている人もいます。
+    彼らは自分が興味がないことに取り組むか、
+    ぼけっとしているかを選ばねばならなくなったとしたら怒ってしまうでしょう。
+    なぜなら、プロジェクトのリリースプロセスは開発ツリーを不自然に休止状態とすることを要求してしまうからです。
+</para>
+
+<!--
 <para>The solution to these problems is to always use
 a <firstterm>release branch</firstterm>.  A release branch is just a
 branch in the version control system (see
@@ -964,7 +1013,18 @@ However, in commercial environments, release branches are sometimes
 considered a luxury&mdash;a kind of formal "best practice" that can,
 in the heat of a major deadline, be dispensed with while everyone on
 the team scrambles to stabilize the main tree.</para>
+-->
 
+<para>
+    こうした問題に対する解は、いつも <firstterm>リリースブランチ</firstterm> を使うことです。
+    リリースブランチは、バージョン管理システムの単なるブランチ（<xref linkend="vc-vocabulary-branch"/> を参照してください）です。
+    そこでは、リリースされることになっているコードが開発の本線から隔離されます。
+    リリースブランチの概念は、フリーソフトウェアプロジェクトで生まれたものではありません。
+    たくさんの商用ソフトウェアの開発チームもリリースブランチを使っています。
+    しかし、商用ソフトウェアの開発では、リリースブランチは贅沢なものだと考えられることがあります &mdash; つまり、開発チームがメインツリーを安定させる作業を急いでいる間は、大きな締切に追われて省略されがちな一種の "ベストプラクティス" になってしまう可能性があるのです。
+</para>
+
+<!--
 <para>Release branches are pretty much required in open source
 projects, however.  I have seen projects do releases without them, but
 it has always resulted in some developers sitting idle while
@@ -983,6 +1043,25 @@ without the branch, their choice becomes "Do I participate in the
 project today or not?"  instead of "Do I work on the release today, or
 work on that new feature I've been developing in the mainline
 code?"</para>
+-->
+
+<para>
+    しかし、リリースブランチはオープンソースプロジェクトに不可欠なものです。
+    私はリリースブランチ無しでリリースを行っているプロジェクトを見たことがありますが、
+    いつもぼけっとしている開発者がいる一方で &mdash; いつも少数の &mdash; 開発者がリリースを世に出すために働いていたのです。
+    これは複数の点で悪い結果をもたらしてしまいます。
+    まず第一に、開発全体の勢いが衰えてしまいます。
+    ふたつめに、リリースの質が必要以上に下がってしまいます。なぜなら、
+    開発者は２、３人しか働いていませんし、
+    他の開発者を早く開発に復帰できるように急いで作業を終えようとしてしまうからです。
+    3つめは、異なった仕事が開発者同士を不必要に衝突させる状況をつくり出すために、
+    開発者チームが精神的に分裂してしまうことです。
+    ぼーっとしている開発者は、自分達のスケジュールや興味に従って行動を選択できる限り、
+    リリースブランチに注意を向けるのに <emphasis>少し</emphasis> 貢献できれば多分幸せでしょう。
+    しかしブランチがなければ、彼らの選択は "俺は今日リリース作業をやろうか、
+    それとも本線で開発している新機能の作業をしようか？" の二択ではなく、
+    "俺は今日プロジェクトに参加しようか、それともやめちゃおうか？" になってしまいます。  
+</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-branch-mechanics">
