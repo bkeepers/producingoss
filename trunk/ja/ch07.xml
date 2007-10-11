@@ -1074,7 +1074,7 @@ code?"</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-branch-mechanics">
-<title>リリースブランチのしくみ</title>
+<title>リリースブランチの作り方</title>
 
 <!--
 <para>The exact mechanics of creating a release branch depend on your
@@ -1105,7 +1105,7 @@ $ cvs tag -b RELEASE_1_0_X
 <para>or in Subversion, like this:</para>
 -->
 
-<para>Subversionでは、次のようになります</para>
+<para>Subversionでは、次のようになります。</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
@@ -1144,11 +1144,12 @@ ready, it is time to tag a snapshot from the branch:</para>
     (文字通り "x" という文字を使って）"1.0.x" ブランチを作成したことに注意してください。
     これは同じマイナーライン &mdash; つまり、同じブランチということです &mdash;
     が全てのマイクロリリースで使われるということです。
-    リリースのためにブランチを安定させる実際の過程については、
+    リリースのためにブランチを安定させる実際のプロセスについては、
     <phrase output="printed">この章の後半の</phrase> <xref linkend="stabilizing-a-release"/> で説明しています。
     ここでは、バージョン管理システムとリリースプロセスの関係にだけ注意を払うことにします。
     ブランチが安定し、リリースの準備ができたら、
-    次のようにしてブランチのスナップショットにタグを打つときです。
+    ブランチのスナップショットにタグを打つときです。
+    CVS では次のようにします。
 </para>
 
 <screen>
@@ -1156,7 +1157,7 @@ $ cd RELEASE_1_0_X-working-copy
 $ cvs tag RELEASE_1_0_0
 </screen>
 
-<para>CVS では上のようにし、Subversion では以下のようにします。</para>
+<para>Subversion では下のようにします。</para>
 
 <screen>
 $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
@@ -1176,14 +1177,15 @@ trunk:</para>
 <para>
     このタグは 1.0.0 がリリースされた時点の、
     プロジェクトのソースツリーの正確な状態を表しています。
-    （これはパッケージ化された配布物やバイナリが〜された後で、
-    誰かが古いバージョンを取得したい場合に役に立ちます。）
+    （これはパッケージ化された配布物やバイナリが削除された後で、
+    古いバージョンを取得したい場合に役立ちます。）
     同じリリースラインでの次のマイクロリリースは、
     同じく 1.0.x ブランチ上で準備され、リリースの準備が出来次第、
     1.0.1 のタグが打たれます。
     1.0.2 に向けて繰り返しブランチを綺麗にしていきましょう。
     1.1.x リリースラインにについて考え始める時期が来たら、
-    次のようにして新しいブランチを trunk から作ります。
+    新しいブランチを trunk から作ります。
+    CVS では次のようにします。
 </para>
 
 <screen>
@@ -1191,7 +1193,7 @@ $ cd trunk-working-copy
 $ cvs tag -b RELEASE_1_1_X
 </screen>
 
-<para>CVS では上のようにし、Subversion では以下のようにします。</para>
+<para>Subversion では下のようにします。</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
@@ -1218,7 +1220,7 @@ risk of greater instability.</para>
     必ず周到な準備をしたいと望む保守的なサイト管理者にお薦めです。
     一方で大胆なユーザーは通常、
     不安定なバージョンであるというリスクを負ってでも、
-    自分達が最新の機能を使っていることを確認するために、
+    必ず最新の機能を使うために、
     より新しいラインの最新のリリースを採用します。
 </para>
 
@@ -1236,11 +1238,11 @@ the next section.</para>
 -->
 
 <para>
-    これは勿論、リリースブランチに限った戦略ではありません。
+    これは勿論、リリースブランチに限ったやり方ではありません。
     自分が参加していたプロジェクトではとてもうまくいっていたのに、
-    ある状況下ではうまくいかないことさえあるかもしれません。
+    ある状況下ではうまくいかないことがあるかもしれません。
     うまくいきそうな戦略を使ってください。
-    しかし、重要な以下の点を覚えておきましょう。
+    しかし、以下の点は重要なので覚えておきましょう。
     つまり、リリースブランチの目的は、
     日々の開発作業によって生まれる変化からリリース作業を分離することと、
     リリースプロセスを組織的に行うために、
