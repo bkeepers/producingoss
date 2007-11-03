@@ -1550,7 +1550,7 @@ though).</para>
     リリースの手続きはわざと保守主義に偏っているので、
     正当な理由が付けられた反対票は、技術的というより手続き的に扱われることがあります。
     たとえば、ある変更はよく書かれていて、バグは起こさないだろうけど、
-    マイクロリリースに含めるには変更の規模が大きいから反対票を投じる人がいるかもしれません。。
+    マイクロリリースに含めるには変更の規模が大きいからという理由で反対票を投じる人がいるかもしれません。
     &mdash; 多分その変更は新機能を加えるものか、
     微妙な点で互換性のガイドラインに完全に準拠していないのでしょう。
     ある変更にもっとテストが必要だと直感で思ったという理由で反対票を投じる開発者を見たことがありますが、
@@ -1561,8 +1561,14 @@ though).</para>
 </para>
 
 <sect3 id="release-stabilization-collaboration">
+<!--
 <title>Managing collaborative release stabilization</title>
+-->
+<title>
+    リリースの安定化を管理する
+</title>
 
+<!--
 <para>If your project chooses a change voting system, it is imperative
 that the physical mechanics of setting up ballots and casting votes be
 as convenient as possible.  Although there is plenty of open source
@@ -1575,22 +1581,39 @@ votes for and against it, plus any notes or comments.  (Proposing a
 change doesn't necessarily mean voting for it, by the way, although
 the two often go together.)  An entry in such a file might look like
 this:</para>
+-->
+
+<para>
+    プロジェクトで投票システムを変える選択をした場合、
+    投票用紙や決選投票を行う物理的な仕組みをできるだけ便利にすることが求められます。
+    たくさんの電子投票システムがオープンソースで公開されていますが、
+    実際もっとも簡単なのは、
+    リリースブランチに <filename>STATUS</filename> または <filename>VOTES</filename> といったテキストファイルを用意することです。
+    このファイルは提案されている変更を一覧にしています。&mdash;
+    開発者であれば誰でも変更をリリースに取り込むよう提案することができます。
+    &mdash; このファイルには、全ての投票と、それに対する賛成、反対意見、それに加えてあらゆるメモ、そしてコメントが書き込まれています。
+    （ところで、変更を提案することは、
+    必ずしもその変更に賛成票を投じているというわけではありません。しかし、
+    そのふたつは同時に行われることがよくあります。）
+    こうしたファイルのエントリは、次のようになるでしょう。
+</para>
 
 <screen>
 * r2401 (issue #49)
-  Prevent client/server handshake from happening twice.
-  Justification:
-    Avoids extra network turnaround; small change and easy to review.
-  Notes:
-    This was discussed in http://.../mailing-lists/message-7777.html
-    and other messages in that thread.
-  Votes:
+  クライアント/サーバのハンドシェイクが２度行われるのを避ける。
+  変更する理由:
+    余計なネットワークのターンアラウンド時間を減らす。変更の規模は小さく、レビューしやすい。
+  メモ:
+    これについては http://.../mailing-lists/message-7777.html
+    及びこのスレッドにある他のメッセージで議論された。
+  投票:
     +1: jsmith, kimf
-    -1: tmartin (breaks compatibility with some pre-1.0 servers;
-                 admittedly, those servers are buggy, but why be
-                 incompatible if we don't have to?)
+    -1: tmartin (バージョン 1.0以前のサーバとの互換性が壊れてしまう。
+                 確かに、1.0以前のサーバはバグが多いが、だからといって
+                 何故必要もないのに互換性を壊すのか？)
 </screen>
 
+<!--
 <para>In this case, the change acquired two positive votes, but was
 vetoed by tmartin, who gave the reason for the veto in a parenthetical
 note.  The exact format of the entry doesn't matter; whatever your
@@ -1609,26 +1632,58 @@ system doesn't have an obvious syntax for referring to individual
 changes, then the project should make one up.  For voting to be
 practical, each change under consideration must be unambiguously
 identifiable.</para>
+-->
 
+<para>
+    この場合は、提案された変更は賛成票を2つ得ていますが、
+    tmartin によって拒否権を行使されています。
+    tmartin は括弧つきのメモで拒否権を行使した理由を述べています。
+    正確なフォーマットは問題ではありません。
+    つまり、プロジェクトでどのように決めてもよいのです &mdash; 多分、
+    tmartinが拒否権を行使した理由を "Notes:" のセクションに移すか、
+    変更の理由は他のセクションに合わせて "Description:" ヘッダをつけるべきなのでしょう。
+    重要なのは、変更を評価するのに必要な全ての情報を到達可能にしておくことと、
+    決選投票をする仕組みをできるだけ簡単にしておくことです。
+    提案されている変更はリポジトリのリビジョン番号で参照します。
+    （今回の場合は、単一のリビジョン r2401 ですが、複数のリビジョンでも簡単にできます）
+    リビジョン番号は、trunk に加えられた変更を参照することが想定されています。
+    既にリリースブランチに変更が加えられている場合は、投票する必要はないでしょう。
+    もしバージョン管理システムが個々の変更を参照する明示的な文法を持ってない場合は、
+    プロジェクトが作るべきです。投票を実効性のあるものにするためには、
+    対象となる各々の変更は曖昧でない状態で識別できなければならないのです。
+</para>
+
+<!--
 <para>Those proposing or voting for a change are responsible for
 making sure it applies cleanly to the release branch, that is, applies
 without conflicts (see <xref linkend="vc-vocabulary-conflict"/>).
 If there are conflicts, then the entry should either point to an
 adjusted patch that does apply cleanly, or to a temporary branch that
 holds an adjusted version of the change, for example:</para>
+-->
+
+<para>
+    こうした変更の提案、もしくは投票の対象になる変更は、
+    必ずリリースブランチに綺麗に適用できなければなりません。つまり、
+    衝突せずに適用できるということです（<xref linkend="vc-vocabulary-conflict"/> を参照してください）
+    もし衝突がある場合は、綺麗に適用するよう調整したパッチか、
+    変更を調整したバージョンを格納した一時ブランチを投票のエントリに記述すべきです。
+    たとえば次のようなものです。
+</para>
 
 <screen>
 * r13222, r13223, r13232
-  Rewrite libsvn_fs_fs's auto-merge algorithm
-  Justification:
-    unacceptable performance (>50 minutes for a small commit) in
-    a repository with 300,000 revisions
-  Branch:
+  libsvn_fs_fs の自動マージアルゴリズムを書き直した
+  変更する理由:
+    30万リビジョンが格納されたリポジトリのパフォーマンスが許容できない
+    (小さなコミットをしても50分以上かかる)
+  変更を加えたブランチ:
     1.1.x-r13222@13517
-  Votes:
+  投票:
     +1: epg, ghudson
 </screen>
 
+<!--
 <para>That example is taken from real life; it comes from the
 <filename>STATUS</filename> file for the Subversion 1.1.4 release
 process.  Notice how it uses the original revisions as canonical
@@ -1646,11 +1701,26 @@ branch's log message for r13517 should simply say "Adjust r13222,
 r13223, and r13232 for backport to 1.1.x branch."  All other
 information about the changes can be chased down at their original
 revisions.</para>
+-->
+
+<para>
+    この例は実在のプロジェクト、
+    つまり Subversion 1.1.4 のリリースプロセス用のSTATUSファイルから引用したものです。
+    変更が起こした衝突を調整したブランチがあるにもかかわらず、
+    オリジナルのリビジョンを、どうやって変更を表現する規則的な名前にしているかに注意してください。
+    （そのブランチも、変更をリリースにマージするのを容易にするために３つのtrunkリビジョンを r13517 というリビジョンにまとめていますが、これは許されるはずです）
+    この例にはオリジナルのリビジョンが記述されています。
+    なぜなら、ログメッセージが残っているので、レビューがもっともしやすいからです。
+    一時的なブランチにはそうしたログメッセージはないでしょう。
+    情報の重複を避けるため（<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase> の <xref linkend="vc-singularity"/> を参照してください）、
+    ブランチのログメッセージは"r13222, r13223, r13232 を 1.1.x ブランチ用に調整した" と簡単にすべきでしょう。
+    変更に関する情報は全てオリジナルのリビジョンから追いかけることができます。
+</para>
 
 </sect3>
 
 <sect3 id="release-manager">
-<title>Release manager</title>
+<title>リリースマネージャー</title>
 
 <para>The actual process of merging (see
 <xref linkend="vc-vocabulary-merge"/>) approved changes into the
