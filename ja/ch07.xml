@@ -962,7 +962,7 @@ This process is not guaranteed to halt.</para>
     では、プロジェクトはソフトウェアをどうやって正式にリリースすべきなのでしょうか。
     ある時点のソースツリーのスナップショットを取得してパッケージにまとめ、
     たとえばバージョン "3.5.0" として世界中に配布すべきなのでしょうか。
-    常識的からいって答えはNOです。第一、開発ツリー全体が綺麗になっていて、
+    常識からいって答えはNOです。第一、開発ツリー全体が綺麗になっていて、
     リリースの準備ができている瞬間なんて多分ありません。
     開発を始めた新機能のコードが、様々な完成度でそこらじゅうに転がっているでしょう。
     バグを直すために大きな変更をコミットする人もいますが、
@@ -1365,6 +1365,7 @@ practice.</para>
 <sect2 id="release-owner">
 <title>リリースオーナーによる独裁</title>
 
+<!--
 <para>The group agrees to let one person be the <firstterm>release
 owner</firstterm>.  This person has final say over what changes make
 it into the release.  Of course, it is normal and expected for there
@@ -1374,7 +1375,18 @@ this system to work, it is necessary to choose someone with the
 technical competence to understand all the changes, and the social
 standing and people skills to navigate the discussions leading up to
 the release without causing too many hurt feelings.</para>
+-->
 
+<para>
+    開発者グループは特定の人物が<firstterm>リリースオーナー</firstterm>になることに同意します。
+    リリースオーナーはどの変更をリリースに取り込むかを決める最終的な権限を持ちます。
+    勿論、それについては通常議論が行われますし、期待されていますが、
+    開発者グループは結局、リリースオーナーに最終的な決断を行うための十分な権限を与えなければなりません。
+    この仕組みがうまく機能するには、加えられた全ての変更を理解できる卓越した技術力を持ち、
+    社会的にうまくやっており、多くの人を傷つけずにリリースにもっていけるよう議論を導くコミュニケーション能力がある人を選ばなければいけません。
+</para>
+
+<!--
 <para>A common pattern is for the release owner to say "I don't think
 there's anything wrong with this change, but we haven't had enough
 time to test it yet, so it shouldn't go into this release."  It helps
@@ -1386,7 +1398,21 @@ decisions to be justified, or will argue that a change is not as risky
 as it looks.  These conversations need not be confrontational, as long
 as the release owner is able to consider all the arguments objectively
 and not reflexively dig in his heels.</para>
+-->
 
+<para>
+    よくあるのは、"この変更は間違ってないけど、テストをする十分な時間がとれていない。
+    だから、今回のリリースに含めるべきではない。" というものです。
+    これは、リリースオーナーがプロジェクトに関連した技術の知識を広く持っている場合に大いに役立ちますし、
+    その変更が潜在的にコードを不安定にする（たとえば、ソフトウェアの他の部分に与える影響や、移植性に関することなど）理由を得ることができます。
+    場合によっては、リリースオーナーの決定が正しいことを証明せよという人や、
+    見た目ほどその変更はリスキーでないと主張する人も現れます。
+    リリースーオーナーは、こうした主張のすべてが自分の決定に反対しているか、
+    反対に固執しているわけではないと判断できれば、
+    こうした主張に真正面からぶつかる必要はありません。
+</para>
+
+<!--
 <para>Note that the release owner need not be the same person as the
 project leader (in cases where there is a project leader at all; see
 <xref linkend="benevolent-dictator"/><phrase output="printed">
@@ -1397,17 +1423,39 @@ The skills that make a good development leader are not necessarily the
 same as those that make a good release owner.  In something as
 important as the release process, it may be wise to have someone
 provide a counterbalance to the project leader's judgement.</para>
+-->
 
+<para>
+    プロジェクトリーダーがリリースオーナーになる必要はないことに注意してください。
+    (そもそもプロジェクトリーダーがいる場合は、<phrase output="printed"><xref linkend="social-infrastructure"/></phrase> の <xref linkend="benevolent-dictator"/> を参照してください)
+    実際、プロジェクトリーダーとリリースオーナーは兼任 <emphasis>しない</emphasis> ほうがよいことがあります。
+    優れたプロジェクトリーダーになるのに必要なスキルは、リリースオーナーになるのに必要なそれと同じではありません。
+    リリースプロセスと同じくらい重要な局面では、
+    誰かがプロジェクトリーダーの判断を相殺するくらいの方が賢いかもしれません。
+</para>
+
+<!--
 <para>Contrast the release owner role with the less dictatorial role
 described in
 <xref linkend="release-manager"/><phrase output="printed"> later
 in this chapter</phrase>.</para>
+-->
+
+<para>
+    <phrase output="printed">この章の後半にある</phrase>
+    <xref linkend="release-manager"/> で説明するリリースマネージャーは、
+    リリースオーナーとは対照的に独裁的ではありません。
+</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-voting">
+
+<!--
 <title>Change Voting</title>
+-->
+<title>リリースに含める変更を投票で決める</title>
 
 <para>At the opposite extreme from dictatorship by release owner,
 developers can simply vote on which changes to include in the release.
