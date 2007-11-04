@@ -1565,7 +1565,7 @@ though).</para>
 <title>Managing collaborative release stabilization</title>
 -->
 <title>
-    リリースの安定化を管理する
+    リリースを安定させるプロセスを管理する
 </title>
 
 <!--
@@ -1599,7 +1599,7 @@ this:</para>
 </para>
 
 <screen>
-* r2401 (issue #49)
+* r2401 (問題 #49)
   クライアント/サーバのハンドシェイクが２度行われるのを避ける。
   変更する理由:
     余計なネットワークのターンアラウンド時間を減らす。変更の規模は小さく、レビューしやすい。
@@ -1635,13 +1635,13 @@ identifiable.</para>
 -->
 
 <para>
-    この場合は、提案された変更は賛成票を2つ得ていますが、
+    この場合、提案された変更は賛成票を2つ得ていますが、
     tmartin によって拒否権を行使されています。
     tmartin は括弧つきのメモで拒否権を行使した理由を述べています。
     正確なフォーマットは問題ではありません。
     つまり、プロジェクトでどのように決めてもよいのです &mdash; 多分、
-    tmartinが拒否権を行使した理由を "Notes:" のセクションに移すか、
-    変更の理由は他のセクションに合わせて "Description:" ヘッダをつけるべきなのでしょう。
+    tmartin が拒否権を行使した理由を "メモ:" のセクションに移すか、
+    変更の理由は他のセクションに合わせて "説明:" ヘッダをつけるべきでしょう。
     重要なのは、変更を評価するのに必要な全ての情報を到達可能にしておくことと、
     決選投票をする仕組みをできるだけ簡単にしておくことです。
     提案されている変更はリポジトリのリビジョン番号で参照します。
@@ -1705,12 +1705,12 @@ revisions.</para>
 
 <para>
     この例は実在のプロジェクト、
-    つまり Subversion 1.1.4 のリリースプロセス用のSTATUSファイルから引用したものです。
+    つまり Subversion 1.1.4 のリリースプロセスで作られたSTATUSファイルから引用したものです。
     変更が起こした衝突を調整したブランチがあるにもかかわらず、
     オリジナルのリビジョンを、どうやって変更を表現する規則的な名前にしているかに注意してください。
     （そのブランチも、変更をリリースにマージするのを容易にするために３つのtrunkリビジョンを r13517 というリビジョンにまとめていますが、これは許されるはずです）
     この例にはオリジナルのリビジョンが記述されています。
-    なぜなら、ログメッセージが残っているので、レビューがもっともしやすいからです。
+    なぜなら、ログメッセージが残っているので、もっともレビューしやすいからです。
     一時的なブランチにはそうしたログメッセージはないでしょう。
     情報の重複を避けるため（<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase> の <xref linkend="vc-singularity"/> を参照してください）、
     ブランチのログメッセージは"r13222, r13223, r13232 を 1.1.x ブランチ用に調整した" と簡単にすべきでしょう。
@@ -1722,12 +1722,21 @@ revisions.</para>
 <sect3 id="release-manager">
 <title>リリースマネージャー</title>
 
+<!--
 <para>The actual process of merging (see
 <xref linkend="vc-vocabulary-merge"/>) approved changes into the
 release branch can be performed by any developer.  There does not need
 to be one person whose job it is to merge changes; if there are a lot
 of changes, it can be better to spread the burden around.</para>
+-->
 
+<para>
+    リリースに取り込む変更を実際にリリースブランチにマージする(<xref linkend="vc-vocabulary-merge"/> を参照してください)プロセスは、開発者であれば誰でもできます。
+    変更をマージする専門の人を置く必要はありません。もし変更がたくさんあれば、
+    マージする負担を分散させた方がよいかもしれません。
+</para>
+
+<!--
 <para>However, although both voting and merging happen in a
 decentralized fashion, in practice there are usually one or two people
 driving the release process.  This role is sometimes formally blessed
@@ -1751,6 +1760,27 @@ later in this chapter</phrase>), the release managers
 also take care of the logistics of creating the final release
 packages, collecting digital signatures, uploading the packages, and
 making the public announcement.</para>
+-->
+
+<para>
+    投票することと変更をマージすることは別々に行われますが、
+    実際にはリリースプロセスを指揮する人がひとりかふたりはいます。
+    この役割を正式に <firstterm>リリースマネージャー</firstterm> と呼ぶことがありますが、
+    どの変更を取り込むかに関する最終的な決定権があるリリースオーナー（<phrase output="printed">この章のはじめの方の</phrase> <xref linkend="release-owner"/> を参照してください）とは全く別物です。
+    リリースマネージャーは、リリースに取り込む候補になる変更の数や、
+    実際に取り込まれた変更の数、そして取り込まれる可能性が高い変更の数などを追いかけています。
+    重要な変更に対して開発者が十分に注意を払わず、
+    投票もされずに放置されるかもしれないとリリースマネージャーが感じた場合、
+    彼らは他の開発者に小言を言ってレビューや投票をするよう促します。
+    リリースに取り込む変更がたまってきたら、
+    リリースマネージャーが引き取ってまとめてリリースブランチにマージすることもあります。
+    変更を明示的にコミットする以外の仕事を全て彼らにやらせる必要はないと理解しているのなら、
+    他の開発者がそうした仕事をリリースマネージャーに任せられるのはよい状態です。
+    リリースを世に出す時がきたら(<phrase output="printed">この章の後半の</phrase> <xref linkend="testing-and-releasing"/> を参照してください)、
+    リリースマネージャーは最終的なリリースパッケージを作成したり、
+    デジタル署名を集めたり、パッケージをアップロードしたり、
+    公式にアナウンスを出す作業に注意を払います。
+</para>
 
 </sect3>
 
