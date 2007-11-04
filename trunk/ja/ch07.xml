@@ -1256,7 +1256,7 @@ the next section.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="stabilizing-a-release">
-<title>リリースを安定させる</title>
+<title>リリースを安定させるプロセス</title>
 
 <!--
 <para><firstterm>Stabilization</firstterm> is the process of getting a
@@ -1266,7 +1266,7 @@ content accordingly.</para>
 -->
 
 <para>
-    <firstterm>リリースの安定化</firstterm> とは、
+    <firstterm>リリースを安定させるプロセス</firstterm> とは、
     リリースブランチをリリースできる状態に持っていく作業です。
     つまり、どの変更をリリースに含めるか、含めないかを決定し、
     その方針に従ってブランチを整備することです。
@@ -1483,7 +1483,7 @@ about the individuals.</para>
 -->
 
 <para>
-    リリースオーナーの独裁と全く正反対ですが、
+    リリースオーナーの独裁と正反対のやり方ですが、
     開発者はどの変更をリリースに取り込むかを投票することができます。
     しかし、リリースの安定化するプロセスで一番重要なのは変更を除外することなので、
     複数の開発者が積極的に賛成した変更をリリースに取り込めるように投票システムを設計することが重要になります。
@@ -1640,7 +1640,7 @@ identifiable.</para>
     tmartin は括弧つきのメモで拒否権を行使した理由を述べています。
     正確なフォーマットは問題ではありません。
     つまり、プロジェクトでどのように決めてもよいのです &mdash; 多分、
-    tmartin が拒否権を行使した理由を "メモ:" のセクションに移すか、
+    tmartin が拒否権を行使した理由は "メモ:" のセクションに移すか、
     変更の理由は他のセクションに合わせて "説明:" ヘッダをつけるべきでしょう。
     重要なのは、変更を評価するのに必要な全ての情報を到達可能にしておくことと、
     決選投票をする仕組みをできるだけ簡単にしておくことです。
@@ -1705,7 +1705,7 @@ revisions.</para>
 
 <para>
     この例は実在のプロジェクト、
-    つまり Subversion 1.1.4 のリリースプロセスで作られたSTATUSファイルから引用したものです。
+    つまり Subversion 1.1.4 のリリースプロセスで作られた STATUS ファイルから引用したものです。
     変更が起こした衝突を調整したブランチがあるにもかかわらず、
     オリジナルのリビジョンを、どうやって変更を表現する規則的な名前にしているかに注意してください。
     （そのブランチも、変更をリリースにマージするのを容易にするために３つのtrunkリビジョンを r13517 というリビジョンにまとめていますが、これは許されるはずです）
@@ -1790,8 +1790,12 @@ making the public announcement.</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="packaging">
+<!--
 <title>Packaging</title>
+-->
+<title>パッケージング</title>
 
+<!--
 <para>The canonical form for distribution of free software is as
 source code.  This is true regardless of whether the software normally
 runs in source form (i.e., can be interpreted, like Perl, Python, PHP,
@@ -1805,16 +1809,42 @@ point of the source package is to unambiguously define the release.
 When the project distributes "Scanley&nbsp;2.5.0", what it means,
 specifically, is "The tree of source code files that, when compiled
 (if necessary) and installed, produces Scanley 2.5.0."</para>
+-->
 
+<para>
+    フリーソフトウェアを配布する標準的なやり方は、ソースコードを配布することです。
+    これはソフトウェアがソースコードをそのまま実行できる(i.e. Perl, Python, PHP などのように、
+    インタプリタによっって解釈できるもの)か、
+    はじめに(C, C++, Javaなどによって）コンパイルする必要があるかどうかに関わらず当てはまります。
+    コンパイルする必要があるソフトウェアの場合、
+    ほとんどのユーザーが多分自分でソースをコンパイルせず、
+    あらかじめビルドされたバイナリパッケージをインストールするでしょう。
+    (<phrase output="printed">この章の後半にある</phrase> <xref linkend="binary-packages"/> を参照してください)
+    しかしながら、バイナリパッケージはオリジナルのソースコードを元にして作られています。
+    ソースパッケージで重要なのは、曖昧でない形でリリースを定義していることです。
+    プロジェクトが "Scanley 2.5.0" を配布する場合、それが特に意味するところは "コンパイルして（必要であれば）インストールすると、Scanley 2.5.0 を生成するソースファイルのツリーである" ということです。
+</para>
+
+<!--
 <para>There is a fairly strict standard for how source releases
 should look.  One will occasionally see deviations from this standard,
 but they are the exception, not the rule.  Unless there is a compelling
 reason to do otherwise, your project should follow this standard
 too.</para>
+-->
+
+<para>
+    どういう形でソースファイルをリリースすべきかについては、かなり厳格な基準があります。
+    基準から外れた部分も時折見つかるでしょうが、それはルールではなく例外です。
+    やむを得ない理由がなければ、あなたのプロジェクトでもこの基準に従うべきです。
+</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-format">
+<!--
 <title>Format</title>
+-->
+<title>パッケージのフォーマット</title>
 
 <para>The source code should be shipped in the standard formats for
 transporting directory trees.  For Unix and Unix-like operating
