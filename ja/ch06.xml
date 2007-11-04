@@ -4298,15 +4298,31 @@ and in the bargain get some influence over what gets quoted.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="security">
+<!--
 <title>Announcing Security Vulnerabilities</title>
+-->
+<title>セキュリティ脆弱性の告知</title>
 
+<!--
 <para>Handling a security vulnerability is different from handling any
 other kind of bug report.  In free software, doing things openly and
 transparently is normally almost a religious credo.  Every step of the
 standard bug-handling process is visible to all who care to watch: the
 arrival of the initial report, the ensuing discussion, and the
 eventual fix.</para>
+-->
+<para>
+  セキュリティ脆弱性の処理のしかたは、
+  他のバグ報告の場合とは異なります。
+  通常、フリーソフトウェアの世界では、
+  物事をオープンにして誰にでも見えるようにすることが当たり前のことです。
+  一般的なバグ報告の対応状況は、興味のある人なら誰にでも見えるようになっています。
+  いつバグが報告されたのか、どのような議論がなされたのか、
+  そして最終的にどのように修正されたのか。
+  これらはすべて、知りたければ誰でも知ることができるわけです。
+</para>
 
+<!--
 <para>Security bugs are different.  They can compromise users' data,
 and possibly users' entire computers.  To discuss such a problem
 openly would be to advertise its existence to the entire
@@ -4318,26 +4334,69 @@ indicate security problems in the pre-change code).  Most open source
 projects have settled on approximately the same set of steps to handle
 this conflict between openness and secrecy, based on the these basic
 guidelines:</para>
+-->
+<para>
+  セキュリティに関するバグの場合は、これとは異なります。
+  セキュリティに関するバグが原因でユーザのデータが漏洩してしまう可能性もありますし、
+  場合によってはコンピュータを破壊してしまうことになるかもしれません。
+  このような問題をオープンな場で議論してしまうと、
+  問題があることを全世界に知らしめてしまうことになります。
+  当然その中には、そのバグを悪用しようという人たちもいることでしょう。
+  単に淡々とバグを修正してコミットしただけでも、バグの存在を世にさらしてしまうことになります
+  (攻撃者の中には、公開されているプロジェクトのコミットログをチェックしている人もいます。
+  変更内容を調べれば、変更前のコードにセキュリティ上の問題があることがわかるでしょう)。
+  ほとんどのオープンソースプロジェクトでは、
+  この開放性と秘密主義の対立に折り合いをつけるために
+  同じような方針をとっています。その方針は、以下のようなものとなります。
+</para>
 
 <orderedlist>
+<!--
   <listitem><para>Don't talk about the bug publicly until a fix is
             available; then supply the fix at exactly the same moment
             you announce the bug.</para> 
   </listitem>
+-->
+  <listitem>
+    <para>
+      修正が完了するまではバグのことを口外しない。
+      そして、バグがあったことをアナウンスすると同時に修正プログラムを公開する。
+    </para> 
+  </listitem>
+<!--
   <listitem><para>Come up with that fix as fast as you
             can&mdash;especially if someone outside the project
             reported the bug, because then you know there's at least
             one person outside the project who is able to exploit the
             vulnerability.</para>
   </listitem>
+-->
+  <listitem>
+    <para>
+      修正プログラムは、可能な限り迅速に提供する。
+      そのバグが外部からの報告で発覚したものである場合は特に急ぐ必要があります。
+      というのも、プロジェクトの外部の人間の中に少なくとも
+      1 人はその脆弱性を突く攻撃ができる人がいるということがはっきりしているからです。
+    </para>
+  </listitem>
 </orderedlist>
 
+<!--
 <para>In practice, those principles lead to a fairly standardized
 series of steps, which are described in the sections below.</para>
+-->
+<para>
+  実際のところ、この規則は標準化した手順としてまとめることができます。
+  これらの手順について、以下のセクションで解説します。
+</para>
 
 <sect3 id="security-receiving">
+<!--
 <title>Receive the report</title>
+-->
+<title>バグ報告を受ける</title>
 
+<!--
 <para>Obviously, a project needs the ability to receive security bug
 reports from anyone.  But the regular bug reporting address won't do,
 because it can be watched by anyone too.  Therefore, have a separate
@@ -4348,7 +4407,26 @@ on the list.  If you need a formal definition of "trusted", you can
 use "anyone who has had commit access for two years or more" or
 something like that, to avoid favoritism.  This is the group that will
 handle security bugs.</para>
+-->
+<para>
+  当然のことながら、各プロジェクトには
+  セキュリティバグの報告を一般から受け付けるための窓口が必要です。
+  しかし、これは通常のバグ報告を受け付けるアドレスと一緒にはできません。
+  というのも、通常のバグは誰にでも見えるようになっているからです。
+  そこで、セキュリティ関連のバグ報告を受け取るためのメーリングリストを別途用意します。
+  このメーリングリストのアーカイブは一般に公開してはいけません。
+  また、参加資格は厳しく制限するべきです。そのプロジェクトに長くかかわっていて
+  信頼できる開発者たちのみをメンバーに加えるようにしましょう。
+  もし "信頼できる" の具体的な定義が必要な場合は、たとえば
+  "コミット権を得てから 2 年以上経過している"
+  などといった条件を使用するといいでしょう。
+  そうすれば、参加資格に関して "えこひいきしているのでは?"
+  といった批判を避けることができます。
+  このメーリングリストに参加しているメンバーが、
+  セキュリティバグに対応するメンバーとなります。
+</para>
 
+<!--
 <para>Ideally, the security list should not be spam-protected or
 moderated, since you don't want an important report to get filtered
 out or delayed just because no moderators happened to be online that
@@ -4363,28 +4441,81 @@ without some sort of address hiding transformation, as described in
 Fortunately, address-hiding need not make the address illegible; see
 <ulink url="http://subversion.tigris.org/security.html"/>, and view
 that page's HTML source, for an example.</para>
+-->
+<para>
+  セキュリティ関連のメーリングリストについては、
+  スパム対策やモデレートは行わないのが理想です。
+  というのも、重要な報告がスパム扱いされてしまうと困りますし、
+  たまたまその週末にすべてのモデレータがメールをチェックしなかったなどという理由で
+  重要な報告に気づくのが遅れるというのも困ります。
+  何らかのスパム対策ソフトウェアを使用するのなら、
+  可能な限り緩やか目の設定にしておきましょう。
+  重要な報告をフィルタリングしてしまうくらいなら、
+  多少のスパムが混ざってしまうほうがずっとましです。
+  作成したメーリングリストをうまく活用するためには、
+  そのアドレスを周知させる必要があります。
+  しかし、このメーリングリストはモデレートされておらず、
+  またスパム対策も甘いものです。したがって、
+  そのアドレスを宣伝するときには、アドレスを隠すために何らかの細工が必須となります。
+  詳細は <phrase output="printed"><xref linkend="technical-infrastructure"/> の</phrase>
+  <xref linkend="address-hiding"/> で説明します。
+  幸いにも、アドレスを読みにくいものになどしなくてもアドレスを隠すことは可能です。
+  <ulink url="http://subversion.tigris.org/security.html"/> をごらんになったうえで、
+  そのページの HTML ソースを確認してみてください。
+</para>
 
 </sect3>
 
 <sect3 id="security-finding-a-fix">
+<!--
 <title>Develop the fix quietly</title>
+-->
+<title>大至急それを修正する</title>
 
+<!--
 <para>So what does the security list do when it receives a report?
 The first task is to evaluate the problem's severity and
 urgency:</para>
+-->
+<para>
+  セキュリティメーリングリストに報告が来たら、次は何をすればいいのでしょう?
+  まず最初にすべきことは、その問題の重大度 (severity)
+  と緊急性 (urgency) を評価することです。
+</para>
 
 <orderedlist>
+<!--
   <listitem><para>How serious is the vulnerability?  Does it allow a
             malicious attacker to take over the computer of someone
             who uses your software?  Or does it, say, merely leak
             information about the sizes of some of their files?</para>
   </listitem>
+-->
+  <listitem>
+    <para>
+      その脆弱性はどれくらい深刻なものでしょう?
+      悪意のある攻撃者が、
+      そのソフトウェアを使用しているコンピュータを乗っ取ってしまえるほどのものですか?
+      それとも、ただ単に何らかのファイルのサイズが漏洩してしまうというだけのものですか?
+    </para>
+  </listitem>
 
+<!--
   <listitem><para>How easy is it to exploit the vulnerability?  Can
             an attack be scripted, or does it require circumstantial
             knowledge, educated guessing, and luck?</para>
   </listitem>
+-->
+  <listitem>
+    <para>
+      その脆弱性を突く攻撃の難易度はどの程度ですか?
+      スクリプトを使って誰でも攻撃できる程度のもの?
+      あるいはその場の状況を熟知している人が
+      高度に頭を働かせても、ごくまれにしか成功しないもの?
+    </para>
+  </listitem>
 
+<!--
   <listitem><para><emphasis>Who</emphasis> reported the problem to
             you?  The answer to this question doesn't change the
             nature of the vulnerability, of course, but it does give
@@ -4400,8 +4531,26 @@ urgency:</para>
             she'll wait before exploiting the vulnerability on live
             installations.</para>
   </listitem>
+-->
+  <listitem>
+    <para>
+      <emphasis>誰が</emphasis> その問題を報告してきたのですか?
+      この問いへの答えによって脆弱性そのものの性質が変わるわけではありませんが、
+      他にどれくらいの人がその問題に気づいている可能性があるかを推測することができます。
+      もしそのプロジェクトの開発者自身から報告されたのなら、ちょっとだけ
+      (本当にちょっとだけ) 安心できます。
+      おそらく、その報告者は他人にその問題を漏らしていないでしょうから。
+      一方、もし <literal>anonymous14@globalhackerz.net</literal>
+      とかいうアドレスからのメールで報告を受けたのなら、
+      一刻も早く対応すべきでしょう。
+      あなたにその問題を報告してくれた人は、
+      あなた以外の人にもその情報を漏らしているかもしれません。
+      あるいは報告を受けたときには既にその脆弱性を突いた攻撃を始めているかもしれません。
+    </para>
+  </listitem>
 </orderedlist>
 
+<!--
 <para>Note that the difference we're talking about here is often just
 a narrow range between <emphasis>urgent</emphasis>
 and <emphasis>extremely&nbsp;urgent</emphasis>.  Even when the report
@@ -4409,7 +4558,20 @@ comes from a known, friendly source, there could be other people on
 the Net who discovered the bug long ago and just haven't reported it.
 The only time things aren't urgent is when the bug inherently does not
 compromise security very severely.</para>
+-->
+<para>
+  ここで考えているのは、あくまでも
+  <emphasis>緊急 (urgent)</emphasis> と
+  <emphasis>超緊急 (extremely&nbsp;urgent</emphasis>)
+  のどちらかというレベルの話であることに注意しましょう。
+  たとえ今回の報告が既知の信頼できるところからのものであったとしても、
+  それよりずっと前に他の人が同じ問題を発見しているが
+  ただ報告していないだけなのかもしれません。
+  緊急性が低いといえるのは、
+  そのバグが本質的に深刻なセキュリティ問題を引き起こさないといえる場合のみです。
+</para>
 
+<!--
 <para>The "<literal>anonymous14@globalhackerz.net</literal>" example
 is not facetious, by the way.  You really may get bug reports from
 identity-cloaked people who, by their words and behavior, never quite
@@ -4427,7 +4589,34 @@ seriously enough.  Either way, you can't afford to tick this person
 off.  After all, if the bug is severe, he has knowledge that could
 cause your users big problems.  Treat such reporters well, and hope
 that they treat you well.</para>
+-->
+<para>
+  ところで、さきほどの "<literal>anonymous14@globalhackerz.net</literal>"
+  の例は、決して冗談で言ったわけではありません。
+  実際、このようにどこの誰だかわからないような相手からバグの報告を受けることもあり得ます。
+  彼らは自分の身元を明かすこともないでしょうし、
+  あなたの味方なのか敵なのかさえはっきりさせないでしょう。
+  でもそんなの関係ありません。あなたにセキュリティホールを教えてくれたということは、
+  向こうはあなたに対してひとつ貸しを作ったと考えているはずです。
+  それに対して、誠意を持って対応する必要があります。
+  まず報告してくれたことに対して感謝し、
+  修正版を公式リリースする予定日を彼らに伝えるようにします。
+  時には <emphasis>報告者側から</emphasis> 日時を指定されることもあります。
+  つまり、「バグが修正されているかどうかにかかわらず、
+  ○月○日になればこの問題を公表する」などどして暗黙の脅しをかけてくるようなものです。
+  これは単なる弱い物いじめに感じられるかもしれませんが、
+  おそらくその報告者が過去に経験したいやな思い出
+  (せっかくセキュリティ問題を報告してやったのに、
+  ソフトウェアの作者にまともに取り合ってもらえなかったなど)
+  に基づく先制攻撃と考えたほうが適切でしょう。
+  いずれにせよ、報告者をいちいち怒らせている余裕などありません。
+  結局のところ、もしそのバグが深刻なものなのだとしたら、
+  その報告者はユーザに問題を引き起こさせる方法を知っているということになります。
+  彼の機嫌を損ねないよう丁重に扱いましょう。
+  そうすればきっと相手もこちらを尊重してくれることでしょう。
+</para>
 
+<!--
 <para>Another frequent reporter of security bugs is the security
 professional, someone who audits code for a living and keeps up on the
 latest news of software vulnerabilities.  These people usually have
@@ -4440,7 +4629,23 @@ security professionals as pretty much the only reliable way to get
 organizations to address security problems promptly.  So don't treat
 the deadline as rude; it's a time-honored tradition, and there are
 good reasons for it.</para>
+-->
+<para>
+  セキュリティバグの報告者としてほかによくあるのは、
+  セキュリティの専門家です。彼らはソフトウェアのコードを監査するのを仕事にしており、
+  ソフトウェアの脆弱性についての最新情報を追いかけています。
+  この手の人たちは、バグを報告する側だけでなくバグ報告を受け取る側としての経験も豊富です。
+  おそらくあなたのプロジェクト内のどのメンバーよりも経験を積んでいることでしょう。
+  また、彼らの特徴としては、期日を指定してその日までの対応を迫り、
+  期日がくればバグを一般に公表するというやり方があります。
+  交渉次第で期日を引き延ばすこともできるかもしれませんが、それは相手によります。
+  セキュリティの専門家たちにとっては、報告先にまともに取り合ってもらうための
+  唯一効果的な方法が期日を設定することなのです。
+  彼らが期日を指定してきたとしても、それを失礼だとは思わないようにしましょう。
+  それなりの理由があって続いている伝統なのですから。
+</para>
 
+<!--
 <para>Once you know the severity and urgency, you can start working on
 a fix.  There is sometimes a tradeoff between doing a fix elegantly
 and doing it speedily; this is why you must agree on the urgency
@@ -4448,7 +4653,17 @@ before you start.  Keep discussion of the fix restricted to the
 security list members, of course, plus the original reporter (if she
 wants to be involved) and any developers who need to be brought in for
 technical reasons.</para>
+-->
+<para>
+  重大度と緊急性を判定し終えたら、実際の作業に取り掛かり始めます。
+  修正をエレガントに行うか、それともとにかくすばやく修正するのかのトレードオフになることもあります。
+  このようなときのために、まず最初に緊急性を判定しておいたのです。
+  セキュリティに関する修正についての議論は、当然セキュリティメーリングリスト内でのみ行います。
+  また、問題の報告者がもし議論への参加を希望するなら、報告者もその議論に参加させましょう。
+  そして、技術的な理由でそれ以外の開発者が参加することもあるかもしれません。
+</para>
 
+<!--
 <para>Do not commit the fix to the repository.  Keep it in patch form
 until the go-public date.  If you were to commit it, even with an
 innocent-looking log message, someone might notice and understand the
@@ -4462,17 +4677,48 @@ already aware of the bug.  (If you use a decentralized version control
 system like Arch or SVK, you can do the work under full version
 control, and just keep that repository inaccessible to
 outsiders.)</para>
+-->
+<para>
+  修正内容をリポジトリにコミットしてはいけません。
+  一般に公開するまではパッチ形式で管理しておくようにします。
+  もし仮にそれをコミットしてしまったら、
+  たとえログメッセージを適当に取り繕っていたとしても
+  見る人が見ればその変更の意味するところを感づかれてしまいます。
+  どこの誰がどういう目的であなたのリポジトリをチェックしているかなんてわかりません。
+  コミットメールの送信をやめたとしても無意味です。
+  まず、コミットメールの送信が突然止まったという時点で
+  「なにか怪しい」と思われてしまうでしょう。
+  そしてコミットメールの有無にかかわらず、
+  その内容はリポジトリのデータとして残されているわけです。
+  修正の開発はすべてパッチ形式で行い、パッチは隔離された場所で管理します。
+  そのバグの対応をしている人たちだけが知っている個別のリポジトリなどがいいでしょう
+  (Arch や SVK といった中央管理型ではないバージョン管理システムを使用しているなら、
+  完全にバージョン管理された環境で作業を進めることができます。
+  バグへの対応中は、外部からはリポジトリにアクセスできないようにしておけばいいのです)。
+</para>
 
 </sect3>
 
 <sect3 id="security-cve">
+<!--
 <title>CAN/CVE numbers</title>
+-->
+<title>CAN/CVE 番号</title>
 
+<!--
 <para>You may have seen a <firstterm>CAN number</firstterm> or
 a <firstterm>CVE number</firstterm> associated with security problems.
 These numbers usually look like "CAN-2004-0397" or
 "CVE-2002-0092", for example.</para>
+-->
+<para>
+  これまでに、セキュリティの問題の中で <firstterm>CAN 番号</firstterm>
+  や <firstterm>CVE 番号</firstterm> といったものをみたことがある人がいるかもしれません。
+  たとえば "CAN-2004-0397" あるいは "CVE-2002-0092"
+  といった形式のものです。
+</para>
 
+<!--
 <para>Both kinds of numbers represent the same type of entity: an
 entry in the list of "Common Vulnerabilities and Exposures" list
 maintained at <ulink url="http://cve.mitre.org/"/>.  The purpose of
@@ -4486,7 +4732,24 @@ Board, and the latter represents an approved entry.  However, both
 types of entries are visible to the public, and an entry's number does
 not change when it is approved&mdash;the "CAN" prefix is simply
 replaced with "CVE".</para>
+-->
+<para>
+  これらの番号は、どちらも同じ型の内容を表しています。これは
+  <ulink url="http://cve.mitre.org/"/> で管理されている
+  "Common Vulnerabilities and Exposures"
+  リストのエントリを表します。このリストの目的は、
+  既知のセキュリティ問題についての共通の呼び名を提供することにあります。
+  そうすることで、個々の問題をはっきり区別できるようになります。
+  また、詳細な情報を探すための中央広場としての働きもあります。
+  "CAN" 番号と "CVE" 番号の唯一の違いは、
+  前者はまだ正式に認定される前の状態であるということです。
+  CVE Editorial Board によって認定されて公式リストに登場したものが後者となります。
+  しかし、どちらの情報も一般に公開されており、
+  認定の前後で番号事態は変わりません。
+  単に、番号の前の "CAN" が "CVE" に置き換わるだけのことです。
+</para>
 
+<!--
 <para>A CAN/CVE entry does not itself contain a full description of
 the bug and how to protect against it.  Instead, it contains a brief
 summary, and a list of references to external resources (such as
@@ -4499,7 +4762,24 @@ for an example of an entry.  Note that the references can be very
 terse, with sources appearing as cryptic abbreviations.  A key to
 those abbreviations is at
 <ulink url="http://cve.mitre.org/cve/refs/refkey.html"/>.</para>
+-->
+<para>
+  CAN/CVE のエントリ自体には、
+  バグの詳細な説明や対処方法などは含まれていません。
+  その代わりに、そのバグの概要説明と外部リソース
+  (メーリングリストのアーカイブなど) へのリンクを用意し、
+  詳細な情報が知りたい人はそちらを参照すればいいようになっています。
+  <ulink url="http://cve.mitre.org/"/> の真の目的は、
+  きちんと整理整頓された場所を用意してすべての脆弱性に名前をつけ、
+  詳細なデータを得るための道筋を示すことです。たとえば、エントリの例として
+  <ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"/>
+  を見てみましょう。その記述内容は非常に簡潔なものであり、
+  なにやら怪しげな略語をつけたリンクがあるだけです。
+  これらの略語の意味については <ulink url="http://cve.mitre.org/cve/refs/refkey.html"/>
+  でご確認ください。
+</para>
 
+<!--
 <para>If your vulnerability meets the CVE criteria, you may wish to
 acquire it a CAN number.  The process for doing so is deliberately
 gated: basically, you have to know someone, or know someone who knows
@@ -4522,7 +4802,32 @@ BugTraq mailing list at <ulink url="http://www.securityfocus.com/"/>.
 (If that happened without your project hearing about it, then you
 should worry what else might be going on that you don't know
 about.)</para>
+-->
+<para>
+  あなたが対応した脆弱性が CVE の条件を満たすようなら、CAN 番号の取得を検討するといいでしょう。
+  取得方法は、意図的に難しくしてあります。
+  基本的に、まずあなたが誰かの知り合いであるか、誰かの知り合いの知り合いである必要があります。
+  なんだかよくわからない言い方ですが、要はこういうことです。
+  脆弱性でもない内容や中身のないような報告に対応するのを避けるため、
+  CVE Editorial Board は既知の信頼できる情報源からの報告しか受け取らないのです。
+  したがって、脆弱性をリストに載せてもらうには、
+  あなたのプロジェクトと CVE Editorial Board の橋渡しをする仲介役が必要になるということです。
+  周囲の開発者に聞いてみましょう。その中に一人くらいは、
+  「以前に一度 CAN を取得したことがある」とか
+  「知り合いが CAN を取得していた」とかいう人がいるでしょう。
+  この方式の利点は、知り合いのつてをたどっていくうちに
+  a) それは MITRE の言うところの脆弱性に該当しないから投稿する必要はない
+  とか
+  b) その脆弱性にはすでに CAN あるいは CVE 番号が割り当てられている
+  といったことを教えてくれるかもしれないということです。
+  後者の可能性としては、そのバグが既に別のセキュリティメーリングリストで報告されているといったことがあります。
+  たとえば <ulink url="http://www.cert.org/"/>、あるいは <ulink url="http://www.securityfocus.com/"/>
+  の  BugTraq メーリングリストなどがこれにあたります
+  (もしあなたのプロジェクトに対して何も連絡がないまま後者の状態になっているのだとしたら、
+  自分たちのうかがい知れないところで何かが起こっているということを心配しなければなりません)。
+</para>
 
+<!--
 <para>If you get a CAN/CVE number at all, you usually want to get it
 in the early stages of your bug investigation, so that all further
 communications can refer to that number.  CAN entries are embargoed
@@ -4530,24 +4835,55 @@ until the go-public date; the entry will exist as an empty placeholder
 (so you don't lose the name), but it won't reveal any information
 about the vulnerability until the date on which you will be announcing
 the bug and the fix.</para>
+-->
+ <para>
+  どうせ CAN/CVE 番号を得るのなら、
+  普通はバグの調査段階のできるだけ早いうちに番号を取得したいものです。
+  そうすれば、その後のやりとりはその番号を使用して進めることができます。
+  CAN エントリは、一般に公開される日まで使用できません。
+  それまでは空のエントリが存在するだけ (場所を確保するだけ)
+  であり、あなたがバグの存在と修正を公表するまで、
+  そこには何の情報も掲載されません。
+</para>
 
+<!--
 <para>More information about the CAN/CVE process may be found at
 <ulink url="http://cve.mitre.org/about/candidates.html"/>, and a
 particularly clear exposition of one open source project's use of
 CAN/CVE numbers is at
 <ulink
 url="http://www.debian.org/security/cve-compatibility"/>.</para>
+-->
+<para>
+  CAN/CVE のプロセスについてのより詳細な情報は
+  <ulink url="http://cve.mitre.org/about/candidates.html"/>
+  で得られます。また CAN/CVE 番号を非常にうまく使っている
+  オープンソースプロジェクトの例としては
+  <ulink url="http://www.debian.org/security/cve-compatibility"/>
+  があります。
+</para>
 
 </sect3>
 
 <sect3 id="security-prenotification">
+<!--
 <title>Pre-notification</title>
+-->
+<title>事前通知</title>
 
+<!--
 <para>Once your security response team (that is, those developers who
 are on the security mailing list, or who have been brought in to deal
 with a particular report) has a fix ready, you need to decide how to
 distribute it.</para>
+-->
+<para>
+  セキュリティ対策チーム (セキュリティメーリングリストのメンバー、
+  あるいはそのセキュリティ問題の対応担当者) が修正を完了したら、
+  次はそれをどのように公表するのかを判断する必要があります。
+</para>
 
+<!--
 <para>If you simply commit the fix to your repository, or otherwise
 announce it to the world, you effectively force everyone using your
 software to upgrade immediately or risk being hacked.  It is sometimes
@@ -4558,7 +4894,23 @@ tempting targets for attackers.  Those servers' administrators would
 appreciate having an extra day or two to do the upgrade, so that they
 are already protected by the time the exploit becomes public
 knowledge.</para>
+-->
+<para>
+  単に修正をリポジトリにコミットするとか全世界に公表するとかだと、
+  そのソフトウェアを使用している人たちは
+  事実上即時のアップグレードを迫られることになってしまいます。
+  さもないと、攻撃を受ける危険性が生じるわけですから。
+  したがって、ある種の重要なユーザ向けには
+  <firstterm>事前通知</firstterm> をしておくほうが適切なこともあります。
+  いわゆるクライアント/サーバ型のソフトウェアなどでは特にこれが重要です。
+  有名なサーバが、一時的にでも攻撃の対象となってしまう可能性があるからです。
+  これらのサーバの管理者にとっては、アップグレードを行うためには
+  1 日から 2 日の時間が必要となるでしょう。
+  脆弱性が一般に公開される前にそのくらいの猶予があれば、
+  サーバの管理者はありがたいと思うことでしょう。
+</para>
 
+<!--
 <para>Pre-notification simply means sending mails to those
 administrators before the go-public date, telling them of the
 vulnerability and how to fix it.  You should send pre-notification
@@ -4568,7 +4920,18 @@ recipient must run a large, important server where a compromise would
 be a serious matter, <emphasis>and</emphasis> the recipient must be
 known to be someone who won't blab about the security problem before
 the go-public date.</para>
+-->
+<para>
+  事前通知とは、単に一般公開前にそれらの管理者向けにメールを送信することを指します。
+  通知メールでは、脆弱性の内容とその対処方法を説明しておくようにします。
+  事前通知の送信先は、その情報を適切に扱ってくれると信頼できる相手に限定しなければなりません。
+  つまり、事前通知を受け取る資格があるのは、次のふたつの条件を満たす相手だけだということです。
+  まず、攻撃を受けると深刻な問題となるような巨大で重要なサーバを運営しているということ。
+  <emphasis>さらに</emphasis>、一般公開の前にその問題をペラペラしゃべってしまうような
+  口の軽い人ではないということ。
+</para>
 
+<!--
 <para>Send each pre-notification mail individually (one at a time) to
 each recipient.  Do <emphasis>not</emphasis> send to the entire list
 of recipients at once, because then they would see each others'
@@ -4579,9 +4942,26 @@ blind CC (BCC) isn't a good solution either, because some admins
 protect their inboxes with spam filters that either block or reduce
 the priority of BCC'd mail, since so much spam is sent via BCC these
 days.</para>
+-->
+<para>
+  事前通知のメールは、それぞれの相手に個別に (一度に一通ずつ) 送信するようにします。
+  全員に一括送信などしては <emphasis>いけません</emphasis>。
+  そんなことをすれば、それを受け取った人たちに「私のほかにどんな相手に送っているのか」
+  を知られてしまいます。これが何を意味するのか。それを受け取った人は
+  「(私以外の) 他のメンバーのサーバにも同じセキュリティホールがある」
+  ということを知ってしまうことになります。
+  全員をブラインドカーボンコピー (BCC) で指定すればいいという問題でもありません。
+  受け取り先が使用しているスパムフィルタの設定によっては、BCC
+  で送信されたメールをブロックしたり優先度を下げたりするようになっていることもあるからです
+  (最近のスパムには、BCC を使用して送られてくるものが多いのです)。
+</para>
 
+<!--
 <para>Here's a sample pre-notification mail:</para>
+-->
+<para>事前通知メールの例を、ここに示します。</para>
 
+<!--
 <screen>
 From: Your Name Here
 To: admin@large-famous-server.com
@@ -4635,7 +5015,61 @@ Patch:
 
 [...patch goes here...]
 </screen>
+-->
+<screen>
+From: あなたの名前
+To: admin@large-famous-server.com
+Reply-to: あなたの名前 (セキュリティメーリングリストのアドレスではありません)
+Subject: [機密] セキュリティ脆弱性の通知
 
+
+このメールは、Scanley サーバにおけるセキュリティ警告に関する極秘の事前
+通知です。
+
+このメールの内容は、決して他人に転送しないでください。一般向けには 5 月
+19 日に公表する予定です。それまではこの情報を口外しないようお願いいたし
+ます。
+
+あなたにこのお知らせを送信した理由は、(おそらく) あなたが Scanley サー
+バをご利用いただいており、5 月 19 日にセキュリティホールを公表する前に
+パッチを適用したいであろうと考えられるからです。
+
+参照:
+=====
+
+   CAN-2004-1771: Scanley stack overflow in queries
+
+脆弱性:
+=======
+
+   サーバのロケールの設定が正しくない場合に、クライアントから不正な
+   クエリを送信するとサーバ上で任意のコマンドを実行できるようになります。
+
+重大度:
+=======
+
+   非常に深刻。サーバ上で任意のコードの実行を許してしまいます。
+
+回避方法:
+=========
+
+   scanley.conf で 'natural-language-processing' オプションを 'off'
+   に設定することで、この脆弱性を回避可能です。
+
+パッチ:
+=======
+
+   以下のパッチは Scanley 3.0、3.1 および 3.2 に適用可能です。
+
+   新しい公開リリース (Scanley 3.2.1) が 5 月 19 日の直前に公開されます。
+   つまり、この脆弱性を公表するのと同時に公開するということです。以下の
+   パッチを適用するか、あるいは新しいリリースが発表されるのをお待ちくだ
+   さい。3.2 と 3.2.1 の違いは、以下のパッチのみです。
+
+[...ここにパッチを示します...]
+</screen>
+
+<!--
 <para>If you have a CAN number, include it in the pre-notification (as
 shown above), even though the information is still embargoed and
 therefore the MITRE page will show nothing.  Including the CAN number
@@ -4644,12 +5078,26 @@ pre-notified about is the same one they later hear about through
 public channels, so they don't have to worry whether further action is
 necessary or not, which is precisely the point of CAN/CVE
 numbers.</para>
+-->
+<para>
+  CAN 番号を取得している場合は、それを事前通知に含めるようにしましょう
+  (先ほどの例で示したようにします)。まだ情報は公開されておらず
+  MITRE のページには何も掲載されていませんが、それでも含める価値があります。
+  CAN 番号を示すことで、それを受け取った相手は「この通知で知ったバグと
+  後日正式に公開されるバグが確かに同じものである」ということを確認できます。
+  正式にバグが公開されたときに、余計な心配をせずにすむというわけです。
+  まさにこれこそが、CAN/CVE 番号の重要なところです。
+</para>
 
 </sect3>
 
 <sect3 id="security-announcing">
+<!--
 <title>Distribute the fix publicly</title>
+-->
+<title>修正を一般に公開する</title>
 
+<!--
 <para>The last step in handling a security bug is to distribute the
 fix publicly.  In a single, comprehensive announcement, you should
 describe the problem, give the CAN/CVE number if any, describe how to
@@ -4664,7 +5112,28 @@ because the security fix will be in all future releases as a matter of
 course.  (Details of release procedures are discussed in
 <xref linkend="security-releases"/><phrase output="printed"> in
 <xref linkend="development-cycle"/></phrase>.)</para>
+-->
+<para>
+  セキュリティバグへの対応で最後に行うのが、
+  修正内容を一般に公開することです。
+  ひとつの包括的なアナウンスで、以下の内容を説明しなければなりません。
+  まずその問題の内容、そして CAN/CVE 番号を取得していればその番号、
+  当面の回避策と本質的な修正方法などを示します。
+  "修正" は、通常はそのソフトウェアの最新バージョンへのアップデートとなります。
+  しかし、ソースコード形式で実行されるソフトウェアなどでは、
+  パッチの適用をもって "修正" とすることもあります。
+  新しいリリースを作成した場合は、それが通常のリリースとは異なり
+  セキュリティパッチの適用によるものであることを明示しておく必要があります。
+  そうしておけば、保守的な管理者であっても
+  副作用を気にせずにアップグレードできるようになります。
+  当然、今回のセキュリティ修正は将来のリリースにも含まれているでしょうから、
+  将来のアップグレードの際にも心配せずにすみます
+  (リリース手続きの詳細については、<phrase output="printed">
+  <xref linkend="development-cycle"/> の</phrase> <xref linkend="security-releases"/>
+  で説明します)。
+</para>
 
+<!--
 <para>Whether or not the public fix involves a new release, do the
 announcement with roughly the same priority as you would a new
 release: send a mail to the project's <literal>announce</literal>
@@ -4682,11 +5151,40 @@ also might not believe you when you have a really big problem to
 announce.  See
 <ulink url="http://cve.mitre.org/about/terminology.html"/> for a good
 introduction to the problem of judging severity.</para>
+-->
+<para>
+  セキュリティ対応の修正で新バージョンをリリースするか否かにかかわらず、
+  通常の新バージョンのリリースと同程度の優先度でアナウンスを行うようにします。
+  つまり、そのプロジェクトの <literal>announce</literal>
+  メーリングリストにメールを送ったりプレスリリースを作成したり
+  Freshmeat のエントリを更新したりといったことです。
+  そのプロジェクトの評判を気にしてセキュリティバグの存在を甘く見るなんてことは論外ですが、
+  セキュリティに関するアナウンスの影響と実際の問題の重大度との兼ね合いには注意しましょう。
+  そのセキュリティホールが単に些細な情報が漏洩するというだけのものであって
+  コンピュータ全体がのっとられてしまうほどのものではないという場合は、
+  あまり大騒ぎしないほうがいいこともあります。場合によっては
+  <literal>announce</literal> メーリングリストへの投稿も控えるということもありえます。
+  ささいなことで毎回大騒ぎしていると、ユーザはどう思うでしょう?
+  実際にはそれほどではないのに「このソフトウェアはあまり安全ではない」
+  と思われてしまうかもしれません。また、本当に深刻な問題が発生したときにそれをアナウンスしても、
+  「またいつものやつだろう」と無視されてしまう可能性もあります。
+  重要度の判断方法については、
+  <ulink url="http://cve.mitre.org/about/terminology.html"/>
+  にすばらしい入門文書があるので、ぜひごらんください。
+</para>
 
+<!--
 <para>In general, if you're unsure how to treat a security problem,
 find someone with experience and talk to them about it.  Assessing and
 handling vulnerabilities is very much an acquired skill, and it's easy
 to make missteps the first few times.</para>
+-->
+<para>
+  セキュリティ問題の対処方法がよくわからない場合は、
+  経験がありそうな人を探して相談するようにしましょう。
+  脆弱性の評価やその処理の技術は、経験を積まないとなかなか得られないもので、
+  最初のうちは失敗することが多いものです。
+</para>
 
 </sect3>
 
