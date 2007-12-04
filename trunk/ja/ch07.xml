@@ -1899,23 +1899,42 @@ it.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-name-and-layout">
+<!--
 <title>Name and Layout</title>
+-->
+<title>パッケージ名とレイアウト</title>
 
+<!--
 <para>The name of the package should consist of the software's name
 plus the release number, plus the format suffixes appropriate for the
 archive type.  For example, Scanley 2.5.0, packaged for Unix using GNU
 Zip (gzip) compression, would look like this:</para>
+-->
+
+<para>
+    パッケージの名前は、ソフトウェアの名前とリリース番号の後に、
+    アーカイブのやり方に合った適切なフォーマットの拡張子を末尾につけるようにしましょう。
+    たとえば、Scanley 2.5.0 を Unix向けにパッケージングし、
+    GNU Zip(gzip) フォーマットで圧縮したときの名前は次のようになるでしょう。
+</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.tar.gz</literallayout>
 </informalexample>
 
+<!--
 <para>or for Windows using zip compression:</para>
+-->
+
+<para>
+    また、Windows向けに zip フォーマットで圧縮した場合の名前は次のようになるでしょう。
+</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.zip</literallayout>
 </informalexample>
 
+<!--
 <para>Either of these archives, when unpacked, should create a single
 new directory tree named <filename>scanley-2.5.0</filename> in the
 current directory.  Underneath the new directory, the source code
@@ -1933,7 +1952,22 @@ As mentioned in
 in <xref linkend="getting-started"/></phrase>, there should also
 be a <filename>COPYING</filename> or <filename>LICENSE</filename>
 file, giving the software's terms of distribution.</para>
+-->
 
+<para>
+    これらのアーカイブを展開すると、カレントディレクトリに scanley-2.5.0 という名前の単一のディレクトリツリーを生成するはずです。
+    このディレクトリには、ソースコードを(必要なら)コンパイルし、
+    インストールできる状態でソースコードを配置すべきでしょう。
+    ディレクトリツリーの最上部には、このソフトウェアが何をするもので、
+    このリリースがどういうものなのか、そしてプロジェクトのWebサイトや面白い他のファイルなどのようなその他のリソースを説明した <filename>README</filename> ファイルをプレーンテキストで配置します。
+    他の面白いファイルとしては、<filename>README</filename> ファイルの兄弟分にあたり、
+    サポートする全てのオペレーティングシステム上でソフトウェアをビルドし、
+    インストール方法を説明した <filename>INSTALL</filename> ファイルがあげられます。
+    <phrase output="printed"><xref linkend="getting-started"/> の</phrase> <xref linkend="license-quickstart-applying"/> でも説明していますが、
+    ソフトウェアの配付条件を示した <filename>COPYING</filename> や <filename>LICENSE</filename>ファイルもあげられるでしょう。
+</para>
+
+<!--
 <para>There should also be a <filename>CHANGES</filename> file
 (sometimes called <filename>NEWS</filename>), explaining what's new in
 this release.  The <filename>CHANGES</filename> file accumulates
@@ -1944,32 +1978,59 @@ branch; some projects write the list piecemeal as they're developing,
 others prefer to save it all up for the end and have one person write
 it, getting information by combing the version control logs.  The list
 looks something like this:</para>
+-->
+
+<para>
+    このリリースで新しくなったことを説明した <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもあげられるでしょう。
+    この <filename>CHANGES</filename> ファイルは、
+    これまで行われたリリース全ての変更点を集めたもので、
+    今回のリリースの変更点の一覧が一番最初になるように、
+    リリースされた順番とは逆に記されています。
+    この変更点一覧を完成させるのは、
+    リリースブランチをリリースできる状態にする作業の最後に行うのが普通です。
+    開発している間に少しずつ変更点を書き足していくプロジェクトもあれば、
+    バージョン管理システムのログを組み合わせることで情報を集め、
+    最後にひとりの人間がまとめるまで作業を保留するのを好むプロジェクトもあります。
+    変更点の一覧は、次のようになるでしょう。
+</para>
 
 <screen>
 Version 2.5.0
-(20 December 2004, from /branches/2.5.x)
+(2004年12月20日に /branches/2.5.x からリリースされた)
 http://svn.scanley.org/repos/svn/tags/2.5.0/
 
- New features, enhancements:
-    * Added regular expression queries (issue #53)
-    * Added support for UTF-8 and UTF-16 documents
-    * Documentation translated into Polish, Russian, Malagasy
+ 新機能、改良点:
+    * 正規表現による問い合わせを追加 (問題 #53)
+    * UTF-8 と UTF-16 で書かれたドキュメントのサポートを追加
+    * ドキュメントが ポーランド語、ロシア語、マダガスカル語に翻訳された。
     * ...
 
- Bugfixes:
-    * fixed reindexing bug (issue #945)
-    * fixed some query bugs (issues #815, #1007, #1008)
+ バグ修正:
+    * 再インデックス時のバグを修正 (問題 #945)
+    * 問い合わせに関するバグをいくつか修正 (問題 #815, #1007, #1008)
     * ...
 </screen>
 
+<!--
 <para>The list can be as long as necessary, but don't bother to
 include every little bugfix and feature enhancement.  Its purpose is
 simply to give users an overview of what they would gain by upgrading
 to the new release.  In fact, the changelist is customarily included
 in the announcement email (see
 <xref linkend="testing-and-releasing"/><phrase output="printed">
-later in this chapter</phrase>), so write it with that
+later in this chapter</phrase>), so write it with that As mentioned in
+<xref linkend="license-quickstart-applying"/><phrase output="printed">
+in <xref linkend="getting-started"/></phrase>
 audience in mind.</para>
+-->
+
+<para>
+    変更点の一覧は、必要であればどれだけ長くても構いませんが、
+    小さなバグ修正や機能追加を全て含めてしまうことで、内容が退屈にならないようにしましょう。
+    このファイルの目的は、新しいリリースにアップグレードすることで得られるものの概要をユーザに示すだけです。
+    実際、変更点の一覧はリリースアナウンスの電子メールに書くことが普通なので、
+    それを見る人のことを考えて書くようにしましょう。
+</para>
 
    <sidebar id="changelog">
    <title>CHANGES Versus ChangeLog</title>
