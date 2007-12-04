@@ -1151,7 +1151,7 @@ ready, it is time to tag a snapshot from the branch:</para>
     ここでは、バージョン管理システムとリリースプロセスの関係にだけ注意を払うことにします。
     ブランチが安定し、リリースの準備ができたら、
     ブランチのスナップショットにタグを打つときです。
-    CVS では次のようにします。
+    CVS では、次のようにします。
 </para>
 
 <screen>
@@ -1159,7 +1159,7 @@ $ cd RELEASE_1_0_X-working-copy
 $ cvs tag RELEASE_1_0_0
 </screen>
 
-<para>Subversion では次のようにします。</para>
+<para>Subversion では、次のようにします。</para>
 
 <screen>
 $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
@@ -1187,7 +1187,7 @@ trunk:</para>
     1.0.2 に向けて繰り返しブランチを綺麗にしていきましょう。
     1.1.x リリースラインについて考え始める時期が来たら、
     新しいブランチを trunk から作ります。
-    CVS では次のようにします。
+    CVS では、次のようにします。
 </para>
 
 <screen>
@@ -1195,7 +1195,7 @@ $ cd trunk-working-copy
 $ cvs tag -b RELEASE_1_1_X
 </screen>
 
-<para>Subversion では次のようにします。</para>
+<para>Subversion では、次のようにします。</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
@@ -1516,7 +1516,7 @@ reason for it.</para>
 -->
 
 <para>
-    Subversionプロジェクトで使われているシステムは、
+    Subversion プロジェクトで使われているシステムは、
     うまくバランスがとれているようなので、私はここでそれをお勧めします。
     ある変更をリリースブランチに適用するには、
     少なくとも３人の開発者が賛成しなければならず、反対する人がひとりもいてはいけません。
@@ -1846,6 +1846,7 @@ too.</para>
 -->
 <title>パッケージのフォーマット</title>
 
+<!--
 <para>The source code should be shipped in the standard formats for
 transporting directory trees.  For Unix and Unix-like operating
 systems, the convention is to use TAR format, compressed
@@ -1855,10 +1856,24 @@ the standard method for distributing directory trees
 is <firstterm>zip</firstterm> format, which happens to do compression
 as well, so there is no need to compress the archive after creating
 it.</para>
+-->
+
+<para>
+    ソースコードはディレクトリツリーを保存する標準的なフォーマットでリリースすべきです。
+    Unix または Unixライクなオペレーティングシステムでは、
+    <command>compress</command> コマンドや、<command>gzip</command>、
+    <command>bzip</command> または <command>bzip2</command> コマンドを使って圧縮した TAR フォーマットを使うという決まりがあります。Microsoft Windows では、
+    ディレクトリツリーを保存した状態で配布する標準的なやり方として <firstterm>zip</firstterm> フォーマットを使う方法があります。これはたまたま圧縮も行うので、
+    アーカイブを作成した後に圧縮を行う必要がありません。
+</para>
 
    <sidebar id="packaging-tar">
+   <!--
    <title>TAR Files</title>
-
+   -->
+   <title>TAR ファイル</title>
+   
+   <!--
    <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
    because tar format represents a directory tree as a linear data
    stream, which makes it ideal for saving directory trees to tape.
@@ -1868,7 +1883,16 @@ it.</para>
    systems, the <command>tar</command> command can produce a
    compressed archive itself; on others, a separate compression
    program is used.</para>
+   -->
 
+   <para>
+       <firstterm>TAR</firstterm> とは、"Tape&nbsp;ARchive" を略したものです。
+       なぜなら、tar フォーマットはディレクトリツリーを磁気テープに保存するのに理想的な直列のデータストリームとして表現するからです。
+       また、この性質ゆえにディレクトリツリーを単一のファイルとして配布することが標準となっています。
+       圧縮された tar ファイル(または<firstterm>tarボール</firstterm>)を提供するのは非常に簡単です。
+       システムによっては、<command>tar</command>コマンド自体が圧縮済みのtarボールを生成するものもありますし、
+       圧縮するのにtarコマンドとは別のコマンドを使うシステムもあります。
+   </para>
    </sidebar>
 
 </sect2>
