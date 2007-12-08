@@ -1983,7 +1983,7 @@ looks something like this:</para>
 -->
 
 <para>
-    今回のリリースで新しくなったことを説明する <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもツリーの最上部に配置されます。
+    今回のリリースで新しくなったことを説明する <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもツリーの最上部に配置します。
     この <filename>CHANGES</filename> ファイルは、
     これまで行われたリリース全ての変更点を集めたもので、
     今回のリリースの変更点の一覧が一番最初になるように、
@@ -2051,8 +2051,8 @@ audience in mind.</para>
    -->
 
    <para>
-       <firstterm>ChangeLog</firstterm> ファイルは、
-       伝統的にプロジェクトでこれまで行われたあらゆる変更を一覧にします。
+       伝統的に <firstterm>ChangeLog</firstterm> ファイルは、
+       プロジェクトでこれまで行われたあらゆる変更を一覧にします。
        &mdash; つまり、バージョン管理システムにコミットされた全てのリビジョンです。
        ChangeLog ファイルには様々なフォーマットがあります。
        どんなフォーマットでも同じ情報が含まれているので、
@@ -2288,11 +2288,20 @@ named <filename>scanley-2.3.0-alpha1</filename>, the second into
 -->
 <title>コンパイルとインストール</title>
 
+<!--
 <para>For software requiring compilation or installation from source,
 there are usually standard procedures that experienced users expect to
 be able to follow.  For example, for programs written in C, C++, or
 certain other compiled languages, the standard under Unix-like systems
 is for the user to type:</para>
+-->
+
+<para>
+    ソースコードをコンパイルし、インストールを行う必要があるソフトウェアは、
+    経験豊富なユーザーが行う標準的な手順があります。
+    たとえば、C, C++, その他のコンパイル言語で書かれたプログラムでは、
+    Unixライクなシステムでユーザーがタイプする標準的な手順は次のようなものです。
+</para>
 
 <screen>
    $ ./configure
@@ -2300,6 +2309,7 @@ is for the user to type:</para>
    # make install
 </screen>
 
+<!--
 <para>The first command autodetects as much about the environment as
 it can and prepares for the build process, the second command builds
 the software in place (but does not install it), and the last command
@@ -2310,7 +2320,21 @@ Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
 is published as treeware by New Riders, and its content is also freely
 available online at
 <ulink url="http://sources.redhat.com/autobook/"/>.</para>
+-->
 
+<para>
+    はじめのコマンドは、自動的に実行環境をできるだけ把握し、ビルドプロセスの準備を行います。
+    ふたつめのコマンドはソフトウェアをビルとします。（しかしインストールは行いません）
+    最後のコマンドはシステムにソフトウェアをインストールします。
+    最初のふたつのコマンドは通常のユーザーで実行し、最後はrootユーザーで実行します。
+    このシステムをセットアップする作業の詳細は、Vaughan, Elliston, Tromey,
+    Taylor が書いた <citetitle>GNU Autoconf, Automake,
+    and Libtool</citetitle> という優れた本があるので、それを参照して下さい。
+    この本は 出版社 New Riders によってツリーウェア(訳注：ドキュメントやその他の印刷物を指すハッカー用語)として公開されており、
+    <ulink url="http://sources.redhat.com/autobook/"/> でもオンラインで利用可能です。
+</para>
+
+<!--
 <para>This is not the only standard, though it is one of the most
 widespread.  The Ant (<ulink url="http://ant.apache.org/"/>) build
 system is gaining popularity, especially with projects written in
@@ -2323,6 +2347,20 @@ obvious to you what the applicable standards are for your project, ask
 an experienced developer; you can safely assume
 that <emphasis>some</emphasis> standard applies, even if you don't
 know what it is at first.</para>
+-->
+
+<para>
+    この手順が唯一の標準というわけではありませんが、
+    これはもっとも普及しているもののひとつです。
+    Ant(<ulink url="http://ant.apache.org/"/>) ビルドシステムが特にJavaで書かれたプロジェクトで人気を得つつありますが、Antもビルドとインストールの標準的な手順を持っています。
+    同様に、PerlやPythonのようなプログラミング言語では、
+    その言語で書かれた殆どのプログラムで同じ手順を使うことを勧めています(たとえば、Perlモジュールは次のようなコマンドを使います。
+    <command>perl&nbsp;Makefile.pl</command>)
+    自分のプロジェクトにどの標準を使うかがわからない場合は、
+    経験豊富な開発者に尋ねてみましょう。
+    たとえどの標準使うかがはじめわからなくても、
+    適用できる標準が <emphasis>存在する</emphasis> と想定しても安全です。
+</para>
 
 <para>Whatever the appropriate standards for you project are, don't
 deviate from them unless you absolutely must.  Standard installation
