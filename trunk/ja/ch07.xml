@@ -1814,7 +1814,7 @@ specifically, is "The tree of source code files that, when compiled
 <para>
     フリーソフトウェアを配布する標準的なやり方は、ソースコードを配布することです。
     これはソフトウェアがソースコードをそのまま実行できる(i.e. Perl, Python, PHP などのように、
-    インタプリタによっって解釈できるもの)か、
+    インタプリタによって解釈できるもの)か、
     はじめに(C, C++, Javaなどによって）コンパイルする必要があるかどうかに関わらず当てはまります。
     コンパイルする必要があるソフトウェアの場合、
     ほとんどのユーザーが多分自分でソースをコンパイルせず、
@@ -1859,12 +1859,12 @@ it.</para>
 -->
 
 <para>
-    ソースコードはディレクトリツリーを保存する標準的なフォーマットでリリースすべきです。
+    ソースコードはディレクトリツリーを保存してくれる標準的なフォーマットでリリースすべきです。
     Unix または Unixライクなオペレーティングシステムでは、
     <command>compress</command> コマンドや、<command>gzip</command>、
     <command>bzip</command> または <command>bzip2</command> コマンドを使って圧縮した TAR フォーマットを使うという決まりがあります。Microsoft Windows では、
-    ディレクトリツリーを保存した状態で配布する標準的なやり方として <firstterm>zip</firstterm> フォーマットを使う方法があります。これはたまたま圧縮も行うので、
-    アーカイブを作成した後に圧縮を行う必要がありません。
+    ディレクトリツリーを保存した状態で配布する標準的なやり方として <firstterm>zip</firstterm> フォーマットを使う方法があります。これはたまたま圧縮もしてくれるので、
+    アーカイブを作った後に圧縮を行う必要がありません。
 </para>
 
    <sidebar id="packaging-tar">
@@ -1912,7 +1912,7 @@ Zip (gzip) compression, would look like this:</para>
 -->
 
 <para>
-    パッケージの名前は、ソフトウェアの名前とリリース番号の後に、
+    パッケージの名前は、ソフトウェアの名前とリリース番号の後で、
     アーカイブのやり方に合った適切なフォーマットの拡張子を最後につけるようにしましょう。
     たとえば、Scanley 2.5.0 を Unix向けにパッケージングし、
     GNU Zip(gzip) フォーマットで圧縮したときの名前は次のようになるでしょう。
@@ -1966,7 +1966,7 @@ file, giving the software's terms of distribution.</para>
     サポートする全てのオペレーティングシステム上でソフトウェアをビルドし、
     インストールする方法を説明した <filename>INSTALL</filename> ファイルがあげられます。
     <phrase output="printed"><xref linkend="getting-started"/> の</phrase> <xref linkend="license-quickstart-applying"/> でも説明していますが、
-    ソフトウェアの配付条件を示した <filename>COPYING</filename> や <filename>LICENSE</filename>ファイルもツリーの最上部に配置されます。
+    ソフトウェアの配付条件を示した <filename>COPYING</filename> や <filename>LICENSE</filename>ファイルもツリーの最上部に配置します。
 </para>
 
 <!--
@@ -1983,7 +1983,7 @@ looks something like this:</para>
 -->
 
 <para>
-    今回のリリースで新しくなったことを説明した <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもツリーの最上部に配置されます。
+    今回のリリースで新しくなったことを説明する <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもツリーの最上部に配置されます。
     この <filename>CHANGES</filename> ファイルは、
     これまで行われたリリース全ての変更点を集めたもので、
     今回のリリースの変更点の一覧が一番最初になるように、
@@ -1998,7 +1998,7 @@ looks something like this:</para>
 
 <screen>
 Version 2.5.0
-(2004年12月20日に /branches/2.5.x からリリースされた)
+(2004年12月20日に /branches/2.5.x からリリース)
 http://svn.scanley.org/repos/svn/tags/2.5.0/
 
  新機能、改良点:
@@ -2035,7 +2035,12 @@ audience in mind.</para>
 </para>
 
    <sidebar id="changelog">
+   <!--
    <title>CHANGES Versus ChangeLog</title>
+   -->
+   <title>CHANGE ファイルと ChangeLog ファイル</title>
+
+   <!--
    <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
    lists every change ever made to a project&mdash;that is, every
    revision committed to the version control system.  There are
@@ -2043,7 +2048,19 @@ audience in mind.</para>
    aren't important here, as they all contain the same information:
    the date of the change, its author, and a brief summary (or just
    the log message for that change).</para>
+   -->
 
+   <para>
+       <firstterm>ChangeLog</firstterm> ファイルは、
+       伝統的にプロジェクトでこれまで行われたあらゆる変更を一覧にします。
+       &mdash; つまり、バージョン管理システムにコミットされた全てのリビジョンです。
+       ChangeLog ファイルには様々なフォーマットがあります。
+       どんなフォーマットでも同じ情報が含まれているので、
+       フォーマットの詳細はここでは重要ではありません。
+       その情報とは、変更日、変更した人、変更に関する簡単な要約(または単にその変更のログメッセージ）です。
+   </para>
+
+   <!--
    <para>A <filename>CHANGES</filename> file is different.  It too is
    a list of changes, but only the ones thought important for a
    certain audience to see, and often with metadata like the exact
@@ -2053,7 +2070,24 @@ audience in mind.</para>
    "ChangeLog", it is a bit of a misnomer, since the CHANGES file
    retains change information for all releases, and thus has a lot of
    old news in addition to the new news at the top.</para>
+   -->
 
+   <para>
+       <filename>CHANGES</filename> ファイルは違います。
+       このファイルは変更点を一覧にするだけでなく、
+       ある人達が見て重要だと思われるものも一覧に加えます。
+       そして正確な変更日や変更した人のようなメタデータはよく省略されます。
+       混乱を避けるため、CHANGES と ChangeLog ファイルを同じ意味で使わないで下さい。
+       プロジェクトによっては、"CHANGELOG" ではなく、
+       "NEWS" というファイル名を使うところもあります。
+       こうすることで "ChangeLog" との混同は避けられますが、
+       この名前はぴったり来る名前ではありません。なぜなら、
+       CHANGES ファイルは全てのリリースの変更点を保持しているので、
+       先頭に書いてある最新のニュースに加えて、
+       たくさんの古いニュースも掲載することになるからです。
+   </para>
+
+   <!--
    <para>ChangeLog files may be slowly disappearing anyway.  They were
    helpful in the days when CVS was the only choice of version control
    system, because change data was not easy to extract from CVS.
@@ -2063,8 +2097,23 @@ audience in mind.</para>
    to keep a static file containing that data&mdash;in fact, worse
    than pointless, since the ChangeLog would merely duplicate the log
    messages already stored in the repository.</para>
+   -->
+  
+   <para>
+       ChangeLog ファイルは、どちらにせよ徐々に消えつつあるものかもしれません。
+       このファイルはCVSがバージョン管理システムの唯一の選択肢だった時代には役に立つものでした。
+       なぜなら、CVSでは変更点の情報が展開しにくかったからです。
+       しかし、最近のバージョン管理システムを使うと、
+       ChangeLogで保存されていたデータは、
+       バージョン管理システムのリポジトリに要求することでいつでも引き出すことができます。
+       これによって、プロジェクトが変更点を静的なファイルに保存する意味がなくなります。
+       &mdash; 実際には、リポジトリに保存されたログメッセージは、
+       ChangeLog ファイルの内容と重複するだけなので、もっと意味がないことが起こります。
+   </para>
+
    </sidebar>
 
+<!--
 <para>The actual layout of the source code inside the tree should be
 the same as, or as similar as possible to, the source code layout one
 would get by checking out the project directly from its version
@@ -2083,12 +2132,38 @@ particular, unchangeable configuration of source files.  If it were a
 working copy, the danger would be that the user might update it, and
 afterward think that he still has the release when in fact he has
 something different.</para>
+-->
 
+<para>
+    ツリーにあるソースコードのレイアウトは、
+    バージョン管理システムのリポジトリから直接プロジェクトをチェックアウトしたときに得られるものと同じか、
+    できるだけ似たものにすべきです。
+    これらの間には少し違いがあるのが普通です。
+    たとえば、リリースされるパッケージには設定やコンパイルに必要な自動生成されたファイル(<phrase output="printed">この章の後半の</phrase><xref linkend="packaging-build-install"/> を参照して下さい) が含まれていたり、
+    プロジェクトが管理していないが、必須のものであったり、ユーザーがまだインストールしていないかもしれないサードパーティーのソフトウェアが含まれているからです。
+    しかしながら、たとえ配布されたディレクトリツリーが、
+    バージョン管理システムのリポジトリにある開発ツリーと全く同じだったとしても、
+   その配布物は作業コピーと同じであってはいけません(<xref linkend="vc-vocabulary-working-copy"/> を参照して下さい)。
+    あるリリースは、開発ツリーへの静的な参照ポイント
+    &mdash; 特に、ある時点の固定されたソースファイルの設定 を表したものです。
+    もし配布物が作業コピーと同じだと、ユーザーがそれを変更したり、
+    実際に変更した後でリリースがあるとユーザーが考えると危険です。
+</para>
+
+<!--
 <para>Remember that the package is the same regardless of the
 packaging.  The release&mdash;that is, the precise entity referred to
 when someone says "Scanley&nbsp;2.5.0"&mdash;is the tree created by
 unpacking a zip file or tarball.  So the project might offer all of
 these for download:</para>
+-->
+
+<para>
+    パッケージの中身は、パッケージングのやり方に関わらず同じであることを忘れないで下さい。
+    リリース&mdash;つまり、"Scanley&nbsp;2.5.0" と呼ぶ場合に参照する正確なものは、
+    zipやtarボールを展開したときに生成されるディレクトリツリーと同じです。
+    よって、プロジェクトはこれら全てのフォーマットをダウンロード用に提供しても構いません。
+</para>
 
 <informalexample>
 <literallayout>scanley-2.5.0.tar.bz2
@@ -2096,6 +2171,7 @@ scanley-2.5.0.tar.gz
 scanley-2.5.0.zip</literallayout>
 </informalexample>
 
+<!--
 <para>...but the source tree created by unpacking them must be the
 same.  That source tree is the distribution; the form in which it is
 downloaded is merely a matter of convenience.  Certain trivial
@@ -2108,10 +2184,30 @@ operating systems require different sorts of layouts for compilation.
 However, these are all basically trivial transformations.  The basic
 source files should be the same across all the packagings of a given
 release.</para>
+-->
+
+<para>
+    しかし、パッケージを展開して生成されるソースツリーは全て同じでなければなりません。
+    このソースツリーは配布物です。つまり、ダウンロードするパッケージのフォーマットは、
+    ユーザーの便宜のためだけに存在します。
+    ソースパッケージにちょっとした違いがあっても許される場合があります。
+    たとえば、Windows用のパッケージでは、
+    テキストファイルの行はCRLF(キャリッジリターンとラインフィード)コードで終わるべきです。
+    一方でUnix用のパッケージでは、LFで終了します。
+    仮に異なったオペレーティングシステム間で違うコンパイル用のレイアウトが必要なら、
+    異なったオペレーティングシステム用のソースパッケージでは、
+    ソースツリーが少し異なっていても構いません。
+    しかし、こうした違いは基本的にちょっとした変換で済ませるものです。
+    基本的なソースファイルは、同じリリースのパッケージの範囲では同じにしておくべきです。
+</para>
 
 <sect3 id="release-capitalization">
+<!--
 <title>To capitalize or not to capitalize</title>
+-->
+<title>大文字にすべきか、小文字のままにするか</title>
 
+<!--
 <para>When referring to a project by name, people generally capitalize
 it as a proper noun, and capitalize acronyms if there are any:
 "MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", etc.  Whether this
@@ -2124,10 +2220,27 @@ The important thing is that the directory created by unpacking the
 tarball use the same capitalization.  There should be no surprises:
 the user must be able to predict with perfect accuracy the name of the
 directory that will be created when she unpacks a distribution.</para>
+-->
+
+<para>
+    プロジェクトの名前を引用する場合、普通は適当な名詞を大文字にし、
+    もし頭文字だけを大文字にする単語があれば、そのようにします。
+    たとえば "MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0" などです。
+    大文字の表現をパッケージ名でも使うかどうかは、プロジェクトによって異なります。
+    たとえば、<filename>Scanley-2.5.0.tar.gz</filename> と <filename>scanley-2.5.0.tar.gz</filename> のどちらがよいか、ということです。(私は後者が好きです。
+    なぜなら、シフトキーを人に打たせるのが嫌だからではなく、
+    大文字を使うパッケージをたくさんのプロジェクトに出荷させることになるからです)
+    重要なのは、tarボールを展開したときに作られるディレクトリが同じ名前を使っているかどうかです。
+    ユーザーを驚かせないようにすべきです。つまり、配布物を展開して生成されるディレクトリ名は、
+    ユーザーが正確に予測できるようにしておかなければなりません。
+</para>
 
 </sect3>
 <sect3 id="release-prereleases">
+<!--
 <title>Pre-releases</title>
+-->
+<title>プレリリース</title>
 
 <para>When shipping a pre-release or candidate release, the qualifier
 is truly a part of the release number, so include it in the name of
