@@ -2441,6 +2441,7 @@ to require unexpected steps.</para>
 -->
 <title>バイナリパッケージ</title>
 
+<!--
 <para>Although the formal release is a source code package, most users
 will install from binary packages, either provided by their operating
 system's software distribution mechanism, or obtained manually from
@@ -2452,7 +2453,21 @@ RedHat GNU/Linux, it is the RPM system; on Debian GNU/Linux, it is the
 APT (<filename>.deb</filename>) system; on MS Windows, it's usually
 <literal>.MSI</literal> files or self-installing
 <literal>.exe</literal> files.</para>
+-->
 
+<para>
+    ソースコードをパッケージングしてリリースするのが正式なやり方ですが、
+    ほとんどのユーザーは、オペレーティングシステムのソフトウェア配布システムや、
+    プロジェクト自体や、サードパーティーから取得したバイナリパッケージをインストールします。
+    ここでいう "バイナリ" というのは必ずしも "コンパイルして生成したもの" という意味ではありません。
+    ここでは単に、ソースコードをビルドしてインストールする手順を経ずに、
+    コンピューターにインストールすることができる設定済みのパッケージのことをいいます。
+    RedHat GNU/Linux では、その仕組みはRPMシステムと呼ばれ、Debian GNU/Linux では、
+    APT (<filename>.deb</filename>) システムといいます。Microsoft Windows では、
+    <literal>.MSI</literal> ファイル や、実行すればインストールを行ってくれる <literal>.exe</literal> ファイルであることが普通です。
+</para>
+
+<!--
 <para>Whether these binary packages are assembled by people closely
 associated with the project, or by distant third parties, users are
 going to <emphasis>treat</emphasis> them as equivalent to the
@@ -2461,7 +2476,20 @@ tracker based on the behavior of the binary packages.  Therefore, it
 is in the project's interest to provide packagers with clear
 guidelines, and work closely with them to see to it that what they
 produce represents the software fairly and accurately.</para>
+-->
 
+<para>
+    バイナリパッケージを作る人がプロジェクトに深く関わっている人であれ、
+    サードパーティーであれ、
+    ユーザーはそれらをプロジェクトの公式なリリースとして<emphasis>扱い</emphasis>、
+    バイナリパッケージの振る舞いをベースにしてバグ報告システムに問題を登録してきます。
+    よって、パッケージャーに明確なガイドラインを提供し、
+    彼らが提供するパッケージが、
+    プロジェクトのソフトウェアを適切に表現してくれるように、
+    彼らと緊密に連携することがプロジェクトの関心事になります。
+</para>
+    
+<!--
 <para>The main thing packagers need to know is that they should always
 base their binary packages on an official source release.  Sometimes
 packagers are tempted to pull a later incarnation of the code from the
@@ -2479,6 +2507,26 @@ been fixed and that the user should upgrade or wait for the
 next release.  If it is a previously unknown bug, having the precise
 release makes it easier to reproduce and easier to categorize in the
 tracker.</para>
+-->
+
+<para>
+    パッケージャーが主に知っておくべきことは、生成するバイナリパッケージは、
+    プロジェクトからリリースされたオフィシャルなソースコードを元にすべきだということです。
+    ユーザーにバグ修正や機能追加を提供するために、
+    パッケージャーはソースコードリポジトリのコピーや、
+    リリース後にコミットされた修正を選んでバイナリパッケージに取り込むことがあります。
+    しかし、こうした習慣は実際に多くの混乱を引きおこします。
+    プロジェクトはリリース済みのバージョンで見つかったバグ報告や、
+    最近の trunk や主要なブランチのソースコードのバグ報告（つまり、
+    注意深く最先端のコードを実行している人が見つけたバグ）を受け付ける準備をしています。
+    バグ報告があがってくると、
+    応答する人はそのバグがある時点のスナップショットで発生したということや、
+    修正済みであること、そしてユーザーがアップグレードすべきか、
+    次のリリースを待つべきかを確認することがけいます。
+    仮にまだ報告されていないバグの場合は、
+    リリースの時点が明確であれば、
+    それの再現やバグ報告システム上でのバグの分類もやりやすくなります。
+</para>
 
 <para>Projects are not prepared, however, to receive bug reports based
 on unspecified intermediate or hybrid versions.  Such bugs can be hard
@@ -2525,7 +2573,7 @@ can.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="testing-and-releasing">
-<title>Testing and Releasing</title>
+<title>テストとリリース</title>
 
 <para>Once the source tarball is produced from the stabilized release
 branch, the public part of the release process begins.  But before the
