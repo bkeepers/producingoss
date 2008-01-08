@@ -317,178 +317,169 @@ dyskusyjna, która nie stosuje zabezpieczeń antyspamowych, zostanie szybko
 zalana śmieciowymi mailami tak, że stanie się nieużywalna. Ochrona
 antyspamowa jest koniecznością.</para>
 
-<para>We divide spam prevention into two categories: preventing spam
-posts from appearing on your mailing lists, and preventing your
-mailing list from being a source of new email addresses for spammers'
-harvesters.  The former is more important, so we examine it
-first.</para>
+<para>Ochronę antyspamową można podzielić na dwa rodzaje: zapobieganie
+pojawianiu się spamu na liście i uniemożliwianie spamerom uzyskiwania nowych
+adresów email z listy. Pierwsza z nich jest bardziej istotna, więc zajmiemy
+się nią najpierw.</para>
 
 <sect3 id="spam-filtering">
-<title>Filtering posts</title>
+<title>Filtrowanie wiadomości</title>
 
-<para>There are three basic techniques for preventing spam posts, and
-most mailing list software offers all three.  They are best used in
-tandem:</para>
+<para>Istnieją trzy podstawowe techniki unikania spamu, większość
+oprogramowania do zarządzania listą oferuje wszystkie z nich. Najlepiej
+działają razem:</para>
 
 <orderedlist>
 
-  <listitem><para><emphasis role="bold">Only auto-allow postings from
-            list subscribers.</emphasis></para>
+  <listitem><para><emphasis role="bold">Umożliwianie wysyłania wiadomości
+  jedynie subskrybentom.</emphasis></para>
 
-            <para>This is effective as far as it goes, and also
-            involves very little administrative overhead, since it's
-            usually just a matter of changing a setting in the mailing
-            list software's configuration.  But note that posts which
-            aren't automatically approved must not be simply
-            discarded.  Instead, they should be passed along for
-            moderation, for two reasons.  First, you want to allow
-            non-subscribers to post.  A person with a question or
-            suggestion should not need to subscribe to a mailing list
-            just to make a single post there.  Second, even
-            subscribers may sometimes post from an address other than
-            the one by which they're subscribed.  Email addresses are
-            not a reliable method of identifying people, and shouldn't
-            be treated as such.</para>
+            <para>To bardzo efektywna metoda, w dodatku niezbyt prachłonna,
+            gdyż głównie sprowadza się do zmiany jednej opcji
+            konfiguracyjnej. Pamiętaj jednak, że wiadomości które nie
+            zostały zaakceptowane, nie powinny być po prostu odrzucane.
+            Zamiast tego powinny zostać przekazane do moderacji, z dwóch
+            powodów. Po pierwsze, użytkownicy nie zapisani na listę powinni
+            mieć prawo głosu. Osoba mająca pytanie lub sugestię nie powinna
+            być zmuszana do zapisania się na listę tylko po to, żeby posłać
+            pojedynczą wiadomość. Po drugie, nawet zapisani użytkownicy mogą
+            czasem korzystać z innego adresu niż ten, pod którym są zapisani
+            na listę. Adres email nie jest dobrym sposobem identyfikacji
+            człowieka, i nie powinien być za taki uznawany.</para>
             </listitem>
 
-  <listitem><para><emphasis role="bold">Filter posts through
-            spam-filtering software.</emphasis></para>
+  <listitem><para><emphasis role="bold">Filtrowanie wiadomości za pomocą
+  oprogramowania antyspamowego.</emphasis></para>
 
-            <para>If the mailing list software makes it possible (most
-            do), you can have posts filtered by spam-filtering
-            software.  Automatic spam-filtering is not perfect, and
-            never will be, since there is a never-ending arms race
-            between spammers and filter writers.  However, it can
-            greatly reduce the amount of spam that gets through to the
-            moderation queue, and since the longer that queue is the
-            more time humans must spend examining it, any amount of
-            automated filtering is beneficial.</para>
+            <para>Jeśli oprogramowanie zarządzające listą daje taką
+            możliwość (większość daje), można filtrować wiadomości za pomocą
+            filtrów antyspamowych. Automatyczne kategoryzownie nie jest
+            doskonałe, i nigdy nie będzie, gdyż trwa nieustający wyścig
+            zbrojeń pomiędzy spamerami i twórcami filtrów. Jednak może ono
+            znacznie zredukować ilość spamu docierającą do kolejki
+            moderacyjnej. Im większa długość kolejki, tym więcej ludzkiego
+            czasu trzeba poświęcić na jej przejrzenie, więc każde
+            automatyczne filtrowanie jest bardzo przydatne.</para>
 
-            <para>There is not space here for detailed instructions
-            on setting up spam filters.  You will have to consult
-            your mailing list software's documentation for that (see
-            <xref
-            linkend="mailing-list-software"/><phrase
-            output="printed"> later in this chapter</phrase>).  List
-            software often comes with some built-in spam prevention
-            features, but you may want to add some third-party
-            filters.  I've had good experiences with these two:
-            SpamAssassin
-            (<ulink url="http://spamassassin.apache.org/"/>)
-            and SpamProbe
-            (<ulink url="http://spamprobe.sourceforge.net/"/>).  This
-            is not a comment on the many other open source spam
-            filters out there, some of which are apparently also quite
-            good.  I just happen to have used those two myself and
-            been satisfied with them.</para>
+            <para>To nie miejsce na szczegółowe omówienie konfiguracji
+            filtrów antyspamowych. W tym celu warto spojrzeć do dokumetacji
+            wybranego systemu zarządzania listami dyskusyjnymi (patrz <xref
+            linkend="mailing-list-software"/><phrase output="printed"> dalej
+            w tym rozdziale</phrase>). Oprogramowanie na ogół dostarczane
+            jest z jakimiś wbudowanymi możliwościami antyspamowymi, ale
+            czasem warto dodatkowo zainstalować zewnętrzne filtry. Mam dobre
+            doświadczenie z następującymi: SpamAssassin (<ulink
+            url="http://spamassassin.apache.org/"/>) i SpamProbe (<ulink
+            url="http://spamprobe.sourceforge.net/"/>). Nie chcę się
+            wypowiadać na temat innych dostępnych filtrów antyspamowych, z
+            których z pewnością wiele jest bardzo dobrych. Po prostu sam
+            korzystałem akurat z tych dwóch, i jestem z nich
+            zadowolony.</para>
   </listitem>
 
-  <listitem><para><emphasis role="bold">Moderation.</emphasis></para>
-            <para>For mails that aren't automatically allowed by
-            virtue of being from a list subscriber, and which make it
-            through the spam filtering software, if any, the last stage
-            is <firstterm>moderation</firstterm>: the mail is routed
-            to a special address, where a human examines it and
-            confirms or rejects it.</para>
+  <listitem><para><emphasis role="bold">Moderacja.</emphasis></para>
+            <para>Dla maili, które nie zostały dopuszone automatycznie, jako
+            pochodzące od subskrybentów, i przeszły przez filtry
+            antyspamowe, ostatnim krokiem jest
+            <firstterm>moderacja</firstterm>: email zostaje przekierowany na
+            specjalny adres, pod którym człowiek jest w stanie przejrzeć
+            jego treść i zaakceptować lub odrzucić wiadomość.</para>
 
-            <para>Confirming a post takes one of two forms: you can
-            accept the post just this once, or you can tell the list
-            software to allow this and all future posts from the same
-            sender.  You almost always want to do the latter, in order
-            to reduce the future moderation burden.  Details on how
-            to confirm vary from system to system, but it's usually a
-            matter of replying to a special address with the command
-            "accept" (meaning accept just this one post) or "allow"
-            (allow this and future posts).</para>
+            <para>Akceptacja wiadomości może odbywać się na dwa sposoby:
+            można zaakceptować daną wiadomość jednorazowo, lub zezwolić na
+            publikowanie wszystkich dalszych wiadomości od danego nadawcy.
+            Na ogół stosowana jest ta druga metoda, poniważ pozwala
+            zmniejszyć obciążenie moderatora. Szczegóły tego, jak
+            zatwierdzać wiadomości, różnią się pomiędzy systemami, ale na
+            ogół sprowadza się to do odpowiedzi na pewien adres z komendą
+            "accept" (aby zaakceptować tę jedną wiadomość) lub "allow" (aby
+            zaakceptować daną wiadomość i wszystkie następne od tego
+            nadawcy).</para>
 
-            <para>Rejecting is usually done by simply ignoring the
-            moderation mail.  If the list software never receives
-            confirmation that something is a valid post, then it won't
-            pass that post on to the list, so simply dropping the
-            moderation mail achieves the desired effect.  Sometimes
-            you also have the option of responding with a "reject" or
-            "deny" command, to automatically disapprove future mails
-            from the same sender without even running them through
-            moderation.  There is rarely any point doing this, since
-            moderation is mostly about spam prevention, and spammers
-            tend not to send from the same address twice anyway.</para>
+            <para>Odrzucenie wiadomości na ogół sprowadza się do
+            zignorowania maila moderacyjnego. Jeśli oprogramowanie
+            zarządzające listą nie otrzyma potwierdzenia, nie opublikuje
+            wiadomości na liście, a więc aby odrzucić wiadomość wystarczy
+            usunąć mail z prośbą o moderację. Czasem można odpowiedzieć
+            komendą "reject" lub "deny", aby automatycznie odrzucać
+            wszystkie przyszłe maile od danego nadawcy, nie dopuszczając ich
+            nawet do moderacji. Jednak rzadko kiedy ma to sens, gdyż
+            moderacja przede wszystkim dotyczy spamu, a spamerzy rzadko
+            kiedy korzystają z tego samego adresu więcej niż raz.</para>
             </listitem>
 </orderedlist>
 
-<para>Be sure to use moderation <emphasis>only</emphasis> for
-filtering out spams and clearly off-topic messages, such as when
-someone accidentally posts to the wrong mailing list.  The moderation
-system will usually give you a way to respond directly to the sender,
-but don't use that method to answer questions that really belong on
-the mailing list itself, even if you know the answer off the top of
-your head.  To do so would deprive the project's community of an
-accurate picture of what sorts of questions people are asking, and
-deprive them of a chance to answer questions themselves and/or see
-answers from others.  Mailing list moderation is strictly about
-keeping the list free of junk and off-topic emails, nothing
-more.</para>
+<para>Upewnij się, że korzystasz z moderacji <emphasis>jedynie</emphasis> do
+filtrowania spamu i wiadomości ewidentnie nie na temat, chociażby
+przesłanych przypadkowo na złą listę dyskusyjną. System moderacji na ogół
+daje możliwość nawiązania bezpośredniego kontaktu z nadawcą, ale nie
+korzystaj z niej aby odpowiadać na kwestie, które powinny zostać poruszone
+na liście, nawet jeśli doskonale znasz odpowiedź. Jeśli będziesz to robić,
+społeczność skupiona wokół projektu nie będzie miała jasnego obrazu tego,
+jakiego rodzaju pytania są zadawane przez użytkowników, a inni nie będą
+mieli szansy odpowiedzieć na nie, ani zobaczyć odpowiedzi innych. W
+moderacji listy dyskusyjnej chodzi tylko i wyłącznie o ochronę przed spamem
+i wiadomościami nie na temat.</para>
 
 </sect3>
 
 <sect3 id="address-hiding">
-<title>Address hiding in archives</title>
+<title>Ukrywanie adresów w archiwach</title>
 
-<para>To prevent your mailing lists from being a source of addresses
-for spammers, a common technique is for the archives to obscure
-people's email addresses, for example by replacing</para>
-
-    <blockquote>
-      <para><literal>jrandom@somedomain.com</literal></para>
-    </blockquote>
-
-<para>with</para>
+<para>Aby twoja lista dyskusyjna nie stała się źródłem adresów dla spamerów,
+powszechną metodą jest zaciemnianie adresów email w archiwach listy, na
+przykład zamieniając</para>
 
     <blockquote>
-      <para><literal>jrandom_AT_somedomain.com</literal></para>
+      <para><literal>jlosowy@jakasdomena.com</literal></para>
     </blockquote>
 
-<para>or</para>
+<para>na</para>
 
     <blockquote>
-      <para><literal>jrandomNOSPAM@somedomain.com</literal></para>
+      <para><literal>jlosowy_AT_jakasdomena.com</literal></para>
     </blockquote>
 
-<para>or some similarly obvious (to a human) encoding.  Since spam
-address harvesters often work by crawling through web
-pages&mdash;including your mailing list's online archives&mdash;and
-looking for sequences containing "@", encoding the addresses is a way
-of making people's email addresses invisible or useless to spammers.
-This does nothing to prevent spam from being sent to the mailing list
-itself, of course, but it does avoid increasing the amount of spam
-sent directly to list users' personal addresses.</para>
+<para>lub</para>
 
-<para>Address hiding can be controversial.  Some people like it a lot,
-and will be surprised if your archives don't do it automatically.
-Other people think it's too much of an inconvenience (because humans
-also have to translate the addresses back before using them).
-Sometimes people assert that it's ineffective, because a harvester
-could in theory compensate for any consistent encoding pattern.
-However, note that there is empirical evidence that address hiding
-<emphasis>is</emphasis> effective, see <ulink
+    <blockquote>
+      <para><literal>jlosowyNOSPAM@jakasdomena.com</literal></para>
+    </blockquote>
+
+<para>lub w jakiś inny zrozumiały (dla człowieka) sposób. Roboty zbierające
+adresy dla spamerów często po prostu przeszukują strony WWW&mdash;włączając
+w to archiwum twojej listy&mdash;w poszukiwaniu ciągów zawierających znak
+"@".  Zaciemnienie adresów to sposób na ukrycie adresów przed spamerami.
+Oczywiście nie zapobiega to w żaden sposób przed wysyłaniem spamu na samą
+listę, ale pomaga ograniczyć ilość spamu trafiającego na prywatne adresy
+uczestników listy.</para>
+
+<para>Ukrywanie adresów bywa kontrowersyjne. Niektórzy bardzo lubią tę
+technikę i bywają zaskoczeni, jeśli nie jest ona stosowana w archiwum. Inni
+uważają to za niepotrzebne utrudnienie (gdyż ludzie muszą odkodować adres,
+zanim mogą z niego skorzystać). Niektórzy zakładają, że nie daje ona
+spodziewanych efektów, ponieważ robot zbierający adresy może w teorii
+odkodować każdy adres zaciemniony prostym algorytmem. Warto jednak zauważyć,
+że istnieją empiryczne dowody tego, że ukrywanie adresów
+<emphasis>jest</emphasis> efektywne, patrz <ulink
 url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
 
-<para>Ideally, the list management software would leave the choice up
-to each individual subscriber, either through a special yes/no header
-or a setting in that subscriber's list account preferences.  However,
-I don't know of any software which offers per-subscriber or per-post
-choice in the matter, so for now the list manager must make a decision
-for everyone (assuming the archiver offers the feature at all, which
-is not always the case).  I lean very mildly toward turning
-address hiding on.  Some people are very careful to avoid posting
-their email addresses on web pages or anywhere else a spam harvester
-might see it, and they would be disappointed to have all that care
-thrown away by a mailing list archive; meanwhile, the inconvenience
-address hiding imposes on archive users is very slight, since it's
-trivial to transform an obscured address back to a valid one if you
-need to reach the person.  But keep in mind that, in the end, it's
-still an arms race: by the time you read this, harvesters might well
-have evolved to the point where they can recognize most common forms
-of hiding, and we'll have to think of something else.</para>
+<para>Najlepiej gdyby oprogramowanie zarządzające listą dawało wybór każdemu
+użytkownikowi, albo poprzez specjalny nagłówek, albo konfigurowalną opcję
+związaną z kontem użytkownika. Nie znam jednak żadnego oprogramowania, które
+oferowało by taką możliwość, więc na chwilę obecną administrator listy musi
+podjąć tę decyzję za wszystkich (zakładając, że lista jest w ogóle
+archiwizowana, co nie jest zasadą). Skłaniam się nieśmiało w stronę
+ukrywania adresów. Niektórzy są bardzo ostrożni jeśli chodzi o ujawnianie
+ich adresu email na stronach WWW lub gdziekolwiek, gdzie przechwycić je mogą
+automaty zbierające adresy, i byliby bardzo zawiedzeni, gdyby cały ten
+wysiłek poszedł na marne z momencie publikacji ich adresu w archiwum. Z
+kolei niedogodności dla pozostałych użytkowników nie są wielkie, ponieważ
+przekształcenie zaciemnionego adresu na postać oryginalną jest trywialne.
+Pamiętaj jednak, że wciąż trwa wyścig zbrojeń. W momencie gdy czytasz te
+słowa automaty zbierające adresy mogły już mauczyć się większości
+popularnych wzorców zaciemniania, i będzie trzeba zastanowić się nad innym
+rozwiązaniem.</para>
 
 </sect3>
 
