@@ -770,185 +770,176 @@ globalnym.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="archiving">
-<title>Archiving</title>
+<title>Archiwizacja</title>
 
-<para>The technical details of setting up mailing list archiving are
-specific to the software that's running the list, and are beyond the
-scope of this book.  When choosing or configuring an archiver,
-consider these qualities:</para>
+<para>Techniczne szczegóły archiwizacji listy dyskusyjnej są mocno zależne
+od oprogramowania, zarządzającego listą, tym samym wykraczają poza zakres
+tej książki. Wybierając lub konfigurując rozwiązanie archiwizacyjne, weź pod
+uwagę następujące czynniki:</para>
 
 <variablelist>
 
-  <varlistentry><term>Prompt updating</term>
+  <varlistentry><term>Szybkość aktualizacji</term>
     <listitem>
-      <para>People will often want to refer to an archived post made
-            within the last hour or two.  If possible, the archiver
-            should archive each post instantaneously, so that by the
-            time a post appears on the mailing list, it's already
-            present in the archives.  If that option isn't available,
-            then at least try to set the archiver to update itself
-            every hour or so.  (By default, some archivers run their
-            update processes once per night, but in practice that's
-            far too much lag time for an active mailing list.)</para>
+      <para>Użytkownicy często będą chcieli odwołać się do zarchiwizowanej
+      wersji wiadomości wysłanej w ciągu ostatniej godziny czy dwóch. Jeśli
+      to tylko możliwe, wiadomości powinny pojawiać się w archiwum
+      natychmiast&mdash;tak, aby w chwili gdy wiadomość pojawi się na
+      liście, była także dostępna w archiwum. Jeśli to niemożliwe,
+      powinieneś skonfigurować archiwum tak, aby było uaktualniane
+      najrzadziej co godzinę. Domyślnie niektóre archiwizatory wykonują
+      proces aktualizacji co noc, ale w praktyce to zdecydowanie za rzadko
+      dla potrzeb aktywnej listy dyskusyjnej.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Referential stability</term>
+  <varlistentry><term>Stabilność odnośników</term>
     <listitem>
-      <para>Once a message is archived at a particular URL, it should
-            remain accessible at that exact same URL forever, or as
-            close to forever as possible.  Even if the archives are
-            rebuilt, restored from backup, or otherwise fixed, any
-            URLs that have already been made publicly available
-            should remain the same.  Stable references make it
-            possible for Internet search engines to index the
-            archives, which is a major boon to users looking for
-            answers.  Stable references are also important because
-            mailing list posts and threads are often linked to from
-            the bug tracker (see
-            <xref
-            linkend="bug-tracker"/>)<phrase output="printed">
-            later in this chapter</phrase> or
-            from other project documents.</para>
+      <para>Gdy wiadomość została zarchiwizowana pod danym adresem URL,
+      powina być pod nim dostępna na zawsze, czy raczej na tyle długo, na
+      ile to możliwe. Nawet gdy archiwa zostaną przebudowane, odtworzone z
+      kopii zapasowej czy w inny sposób zmodyfikowane, wszystkie adresy URL,
+      które zostały opublikowane powinny pozostać bez zmian. Stabilne
+      odnośniki umożliwiają wyszukiwarkom internetowym indeksowanie
+      archiwów, co bardzo pomaga osobom szukającym odpowiedzi. Stabilne
+      odnośniki są ważne także dlatego, że linki do wiadomości w archiwum są
+      często umieszczane w systemie śledzenia błędów (patrz <xref
+      linkend="bug-tracker"/>)<phrase output="printed"> dalej w tym
+      rozdziale</phrase> czy innych dokumentach projektu.</para>
 
-      <para>Ideally, mailing list software would include a message's
-            archive URL, or at least the message-specific portion of
-            the URL, in a header when it distributes the message to
-            recipients.  That way people who have a copy of the
-            message would be able to know its archive location
-            without having to actually visit the archives, which would
-            be helpful because any operation that involves one's web
-            browser is automatically time-consuming.  Whether any
-            mailing list software actually offers this feature, I don't
-            know; unfortunately, the ones I have used do not.
-            However, it's something to look for (or, if you write
-            mailing list software, it's a feature to consider
-            implementing, please).</para>
+      <para>Najlepiej gdyby oprogramowanie zarządzające listą dołączało w
+      nagłówkach rozsyłanych wiadomości jej adres URL w archiwum (albo
+      chociaż unikalną dla niej część tego adresu). Dzięki temu osoby, które
+      posiadają kopię wiadomości mogłyby łatwo sprawdzić jej adres w
+      archiwum bez konieczności odwiedzania samego archiwum. To byłoby
+      pomocne, gdyż czynności wymagające użycia przeglądarki mogą zająć
+      sporo czasu. Nie wiem czy jakiekolwiek oprogramowanie zarządzające
+      listą oferuje taką możliwość&mdash;niestety te, z których korzystałem
+      nie posiadają jej. Jednak to coś, o czym warto pomyśleć (lub, jeśli
+      piszesz oprogramowanie do obsługi list dyskusyjnych, co warto
+      zaimplementować).</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Backups</term>
+  <varlistentry><term>Kopie zapasowe</term>
     <listitem>
-      <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult.  In other words, don't treat your archiver as a
-            black box.  You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary.  Those archives are precious
-            data&mdash;a project that loses them loses a good part of
-            its collective memory.</para>
+        <para>Tworzenie kopii zapasowych archiwów nie powinno być zbyt
+            trudne, a proces odtwarzania z kopii zbyt skomplikowany. Nie
+            powinieneś traktować oprogramowania archiwum na zasadzie czarnej
+            skrzynki. Sam powinieneś wiedzieć (lub powinien to wiedzieć inny
+            uczestnik projektu) gdzie przechowywane są wiadomości, i w jaki
+            sposób wygenerować ponownie strony archiwum na podstawie bazy
+            wiadomości, jeśli zajdzie taka konieczność. Archiwum to cenne
+            dane&mdash;projekt, który je straci, traci zarazem część swojej
+            zbiorowej pamięci.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Thread support</term>
+  <varlistentry><term>Wsparcie dla wątków</term>
     <listitem>
-      <para>It should be possible to go from any individual message to
-            the <firstterm>thread</firstterm> (group of related
-            messages) that that original message is part of.  Each
-            thread should have its own URL too, separate from the URLs
-            of the individual messages in the thread.</para>
+        <para>Powinna istnieć możliwość przejścia od każdej wiadomości do
+            <firstterm>wątku</firstterm> (grupy powiązanych wiadomości), do
+            którego należy. Każdy wątek powinien także posiadać swój adres
+            URL, niezależny od adresów poszczególnych wiadomości w
+            wątku.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Searchability</term>
+  <varlistentry><term>Wyszukiwanie</term>
     <listitem>
-      <para>An archiver that doesn't support searching&mdash;on the
-            bodies of messages, as well as on authors and
-            subjects&mdash;is close to useless.  Note that some archivers 
-            support searching by simply farming the work out to an
-            external search engine such as <ulink
-            url="http://www.google.com/">Google</ulink>.  This is
-            acceptable, but direct search support is usually more
-            fine-tuned, because it allows the searcher to specify that
-            the match must appear in a subject line versus the body,
-            for example.</para>
+        <para>Archiwum, które nie pozwala na wyszukiwanie (zarówno po treści
+            wiadomośc, jak i ich autorach i tematach) jest prawie
+            bezużyteczne. Niektóre programy archiwizujące umożliwiają
+            wyszukiwanie tylko poprzez zewnętrzną wyszukiwarkę, jak na
+            przykład <ulink url="http://www.google.com/">Google</ulink>. To
+            zawsze coś, jednak wbudowana wyszukiwarka na ogół jest lepiej
+            dostosowana do potrzeb archiwum, na przykład pozwala na
+            wyszukiwanie słów w kluczowych tylko w temacie, albo tylko w
+            treści.</para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 
-<para>The above is just a technical checklist to help you evaluate and
-set up an archiver.  Getting people to
-actually <emphasis>use</emphasis> the archiver to the project's
-advantage is discussed in later chapters, in particular
-<xref linkend="using-archives"/>.</para>
+<para>To jedynie lista technicznych kwestii ważnych w trakcie wyboru i
+    konfiguracji archiwum. Do tego. jak skłonić ludzi do
+    <emphasis>korzystania</emphasis> z archiwum, aby poprawić komunikację w
+    projekcie, wrócimy w dalszych rozdziałach, w szczególności w <xref
+        linkend="using-archives"/>.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="mailing-list-software">
-<title>Software</title>
+<title>Oprogramowanie</title>
 
-<para>Here are some open source tools for doing list management and
-archiving.  If the site where you're hosting your project already has
-a default setup, then you may not ever have to decide on a tool at
-all.  But if you must install one yourself, these are some
-possibilities.  The ones I have actually used are Mailman, Ezmlm,
-MHonArc, and Hypermail, but that doesn't mean the others aren't good
-too (and of course, there are probably other tools out there that I
-just didn't happen to find, so don't take this as a complete
-list).</para>
+<para>Poniżej znajduje się lista wolnego oprogramowania do zarządzania listą
+    i archiwizacji. Jeśli serwer, na którym ulokowany jest twój projekt, ma
+    już działające oprogramowanie do obsługi list dyskusyjnych, być może
+    nawet nie będziesz musiał podejmować decyzji. Jeśli jednak musisz
+    zainstalować je sam, masz sporo możliwości. Ja sam korzystałem z
+    Mailman, Ezmlm, MHonArc i Hypermail, ale nie znaczy to, że inne nie są
+    dobre (oczywiście są jeszcze inne narzędzia, na które nie trafiłem, więc
+    nie uznawaj tej listy za kompletną).</para>
 
-<para>Mailing list management software:</para>
+<para>Oprogramowanie do zarządzania listami dyskusyjnymi:</para>
 
 <itemizedlist>
  <listitem>
-   <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.list.org/"/></para>
-   <para>(Has built-in archiver, and hooks for plugging in
-         external archivers.)</para>
+     <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.list.org/"/></para>
+     <para>(Posiada wbudowany archiwizator, i możliwość podpięcia zewnętrznych
+         archiwizatorów.)</para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.procmail.org/"/></para>
-   <para>(Meant to be used with the Procmail mail processing system.)</para>
+     <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.procmail.org/"/></para>
+     <para>(Przeznaczony do użycia z systemem przetwarzania poczty Procmail.)</para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.ecartis.org/"/></para>
+     <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.ecartis.org/"/></para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://listproc.sourceforge.net/"/></para>
+     <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://listproc.sourceforge.net/"/></para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://cr.yp.to/ezmlm.html"/></para>
-   <para>(Designed to work with the <ulink
-         url="http://cr.yp.to/qmail.html">Qmail</ulink> mail
-         delivery system.)</para> 
+     <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://cr.yp.to/ezmlm.html"/></para>
+     <para>(Zaprojektowany do współpracy z serwerem pocztowym <ulink
+             url="http://cr.yp.to/qmail.html">Qmail</ulink>).</para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://mojo.skazat.com/"/></para>
-   <para>(Despite the web site's bizarre attempts to hide the fact,
-         this is free software, released under the GNU General
-         Public License.  It also has a built-in archiver.)</para>
+     <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://mojo.skazat.com/"/></para>
+     <para>(Mimo prób ukrycia tego faktu przez autorów strony, to wolne
+         oprogramowanie, wydane na licencji GNU General Public License. Posiada
+         też wbudowany archiwizator.)</para>
  </listitem>
 </itemizedlist>
 
-<para>Mailing list archiving software:</para>
+<para>Oprogramowanie do archiwizacji list:</para>
 
 <itemizedlist>
  <listitem>
-   <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.mhonarc.org/"/></para>
+     <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.mhonarc.org/"/></para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.hypermail.org/"/></para>
+     <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.hypermail.org/"/></para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://sourceforge.net/projects/lurker/"/></para>
+     <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://sourceforge.net/projects/lurker/"/></para>
  </listitem>
  <listitem>
-   <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.procmail.org/"/></para>
-   <para>(Companion software to SmartList, this is a general mail
-         processing system that can, apparently, be configured as an
-         archiver.)</para>
+     <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+             url="http://www.procmail.org/"/></para>
+     <para>(Oprogramowanie towarzyszące SmartList, system przetwarzania poczty
+         ogólnego przeznaczenia, który można skonfigurować jako
+         archiwizator.)</para>
  </listitem>
 </itemizedlist>
 
