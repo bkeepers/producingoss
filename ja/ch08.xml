@@ -1217,8 +1217,12 @@ invented for; save your humans for more interesting things.</para>
 </para>
 
 <sect3 id="automated-testing">
+<!--
 <title>Automated testing</title>
+-->
+<title>自動テスト</title>
 
+<!--
 <para>Automated test runs are helpful for any software project, but
 especially so for open source projects, because automated testing
 (especially regression testing) allows developers to feel comfortable
@@ -1230,10 +1234,26 @@ didn't&mdash;having automated ways to detect such breakage saves the
 project a <emphasis>lot</emphasis> of time.  It also makes people much
 more relaxed about refactoring large swaths of code, and therefore
 contributes to the software's long-term maintainability.</para>
+-->
+<para>
+  テストの自動化はどんなソフトウェアプロジェクトにとっても有用ですが、
+  オープンソースプロジェクトでは特に有用となります。
+  自動テスト (特に回帰テスト) を行うことで、
+  不慣れな分野のコードでも安心して変更できるようになります。
+  これは、開発の効率を大きく向上させます。
+  問題の原因を人間の目で検出するのは大変
+  (まず「このあたりに問題があるのではないか」と見当をつけ、
+  その部分に問題がないかどうかあらゆる手段で調べることになります)
+  なので、それを自動化すれば <emphasis>大きな</emphasis> 時間の節約になります。
+</para>
 
   <sidebar id="regression-testing">
+<!--
   <title>Regression Testing</title>
+-->
+  <title>回帰テスト</title>
 
+<!--
   <para><firstterm>Regression testing</firstterm> means testing for
   the reappearance of already-fixed bugs.  The purpose of regression
   testing is to reduce the chances that code changes will break the
@@ -1242,7 +1262,19 @@ contributes to the software's long-term maintainability.</para>
   increase steadily.  Good design can reduce the rate at which the
   chances increase, but it cannot eliminate the problem
   entirely.</para>
+-->
+  <para>
+    <firstterm>回帰テスト (リグレッションテスト、Regression testing)</firstterm>
+    とは、修正済みのバグが再発していないかどうかを調べるテストのことです。
+    回帰テストを行う理由は、
+    コードを変更したことで予期せぬところでソフトウェアを破壊していないことを確認するためです。
+    ソフトウェアが大規模、複雑になっていくにつれて、
+    予期せぬ副作用があらわれる可能性も大きくなります。
+    きちんと設計していればその可能性を低くすることはできるでしょうが、
+    完全に問題を解消するのは不可能です。
+  </para>
 
+<!--
   <para>As a result, many projects have a <firstterm>test
   suite</firstterm>, a separate program that invokes the project's
   software in ways that have been known in the past to stimulate
@@ -1250,12 +1282,29 @@ contributes to the software's long-term maintainability.</para>
   bugs happen, this is known as a <firstterm>regression</firstterm>,
   meaning that someone's change unexpectedly unfixed a
   previously-fixed bug.</para>
+-->
+  <para>
+    ということもあり、多くのプロジェクトでは
+    <firstterm>テストスイート</firstterm> を用意しています。
+    これは、プロジェクトとは別に用意されたプログラムで、
+    過去に存在したバグが再現するような処理を実行します。
+    テストスイートを実行してこれらのバグが再現した状態を
+    <firstterm>リグレッション</firstterm> といいます。
+    これは、誰かの修正が過去に修正済みのバグを再発させてしまったことを意味します。
+  </para>
 
+<!--
   <para>See also
   <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>.</para>
+-->
+  <para>
+    <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>
+    もごらんください。
+  </para>
 
   </sidebar>
 
+<!--
 <para>Regression testing is not a panacea.  For one thing, it works
 best for programs with batch-style interfaces.  Software that is
 operated primarily through graphical user interfaces is much harder to
@@ -1267,7 +1316,24 @@ considerable amount of time.  The easier it is to add new tests to the
 suite, the more developers will do so, and the fewer bugs will survive
 to release.  Any effort spent making tests easier to write will be
 paid back manyfold over the lifetime of the project.</para>
+-->
+<para>
+  回帰テストは決して万能というわけではありません。
+  バッチ処理的なプログラムではうまく動作するでしょうが、
+  たとえばグラフィカルなインターフェイスで操作するプログラムに適用するのは難しいものです。
+  もうひとつの問題として、回帰テスト用のフレームワークが非常に複雑なものであるということが挙げられます。
+  まともに使いこなせるようになるまでにはかなりの時間がかかることでしょう。
+  この複雑さをなんとか軽減させることが大切です。
+  たとえ時間がかかったとしても、
+  その努力は必ず報われます。
+  新しいテストをテストスイートに追加しやすくすればするほど、
+  多くの開発者がテストを作成してくれるようになります。
+  その結果として、リリース後に見つかるバグも少なくなるでしょう。
+  テストを書きやすくするために費やした努力は、
+  将来にわたってそのプロジェクトに大きな効果を及ぼします。
+</para>
 
+<!--
 <para>Many projects have a <firstterm>"Don't break the
 build!"</firstterm> rule, meaning: don't commit a change that makes
 the software unable to compile or run.  Being the person who broke the
@@ -1278,7 +1344,25 @@ spot if there are automatic nightly runs of the entire test suite,
 with the results mailed out to the development list or to a dedicated
 test-results mailing list; that's another example of a worthwhile
 automation.</para>
+-->
+<para>
+  多くのプロジェクトでは <firstterm>"Don't break the build!"</firstterm>
+  という決まりがあります。これは、コンパイルできなくなったり
+  実行できなくなったりするような変更はコミットするなという意味です。
+  そんなコミットをしてしまった人は、
+  かなり気まずい思いをすることになるでしょう。
+  回帰テストを採用しているプロジェクトの場合、この決まりはもっと明確になります。
+  つまり「テストが失敗するような変更はコミットするな」
+  ということになるのです。
+  テストスイート全体を毎晩自動実行するようにしておけば、
+  このようなコミットを検出することは容易です。
+  そして、テストの実行結果は開発者向けメーリングリスト
+  (あるいはテスト結果専用のメーリングリスト)
+  に送るようにすればいいのです。
+  ほら。ここにもまた自動化の例がひとつ登場しました。
+</para>
 
+<!--
 <para>Most volunteer developers are willing to take the extra time to
 write regression tests, when the test system is comprehensible and
 easy to work with.  Accompanying changes with tests is understood to
@@ -1289,7 +1373,20 @@ test.  The latter developer may often end up with more work, and since
 writing a test is already less satisfying than actually fixing the
 bug, it is imperative that the test suite not make the experience more
 painful than it has to be.</para>
+-->
+<para>
+  わかりやすくて作業しやすいテストシステムがあれば、
+  たいていの開発者は喜んで回帰テストを作成してくれるでしょう。
+  変更をするときはテストも作成するというのは共通認識となっています。
+  この作業は、複数で協力して行うこともあります。
+  バグ修正作業を二人で分担し、一人が実際の修正を行って
+  もう一人がテストを書くといったようにです。
+  テストを書く側の担当者のほうが、作業量は多くなりがちです。
+  もともと実際のバグ修正にくらべてテストを書く作業はつまらないものなので、
+  テストを書くのが苦にならないようにする必要があります。
+</para>
 
+<!--
 <para>Some projects go even further, requiring that a new test
 accompany <emphasis>every</emphasis> bugfix or new feature.  Whether
 this is a good idea or not depends on many factors: the nature of the
@@ -1306,7 +1403,35 @@ by new tests, means that CVS effectively discourages patches.  When I
 used to work on CVS, I sometimes saw people start on and even complete
 a patch to CVS's own code, but give up when told of the requirement to
 add a new test to <filename>sanity.sh</filename>.</para>
+-->
+<para>
+  プロジェクトによっては、さらに厳しい規則を設けていることもあります。
+  バグ修正や機能追加を行う際は、<emphasis>必ず</emphasis>
+  新しいテストを追加しなければならないといったものです。
+  このような規則を設けることのよしあしは、多くの要素に依存します。
+  「そのソフトウェアがどんな類のものなのか」
+  「開発チームの構成はどのようなものなのか」
+  「新しいテストを書く難易度はどれくらいか」
+  などが考慮の対象になります。
+  CVS (<ulink url="http://www.cvshome.org/"/>)
+  プロジェクトでは、長年この厳しめの規則を採用しています。
+  理屈の上では、これはよい方針でしょう。
+  CVS はバージョン管理用のソフトウェアであり、
+  ユーザのデータを壊して復旧できなくしてしまうようなことがあってはならないからです。
+  ただ、実際に運用していく上では問題がありました。
+  CVS の回帰テストスイートは、ひとつの巨大なシェルスクリプトでできています
+  (<filename>sanity.sh</filename> という変な名前がついています)。
+  これは非常に読みづらく、また修正したり拡張したりするのも大変なのです。
+  新しいテストを追加するのが大変であること、
+  そしてパッチが受け入れられるためには新しいテストが必須であること。
+  これらによって、CVS は事実上パッチの受け入れを拒否しているようなものだと言えます。
+  かつて私が CVS プロジェクトで作業をしていたころ、
+  「CVS のパッチを作成したんだけど、<filename>sanity.sh</filename>
+  にテストを追加しなきゃならないっていう話を聞いて結局あきらめた」
+  という人を散々見てきました。
+</para>
 
+<!--
 <para>It is normal to spend more time writing a new regression test
 than on fixing the original bug.  But CVS carried this phenomenon to
 an extreme: one might spend hours trying to design one's test
@@ -1314,7 +1439,18 @@ properly, and still get it wrong, because there are just too many
 unpredictable complexities involved in changing a 35,000-line Bourne
 shell script.  Even longtime CVS developers often grumbled when they
 had to add a new test.</para>
+-->
+<para>
+  バグの修正そのものより新たな回帰テストを書くほうが時間のかかるというのは
+  ごく普通のことです。ただ、CVS の場合はそれがちょっと極端すぎます。
+  数時間かけて自分用のテストを作ったとしても、まだそれが間違っているかもしれません。
+  35,000 行にもおよぶシェルスクリプトの中には、
+  思いもよらぬような込み入った仕組みが潜んでいるからです。
+  長年 CVS にかかわっている開発者でさえも、
+  新たなテストを追加するときには不満をもらすことがあります。
+</para>
 
+<!--
 <para>This situation was due to a failure on all our parts to consider
 the automation ratio.  It is true that switching to a real test
 framework&mdash;whether custom-built or off-the-shelf&mdash;would have
@@ -1330,7 +1466,30 @@ features the developers might forgo in order to develop a new test
 system (or integrate an off-the-shelf system).  That task would only
 take a finite amount of time, while the penalty of using the current
 test suite will continue forever if nothing is done.</para>
+-->
+<para>
+  このようになってしまった原因は、
+  私たちが自動化の割合について考えていなかったことです。
+  自前で作るなり既存のものを使うなりして、
+  本物のテストフレームワークに移行しようという試みはありました。
+  <footnote>
+    <para>
+      既存のテストをすべて新しいフレームワークに移行させなければならないというわけではありません。
+      両者を共存させることもできるでしょう。
+      必要になったものだけを新しい形式に変換すればいいのです。
+    </para>
+  </footnote>
+  しかし、長年それを怠ってきたツケが今まわってきているというわけです。
+  この使いづらいテストスイートのせいで現在の CVS に取り込まれて <emphasis>いない</emphasis>
+  バグ修正や新機能って、いったいどれくらいになるんでしょう?
+  実際のところは知りようがありません。ただ、
+  新しいテストシステムを開発 (あるいは既存のシステムを採用)
+  する時間を確保するために減ってしまうバグ修正・機能追加の数よりはるかに多いことは確かです。
+  テストシステムを移行するのにかかる時間は有限のものですが、
+  何もせず現状のテストスイートを使い続けることによる被害は永遠に続くわけですから。
+</para>
 
+<!--
 <para>The point is not that having strict requirements to write tests
 is bad, nor that writing your test system as a Bourne shell script is
 necessarily bad.  It might work fine, depending on how you design it
@@ -1338,6 +1497,18 @@ and what it needs to test.  The point is simply that when the test
 system becomes a significant impediment to development, something must
 be done.  The same is true for any routine process that turns into a
 barrier or a bottleneck.</para>
+-->
+<para>
+  ここで言っているのは、「テストを書くよう厳しく要求するのはダメ」
+  ということではありません。また、
+  テストシステムをシェルスクリプトで書くのが必ずしも悪いというわけでもありません。
+  きちんと設計した上であれば、それが有用な場合もあるでしょう。
+  言いたかったのは、「もしテストシステムが開発の障害になっているのなら、
+  何か手を打たなければいけない」という単純なことです。
+  その他の定型作業も一緒です。
+  もしそれが障害やボトルネックになっているのなら、
+  何らかの対処が必要です。
+</para>
 
 </sect3>
 
