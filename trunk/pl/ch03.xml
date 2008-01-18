@@ -950,108 +950,119 @@ uwagę następujące czynniki:</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
-<title>Version Control</title>
+<title>Kontrola wersji</title>
 
-<para>A <firstterm>version control system</firstterm> (or
-<firstterm>revision control system</firstterm>) is a combination of
-technologies and practices for tracking and controlling changes to a
-project's files, in particular to source code, documentation, and web
-pages.  If you have never used version control before, the first thing
-you should do is go find someone who has, and get them to join your
-project.  These days, everyone will expect at least your project's
-source code to be under version control, and probably will not take
-the project seriously if it doesn't use version control with at least
-minimal competence.</para>
+<para><firstterm>System kontroli wersji</firstterm> (ang.
+    <firstterm>version control system</firstterm> lub <firstterm>revision
+        control system</firstterm>) to zestaw narzędzi do śledzenia i
+    kontrolowania zmian w plikach projektu, w szczególności w kodzie
+    źródłowym, dokumentacji i stronach WWW. Jeśli nigdy nie korzystałeś z
+    kontroli wersji, powinieneś jak najprędzej znaleźć kogoś, kto korzystał,
+    i przekonać go, aby dołączył do projektu. W dzisiejszych czasach każdy
+    spodziewa się, że przynajmniej kod źródłowy projektu znajduje się pod
+    kontrolą wersji, i nie traktuje poważnie projektów, które nie korzystają
+    z niej przynajmniej minimalnie umiejętnie.</para>
 
-<para>The reason version control is so universal is that it helps with
-virtually every aspect of running a project: inter-developer
-communications, release management, bug management, code stability and
-experimental development efforts, and attribution and authorization of
-changes by particular developers.  The version control system provides
-a central coordinating force among all of these areas.  The core of
-version control is <firstterm>change management</firstterm>:
-identifying each discrete change made to the project's files,
-annotating each change with metadata like the change's date and
-author, and then replaying these facts to whoever asks, in whatever
-way they ask.  It is a communications mechanism where a change is the
-basic unit of information.</para>
+<para>Kontrola wersji jest tak uniwersalna, ponieważ pomaga praktycznie w
+    każdym aspekcie projektu: komunikacji między programistami, zarządzaniu
+    wydaniami, śledzeniu błędów, stabilizacji kodu czy eksperymentowaniu,
+    może także służyć do uwierzyteniania i przypisywania zasług
+    poszczególnym programistom. System kontroli wersji stanowi centralny
+    punkt we wszystkich wspomnianych obszarach. Sercem kontroli wersji jest
+    <firstterm>zarządzanie zmianami</firstterm>, pozwalające odróżnić każdą
+    atomową zmianę w plikach projektu, metadane z nią związane (jak data i
+    autor danej zmiany) i przekazać ją do innych użytkowników w sposób, w
+    jaki sobie tego zażyczą. To kanał komunikacyjny, w którym podstawową
+    jednostką informacji jest pojedyncza zmiana.</para>
 
-<para>This section does not discuss all aspects of using a version
-control system.  It's so all-encompassing that it must be addressed
-topically throughout the book.  Here, we will concentrate on choosing
-and setting up a version control system in a way that will foster
-cooperative development down the road.</para>
+<para>Ten rozdział nie omawia wszystkich aspektów korzystania z systemu
+    kontroli wersji. To tak rozległy temat, że przy okazji omawiania innych
+    kwestii będziemy do niego wracali jeszcze nie raz w tej książce. Tutaj
+    skupimy się na wybraniu i konfiguracji systemu kontroli wersji w taki
+    sposób, który wspiera współpracę nad rozwojem projektu.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
-<title>Version Control Vocabulary</title>
+<title>Słownictwo kontroli wersji</title>
 
-<para>This book cannot teach you how to use version control if you've
-never used it before, but it would be impossible to discuss the
-subject without a few key terms.  These terms are useful independently
-of any particular version control system: they are the basic nouns and
-verbs of networked collaboration, and will be used generically
-throughout the rest of this book.  Even if there were no version
-control systems in the world, the problem of change management would
-remain, and these words give us a language for talking about that
-problem concisely.
+<para>Ta książka nie może nauczyć cię kontroli wersji, jeśli nigdy wcześniej
+    z niej nie korzystałeś. Z drugiej strony trudno byłoby rozmawiać o niej
+    bez wprowadzenia kilku podstawowych pojęć. Te pojęcia są niezależne od
+    konkretnego systemu kontroli wersji, to podstawowe rzeczowniki i
+    przymiotniki gdy współpracujemy w sieci, i będą często stosowane w
+    dalszej części książki. Nawet gdyby nie wymyślono systemów kontroli
+    wersji, problem zarządzania zmianami ciągle by istniał&mdash;a więc
+    potrzebujemy języka, pozwalającego mówić o problemie w zwięzły sposób.
 
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
-  <term><firstterm>commit</firstterm></term>
-  <listitem><para>To make a change to the project; more formally, to
-  store a change in the version control database in such a way that it
-  can be incorporated into future releases of the project.  "Commit"
-  can be used as a verb or a noun.  As a noun, it is essentially
-  synonymous with "change".  For example: "I just committed a fix for
-  the server crash bug people have been reporting on Mac OS X.  Jay,
-  could you please review the commit and check that I'm not misusing
-  the allocator there?"</para></listitem>
+     <term><firstterm>zmiana</firstterm> (ang.
+         <firstterm>commit</firstterm>)</term>
+  <listitem><para>Dokonać zmiany w projekcie. Bardziej formalnie, zapisać
+          zmianę w bazie danych systemu kontroli wersji w taki sposób, że
+          może zostać włączona do przyszłych wydań projektu. "Commit" można
+          stosować jako czasownik lub rzeczownik, Jako rzeczownik to w
+          zasadzie synonim "zmiany"<footnote>W języku polskim nie ma dobrego
+              odpowiednika słowa "commit" (w omawianym tu znaczniu), więc
+              zachowana została angielska wersja w formie rzeczownika, lub
+              synonim "zmiana". Warto jednak wiedzieć, że niektórzy
+              programiści mówią slangowo "zkommitować" czy "kommitnąć"
+              (przyp.  tłum.)</footnote>. Na przykład: "Właśnie zrobiłem
+          commit poprawki dla błędu powodującego problemy ze stabilnością
+          serwera, zgłaszanego przez użytkowników Mac OS X. Jay, mógłbyś
+          przejrzeć zmianę i sprawdzić, czy dobrze używam w niej
+          alokatora?"</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
-  <term><firstterm>log&nbsp;message</firstterm></term>
-  <listitem><para>A bit of commentary attached to each commit,
-  describing the nature and purpose of the commit.  Log messages are
-  among the most important documents in any project: they are the
-  bridge between the highly technical language of individual code
-  changes and the more user-oriented language of features, bugfixes,
-  and project progress.  Later in this section, we'll look at ways to
-  distribute log messages to the appropriate audiences; also, <xref
-  linkend="codifying-tradition"/><phrase output="printed"> in
-  <xref linkend="communications"/></phrase> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
+     <term><firstterm>komentarz zmiany</firstterm> (ang.
+         <firstterm>log&nbsp;message</firstterm>)</term>
+     <listitem><para>Krótka wiadomość dołączona do każdej zmiany, opisująca
+             jej naturę i cel. Komentarze do zmian to jedne z
+             najważniejszych dokumentów każdego projektu, stanowią most
+             pomiędzy bardzo technicznym językiem samego kodu, a bardziej
+             zorientowanym na użytkownika językiem mówiącym o zadaniach,
+             poprawkach błędów i postępie projektu. Dalej w tym rozdziale
+             omówimy sposoby dystrybucji komentarzy zmian do odpowiednich
+             odbiorców. Co więcej, <xref
+                 linkend="codifying-tradition"/><phrase output="printed"> w
+                 <xref linkend="communications"/></phrase> mówi o tym, jak
+             zachęcić uczestników projektu do pisania zwięzłych i
+             użytecznych komentarzy do zmian.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
-  <term><firstterm>update</firstterm></term>
-  <listitem><para>To ask that others' changes (commits) be
-  incorporated into your local copy of the project; that is, to bring
-  your copy "up-to-date".  This is a very common operation; most
-  developers update their code several times a day, so that they know
-  they're running roughly the same thing the other developers are
-  running, and so that if they see a bug, they can be pretty sure it
-  hasn't been fixed already.  For example: "Hey, I noticed the
-  indexing code is always dropping the last byte.  Is this a new bug?"
-  "Yes, but it was fixed last week&mdash;try updating, it should go
-  away."</para></listitem>
+     <term><firstterm>aktualizacja</firstterm> (ang.
+         <firstterm>update</firstterm>)</term>
+     <listitem><para>Aktualizacja to dołączenie zmian dokonanych przez
+             innych do lokalnej kopii projektu, a więc sprawienie, aby kopia
+             stała się aktualna. To bardzo częsta czynność, większość
+             programistów aktualizuje swój kod wiele razy dziennie, aby mieć
+             pewność, że pracują mniej-więcej na tej samej wersji kodu, co
+             pozostali. Co więcej, gdy znajdą błąd, mogą być niemal pewni, że
+             nie został on jeszcze naprawiony. Na przykład: "Hej,
+             zauważyłem, że kod indeksujący zawsze wyrzuca ostatni bajt. Czy
+             to nowy błąd?" "Tak, ale został już naprawiony tydzień
+             temu&mdash;zrób aktualizację, powinien
+             zniknąć."</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
-  <term><firstterm>repository</firstterm></term> <listitem><para>A
-  database in which changes are stored.  Some version control systems
-  are centralized: there is a single, master repository, which stores
-  all changes to the project.  Others are decentralized: each
-  developer has his own repository, and changes can be swapped back
-  and forth between repositories arbitrarily.  The version control
-  system keeps track of dependencies between changes, and when it's
-  time to make a release, a particular set of changes is approved for
-  that release.  The question of whether centralized or decentralized
-  is better is one of the enduring holy wars of software development;
-  try not to fall into the trap of arguing about it on your project
-  lists.</para></listitem>
+     <term><firstterm>repozytorium</firstterm> (ang.
+         <firstterm>repository</firstterm>)</term>
+     <listitem><para>Baza danych, w której zapisywane są zmiany. Niektóre
+             systemy wersji są zcentralizowane: istnieje jedno główne
+             repozytorium, przechowujące wszystkie zmiany. Inne są
+             zdecentralizowane: każdy programista ma swoje własne
+             repozytorium, a zmiany mogą być dowolnie przenoszone pomiędzy
+             repozytoriami. System kontroli wersji śledzi zależności
+             pomiędzy zmianami, i gdy nadejdzie czas wydania, odpowiedni
+             zestaw zmian zostaje zaakceptowany do nowej wersji. Pytanie czy
+             lepsze są systemy zcentralizowane czy rozproszone to jedna z
+             wciąż żywych programistycznych świętych wojen, postaraj się
+             unikać kłótni na ten temat na listach dyskusyjnych
+             projektu.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
