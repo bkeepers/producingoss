@@ -997,29 +997,27 @@ uwagę następujące czynniki:</para>
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
-     <term><firstterm>zmiana</firstterm> (ang.
-         <firstterm>commit</firstterm>)</term>
+     <term><firstterm>commit</firstterm></term>
   <listitem><para>Dokonać zmiany w projekcie. Bardziej formalnie, zapisać
           zmianę w bazie danych systemu kontroli wersji w taki sposób, że
           może zostać włączona do przyszłych wydań projektu. "Commit" można
-          stosować jako czasownik lub rzeczownik, Jako rzeczownik to w
-          zasadzie synonim "zmiany"<footnote>W języku polskim nie ma dobrego
-              odpowiednika słowa "commit" (w omawianym tu znaczniu), więc
-              zachowana została angielska wersja w formie rzeczownika, lub
-              synonim "zmiana". Warto jednak wiedzieć, że niektórzy
-              programiści mówią slangowo "zkommitować" czy "kommitnąć"
-              (przyp.  tłum.)</footnote>. Na przykład: "Właśnie zrobiłem
-          commit poprawki dla błędu powodującego problemy ze stabilnością
-          serwera, zgłaszanego przez użytkowników Mac OS X. Jay, mógłbyś
-          przejrzeć zmianę i sprawdzić, czy dobrze używam w niej
+          stosować jako czasownik lub rzeczownik<footnote>W języku polskim
+              nie ma dobrego odpowiednika, więc zachowane zostało angielskie
+              słowo "commit" w formie rzeczownikowej. Warto jednak dodać, że
+              niektórzy programiści mówią slangowo "zkommitować" czy
+              "kommitnąć" (przyp.  tłum.)</footnote>, jako rzeczownik to w
+          zasadzie synonim "zmiany". Na przykład: "Właśnie zrobiłem commit
+          poprawki dla błędu powodującego problemy ze stabilnością serwera,
+          zgłaszanego przez użytkowników Mac OS X. Jay, mógłbyś przejrzeć
+          commit i sprawdzić, czy dobrze używam w niej
           alokatora?"</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
-     <term><firstterm>komentarz zmiany</firstterm> (ang.
+     <term><firstterm>komentarz do zmiany</firstterm> (ang.
          <firstterm>log&nbsp;message</firstterm>)</term>
-     <listitem><para>Krótka wiadomość dołączona do każdej zmiany, opisująca
-             jej naturę i cel. Komentarze do zmian to jedne z
+     <listitem><para>Krótka wiadomość dołączona do każdego commita,
+             opisująca jego naturę i cel. Komentarze do zmian to jedne z
              najważniejszych dokumentów każdego projektu, stanowią most
              pomiędzy bardzo technicznym językiem samego kodu, a bardziej
              zorientowanym na użytkownika językiem mówiącym o zadaniach,
@@ -1067,161 +1065,177 @@ uwagę następujące czynniki:</para>
 
  <varlistentry id="vc-vocabulary-checkout">
   <term><firstterm>checkout</firstterm></term>
-  <listitem><para>The process of obtaining a copy of the project from
-  a repository.  A checkout usually produces a directory tree called a
-  "working copy" (see below), from which changes may be committed back
-  to the original repository.  In some decentralized version control
-  systems, each working copy is itself a repository, and changes can
-  be pushed out to (or pulled into) any repository that's willing
-  to accept them.</para></listitem>
+  <listitem><para>Proces pobierania kopii projektu z repozytorium.
+          Checkout<footnote>W języku polskim nie ma dobrego odpowiednika,
+              więc zachowane zostało angielskie słowo "checkout" (przyp.
+              tłum.)</footnote> zazwyczaj tworzy drzewo podkatalogów,
+          nazywane "kopią roboczą" (patrz niżej), w której zmiany mogą być
+          wysyłane do repozytorium (jako commit). W niektórych
+          zdecentralizowanych systemach kontroli wersji każda kopia robocza
+          jest zarazem repozytorium, a zmiany mogą być wypychane z (lub
+          wciągane do) każdego repozytorium, które je
+          zaakceptuje.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
-  <term><firstterm>working copy</firstterm></term>
-  <listitem><para>A developer's private directory tree containing the
-  project's source code files, and possibly its web pages or other
-  documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling the working copy what
-  repository it comes from, what "revisions" (see below) of the files
-  are present, etc.  Generally, each developer has his own working
-  copy, in which he makes and tests changes, and from which he
-  commits.</para></listitem>
+     <term><firstterm>kopia robocza</firstterm> (<firstterm>ang. working
+             copy</firstterm>)</term>
+     <listitem><para>Prywatne drzewo katalogów każdego programisty,
+             zawierające kod źródłowy projektu i być może jego stronę WWW,
+             czy inne dokumenty. Kopia robocza zawiera także pewną ilość
+             metadanych, zarządzanych przez system kontroli wersji,
+             określających z jakiego repozytorium pochodzi, jakie "wersje"
+             (patrz niżej) plików są obecne, itd. Na ogół każdy programista
+             ma swoją własną kopię roboczą, w której dokonuje zmian i je
+             testuje, i z której wykonuje commit.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
-  <term><firstterm>revision</firstterm>,
-        <firstterm>change</firstterm>,
-        <firstterm>changeset</firstterm></term>
-  <listitem><para>A "revision" is usually one specific incarnation of
-  a particular file or directory.  For example, if the project starts
-  out with revision 6 of file F, and then someone commits a change to
-  F, this produces revision 7 of F.  Some systems also use
-  "revision", "change", or "changeset" to refer to a set of changes
-  committed together as one conceptual unit.</para> 
+     <term><firstterm>wersja</firstterm> (ang.
+         <firstterm>revision</firstterm>), <firstterm>zmiana</firstterm>
+         (ang. <firstterm>change</firstterm>), <firstterm>zbiór
+             zmian</firstterm> (ang.
+         <firstterm>changeset</firstterm>)</term>
+     <listitem><para>"Wersja" to na ogół konkretne wcielenie danego pliku
+             lub katalogu. Na przykład plik F może być najpierw w wersji 6,
+             następnie ktoś wykonuje commit zmieniający plik F, tworząc
+             wersję 7 pliku F. Niektóre systemy stosują pojęcia "wersja",
+             "zmiana" czy "zbiór zmian" aby opisać zbiór zmian, wysłanych w
+             jednym commicie jako jedna abstrakcyjna operacja.</para>
 
-  <para>These terms occasionally have distinct technical meanings in
-  different version control systems, but the general idea is always
-  the same: they give a way to speak precisely about exact points in
-  time in the history of a file or a set of files (say, immediately
-  before and after a bug is fixed).  For example: "Oh yes, she fixed
-  that in revision 10" or "She fixed that in revision 10 of
-  foo.c."</para>
+         <para>Niekiedy te pojęcia mają różne znaczenia w poszczególnych
+             systemach kontroli wersji, ale sama idea pozostaje bez zmian:
+             pozwalają one mówić precyzyjnie o pewnych punktach w czasie
+             historii pliku lub zbioru plików (na przykład przed i po
+             poprawce jakiegoś błędu). Na przykład: "Tak, naprawiła to w
+             wersji 10" lub "Naprawiła to w wersji 10 pliku foo.c".</para>
 
-  <para>When one talks about a file or collection of files without
-  specifying a particular revision, it is generally assumed that one
-  means the most recent revision(s) available.</para></listitem>
+         <para>Gdy ktoś mówi o pliku lub grupie plików bez wspominania o
+             konkretnej wersji, na ogół zakłada się, że ma na myśli jego
+             (ich) najnowszą wersję dostępną w
+             repozytorium.</para></listitem>
  </varlistentry>
 
   <sidebar id="version-vs-revision">
-  <title>"Version" Versus "Revision"</title>
-  <para>The word <firstterm>version</firstterm> is sometimes used as a
-  synonym for "revision", but I will not use it that way in this
-  book, because it is too easily confused with "version" in the sense
-  of a version of a piece of software&mdash;that is, the release or
-  edition number, as in "Version 1.0".  However, since the phrase
-  "version control" is already standard, I will continue to use it as
-  a synonym for "revision control" and "change control".</para>
+  <title>Wieloznaczność słowa "wersja"</title>
+  <para>Słowo wersja jest także używane w kontekście "wersji
+      oprogramowania", jak na przykład "wersja 1.0". Należy odróżnić wersję
+      w tym znaczeniu, i w znaczeniu systemu kontroli
+      wersji<footnote>Dlatego w języku angielskim na określenie "wersji" w
+          rozumieniu systemu kontroli wersji często stosowane jest słowo
+          "revision", zamiast "version" (przyp.  tłum.)</footnote>.
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
   <term><firstterm>diff</firstterm></term>
-  <listitem><para>A textual representation of a change.  A diff shows
-  which lines were changed and how, plus a few lines of surrounding
-  context on either side.  A developer who is already familiar with
-  some code can usually read a diff against that code and understand
-  what the change did, and even spot bugs.</para></listitem>
+  <listitem><para>Tekstowa reprezentacja zmiany. Diff wskazuje, które linie
+          uległy zmianie i w jaki sposób, pokazując przy okazji kilka linii
+          kontekstu przed i po. Programista, który zna dany obszar kodu może
+          na ogół przeczytać diff i zrozumieć, na czym polega zmiana, a być
+          może nawet wyłapać błędy.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
-  <term><firstterm>tag</firstterm></term>
-  <listitem><para>A label for a particular collection of files at
-  specified revisions.  Tags are usually used to preserve
-  interesting snapshots of the project.  For example, a tag is usually
-  made for each public release, so that one can obtain, directly from
-  the version control system, the exact set of files/revisions
-  comprising that release.  Common tag names are things like
-  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
-  etc.</para></listitem>
+     <term><firstterm>etykieta</firstterm> (ang.
+         <firstterm>tag</firstterm>)</term>
+     <listitem><para>Określa pewien zbiór plików w ściśle określonych
+             wersjach. Etykiety sa na ogół używane do oznaczania ważnych
+             momentów w życiu projektu. Na przykład etykieta jest na ogół
+             tworzona dla każdego publicznego wydania, tak, aby każdy mógł
+             pobrać bezpośrednio z repozytorium dokładnie te same wersje
+             plików, które zostały wydane. Popularnymi nazwami etykiet są na
+             przykład <literal>Release_1_0</literal>,
+             <literal>Delivery_00456</literal>, itd.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
-  <term><firstterm>branch</firstterm></term>
-  <listitem><para>A copy of the project, under version control but
-  isolated, so that changes made to the branch don't affect the rest
-  of the project, and vice versa, except when changes are
-  deliberately "merged" from one side to the other (see below).
-  Branches are also known as "lines of development".  Even when a
-  project has no explicit branches, development is still considered
-  to be happening on the "main branch", also known as the "main line"
-  or "<firstterm>trunk</firstterm>".</para>
+     <term><firstterm>gałąź</firstterm> (ang.
+         <firstterm>branch</firstterm>)</term>
+     <listitem><para>Kopia projektu znajdująca się w repozytorium, ale
+             izolowana w taki sposób, że zmiany w gałęzi nie wpływają na
+             resztę projektu, i odwrotnie, do czasu gdy zmiany nie zostaną
+             przez kogoś "scalone" (patrz niżej). Gałęzie bywają także
+             nazywane "liniami rozwoju". Nawet gdy projekt nie posiada wielu
+             gałęzi, mówi się że rozwój odbywa się na "głównej gałęzi",
+             także nazywanej "<firstterm>pniem</firstterm>" (ang.
+             <firstterm>trunk</firstterm>).</para>
 
-  <para>Branches offer a way to isolate different lines of development
-  from each other.  For example, a branch can be used for experimental
-  development that would be too destabilizing for the main trunk.  Or
-  conversely, a branch can be used as a place to stabilize a new
-  release.  During the release process, regular development would
-  continue uninterrupted in the main branch of the repository;
-  meanwhile, on the release branch, no changes are allowed except
-  those approved by the release managers.  This way, making a release
-  needn't interfere with ongoing development work.  See <xref
-  linkend="branches"/><phrase output="printed"> later in this
-  chapter</phrase> for a more detailed discussion of
-  branching.</para></listitem>
+         <para>Gałęzie dają możliwość odizolowania od siebie różnych linii
+             rozwoju. Na przykład gałąź może powstać na potrzeby
+             eksperymentalnego kodu, który mógłby zdestabilizować główną
+             gałąź. Albo odwrotnie, gałąź może być użyta jako miejsce, w
+             którym nowe wydanie będzie stabilizowane. Podczas procesu
+             wydania normalny rozwój może odbywać się w głównej gałęzi
+             repozytorium, a w tym samym czasie na gałęzi utworzonej dla
+             wydania nie będą akceptowane żadne zmiany oprócz tych, które
+             zostały dozwolone przez zarządzających wydaniem. W ten sposób
+             wydanie nowej wersji nie musi kolidować z normalnym rozwojem.
+             Patrz <xref linkend="branches"/><phrase output="printed"> dalej
+                 w tym rozdziale</phrase> aby dowiedzieć się więcej o
+             gałęziach.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
-  <term><firstterm>merge (a.k.a. port)</firstterm></term>
-  <listitem><para>To move a change from one branch to another.  This
-  includes merging from the main trunk to some other branch, or vice
-  versa.  In fact, those are the most common kinds of merges; it is
-  rare to port a change between two non-main branches.  See <xref
-  linkend="vc-singularity"/> for more about this kind of
-  merging.</para>
+     <term><firstterm>scalanie lub portowanie</firstterm> (ang.
+         <firstterm>merge</firstterm> lub
+         <firstterm>port</firstterm>)</term>
+     <listitem><para>Przeniesienie zmiany z jednej gałęzi na inną. Chodzi
+             zarówno o scalanie zmian z głównej gałęzi do innej gałęzi, jak
+             i w drugą stronę. To najczęściej stosowane w praktyce rodzaje
+             scaleń&mdash;rzadko przenosi się zmiany pomiędzy dwoma
+             gałęziami, z których żadna nie jest główną. Patrz <xref
+                 linkend="vc-singularity"/> oby dowiedzieć się więcej o
+             takich scalaniach.</para>
 
-  <para>"Merge" has a second, related meaning: it is what the version
-  control system does when it sees that two people have changed the
-  same file but in non-overlapping ways.  Since the two changes do not
-  interfere with each other, when one of the people updates their copy
-  of the file (already containing their own changes), the other
-  person's changes will be automatically merged in.  This is very
-  common, especially on projects where multiple people are hacking on
-  the same code.  When two different changes <emphasis>do</emphasis>
-  overlap, the result is a "conflict"; see below.</para>
+         <para>"Scalanie" ma jeszcze drugie, podobne znaczenie: to
+             zachowanie systemu kontroli wersji gdy stwierdzi, że dwóch
+             użytkowników dokonało zmian w tym samym pliku, które nie
+             zachodzą na siebie. Takie zmiany na ogół nie mają na siebie
+             wpływu, więc u tego użytkownika, który dokona aktualizacji
+             pliku (w którym sam dokonał zmian), zmiany innych zostaną
+             automatycznie scalone. To bardzo częsta sytuacja, szczególnie w
+             projektach, w których wiele osób pracuje nad tym samym kodem.
+             Gdy dwie różne zmiany <emphasis>zachodzą</emphasis> na siebie,
+             pojawia się "konflikt" (patrz niżej).</para>
   </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
-  <term><firstterm>conflict</firstterm></term>
-  <listitem><para>What happens when two people try to make different
-  changes to the same place in the code.  All version control systems
-  automatically detect conflicts, and notify at least one of the
-  humans involved that their changes conflict with someone else's.  It
-  is then up to that human to <firstterm>resolve</firstterm> the
-  conflict, and to communicate that resolution to the version control
-  system.</para></listitem>
+     <term><firstterm>konflikt</firstterm> (ang.
+         <firstterm>conflict</firstterm>)</term>
+     <listitem><para>Konflikt zachodzi, gdy dwie osoby próbują dokonać zmian
+             dokładnie w tym samym miejscu kodu. Wszystkie systemy kontroli
+             wersji automatycznie wykrywają konflikty i powiadamiają jednego
+             z użytkowników o ich istnieniu. Reszta jest w rękach człowieka,
+             musi on ręcznie <firstterm>rozwiązać</firstterm> (ang.
+             <firstterm>resolve</firstterm>) konflikt i poinformować o tym
+             system kontroli wersji.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
-  <term><firstterm>lock</firstterm></term>
-  <listitem><para>A way to declare an exclusive intent to change a
-  particular file or directory.  For example, "I can't commit any
-  changes to the web pages right now.  It seems Alfred has them all
-  locked while he fixes their background images."  Not all version
-  control systems even offer the ability to lock, and of those that
-  do, not all require the locking feature to be used.  This is because
-  parallel, simultaneous development is the norm, and locking people
-  out of files is (usually) contrary to this ideal.</para>
+     <term><firstterm>blokada</firstterm> (ang.
+         <firstterm>lock</firstterm>)</term>
+     <listitem><para>Sposób na zadeklarowanie wyłączności na zmiany w danym
+             pliku lub katalogu. Na przykład: "Nie mogę zrobić commitu moich
+             zmian w stronach WWW. Wygląda na to, że Alfred założył blokadę
+             na czas poprawek w obrazkach tła." Nie wszystkie systemy
+             kontroli wersji pozwalają na stosowanie blokad, a z tych które
+             pozwalają, nie wszystkie wymagają korzystania z nich. To
+             dlatego, że równoległy wspólny rozwój jest standardem, a
+             blokowanie plików przed zmianami innych jest (na ogół)
+             sprzeczne z tą ideą.</para>
 
-  <para>Version control systems that require locking to make commits
-  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
-  Those that do not are said to use the
-  <firstterm>copy-modify-merge</firstterm> model.  An excellent
-  in-depth explanation and comparison of the two models may be found
-  at <ulink
-  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
-  general, the copy-modify-merge model is better for open source
-  development, and all the version control systems discussed in this
-  book support that model.</para></listitem>
+         <para>Mówi się, że systemy kontroli wersji, które wymagają
+             stosowania blokad aby wykonać commit, pracują w modelu
+             <firstterm>blokada-modyfikacja-odblokowanie</firstterm>. Te,
+             które ich nie wymagają stosują model
+             <firstterm>kopia-modyfikacja-scalanie</firstterm>. Doskonałe
+             wyjaśnienie i porównanie obu modeli można znaleźć w <ulink
+                 url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.
+             Na ogół model kopia-modyfikacja-scalanie jest lepszy dla
+             rozwoju otwartego oprogramowania, i wszystkie systemy kontroli
+             wersji omówione w tym rozdziale wspierają taki
+             model.</para></listitem>
  </varlistentry>
 
 </variablelist>
