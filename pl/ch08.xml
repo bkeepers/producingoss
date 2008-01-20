@@ -881,92 +881,90 @@ wyniku, niż gdyby ta decyzja została im narzucona z zewnątrz.</para>
 <sect2 id="patch-manager">
 <title>Menedżer łatek</title>
 
-<para>In a free software project that receives a lot of patches,
-keeping track of which patches have arrived and what has been decided
-about them can be a nightmare, especially if done in a decentralized
-way.  Most patches arrive as posts to the project's development
-mailing list (though some may appear first in the issue tracker, or on
-external web sites), and there are a number of different routes a
-patch can take after arrival.</para>
+<para>W projekcie wolnego oprogramowania, do którego napływa wiele łatek,
+panowanie nad tym, które łatki nadeszły i co zdecydowano w ich sprawie,
+może stać się koszmarem, zwłaszcza w środowisku rozproszonym. Większość 
+łatek napływa w postaci wiadomości na roboczą listę dyskusyjną projektu 
+(choć niektóre mogą się najpierw pojawić w systemie śledzenia zgłoszeń 
+lub na niezależnych stronach w sieci) i istnieje wiele różnych ścieżek,
+którymi może podążać zgłoszona łatka.</para>
 
-<para>Sometimes someone reviews the patch, finds problems, and bounces
-it back to the original author for cleanup.  This usually leads to an
-iterative process&mdash;all visible on the mailing list&mdash;in which
-the original author posts revised versions of the patch until the
-reviewer has nothing more to criticize.  It is not always easy to tell
-when this process is done: if the reviewer commits the patch, then
-clearly the cycle is complete.  But if she does not, it might be
-because she simply didn't have time, or doesn't have commit access
-herself and couldn't rope any of the other developers into doing
-it.</para>
+<para>Czasami ktoś przegląda łatkę, znajduje problem i odsyła ją z 
+powrotem do jej autora w celu poprawienia. To zazwyczaj prowadzi do 
+procesu wzajemnej wymiany wiadomości &mdash; wszystkie są widoczne na 
+liście dyskusyjnej &mdash; w której pierwotny autor wysyła kolejne 
+wersje łatki do chwili kiedy korektor nie ma już nic do krytykowania. 
+Nie zawsze łatwo jest stwierdzić, kiedy ten proces się zakończył: jeśli 
+korektor wprowadza łatkę do kodu, to z pewnością ten cykl się zakończył. 
+Ale jeśli tego nie robi, to może wynikać po prostu z braku czasu lub 
+stąd, że sam nie ma prawa zapisu i nie zdołał zmusić do tego innego 
+programisty.</para>
 
-<para>Another frequent response to a patch is a freewheeling
-discussion, not necessarily about the patch itself, but about whether
-the concept behind the patch is good.  For example, the patch may fix
-a bug, but the project prefers to fix that bug in another way, as part
-of solving a more general class of problems.  Often this is not known
-in advance, and it is the patch that stimulates the discovery.</para>
+<para>Inną częstą reakcją na łatkę jest rozpętanie się dyskusji,
+niekoniecznie na temat samej łatki, ale dotyczącej tego czy sama jej 
+idea jest słuszna. Na przykład łatka może naprawiać błąd, ale projekt
+woli to zrobić inaczej, w ramach naprawy bardziej ogólnej klasy 
+problemów. Często nie wiadomo o tym od początku i dopiero pojawienie 
+się łatki doprowadza do takiego rozwiązania.</para>
 
-<para>Occasionally, a posted patch is met with utter silence.  Usually
-this is due to no developer having time <emphasis>at that
-moment</emphasis> to review the patch, so each hopes that someone else
-will do it.  Since there's no particular limit to how long each person
-waits for someone else to pick up the ball, and meanwhile other
-priorities are always coming up, it's very easy for a patch to slip
-through the cracks without any single person intending for that to
-happen.  The project might miss out on a useful patch this way, and
-there are other harmful side effects as well: it is discouraging to
-the author, who invested work in the patch, and it makes the project
-as a whole look a bit out of touch, especially to others considering
-writing patches.</para>
+<para>Zdarza się, że łatka spotyka się z głuchą ciszą. Zwykle dzieje 
+się tak dlatego, że żaden programista <emphasis>akurat w tej 
+chwili</emphasis> nie ma czasu na jej przejrzenie, więc każdy liczy na 
+to, że zrobi to ktoś inny. Ponieważ nie ma żadnego limitu na to, ile
+każda z osób czeka aż ktoś podejmie pałeczkę, a w tym czasie zawsze 
+wypływają inne ważne rzeczy, to łatka bardzo łatwo może się zagubić w 
+sposób przez nikogo nie zamierzony. Projekt może w ten sposób przegapić
+użyteczną łatkę, a to może doprowadzić także do innych szkodliwych 
+efektów ubocznych: może to zniechęcać autora, który włożył w tę łatkę
+swoją pracę, i sprawia wrażenie, jakby cały projekt nieco stracił 
+kontakt z rzeczywistością, zwłaszcza w oczach innych osób planujących 
+napisać łatkę.</para>
 
-<para>The patch manager's job is to make sure that patches don't "slip
-through the cracks."  This is done by following every patch through to
-some sort of stable state.  The patch manager watches every mailing
-list thread that results from a patch posting.  If it ends in a commit
-of the patch, he does nothing.  If it goes into a review/revise
-iteration, ending with a final version of the patch but no commit, he
-files an issue pointing to the final version, and to the mailing list
-thread around it, so that there is a permanent record for developers
-to follow up on later.  If the patch addresses an existing issue, he
-annotates that issue with the relevant information, instead of opening
-a new issue.</para>
+<para>Zadaniem menedżera łatek jest upewnić się, że łatki nie "gubią 
+się". Robi to śledząc każdą łatkę aż do momentu osiągnięcią przez nią
+swego rodzaju stabilności. Menedżer łatek obserwuje każdy wątek na 
+liście wywołany przez wysłanie łatki. Jeśli kończy się to zapisem do 
+kodu, to nic nie robi. Jeśli dochodzi do cyklu kolejnych 
+przeglądów/rewizji, który kończy się finalną wersją łatki, ale bez 
+zapisu, to wypełnia zgłoszenie wskazujące na finalną wersję oraz na 
+związany z nią wątek na liście dyskusyjnej, aby pozostał trwały ślad dla
+programistów, którzy zajmą się tym potem. Jeśli łatka dotyczy 
+istniejącego zgłoszenia, odpowiednio je opisuje zamiast otwierać nowe.
+</para>
 
-<para>When a patch gets no reaction at all, the patch manager waits a
-few days, then follows up asking if anyone is going to review it.
-This usually gets a reaction: a developer may explain that she doesn't
-think the patch should be applied, and give the reasons why, or she may
-review it, in which case one of the previously described paths is
-taken.  If there is still no response, the patch manager may or may
-not file an issue for the patch, at his discretion, but at
-least the original submitter got <emphasis>some</emphasis>
-reaction.</para>
+<para>Gdy łatka nie wzbudza żadnej reakcji, menedżer łatek czeka przez
+kilka dni, a następnie pyta czy ktoś zamierza się nią zająć. Zwykle to
+powoduje reakcję: programista może wyjaśnić, że jego zdaniem łatka nie
+powinna zostać zaaplikowana i podać przyczynę, albo przejrzeć łatkę, a
+wówczas idzie ona jedną z poprzednio podanych ścieżek. Jeżeli nadal nic
+się nie dzieje, menedżer łatek może - jeśli tak zdecyduje - wypełnić 
+zgłoszenie dla tej łatki, ale autor łatki przynajmniej dostaje 
+<emphasis>jakiś</emphasis> sygnał zwrotny.</para>
 
-<para>Having a patch manager has saved the Subversion development team
-a lot of time and mental energy.  Without a designated person to take
-responsibility, every developer would constantly have to worry "If I
-don't have time to respond to this patch right now, can I count on
-someone else doing it?  Should I try to keep an eye on it?  But if
-other people are also keeping an eye on it, for the same reasons, then
-we'd have needlessly duplicated effort."  The patch manager removes
-the second-guessing from the situation.  Each developer can make the
-decision that is right for her at the moment she first sees the patch.
-If she wants to follow up with a review, she can do that&mdash;the
-patch manager will adjust his behavior accordingly.  If she wants to
-ignore the patch completely, that's fine too; the patch manager will
-make sure it isn't forgotten.</para>
+<para>Posiadanie menedżera łatek zaoszczędziło zespołowi Subversion 
+mnóstwo czasu i energii psychicznej. Bez osoby wyznaczonej do takiej
+roli każdy programista musiałby się ciągle zastanawiać: "Jeśli ja nie
+mam teraz czasu żeby odpowiedzieć na tę łatkę, to czy moge liczyć że 
+ktoś inny to zrobi? Czy powinienem starać się o niej pamiętać? Ale jeśli
+inni także o niej z jakiegoś powodu pamiętają, to będzie to niepotrzebne
+dublowanie wysiłków." Osoba menedżera łatek unieważnia takie spekulacje.
+Każdy programista może podjąć odpowiednią dla siebie decyzję przy 
+pierwszym kontakcie z łatką. Jeśli chce ją przejrzeć, to może to zrobić
+&mdash; menedżer łatek dostosuje się do tego. Jeśli chce zupełnie ją 
+zignorować, to także jest w porządku; menedżer łatek zadba o to, aby nie
+została zapomniana.</para>
 
-<para>Because this system works only if people can depend on the patch
-manager being there without fail, the role should be held formally.
-In Subversion, we advertised for it on the development and users
-mailing lists, got several volunteers, and took the first one who
-replied.  When that person had to step down (see
-<xref linkend="transitions"/><phrase output="printed"> later in
-this chapter</phrase>), we did the same thing again.
-We've never tried having multiple people share the role, because of
-the communications overhead that would be required between them; but
-perhaps at very high volumes of patch submission, a multiheaded patch
-manager might make sense.</para>
+<para>Ponieważ ten system działa tylko jeśli ludzie mogą ślepo polegać 
+na obecności menedżera łatek, to ta rola powinna być obejmowana 
+formalnie. W Subversion ogłaszaliśmy poszukiwania do niej na liście 
+roboczej i liście użytkowników, a ze zgłaszających się ochotników 
+wybieraliśmy tego, który pierwszy odpowiedział. Kiedy ta osoba musiała 
+zrezygnować (zobacz <xref linkend="transitions"/><phrase 
+output="printed">dalej w tym rozdziale</phrase>), powtarzaliśmy ten 
+proces. Nigdy nie próbowaliśmy obsadzić w tej roli więcej niż jedną 
+osobę, ponieważ wymagałoby to dodatkowej komunikacji między nimi; ale
+być może w warunkach dużych ilości zgłaszanych łatek taki zespołowy 
+menedżer mógłby mieć sens.</para>
 
 </sect2>
 
