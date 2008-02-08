@@ -1884,8 +1884,12 @@ interaction.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="share-management">
+<!--
 <title>Share Management Tasks as Well as Technical Tasks</title>
+-->
+<title>技術的な作業だけでなく管理作業もみんなで</title>
 
+<!--
 <para>Share the management burden as well as the technical burden of
 running the project.  As a project becomes more complex, more and more
 of the work is about managing people and information flow.  There is
@@ -1893,7 +1897,19 @@ no reason not to share that burden, and sharing it does not
 necessarily require a top-down hierarchy either&mdash;what happens in
 practice tends to be more of a peer-to-peer network topology than a
 military-style command structure.</para>
+-->
+<para>
+  プロジェクトを運営していくにあたっては、
+  技術的な作業だけでなく管理作業も大切です。
+  プロジェクトが複雑になればなるほど、
+  メンバーや情報の流れの管理作業が多くなります。
+  管理作業だってみんなで協力してやるようにしましょう。
+  別にトップダウンの階層がなくたってそれは可能です。
+  実際のところ、行う作業というのは軍隊式の命令系統ではなく
+  ピアツーピアのネットワークトポロジーに近いものだからです。
+</para>
 
+<!--
 <para>Sometimes management roles are formalized, and sometimes they
 happen spontaneously.  In the Subversion project, we have a patch
 manager, a translation manager, documentation managers, issue managers
@@ -1905,7 +1921,26 @@ Below we'll examine these roles, and a couple of others, in detail
 <xref linkend="release-manager"/> and
 <xref linkend="release-owner"/><phrase output="printed"> earlier
 in this chapter</phrase>).</para>
+-->
+<para>
+  「○○管理者」を正式に任命することもあれば、
+  その場のノリで決めてしまうこともあります。
+  Subversion プロジェクトには、「パッチマネージャー」
+  「翻訳マネージャー」「ドキュメントマネージャー」
+  「バグマネージャー (非公式ですが)」そして
+  「リリースマネージャー」がいます。
+  これらの中には意識して任命したものもあれば、
+  勝手に立候補してくれたものもあります。
+  プロジェクトが成長するにつれて、
+  さらにいろいろな役割が追加されることになるでしょう。
+  以下で、これらの役割 (に加えてさらにいくつかのもの)
+  についての詳細を説明します (リリースマネージャーについては省略します。
+  すでに <phrase output="printed">本章の前半の</phrase>
+  <xref linkend="release-manager"/> や
+  <xref linkend="release-owner"/> で取り上げているからです)。
+</para>
 
+<!--
 <para>As you read the role descriptions, notice that none of them
 requires exclusive control over the domain in question.  The issue
 manager does not prevent other people from making changes in the
@@ -1918,7 +1953,24 @@ multiple efforts reinforce rather than conflict.  Domain managers
 should also document the processes by which they do their work, so
 that when one leaves, someone else can pick up the slack right
 away.</para>
+-->
+<para>
+  以下の説明を読むにあたっては、
+  これらの役割の担当範囲がが決してお互いに排他的なものではないことに注意しましょう。
+  たとえば問題マネージャーでなくても問題データベースを変更することがあるでしょうし、
+  FAQ の編集権を FAQ マネージャーに独占させてしまうこともありません。
+  これらの役割というのはあくまでも責任の範囲に関するものであり、
+  独占させるためのものではありません。
+  各マネージャーの仕事で重要なのは、
+  「誰かが自分の担当分野の作業をしていることに気づいたら、
+  その人がうまくやっていけるように自分の方針を伝える。
+  そして、みんなの作業が競合しないようにする」
+  ということです。マネージャーは、自分の担当分野の作業手順書を作成しなければなりません。
+  そうすれば、何らかの理由でマネージャーが作業をできなくなったとしても
+  誰かがすぐに後を引き継ぐことができます。
+</para>
 
+<!--
 <para>Sometimes there is a conflict: two or more people want the same
 role.  There is no one right way to handle this.  You could suggest
 that each volunteer post a proposal (an "application") and have all
@@ -1927,10 +1979,25 @@ potentially awkward.  I find that a better technique is just to ask the
 multiple candidates to settle it among themselves.  They usually will,
 and will be more satisfied with the result than if a decision had been
 imposed on them from the outside.</para>
+-->
+<para>
+  特定の役割を希望する人が複数あらわれることもあります。
+  このような場合にそれをうまく処理する方法には「これが正解!」というものはありません。
+  たとえば、希望者に所信表明を出してもらい、
+  それをもとにコミッターによる投票を行うという手もあります。
+  しかしこれは面倒ですし、後に尾を引いてしまう可能性があります。
+  それよりは、希望者たちがお互いに話し合って決めてもらうほうがいいでしょう。
+  そうすれば、結果がどうであれ、
+  他人に決められてしまうよりは満足のいくものになるはずです。
+</para>
 
 <sect2 id="patch-manager">
+<!--
 <title>Patch Manager</title>
+-->
+<title>パッチマネージャー</title>
 
+<!--
 <para>In a free software project that receives a lot of patches,
 keeping track of which patches have arrived and what has been decided
 about them can be a nightmare, especially if done in a decentralized
@@ -1938,7 +2005,19 @@ way.  Most patches arrive as posts to the project's development
 mailing list (though some may appear first in the issue tracker, or on
 external web sites), and there are a number of different routes a
 patch can take after arrival.</para>
+-->
+<para>
+  パッチがたくさん送られてくるフリーソフトウェアプロジェクトでは、
+  「どんなパッチが投稿されたのか」「そのパッチをどう処理することにしたのか」
+  といった情報を追いかけるのは大変です。
+  中央管理体制でない場合などは特にそうでしょう。
+  大半のパッチはそのプロジェクトの開発者向けメーリングリストに投稿されます
+  (中にはバグ追跡システムに投稿したり
+  外部のウェブサイトで公開したりといったものもあります)。
+  そしてそのパッチをどのように処理するかについては何通りものパターンがあります。
+</para>
 
+<!--
 <para>Sometimes someone reviews the patch, finds problems, and bounces
 it back to the original author for cleanup.  This usually leads to an
 iterative process&mdash;all visible on the mailing list&mdash;in which
@@ -1949,14 +2028,42 @@ clearly the cycle is complete.  But if she does not, it might be
 because she simply didn't have time, or doesn't have commit access
 herself and couldn't rope any of the other developers into doing
 it.</para>
+-->
+<para>
+  時には、パッチをレビューした結果何か問題が見つかり、
+  元の投稿者に差し戻しとなることもあります。
+  このようなやり取りは、通常は何度か (メーリングリスト上で)
+  繰り返されることになります。元の投稿者がパッチを何度か書き直し、
+  レビューする側が何も文句のつけようがなくなるまでこれが続きます。
+  この繰り返しがいつ完了するのかがはっきりわかるとは限りません。
+  もしレビューした人がパッチをコミットすれば
+  「これで完了」とはっきりわかるのですが、そうでない場合はいろいろな理由が考えられます。
+  「コミットする時間がないだけ」「そもそもその人にコミット権がなく、
+  他の開発者にコミットを依頼できていない」などの理由があるでしょう。
+</para>
 
+<!--
 <para>Another frequent response to a patch is a freewheeling
 discussion, not necessarily about the patch itself, but about whether
 the concept behind the patch is good.  For example, the patch may fix
 a bug, but the project prefers to fix that bug in another way, as part
 of solving a more general class of problems.  Often this is not known
 in advance, and it is the patch that stimulates the discovery.</para>
+-->
+<para>
+  パッチに対する反応としてよくあるもうひとつのパターンは、
+  そのパッチをネタにして議論が紛糾することです。
+  議論の内容はパッチそのものである必要はなく、
+  そのパッチの背景にある考え方のよしあしについてが話題になることもあります。
+  たとえば、ある特定のバグを修正するパッチが投稿されたとしましょう。
+  しかし、開発者側ではもっと別の修正方法のほうがよいと考えている
+  (問題をより一般化して、もっと広い範囲を修正することを考えているなど)
+  ということがあります。開発者側の考える修正方法は、
+  何も以前から頭にあったものであるとは限りません。
+  投稿されたパッチを見ることで、別の修正方法をひらめくということもあります。
+</para>
 
+<!--
 <para>Occasionally, a posted patch is met with utter silence.  Usually
 this is due to no developer having time <emphasis>at that
 moment</emphasis> to review the patch, so each hopes that someone else
@@ -1969,7 +2076,24 @@ there are other harmful side effects as well: it is discouraging to
 the author, who invested work in the patch, and it makes the project
 as a whole look a bit out of touch, especially to others considering
 writing patches.</para>
+-->
+<para>
+  たまに、投稿したパッチが完全にスルーされてしまうことがあります。
+  これは、<emphasis>たまたま</emphasis>
+  そのときにパッチをレビューする暇のある開発者がいなかっただけ
+  (みんな、誰か他の人がみてくれるだろうと思っていただけ)
+  ということが多いようです。「誰かが相手をするのを待つ」
+  のに時間の制限はありませんし、それ以外にも重要な作業はいくらでもあります。
+  かくしてそのパッチは誰の目にとまることもなくやみに葬り去られていきます。
+  せっかくの有用なパッチがこんなことで見過ごされてしまう可能性があるわけです。
+  それだけでなく、さらに悪い副作用もあります。せっかく時間を割いてくれた
+  パッチ作者のやる気をそいでしまうということです。
+  さらに「パッチのひとつでも書いてやろうか」
+  と考えているその他の人たちにとっても、
+  そのプロジェクトが魅力あるものには見えなくなるでしょう。
+</para>
 
+<!--
 <para>The patch manager's job is to make sure that patches don't "slip
 through the cracks."  This is done by following every patch through to
 some sort of stable state.  The patch manager watches every mailing
@@ -1981,7 +2105,23 @@ thread around it, so that there is a permanent record for developers
 to follow up on later.  If the patch addresses an existing issue, he
 annotates that issue with the relevant information, instead of opening
 a new issue.</para>
+-->
+<para>
+  パッチマネージャーの役割は、この手の「闇に葬り去られてしまう」
+  パッチをなくすことです。そのために、
+  次のような手順ですべてのパッチを安定した状態にします。
+  パッチマネージャーはすべてのメーリングリストのスレッドを監視し、
+  パッチを含む投稿を拾い出します。
+  最終的にそのパッチがコミットされているのなら特に何もすることはありません。
+  レビューと修正を繰り返した結果、最終版のパッチがまだコミットされていないという場合は、
+  最終版のパッチ (とメーリングリストでの議論) を問題追跡システムに投稿します。
+  そうすれば、開発者が後でその記録を追うのが容易になります。
+  もしそのパッチが特定の問題を修正するためのものなら、
+  問題追跡システム上に登録されているその問題のコメントとしてパッチの情報を加えます。
+  この場合は、新たな問題として投稿することはありません。
+</para>
 
+<!--
 <para>When a patch gets no reaction at all, the patch manager waits a
 few days, then follows up asking if anyone is going to review it.
 This usually gets a reaction: a developer may explain that she doesn't
@@ -1991,7 +2131,22 @@ taken.  If there is still no response, the patch manager may or may
 not file an issue for the patch, at his discretion, but at
 least the original submitter got <emphasis>some</emphasis>
 reaction.</para>
+-->
+<para>
+  パッチに対する反応が何もないまま数日が経過した場合は、
+  パッチマネージャーが「誰かレビューする人はいませんか?」とフォローします。
+  そうすれば、普通は何らかの反応があります。
+  「そのパッチは適用する価値があるとは思えない。なぜなら……」
+  とか「じゃあ私がレビューしましょうか?」などです。
+  反応があった場合は、先ほど説明したような手順で処理していきます。
+  それでも誰も反応しなかった場合は、
+  そのパッチを問題追跡システムに登録するかどうかは
+  パッチマネージャーの判断で決めます。しかし、
+  少なくともパッチの投稿者に対しては <emphasis>何らかの</emphasis>
+  反応を返すようにしましょう。
+</para>
 
+<!--
 <para>Having a patch manager has saved the Subversion development team
 a lot of time and mental energy.  Without a designated person to take
 responsibility, every developer would constantly have to worry "If I
@@ -2005,7 +2160,25 @@ If she wants to follow up with a review, she can do that&mdash;the
 patch manager will adjust his behavior accordingly.  If she wants to
 ignore the patch completely, that's fine too; the patch manager will
 make sure it isn't forgotten.</para>
+-->
+<para>
+  パッチマネージャーを任命したおかげで、
+  Subversion の開発チームは時間と気力を大幅に節約することができました。
+  専任の担当者がいなければ、開発者みんなが
+  「今すぐには返事できそうにないけれど、誰か他の人が反応してくれるのかなあ?
+  それとも私が後で対応したほうがいいのかな?
+  でも、もし誰か他の人も同じように考えているのなら時間の無駄だなあ」
+  と常に心配するはめになっていたでしょう。
+  パッチマネージャーのおかげで、このような裏読みをすることはなくなりました。
+  各開発者は、パッチを見たときの状況に応じてどう処理するかを決めることができます。
+  もしそれをレビューしたいのならそうします。
+  マッチマネージャーが適切にフォローしてくれるでしょう。
+  もしそのパッチを完全に無視したいのならそれも結構。
+  あなたが見なかったとしても、
+  パッチマネージャーがそのパッチをきちんと扱ってくれます。
+</para>
 
+<!--
 <para>Because this system works only if people can depend on the patch
 manager being there without fail, the role should be held formally.
 In Subversion, we advertised for it on the development and users
@@ -2017,6 +2190,22 @@ We've never tried having multiple people share the role, because of
 the communications overhead that would be required between them; but
 perhaps at very high volumes of patch submission, a multiheaded patch
 manager might make sense.</para>
+-->
+<para>
+  この仕組みがうまく動作するのは、
+  パッチマネージャーがきちんと処理してくれるとみんなが信頼できるときだけです。
+  つまり、この役割の担当者はノリで決めるのではなく正式な手続きを踏んで決める必要があります。
+  Subversion プロジェクトの場合は、まず開発者向けメーリングリストと
+  ユーザ向けメーリングリストで告知を行いました。
+  何人かが立候補してくれましたが、最初に返事をくれた人を担当者として任命しました。
+  後にその人が担当を降りたとき (<phrase output="printed">本章の後半の</phrase>
+  <xref linkend="transitions"/> をごらんください)
+  にも、同じ手順を繰り返しました。
+  同時に複数名を任命することは決してしませんでした。
+  なぜなら、そうすると担当者間のコミュニケーションの手間がかかるからです。
+  しかし、パッチの量があまりにも多い場合には
+  複数担当者制を敷くのもよいでしょう。
+</para>
 
 </sect2>
 
