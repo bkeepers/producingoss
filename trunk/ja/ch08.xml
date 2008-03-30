@@ -2559,15 +2559,29 @@ healthy.</para>
 </sect2>
 
 <sect2 id="issue-manager">
+<!--
 <title>Issue Manager</title>
+-->
+<title>バグマネージャー</title>
 
+<!--
 <para>The number of issues in a project's bug tracker grows in
 proportion to the number of people using the software.  Therefore,
 even as you fix bugs and ship an increasingly robust program, you
 should still expect the number of open issues to grow essentially
 without bound.  The frequency of duplicate issues will also increase,
 as will the frequency of incomplete or poorly described issues.</para>
+-->
+<para>
+  プロジェクトのバグ追跡システムに投稿される問題の数は、
+  そのソフトウェアを使う人の数に比例して増えていきます。
+  したがって、いくらバグを修正して安全なプログラムを公開するようにしても、
+  未対応の問題の数は際限なく増えていくことを覚悟しなければなりません。
+  同じ問題が何度も投稿されることも多くなるでしょうし、
+  何が言いたいのかさっぱりわからないバグ報告も増えてくるでしょう。
+</para>
 
+<!--
 <para>Issue managers help alleviate these problems by watching what
 goes into the database, and periodically sweeping through it looking
 for specific problems.  Their most common action is probably to fix up
@@ -2581,7 +2595,22 @@ instead of everyone trying to do it <foreignphrase>ad
 hoc</foreignphrase>.  When the group tries to do it in a decentralized
 manner, no single individual acquires a deep expertise in the content
 of the database.</para>
+-->
+<para>
+  バグマネージャーの役割は、これらの問題を軽減するために
+  バグデータベースを常に監視し、定期的に整理整頓することです。
+  主な作業は、バグ報告の内容を補足することです。
+  バグ報告の中には、いくつかの項目が正しく埋められていないものもあれば
+  既存のバグと同じ内容を報告しているようなものもあるからです。
+  担当者がバグデータベースの内容に精通していればいるほど、
+  既存のバグと重複しているバグ報告を見つけやすくなります。
+  これが、バグ報告の対応に専任の担当者を割り当てる利点のひとつとなります。
+  全員が臨機応変に対応するより、そのほうが効率的だからです。
+  バグ対応を一元管理せずに分散管理しようとすると、
+  結局誰一人としてバグデータベースの内容に精通した人がいなくなってしまいます。
+</para>
 
+<!--
 <para>Issue managers can also help map between issues and individual
 developers.  When there are a lot of bug reports coming in, not every
 developer may read the issue notification mailing list with equal
@@ -2592,7 +2621,22 @@ course, this has to be done with a sensitivity to everything else
 going on in development, and to the recipient's desires and
 temperament.  Therefore, it is often best for issue managers to be
 developers themselves.</para>
+-->
+<para>
+  バグマネージャーは、個々のバグ報告に対して
+  個別の開発者を割り当てる作業も手伝います。
+  大量のバグ報告が飛び交うようになると、
+  中にはバグ報告の通知用メーリングリストをチェックするのが
+  おっくうになる開発者も出てくるでしょう。
+  開発チームの誰かがすべての報告にきちんと目を通しておくことにすれば、
+  そんな場合でも適切な担当者にきちんとバグ対応をお願いすることができるでしょう。
+  もちろん、この作業は開発の妨げにならないよう注意して行う必要があります。
+  対応をお願いする相手の状況を考慮することも大切です。
+  これらのことを考えると、
+  バグマネージャーは開発者チームの中から任命するとよいでしょう。
+</para>
 
+<!--
 <para>Depending on how your project uses the issue tracker, issue
 managers can also shape the database to reflect the project's
 priorities.  For example, in Subversion we schedule issues into
@@ -2612,7 +2656,39 @@ around, and issues must be moved from one milestone to another so that
 each release remains manageable.  This, again, is best done by people
 who have an overall sense of what's in the database, and how various
 issues relate to each other.</para>
+-->
+<para>
+  そのプロジェクトでバグ追跡システムをどのように利用するのかにもよりますが、
+  プロジェクト内の優先順位に応じて
+  バグデータベースを調整する役割もバグマネージャーにはあります。
+  たとえば Subversion プロジェクトでは、
+  各バグ報告に対して「将来のどのリリースで対応するか」を設定します。
+  そうすれば、誰かに「あのバグはいつ修正されるの？」と聞かれたときに
+  正確な日付がわからなくても「次の次のリリースで対応します」と答えることができます。
+  この「リリース」は、バグ追跡システム上では「ターゲットマイルストーン」
+  という項目で管理します。IssueZilla
+  <footnote>
+    <para>
+      IssueZilla は私たちが使用しているバグ追跡システムで、
+      BugZilla の後継にあたるものです。
+    </para>
+  </footnote>
+  にはこの項目が存在します。Subversion プロジェクトのルールとして、
+  各リリースにはひとつの大きな新機能追加といくつかのバグ修正を含めることにしています。
+  将来のリリースに向けた各バグ報告 (新機能も含みます。
+  新機能も同じデータベースで管理しています) に対して適切な
+  ターゲットマイルストーンを設定しておくことで、
+  それを見れば今後のリリースの予定がわかるようにしています。
+  しかし、一度設定したターゲットマイルストーンがずっとそのままでいることは
+  めったにありません。新しいバグが飛び込んでくると、
+  作業の優先順位が変わることもあるでしょう。
+  そんな場合は既存のバグのマイルストーンを移動させないと
+  リリース計画を管理できなくなります。
+  こういった作業をおこなうには、やはり特定の担当者を割り当てて
+  バグデータベース全体の状況と各報告の内容を把握させておくことが大切です。
+</para>
 
+<!--
 <para>Another thing issue managers do is notice when issues become
 obsolete.  Sometimes a bug is fixed accidentally as part of an
 unrelated change to the software, or sometimes the project changes its
@@ -2628,12 +2704,36 @@ lifetime, shepherding it to resolution or oblivion as necessary.  When
 the database is that large, the issue manager becomes more of an
 overall coordinator, spending less time looking at each issue herself
 and more time getting it into the right person's hands.</para>
+-->
+<para>
+  バグマネージャーのもうひとつの役割は、
+  バグ報告の内容が現状に即していないものになった場合の対応です。
+  全然関係ない別の変更の結果、偶然にバグがなおってしまうこともあります。
+  あるいは、最初はバグとして対処しようとしていたけれど
+  結局それは仕様ということにしてしまうという場合もあります。
+  現状に即していないバグ報告を見つけるのは大変な手間のかかる作業です。
+  機械的にやるとするなら、データベース内のすべてのバグをチェックしなければなりません。
+  しかし、時を経て報告の量が増えてくればくるほど、
+  総チェックいうのは現実的ではなくなります。
+  ある程度の段階になると、データベースをまともな状態に保つ唯一の方法は
+  「分割して統治」ということになるでしょう。
+  バグ報告をカテゴリ分けし、それぞれを適切な開発者 (あるいはチーム)
+  に振り分けるのです。その後の対応はすべて振り分けられた側が責任を持つことにします。
+  これほどデータベースが巨大化すると、バグマネージャーは
+  どちらかというと全体の調整役として働くことが多くなります。
+  自分自身で個々のバグを処理するのではなく、
+  適切な人にそれを振り分ける役になるということです。
+</para>
 
 </sect2>
 
 <sect2 id="faq-manager">
+<!--
 <title>FAQ Manager</title>
+-->
+<title>FAQ マネージャー</title>
 
+<!--
 <para>FAQ maintenance is a surprisingly difficult problem.  Unlike
 most other documents in a project, whose content is planned out in
 advance by the authors, a FAQ is a wholly reactive document (see
@@ -2645,7 +2745,24 @@ or semi-duplicate entries.  Even when it does not have any obvious
 problems like that, there are often unnoticed interdependencies
 between items&mdash;links that should be made but aren't&mdash;because
 the related items were added a year apart.</para>
+-->
+<para>
+  FAQ の保守という作業は、思いのほか難しいものです。
+  大半のドキュメントは、作者が事前に練り込んだ内容を記述するものです。
+  それとは異なり、FAQ は基本的に受け身のドキュメントとなります
+  (<xref linkend="starting-a-faq"/> を参照ください)。
+  どれだけたくさんの量を書いたとしても、
+  次にどんな内容が追加されることになるかは決してわかりません。
+  そして、常に細切れの内容が追加され続けるので
+  ドキュメント全体としての一貫性やまとまりは簡単に崩れてしまいます。
+  ひどい場合は同じ内容が重複してしまったりすることもあるでしょう。
+  そんな問題がないように見えるものでも、
+  目立たないところで関連項目間の相互依存の問題が発生していることはよくあります。
+  たとえば本来はリンクするべきところができていないなどです。
+  お互いの項目が時期をずらして追加された場合などにこれが起こりえます。
+</para>
 
+<!--
 <para>The role of a FAQ manager is twofold.  First, she maintains the
 overall quality of the FAQ by staying familiar with at least the
 topics of all the questions in it, so that when people add new items
@@ -2658,7 +2775,26 @@ questions raised in it, post a proposed FAQ entry, incorporate
 comments from others (since it's impossible for the FAQ manager to be
 an expert in every topic covered by the FAQ), and sense when the
 process is finished so the item can at last be added.</para>
+-->
+<para>
+  FAQ マネージャーの役割は、ふたつあります。
+  まずは FAQ 全体の品質を保持すること。
+  そのためには、FAQ の中でどんな項目が取り上げられているのか
+  少なくとも質問だけでも把握しておく必要があります。
+  そうすれば、既存の項目に関連する内容や重複する内容が新たに追加されたときに
+  適切な処理をすることができます。
+  もうひとつは、プロジェクトのメーリングリストや掲示板をチェックして、
+  どんな問題が発生しているのかやどんな質問が行われているのかを確認することです。
+  それをもとにして、新しい FAQ を書き進めていきます。
+  後者の作業は非常に複雑なものになるかもしれません。
+  各スレッドを追いかけ、そこで行われている質問の内容を把握して
+  新たな FAQ エントリの追加を提案します。
+  そして他のメンバーのコメントなども考慮して
+  (FAQ マネージャーがすべての内容のエキスパートであるとは限りません)
+  エントリの内容をふくらませ、ある程度まとまった段階でそれを実際に追加することになります。
+</para>
 
+<!--
 <para>The FAQ manager usually also becomes the default expert in FAQ
 formatting.  There are a lot of little details involved in keeping a
 FAQ in shape (see
@@ -2667,7 +2803,18 @@ FAQ in shape (see
 people edit the FAQ, they will sometimes forget some of these details.
 That's okay, as long as the FAQ manager is there to clean up after
 them.</para>
+-->
+<para>
+  FAQ マネージャーは、FAQ 自体の書式についても責任を持ちます。
+  FAQ の体裁に関する注意点はさまざまなものがあります
+  (<phrase output="printed"><xref linkend="communications"/> の</phrase>
+  <xref linkend="all-as-archives"/> を参照ください)。
+  不特定多数が FAQ を編集するようになると、
+  これらの注意事項がおろそかになってしまうことがあります。
+  そんな場合でも FAQ マネージャーがきちんと注意してそれを修正していけば大丈夫です。
+</para>
 
+<!--
 <para>Various free software is available to help with the process of
 FAQ maintenance.  It's fine to use it, as long as it doesn't
 compromise the quality of the FAQ, but beware of over-automation.
@@ -2688,11 +2835,45 @@ to provide users what they were looking for, and in the worst cases
 misleads them.  Use whatever tools you need to to maintain your
 project's FAQ, but never let the convenience of the tools seduce you
 into compromising the quality of the FAQ.</para>
+-->
+<para>
+  FAQ の管理を支援するためのフリーソフトウェアも数多く存在します。
+  FAQ の品質を低下させない範囲でそれらのソフトウェアを使うのはかまいませんが、
+  過度に自動化してしまわないように注意しましょう。
+  プロジェクトによっては、FAQ の保守を完全に自動化しようとしているところもあります。
+  wiki (<phrase output="printed"><xref linkend="technical-infrastructure"/> の</phrase>
+  <xref linkend="wikis"/> を参照ください) などを使用して、
+  誰でも自由に FAQ の項目を追加/編集できるようにするなどしています。
+  これは Faq-O-Matic
+  (<ulink url="http://faqomatic.sourceforge.net/"/>)
+  を使っているプロジェクトでよく見かけますが、
+  私の見る限りでは Faq-O-Matic
+  がもともと想定している範囲を超えた使い方だと感じます。
+  FAQ の管理を分散化することでたとえ全体の作業量を軽減できたとしても、
+  その結果できあがる FAQ はどうしても品質が劣ったものになってしまいます。
+  そこには FAQ 全体を把握している人もいなければ
+  更新を要する項目や時代遅れになってしまった項目を見つける人もいません。
+  さらに各項目間のつながりを管理できる人もいないでしょう。
+  そんな状態でできあがった FAQ は、
+  探したい情報が見つからないどころか
+  間違った情報を与えてしまうものになってしまう可能性があります。
+  プロジェクトの FAQ を管理するのにどんなツールを使うのも自由ですが、
+  ツールの便利さに惑わされて FAQ 自体の品質に妥協してしまわないようにしましょう。
+</para>
 
+<!--
 <para>See Sean Michael Kerner's article, <citetitle>The FAQs on
 FAQs</citetitle>, at
 <ulink url="http://osdir.com/Article1722.phtml"/>, for descriptions
 and evaluations of open source FAQ maintenance tools.</para>
+-->
+<para>
+  Sean Michael Kerner が書いた <citetitle>The FAQs on
+  FAQs</citetitle> という記事が
+  <ulink url="http://osdir.com/Article1722.phtml"/>
+  で読めます。この記事では、オープンソースの
+  FAQ 管理ツールについての説明とその評価を行っています。
+</para>
 
 </sect2>
 
