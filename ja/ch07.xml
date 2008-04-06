@@ -2616,8 +2616,12 @@ can.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="testing-and-releasing">
+<!--
 <title>Testing and Releasing</title>
+-->
+<title>テストとリリース</title>
 
+<!--
 <para>Once the source tarball is produced from the stabilized release
 branch, the public part of the release process begins.  But before the
 tarball is made available to the world at large, it should be tested
@@ -2633,13 +2637,38 @@ digitally sign the tarball using GnuPG
 (<ulink url="http://www.gnupg.org/"/>), PGP
 (<ulink url="http://www.pgpi.org/"/>), or some other program capable
 of producing PGP-compatible signatures.</para>
+-->
 
+<para>
+    安定版のリリースブランチから、ソースコードのtarボールがいったん作成されると、
+    正式なリリースの手続きが始まります。しかし、tarボールを世界中で利用できるように
+    する前にはテストを行い、最低限の、通常は3人以上の開発者からリリースしてよいとの同
+    意をもらっておくべきです。この手続きは、明らかな欠陥を探すために単にリリースを調
+    べることではありません。理想を言えば、開発者がtarボールをダウンロードし、インスト
+    ールしたばかりのシステム上でそれをビルドし、インストールして自動回帰テスト(<xref linkend="managing-volunteers"/> の <xref linkend="automated-testing"/> を参照して下さい) を実行し、
+    さらに手動でテストをいくらかしておくべきでしょう。これらのチェックや、プロジ
+    ェクトが持っているリリース時のチェックリストの項目をすべてクリアすれば、開発者は
+    GnuPG(<ulink url="http://www.gnupg.org/"/>) や PGP(<ulink url="http://www.pgpi.org/"/>)、
+    または PGP と互換性のある他のプログラムを使ってtarボールに電子署名を行います。
+</para>
+
+<!--
 <para>In most projects, the developers just use their personal digital
 signatures, instead of a shared project key, and as many developers as
 want to may sign (i.e., there is a minimum number, but not a maximum).
 The more developers sign, the more testing the release undergoes, and
 also the greater the likelihood that a security-conscious user can
 find a digital trust path from herself to the tarball.</para>
+-->
+
+<para>
+    ほとんどのプロジェクトでは、開発者はプロジェクトが共有している鍵を使わず、
+    自分の鍵を使って電子署名をします。そしてできるだけ多くの (すなわち、最低限
+    の人数が必要という意味であって、署名する開発者の数を限ればいいという意味で
+    はありません) 開発者が同じtarボールに署名します。署名する開発者が多くなれば
+    なるほど、多くテストされているということになり、セキュリティに関心があるユー
+    ザーが、そのtarボールから自分が信頼するルートを見つけられる可能性が高くなります。
+</para>
 
 <para>Once approved, the release (that is, all tarballs, zip files,
 and whatever other formats are being distributed) should be placed
@@ -2648,7 +2677,10 @@ signatures, and by MD5/SHA1 checksums (see <ulink
 url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
 There are various standards for doing this.  One way is to accompany
 each released package with a file giving the corresponding digital
-signatures, and another file giving the checksum.  For example, if one
+signatures, and another file giving the checksum.
+
+
+  For example, if one
 of the released packages is <filename>scanley-2.5.0.tar.gz</filename>,
 place in the same directory a file
 <filename>scanley-2.5.0.tar.gz.asc</filename> containing the digital
@@ -2661,6 +2693,26 @@ signatures for all the released packages into a single file,
 <filename>scanley-2.5.0.sigs</filename>; the same may be done with the
 checksums.</para>
 
+<para>
+    開発者達からリリースしてよいとの同意をもらったら、リリース(つまり、
+    すべてのtarボール、zipファイル、そして配布される他のあらゆるフォー
+    マットのファイル) は、電子署名と MD5/SHA1のチェックサム(<ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/> を参照
+    してください) と一緒にプロジェクトのダウンロードエリアに置きましょう。
+    これには標準的なやり方がいくつかあります。ひとつは、それぞれのリリー
+    スするパッケージを、対応する電子署名を記したファイルと、チェックサム
+    が書かれたファイルと一緒に置くことです。
+    たとえば、リリースするパッケージのひとつが、<filename>scanley-2.5.0.tar.gz</filename>
+    だとすると、同じディレクトリにそのtarボールに行った電子署名が含まれている
+    <filename>scanley-2.5.0.tar.gz.asc</filename>  と、MD5 チェックサムを記した
+    <filename>scanley-2.5.0.tar.gz.md5</filename> や、 SHA1チェックサムを記した
+    <filename>scanley-2.5.0.tar.gz.sha1</filename> を置いておきます。
+    別の方法として、リリースするパッケージに対する全ての電子署名を
+    <filename>scanley-2.5.0.sigs</filename> のようなひとつのファイルに集めておく
+    ことがあります。同じやり方がチェックサムにも使えます。
+</para>
+
+<!--
 <para>It doesn't really matter which way you do it.  Just keep to a
 simple scheme, describe it clearly, and be consistent from release to
 release.  The purpose of all this signing and checksumming is to give
@@ -2670,6 +2722,19 @@ computers&mdash;if the code has been tampered with, an attacker could
 suddenly have a back door to all their data.  See
 <xref linkend="security-releases"/><phrase output="printed">
 later in this chapter</phrase> for more about paranoia.</para>
+-->
+
+<para>
+    どの方法を使っても構いません。単純な手続きに留めるようにし、それを
+    明確に文書化するようにしましょう。そして、以後のリリースに対しても
+    それを一貫して適用するようにします。このように、電子署名とチェック
+    サムをつける目的は、自分が受け取ったコピーが悪意がある人間によって
+    改竄されていないことを確認する手段をユーザーに与えることです。
+    ユーザーはダウンロードしたコードをすぐに自分のマシンで実行してしま
+    います&mdash; つまり、コードが改竄されていれば、攻撃者がそのデータ
+    にバックドアを仕掛けることができてしまいます。
+    セキュリティに関して偏執的なユーザについては、<phrase output="printed">この章の後の方にある</phrase> <xref linkend="security-releases"/> を参照してください。
+</para>
 
 <sect2 id="candidate-releases">
 <title>Candidate Releases</title>
