@@ -2879,8 +2879,12 @@ in <xref linkend="managing-volunteers"/></phrase>).</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="release-lines">
+<!--
 <title>Maintaining Multiple Release Lines</title>
+-->
+<title>複数のリリースラインを管理する</title>
 
+<!--
 <para>Most mature projects maintain multiple release lines in
 parallel.  For example, after 1.0.0 comes out, that line should
 continue with micro (bugfix) releases 1.0.1, 1.0.2, etc., until the
@@ -2896,14 +2900,45 @@ bug in 1.0.3 right before it's about to release 1.1.0, it would be a
 bit severe to just put the bugfix in 1.1.0 and tell all the old 1.0.x
 users they should upgrade.  Why not release both 1.1.0 and 1.0.4, so
 everyone can be happy?</para>
+-->
 
+<para>
+    ほとんどの成熟したプロジェクトは、複数のリリースラインを平行して管理しています。
+    たとえば バージョン 1.0.0 がリリースされた後は、
+    プロジェクトが明示的にリリースラインの維持をやめるまで、
+    マイクロ(バグ修正)リリースを 1.0.1, 1.0.2などの形でリリースするようにします。
+    ただ (訳注: メジャー番号が上がった) 1.1.0 をリリースすることが、
+    1.0.x ラインの維持をやめる十分な理由にはならないことに注意してください。
+    たとえば、新しいマイナー(メジャー)シリーズのはじめのリリースは絶対にアップグレードの対象にしないことをポリシーにしているユーザーもいます &mdash;
+    つまり、彼らはたとえば 1.1.0 の間は他のユーザーにバグを探させ、
+    1.1.1 のリリースを待っているのです。これは必ずしも自分勝手な行動とは言えません。
+    (彼らは、新機能や、バグ修正の恩恵を受けることを控えていることも覚えておきましょう)
+    ただ、理由が何であれ、彼らはアップグレードをとても慎重に行うと決めただけなのです。
+    よって、プロジェクトが 1.1.0 のリリースを目前にして 1.0.3 で重大なバグを発見した場合は、
+    ちょっと厳しいですが 1.1.0 でその修正を行い、
+    すべての 1.0.x 系を使っているユーザーにアップグレードを推奨することになるでしょう。
+    この場合、1.1.0 と 1.0.4 を両方リリースしたとして、開発者とユーザーの双方がハッピーでしょうか？
+    そうではないですよね。
+</para>
+
+<!--
 <para>After the 1.1.x line is well under way, you can declare 1.0.x to
 be at <firstterm>end of life</firstterm>.  This should be announced
 officially.  The announcement could stand alone, or it could be
 mentioned as part of a 1.1.x release announcement; however you do
 it, users need to know that the old line is being phased out, so they
 can make upgrade decisions accordingly.</para>
+-->
 
+<para>
+    1.1.x ラインの維持がうまくいくと、プロジェクトは 1.0.x ラインの <firstterm>維持をやめる</firstterm> と宣言することができます。
+    この宣言は公式なものとして行いましょう。その告知は単独で行うこともできますし、
+    1.1.x ラインのリリース告知と一緒に行うこともできます。どの方法をとるにしても、
+    ユーザーは古いリリースラインが維持されなくなることを知らなければいけません。
+    なぜなら、その告知に従って、ユーザーはアップグレードをする決断ができるからです。
+</para>
+
+<!--
 <para>Some projects set a window of time during which they pledge to
 support the previous release line.  In an open source context,
 "support" means accepting bug reports against that line, and making
@@ -2912,7 +2947,20 @@ don't give a definite amount of time, but watch incoming bug reports
 to gauge how many people are still using the older line.  When the
 percentage drops below a certain point, they declare end of life for
 the line and stop supporting it.</para>
+-->
 
+<para>
+    プロジェクトによっては、以前のリリースラインのサポートを保証する期間を設定するところもあります。
+    オープンソースの文脈でいえば、"サポート" とはそのリリースラインに対するバグ報告を受け付け、
+    バグが十分出尽くすまでメンテナンスリリースを行うということです。
+    一方で、明示的にサポート期間は設定しないものの、
+    古いリリースラインを使っているユーザーの数を把握するため、
+    バグ報告の数を見張るプロジェクトもあります。
+    古いリリースラインを使うユーザーの率がある値より下がった時点で、
+    プロジェクトはそのラインの維持をやめると宣言し、サポートをやめるのです。
+</para>
+
+<!--
 <para>For each release, make sure to have a <firstterm>target
 version</firstterm> or <firstterm>target milestone</firstterm>
 available in the bug tracker, so people filing bugs will be able to do
@@ -2920,10 +2968,22 @@ so against the proper release.  Don't forget to also have a target
 called "development" or "latest" for the most recent development
 sources, since some people&mdash;not only active developers&mdash;will
 often stay ahead of the official releases.</para>
+-->
+
+<para>
+    リリースを行うごとに、必ず <firstterm>ターゲットバージョン</firstterm> または <firstterm>ターゲットとなるマイルストーン</firstterm> をバグ報告システムに設定するようにしましょう。
+    なぜなら、ユーザーが、適切なリリースに対してバグを報告できるようにするためです。
+    開発中の最新のソースコードに対しては、
+     "development" や "latest" と呼ばれるターゲット名を設定することも忘れないでください。
+    なぜなら、ユーザーによっては、 &mdash; 活発な開発者だけではありません &mdash; 公式なリリースより新しいコードを実行しているからです。
+</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="security-releases">
 <title>Security Releases</title>
+<!--
+<title>セキュリティリリース</title>
+-->
 
 <para>Most of the details of handling security bugs were covered in
 <xref linkend="security"/><phrase output="printed"> in
