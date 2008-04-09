@@ -3102,8 +3102,12 @@ when it means shifting other planned releases by one.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="releases-and-daily-development">
+<!--
 <title>Releases and Daily Development</title>
+-->
+<title>リリースと日々の開発</title>
 
+<!--
 <para>Maintaining parallel releases simultaneously has implications
 for how daily development is done.  In particular, it makes
 practically mandatory a discipline that would be recommended anyway:
@@ -3112,31 +3116,51 @@ changes in the same commit.  If a change is too big or too disruptive
 to do in one commit, break it across N commits, where each commit is a
 well-partitioned subset of the overall change, and includes nothing
 unrelated to the overall change.</para>
+-->
 
+<para>
+    平行して行われるリリースを同時に管理するということから、
+    日々の開発のやり方を推測することができます。
+    特に、次のことはどんなときでも推奨される強制的な規律になります。
+    つまり、コミットのひとつひとつは、論理的な変更単位であること、
+    そして関連のない変更をごっちゃにして一度にコミットしてはいけない、ということです。
+    変更する量がとても多い、または一度にコミットするのが破壊的である場合は、
+    それをN回のコミットに分割し、
+    それぞれのコミットが変更全体をうまく分割したサブセットであるようにします。
+    そして変更全体に関係のないものは一切含まれないようにします。
+</para>
+
+<!--
 <para>Here's an example of an ill-thought-out commit:</para>
+-->
+
+<para>
+    次に示すのは、まとまりのない悪いコミットの例です。:
+</para>
 
 <screen>
 ------------------------------------------------------------------------
 r6228 | jrandom | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 lines
 
-Fix Issue #1729: Make indexing gracefully warn the user when a file
-is changing as it is being indexed.
+問題 #1729 を修正 : インデックス作成を上品に行うようにした。これに伴い、
+ファイルにインデックスを作成している最中にユーザーがファイルを変更していたら警告するようにした。
 
 * ui/repl.py
-  (ChangingFile): New exception class.
-  (DoIndex): Handle new exception.
+  (ChangingFile): 新しい例外クラス
+  (DoIndex): 新しい例外を処理するようにした
 
 * indexer/index.py
-  (FollowStream): Raise new exception if file changes during indexing.
-  (BuildDir): Unrelatedly, remove some obsolete comments, reformat
-  some code, and fix the error check when creating a directory.
+  (FollowStream): インデックスを作成中にファイルが変更されたら、例外を生成するようにした
+  (BuildDir): 上記とは関係ないが、いくつかの古いコメントを削除し、
+  コードのフォーマットをいくつか修正した。また、ディレクトリ作成時のエラーチェックを修正した。
 
-Other unrelated cleanups:
+その他関連のないクリーンアップ:
 
-* www/index.html: Fix some typos, set next release date.
+* www/index.html: typoを修正し、次のリリース日を設定。
 ------------------------------------------------------------------------
 </screen>
 
+<!--
 <para>The problem with it becomes apparent as soon as someone needs to
 port the <function>BuildDir</function> error check fix over to a
 branch for an upcoming maintenance release.  The porter doesn't want
@@ -3147,14 +3171,36 @@ there.  But she cannot easily grab just the
 <function>BuildDir</function> change via the version control tool's
 merge functionality, because the version control system was told that
 that change is logically grouped with all these other unrelated
-things.  In fact, the problem would become apparent even before the
+things.  
+
+In fact, the problem would become apparent even before the
 merge.  Merely listing the change for voting would become problematic:
 instead of just giving the revision number, the proposer would have to
 make a special patch or change branch just to isolate the portion of
 the commit being proposed.  That would be a lot of work for others to
 suffer through, and all because the original committer couldn't be
 bothered to break things into logical groups.</para>
+-->
 
+<para>
+    問題点が浮き彫りになるのは、来るべきメンテナンスリリースに備えて、
+    <function>BuildDir</function> 関数のエラーチェックをリリースブランチに移植する必要が出てきたときです。
+    移植する人は、それ以外の変更点はいらないのです。
+    たとえば、問題 #1729 の修正自体をメンテナンスブランチに取り込むことは認められず、
+    <filename>index.html</filename> の調整もここでは関係ありません。
+    しかし、<function>BuildDir</function> の変更を、
+    バージョン管理システムのマージ機能を使って容易に取り出すことはできません。
+    なぜなら、バージョン管理システムは、
+    この変更を他の関係のないものとグループ化するように指示されているからです。
+    実際には、マージする前でさえ問題が出てくるでしょう。投票を行うために変更点を羅列する場合です。:
+    投票を提案する人は、該当する変更のリビジョン番号を与える代わりに、
+    提案されているコミットの一部分を分離するためだけに、特別なパッチを作ったり、
+    変更用のブランチを切らなければならなくなります。
+    このため、他の人がうんざりする量の仕事をすることになります。
+    それというのもすべて、変更点を論理的なグループに分割するのを面倒臭がったコミッタのせいなのです。
+</para>
+
+<!--
 <para>In fact, that commit really should have been
 <emphasis>four</emphasis> separate commits: one to fix issue
 #1729, another to remove obsolete comments and reformat code in
@@ -3162,7 +3208,18 @@ bothered to break things into logical groups.</para>
 <function>BuildDir</function>, and finally, one to tweak
 <filename>index.html</filename>.  The third of those commits would be
 the one proposed for the maintenance release branch.</para>
+-->
 
+<para>
+    実際には、このコミットは <emphasis>4つ</emphasis> に分割すべきでした。
+    ひとつは 問題 #1729 の修正、
+    もうひとつは 古いコメントの削除と <function>BuildDir</function> 関数のコードフォーマットの修正、
+    そして <function>BuildDir</function> 関数のエラーチェックの修正、
+    最後に <filename>index.html</filename> の微調整です。
+    3番目のコミットこそが、メンテナンスリリースのブランチに含めるよう提案されているものなのです。
+</para>
+
+<!--
 <para>Of course, release stabilization is not the only reason why
 having each commit be one logical change is desirable.
 Psychologically, a semantically unified commit is easier to review,
@@ -3170,6 +3227,16 @@ and easier to revert if necessary (in some version control systems,
 reversion is really a special kind of merge anyway).  A little
 up-front discipline on everyone's part can save the project a lot of
 headache later.</para>
+-->
+
+<para>
+    それぞれのコミットを論理的な変更単位に分割するのが望ましいのは、
+    もちろんリリースブランチを安定させるためだけではありません。
+    心理的にも、意味がまとまっているコミットはレビューしやすく、
+    必要な時に元に戻しやすいということもあります。
+    (バージョン管理システムによっては、変更を元に戻すことで、特殊なマージを行うものもあります)
+    前もって皆が規律をちょっと守っておけば、プロジェクトが後に頭痛の種を多く抱えずに済むのです。
+</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="planning">
