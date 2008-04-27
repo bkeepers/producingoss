@@ -4,12 +4,12 @@
 
 <simplesect>
 
-<para>Die meisten freie Software-Projekte schlagen fehl.</para>
+<para>Nur wenige freie Software-Projekte sind erfolgreich.</para>
 
 <para>Man hört selten etwas von einem fehlgeschlagen Projekt. Nur 
 erfolgreiche Projekte bekommen Aufmerksamkeit, und es gibt insgesamt
 so viele Open Source Projekte <footnote><para>Die beliebte Hosting
-Seite SourceForge.net, verzeichnete Mitte April 2004 79,225 Projekte.
+Seite SourceForge.net, verzeichnete mitte April 2004 79,225 Projekte.
 Natürlich ist das nicht einmal annähernd die Gesamtzahl der freien 
 Software Projekte im Internet, sondern lediglich die Teilmenge die 
 Sourceforge als Plattform gewählt haben.</para></footnote>, dass obwohl
@@ -25,15 +25,15 @@ wenn an einem Projekt seit sechs Monaten nicht Aktive gearbeitet wurde?
 Sobald seine Nutzer Gemeinde aufhört zu wachsen, ohne die Entwickler
 Gemeinde übertroffen zu haben? Was ist wenn die Entwickler ihr Projekt
 verlassen, wenn sie merken, dass ein anderes Projekt die gleichen
-Ziele hat und Sie unnötig einen Doppelten Aufwand betreiben, und wenn
-sie sich diesem anderen Projekt anschließen und ihre früheren 
+Ziele hat und sie unnötig einen Doppelten Aufwand betreiben. Was ist
+wenn sie sich diesem anderen Projekt anschließen und ihre früheren 
 Anstrengungen mit einzubeziehen? Wurde das Projekt beendet, oder ist 
 es nur umgezogen?</para>
 
-<para>Aufgrund dieser Komplexität, ist es unmöglich ein genaue Ziffer
-zur Ausfallquote zu geben. Einzelberichte aus über ein Jahrzehnt freier
+<para>Durch diese Komplexität, ist es unmöglich die Ausfallquote 
+genau zu beziffern. Einzelberichte aus über ein Jahrzehnt freier
 Software, kurzes Stöbern auf SourceForge.net und ein wenig Googeln, 
-deutet jedoch alle auf den gleichen Schluss: die Rate ist extrem hoch,
+deuten jedoch alle auf den gleichen Schluss: die Rate ist extrem hoch,
 wahrscheinlich in der Größenordnung von 90%&ndash;95%. Die Zahl wird 
 größer wenn man überlebende aber nicht vernünftig laufende Projekte mit
 einbezieht: solche die zwar laufenden Code produzieren, aber weder ein
@@ -42,16 +42,15 @@ Fortschritte machen, wie sie es könnten.</para>
 
 <para>In diesem Buch geht es darum Versagen zu vermeiden. Es untersucht
 nicht nur wie man Sachen richtig macht, sondern wie man sie falsch 
-macht, damit Sie frühzeitig Probleme erkennen und korrigieren können.
-Ich hoffe, dass Sie nach dem Durchlesen ein Repertoire an Techniken 
-haben, nicht nur um häufige Stolpersteine zu vermeiden, sondern auch um
-mit dem Wachstum und der Pflege eines Projekts erfolgreich umzugehen.
-Erfolg ist kein Nullsummenspiel, und in diesem Buch geht es nicht ums 
-Gewinnen oder der Konkurrenz voraus zu sein. Tatsächlich ist ein 
-wichtiger Teil beim Betrieb eines Open Source Projekts, die reibungslose
-Zusammenarbeit mit anderen verwandten Projekten. Auf lange Sicht, trägt
-jedes erfolgreiche Open Source Projekt zu dem Wohl der gesamten Welt der
-freien Software bei.</para>
+macht, um frühzeitig Probleme erkennen und korrigieren zu können.
+Ich hoffe Ihnen zeigen zu können, wie man häufige Stolpersteine 
+vermeidet, und erfolgreich mit dem Wachstum und der Pflege eines 
+Projekts erfolgreich. Erfolg ist kein Nullsummenspiel, und in diesem
+Buch geht es nicht darum zu Gewinnen oder der Konkurrenz voraus zu sein.
+Tatsächlich ist ein wichtiger Teil beim Betrieb eines Open Source 
+Projekts, die reibungslose Zusammenarbeit mit anderen verwandten
+Projekten. Auf lange Sicht, trägt jedes erfolgreiche Open Source
+Projekt zum Wohl der gesamten Welt der freien Software bei.</para>
 
 </simplesect>
 
@@ -61,29 +60,28 @@ freien Software bei.</para>
 selben Gründen fehlschlagen, wie proprietäre Software Projekte. Freie 
 Software hat sicherlich kein Monopol auf unrealistische Anforderungen,
 vage Spezifikationen, unzureichende Verwaltung von Ressourcen, zu kurze 
-Entwurfsphasen, oder irgend eines der anderen Kobolde die der Software
-Industrie bereits wohl bekannt sind. Es gibt einen gewaltigen menge 
-Schriftstücke zu diesem Thema und ich werde sie in diesem Buch nicht
-versuchen zu duplizieren. Statt dessen werde ich versuchen die
-spezifischen Probleme freier Software zu beschreiben. Wenn ein freies
-Software Projekt an die Wand gefahren wird dann ist es oft weil die 
-Entwickler (oder die Projektleiter) nicht die einzigartigen Probleme von
-Open Source Software zu würdigen wussten, auch wenn sie durchaus auf die 
-bekannteren Probleme der Closed-Source Entwicklung vorbereitet 
-waren.</para>
+Entwurfsphasen, oder ein anderes der bekannten Kobolde aus der Software
+Industrie. Es gibt eine gewaltige menge Schriftstücke zu diesem Thema
+und ich werde sie in diesem Buch nicht versuchen zu reproduzieren. Statt
+dessen werde ich versuchen die spezifischen Probleme freier Software zu
+beschreiben. Wenn ein freies Software Projekt an die Wand gefahren wird,
+dann ist es oft weil die Entwickler (oder die Projektleiter) nicht die
+einzigartigen Probleme von Open Source Software zu würdigen wussten,
+auch wenn sie durchaus auf die bekannteren Probleme der Closed-Source
+Entwicklung vorbereitet waren.</para>
 
 <para>Einer der häufigsten Fehler sind unrealistische Erwartungen über
 die Vorteile von offenem Quellcode. Eine offene Lizenz garantiert weder,
-dass eine Horde aktiver Entwickler urplötzlich anfangen werden, von sich
-aus, Zeit in Ihr Projekt zu investieren, noch wird die Offenlegung die 
+dass eine Horde aktiver Entwickler urplötzlich anfangen, von sich aus,
+Zeit in Ihr Projekt zu investieren, noch wird die Offenlegung die 
 Krankheiten des Projekts automatisch heilen. Tatsächlich kann es sogar 
-genau das Gegenteil bewirken: Es kann eine ganze Reihe neuer Komplexität
-hinzufügen, und kann auf kurzfristig <emphasis>mehr</emphasis> kosten 
-als es einfach im Betrieb zu behalten. Das Projekt zu öffnen, bedeutet 
-den Quellcode so um zu strukturieren, dass er für völlig Fremde 
-verständlich ist, eine Seite für Entwickler, sowie einen E-Mail Verteiler
-einzurichten und oft auch zum erstem mal eine Dokumentation zu schreiben.
-All das ist eine Menge Arbeit. Und <emphasis>falls</emphasis> 
+genau das Gegenteil bewirken: Es kann eine ganze Reihe neuer
+Komplexitäten hinzufügen, und kurzfristig <emphasis>mehr</emphasis> 
+kosten als die Software einfach im Betrieb zu behalten. Das Projekt zu
+öffnen, bedeutet den Quellcode so zu gestalten, dass er für völlig Fremde 
+verständlich ist, eine Seite für Entwickler aufzubauen, einen E-Mail
+Verteiler einzurichten und oft auch zum erstem mal eine Dokumentation 
+zu schreiben. All das ist eine Menge Arbeit. Und <emphasis>falls</emphasis> 
 interessierte Entwickler auftauchen, gibt es die zusätzliche Bürde, eine
 Zeit lang, ihre Fragen beantworten zu müssen, bevor man aus ihrer
 Anwesenheit einen Nutzen zieht. Entwickler Jamie Zawinski hatte folgendes
@@ -93,7 +91,7 @@ Anwesenheit einen Nutzen zieht. Entwickler Jamie Zawinski hatte folgendes
       <para><emphasis>Open Source funktioniert schon, aber es ist 
 	  sicherlich kein Allheilmittel. Falls es ein warnende Lehre hier
 	  gibt, dann die, dass man ein sterbendes Projekt nicht einfach mit
-	  dem magischen Elfenstaub des "Open Source" bestreuen kann und
+	  dem magischen Elfenstaub des "Open Source" bestreuen kann, und
 	  danach alles wie von selbst läuft. Die Probleme sind nicht so 
 	  einfach.</emphasis></para>
 
@@ -107,52 +105,52 @@ Projekt erst einmal läuft, erledigt werden können. Aufmachung und
 Präsentation umfasst eine weite Reihe von Aufgaben, die sich alle um das
 Thema drehen, die Einstiegshürden niedriger zu legen. Das Projekt für
 Außenstehende einladend zu machen bedeutet, Anleitungen für Nutzer und
-Entwickler zu schreiben, eine Webseite aufzubauen welche für 
+Entwickler zu schreiben, eine Webseite aufzubauen die für 
 Neuankömmlinge informativ ist, möglichst viele der Kompilierungs-
 und Installationsvorgänge der Software zu automatisieren, usw. Viele
-Entwickler behandeln diese Aufgaben leider so als wären sie nur von
-zweitrangiger Bedeutung im Verhältnis zum eigentlichen Quellcode. Es 
-gibt hierfür ein paar Gründe. Erstens, kann es einem wie Fleißarbeit 
-vorkommen, denn die Vorteile sind zumeist nur für diejenigen sichtbar,
-die noch am wenigsten mit dem Projekt zu tun haben und umgekehrt. 
-Schließlich brauchen solche die bereits mit dem Projekt vertraut sind 
-nicht unbedingt diese ganze Aufmachung. Sie wissen bereits wie man die
-Software installiert, administriert und benutzt, schließlich haben sie 
-es ja auch geschrieben. Zweitens, sind die Fähigkeiten die Aufmachung
-und Präsentation vernünftig zu machen andere, als solche die man 
-benötigt um Quellcode zu schreiben. Menschen neigen dazu sich auf das
-was sie gut können zu konzentrieren, selbst wenn es für das Projekt 
-besser wäre ein wenig Zeit in etwas zu investieren, was ihnen weniger
-liegt. <xref linkend="getting-started"/> behandelt Aufmachung und 
-Präsentation im Detail, und erklärt warum es entscheidend ist, dass 
-sie gleich von Anfang des Projekts an eine Priorität sein sollte.</para>
+Entwickler behandeln diese Aufgaben leider so, als wären sie 
+nebensächlich zum eigentlichen Quellcode. Dafür gibt es ein paar Gründe.
+Erstens, kann es einem wie Fleißarbeit vorkommen, denn es kommt meistens
+nur denen zugute, die noch am wenigsten mit dem Projekt zu tun haben
+und umgekehrt. Schließlich braucht jemand der bereits mit dem Projekt
+vertraut ist, nicht unbedingt diese ganze Aufmachung. Wie man die
+Software installiert, administriert und benutzt ist alles schon bekannt,
+schließlich hat man es selbst geschrieben. Zweitens sind für 
+Aufgaben die sich um vernünftige Aufmachung und Präsentation drehen,
+andere Fähigkeiten gefordert, als solche die man benötigt um Quellcode
+zu schreiben. Menschen neigen dazu, sich auf ihre Stärken zu
+konzentrieren, selbst wenn es für das Projekt besser wäre, ein wenig
+Zeit in etwas zu investieren, was ihnen weniger liegt.
+<xref linkend="getting-started"/> behandelt Aufmachung und 
+Präsentation im Detail, und erklärt warum es von Anfang an eine
+Priorität sein sollte.</para>
 
 <para>Der nächste Trugschluss ist, dass bei freier Software wenig bis
 gar kein Projektmanagement erforderlich ist, bzw. umgekehrt, dass die
 selben Management Verfahren die für die Entwicklung im Betrieb benutzt
 werden, sich genau so gut auf eine Open Source Projekt anwenden lassen.
 Die Verwaltung ist bei einem Open Source Projekt, nicht immer besonders 
-offensichtlich, aber bei erfolgreichen Projekten gibt es sie, in irgend
-einer Form im Hintergrund. Ein kleines Gedankenexperiment reicht um die
-Gründe dafür zu zeigen. Ein Open Source Projekt besteht aus einem 
-zufällig zusammengewürfeltem Haufen von Programmierern&mdash;die an und
-für sich schon eine notorisch eigensinnige Truppe sind&mdash;von denen
+offensichtlich, im Hintergrund haben erfolgreiche Projekte sie aber, 
+in einer Form. Ein kleines Gedankenexperiment reicht um die Gründe 
+dafür zu zeigen. Ein Open Source Projekt besteht aus einem zufällig
+zusammengewürfeltem Haufen Programmierer&mdash;die an und für sich
+schon eine notorisch eigensinnige Truppe sind&mdash;von denen
 untereinander, wahrscheinlich keiner einem andere je begegnet ist, und 
 von denen jeder u.U. unterschiedliche eigene persönliche Ziele verfolgt.
 Das Gedankenexperiment ist einfach, stellen Sie sich vor, was mit einer
 solchen Gruppe passieren würde, <emphasis>ohne</emphasis> eine 
-Verwaltung. Wenn kein Wunder geschieht, würden sie sehr schnell
-außeinander gehen. Auch wenn wir es uns anders wünschen, läuft das
-ganze nicht einfach von alleine. Die Verwaltung ist aber, wenn auch
-ziemlich aktiv, meistens informell, subtil und unauffällig. Das einzige
-was die Entwickler zusammenhält ist, dass sie mehr zusammen erreichen
-können, als jeder für sich. Deshalb muss die Aufgabe einer Verwaltung
-hauptsächlich darin bestehen, sie weiterhin daran glauben zu lassen,
-indem sie Richtlinien für die Kommunikation festlegt, dafür sorgt, dass 
-brauchbare Entwickler nicht aufgrund persönlicher Eigenheiten an den
-Rand gedrängt werden, und allgemein das Projekt als Ort zu gestalten,
-an dem Entwickler zurückkehren wollen. Bestimmte Methoden das zu 
-erreichen, werden im Verlauf des Buchs behandelt.</para>
+Verwaltung. Ohne ein Wunder, würden sie sehr schnell außeinander gehen.
+Auch wenn wir es uns anders wünschen, läuft das ganze nicht einfach von
+alleine. Die Verwaltung ist aber, wenn auch ziemlich aktiv, meistens
+informell, subtil und unauffällig. Das einzige was die Entwickler
+zusammenhält ist, dass sie mehr zusammen erreichen können, als jeder
+alleine. Die Aufgabe einer Verwaltung besteht deshalb hauptsächlich
+darin, dieses Gefühl aufrechtzuerhalten, indem sie Richtlinien für
+die Kommunikation festlegt, brauchbare Entwickler davor schützt, 
+aufgrund persönlicher Eigenheiten an den Rand gedrängt zu werden, und
+allgemein das Projekt als Ort zu gestalten, an dem Entwickler 
+zurückkehren wollen. Bestimmte Methoden das zu erreichen, werden im
+Verlauf des Buchs behandelt.</para>
 
 <para>Zuletzt, gibt es noch die generelle Problemgruppe die man
 "Versagen der kulturellen Navigation" nennen könnte. Vor zehn Jahren,
@@ -163,10 +161,10 @@ monolitisch ist&mdash;sie ist mindestens so anfällig für interne
 Meinungsverschiedenheiten und Parteigeist wie irgend eine geographisch
 gebundene Kultur&mdash;hat sie doch einen im Grunde genommen 
 beständigen Kern. Die meisten erfolgreichen Open Source Projekte,
-weisen alle oder zumindest einen großen Teil der Merkmale von diesem
-Kern auf. Sie belohnen bestimmte Verhaltensmuster und bestrafen andere;
-sie schaffen eine Atmosphäre, welche spontane Beteiligung ermutigt,
-manchmal zu kosten zentraler Koordination; sie haben Konzepte von 
+zeigen alle, oder zumindest einen großen Teil der Merkmale von diesem
+Kern. Sie belohnen bestimmte Verhaltensmuster und bestrafen andere;
+sie schaffen eine Atmosphäre, die spontane Beteiligung fördert,
+manchmal auf kosten zentraler Koordination; sie haben Konzepte von 
 Unhöflichkeit und gutes Benehmen, die von den anderswo vorherrschenden
 erheblich abweichen können. Vielleicht am wichtigsten, sind die 
 erfahrenen Teilnehmer die diese Konzepte meistens verinnerlicht haben,
@@ -174,29 +172,29 @@ sodass sie einen groben Konsens über das zu erwartenden Benehmen teilen.
 Nicht erfolgreiche Projekte weichen für gewöhnlich von diesen Kern
 wesentlich ab, wenn auch unabsichtlich, und haben oft keinen Konsens 
 darüber, welches Benehmen als angemessen einzustufen ist. Das hat zur 
-folge, dass sobald Probleme auftreten, sich die Situation schnell 
+folge, dass sobald Probleme auftreten, die Situation schnell 
 eskalieren kann, da den Teilnehmern ein etablierter Grundbestand
-kultureller Reflexe fehlt, auf denen sie zurückgreifen können, um 
+kultureller Reflexe fehlt, worauf sie zurückgreifen können, um 
 Meinungsverschiedenheiten zu klären.</para>
 
 <para>Dieses Buch ist ein praktischer Führer, keine anthropologische
-Studie oder Historie. Grundkenntnisse über die Herkunft der Kultur der
-freien Software sind dennoch, eine erforderliche Grundlage bei jedem
-praktischen Ratschlag. Eine Person welche die Kultur versteht, kann 
-weit und breit in der Open Source Welt reisen, viele lokale Unterschiede
-in den Gebräuchen und Dialekten begegnen und trotzdem in der Lage sein,
-sich überall bequem und effektiv zu beteiligen. Im Gegensatz dazu, wird
-eine Person ohne Verständnis für die Kultur, die Organisations- und 
-Beteiligungsvorgänge in einem Projekt als schwierig und voller 
-Überraschungen empfinden. Da die Anzahl der Menschen die freie Software
-entwickeln immer noch stark im Anstieg ist, gibt es viele in der 
-letzten Kategorie&mdash;diese sind zum größten Teil vor kurzem
-Eingewandert und das wird auch eine Weile lang so bleiben. Wenn Sie
-meinen vielleicht eine von ihnen zu sein, gibt der nächste Abschnitt 
-einen Hintergrund für spätere Diskussionen, sowohl im Buch als auch im
-Internet. (Wenn Sie andererseits bereits eine Weile lang mit Open Source
-arbeiten, und u.U. bereits eine Menge seiner Geschichte kennen, können
-Sie den nächsten Abschnitt getrost überspringen.)</para>
+Studie oder Historie. Ein Hintergrund zur Kultur freier Software ist
+dennoch, eine erforderliche Grundlage bei jedem praktischen Ratschlag.
+Jemand der die Kultur versteht, kann weit und breit in der Open Source
+Welt reisen, viele lokale Unterschiede in den Gebräuchen und Dialekten
+begegnen und trotzdem in der Lage sein, sich überall bequem und
+effektiv zu beteiligen. Im Gegensatz dazu, wird jemand ohne Verständnis
+für die Kultur, die Organisations- und Beteiligungsvorgänge in einem
+Projekt als schwierig und voller Überraschungen empfinden. Da die 
+Anzahl der Menschen die freie Software entwickeln immer noch stark im
+Anstieg ist, gibt es viele in der letzten Kategorie&mdash;diese sind 
+zum größten Teil vor kurzem Eingewandert und das wird auch eine Weile
+lang so bleiben. Wenn Sie meinen vielleicht eine von ihnen zu sein,
+gibt der nächste Abschnitt einen Hintergrund für spätere Diskussionen,
+sowohl im Buch als auch im Internet. (Wenn Sie andererseits bereits
+eine Weile lang mit Open Source arbeiten, und u.U. bereits eine Menge
+seiner Geschichte kennen, können Sie den nächsten Abschnitt getrost
+überspringen.)</para>
 
 </simplesect>
 
@@ -206,8 +204,8 @@ Sie den nächsten Abschnitt getrost überspringen.)</para>
 
 <para>Software wurde schon immer an Andere weitergegeben und miteinander
 geteilt. In den frühen Tagen der Computerindustrie, waren Hersteller der
-Meinung, dass Wettbewerbsvorteile vor allem durch Innovationen in der
-Hardware zu erreichen waren, und schenkten der Software als
+Meinung, vor allem durch Innovationen in der Hardware 
+Wettbewerbsvorteile zu erreichen, und schenkten der Software als
 Vorteil gegenüber der Konkurrenz wenig Aufmerksamkeit. Viele Kunden 
 dieser frühen Maschinen waren Wissenschaftler oder Techniker, die in der
 Lage waren, die Software die mit der Maschine selbst ausgeliefert wurde, 
