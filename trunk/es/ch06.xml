@@ -1305,7 +1305,7 @@ textual. Los puntos 2 y 3 implican que la FAQ debería estar disponible en forma
 con el punto 2 indicando adicionalmnente que el HTML debería ser diseñado con legibilidad (ejem., 
 necesitaras algún tipo de control sobre su apariencia), y debería tener una tabla de contenidos.
 El punto 4 significa que cada entrada individual en la FAQ debería ser asignada como un HTML
-<firstterm>named anchor</firstterm>, un tag que permite a la gente alcanzar un sitio particular
+<firstterm>named anchor</firstterm>, (anclas con nombre) un tag que permite a la gente alcanzar un sitio particular
 en la página. El punto 5 significa que los ficheros fuente de la FAQ deberían estar disponibles
 de una manera conveniente (ver <xref linkend="version-everything"></xref><phrase output="printed"> en
 <xref linkend="technical-infrastructure"></xref></phrase>), un formato que sea fácil de editar.</para>
@@ -1314,9 +1314,9 @@ de una manera conveniente (ver <xref linkend="version-everything"></xref><phrase
   <title>Named Anchors y atributos ID</title>
 
   <para>Hay dos maneras para que un navegador vaya a un sitio específico
-  dentro de una página web: named anchors y atributos id.</para>
+  dentro de una página web: anclas con nombre y atributos id.</para>
 
-  <para>Un <firstterm>named anchor</firstterm> es simplemente un elemento HTML
+  <para>Un <firstterm>ancla con nombre</firstterm> es simplemente un elemento HTML
   de ancla (<literal>&lt;a&gt;...&lt;/a&gt;</literal>), pero con un atributo
   "name":</para>
 
@@ -1328,55 +1328,49 @@ de una manera conveniente (ver <xref linkend="version-everything"></xref><phrase
 
   <screen>&lt;p&nbsp;id="mylabel"&gt;...&lt;/p&gt;</screen>
 
-  <para>Ambos, named anchors y atributos id son usados de la misma manera.
+  <para>Ambos, anclas con nombre y atributos id son usados de la misma manera.
   Uno añade una marca hash y la etiqueta a una URL, y hacer así al navegador que
   salte directo a dicho punto de la página:
   </para>
 
   <screen>http://myproject.example.com/faq.html#mylabel</screen>
 
-  <para>Virtualmente todos los navegadores soportan los named anchors; los navegadores
+  <para>Virtualmente todos los navegadores soportan las anclas con nombre; los navegadores
   más modernos soportan el atributo id. Para asegurarnos, recomendaría utilizar tanto
-  named anchors únicamente, o named anchors <emphasis>y</emphasis> atributos id attributes 
-  juntos (con la misma etiqueta para ambos en un mismo par, por supuesto). Los named anchors
+  anclas con nombre únicamente, o anclas con nombre<emphasis>y</emphasis> atributos id attributes 
+  juntos (con la misma etiqueta para ambos en un mismo par, por supuesto). Las anclas con nombre
   no pueden ser self-closing&mdash;incluso aunque no haya texto dentro del elemento, aún así
   deberas escribirlo en la forma two-sided:</para>
 
   <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
 
-  <para>...though normally there would be some text, such as the title
-  of a section.</para>
+  <para>...aunque normalmente habrá algún texto, como el título de una sección.</para>
 
-  <para>Whether you use a named anchor, or an id attribute, or both,
-  remember that the label will not be visible to someone who browses
-  to that location without using the label.  But such a person might
-  want to discover the label for a particular location, so they can
-  mail the URL for a FAQ answer to a friend, for example.  To help
-  them do this, add a <firstterm>title attribute</firstterm> to the
-  same element(s) where you added the "name" and/or "id" attribute,
-  for example:</para>
+  <para>Allá donde utilices un ancla de nombre, o un atributo id, o ambos,
+  recuerda que la etiqueta no será visible a nadie que navegue a esa ubicación sin
+  usar la etiqueta. Pero una persona podrá querer descubrir la etiqueta de un sitio
+  en particular, para que puedan enviar un mail con la URL de la respuesta a una FAQ
+  enviada a un amigo, por ejemplo. Para ayudar en eto, añade un <firstterm>atributo de título</firstterm> en
+  el mismo elemento(s) donde has añadido el "name" y/o el atributo "id", por ejemplo:</para>
 
   <screen>&lt;a&nbsp;name="mylabel"&nbsp;title="#mylabel"&gt;...&lt;/a&gt;</screen>
 
-  <para>When the mouse pointer is held over the text inside the
-  title-attributed element, most browsers will pop up a tiny box
-  showing the title.  I usually include the hash-sign, to remind the
-  user that this is what she would put at the end of the URL to jump
-  straight to this location next time.</para>
+  <para>Cuando el ratón se situe sobre el texto dentro del elemento con el atributo
+  del título, la mayoría de los navegadores mostraran una pequeña caja con el título.
+  Normalmente, incluyo el signo hash para recordar al usuario que esto es lo que pondrá
+  al final de la URL para ir directo a esta ubicación la próxima vez.</para>
 
   </sidebar>
 
-<para>Formatting the FAQ like this is just one example of how to make
-a resource presentable.  The same properties&mdash;direct
-searchability, availability to major Internet search engines,
-browsability, referential stability, and (where applicable)
-editability&mdash;apply to other web pages, the source code tree, the
-bug tracker, etc.  It just happens that most mailing list archiving
-software long ago recognized the importance of these properties, which
-is why mailing lists tend to have this functionality natively, while
-other formats may require some extra effort on the maintainer's part
-(<xref linkend="managing-volunteers"></xref> discusses how to spread
-that maintenance burden across many volunteers).</para>
+<para>Formatenado la FAQ de esta manera es sólo un ejemplo de como crear un recurso
+presentable. Las mismas propiedades&mdash;busqueda directa, disponibilidad en la mayoría
+de buscadores de Internet, navegación, estabilidad referencial, y (donde se aplique)
+edición&mdash;son aplicables a otras páginas web, el arbol del código fuente, el seguimiento
+de bugs, etc. Simplemente ocurre que la mayoría del software de archivado de listas de correo
+hace tiempo que reconocen la importancia de estas propiedades, y es por lo que  las listas
+de correo tienden a tener estas funcionalidades de manera nativa, mientras otros formatos
+requieren de un esfuerzo extra en la parte de mantenimiento(<xref linkend="managing-volunteers"></xref> discute como
+difundir esta carga de mantenimiento a través de miles de voluntarios).</para>
 
 </sect3>
 
