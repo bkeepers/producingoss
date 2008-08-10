@@ -1394,35 +1394,34 @@ projekt, polecam Subversion.</para>
 </sect3>
 
 <sect3 id="commit-emails">
-<title>Commit emails</title>
+<title>Powiadomienia o commitach</title>
 
-<para>Every commit to the repository should generate an email showing
-who made the change, when they made it, what files and directories
-changed, and how they changed.  The email should go to a special
-mailing list devoted to commit emails, separate from the mailing lists
-to which humans post.  Developers and other interested parties should
-be encouraged to subscribe to the commits list, as it is the most
-effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review
-(see <xref linkend="code-review"/>), commit emails help create a
-sense of community, because they establish a shared environment in
-which people can react to events (commits) that they know are visible
-to others as well.</para>
+<para>Każdy commit do repozytorim powinien powodować wysłanie emaila
+    zawierającego informacje o autorze zmian, czasie ich wykonania,
+    zmodyfikowanych plikach i różnicach w stosunku do wersji pierwotnej. Ten
+    email powinien zostać wysłany na specjalną listę dyskusyjną, odrębną od
+    tej, na której dyskutują ludzie. Programiści (i inne zainteresowane osoby)
+    powinni być zachęcani do subskrybowania tej listy, gdyż jest to
+    najefektywniejszy sposób na to, aby śledzić zmiany w projekcie na poziomie
+    kodu. Oprócz oczywistych zalet takiego przeglądu kodu (patrz <xref
+        linkend="code-review"/>), takie powiadomienia wzmacniają społeczność,
+    gdyż tworzą wspólne forum na którym ludzie mogą reagować na zdarzenia
+    (commity) widoczne dla wszystkich innych.</para>
 
-<para>The specifics of setting up commit emails will vary depending on
-your version control system, but usually there's a script or other
-packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm>,
-specifically a <firstterm>post-commit hook</firstterm>, also called
-the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
-a general means of launching automated tasks in response to commits.
-The hook is triggered by an individual commit, is fed all the
-information about that commit, and is then free to use that
-information to do anything&mdash;for example, to send out an
-email.</para>
+<para>Szczegóły konfiguracji powiadomień są zależne od konkretnego systemu
+    kontroli wersji, ale na ogół istnieje gotowy skrypt, który można w tym
+    celu wykorzystać. Jeśli masz problemy z jego odnalezieniem, spróbuj
+    poszukać w dokumentacji pod hasłem <firstterm>hooks</firstterm>, a w
+    szczególności <firstterm>post-commit hook</firstterm> (w terminologii CVS
+    <firstterm>loginfo hook</firstterm>). Nie ma przyjętego polskiego
+    odpowiednika, więc na potrzeby tego rozdziału użyjemy bezpośredniego
+    tłumaczenia "hak". Haki post-commit pozwalają na automatyczne wykonywanie
+    pewnych zadań w odpowiedzi na commi. Hak zostaje wykonany dla każdego
+    commita, otrzymując wszystkie konieczne informacje o nim&mdash;których
+    może użyć na przykład do wysłania emaila.</para>
 
-<para>With pre-packaged commit email systems, you may want to
-modify some of the default behaviors:</para>
+<para>Czasem warto zmodyfikować domyślne zachowanie gotowego skryptu
+    wysyłającego powiadomienia:</para>
 
 <orderedlist>
 
