@@ -193,9 +193,7 @@ url="http://en.wikipedia.org/wiki/Brooks_Law"/>。</para></footnote>，也就是
 <sect3 id="address-hiding">
 <title>归档中的地址隐藏</title>
 
-<para>To prevent your mailing lists from being a source of addresses
-for spammers, a common technique is for the archives to obscure
-people's email addresses, for example by replacing</para>
+<para>为了防止你的邮件列表成为垃圾邮件发送者的地址源，一个常见的技术是混淆用户的邮件地址，例如通过替换</para>
 
     <blockquote>
       <para><literal>jrandom@somedomain.com</literal></para>
@@ -213,42 +211,12 @@ people's email addresses, for example by replacing</para>
       <para><literal>jrandomNOSPAM@somedomain.com</literal></para>
     </blockquote>
 
-<para>or some similarly obvious (to a human) encoding.  Since spam
-address harvesters often work by crawling through web
-pages&mdash;including your mailing list's online archives&mdash;and
-looking for sequences containing "@", encoding the addresses is a way
-of making people's email addresses invisible or useless to spammers.
-This does nothing to prevent spam from being sent to the mailing list
-itself, of course, but it does avoid increasing the amount of spam
-sent directly to list users' personal addresses.</para>
+<para>或一些类似的明显的（对人类来说）加密。因为垃圾邮件地址收割器通常会遍寻网络&mdash;包括你的邮件列表的网络归档&mdash;它们会查找包含“@”的字符串，对地址加密是为了让人们的邮件地址对垃圾邮件发送者来说不可见或不可用。这对防止垃圾邮件发送者将邮件直接发送到邮件列表本身，但它可以防止直接发送到用户个人地址的垃圾邮件的增加。</para>
 
-<para>Address hiding can be controversial.  Some people like it a lot,
-and will be surprised if your archives don't do it automatically.
-Other people think it's too much of an inconvenience (because humans
-also have to translate the addresses back before using them).
-Sometimes people assert that it's ineffective, because a harvester
-could in theory compensate for any consistent encoding pattern.
-However, note that there is empirical evidence that address hiding
-<emphasis>is</emphasis> effective, see <ulink
-url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
+<para>地址隐藏可能存在争议。许多人很喜欢，如果你的归档不能自动支持，他们会很惊讶。还有些人认为这样太不方便了（因为人们需要在使用之前转化地址）。有时候用户断定这样做不能产生预期的效果，因为收割器理论上可以弥补任何不变的加密模式。然而，有一个实验证据可以证明地址隐藏<emphasis>是</emphasis>有效的，见<ulink
+url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>。</para>
 
-<para>Ideally, the list management software would leave the choice up
-to each individual subscriber, either through a special yes/no header
-or a setting in that subscriber's list account preferences.  However,
-I don't know of any software which offers per-subscriber or per-post
-choice in the matter, so for now the list manager must make a decision
-for everyone (assuming the archiver offers the feature at all, which
-is not always the case).  I lean very mildly toward turning
-address hiding on.  Some people are very careful to avoid posting
-their email addresses on web pages or anywhere else a spam harvester
-might see it, and they would be disappointed to have all that care
-thrown away by a mailing list archive; meanwhile, the inconvenience
-address hiding imposes on archive users is very slight, since it's
-trivial to transform an obscured address back to a valid one if you
-need to reach the person.  But keep in mind that, in the end, it's
-still an arms race: by the time you read this, harvesters might well
-have evolved to the point where they can recognize most common forms
-of hiding, and we'll have to think of something else.</para>
+<para>理想情况下，邮件列表软件为每个订阅者提供选择的机会，通过特别的yes/no头，或者通过订阅者列表帐户的参数选择设置。然而，我不知道有哪个软件提供了每订阅者或每邮件的选项，因此现在列表管理员必须为所有人作出决定（假定归档程序已经提供了这些特性，就不存在这个问题了）。我倾向于适度使用地址隐藏，一些人对于将自己的邮件发布到网页上或其他收割器可能会搜索的地方会非常小心，他们会因为邮件列表归档暴露它们关心的内容而感到失望，归档用户中的地址隐藏带来的不便是轻微的，因为如果你希望联系某个人，将混淆的邮件地址恢复非常容易。但是最后还是要牢记，这是一场军备竞赛：在你阅读到本文的事以后，收割器可能已经得到了进化，能够识别大多数常见的隐藏形式，我们可以想一些其他形式。</para>
 
 </sect3>
 
@@ -256,15 +224,9 @@ of hiding, and we'll have to think of something else.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="header-management">
-<title>Identification and Header Management</title>
+<title>认证和头管理</title>
 
-<para>List subscribers often want to put mails from the list into a
-project-specific folder, separate from their other mail.  Their
-mail reading software can do this automatically by examining the mail's
-<firstterm>headers</firstterm>.  The headers are the fields at the top
-of the mail that indicate the sender, recipient, subject, date, and
-various other things about the message.  Certain headers are
-well known and effectively mandatory:</para>
+<para>列表订阅者经常希望能将从列表发送的邮件放置到项目特定的目录，和其他邮件分开。他们的邮件阅读软件可以自动检查邮件的<firstterm>头</firstterm>，这个头是在邮件的顶部，用来指明发送者、接收者、主题、日期和其他邮件相关的其他东西。某些头是众所周知的，而且是必须有的：</para>
 
 <screen>
 From: ...
@@ -273,63 +235,37 @@ Subject: ...
 Date: ...
 </screen>
 
-<para>Others are optional, though still quite standard.  For example,
-emails are not strictly required to have the</para>
+<para>还有一些是可选的，尽管也是非常标准的。例如，邮件不必有</para>
 
 <screen>
 Reply-to: sender@email.address.here
 </screen>
 
-<para>header, but most do, because it gives recipients a foolproof way
-to reach the author (it is especially useful when the author had to
-send from an address other than the one to which replies should be
-directed).</para>
+<para>头，但大多数情况下都有，因为这可以保证接收者（当作者必须从一个不能接收邮件地址发送邮件的时候这特别有用）能够联系到原作者。</para>
 
-<para>Some mail reading software offers an easy-to-use interface for
-filing mails based on patterns in the Subject header.  This leads
-people to request that the mailing list add an automatic prefix to all
-Subjects, so they can set their readers to look for that prefix and
-automatically file the mails in the right folder.  The idea is that
-the original author would write:</para>
+<para>一些邮件阅读软件提供了基于主题头模式的易用界面，可以用来过滤邮件。这导致人们会要求邮件列表为所有的主题提供自动前缀，所以他们可以设置的阅读器查找前缀并自动将文件归入正确的文件夹。如果原来的作者是这样写：</para>
 
 <screen>
 Subject: Making the 2.5 release.
 </screen>
 
-<para>but the mail would show up on the list looking like this:</para>
+<para>但是列表中显示的邮件会是：</para>
 
 <screen>
 Subject: [discuss@lists.example.org] Making the 2.5 release.
 </screen>
 
-<para>Although most list management software offers the option to do
-this, I strongly recommend against turning the option on.  The problem
-it solves can easily be solved in much less obtrusive ways, and the
-cost of eating space in the Subject field is far too high.
-Experienced mailing list users typically scan the Subjects of the
-day's incoming list mail to decide what to read and/or respond to.
-Prepending the list's name to the Subject can push the right side of
-the Subject off the screen, rendering it invisible.  This obscures
-information that people depend on to decide what mails to open, thus
-reducing the overall functionality of the mailing list for
-everyone.</para>
+<para>尽管大多数列表管理软件提供这个选项，然而我强烈反对开启这个功能。因为这个问题可以通过更自然的方式轻松解决，而且主题字段消耗的空间也太多了。有经验的邮件列表用户通常会扫视每天的列表邮件的主题，以决定阅读和/或回复哪些邮件。主题中前置的列表名称会将主题的正式内容脱离屏幕，无法看到。这混淆了人们赖以决定是否打开邮件的信息，从而减弱了邮件列表的整体功能。</para>
 
-<para>Instead of munging the Subject header, teach your users to take
-advantage of the other standard headers, starting with the To header,
-which should say the mailing list's name:</para>
+<para>我们不会处理主题头，而是让你的用户利用其他标准的头，以To头说起，可以用来说明邮件列表名称：</para>
 
 <screen>
 To: &lt;discuss@lists.example.org&gt;
 </screen>
 
-<para>Any mail reader that can filter on Subject should be able to filter on
-To just as easily.</para>
+<para>任何可以过滤主题的邮件阅读器一定也能轻易的处理To。</para>
 
-<para>There are a few other optional-but-standard headers expected for
-mailing lists.  Filtering on these is even more reliable than using
-the "To" or "Cc" headers; since these headers are added to each post
-by the mailing list management software itself, some users may be
-counting on their presence:</para>
+<para>还有一些其它的邮件列表期望的可选但标准的头，根据这些头过滤比利用“To”或“Cc”头更加可靠；因为这些头是邮件列表软件本身为每个邮件添加的，一些用户会依赖他们的出现：</para>
 
 <screen>
 list-help: &lt;mailto:discuss-help@lists.example.org&gt;
@@ -339,175 +275,55 @@ Delivered-To: mailing list discuss@lists.example.org
 Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
 </screen>
 
-<para>For the most part, they are self-explanatory.  See <ulink
-url="http://www.nisto.com/listspec/list-manager-intro.html"/> for more
-explanation, or if you need the really detailed, formal specification,
-see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
+<para>绝大部分是自解释的，更多解释可以看<ulink
+url="http://www.nisto.com/listspec/list-manager-intro.html"/>，或者如果你觉得不够详细，正式的规范可以看<ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>。
 </para>
 
-<para>Notice how these headers imply that if you have a mailing list
-named "list", then you also have administrative addresses "list-help"
-and "list-unsubscribe" available.  In addition to these, it is normal
-to have "list-subscribe", for joining, and "list-owner", for reaching
-the list administrators.  Depending on the list management software
-you use, these and/or various other administrative addresses may be
-set up; the documentation will have details.  Usually a complete
-explanation of all these special addresses is mailed to each new user
-as part of an automated "welcome mail" on subscribing.  You yourself
-will probably get a copy of this welcome mail.  If you don't, then ask
-someone else for a copy, so you know what your users are seeing when
-they join the list.  Keep the copy handy so you can answer questions
-about the mailing list functions, or better yet, put it on a web page
-somewhere.  That way when people lose their own copy of the
-instructions and post to ask "How do I unsubscribe from this list?",
-you can just hand them the URL.</para>
+<para>如果你有一个名为“list”的邮件列表，请注意这些头是如何暗示的，然后你也有了管理地址“list-help”和“list-unsubscribe”。除此之外，用来加入的“list-subscribe”和接触列表管理员的“list-owner”也非常常见。取决于你所使用的管理软件，也可能会设置一些其它的管理地址；文档应该会有详细介绍。通常情况下，每个新用户在订阅时都会收到自动的“欢迎邮件”，其中会完整解释所有的特别地址。你可能有这个欢迎邮件的一份拷贝，如果你没有，可以问其他人获取一份拷贝，这样你就知道当你的用户到来时，他们会看到什么。手中有一份拷贝，你就可以回答邮件列表功能的问题，更好一点，可以放置到网页上。这样当有人丢失了自己的指导并询问“我如何从列表退订时？”，你就可以将URL发送个他。</para>
 
-<para>Some mailing list software offers an option to append
-unsubscription instructions to the bottom of every post.  If that
-option is available, turn it on.  It causes only a couple of extra
-lines per message, in a harmless location, and it can save you a lot
-of time, by cutting down on the number of people who mail you&mdash;or
-worse, mail the list!&mdash;asking how to unsubscribe.</para>
+<para>一些邮件列表软件会在每个邮件的底部追加退订信息，如果有这个选项，请打开它。这样只会导致每个邮件有一段额外的行，在一个无害的位置，可以帮助你节省很多时间，减少了给你发邮件询问如何退订的人数&mdash;更坏的情况，发送到列表的数量！</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="reply-to">
-<title>The Great Reply-to Debate</title>
+<title>伟大的Reply-to争论</title>
 
-<para>Earlier, in <xref linkend="avoid-private-discussions"/>, I stressed the
-importance of making sure discussions stay in public forums, and
-talked about how active measures are sometimes needed to prevent
-conversations from trailing off into private email threads;
-furthermore, this chapter is all about setting up project
-communications software to do as much of the work for you as possible.
-Therefore, if the mailing list management software offers a way to
-automatically cause discussions to stay on the list, you would think
-turning that feature on would be the obvious choice.</para>
+<para>在前面的<xref linkend="avoid-private-discussions"/>，我强调了保持在公共论坛讨论的重要性，谈论了如何防止私下邮件讨论的一些主动措施，除此之外，本章将会讨论如何设置项目交流软件来更好的做这件事。因为如果邮件列表管理软件提供了一个方法来自动导致讨论保持在列表中，你会认为开启这个功能是显而易见的选择。</para>
 
-<para>Well, not quite.  There is such a feature, but it has some
-pretty severe disadvantages.  The question of whether or not to use it
-is one of the hottest debates in mailing list
-management&mdash;admittedly, not a controversy that's likely to make
-the evening news in your city, but it can flare up from time to time
-in free software projects.  Below, I will describe the feature, give
-the major arguments on both sides, and make the best recommendation I
-can.</para>
+<para>好的，有时候也不是如此认为。尽管有这个特性，但是它却有严重的缺陷。问题是无论你是否在邮件列表管理中使用这个功能都会成为最热的讨论&mdash;诚然，这不大可能成为你城市里的晚间新闻那样的论战，但它会在自由软件项目中一次次的爆发。下面，我将描述这个特性，提供两方面的主要论点，提出我能作出的建议。</para>
 
-<para>The feature itself is very simple: the mailing list software
-can, if you wish, automatically set the Reply-to header on every post
-to redirect replies to the mailing list.  That is, no matter what the
-original sender puts in the Reply-to header (or even if they don't
-include one at all), by the time the list subscribers see the post,
-the header will contain the list address:</para>
+<para>这个特性本身非常简单：如果你愿意，邮件列表软件可以在每个邮件中自动设置转向到邮件列表的Reply-to头，也就是无论原来的发送者设置了什么Reply-to头（或者他们没有设置），当邮件列表的订阅者看到邮件时，它的头将会包含列表地址：</para>
 
 <screen>
 Reply-to: discuss@lists.example.org
 </screen>
 
-<para>On its face, this seems like a good thing.  Because virtually
-all mail reading software pays attention to the Reply-to header, now
-when anyone responds to a post, their response will be automatically
-addressed to the entire list, not just to the sender of the message
-being responded to.  Of course, the responder can still manually
-change where the message goes, but the important thing is that
-<emphasis>by default</emphasis> replies are directed to the list.
-It's a perfect example of using technology to encourage
-collaboration.</para>
+<para>从表面上看非常好。因为实际上所有的邮件阅读软件会注意到Reply-to头，这样当任何人回复邮件时，他们的回复都会自动来到整个列表，而不仅仅是邮件的发送者。虽然回复者仍然可以手工修改回复的地址，但重要的是<emphasis>缺省的</emphasis>回复会指向列表。这是通过技术鼓励协作的完美实例。</para>
 
-<para>Unfortunately, there are some disadvantages.  The first is known
-as the <firstterm>Can't Find My Way Back Home</firstterm> problem:
-sometimes the original sender will put their "real" email address in
-the Reply-to field, because for one reason or another they send email
-from a different address than where they receive it.  People who
-always read and send from the same location don't have this problem,
-and may be surprised that it even exists.  But for those who have
-unusual email configurations, or who cannot control how the From
-address on their mails looks (perhaps because they send from work and
-do not have any influence over the IT department), using Reply-to may
-be the only way they have to ensure that responses reach them.  When
-such a person posts to a mailing list that he's not subscribed to, his
-setting of Reply-to becomes essential information.  If the list
-software overwrites it, he may never see the responses to his post.</para>
+<para>不幸的是，也有一些缺点。首先是<firstterm>找不到回家的路</firstterm>问题：有时候原来的发送者会把“真正的”邮件地址存放到Reply-to字段，通常是某种原因他们不能通过发送邮件的地址接收邮件。一直从同一个地址读取和发送的人们不会有这种问题，甚至会惊讶有这种情况。但是对于有特别的邮件设置，或者不能设置他们所看邮件的From地址（或许因为他们在工作时发送，而且不能通过IT部门修改配置）时，使用Reply-to可能是保证回复能够收到的唯一方法 。当此类人在未订阅的邮件列表中发送邮件时，她的Reply-to设置就成为了关键信息。如果列表软件覆盖了它，她可能就看不到回复了。</para>
 
-<para>The second disadvantage has to do with expectations, and in my
-opinion is the most powerful argument against Reply-to munging.  Most
-experienced mail users are accustomed to two basic methods of
-replying: <firstterm>reply-to-all</firstterm> and
-<firstterm>reply-to-author</firstterm>.  All modern mail reading
-software has separate keys for these two actions.  Users know that to
-reply to everyone (that is, including the list), they should choose
-reply-to-all, and to reply privately to the author, they should choose
-reply-to-author.  Although you want to encourage people to reply to
-the list whenever possible, there are certainly circumstances where a
-private reply is the responder's prerogative&mdash;for example, they
-may want to say something confidential to the author of the original
-message, something that would be inappropriate on the public
-list.</para>
+<para>第二个可以预期的缺点，从我的观点来看是Reply-to处理最有力的反对论点。大多数有经验的邮件用户会习惯于两个回复的基本方法：<firstterm>reply-to-all</firstterm>和<firstterm>reply-to-author</firstterm>。所有现代的邮件阅读软件对于两个动作都有单独的按键，用户知道如果是回复到所有人（也包括列iboa），他们会选择reply-to-all，如果是私下回复到作者，他们应该选择reply-to-author。尽管你希望鼓励人们尽可能回复到列表，但确实有情况回复者需要有权利私下回复&mdash;例如，他们希望和邮件的原作者说一些机密的事情，可能不适合出现在公共列表中。</para>
 
-<para>Now consider what happens when the list has overridden the
-original sender's Reply-to.  The responder hits the reply-to-author
-key, expecting to send a private message back to the original author.
-Because that's the expected behavior, he may not bother to look
-carefully at the recipient address in the new message.  He composes
-his private, confidential message, one which perhaps says embarrassing
-things about someone on the list, and hits the send key.
-Unexpectedly, a few minutes later his message appears <emphasis>on the
-mailing list!</emphasis> True, in theory he should have looked
-carefully at the recipient field, and should not have assumed anything
-about the Reply-to header.  But authors almost always set Reply-to to
-their own personal address (or rather, their mail software sets it for
-them), and many longtime email users have come to expect that.  In
-fact, when a person deliberately sets Reply-to to some other address,
-such as the list, he usually makes a point of mentioning this in the
-body of the message, so people won't be surprised at what happens when
-they reply.</para>
+<para>现在考虑一下如果列表覆盖了发送者的Reply-to时会发生什么，回复者点reply-to-author，希望向原发送者私下发送一个邮件。因为那是预期的行为，他可能就不会小心查看新邮件的接收地址。他编写了他的私人的、机密信息，可能会说一些对列表中的人来说很尴尬的内容，并点击发送键。出乎意料的是，几分钟之后他的信息出现<emphasis>邮件列表中！</emphasis>诚然，他应该仔细查看接收字段，对于Reply-to头不要有任何设想值。但是作者几乎会肯定将Reply-to设置为他们的个人地址（更确切地说，他们的软件做了设置），许多资深的邮件用户都会期望这样。实际上，如果一个人直接将Reply-to设置为其他地址，他通常会邮件的正文提及这一点，这样人们就不会为回复所发生的事情感到惊讶了。
+</para>
 
-<para>Because of the possibly severe consequences of this unexpected
-behavior, my own preference is to configure list management software
-to never touch the Reply-to header.  This is one instance where using
-technology to encourage collaboration has, it seems to me, potentially
-dangerous side-effects.  However, there are also some powerful
-arguments on the other side of this debate.  Whichever way you choose,
-you will occasionally get people posting to your list asking why you
-didn't choose the other way.  Since this is not something you ever
-want as the main topic of discussion on your list, it might be good to
-have a canned response ready, of the sort that's more likely to stop
-discussion than encourage it.  Make sure you do
-<emphasis>not</emphasis> insist that your decision, whichever it is,
-is obviously the only right and sensible one (even if you think that's
-the case).  Instead, point out that this is a very old debate, there
-are good arguments on both sides, no choice is going to satisfy
-all users, and therefore you just made the best decision you
-could.  Politely ask that the subject not be revisited unless someone
-has something genuinely new to say, then stay out of the thread and
-hope it dies a natural death.</para>
+<para>因为可能出现的严重后果，我的观点是保证列表管理软件决不要碰Reply-to头。这是一个使用技术来鼓励协作的实例，但是对我来说有潜在的危险副作用。然而，在论战的另一面也有强有力的论据，无论你选择何种方式，你都会在列表中看到有人问你为什么不选择另一种方式。因为你肯定不希望这成为邮件列表中的主要讨论，所以最好准备好回应，诸如此类结束讨论而不是鼓励讨论。请确认你<emphasis>不是</emphasis>坚持认定你的决定，也就是无论是哪个，它都应该明显是唯一正确和明智的选择（即使你认为那是一个事实）。相反，指出这是一个老争论了，两方面都有好的论点，没有能够满足所有用户的选择，因而你只是做出了你能做出的最佳决定。有礼貌的告知不要再炒冷饭了，除非有一些独特的新内容，然后不必再参与讨论并希望它能够自然死亡。</para>
 
-<para>Someone may suggest a vote to choose one way or the other.  You
-can do that if you want, but I personally do not feel that counting
-heads is a satisfactory solution in this case.  The penalty for
-someone who is surprised by the behavior is so huge (accidentally
-sending a private mail to a public list), and the inconvenience for
-everyone else is fairly slight (occasionally having to remind someone
-to respond to the whole list instead of just to you), that it's not
-clear that the majority, even though they are the majority, should be
-able to put the minority at such risk.</para>
+<para>有些人会建议开展一个投票，如果你愿意你可以这样做，但是这个情况下我不认为这是一个满意的解决方案。对于某个人因为出人意料的行为模式的惩罚是巨大的（不小心的将私有邮件发送到公共列表），而对于所有其他人的不便是相对轻微的（偶尔需要提醒某人回复到整个列表而不仅仅是你），多数票是什么并不清楚，即使能得到多数票，少数者应该承担这样的危险吗？</para>
 
-<para>I have not addressed all aspects of this issue here, just the
-ones that seemed of overriding importance.  For a full discussion, see
-these two canonical documents, which are the ones people always cite
-when they're having this debate:
+<para>这里我没有涉及问题的所有方面，仅仅包含了看起来最重要的。完整的讨论，请看这两篇权威的文档，当人们遇到争论时经常会对其引用：
 
 <itemizedlist>
   <listitem>
-     <para><emphasis role="bold">Leave Reply-to alone</emphasis>,
-     <emphasis>by Chip Rosenthal</emphasis></para>
+     <para><emphasis role="bold">勿动eply-to</emphasis>,
+     <emphasis>Chip Rosenthal</emphasis></para>
      <para><ulink
         url="http://www.unicom.com/pw/reply-to-harmful.html"/></para>
   </listitem>
   <listitem>
-     <para><emphasis role="bold">Set Reply-to to list</emphasis>,
-     <emphasis>by Simon Hill</emphasis></para>
+     <para><emphasis role="bold">把Reply-to设置为列表地址</emphasis>,
+     <emphasis>Simon Hill</emphasis></para>
      <para><ulink
         url="http://www.metasystema.net/essays/reply-to.mhtml"/></para>
   </listitem>
@@ -515,37 +331,15 @@ when they're having this debate:
 
 </para>
 
-<para>Despite the mild preference indicated above, I do not feel there
-is a "right" answer to this question, and happily participate in many
-lists that <emphasis>do</emphasis> set Reply-to.  The most important
-thing you can do is settle on one way or the other early, and try not
-to get entangled in debates about it after that.</para>
+<para>无论你偏爱上面的哪一条，我不认为此问题有所谓的“正确”答案，也会很乐意参与到<emphasis>设置</emphasis>Reply-to的许多列表，最重要的事情是你尽早确立一种方式，之后再也不要陷入到争论之中。</para>
 
 <sect3 id="reply-fantasies">
-<title>Two fantasies</title>
+<title>两个幻想</title>
 
-<para>Someday, someone will get the bright idea to implement a
-<firstterm>reply-to-list</firstterm> key in a mail reader.  It would
-use some of the custom list headers mentioned earlier to figure out
-the address of the mailing list, and then address the reply directly
-to the list only, leaving off any other recipient addresses, since
-most are probably subscribed to the list anyway.  Eventually, other
-mail readers will pick up the feature, and this whole debate will go
-away.  (Actually, the <ulink url="http://www.mutt.org/">Mutt</ulink>
-mail reader does offer this feature.<footnote><para>Shortly after this
-book appeared, <ulink url="http://www.michaelbernstein.com/"
->Michael Bernstein</ulink> wrote me to say: "There are other email
-clients that implement a reply-to-list function besides Mutt. For
-example, Evolution has this function as a keyboard shortcut, but not a
-button (Ctrl+L)."</para></footnote>)</para>
+<para>将来有一天，有些聪明人会在邮件阅读器实现一个<firstterm>reply-to-list</firstterm>键，它可以使用前面提到的一些自定义的列表头来指出邮件列表的地址，然后会将回复仅指向到邮件列表，同时消除所有的其他接收地址，因此，无论如何大多数都是订阅列表的地址。最终，其他邮件阅读器也会采用这个特性，整个争论也就偃旗息鼓。（实际上，<ulink url="http://www.mutt.org/">Mutt</ulink>邮件阅读器已经提供了这个特性<footnote><para>在本书出现后不久，<ulink url="http://www.michaelbernstein.com/"
+>Michael Bernstein</ulink>告诉我：“也有一些Mutt之外的其他客户端实现了reply-to-list功能，例如，Evolution的一个快捷键有这个功能，但不是一个按钮（Ctrl+L）。”</para></footnote>）</para>
 
-<para>An even better solution would be for Reply-to munging to be a
-per-subscriber preference.  Those who want the list to set Reply-to
-munged (either on others' posts or on their own posts) could ask for
-that, and those who don't would ask for Reply-to to be left alone.
-However, I don't know of any list management software that offers this
-on a per-subscriber basis.  For now, we seem to be stuck with a global
-setting.</para>
+<para>一个更好的解决方案是让每个订阅者自己选择是否进行Reply-to处理，如果希望经过Reply-to处理（自己与他人的邮件），可以要求，而如果不希望，则可以设置为Reply-to不变。然而，我不知道有任何列表管理软件提供这个每订户基础的设置，我们还是只能使用全局设置。</para>
 
 </sect3>
 
@@ -553,139 +347,70 @@ setting.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="archiving">
-<title>Archiving</title>
+<title>归档</title>
 
-<para>The technical details of setting up mailing list archiving are
-specific to the software that's running the list, and are beyond the
-scope of this book.  When choosing or configuring an archiver,
-consider these qualities:</para>
+<para>设置邮件列表归档的技术细节特定于运转列表的软件，超出了本书的范围，当选择归档时，考虑这些特性：</para>
 
 <variablelist>
 
-  <varlistentry><term>Prompt updating</term>
+  <varlistentry><term>立刻更新</term>
     <listitem>
-      <para>People will often want to refer to an archived post made
-            within the last hour or two.  If possible, the archiver
-            should archive each post instantaneously, so that by the
-            time a post appears on the mailing list, it's already
-            present in the archives.  If that option isn't available,
-            then at least try to set the archiver to update itself
-            every hour or so.  (By default, some archivers run their
-            update processes once per night, but in practice that's
-            far too much lag time for an active mailing list.)</para>
+      <para>人们经常会参考在上个小时所做的归档发表，如果可能，归档器必须能够立刻归档每个发布，这样发表出现在邮件列表时，它也就出现在了归档中。如果没有这个特性，至少应该将其设置为每小时更新一次。（缺省情况下，一些归档器会每夜更新，对于一个活跃的邮件列表这有点太滞后了。）</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Referential stability</term>
+  <varlistentry><term>参考稳定性</term>
     <listitem>
-      <para>Once a message is archived at a particular URL, it should
-            remain accessible at that exact same URL forever, or as
-            close to forever as possible.  Even if the archives are
-            rebuilt, restored from backup, or otherwise fixed, any
-            URLs that have already been made publicly available
-            should remain the same.  Stable references make it
-            possible for Internet search engines to index the
-            archives, which is a major boon to users looking for
-            answers.  Stable references are also important because
-            mailing list posts and threads are often linked to from
-            the bug tracker (see
-            <xref
-            linkend="bug-tracker"/>)<phrase output="printed">
-            later in this chapter</phrase> or
-            from other project documents.</para>
+      <para>一旦一个信息已经归档到特定URL，它应该在相同的可访问URL，并尽可能的永远保持。即使归档重建，从备份中恢复，或者其他修正，任何已经公开的URL应该保持相同。稳定引用可以让Internet上的搜索引擎能够索引归档，可以方便用户查找答案，稳定引用也非常重要，因为邮件列表经常会被bug跟踪（见<phrase output="printed">本章后面的</phrase><xref
+            linkend="bug-tracker"/>）或其他项目文档中引用。</para>
 
-      <para>Ideally, mailing list software would include a message's
-            archive URL, or at least the message-specific portion of
-            the URL, in a header when it distributes the message to
-            recipients.  That way people who have a copy of the
-            message would be able to know its archive location
-            without having to actually visit the archives, which would
-            be helpful because any operation that involves one's web
-            browser is automatically time-consuming.  Whether any
-            mailing list software actually offers this feature, I don't
-            know; unfortunately, the ones I have used do not.
-            However, it's something to look for (or, if you write
-            mailing list software, it's a feature to consider
-            implementing, please).</para>
+      <para>理想情况下，邮件列表应该能够包含一个信息归档的地址，或者至少在分发到接收者的信息头上有URL的信息特定的部分。这样人们就有了信息的拷贝，已经知道了归档的位置，而无须实际访问归档，这样做很有用，因为任何操作需要需要花费网络浏览器的时间的。我不知道是否有邮件列表软件实际支持这个特性；不幸的是，我用过的都不行。然而，这是我要寻找的（或者，如果你写邮件列表软件，这应该是一个可以考虑实现的特性）。</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Backups</term>
+  <varlistentry><term>备份</term>
     <listitem>
-      <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult.  In other words, don't treat your archiver as a
-            black box.  You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary.  Those archives are precious
-            data&mdash;a project that loses them loses a good part of
-            its collective memory.</para>
+      <para>如何备份归档必须相当清楚，而恢复方法也不能太难。换一句话说，不要把归档器当作黑盒子，你（或者你项目中的某个人）应当知道信息存放在什么地方，以及如何在必要时从信息存放处重新生成归档页。这些归档是珍贵的数据&mdash;失去了它们，就像失去了项目集体记忆中美好的一部分。</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Thread support</term>
+  <varlistentry><term>线索（thread）支持</term>
     <listitem>
-      <para>It should be possible to go from any individual message to
-            the <firstterm>thread</firstterm> (group of related
-            messages) that that original message is part of.  Each
-            thread should have its own URL too, separate from the URLs
-            of the individual messages in the thread.</para>
+      <para>应该能够从任意单独的信息进入原来信息所归属的<firstterm>线索</firstterm>（一组关联的信息），每个线索必须拥有自己的URL，与线索中的单独信息区分开来。</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Searchability</term>
+  <varlistentry><term>可搜索性</term>
     <listitem>
-      <para>An archiver that doesn't support searching&mdash;on the
-            bodies of messages, as well as on authors and
-            subjects&mdash;is close to useless.  Note that some archivers 
-            support searching by simply farming the work out to an
-            external search engine such as <ulink
-            url="http://www.google.com/">Google</ulink>.  This is
-            acceptable, but direct search support is usually more
-            fine-tuned, because it allows the searcher to specify that
-            the match must appear in a subject line versus the body,
-            for example.</para>
+      <para>一个不支持搜索的归档器&mdash;针对信息内容、以及作者和主题&mdash;接近于无用。注意某些归档器只是将此工作交给了诸如<ulink
+            url="http://www.google.com/">Google</ulink>的第三方搜索引擎，这是可以接受的，但是直接的搜索支持通常会更加易于调整，例如我们可以指定搜索匹配的是主题行还是正文。</para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 
-<para>The above is just a technical checklist to help you evaluate and
-set up an archiver.  Getting people to
-actually <emphasis>use</emphasis> the archiver to the project's
-advantage is discussed in later chapters, in particular
-<xref linkend="using-archives"/>.</para>
+<para>上面是一个技术检查列表，可以帮助你评估和设置归档器，本章后面将讨论如何让人们<emphasis>利用</emphasis>归档器来对项目有益，特别是在<xref linkend="using-archives"/>。</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="mailing-list-software">
-<title>Software</title>
+<title>软件</title>
 
-<para>Here are some open source tools for doing list management and
-archiving.  If the site where you're hosting your project already has
-a default setup, then you may not ever have to decide on a tool at
-all.  But if you must install one yourself, these are some
-possibilities.  The ones I have actually used are Mailman, Ezmlm,
-MHonArc, and Hypermail, but that doesn't mean the others aren't good
-too (and of course, there are probably other tools out there that I
-just didn't happen to find, so don't take this as a complete
-list).</para>
+<para>这里是一些可以进行列表管理和归档的开源工具，如果你的项目主机已经有缺省的设置，你可能无法决定一个工具。但是如果你必须安装一个，这些是可以选择的。我实际使用过的包括ailman、Ezmlm、MHonArc和Hypermail，这并不是意味着其他工具不好（当然可能有其他一些工具只是我碰巧没有找到，所以不要把这当作完全的列表）。</para>
 
-<para>Mailing list management software:</para>
+<para>邮件列表管理软件：</para>
 
 <itemizedlist>
  <listitem>
    <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.list.org/"/></para>
-   <para>(Has built-in archiver, and hooks for plugging in
-         external archivers.)</para>
+   <para>（有内置的归档器，以及外挂其他归档器的钩子。）</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.procmail.org/"/></para>
-   <para>(Meant to be used with the Procmail mail processing system.)</para>
+   <para>（专门用于Procmail邮件处理系统。）</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
@@ -698,20 +423,17 @@ list).</para>
  <listitem>
    <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://cr.yp.to/ezmlm.html"/></para>
-   <para>(Designed to work with the <ulink
-         url="http://cr.yp.to/qmail.html">Qmail</ulink> mail
-         delivery system.)</para> 
+   <para>（设计与<ulink
+         url="http://cr.yp.to/qmail.html">Qmail</ulink>邮件投递系统协同工作。）</para> 
  </listitem>
  <listitem>
    <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://mojo.skazat.com/"/></para>
-   <para>(Despite the web site's bizarre attempts to hide the fact,
-         this is free software, released under the GNU General
-         Public License.  It also has a built-in archiver.)</para>
+   <para>（不管网站因为什么奇怪的想法希望掩盖这个事实，这确实是一个自由软件，使用GNU许可证发布，也有内置的归档器。）</para>
  </listitem>
 </itemizedlist>
 
-<para>Mailing list archiving software:</para>
+<para>邮件列表归档软件：</para>
 
 <itemizedlist>
  <listitem>
@@ -729,9 +451,7 @@ list).</para>
  <listitem>
    <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.procmail.org/"/></para>
-   <para>(Companion software to SmartList, this is a general mail
-         processing system that can, apparently, be configured as an
-         archiver.)</para>
+   <para>（SmartList的伴侣软件，也可以是普通的邮件处理系统，很显然，被配置为归档器。）</para>
  </listitem>
 </itemizedlist>
 
@@ -742,267 +462,106 @@ list).</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
-<title>Version Control</title>
+<title>版本控制</title>
 
-<para>A <firstterm>version control system</firstterm> (or
-<firstterm>revision control system</firstterm>) is a combination of
-technologies and practices for tracking and controlling changes to a
-project's files, in particular to source code, documentation, and web
-pages.  If you have never used version control before, the first thing
-you should do is go find someone who has, and get them to join your
-project.  These days, everyone will expect at least your project's
-source code to be under version control, and probably will not take
-the project seriously if it doesn't use version control with at least
-minimal competence.</para>
+<para>一个<firstterm>版本控制系统</firstterm>（或<firstterm>修订控制系统</firstterm>）是跟踪和控制项目文件变更的技术与实践的组合，包括源代码、文档和网页。如果你以前从来没有使用过版本控制，那你最好赶快找一个有经验的人加入。现今，所有的人都希望你的项目源代码存放在版本控制下，如果不使用版本控制，人们将会轻视项目。</para>
 
-<para>The reason version control is so universal is that it helps with
-virtually every aspect of running a project: inter-developer
-communications, release management, bug management, code stability and
-experimental development efforts, and attribution and authorization of
-changes by particular developers.  The version control system provides
-a central coordinating force among all of these areas.  The core of
-version control is <firstterm>change management</firstterm>:
-identifying each discrete change made to the project's files,
-annotating each change with metadata like the change's date and
-author, and then replaying these facts to whoever asks, in whatever
-way they ask.  It is a communications mechanism where a change is the
-basic unit of information.</para>
+<para>版本控制如此广泛的原因是因为它实际上能帮助运营一个项目的所有方面：内部开发者交流、发布管理、缺陷管理、代码稳定性和试验开发投入，以及对某个变更所属开发者的归因和授权。版本控制系统为这些领域提供了一个集中的协调力量。版本控制的核心是<firstterm>变更管理</firstterm>：识别对项目文件的每一个不相关的变更，使用元数据例如变更的日期和作者来注解每个变更，然后在无论使用什么方法，任何人询问时，重放这个事实。这是变更是信息的基本单元的交流机制。</para>
 
-<para>This section does not discuss all aspects of using a version
-control system.  It's so all-encompassing that it must be addressed
-topically throughout the book.  Here, we will concentrate on choosing
-and setting up a version control system in a way that will foster
-cooperative development down the road.</para>
+<para>这个部分不会讨论使用版本控制的所有方面，它是如此包罗万象，我们不得在本书不时不时的提及。因此，我们会通过促进协作开发的方式，专注于版本控制系统的选择和设置。</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
-<title>Version Control Vocabulary</title>
+<title>版本控制词汇表</title>
 
-<para>This book cannot teach you how to use version control if you've
-never used it before, but it would be impossible to discuss the
-subject without a few key terms.  These terms are useful independently
-of any particular version control system: they are the basic nouns and
-verbs of networked collaboration, and will be used generically
-throughout the rest of this book.  Even if there were no version
-control systems in the world, the problem of change management would
-remain, and these words give us a language for talking about that
-problem concisely.
+<para>如果你没有用过版本控制，本书不会教你如何使用，但是如果没有一些关键术语，我们就无法讨论。这些术语独立于任何特定的版本控制系统：它们是网络交互的基本名词和动词，将会在本书剩下的部分适用，即使这个世界上没有版本控制，变更管理的问题也会存在，这些术语给了我们简明的讨论这些问题提供了一种语言。
 
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
-  <term><firstterm>commit</firstterm></term>
-  <listitem><para>To make a change to the project; more formally, to
-  store a change in the version control database in such a way that it
-  can be incorporated into future releases of the project.  "Commit"
-  can be used as a verb or a noun.  As a noun, it is essentially
-  synonymous with "change".  For example: "I just committed a fix for
-  the server crash bug people have been reporting on Mac OS X.  Jay,
-  could you please review the commit and check that I'm not misusing
-  the allocator there?"</para></listitem>
+  <term><firstterm>提交（commit）</firstterm></term>
+  <listitem><para>对项目做出一个变更；更正式的，以此方式在版本控制数据库存储一个变更，可以成为项目以后发布的一部分。“提交”可以作为名词或动词，作为名词，从本质上讲可以看作是“变更（change）”同义词。例如：“我刚刚为报告的Mac OS X上的服务器宕机bug提交了一个修订，Jay，你能评审一下提交并看一下我有没有误用内存分配？”</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
-  <term><firstterm>log&nbsp;message</firstterm></term>
-  <listitem><para>A bit of commentary attached to each commit,
-  describing the nature and purpose of the commit.  Log messages are
-  among the most important documents in any project: they are the
-  bridge between the highly technical language of individual code
-  changes and the more user-oriented language of features, bugfixes,
-  and project progress.  Later in this section, we'll look at ways to
-  distribute log messages to the appropriate audiences; also, <xref
-  linkend="codifying-tradition"/><phrase output="printed"> in
-  <xref linkend="communications"/></phrase> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
+  <term><firstterm>日志信息（log&nbsp;message）</firstterm></term>
+  <listitem><para>每次提交所附的注释，描述了提交的性质和目的，日志信息是任何项目最重要的文档：它是单个代码变更的高度技术语言与特性、bug修订和项目进展这类更面向用户语言的桥梁。本节的后半部分，我们会关注将日志信息发布给适当读者的方法；另外，<phrase output="printed"><xref linkend="communications"/>的</phrase><xref
+  linkend="codifying-tradition"/>将会讨论鼓励贡献者填写简明和有用日志信息的方法。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
-  <term><firstterm>update</firstterm></term>
-  <listitem><para>To ask that others' changes (commits) be
-  incorporated into your local copy of the project; that is, to bring
-  your copy "up-to-date".  This is a very common operation; most
-  developers update their code several times a day, so that they know
-  they're running roughly the same thing the other developers are
-  running, and so that if they see a bug, they can be pretty sure it
-  hasn't been fixed already.  For example: "Hey, I noticed the
-  indexing code is always dropping the last byte.  Is this a new bug?"
-  "Yes, but it was fixed last week&mdash;try updating, it should go
-  away."</para></listitem>
+  <term><firstterm>更新（update）</firstterm></term>
+  <listitem><para>请求将其他人的变更（提交）和项目的本地拷贝进行组合；也就是将你的拷贝“保持最新”。这是一个非常常见的操作；大多数开发者每天都会多次更新代码，因此，可以确认他们运行的代码与别人的相同，因此他们看到一个bug，他们可以确信它还没有被修正。例如：“嗨，我发现索引代码一直会丢掉最后一个字节，这是一个新的bug吗？”“是的，但已经在上周修正了&mdash;更新一下，一定是好了。”</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
-  <term><firstterm>repository</firstterm></term> <listitem><para>A
-  database in which changes are stored.  Some version control systems
-  are centralized: there is a single, master repository, which stores
-  all changes to the project.  Others are decentralized: each
-  developer has his own repository, and changes can be swapped back
-  and forth between repositories arbitrarily.  The version control
-  system keeps track of dependencies between changes, and when it's
-  time to make a release, a particular set of changes is approved for
-  that release.  The question of whether centralized or decentralized
-  is better is one of the enduring holy wars of software development;
-  try not to fall into the trap of arguing about it on your project
-  lists.</para></listitem>
+  <term><firstterm>版本库（repository）</firstterm></term> <listitem><para>一个存放变更的数据库。一些版本控制是集中式的：有一个单独的主版本库，会存放项目的所有变更。也有一些分布式的系统：每个开发者都有自己的版本库，变更可以在版本库之间任意交换。版本控制系统跟踪了变更之间的依赖关系，当需要发布时，确认一部分变更集进入发布。集中式还是分布式的问题也是一场不朽的软件开发圣战；也要防止落入在你的项目列表中讨论这个问题的陷阱。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
-  <term><firstterm>checkout</firstterm></term>
-  <listitem><para>The process of obtaining a copy of the project from
-  a repository.  A checkout usually produces a directory tree called a
-  "working copy" (see below), from which changes may be committed back
-  to the original repository.  In some decentralized version control
-  systems, each working copy is itself a repository, and changes can
-  be pushed out to (or pulled into) any repository that's willing
-  to accept them.</para></listitem>
+  <term><firstterm>检出（checkout）</firstterm></term>
+  <listitem><para>从版本库获取项目拷贝的过程，一个检出通常会产生一个叫做“工作拷贝”（看后面）的目录树，可以从这个目录将变更提交回原来的版本库。在一些分布式的版本控制系统，每个工作拷贝本身都是一个版本库，变更可以推出（拖入）到任何愿意接受的版本库。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
-  <term><firstterm>working copy</firstterm></term>
-  <listitem><para>A developer's private directory tree containing the
-  project's source code files, and possibly its web pages or other
-  documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling the working copy what
-  repository it comes from, what "revisions" (see below) of the files
-  are present, etc.  Generally, each developer has his own working
-  copy, in which he makes and tests changes, and from which he
-  commits.</para></listitem>
+  <term><firstterm>工作拷贝（working copy）</firstterm></term>
+  <listitem><para>一个包含项目源代码文件或者网页及其他文档的开发者的私有目录树，一个工作拷贝也可能会包含由版本控制系统管理的元数据信息，可以说明工作拷贝所对应的版本库，以及所展现文件的“修订版本（看后面）”等等。通常情况下，每个开发者都有自己的工作拷贝，他可以在其中进行变更以及测试，并提交。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
-  <term><firstterm>revision</firstterm>,
-        <firstterm>change</firstterm>,
-        <firstterm>changeset</firstterm></term>
-  <listitem><para>A "revision" is usually one specific incarnation of
-  a particular file or directory.  For example, if the project starts
-  out with revision 6 of file F, and then someone commits a change to
-  F, this produces revision 7 of F.  Some systems also use
-  "revision", "change", or "changeset" to refer to a set of changes
-  committed together as one conceptual unit.</para> 
+  <term><firstterm>修订版本（revision）</firstterm>,
+        <firstterm>变更（change）</firstterm>,
+        <firstterm>变更集（changeset）</firstterm></term>
+  <listitem><para>一个“修订版本”通常是一个特定文件或目录的具体化身，例如，如果开始时一个项目有一个文件F，修订版本是6，然后如果有一个文件对文件F提交了一个变更，那么就会产生F的修订版本7。一些系统也使用“修订版本”，“变更”或“变更集”来引用作为一个逻辑概念的一组变更。</para> 
 
-  <para>These terms occasionally have distinct technical meanings in
-  different version control systems, but the general idea is always
-  the same: they give a way to speak precisely about exact points in
-  time in the history of a file or a set of files (say, immediately
-  before and after a bug is fixed).  For example: "Oh yes, she fixed
-  that in revision 10" or "She fixed that in revision 10 of
-  foo.c."</para>
+  <para>这些术语在不同的版本控制系统可能有不同的技术含义，但是大意基本相同：他们提供了一个方法可以精确的描述一个文件或一组文件历史中的精确一点（比方说，恰恰在一个bug修正之前或之后）。例如：“她在修订版本10修正了那个”或者“他在文件foo.c的修订版本10修正了那个。”</para>
 
-  <para>When one talks about a file or collection of files without
-  specifying a particular revision, it is generally assumed that one
-  means the most recent revision(s) available.</para></listitem>
+  <para>当一个人在不指定特定修订版本的时候谈论一个文件或一组文件时，通常假定是指最近的修订版本。</para></listitem>
  </varlistentry>
 
   <sidebar id="version-vs-revision">
-  <title>"Version" Versus "Revision"</title>
-  <para>The word <firstterm>version</firstterm> is sometimes used as a
-  synonym for "revision", but I will not use it that way in this
-  book, because it is too easily confused with "version" in the sense
-  of a version of a piece of software&mdash;that is, the release or
-  edition number, as in "Version 1.0".  However, since the phrase
-  "version control" is already standard, I will continue to use it as
-  a synonym for "revision control" and "change control".</para>
+  <title>“版本”对“修订版本”</title>
+  <para><firstterm>版本</firstterm>有时候作为“修订版本”的同义词使用，但是在本书我不会这样使用，因为这太容易与一个软件的版本混淆&mdash;也就是软件的发布或版本号，例如在“版本 1.0（Version 1.0）”。不管怎样，因为短语“版本控制”已经标准化了，所以我会继续将其视为“修订版本控制”和“变更控制”的同义词。</para>
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
-  <term><firstterm>diff</firstterm></term>
-  <listitem><para>A textual representation of a change.  A diff shows
-  which lines were changed and how, plus a few lines of surrounding
-  context on either side.  A developer who is already familiar with
-  some code can usually read a diff against that code and understand
-  what the change did, and even spot bugs.</para></listitem>
+  <term><firstterm>区别（diff）</firstterm></term>
+  <listitem><para>变更的文本化展现，一个区别显示了哪些行发生了怎样的改变，以及围绕上下文两端的几行。一个已经熟悉代码的开发者通常可以阅读区别，并理解变更完成的事情，甚至发现bug。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
-  <term><firstterm>tag</firstterm></term>
-  <listitem><para>A label for a particular collection of files at
-  specified revisions.  Tags are usually used to preserve
-  interesting snapshots of the project.  For example, a tag is usually
-  made for each public release, so that one can obtain, directly from
-  the version control system, the exact set of files/revisions
-  comprising that release.  Common tag names are things like
-  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
-  etc.</para></listitem>
+  <term><firstterm>标签（tag）</firstterm></term>
+  <listitem><para>一组特定修订版本的文件的标签，标签通常用来保存人们感兴趣的项目快照。例如，为每个公开发布使用标签，这样人们就可以从版本控制系统获取发布对应的文件/修订版本。常见的标签名称有<literal>Release_1_0</literal>、<literal>Delivery_00456</literal>等等。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
-  <term><firstterm>branch</firstterm></term>
-  <listitem><para>A copy of the project, under version control but
-  isolated, so that changes made to the branch don't affect the rest
-  of the project, and vice versa, except when changes are
-  deliberately "merged" from one side to the other (see below).
-  Branches are also known as "lines of development".  Even when a
-  project has no explicit branches, development is still considered
-  to be happening on the "main branch", also known as the "main line"
-  or "<firstterm>trunk</firstterm>".</para>
+  <term><firstterm>分支（branch）</firstterm></term>
+  <listitem><para>项目的一个拷贝，在版本控制之下，但却是孤立的，所以分支上的变更不会影响项目的其他部分，或者相反，除非你故意将变更“合并（merged）”过去（看后面）。分支也被称为“开发线（lines of development）”，即使当一个项目没有明确的分支，开发也可以被认为是发生在“主分支”，也称为“主线”或“<firstterm>主干（trunk）</firstterm>”。</para>
 
-  <para>Branches offer a way to isolate different lines of development
-  from each other.  For example, a branch can be used for experimental
-  development that would be too destabilizing for the main trunk.  Or
-  conversely, a branch can be used as a place to stabilize a new
-  release.  During the release process, regular development would
-  continue uninterrupted in the main branch of the repository;
-  meanwhile, on the release branch, no changes are allowed except
-  those approved by the release managers.  This way, making a release
-  needn't interfere with ongoing development work.  See <xref
-  linkend="branches"/><phrase output="printed"> later in this
-  chapter</phrase> for a more detailed discussion of
-  branching.</para></listitem>
+  <para>分支提供了一个将开发线隔离的方法，例如，一个分支可以用来进行对于主干不够稳定的实验开发，或者一个分支可以用来稳定新的发布。在发布过程中，有规律的开发可以继续不受干扰的在版本库的主线进行；与此同时，在发布分支，除非经过发布管理员的确认，不允许任何变更。通过这种方式，让发布不必干扰正在进行的开发工作，关于分支的详细讨论见<phrase output="printed">本章后面的</phrase><xref
+  linkend="branches"/>。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
-  <term><firstterm>merge (a.k.a. port)</firstterm></term>
-  <listitem><para>To move a change from one branch to another.  This
-  includes merging from the main trunk to some other branch, or vice
-  versa.  In fact, those are the most common kinds of merges; it is
-  rare to port a change between two non-main branches.  See <xref
-  linkend="vc-singularity"/> for more about this kind of
-  merging.</para>
+  <term><firstterm>合并（又名搬运）（merge (a.k.a. port)）</firstterm></term>
+  <listitem><para>用来将变更从一个分支搬运到另一个。这包括从主干合并到分支，或者相反。实际上，这是最常见的合并类型；在两个非主分支之间搬运变更的情况很少见，关于此类合并的更多信息可以看<xref
+  linkend="vc-singularity"/>。</para>
 
-  <para>"Merge" has a second, related meaning: it is what the version
-  control system does when it sees that two people have changed the
-  same file but in non-overlapping ways.  Since the two changes do not
-  interfere with each other, when one of the people updates their copy
-  of the file (already containing their own changes), the other
-  person's changes will be automatically merged in.  This is very
-  common, especially on projects where multiple people are hacking on
-  the same code.  When two different changes <emphasis>do</emphasis>
-  overlap, the result is a "conflict"; see below.</para>
+  <para>“合并”也有另一种相关的含义：也就是当两个人对于同一个文件作出没有交叠的变更时，版本控制系统所作的事情。因为两个变更没有互相干扰，当一个人更新其拷贝中的这个文件（已经包含他自己的变更）时，其他人的变更会自动合并进去。这非常常见，特别是当多个人编辑同一代码时。当两个变更<emphasis>确实</emphasis>交叠了，结果就是“冲突”了；看下面。</para>
   </listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
-  <term><firstterm>conflict</firstterm></term>
-  <listitem><para>What happens when two people try to make different
-  changes to the same place in the code.  All version control systems
-  automatically detect conflicts, and notify at least one of the
-  humans involved that their changes conflict with someone else's.  It
-  is then up to that human to <firstterm>resolve</firstterm> the
-  conflict, and to communicate that resolution to the version control
-  system.</para></listitem>
+  <term><firstterm>冲突（conflict）</firstterm></term>
+  <listitem><para>当两个人希望对于代码的同一个地方作出不同的修改时，所有的版本控制系统会自动监测到冲突，并至少让一个人意识到他们的变更与其他人的冲突了。这依赖于<firstterm>解决（resolve）</firstterm>冲突的人，以及与版本控制系统解决的交流。</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
-  <term><firstterm>lock</firstterm></term>
-  <listitem><para>A way to declare an exclusive intent to change a
-  particular file or directory.  For example, "I can't commit any
-  changes to the web pages right now.  It seems Alfred has them all
-  locked while he fixes their background images."  Not all version
-  control systems even offer the ability to lock, and of those that
-  do, not all require the locking feature to be used.  This is because
-  parallel, simultaneous development is the norm, and locking people
-  out of files is (usually) contrary to this ideal.</para>
+  <term><firstterm>锁定（lock）</firstterm></term>
+  <listitem><para>对于某个文件或目录进行排他变更声明的方法，例如，“我现在不能对网页文件提交任何变更，似乎Alfred已经锁定了所有文件，因为他要修改背景图片。”不是所有的版本控制系统都提供了锁定特性，这是因为平行，同时开发是行为准则，而将人们锁定在文件之外违背了这个思想。</para>
 
-  <para>Version control systems that require locking to make commits
-  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
-  Those that do not are said to use the
-  <firstterm>copy-modify-merge</firstterm> model.  An excellent
-  in-depth explanation and comparison of the two models may be found
-  at <ulink
-  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
-  general, the copy-modify-merge model is better for open source
-  development, and all the version control systems discussed in this
-  book support that model.</para></listitem>
+  <para>需要锁定才能提交的版本控制系统，我们称之使用<firstterm>锁定-修改-解锁</firstterm>模型，而其他的我们称之为<firstterm>拷贝-修改-合并</firstterm>模型。两种模型的一个完美的深入解释和比较可以看<ulink
+  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>，通常情况下，拷贝-修改-合并适合于开源开发，在本书讨论的版本控制工具都支持这个模型。</para></listitem>
  </varlistentry>
 
 </variablelist>
@@ -1014,244 +573,75 @@ problem concisely.
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-choosing">
-<title>Choosing a Version Control System</title>
+<title>选择一个版本控制系统</title>
 
-<para>As of this writing, the two most popular version control systems
-in the free software world are <firstterm>Concurrent Versions
-System</firstterm> (<firstterm>CVS</firstterm>,
-<ulink url="http://www.cvshome.org/"/>)
-and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
-<ulink url="http://subversion.tigris.org/"/>).</para>
+<para>在写本文的时候，自由软件世界中两个最流行的版本控制系统是<firstterm>并行版本系统</firstterm>（firstterm>CVS</firstterm>，<ulink url="http://www.cvshome.org/"/>）和<firstterm>Subversion</firstterm>（<firstterm>SVN</firstterm>，<ulink url="http://subversion.tigris.org/"/>）。</para>
 
-<para>CVS has been around for a long time.  Most experienced
-developers are already familiar with it, it does more or less what you
-need, and since it's been popular for a long time, you probably won't
-end up in any long debates about whether or not it was the right
-choice.  CVS has some disadvantages, however.  It doesn't provide an
-easy way to refer to multi-file changes; it doesn't allow you to
-rename or copy files under version control (so if you need to
-reorganize your code tree after starting the project, it can be a real
-pain); it has poor merging support; it doesn't handle large files or
-binary files very well; and some operations are slow when large
-numbers of files are involved.</para>
+<para>CVS已经存在很长时间了。大多数有经验的开发者已经熟悉了它，它或多或少满足了你的需要，而且因为它已经流行了很长时间了，你可能不会陷入它是否是正确选择的争论。CVS有一些缺点，它不支持简单的引用多个文件的变更；它不支持版本控制下的（这样如果你需要识别出项目开始后的代码树，会非常头痛）文件重命名和拷贝；它对合并的支持很弱；它处理大文件和二进制文件不佳；以及在操作很多文件时操作会非常慢。</para>
 
-<para>None of CVS's flaws is fatal, and it is still quite popular.
-However, in the last few years the more recent Subversion has been
-gaining ground, especially in newer
-projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"/> and
-<ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
-for evidence of this growth.</para></footnote>.  If you're starting a
-new project, I recommend Subversion.</para>
+<para>CVS的这些缺陷都不是致命的，所以它一直非常流行。然而，最近几年Subversion逐渐被人们所接受，特别是在新创建的项目中。<footnote><para>关于这种增长的证据可以看<ulink url="http://cia.vc/stats/vcs"/>和<ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>。</para></footnote>如果你新开始一个项目，我推荐Subversion。</para>
 
-<para>On the other hand, since I'm involved in the Subversion project,
-my objectivity might reasonably by questioned.  And in the last few
-years a number of new open-source version control systems have
-appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
-in rough order of popularity.  As the list makes clear, deciding on a
-version control system could easily become a lifelong research
-project.  Possibly you will be spared the decision because it will be
-made for you by your hosting site.  But if you must choose, consult
-with your other developers, ask around to see what people have
-experience with, then pick one and run with it.  Any stable,
-production-ready version control system will do; you don't have to
-worry too much about making a drastically wrong decision.  If you
-simply can't make up your mind, then go with Subversion.  It's fairly
-easy to learn, and is likely to remain a standard for at least a few
-years.</para>
+<para>在另一方面，因为我参与了Subversion项目，我的客观性有理由值得怀疑。在最近几年，许多新的开源版本控制系统已经出现。<xref linkend="vc-systems"/>列出了所有我知道的，大体上根据流行性排序。就像列表说明的，决定使用何种版本控制系统可能成为一项终身的研究项目。有可能你也会省掉选择的过程，因为你的主站已经做出了选择。但如果你必须做出选择，请问文那些有经验的人，然后选择一个并使用起来。任何稳定的产品状态的版本控制系统可以实现；你不必担心会做出灾难性的错误决定，如果你无法下决心，那就Subversion吧。它学起来相对简单，在近几年里还应该保持标准的地位。</para>
 
 </sect2>
 
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-using">
-<title>Using the Version Control System</title>
+<title>使用版本控制系统</title>
 
-<para>The recommendations in this section are not targeted toward a
-particular version control system, and should be simple to implement
-in any of them.  Consult your specific system's documentation for
-details.</para>
+<para>这一部分的建议不针对任何特定版本控制系统，对它们来说应当是很自然的实现。详细信息请参考特定系统的文档。</para>
 
 <sect3 id="version-everything">
-<title>Version everything</title>
+<title>版本化所有的东西</title>
 
-<para>Keep not only your project's source code under version control,
-but also its web pages, documentation, FAQ, design notes, and anything
-else that people might want to edit.  Keep them right next to the
-source code, in the same repository tree.  Any piece of information
-worth writing down is worth versioning&mdash;that is, any piece of
-information that could change.  Things that don't change should be
-archived, not versioned.  For example, an email, once posted, does not
-change; therefore, versioning it wouldn't make sense (unless it becomes
-part of some larger, evolving document).</para>
+<para>不要仅仅将项目的源代码纳入到版本控制下，也应该包括网页、文档、FAQ、设计注释和任何人们希望编辑的内容。让他们与源代码尽量接近，在同一个版本库树中。任何值得写下来的信息都应该纳入版本控制&mdash;也就是任何可能会变更的信息。不会发生变更的东西都应该归档，非版本化。例如，一个邮件一旦发布，就不会变更；因此，将其版本化没有任何意义（除非它成为一个较大的、进化文档的一部份）。</para>
 
-<para>The reason versioning everything together in one place is
-important is so people only have to learn one mechanism for submitting
-changes.  Often a contributor will start out making edits to the web
-pages or documentation, and move to small code contributions later,
-for example.  When the project uses the same system for all kinds of
-submissions, people only have to learn the ropes once.  Versioning
-everything together also means that new features can be committed
-together with their documentation updates, that branching the code
-will branch the documentation too, etc.</para>
+<para>在一个地方版本化所有的东西的原因非常重要，这样人们只需要学习一种提交变更的方式。例如，经常是一个贡献者开始编辑一个网页或者文档，然后接着做一些代码变更。当项目对于所有的提交使用相同的提交方式时，人们只需要学习一次。一起版本化所有的东西也意味着随着文档的更新，新特性可以一起提交，而代码分支时也是对文档分支等等。</para>
 
-<para>Don't keep <firstterm>generated files</firstterm> under version
-control.  They are not truly editable data, since they are produced
-programmatically from other files.  For example, some build systems
-create <filename>configure</filename> based on the template
-<filename>configure.in</filename>.  To make a change to the
-<filename>configure</filename>, one would edit
-<filename>configure.in</filename> and then regenerate; thus, only the
-template <filename>configure.in</filename> is an "editable file."
-Just version the templates&mdash;if you version the result files as
-well, people will inevitably forget to regenerate when they commit a
-change to a template, and the resulting inconsistencies will cause no
-end of confusion.<footnote><para>For a different opinion on the
-question of versioning <filename>configure</filename> files, see
-Alexey Makhotkin's post "<citetitle>configure.in and version
-control</citetitle>" at
-<ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>.</para></footnote></para>
+<para>不要将<firstterm>生成的文件</firstterm>置入版本控制。那些应该不是可编辑的数据，因为它们是程序方式由其他文件产生的。例如，一些构建系统根据模板<filename>configure.in</filename>文件产生<filename>configure</filename>。为了改变<filename>configure</filename>，我们需要编辑<filename>configure.in</filename>，然后重新生成；因此，只有文件<filename>configure.in</filename>是“可编辑文件。”只版本化模板&mdash;如果你也版本化结果文件，人们在对模板进行修改后会不可避免的忘记重新生成它，结果的不一致会导致无休止的混淆。<footnote><para>对于版本化<filename>configure</filename>的不同意见，可以看Alexey Makhotkin的文章，在<ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>的“<citetitle>configure.in and version
+control</citetitle>”。</para></footnote></para>
 
-<para>The rule that all editable data should be kept under version
-control has one unfortunate exception: the bug tracker.  Bug databases
-hold plenty of editable data, but for technical reasons generally
-cannot store that data in the main version control system.  (Some
-trackers have primitive versioning features of their own, however,
-independent of the project's main repository.)</para>
+<para>所有可编辑数据必须存放在版本控制下的规则也有一个不幸的例外：缺陷跟踪。Bug数据库保存了大量的可编辑数据，但是因为技术原因不能将数据存放在版本控制系统。（一些跟踪工具有一些原始的版本控制特性，然而，独立于项目的主版本库。）</para>
 
 </sect3>
 
 <sect3 id="vc-browsing">
-<title>Browsability</title>
+<title>可浏览性</title>
 
-<para>The project's repository should be browsable on the Web.  This
-means not only the ability to see the latest revisions of the
-project's files, but to go back in time and look at earlier revisions,
-view the differences between revisions, read log messages for selected
-changes, etc.</para>
+<para>项目的版本库应该能够通过web浏览，这不仅是意味着浏览最新修订的能力，也包括回到过去查看早先的版本，查看修订之间的区别，以及阅读针对特定变更的日志信息等等。</para>
 
-<para>Browsability is important because it is a lightweight portal to
-project data.  If the repository cannot be viewed through a web
-browser, then someone wanting to inspect a particular file (say, to
-see if a certain bugfix had made it into the code) would first have to
-install version control client software locally, which could turn
-their simple query from a two-minute task into a half-hour or longer
-task.</para>
+<para>可浏览性非常重要，因为它是一个轻量级的项目数据门户，如果不能通过web浏览版本库，那一个人如果希望检查特定的文件（例如，看一下某个bug修正是否已经进入代码），他必须在本地安装版本控制客户端，这会让一项只需要两分钟的任务变成一项半小时或更长的任务。</para>
 
-<para>Browsability also implies canonical URLs for viewing specific
-revisions of files, and for viewing the latest revision at any given
-time.  This can be very useful in technical discussions or when
-pointing people to documentation.  For example, instead of saying "For
-tips on debugging the server, see the www/hacking.html file in your
-working copy," one can say "For tips on debugging the server, see
-<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>,"
-giving a URL that always points to the latest revision of
-the <filename>hacking.html</filename> file.  The URL is better because
-it is completely unambiguous, and avoids the question of whether the
-addressee has an up-to-date working copy.</para>
+<para>可浏览性也暗示了浏览文件特定修订版本的标准URL，以及任意给定时间最近的修订。在技术讨论或向人们指明作为证据时这非常有用。例如我们不会说“关于调试服务器的提示，可以看你工作拷贝中的www/hacking.html”，而会说“关于调试服务器的提示，可以看<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>，”，给定一个会一直指向<filename>hacking.html</filename>最新修订的URL。URL会更好，因为它不会导致混淆，也避免了地址是否有最新工作拷贝的问题。</para>
 
-<para>Some version control systems come with built-in
-repository-browsing mechanisms, while others rely on third-party tools
-to do it.  Three such tools are <firstterm>ViewCVS</firstterm> (<ulink
-url="http://viewcvs.sourceforge.net/"/>),
-<firstterm>CVSWeb</firstterm> (<ulink
-url="http://www.freebsd.org/projects/cvsweb.html"/>), and
-<firstterm>WebSVN</firstterm> (<ulink
-url="http://websvn.tigris.org/"/>).  The first works with both CVS and
-Subversion, the second with CVS only, and the third with Subversion
-only.</para>
+<para>一些版本控制系统包含内置的版本库浏览机制，而其他一些依赖于第三方的工具实现。这类工具有<firstterm>ViewCVS</firstterm>（<ulink
+url="http://viewcvs.sourceforge.net/"/>）、<firstterm>CVSWeb</firstterm>（<ulink
+url="http://www.freebsd.org/projects/cvsweb.html"/>）以及<firstterm>WebSVN</firstterm>（<ulink
+url="http://websvn.tigris.org/"/>）。第一个可以支持CVS和Subversion，而第二个只支持CVS，而第三个只支持Subversion。</para>
 
 </sect3>
 
 <sect3 id="commit-emails">
-<title>Commit emails</title>
+<title>提交邮件</title>
 
-<para>Every commit to the repository should generate an email showing
-who made the change, when they made it, what files and directories
-changed, and how they changed.  The email should go to a special
-mailing list devoted to commit emails, separate from the mailing lists
-to which humans post.  Developers and other interested parties should
-be encouraged to subscribe to the commits list, as it is the most
-effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review
-(see <xref linkend="code-review"/>), commit emails help create a
-sense of community, because they establish a shared environment in
-which people can react to events (commits) that they know are visible
-to others as well.</para>
+<para>对版本库的每一次提交应当能够产生一个邮件，包含谁做出修改的、何时作出的修改、修改的文件和目录以及为什么修改。邮件必须发送到专注于提交邮件的特别邮件列表，在邮件列表中能够同人们的邮件区分开来。必须鼓励开发者和其他感兴趣的参与者订阅这个提交列表，这是从代码级别来跟踪项目的最有效方法。除了同级评审（见<xref linkend="code-review"/>）这一明显的技术益处，提交邮件帮助我们建立了一种社区意识，因为他们创建了一个共享环境，在其中人们可以对其他人也可见的事件（提交）作出反应。</para>
 
-<para>The specifics of setting up commit emails will vary depending on
-your version control system, but usually there's a script or other
-packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm>,
-specifically a <firstterm>post-commit hook</firstterm>, also called
-the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
-a general means of launching automated tasks in response to commits.
-The hook is triggered by an individual commit, is fed all the
-information about that commit, and is then free to use that
-information to do anything&mdash;for example, to send out an
-email.</para>
+<para>设置提交邮件的具体方法依赖于你的版本控制系统，但通常有一些脚本或其他工具可以完成这个工作。如果你在寻找过程中遇到困难，可以查一下<firstterm>钩子（hooks）</firstterm>的文档，特别是<firstterm>post-commit hook</firstterm>，CVS中也称作<firstterm>loginfo hook</firstterm>。Post-commit钩子大意上就是对提交做出自动化的响应。这个钩子会由每个提交出发，并提供关于提交的所有信息，你可以自由的使用这些信息做任何事情&mdash;例如，发送一个邮件。</para>
 
-<para>With pre-packaged commit email systems, you may want to
-modify some of the default behaviors:</para>
+<para>通过预先包装的提交邮件系统，你可能会希望修改一些缺省的行为：</para>
 
 <orderedlist>
 
   <listitem>
-  <para>Some commit mailers don't include the actual diffs in the
-  email, but instead provide a URL to view the change on the web using
-  the repository browsing system.  While it's good to provide the URL,
-  so the change can be referred to later, it is also
-  <emphasis>very</emphasis> important that the commit email include
-  the diffs themselves.  Reading email is already part of people's
-  routine, so if the content of the change is visible right there in
-  the commit email, developers will review the commit on the spot,
-  without leaving their mail reader.  If they have to click on a URL to
-  review the change, most won't do it, because that requires a new
-  action instead of a continuation of what they were already doing.
-  Furthermore, if the reviewer wants to ask something about the
-  change, it's vastly easier to hit reply-with-text and simply
-  annotate the quoted diff than it is to visit a web page and
-  laboriously cut-and-paste parts of the diff from web browser to
-  email client.</para>
+  <para>一些提交邮件程序会在邮件中包含实际的区别，而不是提供在web上使用版本库浏览系统查看变更的URL。虽然提供URL非常好，这样后面就可以引用这个变更，但是在邮件本身中包含区别同样重要。阅读邮件已经成为人们的例行的一部分，如果变更的内容在提交邮件中，开发者可以立刻进行评审，不需要离开邮件阅读器。如果他们需要点击一个URL来评审变更，大多数人就不会作了，因为需要开始一个新动作，而不是延续一个已发生的动作。此外，如果评审者希望询问变更的某些事情，可以直接选择带原文回复并注解区别，这样就不必访问网页并辛勤的从web浏览器拷贝粘贴到邮件客户端。</para>
 
-  <para>(Of course, if the diff is huge, such as when a large body of
-  new code has been added to the repository, then it makes sense to
-  omit the diff and offer only the URL.  Most commit mailers can do
-  this kind of limiting automatically.  If yours can't, then it's
-  still better to include diffs, and live with the occasional huge
-  email, than to leave the diffs off entirely.  Convenient reviewing
-  and commenting is a cornerstone of cooperative development, much
-  too important to do without.)</para>
+  <para>（当然，如果区别非常大，诸如大片的新代码正文添加到了版本库，那么省掉区别而只提供URL就比较有意义。大多数提交邮件程序可以自动执行这种限制，如果你的不支持，那包含区别也没有关系，只是偶尔会有些大邮件，比完全没有区别更好。便利的评审和回复是协作开发的奠基石，是否存在十分关键。）</para>
   </listitem>
 
-  <listitem><para>The commit emails should set their Reply-to header
-  to the regular development list, not the commit email list.  That
-  is, when someone reviews a commit and writes a response, their
-  response should be automatically directed toward the human
-  development list, where technical issues are normally discussed.
-  There are a few reasons for this.  First, you want to keep all
-  technical discussion on one list, because that's where people expect
-  it to happen, and because that way there's only one archive to
-  search.  Second, there might be interested parties not subscribed to
-  the commit email list.  Third, the commit email list advertises
-  itself as a service for watching commits, not for watching commits
-  <emphasis>and</emphasis> occasional technical discussions.  Those who
-  subscribed to the commit email list did not sign up for anything but
-  commit emails; sending them other material via that list would
-  violate an implicit contract.  Fourth, people often write programs
-  that read the commit email list and process the results (for
-  display on a web page, for example).  Those programs are prepared to
-  handle consistently-formatted commit emails, but not inconsistent
-  human-written mails.</para>
+  <listitem><para>提交邮件必须将Reply-to头设置为普通的开发邮件列表，而不是提交邮件列表。那是因为，当有人评审一个提交并撰写了一个回复，这个回复应当自动转向到人们的开发邮件列表，也就是通常人们讨论技术问题的地方。有这么几个原因。首先，你希望将技术讨论保持在一个邮件列表中，因为这也是人们所期望的情况，而且这种情况下只需要搜索一个归档。其次，有一些感兴趣的参与者可能没有订阅提交邮件列表。第三，提交邮件列表把自己当作一个监视提交的服务，而不是用来关注提交<emphasis>并</emphasis>偶尔进行技术讨论。订阅提交邮件列表的人除了提交邮件没有订阅其他东西；通过那个列表发送其他内容违反了隐含的契约。第四，人们经常写程序来阅读提交邮件列表并处理结果（例如为了显示一个网页）。这些程序预备好了处理一致格式的提交邮件，但与人写的邮件不匹配。</para>
 
-  <para>Note that this advice to set Reply-to does not contradict the
-  recommendations in
-  <xref linkend="reply-to"/><phrase output="printed"> earlier in
-  this chapter</phrase>.  It's
-  always okay for the <emphasis>sender</emphasis> of a message to set
-  Reply-to.  In this case, the sender is the version control system
-  itself, and it sets Reply-to in order to indicate that the
-  appropriate place for replies is the development mailing list, not
-  the commit list.</para>
+  <para>请注意这里设置Reply-to的建议与<phrase output="printed">本章前面</phrase><xref linkend="reply-to"/>中说的并不矛盾。对于信息的<emphasis>发送者</emphasis>来说，设置Reply-to非常正常。在这个情况下，发送者是版本控制系统本身，它设置Reply-to是为了说明回复的合适地方是开发邮件列表，而不是提交列表。</para>
 
   </listitem>
 
