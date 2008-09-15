@@ -648,246 +648,78 @@ url="http://websvn.tigris.org/"/>）。第一个可以支持CVS和Subversion，�
 </orderedlist>
 
 <sidebar id="cia">
-<title>CIA: Another Change Publication Mechanism</title>
+<title>CIA：另一种变更公示机制</title>
 
-<para>Commit emails are not the only way to propagate change news.
-Recently, another mechanism called CIA (<ulink
-url="http://cia.navi.cx/"/>) has been developed.  CIA is a real-time
-commit statistics aggregator and distributor.  The most popular use of
-CIA is to send commit notifications to IRC channels, so that people
-logged into those channels see the commits happening in real time.
-Though of somewhat less technical utility than commit emails, since
-observers might or might not be around when a commit notice pops up in
-IRC, this technique is of immense <emphasis>social</emphasis> utility.
-People get the sense of being part of something alive and active, and
-feel that they can see progress being made right before their
-eyes.</para>
+<para>提交邮件不是传播变更新闻的唯一方式，最近一种叫做CIA（<ulink
+url="http://cia.navi.cx/"/>）的机制被开发了出来。CIA是一个实时提交统计信息的聚合器和分发器。CIA最流行的用处是发送提交提醒到IRC频道，所以登陆到频道的人都可以实时的看到发生的提交。尽管比提交邮件有较少的技术功效，因为观察者不一定会在提交提醒弹出时就在频道上，但是这项技术仍然有巨大的<emphasis>社会</emphasis>功效。人们得到了成为某个存在并活跃事务一部分的感觉，并且他们能够感到正在发生的进展。</para>
 
-<para>The way it works is that you invoke the CIA notifier program
-from your post-commit hook.  The notifier formats the commit
-information into an XML message, and sends to a central server
-(typically <literal>cia.navi.cx</literal>).  That server then
-distributes the commit information to other forums.</para>
+<para>工作原理是通过你的post-commit钩子调用CIA通知程序，通知器会将提交信息格式化为XML信息，并发送到中央服务器（通常是<literal>cia.navi.cx</literal>）。然后服务器将提交信息分发到其他论坛。</para>
 
-<para>CIA can also be configured to send out <ulink
-url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
-feeds.  See the documentation at <ulink url="http://cia.navi.cx/"/>
-for details.</para>
+<para>CIA也可以设置来发送<ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>，更多细节可以看文档的<ulink url="http://cia.navi.cx/"/>。</para>
 
-<para>To see an example of CIA in action, point your IRC
-client at <literal>irc.freenode.net</literal>, channel
-<literal>#commits</literal>.</para>
+<para>如果你想参考CIA的一个实例，将你的IRC客户端指向<literal>irc.freenode.net</literal>，频道<literal>#commits</literal>。</para>
 
 </sidebar>
 
 </sect3>
 
 <sect3 id="branches">
-<title>Use branches to avoid bottlenecks</title>
+<title>使用分支来避免瓶颈</title>
 
-<para>Non-expert version control users are sometimes a bit afraid of
-branching and merging.  This is probably a side effect of CVS's
-popularity: CVS's interface for branching and merging is somewhat
-counterintuitive, so many people have learned to avoid those
-operations entirely.</para>
+<para>非专家的版本控制用户有时候会担心分支与合并，这可能是CVS流行性的副作用：CVS对于分支和合并的接口和我们的知觉不太一致，所以很多人学着完全避免此类操作。</para>
 
-<para>If you are among those people, resolve right now to conquer any
-fears you may have and take the time to learn how to do branching and
-merging.  They are not difficult operations, once you get used to
-them, and they become increasingly important as a project acquires
-more developers.</para>
+<para>如果你周围有很多这类人，立即下决心战胜所有恐惧，并花时间学会如何分支和合并。它们不是什么困难的操作，一旦你习惯了，对于项目获取更多的开发者这日益重要。</para>
 
-<para>Branches are valuable because they turn a scarce
-resource&mdash;working room in the project's code&mdash;into an
-abundant one.  Normally, all developers work together in the same
-sandbox, constructing the same castle.  When someone wants to add a
-new drawbridge, but can't convince everyone else that it would be an
-improvement, branching makes it possible for her to go to an isolated
-corner and try it out.  If the effort succeeds, she can invite the
-other developers to examine the result.  If everyone agrees that the
-result is good, they can tell the version control system to move
-("merge") the drawbridge from the branch castle over to the main
-castle.</para>
+<para>分支非常有价值，因为它将一项稀缺的资源&mdash;项目代码的工作空间&mdash;变得充足。当某个人希望添加一个新的吊桥，但是不能确认其他人是否正在工作，分支使她被隔离到一个角落并做出尝试提供了可能。如果这种投入成功了，她可以要求其他开发者检验这个结果。如果所有人认可结果，他们可以告诉版本控制系统将吊桥从分支城堡移动（“合并”）到主城堡。</para>
 
-<para>It's easy to see how this ability helps collaborative
-development.  People need the freedom to try new things without
-feeling like they're interfering with others' work.  Equally
-importantly, there are times when code needs to be isolated from the
-usual development churn, in order to get a bug fixed or a release
-stabilized (see <xref linkend="stabilizing-a-release"/> and
-<xref linkend="release-lines"/><phrase output="printed"> in
-<xref linkend="development-cycle"/></phrase>) without worrying
-about tracking a moving target.</para>
+<para>很容易看到这项能力是如何帮助协作开发的，人们需要自由尝试新事物的感觉，而无须担心干扰其他人的工作。同样重要的是，当为了完成bug修正或发布稳定化（见<phrase output="printed"><xref linkend="development-cycle"/>的</phrase><xref linkend="stabilizing-a-release"/>和<xref linkend="release-lines"/>），代码需要从日常的开发中分离出来时，所花费的时间数倍于无需担心跟踪一个移动目标的情况。</para>
 
-<para>Use branches liberally, and encourage others to use them.  But
-also make sure that a given branch is only active for exactly as long
-as needed.  Every active branch is a slight drain on the community's
-attention.  Even those who are not working in a branch still maintain
-a peripheral awareness of what's going on in it.  Such awareness is
-desirable, of course, and commit emails should be sent out for branch
-commits just as for any other commit.  But branches should not become
-a mechanism for dividing the development community.  With rare
-exceptions, the eventual goal of most branches should be to merge
-their changes back into the main line and disappear.</para>
+<para>不受限制的使用分支，并鼓励其他人也这样做。但是要确保任何特定分支只保持必要的最短时间，任何活动分支都会让社区分神，即使不是在分支工作的人也需要对此有所了解。这种了解是应该的，当然，对于分支的提交应该能和其他提交一样发送提交邮件。但是分支不应该成为分割开发社区的机制，除了很少的例外，大多数分支最终必须合并回它们的主干并消失。</para>
 
 </sect3>
 
 <sect3 id="vc-singularity">
-<title>Singularity of information</title>
+<title>信息单一</title>
 
-<para>Merging has an important corollary: never commit the same change
-twice.  That is, a given change should enter the version control
-system exactly once.  The revision (or set of revisions) in which the
-change entered is its unique identifier from then on.  If it needs to
-be applied to branches other than the one on which it entered, then it
-should be merged from its original entry point to those other
-destinations&mdash;as opposed to committing a textually identical
-change, which would have the same effect in the code, but would make
-accurate bookkeeping and release management impossible.</para>
+<para>合并有一个推论：不要对同一个变更提交两次，也就是一个修改只进入一次版本控制系统。变更的修订（或一组修订）可以在其进入版本控制系统之后唯一标示。如果它需要应用到还没有应用过的分支，那么它应该从最初的入口点合并到其他目标&mdash;而不是直接提交相同的文本，这样虽然对代码的效果是一样的，但会导致我们无法进行精确的记录和发布管理。</para>
 
-<para>The practical effects of this advice differ from one version
-control system to another.  In some systems, merges are special
-events, fundamentally distinct from commits, and carry their own
-metadata with them.  In others, the results of merges are committed
-the same way other changes are committed, so the primary means of
-distinguishing a "merge commit" from a "new change commit" is in the
-log message.  In a merge's log message, don't repeat the log message
-of the original change.  Instead, just indicate that this is a merge,
-and give the identifying revision of the original change, with at most
-a one-sentence summary of its effect.  If someone wants to see the
-full log message, she should consult the original revision.</para>
+<para>这个建议对于不同版本控制系统的实践效果不尽相同。在一些系统，合并是特殊的事件，与提交从根本上不同，并包含他们自己的元数据。而另外一些系统，合并的结果就像其他变更一样是提交到了系统，所以区别“合并提交”和“新变更提交”的主要方法是使用日志信息。在合并的日志信息中，不会再重复原始变更的信息，而只是指明这是一个合并，并提供原始变更的修订版本，以及一段说明其效果的文字。如果有人希望看到完整的日志信息，她应该参考原来的修订。</para>
 
-<para>The reason it's important to avoid repeating the log message is
-that log messages are sometimes edited after they've been committed.
-If a change's log message were repeated at each merge destination,
-then even if someone edited the original message, she'd still leave
-all the repeats uncorrected&mdash;which would only cause confusion
-down the road.</para>
+<para>避免在提交之后再重复日志信息的原因非常重要，如果变更日志在每个合并目标中重复，那有朝一日她修改了最初的信息，而那些重复还是会保持错误&mdash;混淆就会持续下去。</para>
 
-<para>The same principle applies to reverting a change.  If a change
-is withdrawn from the code, then the log message for the reversion
-should merely state that some specific revision(s) is being reverted,
-<emphasis>not</emphasis> describe the actual code change that results
-from the reversion, since the semantics of the change can be derived
-by reading the original log message and change.  Of course, the
-reversion's log message should also state the reason why the change is
-being reverted, but it should not duplicate anything from the original
-change's log message.  If possible, go back and edit the original
-change's log message to point out that it was reverted.</para>
+<para>同样的原理也适用于撤销一个变更，如果一个变更从代码中撤销，那么这个撤销的日志信息也应该仅仅是指明撤销的是哪些特定的修订版本，而<emphasis>不是</emphasis>描述撤销过程中实际变更的代码，因为变更的内容可以通过阅读原来的日志信息和修订获得。当然，修订版本日志信息也应当说明恢复变更的原因，但它不应该从原始变更日志信息复制任何东西。如果可能，回到原来的变更日志信息，并指明它已经撤销了。</para>
 
-<para>All of the above implies that you should use a consistent syntax
-for referring to revisions.  This is helpful not only in log messages,
-but in emails, the bug tracker, and elsewhere.  If you're using
-CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
-where REV is a CVS revision number such as "1.76".  If you're using
-Subversion, the standard syntax for revision 1729 is "r1729" (file
-paths are not needed because Subversion uses global revision numbers).
-In other systems, there is usually a standard syntax for expressing
-the changeset name.  Whatever the appropriate syntax is for your
-system, encourage people to use it when referring to changes.
-Consistent expression of change names makes project bookkeeping much
-easier (as we will see in <xref linkend="communications"/> and
-<xref linkend="development-cycle"/>), and since a lot of the
-bookkeeping will be done by volunteers, it needs to be as easy as
-possible.</para>
+<para>前面所说的都暗示了你应该使用一致的语法来引用这些修订版本，这不仅仅在日志信息中有益，在邮件、bug跟踪和其他地方也同样重要。如果你使用CVS，我建议“<literal>path/to/file/in/project/tree:REV</literal>”，其中的REV就是CVS的修订版本好吗，例如“1.76”。如果你使用Subversion，修订版本1729的标准语法是“r1729”（文件路径不是必需的，因为Subversion使用全局修订版本号）。在其他系统中，也都有一些表达变更集的标准语法，无论对你的系统什么是合适的语法，鼓励人们使用它们来饮用变更。对变更名一致的表达方法可以帮助项目更简单的纪录（在<xref linkend="communications"/>和<xref linkend="development-cycle"/>我们将会看到），而且因为许多纪录是由志愿者完成的，它应该尽可能的简单。</para>
 
-<para>See also
-<xref
-linkend="releases-and-daily-development"/><phrase
-output="printed"> in
-<xref linkend="development-cycle"/></phrase>.</para>
+<para>在<phrase
+output="printed"><xref linkend="development-cycle"/>的</phrase><xref
+linkend="releases-and-daily-development"/>也有介绍。</para>
 
 </sect3>
 
 <sect3 id="vc-authz">
-<title>Authorization</title>
+<title>授权</title>
 
-<para>Most version control systems offer a feature whereby certain
-people can be allowed or disallowed from committing in specific
-sub-areas of the repository.  Following the principle that when handed
-a hammer, people start looking around for nails, many projects use
-this feature with abandon, carefully granting people access to just
-those areas where they have been approved to commit, and making sure
-they can't commit anywhere else.  (See
-<xref linkend="committers"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase> for how projects
-decide who can commit where.)</para>
+<para>大多数版本控制系统提供了控制特定人可以从版本库特定子区域提交的特性，根据这个原理，当人们手握锤子时，就开始到处找钉子，许多项目开始恣意使用这种特性，小心的为每个人只赋予他们被确认的权限，而不能在任何其他地方提交（看<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="committers"/>来确认何人可以在何处提交。）</para>
 
-<para>There is probably little harm done by exercising such tight
-control, but a more relaxed policy is fine too.  Some projects simply
-use an honor system: when a person is granted commit access, even for
-a sub-area of the repository, what they actually receive is a password
-that allows them to commit anywhere in the project.  They're just
-asked to keep their commits in their area.  Remember that there is no
-real risk here: in an active project, all commits are reviewed anyway.
-If someone commits where they're not supposed to, others will
-notice it and say something.  If a change needs to be undone, that's
-simple enough&mdash;everything's under version control anyway, so
-just revert.</para>
+<para>执行这样严格的控制可能会有一些害处，一个宽松的政策也足够好。一些项目会简单得使用一个荣誉系统：当一个人被赋予提交权限，即使只是版本库的一个子区域，他也会收到一个可以在项目所有地方可以提交的密码。他们只是被告知要在自己的区域提交，请记住这里没有真正的危险：在一个活跃的项目里，所有的提交会被审核，如果有人在不被允许的地方提交，其他人会发现这一点并说出来。如果这个变更需要被回退，很简单&mdash;因为所有地变更都在版本控制之下，只需要回退。</para>
 
-<para>There are several advantages to the relaxed approach.  First, as
-developers expand into other areas (which they usually will if they
-stay with the project), there is no administrative overhead to
-granting them wider privileges.  Once the decision is made, the person
-can just start committing in the new area right away.</para>
+<para>这种宽松的方法有许多好处，首先，当开发者扩展了他们的活动范围（如果他们一直在项目中，这是一个通常的情况），赋予更宽泛的权限无需额外的管理工作，一旦作出了这样的决定，这个人就可以立刻在新区域提交。</para>
 
-<para>Second, expansion can be done in a more fine-grained manner.
-Generally, a committer in area X who wants to expand to area Y will
-start posting patches against Y and asking for review.  If someone who
-already has commit access to area Y sees such a patch and approves of
-it, they can just tell the submitter to commit the change directly
-(mentioning the reviewer/approver's name in the log message, of
-course).  That way, the commit will come from the person who actually
-wrote the change, which is preferable from both an information
-management standpoint and from a crediting standpoint.</para>
+<para>第二，扩展可以以一种更细致的方式实现。通常情况下，区域X的提交者如果希望扩展到区域Y，他会通过发表对Y的一个补丁并寻求评审开始，如果对区域Y有提交权限的人看到这个补丁并确认，他可以直接让提交者直接提交这个变更（当然也要在日志信息中提及评审者/确认者的名字）。这样，这个提交就会成为实际编写变更者的作品，无论从信息管理角度还是审计角度这样都更好。</para>
 
-<para>Last, and perhaps most important, using the honor system
-encourages an atmosphere of trust and mutual respect.  Giving someone
-commit access to a subdomain is a statement about their technical
-preparedness&mdash;it says: "We see you have expertise to make commits
-in a certain domain, so go for it."  But imposing strict authorization
-controls says: "Not only are we asserting a limit on your expertise,
-we're also a bit suspicious about
-your <emphasis>intentions</emphasis>."  That's not the sort of
-statement you want to make if you can avoid it.  Bringing someone into
-the project as a committer is an opportunity to initiate them into a
-circle of mutual trust.  A good way to do that is to give them more
-power than they're supposed to use, then inform them that it's up to
-them to stay within the stated limits.</para>
+<para>最后，可能是最重要的，使用荣誉系统来鼓励互相尊重和信任的氛围。给一个人对某一区域的访问权限是对他们已经完成技术准备的证明&mdash;这是说：“我们已经看到了你已经具备了对某一领域做出修改的专业知识，那就继续吧。”但设置严格的授权控制则是暗示：“我们不仅仅确认你专业知识的限制，而且我们对你的<emphasis>目的</emphasis>也保持怀疑。”如果可以避免的话，你一定不愿意做出这样的评价。将一个人引入为项目的提交者是将其引入互相信任循环的机会，好的方法是给他们比期望所能发挥作用更大的权力，然后告诉他们是否保持在规定的限制内完全依赖于他们自己。</para>
 
-<para>The Subversion project has operated on the honor system way for
-more than four years, with 33 full and 43 partial committers as of
-this writing.  The only distinction the system actually enforces is
-between committers and non-committers; further subdivisions are
-maintained solely by humans.  Yet we've never had a problem with
-someone deliberately committing outside their domain.  Once or twice
-there's been an innocent misunderstanding about the extent of
-someone's commit privileges, but it's always been resolved quickly and
-amiably.</para>
+<para>Subversion项目按照荣誉系统的方式已经运作超过4年了，在写作时包含了33个完全的和43个部分提交者。系统实际强制的只是提交者和非提交者的区别；更细的划分只由人为控制。但是我们从来没有遇到故意在领域外提交的问题，只是有一两次由于对个人提交权限范围的误解造成的错误，而且都能够很快和亲切的得到解决。</para>
 
-<para>Obviously, in situations where self-policing is impractical, you
-must rely on hard authorization controls.  But such situations are
-rare.  Even when there are millions of lines of code and hundreds or
-thousands of developers, a commit to any given code module should
-still be reviewed by those who work on that module, and they can
-recognize if someone committed there who wasn't supposed to.  If
-regular commit review <emphasis>isn't</emphasis> happening, then the
-project has bigger problems to deal with than the authorization system
-anyway.</para>
+<para>
+很明显，当自律的方式不够实际时，那你就需要严格的授权控制，但这种情形非常少见。当有几百万行的代码，以及数百或上千的开发者时，对于任何给定模块的提交，也必须经过模块上工作的人们的评审，而且他们可以识别出提交者是否得当。如果<emphasis>没有</emphasis>有规律的提交评审，那么项目恐怕就会遇到比没有授权系统更大的问题了。</para>
 
-<para>In summary, don't spend too much time fiddling with the version
-control authorization system, unless you have a specific reason to.  It
-usually won't bring much tangible benefit, and there are advantages to
-relying on human controls instead.</para>
+<para>归纳起来，不要在版本控制的授权系统上花费太多时间，除非你有特别的原因，复杂的授权系统不能带来实际的好处，依赖人为控制有更多的优点。</para>
 
-<para>None of this should be taken to mean that the restrictions
-themselves are unimportant, of course.  It would be bad for a project
-to encourage people to commit in areas where they're not qualified.
-Furthermore, in many projects, full (unrestricted) commit access has a
-special status: it implies voting rights on project-wide questions.
-This political aspect of commit access is discussed more in <xref
-linkend="electorate"/><phrase output="printed"> in
-<xref linkend="social-infrastructure"/></phrase>.</para>
+<para>当然，上面所说的并不意味着限制本身不重要，项目不应该鼓励人们在不够格的地方提交。此外，在很多项目中，完全（无限制）的提交访问有一个特别的状态：它隐含了项目范围 问题的投票权。提交访问的政治方面将会在<phrase output="printed"><xref linkend="social-infrastructure"/>的</phrase><xref
+linkend="electorate"/>详细讨论。</para>
 
 </sect3>
 
@@ -898,7 +730,7 @@ linkend="electorate"/><phrase output="printed"> in
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="bug-tracker">
-<title>Bug Tracker</title>
+<title>Bug跟踪</title>
 
 <para>Bug tracking is a broad topic; various aspects of it are
 discussed throughout this book.  Here I'll try to concentrate mainly
