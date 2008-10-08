@@ -673,7 +673,7 @@ url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>，更�
 
 <para>分支非常有价值，因为它将一项稀缺的资源&mdash;项目代码的工作空间&mdash;变得充足。当某个人希望添加一个新的吊桥，但是不能确认其他人是否正在工作，分支使她被隔离到一个角落并做出尝试提供了可能。如果这种投入成功了，她可以要求其他开发者检验这个结果。如果所有人认可结果，他们可以告诉版本控制系统将吊桥从分支城堡移动（“合并”）到主城堡。</para>
 
-<para>很容易看到这项能力是如何帮助协作开发的，人们需要自由尝试新事物的感觉，而无须担心干扰其他人的工作。同样重要的是，当为了完成bug修正或发布稳定化（见<phrase output="printed"><xref linkend="development-cycle"/>的</phrase><xref linkend="stabilizing-a-release"/>和<xref linkend="release-lines"/>），代码需要从日常的开发中分离出来时，所花费的时间数倍于无需担心跟踪一个移动目标的情况。</para>
+<para>很容易看到这项能力是如何帮助协作开发的，人们需要自由尝试新问题的感觉，而无须担心干扰其他人的工作。同样重要的是，当为了完成bug修正或发布稳定化（见<phrase output="printed"><xref linkend="development-cycle"/>的</phrase><xref linkend="stabilizing-a-release"/>和<xref linkend="release-lines"/>），代码需要从日常的开发中分离出来时，所花费的时间数倍于无需担心跟踪一个移动目标的情况。</para>
 
 <para>不受限制的使用分支，并鼓励其他人也这样做。但是要确保任何特定分支只保持必要的最短时间，任何活动分支都会让社区分神，即使不是在分支工作的人也需要对此有所了解。这种了解是应该的，当然，对于分支的提交应该能和其他提交一样发送提交邮件。但是分支不应该成为分割开发社区的机制，除了很少的例外，大多数分支最终必须合并回它们的主干并消失。</para>
 
@@ -732,342 +732,109 @@ linkend="electorate"/>详细讨论。</para>
 <sect1 id="bug-tracker">
 <title>Bug跟踪</title>
 
-<para>Bug tracking is a broad topic; various aspects of it are
-discussed throughout this book.  Here I'll try to concentrate mainly
-on setup and technical considerations, but to get to those, we have to
-start with a policy question: exactly what kind of information should
-be kept in a bug tracker?</para>
+<para>Bug跟踪是一个宽泛的话题；贯穿本书会讨论此问题的各个方面。尽管这里我们要着重于配置和技术因素，但是首先要从一个策略问题开始：Bug跟踪系统中应该包含哪些信息？</para>
 
-<para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
-tracking systems are also frequently used to track new feature
-requests, one-time tasks, unsolicited patches&mdash;really anything
-that has distinct beginning and end states, with optional transition
-states in between, and that accrues information over its lifetime.
-For this reason, bug trackers are also called <firstterm>issue
-trackers</firstterm>, <firstterm>defect trackers</firstterm>,
-<firstterm>artifact trackers</firstterm>, <firstterm>request
-trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
-etc.  See <xref linkend="bug-trackers"/> for a list of software.
+<para>术语<firstterm>Bug跟踪（bug tracker）</firstterm>很有误导性，Bug跟踪系统也通常会用来跟踪哪些初始与结束状态不同，包含可选的中间状态，并在生命周期中积累信息的问题，例如新特性请求、一次性任务以及被动性的补丁。由于这些原因，Bug跟踪也被称为<firstterm>问题跟踪（issue
+trackers）</firstterm>、<firstterm>缺陷跟踪（defect 
+trackers）</firstterm>、<firstterm>制品跟踪（artifact trackers）</firstterm>、<firstterm>请求跟踪（request
+trackers）</firstterm>以及<firstterm>问题票跟踪（trouble ticket systems）</firstterm>。<xref linkend="bug-trackers"/>包含了一个此类软件的列表。
 </para>
 
-<para>In this book, I'll continue to use "bug tracker" for the
-software that does the tracking, because that's what most people call
-it, but will use <firstterm>issue</firstterm> to refer to a single
-item in the bug tracker's database.  This allows us to distinguish
-between the behavior or misbehavior that the user encountered (that is,
-the bug itself), and the tracker's <emphasis>record</emphasis> of the
-bug's discovery, diagnosis, and eventual resolution.  Keep in mind
-that although most issues are about actual bugs, issues can be used to
-track other kinds of tasks too.</para>
+<para>在本书中，我会继续使用“bug跟踪（bug tracker）”这个名称，因为大多数人这样称呼，但我会使用<firstterm>问题（issue）</firstterm>来称呼Bug跟踪数据库中的单个条目。这让我们可以把用户遇到的（Bug本身）正常或不良行为与跟踪系统中Bug的发现、诊断和最终解决的<emphasis>记录</emphasis>区分开来。请牢记，尽管大多数问题与实际的Bug相关，我们也可以用其来跟踪其它类型的任务。</para>
 
-<para>The classic issue life cycle looks like this:
+<para>典型的问题生命周期如下：
 
 <orderedlist>
-  <listitem><para>Someone files the issue.  They provide a summary, an
-            initial description (including a reproduction recipe, if
-            applicable; see
-            <xref
-            linkend="users-to-volunteers"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase> for
-            how to encourage good bug reports), and whatever other
-            information the tracker asks for.  The person who files
-            the issue may be totally unknown to the project&mdash;bug
-            reports and feature requests are as likely to come from
-            the user community as from the developers.</para>
+  <listitem><para>某人发起了一个问题，他提供了摘要，初始描述（如果合适则包含重现方法；如何激励好的bug报告请看<phrase
+            output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref
+            linkend="users-to-volunteers"/>），以及其它跟踪系统要求的信息。项目可能对发起人一无所知&mdash;Bug报告和特性请求既可能来自用户社区，也可能来自开发者。</para>
 
-            <para>Once filed, the issue is in what's called an
-            <firstterm>open</firstterm> state.  Because no action has
-            been taken yet, some trackers also label it as
-            <firstterm>unverified</firstterm> and/or
-            <firstterm>unstarted</firstterm>.  It is not assigned to
-            anyone; or, in some systems, it is assigned to a fake
-            user to represent the lack of real assignation.  At this
-            point, it is in a holding area: the issue has been
-            recorded, but not yet integrated into the project's
-            consciousness.</para>
+            <para>一旦发起，这个问题就进入了<firstterm>打开（open）</firstterm>状态，因为还没有作出任何行动，一些跟踪系统也将其标示为<firstterm>未验证（unverified）</firstterm>或<firstterm>未开始（unstarted）</firstterm>。它还没有分配给任何人；或者在某些系统中将起分配给一个冒牌用户来表示其还没有真正的分配。此刻，它存在于一个保留区：这个问题已经记录，但是还没有成为项目关注的一部分。</para>
   </listitem>
-  <listitem><para>Others read the issue, add comments to it, and
-            perhaps ask the original filer for clarification on some
-            points.</para>
+  <listitem><para>其他人读到这个问题，并做出回复，或许会再向发起者询问来澄清一些问题。</para>
   </listitem>
-  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
-            This may be the most important moment in its
-            life cycle.  Although the bug is not actually fixed yet,
-            the fact that someone besides the original filer was able
-            to make it happen proves that it is genuine, and, no less
-            importantly, confirms to the original filer that they've
-            contributed to the project by reporting a real bug.</para>
+  
+  
+  <listitem><para>Bug得到<firstterm>重现（reproduced）</firstterm>。这可能是其生命周期中最重要的一个时刻，尽管bug还没有修正，但发起者之外的人重现这个事实可以证明这个bug的真实性，此外，可以确认原发起者通过报告真实的bug为项目做出了贡献。</para>
   </listitem>
-  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
-            cause is identified, and if possible, the effort required
-            to fix it is estimated.  Make sure these things get
-            recorded in the issue; if the person who diagnosed the
-            bug suddenly has to step away from the project for a
-            while (as can often happen with volunteer developers),
-            someone else should be able to pick up where she left
-            off.</para>
+  <listitem><para>Bug得到<firstterm>诊断（diagnosed）</firstterm>：它的原因得到确认，如果可能，会对修正这个bug所需的工作量做出评估。请确认这些内容会在问题中得到记录；如果诊断人要离开项目一会儿（对于志愿开发者这很普遍），其他人应该能够接手。</para>
 
-            <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the issue and
-            <firstterm>assign</firstterm> it to herself (<xref
-            linkend="delegation-assignment"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase>
-            examines the assignment process in more detail).  The issue's
-            <firstterm>priority</firstterm> may also be set at this
-            stage.  For example, if it is so severe that it should
-            delay the next release, that fact needs to be identified
-            early, and the tracker should have some way of noting
-            it.</para>
+            <para>在本阶段，或者前一个阶段，开发者可以“获取”问题所有权并将其<firstterm>分配（assign）</firstterm>给自己（<phrase
+            output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref
+            linkend="delegation-assignment"/>详细描述了分配过程的细节）。问题<firstterm>优先级（priority）</firstterm>也可以在本阶段设置，例如，如果某个问题严重到足以影响下一个版本的及时发布，则需要尽早标示出来，跟踪系统必须能够使其突出显示。</para>
   </listitem>
-  <listitem><para>The issue gets scheduled for resolution.
-            Scheduling doesn't necessarily mean naming a date by which
-            it will be fixed.  Sometimes it just means deciding which
-            future release (not necessarily the next one) the bug
-            should be fixed by, or deciding that it need not block any
-            particular release.  Scheduling may also be dispensed
-            with, if the bug is quick to fix.</para>
+  <listitem><para>问题纳入解决的日程（schedule），纳入日程并不是意味着规定一个解决的日期，有时候只是决定未来的那个版本（下一个版本不是必须的）必须解决这个bug，或者这个bug将会阻碍哪些特定版本。如果很容易修正，也可以取消纳入日程这一步。
+  </para>
   </listitem>
-  <listitem><para>The bug gets fixed (or the task completed, or
-            the patch applied, or whatever).  The change or set of
-            changes that fixed it should be recorded in a comment in
-            the issue, after which the issue is
-            <firstterm>closed</firstterm> and/or marked as
-            <firstterm>resolved</firstterm>.</para>
+  <listitem><para>Bug得到修正（任务完成、或应用了补丁、或者其他类似的事情），变更或者变更集必须记录在问题的回复中，其后是问题被标注为<firstterm>解决（resolved）</firstterm>而得到<firstterm>关闭（closed）</firstterm>。</para>
   </listitem>
 </orderedlist>
 
 </para>
 
-<para>There are some common variations on this life cycle.  Sometimes
-an issue is closed very soon after being filed, because it turns out
-not to be a bug at all, but rather a misunderstanding on the part of
-the user.  As a project acquires more users, more and more such
-invalid issues will come in, and developers will close them with
-increasingly short-tempered responses.  Try to guard against the
-latter tendency.  It does no one any good, as the individual user in
-each case is not responsible for all the previous invalid issues; the
-statistical trend is visible only from the developers' point of view,
-not the user's.  (In
-<xref linkend="bug-filtering"/><phrase output="printed"> later
-in this chapter,</phrase> we'll look at
-techniques for reducing the number of invalid issues.)  Also, if
-different users are experiencing the same misunderstanding over and
-over, it might mean that that aspect of the software needs to be
-redesigned.  This sort of pattern is easiest to notice when there is
-an issue manager monitoring the bug database; see
-<xref linkend="issue-manager"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>.</para>
+<para>这个生命周期有许多变化，有时候一个问题再发起之后很快就会关闭，例如发现它不是一个bug，而只是部分用户的误解。随着项目获得了越来越多的用户，就会带来更多无效的问题，开发者会通过日益缺乏耐心的回应来关闭这些问题。要尝试预防这后一种趋势，这对谁都没有好处，每个案例中的每个单独用户对于此前的无效问题没有任何责任；统计学的趋势只是从开发者而不是用户的视点有效。（<phrase output="printed">在本章后的</phrase><xref linkend="bug-filtering"/>将会看到减少这种无效问题的技巧。）另外，如果不同的用户反复经历同样的误解，这或许意味着软件的某方面需要重新设计。如果有一个问题经理监视着bug数据库，就会很容易发现这种模式；见<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="issue-manager"/>。
+</para>
 
-<para>Another common life cycle variation is for the issue to be closed
-as a <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate
-is when someone files an issue that's already known to the project.
-Duplicates are not confined to open issues: it's possible for a bug to
-come back after having been fixed (this is known as a
-<firstterm>regression</firstterm>), in which case the preferred course
-is usually to reopen the original issue and close any new reports as
-duplicates of the original one.  The bug tracking system should keep
-track of this relationship bidirectionally, so that reproduction
-information in the duplicates is available to the original issue, and
-vice versa.</para>
+<para>生命周期的另一种常见变种是问题在步骤1之后直接以<firstterm>重复（duplicate）</firstterm>状态关闭，重复是某人发起了一个项目已知的问题。重复不仅限于开放的问题：它也可能来自已经修正的bug重现（这个称为<firstterm>衰退（regression）</firstterm> ），无论何种情况最佳的解决方式是重新打开最初的问题，并将新的报告复制到最初的问题中。bug跟踪系统应当能够双向保持联系，这样重复的重现信息中就可以在原问题中看到，反之亦然。</para>
 
-<para>A third variation is for the developers to close the issue,
-thinking they have fixed it, only to have the original reporter reject
-the fix and reopen it.  This is usually because the developers simply
-don't have access to the environment necessary to reproduce the bug,
-or because they didn't test the fix using the exact same reproduction
-recipe as the reporter.</para>
+<para>开发者关闭这个问题的第三种情况是他们认为已经修正了问题，只是让原报告者拒绝这个修正并重新打开它。这通常仅仅是因为开发者不能访问重现bug的环境，或者因为他们不能通过报告者的再现描述测试这个修正。</para>
 
-<para>Aside from these variations, there may be other small details of
-the life cycle that vary depending on the tracking software.  But the
-basic shape is the same, and while the life cycle itself is not
-specific to open source software, it has implications for how open
-source projects use their bug trackers.</para>
+<para>除了这些情况，不同的跟踪软件也有一些其它小的生命周期细节，但基本的生命周期是相同的，生命周期本身并不特定于开源软件，这暗示了开源项目如何使用他们的bug跟踪系统。</para>
 
-<para>As Step 1 implies, the tracker is as much a public face of the
-project as the mailing lists or web pages.  Anyone may file an issue,
-anyone may look at an issue, and anyone may browse the list of currently
-open issues.  It follows that you never know how many people are
-waiting to see progress on a given issue.  While the size and skill of
-the development community constrains the rate at which issues can be
-resolved, the project should at least try to acknowledge each issue the
-moment it appears.  Even if the issue lingers for a while, a response
-encourages the reporter to stay involved, because she feels that a
-human has registered what she has done (remember that filing an
-issue usually involves more effort than, say, posting an email).
-Furthermore, once an issue is seen by a developer, it enters the
-project's consciousness, in the sense that that developer can be on
-the lookout for other instances of the issue, can talk about it with
-other developers, etc.</para>
+<para>就像步骤1暗示的，跟踪系统和邮件列表或网页一样，是项目的门面。任何人可以发起一个问题，任何人可以浏览当前打开的问题列表。由此我们也能推断我们无法知道有多少人在等待给定问题的进展，而开发社区的规模和技巧限制了问题解决得速率，项目至少应该知道每个出现的问题。即使问题会缓慢小时，一个回复也会鼓励报告者保持参与，因为她能感觉到有人已经为其所作的事情登记（请牢记填写一份问题远比发一封邮件更麻烦）。此外，一旦开发者看到一个问题，它就进入了项目的意识中 ，也就是开发者会查看此问题的类似情况，或者会与其他开发者讨论，等等。</para>
 
-<para>The need for timely reactions implies two things:
+<para>及时反应的需求意味着两件事：
 
 <itemizedlist>
   <listitem>
-    <para>The tracker must be connected to a mailing list, such that
-    every change to an issue, including its initial filing, causes a
-    mail to go out describing what happened.  This mailing list
-    is usually different from the regular development list, since not
-    all developers may want to receive automated bug mails, but (just
-    as with commit mails) the Reply-to header should be set to the
-    development mailing list.</para>
+    <para>跟踪系统必须能够连接到邮件列表，这样问题的每个变更，包括初始的填写，都会导致描述发生情况的邮件。这些邮件列表通常与通常的开发列表不同，因为不是所有的开发者会希望接收自动bug邮件，但是（就像提交邮件）Reply-to头应该设置为开发邮件列表。</para>
   </listitem>
   <listitem>
-    <para>The form for filing issues should capture the reporter's
-    email address, so she can be contacted for more information.
-    (However, it should not <emphasis>require</emphasis> the
-    reporter's email address, as some people prefer to report issues
-    anonymously.  See
-    <xref linkend="anonymity"/><phrase output="printed"> later
-    in this chapter</phrase> for more on the importance of
-    anonymity.)</para>
+    <para>填写问题的表单一定能够捕捉开发者的邮件列表，这样她可以联系到更多信息。（然而，它不应当<emphasis>要求</emphasis>输入报告者的邮件地址，因为一些人喜欢匿名报告问题，匿名访问的重要性可以看<phrase output="printed">本章后面的</phrase><xref linkend="anonymity"/>。）</para>
   </listitem>
 </itemizedlist>
 
 </para>
 
 <sect2 id="bug-tracker-mailing-list-interaction">
-<title>Interaction with Mailing Lists</title>
+<title>与邮件列表交互</title>
 
-<para>Make sure the bug tracker doesn't turn into a discussion forum.
-Although it is important to maintain a human presence in the bug
-tracker, it is not fundamentally suited to real-time discussion.
-Think of it rather as an archiver, a way to organize facts and
-references to other discussions, primarily those that take place on
-mailing lists.</para>
+<para>请确保bug跟踪系统不会成为讨论论坛。尽管让人参与bug跟踪很重要，但从根本上它不适合实时讨论。更应该将其当作归档，组织证据和其他讨论（通常发生在邮件列表）的引用。</para>
 
-<para>There are two reasons to make this distinction.  First, the bug
-tracker is more cumbersome to use than the mailing lists (or than
-real-time chat forums, for that matter).  This is not because bug
-trackers have bad user interface design, it's just that their
-interfaces were designed for capturing and presenting discrete states,
-not free-flowing discussions.  Second, not everyone who should be
-involved in discussing a given issue is necessarily watching the bug
-tracker.  Part of good issue management (see
-<xref linkend="share-management"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>) is to make sure
-each issue is brought to the right peoples' attention, rather than
-requiring every developer to monitor all issues.  In
-<xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
-sure people don't accidentally siphon discussions out of appropriate
-forums and into the bug tracker.</para>
+<para>做出这种区别有两个原因，首先，bug跟踪系统的使用比邮件列表（或者实时讨论论坛）更加笨拙，这不是因为bug跟踪系统都没有好的用户界面设计，是因为它们的界面设计用来捕捉和展示分离的状态，而不是自由流动的讨论。第二，不是每个参与到特定问题讨论的人都必须注意bug跟踪系统。优良的问题管理（见<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="share-management"/>）是让每个问题被恰当的人注意到，而不是让所有的开发者监视所有的问题。在<phrase output="printed"><xref linkend="communications"/>的</phrase><xref linkend="bug-tracker-usage"/>，我们会关注确保人们不会脱离合适的论坛而陷入在bug跟踪系统内讨论的问题。</para>
 
-<para>Some bug trackers can monitor mailing lists and automatically
-log all emails that are about a known issue.  Typically they do this
-by recognizing the issue's identifying number in the subject line of
-the mail, as part of a special string; developers learn to include
-these strings in their mails to attract the tracker's notice.  The bug
-tracker may either save the entire email, or (even better) just record
-a link to the mail in the regular mailing list archive.  Either way,
-this is a very useful feature; if your tracker has it, make sure
-both to turn it on and to remind people to take advantage of
-it.</para>
+<para>有一些bug跟踪系统可以监控邮件列表并自动记录关于已知问题的邮件，他们通常是通过在邮件列表中，将邮件标题出现的问题标示号码作为特殊字符串来识别问题；开发者学着在他们的邮件中包含这类字符串来触动跟踪系统的注意。bug跟踪系统可以保存整个邮件，或（更好一点）只是记录邮件在邮件列表归档中的链接，无论何种方式，这是一个非常有用的特性；如果你的跟踪系统有这个功能，要确保在开启它的同时提醒人们利用这个特性。</para>
 
 </sect2>
 
 <sect2 id="bug-filtering">
-<title>Pre-Filtering the Bug Tracker</title>
+<title>Bug跟踪的预过滤</title>
 
-<para>Most issue databases eventually suffer from the same problem: a
-crushing load of duplicate or invalid issues filed by well-meaning but
-inexperienced or ill-informed users.  The first step in combatting
-this trend is usually to put a prominent notice on the front page of
-the bug tracker, explaining how to tell if a bug is really a bug, how
-to search to see if it's already been filed, and finally, how to
-effectively report it if one still thinks it's a new bug.</para>
+<para>大多数问题数据库最终会遭遇相同的困境：由好心但没经验或消息不灵通用户所发起的重复和无效问题的洪流。与这种趋势斗争的第一步通常是在bug跟踪系统的前页放置一个显著的提醒，解释如何知道一个bug是否确实是bug、如何查找bug是否已经被发起、以及如果依然认为是新bug时如何有效的报告。</para>
 
-<para>This will reduce the noise level for a while, but as the number
-of users increases, the problem will eventually come back.  No
-individual user can be blamed for it.  Each one is just trying to
-contribute to the project's well-being, and even if their first bug
-report isn't helpful, you still want to encourage them to stay
-involved and file better issues in the future.  In the meantime,
-though, the project needs to keep the issue database as free of junk
-as possible.</para>
+<para>这会暂时减少噪音，但是当用户数增加后，问题还是会出现。每个单独的用户都不应该因此被谴责，即使他们的第一个bug报告没有用处，你还是要鼓励他们保持参与并在以后提出更好的问题。同时，项目需要保持问题数据库的垃圾越少越好。</para>
 
-<para>The two things that will do the most to prevent this problem
-are: making sure there are people watching the bug tracker who have
-enough knowledge to close issues as invalid or duplicates the moment
-they come in, and requiring (or strongly encouraging) users to confirm
-their bugs with other people before filing them in the tracker.</para>
+<para>这两件事可以最大程度的防止这些问题：请确认监视bug跟踪系统的人有足够的知识在问题无效或重复时关闭它，而且能够要求（或足够的勇气）用户在填入跟踪系统前确认他们的bug。</para>
 
-<para>The first technique seems to be used universally.  Even projects
-with huge issue databases (say, the Debian bug tracker at
-<ulink url="http://bugs.debian.org/"/>, which contained 315,929 issues
-as of this writing) still arrange things so that
-<emphasis>someone</emphasis> sees each issue that comes in.  It may be
-a different person depending on the category of the issue.  For
-example, the Debian project is a collection of software packages, so
-Debian automatically routes each issue to the appropriate package
-maintainers.  Of course, users can sometimes misidentify an issue's
-category, with the result that the issue is sent to the wrong person
-initially, who may then have to reroute it.  However, the important
-thing is that the burden is still shared&mdash;whether the user
-guesses right or wrong when filing, issue watching is still
-distributed more or less evenly among the developers, so each issue is
-able to receive a timely response.</para>
+<para>第一种技术看起来被广泛使用，即使项目有巨大的问题数据库（例如，Debian在<ulink url="http://bugs.debian.org/"/>的bug跟踪系统，目前有315,929个问题）也是这样安排的，这样<emphasis>某人</emphasis>进入时就能看到所有的问题，不同的问题类别可能是不同的人。例如，Debian项目包含了一组软件包，这样Debian就能够自动路由每个问题到合适的包维护者。当然，用户有时会把问题类别搞错，这样一开始问题就会发送到错误的人，而他可以再将其转向到其他人。然而，最重要的事情是负担被分担了&mdash;无论用户在填写的时候是对是错，问题监视的任务还是会在开发者之间分配，所以每个问题都能够得到及时的回复。</para>
 
-<para>The second technique is less widespread, probably because it's
-harder to automate.  The essential idea is that every new issue gets
-"buddied" into the database.  When a user thinks he's found a problem,
-he is asked to describe it on one of the mailing lists, or in an IRC
-channel, and get confirmation from someone that it is indeed a bug.
-Bringing in that second pair of eyes early can prevent a lot of
-spurious reports.  Sometimes the second party is able to identify that
-the behavior is not a bug, or is fixed in recent releases.  Or she may
-be familiar with the symptoms from a previous issue, and can prevent a
-duplicate filing by pointing the user to the older issue.  Often it's
-enough just to ask the user "Did you search the bug tracker to see if
-it's already been reported?"  Many people simply don't think of that,
-yet are happy to do the search once they know someone's
-<emphasis>expecting</emphasis> them to.</para>
+<para>第二种技术应用的没有那么广泛，可能因为它很难被自动化。本质思想是每个新问题都是经过搭档处理后进入到的数据库中。当用户认为他发现了一个问题，他就会被要求在邮件列表或IRC频道中对其进行描述，然后得到某个人对其是bug确认，尽早引入第二双眼睛可以防止许多虚假的报告。有时候第二方可以识别出这个行为不是一个bug，或者已经在最近的发布中被修正。或者她可能由于类似症状bug而感到熟悉，而且可以通过给用户指明老的问题来防止重复的填写。通常仅仅是询问用户“你查找过bug跟踪系统以确定这个问题是否已经报告过了？”许多用户不会想到这个一点，如果有人<emphasis>期望</emphasis>，你可以愉快的为他们查找一下。</para>
 
-<para>The buddy system can really keep the issue database clean, but
-it has some disadvantages too.  Many people will file solo anyway,
-either through not seeing, or through disregarding, the instructions
-to find a buddy for new issues.  Thus it is still necessary for
-volunteers to watch the issue database.  Furthermore, because most new
-reporters don't understand how difficult the task of maintaining the
-issue database is, it's not fair to chide them too harshly for
-ignoring the guidelines.  Thus the volunteers must be vigilant, and
-yet exercise restraint in how they bounce unbuddied issues back to
-their reporters.  The goal is to train each reporter to use the
-buddying system in the future, so that there is an ever-growing pool
-of people who understand the issue-filtering system.  On seeing an
-unbuddied issue, the ideal steps are:</para>
+<para>这种伙伴系统确实可以保证问题数据库的清洁，但是也有一些不利的地方。许多用户无论如何也要独立发起问题，对为发起新问题而寻找伙伴的指南看不到或者视而不见。因此，还是需要有志愿者关注问题数据库。此外，因为许多新报告者不理解维护问题数据库的难度，对他们忽略指南的行为进行过于严厉的斥责是不公平的。所以志愿者必须保持警觉，联系如何反弹未经搭档处理的问题给报告者。目标是训练每个报告者在未来使用伙伴系统，这样就有一个日益增长的能够理解问题过滤系统的用户池。当看到一个未经伙伴系统处理的问题时，理想的步骤是：</para>
 
 <orderedlist>
   <listitem>
-    <para>Immediately respond to the issue, politely thanking the user
-          for filing, but pointing them to the buddying guidelines
-          (which should, of course, be prominently posted on the web
-          site).</para>
+    <para>立刻回复问题，礼貌的感谢用户的填写，但是向他们指出伙伴系统的操作指南（当然应该在网站的显著位置）。</para>
   </listitem>
   <listitem>
-    <para>If the issue is clearly valid and not a duplicate, approve it
-          anyway, and start it down the normal life cycle.  After all,
-          the reporter's now been informed about buddying, so there's
-          no point wasting the work done so far by closing a valid
-          issue.</para>
+    <para>如果问题是明显有效而且没有重复，想办法证明它，使之开始正常的生命周期。毕竟，报告者没有被告知伙伴系统，所有浪费工作量关闭有效的问题是没有意义的。</para>
   </listitem>
   <listitem>
-    <para>Otherwise, if the issue is not clearly valid, close it, but
-          ask the reporter to reopen it if they get confirmation from
-          a buddy.   When they do, they should put a reference to the
-          confirmation thread (e.g., a URL into the mailing list
-          archives).</para>
+    <para>否则，如果问题不是很清楚的有效，关闭它，但是要求报告者在得到伙伴的确认后重新打开它，当他们这样做时，他们应当放置一个确认邮件列表线索的引用（例如一个邮件列表归档的URL）。</para>
   </listitem>
 </orderedlist>
 
-<para>Remember that although this system will improve the signal/noise
-ratio in the issue database over time, it will never completely stop
-the misfilings.  The only way to prevent misfilings entirely is to
-close off the bug tracker to everyone but developers&mdash;a cure that
-is almost always worse than the disease.  It's better to accept that
-cleaning out invalid issues will always be part of the project's
-routine maintenance, and to try to get as many people as possible to
-help.</para>
+<para>请记住尽管系统会逐渐改善问题数据库的信/噪比，但是不会阻止误填的发生。完全防止误填的唯一方法是关闭bug跟踪系统，只开放给开发者&mdash;治愈几乎永远比疾病本身更坏。应当接受无效问题的清理是项目日常维护的一部分，并努力得到更多的人们来帮忙。</para>
 
 <para>See also
 <xref linkend="issue-manager"/><phrase output="printed"> in
@@ -1079,7 +846,7 @@ help.</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="irc">
-<title>IRC / Real-Time Chat Systems</title>
+<title>IRC / 实时聊天系统</title>
 
 <para>Many projects offer real-time chat rooms using <firstterm>Internet
 Relay Chat</firstterm> (<firstterm>IRC</firstterm>), forums where users
