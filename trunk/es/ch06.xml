@@ -1848,101 +1848,97 @@ el código HTML de esta página, para ver un ejemplo.</para>
 </sect3>
 
 <sect3 id="security-finding-a-fix">
-<title>Develop the fix quietly</title>
+<title>Desarrolla la solución silenciosamente</title>
 
-<para>So what does the security list do when it receives a report?
-The first task is to evaluate the problem's severity and
-urgency:</para>
+<para>¿Qué hace la lista de seguridad cuando recibe un informe?
+La primera tarea es evaluar la urgencia y severidad del problema.
+:</para>
 
 <orderedlist>
-  <listitem><para>How serious is the vulnerability?  Does it allow a
-            malicious attacker to take over the computer of someone
-            who uses your software?  Or does it, say, merely leak
-            information about the sizes of some of their files?</para>
+  <listitem><para>¿Cómo de seria es la vulnerabilidad? Permite que un
+			atacante malicioso tome la computadora de alguien que utiliza
+			tu sofware? o únicamente hay una fuga de información sobre el
+			tamaño de algounos de sus archivos?</para>
   </listitem>
 
-  <listitem><para>How easy is it to exploit the vulnerability?  Can
-            an attack be scripted, or does it require circumstantial
-            knowledge, educated guessing, and luck?</para>
+  <listitem><para>¿Cómo de fácil es explotar la vulnerabilidad? Se puede
+			realizar el ataque con scripts, o hacerlo requiere un conocimiento
+			circunstancial, suposiciones y suerte?</para>
   </listitem>
 
-  <listitem><para><emphasis>Who</emphasis> reported the problem to
-            you?  The answer to this question doesn't change the
-            nature of the vulnerability, of course, but it does give
-            you an idea of how many other people might know about it.
-            If the report comes from one of the project's own
-            developers, you can breathe a little easier (but only a
-            little), because you can trust them not to have told
-            anyone else about it.  On the other hand, if it came in an
-            email from <literal>anonymous14@globalhackerz.net</literal>,
-            then you'd better act as fast as you can.  The person did
-            you a favor by informing you of the problem at all, but you
-            have no idea how many other people she's told, or how long
-            she'll wait before exploiting the vulnerability on live
-            installations.</para>
+  <listitem><para><emphasis>¿Quién</emphasis> te informó del problema?
+            La respuesta a esta pregunta, por supuesto que no cambia 
+			la naturaleza de la vulnerabilidad, pero te da una idea de
+			cómo otras personas pueden conocerla. Si el informe viene de
+			uno de los desarrolladores del propio proyecto, puedes respirar
+			algo tranquilo (pero sólo un poco), porque puedes confiar en
+			que ellos no se lo dirán a nadie más. Por otra parte, si viene
+			de una dirección de correo como <literal>anonymous14@globalhackerz.net</literal>,
+            entonces lo mejor será que actúes tan rápido como puedas. Después de todo
+			la persona te hizo un favor informando del problema, pero no tienes idea
+			de a cuanta gente más se lo ha contado, o cuanto tiempo esperará antes
+			de explotar la vulnerabilidad en instalaciones en producción.</para>
   </listitem>
 </orderedlist>
 
-<para>Note that the difference we're talking about here is often just
-a narrow range between <emphasis>urgent</emphasis>
-and <emphasis>extremely&nbsp;urgent</emphasis>.  Even when the report
-comes from a known, friendly source, there could be other people on
-the Net who discovered the bug long ago and just haven't reported it.
-The only time things aren't urgent is when the bug inherently does not
-compromise security very severely.</para>
+<para>Nota que la diferencia que estamos hablando aquí es un rango estrecho
+entre <emphasis>urgente</emphasis> y <emphasis>extremadamente&nbsp;urgente</emphasis>.
+Incluso cuando el informe viene de una fuente conocida, puede haber otra gente en
+la red que descubrieron el bug hace tiempo y no han informado de ello. La única vez
+que las cosas no son urgentes es cuando el bug inherentemente no compromente la seguridad
+muy severamente.</para>
 
-<para>The "<literal>anonymous14@globalhackerz.net</literal>" example
-is not facetious, by the way.  You really may get bug reports from
-identity-cloaked people who, by their words and behavior, never quite
-clarify whether they're on your side or not.  It doesn't matter: if
-they've reported the security hole to you, they'll feel they've done
-you a good turn, and you should respond in kind.  Thank them for the
-report, give them a date on or before which you plan to release a
-public fix, and keep them in the loop.  Sometimes they may
-give <emphasis>you</emphasis> a date&mdash;that is, an implicit threat
-to publicize the bug on a certain date, whether you're ready or not.
+<para>El ejemplo de "<literal>anonymous14@globalhackerz.net</literal>" por
+cierto, no es burlón. Realmente puedes obtener informes de gente con 
+identidades-encubiertas que, por sus palabras y comportamiento, nunca
+clarifican si estan de tu parte o no. No importa: si te han informado de el
+agujero de seguridad, ellos sienten que te han hecho un buen favor, y
+tú deberías responderles de la misma manera. Agredeciéndoles el informe, 
+facilitándoles una fecha antes de la cual planeas liberar un parche público,
+y mantenlo al tanto. Algunas veces ellos pueden <emphasis>darte</emphasis> una fecha&mdash;que
+es, una amenaza implícita de publicar el bug en una fecha dada, si estás preparado o no.
+Esto puede parecer un juego de poder de intimidación, pero es más una acción
+preferente resultado de decepciones anteriores con productores de software
+que no respondían y no se tomaban los informes de seguridad en serio.
 This may feel like a bullying power play, but it's more likely a
 pre&euml;mptive action resulting from past disappointment with
 unresponsive software producers who didn't take security reports
-seriously enough.  Either way, you can't afford to tick this person
-off.  After all, if the bug is severe, he has knowledge that could
-cause your users big problems.  Treat such reporters well, and hope
-that they treat you well.</para>
+seriously enough. De todas maneras, no puedes permitirte ignorar a esta persona.
+Después de todo, si el bug es severo, el tiene conocimiento que podría causar grandes
+problemas a tus usuarios. Trata a estos informadores bien, y espera que ellos tambien
+te traten bien a tí.</para>
 
-<para>Another frequent reporter of security bugs is the security
-professional, someone who audits code for a living and keeps up on the
-latest news of software vulnerabilities.  These people usually have
-experience on both sides of the fence&mdash;they've both received and
-sent reports, probably more than most developers in your project have.
-They too will usually give a deadline for fixing a vulnerability
-before going public.  The deadline may be somewhat negotiable, but
-that's up to the reporter; deadlines have become recognized among
-security professionals as pretty much the only reliable way to get
-organizations to address security problems promptly.  So don't treat
-the deadline as rude; it's a time-honored tradition, and there are
-good reasons for it.</para>
+<para>Otro informador frecuente de agujeros de seguridad es el profesional de la
+seguridad, alguien que audita código cómo parte de su trabajo y se mantiene al día
+con las últimas noticias en las vulnerabilidades de software. Esta gente normalmente
+tiene experiencia en ambos lados de la vallya&mdash;ellos tanto han recibido
+como enviado informes, probablemente más que la mayoría los desarrolladores de tu
+proyecto tengan. Ellos normalmente también te darán una fecha fija para solucionar
+la vulnerabilidad antes de hacerla pública. Esta fecha puede ser negociable, pero 
+esto dependerá del informador; las fechas fijadas han sido reconocidas entre los
+profesionales de la seguridad como la única vía fiable para que las organizaciones
+solucionen los problemas de seguridad puntualmente. Por lo que no trates la fecha
+fijada como algo grosero; es una larga tradición, y hay buenas razones para ello.</para>
 
-<para>Once you know the severity and urgency, you can start working on
-a fix.  There is sometimes a tradeoff between doing a fix elegantly
-and doing it speedily; this is why you must agree on the urgency
-before you start.  Keep discussion of the fix restricted to the
-security list members, of course, plus the original reporter (if she
-wants to be involved) and any developers who need to be brought in for
-technical reasons.</para>
+<para>Una vez que conozcas la severidad y urgencia, puedes empezar a trabajar en la
+solución. A veces hay un sacrificio entre hacer una solución elegante y hacerla rápida;
+por esto, debeis acordar la urgencia antes de empezar. Manten la discusión de la solución
+restringida únicamente a los miembros de la lista, por supuesto también al informador 
+original (si el quiere estar involucrado) y con cualquier desarrollador que se necesite
+contactar por razones técnicas.</para>
 
-<para>Do not commit the fix to the repository.  Keep it in patch form
-until the go-public date.  If you were to commit it, even with an
-innocent-looking log message, someone might notice and understand the
-change.  You never know who is watching your repository and why they
-might be interested.  Turning off commit emails wouldn't help; first
-of all, the gap in the commit mail sequence would itself look
-suspicious, and anyway, the data would still be in the repository.
-Just do all development in a patch and keep the patch in some private
-place, perhaps a separate, private repository known only to the people
-already aware of the bug.  (If you use a decentralized version control
-system like Arch or SVK, you can do the work under full version
-control, and just keep that repository inaccessible to
-outsiders.)</para>
+<para>No hagas el commit de la solución en el repositorio. Mantelo en forma de parche
+hasta la fecha de ir al público. Si fueras a hacer el commit, incluso con un
+mensaje de log aparentemente inocnete, alguién puede darse cuenta y comprender
+el cambio. Nunca sabes quién está observando tu repositorio y porque estos pueden
+estar interesados. Deshabilitar los correos del commit no ayudará; primero de todo,
+el intervalo en la secuencia del mail del commit resultaría sospechoso, y de cualquier
+manera, los datos todavía estarían disponibles en el repositorio. Simplmente haz todo
+el desarrollo en un parche y mantén el parche en algún lugar privado, quizás un repositorio
+privado y separado que sólo lo conozca la gente que está al tanto del bug. (Si usas un
+sistema de control de versiones descentralizado tal como Arch o SVK, puedes hacer el trabajo
+bajo el control de versión completo, y mantener simplemente el repositorio inaccesible a
+los desconocidos.)</para>
 
 </sect3>
 
