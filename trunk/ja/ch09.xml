@@ -1304,7 +1304,7 @@ clause:</para>
     (または <firstterm>BSD スタイルのライセンス</firstterm> と呼ばれることもあります)
     で配布されています。オリジナルのBSDライセンスは、
     カリフォルニア大学バークレー校がUnixの実装としてリリースした Berkeley Software
-    Distribution のライセンスとして使われていました。
+    Distribution (BSD) のライセンスとして使われていました。
     このライセンス (原文は <ulink url="http://www.xfree86.org/3.3.6/COPYRIGHT2.html#6"/>
     の 2.2.2 にあります) の考え方は MIT/X ライセンスと似ていますが、
     以下の一節だけは異なっています。
@@ -1589,8 +1589,12 @@ just go with CLAs; they're easier for everyone.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="dual-licensing">
+<!--
 <title>Dual Licensing Schemes</title>
+-->
+<title>デュアルライセンスの仕組み</title>
 
+<!--
 <para>Some projects try to fund themselves by using a dual licensing
 scheme, in which proprietary derivative works may pay the copyright
 holder for the right to use the code, but the code still remains free
@@ -1606,7 +1610,28 @@ described at
 example of the latter is Sleepycat Software's licensing strategy,
 described at <ulink 
 url="http://www.oracle.com/technology/software/products/berkeley-db/htdocs/licensing.html"/>.</para>
+-->
 
+<para>
+    プロジェクトによっては、お金を稼ぐためにデュアルライセンスの仕組みを使うところがあります。
+    これはプロプラエタリな派生物については、
+    コードを使う権利を得るために著作権者にお金を払ってもらう一方で、
+    オープンソースプロジェクトで使う目的ならコードをフリーのままにしておく、
+    というものです。
+    これは当然、単独のアプリケーションよりはライブラリのコードと相性がよい仕組みです。
+    正確な条件は場合によって異なります。
+    オープンソースプロジェクトで使う場合のフリーなライセンスは
+    GNU GPL がよく使われます。なぜなら、
+    GPL は著作権者の許可なくプロプラエタリな製品にコードを取り込むことを既に禁止しているからですが、
+    これと同じ効果を持つ独自のライセンスが使われることもあります。
+    前者の例は MySQLのライセンス であり、<ulink url="http://www.mysql.com/company/legal/licensing/"/> に説明があります。
+    後者の例は Sleepycat Software が採用しているライセンス戦略で、
+    <ulink
+url="http://www.oracle.com/technology/software/products/berkeley-db/htdocs/licen
+sing.html"/> に説明があります。
+</para>
+
+<!--
 <para>You might be wondering: how can the copyright holder offer
 proprietary licensing for a mandatory fee if the terms of the GNU GPL
 stipulate that the code must be available under less restrictive
@@ -1619,7 +1644,27 @@ time it takes one out of the bucket to send into the world, it can
 decide what license to put on it: GPL, proprietary, or something else.
 Its right to do this is not tied to the GPL or any other open source
 license; it is simply a power granted by copyright law.</para>
+-->
 
+<para>
+    こんな疑問があるかもしれません 「GNU GPL が、
+    制限が緩い方法でコードを利用させるように要求していたとしたら、
+    著作権者はどうやってお金と引換えにライセンスを与えればいいの？」
+    これに対しては 「GPL の条件は、著作権者が他人に課すものです。
+    よって、著作権者には GPL の条件を <emphasis>課さずに</emphasis>
+    プロプラエタリな条件のみを課す自由もあるのです。」
+    というのが答えになります。
+    これについては、
+    著作権者がソフトウェアのコピーを無限に在庫として持っていると考えるとよいでしょう。
+    彼らはソフトウェアのコピーを一つ取り出して世に送り出すたびに、
+    どのライセンスを付けるか、つまり GPL なのか、
+    プロプラエタリなライセンスか、それ以外かを決めることができるのです。
+    ライセンスを選んで決める権利は、
+    GPL や他のオープンソースライセンスが課しているものではありません。
+    単に著作権に関する法律が与えたものなのです。
+</para>
+
+<!--
 <para>The attractiveness of dual licensing is that, at its best, it
 provides a way for a free software project to get a reliable income
 stream.  Unfortunately, it can also interfere with the normal dynamics
@@ -1636,14 +1681,48 @@ disgruntled contributor later claiming a percentage of royalties from
 the proprietary stream.  The process of collecting these assignment
 papers means that contributors are starkly confronted with the fact
 that they are doing work that makes money for someone else.</para>
+-->
 
+<para>
+    デュアルライセンスの魅力は、
+    フリーソフトウェアプロジェクトに安定した収入の道を開くことです。
+    不幸なことに、
+    これがオープンソースプロジェクトの通常の力学を妨げてしまう可能性があります。
+    問題なのは、コードを提供するボランティアたちが、
+    フリーなバージョンのものと、プロプラエタリなものの、
+    全く別なふたつのバージョンに貢献するようになることです。
+    貢献するボランティアたちは、
+    フリーなバージョンには喜んでコードを提供するでしょう。
+    なぜなら、提供したコードをフリーにするのがオープンソースプロジェクトでは普通だからです。
+    しかし、他の人が半ばプロプラエタリなやり方で利益を得るのに加担するのはおかしいと感じるかもしれません。
+    このジレンマは、デュアルライセンスを採用した場合に、
+    プロプラエタリなやり方で得た利益からボランティアがロイヤリティを請求することを防ぐために、
+    著作権者が彼らのコードの著作権を自らに譲渡する契約にサインするよう求めてきたときにさらに大きくなります。
+    こういう契約書にサインさせるプロセスは、
+    ボランティア達に、自分が誰かを儲けさせるために動いているという事実をいやがおうでも突きつけることになります。
+</para>
+
+
+<!--
 <para>Not all volunteers will be bothered by this; after all, their
 contributions go into the open source edition as well, and that may be
 where their main interest lies.  Nevertheless, dual licensing is an
 instance of the copyright holder assigning itself a special right that
 others in the project do not have, and is thus bound to raise
 tensions at some point, at least with some volunteers.</para>
+-->
 
+<para>
+    ボランティア全員がこの問題で悩むとは限りません。
+    結局、提供したコードはオープンソースなバージョンにも取り込まれるわけで、
+    それこそが彼らの関心事かもしれないからです。
+    それにも関わらずデュアルライセンスは、
+    著作権者がプロジェクトの他のメンバが持っていない特別な権利を、
+    自らに与えるものです。
+    それゆえに、ボランティアの中にはある時点で著作権者と対立してしまう人が必ずいます。
+</para>
+
+<!--
 <para>What seems to happen in practice is that companies based on
 dual licensed software do not have truly egalitarian development
 communities.  They get small-scale bug fixes and cleanup patches from
@@ -1658,6 +1737,25 @@ handling of the software could fork the project.  To what degree this
 threat pre&euml;mptively shapes the company's policies I don't know,
 but at any rate, MySQL does not seem to be having acceptance problems
 either in the open source world or beyond.</para>
+-->
+
+<para>
+    デュアルライセンスを採用したソフトウェアを基盤にしている企業では、
+    ボランティアの開発コミュニティと本当の意味で平等な関係を築いているわけではないようです。
+    彼らは小規模なバグ修正やコードを整理する修正プログラムは外部に依存するものの、
+    難しい仕事はほとんど内部でこなしてしまうのです。
+    たとえば、MySQL のマーケティング部門副社長の Zack Urlocker は、
+    活発なボランティアは結局企業が雇ってしまうのが一般的だと述べています。
+    それゆえに、MySQL そのものは GPL でライセンスされたオープンソースソフトウェアですが、
+    開発そのものは多かれ少なかれ企業がコントロールしています。
+    (可能性は極めて小さいものの)
+    誰かが企業のソフトウェアの扱いに不満を持ってしまうと、
+    プロジェクトが分裂してしまう可能性も孕んでいます。
+    こうした懸念がどの程度企業の方針に影響しているのかはわかりませんが、
+    いずれにせよ、MySQLという企業は、
+    オープンソースの世界に留まるか、
+    そうでないかは問題視していないようです。
+</para>
 
 </sect1>
 
