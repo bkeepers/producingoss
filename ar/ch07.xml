@@ -722,20 +722,21 @@ remember if any bugs were found in later testing or not,
 though).</para>
 
 <sect3 id="release-stabilization-collaboration">
-<title>Managing collaborative release stabilization</title>
+<title>الإدارة التعاونية لتحقيق الاستقرار </title>
 
-<para>If your project chooses a change voting system, it is imperative
-that the physical mechanics of setting up ballots and casting votes be
-as convenient as possible.  Although there is plenty of open source
-electronic voting software available, in practice the easiest thing to
-do is just to set up a text file in the release branch,
-called <filename>STATUS</filename> or <filename>VOTES</filename> or
-something like that.  This file lists each proposed change&mdash;any
-developer can propose a change for inclusion&mdash;along with all the
-votes for and against it, plus any notes or comments.  (Proposing a
-change doesn't necessarily mean voting for it, by the way, although
-the two often go together.)  An entry in such a file might look like
-this:</para>
+<para>
+  إذا كان مشروعك يختار نظام تغيير التصويت فمن الواجب أن تكون آليات
+  الإدلاء بالأصوات مريحة وميسرة قدر الإمكان
+  .و على الرغم من وجود الكثير من برامج التصويت الالكترونية مفتوحة المصدر .
+  في الممارسة العملية أسهل شيء عملة هو إنشاء ملف نصي نسميه
+   <filename>STATUS</filename> or <filename>VOTES</filename> أو أي من هذا القبيل.
+  هذا الملف يحوي كل قوائم الاقتراحات
+  وأي مطور يستطيع إدراج التغييرات سواء كانت
+  مع الأصوات أو ضدها بالإضافة الى التعليقات والملاحظات
+  (بالمناسبة اقتراح التغيير لا يعني بالضرورة التصويت علية
+  وإن كانا في اغلب الأحيان يسيران جنبا إلى جنب )
+  عند مشاهد هذا الملف قد يبدو شيئا كهذا ...
+</para>
 
 <screen>
 * r2401 (issue #49)
@@ -752,24 +753,22 @@ this:</para>
                  incompatible if we don't have to?)
 </screen>
 
-<para>In this case, the change acquired two positive votes, but was
-vetoed by tmartin, who gave the reason for the veto in a parenthetical
-note.  The exact format of the entry doesn't matter; whatever your
-project settles on is fine&mdash;perhaps tmartin's explanation for the
-veto should go up in the "Notes:" section, or perhaps the change
-description should get a "Description:" header to match the other
-sections.  The important thing is that all the information needed to
-evaluate the change be reachable, and that the mechanism for casting
-votes be as lightweight as possible.  The proposed change is referred
-to by its revision number in the repository (in this case a single
-revision, r2401, although a proposed change could just as easily
-consist of multiple revisions).  The revision is assumed to refer to a
-change made on the trunk; if the change were already on the release
-branch, there would be no need to vote on it.  If your version control
-system doesn't have an obvious syntax for referring to individual
-changes, then the project should make one up.  For voting to be
-practical, each change under consideration must be unambiguously
-identifiable.</para>
+<para>
+  في هذه الحالة التغيير حصل على صوتين إيجابيين لكنة تعرض للنقض من قبل tmartin's
+  والسبب الذي قدم لاستخدام حق النقض هو مابين القوسين.
+  . وربما تفسير tmartin's
+  لاستخدام حق النقض ينبغي أن يوضع في ملاحظات الباب أو ربما ينبغي أن يحصل على وصف راسي (  وصف Description   )
+  راسي ليتناسب مع الأقسام الأخرى . المهم هنا هو أن جميع المعلومات اللازمة لتقييم
+  تغيير ما وان آلية الإدلاء بالأصوات ينبغي أن تكون سهلة وممكنة التغير المقترح ويشار إلى جانب إعادة النظر في عدد المستودع .
+  في هذه الحالة إعادة النظر في التغيير , r2401 وان كان التغيير المقترح يمكن ببساطة أن يتألف من عدة
+  تنقيحات . التنقيح يفترض أن يشير إلى التغيير الحاصل على الجزء الفرعي . وإذا كان التغيير بالفعل على الجزء
+  الفرعي فلن تكون هناك حاجة للتصويت علية .
+  إذا كان الإصدار الخاص بك  من نظام المراقبة لا يمتلك تركيب واضح للإشارة إلى التغييرات الفردية .. ثم
+  ينبغي واحد من اجل أن تكون  عملية التصويت أكثر عملية .. كل تغيير قيد النظر يجب أن يكون واضح ومستقل للتعرف عليه .
+  أو تلك التي تقترح التصويت للتغير مؤولة للتأكد من أنها تنطبق من دون معوقات . إذا كان هناك معوقات إما أن
+  تشير إلى أن معدل التصحيح ينطبق تماما أو مؤقت لفرع يحمل نسخة المعدلة للتغير .
+  مثال
+</para>
 
 <para>Those proposing or voting for a change are responsible for
 making sure it applies cleanly to the release branch, that is, applies
