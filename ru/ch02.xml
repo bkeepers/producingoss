@@ -467,149 +467,120 @@ linkend="legal"/>.</para>
 зависимости, что просто заставить его заработать потребовало бы значительных усилий для большинства людей.
 (Но если дело обстоит именно так, то проекту в любом случае будет очень нелегко привлечь разработчиков!)</para>
 
-<para>The distribution mechanism should be as convenient, standard,
-and low-overhead as possible.  If you were trying to eradicate a
-disease, you wouldn't distribute the medicine in such a way that it
-requires a non-standard syringe size to administer.  Likewise,
-software should conform to standard build and installation methods;
-the more it deviates from the standards, the more potential users and
-developers will give up and go away confused.</para>
+<para>Механизм распространения должен быть настолько же удобным, стандартным, и нетрудоемким насколько
+это возможно. Если бы вы пытались вылечить болезнь, то вы не распространяли бы лекарство таким образом,
+который требовал бы применения нестандартного размера шприца. Точно так же и программное обеспечение
+должно соответствовать стандартным методам сборки и установки; чем больше оно отклоняется от стандартов,
+тем больше потенциальные пользователи и разработчики будут сдаваться и уходить в замешательстве.</para>
 
-<para>That sounds obvious, but many projects don't bother to
-standardize their installation procedures until very late in the game,
-telling themselves they can do it any time: <emphasis>"We'll sort all
-that stuff out when the code is closer to being ready."</emphasis>
-What they don't realize is that by putting off the boring work of
-finishing the build and installation procedures, they are actually
-making the code take longer to get ready&mdash;because they
-discourage developers who might otherwise have contributed to the
-code.  Most insidiously, they don't <emphasis>know</emphasis> they're
-losing all those developers, because the process is an accumulation of
-non-events: someone visits a web site, downloads the software, tries
-to build it, fails, gives up and goes away.  Who will ever know it
-happened, except the person themselves?  No one working on the project
-will realize that someone's interest and good will have been silently
-squandered.</para>
+<para>Это кажется очевидным, но многие проекты не потрудились стандартизировать свои операции по установке
+почти до окончания игры, говоря самим себе, что они могут это сделать в любое время: <emphasis> "Мы уладим 
+все это когда код будет близок к завершению." </emphasis> Чего они не понимают, так это того, что
+откладывая скучную работу по доведению до ума процедур сборки и установки, они фактически увеличивают время на 
+завершение кода&mdash; потому что они отпугивают разработчиков, которые, в ином случае,дополнили бы код.
+Но самое коварство заключается в том, что они<emphasis> не знают </emphasis>, что они теряют всех этих
+разработчиков, потому что этот процесс - накопление непримечательных событий: кто-то посещает веб-сайт,
+загружает программное обеспечение, пытается его собрать, терпит неудачу, сдается и уходит. 
+Узнает ли кто-нибудь когда-нибудь, что это случилось, кроме самого этого человека? Никто работающий над 
+проектом не поймет, что чей-то интерес и добрая воля были тихо растрачены.</para>
 
-<para>Boring work with a high payoff should always be done early, and
-significantly lowering the project's barrier to entry through good
-packaging brings a very high payoff.</para>
+<para>Скучная работа, хорошо оправдывающая себя, всегда должна быть выполнена на 
+ранней стадии, а значительное понижение понятийного барьера при помощи хорошей подготовки
+пакетов очень хорошо себя оправдывает.</para>
 
-<para>When you release a downloadable package, it is vital that you
-give a unique version number to the release, so that people can
-compare any two releases and know which supersedes the other.  A
-detailed discussion of version numbering can be found in <xref
-linkend="release-numbering"/>, and the details of standardizing
-build and installation procedures are covered in
-<xref linkend="packaging"/><phrase output="printed">, both
-in <xref linkend="development-cycle"/></phrase>.</para>
+<para>Когда вы выпускаете пакет, доступный для скачивания, жизненно важно присвоить уникальный номер версиии
+этому выпуску, чтобы люди могли сравнить два любых пакета и узнать какой из них заменяет другой.
+Подробное обсуждение нумерования версий можно найти в <xref linkend="release-numbering"/>, а подробности
+стандартизации процессов сборки и установки в <xref linkend="packaging"/><phrase output="printed">, оба в
+<xref linkend="development-cycle"/></phrase>.</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="vc-and-bug-tracker-access">
-<title>Version Control and Bug Tracker Access</title>
+<title>Контроль версий и доступ к системе учета ошибок.</title>
 
-<para>Downloading source packages is fine for those who just want to
-install and use the software, but it's not enough for those who want
-to debug or add new features.  Nightly source snapshots can help, but
-they're still not fine-grained enough for a thriving development
-community.  People need real-time access to the latest sources, and
-the way to give them that is to use a version control system.  The
-presence of anonymously accessible version controlled sources is a
-sign&mdash;to both users and developers&mdash;that this project is
-making an effort to give people what they need to participate.  If you
-can't offer version control right away, then put up a sign saying you
-intend to set it up soon.  Version control infrastructure is discussed
-in detail in <xref linkend="vc"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>.</para>
+<para>Скачивание исходных пакетов прекрасно подходит для тех, кто хочет просто установить и 
+использовать программное обеспечение, но этого недостаточно для тех, кто хочет его отладить или добавить
+новые возможности. Ночные версии кода могут помочь, но они все еще не являются достаточно разделенными 
+на модули для бурно развивающегося сообщества разработчиков. Людям нужен доступ к последним версиям кода
+в реальном времени, и средством обеспечения такого доступа является использование системы управления версиями.
+Наличие анонимно доступных исходных кодов с контролируемыми версиями, это указание&mdash; и пользователям и 
+разработчикам&mdash; на то, что проект позаботился о том, чтобы дать людям все что им нужно для учестия
+в проекте. Если вы не можете предложить систему управления версиями сразу же, то сделайте пометку, указывающую
+на то, что вы намерены вскоре ее настроить. Инфраструктура управления версиями подробно обсуждается в
+<xref linkend="vc"/><phrase output="printed"> в <xref linkend="technical-infrastructure"/></phrase>.</para>
 
-<para>The same goes for the project's bug tracker.  The importance of
-a bug tracking system lies not only in its usefulness to developers,
-but in what it signifies for project observers.  For many people, an
-accessible bug database is one of the strongest signs that a project
-should be taken seriously.  Furthermore, the higher the number of bugs
-in the database, the better the project looks.  This might seem
-counterintuitive, but remember that the number of bugs recorded really
-depends on three things: the absolute number of bugs present in the
-software, the number of users using the software, and the convenience
-with which those users can register new bugs.  Of these three factors,
-the latter two are more significant than the first.  Any software of
-sufficient size and complexity has an essentially arbitrary number of
-bugs waiting to be discovered.  The real question is, how well will
-the project do at recording and prioritizing those bugs?  A project
-with a large and well-maintained bug database (meaning bugs are
-responded to promptly, duplicate bugs are unified, etc.) therefore
-makes a better impression than a project with no bug database, or a
-nearly empty database.</para>
+<para>Тоже самое каксается и проектной системы отслеживания ошибок. Важность системы отслеживания ошибок
+заключается не только в ее полезности для разработчиков, но и в том, что она значит для тех, кто наблюдает
+за проектом. Для многих людей, доступная база данных об ошибках является лучшим показателем того, что к 
+проекту можно относиться серьезно. Более того, чем большее количество ошибок содержится в базе данных,
+тем лучше выглядит проект. Это может показаться парадоксальным, но вспомните, что количество зарегистрированных
+ошибок зависит от трех факторов: абсолютного числа ошибок, содержащихся в программном
+обеспечении, числа пользователей, работающих с программным обеспечением и удобства, с которым
+эти пользователи могут регистрировать эти ошибки. Из этих трех факторов два последних более
+значимы, чем первый. Любое программное обеспечение достаточного объема и сложности, содержит
+в высшей степени случайное число ошибок, ожидающих, чтобы их нашли. Настоящий вопрос в том,
+насколько хорошо проект регистрирует и выставляет приоритеты этим ошибкам? Проект с большой
+и хорошо поддерживаемой базой данных об ошибках (это значит, что реакция на ошибки своевременна,
+дублирующиеся ошибки сведены к одной и т.д.), таким образом, производит лучшее впечатление, чем
+проект совсем без базы данных об ошибках и с почти пустой базой данных.</para>
 
-<para>Of course, if your project is just getting started, then the bug
-database will contain very few bugs, and there's not much you can do
-about that.  But if the status page emphasizes the project's youth,
-and if people looking at the bug database can see that most filings have
-taken place recently, they can extrapolate from that that the project
-still has a healthy <emphasis>rate</emphasis> of filings, and they
-will not be unduly alarmed by the low absolute number of bugs
-recorded.</para>
+<para>Конечно, если ваш проект только начинается, то база данных об ошибках будет содержать очень мало
+ошибок, и вы мало что можете с этим поделать. Но если страница статуса подчеркивает молодость
+проекта, и если люди, смотрящие на базу данных об ошибках, могут увидеть, что большинство
+записей было сделано недавно, они смогут на этом основании экстраполировать, что у проекта
+уже есть соответсвующая <emphasis>норма</emphasis> записей, и они не будут чрезмерно встревожены
+малым абсолютным количеством зарегистрированных ошибок.</para>
 
-<para>Note that bug trackers are often used to track not only software
-bugs, but enhancement requests, documentation changes, pending tasks,
-and more.  The details of running a bug tracker are covered in
-<xref linkend="bug-tracker"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>, so I won't
-go into them here.  The important thing from a presentation point of
-view is just to <emphasis>have</emphasis> a bug tracker, and to make
-sure that fact is visible from the front page of the project.</para>
+<para>Заметьте, что системы учета ошибок используются для слежения не только за ошибками в
+программном обеспечении, но и для заявок на расширение функциональных возможностей, изменений
+в документации, ожидающих реализации заданий и многого другого. Подробности работы с системой
+учета ошибок описаны в <xref linkend="bug-tracker"/><phrase output="printed"> в
+<xref linkend="technical-infrastructure"/></phrase>, так что здесь я не буду рассматривать ее здесь.
+С точки зрения представления проекта важно просто <emphasis>иметь</emphasis> систему слежения за
+ошибками и убедиться в том, что факт ее наличия отражен на главной странице проекта.</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="communications-channels">
-<title>Communications Channels</title>
+<title>Каналы связи</title>
 
-<para>Visitors usually want to know how to reach the human beings
-involved with the project.  Provide the addresses of mailing lists,
-chat rooms, and IRC channels, and any other forums where others
-involved with the software can be reached.  Make it clear that you and
-the other authors of the project are subscribed to these mailing
-lists, so people see there's a way to give feedback that will reach
-the developers.  Your presence on the lists does not imply a
-committment to answer all questions or implement all feature requests.
-In the long run, most users will probably never join the forums
-anyway, but they will be comforted to know that they
-<emphasis>could</emphasis> if they ever needed to.</para>
+<para>Посетители обычно хотят знать, как добраться до людей, связанных с проектом. Предоставьте
+адреса списков рассылки,  дискуссионных групп, и каналов IRC, и любых других форумов, где
+можно добраться до других людей, связанных с этим программным обеспечением. Поясните, что вы
+и другие авторы проекта подписаны на эти списки рассылки, таким образом, чтобы люди видели,
+что есть обратной связи, которая дойдет до разработчиков. Ваше присутствие в списках не подразумевает
+стремления ответить на все вопросы или реализовать все заявки на расширение функциональных возможностей.
+В конечном счете, большинство пользователей в любом случае никогда не присоединится к форумам,
+но они будут спокойны, зная, что они <emphasis>могут</emphasis>, если когда-нибудь им это понадобится.</para>
 
-<para>In the early stages of a project, there's no need to have
-separate user and developer forums.  It's much better to have everyone
-involved with the software talking together, in one "room."  Among
-early adopters, the distinction between developer and user is often
-fuzzy; to the extent that the distinction can be made, the ratio of
-developers to users is usually much higher in the early days of the
-project than later on.  While you can't assume that every early
-adopter is a programmer who wants to hack on the software, you can
-assume that they are at least interested in following development
-discussions and in getting a sense of the project's direction.</para>
+<para>На ранних стадиях проекта, нет никакой необходимости иметь отдельные форумы для пользователей
+и разработчиков. Гораздо лучше сделать так, чтобы все люди, связанные с программным обеспечением
+разговаривали вместе, в одной "комнате". Среди тех, кто с ранних стадий принимает участия в проекте,
+различия между разработчиком и пользователем часто расплывчато, до тех пор, пока не настанет время их различать;
+соотношение разработчиков к пользователям обычно намного выше на ранних стадиях проекта, чем на поздних.
+Пока вы не можете быть уверены, что каждый заинтересовавшийся продуктом на ранней стадии - программист,
+который хочет залезть внутрь программы, вы можете предположить, что они по крайней мере интересуются
+последующими обсуждениями хода разработки и пониманием направлений развития проекта.</para>
    
-<para>As this chapter is only about getting a project started, it's
-enough merely to say that these communications forums need to exist.
-Later, in <xref linkend="growth"/><phrase output="printed"> in
-<xref linkend="communications"/></phrase>, we'll examine where
-and how to set up such forums, the ways in which they might need
-moderation or other management, and how to separate user forums from
-developer forums, when the time comes, without creating an
-unbridgeable gulf.</para>
+<para>Так как эта глава только о том, как начать проект, то достаточно сказать, что эти
+форумы для общения должны существовать. Позже, в <xref linkend="growth"/><phrase output="printed"> в
+<xref linkend="communications"/></phrase>, мы рассмотрим где и как устанавливать такие форумы,
+случаи, в которых они могут нуждаться в модерировании и другом обслуживании, и как отделить
+форумы для разработчиков от форумов для пользователей, когда придет время, избежав создания
+непреодолимой пропасти.</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="developer-guidelines">
-<title>Developer Guidelines</title>
+<title>Руководство разработчика</title>
 
-<para>If someone is considering contributing to the project, she'll
-look for developer guidelines.  Developer guidelines are not so much
-technical as social: they explain how the developers interact with
-each other and with the users, and ultimately how things get
-done.</para>
+<para>Если кто-то рассматривает возможность поучавствовать в  проекте, он будет искать руководство
+разработчика. Руководство разработчика является не столько техническим, сколько социальным: оно объясняет,
+как разработчики взаимодействуют с друг другом и с пользователями, и,в конечном счете, как все делать.</para>
 
 <para>This topic is covered in detail in
 <xref linkend="written-rules"/><phrase output="printed"> in
