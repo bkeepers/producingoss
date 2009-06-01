@@ -4,173 +4,83 @@
 
 <simplesect>
 
-<para>This chapter is about how free software projects package and
-release their software, and how overall development patterns organize
-around those goals.</para>
+<para>Questo capitolo parla di come i progetti di software libero confezionano e rilasciano i loro software e di come si organizzano le procedure generali di sviluppo su questi obiettivi. </para>
 
-<para>A major difference between open source projects and proprietary
-ones is the lack of centralized control over the development team.
-When a new release is being prepared, this difference is especially
-stark: a corporation can ask its entire development team to focus on
-an upcoming release, putting aside new feature development and
-non-critical bug fixing until the release is done.  Volunteer groups
-are not so monolithic.  People work on the project for all sorts of
-reasons, and those not interested in helping with a given release
-still want to continue regular development work while the release is
-going on.  Because development doesn't stop, open source release
-processes tend to take longer, but be less disruptive, than commercial
-release processes.  It's a bit like highway repair.  There are two
-ways to fix a road: you can shut it down completely, so that a repair
-crew can swarm all over it at full capacity until the problem is
-solved, or you can work on a couple of lanes at a time, while leaving the
-others open to traffic.  The first way is very efficient <emphasis>for
-the repair crew</emphasis>, but not for anyone else&mdash;the road is
-entirely shut down until the job is done.  The second way involves
-much more time and trouble for the repair crew (now they have to work
-with fewer people and less equipment, in cramped conditions, with
-flaggers to slow and direct traffic, etc.), but at least the road
-remains useable, albeit not at full capacity.</para>
+<para>Una differenza principale fra i progetti open source e quelli proprietari è il difetto di un controllo centralizzato sul team di sviluppo. Quando sta venendo preparata una nuova release, questa differenza è specialmente forte: una compagnia può richiedere al suo team di sviluppo di focalizzarsi sula prossima release, mettendo da parte lo sviluppo di nuove funzionalità e la correzione di bugs non critici fino a che il rilascio non è avvenuto. I gruppi di volontari no sono così monolitici. La gente lavora al progetto per tutti i tipi di motivazioni, e quelli non interessati  a favorire una data release vogliono continuare il lavoro di sviluppo mentre la release sta andando avanti. Poiché lo sviluppo non si ferma, i processi di rilascio tendono a impiegare più tempo, ma sono meno distruttivi, dei processi di rilascio commerciali. Questo è in po' come ritrovare la strada maestra.
+Ci sono due modi di riparare una strada: potete chiuderla completamente, così che il gruppo che sta riparando la strada maestra può sciamare su di essa alla piena capacità finché il problema è risolto, o potete lavorare su una coppia di corsie alla volta, lasciando le altre aperte al traffico. Il primo modo è molto efficace <emphasis>per il gruppo di riparazione</emphasis>, but not for anyone else&mdash;ma non per gli altri la strada è chiusa completamente fino a che il lavoro non è completato. Il secondo modo richiede molto più tempo comporta più problemi per il gruppo di riparazione (ora essi devono lavorare con meno gente e meno equipaggiamento, in condizioni più ristrette, con bandiere per rallentare e dirigere il traffico, ecc..), ma almeno la strada rimane utilizzabile, sebbene non con la sua piena capacità.</para>
 
-<para>Open source projects tend to work the second way.  In fact, for
-a mature piece of software with several different release lines being
-maintained simultaneously, the project is sort of in a permanent state
-of minor road repair.  There are always a couple of lanes closed; a
-consistent but low level of background inconvenience is always being
-tolerated by the development group as a whole, so that releases get
-made on a regular schedule.</para>
+<para>I progetti open source tendono a funzionare nel secondo modo. Infatti per un pezzo di software maturo con diverse linee di rilascio mantenute simultaneamente, il progetto è un genere di stato di permanente riparazione di una strada. C'è sempre una coppia di corsie chiuse ma un basso livello di inconveniente di fondo vien sempre tollerato dal gruppo di sviluppo nel complesso, cosicché le release vengono effettuate con una programmazione regolare. </para>
 
-<para>The model that makes this possible generalizes to more than just
-releases.  It's the principle of parallelizing tasks that are not
-mutually interdependent&mdash;a principle that is by no means unique
-to open source development, of course, but one which open source
-projects implement in their own particular way.  They cannot afford to
-annoy either the roadwork crew or the regular traffic too much, but
-they also cannot afford to have people dedicated to standing by the
-orange cones and flagging traffic along.  Thus they gravitate toward
-processes that have flat, constant levels of administrative overhead,
-rather than peaks and valleys.  Volunteers are generally willing to
-work with small but consistent amounts of inconvenience; the
-predictability allows them to come and go without worrying about
-whether their schedule will clash with what's happening in the
-project.  But if the project were subject to a master schedule in
-which some activities excluded other activities, the result would be a
-lot of developers sitting idle a lot of the time&mdash;which would be
-not only inefficient but boring, and therefore dangerous, in that a
-bored developer is likely to soon be an ex-developer.</para>
+<para>Il modello che rende ciò  possibile si estende a più che una sola release. E' il principio di mettere in parallelo  operazioni che non sono mutualmente interdipendenti un principio che non è in nessun modo unico dello sviluppo open source, certamente, ma è un principio che i progetti open source implementano fra propri in particolar modo. Essi non possono permettersi di infastidire molto sia il gruppo di lavoro sulla strada sia il regolare traffico, ma non possono permettersi anche di avere gente dedita a fare affidamento sui coni arancione e a fare segnalazioni lungo il traffico. Così essi sono attratti da processi che hanno piatti, costanti livelli di spese generali amministrative, piuttosto che picchi e valli. I volontari vogliono generalmente lavorare con piccoli ma consistenti quantità di incomodo. La prevedibilità permette loro di venire e andare senza senza preoccuparsi se il loro programma contrasterà con ciò che sta avvenendo nel progetto. Ma se il progetto fosse soggetto a un importante programma in cui alcune attività escludessero altre attività, il risultato sarebbe un sacco di sviluppatori seduti a oziare per un sacco di tempo la qualcosa sarebbe non solo inefficiente ma tediosa, e quindi dannosa, in quanto uno sviluppatore annoiato è equivalente presto a un ex sviluppatore. </para>
 
-<para>Release work is usually the most noticeable non-development task
-that happens in parallel with development, so the methods described in
-the following sections are geared mostly toward enabling releases.
-However, note that they also apply to other parallelizable tasks, such
-as translations and internationalization, broad API changes made
-gradually across the entire code base, etc.</para>
+<para>Il lavoro di release è usualmente la più notevole operazione che avviene in parallelo con lo sviluppo, così i metodi descritti nella prossima sezione sono per lo più attrezzati a rendere possibili le releases. Comunque notate che essi si applicano anche ad altre operazione eseguibili in parallelo, come la traduzione e l'internazionalizzazione, grandi cambiamenti alle API fatti generalmente lungo tutto il codice base, ecc..</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 
 <sect1 id="release-numbering">
-<title>Release Numbering</title>
+<title>Numerazione delle Releases</title>
 
-<para>Before we talk about how to make a release, let's look at how to
-name releases, which requires knowing what releases actually mean to
-users.  A release means that:</para>
+<para>Prima di parlare di come fare una release, vediamo come chiamare una release, che vuol dire sapere veramente cosa significa per un utilizzatore. Una release significa che:</para>
 
 <itemizedlist>
 
-  <listitem><para>Old bugs have been fixed.  This is probably the one
-            thing users can count on being true of every release.</para>
+  <listitem><para>I vecchi bugs sono stati corretti. Questa è probabilmente l'unica cosa sulla cui verità gli utilizzatori possono contare.</para>
   </listitem>
 
-  <listitem><para>New bugs have been added.  This too can usually
-            be counted on, except sometimes in the case of security
-            releases or other one-offs (see
+  <listitem><para>Nuovi bugs si sono aggiunti. Questa è anche una cosa su cui si può contare, tranne a volte nel caso di releases di sicurezza o di altre cose che avvengono una sola volta (vedere
             <xref linkend="security-releases"/><phrase
-            output="printed"> later in this chapter</phrase>).</para>
+            output="printed"> più avanti in questo capitolo</phrase>).</para>
   </listitem>
 
-  <listitem><para>New features may have been added.</para>
+  <listitem><para>Nuove funzionalità possono essere state aggiunte.</para>
   </listitem>
 
-  <listitem><para>New configuration options may have been added, or
-            the meanings of old options may have changed subtly.  The
-            installation procedures may have changed slightly since
-            the last release too, though one always hopes not.</para>
+  <listitem><para>Nuove opzioni di configurazione possono essere state aggiunte, o il fine delle vecchie opzioni può essere stato cambiato di poco. Le procedure di installazione anche possono essere cambiate sin dalla ultima release, sebbene uno speri di no.</para>
   </listitem>
 
-  <listitem><para>Incompatible changes may have been introduced, such
-            that the data formats used by older versions of the
-            software are no longer useable without undergoing some
-            sort of (possibly manual) one-way conversion step.</para>
+  <listitem><para>Possono essere stati introdotti cambiamenti incompatibili, sicché alcuni formati di dati usati dalle versioni più vecchie non sono più utilizzabile senza sopportare qualche sorta di (possibilmente manuale) passo a senso unico. </para>
   </listitem>
 
 </itemizedlist>
 
-<para>As you can see, not all of these are good things.  This is why
-experienced users approach new releases with some trepidation,
-especially when the software is mature and was already mostly doing
-what they wanted (or thought they wanted).  Even the arrival of new
-features is a mixed blessing, in that it may mean the software
-will now behave in unexpected ways.</para>
+<para>Come potete vedere non tutte queste cose sono buone. Questo è il motivo per cui utilizzatori di esperienza si avvicinano alle nuove releases con qualche apprensione, specialmente quando il software è maturo e stavano già per la maggior parte facendo quello che volevano (o pensavano quello che volevano). Anche l'arrivo di nuove funzionalità è una benedizione di diversa specie, in quanto può significare che il software si comporterà ora in maniera imprevista.</para>
 
-<para>The purpose of release numbering, therefore, is twofold:
-obviously the numbers should unambiguously communicate the ordering of
-releases (i.e., by looking at any two releases' numbers, one can know
-which came later), but also they should indicate as compactly as
-possible the degree and nature of the changes in the release.</para>
+<para>Lo scopo della numerazione delle versioni, quindi, è duplice: ovviamente dovrebbero comunicare senza ambiguità l'orine delle releases (cioè, guardando a una di due releases, uno può sapere quella che viene dopo), ma anche dovrebbe indicare in modo quanto più compatto possibile il grado e la natura dei cambiamenti nella release. </para>
 
-<para>All that in a number?  Well, more or less, yes.  Release
-numbering strategies are one of the oldest bikeshed discussions around
-(see <xref linkend="bikeshed"/><phrase output="printed"> in
-<xref linkend="communications"/></phrase>), and the world is
-unlikely to settle on a single, complete standard anytime soon.
-However, a few good strategies have emerged, along with one
-universally agreed-on principle: <emphasis>be consistent</emphasis>.
-Pick a numbering scheme, document it, and stick with it.  Your users
-will thank you.</para>
+<para>Tutto questo in un numero? Si, più o meno, si. La strategia della numerazione delle releases è una delle più vecchie superflue discussioni qua e là
+(vedere <xref linkend="bikeshed"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>), ed è improbabile che il mondo pattuisca un unico completo standard molto presto. Comunque poche buone strategie sono emerse, insieme a un principio su cui si è universalmente d'accordo: <emphasis> essere in armonia</emphasis>.
+Scegliete uno schema di numerazione, documentatelo, e seguitelo. I vostri utilizzatori vi ringrazieranno.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-components">
-<title>Release Number Components</title>
+<title>I Componenti del Numero di Rilascio</title>
 
-<para>This section describes the formal conventions of release
-numbering in detail, and assumes very little prior knowledge.  It is
-intended mainly as a reference.  If you're already familiar with these
-conventions, you can skip this section.</para>
+<para>Questa sezione descrive le convenzioni formali della numerazione delle releases, e presuppone, una piccola precedente conoscenza. Se già avete familiarità con queste convenzioni, potete saltare questa sezione.</para>
 
-<para>Release numbers are groups of digits separated by dots:</para>
+<para>I numeri delle releases son gruppi di cifre separate da punti:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3
 Singer 5.11.4</literallayout>
 </informalexample>
 
-<para>...and so on.  The dots are <emphasis>not</emphasis> decimal
-points, they are merely separators; "5.3.9" would be followed by
-"5.3.10".  A few projects have occasionally hinted otherwise, most
-famously the Linux kernel with its "0.95", "0.96"... "0.99" sequence
-leading up to Linux 1.0, but the convention that the dots are not
-decimals is now firmly established and should be considered a
-standard.  There is no limit to the number of components (digit
-portions containing no dots), but most projects do not go beyond three
-or four.  The reasons why will become clear later.</para>
+<para>...e così via.  I punti <emphasis>non</emphasis> ono punti decimali, essi sono solamente separatori; "5.3.9" sarebbe seguito da
+"5.3.10".  Pochi progetti hanno fatto intendere diversamente, il più famoso il kernel Linux con la sua sequenza "0.95", "0.96"... "0.99" 
+leading up to Linux 1.0, ma la convenzione che i punti non sono decimali è fermamente stabilita e deve essere considerato uno standard. Non c'è un limite al numero dei componenti (parti di cifre non contenenti il punto), ma la maggior parte dei progetti non va oltre tre o quattro. La ragione diventerà chiara avanti.</para>
 
-<para>In addition to the numeric components, projects sometimes tack
-on a descriptive label such as "Alpha" or "Beta" (see
-<xref linkend="alpha-and-beta"/>), for example:</para>
+<para>In aggiunta a componenti numerici i progetti a volte aggiungono un'etichetta descrittiva tipo “Alpha” o “Beta” (vedere
+<xref linkend="alpha-and-beta"/>), per esempio:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha)
 Singer 5.11.4 (Beta)</literallayout>
 </informalexample>
 
-<para>An Alpha or Beta qualifier means that this
-release <emphasis>precedes</emphasis> a future release that will have
-the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
-leads eventually to "2.3.0".  In order to allow several such candidate
-releases in a row, the qualifiers themselves can have meta-qualifiers.
-For example, here is a series of releases in the order that they would
-be made available to the public:</para>
+<para>Un qualificatore Alpha o Beta significa che quella release  <emphasis>precede</emphasis>una futura release che avrà lo stesso numero senza il qualificatore  Così, "2.3.0&nbsp;(Alpha)"
+porta alla fine a "2.3.0".  Per far entrare queste release candidate in una riga, gli stessi qualificatori posso avere dei meta-qualificatori. Per esempio qui c'è una serie di releases che sarebbero rese disponibili al pubblico:</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha 1)
@@ -181,226 +91,74 @@ Scanley 2.3.0 (Beta 3)
 Scanley 2.3.0</literallayout>
 </informalexample>
 
-<para>Notice that when it has the "Alpha" qualifier, Scanley "2.3" is
-written as "2.3.0".  The two numbers are equivalent&mdash;trailing
-all-zero components can always be dropped for brevity&mdash;but when a
-qualifier is present, brevity is out the window anyway, so one might
-as well go for completeness instead.</para>
+<para>Notate che quando essa ha il qualificatore  “Alpha” Scanley "2.3" si scrive "2.3.0". I due numeri sono equivalenti&mdash;tutti i componenti 0 seguenti possono sempre essere eliminati per brevità ma quando un qualificatore è presente, la brevità smette di esistere comunque, come pure uno potrebbe scegliere la completezza invece. </para>
 
-<para>Other qualifiers in semi-regular use include "Stable",
-"Unstable", "Development", and "RC" (for "Release Candidate").  The
-most widely used ones are still "Alpha" and "Beta", with "RC" running
-a close third place, but note that "RC" always includes a numeric
-meta-qualifier.  That is, you don't release
-"Scanley&nbsp;2.3.0&nbsp;(RC)", you release
-"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+<para>Altri qualificatori semi regolari usano includere “Stabile”, “Instabile”, “Sviluppo” e “RC” (per “Release Candidate”). Le più largamente usate sono comunque "Alpha" e "Beta", con “RC” che concorre da vicino per il terzo posto, ma notate che “RC” include sempre un meta-qualificatore numerico. Cioè non rilasciate
+"Scanley&nbsp;2.3.0&nbsp;(RC)", voi rilasciate
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", seguita dalla RC2, etc.</para>
 
-<para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
-known now, and I don't recommend using any of the others, even though
-the others might at first glance seem like better choices because they
-are normal words, not jargon.  But people who install software from
-releases are already familiar with the big three, and there's no
-reason to do things gratuitously differently from the way everyone
-else does them.</para>
+<para>Queste tre etichette “Alpha”, “Beta” e “RC” sono piuttosto largamente conosciute ora, e raccomando di non usare le altre, anche se a prima vista sembrano scelte migliori perché sono parole normali, non gergo. Ma la gente che installa software da release ha già familiarità con quelle tre, è non c'è motivo per fare cose gratuitamente in modo differente dal modo in cui chiunque altro le fa.</para>
 
-<para>Although the dots in release numbers are not decimal points,
-they do indicate place-value significance.  All "0.X.Y" releases
-precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
-immediately precedes "3.14.159", and non-immediately precedes
-"3.14.160" as well as "3.15.anything", and so.</para>
+<para>Sebbene i punti nei numeri delle realases non siano punti decimali, indicano un significato del valore della posizione. Tutte le realeases "0.X.Y" precedono la "1.0" (che è equivalente alla “1.0.0”, certo). La"3.14.158" precede immediatamente la "3.14.159" e non immediatamente precede la "3.14.160" come la "3.15.qualcosa", e così via. </para>
 
-<para>A consistent release numbering policy enables a user to look at
-two release numbers for the same piece of software and tell, just from
-the numbers, the important differences between those two releases.  In
-a typical three-component system, the first component is
-the <firstterm>major&nbsp;number</firstterm>, the second is
-the <firstterm>minor&nbsp;number</firstterm>, and the third is the
-<firstterm>micro&nbsp;number</firstterm>.  For example, release
-"2.10.17" is the seventeenth micro release in the tenth minor release
-line within the second major release series.  The words "line" and
-"series" are used informally here, but they mean what one would
-expect.  A major series is simply all the releases that share the same
-major number, and a minor series (or minor line) consists of all the releases
-that share the same minor <emphasis>and</emphasis> major number.  That
-is, "2.4.0" and "3.4.1" are not in the same minor series,
-even though they both have "4" for their minor number; on the other
-hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
-not adjacent if "2.4.1" was released between them.</para>
+<para>Una politica di numerazione delle releases rende capace l'utilizzatore di di guardare ai numeri di rilascio per lo stesso pezzo di software e dire, proprio dai numeri, le importanti differenze fra queste due relaeases. In un tripico sistema a tre componenti il primo componente è il<firstterm>numero&nbsp;maggiore</firstterm>, il secondo è il  <firstterm>il secondo è il numero&nbsp;minore</firstterm>, il terzo è il
+<firstterm>micro&nbsp;numero</firstterm>.  FPer esempio, la release "2.10.17" è la diciassettesima micro-relaese nella decima linea di release minore entro la seconda serie di release maggiore. Le parole “linea” e “serie” sono usate informalmente qui, 
+ma significano ciò che uno si aspetterebbe. Una serie maggiore sono semplicemente tutte le releases che hanno in comune lo stesso numero maggiore, e una serie minore (o linea minore) sono semplicemente tutte le releases che hanno in comune lo stesso numero maggiore <emphasis>e</emphasis> lo stesso numero minore.  Cioè la "2.4.0" e la "3.4.1" non si trovano nella stessa serie minore anche se ambedue hanno “4” come numero minore; d'altra parte la "2.4.0" e la "2.4.2" si trovano nella stessa linea minore, sebbene non siano adiacenti se la “2.4.1” è stata rilasciata fra di esse.</para>
 
-<para>The meanings of these numbers are exactly what you'd expect: an
-increment of the major number indicates that major changes happened;
-an increment of the minor number indicates minor changes; and an
-increment of the micro number indicates really trivial changes.  Some
-projects add a fourth component, usually called
-the <firstterm>patch&nbsp;number</firstterm>, for especially
-fine-grained control over the differences between their releases
-(confusingly, other projects use "patch" as a synonym for "micro" in a
-three-component system).  There are also projects that use the last
-component as a <firstterm>build&nbsp;number</firstterm>, incremented
-every time the software is built and representing no change other than
-that build.  This helps the project link every bug report with a
-specific build, and is probably most useful when binary packages are
-the default method of distribution.</para>
+<para>Il significato di questi numeri è esattamente ciò che vi aspettereste: un aumento del numero maggiore indica che il cambiamento maggiore è avvenuto; un cambiamento del numero minore indica che sono avvenuti cambiamenti minori, e un cambiamento del micro numero indica cambiamenti trascurabili. Alcuni progetti aggiungono un quarto componente, usualmente chiamato 
+<firstterm>numero di&nbsp;patch</firstterm>, specialmente per un un controllo più fine sulle differenze fra le loro releases (in maniera disorientante, altri progetti usano “patch” come sinonimo di “micro” in un sistema. Ci sono anche progetti che usano un sistema a tre componenti).  Ci sono anche progetti che usano l'ultimo componente come<firstterm>numero&nbsp;di fabbricazione</firstterm>, incrementato ogni volta che il software è costruito, e non rappresenta nessun cambiamento al di fuori della costruzione. Ciò aiuta il progetto a mettere in relazione ogni rapporto di bugs con una specifica costruzione, ed è forse molto utile quando i pacchetti binari sono il metodo di distribuzione di default.</para>
 
-<para>Although there are many different conventions for how many
-components to use, and what the components mean, the differences tend
-to be minor&mdash;you get a little leeway, but not a lot.  The next
-two sections discuss some of the most widely used conventions.</para>
+<para>Sebbene ci siano molte differenti convenzioni su quanti componenti usare, e cosa significhino i componenti, le differenze tendono a diventare piccole, voi tenete una piccola tolleranza, ma non troppo. Le prossime sue sezioni parlano delle due convenzioni più largamente usate.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-simple-strategy">
-<title>The Simple Strategy</title>
+<title>La Strategia Semplice</title>
 
-<para>Most projects have rules about what kinds of changes are allowed
-into a release if one is only incrementing the micro number, different
-rules for the minor number, and still different ones for the major
-number.  There is no set standard for these rules yet, but here I will
-describe a policy that has been used successfully by multiple
-projects.  You may want to just adopt this policy in your own
-project, but even if you don't, it's still a good example of the kind
-of information release numbers should convey.  This policy is adapted
-from the numbering system used by the APR project, see
+<para>La maggior parte dei progetti ha delle regole su che tipo di cambiamenti sono permessi nella release se uno sta incrementando solo il micro numero, differenti regole per il numero minore e ancora differenti regole per il numero maggiore.  Non c'è uno standard stabilito per queste regole ancora, ma qui io descriverò una politica che è stata usata con successo da più di un progetto. Voi potete giusto adottare questa politica nei vostri porgetti, ma anche se non lo volete, questo è tuttavia un buon esempio del tipo di informazione che i numeri di release dovrebbero portare con sé. Questa politica è adattata dal sistema di numerazione usato dal progetto APR, vedere
 <ulink url="http://apr.apache.org/versioning.html"/>.</para>
 
 <orderedlist>
 
-  <listitem><para>Changes to the micro number only (that is, changes
-            within the same minor line) must be both forward- and
-            backward-compatible.  That is, the changes should be bug
-            fixes only, or very small enhancements to existing
-            features.  New features should not be introduced in a
-            micro release.</para>
+  <listitem><para>I cambiamenti dei micro numeri (cioè i cambiamenti alla stessa linea minore) devono essere sia in avanti compatibili che indietro compatibili. Cioè, i cambiamenti dovrebbero essere solo le correzioni di bugs o accrescimenti molto piccoli delle funzionalità esistenti. Nuove funzionalità non dovrebbero essere introdotte in una micro release. </para>
   </listitem>
 
-  <listitem><para>Changes to the minor number (that is, within the
-            same major line) must be backward-compatible, but not
-            necessarily forward-compatible.  It's normal to introduce
-            new features in a minor release, but usually not too many
-            new features at once.</para>
+  <listitem><para>Cambiamenti del numero minore (cioè entro la linea maggiore) devono essere compatibili all'indietro, ma non necessariamente in avanti. E' normale aggiungere nuove funzionalità ad una release minore, ma non troppe in un sola volta.</para>
   </listitem>
 
-  <listitem><para>Changes to the major number mark compatibility
-            boundaries.  A new major release can be forward- and
-            backward-incompatible.  A major release is expected to
-            have new features, and may even have entire new feature
-            sets.</para>
+  <listitem><para>I cambiamenti al numero maggiore segnano i limiti della compatibilità. Una nuova release maggiore può essere incompatibile sia in avanti che all'indietro. Ci si aspetta che una release maggiore abbia nuove funzionalità e può avere interi nuovi d set di funzionalità.</para>
   </listitem>
 
 </orderedlist>
 
-<para>What <firstterm>backward-compatible</firstterm>
-and <firstterm>forward-compatible</firstterm> mean, exactly, depends on
-what your software does, but in context they are usually not open to
-much interpretation.  For example, if your project is a client/server
-application, then "backward-compatible" means that upgrading the
-server to 2.6.0 should not cause any existing 2.5.4 clients to lose
-functionality or behave differently than they did before (except for
-bugs that were fixed, of course).  On the other hand, upgrading one of
-those clients to 2.6.0, along with the server, might
-make <emphasis>new</emphasis> functionality available for that client,
-functionality that 2.5.4 clients don't know how to take advantage of.
-If that happens, then the upgrade is <emphasis>not</emphasis>
-"forward-compatible": clearly you can't now downgrade that client
-back to 2.5.4 and keep all the functionality it had at 2.6.0, since
-some of that functionality was new in 2.6.0.</para>
+<para>Che  significhi<firstterm>compatibile in avanti</firstterm>
+e<firstterm>compatibile all'indietro</firstterm> , esattamente, dipende da ciò che il vostro software fa, ma nel contesto, non sono aperte a tante interpretazioni. Per esempio, se il vostro software è una applicazione client/server, allora “compatibile all'indietro” significa che l'aggiornamento del server alla 2.6.0 non dovrebbe causare per i clients la perdita di funzionalità o comportamenti differenti da quelli di prima (eccetto per i bugs che sono stati corretti, certo).  D'altra parte, l'aggiornamento di uno di quei clients alla 2.6.0 , insieme al server, potrebbe rendere disponibili <emphasis>nuove</emphasis> funzionalità per quel client, funzionalità di cui i client 2.5.4 non sanno come avvantaggiarsi. Se ciò avviene, l'aggiornamento <emphasis>non</emphasis>
+è “compatibile in avanti”: chiaramente non potete ora tornare indietro con quel client alla 2.5.4 e mantenere tutte le funzionalità che aveva nella 2.6.0, perché alcune di quelle funzionalità erano nuove nella 2.6.0.</para>
 
-<para>This is why micro releases are essentially for bug fixes only.
-They must remain compatible in both directions: if you upgrade from
-2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
-functionality should be lost.  Of course, the bugs fixed in 2.5.4
-would reappear after the downgrade, but you wouldn't lose any
-features, except insofar as the restored bugs prevent the use of some
-existing features.</para>
+<para>Questo è il motivo per cui le micro releases sono essenzialmente per le correzioni dei bugs. Esse devono rimanere compatibili in entrambe le direzioni: se voi aggiornate dalla 2.5.3 alla 2.5.4, poi cambiate idea e tornate indietro alla 2.5.3, nessuna funzionalità dovrebbe andar perduta. Certo i bugs corretti riapparirebbero dopo il ritorno alla precedente versione, ma voi non perdereste nessuna funzionalità, eccetto per il fatto che i bugs reintrodotti impediscono l'uso di alcune funzionalità esistenti.</para>
 
-<para>Client/server protocols are just one of many possible
-compatibility domains.  Another is data formats: does the software
-write data to permanent storage?  If so, the formats it reads and
-writes need to follow the compatibility guidelines promised by the
-release number policy.  Version 2.6.0 needs to be able to read the
-files written by 2.5.4, but may silently upgrade the format to
-something that 2.5.4 cannot read, because the ability to downgrade is
-not required across a minor number boundary.  If your project
-distributes code libraries for other programs to use, then APIs are a
-compatibility domain too: you must make sure that source and binary
-compatibility rules are spelled out in such a way that the informed
-user need never wonder whether or not it's safe to upgrade in place.
-She will be able to look at the numbers and know instantly.</para>
+<para>I protocolli client/server sono giusto uno dei campi dalle molte possibili compatibilità. Un' altra è la formattazione dei dati: il software scrive i dati in uno spazio permanente? Se così, i formati che legge devono seguire le leggi di compatibilità promesse dalla politica dei numeri di rilascio. La versione 2.6.0 deve poter leggere files scritti nella 2.5.4, ma può in silenzio aggiornare il formato a qualcosa che la 2.5.4 non può leggere, perché la possibilità di ritornare indietro non è un requisito della 2.6.0 per via delle delimitazioni riguardanti un numero minore.  Se il vostro progetto distribuisce librerie di codice per l'impiego in altri programmi, allora le API sono anche un dominio di compatibilità: dovete essere sicuri che le regole di compatibilità per il sorgente e il binario siano dette in maniera  tale che l'utilizzatore informato non debba mai chiedersi se è sicuro e opportuno aggiornare o no. Egli deve essere capace di guardare i numeri è e saperlo istantaneamente.</para>
 
-<para>In this system, you don't get a chance for a fresh start until
-you increment the major number.  This can often be a real
-inconvenience: there may be features you wish to add, or protocols
-that you wish to redesign, that simply cannot be done while
-maintaining compatibility.  There's no magic solution to this, except
-to try to design things in an extensible way in the first place (a
-topic easily worth its own book, and certainly outside the scope of
-this one).  But publishing a release compatibility policy, and
-adhering to it, is an inescapable part of distributing software.  One
-nasty surprise can alienate a lot of users.  The policy just described
-is good partly because it's already quite widespread, but also because
-it's easy to explain and to remember, even for those not already familiar
-with it.</para>
+<para> In questo sistema voi non avete una chance per una fresca partenza finché non incrementate il numero maggiore. Questo può essere spesso un reale inconveniente: ci possono essere funzionalità che voi volete aggiungere, o protocolli che volete ridisegnare, cose che non possono essere semplicemente fatte mentre mantenete la compatibilità. Non c'è una soluzione magica a questo, eccetto che cercare di disegnare le cose in modo estensibile in primo luogo (una argomento che facilmente merita il proprio libro, ma certamente fuori tema in questo). Ma pubblicare una politica di compatibilità delle releases, e aderirvi, è una parte delle distribuzione del software a cui non si può sfuggire. Una sgradevole sorpresa può allontanare un sacco di utilizzatori. La politica appunto descritta è buona in parte perché è già abbastanza diffusa, ma anche perché è facile da spiegare e da ricordare, anche per coloro che non hanno ancora familiarità con essa.</para>
 
-<para>It is generally understood that these rules do not apply to
-pre-1.0 releases (although your release policy should probably state
-so explicitly, just to be clear).  A project that is still in initial
-development can release 0.1, 0.2, 0.3, and so on in sequence, until
-it's ready for 1.0, and the differences between those releases can be
-arbitrarily large.  Micro numbers in pre-1.0 releases are optional.
-Depending on the nature of your project and the differences between
-the releases, you might find it useful to have 0.1.0, 0.1.1, etc., or
-you might not.  Conventions for pre-1.0 release numbers are fairly
-loose, mainly because people understand that strong compatibility
-constraints would hamper early development too much, and because early
-adopters tend to be forgiving anyway.</para>
+<para>E' generalmente convenuto che queste regole non si applicano alle release pre-1.0 (sebbene la vostra politica di release lo stabilisca esplicitamente, giusto per essere chiari). Un progetto che sia ancora allo sviluppo iniziale può rilasciare la 0.1, 0.2, 0.3 e così via in sequenza, finché non sia pronto per la 1.0, e le differenze fra queste releases possono essere arbitrariamente grandi. I micro numeri nelle releases pre-1.0 sono opzionali. A seconda della natura del vostro progetto e delle differenze fra le releases potreste trovare utile avere la 0.1.0, la 0.1.1. ecc.., oppure no. Le convenzioni per le releases pre-1.0 sono piuttosto permissive, principalmente perché la gente capisce che forti costrizioni di compatibilità intralcerebbero molto il primo sviluppo, e anche perché i primi che le adottano tendono ad essere indulgenti comunque.</para>
 
-<para>Remember that all these injunctions only apply to this
-particular three-component system.  Your project could easily come up
-with a different three-component system, or even decide it doesn't
-need such fine granularity and use a two-component system instead.
-The important thing is to decide early, publish exactly what the
-components mean, and stick to it.</para>
+<para>Ricordate che tutte queste ingiunzioni si applicano a questo sistema a tre componenti. Il vostro progetto potrebbe venir su con un differente sistema a tre componenti, oppure potrebbe decidere di non avere bisogno di un così fine granulosità e usare invece un sistema a due componenti. La cosa importante è deciderlo per tempo, rendere pubblico ciò che i componenti significano, e aderire ad essi.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-even-odd-strategy">
-<title>The Even/Odd Strategy</title>
+<title>La Strategia pari/dispari </title>
 
-<para>Some projects use the parity of the minor number component to
-indicate the stability of the software: even means stable, odd means
-unstable.  This applies only to the minor number, not the major and
-micro numbers.  Increments in the micro number still indicate bug
-fixes (no new features), and increments in the major number still
-indicate big changes, new feature sets, etc.</para>
+<para>Alcuni progetti usano la parità del componente numero minore per indicare la stabilità del software. Pari significa stabile, dispari significa instabile. Ciò si applica solo al numero minore, non al numero maggiore a al micro numero. Incrementi nel micro numero ancora significano correzioni di bug (non nuove funzionalità), e incrementi nel numero maggiore ancora indicano grossi cambiamenti, nuovi set di funzionalità, ecc.. </para>
 
-<para>The advantage of the even/odd system, which has been used by the
-Linux kernel project among others, is that it offers a way to release
-new functionality for testing without subjecting production users to
-potentially unstable code.  People can see from the numbers that
-"2.4.21" is okay to install on their live web server, but that "2.5.1"
-should probably stay confined to home workstation experiments.  The
-development team handles the bug reports that come in from the
-unstable (odd-minor-numbered) series, and when things start to settle
-down after some number of micro releases in that series, they
-increment the minor number (thus making it even), reset the micro
-number back to "0", and release a presumably stable package.</para>
+<para>Il vantaggio del sistema pari/dispari, che è stato usato dal progetto kernel di Linux fra gli altri, è che offre una via per rilasciare nuove funzionalità per la fase di prova, senza costringere gli utilizzatori della produzione a un codice potenzialmente instabile. Le persone possono vedere dai numeri che la "2.4.21" va bene per l'installazione sul loro attivo web server, ma che la "2.5.1" dovrebbe essere usata solamente per esperimenti sulle work station. Il team di sviluppo gestisce i report di bugs che arrivano dalla serie minore (numerata dispari), e quando le cose incominciano a sistemarsi dopo un certo numero di micro releases in quella serie, incrementano il numero minore (così facendolo diventare pari), riportano il micro numero a “0”, e rilasciano il pacchetto presumibilmente stabile. </para>
 
-<para>This system preserves, or at least, does not conflict with, the
-compatibility guidelines given earlier.  It simply overloads the minor
-number with some extra information.  This forces the minor number to
-be incremented about twice as often as would otherwise be necessary,
-but there's no great harm in that.  The even/odd system is probably
-best for projects that have very long release cycles, and which by
-their nature have a high proportion of conservative users who value
-stability above new features.  It is not the only way to get new
-functionality tested in the wild, however.
+<para>Questo sistema conserva, o almeno non va in conflitto con le linee guida date prima. Esso semplicemente carica ulteriormente il numero minore di qualche extra informazione. Questo costringe d'altronde il numero minore ad essere incrementato di circa due volte tanto spesso quanto sarebbe necessario, ma non c'è un gran male in ciò. Il sistema pari dispari è probabilmente il migliore per i progetti che hanno cicli di release molto lunghi, e che per loro natura hanno una grande fetta di utilizzatori conservatori che valutano la stabilità al di sopra delle nuove funzionalità. Questo comunque non è il solo modo di fare il test di nuove funzionalità allo stato selvaggio, comunque.
 <xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase> describes another, perhaps more common,
-method of releasing potentially unstable code to the public, marked so
-that people have an idea of the risk/benefit trade-offs immediately on
-seeing the release's name.</para>
+Più avanti in questo capitolo</phrase> si descrive un altro, forse più comune, metodo di rilasciare al pubblico codice potenzialmente instabile, contrassegnato in modo che le persona abbiano un'idea del compromesso rischio/beneficio vedendo il nome della release.</para>
 
 </sect2>
 
@@ -408,115 +166,44 @@ seeing the release's name.</para>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="release-branches">
-<title>Release Branches</title>
+<title>Rami Di Release</title>
 
-<para>From a developer's point of view, a free software project is in
-a state of continuous release.  Developers usually run the latest
-available code at all times, because they want to spot bugs, and
-because they follow the project closely enough to be able to stay away
-from currently unstable areas of the feature space.  They often update
-their copy of the software every day, sometimes more than once a day,
-and when they check in a change, they can reasonably expect that every
-other developer will have it within 24 hours.</para>
+<para>Dal punto di vista dello sviluppatore un progetto di software libero è in continuo stato di release sviluppatori eseguono sempre l'ultimo codice disponibile, perché vogliono scoprire i bugs, e perché seguono il progetto abbastanza da vicino da essere capaci di tirarsi indietro da aree instabili per quanto riguarda le funzionalità. Essi spesso aggiornano la loro copia del software ogni giorno, a volte più di una volta al giorno, e quando registrano un cambiamento, essi possono ragionevolmente aspettarsi che ogni altro sviluppatore lo riceverà entro ventiquattro ore.</para>
 
-<para>How, then, should the project make a formal release?  Should it
-simply take a snapshot of the tree at a moment in time, package it up,
-and hand it to the world as, say, version "3.5.0"?  Common sense says
-no.  First, there may be no moment in time when the entire development
-tree is clean and ready for release.  Newly-started features could be
-lying around in various states of completion.  Someone might have
-checked in a major change to fix a bug, but the change could be
-controversial and under debate at the moment the snapshot is taken.
-If so, it wouldn't work to simply delay the snapshot until the debate
-ends, because another, unrelated debate could start in the meantime,
-and then you'd have wait for <emphasis>that</emphasis> one to end too.
-This process is not guaranteed to halt.</para>
+<para>Come, allora un progetto dovrebbe creare una release formale? Dovrebbe ricevere una istantanea dell'albero in un momento in tempo, farne il pacchetto, e passarlo al mondo come, diciamo, la versione "3.5.0"?. Il senso comune dice di no. Primo, ci può non essere un momento nel tempo in cui l'intero albero di sviluppo è pulito e pronto per il rilascio. Le funzionalità già cominciate potrebbero trovarsi in vari stadi di completamento. Qualcuno potrebbe aver cercato in un cambiamento più importante dei bug, ma il cambiamento potrebbe essere controverso e sotto dibattito al momento in cui la foto è stata  fatta. Se così, non funzionerebbe ritardare la fotografia fino a quando il dibattito non termini, perché un altro dibattito non collegato potrebbe iniziare nel frattempo, e allora voi dovreste attendere che anche<emphasis>quello</emphasis> termini.
+Non è garantito che questo processo termini.</para>
 
-<para>In any case, using full-tree snapshots for releases would
-interfere with ongoing development work, even if the tree could be put
-into a releasable state.  Say this snapshot is going to be "3.5.0";
-presumably, the next snapshot would be "3.5.1", and would contain
-mostly fixes for bugs found in the 3.5.0 release.  But if both are
-snapshots from the same tree, what are the developers supposed to do
-in the time between the two releases?  They can't be adding new
-features; the compatibility guidelines prevent that.  But not everyone
-will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
-may have new features they're trying to complete, and will become
-irate if they are forced to choose between sitting idle and working on
-things they're not interested in, just because the project's release
-processes demand that the development tree remain unnaturally
-quiescent.</para>
+<para>In ogni caso, usare fotografie dell'intero albero per le releases  interferirebbe con il lavoro di sviluppo in corso, anche se l'albero potrebbe essere messo in uno stato di rilascio. Per esempio questa fotografia potrebbe andare per la "3.5.0"; presumibilmente la successiva fotografia sarebbe la "3.5.1" e conterrebbe per lo più correzioni dei bugs trovati nella 3.5.0. Ma se ambedue sono fotografie dello stesso albero, cosa si suppone che gli sviluppatori facciano nel tempo fra le due releases? Essi non possono aggiungere nuove funzionalità; le linee guida di compatibilità non lo permettono.
+Ma non tutti saranno entusiasti di correggere i bugs nel codice 3.5.0. Alcuni possono avere alcune funzionalità che stanno cercando di completare, e si arrabbieranno se saranno obbligati a scegliere fra il sedere oziosi e lavorare a cose alle quali non sono interessati, giusto perché i processi di rilascio del progetto chiedono che l'albero di sviluppo rimanga fermo in maniera non naturale.</para>
 
-<para>The solution to these problems is to always use
-a <firstterm>release branch</firstterm>.  A release branch is just a
-branch in the version control system (see
-<xref linkend="vc-vocabulary-branch"/>), on which the code
-destined for this release can be isolated from mainline development.
-The concept of release branches is certainly not original to free
-software; many commercial development organizations use them too.
-However, in commercial environments, release branches are sometimes
-considered a luxury&mdash;a kind of formal "best practice" that can,
-in the heat of a major deadline, be dispensed with while everyone on
-the team scrambles to stabilize the main tree.</para>
+<para>La soluzione a questi problemi è usare sempre una <firstterm>release ramo</firstterm>.  Una release ramo è appunto un ramo nel sistema di controllo della versione  (vedere
+<xref linkend="vc-vocabulary-branch"/>), sul quale il codice destinato a questa release può essere isolato dalla  linea principale dello sviluppo. Il concetto di rami di release non è certamente originale del software libero; molti sviluppi commerciali lo usano anche. Comunque, in ambienti commerciali, i rami di release sono a volte considerati un lusso una specie di formale “miglior pratica” di cui nell'entusiasmo di una scadenza maggiore, se ne può fare a meno mentre ognuno nel team si affanna a stabilizzare l'albero principale.</para>
 
-<para>Release branches are pretty much required in open source
-projects, however.  I have seen projects do releases without them, but
-it has always resulted in some developers sitting idle while
-others&mdash;usually a minority&mdash;work on getting the release out
-the door.  The result is usually bad in several ways.  First, overall
-development momentum is slowed.  Second, the release is of poorer
-quality than it needed to be, because there were only a few people
-working on it, and they were hurrying to finish so everyone else could
-get back to work.  Third, it divides the development team
-psychologically, by setting up a situation in which different types of
-work interfere with each other unnecessarily.  The developers sitting
-idle would probably be happy to contribute <emphasis>some</emphasis>
-of their attention to a release branch, as long as that were a choice
-they could make according to their own schedules and interests.  But
-without the branch, their choice becomes "Do I participate in the
-project today or not?"  instead of "Do I work on the release today, or
-work on that new feature I've been developing in the mainline
-code?"</para>
+<para>I rami di release sono quasi richiesti nel software open source, comunque. Io ho visto progetti fare una release senza di essi, ma il risultato è stato sempre che alcuni sviluppatori stessero oziosi
+mentre altri&mdash;usualmente una minoranza&mdash;lavoravano a fare uscire la release fuori della porta. Il risultato è usualmente cattivo per molti versi. Primo, la velocità dello sviluppo principale è diminuita. Secondo. La qualità erea peggiore di quanto sarebbe stato necessario, perché c'erano solo poche persone a lavorare ad essa, ed essi si affrettavano a finire in modo che ogni altro potesse tornare a lavorare. Terzo, esso divide il team di sviluppo psicologicamente, dando luogo a una situazione in cui differenti tipi di lavoro interferiscono con ogni altro tipo senza necessità. Gli sviluppatori che restano oziosi sarebbero probabilmente felici di collaborare con una certa attenzione al ramo di release, nella misura in cui quella sarebbe una scelta che potrebbero fare in accordo con i loro programmi e interessi. Ma senza il ramo, la loro scelta diventa “Devo partecipare al progetto o no?” invece di “Devo partecipare alla release oggi, o lavorare a quella funzionalità che stavo sviluppando nella linea principale del codice?”</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-branch-mechanics">
-<title>Mechanics of Release Branches</title>
+<title>Il Meccanismo Dei Rami di Release</title>
 
-<para>The exact mechanics of creating a release branch depend on your
-version control system, of course, but the general concepts are the
-same in most systems.  A branch usually sprouts from another branch or
-from the trunk.  Traditionally, the trunk is where mainline
-development goes on, unfettered by release constraints.  The first
-release branch, the one leading to the "1.0" release, sprouts off the
-trunk.  In CVS, the branch command would be something like this</para>
+<para>L'esatto meccanismo della creazione di un ramo di release dipende dal vostro sistema di controllo della versione, certo, ma i concetti generali sono gli stessi nella maggior parte dei sistemi. Un ramo usualmente vien fuori da un altro ramo o dal tronco. Tradizionalmente, il tronco è dove si ha la linea principale dello sviluppo, libera dai vincoli della release. Il primo ramo della release, quello che porta alla release “1.0”, vien fuori dal tronco. Nel CVS il comando di ramo sarebbe qualcosa come</para>
 
 <screen>
 $ cd trunk-working-copy
 $ cvs tag -b RELEASE_1_0_X
 </screen>
 
-<para>or in Subversion, like this:</para>
+<para>o in Subversion, come questo:</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
 </screen>
 
-<para>(All these examples assume a three-component release numbering
-system.  While I can't show the exact commands for every version
-control system, I'll give examples in CVS and Subversion and hope that
-the corresponding commands in other systems can be deduced from those
-two.)</para>
+<para>(Tutti questi esempi accettano il sistema di numerazione a tre componenti. Mentre non posso mostrare i comandi per ogni sistema di controllo della versione, farò degli esempi in CVS e Subversion e spero che i corrispondenti comandi in altri sistemi possano essere dedotti da questi due.)</para>
 
-<para>Notice that we created branch "1.0.x" (with a literal "x")
-instead of "1.0.0".  This is because the same minor line&mdash;i.e.,
-the same branch&mdash;will be used for all the micro releases in that
-line.  The actual process of stabilizing the branch for release is
-covered in
+<para>Notare che noi creammo il ramo "1.0.x" (con una lettera  "x") invece di "1.0.0". Questo perché la stessa linea minore cioè lo stesso ramo&mdash;sarebbe stato usato per le micro releases in quella linea. Il reale processo di stabilizzazione dei rami è trattato 
 <xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase>.  Here we are
-concerned just with the interaction between the version control system
-and the release process.  When the release branch is stabilized and
-ready, it is time to tag a snapshot from the branch:</para>
+ più avanti in questo capitolo</phrase>.  Qui noi ci occupiamo appunto dell'interazione fra il sistema di controllo della versione con il processo di release. Quando il ramo di release è stabilizzato e pronto, è il momento di tracciare una fotografia del ramo:</para>
 
 <screen>
 $ cd RELEASE_1_0_X-working-copy
@@ -529,14 +216,7 @@ $ cvs tag RELEASE_1_0_0
 $ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
 </screen>
 
-<para>That tag now represents the exact state of the project's source
-tree in the 1.0.0 release (this is useful in case anyone ever needs to
-get an old version after the packaged distributions and binaries have
-been taken down).  The next micro release in the same line is likewise
-prepared on the 1.0.x branch, and when it is ready, a tag is made for
-1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
-start thinking about a 1.1.x release, make a new branch from
-trunk:</para>
+<para>Questa traccia ora rappresenta lo stato esatto dell'albero origine nella release 1.0.0 (ciò è utile nel caso che qualcuno abbia bisogno di prelevare una vecchia versione dopo che distribuzioni confezionate e i binari siano stati dismessi). La successiva micro release nella stessa linea è preparata nello steso modo nel ramo 1.0.x, e quando è pronta, una traccia è fatta per la 1.0.1. Più avanti, risciacquatura, si ripete con la 1.0.2, e così via. Quando è il tempo di partire pensando alla release 1.1.x, create un nuovo ramo dal tronco:</para>
 
 <screen>
 $ cd trunk-working-copy
@@ -549,26 +229,11 @@ $ cvs tag -b RELEASE_1_1_X
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
 </screen>
 
-<para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
-and releases can be made independently from both lines.  In fact, it
-is not unusual to publish near-simultaneous releases from two
-different lines.  The older series is recommended for more
-conservative site administrators, who may not want to make the big
-jump to (say) 1.1 without careful preparation.  Meanwhile, more
-adventurous people usually take the most recent release on the highest
-line, to make sure they're getting the latest features, even at the
-risk of greater instability.</para>
+<para>Il mantenimento può continuare in parallelo lungo la 1.0.x e la 1.1.x e un rilascio può essere fatto indipendentemente da ambedue le differenti linee. La vecchia serie è raccomandata per gli amministratori di sito più conservatori che possono non voler fare il grosso salto alla (diciamo)  1.1 senza una attenta preparazione. Intanto, persone più avventurose prendono la più recente release sulla linea più alta, per essere sicuri di fare proprie le più recenti funzionalità, anche a rischio di una piuttosto grande instabilità. </para>
 
 </sect2>
 
-<para>This is not the only release branch strategy, of course.  In
-some circumstances it may not even be the best, though it's worked out
-pretty well for projects I've been involved in.  Use any strategy that
-seems to work, but remember the main points: the purpose of a release
-branch is to isolate release work from the fluctuations of daily
-development, and to give the project a physical entity around which to
-organize its release process.  That process is described in detail in
-the next section.</para>
+<para>Questa non è l'unica strategia delle releases ramo, certo. In alcune circostanze, può neanche essere la migliore, sebbene abbia funzionato bene per i progetti in cui è stata impiegata. Usate una strategia che sembra funzionare, ma ricordate i punti principali: il proposito di una release ramo è quello di isolare il lavoro di rilascio dalle fluttuazioni dello sviluppo giornaliero, e dare al progetto una entità fisica intorno alla quale organizzare il processo di rilascio. Il processo è descritto in dettaglio nelle successiva sezione.</para>
 
 </sect1>
 
