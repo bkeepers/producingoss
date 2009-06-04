@@ -241,166 +241,48 @@ $ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
 <sect1 id="stabilizing-a-release">
 <title>Stabilizing a Release</title>
 
-<para><firstterm>Stabilization</firstterm> is the process of getting a
-release branch into a releasable state; that is, of deciding which
-changes will be in the release, which will not, and shaping the branch
-content accordingly.</para>
+<para>La <firstterm>stabilizzazione</firstterm> è il processo di procurarsi una ramo di release per uno stato in cui si può rilasciare; cioè ilo processo di decidere quali cambiamenti ci saranno nelle release, quali no, e dar forma al contenuto  del ramo di conseguenza. </para>
 
-<para>There's a lot of potential grief contained in that word,
-"deciding".  The last-minute feature rush is a familiar phenomenon in
-collaborative software projects: as soon as developers see that a
-release is about to happen, they scramble to finish their current
-changes, in order not to miss the boat.  This, of course, is the exact
-opposite of what you want at release time.  It would be much better
-for people to work on features at a comfortable pace, and not worry
-too much about whether their changes make it into this release or the
-next one.  The more changes one tries to cram into a release at the
-last minute, the more the code is destabilized, and (usually) the more
-new bugs are created.</para>
+<para>Ci sono un sacco di di potenziali pene in quella parola, “decidere”. La corsa alla funzionalità dell'ultimo minuto è un fenomeno familiare nei progetti di software in collaborazione: appena gli sviluppatori vedono che la release sta per avvenire, si agitano a finire il loro correnti cambiamenti, per non perdere il battello. Questo, certamente, è l'esatto opposto di ciò che volete al momento del rilascio. Sarebbe molto meglio per la gente lavorare alle funzionalità in una confortevole ritmo, e non preoccuparsi e non preoccuparsi tanto se i loro cambiamenti riusciranno a farcela per questa release o per la prossima. Più uno cerca di imbottire i cambiamenti nella release all'ultimo minuto, più il codice è destabilizzato, e (usualmente) più bugs si creano.</para>
 
-<para>Most software engineers agree in theory on rough criteria for
-what changes should be allowed into a release line during its
-stabilization period.  Obviously, fixes for severe bugs can go in,
-especially for bugs without workarounds.  Documentation updates are
-fine, as are fixes to error messages (except when they are considered
-part of the interface and must remain stable).  Many projects also
-allow certain kinds of low-risk or non-core changes to go in during
-stabilization, and may have formal guidelines for measuring risk.  But
-no amount of formalization can obviate the need for human judgement.
-There will always be cases where the project simply has to make a
-decision about whether a given change can go into a release.  The
-danger is that since each person wants to see their own favorite
-changes admitted into the release, then there will be plenty of people
-motivated to allow changes, and not enough people motivated to bar
-them.</para>
+<para>La maggior parte degli ingegneri di software convengono in teoria su abbozzi di criteri circa quali cambiamenti debbano essere consentiti in una linea di rilascio durante il suo periodo di stabilizzazione. Ovviamente correzioni per importanti bugs dovrebbero entrarci, specialmente per bugs senza correzioni che non risolvono il problema. Gli aggiornamenti della documentazione vanno bene, così come le correzioni ai messaggi di errore (eccetto quando sono considerati parte dell'interfaccia e devono rimanere stabili). Molti progetti anche consentono certi cambiamenti non rischiosi e non di base di entrare durante la stabilizzazione, e si possono avere formali linee guida per la misurazione del rischio. Ma nessun ammontare di formalizzazione può ovviare al bisogno del giudizio umano. Ci saranno casi in cui il progetto deve semplicemente prendere una decisione se un dato cambiamento deve entrare in una release. Il pericolo è che siccome ognuno vuol vedere il suo cambiamento preferito ammesso nella release, ci sarà una gran quantità di gente motivata a consentire cambiamenti, e gente non abbastanza motivata a impedirli.</para>
 
-<para>Thus, the process of stabilizing a release is mostly about
-creating mechanisms for saying "no".  The trick for open source
-projects, in particular, is to come up with ways of saying "no" that
-won't result in too many hurt feelings or disappointed developers, and
-also won't prevent deserving changes from getting into the release.
-There are many different ways to do this.  It's pretty easy to design
-systems that satisfy these criteria, once the team has focused on them
-as the important criteria.  Here I'll briefly describe two of the most
-popular systems, at the extreme ends of the spectrum, but don't let
-that discourage your project from being creative.  Plenty of other
-arrangements are possible; these are just two that I've seen work in
-practice.</para>
+<para>Così, il processo di stabilizzazione di una release consiste per lo più nel creare un meccanismo per dire “no”. Il trucco per un progetto open source, in particolare, è venir fuori con modi di dire “no” che non abbiano molto l risultato di dare la sensazione di una ferita o creare il disappunto degli sviluppatori, e che anche non impediscano che cambiamenti validi entrino nella release. Ci sono molti modi per fare ciò. E' piuttosto facile inventare sistemi che soddisfino questi criteri, una volta che il team si è focalizzato su di essi come criteri importanti. Qui descriverò due dei più popolari sistemi, agli estremi dello spettro, ma non permetto che questo scoraggi il vostro progetto dall'essere creativo. Una abbondanza di altri espedienti è possibile; questi sono giusto due che ho visto funzionare in pratica. </para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-owner">
-<title>Dictatorship by Release Owner</title>
+<title>Dittatura Da Parte del Proprietario Della Release</title>
 
-<para>The group agrees to let one person be the <firstterm>release
-owner</firstterm>.  This person has final say over what changes make
-it into the release.  Of course, it is normal and expected for there
-to be discussions and arguments, but in the end the group must grant
-the release owner sufficient authority to make final decisions.  For
-this system to work, it is necessary to choose someone with the
-technical competence to understand all the changes, and the social
-standing and people skills to navigate the discussions leading up to
-the release without causing too many hurt feelings.</para>
+<para> Il gruppo conviene di permettere a una persona di essere <firstterm>proprietario della release</firstterm>. Questo proprietario ha la parola finale sui cambiamenti che devono entrare nella release. Certo, ci si aspetterebbe ed è normale che ci siano discussioni e argomentazioni, ma alla fine il gruppo deve assegnare al proprietario  la sufficiente autorità per prendere le decisioni finali. Affinché questo sistema funzioni, è necessario scegliere una persona con la competenza  tecnica per comprendere tutti i cambiamenti e la posizione sociale e le capacità di navigare fra le discussioni puntando alla release senza causare tanti sensi di risentimento. </para>
 
-<para>A common pattern is for the release owner to say "I don't think
-there's anything wrong with this change, but we haven't had enough
-time to test it yet, so it shouldn't go into this release."  It helps
-a lot if the release owner has broad technical knowledge of the
-project, and can give reasons why the change could be potentially
-destabilizing (for example, its interactions with other parts of the
-software, or portability concerns).  People will sometimes ask such
-decisions to be justified, or will argue that a change is not as risky
-as it looks.  These conversations need not be confrontational, as long
-as the release owner is able to consider all the arguments objectively
-and not reflexively dig in his heels.</para>
+<para>Un comportamento comune del proprietario è dire “non penso che ci sia qualcosa di sbagliato in questo cambiamento, ma non abbiamo avuto abbastanza tempo per provarlo, per cui non deve entrare nelle release”. Ciò aiuta molto se il proprietario della release ha larghe conoscenze tecniche del progetto, e ha la capacità di rendere conto del perché il cambiamento potrebbe esser potenzialmente destabilizzante (per esempio la sua interazione con altre parti del software, o questioni di portabilità). La gente potrà a volte chiedere che tali decisioni siano giustificate o sostenere che il cambiamento non è un rischio come sembra. Queste conversazioni non devono essere provocatorie, nella misura in cui il proprietario della release è capace di prendere in considerazione tutte le argomentazioni obbiettivamente e non come un colpo alle sue gambe</para>
 
-<para>Note that the release owner need not be the same person as the
-project leader (in cases where there is a project leader at all; see
+<para>Notate che non è necessario che il proprietario della release sia la stessa persona del leader del progetto (nei casi in cui c'è un leader del progetto; vedere
 <xref linkend="benevolent-dictator"/><phrase output="printed">
-in <xref linkend="social-infrastructure"/></phrase>).  In fact,
-sometimes it's
-good to make sure they're <emphasis>not</emphasis> the same person.
-The skills that make a good development leader are not necessarily the
-same as those that make a good release owner.  In something as
-important as the release process, it may be wise to have someone
-provide a counterbalance to the project leader's judgement.</para>
+in <xref linkend="social-infrastructure"/></phrase>).  Infatti a volte è bene assicurarsi che non siano la stessa persona. Le capacità che fanno un buon leader di sviluppo non sono necessariamente le stesse che fanno un buon proprietario di release. In una cosa così importante come il processo di release, può essere saggio avere qualcuno che controbilanci il giudizio del leader di progetto. </para>
 
-<para>Contrast the release owner role with the less dictatorial role
-described in
-<xref linkend="release-manager"/><phrase output="printed"> later
-in this chapter</phrase>.</para>
+<para>Contrastate il ruolo del proprietario di release con un un ruolo meno dittatoriale descritto in
+<xref linkend="release-manager"/><phrase output="printed"> più avanti in questo capitolo</phrase>.</para>
 
 </sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-voting">
-<title>Change Voting</title>
+<title>Votare Il Cambiamento</title>
 
-<para>At the opposite extreme from dictatorship by release owner,
-developers can simply vote on which changes to include in the release.
-However, since the most important function of release stabilization is
-to <emphasis>exclude</emphasis> changes, it's important to design the
-voting system in such a way that getting a change into the release
-involves positive action by multiple developers.  Including a change
-should need more than just a simple majority (see <xref
+<para>All'estremo opposto della dittatura da parte del proprietario di release, gli sviluppatori possono semplicemente votare su quali cambiamenti includere nella release. Comunque, poichè la funzione più importante per la stabilizzazione delle release è <emphasis>escludere</emphasis> cambiamenti, è importante creare un sistema di voto in modo tale che fare cambiamenti alla release comporti una azione positiva da parte di più di uno sviluppatore. Per inserire un cambiamento ci dovrebbe essere bisogno più di una semplice maggioranza (vedere <xref
 linkend="electorate"/><phrase output="printed"> in
-<xref linkend="social-infrastructure"/></phrase>).  Otherwise,
-one vote for and none against a given change would suffice to get it
-into the release, and an
-unfortunate dynamic would be set up whereby each developer would vote
-for her own changes, yet would be reluctant to vote against others'
-changes, for fear of possible retaliation.  To avoid this, the system
-should be arranged such that subgroups of developers must act in
-cooperation to get any change into the release.  This not only means
-that more people review each change, it also makes any individual
-developer less hesitant to vote against a change, because she knows
-that no particular one among those who voted for it would take her
-vote against as a personal affront.  The greater the number of people
-involved, the more the discussion becomes about the change and less
-about the individuals.</para>
+<xref linkend="social-infrastructure"/></phrase>).  Diversamente un voto a favore e uno contro un dato cambiamento sarebbe sufficiente per inserirlo nella release e si creerebbe una sciagurata dinamica per cui ciascuno sviluppatore voterebbe per i propri cambiamenti, mentre sarebbe riluttante a votare contro i cambiamenti degli altri, per paura di possibili ritorsioni. Per evitare ciò, il sistema dovrebbe essere congegnato in modo che sottogruppi di sviluppatori debbano agire in cooperazione per inserire cambiamenti nella release. Ciò significa non solo che più persone revisionano ogni cambiamento, ma rende  uno sviluppatore individuale meno indeciso nel votare contro un cambiamento, perché egli sa che nessuno in particolare fra quelli che votarono per esso può prendere il suo voto contro come un affronto personale. Più grande è il numero di persone coinvolte, più numerose diventano le discussioni sui cambiamenti e meno numerose quelle sugli individui.</para>
 
-<para>The system we use in the Subversion project seems to have struck
-a good balance, so I'll recommend it here.  In order for a change to
-be applied to the release branch, at least three developers must vote
-in favor of it, and none against.  A single "no" vote is enough to
-stop the change from being included; that is, a "no" vote in a release
-context is equivalent to a veto (see <xref linkend="veto"/>).
-Naturally, any such vote must be accompanied by a justification, and
-in theory the veto could be overridden if enough people feel it is
-unreasonable and force a special vote over it.  In practice, this has
-never happened, and I don't expect that it ever will.  People are
-conservative around releases anyway, and when someone feels strongly
-enough to veto the inclusion of a change, there's usually a good
-reason for it.</para>
+<para>Il sistema che noi usiamo nel progetto Subversion sembra aver centrato un buon bilanciamento, per cui io lo raccomando qui. Affinché un cambiamento sia apportato a un ramo di release, almeno tre sviluppatori devono votare a favore di esso, e nessuno contro. Un singolo voto “no” è sufficiente a impedire che il cambiamento sia incluso; cioè un voto “no” in un contesto di release è equivalente a un veto (vedere <xref linkend="veto"/>).
+Naturalmente ogni voto di questo tipo deve essere accompagnato da una giustificazione, e in teoria si potrebbe non tener conto del veto, se abbastanza gente ritenesse che esso è non ragionevole e obbliga a  un voto speciale su di esso. In pratica, ciò non è mai successo, e prevedo che non succederà mai. Le persone sono conservatrici nei confronti delle release in ogni modo, e quando qualcuno si sente abbastanza fortemente a favore del veto nei confronti dell'inclusione di una cambiamento, c'è usualmente una buona ragione per ciò.</para>
 
-<para>Because the release procedure is deliberately biased toward
-conservatism, the justifications offered for vetoes are sometimes
-procedural rather than technical.  For example, a person may feel that
-a change is well-written and unlikely to cause any new bugs, but vote
-against its inclusion in a micro release simply because it's too
-big&mdash;perhaps it adds a new feature, or in some subtle way fails
-to fully follow the compatibility guidelines.  I've occasionally even
-seen developers veto something because they simply had a gut feeling
-that the change needed more testing, even though they couldn't spot
-any bugs in it by inspection.  People grumbled a little bit, but the
-vetoes stood and the change was not included in the release (I don't
-remember if any bugs were found in later testing or not,
-though).</para>
+<para>Poiché la procedura di rilascio è deliberatamente orientata verso il conservatorismo, le giustificazioni portate per il veto sono talvolta procedurali piuttosto che tecniche. Per esempio, una persona può ritenere che un cambiamento sia ben scritto e che sia improbabile che causi nuovi bugs, ma vota contro la sua inclusione nella micro release semplicemente perché è troppo grossa magari apporta nuove funzionalità, o in qualche modo sottile non riesce a seguire completamente le linee guida di compatibilità. Io occasionalmente ho visto anche sviluppatori porre il veto a qualcosa semplicemente perché avevano una sensazione viscerale che il cambiamento avesse bisogno di  ulteriori prove, anche se essi non potevano individuare bugs in esse con un esame interno. Le persone si lagnavano un poco, ma il veto resisteva e il cambiamento non veniva incluso nella release (non ricordo se qualche bug veniva trovato o no in una ulteriore prova, comunque). </para>
 
 <sect3 id="release-stabilization-collaboration">
-<title>Managing collaborative release stabilization</title>
+<title>Portare avanti una stabilizzazione di release in collaborazione</title>
 
-<para>If your project chooses a change voting system, it is imperative
-that the physical mechanics of setting up ballots and casting votes be
-as convenient as possible.  Although there is plenty of open source
-electronic voting software available, in practice the easiest thing to
-do is just to set up a text file in the release branch,
-called <filename>STATUS</filename> or <filename>VOTES</filename> or
-something like that.  This file lists each proposed change&mdash;any
-developer can propose a change for inclusion&mdash;along with all the
-votes for and against it, plus any notes or comments.  (Proposing a
-change doesn't necessarily mean voting for it, by the way, although
-the two often go together.)  An entry in such a file might look like
-this:</para>
+<para>Se il vostro progetto opta per un sistema di voto per il cambiamento, è imperativo che i meccanismi di organizzazione delle schede di voto e di votare sia il più adatto possibile. Anche se c'è una pletora di software open source disponibile, in pratica la cosa più facile da fare è giusto preparare nel ramo di release un file di testo, chiamato<filename>STATO</filename> or <filename>VOTI</filename> o qualcosa di simile. Questo file elenca ogni cambiamento proposto per l'inclusione insieme a tutti i voti a favore e contro, più eventuali note o commenti (Proporre un cambiamento non significa necessariamente votarlo, strada facendo, sebbene le due cose vadano insieme). Una voce in un tale file appare così:</para>
 
 <screen>
 * r2401 (issue #49)
