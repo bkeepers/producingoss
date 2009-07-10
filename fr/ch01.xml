@@ -6,769 +6,816 @@
 
 <para>La plupart des projets de logiciel libre échouent.</para>
 
-<para>Nous avons tendance à ne pas entendre beaucoup parler des
-échecs.  Seulement les projets qui ont du succès attirent
-l'attention et il y a tellement de projets de logiciel libre au
-total<footnote><para>SourceForge.net, un site d'hébergement Web
-populaire, a 79,225 projets d'enregistrés en date de la mi-avril
-2004.
-Ceci n'est aucunement près du nombre total de projets de logiciels
-libres sur Internet, bien sûr; c'est seulement le nombre de
-projets qui ont choisi d'utiliser SourceForge.</para></footnote> que
-même si seulement un faible pourcentage réussissent, le résultat est
-encore beaucoup de projets bien en vue. Nous n'entendons pas parler
-non plus à propos des échecs parce que les échecs ne sont pas des
-événements cocasses.
-Il n'y a pas de moment bien précis lorsqu'un projet cesse d'être
-viable; c'est en quelque sorte que les gens s'en vont et arrête de
-travailler dessus.  Il peut y avoir un moment lorsqu'un changement
-final est apporté au projet mais celui qui l'a fait ignorait
-habituellement à cet instant que ce serait le dernier.  Il n'y a pas
-même une définition clair à savoir à quel moment un projet est expiré. 
-Est-ce que c'est lorsque aucun changement ne lui a été apporté dans les
-six derniers mois?  Quand son bassin d'utilisateurs cesse d'augmenter,
-sans avoir dépasser le bassin de développeurs?  Et si c'était que les
-développeurs d'un projet l'abandonne parce qu'ils ont réalisés qu'ils
-dupliquaient le travail d'un autre&mdash;et si ils ont joint cet autre
-projet et l'ont étendu pour inclure beaucoup de leur effort
-précédant?  Est-ce que le premier projet se termine ou bien s'il change
-seulement de <!--TRAD: à traduire (ES)-->homes?</para>
+<para>Nous avons tendance à ne pas trop remarquer les échecs. Seuls ceux
+qui
+réussissent attirent notre attention, mais le nombre
+total<footnote><para>SourceForge.net, un site d'hébergement populaire.
+Il contenait 79 225 projets enregistrés à la mi-avril 2004. On est bien
+sûr très loin de la quantité totale de projets de logiciels libres sur
+Internet: c'est juste le nombre ayant choisi d'utiliser
+SourceForge.</para></footnote>de projets de logiciels libres est si
+conséquent que leur visibilité reste néanmoins importante pour une
+quantité de réussites relativement faible. De même, nous n'entendons pas
+parler des échecs car l'insuccès est un non-évènement. Le moment précis
+où un projet cesse d'être viable n'existe pas : les gens s'en écartent
+et finissent par l'abandonner. Il se peut qu'à un moment donné un
+dernier changement soit apporté au projet mais l'auteur, à cet instant,
+ne sait pas qu'il s'agit du dernier. Comment définir la mort d'un projet
+? Est-ce quand on n'y a plus travaillé activement depuis six mois ?
+Quand le nombre de ses utilisateurs cesse de croître, sans avoir dépassé
+celui des développeurs ? Et que dire d'un projet abandonné parce que ses
+développeurs, se rendant compte qu'ils reproduisaient un travail
+existant, se décident à rejoindre un autre projet pour l'améliorer en y
+intégrant une grande partie de leurs travaux précédents ? Le premier
+projet est-il mort ou a-t-il juste changé d'adresse ?</para>
 
-<para>Because of such complexities, it's impossible to put a precise
-number on the failure rate.  But anecdotal evidence from over a decade
-in open source, some casting around on SourceForge.net, and a little
-Googling all point to the same conclusion: the rate is extremely high,
-probably on the order of 90&ndash;95%.  The number climbs higher if you
-include surviving but dysfunctional projects: those
-which <emphasis>are</emphasis> producing running code, but which are
-not pleasant places to be, or are not making progress as quickly or as
-dependably as they could.</para>
+<para>En raison de cette complexité, il est impossible de déterminer
+précisément le taux d'échec. Mais le constat qui ressort de plus d'une
+décennie dans l'Open Source, de quelques participations à
+SourceForge.net et d'un peu de « googlage » est le suivant : ce taux est
+extrêmement élevé, probablement de l'ordre de 90% à 95%. Il l'est encore
+plus si l'on y inclut les projets survivants mais qui fonctionnent mal,
+à savoir ceux qui produisent des applications utilisables sans pour
+autant être des lieux agréables ou progresser de manière aussi rapide et
+fiable qu'ils le pourraient.</para>
 
-<para>This book is about avoiding failure.  It examines not only how
-to do things right, but how to do them wrong, so you can recognize and
-correct problems early.  My hope is that after reading it, you will
-have a repertory of techniques not just for avoiding common pitfalls
-of open source development, but also for dealing with the growth and
-maintenance of a successful project.  Success is not a zero-sum game,
-and this book is not about winning or getting ahead of the
-competition.  Indeed, an important part of running an open source
-project is working smoothly with other, related projects.  In the long
-run, every successful project contributes to the well-being of the
-overall, worldwide body of free software.</para>
+<para>L'objet de cet ouvrage est d'éviter l'échec. Il passe en revue non
+seulement les bonnes attitudes à adopter, mais aussi les mauvaises, afin
+que chacun puisse détecter et corriger les problèmes rapidement. Mon
+plus grand souhait est qu'après sa lecture, on dispose d'un répertoire
+de techniques pour, d'une part, éviter les pièges les plus courants du
+développement Open Source, et d'autre part, gérer la croissance et la
+maintenance d'un projet réussi. Le succès n'est pas un jeu à somme nulle
+et cet écrit ne parle ni de victoire ni de maitrise de la concurrence.
+En réalité, une part importante du développement d'un projet Open Source
+consiste à travailler sans heurt avec les autres projets apparentés. À
+long terme, chaque réussite contribue au bien-être du « logiciel libre
+», dans son ensemble et partout dans le monde.</para>
 
 </simplesect>
 
 <simplesect>
 
-<para>It would be tempting to say that free software projects fail for
-the same sorts of reasons proprietary software projects do.
-Certainly, free software has no monopoly on unrealistic requirements,
-vague specifications, poor resource management, insufficient design
-phases, or any of the other hobgoblins already well known to the
-software industry.  There is a huge body of writing on these topics,
-and I will try not to duplicate it in this book.  Instead, I will
-attempt to describe the problems peculiar to free software.  When a
-free software project runs aground, it is often because the developers
-(or the managers) did not appreciate the unique problems of open
-source software development, even though they might have been quite
-prepared for the better-known difficulties of closed-source
-development.</para>
+<para>Il serait tentant de dire les projets de logiciels libres ou
+propriétaires échouent pour les mêmes raisons. Le libre n'a pas le
+monopole des cahiers de charges farfelus, des spécifications floues, de
+la gestion déficiente des ressources humaines, des phases de conception
+insuffisantes et autres lutins malveillants bien connus de l'industrie
+du logiciel. La somme d'écrits traitant de ce sujet est déjà
+considérable, je ne m'étendrai donc pas sur ce sujet. J'essaierai plutôt
+de décrire les problèmes spécifiques au logiciel libre. Quand un projet
+s'écroule c'est souvent parce que les développeurs (ou les directeurs)
+n'ont pas su évaluer les problèmes propres au développement d'un
+logiciel Open Source, alors même qu'ils étaient rodés aux difficultés
+mieux connues du développement à code fermé.</para>
 
-<para>One of the most common mistakes is unrealistic expectations
-about the benefits of open source itself.  An open license does not
-guarantee that hordes of active developers will suddenly volunteer
-their time to your project, nor does open-sourcing a troubled project
-automatically cure its ills.  In fact, quite the opposite: opening up
-a project can add whole new sets of complexities, and cost
-<emphasis>more</emphasis> in the short term than simply keeping it
-in-house.  Opening up means arranging the code to be comprehensible to
-complete strangers, setting up a development web site and email lists,
-and often writing documentation for the first time.  All this is a lot
-of work.  And of course, if any interested developers
-<emphasis>do</emphasis> show up, there is the added burden of
-answering their questions for a while before seeing any benefit from
-their presence.  As developer Jamie Zawinski said about the troubled
-early days of the Mozilla project:</para>
+<para>Mesurez vos attentes vis à vis de l'Open Source, ne tombez pas
+dans le piège d'une trop grande attente. Une licence ouverte ne garantit
+pas que des hordes de développeurs se mettront immédiatement au service
+de votre projet et ouvrir le code d'un projet en difficulté ne le guérit
+pas automatiquement de tous ses maux. En fait, c'est plutôt le contraire
+: ouvrir un projet peut ajouter une nouvelle série de complications et
+coûter <emphasis>plus</emphasis> cher à court terme que le garder fermé.
+Ouvrir veut dire remanier le code pour le rendre compréhensible par
+quelqu'un de complètement étranger au projet, mettre en place un espace
+Web de développement, des listes de diffusion et, souvent, écrire pour
+la première fois la documentation. Tout ceci représente beaucoup de
+travail. Et bien sûr, <emphasis>si</emphasis> des développeurs
+intéressés se présentent, il faudra les intégrer, répondre à leurs
+questions, tout cela peut prendre un certain temps avant que vous ne
+perceviez les bénéfices de leur présence. Comme l'a dit Jamie Zawinski
+en parlant des périodes troubles du début du projet Mozilla :</para>
 
     <blockquote>
-      <para><emphasis>Open source does work, but it is most definitely
-      not a panacea.  If there's a cautionary tale here, it is that
-      you can't take a dying project, sprinkle it with the magic pixie
-      dust of "open source," and have everything magically work
-      out. Software is hard.  The issues aren't that simple.</emphasis></para>
+      <para><emphasis>L'Open Source fonctionne, mais ce n'est vraiment
+pas la panacée. La morale de cette histoire c'est qu'on ne peut pas
+prendre un projet moribond et le saupoudrer de poudre de perlimpinpin «
+Open Source » pour que tout se mette à marcher par magie. Le
+développement logiciel c'est difficile. Les solutions ne sont pas si
+simples.</emphasis></para>
 
-      <para>(from <emphasis role="bold"><ulink
+      <para>(extrait de <emphasis role="bold"><ulink
       url="http://www.jwz.org/gruntle/nomo.html"/></emphasis>)</para>
     </blockquote>
 
-<para>A related mistake is that of skimping on presentation and
-packaging, figuring that these can always be done later, when the
-project is well under way.  Presentation and packaging comprise a wide
-range of tasks, all revolving around the theme of reducing the barrier
-to entry.  Making the project inviting to the uninitiated means
-writing user and developer documentation, setting up a project web
-site that's informative to newcomers, automating as much of the
-software's compilation and installation as possible, etc.  Many
-programmers unfortunately treat this work as being of secondary
-importance to the code itself.  There are a couple of reasons for
-this.  First, it can feel like busywork, because its benefits are most
-visible to those least familiar with the project, and vice versa.
-After all, the people who develop the code don't really need the
-packaging.  They already know how to install, administer, and use the
-software, because they wrote it.  Second, the skills required to do
-presentation and packaging well are often completely different from
-those required to write code.  People tend to focus on what they're
-good at, even if it might serve the project better to spend a little
-time on something that suits them less.  <xref
-linkend="getting-started"/> discusses presentation and packaging
-in detail, and explains why it's crucial that they be a priority from
-the very start of the project.</para>
+<para>Lésiner sur la présentation et la création de paquets en remettant
+cela à plus tard, une fois le projet sur les rails, sont des erreurs
+liées. La présentation et la création de paquets comportent un nombre
+important de tâches visant à faciliter l'approche. Pour rendre le projet
+accueillant aux néophytes, il faut écrire la documentation développeur
+et utilisateur, créer pour le projet un site Web informant les curieux,
+automatiser autant que possible la compilation et l'installation du
+logiciel, etc. Beaucoup de programmeurs considèrent malheureusement ce
+travail comme secondaire par rapport au code lui-même. Et ceci pour
+plusieurs raisons. Premièrement, c'est à leurs yeux une perte de temps
+car ils n'en tirent pas directement les bénéfices contrairement aux
+personnes moins familières avec le projet. Après tout, les gens qui
+développent le projet n'ont pas vraiment besoin qu'on leur prépare des
+paquets. Ils savent déjà comment installer, administrer et utiliser le
+logiciel qu'ils ont écrit. Deuxièmement, les compétences requises pour
+la présentation et la création de paquets sont souvent complètement
+différentes de celles requises pour écrire le code. Les gens ont
+tendance à se concentrer sur ce qu'ils connaissent le mieux, même s'ils
+peuvent rendre un meilleur service au projet en consacrant un peu de
+temps aux choses qui leur conviennent moins. Le <xref
+linkend="getting-started"/>, examine en détail les questions de
+présentation et de création de paquets. Il explique pourquoi il est
+essentiel d'en faire une priorité dès le lancement du projet.</para>
 
-<para>Next comes the fallacy that little or no project management is
-required in open source, or conversely, that the same management
-practices used for in-house development will work equally well on an
-open source project.  Management in an open source project isn't
-always very visible, but in the successful projects, it's usually
-happening behind the scenes in some form or another.  A small thought
-experiment suffices to show why.  An open source project consists of a
-random collection of programmers&mdash;already a notoriously
-independent-minded category&mdash;who have most likely never met each
-other, and who may each have different personal goals in working on
-the project.  The thought experiment is simply to imagine what would
-happen to such a group <emphasis>without</emphasis> management.
-Barring miracles, it would collapse or drift apart very quickly.
-Things won't simply run themselves, much as we might wish otherwise.
-But the management, though it may be quite active, is often informal,
-subtle, and low-key.  The only thing keeping a development group
-together is their shared belief that they can do more in concert than
-individually.  Thus the goal of management is mostly to ensure that
-they continue to believe this, by setting standards for
-communications, by making sure useful developers don't get
-marginalized due to personal idiosyncracies, and in general by making
-the project a place developers want to keep coming back to.  Specific
-techniques for doing this are discussed throughout the rest of this
-book.</para>
+<para>Vient ensuite l'idée fausse que l'Open Source n'a guère besoin de
+gestion de projet et, qu'inversement les techniques de direction
+utilisées pour les développements en interne fonctionneront également
+pour le projet Open Source. Le management dans un projet Open Source
+n'est pas toujours très visible, mais dans les projets réussis il est
+toujours présent en coulisse d'une manière ou d'une autre. Inutile de
+pousser la réflexion très loin pour s'en rendre compte. Un projet Open
+Source consiste en un assemblage fortuit de programmeurs, catégorie déjà
+réputée pour son indépendance d'esprit, qui ne se sont très probablement
+jamais rencontrés et qui peuvent y participer en ayant chacun des
+objectifs personnels différents. Il est facile d'imaginer ce que
+deviendrait un tel groupe <emphasis>sans</emphasis> management. À moins
+d'un miracle, il s'écroulerait ou éclaterait très vite. Les choses ne
+vont pas marcher d'elles-même, que nous le voulions ou non. Mais le
+management, aussi actif soit-il, est le plus souvent informel, subtil et
+voilé. La seule chose qui maintienne un groupe de développeurs ensemble
+est la croyance partagée qu'ils peuvent faire plus collectivement
+qu'individuellement. Dans ce cadre, le management a pour but principal
+de faire en sorte qu'ils continuent à le croire, en établissant des
+formes de communication, en s'assurant que des développeurs utiles ne
+sont pas marginalisés en raisons de caractéristiques personnelles et, de
+manière générale, en faisant en sorte que le projet reste un espace où
+les développeurs ont envie de revenir. Les techniques spécifiques pour
+réussir cela sont abordées dans le reste de l'ouvrage.</para>
 
-<para>Finally, there is a general category of problems that may be
-called "failures of cultural navigation."  Ten years ago, even five,
-it would have been premature to talk about a global culture of free
-software, but not anymore.  A recognizable culture has slowly emerged,
-and while it is certainly not monolithic&mdash;it is at least as prone
-to internal dissent and factionalism as any geographically bound
-culture&mdash;it does have a basically consistent core.  Most
-successful open source projects exhibit some or all of the
-characteristics of this core.  They reward certain types of behaviors,
-and punish others; they create an atmosphere that encourages unplanned
-participation, sometimes at the expense of central coordination; they
-have concepts of rudeness and politeness that can differ substantially
-from those prevalent elsewhere.  Most importantly, longtime
-participants have generally internalized these standards, so that they
-share a rough consensus about expected conduct.  Unsuccessful projects
-usually deviate in significant ways from this core, albeit
-unintentionally, and often do not have a consensus about what
-constitutes reasonable default behavior.  This means that when
-problems arise, the situation can quickly deteriorate, as the
-participants lack an already established stock of cultural reflexes to
-fall back on for resolving differences. </para>
+<para>Enfin, il y a une catégorie générique de problèmes qu'on pourrait
+appeler « échecs de navigation culturelle ». Il y a dix ou même cinq
+ans, il aurait été prématuré de parler d'une culture mondiale du
+logiciel libre : plus maintenant. Une culture reconnaissable a émergé
+lentement et bien qu'elle ne soit pas monolithique (elle est autant
+sujette à la dissidence et aux factions que n'importe quelle culture
+géographiquement définie), elle est basée sur un noyau fondamentalement
+solide. La plupart des projets Open Source réussis affichent
+quelques-unes sinon toutes les caractéristiques de ce noyau. Ils
+récompensent certains types de comportements et en punissent d'autres,
+ils créent une atmosphère qui encourage la participation non planifiée
+(parfois au détriment de la coordination centralisée), ils possèdent
+leur propre conception de la politesse et de la brutalité pouvant
+différer foncièrement de celle qui prévaut ailleurs. Et, chose
+primordiale, les participants de longue date ont généralement
+intériorisé ces critères au point d'être plus ou moins unanimes sur les
+comportements attendus. Les projets qui échouent généralement s'écartent
+de manière significative de ce noyau, même involontairement, et n'ont
+pas de définition unanime de la constitution du comportement raisonnable
+par défaut. Ainsi, quand les problèmes surgissent, la situation peut se
+détériorer rapidement, les participants ne disposant pas d'un stock de
+réflexes culturels établis auxquels recourir pour résoudre les
+différends.</para>
 
-<para>This book is a practical guide, not an anthropological study or
-a history.  However, a working knowledge of the origins of today's
-free software culture is an essential foundation for any practical
-advice.  A person who understands the culture can travel far and wide
-in the open source world, encountering many local variations in custom
-and dialect, yet still be able to participate comfortably and
-effectively everywhere.  In contrast, a person who does not understand
-the culture will find the process of organizing or participating in a
-project difficult and full of surprises.  Since the number of people
-developing free software is still growing by leaps and bounds, there
-are many people in that latter category&mdash;this is largely a
-culture of recent immigrants, and will continue to be so for some
-time.  If you think you might be one of them, the next section
-provides background for discussions you'll encounter later, both in
-this book and on the Internet.  (On the other hand, if you've been
-working with open source for a while, you may already know a lot of
-its history, so feel free to skip the next section.)</para>
+<para>Cet ouvrage est un guide pratique et non une étude anthropologique
+ou historique. Cependant, une réelle connaissance des origines de la
+culture actuelle du logiciel libre est une base essentielle pour tout
+conseil pratique. Une personne qui en comprend la culture peut
+parcourir, en long et en large, le monde de l'Open Source, rencontrer
+maintes variantes locales des coutumes et des dialectes, tout en étant
+capable de participer partout avec aisance et efficacité. En revanche,
+pour quelqu'un ne comprenant pas cette culture, le processus
+d'organisation ou de participation à un projet sera difficile et plein
+de surprises. Le nombre de personnes qui développent des logiciels
+libres ne cessant de croître à toute allure, cette dernière catégorie ne
+désemplit pas. C'est en grande partie une culture de nouveaux migrants,
+et ça continuera à l'être pendant un certain temps. Si vous pensez être
+l'un d'eux, la section suivante vous fournit l'arrière-plan des
+discussions que vous entendrez plus tard, aussi bien dans ce livre que
+sur Internet (d'autre part, si vous travaillez dans le monde du libre
+depuis un moment, vous en savez peut-être déjà pas mal sur son histoire.
+Dans ce cas, n'hésitez pas à sauter la prochaine section).</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="history">
-<title>History</title>
+<title>Historique</title>
 
-<para>Software sharing has been around as long as software itself.  In
-the early days of computers, manufacturers felt that competitive
-advantages were to be had mainly in hardware innovation, and therefore
-didn't pay much attention to software as a business asset.  Many of
-the customers for these early machines were scientists or technicians,
-who were able to modify and extend the software shipped with the
-machine themselves.  Customers sometimes distributed their patches
-back not only to the manufacturer, but to other owners of similar
-machines.  The manufacturers often tolerated and even encouraged this:
-in their eyes, improvements to the software, from whatever source,
-just made the machine more attractive to other potential
-customers.</para>
+<para>Le partage des logiciels est aussi ancien que les logiciels
+eux-mêmes. Aux premiers temps des ordinateurs, les fabricants, sentant
+que les bénéfices économiques se trouvaient principalement dans la
+production de matériel, ne prêtèrent guère attention aux logiciels et
+leurs atouts financiers. Un grand nombre d'acheteurs de ces premières
+machines étaient des scientifiques ou des techniciens capables de
+modifier et d'améliorer eux-mêmes les logiciels livrés avec les
+machines. Parfois les clients distribuaient leurs correctifs non
+seulement aux fabricants, mais aussi aux propriétaires de machines
+semblables. Les fabricants toléraient, voire encourageaient ceci : pour
+eux, l'amélioration des logiciels, peu importe la source, rendait leurs
+machines plus attrayantes aux yeux d'autres acheteurs potentiels.</para>
 
-<para>Although this early period resembled today's free software
-culture in many ways, it differed in two crucial respects.  First,
-there was as yet little standardization of hardware&mdash;it was a
-time of flourishing innovation in computer design, but the diversity
-of computing architectures meant that everything was incompatible with
-everything else.  Thus, software written for one machine would
-generally not work on another.  Programmers tended to acquire
-expertise in a particular architecture or family of architectures
-(whereas today they would be more likely to acquire expertise in a
-programming language or family of languages, confident that their
-expertise will be transferable to whatever computing hardware they
-happen to find themselves working with).  Because a person's expertise
-tended to be specific to one kind of computer, their accumulation of
-expertise had the effect of making that computer more attractive to
-them and their colleagues.  It was therefore in the manufacturer's
-interests for machine-specific code and knowledge to spread as widely
-as possible.</para>
+<para>Bien que cette période ressemblât, sous de nombreux aspects, à la
+culture des logiciels libres d'aujourd'hui, elle en déviait sur deux
+points importants. Premièrement la standardisation du matériel n'était
+pas vraiment à l'ordre du jour. C'était une époque d'innovation
+florissante pour la fabrication d'ordinateurs, mais face à la diversité
+des architectures la compatibilité n'était pas une priorité. Ainsi, les
+logiciels écrits pour une machine ne fonctionnaient en général pas sur
+une autre. Les programmeurs avaient tendance à se spécialiser dans une
+architecture ou dans une famille d'architectures (alors qu'aujourd'hui,
+ils auraient plutôt tendance à se spécialiser dans un langage de
+programmation, ou une famille de langages, sachant pertinemment que leur
+savoir sera transférable sur n'importe quel système auquel ils se
+trouveraient confrontés). Comme leur expertise tendait à être spécifique
+à un type d'ordinateur, l'accumulation des savoirs avait pour effet de
+le rendre plus attractif à leurs yeux et à ceux de leurs collègues.
+C'était alors dans l'intérêt du constructeur de voir les codes et
+connaissances spécifiques à sa machine se répandre le plus
+possible.</para>
 
-<para>Second, there was no Internet.  Though there were fewer legal
-restrictions on sharing than today, there were more technical ones:
-the means of getting data from place to place were inconvenient and
-cumbersome, relatively speaking.  There were some small, local
-networks, good for sharing information among employees at the same
-research lab or company.  But there remained barriers to overcome if
-one wanted to share with everyone, no matter where they were.  These
-barriers <emphasis>were</emphasis> overcome in many cases.  Sometimes
-different groups made contact with each other independently, sending
-disks or tapes through land mail, and sometimes the manufacturers
-themselves served as central clearing houses for patches.  It also
-helped that many of the early computer developers worked at
-universities, where publishing one's knowledge was expected.  But the
-physical realities of data transmission meant there was always an
-impedance to sharing, an impedance proportional to the distance (real
-or organizational) that the software had to travel.  Widespread,
-frictionless sharing, as we know it today, was not possible.</para>
+<para>Deuxièmement, l'Internet alors n'existait pas. Bien que les
+restrictions légales vis à vis du partage fussent moins fortes
+qu'aujourd'hui, elles étaient plus nombreuses sur le plan technique. Les
+moyens pour transporter les données d'un endroit à un autre étaient peu
+pratiques et encombrants, comparés à maintenant. Il existait des petits
+réseaux locaux, pratiques pour partager des informations entre employés
+du même laboratoire de recherche ou de la même entreprise. Mais
+certaines barrières restaient à surmonter si l'on voulait partager avec
+le monde entier tout en s'affranchissant des contraintes géographiques.
+Ces difficultés <emphasis>ont été</emphasis> surmontées dans de nombreux
+cas. Parfois des groupes entraient en contact les uns avec les autres
+indépendamment, en s'envoyant des disquettes ou des cassettes par
+courrier. Parfois les fabricants eux-mêmes centralisaient les
+correctifs. Un point positif étant qu'une grande partie des premiers
+développeurs travaillaient au sein d'universités où la publication des
+connaissances d'une personne est attendue. Mais les réalités physiques
+de l'échange de données entraînaient un temps de latence, un retard
+proportionnel à la distance (physique ou organisationnelle) que le
+logiciel avait à parcourir. Le partage souple et à grande échelle, comme
+nous le connaissons aujourd'hui, était impossible alors.</para>
 
-<!-- ========================== subsection ========================== -->
+<!-- ========================== subsection ==========================
+-->
 <sect2 id="propertization">
-<title>The Rise of Proprietary Software and Free Software</title>
+<title>L'avènement des logiciels propriétaires et des logiciels
+libres</title>
 
-<para>As the industry matured, several interrelated changes occurred
-simultaneously.  The wild diversity of hardware designs gradually gave
-way to a few clear winners&mdash;winners through superior technology,
-superior marketing, or some combination of the two.  At the same time,
-and not entirely coincidentally, the development of so-called "high
-level" programming languages meant that one could write a program
-once, in one language, and have it automatically translated
-("compiled") to run on different kinds of computers.  The implications
-of this were not lost on the hardware manufacturers: a customer could
-now undertake a major software engineering effort without necessarily
-locking themselves into one particular computer architecture.  When
-this was combined with the gradual narrowing of performance
-differences between various computers, as the less efficient designs
-were weeded out, a manufacturer that treated its hardware as its only
-asset could look forward to a future of declining profit margins.  Raw
-computing power was becoming a fungible good, while software was
-becoming the differentiator.  Selling software, or at least treating
-it as an integral part of hardware sales, began to look like a good
-strategy.</para>
+<para>À mesure que l'industrie mûrissait, plusieurs changements liés se
+sont produits en même temps. La jungle des normes matérielles a
+progressivement permis l'émergence de quelques lauréats : lauréats grâce
+à une meilleure technologie, une meilleure stratégie voire la
+combinaison des deux. En même temps, et pas entièrement par hasard, le
+développement de langages de programmation dits de « haut niveau »
+signifiait que l'on pouvait écrire un programme une seul fois, dans un
+langage, et le voir automatiquement traduit (compilé) pour qu'il puisse
+fonctionner sur différents types d'ordinateurs. Les constructeurs de
+matériel n'ont pas manqué de voir les implications : un client pouvait,
+dès ce moment, entreprendre un travail considérable d'ingénierie
+logicielle sans s'enchaîner nécessairement à une architecture
+particulière. Ceci, couplé à une diminution des écarts de performances
+entre les différents ordinateurs (les conceptions les moins performantes
+étant évincées), faisait qu'un fabriquant qui misait tout sur le
+matériel pouvait s'attendre à voir baisser ses marges dans un futur
+proche. La puissance brute des ordinateurs n'était plus suffisante pour
+créer un avantage décisif, la concurrence s'est alors déplacée sur le
+terrain des logiciels. Vendre des logiciels, ou au moins leur donner la
+même importance qu'au matériel, devenait la nouvelle stratégie
+gagnante.</para>
 
-<para>This meant that manufacturers had to start enforcing the
-copyrights on their code more strictly.  If users simply continued to
-share and modify code freely among themselves, they might
-independently reimplement some of the improvements now being sold as
-"added value" by the supplier.  Worse, shared code could get into the
-hands of competitors.  The irony is that all this was happening around
-the time the Internet was getting off the ground.  Just when truly
-unobstructed software sharing was finally becoming technically
-possible, changes in the computer business made it economically
-undesirable, at least from the point of view of any single company.
-The suppliers clamped down, either denying users access to the code
-that ran their machines, or insisting on non-disclosure agreements
-that made effective sharing impossible.</para>
+<para>Cela signifiait que les fabricants devaient commencer à faire
+respecter le droit d'auteur sur leur code de manière plus stricte. Si
+les utilisateurs continuaient à partager et modifier le code de manière
+libre entre eux, ils pourraient reproduire certaines des améliorations
+désormais vendues en tant que « valeur ajoutée » par le fournisseur.
+Pire encore, le code partagé pourrait tomber entre les mains des
+concurrents. L'ironie est que tout ceci se passait à l'époque où
+Internet commençait à pointer son nez. Alors même que les obstacles au
+partage de logiciels tombaient, la mue du marché des ordinateurs l'a
+rendu économiquement indésirable, au moins du point de vue de n'importe
+quelle entreprise. Les fournisseurs ont renforcé leurs positions, soit
+en refusant aux utilisateurs l'accès au code faisant fonctionner leurs
+machines, soit en imposant des accords de confidentialité rendant tout
+partage impossible.</para>
 
 <sect3 id="history-conscious-resistance">
-<title>Conscious resistance</title>
+<title>Résistance consciente</title>
 
-<para>As the world of unrestricted code swapping slowly faded away, a
-counterreaction crystallized in the mind of at least one programmer.
-Richard Stallman worked in the Artificial Intelligence Lab at the
-Massachusetts Institute of Technology in the 1970s and early '80s,
-during what turned out to be a golden age and a golden location for
-code sharing.  The AI Lab had a strong "hacker
-ethic",<footnote><para>Stallman uses the word "hacker" in the sense of
-"someone who loves to program and enjoys being clever about it," not
-the relatively new meaning of "someone who breaks into
-computers."</para></footnote> and people were not only encouraged but
-expected to share whatever improvements they made to the system.  As
-Stallman wrote later:</para>
+<para>Alors que le monde du libre échange de code s'affaiblissait,
+l'idée
+d'une riposte germait dans l'esprit d'au moins un programmeur. Richard
+Stallman travaillait au laboratoire d'intelligence artificielle au MIT
+(Massachusetts Institue of Technology) dans les années 70 et au début
+des années 80, durant une période qui s'est révélée être l'âge d'or du
+partage de code. Le laboratoire avait une forte « éthique de hacker
+»,<footnote><para>Stallman utilise le mot « hacker » pour désigner « une
+personne qui aime programmer et qui adore faire le malin avec ça » mais
+pas « quelqu'un qui s'introduit dans les ordinateurs » comme le voudrait
+le nouveau sens.</para></footnote>et les gens n'étaient pas seulement
+encouragés à partager les améliorations qu'ils avaient pu apporter au
+système, c'était ce qu'on attendait d'eux. Comme Stallman écrivit plus
+tard : </para>
 
     <blockquote>
-      <para><emphasis>We did not call our software "free software",
-      because that term did not yet exist; but that is what it was.
-      Whenever people from another university or a company wanted to
-      port and use a program, we gladly let them.  If you saw someone
-      using an unfamiliar and interesting program, you could always
-      ask to see the source code, so that you could read it, change
-      it, or cannibalize parts of it to make a new program.
+      <para><emphasis>Nous n'appelions pas nos logiciels « logiciels
+      libres » parce que ce terme n'existait pas, mais c'est bien ce que
+      c'était. Si des gens d'une autre université ou d'une entreprise
+      voulait utiliser nos programmes, nous leur en donnions volontiers
+      la permission. Si vous voyiez quelqu'un utiliser un programme
+      intéressant que vous n'aviez jamais rencontré, vous pouviez
+      toujours lui en demander le code source, pour pouvoir le lire, le
+      modifier ou en piller une partie pour faire un nouveau programme.
       </emphasis></para>
 
-      <para>(from <emphasis role="bold"><ulink
-      url="http://www.gnu.org/gnu/thegnuproject.html"/></emphasis>)</para>
+      <para>(tiré de <emphasis role="bold"><ulink
+
+url="http://www.gnu.org/gnu/thegnuproject.html"/></emphasis>)</para>
     </blockquote>
 
 
-<para>This Edenic community collapsed around Stallman shortly after
-1980, when the changes that had been happening in the rest of the
-industry finally caught up with the AI Lab.  A startup company hired
-away many of the Lab's programmers to work on an operating system
-similar to what they had been working on at the Lab, only now under an
-exclusive license.  At the same time, the AI Lab acquired new
-equipment that came with a proprietary operating system.</para>
+<para>Cette communauté utopique s'est effondrée autour de Stallman peu
+après 1980, quand le laboratoire a finalement été rattrapé par les
+changements qui s'opéraient dans le reste de l'industrie. Une startup
+débaucha de nombreux programmeurs du laboratoire pour développer un
+système d'exploitation proche de celui sur lequel ils travaillaient,
+mais désormais sous licence exclusive. Au même moment, le laboratoire
+faisait l'acquisition de nouveaux équipements livrés avec un système
+d'exploitation propriétaire.</para>
 
-<para>Stallman saw the larger pattern in what was happening:</para>
+<para>Stallman voyait très bien où cette tendance les conduisait
+:</para>
 
     <blockquote>
-      <para><emphasis>The modern computers of the era, such as the VAX
-      or the 68020, had their own operating systems, but none of them
-      were free software: you had to sign a nondisclosure agreement
-      even to get an executable copy.</emphasis> </para>
+      <para><emphasis>Les ordinateurs modernes de ce temps, comme le VAX
+      ou le 68020 avaient leur propre système d'exploitation, mais
+      ni l'un ni l'autre n'était libre, vous deviez signer un accord de
+      confidentialité, même pour en obtenir une copie
+      fonctionnelle.</emphasis> </para>
 
-      <para><emphasis>This meant that the first step in using a
-      computer was to promise not to help your neighbor. A cooperating
-      community was forbidden. The rule made by the owners of
-      proprietary software was, "If you share with your neighbor, you
-      are a pirate. If you want any changes, beg us to make them."
+      <para><emphasis>Ce qui signifiait que la première démarche à faire
+      pour utiliser un ordinateur était de promettre de ne pas aider son
+      voisin. Une communauté coopérative était proscrite. La règle mise
+      en place par les créateurs des logiciels propriétaires était : «
+      Si vous partagez avec votre voisin vous êtes un pirate. Si vous
+      désirez des changements suppliez nous de les faire ».
       </emphasis> </para>
 
     </blockquote>
 
-<para>By some quirk of personality, he decided to resist the trend.
-Instead of continuing to work at the now-decimated AI Lab, or taking a
-job writing code at one of the new companies, where the results of his
-work would be kept locked in a box, he resigned from the Lab and
-started the GNU Project and the Free Software Foundation (FSF).  The
-goal of GNU<footnote><para>It stands for "GNU's Not Unix", and the
-"GNU" in that expansion stands for...the same
-thing.</para></footnote> was to develop a completely free and open
-computer operating system and body of application software, in which
-users would never be prevented from hacking or from sharing their
-modifications.  He was, in essence, setting out to recreate what had
-been destroyed at the AI Lab, but on a world-wide scale and without
-the vulnerabilities that had made the AI Lab's culture susceptible to
-disintegration.</para>
+<para>Mais Stallman n'était pas un hacker comme les autres et sa
+personnalité le poussa à s'opposer à cette tendance. Plutôt que de
+continuer à travailler dans un laboratoire décimé ou de trouver un
+emploi de programmeur dans l'une de ces nouvelles compagnies où les
+fruits de son travail seraient enfermés dans une boîte, il a démissionné
+pour lancer le projet GNU et la Free Software Foundation (FSF). Le but
+du projet GNU<footnote><para>GNU est l'acronyme de « GNU is Not Unix »
+et « GNU » dans cette extension signifie... la même
+chose.</para></footnote>était de développer un système d'exploitation
+pour ordinateur complètement libre et ouvert ainsi qu'un ensemble
+d'applications logiciels dans lequel les utilisateurs ne seraient jamais
+empêchés d'hacker ou de partager leurs modifications. Il entreprenait en
+fait de recréer ce qui avait été détruit au laboratoire d'intelligence
+artificielle mais à l'échelle mondiale et sans les points faibles à
+l'origine de la destruction de l'esprit du laboratoire.</para>
 
-<para>In addition to working on the new operating system, Stallman
-devised a copyright license whose terms guaranteed that his code would
-be perpetually free.  The GNU General Public License (GPL) is a clever
-piece of legal judo: it says that the code may be copied and modified
-without restriction, and that both copies and derivative works (i.e.,
-modified versions) must be distributed under the same license as the
-original, with no additional restrictions.  In effect, it uses
-copyright law to achieve an effect opposite to that of traditional
-copyright: instead of limiting the software's distribution, it
-prevents <emphasis>anyone</emphasis>, even the author, from limiting
-it.  For Stallman, this was better than simply putting his code into
-the public domain.  If it were in the public domain, any particular
-copy of it could be incorporated into a proprietary program (as has
-also been known to happen to code under permissive copyright
-licenses).  While such incorporation wouldn't in any way diminish the
-original code's continued availability, it would have meant that
-Stallman's efforts could benefit the enemy&mdash;proprietary software.
-The GPL can be thought of as a form of protectionism for free
-software, because it prevents non-free software from taking full
-advantage of GPLed code.  The GPL and its relationship to other free
-software licenses are discussed in detail in
-<xref linkend="legal"/>.</para>
+<para>En plus de travailler sur le nouveau système d'exploitation,
+Stallman
+conçut une licence dont les termes garantissent que son code restera
+libre à tout jamais. La GNU General Public License (GPL) est une
+pirouette légale bien pensée : elle dit que le code peut être copié ou
+modifié sans restriction et que les copies ou le travail dérivé (
+c'est-à-dire les versions modifiées ) doivent être distribuées sous la
+même licence que l'original, sans y ajouter de restrictions. En fait,
+elle utilise les lois du droit d'auteur pour produire l'effet opposé du
+copyright traditionnel : plutôt que de limiter la diffusion du logiciel,
+elle empêche <emphasis>quiconque</emphasis>, même l'auteur, de la
+restreindre. Pour Stallman ça valait mieux que de simplement placer son
+code dans le domaine public. En appartenant au domaine public, n'importe
+quelle copie aurait pu être incorporée dans un programme propriétaire
+(ce qui s'est passé avec du code publié sous des licences trop
+permissives). Même si cette incorporation ne diminuerait en rien la
+disponibilité continue du code originel, cela aurait signifié que les
+efforts de Stallman auraient pu profiter à l'ennemi, le logiciel
+propriétaire. La GPL peut être vue comme une forme de protection pour le
+logiciel libre car elle empêche les logiciels non-libres de profiter du
+code sous licence GPL. La GPL et ses relations avec d'autres licences de
+logiciels libres sont présentées en détails dans le <xref
+linkend="legal"/>.</para>
 
-<para>With the help of many programmers, some of whom shared
-Stallman's ideology and some of whom simply wanted to see a lot of
-free code available, the GNU Project began releasing free replacements
-for many of the most critical components of an operating system.
-Because of the now-widespread standardization in computer hardware and
-software, it was possible to use the GNU replacements on otherwise
-non-free systems, and many people did.  The GNU text editor (Emacs)
-and C compiler (GCC) were particularly successful, gaining large and
-loyal followings not on ideological grounds, but simply on their
-technical merits.  By about 1990, GNU had produced most of a free
-operating system, except for the kernel&mdash;the part that the
-machine actually boots up, and that is responsible for managing memory,
-disk, and other system resources.</para>
+<para>Avec l'aide de nombreux développeurs, certains d'entre eux
+partageant l'idéologie de Stallman et d'autres voulant simplement voir
+un maximum de code libre disponible, le projet GNU commença à produire
+des équivalents libres pour beaucoup d'éléments importants d'un système
+d'exploitation. Grâce à la standardisation du matériel informatique et
+des logiciels, il était devenu possible d'utiliser les équivalents GNU
+sur des systèmes non-libres, et beaucoup l'ont fait. L'éditeur de texte
+GNU (Emacs) et le compilateur C (GCC) en particulier ont rencontré un
+succès important, rassemblant, non pour l'idéologie qu'ils véhiculaient
+mais simplement pour leurs mérites techniques, une grande communauté
+d'utilisateurs loyaux. À l'orée de 1990, GNU avait produit l'essentiel
+d'un système d'exploitation libre à l'exception du noyau (la partie sur
+laquelle démarre la machine et qui est en charge de la gestion de la
+mémoire, des disques et des autres ressources systèmes).</para>
 
-<para>Unfortunately, the GNU project had chosen a kernel design that
-turned out to be harder to implement than expected.  The ensuing delay
-prevented the Free Software Foundation from making the first release
-of an entirely free operating system.  The final piece was put into
-place instead by Linus Torvalds, a Finnish computer science student
-who, with the help of volunteers around the world, had completed a
-free kernel using a more conservative design.  He named it Linux, and
-when it was combined with the existing GNU programs, the result was a
-completely free operating system.  For the first time, you could boot
-up your computer and do work without using any proprietary
-software.<footnote><para>Technically, Linux was not the first.  A free
-operating system for IBM-compatible computers, called 386BSD, had come
-out shortly before Linux.  However, it was a lot harder to get 386BSD
-up and running.  Linux made such a splash not only because it was
-free, but because it actually had a high chance of booting your
-computer when you installed it.</para></footnote></para>
+<para>Malheureusement le projet GNU avait fait le choix d'une conception
+de noyau qui s'est révélée plus difficile à mettre en œuvre que prévu.
+Le retard qui s'ensuivit, empêcha la Free Software Foundation de sortir
+le premier système d'exploitation libre. La dernière pièce a,
+finalement, été mise en place par Linus Torvalds, un étudiant en
+informatique finlandais qui, avec l'aide de volontaires du monde entier,
+avait compilé un noyau libre de conception plus classique. Il le nomma
+Linux, lequel, une fois combiné aux programmes GNU existants, donna un
+système d'exploitation entièrement libre. Pour la première fois vous
+pouviez allumer votre ordinateur et travailler sans utiliser un seul
+logiciel propriétaire. <footnote><para>Techniquement, Linux n'était pas
+le premier. Un système d'exploitation libre pour les ordinateurs
+compatibles IBM, appelé 386BSD, est sorti peu avant Linux. Cependant, il
+était bien plus compliqué de faire marcher 386BSD. Linux a créé des
+remous non seulement parce qu'il était libre mais aussi parce qu'il
+avait vraiment une bonne chance de faire marcher l'ordinateur sur lequel
+vous l'aviez installé.</para></footnote></para>
 
-<para>Much of the software on this new operating system was not
-produced by the GNU project.  In fact, GNU wasn't even the only group
-working on producing a free operating system (for example, the code
-that eventually became NetBSD and FreeBSD was already under
-development by this time).  The importance of the Free Software
-Foundation was not only in the code they wrote, but in their political
-rhetoric.  By talking about free software as a cause instead of a
-convenience, they made it difficult for
-programmers <emphasis>not</emphasis> to have a political consciousness
-about it.  Even those who disagreed with the FSF had to engage the
-issue, if only to stake out a different position.  The FSF's
-effectiveness as propagandists lay in tying their code to a message,
-by means of the GPL and other texts.  As their code spread widely,
-that message spread as well.</para>
+<para>La plupart des logiciels de ce nouveau système d'exploitation
+n'étaient pas produits par le projet GNU. En fait, GNU n'était même pas
+le seul groupe travaillant à l'élaboration d'un système d'exploitation
+libre (par exemple, le code qui deviendra NetBSD et FreeBSD était déjà
+en développement à cette époque). Mais l'importance de la Free Software
+Foundation n'était pas seulement dans le code écrit par ses membres,
+mais aussi dans leur discours politique. En mettant en avant le logiciel
+libre comme une cause à part entière, plutôt qu'une commodité, ils lui
+ont donné une dimension politique difficile à
+<emphasis>ignorer</emphasis> par les programmeurs. Même les gens en
+désaccord avec la FSF ont dû traiter de ce problème, parfois pour
+revendiquer une position différente. L'efficacité du message de la FSF
+tient au fait qu'il est lié au code grâce à la GPL et d'autres textes.
+Alors que le code se répand partout, le message se diffuse
+également.</para>
 
 </sect3>
 
 <sect3 id="history-accidental-resistance">
-<title>Accidental resistance</title>
+<title>Résistance accidentelle</title>
 
-<para>There were many other things going on in the nascent free
-software scene, however, and few were as explictly ideological as
-Stallman's GNU Project.  One of the most important was
-the <firstterm>Berkeley Software Distribution</firstterm>
-(<firstterm>BSD</firstterm>), a gradual re-implementation of the Unix
-operating system&mdash;which up until the late 1970's had been a
-loosely proprietary research project at AT&amp;T&mdash;by programmers
-at the University of California at Berkeley.  The BSD group did not
-make any overt political statements about the need for programmers to
-band together and share with one another, but they
-<emphasis>practiced</emphasis> the idea with flair and
-enthusiasm, by coordinating a massive distributed development effort
-in which the Unix command-line utilities and code libraries, and
-eventually the operating system kernel itself, were rewritten from
-scratch mostly by volunteers.  The BSD project became a prime example
-of non-ideological free software development, and also served as a
-training ground for many developers who would go on to remain active
-in the open source world.</para>
+<para>Bien que la scène naissante du logiciel libre ait été très
+dynamique, peu d'activités furent aussi clairement idéologiques que le
+projet GNU de Stallman. L'un des plus importants était le
+projet <firstterm>Berkeley Software Distribution</firstterm>
+(<firstterm>BSD</firstterm>),une ré-implémentation graduelle du système
+d'exploitation Unix (qui jusqu'à la fin des années 70 fut un projet de
+recherche vaguement propriétaire chez AT&amp;T) par des programmeurs de
+l'Université de Californie de Berkeley. Le groupe BSD ne prit pas
+ouvertement position sur la nécessité des programmeurs de s'unir et de
+partager, mais ils mirent <emphasis>en pratique</emphasis> cette idée
+avec style et enthousiasme en coordonnant un gros effort de
+développement coopératif grâce auquel les lignes de commande des
+utilitaires Unix, les librairies de code et finalement le noyau du
+système d'exploitation lui-même furent ré-écrits entièrement,
+principalement par des volontaires. Le projet BSD devint un exemple
+important de développement non-idéologique de logiciel libre et servit
+également de terrain d'entraînement à de nombreux développeurs qui
+continueront par la suite à être actifs dans le monde de l'Open
+Source.</para>
 
 <para>Another crucible of cooperative development was the <firstterm>X
 Window System</firstterm>, a free, network-transparent graphical
 computing environment, developed at MIT in the mid-1980's in
-partnership with hardware vendors who had a common interest in being
-able to offer their customers a windowing system.  Far from opposing
-proprietary software, the X license deliberately allowed proprietary
-extensions on top of the free core&mdash;each member of the consortium
-wanted the chance to enhance the default X distribution, and thereby
-gain a competitive advantage over the other members.  X
-Windows<footnote><para>They prefer it to be called the "X Window
-System", but in practice, people usually call it "X Windows", because
-three words is just too cumbersome.</para></footnote> itself was free
-software, but mainly as a way to level the playing field between
-competing business interests, not out of some desire to end the
-dominance of proprietary software.  Yet another example, predating the
-GNU project by a few years, was TeX, Donald Knuth's free,
-publishing-quality typesetting system.  He released it under a license
-that allowed anyone to modify and distribute the code, but not to call
-the result "TeX" unless it passed a very strict set of compatibility
-tests (this is an example of the "trademark-protecting" class of free
-licenses, discussed more in <xref linkend="legal"/>).  Knuth wasn't
-taking a stand one way or the other on the question of
-free-versus-proprietary software, he just needed a better typesetting
-system in order to complete his
-<emphasis>real</emphasis> goal&mdash;a book on computer
-programming&mdash;and saw no reason not to release his system to the
-world when done.</para>
+paUn autre nid de développement coopératif fut le système X Window, un
+environnement graphique, libre et transparent au réseau, développé au
+MIT au milieu des années 80 en partenariat avec des vendeurs de matériel
+ayant un intérêt commun à pouvoir proposer à leurs clients un système
+graphique. Loin de s'opposer aux logiciels propriétaires, la licence X
+permettait délibérément l'ajout d'extensions propriétaires au cœur libre
+du système, chaque membre du consortium souhaitant pouvoir améliorer la
+distribution X de base et, par ce moyen, obtenir un avantage
+concurrentiel sur les autres. X Windows<footnote><para>Ils préfèrent
+qu'il soit appelé le « Système X Window », mais en pratique on l'appelle
+« X Window » parce que les trois mots sont trop
+encombrants.</para></footnote>en lui même était un logiciel libre, mais
+essentiellement par volonté de placer les concurrents sur un même pied
+d'égalité, et non pas comme un désir quelconque de mettre un terme à
+l'hégémonie des logiciels propriétaires. Devançant le projet GNU de
+quelques années, TeX, le système libre de traitement de texte de Donald
+Knuth permettant la création de documents de grande qualité, en est un
+autre exemple. Il fut publié sous une licence permettant à quiconque de
+modifier et de distribuer le code mais qui interdisait de nommer le
+résultat « TeX » s'il n'avait pas passé une série de tests de
+compatibilité stricts ( c'est là un exemple de licence libre de «
+protection de marque déposée » que nous approfondirons dans le <xref
+linkend="legal"/>). Knuth n'exprimait aucun avis, d'une façon ou d'une
+autre, sur la question de l'opposition des logiciels libres aux
+logiciels propriétaires : il cherchait simplement un meilleur traitement
+de texte pour achever son <emphasis>véritable</emphasis> but, un livre
+sur la programmation informatique, et ne voyait aucune raison de ne pas
+offrir son système au monde une fois celui-ci prêt.</para>
 
 </sect3>
 
-<para>Without listing every project and every license, it's safe to
-say that by the late 1980's, there was a lot of free software
-available under a wide variety of licenses.  The diversity of licenses
-reflected a corresponding diversity of motivations.  Even some of the
-progammers who chose the GNU GPL were much less ideologically driven
-than the GNU project itself.  Although they enjoyed working on free
-software, many developers did not consider proprietary software a
-social evil.  There were people who felt a moral impulse to rid the
-world of "software hoarding" (Stallman's term for non-free software),
-but others were motivated more by technical excitement, or by the
-pleasure of working with like-minded collaborators, or even by a
-simple human desire for glory.  Yet by and large these disparate
-motivations did not interact in destructive ways.  This is partly
-because software, unlike other creative forms like prose or the visual
-arts, must pass semi-objective tests in order to be considered
-successful: it must run, and be reasonably free of bugs.  This gives
-all participants in a project a kind of automatic common ground, a
-reason and a framework for working together without worrying too much
-about qualifications beyond the technical.</para>
+<para>Sans faire une liste de tous les projets et de toutes les
+licences, on peut dire qu'à la fin des années 80, il existait de
+nombreux logiciels disponibles sous une grande variété de licences. La
+diversité des licences reflétait une diversité équivalente des
+motivations. Même certains des programmeurs choisissant la GNU GPL
+n'étaient pas aussi déterminés idéologiquement que le projet GNU
+lui-même. Et s'ils appréciaient de travailler sur des logiciels libres,
+de nombreux développeurs ne considéraient pas les logiciels
+propriétaires comme un mal social. Quelques personnes ressentaient un
+besoin moral de débarrasser le monde des « logiciels panneaux
+d'affichage » (appellation de Stallman pour les logiciels
+propriétaires), mais d'autres étaient plutôt motivées par l'émulation
+technique ou le plaisir de travailler avec des collaborateurs partageant
+leurs idées, voire même, par le simple désir humain de gloire. Pourtant
+généralement, ces diverses motivations n'interagissaient pas de manière
+destructive. C'est en parti dû au fait que les logiciels, contrairement
+à d'autres œuvres créatives comme la prose ou les arts visuels, doivent
+réussir des tests semi-objectifs pour être considérés comme des succès :
+ils doivent fonctionner et ne pas trop comporter de bogues. Cela donne
+aux participants du projet une base commune, une raison et un cadre pour
+travailler ensemble sans trop se préoccuper des qualifications autres
+que techniques.</para>
 
-<para>Developers had another reason to stick together as well: it
-turned out that the free software world was producing some very
-high-quality code.  In some cases, it was demonstrably technically
-superior to the nearest non-free alternative; in others, it was at
-least comparable, and of course it always cost less.  While only a few
-people might have been motivated to run free software on strictly
-philosophical grounds, a great many people were happy to run it
-because it did a better job.  And of those who used it, some
-percentage were always willing to donate their time and skills to help
-maintain and improve the software.</para>
+<para>Les développeurs avaient une autre raison de rester unis : il
+s'est avéré que le code produit par le monde des logiciels libres était
+de très bonne qualité. Dans certains cas, ils étaient notablement
+techniquement supérieurs à leur équivalent non-libre le plus proche,
+dans d'autres cas ils étaient au moins comparables, et bien sûr,
+toujours meilleur marché. Alors que seulement quelques personnes
+auraient pu être motivées pour produire des logiciels libres sur des
+bases strictement philosophiques, bien plus l'étaient du fait des
+meilleurs résultats obtenus. De plus, il y avait toujours, parmi les
+utilisateurs, un certain pourcentage prêt à faire don de leur temps et
+de leurs compétences afin d'aider à entretenir et améliorer le
+logiciel.</para>
 
-<para>This tendency to produce good code was certainly not universal,
-but it was happening with increasing frequency in free software
-projects around the world.  Businesses that depended heavily on
-software gradually began to take notice.  Many of them discovered that
-they were already using free software in day-to-day operations, and
-simply hadn't known it (upper management isn't always aware of
-everything the IT department does).  Corporations began to take a more
-active and public role in free software projects, contributing time
-and equipment, and sometimes even directly funding the development of
-free programs.  Such investments could, in the best scenarios, repay
-themselves many times over.  The sponsor only pays a small number of
-expert programmers to devote themselves to the project full time, but
-reaps the benefits of <emphasis>everyone's</emphasis> contributions,
-including work from unpaid volunteers and from programmers being paid
-by other corporations.</para>
+<para>Cette tendance à produire du bon code n'était certainement pas
+universelle, mais cela se produisait à une fréquence croissante dans les
+projets de logiciels libres du monde entier. Les entreprises tributaires
+de logiciels commencèrent progressivement à le remarquer. Beaucoup
+d'entre elles découvrirent qu'elles utilisaient déjà, sans le savoir,
+des logiciels libres pour leurs opérations quotidiennes (les dirigeants
+ne sont pas toujours au courant des choix de leur service informatique).
+Les sociétés entreprirent de s'impliquer davantage dans les projets de
+logiciels libres en mettant à disposition du temps et des équipements,
+voire même en finançant le développement. De tels investissements
+pouvaient, dans les meilleurs scénarii, se montrer très lucratifs par un
+coefficient de retour conséquent. Le commanditaire ne paie qu'un nombre
+réduit de programmeurs experts pour se consacrer à plein temps au
+projet, mais récolte les fruits de la collaboration <emphasis>de
+chacun</emphasis>, y compris du travail des bénévoles et des
+développeurs payés par d'autres sociétés.</para>
 
 </sect2>
 
-<!-- ========================== subsection ========================== -->
+<!-- ========================== subsection ==========================
+-->
 <sect2 id="free-vs-open-source">
-<title>"Free" Versus "Open Source"</title>
+<title>« Libre » contre « Open Source »</title>
 
-<para>As the corporate world gave more and more attention to free
-software, programmers were faced with new issues of presentation.  One
-was the word "free" itself.  On first hearing the term "free software"
-many people mistakenly think it means just "zero-cost software."  It's
-true that all free software is zero-cost,<footnote><para>One may charge
-a fee for giving out copies of free software, but since one cannot
-stop the recipients from offering it at no charge afterwards, the
-price is effectively driven to zero immediately.</para></footnote>
-but not all zero-cost software is free.  For example, during the
-battle of the browsers in the 1990s, both Netscape and Microsoft gave
-away their competing web browsers at no charge, in a scramble to gain
-market share.  Neither browser was free in the "free software" sense.
-You couldn't get the source code, and even if you could, you didn't
-have the right to modify or redistribute it.<footnote><para>The source
-code to Netscape Navigator
-<emphasis>was</emphasis> eventually released under an open source
-license, in 1998, and became the foundation for the Mozilla web
-browser.  See <ulink
-url="http://www.mozilla.org/"/>.</para></footnote>  The only thing
-you could do was download an executable and run it.  The browsers were
-no more free than shrink-wrapped software bought in a store; they
-merely had a lower price.</para>
+<para>Alors que le monde de l'entreprise prêtait de plus en plus
+attention aux
+logiciels libres, les programmeurs se trouvèrent confrontés à de
+nouveaux problèmes de représentation. L'un d'entre eux était le mot «
+free » lui-même. Entendant pour la première fois « free software »,
+nombre de personne pensait, à tort, que cela signifiait « logiciel
+gratuit ». S'il est vrai que tous les logiciels libres ne coûtent
+rien,<footnote><para>On peut faire payer quelque chose en échange de
+copies d'un logiciel libre, mais comme on ne peut pas empêcher
+l'acheteur de le redistribuer gratuitement, le prix tend immédiatement
+vers zéro.</para></footnote>, tous les logiciels gratuits ne sont pas
+libres. Par exemple, durant la bataille des navigateurs dans les années
+90 et dans la course aux parts de marché qu'ils se livraient, Netscape
+et Microsoft offraient leurs navigateurs Web gratuitement. Aucun des
+deux n'était libre dans le sens des « logiciels libres ». Vous ne
+pouviez pas obtenir le code source et, même si vous y parveniez, vous
+n'aviez pas le droit de le modifier ni de le redistribuer
+<footnote><para>Finalement le code source de Netscape Navigator
+<emphasis>a été</emphasis> publié sous une licence libre, en 1998, et
+deviendra la base du navigateur Web Mozilla. Voir sur <ulink
+url="http://www.mozilla.org/"/>.</para></footnote> Vous pouviez tout
+juste télécharger un exécutable et le lancer. Les navigateurs n'étaient
+pas plus libres que les logiciels sous film plastique achetés en magasin
+: tout au plus étaient-ils diffusés à prix inférieur.</para>
 
-<para>This confusion over the word "free" is due entirely to an
-unfortunate ambiguity in the English language.  Most other tongues
-distinguish low prices from liberty (the distinction between
-<emphasis>gratis</emphasis> and <emphasis>libre</emphasis> is
-immediately clear to speakers of Romance languages, for example).  But
-English's position as the de facto bridge language of the Internet
-means that a problem with English is, to some degree, a problem for
-everyone.  The misunderstanding around the word "free" was so
-prevalent that free software programmers eventually evolved a standard
-formula in response: "It's <emphasis>free</emphasis> as in
-<emphasis>freedom</emphasis>&mdash;think <emphasis>free
-speech</emphasis>, not <emphasis>free beer</emphasis>."  Still, having
-to explain it over and over is tiring.  Many programmers felt, with
-some justification, that the ambiguous word "free" was hampering the
-public's understanding of this software.</para>
+<para>La confusion sur le mot « free » est entièrement due à
+l'ambivalence malheureuse du terme en anglais. La plupart des autres
+langues font une distinction entre la notion de prix et de liberté (la
+différence entre <emphasis>gratuit</emphasis> et
+<emphasis>libre</emphasis> est évidente pour ceux parlant une langue
+romane par exemple). Mais l'anglais étant de facto la langue d'échange
+sur Internet, le problème spécifique à cette langue concerne, à un
+certain degré, tout le monde. L'incompréhension liée au mot « free »
+était telle que les programmeurs de logiciels libres ont fini par créer
+une formule en réponse : « C'est <emphasis>free</emphasis> (libre) comme
+dans <emphasis>freedom</emphasis> (liberté), pensez à <emphasis>free
+speech</emphasis> (liberté de parole), pas à <emphasis>free
+beer</emphasis> (bière gratuite) ». Reste que devoir l'expliquer sans
+cesse est fatigant. De nombreux programmeurs ressentaient, à juste
+titre, que l'ambiguïté du mot « free » rendait plus difficile la
+compréhension par le public de ce type de logiciels.</para>
 
-<para>But the problem went deeper than that.  The word "free" carried
-with it an inescapable moral connotation: if freedom was an end in
-itself, it didn't matter whether free software also happened to
-be better, or more profitable for certain businesses in certain
-circumstances.  Those were merely pleasant side effects of a motive
-that was, at bottom, neither technical nor mercantile, but moral.
-Furthermore, the "free as in freedom" position forced a glaring
-inconsistency on corporations who wanted to support particular free
-programs in one aspect of their business, but continue marketing
-proprietary software in others.</para>
+<para>Cependant, le problème apparaissait plus profond que cela. Le mot
+« libre » était vecteur d'une connotation morale indéniable : si la
+liberté était une fin en soi, peu importait que les logiciels libres
+soient également meilleurs ou plus profitables à certaines sociétés dans
+certaines circonstances. Ce n'étaient là que les effets secondaires
+bienvenus d'une motivation qui, au fond, n'était ni technique ni
+commerciale mais morale. En outre, l'idée « Libre comme dans liberté »
+imposait une flagrante contradiction aux sociétés souhaitant soutenir
+certains logiciels libres dans un domaine particulier de leurs
+activités, mais voulant continuer à commercialiser des logiciels
+propriétaires dans d'autres branches.</para>
 
-<para>These dilemmas came to a community that was already poised for
-an identity crisis.  The programmers who actually
-<emphasis>write</emphasis> free software have never been of one mind
-about the overall goal, if any, of the free software movement.  Even
-to say that opinions run from one extreme to the other would be
-misleading, in that it would falsely imply a linear range where there
-is instead a multidimensional scattering.  However, two broad
-categories of belief can be distinguished, if we are willing to ignore
-subtleties for the moment.  One group takes Stallman's view, that the
-freedom to share and modify is the most important thing, and that
-therefore if you stop talking about freedom, you've left out the core
-issue.  Others feel that the software itself is the most important
-argument in its favor, and are uncomfortable with proclaiming
-proprietary software inherently bad.  Some, but not all, free
-software programmers believe that the author (or employer, in the case
-of paid work)
-<emphasis>should</emphasis> have the right to control the terms of
-distribution, and that no moral judgement need be attached to the
-choice of particular terms.</para>
+<para>Ces dilemmes touchèrent une communauté déjà promise à une crise
+d'identité. Les programmeurs qui <emphasis>écrivent</emphasis> des
+logiciels libres n'ont
+jamais réussi à se mettre d'accord sur le but final, s'il existe, du
+mouvement des logiciels libres. Même dire que les opinions vont d'un
+extrême à l'autre serait trompeur, car cela implique une vision linéaire
+au lieu de la dispersion multidimensionnelle existante. Cependant, on
+peut définir deux grands courants de pensée, si vous acceptez de passer
+outre les détails pour le moment. L'un des groupes partage la pensée de
+Stallman que la liberté de partager et modifier est la plus importante,
+et qu'en conséquence, si vous cessez de parler de liberté, vous
+abandonnez l'idée principale. Pour d'autres, c'est le logiciel qui
+compte et ils ne se voient pas dire que les logiciels propriétaires sont
+par définition mauvais. Certains programmeurs de logiciels libres, mais
+pas tous, pensent que l'auteur (ou l'employeur dans le cas de travail
+rémunéré) <emphasis>devrait</emphasis> avoir le droit de contrôler les
+termes de la distribution et qu'aucun jugement moral ne devrait été
+rattaché au choix de termes particuliers.</para>
 
-<para>For a long time, these differences did not need to be carefully
-examined or articulated, but free software's burgeoning success in the
-business world made the issue unavoidable.  In 1998, the term
-<firstterm>open&nbsp;source</firstterm> was created as an alternative
-to "free", by a coalition of programmers who eventually became The
-Open Source Initiative (OSI).<footnote><para>OSI's web home is <ulink
-url="http://www.opensource.org/"/>.</para></footnote>  The OSI felt
-not only that "free software" was potentially confusing, but that the
-word "free" was just one symptom of a general problem: that the
-movement needed a marketing program to pitch it to the corporate
-world, and that talk of morals and the social benefits of sharing
-would never fly in corporate boardrooms.  In their own words:</para>
+<para>Pendant longtemps personne n'a vraiment eu à prêter attention à
+ces différences ou à leurs interférences, mais le succès grandissant des
+logiciels libres dans le monde de l'entreprise a rendu cette question
+inévitable. En 1998, le terme <firstterm>Open&nbsp;Source</firstterm>
+a été inventé, en tant
+qu'alternative à « libre », par une coalition de programmeurs devenue
+par la suite The Open Source Initiative (OSI).<footnote><para>La page
+Web de l'OSI est : <ulink
+url="http://www.opensource.org/"/>.</para></footnote>. Pour l'OSI non
+seulement le terme « logiciel libre » était déroutant, mais le mot «
+libre » n'était qu'un symptôme d'un problème plus général : le mouvement
+avait besoin d'une stratégie de commercialisation pour s'adapter au
+monde de l'entreprise, et les discours sur les avantages moraux et
+sociaux du partage ne pénètreraient pas les conseils des sociétés. Selon
+eux : </para>
 
     <blockquote>
-      <para><emphasis>The Open Source Initiative is a marketing
-      program for free software. It's a pitch for "free software" on
-      solid pragmatic grounds rather than ideological
-      tub-thumping. The winning substance has not changed, the losing
-      attitude and symbolism have.&nbsp;...</emphasis></para>
+      <para><emphasis>L'Open Source Initiative est un programme de
+      commercialisation des logiciels libres. C'est un argumentaire en
+      faveur des « logiciels libres » qui s'appuie sur une solide base
+      pragmatique plutôt que sur une idéologie dévote. La substance
+      gagnante n'a pas changé, l'attitude et le symbolisme perdants,
+      eux, ont changés.&nbsp;...</emphasis></para>
 
-      <para><emphasis>The case that needs to be made to most techies
-      isn't about the concept of open source, but the name. Why not
-      call it, as we traditionally have, free software?</emphasis></para>
+      <para><emphasis>Le point qui doit être exposé à la plupart des
+      techniciens n'est pas le concept de l'Open Source, mais le nom.
+      Pourquoi ne pas l'appeler, comme nous l'avons toujours fait,
+      logiciel libre ?</emphasis></para>
 
-      <para><emphasis>One direct reason is that the term "free
-      software" is easily misunderstood in ways that lead to
-      conflict.&nbsp;...</emphasis></para>
+      <para><emphasis>Une raison simple est que le terme « logiciel
+      libre » peut facilement prêter à confusion et mener au
+      conflit.&nbsp;...</emphasis></para>
 
-      <para><emphasis>But the real reason for the re-labeling is a
-      marketing one. We're trying to pitch our concept to the
-      corporate world now. We have a winning product, but our
-      positioning, in the past, has been awful. The term "free
-      software" has been misunderstood by business persons, who
-      mistake the desire to share with anti-commercialism, or worse,
-      theft.</emphasis></para>
+      <para><emphasis>Mais la vraie motivation de ce changement de nom
+      est économique. Nous essayons maintenant de vendre notre concept
+      au monde de l'entreprise. Nous avons un produit compétitif, mais
+      notre positionnement, dans le passé, était très mauvais. Le terme
+      « logiciel libre » n'a pas été compris correctement par les hommes
+      d'affaires qui ont pris le désir de partage pour de
+      l'anti-capitalisme, ou pire encore, pour du vol.</emphasis></para>
 
-      <para><emphasis>Mainstream corporate CEOs and CTOs will never
-      buy "free software." But if we take the very same tradition, the
-      same people, and the same free-software licenses and change the
-      label to "open source" ? that, they'll buy.</emphasis></para>
+      <para><emphasis>Les décideurs des principales grandes entreprises
+      n'achèteront jamais un « logiciel libre ». Mais si nous prenons
+      les mêmes idées, les mêmes licences de logiciel libre et que l'on
+      remplace le nom par « Open Source » ? Alors ils achèteront.
+      Certains hackers ont du mal à y croire, mais c'est parce que ce
+      sont des techniciens qui pensent aux choses concrètes, palpables
+      et qui ne comprennent pas l'importance de l'image quand vous
+      vendez quelque chose.</emphasis></para>
 
-      <para><emphasis>Some hackers find this hard to believe, but
-      that's because they're techies who think in concrete,
-      substantial terms and don't understand how important image is
-      when you're selling something.</emphasis></para>
+      <para><emphasis>Dans le monde des affaires, l'apparence est une
+      réalité. L'apparence que nous voulons abattre les barricades et
+      travailler avec le monde des affaires compte au moins autant que
+      la réalité de notre comportement, nos convictions et nos
+      logiciels.</emphasis></para>
 
-      <para><emphasis>In marketing, appearance is reality. The
-      appearance that we're willing to climb down off the barricades
-      and work with the corporate world counts for as much as the
-      reality of our behavior, our convictions, and our
-      software.</emphasis></para>
-
-      <para>(from <emphasis role="bold"><ulink
+      <para>(Tiré et traduit de <emphasis role="bold"><ulink
       url="http://www.opensource.org/advocacy/faq.php"/></emphasis>
-      and <emphasis role="bold"><ulink
-      url="http://www.opensource.org/advocacy/case_for_hackers.php#marketing"
+      et <emphasis role="bold"><ulink
+
+url="http://www.opensource.org/advocacy/case_for_hackers.php#marketing"
       /></emphasis>)</para>
     </blockquote>
 
-<para>The tips of many icebergs of controversy are visible in that
-text.  It refers to "our convictions", but smartly avoids spelling out
-exactly what those convictions are.  For some, it might be the
-conviction that code developed according to an open process will be
-better code; for others, it might be the conviction that all
-information should be shared.  There's the use of the word "theft" to
-refer (presumably) to illegal copying&mdash;a usage that many object
-to, on the grounds that it's not theft if the original possessor still
-has the item afterwards.  There's the tantalizing hint that the free
-software movement might be mistakenly accused of anti-commercialism,
-but it leaves carefully unexamined the question of whether such an
-accusation would have any basis in fact.</para>
+<para>La pointe de l'iceberg de la polémique apparaît dans ce texte. Il
+mentionne « nos convictions » mais évite intelligemment de citer
+précisément quelles sont ces convictions. Pour certains, ça peut être la
+conviction que le code développé selon un processus ouvert sera
+meilleur, pour d'autres ça peut-être la conviction que toutes les
+informations devraient être partagées. L'usage du mot « vol » fait
+(sûrement) référence à la copie illégale, dont beaucoup se défendent :
+ce n'est pas un vol si personne n'est dépossédé de son bien. On retrouve
+aussi le raccourci facile, mais injuste, entre logiciels libres et
+anti-capitalisme, sans débattre du bien fondé de cette
+accusation.</para>
 
-<para>None of which is to say that the OSI's web site is inconsistent
-or misleading.  It's not.  Rather, it is an example of exactly what
-the OSI claims had been missing from the free software movement: good
-marketing, where "good" means "viable in the business world."  The
-Open Source Initiative gave a lot of people exactly what they had been
-looking for&mdash;a vocabulary for talking about free software as a
-development methodology and business strategy, instead of as a moral
-crusade.</para>
+<para>Rien de tout cela ne signifie que le site de l'OSI est incomplet
+ou trompeur. Il ne l'est pas. Au contraire, c'est la vitrine de ce qui
+manquait au mouvement du logiciel libre d'après l'OSI : une bonne
+stratégie commerciale où « bon » veut dire : « viable dans le monde des
+affaires ». L'Open Source Initiative a offert à beaucoup de gens
+exactement ce qu'ils cherchaient : un vocabulaire pour parler des
+logiciels libres avec un plan de développement et une stratégie
+commerciale, plutôt qu'une croisade idéologique.</para>
 
 </sect2>
 
-<para>The appearance of the Open Source Initiative changed the
-landscape of free software.  It formalized a dichotomy that had long
-been unnamed, and in doing so forced the movement to acknowledge that
-it had internal politics as well as external.  The effect today is
-that both sides have had to find common ground, since most projects
-include programmers from both camps, as well as participants who don't
-fit any clear category.  This doesn't mean people never talk about
-moral motivations&mdash;lapses in the traditional "hacker ethic" are
-sometimes called out, for example.  But it is rare for a free software
-/ open source developer to openly question the basic motivations of
-others in a project.  The contribution trumps the contributor.  If
-someone writes good code, you don't ask them whether they do it for
-moral reasons, or because their employer paid them to, or because
-they're building up their resum&eacute;, or whatever.  You evaluate
-the contribution on technical grounds, and respond on technical
-grounds.  Even explicitly political organizations like the Debian
-project, whose goal is to offer a 100% free (that is, "free as in
-freedom") computing environment, are fairly relaxed about integrating
-with non-free code and cooperating with programmers who don't share
-exactly the same goals.</para>
+<para>L'apparition de l'Open Source Initiative a transformé l'horizon
+des logiciels libres. Elle a reconnu une dichotomie longtemps inavouée
+et, par là même, a forcé le mouvement à reconnaître qu'il avait autant
+une politique interne qu'externe. On voit aujourd'hui que les deux
+groupes ont dû trouver un terrain d'entente puisque la plupart des
+projets font participer des programmeurs des deux camps aussi bien que
+d'autres n'entrant pas clairement dans l'une ou l'autre des catégories.
+Cela ne veut pas dire que les gens ne parlent jamais de motivations
+idéologiques, on fait parfois référence aux manquements à la « morale de
+hacker » traditionnelle par exemple. Mais il est rare de voir un
+développeur de l'un deux mondes douter ouvertement des motivations
+profondes de ses collègues. La contribution transcende le participant.
+Si quelqu'un produit du bon code, personne ne lui demande s'il le fait
+pour des raisons morales, ou parce que son employeur le paie pour cela,
+ou parce qu'il étoffe son Curriculum Vitae ou quoique ce soit d'autre.
+L'évaluation et les critiques de la contribution se font sur des
+critères techniques. Même des organisations ouvertement politiques comme
+le projet Debian dont le but est d'offrir un environnement 100% libre
+(c'est-à-dire « libre comme dans liberté ») sont plutôt ouvertes à
+l'intégration de code non-libre et à la coopération avec des
+programmeurs qui ne partagent pas exactement les mêmes buts.</para>
 
 </sect1>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="today">
-<title>The Situation Today</title>
+<title>La situation actuelle</title>
 
-<para>When running a free software project, you won't need to talk
-about such weighty philosophical matters on a daily basis.
-Programmers will not insist that everyone else in the project agree
-with their views on all things (those who do insist on this quickly
-find themselves unable to work in any project).  But you do need to be
-aware that the question of "free" versus "open source" exists, partly
-to avoid saying things that might be inimical to some of the
-participants, and partly because understanding developers' motivations
-is the best way&mdash;in some sense, the <emphasis>only</emphasis>
-way&mdash;to manage a project.</para>
+<para>Quand vous dirigez un projet de logiciel libre, vous n'aurez pas
+besoin de discuter de lourds problèmes philosophiques tous les jours.
+Les programmeurs n'auront pas à cœur de rallier tous les participants du
+projet à leurs idées sur tous les sujets (ceux qui insistent là dessus
+se retrouvent rapidement incapables de travailler sur un projet). Mais
+vous devez savoir que la question « libre » contre « Open Source »
+existe, au moins pour éviter de dire des choses inamicales à certains
+des participants, mais aussi parce que comprendre les motivations des
+développeurs est la meilleure manière, la <emphasis>seule</emphasis>
+manière en un certain sens, de diriger un projet.</para>
 
-<para>Free software is a culture by choice.  To operate successfully
-in it, you have to understand why people choose to be in it in the
-first place.  Coercive techniques don't work.  If people are unhappy in
-one project, they will just wander off to another one.  Free software
-is remarkable even among volunteer communities for its lightness of
-investment.  Most of the people involved have never actually met the
-other participants face-to-face, and simply donate bits of time
-whenever they feel like it.  The normal conduits by which humans bond
-with each other and form lasting groups are narrowed down to a tiny
-channel: the written word, carried over electronic wires.  Because of
-this, it can take a long time for a cohesive and dedicated group to
-form.  Conversely, it's quite easy for a project to lose a potential
-volunteer in the first five minutes of acquaintanceship.  If a project
-doesn't make a good first impression, newcomers rarely give it a
-second chance.</para>
+<para>Le logiciel libre est une culture par choix. Pour y naviguer avec
+succès, vous devez comprendre pourquoi les gens ont fait le choix d'y
+participer en premier lieu. Les manières coercitives ne fonctionnent
+pas. Si les gens ne sont pas heureux au cœur d'un projet, ils vont
+simplement s'en écarter pour en rejoindre un autre. Le logiciel libre
+est remarquable, même au sein des communautés de volontaires, par la
+légèreté de l'investissement. La plupart des gens engagés n'ont jamais
+vraiment rencontrés d'autres participants face à face, et donnent
+simplement un peu de leur temps quand ils en ressentent l'envie. Les
+moyens usuels, par lesquels les humains établissent des liens entre eux
+et forment des groupes qui durent, sont restreints à leur plus simple
+expression : des mots écrits transmis par des fils électriques. À cause
+de cela, la formation d'un groupe soudé et dévoué peut prendre du temps.
+Inversement, un projet peut facilement perdre un volontaire potentiel
+dans les cinq premières minutes de présentation. Si un projet ne fait
+pas bonne impression, les nouveaux venus lui donnent rarement une
+seconde chance.</para>
 
-<para>The transience, or rather the <emphasis>potential</emphasis>
-transience, of relationships is perhaps the single most daunting task
-facing a new project.  What will persuade all these people to stick
-together long enough to produce something useful?  The answer to that
-question is complex enough to occupy the rest of this book, but if it
-had to be expressed in one sentence, it would be this:</para>
+<para>La brièveté, ou plutôt la brièveté
+<emphasis>potentielle</emphasis>, des relations est
+peut-être l'obstacle le plus intimidant au commencement d'un nouveau
+projet. Qu'est ce qui persuadera tous ces gens de rester groupés
+suffisamment longtemps pour produire quelque chose d'utile ? La réponse
+à cette question est suffisamment complexe pour être le sujet du reste
+de ce livre, mais si elle devait être exprimée en une seule phrase, ce
+serait :</para>
 
     <blockquote>
-      <para><emphasis>People should feel that their connection to a
-      project, and influence over it, is directly proportional to
-      their contributions.</emphasis></para> 
+      <para><emphasis>Les gens doivent sentir que leur relation à un
+      projet, et leur influence sur celui-ci, est directement
+      proportionnelle à leurs contributions.</emphasis></para>
     </blockquote>
 
-<para>No class of developers, or potential developers, should ever
-feel discounted or discriminated against for non-technical reasons.
-Clearly, projects with corporate sponsorship and/or salaried
-developers need to be especially careful in this regard, as <xref
-linkend="money"/> discusses in detail.  Of course, this doesn't
-mean that if there's no corporate sponsorship then you have nothing to
-worry about.  Money is merely one of many factors that can affect the
-success of a project.  There are also questions of what language to
-choose, what license, what development process, precisely what kind of
-infrastructure to set up, how to publicize the project's inception
-effectively, and much more.  Starting a project out on the right foot
-is the topic of <link linkend="getting-started">the next
-chapter</link>.</para>
+<para>Aucune catégorie de développeurs, ou de développeurs potentiels,
+ne devrait se sentir mise à l'écart ou être discriminée pour des raisons
+non-techniques. Les projets portés par une société et/ou des
+développeurs salariés doivent y faire particulièrement attention, le
+<xref linkend="money"/>aborde ce sujet plus en détail. Bien sûr, cela ne
+veut pas dire que, si vous ne bénéficiez pas du financement d'une
+société, vous n'avez à vous soucier de rien. L'argent n'est que l'un des
+nombreux facteurs pouvant influencer le succès d'un projet. Il y a aussi
+les questions de choix du langage, de la licence, du processus de
+développement, du type précis d'infrastructure à mettre en place, de la
+manière de rendre public la base du projet de manière efficace et bien
+plus encore. Commencer un projet du bon pied est le sujet <link
+linkend="getting-started">du prochain chapitre</link>.</para>
 
 </sect1>
 
 </chapter>
 
 <!--
-local variables: 
+local variables:
 sgml-parent-document: ("book.xml" "chapter")
 end:
 -->
