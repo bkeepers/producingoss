@@ -1369,176 +1369,60 @@ Fortunatamente per nascondere dell'indirizzo non c'è bisogno che l'indirizzo si
 </sect3>
 
 <sect3 id="security-finding-a-fix">
-<title>Develop the fix quietly</title>
+<title>Sviluppate la correzione silenziosamente</title>
 
-<para>So what does the security list do when it receives a report?
-The first task is to evaluate the problem's severity and
-urgency:</para>
+<para>E così cosa fa la mailing list quando riceve un report? Il primo compito è quello di valutare la serietà e la urgenza del problema:</para>
 
 <orderedlist>
-  <listitem><para>How serious is the vulnerability?  Does it allow a
-            malicious attacker to take over the computer of someone
-            who uses your software?  Or does it, say, merely leak
-            information about the sizes of some of their files?</para>
+  <listitem><para>Quanto seria è la vulnerabilità? Permette a chi fa l'attacco di prendere la direzione del computer si qualcuno che usa ilo vostro software? O si perdono semplicemente informazioni sulla grandezza di qualcuno dei suoi file?</para>
   </listitem>
 
-  <listitem><para>How easy is it to exploit the vulnerability?  Can
-            an attack be scripted, or does it require circumstantial
-            knowledge, educated guessing, and luck?</para>
+  <listitem><para>Quanto facile è sfruttare la vulnerabilità? Può un attacco essere prestabilito, o richiede una conoscenza profonda, o un calcolo studiato, e fortuna? </para>
   </listitem>
 
-  <listitem><para><emphasis>Who</emphasis> reported the problem to
-            you?  The answer to this question doesn't change the
-            nature of the vulnerability, of course, but it does give
-            you an idea of how many other people might know about it.
-            If the report comes from one of the project's own
-            developers, you can breathe a little easier (but only a
-            little), because you can trust them not to have told
-            anyone else about it.  On the other hand, if it came in an
-            email from <literal>anonymous14@globalhackerz.net</literal>,
-            then you'd better act as fast as you can.  The person did
-            you a favor by informing you of the problem at all, but you
-            have no idea how many other people she's told, or how long
-            she'll wait before exploiting the vulnerability on live
-            installations.</para>
+  <listitem><para><emphasis>Chi</emphasis> fece il report del problema a voi? Lar risposta a questa domanda non cambiate la natura della vulnerabilità, certo, ma vi dà un'idea di quante altre persone potrebbero sapere di essa. Se il report viene da una degli sviluppatori del progetto, voi potete respirare un pò più facilmente (ma solo un poco) perché potete confidare sul fatto che egli non ha parlato a nessuno di esso. D'altro canto, se il report viene con una email da <literal>anonimo14@globalhackerz.net</literal>,
+            allora sarebbe meglio che che voi agiate quanto più velocemente possibile. La persona vi fece un favore informandovi del problema, ma non avete idea di quante persone sono state informate da lui, o di quanto abbia aspettato prima di sfruttare la vulnerabilità sulle installazione caricate.</para>
   </listitem>
 </orderedlist>
 
-<para>Note that the difference we're talking about here is often just
-a narrow range between <emphasis>urgent</emphasis>
-and <emphasis>extremely&nbsp;urgent</emphasis>.  Even when the report
-comes from a known, friendly source, there could be other people on
-the Net who discovered the bug long ago and just haven't reported it.
-The only time things aren't urgent is when the bug inherently does not
-compromise security very severely.</para>
+<para>Notate che la differenza di cui stiamo parlando qui è fra <emphasis> urgente</emphasis>
+e <emphasis>estremamente&nbsp;urgente</emphasis>.  Anche quando il report proviene da una fonte nota e amica, ci potrebbe essere altra gente sulla rete che scoprì il bug da tempo e che non lo ha giusto riportata. La sola occasione in cui le cose non sono urgenti è quando il bug in modo innato non compromette la sicurezza in modo serio.</para>
 
-<para>The "<literal>anonymous14@globalhackerz.net</literal>" example
-is not facetious, by the way.  You really may get bug reports from
-identity-cloaked people who, by their words and behavior, never quite
-clarify whether they're on your side or not.  It doesn't matter: if
-they've reported the security hole to you, they'll feel they've done
-you a good turn, and you should respond in kind.  Thank them for the
-report, give them a date on or before which you plan to release a
-public fix, and keep them in the loop.  Sometimes they may
-give <emphasis>you</emphasis> a date&mdash;that is, an implicit threat
-to publicize the bug on a certain date, whether you're ready or not.
-This may feel like a bullying power play, but it's more likely a
-pre&euml;mptive action resulting from past disappointment with
-unresponsive software producers who didn't take security reports
-seriously enough.  Either way, you can't afford to tick this person
-off.  After all, if the bug is severe, he has knowledge that could
-cause your users big problems.  Treat such reporters well, and hope
-that they treat you well.</para>
+<para>L'esempio "<literal>anonimo14@globalhackerz.net</literal>" non è faceto, tra parentesi. Voi potete ricevere realmente dei rapporti di bug da persone dall'identità nascosta, che con le loro parole e il loro comportamento, non chiariscono del tutto se sono dalla vostra parte o no. Non ha importanza: se hanno fatto rapporto sul buco nella sicurezza a voi essi riterranno di avervi fatto un favore, e voi potete rispondere a modo. Ringraziateli per il report, dategli una data nella o prima della quale progettate di rilasciare una correzione pubblica, e teneteli nel giro.  A volte essi possono dare <emphasis>a voi</emphasis> una data&mdash;cioè, una minaccia intrinseca di pubblicizzare il bug in una certa data, siate pronti o no. Questo può essere avvertito come un minaccioso gioco di potere, ma è più probabilmente una azione preventiva risultante dalla passata delusione con produttori di software indifferenti che non presero i report di sicurezza abbastanza seriamente. D'altra parte, voi non potete permettervi di irritare questa persona. Dopotutto, se ilo bug è serio, egli ha conoscenze che potrebbero causare grossi problemi ai vostri utenti. Trattate bene queste persone che fanno i report, e sperate che trattino bene voi.</para>
 
-<para>Another frequent reporter of security bugs is the security
-professional, someone who audits code for a living and keeps up on the
-latest news of software vulnerabilities.  These people usually have
-experience on both sides of the fence&mdash;they've both received and
-sent reports, probably more than most developers in your project have.
-They too will usually give a deadline for fixing a vulnerability
-before going public.  The deadline may be somewhat negotiable, but
-that's up to the reporter; deadlines have become recognized among
-security professionals as pretty much the only reliable way to get
-organizations to address security problems promptly.  So don't treat
-the deadline as rude; it's a time-honored tradition, and there are
-good reasons for it.</para>
+<para>Un'altra persona che fa frequenti report di sicurezza è il professionista della sicurezza, uno che controlla il codice per campare e si mantiene con le ultime notizie sulle vulnerabilità della sicurezza. Queste persone hanno di solito esperienza su tutti e due i lati della staccionata&mdash;essi hanno ricevuto e mandato report, magari più della maggioranza degli sviluppatori nel vostro progetto. Essi anche di solito danno anche una scadenza sulla correzione di una vulnerabilità, prima che diventi pubblica. Questa scadenza può essere in un certo modo negoziabile ma questo tocca a chi manda il report; le scadenze sono diventate riconosciute fra i professionisti della sicurezza in qualche grado come l'unica via affidabile per ottenere che le organizzazioni affrontino i problemi di sicurezza tempestivamente. Così non trattate le scadenze da maleducati; è una tradizione che gode di buona reputazione, e ci sono buone ragioni per questo.</para>
 
-<para>Once you know the severity and urgency, you can start working on
-a fix.  There is sometimes a tradeoff between doing a fix elegantly
-and doing it speedily; this is why you must agree on the urgency
-before you start.  Keep discussion of the fix restricted to the
-security list members, of course, plus the original reporter (if she
-wants to be involved) and any developers who need to be brought in for
-technical reasons.</para>
+<para>Una volta che ne conoscete la serietà e l'urgenza, potete partire col lavoro della correzione. A volte c'è un compromesso fra il fare una correzione elegantemente e il farla velocemente; questo è il perché dovete accordarvi sull'urgenza prima di partire. Mantenete la discussione ristretta ai membri della mailing list, più chi fece il report originariamente (se lui vuole essere coinvolto), a qualche sviluppatore che è necessario tirare dentro per ragioni tecniche.</para>
 
-<para>Do not commit the fix to the repository.  Keep it in patch form
-until the go-public date.  If you were to commit it, even with an
-innocent-looking log message, someone might notice and understand the
-change.  You never know who is watching your repository and why they
-might be interested.  Turning off commit emails wouldn't help; first
-of all, the gap in the commit mail sequence would itself look
-suspicious, and anyway, the data would still be in the repository.
-Just do all development in a patch and keep the patch in some private
-place, perhaps a separate, private repository known only to the people
-already aware of the bug.  (If you use a decentralized version control
-system like Arch or SVK, you can do the work under full version
-control, and just keep that repository inaccessible to
-outsiders.)</para>
+<para>Non inviate la correzione al deposito. Mantenetela in forma di patch fino alla data di andare in pubblico. Nel caso doveste inviarla, anche con un log innocente a vedersi, qualcuno potrebbe notarla e capire il cambiamento. Voi non sapete mai chi sta guardando nel deposito, e perché sarebbe interessato. Cessare le email di invio non aiuterebbe; prima di tutto l'interruzione nella sequenza dell'invio delle email potrebbe sembrare il se stessa sospetta, e comunque, i dati sarebbero tuttavia nel deposito.
+Appunto fate tutto lo sviluppo in una patch e tenete la patch in qualche posto privato, magari un deposito privato separato conosciuto solo alle persone al corrente del bug. (Se usate un sistema di controllo della versione decentrato come Arch o SVK, potete fare il lavoro sotto il pieno controllo della versione, e giusto tenete quel deposito inaccessibile agli esterni.)</para>
 
 </sect3>
 
 <sect3 id="security-cve">
-<title>CAN/CVE numbers</title>
+<title>I numeri CAN/CVE</title>
 
-<para>You may have seen a <firstterm>CAN number</firstterm> or
-a <firstterm>CVE number</firstterm> associated with security problems.
-These numbers usually look like "CAN-2004-0397" or
-"CVE-2002-0092", for example.</para>
+<para>Potete aver visto un <firstterm>numero CAN</firstterm> o
+un <firstterm>numero CVE</firstterm> associati con i problemi di sicurezza. Questi numeri di solito appaiono come "CAN-2004-0397" o "CVE-2002-0092", per esempio. </para>
 
   <para>
-    Both kinds of numbers represent the same type of entity: an
-    entry in the list of "Common Vulnerabilities and Exposures" list
-    maintained at <ulink url="http://cve.mitre.org/"/>.  The purpose of
-    the list is to provide standardized names for all known security
-    problems, so that everyone has a unique, canonical name to use when
-    discussing one, and a central place to go to find out more
-    information.  The only difference between a "CAN" number and a "CVE"
-    number is that the former represents a candidate entry, not yet
-    approved for inclusion in the official list by the CVE Editorial
-    Board, and the latter represents an approved entry.  However, both
-    types of entries are visible to the public, and an entry's number does
-    not change when it is approved&mdash;the "CAN" prefix is simply
-    replaced with "CVE".
+    Ambedue i tipi di numeri rappresentano lo stesso tipo di entità: una voce nella lista di “Vulnerabilità comuni ed Esposizioni” curata in <ulink url="http://cve.mitre.org/"/>.  Il proposito della lista è quello di fornire nomi standardizzati per tutti i problemi conosciuti di sicurezza, in modo che chiunque deve usare un unico nome canonico quando ne discute uno e un posto centralizzato dove andare per trovare maggiori informazioni. La sola differenza tra il numero “CAN” e “CVE” è che il primo rappresentata una voce candidata, non ancora approvata per l'inserimento nella lista della dal Consiglio editoriale della CVE e il secondo rappresenta una voce approvata. Comunque tutti e due i tipi di voce sono visibili al pubblico, e il numero di una voce non cambia quando è approvato&mdash;il prefisso “CAN” è solo sostituito da “CVE”
   </para>
 
-<para>A CAN/CVE entry does not itself contain a full description of
-the bug and how to protect against it.  Instead, it contains a brief
-summary, and a list of references to external resources (such as
-mailing list archives) where people can go to get more detailed
-information.  The real purpose of <ulink url="http://cve.mitre.org/"/>
-is to provide a well-organized space in which every vulnerability can
-have a name and a clear route to more data.  See
+<para>Una voce CAN/CVE non contiene di per se stessa una descrizione completa del bug non dice come proteggersi da essa. Invece, contiene un breve sommario, e un elenco di riferimenti a risorse esterne (come archivi di mailing lista) dove la gente possa andare per prende maggiori informazioni. Il vero proposito di è quello di fornire uno spazio ben organizzato in cui in cui ogni vulnerabilità possa avere un nome e una chiara rotta verso dati ulteriori. Vedere
 <ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"/>
-for an example of an entry.  Note that the references can be very
-terse, with sources appearing as cryptic abbreviations.  A key to
-those abbreviations is at
+per un esempio di voce. Notate che i riferimenti possono essere molto succinti, con le sorgenti che appaiono abbreviazioni criptate. Una chiave per queste abbreviazione si trova a
 <ulink url="http://cve.mitre.org/cve/refs/refkey.html"/>.</para>
 
-<para>If your vulnerability meets the CVE criteria, you may wish to
-acquire it a CAN number.  The process for doing so is deliberately
-gated: basically, you have to know someone, or know someone who knows
-someone.  This is not as crazy as it might sound.  In order for the
-CVE Editorial Board to avoid being overwhelmed with spurious or
-poorly written submissions, they take submissions only from sources
-they already know and trust.  In order to get your vulnerability
-listed, therefore, you need to find a path of acquaintance from your
-project to the CVE Editorial Board.  Ask around among your developers;
-one of them will probably know someone else who has either done the
-CAN process before, or knows someone who has, etc.  The advantage of
-doing it this way is also that somewhere along the chain, someone may
-know enough to tell you that a) it wouldn't count as a vulnerability
-or exposure according to MITRE's criteria, so there is no point
-submitting it, or b) the vulnerability already
-<emphasis>has</emphasis> a CAN or CVE number.  The latter can happen
-if the bug has already been published on another security advisory
-list, for example at <ulink url="http://www.cert.org/"/> or on the
-BugTraq mailing list at <ulink url="http://www.securityfocus.com/"/>.
-(If that happened without your project hearing about it, then you
-should worry what else might be going on that you don't know
-about.)</para>
+<para>Se la vostra vulnerabilità soddisfa i criteri CVE, potete voler acquisire ad esso un numero CAN. Il procedimento per fare ciò e deliberatamente impedito: fondamentalmente voi dovete conoscere qualcuno, o conoscere qualcuno che conosce qualcuno. Ciò non è folle come potrebbe suonare. Affinché il Consiglio Editoriale del CVE eviti di essere travolto con candidature spurie o scritte in modo deficitario, prende candidature solo da fonti già note o fidate. Per ottenere che la vostra vulnerabilità sia elencata, quindi, avete bisogno di un percorso di conoscenze dal vostro progetto al
+Consiglio Editoriale del CVE. Chiedete fra i vostri sviluppatori; uno di essi o probabilmente conosce qualcun altro che ha percorso il procedimento CAN prima, o qualcuno che lo ha, ecc.. Il vantaggio di fare ciò in questo modo è anche quello che in qualche punto lungo la catena, qualcuno può  sapere abbastanza da dire a) che essa non conterebbe come vulnerabilità o come esposizione in accordo con i criteri del MITRE, per cui non è il caso di inviarla o b) la vulnerabilità
+<emphasis>ha</emphasis> già un numero CAN o CVE. La seconda cosa può presentarsi se il bug è stato appena pubblicato su un'altra mailing list consultiva di sicurezza, per esempio su <ulink url="http://www.cert.org/"/> o sulla mailing list BugTraq a <ulink url="http://www.securityfocus.com/"/>.
+(Se ciò è avvenuto senza che il vostro progetto ne abbia sentito parlare, allora vi dovreste preoccupare di cos'altro potrebbe andare avanti di cui voi non avete conoscenza).</para>
 
-<para>If you get a CAN/CVE number at all, you usually want to get it
-in the early stages of your bug investigation, so that all further
-communications can refer to that number.  CAN entries are embargoed
-until the go-public date; the entry will exist as an empty placeholder
-(so you don't lose the name), but it won't reveal any information
-about the vulnerability until the date on which you will be announcing
-the bug and the fix.</para>
+<para>Se ottenete un numero CAN/CVE, voi volete ottenerlo nei primi stadi dell'investigazione sul bug, in modo che tutte le ulteriori comunicazioni possano far riferimento a quel numero. Le voci CAN vengono impedite fino alla data della pubblicazione; la voce consisterà in un simbolo vuoto (così voi non perdete il nome), ma ciò non rivelerà nessuna informazione sulla vulnerabilità fino alla data in cui voi annunciate il bug e la correzione.</para>
 
-<para>More information about the CAN/CVE process may be found at
-<ulink url="http://cve.mitre.org/about/candidates.html"/>, and a
-particularly clear exposition of one open source project's use of
-CAN/CVE numbers is at
+<para>Maggiori informazioni sul processo CAN/CVE possono essere trovate a
+<ulink url="http://cve.mitre.org/about/candidates.html"/>, e una esposizione particolarmente chiara dell'uso da parte di un progetto open source dei numeri CAN/CVE si trova a
 <ulink
 url="http://www.debian.org/security/cve-compatibility"/>.</para>
 
@@ -1547,150 +1431,74 @@ url="http://www.debian.org/security/cve-compatibility"/>.</para>
 <sect3 id="security-prenotification">
 <title>Pre-notification</title>
 
-<para>Once your security response team (that is, those developers who
-are on the security mailing list, or who have been brought in to deal
-with a particular report) has a fix ready, you need to decide how to
-distribute it.</para>
+<para>Una volta che il team delle risposte sulla sicurezza (cioè quegli sviluppatori che stanno sulla mailing list della sicurezza, o che sono stati tirati dentro l'affare della sicurezza con un particolare rapporto) ha una correzione pronta, dovete decidere come distribuirla.</para>
 
-<para>If you simply commit the fix to your repository, or otherwise
-announce it to the world, you effectively force everyone using your
-software to upgrade immediately or risk being hacked.  It is sometimes
-appropriate, therefore, to do <firstterm>pre-notification</firstterm>
-for certain important users.  This is particularly true with
-client/server software, where there may be well-known servers that are
-tempting targets for attackers.  Those servers' administrators would
-appreciate having an extra day or two to do the upgrade, so that they
-are already protected by the time the exploit becomes public
-knowledge.</para>
+<para>Se inviate semplicemente la correzione al deposito, o diversamente la annunciate al mondo, voi in effetti costringete chiunque usi il vostro software ad aggiornare immediatamente o rischiare di essere bucato. Talvolta è appropriato, quindi, fare una pre notifica per certi utenti importanti. Ciò è particolarmente vero per il software client/server, dove ci possono essere ben noti server che sono degli allettanti obiettivi per chi fa gli attacchi. Gli amministratori di questi server apprezzerebbero il fatto di avere qualche giorno in più o due per fare l'aggiornamento, in modo da essere protetti nel frattempo che il metodo di attacco diventa di pubblica conoscenza.</para>
 
-<para>Pre-notification simply means sending mails to those
-administrators before the go-public date, telling them of the
-vulnerability and how to fix it.  You should send pre-notification
-only to people you trust to be discreet with the information.  That
-is, the qualification for receiving pre-notification is twofold: the
-recipient must run a large, important server where a compromise would
-be a serious matter, <emphasis>and</emphasis> the recipient must be
-known to be someone who won't blab about the security problem before
-the go-public date.</para>
+<para>Pre notifica significa semplicemente inviare email a quegli amministratori prima della data dell'uscita, per dire loro della vulnerabilità e come correggerla. Dovreste mandare la pre notifica solo a persone che voi confidate siano discrete con le informazioni. Cioè, la qualifica per ricevere la pre notifica è duplice: il destinatario deve far girare un grosso, importante server l'essere in pericolo sarebbe una questione seria, <emphasis>e</emphasis> e il destinatario dovrebbe essere noto per non essere uno che chiacchiera sul problema di sicurezza prima della data dell'uscita.</para>
 
-<para>Send each pre-notification mail individually (one at a time) to
-each recipient.  Do <emphasis>not</emphasis> send to the entire list
-of recipients at once, because then they would see each others'
-names&mdash;meaning that you would essentially be alerting each
-recipient to the fact that each <emphasis>other</emphasis> recipient
-may have a security hole in her server.  Sending it to them all via
-blind CC (BCC) isn't a good solution either, because some admins
-protect their inboxes with spam filters that either block or reduce
-the priority of BCC'd mail, since so much spam is sent via BCC these
-days.</para>
+<para>Mandate le email di prenotifica individualmente (una alla volta) ad ogni destinatario. <emphasis>Non</emphasis> mandate la lista intera dei destinatari subito, perché essi vedrebbero i nomi gli uni degli altri&mdash;nel senso che voi stareste avvisando ogni destinatario del fatto che ogni <emphasis>altro</emphasis> destinatario può avere una buca nella sicurezza nel suo server. Mandando a tutti loro l'email via CC non visibile (BCC) non è una buona soluzione nemmeno, perché alcuni admin proteggono la loro casella di posta con filtri antispam che o bloccano o riducono la priorità delle email BCC, dal momento che così tanto spam è inviato via BCC di questi tempi.</para>
 
-<para>Here's a sample pre-notification mail:</para>
+<para>Qui c'è un esempio di email di pre notifica:</para>
 
 <screen>
-From: Your Name Here
+DA: Qui il Vostro Nome
 To: admin@large-famous-server.com
-Reply-to: Your Name Here (not the security list's address)
-Subject: Confidential Scanley vulnerability notification.
+Risposta a: Qui in Vosto Nome (non l'indirizzo della mailing list sulla sicurezza)
+Oggetto: Notifica confidenziale della vulnerabilità di Scanley.
 
 
-This email is a confidential pre-notification of a security alert
-in the Scanley server.
+Questa email è una una notifica confidenziale di una allarme nel server di Scanley.
 
-Please *do not forward* any part of this mail to anyone.  The public
-announcement is not until May 19th, and we'd like to keep the
-information embargoed until then.
+Prego *non inoltrare* nessuna parte di questa email ad alcuno. Non c'è annuncio fino al 19 Maggio e noi gradiremmo tenere questa informazione bloccata fino ad allora.
 
-You are receiving this mail because (we think) you run a Scanley
-server, and would want to have it patched before this security hole is
-made public on May 19th.
+State ricevendo questa email perché (noi pensiamo) che voi facciate girare un server Scanley e vorreste averlo sistemato prima che il buco nella sicurezza venga reso pubblico il 19 Maggio.
 
-References:
+Riferimenti:
 ===========
 
-   CAN-2004-1771: Scanley stack overflow in queries
+   CAN-2004-1771: Sovraccarico dello stack di Scanley nelle query
 
-Vulnerability:
+Vulnerabilità:
 ==============
 
-   The server can be made to run arbitrary commands if the server's
-   locale is misconfigured and the client sends a malformed query.
+Il server può essere messo nelle condizioni di eseguire comandi arbitrari se il locale del server è mal configurato e il client invia una query mal formata.
 
-Severity:
+Serietà:
 =========
 
-   Very severe, can involve arbitrary code execution on the server.
+   Molto seria. Può comportare l'arbitraria esecuzioni di codice sul server.
 
-Workarounds:
+Soluzioni:
 ============
 
-   Setting the 'natural-language-processing' option to 'off' in
-   scanley.conf closes this vulnerability.
+   Il mettere l'opzione del 'processo del linguaggio naturale' a 'off' in scanley.conf blocca questa vulnerabilità
 
 Patch:
 ======
 
-   The patch below applies to Scanley 3.0, 3.1, and 3.2.
+   La patch di sotto si applica a Scanley 3.0, 3.1, e 3.2.
 
-   A new public release (Scanley 3.2.1) will be made on or just before
-   May 19th, so that it is available at the same time as this
-   vulnerability is made public.  You can patch now, or just wait for
-   the public release.  The only difference between 3.2 and 3.2.1 will
-   be this patch.
+Una nuova release (la Scanley 3.2.1) verrà creata il o appena prima del 19 Maggio, in modo che sia disponibile nello stesso momento in cui questa vulnerabilità è resa pubblica. Potete sistemare adesso, o appunto aspettare la release pubblica. L'unica differenza fra  la 3.2 e la 3.2.1 sarà questa patch.
 
-[...patch goes here...]
+[...la patch va qui...]
 </screen>
 
-<para>If you have a CAN number, include it in the pre-notification (as
-shown above), even though the information is still embargoed and
-therefore the MITRE page will show nothing.  Including the CAN number
-allows the recipient to know with certainty that the bug they were
-pre-notified about is the same one they later hear about through
-public channels, so they don't have to worry whether further action is
-necessary or not, which is precisely the point of CAN/CVE
-numbers.</para>
+<para>Se avete un numero CAN, includetelo nella pre notifica (come mostrato sopra) anche le informazioni a sono ancora bloccate e quindi la pagina del MITRE non mostra nulla. L'inclusione del numero CAN mette il destinatario in grado di sapere con certezza che il bug del quale è stato pre notificato è lo stesso  di cui ha sentito parlare attraverso i canali pubblici, così egli non ha a preoccuparsi se è necessaria qualche azione ulteriore o no, che è precisamente lo scopo dei numeri CAN/CVE.</para>
 
 </sect3>
 
 <sect3 id="security-announcing">
 <title>Distribute the fix publicly</title>
 
-<para>The last step in handling a security bug is to distribute the
-fix publicly.  In a single, comprehensive announcement, you should
-describe the problem, give the CAN/CVE number if any, describe how to
-work around it, and how to permanently fix it.  Usually "fix" means
-upgrading to a new version of the software, though sometimes it can
-mean applying a patch, particularly if the software is normally run in
-source form anyway.  If you do make a new release, it should differ
-from some existing release by exactly the security patch.  That way,
-conservative admins can upgrade without worrying about what else they
-might be affecting; they also don't have to worry about future upgrades,
-because the security fix will be in all future releases as a matter of
-course.  (Details of release procedures are discussed in
+<para>L'ultimo passo nella gestione di un bug di sicurezza è quello di di distribuire la pubblicità della correzione. In un unico, comprensivo annuncio, dovreste descrivere il problema, dare il numero CAN/CVE, se esiste, descrivere come risolvere il problema, e come correggerlo permanentemente. Di solito “fix” significa aggiornare alla nuova versione del software, sebbene, a volte, significa applicare una patch, particolarmente se il software è fatto girare normalmente in una forma sorgente in qualche modo. Se create una nuova release, essa dovrebbe differire dalla release esistente esattamente per la patch sulla sicurezza. In questo modo gli admin prudenti possono aggiornare senza preoccuparsi su quale altra cosa essa stia avendo effetto; essi non dovrebbero nemmeno preoccuparsi dei futuri aggiornamenti perché la correzione della sicurezza ci sarà in tutte le release future come cosa naturale. (Dettagli sulle procedure della release sono discussi in
 <xref linkend="security-releases"/><phrase output="printed"> in
 <xref linkend="development-cycle"/></phrase>.)</para>
 
-<para>Whether or not the public fix involves a new release, do the
-announcement with roughly the same priority as you would a new
-release: send a mail to the project's <literal>announce</literal>
-list, make a new press release, update the Freshmeat entry, etc.
-While you should never try to play down the existence of a security
-bug out of concern for the project's reputation, you may certainly set
-the tone and prominence of a security announcement to match the actual
-severity of the problem.  If the security hole is just a minor
-information exposure, not an exploit that allows the user's entire
-computer to be taken over, then it may not warrant a lot of fuss.  You
-may even decide not to distract the <literal>announce</literal> list
-with it.  After all, if the project cries wolf every time, users might
-end up thinking the software is less secure than it actually is, and
-also might not believe you when you have a really big problem to
-announce.  See
-<ulink url="http://cve.mitre.org/about/terminology.html"/> for a good
-introduction to the problem of judging severity.</para>
+<para>Se o meno la correzione pubblica comporta una nuova release, fate l'annuncio con circa la stessa priorità che in una nuova release: mandate una email alle mailing list annuncia del progetto, fate un nuovo comunicato stampa, aggiornate la voce di Freshmet, ecc.. Mentre non dovreste mai minimizzare l'esistenza di un bug di sicurezza al di fuori della relazione con la reputazione del progetto, potete impostare certamente il tono e la prominenza di un annuncio di sicurezza perché sia adatto alla severità del problema.  Se il buco nella sicurezza è solo una rischiosità secondaria relativa alle informazioni, non un metodo di attacco che consente all'intero computer dell'utente di essere rilevato, allora esso non può giustificare tanta agitazione. Potete anche decidere di non distrarre la mailing list <literal>annuncia</literal> con esso.  Dopotutto, se il progetto guarda al lupo ogni volta, gli utenti potrebbero finire col pensare che il software sia meno sicuro di quanto in realtà lo sia, e potrebbero anche non credervi quando avete da annunciare veramente un grosso problema. Vedere
+<ulink url="http://cve.mitre.org/about/terminology.html"/> per una buona introduzione al problema del giudizio sulla severità.</para>
 
-<para>In general, if you're unsure how to treat a security problem,
-find someone with experience and talk to them about it.  Assessing and
-handling vulnerabilities is very much an acquired skill, and it's easy
-to make missteps the first few times.</para>
+<para>In generale, se siete incerti su come trattare un problema di sicurezza, trovate qualcuno esperto e parlategli di esso. Valutare e gestire le vulnerabilità è molto una abilità acquisita, ed è facile fare dei passi falsi le prima volte. </para>
 
 </sect3>
 
