@@ -1,4 +1,4 @@
-LANGUAGES=de en es fr he ja ml pl pt-pt pt-br zh ca da fa id ru it gr
+LANGUAGES=de en es fr he ja ml pl pt-pt pt-br ca da fa id ru it gr ar gl hu nl ro vi
 
 .PHONY: ${LANGUAGES}
 ${LANGUAGES}: 
