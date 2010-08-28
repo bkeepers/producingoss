@@ -1,176 +1,125 @@
 <chapter id="development-cycle">
 
-<title>Packaging, Releasing, and Daily Development</title>
-
+<title>包，发布和每日开发</title>
 <simplesect>
 
-<para>This chapter is about how free software projects package and
-release their software, and how overall development patterns organize
-around those goals.</para>
+<para>这一章是关于自由软件项目如何打包和发布软件，以及总的开发模式
+如何围绕目标进行组织</para>
 
-<para>A major difference between open source projects and proprietary
-ones is the lack of centralized control over the development team.
-When a new release is being prepared, this difference is especially
-stark: a corporation can ask its entire development team to focus on
-an upcoming release, putting aside new feature development and
-non-critical bug fixing until the release is done.  Volunteer groups
-are not so monolithic.  People work on the project for all sorts of
-reasons, and those not interested in helping with a given release
-still want to continue regular development work while the release is
-going on.  Because development doesn't stop, open source release
-processes tend to take longer, but be less disruptive, than commercial
-release processes.  It's a bit like highway repair.  There are two
-ways to fix a road: you can shut it down completely, so that a repair
-crew can swarm all over it at full capacity until the problem is
-solved, or you can work on a couple of lanes at a time, while leaving the
-others open to traffic.  The first way is very efficient <emphasis>for
-the repair crew</emphasis>, but not for anyone else&mdash;the road is
-entirely shut down until the job is done.  The second way involves
-much more time and trouble for the repair crew (now they have to work
-with fewer people and less equipment, in cramped conditions, with
-flaggers to slow and direct traffic, etc.), but at least the road
-remains useable, albeit not at full capacity.</para>
+<para>开源项目和专利项目之间的一个重要区别是开源项目缺少对开发团队的核心控制，
+当准备一个新的发布时，这个差别尤其明显：一个公司可以要求它的整个开发团队集中
+到即将发布的新版本上，在发布完成之前把开发新特性和解决不重要的缺陷暂时放到一边，
+开源项目的志愿者不会如此统一。参与开源项目的每个人都有自己的理由和目的，有些对
+参与新发布不感兴趣的人想在发布过程中继续正规的开发工作。因为开发没有停止，开源
+软件的发布过程比商业软件趋向花费更长的时间，但是更少中断。这有些像修高速公路。
+有两种方式修一条路：你能完全关闭它，使得一个修理队能全力以赴直至问题解决，或者
+你能一次在若干条路线上工作，留下其余开放通车。第一种方法&mdash;道路完全关闭直至
+任务完成<emphasis>对于修理队</emphasis>非常有效，但是对于其他人则不是。第二种
+方法对于修理队意味着更多的时间和麻烦(现在他们不得不在拥挤的条件下和更少的人用
+更少的工具工作等)，但是至少道路仍然可用，虽然不是完全畅通。</para>
 
-<para>Open source projects tend to work the second way.  In fact, for
-a mature piece of software with several different release lines being
-maintained simultaneously, the project is sort of in a permanent state
-of minor road repair.  There are always a couple of lanes closed; a
-consistent but low level of background inconvenience is always being
-tolerated by the development group as a whole, so that releases get
-made on a regular schedule.</para>
+<para>开源项目通常像第二种方式工作。事实上，对于有若干同时维护的不同版本的成熟
+软件，项目就像处于一种持续不断的对公路进行小修整的状态。总是有几条轨道关闭；开发
+团队总是容忍这种一贯的不方便，从而使得发布是一个经常的计划。</para>
 
-<para>The model that makes this possible generalizes to more than just
-releases.  It's the principle of parallelizing tasks that are not
-mutually interdependent&mdash;a principle that is by no means unique
-to open source development, of course, but one which open source
-projects implement in their own particular way.  They cannot afford to
-annoy either the roadwork crew or the regular traffic too much, but
-they also cannot afford to have people dedicated to standing by the
-orange cones and flagging traffic along.  Thus they gravitate toward
-processes that have flat, constant levels of administrative overhead,
-rather than peaks and valleys.  Volunteers are generally willing to
-work with small but consistent amounts of inconvenience; the
-predictability allows them to come and go without worrying about
-whether their schedule will clash with what's happening in the
-project.  But if the project were subject to a master schedule in
-which some activities excluded other activities, the result would be a
-lot of developers sitting idle a lot of the time&mdash;which would be
-not only inefficient but boring, and therefore dangerous, in that a
-bored developer is likely to soon be an ex-developer.</para>
+<para>这种模型可以一般化，不仅可以表达软件发布。它代表彼此不依赖的任务的并行原理。
+&mdash;一个绝不只在开源软件开发中有所体现的原理，而是开源项目用他们自己的特殊方式
+实现了此原理。他们承担不了过多地扰乱修路队或者正常的交通，但是他们也承担不了让人
+专门站在圆锥型交通岗下一直指挥交通。因此他们倾向于采用有水平持平恒定成本的过程，
+而不是大起大落的过程。志愿者工作时一般愿意有少量一致的不方便；可预测性允许他们变来
+变去不用担心他们的计划是否会和项目中正在进行的有冲突。但是如果项目受到一个主要计划的限制，
+在该计划中一些活动会排斥其他活动，结果将会是许多开发者在很多时间都闲坐&mdash;这将不只
+没有效率而且令人厌烦，因此是危险的，因为一个带有厌烦情绪的开发者可能不久成为一个开发
+出身的管理者。</para>
 
-<para>Release work is usually the most noticeable non-development task
-that happens in parallel with development, so the methods described in
-the following sections are geared mostly toward enabling releases.
-However, note that they also apply to other parallelizable tasks, such
-as translations and internationalization, broad API changes made
-gradually across the entire code base, etc.</para>
+<para>发布工作通常是和开发并行进行的最显著的非开发任务，所以下面小节描述的方法
+主要是为了使得发布成为可能。然而，注意它们也可以应用到其他并行任务，例如翻译和
+国际化，在整个代码基中逐渐大范围修改API等等</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 
 <sect1 id="release-numbering">
-<title>Release Numbering</title>
+<title>发布编号</title>
 
-<para>Before we talk about how to make a release, let's look at how to
-name releases, which requires knowing what releases actually mean to
-users.  A release means that:</para>
+<para>在我们讨论如何发布软件之前，让我们看一看如何命名新发布，这需要知道
+新发布对于用户意味着什么，一个新发布意味着：</para>
 
 <itemizedlist>
 
-  <listitem><para>Old bugs have been fixed.  This is probably the one
-            thing users can count on being true of every release.</para>
+  <listitem><para>旧缺陷已经解决。这可能是用户用来判断是否可以发布的事件，
+		  这个事件对于每一个发布都适用。</para>
   </listitem>
 
-  <listitem><para>New bugs have been added.  This too can usually
-            be counted on, except sometimes in the case of security
-            releases or other one-offs (see
-            <xref linkend="security-releases"/><phrase
-            output="printed"> later in this chapter</phrase>).</para>
+  <listitem><para>新的缺陷被引入。除了有时在安全发布或者其他一次性发布的
+		  情况下，这通常也可以是被用来做判断的事件。(可见：
+		  <xref linkend="security-releases"/><phrase
+		   output="printed"> 在这章之后</phrase>).</para>
   </listitem>
 
-  <listitem><para>New features may have been added.</para>
+  <listitem><para>新特性也许被加入</para>
   </listitem>
 
-  <listitem><para>New configuration options may have been added, or
-            the meanings of old options may have changed subtly.  The
-            installation procedures may have changed slightly since
-            the last release too, though one always hopes not.</para>
+  <listitem><para>新配置选项也许被加入，或者旧的选项的含义已经做了小的改变。
+		  安装过程自从上次发布也许也已经轻微改变，即使大家总是希望
+		  不要这样。
+	    </para>
   </listitem>
 
-  <listitem><para>Incompatible changes may have been introduced, such
-            that the data formats used by older versions of the
-            software are no longer useable without undergoing some
-            sort of (possibly manual) one-way conversion step.</para>
+  <listitem><para>不适配的改变也许被引进，使得旧版本软件使用的数据格式如果
+            没有采用某种(可能是手工)单向转换步骤就不能再使用</para>
   </listitem>
 
 </itemizedlist>
 
-<para>As you can see, not all of these are good things.  This is why
-experienced users approach new releases with some trepidation,
-especially when the software is mature and was already mostly doing
-what they wanted (or thought they wanted).  Even the arrival of new
-features is a mixed blessing, in that it may mean the software
-will now behave in unexpected ways.</para>
+<para>正如你所见，并非所有的事件都是有益的。这是为什么有经验的用户对于新的发布
+带有某些恐惧，尤其是当软件是成熟的并且已经能做他们通常想做的(或者他们想要的想法)
+即使是新特性的加入也是福祸兼有的事，因为这也许意味着软件现在会按意想不到的方式
+工作</para>
 
-<para>The purpose of release numbering, therefore, is twofold:
-obviously the numbers should unambiguously communicate the ordering of
-releases (i.e., by looking at any two releases' numbers, one can know
-which came later), but also they should indicate as compactly as
-possible the degree and nature of the changes in the release.</para>
+<para>因此，发布编号的目的是两方面：很明显，编号应该清楚地表示发布的顺序(例如，
+通过查看两个发布的编号，就能识别哪个版本是新的)，但是他们也应该尽可能紧凑地指明
+在发布中改变的程度和本质。</para>
 
-<para>All that in a number?  Well, more or less, yes.  Release
-numbering strategies are one of the oldest bikeshed discussions around
-(see <xref linkend="bikeshed"/><phrase output="printed"> in
-<xref linkend="communications"/></phrase>), and the world is
-unlikely to settle on a single, complete standard anytime soon.
-However, a few good strategies have emerged, along with one
-universally agreed-on principle: <emphasis>be consistent</emphasis>.
-Pick a numbering scheme, document it, and stick with it.  Your users
-will thank you.</para>
+<para>所有信息都在编号中? 嗯，差不多是这样。发布编号的方法是最老的讨论话题，
+(可见 <xref linkend="bikeshed"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>), 任何时候事情不可能立刻用单一的
+完全的标准解决。然而，一些好的方法已经被提出，还有一个普遍的大家一致同意的
+原理：<emphasis>保持一致</emphasis>选择一个编号体制，用文档描述，然后坚持
+这个体制，你的用户会感谢你。</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="release-number-components">
-<title>Release Number Components</title>
+<title>发布编号组部件</title>
 
-<para>This section describes the formal conventions of release
-numbering in detail, and assumes very little prior knowledge.  It is
-intended mainly as a reference.  If you're already familiar with these
-conventions, you can skip this section.</para>
+<para>这一节详细描述了发布编号的正式传统，并且需要很少前面的知识。它主要是为了
+作为参考。如果你已经熟悉了这些传统，你可以跳过这一节。</para>
 
-<para>Release numbers are groups of digits separated by dots:</para>
+<para>发布号是由点分隔的数字组</para>
 
 <informalexample>
 <literallayout>Scanley 2.3
 Singer 5.11.4</literallayout>
 </informalexample>
 
-<para>...and so on.  The dots are <emphasis>not</emphasis> decimal
-points, they are merely separators; "5.3.9" would be followed by
-"5.3.10".  A few projects have occasionally hinted otherwise, most
-famously the Linux kernel with its "0.95", "0.96"... "0.99" sequence
-leading up to Linux 1.0, but the convention that the dots are not
-decimals is now firmly established and should be considered a
-standard.  There is no limit to the number of components (digit
-portions containing no dots), but most projects do not go beyond three
-or four.  The reasons why will become clear later.</para>
+<para>...等等。点<emphasis>不是</emphasis>小数点，它们只是分隔符；"5.3.9"下来
+会是"5.3.10"。一些项目编号有其他方面的暗示，最著名的是编号为"0.95","0.96"...
+"0.99"直到"1.0"的Linux内核，但是点不是小数点的传统现在已经稳定建立，并且应该
+被认为是一个标准。部件(不包含点的数字部分)的数目没有限制，但是大多数项目不超出
+3个或4个。原因将会在后面逐渐说明。</para>
 
-<para>In addition to the numeric components, projects sometimes tack
-on a descriptive label such as "Alpha" or "Beta" (see
-<xref linkend="alpha-and-beta"/>), for example:</para>
+<para>除了数字部件，项目有时附加一个描述标记如"Alpha"或者"Beta" 限定词(可见
+<xref linkend="alpha-and-beta"/>), 例如：</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha)
 Singer 5.11.4 (Beta)</literallayout>
 </informalexample>
 
-<para>An Alpha or Beta qualifier means that this
-release <emphasis>precedes</emphasis> a future release that will have
-the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
-leads eventually to "2.3.0".  In order to allow several such candidate
-releases in a row, the qualifiers themselves can have meta-qualifiers.
-For example, here is a series of releases in the order that they would
-be made available to the public:</para>
+<para>一个Alpha或者Beta限定词意味着这个发布<emphasis>先于</emphasis>有同样编号
+无限定词的将来的发布。为了允许这样的候选发布连续,限定词本身可以有元限定词，
+例如，这是一系列发布序列，按照公开可用的先后顺序：</para>
 
 <informalexample>
 <literallayout>Scanley 2.3.0 (Alpha 1)
@@ -181,71 +130,45 @@ Scanley 2.3.0 (Beta 3)
 Scanley 2.3.0</literallayout>
 </informalexample>
 
-<para>Notice that when it has the "Alpha" qualifier, Scanley "2.3" is
-written as "2.3.0".  The two numbers are equivalent&mdash;trailing
-all-zero components can always be dropped for brevity&mdash;but when a
-qualifier is present, brevity is out the window anyway, so one might
-as well go for completeness instead.</para>
+<para>注意当有"Alpha"限定词时，Scanley "2.3"被写成"2.3.0"。这两个编号是等价的
+&mdash;简单起见末尾的全零部件总是可以被截去&mdash;但是当一个限定词出现时，简单性
+不再主导，反而也许需要注重完整性。</para>
 
-<para>Other qualifiers in semi-regular use include "Stable",
-"Unstable", "Development", and "RC" (for "Release Candidate").  The
-most widely used ones are still "Alpha" and "Beta", with "RC" running
-a close third place, but note that "RC" always includes a numeric
-meta-qualifier.  That is, you don't release
-"Scanley&nbsp;2.3.0&nbsp;(RC)", you release
-"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+<para>其他有时使用限定词有"Stable", "Unstable", "Development"和"RC" (指"Release
+Candidate")。最广泛使用的仍然是"Alpha"和"Beta"，还有排在第三位的"RC"。但是注意"RC"
+总是包含一个数字元限定词。也就是说，你不是发布"Scanley&nbsp;2.3.0&nbsp;(RC)",而是
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)"，下来的是RC2等等</para>
 
-<para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
-known now, and I don't recommend using any of the others, even though
-the others might at first glance seem like better choices because they
-are normal words, not jargon.  But people who install software from
-releases are already familiar with the big three, and there's no
-reason to do things gratuitously differently from the way everyone
-else does them.</para>
+<para>那三个标记"Alpha", "Beta", 和"RC"，现在已经广泛熟知，而且我不推荐使用任何
+其他的标记，即使其他的也许初看好像是更好的选择，因为他们是普通单词，而不是行话。
+但是安装发布软件的人们已经熟悉这三个常用词，但是没有理由无故地采用和其他每个人
+的通用做法不一样的做法。</para>
 
-<para>Although the dots in release numbers are not decimal points,
-they do indicate place-value significance.  All "0.X.Y" releases
-precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
-immediately precedes "3.14.159", and non-immediately precedes
-"3.14.160" as well as "3.15.anything", and so.</para>
+<para>尽管在发布编号中的点不是小数点，它们的确表明了不同位置的值有不同重要行。
+所有的"0.X.Y"发布先于"1.0"(当然，它等价宇"1.0.0")。"3.14.158"紧挨"3.14.159"并在
+之前，也先于"3.14.160"和"3.15.XXX"但不紧邻，等等。</para>
 
-<para>A consistent release numbering policy enables a user to look at
-two release numbers for the same piece of software and tell, just from
-the numbers, the important differences between those two releases.  In
-a typical three-component system, the first component is
-the <firstterm>major&nbsp;number</firstterm>, the second is
-the <firstterm>minor&nbsp;number</firstterm>, and the third is the
-<firstterm>micro&nbsp;number</firstterm>.  For example, release
-"2.10.17" is the seventeenth micro release in the tenth minor release
-line within the second major release series.  The words "line" and
-"series" are used informally here, but they mean what one would
-expect.  A major series is simply all the releases that share the same
-major number, and a minor series (or minor line) consists of all the releases
-that share the same minor <emphasis>and</emphasis> major number.  That
-is, "2.4.0" and "3.4.1" are not in the same minor series,
-even though they both have "4" for their minor number; on the other
-hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
-not adjacent if "2.4.1" was released between them.</para>
+<para>一个一致的发布编号策略使得一个用户只是从看到的同一个软件的两个发布号就能
+区分那两个发布之间的重要不同。在一个典型的三部件系统，第一个部件是<firstterm>
+主&nbsp;发布号</firstterm>，第二个部件是<firstterm>次&nbsp;发布号</firstterm>
+，第三个是<firstterm>微&nbsp;发布号</firstterm>。例如，发布"2.10.17"是第二次主发布
+系列里的第十次次发布族的第十七次微发布。词语"族"和"系列"在这儿是非正式使用，但是
+它们符合人们的期望。一个主系列只是所有有同样主发布号的发布，一个次系列(或次发布
+族)由共享同样的主<emphasis>和</emphasis>次发布号的所有发布组成。也即，"2.4.0"和
+"3.4.1"不在同样的次发布系列里，即使它们的次发布号都是4；另一方面，"2.4.0"和"2.4.2"
+在同样的次发布族中，尽管如果"2.4.1"在它们之间发布它们不相邻。</para>
 
-<para>The meanings of these numbers are exactly what you'd expect: an
-increment of the major number indicates that major changes happened;
-an increment of the minor number indicates minor changes; and an
-increment of the micro number indicates really trivial changes.  Some
-projects add a fourth component, usually called
-the <firstterm>patch&nbsp;number</firstterm>, for especially
-fine-grained control over the differences between their releases
-(confusingly, other projects use "patch" as a synonym for "micro" in a
-three-component system).  There are also projects that use the last
-component as a <firstterm>build&nbsp;number</firstterm>, incremented
-every time the software is built and representing no change other than
-that build.  This helps the project link every bug report with a
-specific build, and is probably most useful when binary packages are
-the default method of distribution.</para>
+<para>这些编号的含义正如你所期望的:一个主发布号的增加表明主要的改变发生了；
+一个次发布号的增加表明有小的改变；一个微发布号的增加表明有实际的不重要的改变。
+一些项目增加了第四个部件，通常被称为<firstterm>补丁&nbsp;号</firstterm>
+专门是为了在发布之间对改变的细粒度控制(令人混淆的是，其他项目使用"补丁"作为在
+三部件系统中的"微"部件。也有项目使用最后一个部件作为<firstterm>构建&nbsp;号
+</firstterm>，每次软件被构建时增加，表示除了那个构建没有变化。这有助于项目将
+每一个缺陷报告和一个特定的构建联系起来，当二进制包是发布默认的方法时这也许是
+最有用的。</para>
 
-<para>Although there are many different conventions for how many
-components to use, and what the components mean, the differences tend
-to be minor&mdash;you get a little leeway, but not a lot.  The next
-two sections discuss some of the most widely used conventions.</para>
+<para>尽管对于使用多少部件和部件代表什么有不同的传统，差别并不大&mdash;你有一些回旋
+余地但不很多。下面两节讨论一些最广泛使用的传统。
 
 </sect2>
 
@@ -1672,4 +1595,5 @@ local variables:
 sgml-parent-document: ("book.xml" "chapter")
 end:
 -->
+
 
