@@ -1199,79 +1199,70 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;
 все время напоминает им, что рецензирование это ожидаемое, обычное действие, как мытье посуды
 или стрижка газона.</para>
 
-<para>In the Subversion project, we did not at first make a regular
-practice of code review.  There was no guarantee that every commit
-would be reviewed, though one might sometimes look over a change if
-one was particularly interested in that area of the code.  Bugs
-slipped in that really could and should have been caught.  A developer
-named Greg Stein, who knew the value of code review from past work,
-decided that he was going to set an example by reviewing every line of
-<emphasis>every single commit</emphasis> that went into the code
-repository.  Each commit anyone made was soon followed by an email to
-the developer's list from Greg, dissecting the commit, analyzing
-possible problems, and occasionally praising a clever bit of code.  Right
-away, he was catching bugs and non-optimal coding practices that would
-otherwise have slipped by without ever being noticed.  Pointedly, he
-never complained about being the only person reviewing every commit,
-even though it took a fair amount of his time, but he did sing the
-praises of code review whenever he had the chance.  Pretty soon, other
-people, myself included, started reviewing commits regularly too.
-What was our motivation?  It wasn't that Greg had consciously shamed
-us into it.  But he had proven that reviewing code was a valuable way
-to spend time, and that one could contribute as much to the project by
-reviewing others' changes as by writing new code.  Once he
-demonstrated that, it became expected behavior, to the point where any
-commit that didn't get some reaction would cause the committer to
-worry, and even ask on the list whether anyone had had a chance to
-review it yet.  Later, Greg got a job that didn't leave him as much
-time for Subversion, and had to stop doing regular reviews.  But by
-then, the habit was so ingrained for the rest of us as to seem that it
-had been going on since time immemorial.</para>
+<para>В проекте Subversion, мы поначалу не занимались регулярным рецензированием кода.
+Не было гарантии того, что каждое изменение было бы просмотрено, хотя, кто-нибудь мог 
+иногда просмотреть изменения, если был особенно заинтересован в данном разделе кода. 
+Проскальзывали такие ошибки, которые могли бы и должны были быть пойманы. Разработчик по имени
+Грег Стейн, который знал о значимости рецензирования кода из прошлого опыта, решил, что он станет
+примером для подражания, рецензируя  каждую строчку <emphasis>каждого изменения</emphasis>
+которое вносилось в хранилище кода. Каждое изменение, которое вносил кто угодно, вскоре стало
+сопровождаться письмом от Грега в список рассылки для разработчиков, в котором разбирались изменения,
+анализировались возможные проблемы и иногда хвалились хорошие куски кода. И сразу же он стал находить ошибки
+и неоптимальные приемы кодирования, которые, в ином случае, проскользнули бы совсем незамеченными. Он подчеркнуто никогда
+не жаловался на то, что являлся единственным человеком, просматривающим каждое изменение, даже если
+это занимало приличную часть его времени, но он пел хвалу рецензированию кода каждый раз, когда предоставлялась
+такая возможность. Довольно скоро другие люди, включая меня, тоже начали регулярно рецензировать изменения.
+Что нами двигало? Не то, что Грег умышленно нас стыдил. Но он доказал, что рецензирование кода
+было полезной тратой времени, и что человек может принести столько же пользы проекту путем
+рецензирования изменений, вносимых другими, сколько и путем написания нового кода. Как только он
+это продемонстрировал, рецензирование стало ожидаемым действием, до такой степени, что любое изменение,
+которое не вызывало какой-либо реакции, заставляло автора волноваться и даже спрашивать в списке рассылки,
+смог ли уже кто-нибудь его оценить. Позже, Грег получил работу, которая уже не оставляла ему много
+времени на Subversion, и ему пришлось прекратить регулярные рецензии. Но к тому времени эта привычка
+настолько укоренилась во всех нас, что казалось, будто так и было с незапамятных времен.</para>
 
-<para>Start doing reviews from very first commit.  The sorts of
-problems that are easiest to catch by reviewing diffs are security
-vulnerabilities, memory leaks, insufficient comments or API
-documentation, off-by-one errors, caller/callee discipline mismatches,
-and other problems that require a minimum of surrounding context to
-spot.  However, even larger-scale issues such as failure to abstract
-repeated patterns to a single location become spottable after one has
-been doing reviews regularly, because the memory of past diffs informs
-the review of present diffs.</para>
+<para>Начинайте рецензирование с самого первого изменения. С помощью просмотра изменений
+проще всего поймать такие типы ошибок как уязвимости системы безопасности, утечка памяти,
+недостатоность комментариев или документации API, ошибки завышения или занижения на единицу
+(off-by-one), несовпадение порядка вызывающего/вызываемого и другие ошибки, которые
+требуют минимум окружающего контекста для их выявления. Однако, даже широкомасштабные
+проблемы, такие как неспособность выделить повторяющиеся шаблоны в отдельное место,
+становятся заметными, после того, как кто-нибудь начинает регулярно рецензировать
+изменения, потому что память о прошлых различиях дополняет информацию о текущих.</para>
 
 <!-- todo: Andrew Stellman suggested putting a checklist of what to
      look for in code review here.  That might be a good idea. -->
 
-<para>Don't worry that you might not find anything to comment on, or
-that you don't know enough about every area of the code.  There will
-usually be something to say about almost every commit; even where you
-don't find anything to question, you may find something to praise.
-The important thing is to make it clear to every committer that what
-they do is seen and understood.  Of course, code review does not
-absolve programmers of the responsibility to review and test their
-changes before committing; no one should depend on code review to
-catch things he ought to have caught on his own.</para>
+<para>Не беспокойтесь о том, что вы можете не найти ничего, что можно прокомментировать 
+или о том, что вы недостаточно знакомы с каждой областью кода. Обычно, всегда есть что
+сказать по поводу любого изменения; даже если вы не находите ничего сомнительного, вы
+можете найти что-нибудь что можно похвалить. Важной задачей является четко показать каждому,
+кто вносит изменения, что их работа просмотрена и понята. Конечно, рецензирование кода
+не освобождает программистов от ответственности проверять и тестировать их изменения
+до внесения в проект; никто не должен полагаться на рецензирования кода для нахождения
+тех ошибок, которые он должен находить сам.</para>
 
 </sect2>
 
 <!-- ======================== SECTION ============================== -->
 <sect2 id="opening-closed-projects">
-<title>When Opening a Formerly Closed Project, be Sensitive to the
-Magnitude of the Change</title>
+<title>Открывая Изначально Закрытый Проект Будьте Внимательны к Значимости Изменений</title>
 
-<para>If you're opening up an existing project, one that already has
-active developers accustomed to working in a closed-source
-environment, make sure everyone understands that a big change is
-coming&mdash;and make sure that you understand how it's going to
-feel from their point of view.</para>
+<para>Если вы открывает существующий проект, такой, в котором активно учавствуют разработчики,
+привыкшие работать в обстаноке закрытого исходного кода, убедитесь в том, что все понимают,
+насколько значительны грядущие перемены&mdash;и убедитесь, что вы сами понимаете, как это будет
+выглядеть с их точки зрения.</para>
 
-<para>Try to imagine how the situation looks to them: formerly, all
-code and design decisions were made with a group of other programmers
-who knew the software more or less equally well, who all received the
-same pressures from the same management, and who all know each others'
-strengths and weaknesses.  Now you're asking them to expose their code
-to the scrutiny of random strangers, who will form judgements based
-only on the code, with no awareness of what business pressures may
-have forced certain decisions.  These strangers will ask lots of
+<para>Попробуйте вообразить, как эта ситуация выглядит для них: раньше
+все решения относительно кода и дизайна принимались группой программистов,
+которые знали программу более или менее одинаково хорошо, которые испытывали
+одинаковое давление со стороны одного и того же менеджемента, и которые знали
+сильные и слабые стороны каждого из них. А теперь вы просите отдать их код
+на внимательное изучение случайным людям, которые будут строить свои суждения
+основываясь только на коде, без учета того, что даление со стороны бизнеса могло
+диктовать принятие некоторых решений.
+
+ These strangers will ask lots of
 questions, questions that jolt the existing developers into realizing
 that the documentation they slaved so hard over is
 <emphasis>still</emphasis> inadequate (this is inevitable).  To top it
