@@ -1394,100 +1394,109 @@ será mantida por todos.</para>
 <sect2 id="code-review">
 <title>Pratique uma Revisão de Código Visível</title>
 
-<para>One of the best ways to foster a productive development
-community is to get people looking at each others' code.  Some
-technical infrastructure is required to do this effectively&mdash;in
-particular, commit emails must be turned on; see
-<xref linkend="commit-emails"/> for more details.  The effect of
-commit emails is that every time someone commits a change to the
-source code, an email goes out showing the log message and diffs for
-the change (see <xref linkend="vc-vocabulary-diff"/>, in
-<xref linkend="vc-vocabulary"/>).  <firstterm>Code review</firstterm>
-is the practice of reviewing commit emails as they come in, looking
-for bugs and possible improvements.<footnote><para>This is how code
-review is usually done in open source projects, at any rate.  In more
-centralized projects, "code review" can also mean multiple people
-sitting down together and going over printouts of source code, looking
-for specific problems and patterns.</para></footnote></para>
+<para>Uma das melhores maneiras de promover um desenvolvimento 
+produtivo da comunidade é colocar as pessoas para olhar o código uns 
+dos outros. Uma certa infraestrutura técnica é necessária para se
+fazer isto efetivamente&mdash;em particular, emails de commit devem
+ser ligados; veja <xref linkend="commit-emails"/> para maiores 
+detalhes. O efeito de emails de commit é que toda a vez que alguém
+efetua o commit de uma mudança no código fonte, um e-mail é enviado
+mostrando a mensagem de log e as diferenças da mudança. (ver 
+<xref linkend="vc-vocabulary-diff"/>, em
+<xref linkend="vc-vocabulary"/>).  <firstterm>Revisão de
+ código</firstterm> é a prática de revisar todos os emails de commit
+a medida que eles chegam, procurando por bugs e possíveis 
+melhorias.<footnote><para>Assim é como a revisão de código geralmente
+é realizada em projetos de código aberto, de qualquer tamanho. Em
+projetos mais centralizados, a "revisão de código" pode também 
+significar diversas pessoas que sentam juntas e com impressões de
+código fonte, buscam problemas e padrões específicos.
+</para></footnote></para>
 
-<para>Code review serves several purposes simultaneously.  It's the
-most obvious example of peer review in the open source world, and
-directly helps to maintain software quality.  Every bug that ships in
-a piece of software got there by being committed and not detected;
-therefore, the more eyes watch commits, the fewer bugs will ship.  But
-code review also serves an indirect purpose: it confirms to people
-that what they do matters, because one obviously wouldn't take time to
-review a commit unless one cared about its effect.  People do their
-best work when they know that others will take the time to evaluate
-it.</para>
+<para>A revisão de código serve a vários propósitos simultaneamente.
+O exemplo mais óbvio é a revisão em pares no mundo do código aberto,
+e ajuda diretamente a manter a qualidade do software. Todo bug
+que existe em um trecho de software ficou lá por ter sido "comitado"
+e não detectado; portanto, quanto mais pessoas verificando os commits,
+menor a quantidade de bugs existentes. Mas a revisão de código também
+serve para um propósito indireto: ela mostra para as pessoas que o
+que elas fazem realmente importa, porque alguém obviamente não lava
+um tempo para revisar um commit a menos que realmente se importe com
+o seu efeito. As pessoas fazem seu melhor trabalho quando elas sabem
+que outros separam um tempo para avalia-lo.</para>
 
-<para>Reviews should be public.  Even on occasions when I have been
-sitting in the same physical room with developers, and one of us has
-made a commit, we take care not to do the review verbally in the room,
-but to send it to the development mailing list instead.  Everyone
-benefits from seeing the review happen.  People follow the commentary
-and sometimes find flaws in it, and even when they don't, it still
-reminds them that review is an expected, regular activity, like
-washing the dishes or mowing the lawn.</para>
+<para>Revisões deveriam ser públicas. Até mesmo em ocasiões quando
+eu fico sentado na mesma sala física com outros desenvolvedores, e
+um de nós realizou um commit, tomamos cuidado para não fazer a revisão
+verbalmente na sala, e ao invés disso a enviamos para a lista de emails
+de desenvolvimento. Todos se beneficiam vendo a revisão acontecer. As
+pessoas olham o comentário e algumas vezes acham falhas nele, e até
+mesmo quando elas não acham, isso os faz lembrar que a revisão é uma
+atividade regular e esperada, como lavar a louça ou cortar a grama.
+</para>
 
-<para>In the Subversion project, we did not at first make a regular
-practice of code review.  There was no guarantee that every commit
-would be reviewed, though one might sometimes look over a change if
-one was particularly interested in that area of the code.  Bugs
-slipped in that really could and should have been caught.  A developer
-named Greg Stein, who knew the value of code review from past work,
-decided that he was going to set an example by reviewing every line of
-<emphasis>every single commit</emphasis> that went into the code
-repository.  Each commit anyone made was soon followed by an email to
-the developer's list from Greg, dissecting the commit, analyzing
-possible problems, and occasionally praising a clever bit of code.  Right
-away, he was catching bugs and non-optimal coding practices that would
-otherwise have slipped by without ever being noticed.  Pointedly, he
-never complained about being the only person reviewing every commit,
-even though it took a fair amount of his time, but he did sing the
-praises of code review whenever he had the chance.  Pretty soon, other
-people, myself included, started reviewing commits regularly too.
-What was our motivation?  It wasn't that Greg had consciously shamed
-us into it.  But he had proven that reviewing code was a valuable way
-to spend time, and that one could contribute as much to the project by
-reviewing others' changes as by writing new code.  Once he
-demonstrated that, it became expected behavior, to the point where any
-commit that didn't get some reaction would cause the committer to
-worry, and even ask on the list whether anyone had had a chance to
-review it yet.  Later, Greg got a job that didn't leave him as much
-time for Subversion, and had to stop doing regular reviews.  But by
-then, the habit was so ingrained for the rest of us as to seem that it
-had been going on since time immemorial.</para>
+<para>No projeto Subversion, não fizemos no início uma prática 
+regular de revisão de código. Não havia garantia que todo código
+seria revisado, mesmo que de vez em quando alguém pudesse verificar
+uma mudança se estivesse particularmente interessado naquela parte
+do código. Os bugs escapavam e realmente poderiam e deveriam ter
+sido pegos. Um desenvolvedor chamado Greg Stein, que sabia o valor da
+revisão de código por experiências anteriores, decidiu que ele iria
+servir de exemplo revisando cada linha de <emphasis>todos os 
+commits</emphasis> que fosse para o repositório de código. Todo
+commit que qualquer um tenha feito era em breve seguido por um e-mail
+do Greg para a lista de desenvolvimento, dissecando o commit, 
+analizando possíveis problemas, e ocasionalmente elogiando um trecho
+inteligente de código. Imediatamete ele achava bugs e práticas
+de codificação sem otimização que teriam escapado sem nem terem sidos
+notados. Incisivamente, ele nunca reclamou de ser a única pessoa 
+revisando cada commit, mesmo que isso lhe tomasse um bom tempo, mas
+ele falava dos elogios sobre a revisão de código sempre que tinha
+chance. Logo, outras pessoas, incluindo a mim, passaram a revisar
+os códigos regularmente. Qual era a nossa motivação? Não foi porque
+o Greg conscientemente nos envergonhou. Ele tinha provado que revisar
+o código era uma maneira valiosa de gastar o tempo, e que alguém podia
+contribuir tanto para o projeto revisando a mudança dos demais quanto 
+escrever novos códigos. Uma vez demonstrado, isso se tornou um 
+comportamento esperado, ao ponto que algum commit que não gerava nenhuma 
+reação poderia deixar o committer preocupado, e perguntar na lista se 
+alguém teve a oportunidade de rever. Mais tarde, o Greg mudou para um
+emprego que não o deixava com muito tempo para o Subversion, e teve
+que parar com as revisões regulares. Mas nesta época, o hábito estava
+tão arraigado para todos nós como se fizesse parte desde de o início.
+</para>
 
-<para>Start doing reviews from very first commit.  The sorts of
-problems that are easiest to catch by reviewing diffs are security
-vulnerabilities, memory leaks, insufficient comments or API
-documentation, off-by-one errors, caller/callee discipline mismatches,
-and other problems that require a minimum of surrounding context to
-spot.  However, even larger-scale issues such as failure to abstract
-repeated patterns to a single location become spottable after one has
-been doing reviews regularly, because the memory of past diffs informs
-the review of present diffs.</para>
+<para>Comece a revisar desde o primeiro commit. Os tipos de problemas
+que são mais fáceis de encontrar revisando diferenças são 
+vulnerabilidades de segurança, vazamento de memória, comentários 
+ou documentação de API insuficientes, erros de índices de listas,
+incoerências entre chamador/receptor, e outros problemas que requerem
+um mínimo de conhecimento do contexto para identificar. No entanto,
+até mesmo problemas de larga escala como falhas ao abstrair padrões
+repetidos em um único local se torna identificável após a realização
+de algumas revisões, pois o histórico de diferenças anteriores mostra
+as diferenças em relação a versão atual.</para>
 
 <!-- todo: Andrew Stellman suggested putting a checklist of what to
      look for in code review here.  That might be a good idea. -->
 
-<para>Don't worry that you might not find anything to comment on, or
-that you don't know enough about every area of the code.  There will
-usually be something to say about almost every commit; even where you
-don't find anything to question, you may find something to praise.
-The important thing is to make it clear to every committer that what
-they do is seen and understood.  Of course, code review does not
-absolve programmers of the responsibility to review and test their
-changes before committing; no one should depend on code review to
-catch things he ought to have caught on his own.</para>
+<para>Não se preocupe caso você não encontre nada para comentar, ou
+que você não sabe o suficiente sobre todo o código. Haverá normalmete
+algo a dizer sobre quase todos os commits; mesmo que você não encontre
+nada a questionar, você pode encontrar algo para elogiar. O que é 
+importante é deixar claro para todo committer que o que eles fazem é
+visto e entendido. Claro que as revisões de código não absolvem os 
+programadores da responsabilidade de rever e testar suas mudanças
+antes de realizar o commit; ninguém deve depender da revisão de código
+para identificar problemas que devem ser identificados por si próprio.
+</para>
 
 </sect2>
 
 <!-- ======================== SECTION ============================== -->
 <sect2 id="opening-closed-projects">
-<title>When Opening a Formerly Closed Project, be Sensitive to the
-Magnitude of the Change</title>
+<title>Ao Abrir um Projeto Anteriormente Fechado, Seja Sensível a 
+Magnitude da Mudança</title>
 
 <para>If you're opening up an existing project, one that already has
 active developers accustomed to working in a closed-source
