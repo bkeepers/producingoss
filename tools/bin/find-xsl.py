@@ -15,6 +15,8 @@ candidate_xsldirs = (
     '/usr/share/xml/docbook/stylesheet/nwalsh/current',
     # FreeBSD
     '/usr/local/share/xsl/docbook',
+    # Ubuntu (docbook-xsl-ns package)
+    '/usr/share/xml/docbook/stylesheet/docbook-xsl-ns'
     # Please add your OS's location here if not listed!
     )
 #######################################################
