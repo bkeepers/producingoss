@@ -1,107 +1,119 @@
+﻿<!--
+https://spreadsheets.google.com/pub?hl=ja&hl=ja&key=0AgOqPQzRjQPOdDF5SGdRYXdVSGZWZGVxWWZXWV91WHc&output=html
+-->
+
 <chapter id="development-cycle">
 
-<title>Packaging, Releasing, and Daily Development</title>
+<title>Đóng gói, Phân phối và Phát triển hàng ngày</title>
 
 <simplesect>
 
-<para>This chapter is about how free software projects package and
-release their software, and how overall development patterns organize
-around those goals.</para>
+<para>Chương này trình bày về vấn đề đóng gói dự án phần mềm 
+và phát hành phần mềm, và những loại phát triển chung xung quanh 
+mục đích dự án.</para>
 
-<para>A major difference between open source projects and proprietary
-ones is the lack of centralized control over the development team.
-When a new release is being prepared, this difference is especially
-stark: a corporation can ask its entire development team to focus on
-an upcoming release, putting aside new feature development and
-non-critical bug fixing until the release is done.  Volunteer groups
-are not so monolithic.  People work on the project for all sorts of
-reasons, and those not interested in helping with a given release
-still want to continue regular development work while the release is
-going on.  Because development doesn't stop, open source release
-processes tend to take longer, but be less disruptive, than commercial
-release processes.  It's a bit like highway repair.  There are two
-ways to fix a road: you can shut it down completely, so that a repair
-crew can swarm all over it at full capacity until the problem is
-solved, or you can work on a couple of lanes at a time, while leaving the
-others open to traffic.  The first way is very efficient <emphasis>for
-the repair crew</emphasis>, but not for anyone else&mdash;the road is
-entirely shut down until the job is done.  The second way involves
-much more time and trouble for the repair crew (now they have to work
-with fewer people and less equipment, in cramped conditions, with
-flaggers to slow and direct traffic, etc.), but at least the road
-remains useable, albeit not at full capacity.</para>
+<para>Sự khác biệt giữa phần mềm mã mở và phần mềm bản quyền là sự quản lý
+tập trung đối với đội ngũ phát triển.
 
-<para>Open source projects tend to work the second way.  In fact, for
-a mature piece of software with several different release lines being
-maintained simultaneously, the project is sort of in a permanent state
-of minor road repair.  There are always a couple of lanes closed; a
-consistent but low level of background inconvenience is always being
-tolerated by the development group as a whole, so that releases get
-made on a regular schedule.</para>
+Khi chuẩn bị một phiên bản mới, sự khác biệt này là đặc biệt
+rõ rệt: một công ty có thể yêu cầu toàn bộ đội ngũ phát triển tập trung vào
+một bản phát hành sắp tới, đặt sang một bên tính năng mới và phát triển
+không quan trọng sửa lỗi cho đến khi phát hành xong.
 
-<para>The model that makes this possible generalizes to more than just
-releases.  It's the principle of parallelizing tasks that are not
-mutually interdependent&mdash;a principle that is by no means unique
-to open source development, of course, but one which open source
-projects implement in their own particular way.  They cannot afford to
-annoy either the roadwork crew or the regular traffic too much, but
-they also cannot afford to have people dedicated to standing by the
-orange cones and flagging traffic along.  Thus they gravitate toward
-processes that have flat, constant levels of administrative overhead,
-rather than peaks and valleys.  Volunteers are generally willing to
-work with small but consistent amounts of inconvenience; the
-predictability allows them to come and go without worrying about
-whether their schedule will clash with what's happening in the
-project.  But if the project were subject to a master schedule in
-which some activities excluded other activities, the result would be a
-lot of developers sitting idle a lot of the time&mdash;which would be
-not only inefficient but boring, and therefore dangerous, in that a
-bored developer is likely to soon be an ex-developer.</para>
+Nhóm tình nguyện viên không phải là một "khối" cứng. 
+Mọi người tham gia dự án vì nhiều lý do khác nhau, 
+và những người quan tâm tới một bản phát hành cho
+vẫn muốn tiếp tục công việc phát triển thường xuyên, liên tiếp dù bản đó đã ra đời. 
+Vì tính phát triển không ngừng của dự án mã nguồn mở, phát hành mã nguồn mở
+quy trình có xu hướng tốn nhiều thời gian, nhưng ít gây rối, 
+so với các quy trình phát hành thương mại. 
+Điều đó cũng giống như việc sửa đường cao tốc. 
+Có hai cách để sửa chữa một con đường: bạn có thể chặn hoàn toàn đường, 
+sửa chữa hết công suất cho đến khi vấn đề đượcgiải quyết, 
+hoặc bạn có thể làm việc trên một số tuyến đường tại một thời điểm, 
+tuy vẫn mở các đoạn đường khác
 
-<para>Release work is usually the most noticeable non-development task
-that happens in parallel with development, so the methods described in
-the following sections are geared mostly toward enabling releases.
-However, note that they also apply to other parallelizable tasks, such
-as translations and internationalization, broad API changes made
-gradually across the entire code base, etc.</para>
+Cách đầu tiên là rất hiệu quả <emphasis> với đội thợ </emphasis>, 
+nhưng nó không cho bất cứ ai khác sử dụng đường cho đến khi việc sửa hoàn thành. 
+Cách làm thứ hai cần
+nhiều thời gian và rắc rối cho đội thợ (bây giờ họ phải làm việc
+ít người hơn và trang thiết bị ít hơn, trong điều kiện chật hẹp,
+tiến hành chậm do lưu lượng truy cập trực tiếp, vv), nhưng ít nhất thì đường
+vẫn sử dụng được, mặc dù không hết công suất.
+
+<para>
+Dự án mã nguồn mở có xu hướng làm việc theo cách thứ hai. Trong thực tế, 
+cho một đoạn mã nguồn ổn định đựoc duy trì đồng thời, 
+dự án sẽ rơi vào tình trạng luôn phải 
+sửa chữa những đoạn đường nhỏ. Luôn luôn có một vài làn bị chặn 
+phù hợp nhưng mức độ bất tiện thấp. Việc sửa chữa đó được
+chấp nhận bởi nhóm phát triển nói chung sao cho có được bản phát hành
+theo đúng lịch trình.
+</para>
+
+<para>
+Mô hình mà làm này có thể tổng quát hóa từ việc
+phát hành. Đó là nguyên tắc làm việc song song không
+làm hai bên phụ thuộc lẫn nhau-một nguyên tắc là không có nghĩa là duy nhất
+để phát triển nguồn mở. Tất nhiên, nhưng dự án nguồn mở
+được thực hiện theo cách đặc biệt của riêng nó. Họ không thể
+gây phiền toái quá nhiều tới luồng giao thông, 
+nhưng họ cũng không thể đứng chắn đường
+và làm luồng giao thông suy giảm theo. Do đó, họ tạo ra một 
+quy trình phẳng với các cấp độ quản lý đồng cấp, không có người hơn, người kém.
+Các tình nguyện viên nói chung sẽ sẵn sàng
+làm việc với sự bất tiện nhỏ nhưng thích hợp; 
+tính có thể dự báo cho phép họ đi đến đích mà không lo lắng về
+lịch trình và những khúc mắc xảy ra trong
+dự án. 
+Nhưng nếu các dự án được đặt dưới một lình trình cứng trong đó
+một số hoạt động không cho phép một số họat động khác tiến hành, kết quả sẽ là một hay 
+rất nhiều nhà phát triển không có việc gì làm (phải đợi), làm phí phạm thời gian-điều 
+đó không những không hiệu quả mà còn nhàm chán, và do đó là nguy hiểm. 
+Và một khi một lập trình viên cảm thấy nhàm chán, họ sẽ bỏ dự án
+</para>
+
+<para>
+Công việc phát hành thường không phải là công việc đáng chú ý nhất trong quy trình phát triển phần mềm.
+Điều đó xảy ra song song với sự phát triển, do đó, các phương pháp mô tả trong
+các phần sau chủ yếu hướng tới sự phát hành liên tục suôn sẻ.
+Tuy nhiên, lưu ý rằng những điều này cũng áp dụng cho các nhiệm vụ son song khác, 
+chẳng hạn như bản dịch hay quốc tế hóa, thay đổi API diện rộng sẽ 
+dần dẫn tới sự thay đổi toàn bộ mã nguồn...
+</para>
 
 </simplesect>
 
 <!-- ========================== SECTION =========================== -->
 
 <sect1 id="release-numbering">
-<title>Release Numbering</title>
+<title>Đánh số phát hành</title>
 
-<para>Before we talk about how to make a release, let's look at how to
-name releases, which requires knowing what releases actually mean to
-users.  A release means that:</para>
+<para>Trước khi nói về việc làm thế làm để phát hành,
+chúng ta hãy xem tên bản phát hành có ý nghĩa như thế nào đối với người dùng cuối.
+Phát hành bao gồm:</para>
 
 <itemizedlist>
 
-  <listitem><para>Old bugs have been fixed.  This is probably the one
-            thing users can count on being true of every release.</para>
+  <listitem><para>Sửa lỗi cũ. Đây là điều mà người dùng mong đợi ở mọi phiên bản phát hành.</para>
   </listitem>
 
-  <listitem><para>New bugs have been added.  This too can usually
-            be counted on, except sometimes in the case of security
-            releases or other one-offs (see
+  <listitem><para>Thêm lỗi mới. Phát hành bao gồm cả những lỗi kèm theo trừ những phiên bản phát 
+                  hành một lần duy nhất vì lý do bảo mật(xem
             <xref linkend="security-releases"/><phrase
-            output="printed"> later in this chapter</phrase>).</para>
+            output="printed"> trong chương sau.</phrase>).</para>
   </listitem>
 
-  <listitem><para>New features may have been added.</para>
+  <listitem><para>Thêm chức năng mới.</para>
   </listitem>
 
-  <listitem><para>New configuration options may have been added, or
-            the meanings of old options may have changed subtly.  The
-            installation procedures may have changed slightly since
-            the last release too, though one always hopes not.</para>
+  <listitem><para>Thêm chức năng cấu hình mới, hoặc có sự thay đổi ý nghĩa của cấu hình cũ.
+   Có thể có cả sự thay đổi thứ tự cài đặt nhưng nói chung nên tránh điều này.</para>
   </listitem>
 
-  <listitem><para>Incompatible changes may have been introduced, such
-            that the data formats used by older versions of the
-            software are no longer useable without undergoing some
-            sort of (possibly manual) one-way conversion step.</para>
+  <listitem><para>Những thay đổi phá vỡ sự tương thích,
+   ví dụ như thay đổi cấu trúc dữ liệu làm cho phiên bản cũ và mới không thể sử dụng đồng thời nếu không
+   hoán chuyển định dạng dữ liệu.</para>
   </listitem>
 
 </itemizedlist>
