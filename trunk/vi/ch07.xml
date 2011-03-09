@@ -267,47 +267,54 @@ một số quy ước được sử dụng rộng rãi.</para>
 <sect2 id="release-number-simple-strategy">
 <title>Chiến lược đơn giản</title>
 
-<para>Most projects have rules about what kinds of changes are allowed
-into a release if one is only incrementing the micro number, different
-rules for the minor number, and still different ones for the major
-number.  There is no set standard for these rules yet, but here I will
-describe a policy that has been used successfully by multiple
-projects.  You may want to just adopt this policy in your own
-project, but even if you don't, it's still a good example of the kind
-of information release numbers should convey.  This policy is adapted
-from the numbering system used by the APR project, see
+<para>
+Hầu hết các dự án có luật về việc cho phép loại thay đổi vào vào một
+lần xuất bản nếu nó chỉ chứa một số micro và có luật khác cho số minor, 
+và thậm chí khác hơn nữa cho số phiên bản chính. 
+Không có "chuẩn" chung đặt cho các luật này nhưng ở đây, chúng tôi 
+sẽ mô tả chính sách được dùng thành một ở nhiều dự án.
+Bạn có thể cải tiến chính sách này cho phù hợp với dự án của mình.
+Chính sách dưới đây được sửa đổi từ dự án APR, xem 
 <ulink url="http://apr.apache.org/versioning.html"/>.</para>
 
 <orderedlist>
 
-  <listitem><para>Changes to the micro number only (that is, changes
-            within the same minor line) must be both forward- and
-            backward-compatible.  That is, the changes should be bug
-            fixes only, or very small enhancements to existing
-            features.  New features should not be introduced in a
-            micro release.</para>
+  <listitem><para>
+  
+  Chỉ thay đổi số micro (nghĩa là, thay đổi trong cùng dòng) phải tương thích với 
+  phiên bản trước và sau nó. Nghĩa là, thay đổi này có thể là bug fix, 
+  hoặc thay đổi rất nhỏ tới các chức năng sẵn có. Và, chức năng mới không được
+  đưa vào phiên bản micro. 
+			</para>
   </listitem>
 
-  <listitem><para>Changes to the minor number (that is, within the
-            same major line) must be backward-compatible, but not
-            necessarily forward-compatible.  It's normal to introduce
-            new features in a minor release, but usually not too many
-            new features at once.</para>
+  <listitem><para>
+  
+  
+  Thay đổi tới số minor (nghĩa là, thay đổi trong dòng chính), phải thỏa mãn
+  tính tương tích với phiên bản trước đó, nhưng không cần thiết tương thích với
+  phiên bản sau nó. Thường người ra thêm các chức năng mới vào phiên bản minor,
+  			</para>
   </listitem>
 
-  <listitem><para>Changes to the major number mark compatibility
-            boundaries.  A new major release can be forward- and
-            backward-incompatible.  A major release is expected to
-            have new features, and may even have entire new feature
-            sets.</para>
+  <listitem><para>
+  Thay đổi số phiên bản chính là ranh giới đánh dấu sự tương thích.
+  Một phiên bản chính có thể không tương thích với bản cũ và mới. 
+  Một phiên bản chính thường có nhiều chức năng mới, được gộp thành một bộ.
+			</para>
   </listitem>
 
 </orderedlist>
 
-<para>What <firstterm>backward-compatible</firstterm>
-and <firstterm>forward-compatible</firstterm> mean, exactly, depends on
-what your software does, but in context they are usually not open to
-much interpretation.  For example, if your project is a client/server
+<para><firstterm>Tương thích ngược (backward-compatible)</firstterm> là gì
+phụ thuộc vào việc bản thân phần mềm đó làm gì nhưng thông thường, nó không 
+nói lên nhiều điều. Ví dụ, nếu dự án của bạn ở dạng máy chủ/máy chạm thì nghĩa
+là, nếu nâng cấp máy chủ lên 2.6.0 sẽ làm các phiên bản máy trạm 2.5.4 không thể
+họat động được nữa vì máy chủ và trạm họat động khác nhau (trừ khi lỗi đã được sửa!).
+Mặt khác 
+
+
+  For example, if your project is a client/server
 application, then "backward-compatible" means that upgrading the
 server to 2.6.0 should not cause any existing 2.5.4 clients to lose
 functionality or behave differently than they did before (except for
