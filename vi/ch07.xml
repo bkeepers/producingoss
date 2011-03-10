@@ -308,34 +308,29 @@ Chính sách dưới đây được sửa đổi từ dự án APR, xem
 
 <para><firstterm>Tương thích ngược (backward-compatible)</firstterm> là gì
 phụ thuộc vào việc bản thân phần mềm đó làm gì nhưng thông thường, nó không 
-nói lên nhiều điều. Ví dụ, nếu dự án của bạn ở dạng máy chủ/máy chạm thì nghĩa
-là, nếu nâng cấp máy chủ lên 2.6.0 sẽ làm các phiên bản máy trạm 2.5.4 không thể
-họat động được nữa vì máy chủ và trạm họat động khác nhau (trừ khi lỗi đã được sửa!).
-Mặt khác 
+nói lên nhiều điều. Ví dụ, nếu chương trình của bạn ở dạng máy trạm/máy chủ,
+"tương thích ngược" sẽ có nghĩa là, nếu nâng cấp máy chủ lên 2.6.0
+không được glàm cho phiên bản 2.5.4 ở máy trạm mất một chức năng bất kỳ
+hoặc chạy khác với phiên bản trước đó (trừ trường hợp sửa lỗi!)
+Mặt khác, nếu nâng cấp máy trạm lên 2.6.0 cùng với máy chủ, thì máy trạm
+sẽ có thêm chức năn mới nhưng bản 2.5.4 lại không sử dụng được chức năng mới này.
+Nếu điều đó xảy ra, chúng ta gọi bản nâng cấp là <emphasis>không</emphasis>
+"tương thích xuôi": Hiển nhiên, bạn không thể hạ phiên bản của máy trạm về 
+2.5.4 và giữ mọi chức năng mà nó có ở 2.6.0, vì một số chức năng đó đã đuợc
+thêm mới ở 2.6.0.
+</para>
 
+<para>
+Điều này nghĩa là bản nâng cấp micro chỉ cần thiết chỉ trong trường hợp sửa lỗi.
+Nó phải giữ tính tương thích cả hai hướng: Nếu nâng cấp từ 2.5.3 lên 2.5.4 và sau đó
+quay ngược trở lại 2.5.3 thì vẫn không mất chức năng nào. 
+Tất nhiên, những bản sửa lỗi với 2.5.4 xuất hiện sau khi hạ phiên bản, nhưng bạn không
+mất bất kì sức năng nào, ngoại trừ những lỗi đã được sửa làm ảnh hưởng đến 
+một số chức năng có sẵn.
+</para>
 
-  For example, if your project is a client/server
-application, then "backward-compatible" means that upgrading the
-server to 2.6.0 should not cause any existing 2.5.4 clients to lose
-functionality or behave differently than they did before (except for
-bugs that were fixed, of course).  On the other hand, upgrading one of
-those clients to 2.6.0, along with the server, might
-make <emphasis>new</emphasis> functionality available for that client,
-functionality that 2.5.4 clients don't know how to take advantage of.
-If that happens, then the upgrade is <emphasis>not</emphasis>
-"forward-compatible": clearly you can't now downgrade that client
-back to 2.5.4 and keep all the functionality it had at 2.6.0, since
-some of that functionality was new in 2.6.0.</para>
-
-<para>This is why micro releases are essentially for bug fixes only.
-They must remain compatible in both directions: if you upgrade from
-2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
-functionality should be lost.  Of course, the bugs fixed in 2.5.4
-would reappear after the downgrade, but you wouldn't lose any
-features, except insofar as the restored bugs prevent the use of some
-existing features.</para>
-
-<para>Client/server protocols are just one of many possible
+<para>
+Client/server protocols are just one of many possible
 compatibility domains.  Another is data formats: does the software
 write data to permanent storage?  If so, the formats it reads and
 writes need to follow the compatibility guidelines promised by the
