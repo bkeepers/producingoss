@@ -453,43 +453,36 @@ Khái niệm này cũng đuợc dùng khá rộng rãi trong phát triển phầ
 Tuy nhiên, trong môi trường thương mại, "rẽ nhánh" đôi khi được coi là hoang phí
 tài nguyên và họ bị ép bởi hạn nộp hàng và đành phải sử dụng một hay ít cây phát triển. </para>
 
-<para>Release branches are pretty much required in open source
-projects, however.  I have seen projects do releases without them, but
-it has always resulted in some developers sitting idle while
-others&mdash;usually a minority&mdash;work on getting the release out
-the door.  The result is usually bad in several ways.  First, overall
-development momentum is slowed.  Second, the release is of poorer
-quality than it needed to be, because there were only a few people
-working on it, and they were hurrying to finish so everyone else could
-get back to work.  Third, it divides the development team
-psychologically, by setting up a situation in which different types of
-work interfere with each other unnecessarily.  The developers sitting
-idle would probably be happy to contribute <emphasis>some</emphasis>
-of their attention to a release branch, as long as that were a choice
-they could make according to their own schedules and interests.  But
-without the branch, their choice becomes "Do I participate in the
-project today or not?"  instead of "Do I work on the release today, or
-work on that new feature I've been developing in the mainline
-code?"</para>
+<para>
+Tuy nhiên, phát hành nhánh là điều bắt buộc trong các dự án mã mở. 
+Một số dự án không phát hành nhánh và hệ quả là lập trình viên phải
+"ngồi chơi xơi nước" chờ tới khi phát hành xong. Tóm lại, hậu quả là xấu
+vì vòng phát triển bị đình trệ. Thứ hai, chất lượng cần đạt mức tốt hơn
+nó hiện có, vì khá ít người làm việc trên một nhánh và họ phải làm gấp
+để những người khác có thể tiến hành tiếp công việc của họ. Thứ ba, điều 
+này phân rã đội phát triển về mặt tâm lý và họ rơi vào trình trạng phải
+tương tác với nhau một cách không cần thiết. Người phát triển, cho dù
+không có việc gì làm, vẫn phải theo dõi các bản phát hành và tự hỏi
+"không rõ nó có liên quan tới tôi và tôi có phải làm gì không?"</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-branch-mechanics">
-<title>Mechanics of Release Branches</title>
+<title>Nguyên lý phát hành rẽ nhánh</title>
 
-<para>The exact mechanics of creating a release branch depend on your
-version control system, of course, but the general concepts are the
-same in most systems.  A branch usually sprouts from another branch or
-from the trunk.  Traditionally, the trunk is where mainline
-development goes on, unfettered by release constraints.  The first
-release branch, the one leading to the "1.0" release, sprouts off the
-trunk.  In CVS, the branch command would be something like this</para>
+<para>
+Nguyên lý để tạo bản phát hành rẽ nhánh phụ thuộc vào từng hệ thống
+quản lý phiên bản. Tuy nhiên, có những khái niệm chung cho mọi hệ thống.
+Một rẽ nhánh nói chung được triết từ nhánh chính (trunk). Ở đây, thông thường,
+"trunk" là cành chính, không bị ràng buộc bởi các phát hành. Bản phát 
+hành rẽ nhánh đầu tiên bắt đầu bằng "1.0" được triết từ nhánh chính. 
+Với CVS, lệnh nhánh chạy như sau</para>
 
 <screen>
 $ cd trunk-working-copy
 $ cvs tag -b RELEASE_1_0_X
 </screen>
 
-<para>or in Subversion, like this:</para>
+<para>với Subversion</para>
 
 <screen>
 $ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
