@@ -10,6 +10,12 @@ all:
           cd ..;                                     \
         done
 
+ebook:
+	@for name in ${LANGUAGES}; do                \
+          cd $${name}; make -f ../lang-makefile epub; \
+          cd ..;                                     \
+        done
+
 # The web site post-commit hook runs 'make www'.
 www: lang-www dist
 lang-www:
