@@ -1,7 +1,7 @@
 # See comment in ./Makefile.base-vars
 
 # Grouping targets
-all: html html-chunk pdf ps
+all: html html-chunk pdf ps epub
 all-html: html html-chunk
 install: install-html install-html-chunk install-pdf install-ps
 
@@ -19,6 +19,19 @@ version:
 	else \
 	  mv $(VERSION_SOURCE).tmp $(VERSION_SOURCE); \
 	fi
+
+epub: $(EPUB_TARGET)
+
+$(EPUB_TARGET): $(EPUB_CHUNK_DIR)
+	cd $(EPUB_CHUNK_DIR)
+	echo "application/epub+zip" > mimetype
+	zip -0Xq  $(OUTNAME).epub mimetype
+	zip -Xr9D $(OUTNAME).epub *
+
+$(EPUB_CHUNK_DIR): $(ALL_SOURCE) $(VERSION_SOURCE) $(STYLESHEET) $(IMAGES)
+	$(ENSURE_XSL)
+	$(XSLTPROC) $(HTML_XSLTPROC_OPTS) --output $(EPUB_CHUNK_DIR)/ \
+	  $(TOOLS_DIR)/xsl/epub/docbook.xsl $(XML_SOURCE)
 
 html: $(HTML_TARGET)
 $(HTML_TARGET): $(ALL_SOURCE) $(VERSION_SOURCE) $(STYLESHEET) $(IMAGES)
