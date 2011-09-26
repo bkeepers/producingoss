@@ -4,32 +4,13 @@
 <simplesect>
 
 <para>These are all the open source version control systems I was
-aware of as of mid-2007.  The only one I use on a regular basis is
-Subversion.  I have little or no experience with most of these
-systems, except for Subversion and CVS; the information here is taken
-from their web sites.  See also
-<ulink
+aware of as of mid-2007, plus a few that I added in late 2011.  The
+ones I use on a regular basis are Subversion and Git, and I have used
+Bazaar and CVS extensively as well.  The others I have little or no
+experience with, and the information here is taken from their web
+sites.  See also <ulink
 url="http://en.wikipedia.org/wiki/List_of_revision_control_software"/>.
 </para>
-
-<!-- ======================== subsection ============================== -->
-<sect2 id="vc-cvs">
-<title><emphasis role="bold">CVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.nongnu.org/cvs/"/></title>
-
-<para>CVS has been around for a long time, and many developers are
-already familiar with it.  In its day it was revolutionary: it was the
-first open source version control system with wide-area network access
-for developers (as far as I know), and the first to offer anonymous
-read-only checkouts, which gave new developers an easy way to get
-involved in projects.  CVS versions files only, not directories; it
-offers branching, tagging, and good client-side performance, but
-doesn't handle large files or binary files very well.  It also does
-not support atomic commits.<emphasis>[Disclaimer: I was active in CVS
-development for about five years, before helping to start the
-Subversion project to replace it.]</emphasis></para>
-
-</sect2>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="vc-subversion">
@@ -46,34 +27,6 @@ Subversion's features; see its web site for more information.
 <emphasis>[Disclaimer: I am involved in Subversion development, and it
 is the only one of these systems that I use on a regular
 basis.]</emphasis></para>
-
-</sect2>
-
-<!-- ======================== subsection ============================== -->
-<sect2 id="vc-svk">
-<title><emphasis role="bold">SVK</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://svk.elixus.org/"/></title>
-
-<para>Although it is built on top of Subversion, SVK probably
-resembles some of the decentralized systems below more than it does
-Subversion.  SVK supports distributed development, local commits,
-sophisticated change merging, and the ability to mirror trees from
-non-SVK version control systems.  See its web site for details.</para>
-
-</sect2>
-
-<!-- ======================== subsection ============================== -->
-<sect2 id="vc-mercurial">
-<title><emphasis role="bold">Mercurial</emphasis>&nbsp;&mdash;&nbsp;<ulink
-        url="http://www.selenic.com/mercurial/"/></title>
-
-<para>Mercurial is a distributed version control system that offers,
-among other things, "complete cross-indexing of files and changesets;
-bandwidth and CPU efficient HTTP and SSH sync protocols; arbitrary
-merging between developer branches; integrated stand-alone web
-interface; [portability to] UNIX, MacOS X, and Windows" and more (the
-preceding feature list was paraphrased from the Mercurial web
-site).</para>
 
 </sect2>
 
@@ -97,6 +50,21 @@ dependent on network access or a central server."</para>
 </sect2>
 
 <!-- ======================== subsection ============================== -->
+<sect2 id="vc-mercurial">
+<title><emphasis role="bold">Mercurial</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.selenic.com/mercurial/"/></title>
+
+<para>Mercurial is a distributed version control system that offers,
+among other things, "complete cross-indexing of files and changesets;
+bandwidth and CPU efficient HTTP and SSH sync protocols; arbitrary
+merging between developer branches; integrated stand-alone web
+interface; [portability to] UNIX, MacOS X, and Windows" and more (the
+preceding feature list was paraphrased from the Mercurial web
+site).</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
 <sect2 id="vc-bazaar">
 <title><emphasis role="bold">Bazaar</emphasis>&nbsp;&mdash;&nbsp;<ulink
         url="http://bazaar-vcs.org/"/></title>
@@ -111,6 +79,84 @@ Branches can be merged into one another in a decentralized manner, but
 Bazaar can also be configured to work in a centralized way.  Bazaar
 started out as a fork of GNU Arch, but was rewritten from scratch and
 now has no direct relation to GNU Arch.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="vc-svk">
+<title><emphasis role="bold">SVK</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://svk.elixus.org/"/></title>
+
+<para>Although it is built on top of Subversion, SVK probably
+resembles some of the decentralized systems below more than it does
+Subversion.  SVK supports distributed development, local commits,
+sophisticated change merging, and the ability to mirror trees from
+non-SVK version control systems.  See its web site for details.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="vc-veracity">
+<title><emphasis role="bold">Veracity</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://veracity-scm.com/"/></title>
+
+<para>Veracity is a distributed version control system; as with Git,
+Mercurial, Bazaar, et al, every developer works with a full local
+repository, and changes are pushed and pulled between repositories as
+needed.  Command-wise, it is fairly similar to those systems, However,
+in addition to versioning files, Veracity includes a distributed bug
+tracking database that is versioned alongside the files.  In other
+words, Veracity tries to take every artifact you need to actually do
+development&nbsp;&mdash;&nbsp;not just the source code tree, but the
+bug reports too&nbsp;&mdash;&nbsp;and make them available via the
+version control system.  It's an ambitious vision, and while I haven't
+had a chance to use it, I'd certainly be interested in reports from
+anyone who has.  It's written mainly by SourceGear, Inc, a company
+with a long history in version control and software configuration
+management.</para>
+
+<para>See also <xref linkend="vc-fossil"/> for a similar system.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="vc-fossil">
+<title><emphasis role="bold">Fossil</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.fossil-scm.org/"/></title>
+
+<para>Fossil is similar to Veracity (<xref linkend="vc-fossil"/>) in
+that it is a distributed version control system that versions more
+than just the code files: it versions the bug tracking database, and a
+distributed wiki, and a distributed blog.  Other features include a
+default "autosync" mode, to do automated merging of non-conflicting
+changes (i.e., Fossil can operate in a centralized fashion or a
+decentralized fashion, which is in theory true of other distributed
+systems as well, but it appears that Fossil makes more of an effort to
+actually support the centralized workflow).  It also ships with a
+web interface so people can browse the code repository.</para>
+
+<para>Fossil is mainly written by Dr. Richard Hipp, perhaps better
+known as the author of the SQLite database engine.  Like Veracity, I
+have not used Fossil; if you do, let me know how it goes.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="vc-cvs">
+<title><emphasis role="bold">CVS</emphasis>&nbsp;&mdash;&nbsp;<ulink
+        url="http://www.nongnu.org/cvs/"/></title>
+
+<para>CVS has been around for a long time, and many developers are
+already familiar with it.  In its day it was revolutionary: it was the
+first open source version control system with wide-area network access
+for developers (as far as I know), and the first to offer anonymous
+read-only checkouts, which gave new developers an easy way to get
+involved in projects.  CVS versions files only, not directories; it
+offers branching, tagging, and good client-side performance, but
+doesn't handle large files or binary files very well.  It also does
+not support atomic commits.<emphasis>[Disclaimer: I was active in CVS
+development for about five years, before helping to start the
+Subversion project to replace it.]</emphasis></para>
 
 </sect2>
 
