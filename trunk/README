@@ -31,7 +31,7 @@ Compiling
    of XSL stylesheets that specifically operate on Docbook.  Download
    and install the latest 'docbook-xsl' package from this page:
   
-      http://sourceforge.net/project/showfiles.php?group_id=21935
+      http://sourceforge.net/projects/docbook/files/docbook-xsl/
 
    Download the latest version of docbook-xsl, unpack it, then
    rename the unpacked directory to tools/xsl, something like this:
@@ -51,7 +51,9 @@ Compiling
 
    * Get libxslt, a C library for XSLT, from http://xmlsoft.org/XSLT/.
      (If you're having trouble finding a source package to compile,
-     try ftp://archive.progeny.com/GNOME/sources/libxslt/1.0/.)
+     try ftp://archive.progeny.com/GNOME/sources/libxslt/1.0/ or
+     ftp://xmlsoft.org/libxslt/.)
+
      Install it:
 
         $ tar zxvf libxslt-1.0.22.tar.gz
@@ -64,7 +66,9 @@ Compiling
      Find it at ftp://archive.progeny.com/GNOME/sources/libxml2/)
 
      If you don't want to compile libxslt, you can just fetch the
-     appropriate OS binary package.  
+     appropriate OS binary package.  For example, on Debian GNU/Linux
+     as of late 2011, packages "libxslt1.1" and "libxslt1-dev" were
+     available; I also had to install package "xsltproc".
 
    * From the book directory, do 
 
@@ -83,8 +87,8 @@ Compiling
 
      There are approximately 17577 ways to install FOP.  Rather than
      describe them all, we will recommend one way.  If you've already
-     installed FOP some other way, that's fine, then you can ignore
-     the following recipe:
+     installed FOP some other way (e.g., via package "fop" on Debian
+     GNU/Linux), then you can ignore the following recipe:
 
         1. Download the latest from 
            http://www.apache.org/dyn/closer.cgi/xmlgraphics/fop, for 
@@ -116,6 +120,15 @@ Compiling
      your ~/.foprc).
 
         $ export FOP_OPTS="-Xms100m -Xmx200m"
+
+     If you're doing all this on a Debian GNU/Linux system, you may
+     see errors when the build process tries to run fop, like this:
+
+     "/usr/bin/fop: Unable to locate servlet-api in /usr/share/java"
+
+     If so, see http://wiki.debian.org/Java about setting a Java
+     run-time environment on Debian.  You may still have problems -- I
+     did, and have contacted freexian.com about paid help (2011-12-18).
 
    * If you want images to be included in the PDF, you'll need to use
      the JIMI image processing library.  Grab the latest release from
