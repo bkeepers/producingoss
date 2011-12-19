@@ -11,7 +11,12 @@ HTML_CHUNK_DIR = .
 # Suppress svnversion for now
 VERSION_SOURCE = 
 
-all: html html-chunk pdf ps epub
+# TODO: Workaround for the fact that "fop" is being problematic and
+# therefore PDF generation is sometimes broken.  While that needs to
+# be fixed, it at least shouldn't block other formats being generated.
+all-but-pdf: html html-chunk ps epub
+
+all: all-but-pdf pdf
 
 # The web site post-commit hook runs 'make www'.
 www: all-html
