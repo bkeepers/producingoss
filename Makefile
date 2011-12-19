@@ -1,19 +1,23 @@
 LANGUAGES=de en es fr he ja ml pl pt-pt pt-br ca da fa id ru it gr ar gl hu nl ro vi zh
 
+default: all
+
 .PHONY: ${LANGUAGES}
 ${LANGUAGES}: 
-	@cd $@; make -f ../lang-makefile all; cd ..
+	@(cd $@ && make -f ../lang-makefile all-but-pdf)
+	@(cd $@ && make -f ../lang-makefile pdf)
 
 all:
-	@for name in ${LANGUAGES}; do                \
-          cd $${name}; make -f ../lang-makefile all; \
-          cd ..;                                     \
+	@for name in ${LANGUAGES}; do                           \
+          (cd $${name} && make -f ../lang-makefile all-but-pdf) \
+        done
+	@for name in ${LANGUAGES}; do                           \
+          (cd $${name} && make -f ../lang-makefile pdf)         \
         done
 
 ebook:
-	@for name in ${LANGUAGES}; do                \
-          cd $${name}; make -f ../lang-makefile epub; \
-          cd ..;                                     \
+	@for name in ${LANGUAGES}; do                    \
+          (cd $${name} && make -f ../lang-makefile epub) \
         done
 
 # The web site post-commit hook runs 'make www'.
