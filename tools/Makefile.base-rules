@@ -23,10 +23,10 @@ version:
 epub: $(EPUB_TARGET)
 
 $(EPUB_TARGET): $(EPUB_CHUNK_DIR)
-	cd $(EPUB_CHUNK_DIR)
-	echo "application/epub+zip" > mimetype
-	zip -0Xq  $(OUTNAME).epub mimetype
-	zip -Xr9D $(OUTNAME).epub *
+	cd $(EPUB_CHUNK_DIR) && \
+	echo "application/epub+zip" > mimetype && \
+	zip -0Xq  $(OUTNAME).epub mimetype && \
+	zip -Xr9D ../$(OUTNAME).epub *
 
 $(EPUB_CHUNK_DIR): $(ALL_SOURCE) $(VERSION_SOURCE) $(STYLESHEET) $(IMAGES)
 	$(ENSURE_XSL)
