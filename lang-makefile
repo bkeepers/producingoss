@@ -14,12 +14,12 @@ VERSION_SOURCE =
 # TODO: Workaround for the fact that "fop" is being problematic and
 # therefore PDF generation is sometimes broken.  While that needs to
 # be fixed, it at least shouldn't block other formats being generated.
-all-but-pdf: html html-chunk ps epub
+all-but-pdf: html html-chunk epub
 
-all: all-but-pdf pdf
+all: all-but-pdf pdf ps
 
 # The web site post-commit hook runs 'make www'.
-www: all-html
+www: all-but-pdf
 
 ebook: epub
 
