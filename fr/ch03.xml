@@ -533,117 +533,93 @@
         quantité de spams envoyés directement aux utilisateurs des listes.
         </para>
 
-        <para>Address hiding can be controversial. Some people like it a
-        lot, and will be surprised if your archives don't do it
-        automatically. Other people think it's too much of an
-        inconvenience (because humans also have to translate the
-        addresses back before using them). Sometimes people assert that
-        it's ineffective, because a harvester could in theory compensate
-        for any consistent encoding pattern. However, note that there is
-        empirical evidence that address hiding <emphasis>is</emphasis>
-        effective, see <ulink
-        url="http://www.cdt.org/speech/spam/030319spamreport.shtml" />.</para>
+        <para>Le masquage d’adresse peut être sujet à controverse. Certaines
+        personnes appréciant beaucoup cette technique seront surprises si
+        vos archives ne le font pas automatiquement. D’autres pensent plutôt que c’est un désagrément (parce que les utilisateurs doivent aussi
+        traduire les adresses avant usage). Certains doutent de l’efficacité
+        de la méthode puisqu’un collecteur peut, en théorie, s’adapter aux
+        codes les plus répandus. Notez, malgré tout, que, par expérience, le
+        masquage d’adresse se montre efficace (voir <ulink
+        url="http://www.cdt.org/speech/spam/030319spamreport.shtml" />).
+        </para>
 
-        <para>Ideally, the list management software would leave the
-        choice up to each individual subscriber, either through a
-        special yes/no header or a setting in that subscriber's list
-        account preferences. However, I don't know of any software which
-        offers per-subscriber or per-post choice in the matter, so for
-        now the list manager must make a decision for everyone (assuming
-        the archiver offers the feature at all, which is not always the
-        case). I lean very mildly toward turning address hiding on. Some
-        people are very careful to avoid posting their email addresses
-        on web pages or anywhere else a spam harvester might see it, and
-        they would be disappointed to have all that care thrown away by
-        a mailing list archive; meanwhile, the inconvenience address
-        hiding imposes on archive users is very slight, since it's
-        trivial to transform an obscured address back to a valid one if
-        you need to reach the person. But keep in mind that, in the end,
-        it's still an arms race: by the time you read this, harvesters
-        might well have evolved to the point where they can recognize
-        most common forms of hiding, and we'll have to think of
-        something else.</para>
+        <para>Idéalement, le programme de gestion de listes devrait laisser le
+        choix à chaque abonné, grâce à un en-tête oui/non ou un paramètre
+        dans les préférences de son compte. Mais je ne connais aucun logiciel
+        permettant ce réglage, ce qui oblige, pour l’instant, le responsable
+        des listes à faire ce choix pour tout le monde (en supposant que le
+        logiciel d’archivage propose cette option, ce qui n’est pas toujours le cas). Je penche légèrement en faveur du masquage d’adresses. Certaines personnes sont très prudentes et n’affichent pas leur adresse e-mail sur les pages Web ou à n’importe quel endroit qu’un collecteur d’adresse pourrait inspecter. Elles seraient déçues de voir tous leurs efforts réduits à néant par une archive de liste de diffusion.
+        De plus, le désagrément imposé aux utilisateurs des archives par le
+        masquage est très faible puisqu’il est fort simple de « traduire » ces
+        adresses si vous avez besoin de contacter quelqu’un. Mais n’oubliez
+        pas qu’au final, cela reste une course à l’armement : au moment
+        où vous lirez ceci, les collecteurs auront peut-être évolué au point
+        qu’ils pourront reconnaître les techniques classiques de masquage
+        d’adresse e-mail et nous devrons trouver alors une autre parade.
+        </para>
       </sect3>
     </sect2>
 
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="header-management">
-      <title>Identification and Header Management</title>
+      <title>Identification et gestion des en-têtes</title>
 
-      <para>List subscribers often want to put mails from the list into
-      a project-specific folder, separate from their other mail. Their
-      mail reading software can do this automatically by examining the
-      mail's <firstterm>headers</firstterm>. The headers are the fields
-      at the top of the mail that indicate the sender, recipient,
-      subject, date, and various other things about the message. Certain
-      headers are well known and effectively mandatory:</para>
+      <para>Les utilisateurs des listes rangeront souvent les messages dans des dossiers réservés au projet, séparés de leurs autres courriers. Leur
+      logiciel de lecture de courrier peut faire cela automatiquement en
+      vérifiant les <firstterm>en-têtes</firstterm> du message. Les en-têtes sont les champs au début du courrier qui indiquent l’expéditeur, le destinataire, le sujet, la date et d’autres informations à propos du message. Certains en-têtes sont bien connus et obligatoires :
+      </para>
 
       <screen>
-From: ...
-To: ...
-Subject: ...
+De: ...
+À: ...
+Sujet: ...
 Date: ...
 </screen>
 
-      <para>Others are optional, though still quite standard. For
-      example, emails are not strictly required to have the</para>
+      <para>D’autres sont optionnels bien que plutôt courants. Par exemple,
+      vous n’êtes pas obligés de remplir l’en-tête :</para>
 
       <screen>
-Reply-to: sender@email.address.here
+Répondre à: expediteur@addresse.courriel.ici
 </screen>
 
-      <para>header, but most do, because it gives recipients a foolproof
-      way to reach the author (it is especially useful when the author
-      had to send from an address other than the one to which replies
-      should be directed).</para>
+      <para>Mais la plupart des gens le font puisque cela permet au destinataire de répondre de manière certaine à l’auteur du message (c’est particulièrement utile si l’auteur a dû recourir à une adresse différente de celle à laquelle les réponses devraient être adressées).
+      </para>
 
-      <para>Some mail reading software offers an easy-to-use interface
-      for filing mails based on patterns in the Subject header. This
-      leads people to request that the mailing list add an automatic
-      prefix to all Subjects, so they can set their readers to look for
-      that prefix and automatically file the mails in the right folder.
-      The idea is that the original author would write:</para>
+      <para>Certains logiciels de courrier fournissent une interface simple
+      d’emploi pour trier les messages en fonction du sujet. Certaines personnes demandent par conséquent que les listes de diffusion ajoutent
+      automatiquement un préfixe aux sujets afin que leur logiciel puisse
+      automatiquement ranger ces messages dans le bon dossier. L’idée
+      est que l’auteur du message écrive :</para>
 
       <screen>
-Subject: Making the 2.5 release.
+Sujet: Préparation de la version 2.5
 </screen>
 
-      <para>but the mail would show up on the list looking like
-      this:</para>
+      <para>mais que le message au final soit envoyé sous cette forme (par
+      exemple) :</para>
 
       <screen>
-Subject: [discuss@lists.example.org] Making the 2.5 release.
+Sujet: [discussion@listes.exemple.org] Préparation de la version 2.5
 </screen>
 
-      <para>Although most list management software offers the option to
-      do this, I strongly recommend against turning the option on. The
-      problem it solves can easily be solved in much less obtrusive
-      ways, and the cost of eating space in the Subject field is far too
-      high. Experienced mailing list users typically scan the Subjects
-      of the day's incoming list mail to decide what to read and/or
-      respond to. Prepending the list's name to the Subject can push the
-      right side of the Subject off the screen, rendering it invisible.
-      This obscures information that people depend on to decide what
-      mails to open, thus reducing the overall functionality of the
-      mailing list for everyone.</para>
+      <para>Bien que la plupart des logiciels de gestion de listes de diffusion proposent cette option, je ne vous recommande pas de l’activer. Le problème réglé ici peut l’être par des moyens beaucoup moins marqués, et le prix à payer, l’utilisation de l’espace dans le champ Sujet, est bien trop élevé. Les utilisateurs habitués aux listes de diffusion passent en général en revue les sujets des messages pour décider de ce qu’ils vont lire et ce à quoi ils vont répondre. Ajouter le nom de la liste au sujet peut repousser la partie importante du sujet hors de l’écran, la rendant ainsi invisible. Cela masque les informations sur lesquelles les gens se reposent durant leur inspection des sujets, réduisant par conséquent l’utilité de la liste de diffusion.
+      </para>
 
-      <para>Instead of munging the Subject header, teach your users to
-      take advantage of the other standard headers, starting with the To
-      header, which should say the mailing list's name:</para>
+      <para>Plutôt que de grignoter une partie du champ Sujet, enseignez aux utilisateurs à utiliser les autres champs, en commençant par le champ À : qui devrait afficher le nom de la liste :</para>
 
       <screen>
-To: &lt;discuss@lists.example.org&gt;
+À: &lt;discussion@listes.exemple.org&gt;
 </screen>
 
-      <para>Any mail reader that can filter on Subject should be able to
-      filter on To just as easily.</para>
+      <para>N’importe quel logiciel de messagerie pouvant filtrer les sujets
+      devrait également pouvoir filtrer aussi facilement le champ À :.
+      </para>
 
-      <para>There are a few other optional-but-standard headers expected
-      for mailing lists. Filtering on these is even more reliable than
-      using the "To" or "Cc" headers; since these headers are added to
-      each post by the mailing list management software itself, some
-      users may be counting on their presence:</para>
+      <para>D’autres champs optionnels sont en général remplis pour les listes
+      de diffusion. Baser le filtrage sur ces champs est encore plus efficace
+      que d’utiliser les champs <emphasis>À :</emphasis> ou <emphasis>Cc :</emphasis> puisque ces champs sont remplis automatiquement par le logiciel de la liste de diffusion, certains utilisateurs s’attendent à les trouver :</para>
 
       <screen>
 list-help: &lt;mailto:discuss-help@lists.example.org&gt;
@@ -653,173 +629,82 @@ Delivered-To: mailing list discuss@lists.example.org
 Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
 </screen>
 
-      <para>For the most part, they are self-explanatory. See <ulink
-      url="http://www.nisto.com/listspec/list-manager-intro.html" /> for
-      more explanation, or if you need the really detailed, formal
-      specification, see <ulink
+      <para>Pour la plupart, leur fonction est évidente. Voyez <ulink
+      url="http://www.nisto.com/listspec/list-manager-intro.html" /> plus d’informations à ce sujet ou, si vous cherchez des spécifications
+      vraiment détaillées et formelles, voyez  <ulink
       url="http://www.faqs.org/rfcs/rfc2369.html" />.</para>
 
-      <para>Notice how these headers imply that if you have a mailing
-      list named "list", then you also have administrative addresses
-      "list-help" and "list-unsubscribe" available. In addition to
-      these, it is normal to have "list-subscribe", for joining, and
-      "list-owner", for reaching the list administrators. Depending on
-      the list management software you use, these and/or various other
-      administrative addresses may be set up; the documentation will
-      have details. Usually a complete explanation of all these special
-      addresses is mailed to each new user as part of an automated
-      "welcome mail" on subscribing. You yourself will probably get a
-      copy of this welcome mail. If you don't, then ask someone else for
-      a copy, so you know what your users are seeing when they join the
-      list. Keep the copy handy so you can answer questions about the
-      mailing list functions, or better yet, put it on a web page
-      somewhere. That way when people lose their own copy of the
-      instructions and post to ask "How do I unsubscribe from this
-      list?", you can just hand them the URL.</para>
+      <para>Vous remarquerez que ces champs suggèrent que si vous avez une
+      liste nommée "list", alors vous possédez aussi les listes administratives "list-help" et "list-unsubscribe". En plus de celles-ci, il est normal que vous proposiez "list-subscribe" pour s’inscrire et
+      "list-owner" pour contacter les administrateurs des listes. En fonction du logiciel utilisé pour gérer vos listes, ces adresses et/ou plusieurs autres adresses administratives peuvent être mises en place, vous trouverez des explications dans la documentation. En général, un descriptif complet de toutes ces adresses spéciales est communiqué à chaque nouvel utilisateur au sein d’un message de bienvenue lors de l’inscription. Vous recevrez aussi certainement une copie de ce courrier. Si vous ne la recevez pas, alors demandez ce que reçoivent les utilisateurs lorsqu’ils s’inscrivent à une liste. Gardez ce message à portée afin de pouvoir répondre aux questions concernant les fonctions de la liste de diffusion ou, encore mieux, affichez-le sur une page Web, ainsi quand quelqu’un perd sa copie des instructions et envoie un message concernant les modalités de désinscription, vous n’avez qu’à lui envoyer l’URL.
+      </para>
 
-      <para>Some mailing list software offers an option to append
-      unsubscription instructions to the bottom of every post. If that
-      option is available, turn it on. It causes only a couple of extra
-      lines per message, in a harmless location, and it can save you a
-      lot of time, by cutting down on the number of people who mail
-      you—or worse, mail the list!—asking how to unsubscribe.</para>
+      <para>Certains logiciels de liste de diffusion possèdent une option pour
+      ajouter les instructions de désabonnement à chaque message. Si cette option est présente, activez-la. Cela n’ajoute que quelques lignes au message, ne gêne pas sa lecture, et peut vous faire gagner beaucoup de temps en évitant que les gens ne vous écrivent, ou pire encore, n’écrivent à toute la liste, pour demander comment se désinscrire.
+      </para>
     </sect2>
 
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="reply-to">
-      <title>The Great Reply-to Debate</title>
+      <title>Le grand débat du &laquo; Répondre à &raquo;</title>
 
-      <para>Earlier, in <xref linkend="avoid-private-discussions" />, I
-      stressed the importance of making sure discussions stay in public
-      forums, and talked about how active measures are sometimes needed
-      to prevent conversations from trailing off into private email
-      threads; furthermore, this chapter is all about setting up project
-      communications software to do as much of the work for you as
-      possible. Therefore, if the mailing list management software
-      offers a way to automatically cause discussions to stay on the
-      list, you would think turning that feature on would be the obvious
-      choice.</para>
+      <para>Précédemment, dans une partie appelée <xref linkend="avoid-private-discussions" />, j’ai insisté sur l’importance du fait que les discussions doivent se dérouler dans les forums publics, et j’ai dit que parfois des mesures devaient être prises pour éviter que les conversations ne se transforment en échanges d’e-mails privés. Ce chapitre traite de la mise en place des logiciels de communication du projet afin qu’ils facilitent au maximum la vie du projet. Par conséquent, si le logiciel de gestion des listes de discussion vous offre la possibilité de garder automatiquement les discussions sur la liste, vous vous direz qu’il est logique d’activer cette fonctionnalité.</para>
 
-      <para>Well, not quite. There is such a feature, but it has some
-      pretty severe disadvantages. The question of whether or not to use
-      it is one of the hottest debates in mailing list
-      management—admittedly, not a controversy that's likely to make the
-      evening news in your city, but it can flare up from time to time
-      in free software projects. Below, I will describe the feature,
-      give the major arguments on both sides, and make the best
-      recommendation I can.</para>
+      <para>En fait ce n’est pas si évident. Cette option existe, mais elle comporte des inconvénients plutôt restrictifs. Son utilisation est sujette à l’un des plus importants débats concernant la gestion des listes de diffusion, rien qui ne fera la une des journaux du soir, mais parfois les discussions à ce propos peuvent devenir tendues au sein des projets de logiciels libres. Ci-dessous je vais décrire la fonctionnalité, exposer les principaux arguments de chaque camp et vous donner mes meilleures recommandations.</para>
 
-      <para>The feature itself is very simple: the mailing list software
-      can, if you wish, automatically set the Reply-to header on every
-      post to redirect replies to the mailing list. That is, no matter
-      what the original sender puts in the Reply-to header (or even if
-      they don't include one at all), by the time the list subscribers
-      see the post, the header will contain the list address:</para>
+      <para>La fonctionnalité en elle-même est très simple : le logiciel peut, si vous le souhaitez, remplir le champ Répondre à : automatiquement afin que les réponses soient redirigées sur la liste de diffusion. C’est à dire que, peu importe ce que l’expéditeur met dans le champ Répondre à : (ou même s’il ne le remplit pas), quand les abonnés de la liste recevront le message l’en-tête contiendra l’adresse de la liste :</para>
 
       <screen>
-Reply-to: discuss@lists.example.org
+Répondre à: discuss@lists.example.org
 </screen>
 
-      <para>On its face, this seems like a good thing. Because virtually
-      all mail reading software pays attention to the Reply-to header,
-      now when anyone responds to a post, their response will be
-      automatically addressed to the entire list, not just to the sender
-      of the message being responded to. Of course, the responder can
-      still manually change where the message goes, but the important
-      thing is that <emphasis>by default</emphasis> replies are directed
-      to the list. It's a perfect example of using technology to
-      encourage collaboration.</para>
+      <para>De prime abord, cela semble être une bonne chose parce que quasiment tous les logiciels de messagerie inspectent le champ Répondre
+      à : et donc quand quelqu’un enverra une réponse, elle sera automatiquement envoyée à la liste entière : pas uniquement à l’expéditeur du message auquel on répond. Bien sûr, la personne qui répond peut modifier à la main le destinataire du message, mais l’important est que, par défaut, les réponses sont directement envoyées à la liste.
+      C’est un très bon exemple d’utilisation de la technologie pour encourager la collaboration.</para>
 
-      <para>Unfortunately, there are some disadvantages. The first is
-      known as the <firstterm>Can't Find My Way Back Home</firstterm>
-      problem: sometimes the original sender will put their "real" email
-      address in the Reply-to field, because for one reason or another
-      they send email from a different address than where they receive
-      it. People who always read and send from the same location don't
-      have this problem, and may be surprised that it even exists. But
-      for those who have unusual email configurations, or who cannot
-      control how the From address on their mails looks (perhaps because
-      they send from work and do not have any influence over the IT
-      department), using Reply-to may be the only way they have to
-      ensure that responses reach them. When such a person posts to a
-      mailing list that he's not subscribed to, his setting of Reply-to
-      becomes essential information. If the list software overwrites it,
-      he may never see the responses to his post.</para>
+      <para>Malheureusement, il existe quelques inconvénients. Le premier est
+      connu sous le nom du problème de <firstterm>Je ne peux plus retrouver mon chemin</firstterm> : il se peut que l’expéditeur mette sa « véritable » adresse e-mail dans le champ Répondre à : parce que, pour une raison ou pour une autre, il a utilisé une autre adresse pour envoyer le message que celle qu’il utilise pour les recevoir. Les personnes qui expédient et lisent les messages à partir de la même adresse n’ont pas ce problème, et sont même parfois surprises d’apprendre son existence. Mais, pour ceux qui utilisent leurs comptes mail de manière particulière ou qui n’ont pas de contrôle sur le champ De : dans leurs courriers (parce qu’ils écrivent depuis leur travail, ou parce qu’ils n’ont pas assez d’influence sur le département informatique), utiliser le champ Répondre à : peut être la seule manière d’être sûr que les réponses leur parviennent. Quand une personne dans cette situation envoie un message à une liste de diffusion à laquelle il n’est pas abonné, l’adresse dans le champ Répondre à : devient une information essentielle. Si le logiciel remplace cette adresse, il se peut qu’il ne reçoive jamais de réponse.
+      </para>
 
-      <para>The second disadvantage has to do with expectations, and in
-      my opinion is the most powerful argument against Reply-to munging.
-      Most experienced mail users are accustomed to two basic methods of
-      replying: <firstterm>reply-to-all</firstterm> and
-      <firstterm>reply-to-author</firstterm>. All modern mail reading
-      software has separate keys for these two actions. Users know that
-      to reply to everyone (that is, including the list), they should
-      choose reply-to-all, and to reply privately to the author, they
-      should choose reply-to-author. Although you want to encourage
-      people to reply to the list whenever possible, there are certainly
-      circumstances where a private reply is the responder's
-      prerogative—for example, they may want to say something
-      confidential to the author of the original message, something that
-      would be inappropriate on the public list.</para>
+      <para>Le deuxième inconvénient est lié aux attentes et, d’après moi, c’est l’argument qui a le plus de poids contre l’automatisation du champ
+      Répondre à :. La majorité des gens ayant l’habitude de se servir des e-mails sont accoutumés à deux choix simples pour répondre : <firstterm>Répondre à tous</firstterm> et <firstterm>Répondre</firstterm>. Tous les logiciels modernes de messagerie possèdent deux boutons distincts pour ces deux fonctions.
+      Les utilisateurs savent que pour répondre à tout le monde (ce qui inclut la liste), ils doivent utiliser le bouton « Répondre à tous », et
+      que pour répondre en privé à l’auteur ils doivent utiliser le bouton « Répondre ». Même si votre but est d’encourager les gens à répondre à toute la liste le plus souvent possible, il y aura parfois des 
+      circonstances qui font qu’une réponse privée est plus appropriée, par
+      exemple, si une personne veut dire quelque chose de confidentiel à
+      l’auteur du message original, quelque chose qui n’aurait pas sa place
+      sur la liste publique.
+      </para>
 
-      <para>Now consider what happens when the list has overridden the
-      original sender's Reply-to. The responder hits the reply-to-author
-      key, expecting to send a private message back to the original
-      author. Because that's the expected behavior, he may not bother to
-      look carefully at the recipient address in the new message. He
-      composes his private, confidential message, one which perhaps says
-      embarrassing things about someone on the list, and hits the send
-      key. Unexpectedly, a few minutes later his message appears
-      <emphasis>on the mailing list!</emphasis> True, in theory he
-      should have looked carefully at the recipient field, and should
-      not have assumed anything about the Reply-to header. But authors
-      almost always set Reply-to to their own personal address (or
-      rather, their mail software sets it for them), and many longtime
-      email users have come to expect that. In fact, when a person
-      deliberately sets Reply-to to some other address, such as the
-      list, he usually makes a point of mentioning this in the body of
-      the message, so people won't be surprised at what happens when
-      they reply.</para>
+      <para>Maintenant penchons-nous sur le cas où la liste a ré-écrit le champ Répondre à :. La personne qui répond appuie sur le bouton « Répondre » en s’attendant à envoyer un message privé à l’auteur du
+      courrier. Puisque c’est ce qu’il se passe normalement, il ne prendra
+      pas forcément la peine de vérifier l’adresse du destinataire du message.  Il écrit alors son message privé et confidentiel, où il pourrait dire des choses gênantes sur une autre personne de la liste, et appuie ensuite sur « Envoi ». Alors qu’il ne s’y attendait pas, quelques
+      minutes plus tard son message apparaît sur la liste de diffusion !
+      Il aurait effectivement, en théorie, dû prendre le temps de regarder avec précaution le champ Destinataire, et n’aurait pas dû supposer qu’il n’avait pas à se soucier du champ Répondre à :.
+      Mais les expéditeurs règlent quasiment à chaque fois le champ Répondre à : de telle sorte qu’ils reçoivent la réponse (ou pour être plus précis, c’est leur logiciel de messagerie qui le fait pour eux), et
+      beaucoup d’utilisateurs expérimentés le prennent pour argent comptant. En fait, lorsqu’une personne met une autre adresse que celle de l’expéditeur dans le champ Répondre à :, comme celle de la liste par exemple, il prendra en général la peine de le notifier dans le message, ainsi les gens ne seront pas surpris par ce qui se passe lorsqu’ils appuient sur « Répondre ».
+      </para>
 
-      <para>Because of the possibly severe consequences of this
-      unexpected behavior, my own preference is to configure list
-      management software to never touch the Reply-to header. This is
-      one instance where using technology to encourage collaboration
-      has, it seems to me, potentially dangerous side-effects. However,
-      there are also some powerful arguments on the other side of this
-      debate. Whichever way you choose, you will occasionally get people
-      posting to your list asking why you didn't choose the other way.
-      Since this is not something you ever want as the main topic of
-      discussion on your list, it might be good to have a canned
-      response ready, of the sort that's more likely to stop discussion
-      than encourage it. Make sure you do <emphasis>not</emphasis>
-      insist that your decision, whichever it is, is obviously the only
-      right and sensible one (even if you think that's the case).
-      Instead, point out that this is a very old debate, there are good
-      arguments on both sides, no choice is going to satisfy all users,
-      and therefore you just made the best decision you could. Politely
-      ask that the subject not be revisited unless someone has something
-      genuinely new to say, then stay out of the thread and hope it dies
-      a natural death.</para>
+      <para>À cause des lourdes conséquences potentielles que cela peut entraîner, je préfère configurer le logiciel de gestion de liste de manière à ce qu’il ne modifie pas le champ Répondre à :. C’est l’un des cas où l’utilisation de la technologie pour encourager la collaboration peut, à mon sens, avoir des effets pervers. Mais l’autre camp a également d’excellents arguments à faire valoir. Quel que soit votre choix, des gens de temps à autre vous demanderont pourquoi vous n’avez pas fait l’autre choix. Comme c’est quelque chose que vous ne voulez
+      pas voir prendre de trop grandes proportions, il vaut mieux que vous ayez une réponse toute prête, une réponse qui mettra un terme au débat plutôt que de l’encourager. Ne faites pas paraître votre décision, que vous choisissiez une solution ou l’autre, comme étant la seule, l’unique valable et la bonne (même si vous pensez que c’est le cas). Insistez plutôt sur le fait que c’est un très vieux débat, que les deux camps possèdent de bon arguments, mais qu’aucun choix ne peut satisfaire tous les utilisateurs, en conséquence, vous avez pris
+      la décision qui vous semblait la meilleure. Demandez poliment à ce
+      que le sujet ne soit pas ré-ouvert, à moins que quelqu’un ait quelque
+      chose de vraiment nouveau à apporter au débat, puis ne participez plus à la discussion en espérant qu’elle s’éteigne d’elle-même.
+      </para>
 
-      <para>Someone may suggest a vote to choose one way or the other.
-      You can do that if you want, but I personally do not feel that
-      counting heads is a satisfactory solution in this case. The
-      penalty for someone who is surprised by the behavior is so huge
-      (accidentally sending a private mail to a public list), and the
-      inconvenience for everyone else is fairly slight (occasionally
-      having to remind someone to respond to the whole list instead of
-      just to you), that it's not clear that the majority, even though
-      they are the majority, should be able to put the minority at such
-      risk.</para>
+      <para>Quelqu’un pourrait suggérer de voter pour choisir une méthode ou
+      l’autre. Vous pouvez le faire si c’est votre choix, mais je ne pense
+      pas qu’un vote à main levée soit la meilleure solution dans ce cas.
+      Le risque que quelqu’un se fasse surprendre par la modification du
+      champ Répondre à : est trop important et le désagrément pour chacun est plutôt faible (devoir rappeler occasionnellement aux gens de répondre à la liste entière) pour qu’une majorité, même si c’est la majorité, impose un tel risque à une minorité.
+      </para>
 
-      <para>I have not addressed all aspects of this issue here, just
-      the ones that seemed of overriding importance. For a full
-      discussion, see these two canonical documents, which are the ones
-      people always cite when they're having this debate: <itemizedlist>
+      <para>Je n’ai pas abordé, ici, tous les aspects de ce problème, seulement ceux qui semblaient les plus importants. Si le sujet vous intéresse je vous conseille de lire ces deux documents canoniques toujours cités dans ce débat :
+      <itemizedlist>
           <listitem>
             <para><emphasis role="bold">Leave Reply-to alone</emphasis>,
-            <emphasis>by Chip Rosenthal</emphasis></para>
+            <emphasis>de Chip Rosenthal</emphasis></para>
 
             <para>
               <ulink url="http://www.unicom.com/pw/reply-to-harmful.html" />
@@ -828,7 +713,7 @@ Reply-to: discuss@lists.example.org
 
           <listitem>
             <para><emphasis role="bold">Set Reply-to to list</emphasis>,
-            <emphasis>by Simon Hill</emphasis></para>
+            <emphasis>de Simon Hill</emphasis></para>
 
             <para>
               <ulink url="http://www.metasystema.net/essays/reply-to.mhtml" />
@@ -836,173 +721,103 @@ Reply-to: discuss@lists.example.org
           </listitem>
         </itemizedlist></para>
 
-      <para>Despite the mild preference indicated above, I do not feel
-      there is a "right" answer to this question, and happily
-      participate in many lists that <emphasis>do</emphasis> set
-      Reply-to. The most important thing you can do is settle on one way
-      or the other early, and try not to get entangled in debates about
-      it after that.</para>
+      <para>Malgré cette légère préférence énoncée ci-dessus, je ne pense pas
+      qu’il existe une vérité « transcendante » à sujet, et je participe
+      gaiement à de nombreuses listes imposant le Répondre à :. Le mieux que vous puissiez faire, est d’opter assez tôt pour une solution ou pour l’autre, et d’éviter de vous faire attirer dans un débat par la suite.
+      </para>
 
       <sect3 id="reply-fantasies">
-        <title>Two fantasies</title>
+        <title>Deux rêves</title>
 
-        <para>Someday, someone will get the bright idea to implement a
-        <firstterm>reply-to-list</firstterm> key in a mail reader. It
-        would use some of the custom list headers mentioned earlier to
-        figure out the address of the mailing list, and then address the
-        reply directly to the list only, leaving off any other recipient
-        addresses, since most are probably subscribed to the list
-        anyway. Eventually, other mail readers will pick up the feature,
-        and this whole debate will go away. (Actually, the <ulink
-        url="http://www.mutt.org/">Mutt</ulink> mail reader does offer
-        this feature.<footnote>
-            <para>Shortly after this book appeared, <ulink
+        <para>Un jour, quelqu’un aura cette idée brillante d’ajouter un bouton
+        <firstterm>Répondre à la liste</firstterm> dans un logiciel de messagerie. Pour ce faire, il se servirait des en-têtes afin de déterminer l’adresse de la liste de diffusion, et enverrait donc la réponse directement à la liste, en ne se préoccupant pas des adresses d’autres destinataires puisqu’ils sont, de toute façon et pour la plupart déjà inscrits à la liste. Finalement, d’autres logiciels de messagerie reprendraient l’idée et le débat deviendrait obsolète (en fait, le logiciel de messagerie <ulink url="http://www.mutt.org/">Mutt</ulink> propose déjà cette fonctionnalité.<footnote>
+            <para>Peu après la publication de ce livre, <ulink
             url="http://www.michaelbernstein.com/">Michael
-            Bernstein</ulink> wrote me to say: "There are other email
-            clients that implement a reply-to-list function besides
-            Mutt. For example, Evolution has this function as a keyboard
-            shortcut, but not a button (Ctrl+L)."</para>
+            Bernstein</ulink> m’a écrit pour
+            m’informer que « Mutt n’est pas le seul logiciel de messagerie à proposer la fonction « Répondre à la liste ». Par exemple Evolution le propose grâce à un raccourci clavier, mais pas avec un bouton (Ctrl+L). »
+            </para>
           </footnote>)</para>
 
-        <para>An even better solution would be for Reply-to munging to
-        be a per-subscriber preference. Those who want the list to set
-        Reply-to munged (either on others' posts or on their own posts)
-        could ask for that, and those who don't would ask for Reply-to
-        to be left alone. However, I don't know of any list management
-        software that offers this on a per-subscriber basis. For now, we
-        seem to be stuck with a global setting.</para>
+        <para>Une meilleure solution : laisser le choix à chaque abonné. Ceux
+        qui veulent que la liste remplisse le champ Répondre à : (que se soit pour leurs propres messages ou ceux des autres) pourraient régler cette option et ceux qui ne le veulent pas pourraient aussi choisir. Je ne connais cependant aucun logiciel de gestion de liste qui permette ce choix individuel. Pour le moment on doit faire avec une configuration identique pour tous.</para>
       </sect3>
     </sect2>
 
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="archiving">
-      <title>Archiving</title>
+      <title>L’archivage</title>
 
-      <para>The technical details of setting up mailing list archiving
-      are specific to the software that's running the list, and are
-      beyond the scope of this book. When choosing or configuring an
-      archiver, consider these qualities:</para>
+      <para>Les détails techniques concernant la mise en place de l’archivage
+      d’une liste de diffusion sont particuliers au logiciel qui fait fonctionner la liste et dépassent le cadre de ce livre. Lors du choix, ou de la configuration, de l’archive, vous devez prendre en compte les
+      facteurs suivants :</para>
 
       <variablelist>
         <varlistentry>
-          <term>Prompt updating</term>
+          <term>Mise à jour rapide</term>
 
           <listitem>
-            <para>People will often want to refer to an archived post
-            made within the last hour or two. If possible, the archiver
-            should archive each post instantaneously, so that by the
-            time a post appears on the mailing list, it's already
-            present in the archives. If that option isn't available,
-            then at least try to set the archiver to update itself every
-            hour or so. (By default, some archivers run their update
-            processes once per night, but in practice that's far too
-            much lag time for an active mailing list.)</para>
+            <para>Les gens se réfèreront souvent à un message archivé envoyé une ou deux heures auparavant. Si possible, le logiciel devrait archiver chaque message instantanément, dès qu’un message apparaît dans la liste de diffusion, afin qu’il soit aussi présent dans les archives. Si cette option n’est pas disponible, alors essayez de faire en sorte que l’archive soit remise à jour au moins toutes les heures (par défaut certains logiciels d’archives se mettent à jour automatiquement chaque nuit, mais dans la pratique ce délai est bien trop important pour une liste de diffusion active).
+            </para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
-          <term>Referential stability</term>
+          <term>La stabilité du référentiel</term>
 
           <listitem>
-            <para>Once a message is archived at a particular URL, it
-            should remain accessible at that exact same URL forever, or
-            as close to forever as possible. Even if the archives are
-            rebuilt, restored from backup, or otherwise fixed, any URLs
-            that have already been made publicly available should remain
-            the same. Stable references make it possible for Internet
-            search engines to index the archives, which is a major boon
-            to users looking for answers. Stable references are also
-            important because mailing list posts and threads are often
-            linked to from the bug tracker (see <xref
-            linkend="bug-tracker" />)<phrase output="printed"> later in
-            this chapter</phrase> or from other project
-            documents.</para>
+            <para>Une fois qu’un message est archivé à une URL donnée, il devrait rester accessible par la même URL à tout jamais, ou le plus longtemps possible en tout cas. Même si les archives sont reconstruites, rétablies à partir d’une sauvegarde ou réparées d’une quelconque manière, aucune URL qui a été rendue publique ne devrait être modifiée. Des coordonnées stables rendent possible l’indexation des archives par les moteurs de recherche qui sont les meilleurs compagnons des utilisateurs en quête de réponses. Des coordonnées stables sont aussi importantes, car les messages et les sujets, dans les listes de diffusion, contiennent souvent des liens vers le système de suivi de bogues (voir la section nommée <xref linkend="bug-tracker" /><phrase output="printed"> plus loin dans ce chapitre</phrase>) ou vers d’autres documents du projets.</para>
 
-            <para>Ideally, mailing list software would include a
-            message's archive URL, or at least the message-specific
-            portion of the URL, in a header when it distributes the
-            message to recipients. That way people who have a copy of
-            the message would be able to know its archive location
-            without having to actually visit the archives, which would
-            be helpful because any operation that involves one's web
-            browser is automatically time-consuming. Whether any mailing
-            list software actually offers this feature, I don't know;
-            unfortunately, the ones I have used do not. However, it's
-            something to look for (or, if you write mailing list
-            software, it's a feature to consider implementing,
-            please).</para>
+            <para>Idéalement, les logiciels de listes de diffusion devraient inclure l’URL du message dans les archives, ou, au moins, une portion particulière de l’URL dans les en-têtes du message lorsqu’il est distribué aux destinataires. Ainsi, ceux qui ont une copie du message peuvent savoir où il est rangé dans les archives sans avoir à se rendre sur la page des archives. C’est utile en effet, car toute opération nécessitant l’utilisation d’un navigateur prend du temps. Par contre, je ne sais pas s’il existe un logiciel proposant cette fonctionnalité. Ceux que j’ai utilisés ne le faisaient pas. C’est tout de même une fonctionnalité que vous devriez chercher (ou, si vous écrivez un logiciel de gestion de listes de diffusion, c’est une fonctionnalité que vous devriez penser à ajouter, s’il vous plaît).</para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
-          <term>Backups</term>
+          <term>Les sauvegardes</term>
 
           <listitem>
-            <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult. In other words, don't treat your archiver as a
-            black box. You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary. Those archives are precious data—a
-            project that loses them loses a good part of its collective
-            memory.</para>
+            <para>La méthode de sauvegarde des archives devrait être plutôt évidente, et la manière de les restaurer ne devrait pas être trop compliquée non plus. En d’autres termes, ne voyez pas votre logiciel d’archivage comme une boîte noire. Tout le monde (vous ou
+            quelqu’un de votre projet) devrait savoir où les messages sont classés, et comment recréer, si nécessaire, la page d’archives depuis les messages sauvegardés. Les archives sont des données précieuses ; un projet qui les perd voit disparaître une grande partie de sa mémoire collective.
+            </para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
-          <term>Thread support</term>
+          <term>La gestion des sujets</term>
 
           <listitem>
-            <para>It should be possible to go from any individual
-            message to the <firstterm>thread</firstterm> (group of
-            related messages) that that original message is part of.
-            Each thread should have its own URL too, separate from the
-            URLs of the individual messages in the thread.</para>
+            <para>Il devrait être possible de naviguer depuis n’importe quel message vers le sujet (groupe de messages ayant un lien) auquel appartient ce message. Chaque sujet devrait avoir sa propre URL, différente de l’URL des messages composant ce sujet.
+            </para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
-          <term>Searchability</term>
+          <term>Recherche</term>
 
           <listitem>
-            <para>An archiver that doesn't support searching—on the
-            bodies of messages, as well as on authors and subjects—is
-            close to useless. Note that some archivers support searching
-            by simply farming the work out to an external search engine
-            such as <ulink url="http://www.google.com/">Google</ulink>.
-            This is acceptable, but direct search support is usually
-            more fine-tuned, because it allows the searcher to specify
-            that the match must appear in a subject line versus the
-            body, for example.</para>
+            <para>Un logiciel d’archivage ne proposant pas d’outil de recherche, ni dans le corps des messages, ni par auteur ou par sujet, est quasiment inutile. Remarquez que certains logiciels proposent un outil de recherche simplement en sous-traitant le travail à un moteur de recherche tiers comme <ulink url="http://www.google.com/">Google</ulink>. Passons. Mais un outil de recherche natif est en général plus précis puisqu’il permet à l’utilisateur de spécifier, par exemple, que le mot doit se trouver dans le sujet et pas dans le corps du texte.
+            </para>
           </listitem>
         </varlistentry>
       </variablelist>
 
-      <para>The above is just a technical checklist to help you evaluate
-      and set up an archiver. Getting people to actually
-      <emphasis>use</emphasis> the archiver to the project's advantage
-      is discussed in later chapters, in particular <xref
-      linkend="using-archives" />.</para>
+      <para>Ceci n’est qu’une liste technique pour vous aider à évaluer et
+      mettre en place un outil d’archivage. Comment amener les gens à vraiment utiliser cet outil pour le bien du projet, est un sujet différent, qui sera abordé dans d’autres chapitres de cet ouvrage,
+      en particulier dans la section intitulée <xref linkend="using-archives" />.
+      </para>
     </sect2>
 
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="mailing-list-software">
-      <title>Software</title>
+      <title>Les logiciels</title>
 
-      <para>Here are some open source tools for doing list management
-      and archiving. If the site where you're hosting your project
-      already has a default setup, then you may not ever have to decide
-      on a tool at all. But if you must install one yourself, these are
-      some possibilities. The ones I have actually used are Mailman,
-      Ezmlm, MHonArc, and Hypermail, but that doesn't mean the others
-      aren't good too (and of course, there are probably other tools out
-      there that I just didn't happen to find, so don't take this as a
-      complete list).</para>
+      <para>Voici une liste d’outils Open Source pour la gestion et l’archivage de listes. Si le site qui héberge votre projet propose déjà une configuration par défaut, vous n’aurez peut-être jamais à faire de choix. Mais si vous devez en installer un vous-même, en voici quelques-uns. Ceux que j’ai utilisés sont Mailman, Ezmlm, MHonArc et Hyper-
+      mail, mais cela ne veut pas dire que les autres ne sont pas bons (et
+      bien sûr, il en existe probablement sur lesquels je ne suis pas tombé ;
+      cette liste n’est en rien exhaustive).</para>
 
-      <para>Mailing list management software:</para>
+      <para>Les logiciels de gestion de listes de diffusion sont :</para>
 
       <itemizedlist>
         <listitem>
@@ -1010,8 +825,7 @@ Reply-to: discuss@lists.example.org
           role="bold">Mailman</emphasis>&nbsp;—&nbsp;<ulink
           url="http://www.list.org/" /></para>
 
-          <para>(Has built-in archiver, and hooks for plugging in
-          external archivers.)</para>
+          <para>(Possède un outil d’archivage inclus, et s’adapte bien aux outils d’archivage tiers.)</para>
         </listitem>
 
         <listitem>
@@ -1019,8 +833,7 @@ Reply-to: discuss@lists.example.org
           role="bold">SmartList</emphasis>&nbsp;—&nbsp;<ulink
           url="http://www.procmail.org/" /></para>
 
-          <para>(Meant to be used with the Procmail mail processing
-          system.)</para>
+          <para>(Fait pour être utilisé avec le système d’envoi de courrier Procmail.)</para>
         </listitem>
 
         <listitem>
@@ -1040,22 +853,22 @@ Reply-to: discuss@lists.example.org
           role="bold">Ezmlm</emphasis>&nbsp;—&nbsp;<ulink
           url="http://cr.yp.to/ezmlm.html" /></para>
 
-          <para>(Designed to work with the <ulink
-          url="http://cr.yp.to/qmail.html">Qmail</ulink> mail delivery
-          system.)</para>
+          <para>(Fait pour être utilisé avec le système d’envoi de courrier 
+            <ulink url="http://cr.yp.to/qmail.html">Qmail</ulink>.)</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">Dada</emphasis>&nbsp;—&nbsp;<ulink
           url="http://mojo.skazat.com/" /></para>
 
-          <para>(Despite the web site's bizarre attempts to hide the
-          fact, this is free software, released under the GNU General
-          Public License. It also has a built-in archiver.)</para>
+          <para>(Malgré les tentatives
+          étranges faites sur le site Web pour s’en cacher, c’est bien un
+          logiciel libre, publié sous licence GNU General Public License.
+          Il propose aussi un outil d’archivage incorporé.)</para>
         </listitem>
       </itemizedlist>
 
-      <para>Mailing list archiving software:</para>
+      <para>Les logiciels d’archivage sont :</para>
 
       <itemizedlist>
         <listitem>
@@ -1081,9 +894,7 @@ Reply-to: discuss@lists.example.org
           role="bold">Procmail</emphasis>&nbsp;—&nbsp;<ulink
           url="http://www.procmail.org/" /></para>
 
-          <para>(Companion software to SmartList, this is a general mail
-          processing system that can, apparently, be configured as an
-          archiver.)</para>
+          <para>(Logiciel fonctionnant de pair avec SmartList, c’est un système d’envoi de courrier qui peut apparemment être configuré pour réaliser l’archivage également.)</para>
         </listitem>
       </itemizedlist>
     </sect2>
@@ -1092,182 +903,149 @@ Reply-to: discuss@lists.example.org
   <!-- ========================== SECTION =========================== -->
 
   <sect1 id="vc">
-    <title>Version Control</title>
+    <title>Les logiciels de gestion de versions</title>
 
-    <para>A <firstterm>version control system</firstterm> (or
-    <firstterm>revision control system</firstterm>) is a combination of
-    technologies and practices for tracking and controlling changes to a
-    project's files, in particular to source code, documentation, and
-    web pages. If you have never used version control before, the first
-    thing you should do is go find someone who has, and get them to join
-    your project. These days, everyone will expect at least your
-    project's source code to be under version control, and probably will
-    not take the project seriously if it doesn't use version control
-    with at least minimal competence.</para>
+    <para>Un <firstterm>logiciel de gestion de versions</firstterm> (ou
+    <firstterm>logiciel de gestion des révisions</firstterm>) est un mélange de technologie et de bonnes pratiques pour traquer et contrôler les modifications apportées aux fichiers d’un projet, en particulier au code source, à la documentation et aux pages Web. Si vous n’avez jamais utilisé un logiciel de gestion de version, la première chose que vous devriez faire est de trouver qui en a l’expérience et la maîtrise, et le convaincre de rejoindre le projet. De nos jours, tout le monde s’attend au minimum à ce que le code source du projet soit sous la surveillance d’un logiciel de gestion de versions, et votre projet ne sera pas pris au sérieux s’il n’utilise pas efficacement un tel logiciel.
+    </para>
 
-    <para>The reason version control is so universal is that it helps
-    with virtually every aspect of running a project: inter-developer
-    communications, release management, bug management, code stability
-    and experimental development efforts, and attribution and
-    authorization of changes by particular developers. The version
-    control system provides a central coordinating force among all of
-    these areas. The core of version control is <firstterm>change
-    management</firstterm>: identifying each discrete change made to the
-    project's files, annotating each change with metadata like the
-    change's date and author, and then replaying these facts to whoever
-    asks, in whatever way they ask. It is a communications mechanism
-    where a change is the basic unit of information.</para>
+    <para>Les logiciels de gestion de versions sont devenus des standards,
+    car ils fournissent une aide précieuse dans quasiment chaque do-
+    maine d’un projet efficace : la communication entre développeurs,
+    la gestion des sorties, la gestion des bogues, la stabilité du code, le
+    développement expérimental, les attributions et les autorisations de
+    modifications. La gestion de versions vous fournit un contrôle cen-
+    tralisé sur tous ces domaines. Le cœur de la gestion de versions est
+    la <firstterm>gestion des modifications</firstterm>: l’identification de chaque petit changement apporté aux fichiers du projet, l’annotation de chaque modification par des métadonnées comme la date du changement, son
+    auteur, et la possibilité de ressortir ces données pour toute demande,
+    quelle qu’en soit la manière. C’est un mécanisme de communication avec lequel le changement est l’unité de base de l’information.
+    </para>
 
-    <para>This section does not discuss all aspects of using a version
-    control system. It's so all-encompassing that it must be addressed
-    topically throughout the book. Here, we will concentrate on choosing
-    and setting up a version control system in a way that will foster
-    cooperative development down the road.</para>
+    <para>Nous n’aborderons pas tous les aspects de l’utilisation d’un logiciel de gestion de versions dans cette partie. La gestion de versions étant un vaste sujet, nous l’étudierons au fur et à mesure, tout au long du livre. Ici, nous allons nous intéresser plus particulièrement au choix
+    et à l’installation d’un logiciel de gestion de versions, avec comme objectif la promotion du développement collaboratif.
+    </para>
 
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="vc-vocabulary">
-      <title>Version Control Vocabulary</title>
+      <title>Vocabulaire de la gestion de versions</title>
 
-      <para>This book cannot teach you how to use version control if
-      you've never used it before, but it would be impossible to discuss
-      the subject without a few key terms. These terms are useful
-      independently of any particular version control system: they are
-      the basic nouns and verbs of networked collaboration, and will be
-      used generically throughout the rest of this book. Even if there
-      were no version control systems in the world, the problem of
-      change management would remain, and these words give us a language
-      for talking about that problem concisely. <variablelist>
+      <para>Ce livre ne vous enseignera pas l’emploi de la gestion de versions si vous ne l’avez pas déjà expérimenté auparavant, cependant il serait impossible d’aborder ce sujet sans quelques termes clés. Ces termes sont utiles, indépendamment de tout système de gestion de versions : ce sont les noms et verbes de base de la collaboration en réseau, et ils seront employés de manière générique tout au long de ce livre. Même s’il n’existait aucun système de gestion de versions, le problème de gestion des modifications serait quand même présent, et ces mots nous fournissent un langage pour en parler de manière concise.
+ <variablelist>
           <varlistentry id="vc-vocabulary-commit">
             <term>
-              <firstterm>commit</firstterm>
+              <firstterm>Commit</firstterm>
             </term>
 
             <listitem>
-              <para>To make a change to the project; more formally, to
-              store a change in the version control database in such a
-              way that it can be incorporated into future releases of
-              the project. "Commit" can be used as a verb or a noun. As
-              a noun, it is essentially synonymous with "change". For
-              example: "I just committed a fix for the server crash bug
-              people have been reporting on Mac OS X. Jay, could you
-              please review the commit and check that I'm not misusing
-              the allocator there?"</para>
+              <para>Apporter une modification au projet, ou, plus formellement, enregistrer un changement dans la base de données
+              de gestion de versions, pour qu’il puisse être ajouté dans une
+              version future du projet. Commit peut être utilisé comme un
+              verbe ou un nom. En tant que nom, il est surtout synonyme de
+              « modification ». Par exemple : « Je viens juste d’enregistrer
+              un correctif pour le bogue de crash de serveur que les gens ont
+              rapporté sur Mac OS X. Jay, pourrais-tu, s’il te plaît, vérifier
+              le commit, et t’assurer que je ne me trompe pas au sujet de
+              l’allocation ? »
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-log-message">
             <term>
-              <firstterm>log&nbsp;message</firstterm>
+              <firstterm>Messages enregistrés</firstterm>
             </term>
 
             <listitem>
-              <para>A bit of commentary attached to each commit,
-              describing the nature and purpose of the commit. Log
-              messages are among the most important documents in any
-              project: they are the bridge between the highly technical
-              language of individual code changes and the more
-              user-oriented language of features, bugfixes, and project
-              progress. Later in this section, we'll look at ways to
-              distribute log messages to the appropriate audiences;
-              also, <xref linkend="codifying-tradition" /><phrase
-              output="printed"> in <xref
-              linkend="communications" /></phrase> discusses ways to
-              encourage contributors to write concise and useful log
-              messages.</para>
+              <para>Quelques commentaires joints à chaque
+              commit, décrivant la nature et le but du commit. Les messages
+              enregistrés font partie des documents les plus importants d’un
+              projet : ils font le lien entre le langage très technique des 
+              modifications du code et le langage plus compréhensible qui se
+              rapporte aux fonctionnalités, aux corrections de bogues et à
+              la progression du projet. Par la suite, dans cette section, nous
+              étudierons comment distribuer les messages enregistrés au bon
+              public ; de plus, la section nommée <xref linkend="codifying-tradition" /><phrase output="printed"> in <xref
+              linkend="communications" /></phrase> dans le chapitre 6 aborde les manières d’encourager les participants à écrire des messages enregistrés concis et utiles.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-update">
             <term>
-              <firstterm>update</firstterm>
+              <firstterm>Mise à jour</firstterm>
             </term>
 
             <listitem>
-              <para>To ask that others' changes (commits) be
-              incorporated into your local copy of the project; that is,
-              to bring your copy "up-to-date". This is a very common
-              operation; most developers update their code several times
-              a day, so that they know they're running roughly the same
-              thing the other developers are running, and so that if
-              they see a bug, they can be pretty sure it hasn't been
-              fixed already. For example: "Hey, I noticed the indexing
-              code is always dropping the last byte. Is this a new bug?"
-              "Yes, but it was fixed last week—try updating, it should
-              go away."</para>
+              <para>Demander que les autres modifications (commit)
+              soient incorporées dans votre propre version du projet, c’est à
+              dire, mettre votre copie à jour. C’est une opération de routine,
+              la plupart des développeurs mettent à jour leur code plusieurs
+              fois par jour. Ainsi, ils savent qu’ils utilisent sensiblement la même chose que les autres. En conséquence, s’ils détectent
+              un bogue, il y a peu de chance qu’il ait déjà été corrigé. Par
+               exemple : « Salut, j’ai remarqué que le code d’indexation ou-
+              blie toujours le dernier nombre. Est-ce un nouveau bogue ? »
+              « Oui, mais il a été réparé la semaine dernière, fais une mise
+              à jour, il devrait disparaître. »
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-repository">
             <term>
-              <firstterm>repository</firstterm>
+              <firstterm>Dépôt</firstterm>
             </term>
 
             <listitem>
-              <para>A database in which changes are stored. Some version
-              control systems are centralized: there is a single, master
-              repository, which stores all changes to the project.
-              Others are decentralized: each developer has his own
-              repository, and changes can be swapped back and forth
-              between repositories arbitrarily. The version control
-              system keeps track of dependencies between changes, and
-              when it's time to make a release, a particular set of
-              changes is approved for that release. The question of
-              whether centralized or decentralized is better is one of
-              the enduring holy wars of software development; try not to
-              fall into the trap of arguing about it on your project
-              lists.</para>
+              <para>Une base de données au sein de laquelle les modifications sont stockées. Certains logiciels de gestion de versions
+              sont centralisés : il y a un unique dépôt maître qui conserve
+              toutes les modifications du projet. D’autres sont décentralisés : chaque développeur possède son propre dépôt et les modifications peuvent être partagées entre les dépôts de manière
+              arbitraire. Le logiciel de gestion de versions conserve un suivi
+              des dépendances entre les modifications. Au moment de la publication d’une nouvelle version, un ensemble particulier de
+              modifications est approuvé pour la sortie. Quant à savoir quel
+              système est le meilleur, centralisé ou décentralisé... Cette question est l’une des vieilles guerres du développement de logiciel, essayez de ne pas vous laisser entraîner dans ce débat sur l’une des listes du projet.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-checkout">
             <term>
-              <firstterm>checkout</firstterm>
+              <firstterm>Retrait</firstterm>
             </term>
 
             <listitem>
-              <para>The process of obtaining a copy of the project from
-              a repository. A checkout usually produces a directory tree
-              called a "working copy" (see below), from which changes
-              may be committed back to the original repository. In some
-              decentralized version control systems, each working copy
-              is itself a repository, and changes can be pushed out to
-              (or pulled into) any repository that's willing to accept
-              them.</para>
+              <para>L’obtention d’une copie du projet depuis le dépôt. Un
+              retrait produit en général une arborescence de répertoires appelée « copie de travail » (voir ci-dessous), à partir de laquelle des changements peuvent être intégrés au dépôt originel. Pour certains logiciels décentralisés de gestion de versions, chaque copie de travail est, elle-même, un dépôt, et les modifications peuvent être envoyées (ou aspirées) vers les dépôts les acceptant.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-working-copy">
             <term>
-              <firstterm>working copy</firstterm>
+              <firstterm>Copie de travail</firstterm>
             </term>
 
             <listitem>
-              <para>A developer's private directory tree containing the
-              project's source code files, and possibly its web pages or
-              other documents. A working copy also contains a little bit
-              of metadata managed by the version control system, telling
-              the working copy what repository it comes from, what
-              "revisions" (see below) of the files are present, etc.
-              Generally, each developer has his own working copy, in
-              which he makes and tests changes, and from which he
-              commits.</para>
+              <para>L’arborescence personnelle d’un développeur
+              contient les fichiers du code source du projet, et peut éga-
+              lement contenir pages Web et autres documents. Une copie
+              de travail contient également quelques méta-données prises en
+              charge par le logiciel de gestion de versions, indiquant à la copie de travail de quel dépôt elle provient, quelles « révisions » (voir ci-dessous) des fichiers sont présentes, etc. Généralement, chaque développeur possède sa propre copie de travail dans laquelle il réalise et teste les modifications, et à partir de laquelle il <emphasis>commit</emphasis>.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-revision">
-            <term><firstterm>revision</firstterm>,
-            <firstterm>change</firstterm>,
-            <firstterm>changeset</firstterm></term>
+            <term><firstterm>Révision</firstterm>,
+            <firstterm>Modifications</firstterm> et 
+            <firstterm>Ensemble de modifications</firstterm></term>
 
             <listitem>
-              <para>A "revision" is usually one specific incarnation of
-              a particular file or directory. For example, if the
-              project starts out with revision 6 of file F, and then
-              someone commits a change to F, this produces revision 7 of
-              F. Some systems also use "revision", "change", or
-              "changeset" to refer to a set of changes committed
-              together as one conceptual unit.</para>
+              <para>Une « révision » est en général une incarnation précise d’un fichier ou dossier particulier. Par exemple, si le projet commence avec la révision 6 du fichier F et qu’ensuite quelqu’un
+              modifie F on parlera alors de la révision 7 de F. Certains
+              systèmes parlent aussi de « révision », « modification » ou
+              « ensemble de modifications » pour se référer à un ensemble
+              de modifications ajoutées en même temps comme une unité conceptuelle.</para>
 
               <para>These terms occasionally have distinct technical
               meanings in different version control systems, but the
@@ -1278,54 +1056,61 @@ Reply-to: discuss@lists.example.org
               revision 10" or "She fixed that in revision 10 of
               foo.c."</para>
 
-              <para>When one talks about a file or collection of files
-              without specifying a particular revision, it is generally
-              assumed that one means the most recent revision(s)
-              available.</para>
+              <para>Ces termes ont parfois une signification technique distincte selon le logiciel de gestion de versions, mais
+              l’idée générale est toujours la même : ils fournissent un moyen
+              de parler sans ambiguïté d’un point précis dans l’histoire
+              d’un fichier ou d’un ensemble de fichiers : par exemple,
+              immédiatement avant ou après la correction d’un bogue, ou
+              encore « Ah oui, elle a corrigé cela dans la révision 10 » ou
+              bien « Elle a corrigé cela dans la révision 10 de foo.c. » Quand
+              quelqu’un parle d’un fichier ou d’un ensemble de fichiers sans
+              préciser de révision particulière, on comprend généralement
+              qu’il s’agit de la révision la plus récente.
+              </para>
             </listitem>
           </varlistentry>
 
           <sidebar id="version-vs-revision">
-            <title>"Version" Versus "Revision"</title>
+            <title>"Version" contre "Révision"</title>
 
-            <para>The word <firstterm>version</firstterm> is sometimes
-            used as a synonym for "revision", but I will not use it that
-            way in this book, because it is too easily confused with
-            "version" in the sense of a version of a piece of
-            software—that is, the release or edition number, as in
-            "Version 1.0". However, since the phrase "version control"
-            is already standard, I will continue to use it as a synonym
-            for "revision control" and "change control".</para>
+            <para>Le mot version est parfois employé comme synonyme de « ré-
+            vision ». Ici, je ne lui donnerai pas cette signification afin de
+            ne pas le confondre trop facilement avec « version », dans le
+            sens de version d’un logiciel, c’est à dire le numéro de sortie ou
+            d’édition comme dans « Version 1.0 ». Mais l’expression « ges-
+            tion de versions » étant déjà répandue, je continuerai à ’utiliser
+            comme synonyme de « gestion de révisions » ou « gestion de modifications ».
+            </para>
           </sidebar>
 
           <varlistentry id="vc-vocabulary-diff">
             <term>
-              <firstterm>diff</firstterm>
+              <firstterm>Diff</firstterm>
             </term>
 
             <listitem>
-              <para>A textual representation of a change. A diff shows
-              which lines were changed and how, plus a few lines of
-              surrounding context on either side. A developer who is
-              already familiar with some code can usually read a diff
-              against that code and understand what the change did, and
-              even spot bugs.</para>
+              <para>La représentation textuelle d’une modification. Un diff
+              montre quelles lignes ont été modifiées et comment, en ajoutant quelques lignes de contexte d’un côté ou de l’autre. Pour
+              un développeur déjà familier avec le code, la lecture d’un diff
+              et du code suffisent, en général, à comprendre l’impact des
+              modifications, voire à détecter des bogues.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-tag">
             <term>
-              <firstterm>tag</firstterm>
+              <firstterm>Mot-clé</firstterm>
             </term>
 
             <listitem>
-              <para>A label for a particular collection of files at
-              specified revisions. Tags are usually used to preserve
-              interesting snapshots of the project. For example, a tag
-              is usually made for each public release, so that one can
-              obtain, directly from the version control system, the
-              exact set of files/revisions comprising that release.
-              Common tag names are things like
+              <para>Une étiquette pour un ensemble de fichiers donnés à
+              une révision donnée. Les mots-clés sont en général utilisés pour
+              résumer les idées majeures du projet. Par exemple, un mot-clé
+              est généralement utilisé pour chaque sortie publique afin qu’on
+              puisse obtenir, directement depuis le logiciel de gestion de
+              versions, l’ensemble exact des fichiers/révisions compris dans
+              cette version. Des mots-clés courants sont
               <literal>Release_1_0</literal>,
               <literal>Delivery_00456</literal>, etc.</para>
             </listitem>
@@ -1333,107 +1118,67 @@ Reply-to: discuss@lists.example.org
 
           <varlistentry id="vc-vocabulary-branch">
             <term>
-              <firstterm>branch</firstterm>
+              <firstterm>Branche</firstterm>
             </term>
 
             <listitem>
-              <para>A copy of the project, under version control but
-              isolated, so that changes made to the branch don't affect
-              the rest of the project, and vice versa, except when
-              changes are deliberately "merged" from one side to the
-              other (see below). Branches are also known as "lines of
-              development". Even when a project has no explicit
-              branches, development is still considered to be happening
-              on the "main branch", also known as the "main line" or
-              "<firstterm>trunk</firstterm>".</para>
+              <para>Une copie du projet, sous gestion de versions mais isolée, afin que les modifications de cette branche n’affectent pas le reste du projet (et vice versa) , sauf quand les modifications sont « fusionnées » volontairement dans un sens ou l’autre (voir plus bas). Les branches sont aussi connues sous le nom de « lignes de développement ». Même dans un projet n’ayant pas explicitement de branches, on considère toujours que le développement s’effectue sur la « branche principale », également connue sous le nom de « ligne principale » ou
+              «<firstterm>tronc</firstterm>».</para>
 
-              <para>Branches offer a way to isolate different lines of
-              development from each other. For example, a branch can be
-              used for experimental development that would be too
-              destabilizing for the main trunk. Or conversely, a branch
-              can be used as a place to stabilize a new release. During
-              the release process, regular development would continue
-              uninterrupted in the main branch of the repository;
-              meanwhile, on the release branch, no changes are allowed
-              except those approved by the release managers. This way,
-              making a release needn't interfere with ongoing
-              development work. See <xref linkend="branches" /><phrase
-              output="printed"> later in this chapter</phrase> for a
-              more detailed discussion of branching.</para>
+              <para>Les branches offrent la possibilité d’isoler différentes lignes de développement les unes des autres. Par exemple, une branche peut être employée pour faire du développement expérimental qui serait trop déstabilisant pour le tronc principal. Ou, à l’inverse, une branche peut être utilisée pour stabiliser une nouvelle version. Au cours du processus de sortie, le développement normal continue sans interruption dans la branche principale du dépôt, tandis que dans la branche de sortie aucun changement n’est accepté, sauf ceux approuvés par les responsables de la parution. Ainsi, la conception de la nouvelle version n’interfère pas avec le travail de développement en cours. Voir la section <xref linkend="branches" /><phrase output="printed"> plus loin dans ce chapitre</phrase> pour une discussion plus détaillée à propos des branches.
+              </para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-merge">
             <term>
-              <firstterm>merge (a.k.a. port)</firstterm>
+              <firstterm>Fusion (ou port)</firstterm>
             </term>
 
             <listitem>
-              <para>To move a change from one branch to another. This
-              includes merging from the main trunk to some other branch,
-              or vice versa. In fact, those are the most common kinds of
-              merges; it is rare to port a change between two non-main
-              branches. See <xref linkend="vc-singularity" /> for more
-              about this kind of merging.</para>
+              <para>Transférer une modification d’une branche
+              à une autre. Cela englobe la fusion du tronc principal vers
+              d’autres branches et inversement. En fait, ce sont les types
+              de fusion les plus courants, il est rare de porter une modifica-
+              tion entre deux branches secondaires. Voir la section appelée <xref linkend="vc-singularity" /> pour en savoir plus sur ce type
+              de fusion.</para>
 
-              <para>"Merge" has a second, related meaning: it is what
-              the version control system does when it sees that two
-              people have changed the same file but in non-overlapping
-              ways. Since the two changes do not interfere with each
-              other, when one of the people updates their copy of the
-              file (already containing their own changes), the other
-              person's changes will be automatically merged in. This is
-              very common, especially on projects where multiple people
-              are hacking on the same code. When two different changes
-              <emphasis>do</emphasis> overlap, the result is a
-              "conflict"; see below.</para>
+              <para>« Fusion » a un deuxième sens proche : c’est ce
+              que fait le logiciel de gestion de versions quand il voit que
+              deux personnes ont modifié le même fichier à des endroits différents. Puisque les deux modifications n’interfèrent pas entre elles, quand l’une des personnes met à jour sa copie du fichier (contenant déjà ses propres changements), les modifications de l’autre personne seront automatiquement fusionnées. C’est très courant, particulièrement dans les projets où plusieurs personnes travaillent sur le même code. Quand deux modifications différentes se chevauchent, il en résulte un « conflit », voir ci-dessous.</para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-conflict">
             <term>
-              <firstterm>conflict</firstterm>
+              <firstterm>Conflit</firstterm>
             </term>
 
             <listitem>
-              <para>What happens when two people try to make different
-              changes to the same place in the code. All version control
-              systems automatically detect conflicts, and notify at
-              least one of the humans involved that their changes
-              conflict with someone else's. It is then up to that human
-              to <firstterm>resolve</firstterm> the conflict, and to
-              communicate that resolution to the version control
-              system.</para>
+              <para>C’est ce qui se passe quand deux personnes tentent de
+              faire des changements au même endroit du code. Tous les systèmes de gestion de version détectent automatiquement les
+              conflits, et avertissent au moins l’un des responsable de ces
+              modifications conflictuelles. C’est alors à l’humain de <firstterm>régler le conflit</firstterm>, et d’envoyer la résolution au logiciel de gestion de version.</para>
             </listitem>
           </varlistentry>
 
           <varlistentry id="vc-vocabulary-lock">
             <term>
-              <firstterm>lock</firstterm>
+              <firstterm>Verrouiller</firstterm>
             </term>
 
             <listitem>
-              <para>A way to declare an exclusive intent to change a
-              particular file or directory. For example, "I can't commit
-              any changes to the web pages right now. It seems Alfred
-              has them all locked while he fixes their background
-              images." Not all version control systems even offer the
-              ability to lock, and of those that do, not all require the
-              locking feature to be used. This is because parallel,
-              simultaneous development is the norm, and locking people
-              out of files is (usually) contrary to this ideal.</para>
+              <para>Une manière de se réserver les modifications sur
+              un fichier ou un dossier particulier. Par exemple : « Je ne
+              peux pas envoyer de modifications des pages Web en ce moment. Il semblerait qu’Alfred les ait verrouillées pendant qu’il
+              modifie leur image de fond. » Tous les systèmes de gestion
+              de versions ne permettent pas ceci, et ceux qui l’autorisent
+              n’imposent pas l’utilisation de cette fonctionnalité. C'est parce que le développement simultané, parallèle, est la norme, et le fait d'empêcher l'accès à des fichiers à d'autres personnes en utilisant le verrouillage est (habituellement) contraire à cet idéal.</para>
 
-              <para>Version control systems that require locking to make
-              commits are said to use the
-              <firstterm>lock-modify-unlock</firstterm> model. Those
-              that do not are said to use the
-              <firstterm>copy-modify-merge</firstterm> model. An
-              excellent in-depth explanation and comparison of the two
-              models may be found at <ulink
-              url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html" />.
-              In general, the copy-modify-merge model is better for open
-              source development, and all the version control systems
-              discussed in this book support that model.</para>
+              <para>On dit que les systèmes de gestion de version, imposant le verrouillage avant d’enregistrer des modifications, utilisent le modèle <firstterm>verrouillage-modification-déverrouillage</firstterm>. Ceux qui ne le
+              font pas utilisent le modèle dit de <firstterm>copie-modification-fusion</firstterm>. Une excellente explication détaillée et une comparaison de ces deux modèles peut être trouvée à l'endroit suivant : <ulink url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html" />.
+              En général, le modèle copie-modification-fusion est plus adapté au développement Open Source, et tous les logiciels de gestion de versions abordés dans ce livre prennent en charge ce modèle.
+              </para>
             </listitem>
           </varlistentry>
         </variablelist></para>
@@ -1442,7 +1187,7 @@ Reply-to: discuss@lists.example.org
     <!-- ========================== subsection =========================== -->
 
     <sect2 id="vc-choosing">
-      <title>Choosing a Version Control System</title>
+      <title>Choisir un logiciel de gestion de versions</title>
 
       <para>As of this writing, the two most popular version control
       systems in the free software world are <firstterm>Concurrent
