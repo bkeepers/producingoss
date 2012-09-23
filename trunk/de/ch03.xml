@@ -1132,7 +1132,7 @@ setting of Reply-to becomes essential information.  If the list
 software overwrites it, he may never see the responses to his post.</para>
 -->
 <para>Leider gibt es einige Nachteile. Der erste ist bekannt als 
-das <firstterm>Ich-finde-den-Weg-nicht-Nachhause</firstterm>-Problem:
+das <firstterm>Ich-finde-nicht-den-Weg-nach-Hause</firstterm>-Problem:
 Manchmal setzt der ursprüngliche Absender seine "echte" E-Mail-Adresse
 in den Reply-to Header, da er aus irgendeinem Grund die Nachricht von 
 einer anderen Adresse absendet, als er Antworten empfangen möchte.
@@ -1326,8 +1326,26 @@ andere zu entscheiden und sich danach nicht zu Debatten über das Thema
 verleiten zu lassen.</para>
 
 <sect3 id="reply-fantasies">
+<!--
+<title>Two fantasies</title>
+-->
 <title>Zwei Fantasien</title>
-
+<!--
+<para>Someday, someone will get the bright idea to implement a
+<firstterm>reply-to-list</firstterm> key in a mail reader.  It would
+use some of the custom list headers mentioned earlier to figure out
+the address of the mailing list, and then address the reply directly
+to the list only, leaving off any other recipient addresses, since
+most are probably subscribed to the list anyway.  Eventually, other
+mail readers will pick up the feature, and this whole debate will go
+away.  (Actually, the <ulink url="http://www.mutt.org/">Mutt</ulink>
+mail reader does offer this feature.<footnote><para>Shortly after this
+book appeared, <ulink url="http://www.michaelbernstein.com/"
+>Michael Bernstein</ulink> wrote me to say: "There are other email
+clients that implement a reply-to-list function besides Mutt. For
+example, Evolution has this function as a keyboard shortcut, but not a
+button (Ctrl+L)."</para></footnote>)</para>
+-->
 <para>Eines Tages wird jemand auf die geniale Idee kommen, einen
 <firstterm>reply-to-list</firstterm> Schlüssel in einer E-Mail 
 Software zu implementieren. Es würde irgend welche der vorher 
@@ -1346,7 +1364,20 @@ eine reply-to-list Funktion implementiert haben. Evolution bietet
 diese Funktion z.B. wenn auch ohne eigene Schaltfläche, über die 
 Tastenkombination (Strg+L)."</para></footnote>)
 </para>
-
+<!--
+<para>An even better solution would be for Reply-to munging to be a
+per-subscriber preference.  Those who want the list to set Reply-to
+munged (either on others' posts or on their own posts) could ask for
+that, and those who don't would ask for Reply-to to be left alone.
+However, I don't know of any list management software that offers this
+on a per-subscriber basis.  For now, we seem to be stuck with a global
+setting.<footnote><para>Since I wrote that, I've learned that there is
+at least one list management system that offers this
+feature: <ulink url="http://siesta.unixbeard.net/">Siesta</ulink>.
+See also this article about it:
+<ulink url="http://www.perl.com/pub/a/2004/02/05/siesta.html"
+/></para></footnote></para>
+-->
 <para>Eine noch bessere Lösung wäre es, die Verunstaltung von 
 Reply-to jedem selbst zu überlassen. Wer haben möchte, dass der
 Verteiler ihre Reply-to Header ändert (entweder nur für ihren eigenen
@@ -1367,8 +1398,16 @@ auch diesen Artikel:
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="archiving">
+<!--
+<title>Archiving</title>
+-->
 <title>Archivierung</title>
-
+<!--
+<para>The technical details of setting up mailing list archiving are
+specific to the software that's running the list, and are beyond the
+scope of this book.  When choosing or configuring an archiver,
+consider these qualities:</para>
+-->
 <para>Wie man genau ein Archiv für Mailinglisten einrichtet, ist bei
 jeder Listen-Software unterschiedlich, und würde den Rahmen dieses Buchs
 sprengen. Wenn Sie ein Programm zur Archivierung wählen oder konfigurieren,
@@ -1466,7 +1505,13 @@ sollten Sie auf folgendes achten:</para>
   </varlistentry>
 
 </variablelist>
-
+<!--
+<para>The above is just a technical checklist to help you evaluate and
+set up an archiver.  Getting people to
+actually <emphasis>use</emphasis> the archiver to the project's
+advantage is discussed in later chapters, in particular
+<xref linkend="using-archives"/>.</para>
+-->
 <para>Obiges ist lediglich eine Checkliste, um Ihnen die Evaluierung und
 Einrichtung der Software für ihre Archive zu erleichtern. Leute zu
 überreden es wirklich zum Vorteil des Projekts zu 
@@ -1477,8 +1522,21 @@ insbesondere im Abschnitt <xref linkend="using-archives"/>.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="mailing-list-software">
+<!--
+<title>Software</title>
+-->
 <title>Mailinglisten-Software</title>
-
+<!--
+<para>Here are some open source tools for doing list management and
+archiving.  If the site where you're hosting your project already has
+a default setup, then you may not ever have to decide on a tool at
+all.  But if you must install one yourself, these are some
+possibilities.  The ones I have actually used are Mailman, Ezmlm,
+MHonArc, and Hypermail, but that doesn't mean the others aren't good
+too (and of course, there are probably other tools out there that I
+just didn't happen to find, so don't take this as a complete
+list).</para>
+-->
 <para>Hier sind einige Open-Source-Programme für die Verwaltung von
 Listen und Archives. Wenn Ihre Projektseite bereits vorkonfiguriert
 wurde, werden Sie sich u.U. niemals für eines entscheiden müssen. Wenn 
@@ -1488,7 +1546,9 @@ MHonArc, und Hypermail, was aber keine Aussage über andere sein soll
 (und natürlich gibt es bestimmt auch andere Programme die ich einfach
 nicht gefunden habe, betrachten Sie diese Liste also nicht als 
 vollständig).</para>
-
+<!--
+<para>Mailing list management software:</para>
+-->
 <para>Software für Mailinglisten:</para>
 
 <itemizedlist>
@@ -1559,8 +1619,22 @@ vollständig).</para>
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
+<!--
+<title>Version Control</title>
+-->
 <title>Versionsverwaltung</title>
-
+<!--
+<para>A <firstterm>version control system</firstterm> (or
+<firstterm>revision control system</firstterm>) is a combination of
+technologies and practices for tracking and controlling changes to a
+project's files, in particular to source code, documentation, and web
+pages.  If you have never used version control before, the first thing
+you should do is go find someone who has, and get them to join your
+project.  These days, everyone will expect at least your project's
+source code to be under version control, and probably will not take
+the project seriously if it doesn't use version control with at least
+minimal competence.</para>
+-->
 <para>Eine <firstterm>Versionsverwaltung<footnote><para>im Deutschen
 auch manchmal "Versionskontrolle" genannt.</para></footnote></firstterm>
 (en. Version Control) ist eine Kombination verschiedener Techniken
@@ -1572,8 +1646,21 @@ beizutreten.  Heutzutage wird jeder erwarten, dass zumindest Ihr
 Quellcode unter Versionsverwaltung steht und keiner wird Ihr Projekt
 ernst nehmen, wenn es nicht zumindest halbwegs kompetent mit seiner 
 Versionsverwaltung umgeht.</para>
-
-<para>Versionsverwaltung ist beim betrieb eines Projekts allgegenwärtig
+<!--
+<para>The reason version control is so universal is that it helps with
+virtually every aspect of running a project: inter-developer
+communications, release management, bug management, code stability and
+experimental development efforts, and attribution and authorization of
+changes by particular developers.  The version control system provides
+a central coordinating force among all of these areas.  The core of
+version control is <firstterm>change management</firstterm>:
+identifying each discrete change made to the project's files,
+annotating each change with metadata like the change's date and
+author, and then replaying these facts to whoever asks, in whatever
+way they ask.  It is a communications mechanism where a change is the
+basic unit of information.</para>
+-->
+<para>Versionsverwaltung ist beim Betrieb eines Projekts allgegenwärtig,
 weile es in nahezu jedem Bereich hilft: Kommunikation unter den 
 Entwicklern, Veröffentlichung neuer Versionen, Bug-Verwaltung, 
 Code-Stabilität und experimentelle Entwicklungen sowie die Annahme von und
@@ -1586,18 +1673,37 @@ bei, wie das Datum der Änderung, den Namen des Autors und kann jedem der
 danach sucht, diese auf die gewünschte Art aufbereiten. Sie ist eine
 Methode zur Kommunikation, bei dem eine Änderung die grundlegende 
 Einheit der Information ist.</para>
-
+<!--
+<para>This section does not discuss all aspects of using a version
+control system.  It's so all-encompassing that it must be addressed
+topically throughout the book.  Here, we will concentrate on choosing
+and setting up a version control system in a way that will foster
+cooperative development down the road.</para>
+-->
 <para>Dieser Abschnitt behandelt nicht alle Aspekte der Bedienung 
 einer Versionsverwaltung. Dieses Thema ist derart umfassend, dass es im
 Verlaufe des Buchs immer wieder angesprochen werden muss. Hier werden 
 wir uns darauf konzentrieren ein Versionsverwaltung auszuwählen und 
-einzurichten, sodass es später die gemeinschaftliche Entwicklung 
+einzurichten, die später die gemeinschaftliche Entwicklung 
 unterstützt.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-vocabulary">
+<!--
+<title>Version Control Vocabulary</title>
+-->
 <title>Vokabular der Versionsverwaltung</title>
-
+<!--
+<para>This book cannot teach you how to use version control if you've
+never used it before, but it would be impossible to discuss the
+subject without a few key terms.  These terms are useful independently
+of any particular version control system: they are the basic nouns and
+verbs of networked collaboration, and will be used generically
+throughout the rest of this book.  Even if there were no version
+control systems in the world, the problem of change management would
+remain, and these words give us a language for talking about that
+problem concisely.
+-->
 <para>Dieses Buch kann Ihnen die Bedienung einer Versionsverwaltung 
 nicht beibringen ohne vorherige Erfahrung, es wäre aber unmöglich das 
 Thema zu behandeln, ohne ein paar Begriffe zu klären. Diese sind 
@@ -1611,6 +1717,17 @@ präzise und prägnant über das Problem zu reden.
 <variablelist>
 
  <varlistentry id="vc-vocabulary-commit">
+<!--
+  <term><firstterm>commit</firstterm></term>
+  <listitem><para>To make a change to the project; more formally, to
+  store a change in the version control database in such a way that it
+  can be incorporated into future releases of the project.  "Commit"
+  can be used as a verb or a noun.  As a noun, it is essentially
+  synonymous with "change".  For example: "I just committed a fix for
+  the server crash bug people have been reporting on Mac OS X.  Jay,
+  could you please review the commit and check that I'm not misusing
+  the allocator there?"</para></listitem>
+-->
   <term><firstterm>Commit</firstterm></term>
   <listitem><para>Eine Änderung an dem Projekt vornehmen; formeller
   gesagt, eine Änderung in die Versionsverwaltung zu speichern, sodass
@@ -1624,6 +1741,20 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-log-message">
+<!--
+  <term><firstterm>log&nbsp;message</firstterm></term>
+  <listitem><para>A bit of commentary attached to each commit,
+  describing the nature and purpose of the commit.  Log messages are
+  among the most important documents in any project: they are the
+  bridge between the highly technical language of individual code
+  changes and the more user-oriented language of features, bugfixes,
+  and project progress.  Later in this section, we'll look at ways to
+  distribute log messages to the appropriate audiences; also, <xref
+  linkend="codifying-tradition"/><phrase output="printed"> in
+  <xref linkend="communications"/></phrase> discusses ways to
+  encourage contributors to write concise and useful log
+  messages.</para></listitem>
+-->
   <term><firstterm>Commit-Log</firstterm></term>
   <listitem><para>Ein Kommentar der an jedem Commit angehängt wird,
   mit einer Beschreibung über die Änderung und sein Nutzen.
@@ -1641,6 +1772,19 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-update">
+<!--
+  <term><firstterm>update</firstterm></term>
+  <listitem><para>To ask that others' changes (commits) be
+  incorporated into your local copy of the project; that is, to bring
+  your copy "up-to-date".  This is a very common operation; most
+  developers update their code several times a day, so that they know
+  they're running roughly the same thing the other developers are
+  running, and so that if they see a bug, they can be pretty sure it
+  hasn't been fixed already.  For example: "Hey, I noticed the
+  indexing code is always dropping the last byte.  Is this a new bug?"
+  "Yes, but it was fixed last week&mdash;try updating, it should go
+  away."</para></listitem>
+-->
   <term><firstterm>Update</firstterm></term>
   <listitem><para>Eine Anfrage die Änderungen (Commits) anderer
   Teilnehmer in die eigenen lokalen Kopie des Projekts einzubinden; 
@@ -1656,6 +1800,20 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
+<!--
+  <term><firstterm>repository</firstterm></term> <listitem><para>A
+  database in which changes are stored.  Some version control systems
+  are centralized: there is a single, master repository, which stores
+  all changes to the project.  Others are decentralized: each
+  developer has his own repository, and changes can be swapped back
+  and forth between repositories arbitrarily.  The version control
+  system keeps track of dependencies between changes, and when it's
+  time to make a release, a particular set of changes is approved for
+  that release.  The question of whether centralized or decentralized
+  is better is one of the enduring holy wars of software development;
+  try not to fall into the trap of arguing about it on your project
+  lists.</para></listitem>
+-->
   <term><firstterm>Projektarchiv</firstterm></term> (engl. Repository)
   <listitem><para>Die Datenbank der Versionsverwaltung in der 
   Änderungen gespeichert werden. Manche Systeme sind zentralisiert: Es 
@@ -1672,6 +1830,16 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
+<!--
+  <term><firstterm>checkout</firstterm></term>
+  <listitem><para>The process of obtaining a copy of the project from
+  a repository.  A checkout usually produces a directory tree called a
+  "working copy" (see below), from which changes may be committed back
+  to the original repository.  In some decentralized version control
+  systems, each working copy is itself a repository, and changes can
+  be pushed out to (or pulled into) any repository that's willing
+  to accept them.</para></listitem>
+-->
   <term><firstterm>Checkout</firstterm></term>
   <listitem><para>Sich eine Kopie des Projekts aus dem Projektarchiv zu 
   beschaffen. Ein Checkout produziert meistens eine Verzeichnisstruktur,
@@ -1684,7 +1852,19 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
-  <term><firstterm>Arbeitsverzeichnis<footnote><para>engl. "working
+<!--
+  <term><firstterm>working copy</firstterm></term>
+  <listitem><para>A developer's private directory tree containing the
+  project's source code files, and possibly its web pages or other
+  documents.  A working copy also contains a little bit of metadata
+  managed by the version control system, telling the working copy what
+  repository it comes from, what "revisions" (see below) of the files
+  are present, etc.  Generally, each developer has his own working
+  copy, in which he makes and tests changes, and from which he
+  commits.</para></listitem>
+ </varlistentry>
+-->
+  <term><firstterm>Arbeitkopie<footnote><para>engl. "working
   copy"</para></footnote></firstterm></term>
   <listitem><para>Der private Verzeichnisbaum eines Entwicklers, 
   mit dem Quellcode des Projekts und möglicherweise seine Webseite 
@@ -1692,11 +1872,22 @@ präzise und prägnant über das Problem zu reden.
   Metadaten, die von der Versionsverwaltung benutzt werden um zu 
   Kennzeichen, von welchem Projektarchiv sie kommt, welche "Revision" 
   (siehe unten) der Dateien vorliegen, usw. Im allgemeinen hat jeder 
-  Entwickler seine eigenes Arbeitsverzeichnis, indem er seine 
+  Entwickler seine eigenes Arbeitskopie, indem er seine 
   Änderungen macht, prüft und anschließend als Commit an das
   Projektarchiv schickt.</para></listitem></varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
+<!--
+  <term><firstterm>revision</firstterm>,
+        <firstterm>change</firstterm>,
+        <firstterm>changeset</firstterm></term>
+  <listitem><para>A "revision" is usually one specific incarnation of
+  a particular file or directory.  For example, if the project starts
+  out with revision 6 of file F, and then someone commits a change to
+  F, this produces revision 7 of F.  Some systems also use
+  "revision", "change", or "changeset" to refer to a set of changes
+  committed together as one conceptual unit.</para> 
+-->
   <term><firstterm>Revision</firstterm><footnote><para> im engl. auch
   <firstterm>change</firstterm> oder 
   <firstterm>changeset</firstterm> (de. Satz von 
@@ -1707,7 +1898,15 @@ präzise und prägnant über das Problem zu reden.
   an D committed, entsteht die Revision 7 von D. Manche Systeme
   benutzen "Revision" auch als Bezeichnung für einen ganzen Satz an 
   Änderungen die zusammen als Einheit committed wurden.</para>
-
+<!--
+  <para>These terms occasionally have distinct technical meanings in
+  different version control systems, but the general idea is always
+  the same: they give a way to speak precisely about exact points in
+  time in the history of a file or a set of files (say, immediately
+  before and after a bug is fixed).  For example: "Oh yes, she fixed
+  that in revision 10" or "She fixed that in revision 10 of
+  foo.c."</para>
+-->
   <para>Diese Begriffe haben ab und zu eine Bestimmte technische 
   Bedeutung abhängig von der Versionsverwaltung, im Allgemeinen ist 
   die Idee jedoch immer die gleiche: Sie ermöglichen es genau über 
@@ -1715,13 +1914,27 @@ präzise und prägnant über das Problem zu reden.
   direkt vor und nachdem ein Fehler behoben wurde). Beispielsweise: 
   "Ja, sie hat das in Revision 10 behoben" oder "Sie hat das in 
   Revision 10 von foo.c behoben."</para>
-
+<!--
+  <para>When one talks about a file or collection of files without
+  specifying a particular revision, it is generally assumed that one
+  means the most recent revision(s) available.</para></listitem>
+-->
   <para>Wenn man von einer Datei oder einer Sammlung von Dateien 
   spricht ohne eine bestimmte Revision anzugeben, geht man im 
   Allgemeinen von der aktuellsten Revision aus.</para></listitem>
  </varlistentry>
 
   <sidebar id="version-vs-revision">
+<!--
+  <title>"Version" Versus "Revision"</title>
+  <para>The word <firstterm>version</firstterm> is sometimes used as a
+  synonym for "revision", but I will not use it that way in this
+  book, because it is too easily confused with "version" in the sense
+  of a version of a piece of software&mdash;that is, the release or
+  edition number, as in "Version 1.0".  However, since the phrase
+  "version control" is already standard, I will continue to use it as
+  a synonym for "revision control" and "change control".</para>
+-->
   <title>"Version" kontra "Revision"</title>
   <para>Das Wort <firstterm>Version</firstterm> wird manchmal als
   Synonym für "Revision" benutzt, ich werde es jedoch in diesem Buch 
@@ -1733,6 +1946,14 @@ präzise und prägnant über das Problem zu reden.
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
+<!--
+  <term><firstterm>diff</firstterm></term>
+  <listitem><para>A textual representation of a change.  A diff shows
+  which lines were changed and how, plus a few lines of surrounding
+  context on either side.  A developer who is already familiar with
+  some code can usually read a diff against that code and understand
+  what the change did, and even spot bugs.</para></listitem>
+-->
   <term><firstterm>Diff</firstterm><footnote><para>kurz für
   <foreignphrase>difference</foreignphrase>(de.
   Unterschied)</para></footnote></term> <listitem><para>Eine textuelle
@@ -1744,6 +1965,17 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
+<!--
+  <term><firstterm>tag</firstterm></term>
+  <listitem><para>A label for a particular collection of files at
+  specified revisions.  Tags are usually used to preserve
+  interesting snapshots of the project.  For example, a tag is usually
+  made for each public release, so that one can obtain, directly from
+  the version control system, the exact set of files/revisions
+  comprising that release.  Common tag names are things like
+  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
+  etc.</para></listitem>
+-->
   <term><firstterm>Tag<footnote><para>de. 
   Etikett</para></footnote></firstterm></term>
   <listitem><para>Eine Beschriftung einer bestimmen Menge an Dateien
@@ -1757,6 +1989,17 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
+<!--
+  <term><firstterm>branch</firstterm></term>
+  <listitem><para>A copy of the project, under version control but
+  isolated, so that changes made to the branch don't affect the rest
+  of the project, and vice versa, except when changes are
+  deliberately "merged" from one side to the other (see below).
+  Branches are also known as "lines of development".  Even when a
+  project has no explicit branches, development is still considered
+  to be happening on the "main branch", also known as the "main line"
+  or "<firstterm>trunk</firstterm>".</para>
+-->
   <term><firstterm>Branch<footnote><para>de. 
   Zweig/Ast</para></footnote></firstterm></term><listitem><para>Eine
   Kopie des Projekts in der Versionsverwaltung, die aber vom Hauptzweig
@@ -1768,7 +2011,20 @@ präzise und prägnant über das Problem zu reden.
   "Hauptzweig"<footnote><para>engl. "main branch" auch "main line" oder 
   "<firstterm>trunk</firstterm>" de. "Stamm"</para></footnote>als den
   Zweig auf dem die Entwicklung stattfindet.</para>
-
+<!--
+  <para>Branches offer a way to isolate different lines of development
+  from each other.  For example, a branch can be used for experimental
+  development that would be too destabilizing for the main trunk.  Or
+  conversely, a branch can be used as a place to stabilize a new
+  release.  During the release process, regular development would
+  continue uninterrupted in the main branch of the repository;
+  meanwhile, on the release branch, no changes are allowed except
+  those approved by the release managers.  This way, making a release
+  needn't interfere with ongoing development work.  See <xref
+  linkend="branches"/><phrase output="printed"> later in this
+  chapter</phrase> for a more detailed discussion of
+  branching.</para></listitem>
+-->
   <para>Zweige bieten bei der Entwicklung, die Möglichkeit verschiedene
   Richtungen getrennt zu verfolgen. Ein Zweig kann z.B. für 
   experimentelle Entwicklung benutzt werden, die für den Hauptzweig 
@@ -1785,6 +2041,15 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
+<!--
+  <term><firstterm>merge (a.k.a. port)</firstterm></term>
+  <listitem><para>To move a change from one branch to another.  This
+  includes merging from the main trunk to some other branch, or vice
+  versa.  In fact, those are the most common kinds of merges; it is
+  rare to port a change between two non-main branches.  See <xref
+  linkend="vc-singularity"/> for more about this kind of
+  merging.</para>
+-->
   <term><firstterm>Merge<footnote><para>im engl. auch "port" de. 
   Zusammenführung/Portierung</para></footnote></firstterm></term>
   <listitem><para>Eine Änderung von einem Zweig in ein Anders 
@@ -1794,7 +2059,17 @@ präzise und prägnant über das Problem zu reden.
   Änderung zwischen zwei Zweige, die nicht beide Hauptzweige sind. 
   Siehe <xref linkend="vc-singularity"/> für mehr zu dieser Art zu
   portieren.</para>
-
+<!--
+  <para>"Merge" has a second, related meaning: it is what the version
+  control system does when it sees that two people have changed the
+  same file but in non-overlapping ways.  Since the two changes do not
+  interfere with each other, when one of the people updates their copy
+  of the file (already containing their own changes), the other
+  person's changes will be automatically merged in.  This is very
+  common, especially on projects where multiple people are hacking on
+  the same code.  When two different changes <emphasis>do</emphasis>
+  overlap, the result is a "conflict"; see below.</para>
+-->
   <para>"Merge" hat eine zweite, verwandte Bedeutung: Die 
   Versionsverwaltung macht einen Merge, wenn zwei Leute die gleiche 
   Datei bearbeitet haben, sodass die Änderungen sich nicht überlappen.
@@ -1808,6 +2083,16 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-conflict">
+<!--
+  <term><firstterm>conflict</firstterm></term>
+  <listitem><para>What happens when two people try to make different
+  changes to the same place in the code.  All version control systems
+  automatically detect conflicts, and notify at least one of the
+  humans involved that their changes conflict with someone else's.  It
+  is then up to that human to <firstterm>resolve</firstterm> the
+  conflict, and to communicate that resolution to the version control
+  system.</para></listitem>
+-->
   <term><firstterm>Konflikt</firstterm></term>
   <listitem><para>Was geschieht wenn zwei Personen gleichzeitig 
   unterschiedliche Änderungen vornehmen, an der gleichen Stelle im Code.
@@ -1819,6 +2104,17 @@ präzise und prägnant über das Problem zu reden.
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-lock">
+<!--
+  <term><firstterm>lock</firstterm></term>
+  <listitem><para>A way to declare an exclusive intent to change a
+  particular file or directory.  For example, "I can't commit any
+  changes to the web pages right now.  It seems Alfred has them all
+  locked while he fixes their background images."  Not all version
+  control systems even offer the ability to lock, and of those that
+  do, not all require the locking feature to be used.  This is because
+  parallel, simultaneous development is the norm, and locking people
+  out of files is (usually) contrary to this ideal.</para>
+-->
   <term><firstterm>Lock</firstterm></term>
   <listitem><para>(de. Schloss/Sperre) Eine Möglichkeit eine exklusive
   Absicht auf eine Datei oder ein Verzeichnis zu erklären. z.B.: "Ich 
@@ -1829,7 +2125,18 @@ präzise und prägnant über das Problem zu reden.
   nicht alle, dass sie auch benutzt wird. Das liegt daran, dass 
   parallele, gleichzeitige Entwicklung der Normalfall ist und Sperren
   auf Dateien, diesem Ideal (üblicherweise) widersprechen.</para>
-
+<!--
+  <para>Version control systems that require locking to make commits
+  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
+  Those that do not are said to use the
+  <firstterm>copy-modify-merge</firstterm> model.  An excellent
+  in-depth explanation and comparison of the two models may be found
+  at <ulink
+  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
+  general, the copy-modify-merge model is better for open source
+  development, and all the version control systems discussed in this
+  book support that model.</para></listitem>
+-->
   <para>Eine Versionsverwaltung die einen Lock erfordert um einen 
   Commit zu machen, benutzt das sogenannte 
   <firstterm>lock-modify-unlock</firstterm> Verfahren. Solche die es 
@@ -1852,27 +2159,57 @@ präzise und prägnant über das Problem zu reden.
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="vc-choosing">
+<!--
+<title>Choosing a Version Control System</title>
+-->
 <title>Wahl einer Versionsverwaltung</title>
-
-<para>Zum Zeitpunkt dieses Schreibens sind die zwei verbreitetsten 
+<!--
+<para>As of this writing, the two most popular version control systems
+in the free software world are <firstterm>Concurrent Versions
+System</firstterm> (<firstterm>CVS</firstterm>,
+<ulink url="http://www.cvshome.org/"/>)
+and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
+<ulink url="http://subversion.tigris.org/"/>).</para>
+-->
+<para>Zum Zeitpunkt dieses Schreibens sind die beiden verbreitetsten 
 Systeme für Versionsverwaltung in der Welt der freien Software das 
 <firstterm>Concurrent Versions System</firstterm> oder auch 
 <firstterm>CVS</firstterm> (<ulink url="http://www.cvshome.org/"/>)
 und <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
 <ulink url="http://subversion.tigris.org/"/>).</para>
-
+<!--
+<para>CVS has been around for a long time.  Most experienced
+developers are already familiar with it, it does more or less what you
+need, and since it's been popular for a long time, you probably won't
+end up in any long debates about whether or not it was the right
+choice.  CVS has some disadvantages, however.  It doesn't provide an
+easy way to refer to multi-file changes; it doesn't allow you to
+rename or copy files under version control (so if you need to
+reorganize your code tree after starting the project, it can be a real
+pain); it has poor merging support; it doesn't handle large files or
+binary files very well; and some operations are slow when large
+numbers of files are involved.</para>
+-->
 <para>CVS gibt es schon lange. Die meisten erfahrenen Entwickler sind
 bereits damit vertraut, es erledigt die Aufgabe mehr oder weniger gut
 und da es die Norm ist, werden Sie keine lange Debatten darüber führen
-müssen ob es die richtige Wahl war. CVS hat jedoch einige Nachteile.
+müssen, ob es die richtige Wahl war. CVS hat jedoch einige Nachteile.
 Es bietet keine einfache Möglichkeit an, Änderungen über mehrere
 Dateien abzufragen; es erlaubt nicht, Dateien im Projektarchiv
 umzubenennen oder zu kopieren (was besonders nervt, wenn Sie Ihren Code 
 neu organisieren wollen, nachdem Sie das Projekt gestartet haben); es 
-bietet nur dürftige Merge-Unterstützung an; es kann nicht sonderlich 
+bietet nur dürftige Merge-Unterstützung; es kann nicht sonderlich 
 gut mit großen oder binären Dateien umgehen; und manche Vorgänge sind
 bei vielen Dateien sehr langsam.</para>
-
+<!--
+<para>None of CVS's flaws is fatal, and it is still quite popular.
+However, in the last few years the more recent Subversion has been
+gaining ground, especially in newer
+projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"/> and
+<ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
+for evidence of this growth.</para></footnote>.  If you're starting a
+new project, I recommend Subversion.</para>
+-->
 <para>Kein Fehler von CVS ist fatal und es ist immer noch ziemlich 
 beliebt. In den vergangenen Jahren hat das neuere Subversion an Boden
 gewonnen, inbesondere bei neuen Projekten.<footnote><para>Siehe
@@ -1880,9 +2217,25 @@ gewonnen, inbesondere bei neuen Projekten.<footnote><para>Siehe
 url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
 für beweise für dieses Wachstum.</para></footnote>. Wenn Sie ein neues
 Projekt anfangen, empfehle ich Ihnen Subversion.</para>
-
-<para>Da ich andererseits auch an dem Subversion-Projekt arbeite,
-könnte man meine objektivität berechtigt in Frage stellen. In den
+<!--
+<para>On the other hand, since I'm involved in the Subversion project,
+my objectivity might reasonably be questioned.  And in the last few
+years a number of new open-source version control systems have
+appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
+in rough order of popularity.  As the list makes clear, deciding on a
+version control system could easily become a lifelong research
+project.  Possibly you will be spared the decision because it will be
+made for you by your hosting site.  But if you must choose, consult
+with your other developers, ask around to see what people have
+experience with, then pick one and run with it.  Any stable,
+production-ready version control system will do; you don't have to
+worry too much about making a drastically wrong decision.  If you
+simply can't make up your mind, then go with Subversion.  It's fairly
+easy to learn, and is likely to remain a standard for at least a few
+years.</para>
+-->
+<para>Da ich andererseits selbst an dem Subversion-Projekt arbeite,
+könnte man meine Objektivität berechtigt in Frage stellen. In den
 letzden Jahren sind ein paar neue Versionsverwaltungssysteme 
 erschienen. <xref linkend="vc-systems"/> listet alle mir bekannten 
 auf. Wie diese Liste klar macht kann die Entscheidung für eine 
