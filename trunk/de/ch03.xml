@@ -3173,40 +3173,83 @@ in den Hauptzweig überzugehen und zu verschwinden.</para>
 </sect3>
 
 <sect3 id="vc-singularity">
-<title>Singuläre Informationen</title>
-
-<para>Merges haben eine wichtige Konsequenz: Die selbe Änderung
+<!--
+<title>Singularity of information</title>
+-->
+<title>Eindeutigkeit von Informationen</title>
+<!--
+<para>Merging has an important corollary: never commit the same change
+twice.  That is, a given change should enter the version control
+system exactly once.  The revision (or set of revisions) in which the
+change entered is its unique identifier from then on.  If it needs to
+be applied to branches other than the one on which it entered, then it
+should be merged from its original entry point to those other
+destinations&mdash;as opposed to committing a textually identical
+change, which would have the same effect in the code, but would make
+accurate bookkeeping and release management impossible.</para>
+-->
+<para>Merges haben eine wichtige Konsequenz: Dieselbe Änderung
 sollte niemals doppelt committet werden. D.h. eine bestimmte Änderung
 sollte durch das Versionsverwaltungssystem nur genau einmal übernommen
 werden. Die Revision (oder die Gruppe von Revisionen) in dem diese
 Änderung eingebracht wurde, ist von da an seine eindeutige Kennung.
-Wenn sie auf weitere Zweigen angewendet werden soll, sollte es von seinem
+Wenn sie auf weitere Zweige angewendet werden soll, sollte sie von ihrem
 ursprünglichen Eintrittspunkt aus in diese anderen Ziele portiert
-werden &ndash; man sollte also nicht mehrer textgleiche Änderungen 
+werden &ndash; man sollte also nicht mehrere textgleiche Änderungen 
 committen, was zwar die gleiche Wirkung auf den Code haben würde,
 aber eine genaue Buchführung unmöglich machen würden.</para>
-
+<!--
+<para>The practical effects of this advice differ from one version
+control system to another.  In some systems, merges are special
+events, fundamentally distinct from commits, and carry their own
+metadata with them.  In others, the results of merges are committed
+the same way other changes are committed, so the primary means of
+distinguishing a "merge commit" from a "new change commit" is in the
+log message.  In a merge's log message, don't repeat the log message
+of the original change.  Instead, just indicate that this is a merge,
+and give the identifying revision of the original change, with at most
+a one-sentence summary of its effect.  If someone wants to see the
+full log message, she should consult the original revision.</para>
+-->
 <para>Die praktische Auswirkung dieser Empfehlung sind unterschiedlich,
 je nach Versionsverwaltungssystem. Manche Systeme erfassen einen Merge 
-als besonderes Ereignis, grundsätzlich von einem Commit zu
-unterscheiden, und haben ihre eigene Metadaten. Bei anderen wird das
-Ergebnis von einem Merge genau wie jeder andere Commit eingespielt, 
-also wird ein "Merge-Commit" borzugsweise in dem Commit-Log von einem 
-"Änderungs-Commit" unterschieden. In dem Commit-Log von einem Merge 
-sollte nicht die Nachricht der Ursprünglichen Änderung wiederholt 
-werden. Statt dessen sollten Sie lediglich angeben, dass es sich um 
+als besonderes Ereignis, grundsätzlich unterschiedlich zu einem normalen
+Commit, mit eigenen Metadaten. Bei anderen wird das Ergebnis eines Merges
+genau wie jeder andere Commit übernommen, in solchen Fällen sollte man 
+dafür sorgen, dass sich ein "Merge-Commit" im Commit-Log klar von einem 
+"Änderungs-Commit" unterscheidet. In dem Commit-Log von einem Merge 
+sollte nicht die Nachricht der ursprünglichen Änderung wiederholt 
+werden. Stattdessen sollten Sie lediglich angeben, dass es sich um 
 einen Merge handelt, und die Revisionsnummer der Ursprünglichen 
-Änderung angeben und höchstens einen Satz um die Auswirkungen der 
+Änderung angeben und höchstens einen Satz, um die Auswirkungen der 
 Änderung zusammenzufassen. Wenn jemand den kompletten Commit-Log sehen 
-will, sollte sie die ursprünglich Revision aufsuchen.</para>
-
+will, kann er die ursprünglichen Revisionen aufsuchen.</para>
+<!--
+<para>The reason it's important to avoid repeating the log message is
+that log messages are sometimes edited after they've been committed.
+If a change's log message were repeated at each merge destination,
+then even if someone edited the original message, she'd still leave
+all the repeats uncorrected&mdash;which would only cause confusion
+down the road.</para>
+-->
 <para>Es ist wichtig zu vermeiden, die Commit-Logs zu wiederholen, da
 ein Log manchmal nach dem Commit geändert werden. Wenn der Log einer
 Änderung bei jedem Merge wiederholt würde, blieben selbst bei einer
 korrektur der Ursprünglichen Nachricht alle Kopien 
 unverändert &ndash; was später unweigerlich zu Verwirrung führen 
 kann.</para>
-
+<!--
+<para>The same principle applies to reverting a change.  If a change
+is withdrawn from the code, then the log message for the reversion
+should merely state that some specific revision(s) is being reverted,
+<emphasis>not</emphasis> describe the actual code change that results
+from the reversion, since the semantics of the change can be derived
+by reading the original log message and change.  Of course, the
+reversion's log message should also state the reason why the change is
+being reverted, but it should not duplicate anything from the original
+change's log message.  If possible, go back and edit the original
+change's log message to point out that it was reverted.</para>
+-->
 <para>Dasselbe Prinzip gilt beim Zurückdrehen einer Änderung. Wenn 
 eine Änderung wieder vom Code entfernt wird, sollte sein Commit-Log
 lediglich festhalten, dass die Änderung einer bestimmten Revision 
@@ -3218,7 +3261,23 @@ Entfernung nennen, jedoch nichts aus dem ursprünglichen Log
 wiederholen. Wenn möglich gehen Sie zurück und Ändern Sie den Log der 
 ursprünglichen Änderung und weisen Sie darauf hin, dass sie
 zurückgedreht wurde.</para>
-
+<!--
+<para>All of the above implies that you should use a consistent syntax
+for referring to revisions.  This is helpful not only in log messages,
+but in emails, the bug tracker, and elsewhere.  If you're using
+CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
+where REV is a CVS revision number such as "1.76".  If you're using
+Subversion, the standard syntax for revision 1729 is "r1729" (file
+paths are not needed because Subversion uses global revision numbers).
+In other systems, there is usually a standard syntax for expressing
+the changeset name.  Whatever the appropriate syntax is for your
+system, encourage people to use it when referring to changes.
+Consistent expression of change names makes project bookkeeping much
+easier (as we will see in <xref linkend="communications"/> and
+<xref linkend="development-cycle"/>), and since a lot of the
+bookkeeping will be done by volunteers, it needs to be as easy as
+possible.</para>
+-->
 <para>Die vorhergehenden Passagen implizieren die Verwendenung einer
 konsistenten und gleichbleibende Syntax um auf Revisionen Bezug zu
 nehmen. Das ist nicht nur in den Logs hilfreich, sondern auch in 
@@ -3234,7 +3293,13 @@ wir in <xref linkend="communications"/> und
 <xref linkend="development-cycle"/>) sehen werden und da ein großer 
 Teil der Buchhaltung von Freiwilligen erledigt wird, muss es so 
 einfach wie Möglich sein.</para>
-
+<!--
+<para>See also
+<xref
+linkend="releases-and-daily-development"/><phrase
+output="printed"> in
+<xref linkend="development-cycle"/></phrase>.</para>
+-->
 <para>Siehe auch
 <xref linkend="releases-and-daily-development"/><phrase output="printed">
 im Kapitel <xref linkend="development-cycle"/></phrase>.</para>
@@ -3242,41 +3307,83 @@ im Kapitel <xref linkend="development-cycle"/></phrase>.</para>
 </sect3>
 
 <sect3 id="vc-authz">
+<!--
+<title>Authorization</title>
+-->
 <title>Autorisierung</title>
-
-<para>Fast jede Versionsverwaltung bietet eine Funktion an um 
+<!--
+<para>Most version control systems offer a feature whereby certain
+people can be allowed or disallowed from committing in specific
+sub-areas of the repository.  Following the principle that when handed
+a hammer, people start looking around for nails, many projects use
+this feature with abandon, carefully granting people access to just
+those areas where they have been approved to commit, and making sure
+they can't commit anywhere else.  (See
+<xref linkend="committers"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase> for how projects
+decide who can commit where.)</para>
+-->
+<para>Die meistene Versionsverwaltungen bieten Funktionen, um 
 bestimmte Personen Schreibzugriff auf einzelne Bereiche des Projektarchivs
-zu erlauben oder verwehren. Nach dem Grundsatz, dass wenn man jemand 
-einen Hammer reicht, er anfangen wird überall Nägel zu sehen, wird 
-diese Funktion von vielen Projekten hemmungslos benutzt. Sie erlaben 
-vorsichtig Beteiligte lediglich schreibzugriff auf Bereiche nachdem sie
-Zustummung erhalten haben und sichergestellt ist, dass sie nirgendwo 
+zu erlauben oder verwehren. Nach dem Grundsatz, dass jemand, sobald man ihm
+einen Hammer in die Hand gibt, anfangen wird, überall Nägel zu sehen, wird 
+diese Funktion von vielen Projekten schonungslos benutzt. Sie erlaben 
+den Beteiligten lediglich Schreibzugriff Bereiche mit denen sie sich
+offensichtlich auskennen und sichergestellt ist, dass sie nirgendwo 
 sonst Schreibzugriff haben. (Siehe 
 <xref linkend="committers"/><phrase output="printed"> im Kapitel
 <xref linkend="managing-volunteers"/></phrase> indem beschrieben ist,
 wie Projekte entscheiden wer wo Änderungen machen kann.)</para>
-
-<para>Es ist wahrscheinlich nicht allzu schädlich solch eine strenge 
-Kontrolle auszuüben, eine lockere Haltung ist aber auch in Ordnung.
-Manche Projekte benutzen einfach einen System basierend auf Ehre: Wenn
+<!--
+<para>There is probably little harm done by exercising such tight
+control, but a more relaxed policy is fine too.  Some projects simply
+use an honor system: when a person is granted commit access, even for
+a sub-area of the repository, what they actually receive is a password
+that allows them to commit anywhere in the project.  They're just
+asked to keep their commits in their area.  Remember that there is no
+real risk here: in an active project, all commits are reviewed anyway.
+If someone commits where they're not supposed to, others will
+notice it and say something.  If a change needs to be undone, that's
+simple enough&mdash;everything's under version control anyway, so
+just revert.</para>
+-->
+<para>Mit einer solch scharfen Kontrolle können Sie wahrscheinlich kaum
+Schaden anrichten, eine lockerere Haltung ist aber auch in Ordnung.
+Manche Projekte benutzen einfach ein Vertrauenssystem: Wenn
 einer Person Commit-Zugriff gewährt wird, wenn auch nur für einen
-Teilbereich des Projektarchivs, erhalten sie in Wirklichkeit den Schlüssel,
-um überall im Projekt zu Änderungen zu machen. Sie werden einfach 
+Teilbereich des Projektarchivs, erhält diese in Wirklichkeit den Schlüssel,
+um überall im Projekt zu Änderungen vorzunehmen. Sie wird einfach 
 darum gebeten, sich auf ihren Bereich zu beschränken. Denken Sie daran,
 dass hierin keine echte Gefahr besteht: In einem aktiven Projekt
 wird sowieso jeder Commit überprüft. Wenn jemand in einem Bereich etwas
-ändert den er nicht sollte, werden es andere bemerken und etwas sagen.
+ändert, in dem er nichts zu suchen hat, werden es andere bemerken und etwas sagen.
 Wenn eine Änderung rückgängig gemacht werden muss, ist das auch kein 
-Problem &ndash; es ist eh alles in der Versionsverwaltung, also kann man
+Problem &ndash; es ist sowieso alles in der Versionsverwaltung, also kann man
 es einfach rückgängig machen.</para>
-
+<!--
+<para>There are several advantages to the relaxed approach.  First, as
+developers expand into other areas (which they usually will if they
+stay with the project), there is no administrative overhead to
+granting them wider privileges.  Once the decision is made, the person
+can just start committing in the new area right away.</para>
+-->
 <para>Die Sache locker anzugehen hat mehrere Vorteile. Erstens gibt es
 keinen weiteren Aufwand um Entwickler zusätzliche Rechte einzuräumen, 
 sobald sie sich auf andere Bereiche ausweiten (was meistens irgendwann
 passiert, wenn sie länger beim Projekt bleiben). Sobald die 
 Entscheidung getroffen wurde, kann die Person gleich anfangen 
 Änderungen im neuen Bereich zu machen.</para>
-
+<!--
+<para>Second, expansion can be done in a more fine-grained manner.
+Generally, a committer in area X who wants to expand to area Y will
+start posting patches against Y and asking for review.  If someone who
+already has commit access to area Y sees such a patch and approves of
+it, they can just tell the submitter to commit the change directly
+(mentioning the reviewer/approver's name in the log message, of
+course).  That way, the commit will come from the person who actually
+wrote the change, which is preferable from both an information
+management standpoint and from a crediting standpoint.</para>
+-->
 <para>Zweitens kann die Erweiterung viel feiner granuliert werden. 
 Allgemein wird ein Commit-Berechtigter im Bereich X der auch im Bereich
 Y arbeiten will, anfangen Patches für Y einzureichen und darum bitten,
@@ -3287,33 +3394,67 @@ können(natürlich mit Namensangabe vom Überprüfenden bzw, Zustimmenden
 im Commit-Log). Auf diese Art stammt der Commit von dem, der ihn auch 
 geschrieben hat, was sowohl aus Sicht der Informationsverwaltung als 
 auch der Anerkennung vorzuziehen ist.</para>
-
-<para>Zuletzt und vielleicht am wichtigsten, regt ein System welches
-auf Ehre basiert, eine Atmosphäre des Vertrauens und des gegenseitigen
-Respekts an. Jemandem Commit-Zugriff auf einem Teilgebiet zu geben ist
+<!--
+<para>Last, and perhaps most important, using the honor system
+encourages an atmosphere of trust and mutual respect.  Giving someone
+commit access to a subdomain is a statement about their technical
+preparedness&mdash;it says: "We see you have expertise to make commits
+in a certain domain, so go for it."  But imposing strict authorization
+controls says: "Not only are we asserting a limit on your expertise,
+we're also a bit suspicious about
+your <emphasis>intentions</emphasis>."  That's not the sort of
+statement you want to make if you can avoid it.  Bringing someone into
+the project as a committer is an opportunity to initiate them into a
+circle of mutual trust.  A good way to do that is to give them more
+power than they're supposed to use, then inform them that it's up to
+them to stay within the stated limits.</para>
+-->
+<para>Schließlicn, und das ist vielleicht das Wichtigste, regt ein System,
+das auf Ehre basiert, eine Atmosphäre des Vertrauens und des gegenseitigen
+Respekts an. Jemandem Commit-Zugriff auf einem Teilbereich zu geben, ist
 eine Aussage über ihre fachliche Vorbereitung &ndash; es sagt: "Wir 
-sehen, dass du die Kenntnisse hast um auf einem Gebiet Änderungen zu 
-machen, also leg los". Strikte Autorisierung aufzuerlegen sagt aber: 
+sehen, dass du die Kenntnisse hast, um auf einem Gebiet Änderungen zu 
+machen, also leg los". Strikte Autorisierung aufzuerlegen, sagt aber: 
 "Wir behaupten nicht nur, dass deine Kenntnisse begrenzt sind, wir 
-sind auch ein wenig verdächtig im Bezug auf deine 
-<emphasis>Absichten</emphasis>". Das ist keine Behauptung die Sie in
-den Raum stellen wollen, wenn es sich vermeiden lässt. Jemand an dem 
-Projekt als Commit-Berechtigt zu beteiligen, ist eine Gelegenheit sie 
-in einem Kreis vertrauter Personen aufzunehmen. Das errecht man am
-besten indem man ihr mehr Macht gibt als sie benutzen sollen, und sie 
-darüber informiert, dass es an ihr liegt sich innerhalb der genannten 
+sind auch ein wenig skeptisch im Bezug auf deine 
+<emphasis>Absichten</emphasis>". Das ist keine Behauptung, die Sie in
+den Raum stellen wollen, wenn es sich vermeiden lässt. Jemanden an dem 
+Projekt als commit-berechtigt zu beteiligen, ist eine Gelegenheit, ihn 
+in einen Kreis vertrauter Personen aufzunehmen. Das erreicht man am
+besten, indem man ihm mehr Macht gibt als er letztlich braucht, und ihn
+darüber informiert, dass es an ihm ist, sich innerhalb der genannten 
 Grenzen zu bewegen.</para>
-
+<!--
+<para>The Subversion project has operated on the honor system way for
+more than four years, with 33 full and 43 partial committers as of
+this writing.  The only distinction the system actually enforces is
+between committers and non-committers; further subdivisions are
+maintained solely by humans.  Yet we've never had a problem with
+someone deliberately committing outside their domain.  Once or twice
+there's been an innocent misunderstanding about the extent of
+someone's commit privileges, but it's always been resolved quickly and
+amiably.</para>
+-->
 <para>Das Subversion-Projekt arbeitet schon seit vier Jahren nach dem
-Ehren-Prinzip, mit 33 voll und 43 teil-berechtigte Entwickler zum
-Zeitpunkt dieses Schreibens. Die einzige Unterscheidung die das System
-macht, ist zwischen Commit-Berechtigte und nicht Commit-Berechtigte; 
-weitere Unterteilungen bestehen alleine auf zwischenmenschlicher Ebene.
-Dennoch hatten wir nie Probleme mit den Grenzen der Berechtigungen. Es
-gab ein-zwei Missverständnisse über das Ausmaß der 
+Ehren-Prinzip, mit 33 voll -und 43 teil-berechtigten Entwicklern zum
+Zeitpunkt dieses Schreibens. Der einzige Unterschied, den das System
+macht, ist zwischen Commit-Berechtigten und nicht Commit-Berechtigten; 
+weitere Unterteilungen bestehen allein auf zwischenmenschlicher Ebene.
+Dennoch hatte man dort nie Probleme mit den Grenzen der Berechtigungen. Es
+gab ein oder zwei Missverständnisse über das Ausmaß der 
 Commit-Berechtigungen, die jedoch immer schnell und freundlich gelöst
 wurden.</para>
-
+<!--
+<para>Obviously, in situations where self-policing is impractical, you
+must rely on hard authorization controls.  But such situations are
+rare.  Even when there are millions of lines of code and hundreds or
+thousands of developers, a commit to any given code module should
+still be reviewed by those who work on that module, and they can
+recognize if someone committed there who wasn't supposed to.  If
+regular commit review <emphasis>isn't</emphasis> happening, then the
+project has bigger problems to deal with than the authorization system
+anyway.</para>
+-->
 <para>Offensichtlich muss man sich auf strikte Autorisierung verlassen
 können, wenn Selbstkontrolle nicht sinnvoll ist. Solche Situationen
 sind jedoch selten. Selbst bei Unmengen Code und hunderte oder tausende
@@ -3323,13 +3464,27 @@ jemand an eine Stelle etwas geändert hat die er nicht sollte. Wenn
 Änderungen <emphasis>nicht</emphasis> regelmäßig überprüft werden, 
 dann hat das Projekt ohnehin größere Probleme als die
 Commit-Berechtigung.</para>
-
+<!--
+<para>In summary, don't spend too much time fiddling with the version
+control authorization system, unless you have a specific reason to.  It
+usually won't bring much tangible benefit, and there are advantages to
+relying on human controls instead.</para>
+-->
 <para>Insgesamt sollte man nicht allzuviel Zeit damit verbringen, die 
 Berechtigungen der Versionsverwaltung auszutüfteln, es sei denn Sie 
 haben einen ganz bestimmten Grund dazu. Es wird für meistens wenig
 handfesten Nutzen bringen und es hat seine Vorteile sich stattdessen
 auf menschliche Kontrolle zu verlassen.</para>
-
+<!--
+<para>None of this should be taken to mean that the restrictions
+themselves are unimportant, of course.  It would be bad for a project
+to encourage people to commit in areas where they're not qualified.
+Furthermore, in many projects, full (unrestricted) commit access has a
+special status: it implies voting rights on project-wide questions.
+This political aspect of commit access is discussed more in <xref
+linkend="electorate"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase>.</para>
+-->
 <para>Natürlich sollte man nichts hiervon so auffassen, dass die 
 Beschränkungen an und für sich unwichtig sind. Es wäre schlecht für 
 das Projekt, Teilnehmer anzuregen Bereiche zu ändern, für denen sie
