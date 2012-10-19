@@ -15,6 +15,11 @@ all:
           (cd $${name} && make -f ../lang-makefile pdf)         \
         done
 
+pdf: 
+	@for name in ${LANGUAGES}; do                           \
+          (cd $${name} && make -f ../lang-makefile pdf)         \
+        done
+
 ebook:
 	@for name in ${LANGUAGES}; do                    \
           (cd $${name} && make -f ../lang-makefile epub) \
