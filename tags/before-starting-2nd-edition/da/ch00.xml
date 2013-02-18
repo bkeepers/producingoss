@@ -1,0 +1,310 @@
+<preface id="preface">
+<title>Forord</title>
+  
+<!-- ======================== SECTION ============================== -->
+<sect1 id="why">
+<title>Hvorfor skrive denne bog?</title>
+
+
+<para>Til fester, er reaktionen når jeg fortæller at jeg udvikler fri
+software ikke længere bare et stift blik ud i rummet.  "Åh, ja, open
+source&mdash;ligesom Linux?" siger de.  Jeg nikker ivrigt.  "Ja, præcis!
+Det er det jeg beskæftiger mig med."  Det er rart ikke at være komplet
+på kanten(!) mere. Før i tiden var det næste spørgsmål normalt rimeligt
+forudsigeligt: "Hvordan tjener du penge på det?". Som svar, ville jeg så
+kort ridse økonomien omkring open source op: at der er visse
+organisationer hvis interesse det er at noget bestemt software eksisterer,
+men at de ikke nødvendigvis behøver at sælge kopier af det, men bare vil
+være sikker på at softwaren er tilgængelig og bliver vedligeholdt, mere
+som værktøj end som en handelsvare.</para>
+
+<para>På det sidste, har det næste spørgsmål dog ikke altid været om
+penge. Forretningsmetoden(!) for open source software<footnote><para>
+Betegnelserne "open source" og "fri" er i denne sammenhæng i det
+væsentligste synonymer; de behandles yderligere i <xref
+linkend="free-vs-open-source"/><phrase output="printed"> i <xref
+linkend="introduction"/></phrase>.</para></footnote> er ikke længere så
+mystisk, og mange ikke-programmører forstår, &mdash;eller er i det
+mindste ikke overaskede over&mdash;at der er folk der arbejder med det
+på fuld tid.  Istedet er spørgsmålet jeg hører mere og mere
+"<emphasis>Okay, hvordan virker det så?</emphasis>"</para>
+
+<para>Jeg havde ikke et tilfredsstillende svar klar, og jo mere jeg
+forsøgte at finde et, jo mere måtte jeg indse hvor komplekst emnet
+virkelig er. At drive et frit software projekt er ikke det
+samme som at drive en forretning (forestil dig konstant at skulle
+forhandle om dit produkts indhold med en gruppe frivillige, hvoraf de
+fleste er nogen du aldrig har mødt!). Af forskellige årsager er det
+heller ikke præcis som at drive en traditionel ikke-for-profit(!)
+forening, eller en statsadministration(!). Det har lighedspunkter med
+alle disse, men jeg er lige så langsomt kommet til den konklusion at
+fri software er <foreignphrase>sui generis</foreignphrase>. Der er
+mange ting det kan sammenlignes med, men ingen det kan ikke sidestilles
+helt med. Selv antagelsen at et fri software projekt kan "drives" er
+lidt af en tilsnigelse. Et frit software projekt kan <emphasis>startes
+</emphasis>, og det kan påvirkes af interesserede parter, ofte temmelig
+stærkt. Men projektets værdier kan ikke skifte ejerskab til en enkelt
+ejer, og så længe der er folk et eller andet sted &mdash;et hvilket som
+helst sted&mdash;som er interesserede i at fortsætte det, kan det ikke
+lukkes af en enkelt part. Enhver har uendelig magt; enhver har ingen
+magt. Det giver en interessant dynamik.</para>
+
+<para>Derfor ønskede jeg at skrive denne bog. Fri software
+projekter har udviklet en (distinct culture) unik kultur(!), et ethos(!)
+hvori friheden til at få software til at gøre præcis hvad man vil en
+en central tese(!), og dog er resultatet af denne frihed  ikke en
+spredning af individer der arbejder i hver deres retning med koden,
+men entusiastisk samarbejde. Ja, blot kompetencen i samarbejde i sig
+selv, er en af de mest værdsatte evner indenfor fri software. At styre
+disse projekter er at kaste sig ud i en slags hypertrofi<footnote><para>
+abnorm forstørrelse af kropsdel eller organ</para></footnote>-ramt
+samarbejde, hvor ens evne til, ikke blot at arbejde med andre, men også
+at finde på nye måder at arbejde sammen, kan resultere i betydelige
+fordele for softwaren. Denne bog forsøger at beskrive teknikker hvormed
+dette kan gøres. Den er på ingen måder komplet, men den er i det mindste
+en begyndelse.</para>
+
+<para>God fri software er et værdigt mål i sig selv, og jeg håber at
+læsere som søger efter måder at opnå det på, vil blive tilfreds med hvad
+de finder her. Men udover det, håber jeg også at kunne viderebringe noget
+af den rene glæde det bringer at arbejde med et motiveret hold af open
+source udviklere, og af at interagere med brugere på den herligt direkte
+måde som open source tilskynder. At deltage i et successfuldt fri software
+projekt er <emphasis>sjovt</emphasis>, og det er i sidste ende præcis det
+der holder hele systemet kørende.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="audience">
+<title>Hvem har interresse i at læse denne bog?</title>
+
+<para>Denne bog er skrevet til softwareudviklere og ledere som
+overvejer at starte et open source projekt, eller som har startet et og
+nu er bekymret for hvordan de kommer videre. Den vil nok også kunne
+hjælpe folk der bare vil deltage i et open source projekt, men aldrig
+har gjort det før.</para>
+
+<para>Læseren behøver ikke at være programmør, men bør kende til
+grundlæggende koncepter indenfor software udvikling, såsom kilde kode,
+kompilere og lapper til kilde kode (patches, herefter kaldet lap).
+</para>
+
+<para>Forhåndserfaring med open source software, hverken som bruger eller
+udvikler er ikke nødvendig. De som har arbejdet i fri software projekter
+før vil nok opfatte dele af bogen som en smule indlysende, og vil måske
+kunne springe disse dele over. Da der er så stort et spænd i læsernes
+potentielle erfaringer, har jeg gjort meget ud af at navngive bogens
+sektioner så de antyder hvilket erfaringsniveau de er henvendt til,
+samt at fortælle når noget kan springes over af dem der er bekendt med
+stoffet på forhånd.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="sources">
+<title>Bogens kilder</title>
+
+<para>Det meste af råmaterialet til denne bog er opstået ud af fem års
+arbejde med Subversion projektet (<ulink
+url="http://subversion.tigris.org/"/>). Subversion er et open source
+versions kontrol system, skrevet helt fra bunden af, med intentionen om
+at erstatte CVS som <foreignphrase>de facto</foreignphrase> valget for
+versions kontrol systemer i open source fællesskabet. Projektet blev
+startet af min arbejdsgiver, CollabNet (<ulink
+url="http://www.collab.net/"/>), tidligt i år 2000, og heldigvis
+forstod CollabNet lige fra starten at drive det som en ægte
+kollaborativ, distribueret opgave(!)(effort). Vi fik tidligt en masse
+frivillige udviklere koblet på projektet, og i dag er der nogen og
+halvtreds aktive udviklere, heraf er kun et fåtal CollabNet
+medarbejdere.</para>
+
+<para>Subversion er på mange måder et klassisk eksempel på et open
+source projekt, og jeg endte med at referere mere til det i denne bog,
+end jeg oprindeligt forventede. Dette til dels af bekvemmelighedsgrunde,
+når jeg skulle bruge et eksempel på et bestemt fænomen, dukkede der som
+regel et fra Subversion op i mit hoved som det første. Men også for at
+kunne være helt sikker på mine kilders pålidelighed. Selvom jeg er
+involveret i andre fri software projekter i forskellige grader, og
+snakker med venner og bekendte der er involveret i mange andre, indser
+man hurtigt at når man skriver til tryk, skal enhver antagelses sandhed
+verificeres. Jeg ville ikke udtale mig om hændelser i andre projekter,
+baseret på hvad jeg kunne læse i deres offentlige post-liste arkiver.
+Hvis nogle gjorde det med Subversion, ved jeg at de ville have ret
+omkring halvdelen af tiden, og tage fejl den anden halvdel. Så når jeg
+hentede inspiration eller eksempler fra et projekt jeg ikke havde
+direkte erfaring med, prøvede jeg først at finde en meddeler derfra, én
+som jeg kunne stole på ville kunne forklare hvad der virkelig skete.
+</para>
+
+<para>Subversion har været mit job i de sidste 5 år, men jeg har været involveret i fri software i 12. Andre projekter der har influeret denne bog er:</para>
+
+<itemizedlist>
+  <listitem><para>GNU Emacs tekst editor projektet hos Free
+            Software Foundation, i hvilket jeg vedligeholder nogle få små
+            pakker.</para>
+  </listitem>
+  <listitem><para>Concurrent Versions System (CVS), som jeg arbejdede
+            intenst på i 1994&ndash;1995 sammen med Jim Blandy, men som
+            jeg kun har været sporadisk involveret i siden.</para>
+  </listitem>
+  <listitem><para>Samlingen af open source projekter kendt som Apache
+            Software Foundation, specielt Apache Portable
+            Runtime (APR) og Apache HTTP Server.</para> 
+  </listitem>
+  <listitem><para>OpenOffice.org, Berkeley databasen fra
+            Sleepycat, og MySQL databasen har jeg ikke personligt været
+	    involveret, men har observeret dem, og i
+	    nogle tilfælde snakket med folk derfra.</para> 
+  </listitem>
+  <listitem><para>GNU Debugger (GDB) (som ovenstående).</para>
+  </listitem>
+  <listitem><para>The Debian Project (som ovenstående).</para>
+  </listitem>
+</itemizedlist>
+
+<para>Dette er selvfølgelig ikke en komplet liste. Som de fleste open
+source programmører, skæver jeg løbende til mange forskellige projekter,
+bare for at have en fornemmelse af deres generelle tilstand. Jeg vil
+ikke liste dem alle her, men de er nævnt i teksten ved lejlighed.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="acknowledgments">
+<title>Tilegnelser</title>
+
+<para>Denne bog tog fire gange længere tid at skrive end jeg troede,
+og det meste af den tid føltes det som om jeg havde et større
+klavermøbel svævende over hovedet hvorend jeg bevægede mig. Uden hjælpen
+fra mange mennesker, ville jeg ikke have været i stand til at færdiggøre
+den, og stadig være ved mine sansers fulde fem.</para>
+
+<para>Andy Oram, min redaktør hos O'Reilly, var en forfatters drøm. 
+Bortset fra hans intime kendskab til området (han foreslog mange af
+emnerne), har han den sjældne egenskab at kunne gennemskue hvad man
+gerne ville have sagt, og hjælpe en til at finde den rette måde at
+sige det på.  Det har været en ære at arbejde med ham.
+Tak skal også gå til Chuck Toporek for at styre mig i Andys retning
+da jeg kun havde ideen til bogen.</para>
+
+<para>Brian Fitzpatrick læste korrektur på næsten alt materialet mens
+jeg skrev, hvilket ikke bare gjorde bogen bedre, men holdt mig i gang
+med at skrive når jeg ønskede at være alle andre steder end foran
+computeren. Ben Collins-Sussman og Mike Pilato fulgte også bogens
+fremskridt, og var altid villige til at diskutere&mdash;nogen gange
+længe&mdash;det emne jeg nu lige forsøgte at dække den uge. De lagde
+også mærke til det når jeg gik ned i tempo, og stak forsigtigt til mig
+når det var nødvendigt. Tak gutter.</para>
+
+<para>Biella Coleman skrev hendes disputats samtidigt med at jeg skrev
+denne bog. Hun ved hvad det betyder at sætte sig ned hver dag for at
+skrive, og var et inspirerende eksempel såvel som et sympatisk øre.
+Hendes fascinerende antropologiske indgansvinkel til fri software
+bevægelsen, gav både ideer og referencer som jeg kunne bruge i bogen.
+Alex Golub&mdash;endnu en antropolog med en fod indenfori fri software
+verdenen, som også færdiggjorde hans disputats samtidigt&mdash;gav en
+ekseptionel støtte tidligt i forløbet, hvilket var en stor hjælp.</para>
+
+<para>Det lykkedes Micah Anderson at fremstå upåvirket af hans eget
+skrive-job, hvilket var inspirerende på en sådan lidt syg,
+misundelses-skabende måde, men han var altid klar med venskab, samtale
+og (ved mindst en lejlighed) teknisk support. Tak Micah!</para>
+
+<para>Jon Trowbridge og Sander Striker bidrog med både opmuntring og
+konkret hjælp&mdash;deres brede erfaringsgrundlag indenfor fri software
+gav materiale jeg ikke kunne have fået på andre måder.</para>
+
+<para>Tak til Greg Stein, ikke kun for venskab og vel-placeret
+opmuntring, men for at vise Subversion projektet, hvor vigtigt
+regelmæssige kode gennemgange er i opbygningen af et
+programmerings-fællesskab.  Tak skal også gå til Brian Behlendorf,
+som taktfuldt fik vigtigheden af at diskussioner skulle foregå
+offentligt trommet ind i vores hoveder. Jeg håber det princip er
+afspejlet gennem hele bogen.</para>
+
+<para>Tak til Benjamin "Mako" Hill og Seth Schoen, for adskillige
+samtaler om fri software og dets politikker. Til Zack Urlocker og Louis
+Suarez-Potts for at tage tid ud af deres travle kalendre for at blive
+interviewet. Til Shane på Slashcode listen for at tillade mig at citere
+hans meddelelse, og til Haggen So for hans enormt hjælpsomme
+sammenligning af canned hosting(!) sider.</para>
+
+<para>Tak til Alla Dekhtyar, Polina, og Sonya for deres unflagging(!)
+og tålmodige opmuntring.  Jeg er meget glad for at jeg ikke længere er
+nødt til at afslutte (eller rettere, forsøge uden held at afslutte)
+vores aftener tidligt for at gå hjem og arbejde på "Bogen".</para>
+
+<para>Tak til Jack Repenning for venskab, samtale, og for stædigt at
+nægte at acceptere en nem forkert analyse, når der er en svær men rigtig
+tilgængelig. Jeg håber at noget af hans store erfaring med software-
+udvikling og software-industrien er smittet af på denne bog.</para>
+
+<para>CollabNet was exceptionally generous in allowing me a flexible
+schedule to write, and didn't complain when it went on far longer than
+originally planned.  I don't know all the intricacies of how
+management arrives at such decisions, but I suspect Sandhya Klute, and
+later Mahesh Murthy, had something to do with it&mdash;my thanks to
+them both.</para>
+
+<para>The entire Subversion development team has been an inspiration
+for the past five years, and much of what is in this book I learned
+from working with them.  I won't thank them all by name here, because
+there are too many, but I implore any reader who runs into a
+Subversion committer to immediately buy that committer the drink of
+his choice&mdash;I certainly plan to.</para>
+
+<para>Many times I ranted to Rachel Scollon about the state of the
+book; she was always willing to listen, and somehow managed to make
+the problems seem smaller than before we talked.  That helped a
+lot&mdash;thanks.</para>
+
+<para>Thanks (again) to Noel Taylor, who must surely have wondered why
+I wanted to write another book given how much I complained the last
+time, but whose friendship and leadership of Golos&aacute; helped keep
+music and good fellowship in my life even in the busiest times.
+Thanks also to Matthew Dean and Dorothea Samtleben, friends and
+long-suffering musical partners, who were very understanding as my
+excuses for not practicing piled up.  Megan Jennings was constantly
+supportive, and genuinely interested in the topic even though it was
+unfamiliar to her&mdash;a great tonic for an insecure writer.  Thanks,
+pal!</para>
+
+<para>I had four knowledgeable and diligent reviewers for this book:
+Yoav Shapira, Andrew Stellman, Davanum Srinivas, and Ben Hyde.  If I
+had been able to incorporate all of their excellent suggestions, this
+would be a better book.  As it was, time constraints forced me to pick
+and choose, but the improvements were still significant.  Any errors
+that remain are entirely my own.</para>
+
+<para>My parents, Frances and Henry, were wonderfully supportive as
+always, and as this book is less technical than the previous one, I
+hope they'll find it somewhat more readable.</para>
+
+<para>Finally, I would like to thank the dedicatees, Karen Underhill
+and Jim Blandy.  Karen's friendship and understanding have meant
+everything to me, not only during the writing of this book but for the
+last seven years.  I simply would not have finished without her help.
+Likewise for Jim, a true friend and a hacker's hacker, who first
+taught me about free software, much as a bird might teach an airplane
+about flying.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="disclaimer">
+<title>Disclaimer</title>
+
+<para>The thoughts and opinions expressed in this book are my own.
+They do not necessarily represent the views of CollabNet or of the
+Subversion project.</para>
+
+</sect1>
+
+</preface>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

@@ -1,0 +1,1871 @@
+<chapter id="development-cycle">
+
+<title>Paket-Erstellung, Veröffentlichung, und tägliche Entwicklung
+</title>
+
+<simplesect>
+
+<para>In diesem Kapitel geht es darum, wie freie Software-Projekte
+ihre Software-Pakete erstellen und veröffentlichen, und wie sich
+allgemeine Entwicklungsmuster um diese Ziele herum organisieren.</para>
+
+<para>Ein großer Unterschied zwischen Open Source und proprietären
+Projekten ist der Mangel einer zentralen Kontrolle über das
+Entwicklerteam. Wenn eine neue Version vorbereitet wird, ist der
+Unterschied besonders gravierend: Ein Unternehmen kann das gesamte
+Entwicklerteam darum bitten, sich auf die bevorstehenden Version
+zu konzentrieren und die Entwicklung neuer Funktionen und die Behebung
+unkritischer Bugs ruhen zu lassen, bis die neue Version
+fertig ist. Gruppen von Freiwilligen sind nicht derart monolitisch.
+Sie arbeiten aus allen möglichen Gründen an dem Projekt, und 
+diejenigen, die nicht daran interessiert sind, bei einer bestimmten
+Version zu helfen, wollen immer noch ihre normale Entwicklung 
+weiterführen, während die neue Version vorbereitet wird. Da die
+Entwicklung niemals aufhört, neigen der Herausgabe-Prozesse in
+Open-Source-Projekten dazu, länger zu dauern, verursachen aber weniger
+Unruhe, als die kommerziellen Herausgabe-Prozesse. Es ist
+ein wenig wie die Reparatur einer Autobahn. Es gibt zwei Möglichkeiten,
+eine Straße zu reparieren: Sie können sie komplett absperren, damit
+die Reparaturmannschaft in voller Kapazität ausschwärmen kann, bis
+das Problem gelöst ist, oder Sie können jeweils nur ein paar Spuren 
+gleichzeitig bearbeiten, während die anderen für den Verkehr
+offen bleiben. Die erste Methode ist sehr effizient <emphasis>für die
+Reparaturmannschaft</emphasis>, aber für niemanden sonst &ndash; die
+Straße ist komplett blockiert, bis die Arbeit erledigt ist. Die
+zweite Methode verursacht mehr Arbeitszeit und Kopfschmerzen für die
+Reparaturmannschaft (jetzt müssen sie mit weniger Leuten und Mitteln,
+unter eingeengten Bedingungen arbeiten, mit Schildern um den
+Verkehr zu verlangsamen und zu lenken, usw.), allerdings bleibt die 
+Straße  weiterhin benutzbar, wenn auch nicht mit der vollen
+Kapazität.</para>
+
+<para>Open-Source-Projekte tendieren dazu nach der zweiten Methode zu
+arbeiten. Bei einer ausgereiften Software ist es sogar so, dass mehrere
+verschiedene Versionslinien gleichzeitig gepflegt werden, das Projekt
+befindet sich in einer Art ständigen Straßenreparatur. Es sind immer
+ein paar Spuren geschlossen; beständige aber geringe Umstände im
+Hintergrund werden die ganze Zeit über von der Entwicklergemeinschaft
+toleriert, damit die neuen Version plangemäß fertig
+werden.</para>
+
+<para>Das Modell, das dies ermöglicht, lässt sich auf mehr als nur
+neue Versionen verallgemeinern. Es ist das Prinzip, Aufgaben zu
+parallelisieren, die nicht von einander abhängen &ndash; ein Prinzip
+das natürlich keinesfalls auf Open-Source-Entwicklung 
+beschränkt ist, das jedoch von Open-Source-Projekten auf eine jeweils
+eigene bestimmte Art umgesetzt wird. Sie können es sich nicht leisten,
+ihre Straßenbau-Truppe oder den gewöhnlichen Verkehr zu sehr zu nerven,
+aber sie können es sich auch nicht leisten Leute dafür abzustellen,
+bei den orangen Kegeln zu stehen und den Verkehr zu dirigieren.
+Sie streben deshalb eher zu Abläufe die einen flachen, konstanten Grad
+an Mehraufwand haben, als Höhen und Tiefen. Freiwillige sind im
+Allgemeinen eher dazu bereit mit kleinen gleichbleibenden Mengen an
+Unbequemlichkeiten zu arbeiten; die Berechenbarkeit erlaubt es ihnen
+zu kommen und zu gehen, ohne sich darüber Sorgen zu machen, ob ihr
+Terminkalender mit dem was im Projekt passiert kollidiert. Wenn das
+Projekt aber eine einem Produktionsplan unterliegen würde, wäre das
+Ergebnis, eine Menge Entwickler die die meiste Zeit untätig
+herumsitzen &ndash; was nicht nur ineffizient wäre, sondern auch 
+langweilig und dadurch gefährlich, insofern, dass ein gelangweilter
+Entwickler wahrscheinlich bald ein Ex-Entwickler sein wird.</para>
+
+<para>Arbeit an neuen Versionen ist für gewöhnlich die am ehesten
+bemerkbare Aufgabe die nicht zur Entwicklung gehört, welche neben der
+Entwicklung her läuft, also sind die Methoden die in den folgenden
+Abschnitten folgen meistens darauf ausgelegt neue Versionen zu
+ermöglichen. Beachten Sie jedoch, dass sie auch für andere Aufgaben
+gelten, die sich parallelisieren lassen, wie Übersetzungen und 
+Lokalisierung, weitgreifende Änderungen an den Schnittstellen die nach
+und nach über den gesamten Quellcode gemacht werden, usw.</para>
+
+</simplesect>
+
+<!-- ========================== SECTION =========================== -->
+
+<sect1 id="release-numbering">
+<title>Versionszählung</title>
+
+<para>Vor wir uns darüber unterhalten, wie man eine neue Version macht,
+lasst uns anschauen, wie man diese Versionen benennt, wozu wir wissen
+müssen was eine neue Version für die Benutzer tatsächlich bedeutet. 
+Eine neue Version bedeutet, dass:</para>
+
+<itemizedlist>
+
+  <listitem><para>Alte Bugs behoben wurden. Das ist wahrscheinlich eines
+	der Sachen auf den sich die Benutzer für jede neue Version
+	verlassen können.</para>
+  </listitem>
+
+  <listitem><para>Neue Bugs wurden hinzugefügt. Darauf kann man sich
+	für gewöhnlich auch verlassen, außer in manchen Fällen, bei
+	der Behebung von Sicherheitslücken oder andere Einmalige
+	Änderungen (siehe <xref linkend="security-releases"/><phrase
+        output="printed"> später in diesem Kapitel</phrase>).</para>
+  </listitem>
+
+  <listitem><para>Neue Funktionen können hinzugefügt worden sein.</para>
+  </listitem>
+
+  <listitem><para>Neue Konfigurationseinstellung können hinzugefügt
+	worden sein, oder die Bedeutung alter Einstellungen sich ein
+	klein wenig geändert haben. Die Installationsabläufe können
+	sich auch seit der letzten Version leicht geändert haben,
+	auch wenn man immer hofft, dass das nicht der Fall ist.</para>
+  </listitem>
+
+  <listitem><para>Nicht kompatible Änderungen können eingeführt worden
+	sein, wie die Formatierung der Daten welche von älterer 
+	Software benutzt werden nicht weiter ohne irgend einer
+	(möglicherweise händischen) Einweg-Konvertierung benutzt werden
+	können.</para>
+  </listitem>
+
+</itemizedlist>
+
+<para>Wie sie sehen, ist nicht alles davon etwas gutes. Deshalb gehen
+erfahrene Benutzer immer mit ein wenig Angst an neue Versionen heran,
+ganz besonders, wenn die Software ausgereift ist und vorher schon
+zum größten Teil das gemacht hat, was sie wollten (oder dachten das
+sie wollten). Selbst der Einbau neuer Funktionen hat insofern nicht nur
+Vorteile, dass es bedeuten könnte, dass sich die Software jetzt 
+unerwartet verhält.</para>
+
+<para>Der Sinn einer Versionsnummer ist deshalb zweifältig: 
+Offensichtlich sollte die Nummer unzweideutig die Reihenfolge der
+Versionen mitteilen (d.h. wenn man sich zwei Versionsnummern anschaut,
+kann man unterscheiden, welches die später kam), sie sollten aber auch
+so kompakt wie möglich den Grad und Art der Änderungen in der Version
+andeuten.</para>
+
+<para>Das alles in einer Zahl? Nun, im Grunde genommen, ja. Die 
+Strategien für Versionsnummern sind eine der ältesten 
+Fahrradschuppen-Diskussionen, die es gibt (siehe <xref 
+linkend="bikeshed"/><phrase output="printed"> im Kapitel <xref 
+linkend="communications"/></phrase>), und ist unwahrscheinlich, dass
+sich die Welt auf einen, vollständigen Standard in der irgendwann in 
+der nächsten Zeit einigt. Ein paar gute Strategien sind aber 
+entstanden, zusammen mit dem universell anerkannten Prinzip: <emphasis>
+konsistent zu sein</emphasis>. Wählen Sie ein Nummerierungsschema und
+bleiben Sie dabei. Ihre Nutzer werden es Ihnen danken.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-components">
+<title>Die Komponenten der Versionsnummer</title>
+
+<para>Dieser Abschnitt beschreibt im Detail die formalen Konventionen
+der Nummerierung von Versionen, und geht von sehr wenig Vorwissen aus.
+Es ist hauptsächlich als eine Referenz gedacht. Wenn Sie bereits mit
+diesen Konventionen vertraut sind, können Sie diesen Abschnitt
+überspringen.</para>
+
+<para>Eine Versionsnummer ist eine Gruppe von Zahlen die durch punkte
+getrennt sind:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3
+Singer 5.11.4</literallayout>
+</informalexample>
+
+<para>...und so weiter. Die Punkte sind <emphasis>keine</emphasis>
+Dezimalzeichen, sie sind lediglich Trennzeichen; nach "5.3.9" käme
+"5.3.10". Ein paar wenige Projekte haben ab und zu auf was anderes
+hingedeutet, am bekanntesten der Linux-Kernel mit seiner "0.95", 
+"0.96"... "0.99" Reihe die zu Linux 1.0 hinführte, die Konvention,
+dass die Punkte keine Dezimalzeichen sind, ist jetzt aber fest
+etabliert und sollte als Standard betrachtet werden. Es gibt keine
+Grenze bei der Anzahl der Komponenten (Ziffernsequenzen, die keine
+Punkte enthalten), aber die meisten Projekte gehen nicht über drei
+oder vier hinaus. Die Gründe dafür werden später klar.</para>
+
+<para>Zusätzlich zu den numerischen Komponenten, hängen Projekte
+manchmal erläuternde Kennschrift wie "Alpha" oder "Beta" an (siehe
+<xref linkend="alpha-and-beta"/>), als Beispiel:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha)
+Singer 5.11.4 (Beta)</literallayout>
+</informalexample>
+
+<para>Ein Alpha- oder Beta-Vermerk bedeutet, dass diese Version einer
+zukünftigen <emphasis>vorausgeht</emphasis> welches die selbe Zahl 
+haben wird, jedoch ohne den Vermerk. Deshalb führt "2.3.0&nbsp;(Alpha)"
+letztendlich zu "2.3.0". Um mehrere solche Kandidaten in einer
+Folge zu ermöglichen, können die Vermerke selber Meta-Vermerke haben.
+Hier ist als Beispiel eine Serie von Versionen, in der Reihenfolge
+mit der sie veröffentlicht werden würden:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha 1)
+Scanley 2.3.0 (Alpha 2)
+Scanley 2.3.0 (Beta 1)
+Scanley 2.3.0 (Beta 2)
+Scanley 2.3.0 (Beta 3)
+Scanley 2.3.0</literallayout>
+</informalexample>
+
+<para>Beachten Sie, dass es mit dem "Alpha" Vermerk, Scanley "2.3" als
+"2.3.0" geschrieben wird. Die beiden Zahlen sind gleich &ndash; folgende
+Nullanteile können der Kürze halber immer weggelassen werden &ndash; wenn
+ein Vermerk aber vorhanden ist, ist die Kürze eh schon nicht gegeben,
+also kann man genau so gut vollständig ausschreiben.</para>
+
+<para>Andere Vermerke die mehr oder weniger oft benutzt werden sind 
+"Stable" (de. stabil), "Unstable" (de. nicht stabil), "Development"
+(de. Entwicklerversion), und "RC" (für "Release Candidate")
+(de. Kandidat für eine finale Version). Die am weitesten verbreiteten
+sind immer noch "Alpha" und "Beta", mit "RC" nahe an dritter Stelle,
+beachten Sie aber, dass zu "RC" immer einen Meta-Vermerk gehört. Sie
+veröffentlichen als nicht
+"Scanley&nbsp;2.3.0&nbsp;(RC)", sondern 
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", gefolgt von RC2, usw.</para>
+
+<para>Diese drei Vermerke, "Alpha", "Beta", und "RC", sind mittlerweile
+relativ gut bekannt, und ich empfehle nicht irgend welche andere zu
+benutzen, auch wenn andere auf dem ersten Blick passender erscheinen
+da sie normale Wörter sind, und kein Jargon. Diejenigen die neue
+Software-Versionen installieren, sind aber bereits mit den großen
+dreien vertraut, und es gibt keinen Grund die Sache grundlos anders von
+allen anderen zu machen.</para>
+
+<para>Obwohl die Punkte in Versionsnummer keine Dezimalzeichen sind,
+deuten sie doch einen Stellenwert an. Alle "0.X.Y" Versionen
+gehen "1.0" voraus (was natürlich gleichbedeutend ist mit "1.0.0").
+"3.14.158" geht direkt "3.14.159" voraus, und indirekt "3.14.160",
+sowie "3.15.irgendwas" und ähnliches vorausgeht.</para>
+
+<para>Eine konsistente Richtlinie für die Numerierung der Versionen
+ermöglicht es den Benutzer zwei Versionsnummern der selben Software
+anzuschauen und alleine durch die Zahlen, die wichtigen Unterschiede
+zwischen ihnen zu unterscheiden. Bei einer typischen System aus drei
+Komponenten, ist die erste Komponente die
+<firstterm>major&nbsp;Nummer</firstterm>, die zweite ist die 
+<firstterm>minor&nbsp;Nummer</firstterm>, und die dritte ist die
+<firstterm>micro&nbsp;Nummer</firstterm>. Version
+"2.10.17" ist zum Beispiel die siebzehnte Micro-Version in der zehnten
+Minor-Reihe innerhalb der zweiten Major-Versions-Serie. Die Worte
+"Reihe" (en. line) und "Serie" (en. series) werden hier informell
+verwendet, sie bedeuten aber was man erwarten würde. Eine Major-Serie
+ist lediglich alle Versionen die die gleich major Nummer teilen und
+eine minor Serie (oder Reihe) besteht aus allen Versionen welche die
+gleiche minor <emphasis>und</emphasis> major Nummer teilen. "2.4.0" und
+"3.4.1" sind also nicht in der selben minor Reihe, obwohl sie beide "4"
+als minor Nummer haben; andererseits sind, "2.4.0" und "2.4.2" in der
+selben Reihe, obwohl sie nicht auf einander folgen, wenn "2.4.1" 
+zwischendurch veröffentlicht wurde.</para>
+
+<para>Die Bedeutung dieser Zahlen ist genau das, was man erwarten 
+würde: Eine Erhöhung der major Nummer deutet auf große Änderungen hin;
+eine Erhöhung der minor Nummer deutet auf kleine Änderungen hin; und
+eine Erhöhung der micro Nummer deutet auf wirklich triviale Änderungen.
+Manche Projekte fügen eine vierte Komponente hinzu, gewöhnlich als
+<firstterm>patch&nbsp;Nummer</firstterm> bezeichnet, für besonders
+fein granulierte Kontrolle über die Unterschiede zwischen ihren 
+Versionen (verwirrenderweise, benutzen andere Projekte "patch" als
+synonym für "micro" bei einem System mit drei Komponenten). Es gibt
+auch Projekte, welche die letzte Komponente als 
+<firstterm>build&nbsp;Nummer</firstterm> verwenden, welches jedes mal
+hochgezählt wird, wenn ein neuer Build der Software gemacht wird und 
+keine andere Änderung außer diesen Build repräsentiert. Das hilft dem
+Projekt jede Bug-Meldung mit einem bestimmten Build in Verbindung zu
+bringen, und ist wahrscheinlich am nützlichsten wenn binären Pakete die
+übliche Methode der Verteilung ist.</para>
+
+<para>Obwohl es viele verschiedene Konventionen gibt, wieviele
+Komponenten man verwenden soll, und was die Komponenten bedeutet,
+neigen die Unterschiede dazu unwesentlich zu sein &ndash; Sie haben
+ein wenig Spielraum aber nicht viel. Die nächsten beiden Abschnitte
+besprechen einige der am meisten benutzten Konventionen.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-simple-strategy">
+<title>Die einfache Strategie</title>
+
+<para>Die meisten Projekte haben Regeln darüber, welche Arten von
+Änderungen bei einer neuen Version erlaubt sind wenn man nur eine
+micro Nummer erhöht, andere wenn man die minor Nummer erhöht und
+wieder andere bei der major Nummer. Es gibt noch keinen Satz von Normen
+für diese Regeln, ich werde hier aber eine Regelung beschreiben, die
+schon bei mehreren Projekten erfolgreich verwendet worden ist. Sie
+können diese Regelung für Ihr Projekt einfach übernehmen, aber selbst
+wenn Sie das nicht tun, ist es trotzdem ein gutes Beispiel für 
+die Art von Informationen die Versionsnummern ausdrücken sollten.
+Diese Regelung basiert auf dem Nummernsystem, das vom
+APR-Projekt benutzt wird, siehe 
+<ulink url="http://apr.apache.org/versioning.html"/>.</para>
+
+<orderedlist>
+
+  <listitem><para>Änderungen an der micro Nummer (d.h Änderungen
+	innerhalb der selben minor Reihe) müssen sowohl aufwärts,
+	als auch abwärtskompatibel sein. D.h. die Änderungen sollten
+	nur Bugfixes sein, oder sehr kleine Verbesserungen an
+	bestehenden Funktionen. Neue Funktionen sollten bei micro
+	Versionen nicht eingeführt werden.</para>
+  </listitem>
+
+  <listitem><para>Änderungen an der minor Nummer (d.h, innerhalb der
+	selben major Reihe) müssen abwärtskompatibel sein, aber nicht
+	unbedingt aufwärtskompatibel. Es ist normal neue Funktionen
+	in einer minor Version einzuführen, für gewöhnlich aber nicht
+	zu viele auf einmal.</para>
+  </listitem>
+
+  <listitem><para>Änderungen an der major Nummer kennzeichnen Grenzen
+	der Kompatibilität. Eine neue major Version kann zu 
+	vorhergehenden und folgenden Versionen inkompatibel sein. Von
+	einer major Version werden neue Funktionen erwartet, und sogar
+	ganze Sammlungen von Funktionen.</para>
+  </listitem>
+
+</orderedlist>
+
+<para>Was <firstterm>abwärtskompatibel</firstterm> und <firstterm>
+aufwärtskompatibel</firstterm> genau bedeuten, hängt davon ab, was
+Ihre Software macht, im Kontext sind sie aber für gewöhnlich nicht
+sonderlich frei interpretierbar. Wenn Ihr Projekt zum Beispiel eine
+Client-Server-Anwendung ist, dann bedeutet "abwärtskompatibel", dass
+eine Aktualisierung auf 2.6.0 keine existierende 2.5.4 Clients 
+Funktionen verlieren oder sich anders als vorher verhalten (natürlich
+abgesehen von den Bugs die behoben wurden). Eine Aktualisierung einer
+dieser Clients auf 2.6.0 zu aktualisieren könnte ihm andererseits
+<emphasis>neue</emphasis> Funktionen zur Verfügung stellen, bei dem
+die 2.5.4 Clients nicht wissen wie sie genutzt werden sollen. Wenn
+das passiert, dann ist die Aktualisierung <emphasis>nicht</emphasis>
+"aufwärtskompatibel": Sie können diesen Client nicht zurück auf 
+2.5.4 setzen und alle Funktionen aus 2.6.0 behalten, da manche dieser
+Funktionen bei 2.6.0 neu waren.</para>
+
+<para>Deshalb sind micro Versionen im wesentlichen ausschließlich zur
+Behebung von Fehler. Sie müssen in beiden Richtungen kompatibel bleiben:
+Wenn Sie von 2.5.3 auf 2.5.4 aktualisieren, Ihre Meinung dann ändern
+und wieder zurück auf 2.5.3 wechseln, sollten keine Funktionen
+verloren gehen. Die Fehler, die durch 2.5.4 behoben wurden, würden natürlich
+wieder auftauchen, aber Sie würden keine Funktionen verlieren, außer
+insofern, dass die wiederhergestellten Fehler die Nutzung
+existierender Funktionen verhindert.</para>
+
+<para>Client-Server-Protokolle sind nur eines vieler möglicher
+Kompatibilitätsbereiche. Ein weiteres sind Datenformate: Schreibt die
+Software auf ein permanentes Speichermedium? Wenn ja, müssen die
+Formate die es liest und schreibt die Kompatibilitätsrichtlinien die
+von den durch die Versionsnumeriertung versprochenen Richtlinien 
+befolgen. Version 2.6.0 muss in der Lage sein die Dateien die von
+2.5.4 geschrieben wurden zu lesen, kann aber im Stillen das Format
+auf etwas erweitern, welches 2.5.4 nicht lesen kann, da die Fähigkeit
+auf eine vorherige Version zu wechseln, nicht über die Grenze einer
+major Nummer erforderlich ist. Wenn Ihr Projekt Code-Bibliotheken,
+für die Nutzung durch andere Anwendungen, vertreibt, dann sind die
+Schnittstellen auch Bereich indem die Kompatibilität gewahrt werden
+muss: Sie müssen dafür sorgen, dass die Regeln für die Kompatibilität
+von Quellcode und Binärdateien, derart formuliert sind, dass ein
+informierter Nutzer sich niemals fragen muss, ob es sicher ist zu
+aktualisieren. Er wird in der Lage sein die Zahlen anzusehen, und
+es sofort zu wissen.</para>
+
+<para>Bei diesem System, bekommen Sie keine Gelegenheit für einen
+sauberen Neuanfang, bis sie die major Nummer hochzählen. Das kann oft
+lästig sein: Es mag Funktionen geben, die Sie hinzufügen wollen, oder
+Protokolle, die Sie neu entwerfen wollen, was einfach nicht gemacht
+werden können, während Sie die Kompatibilität wahren. Es gibt hierfür
+keine magische Lösung, außer zu versuchen alles von vorn herein so zu
+entwerfen, dass es sich leicht erweitern lässt (ein Thema welches man
+leicht ein ganzes Buch widmen könnte, und sicherlich außerhalb des
+Rahmens von diesem). Die Kompatibilitätsrichtlinien zu veröffentlichen
+und sich an ihnen zu halten, ist ein unausweichlicher Teil beim
+Vertrieb von Software. Eine böse Überraschung kann viele Nutzer
+abschrecken. Die eben beschriebene Richtlinie ist zum Teil deshalb gut,
+da sie bereits ziemlich weit verbreitet ist, aber auch weil sie leicht
+zu erklären und zu behalten ist, selbst solche, die noch nicht damit
+vertraut sind.</para>
+
+<para>Ist ist allgemein anerkannt, das diese Regeln nicht für 
+Versionen vor 1.0 gelten (obwohl Ihre Versionsrichtlinien, um
+Missverständnisse zu vermeiden, das trotzdem explizit sagen sollte). 
+Ein Projekt, welches sich noch in der frühen Entwicklung befindet, kann
+0.1, 0.2, 0.3, usw. in einer Reihe veröffentlichen, bis es für 1.0
+bereit ist, und die Unterschiede zwischen den Versionen können
+beliebig groß sein. Micro-Nummern in einer pre-1.0 Version sind
+optional. Abhängig von der Natur Ihres Projekts, und die Unterschiede
+zwischen den Versionen, werden Sie es nützlich finden, 0.1.0, 0.1.1,
+usw. zu haben oder nicht. Konventionen für pre-1.0 Versionsnummern sind
+relativ locker, hauptsächlich deshalb, weil Leute verstehen, dass 
+strenge Einschränkungen für Kompatibilität die frühe Entwicklung zu 
+sehr behindern würde, und weil Personen die ein Produkte in ihren
+frühen Phasen benutzen, sowieso etwas nachsichtig sind.</para>
+
+<para>Denken Sie daran, dass all diese Vorschriften nur für dieses
+bestimmte Drei-Komponenten-System gelten. Ihr Projekt kann sich ganz
+leicht ein anderes Drei-Komponenten-System ausdenken, oder sich gar 
+entscheiden, dass es keine derart feine Granularität benötigt und
+statt dessen ein Zwei-Komponenten-System verwenden. Das wichtige ist,
+sich frühzeitig zu entscheiden, genau zu veröffentlichen, was die
+Komponenten bedeuten, und dabei zu bleiben.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-even-odd-strategy">
+<title>Die Gerade/Ungerade-Strategie</title>
+
+<para>Manche Projekte benutzen die Parität der Minor-Nummer,
+um auf die Stabilität der Software zu deuten: gerade bedeutet stabil,
+ungerade bedeutet instabil. Das gilt nur für die Minor-Nummer, nicht
+für die Major- oder Micro-Nummern. Eine Erhöhung in der Micro-Nummer
+deutet immer noch auf Fehlerbehebungen hin (keine neuen Funktionen),
+und eine Erhöhung der Major-Nummer deutet auf große Änderungen,
+neue Funktionen, usw. hin.</para>
+
+<para>Der Vorteil des Gerade/Ungerade-Systems, welches unter anderem vom
+Linux-Kernel-Projekt verwendet wurde ist, dass es eine Möglichkeit
+bietet, neue Funktionen zum Test anzubieten, ohne die Nutzer in
+Produktivsystemen möglicherweise instabilen Code auszusetzen. Die Leute
+können durch die Zahlen erkennen, dass es sicher ist, "2.4.21" auf ihren
+im Einsatz befindliche Webserver zu installieren, aber dass "2.5.1"
+besser für Experimente auf dem heimischen Rechner beschränkt bleiben
+sollten. Das Entwicklerteam befasst sich mit den Bug-Meldungen
+die aus der instabilen (ungerade numerierten) Reihe kommen, und wenn
+sich die Sache nach ein paar Micro-Versionen langsam legt, erhöhen sie
+die Minor-Nummer (wodurch sie gerade gemacht wird), setzen die 
+Micro-Nummer wieder auf "0", und veröffentlichen ein vermutlich stabiles 
+Paket.</para>
+
+<para>Dieses System bewahrt die vorhin erwähnten Kompatibilitsrichtlinien,
+oder tritt zumindest nicht im Konflikt ihnen. Es fügt der 
+Minor-Nummer lediglich ein paar Informationen hinzu. Das zwingt die 
+Minor-Nummer dazu ungefähr doppelt so oft erhöht zu werden, als das sonst
+der Fall wäre, was aber kein großer schaden ist. Das 
+Gerade/Ungerade-System
+ist wahrscheinlich am besten für Projekte geeignet, die sehr
+lange Entwicklungszyklen haben, und von Natur aus einen großen Anteil
+konservativer Nutzer haben, die mehr Wert auf Stabilität als auf
+neue Funktionen setzen. Es ist jedoch nicht die einzige Möglichkeit,
+neue Funktionen im Feld getestet zu bekommen. <xref
+linkend="stabilizing-a-release"/><phrase output="printed"> später in
+diesem Kapitel</phrase> beschreibt eine weitere, vielleicht 
+gebräuchlichere Art, potentiell instabilen Code zu veröffentlichen,
+der in einer Weise gekennzeichnet ist, die den Leuten bereits aus dem 
+Namen der Version eine Vorstellung von dem mit ihr verbundenen 
+Risiko/Nutzen-Kompromiss vermittelt.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-branches">
+<title>Versionszweige</title>
+
+<para>Aus der Sicht eines Entwicklers, ist ein freies Software-Projekt,
+in einem ständigen Zustand der Veröffentlichung. Entwickler betreiben
+für gewöhnlich zu jeder Zeit die aktuellste Version, da sie Fehler
+entdecken wollen, und da sie das Projekt dicht genug verfolgen, um von
+derzeit instabilen Bereichen des Funktionsumfangs fern zu bleiben. Sie
+aktualisieren ihre Kopie der Software für gewöhnlich jeden tag, 
+manchmal öfter, und wenn Sie eine Änderung abschicken, können sie
+halbwegs erwarten, dass jeder andere Entwickler es innerhalb von 24
+Stunden haben wird.</para>
+
+<para>Wie sollte das Projekt dann eine formale Veröffentlichung machen?
+Sollte es einfach eine Momentaufnahme vom derzeitigen Zustand des
+Quellcode-Baums machen, und es der Welt als, sagen wir, "3.5.0" 
+überreichen? Die Vernunft sagt nein. Erstens gäbe es möglicherweise
+keinen einzelnen Zeitpunkt, bei dem der ganze Quellcode-Baum bereit
+für eine neue Version ist. Neu angefangene Funktionen könnten an
+verschiedenen Stellen, in verschiedenen Zuständen der
+Fertigstellung herumliegen. Jemand könnte eine riesige Änderung
+committed haben, um einen Fehler zu beheben, die Änderung könnte aber
+kontrovers sein und zu der Zeit debattiert werden indem die 
+Momentaufnahme gemacht wird. Wenn das der Fall ist, würde es nicht so
+einfach funktionieren, die Momentaufnahme zu verzögern, bis die
+Debatte beendet ist, da eine andere, nicht im Zusammenhang stehende
+Debatte in der Zwischenzeit anfangen könnte, und dann müssten Sie
+wieder <emphasis>darauf</emphasis> warten. Man kann nicht garantieren,
+dass dieser Ablauf aufhören wird.</para>
+
+<para>In jedem Fall, würde die Nutzung von Momentaufnahmen des 
+kompletten Quellcode-Baums als eine neue Version, die fortlaufenden
+Entwicklung behindern, selbst wenn der Quellcode in einem für die
+Veröffentlichung geeigneten Zustand gebracht werden könnte. Sagen wir,
+dass diese Momentaufnahme "3.5.0" sein wird; wäre die nächste Version
+vermutlich Bugfixes beinhalten, die in 3.5.0 gefunden wurden. Wenn
+beide Momentaufnahmen aber vom gleichen Baum sein sollen, was sollen
+die Entwickler in der Zeit zwischen den beiden Versionen machen? Sie
+können keine neuen Funktionen hinzufügen; dass verbieten die
+Kompatibilitätsrichtlinien. Aber nicht alle werden enthusiastisch
+darüber sein Fehler in dem Code von 3.5.0 zu beheben. Manche werden
+neue Funktionen haben, die sie versuchen fertigzustellen, und würden
+wütend werden, wenn sie dazu gezwungen wären zu wählen zwischen,
+untätig herum zu sitzen oder an Sachen zu arbeiten, die sie nicht
+interessieren, nur weil der Ablauf des Projekts beim Erstellen einer
+neuen Version erfordert, dass die Entwicklung an dem Codebaum
+unnatürlich ruhig bleibt.</para>
+
+<para>Die Lösung für diese Probleme ist, immer einen
+<firstterm>Versionszweig</firstterm> (en. release branch) zu benutzen.
+Ein Versionszweig ist lediglich ein Zweig in dem
+Versionsverwaltungssystem, (siehe <xref
+linkend="vc-vocabulary-branch"/>), bei dem der Code, welcher für diese
+Release bestimmt ist, von der Hauptentwicklung getrennt
+werden kann. Diese Zweige sind sicherlich kein originäres Konzept
+freier Software; viele kommerzielle Unternehmen, die Software
+entwickeln, benutzen sie auch. In kommerziellen Umgebungen werden
+Versionszweige jedoch manchmal als ein Luxus betrachtet &ndash; eine
+Art formales "optimales Verfahren" (en. "best practice") welches unter
+dem Druck eines wichtigen Termins entfallen kann, während alle 
+Entwickler sich dabei beeilen, den Hauptast stabil zu bekommen.</para>
+
+<para>Versionszweige sind jedoch bei Open-Source-Projekten so ziemlich
+eine Notwendigkeit. Ich habe Projekte gesehen, die neue Versionen ohne
+sie machen, das Ergebnis war jedoch immer, dass einige Entwickler 
+untätig herumsaßen, während einige andere &ndash; für gewöhnlich eine
+Minderheit &ndash; daran arbeiten die Version fertigzustellen. Dieses
+Ergebnis ist gewöhnlicherweise auf verschieden Arten schlecht. Erstens,
+verlangsamt sich die Geschwindigkeit der Entwicklung insgesamt. 
+Zweitens, ist die neue Version von einer schlechteren Qualität als es
+hätte sein müssen, da nur wenige daran gearbeitet haben, und die 
+hatten es eilig, damit alle anderen wieder an die Arbeit gehen konnten.
+Drittens, spaltet es psychologisch die Entwicklermannschaft, indem es
+eine Situation aufbaut, bei dem verschiedene Arten der Arbeit sich
+gegenseitig unnötig stören. Die Entwickler die untätig herumsitzen,
+wären wahrscheinlich froh <emphasis>etwas</emphasis> von ihrer
+Aufmerksamkeit zu dem Versionszweig beizutragen, solange es eine
+Wahl bleibt, die sie abhängig von ihren Interessen und Zeitplänen
+treffen könnten. Ohne den Zweig, beschränkt sich ihre Auswahl jedoch
+auf "Nehme ich heute an dem Projekt teil oder nicht?" anstatt "Arbeite
+ich heute an der neuen Version, oder an der neuen Funktion in dem
+Hauptzweig, dass ich Entwickele?".</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-branch-mechanics">
+<title>Mechanik von Versionszweigen</title>
+
+<para>Die genaue Mechanik der Erstellung eines Versionszweiges hängt
+natürlich von Ihrem Versionsverwaltungssystem ab, die allgemeinen
+Konzepte sind aber für die meisten Systemen gleich. Ein Zweig sprießt
+für gewöhnlich aus einem anderen Zweig under dem Stamm. Traditionell,
+wird die Entwicklung in dem Stamm betrieben, ungestört von den
+Einschränkungen einer neuen Version. Der erste Zweig, welcher zu der
+Version "1.0" führt, sprießt vom Stamm ab. Bei CVS sähe der Befehl
+für einen Zweig ungefähr wie folgt aus:</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b VERSION_1_0_X
+</screen>
+
+<para>Oder in Subversion, wie folgt:</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
+</screen>
+
+<para>(All diese Beispiele gehen von dem Drei-Komponenten-System für
+die Nummerierung der Version aus. Obwohl ich nicht die genauen Befehle
+für jedes Versionsverwaltungssystem geben kann, sind hier Beispiel für
+CVS und Subversion und ich hoffe, dass die entsprechenden Befehle von
+den beiden abgeleitet werden können.)</para>
+
+<para>Beachten Sie, dass wir den Zweig "1.0.x" (mit dem Buchstaben "x")
+anstatt "1.0.0" erzeugt haben. Das liegt daran, dass die selbe 
+Minor-Reihe 
+&ndash; d.h. der selbe Ast &ndash; für alle Micro-Versionen in der
+Reihe benutzt werden wird. Der eigentliche Vorgang, den Zweig für die
+Veröffentlichung stabil zu machen, wird in <xref
+linkend="stabilizing-a-release"/><phrase output="printed"> später in
+diesem Kapitel</phrase> behandelt. Hier geht es nur um die
+Wechselwirkung zwischen dem Versionsverwaltungssystem und dem Ablauf
+beim Erstellen der neuen Version. Sobald der Versionszweig in einen
+stabilen Zustand gebracht wurde und bereit ist, wird es Zeit, eine
+Momentaufnahme von dem Zweig zu machen:</para>
+
+<screen>
+$ cd VERSION_1_0_X-working-copy
+$ cvs tag VERSION_1_0_0
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
+</screen>
+
+<para>Dieses Tag repräsentiert jetzt genau den Zustand, in dem der
+Quellcode des Projekts war bei der Version 1.0.0 (das ist nützlich, 
+falls Sie je eine ältere Version brauchen, nachdem die veröffentlichten
+Pakete nicht mehr zur Verfügung stehen). Die nächste Micro-Version in
+der selben Reihe, wird gleichermaßen in dem 1.0.x Zweig vorbereitet, und
+wenn es bereit ist, wird ein Tag für 1.0.1. gemacht. Gleiches gilt für
+1.0.2, usw. Wenn es Zeit wird, über eine neue 1.1.x-Version nachzudenken,
+erzeugen Sie einen neuen Zweig vom Stamm:</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b VERSION_1_1_X
+</screen>
+
+<para>oder</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
+</screen>
+
+<para>Die Wartung kann parallel dazu in den Versionen 1.0.x und 1.1.x,
+weitergehen, und neue Versionen können in beiden Reihen unabhängig von
+einander veröffentlicht werden. Es ist sogar nicht einmal ungewöhnlich
+zwei Versionen aus verschiedenen Reihen zur gleichen Zeit zu 
+veröffentlichen. Die ältere Reihe wird für die konservativeren Server
+Administratoren empfohlen, die vielleicht nicht den großen Sprung nach
+(sagen wir) 1.1 machen wollen, ohne sorgfältige Vorbereitung. In der
+Zwischenzeit, nehmen die eher abenteuerlustigen Personen die neuste
+Version der höchsten Reihe, um sicher zu sein, dass sie all die neusten
+Funktionen bekommen, selbst mit dem Risiko einer höheren Instabilität.
+</para>
+
+</sect2>
+
+<para>Das ist natürlich nicht die einzige Strategie für neue 
+Versionszweige. Unter manchen Umständen mag es nicht einmal die beste
+sein, obwohl es für die Projekte mit denen ich zu tun hatte ziemlich
+gut funktioniert hat. Benutzen Sie irgend eine Strategie die zu
+funktionieren scheint, bedenken Sie aber die wichtigsten Punkte: Der
+Sinn eines Versionszweiges ist, die Arbeit an der neuen Version von den
+Schwankungen der täglichen Entwicklung zu trennen, und dem Projekt eine
+Physikalische Entität zu geben, um den es die Abläufe bei der
+Veröffentlichung organisieren kann. Diese Abläufe werden im nächsten
+Abschnitt detailliert beschrieben.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="stabilizing-a-release">
+<title>Stabilisierung einer neuen Version</title>
+
+<para><firstterm>Stabilisierung</firstterm> ist der Vorgang, den Zweig
+einer neue Version in einem Zustand zu bringen, der für die
+Veröffentlichung geeignet ist; mit anderen Worten, zu entscheiden,
+welche Änderungen in der Version sein werden, welche nicht, und den
+Inhalt vom Zweig entsprechend zu gestalten.</para>
+
+<para>Es gibt eine menge möglichen Kummer in diesem Wort "entscheiden".
+Der Ansturm neuer Funktionen in der letzten Minute ist ein bekanntes
+Phänomen bei gemeinschaftlichen Software-Projekten: Sobald Entwickler
+sehen, dass eine neue Version gleich gemacht wird, beeilen sie sich
+ihre derzeitigen Änderungen fertig zu bekommen, um den Zug nicht zu
+verpassen. Das ist natürlich genau das Gegenteil, von dem was Sie
+zum Zeitpunkt einer neuen Version haben wollen. Es wäre viel besser,
+wenn Leute in einem gemütlichen Tempo an neue Funktionen arbeiten,
+und sich nicht all zu viele sorgen darüber machen ob Ihre Änderungen
+es in diese Version oder die nächste schaffen. Je mehr Änderungen man
+versucht in eine neue Version in der letzten Minute zu quetschen, 
+desto mehr Code wird instabil gemacht, und (für gewöhnlich) desto mehr
+neue Bugs werden erzeugt.</para>
+
+<para>Die meisten Programmierer sind sich theoretisch über grobe
+Kriterien einig, welche Änderungen in eine Versionsreihe hereingelassen
+werden sollten, währen der Stabilisierungsphase. Offensichtlich, können
+Fixes für schwerwiegende Bugs reingehen, insbesondere wenn es keine
+Möglichkeit gibt sie zu umgehen. Aktualisierungen der Dokumentation 
+sind in Ordnung, genau so wie der Text von Fehlermeldungen (außer wenn
+man sie als einen Teil der Schnittstelle betrachtet und stabil bleiben
+müssen). Viele Projekte erlauben also bestimmte Arten risikoarmer
+nicht grundsätzlicher Änderungen während der Stabilisierungsphase
+einzubinden, und können formale Richtlinien darüber haben, um das 
+Risiko einzustufen. Keine Maß der Formalisierung kann jedoch die
+Notwendigkeit menschlichen Urteils obsolet machen. Es wird immer
+Fälle geben, bei dem das Projekt eine Entscheidung treffen muss, ob
+eine bestimmte Änderung in eine neue Version gehen kann. Die Gefahr
+ist, dass da jede Person ihre eigen Lieblingsängerungen aufgenommen
+haben will, wird es eine Menge Leute geben, die motiviert sind
+Änderungen zu erlauben, und nicht genügend die motiviert sind, sie
+zu verhindern.</para>
+
+<para>Der Ablauf, eine neue Version zu stabilisieren dreht sich deshalb
+größtenteils darum, "nein" zu sagen. Der Trick insbesondere für 
+Open-Source-Projekte ist, sich Wege auszudenken "nein" zu sagen, 
+die nicht mit allzu vielen verletzten Gefühlen oder enttäuschten 
+Entwicklern enden und die es dennoch ermöglichen, dass Änderungen
+in neue Versionen aufgenommen werden, die es verdienen.
+Es gibt viele verschiedene Wege das zu erreichen. 
+Es ist ziemlich leicht Systeme zu entwerfen, welche
+diesen Kriterien gerecht werden, nachdem sich das Team auf sie
+als die wichtigsten Kriterien konzentriert hat. Ich werde hier knapp
+zwei der verbreitetsten Systeme beschreiben, die an den extremen Enden
+des Spektrums liegen, lassen Sie Ihr Projekt hiervon aber nicht abhalten,
+kreativ zu sein. Eine Menge anderer Reglungen sind möglich;
+diese sind lediglich zwei von denen ich gesehen habe, dass sie in der
+Praxis funktionieren.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-owner">
+<title>Diktatur durch den Versionsherrn</title>
+<!-- "Versionsherr" ist eine ziemlich extreme Wortschöpfung. -->
+
+<para>Die Gruppe einigt sich darauf, dass eine Person der 
+<firstterm>Versionsherr </firstterm> (en. release owner) sein wird.
+Diese Person hat das letzte Wort darüber, welche Änderungen es in die
+neue Version schaffen. Es ist natürlich normal und wird erwartet, dass
+es Diskussionen und Auseinandersetzungen gibt, letztendlich muss die
+Gruppe der Person die nötige Autorität geben um endgültige 
+Entscheidungen zu treffen. Damit dieses System funktioniert, ist es
+nötig, jemand zu wählen, der die nötige technische Kompetenz hat um
+alle Änderungen zu verstehen, und den sozialen Stand und Fähigkeiten
+im Umgang mit Menschen um die Diskussionen zu führen, die einer neuen
+Version vorausgehen, ohne zu viele verletzte Gefühle zu verursachen.
+</para>
+
+<para>Ein häufiges Muster ist, dass der Versionsherr sagt "Ich denke
+nicht, dass es irgend etwas an dieser Änderung auszusetzen gibt, aber
+wir haben noch nicht genug Zeit gehabt, um es zu testen, also sollte
+es nicht in diese Version gehen". Es hilft eine Menge wenn der
+Versionsherr ein breites technisches Wissen über das Projekt hat, und
+Gründe angeben kann, warum eine Änderung möglicherweise 
+destabilisierend sein könnte (zum Beispiel seine Wechselwirkung mit
+andern Teilen der Software oder Bedenken im Bezug auf die 
+Kompatibilität). Manche werden nach einer Rechtfertigung für solche
+Entscheidungen fragen, oder argumentieren, dass eine Änderung nicht so
+gefährlich ist wie sie aussieht. Diese Unterhaltungen müssen nicht
+konfrontierend sein, so lange der Versionsherr alle Argumente objektiv
+in Erwägung ziehen kann, und nicht aus reflex auf seinen Standpunkt
+beharrt.</para>
+
+<para>Beachten Sie, dass der Versionsherr nicht die gleiche Person sein
+muss, wie der Projektleiter (bei solchen Fällen wo es überhaupt einen
+Projektleiter gibt; siehe <xref
+linkend="benevolent-dictator"/><phrase output="printed"> im Kapitel
+<xref linkend="social-infrastructure"/></phrase>). Manchmal ist es
+sogar gut, wenn sie <emphasis>nicht</emphasis> ein und die selbe
+Person sind. Die Fähigkeiten die einen gute Projektleiter ausmachen,
+sind nicht unbedingt die gleichen, die einen guten Versionsherr
+ausmachen. Bei etwas derart wichtigem wie die Veröffentlichung neuer
+Versionen, kann es klug sein, jemanden zu haben, der ein Gegengewicht
+zu dem Urteil vom Projektleiter bildet.</para>
+
+<para>Vergleichen Sie die Rolle des Versionsverwalters mit der weniger
+diktatorischen Rolle beschrieben in <xref linkend="release-manager"/>
+<phrase output="printed"> später in diesem Kapitel</phrase>.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-voting">
+<title>Abstimmung über Änderungen</title>
+
+<para>Bei dem anderen extrem, von der Diktatur durch den Versionsherr,
+können Entwickler einfach darüber abstimmen, welche Änderungen in einer
+neun Version aufgenommen werden. Da die wichtigste Aufgabe bei der
+stabilisierung einer neun Version der <emphasis>Ausschluss</emphasis>
+von Änderungen ist, ist es wichtig, das Wahlsystem so zu gestalten,
+dass eine Änderung in eine Version zu bekommen die Zustimmung mehrerer
+Entwickler bedarf. Eine Änderung aufzunehmen, sollte mehr als eine
+einfache Mehrheit erfordern (siehe <xref linkend="electorate"/><phrase
+output="printed"> im Kapitel <xref linkend="social-infrastructure"/>
+</phrase>). Andererseits würde eine Stimme für eine Änderung und keine
+dagegen ausreichen, es in die Version zu bekommen und eine unglückliche
+Dynamik würde einsetzen, bei dem jeder Entwickler für seine eigenen
+Änderungen stimmen würde, jedoch widerwillig gegen die Änderungen
+anderer stimmen würde, aus Angst vor einer möglichen Vergeltung. Um das
+zu vermeiden, sollte das System derart ausgelegt sein das Untergruppen
+von Entwickler zusammen agieren müssen um irgend eine Änderung in eine
+Version zu bekommen. Das bedeutet nicht nur, dass mehr Personen jede
+Änderung überprüfen, es macht auch jeden Entwickler weniger zögerlich
+gegen eine Änderung zu stimmen, da kein bestimmter Entwicklern der
+dafür gestimmt hat, seine Gegenstimme es als einen persönlichen Angriff
+betrachten würde. Je mehr Leute beteiligt sind, desto mehr dreht sich 
+die Entscheidung um die Änderung und weniger um die Individuen.</para>
+
+<para>Das System welches wir beim Subversion-Projekt benutzen, scheint
+ein gutes Gleichgewicht getroffen zu haben, also werde ich es hier
+empfehlen. Damit eine Änderung auf einen Versionszweig angewandt werden
+kann, müssen mindestens drei Entwickler dafür stimmen, und keiner 
+dagegen. Eine einzige Gegenstimme reicht aus, um zu verhindern, dass 
+eine Änderung angewandt wird; in dem Kontext einer neuen Version heißt
+das also, dass eine Gegenstimme gleichbedeutend mit einem Veto ist
+(siehe <xref linkend="veto"/>). Jede solche Gegenstimme muss natürlich
+von einer Rechtfertigung begleitet werden, und theoretisch kann das
+Veto aufgehoben werden, wenn genügend der Meinung sind, dass 
+unvernünftig ist und eine besondere Abstimmung darüber erzwingen. In
+der Praxis, ist das nie vorgekommen und ich erwarte nicht, dass es das
+jemals wird. Bei einer neuen Version sind sowieso alle schon konservativ
+eingestellt, und wenn jemand es als dringend genug erachtet, ein Veto
+einzulegen, dann gibt es für gewöhnlich einen guten Grund dafür.</para>
+
+<para>Da da der Ablauf eine neue Version zu erstellen, absichtlich eine
+konservative Voreingenommenheit hat, sind die Rechtfertigungen die bei
+Vetos angeboten werden manchmal eher formal als technisch orientiert.
+Eine Person kann zum Beispiel das Gefühl haben, dass eine Änderung gut
+geschrieben ist und wahrscheinlich keine neuen Fehler verursachen wird,
+aber gegen die Aufnahme der Änderung in einer micro Version stimmt,
+einfach weil es zu groß ist &ndash; vielleicht fügt es eine neue Funktion
+hinzu, oder auf irgend eine subtile Art, die Kompatibilitätsrichtlinien
+nicht befolgt. Ich habe gelegentlich sogar Entwickler gesehen, die ein
+Veto eingelegt haben, einfach nur aus einem Bauchgefühl heraus, dass
+die Änderung mehr getestet werden musste, auch wenn sie bei der
+Überprüfung keine Fehler entdecken konnten. Leute murrten ein wenig,
+aber die Vetos blieben in Kraft, und die Änderung wurde bei der Version
+nicht aufgenommen (ich kann mich allerdings nicht daran erinnern ob bei
+den weiteren Tests irgend welche Fehler gefunden wurden oder nicht).</para>
+
+<sect3 id="release-stabilization-collaboration">
+<title>Gemeinschaftlichen Stabilisierung neuer Versionen</title>
+
+<para>Wenn Ihr Projekt sich für ein System entscheidet bei dem über
+Änderungen abgestimmt wird, ist es unabdingbar, dass die physikalischen
+Mechanismen, die Wahl zusammen zu stellen und Stimmen, so bequem wie
+möglich ist. Obwohl es eine menge Open-Source-Software für 
+elektronische Wahlen zur Verfügung steht, ist in der Praxis, am
+einfachsten, eine Textdatei im Versionszweig zu erstellen, mit dem
+Namen <filename>STATUS</filename> oder <filename>VOTES</filename> oder
+etwas ähnliches. Diese Datei listet jede vorgeschlagene Änderung auf
+ &ndash; alle Entwickler können eine neue Änderung für die Aufnahme
+vorschlagen &ndash; zusammen mit allen Stimmen dafür oder dagegen, mit
+zusätzlichen Anmerkungen oder Kommentare. (Eine Änderung vorzuschlagen
+bedeutet im übrigen nicht unbedingt dafür zu stimmen, auch wenn die
+beiden oftmals hand in hand gehen.) Ein Eintrag in einer solchen Datei,
+könnte wie folgt aussehen:</para>
+
+<screen>
+* r2401 (Meldung #49)
+  Verhindern, dass der client/server handshake zwei mal durchgeführt
+  wird.
+  
+  Rechtfertigung:
+    Vermeidet überflüssigen Netzwerkverkehr; kleine Änderung und leicht
+    zu überprüfen.
+  Anmerkungen:
+    Wurde in http://.../mailing-lists/message-7777.html und anderen
+    Nachrichten in dem Thread besprochen.
+  Stimmen:
+    +1: jsmith, kimf
+    -1: tmartin (Bricht die Kompatibilität mit manchen pre-1.0 Server;
+                 zugegeben, diese Server sind Buggy, aber warum sollen
+                 wird inkompatibel sein, wenn es nicht sein muss?)
+</screen>
+
+<para>In diesem Fall, erhielt die Änderung zwei positive Stimmen, 
+wurde aber durch den Veto von tmartin aufgehalten, der den Grund für
+seinen Einspruch in Klammern angegeben hat. Das genau Format von diesem
+Eintrag macht keinen Unterschied; egal worauf sich Ihr Projekt einigt,
+es ist in Ordnung &ndash; vielleicht sollte die Erklärung von tmartin für
+seinen Einspruch in den "Anmerkungen:" Bereich gehen, oder vielleicht
+sollte die Beschreibung der Änderung eine "Beschreibung:" Überschrift 
+bekommen um den anderen Abschnitten zu entsprechen. Dass wichtige ist,
+dass alle Information, die nötig ist, um die Änderung zu evaluieren
+zur Verfügung stehen und dass die Mechanismen um Stimmen abzugeben, so
+einfach wie möglich sind. Die vorgeschlagene Änderung wird anhand 
+seiner Revisionsnummer im Projektarchiv gekennzeichnet (in diesem
+Fall eine einzige Revision, r2401, obwohl eine vorgeschlagene Änderung
+genau so gut aus mehreren Änderungen bestehen könnte). Von der Revision
+wird angenommen, dass sie sich auf den Stamm bezieht; wenn die Änderung
+bereits im Versionszweig wäre, gäbe es keinen Grund darüber 
+abzustimmen. Wenn Ihr Versionsverwaltungssystem keine offensichtliche
+Syntax hat, um auf einzelne Revisionen zu verweisen, sollte das Projekt
+eins erfinden. Damit Abstimmungen durchgeführt werden können, müssen
+Änderungen die in Frage stehen, eindeutig zu identifizieren sein.
+</para>
+
+<para>Diejenigen die einen Vorschlag einreichen, oder dafür abstimmen,
+sind dafür verantwortlich, dass es sauber auf den Versionszweig
+angewandt werden kann, d.h. ohne Konflikte (siehe <xref 
+linkend="vc-vocabulary-conflict"/>) angewandt werden kann. Wenn es
+Konflikte gibt, sollte der Eintrag entweder auf einen angepassten
+Zweig verweisen, auf dem sich der Patch sauber anwenden lässt, oder
+auf einen temporären Zweig welcher eine angepasste Version der
+Änderung beinhaltet, zum Beispiel:</para>
+
+<screen>
+* r13222, r13223, r13232
+  Überarbeitung vom auto-merge Algorithmus in libsvn_fs_fs
+  Rechtfertigung:
+    Nicht akzeptable Performance (>50 Minuter für einen kleinen 
+    commit) bei einem Projektarchiv mit 300,000 Revisionen
+  Zweig:
+    1.1.x-r13222@13517
+  Stimmen:
+    +1: epg, ghudson
+</screen>
+
+<para>Dieses Beispiel stammt aus dem echten Leben; es stammt aus der
+<filename>STATUS</filename> Datei für Version 1.1.4 von Subversion.
+Beachten Sie, wie es die ursprünglichen Revisionen als kanonische
+Verweise auf die Änderung benutzt obwohl es auch einen Zweig gibt,
+indem die aufgrund von Konflikten angepasste Version der Änderung 
+enthalten ist (der Zweig kombiniert auch die drei Revisionen im
+Stamm zu einer, r13517, um dem Merge zum Zweig der neuen Version
+zu erleichtern, sollte ihm zugestimmt werden). Die ursprünglichen
+Revisionen werden angegeben, da sie trotzdem noch am einfachsten zu
+überprüfen sind, da sie die ursprünglichen commit Kommentare enthalten.
+Der vorübergehende Zweig hätte diese Kommentar nicht; um eine
+Verdopplung der Informationen zu vermeiden (siehe <xref
+linkend="vc-singularity"/><phrase output="printed"> im Kapitel
+<xref linkend="technical-infrastructure"/></phrase>), der Commit
+Kommentar für r13517 einfach sagen "Anpassung von r13222, r13223,
+und r13232 für die Portierung auf den 1.1.x Zweig." Alle anderen
+Information über die Änderung kann bei ihren ursprünglichen
+Revisionen gefunden werden.</para>
+
+</sect3>
+
+<sect3 id="release-manager">
+<title>Release-Verwalter</title>
+
+<para>Der eigentliche Merge-Vorgang (siehe <xref 
+linkend="vc-vocabulary-merge"/>) angenommener Änderungen in den
+Versionszweig kann von jedem Entwickler durchgeführt werden. Es muss
+keine bestimmte Person geben, deren Aufgabe es ist, die Änderungen zu
+mergen; wenn es eine große Menge von Änderungen gibt, kann es besser sein, die
+Bürde zu verteilen.</para>
+
+<para>Obwohl sowohl Wahlen als auch die Merges auf eine 
+dezentralisierte Art passieren, gibt es in der Praxis ein oder zwei
+Personen welche die Veröffentlichung vorantreiben. Diese Rolle wird
+manchmal als <firstterm>Releaseverwalter</firstterm> (en. release
+manager) bezeichnet, sie ist aber sehr verschieden von einem
+Versionsherr (siehe <xref linkend="release-owner"/><phrase
+output="printed"> früher in diesem Kapitel</phrase>) der das letzte
+Wort über die Änderungen hat. Versionsverwalter halten einen
+Überblick darüber, wie viele Änderungen derzeit in Betracht gezogen
+werden, wie vielen zugestimmt wurde, und wie vielen wahrscheinlich
+zugestimmt wird, usw. Wenn sie das Gefühl bekommen, dass wichtige
+Änderungen nicht die nötige Aufmerksamkeit bekommen, und aus einer
+Version gelassen werden könnten, aufgrund von Stimmenmangel, werden
+sie sanft andere Entwickler nerven, damit sie die Änderungen 
+überprüfen und darüber abzustimmen. Wenn ein Satz von Änderungen
+Zustimmung erhalten haben, werden diese Personen es oft auf sich
+nehmen, sie in den Versionszweig aufzunehmen; es ist in Ordnung wenn
+andere ihnen die Aufgabe überlassen, so lange jeder versteht, dass sie
+keiner Obligation unterliegen, die ganze Arbeit zu übernehmen, es sei
+denn sie haben sich explizit dazu verpflichtet. Wenn die Zeit kommt,
+die neue Version zu veröffentlichen (siehe <xref 
+linkend="testing-and-releasing"/><phrase output="printed"> später
+in diesem Kapitel</phrase>), kümmern sich die Versionsverwalter auch um
+die logistische Arbeit, die Erstellung der Pakete, das sammeln der 
+digitalen Signaturen, das Hochladen der Pakete, und die öffentliche
+Bekanntgabe.</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="packaging">
+<title>Erstellung der Pakete</title>
+
+<para>Die übliche Art, freie Software zu verteilen, ist in Form von
+Quellcode. Das gilt unabhängig davon, ob die Software normalerweise mit
+dem Quellcode betrieben wird (d.h. interpretiert werden kann, wie Perl,
+Python, PHP, usw.) oder vorher kompiliert werden muss (wie C,
+C++, Java, usw.). Bei kompilierter Software, werden die meisten Nutzer
+nicht unbedingt selbst die Quellen kompilieren, sondern
+vorkompilierte binären Paketen installieren wollen
+(siehe <xref linkend="binary-packages"/><phrase output="printed">
+später in diesem Kapitel</phrase>). Diese binären Pakete leiten sich
+jedoch trotzdem von der ursprünglichen Quellcode-Distribution ab. Der
+Sinn der Quellpakete ist, die neue Version eindeutig zu definieren.
+Wenn das Projekt "Scanley&nbsp;2.5.0" veröffentlicht, bedeutet das
+genau genommen, "Die Quellcode-Dateien, die wenn sie kompiliert
+(falls nötig) und installiert wurden, Scanley 2.5.0 erzeugen".</para>
+
+<para>Es gibt einen ziemlich strikten Standard darüber, wie 
+Quellcode-Distributionen auszusehen haben. Man wird ab und zu Abweichungen davon
+sehen, sie sind aber die Ausnahme, nicht die Regel. Wenn es keinen 
+zwingenden Grund gibt es anders zu machen, sollte sich Ihr Projekt auch
+an diesen Standard halten.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-format">
+<title>Formate</title>
+
+<para>Der Quellcode sollte in den Standardformaten für die Übertragung
+von Verzeichnissen verteilt werden. Bei Unix und Unix-ähnlichen
+Betriebssystemen, ist die Konvention, das TAR Format zu benutzen, 
+komprimiert mit <command>compress</command>, <command>gzip</command>,
+<command>bzip</command> oder <command>bzip2</command>. Bei MS Windows,
+ist die Standard-Methode für die Veröffentlichung von Verzeichnissen
+das <firstterm>zip</firstterm> Format, welches zufällig auch 
+komprimiert, also gibt es keinen Grund es zu komprimieren, nach der
+Erstellung.</para>
+
+   <sidebar id="packaging-tar">
+   <title>TAR-Dateien</title>
+
+   <para><firstterm>TAR</firstterm> steht für "Tape&nbsp;ARchive",
+   da das TAR Format ein Verzeichnis als einen linearen Datenstrom
+   repräsentiert, ist es ideal für die Speicherung auf Datenbändern.
+   Die gleiche Eigenschaft, macht es zum Standard für die Verteilung
+   von Verzeichnissen als eine einzige Datei. Komprimierte TAR Dateien
+   (auch<firstterm>tarballs</firstterm>) ist relativ einfach. Auf
+   manchen Systemen, kann der <command>tar</command> Befehl von sich
+   aus ein komprimiertes Archiv erstellen; auf anderen, wird eine
+   separate Anwendung benutzt.</para>
+
+   </sidebar>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-name-and-layout">
+<title>Name und Aufbau</title>
+
+<para>Der Name des Pakets sollte aus dem Namen der Software bestehen,
+gefolgt von der Versionsnummer und den Dateiendungen für die 
+entsprechenden Archiv typen. Scanley 2.5.0, als Paket für Unix mit der
+GNU Zip (gzip) Kompression, würde zum Beispiel so aussehen:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.gz</literallayout>
+</informalexample>
+
+<para>oder für Windows mit zip Kompression:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<para>Beide dieser Archive erzeugen, wenn man sie entpackt, eine 
+einziges neues Verzeichnis namens <filename>scanley-2.5.0</filename>
+in dem derzeitigen Ordner. Im neuen Verzeichnis, sollten die Dateien
+des Quellcodes so ausgelegt sein, welches für die Kompilierung (wenn
+die Kompilierung nötig ist) und installation bereit ist. In der
+obersten Verzeichnisebene, sollte es eine Klartext-Datei mit dem Namen
+<filename>README</filename> geben, welches erklärt, was die Software
+macht, was diese Paket ist, und hinweise Auf andere Ressourcen, wie die
+Webseite des Projekts, andere Dateien die von Interesse sind, usw.
+Unter diesen anderen Dateien sollte eine <filename>INSTALL</filename>
+Datei sein, welches Anweisungen gibt, wie man einen Build der Software
+machen kann, und sie installieren kann, für alle Betriebssysteme die es
+unterstützt. Wie in <xref linkend="license-quickstart-applying"/>
+<phrase output="printed"> im Kapitel <xref linkend="getting-started"/>
+</phrase> erwähnt, sollte es auch eine <filename>COPYING</filename> oder
+<filename>LICENSE</filename> Datei geben, welche die Bedingungen 
+enthält, unter denen die Software vertrieben werden kann.</para>
+
+<para>Es sollte auch eine <filename>CHANGES</filename>-Datei geben
+(manchmal <filename>NEWS</filename>) genannt, welches erklärt, was in
+dieser Version neu ist. Die <filename>CHANGES</filename>-Datei listet
+die Änderungen aller Versionen auf, in antichronologischer
+Richtung, sodass die Liste für diese Version in der Datei oben 
+erscheint. Diese Liste zu vervollständigen, ist üblicherweise das 
+Letzte, was auf einem stabilisierenden Versionszweig gemacht wird; 
+manche Projekte schreiben diese Liste in Stücken während sie entwickeln,
+andere bevorzugen es, alles bis zum Schluss aufzusparen, und es dann
+von einer Person schreiben zu lassen, indem Informationen aus den
+Commit-Kommentaren der Versionsverwaltung gesammelt werden. Die Liste
+sieht in etwa so aus:</para>
+
+<screen>
+Version 2.5.0
+(20 Dezember 2004, von /branches/2.5.x)
+http://svn.scanley.org/repos/svn/tags/2.5.0/
+
+ Neue Funktionen, Erweiterungen:
+    * Neue Abfragen mit regulären Ausdrücken (Meldung #53)
+    * Unterstützung für UTF-8- und UTF-16-Dokumente 
+    * Documentation in Polnisch, Russisch, Malaysisch
+    * ...
+
+ Bugfixes:
+    * Bugs in Neuindexierung behoben (Meldung #945)
+    * Einige Abfragefehler behoben (Meldung #815, #1007, #1008)
+    * ...
+</screen>
+
+<para>Die Liste kann so lang wie nötig sein, Sie brauchen sich aber
+nicht darum zu kümmern, dass jeder kleiner Bugfix und jede 
+kleine Funktioserweiterung
+aufgelistet wird. Ihr Sinn ist es einfach, den Nutzern einen Überblick
+zu geben, inwiefern sie davon profitieren würden, auf die neue Version
+zu aktualisieren. Die Änderungsliste wird üblicherweise in der
+Ankündigungs-Mail aufgenommen (siehe <xref
+linkend="testing-and-releasing"/><phrase output="printed"> später in
+diesem Kapitel</phrase>), schreiben Sie sie also mit dem Publikum im
+Hinterkopf.</para>
+
+   <sidebar id="changelog">
+   <title>CHANGES kontra ChangeLog</title>
+   <para>Traditionell, listet eine Datei namens <firstterm>ChangeLog
+   </firstterm> jede Änderung die je an einem Projekt gemach wurde auf,
+    &ndash; das heißt, jeden Commit der in das Versionsverwaltungssystem
+   aufgenommen wurde. Es gibt verschiedene Formate für ChangeLog 
+   Dateien; die Details der Formate sind an dieser Stelle nicht 
+   wichtig, da sie alle die gleichen Informationen beinhalten: Das 
+   Datum der Änderung, sein Autor, und eine kurze Zusammenfassung
+   (oder einfach nur den Commit-Kommentar für diese Änderung).</para>
+
+   <para>Eine <filename>CHANGES</filename> Datei ist anders. Es ist
+   auch eine Liste von Änderungen, aber nur solche, von denen man
+   denkt, dass sie wichtig genug sind, dass ein bestimmtes Publikum sie
+   sieht, und ohne mit Metadaten wie das genau Datum und der Autor.
+   Um Verwirrung zu vermeiden, vertauschen Sie die Begriffe nicht. 
+   Manche Projekte benutzen "NEWS" anstatt von "CHANGES"; obwohl das
+   die mögliche Verwirrung mit "ChangeLog" vermeidet, ist es etwas
+   falsch bezeichnet, da die CHANGES Datei die Änderungs Informationen
+   über alle Versionen enthält, und deshalb eine Menge alte
+   Informationen zusätzlich zu denen ganz oben enthält.</para>
+
+   <para>ChangeLog Dateien mögen sowieso langsam am verschwinden sein.
+   Sie waren zu einer Zeit hilfreich, als CVS die einzige Wahl für die
+   Versionsverwaltung war, weil Daten über Änderungen nicht leicht aus
+   CVS zu bekommen waren. Bei neueren Systemen können die Daten die 
+   ehemals in dem ChangeLog geschrieben wurden, jedoch jederzeit von
+   dem Versionsverwaltungssystem angefordert werden, was es Sinnlos
+   für das Projekt macht, eine Statistik-Datei darüber zu halten &ndash; 
+   es ist sogar mehr als sinnlos, da die ChangeLog-Datei lediglich die 
+   Meldungen, die bereits im Projektarchiv gespeichert sind, duplizieren
+   würde.</para>
+   </sidebar>
+
+<para>Der tatsächliche Aufbau der Quellcode-Dateien sollte der gleiche
+sein, oder zumindest so ähnlich wie möglich zu dem sein, den man aus
+der Versionsverwaltung herunterladen kann. Für gewöhnlich gibt es ein
+paar Unterschiede, zum Beispiel weil das Paket ein paar generierte
+Dateien enthält, die für die Konfiguration und Kompilierung benötigt
+werden (siehe <xref linkend="packaging-build-install"/><phrase 
+output="printed"> später in diesem Kapitel</phrase>), oder weil es
+Software von dritten Parteien enthält, welches nicht von dem
+Projekt gepflegt wird, welches aber benötigt wird und die Benutzer
+wahrscheinlich nicht haben. Aber selbst wenn das Veröffentlichte
+Verzeichnis nicht genau dem Verzeichnis eines Entwicklungszweiges
+in der Versionsverwaltung entspricht, sollte die Distribution selbst,
+eine Arbeitskopie (siehe <xref linkend="vc-vocabulary-working-copy"/>)
+sein. Die Veröffentlichung soll einen statischen Referenzpunkt
+repräsentieren &ndash; eine bestimmte, unveränderliche Konfiguration von
+Quellcode-Dateien. Wenn es eine Arbeitskopie wäre, gäbe es die Gefahr,
+dass der Nutzer es aktualisieren würde, und nachher denken, dass er die
+neue Version hat, während er tatsächlich etwas anderes hat.</para>
+
+<para>Denken Sie daran, dass das Paket das gleiche ist, unabhängig von
+seiner Verpackung. Die Version &ndash; also genau die Entität, die gemeint
+ist, wenn jemand "Scanley&nbsp;2.5.0" &ndash;  sagt, ist das 
+Verzeichnis, welches erstellt wird wenn die zip Datei oder der Tarball
+entpackt wird. Das Projekt könnte also all diese zum Herunterladen
+anbieten:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.bz2
+scanley-2.5.0.tar.gz
+scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<para>...aber der Quellcode-Baum, der beim entpacken entsteht, muss der
+gleiche sein. Dieser Quellcode-Baum ist die veröffentlichte Version;
+die Form in der es heruntergeladen wird, ist lediglich eine Sache der
+Bequemlichkeit. Bestimmte unwesentliche Unterschiede zwischen den
+Quellcode-Paketen sind zulässig: Zum Beispiel sollten in dem Windows
+Paket die Textdateien mit CRLF (Carriage Return und Line Feed) enden,
+während Unix-Pakete nur LF verwenden sollten. Die Verzeichnisse können
+auch leicht Unterschiedlich zwischen den verschiedenen Betriebssystemen
+angeordnet sein, wenn diese Betriebssysteme verschiedene Anordnungen
+für die Kompilierung erfordern. Das sind jedoch alles im wesentlichen
+triviale Transformationen. Die wesentlichen Quellcode-Dateien sollten
+über alle Pakete für eine Version die gleichen sein.</para>
+
+<sect3 id="release-capitalization">
+<title>Großschreibung - ja oder nein</title>
+
+<para>Wenn man einen bestimmten Projektnamen nennt, schreiben ihn Leute
+im allgemeinen groß, wie bei einem Nomen <footnote><para>Anmk. des 
+Übersetzers: Im Englischen werden Eigennamen (en. proper noun) auch
+groß geschrieben</para></footnote> und schreiben Abkürzungen groß wenn
+solche vorhanden sind: "MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", usw. Ob
+das in dem Paketnamen mit übernommen wird, ist dem Projekt überlassen.
+Sowohl <filename>Scanley-2.5.0.tar.gz</filename> als auch 
+<filename>scanley-2.5.0.tar.gz</filename> wären zum Beispiel in Ordnung
+(Ich persönlich bevorzuge letzteres, da ich es nicht mag, Leute zu
+zwingen die Umschalttaste zu drücken, aber eine Menge Projekte
+veröffentlichen Pakete mit Großschreibung). Das Wichtige ist, dass das
+Verzeichnis welches beim Entpacken des Tarballs erstellt wird, die
+gleiche Schreibweise verwendet. Es sollte keine Überraschungen geben:
+Der Nutzer muss den Namen des Verzeichnisses welches erstellt werden
+wird, wenn er eine Veröffentlichung entpackt, mit absoluter Genauigkeit
+vorhersagen können.</para>
+
+</sect3>
+<sect3 id="release-prereleases">
+<title>Vorveröffentlichungen</title>
+
+<para>Wenn Sie eine Vorveröffentlichung machen, ist der Vermerk ein
+echter Bestandteil der Versionsnummer, nehmen Sie es also mit in den
+Namen des Pakets auf. Die geordnete Folge von Alpha- und Beta-Versionen,
+die vorher in diesem Kapitel in <xref 
+linkend="release-number-components"/> verwendet wurde, würde zum 
+Beispiel folgende Paket namen haben:</para>
+
+<informalexample>
+<literallayout>scanley-2.3.0-alpha1.tar.gz
+scanley-2.3.0-alpha2.tar.gz
+scanley-2.3.0-beta1.tar.gz
+scanley-2.3.0-beta2.tar.gz
+scanley-2.3.0-beta3.tar.gz
+scanley-2.3.0.tar.gz</literallayout>
+</informalexample>
+
+<para>Das erste würde zum Beispiel zu einem Verzeichnis namens
+<filename>scanley-2.3.0-alpha1</filename> entpacken, dass zweite nach
+<filename>scanley-2.3.0-alpha2</filename>, usw.</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-build-install">
+<title>Kompilierung und Installation</title>
+
+<para>Bei Software, die eine Kompilierung oder Installation aus den
+Quellen erfordert, gibt es für gewöhnlich Standardverfahren, welche
+erfahrene Nutzer erwarten anwenden zu können. Bei Programmen die in
+C, C++, oder bestimmte anderen kompilierten Sprachen geschrieben sind,
+ist es in
+Unix-ähnlichen Systemen zum Beispiel für den Nutzer üblich, folgendes
+einzugeben:</para>
+
+<screen>
+   $ ./configure
+   $ make
+   # make install
+</screen>
+
+<para>Der erste Befehl erkennt automatisch, soviel von der Umgebung
+wie möglich, und bereitet den Build-Vorgang vor, der zweite Befehl
+kompiliert die Software im derzeitigen Pfad (installiert es jedoch
+nicht), und der letzte Befehl installiert es auf das System. Die ersten
+beiden Befehle werden als ganz normalen Nutzer ausgeführt, der dritte
+als root. Für weitere Details über die Einrichtung dieses Systems,
+siehe das ausgezeichnete <citetitle>GNU Autoconf, Automake, und 
+Libtool</citetitle> Buch von Vaughan, Elliston, Tromey, und Taylor. Es
+ist als Treeware durch New Riders veröffentlicht worden, und sein
+Inhalt ist unter <ulink url="http://sources.redhat.com/autobook/"/>.
+frei zugänglich.</para>
+
+<para>Das ist nicht der einzige Standard, obwohl es einer der am
+weitesten verbreitetsten ist. Das Build-System Ant (<ulink 
+url="http://ant.apache.org/"/>) nimmt an Beliebtheit
+zu, insbesondere bei Projekten, die in Java geschrieben sind, und hat
+seine eigenen Abläufe für den Build und die Installation. Desweiteren,
+empfehlen bestimmte Programmiersprachen, wie Perl und Python, dass die
+gleiche Methode für die meisten Programme die in dieser Sprache
+geschrieben werden, benutzt werden (Perl-Module benutzten zum Beispiel
+den <command>perl&nbsp;Makefile.PL</command> Befehl). Wenn es für Sie
+nicht offensichtlich ist, welche Standards für Ihr Projekt gelten, 
+fragen Sie einen erfahrenen Entwickler; Sie können mit Sicherheit
+davon ausgehen, dass <emphasis>irgend ein</emphasis> Standard gilt,
+selbst wenn Sie zuerst nicht wissen was es ist.</para>
+
+<para>Was immer die entsprechenden Standards für Ihr Projekt auch sein
+mögen, weichen Sie nicht von Ihnen ab, es sei denn es ist zwingend
+notwendig. Standardabläufe bei der Installation sind mittlerweile 
+praktisch Reflexe im Rückenmark vieler Systemadministratoren. Wenn sie
+bekannte Anweisungen in der <filename>INSTALL</filename> Datei von
+Ihrem Projekt erkennen, hebt es gleich ihr vertrauen darin, dass Ihr
+Projekt sich allgemein über Konventionen im klaren ist, und dass es
+wahrscheinlich ist, dass Sie auch andere Sachen richtig gemacht haben.
+Wie in 
+<xref linkend="downloads"/><phrase output="printed"> im Kapitel 
+<xref linkend="getting-started"/></phrase> beschrieben, erfreute es
+auch mögliche zukünftige Entwickler, wenn Sie standard Build-Verfahren
+benutzen.</para>
+
+<para>Unter Windows, sind die Standards um einen Build zu machen und zu
+installieren weniger festgelegt. Bei Projekten die eine Kompilation
+erfordern, scheint die allgemeine Konvention zu sein, ein Verzeichnis
+zu Veröffentlichen, welches in dem Standardmodell für 
+Arbeitsumgebungen/Projekte von den Entwicklungsumgebungen von Microsoft
+(Developer Studio, Visual Studio, VS.NET, MSVC++, usw.). Abhängig von
+der Natur Ihrer Software kann es möglich sein, eine Unix-ähnliche
+Build-Option mittels der Umgebung Cygwin (<ulink 
+url="http://www.cygwin.com/"/>) auf Windows anzubieten. Und
+wenn Sie natürlich eine Sprache oder einen Programmier-Framework
+verwenden, welches seine eigenen Konventionen für die Installation hat,
+ &ndash; z.B, Perl oder Python &ndash;  sollte Sie einfach die 
+Standardmethode für dieses Framework benutzen, ob auf Windows, Unix,
+Mac OS X oder jedem anderen Betriebssystem.</para>
+
+<para>Seien Sie bereit, zusätzliche Mühen auf sich zu nehmen, um Ihr
+Projekt konform zu den relevanten Build- und Installationsstandards zu
+machen. Build und Installation sind die Einstiegspunkte: Es ist
+in Ordnung, wenn Dinge nach diesem Einstieg schwieriger werden, falls 
+denn überhaupt, es wäre aber schändlich, Benutzern oder Entwicklern 
+gleich bei ihrer allererste Begegnung mit der Software unerwartete
+Schritte abzunötigen.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="binary-packages">
+<title>Binäre Pakete</title>
+
+<para>Auch wenn die formal veröffentlichte Version ein Quellcode-Paket
+ist, werden die meisten Nutzer von binären Paketen installieren, die
+entweder von dem Installationsprogramm ihres Betriebssystems angeboten
+wird, händisch von der Webseite Ihres Projekts besorgt wurden oder von
+irgend einer anderen dritten Partei. "Binär" bedeutet in diesem 
+Zusammenhang nicht unbedingt "kompiliert"; es bedeutet lediglich irgend
+eine vorkonfigurierte Form des Pakets, welches es dem Nutzer erlaubt es
+auf seinen Computer zu installieren, ohne durch die üblichen Build und
+Installations-Abläufe der Quellcode basierenden Pakete. Auf
+RedHat GNU/Linux, ist es das RPM System; auf Debian GNU/Linux, ist es
+das APT (<filename>.deb</filename>) System; unter MS Windows, sind es
+üblicherweise <literal>.MSI</literal> Dateien oder selbst 
+installierende <literal>.exe</literal> Dateien.</para>
+
+<para>Ob diese binären Pakete von Personen die nahe an dem Projekt 
+sind, zusammengestellt werden, oder entfernte dritte Parteien, die
+Nutzer werden sie als gleichwertig zu den offiziellen 
+Veröffentlichungen des Projekts <emphasis>behandeln</emphasis>, und
+werden Meldungen auf den Bugtracker einreichen, auf der Grundlage des
+Verhaltens dieser binärpakete. Deshalb ist es im Interesse des 
+Projekts denjenigen die Pakete schnüren, klare Richtlinien zu geben,
+und eng mit ihnen zusammen zu arbeiten, um dafür zu sorgen, dass was
+sie produzieren, die Software ordentlich und genau repräsentiert.
+</para>
+
+<para>Die Hauptsache, die Ersteller von Paketen wissen müssen, ist, dass
+sie ihre binären Pakete immer aus offiziellen Quellcode-Pakete
+herleiten sollten. Manchmal sind sie versucht, eine spätere Version des
+Quellcodes aus dem Projektarchiv zu nehmen, oder ausgewählte Änderungen,
+die nach der Veröffentlichung committet wurden, zu integrieren, um den
+Nutzern bestimmte Bugfixes oder andere Verbesserungen anzubieten. Der
+Ersteller des Pakets denkt, dass er seinen Nutzern einen Gefallen
+tut, indem er ihnen neueren Code gibt, tatsächlich kann dieses
+Verfahren eine Menge Verwirrung verursachen. Projekte sind darauf
+vorbereitet, Bug-Meldungen zu bekommen, die in den neun Versionen
+gefunden werden, und Bugs die in dem derzeitigen Stamm und den Quellen
+des Hauptastes (das heißt, solche die von Personen gefunden werden, die
+den allerneusten Code verwenden). Wenn eine Bug-Meldung aus diesen
+Quellen kommt, wird der Antwortende oft in der Lage sein zu bestätigen,
+dass dieser Bug in der Momentaufnahme vorhanden ist, und vielleicht,
+dass es seitdem behoben wurde und dass der Nutzer eine Aktualisierung
+durchführen soll, oder auf die nächste Version warten soll. Wenn es ein
+vorher nicht bekannter Bug ist, machte es die Reproduktion und die
+Einordnung des Fehlers in dem Tracker einfacher, wenn man die genaue 
+Version weiß.</para>
+
+<para>Projekte sind jedoch nicht darauf vorbereitet, Meldungen von Bugs
+zu erhalten, die auf nicht spezifizierte oder hybrid Versionen 
+basieren. Solche Bugs können schwer zu reproduzieren sein; sie können
+auch auf unerwartete Wechselwirkungen, zwischen einzelnen
+Änderungen zurück zu führen sein, die aus der späteren Entwicklung
+herausgezogen wurden, und deshalb Fehlverhalten verursachen, für die
+die Entwicklergemeinde die Schuld nicht tragen müssen sollte. Ich habe
+bestürzend viele Mengen an Zeit daran vergeudet gesehen, weil ein Bug
+<emphasis>gefehlt</emphasis> hat, wenn es hätte da sein sollen: jemand
+hatte eine leicht aktualisierte Version betrieben, die auf einer
+offiziellen (aber nicht identische) Version basierte, und als der
+vorhergesagte Bug nicht auftrat, mussten alle herumsuchen um
+herauszufinden, warum.</para>
+
+<para>Trotzdem wird es manchmal Umstände geben, unter denen der Ersteller
+der Pakete darauf besteht, dass Änderungen an der Quellcode-Version
+nötig sind. Paket-Ersteller sollten dazu ermutigt werden, das bei den
+Entwicklern des Projekts zur Sprache zu bringen, und ihre Pläne zu
+beschreiben. Es mag sein, dass sie die Freigabe bekommen, wenn aber nicht,
+werden sie zumindest das Projekt über ihre Vorhaben informiert
+haben, damit das Projekt für die üblichen Bug-Meldungen Ausschau halten
+kann. Die Entwickler mögen reagieren, indem sie eine Ausschlussklausel
+auf ihre Webseite stellen, und den Paket-Ersteller darum bitten, das 
+gleiche bei sich an angemessener Stelle zu machen, damit die Nutzer
+dieser binären Pakete wissen, dass was sie bekommen, nicht genau das
+gleiche ist, wie die offizielle Version. Es muss in einer solchen 
+Situation keine Bitterkeit geben, obwohl es leider oft der Fall ist.
+Es ist nur, dass die Paket-Ersteller leicht unterschiedliche Ziele im
+Vergleich zu den Entwicklern verfolgen. Sie wollen hauptsächlich für
+ihre Nutzer die bestmögliche Erfahrung. Die Entwickler wollen das 
+natürlich auch, sie müssen aber auch sicherstellen, dass sie wissen,
+welche Versionen der Software im Umlauf sind, damit sie verständliche
+Bug-Meldungen bekommen können und Garantien über die Kompatibilität
+machen können. Manchmal stehen diese Ziele im Konflikt zueinander.
+Wenn das der Fall ist, sollte man sich daran erinnern, dass das
+Projekt keine Kontrolle über die Paket-Ersteller hat, und dass das
+Schuldverhältnis in beiden Richtungen läuft. Es stimmt zwar, dass das
+Projekt den Paket-Erstellern einen Gefallen tut, alleine schon indem sie
+die Software erstellt. Die Paket-Ersteller tun dem Projekt aber auch einen
+Gefallen, indem sie die größtenteils unrühmliche Arbeit auf sich 
+nehmen, die Software einer breiteren Masse zur Verfügung zu stellen,
+oftmals um mehrere Größenordnungen. Es ist in Ordnung, mit den 
+Paket-Erstellern Meinungsverschiedenheiten zu haben, aber beleidigen
+Sie sie nicht; versuchen Sie einfach, sich mit ihnen so gut wie möglich
+zu verständigen.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="testing-and-releasing">
+<title>Tests und Veröffentlichung</title>
+
+<para>Wenn der Quellcode tarball von dem stabilisierten Zweig 
+produziert wurde, beginnt der Ablauf sie zu veröffentlichen. Vor der
+tarball der allgemeinen Öffentlichkeit aber zur Verfügung gestellt 
+wird, sollte es von einer minimalen Menge von Entwicklern getestet und
+bewilligt werden, üblicherweise drei oder mehr. Die Bewilligung,
+dreht sich nicht nur darum, die neue Version auf offensichtliche
+Mängel zu untersuchen, die Entwickler laden den Tarball herunter,
+machen einen Build und installieren es auf ein sauberes System, lassen
+die Folge der Regressionstests laufen (siehe <xref 
+linkend="automated-testing"/>)<phrase output="printed"> im Kapitel
+<xref linkend="managing-volunteers"/></phrase>, und machen ein paar
+händische Tests. Angenommen, es besteht diese Überprüfungen, sowie
+irgend welche andere Kriterien für die Veröffentlichung, die das
+Projekt haben mag, machen die Entwickler eine digitale Signatur von
+dem tarball mit GnuPG
+(<ulink url="http://www.gnupg.org/"/>), PGP
+(<ulink url="http://www.pgpi.org/"/>), oder irgend einem anderen
+Programm welches mit PGP kompatible Signaturen erstellen kann.</para>
+
+<para>In den meisten Projekten, benutzen die Entwickler einfach ihre
+eigenen digitalen Signaturen, anstatt des geteilten Schlüssel vom 
+Projekt und so viele Entwickler die wollen, können es signieren (d.h.
+es gibt eine Minimum an Entwickler, aber kein Maximum). Je mehr 
+Entwickler signieren, desto mehr Tests unterläuft die neue Version,
+und desto größer ist die Wahrscheinlichkeit, dass ein 
+sicherheitsbewusster Benutzer ein Pfad des Vertrauens von sich bis
+zu dem tarball finden kann.</para>
+
+<para>Sobald sie bewilligt sind, sollte die neue Version (also, alle
+tarballs, zip Dateien, sowie alle anderen Formate die veröffentlicht
+werden) in dem Download-Bereich des Projekts platziert werden, zusammen
+mit den Signaturen, und MD5/SHA1 Prüfsummen (siehe <ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
+Es gibt verschiedene Standards um das zu machen. Eines ist es, jedes
+Paket von einer Datei begleiten zu lassen, mit den zugehörigen
+digitalen Signaturen, und eine weitere Datei mit der Prüfsumme. Wenn
+das veröffentlichte Paket also
+<filename>scanley-2.5.0.tar.gz</filename> ist, platzieren Sie in dem
+selben Verzeichnis eine Datei
+<filename>scanley-2.5.0.tar.gz.asc</filename> mit der digitalen
+Signatur für diesen tarball, eine weitere Datei
+<filename>scanley-2.5.0.tar.gz.md5</filename> mit seiner MD5
+Prüfsumme und optional eine weitere Datei
+<filename>scanley-2.5.0.tar.gz.sha1</filename>, mit der SHA1 Prüfsumme.
+Eine andere Art die Überprüfung zu ermöglichen ist alle Signaturen der
+veröffentlichten Pakete in eine einzelne Datei zu sammeln
+<filename>scanley-2.5.0.sigs</filename>; das gleiche kann mit den
+Prüfsummen gemacht werden.</para>
+
+<para>Es macht nicht wirklich einen Unterschied wie Sie es machen. 
+Halten Sie sich nur an ein einfaches Schema, beschreiben Sie es klar,
+und seien einheitlich Sie über mehrere Versionen. Der Sinn von all
+diesen Signaturen und Prüfsummen ist, Nutzern eine Möglichkeit zu
+geben, zu verifizieren, dass die Kopie die sie erhalten haben nicht
+böswillig verändert wurde. Die Nutzer werden gleich den Code auf ihren
+Rechnern laufen lassen &ndash; wenn der Code manipuliert wurde, hätte
+ein Angreifer plötzlich Zugriff auf all ihre Daten. Siehe
+<xref linkend="security-releases"/><phrase output="printed">
+später in diesem Kapitel</phrase> für weitere Informationen über 
+Paranoia.</para>
+
+<sect2 id="candidate-releases">
+<title>Release Candidate</title>
+
+<para>Bei wichtigen Veröffentlichungen die viele Änderungen beinhalten,
+bevorzugen es viele Projekte zuerst <firstterm>release candidates
+</firstterm> zu veröffentlichen, z.B., <filename>scanley-2.5.0-beta1
+</filename> vor <filename>scanley-2.5.0</filename>. Der Sinn eines
+solchen Kandidaten ist den Code weite Tests zu unterwerfen, von es
+als eine offiziell Version gesegnet wird. Wenn Probleme gefunden 
+werden, werden sie in dem Versionszweig behoben und eine neuer Kandidat
+wird veröffentlicht (<filename>scanley-2.5.0-beta2</filename>). Dieser
+Kreislauf wird so lange weitergeführt, bis keine untragbaren Fehler
+mehr vorhanden sind, worauf der letzte veröffentlichte Kandidat zur
+offiziellen Version wird &ndash; d.h. der einzige Unterschied zwischen
+dem letzten Release Candidate und der echten neuen version ist die
+Entfernung der Kennzeichnung von der Versionsnummer.</para>
+
+<para>In den meisten anderen Beziehungen, sollten die Kandidaten wie
+eine echte finale Version behandelt werde. Die <emphasis>alpha
+</emphasis>, <emphasis>beta</emphasis>, oder <emphasis>rc</emphasis>
+Kennzeichnung reicht, um die konservativen Nutzer zu warnen, dass sie
+auf die echte finale Version warten sollen, und natürlich sollten die
+E-Mails zur Bekanntgabe darauf hinweisen, dass ihr Sinn das Einholen
+von Rückmeldungen ist. Davon abgesehen, geben Sie den Kandidaten die
+gleiche Menge an Sorgfalt wie gewöhnliche neue Versionen. Schließlich
+wollen Sie, dass Leute sie benutzen, da echte Nutzung die beste 
+Möglichkeit ist, um Fehler zu entdecken, und weil Sie nie wissen,
+ob ein Release Candidate zur offiziellen Version wird.</para>
+
+</sect2>
+
+<sect2 id="release-announcement">
+<title>Bekanntgabe neuer Versionen</title>
+
+<para>Eine neue Version bekannt zu geben, ist wie die ankündigung von
+jedem anderen Ereignis, und sollte die Verfahren die in 
+<xref linkend="publicity"/><phrase output="printed"> im Kapitel 
+<xref linkend="communications"/></phrase> beschrieben sind benutzen. Es
+gibt allerdings ein paar spezifische Sachen bei neuen Versionen.</para>
+
+<para>Immer wenn Sie die URL zu dem Tarball einer neuen Version
+herausgeben, geben Sie unbedingt auch die MD5/SHA1 Prüfsummen an und
+weisen Sie auf die Signatur-Datei hin. Da die Bekanntgabe in meheren
+Foren stattfindet (Mailverteiler, Ihre Webseite, usw.), können 
+Benutzer die Prüfsummen aus mehreren Quellen bekommen, was die
+sicherheitsbewussten unter ihnen die zusätzliche Sicherheit gibt, dass
+die Prüfsummen selber nicht manipuliert wurden. Die Verweise auf die
+Signaturen macht diese nicht unbedingt sicherer, aber es gibt ihnen
+(insbesondere denjenigen die das Projekt nicht so nahe verfolgen) die 
+Gewissheit, dass das Projekt die Sicherheit ernst nimmt.</para>
+
+<para>In der E-Mail mit der Bekanntgabe, und den Webseiten, die mehr als
+nur eine kurzen Text über die neue Version enthalten, sollten Sie auch
+den relevanten Abschnitt aus der CHANGES Datei angeben, damit Leute 
+sehen können, warum es in ihrem Interesse sein könnte eine 
+Aktualisierung durchzuführen. Das ist so wichtig, bei dien 
+Veröffentlichungs Kandidaten wie bei den finalen Versionen; die 
+Existenz von Bugfixes und neuen Funktionen ist wichtig um Leute einen
+Reitz zu geben, einen neuen Kandidaten auszuprobieren.</para>
+
+<para>Schließlich, vergessen Sie es nicht die Entwicklermannschaft zu
+danken, sowie die Tester und alle anderen die sich die Zeit genommen
+haben um gute Bug-Meldungen einzureichen. Heben Sie jedoch keinen
+besonders beim Namen heraus, es sei denn es ist einer für individuell
+für einen riesigen Anteil Arbeit verantwortlich ist, dessen Wert 
+weithin von jedem in dem Projekt anerkannt ist. Seien Sie nur 
+vorsichtig vor dem rutschigen Abhang der Inflation von Anerkennung
+(siehe <xref linkend="credit"/><phrase output="printed"> im Kapitel 
+<xref linkend="managing-volunteers"/></phrase>).</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-lines">
+<title>Wartung mehrerer Versionszweige</title>
+
+<para>Die meisten ausgereiften Projekte pflegen mehrere Versionszweige
+nebeneinander. Nachdem 1.0.0 erscheint, sollte diese Reihe mit micro
+Versionen (Fehlerbehebung) 1.0.1, 1.0.2, usw., so lange weiter geführt
+werden, bis das Projekt sich explizit entscheidet, die Reihe zu beenden.
+Beachten Sie, dass die Veröffentlichung der 1.1.0 kein ausreichender
+Grund ist, die 1.0.x Reihe zu beenden. Manche Nutzer aktualisieren zum
+Beispiel prinzipiell nicht auf die erste Version einer minor oder major
+Reihe &ndash; sie lassen andere die Fehler herausfinden; sagen wir bei
+der Version 1.1.0 warten sie bis 1.1.1. Das ist nicht zwangsläufig
+egoistisch (bedenken Sie, dass sie damit auch auf Bugfixes und neue
+Funktionen verzichten); sie haben sich nur entschieden &ndash; aus welchen 
+Gründen auch immer &ndash;, bei Aktualisierungen sehr vorsichtig zu sein.
+Wenn das Projekt von einem ernsthaften Fehler in 1.0.3 erfährt, kurz
+vor der Veröffentlichung von 1.1.0, wäre es entsprechend hart, den
+Bugfix nur in 1.1.0 zu stecken, und allen Nutzern der alten 1.0.x Reihe
+zu sagen, dass Sie aktualisieren sollen. Warum nicht sowohl 1.1.0 als
+auch 1.0.4 veröffentlichen, damit alle glücklich sind?</para>
+
+<para>Nachdem die 1.1.x Reihe gut läuft, können Sie für 1.0.x erklären,
+dass es am Ende seines Lebenszykluses (en. <firstterm>end of life
+</firstterm>) ist. Das sollte offiziell bekannt gegeben werden. Diese
+Bekanntgabe kann für sich erfolgen, oder im Rahmen der Ankündigung 
+einer neuen 1.1.x Version; wie auch immer Sie sich entscheiden:
+die Nutzer müssen wissen, dass die alte Reihe ausläuft, damit
+sie entsprechende Entscheidungen im Bezug auf Aktualisierungen treffen
+können.</para>
+
+<para>Manche Projekte legen einen Fenster fest, indem sie versprechen
+die vorhergehende Versionsreihe zu pflegen. Im Kontext von Open Source,
+bedeutet "pflege" (en. "support") die annahme von Bug-Meldungen für 
+diese Reihe, und neue Versionen zu veröffentlichen, wenn bedeutende
+Fehler gefunden werden. Andere Projekte geben keine definitive 
+Zeitangabe, halten aber ein Auge auf eintreffende Bug-Meldugen um einen
+Überblick zu behalten, wie viele Personen die alte Reihe noch 
+verwenden. Wenn der Prozentsatz unter einem gewissen Anteil sinkt,
+erklären sie für die Reihe, dass es am ende seines Lebens ist und hören
+auf es zu pflegen.</para>
+
+<para>Sorgen Sie bei jeder neuen Version dafür, dass ein
+<firstterm>target version</firstterm> (de. Zielversion) oder 
+<firstterm>target milestone</firstterm> (de. Ziel-Meilenstein) in dem
+Bugtracker zur Verfügung steht, damit Personen die Bugs finden, ihre
+Meldungen unter der richtig Version einordnen können. Vergessen Sie
+nicht auch einen Ziel namens "development" (de. Entwicklung) oder
+"latest" (de. aktuelle) für den neusten Quellcode zu haben, da manche
+ &ndash; nicht nur die aktiven Entwickler &ndash;  oft den offiziellen
+Versionen voraus bleiben werden.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="security-releases">
+<title>Sicherheitsupdates</title>
+
+<para>Die meisten Details über die Handhabung von Sicherheitslücken
+wurden in <xref linkend="security"/><phrase output="printed"> im
+Kapitel <xref linkend="communications"/></phrase> behandelt, es gibt
+aber ein paar besondere Details, die es für Sicherheits-Updates zu
+besprechen gibt.</para>
+
+<para>Ein <firstterm>Sicherheitsupdate</firstterm> ist eine
+Version die nur gemacht wird, um eine Sicherheitslücke zu schließen.
+Der Code, welcher den Bug behebt, kann nicht veröffentlicht werden, bis
+die neue Version zur Verfügung steht, was nicht nur bedeutet, dass die
+Fixes nicht zum Projektarchiv committet werden können, bis zum Tag der
+Veröffentlichung, sondern dass die Version nicht öffentlich getestet
+weden kann, bis sie freigegeben wird. Die Entwickler können den Fix
+offensichtlich unter sich untersuchen, und die neue Version privat
+testen, aber breites Testen unter realen Bedingungen ist nicht möglich.
+</para>
+
+<para>Aufgrund dieses Mangel an Tests, sollte ein Sicherheits-Update
+immer aus einer bereits herausgegebenen Version bestehen, ergänzt duch die
+Fixes für die Sicherheitslücke <emphasis>ohne sonstige 
+Änderungen</emphasis>. Denn je mehr Änderungen Sie in einer Version
+veröffentlichen, desto wahrscheinlicher ist es, dass eine von ihnen
+einen neuen Fehler verursachen wird, vieleicht sogar eine neue
+Sicherheitslücke! In dieser Hinsicht konservativ zu sein, kommt auch 
+den Administratoren entgegen, die das Sicherheitsupdate einspielen
+werden, deren Richtlinien im Bezug auf Aktualisierungen es aber nicht
+zulassen, zur gleichen Zeit sonstige Änderungen
+einspielen.</para>
+
+<para>Ein Sicherheitsupdate zu erstellen, ist manchmal auch mit ein
+wenig Täuschung verbunden. Das Projekt könnte zum Beispiel an der Version
+1.1.3 arbeiten, für die bestimmte Bugfixes an 1.1.2 bereits öffentlich 
+in Aussicht gestellt wurden, und in diesem Moment trifft die
+Sicherheitsmeldung ein. Die Entwickler können natürlich nicht über das 
+Sicherheitsproblem reden, bis sie den Fix zur Verfügung stellen; bis
+dahin müssen sie weiter öffentlich so reden, als wäre 1.1.3 das, was
+die ganze Zeit geplant war. Wenn 1.1.3 aber wirklich erscheint, wird
+es sich von 1.1.2 nur durch die Sicherheitsfixes unterscheiden, und
+alles andere wird auf die Version 1.1.4 aufgeschoben (die jetzt natürlich
+<emphasis>auch</emphasis> den Sicherheitsfix beinhalten wird, genau
+so wie alle zukünftigen Versionen).</para>
+
+<para>Sie könnten eine weitere Komponente zu der bestehenden Version
+hinzufügen, welche darauf hindeutet, dass nur Sicherheitsänderungen
+enthalten sind. Zum Beispiel könnte man alleine an den Zahlen
+erkennen, dass 1.1.2.1 ein Sicherheitsupdate zu 1.1.2 ist, und es würde
+deutlich, dass jede "höhere" Version (d.h. 1.1.3, 1.2.0, usw.) die
+gleichen Sicherheitsfixes beinhaltet. Für diejenigen die es wissen, teilt
+dieses System eine Menge Informationen mit. Andererseits kann es für
+diejenigen die das Projekt nicht so nah verfolgenein, ein wenig verwirrend
+sein, die meiste Zeit ein Drei-Komponenten-System zu sehen, in das
+gelegentlich vierstellige Versionsnummen eingestreut sind.
+Die meisten Projekte die ich mir angeschaut habe, bevorzugen
+Konsistenz und benutzen einfach die nächste geplante Versionsnummer für 
+Sicherheitsupdates, selbst wenn das bedeutet, andere geplante
+Versionen um eins zu verschieben.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="releases-and-daily-development">
+<title>Neue Versionen und tägliche Entwicklung</title>
+
+<para>Parallele Versionen gleichzeitig zu pflegen, hat Auswirkungen
+darauf, wie die tägliche Entwicklung vonstatten geht. Es macht
+insbesondere etwas praktisch zur Pflicht, was sowieso empfohlen wird:
+Jeder Commit sollte eine einzige logische Änderung sein, und nicht 
+zusammenhängende Änderungen sollten niemals in dem gleichen Commit
+gemacht werden. Wenn eine Änderung zu groß ist oder zu störend ist, um
+sie in einem Commit zu machen, verteilen Sie es über N Commits, wobei
+jeder Commit eine wohl aufgeteilte Untermenge der gesamten Änderung ist,
+und nichts beinhaltet, das keinen Bezug zu der Gesamtänderung hat.</para>
+
+<para>Hier ist ein Beispiel eines schlecht überdachten Commit:</para>
+
+<screen>
+------------------------------------------------------------------------
+r6228 | hmustermann | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 Zeilen
+
+Fehler #1729 behoben: Sorge dafür, dass die Indexierung dem Nutzer
+elegant eine Warnung gibt, wenn eine Datei die sich ändert, indexiert
+wird.
+
+* ui/repl.py
+  (ChangingFile): Neue Ausnahme-Klasse. 
+  (DoIndex): Verarbeite die neue Ausnahme.
+
+* indexer/index.py
+  (FollowStream): Werfen einer neuen Ausnahme, wenn eine Datei sich
+  wärend der Indexierung ändert.
+  (BuildDir): In einem anderen Zusammenhang, Entfernung von veralteten
+  Komentaren, Neuformatierung vom Code, und Behebung der Fehlerprüfung
+  wenn ein Verzeichnis erzeugt wird.
+
+Andere nicht verwandte Aufräumarbeiten:
+
+* www/index.html: Ein paar Vertipper behoben, das Datum der nächsten
+Version gesetzt.
+------------------------------------------------------------------------
+</screen>
+
+<para>Das Problem dabei wird offensichtlich, wenn jemand die Änderung
+der Fehlerprüfung in <function>BuildDir</function> für einen bald 
+anstehende Micro-Version in einen anderen Zweig portieren muss. Der
+Portierende will nicht irgendwelche der anderen Änderungen &ndash; 
+vielleicht wurde der Fix für die Meldung #1729 überhaupt nicht für den
+Stabilen Zweig genemigt, und die Verbesserungen an <filename>
+index.html</filename> wären dort einfach irrelevant. Mittels der 
+Merge-Funktion kann er aber die Änderung an <function>BuildDir</function>
+nicht einfach übernehmen, weil dem Versionsverwaltungssytem gesagt wurde,
+dass diese Änderung mit den anderen nicht zusammenhängenden Dingen 
+logisch gruppiert ist. Tatsächlich würde das Problem
+sogar vor dem Merge offensichtlich werden. Alleine schon die Auflistung
+der Änderung zur Abstimmung würde problematisch werden: statt nur die
+Revisionsnummer anzugeben, müsste der Antragsteller einen besonderen
+Patch oder Änderungszweig erstellen, nur um den Anteil der Änderung,
+welcher vorgeschlagen wird, zu isolieren. Das wäre eine Menge Arbeit,
+unter der die Anderen leiden müssten, und alles nur weil der 
+ursprüngliche Committer keine Lust hatte, die Änderungen logisch zu 
+gruppieren.</para>
+
+<para>Dieser Commit hätte in Wirklichkeit sogar aus <emphasis>vier
+</emphasis> einzelnen Commits bestehen sollen: Einen um den Fehler #1729 
+zu beheben, einen weiteren um die veralteten Komentare zu 
+entfernen und den Code in <function>BuildDir</function> neu zu
+formatieren, noch einen für die Fehlerprüfung in <function>BuildDir
+</function>, und zuletzt einen, um die Datei <filename>index.html</filename>
+zu überarbeiten.</para>
+
+<para>Die Stabilisierung der neuen Version ist natürlich nicht der
+einzige Grund für den Wunsch danach, dass jeder Commit eine 
+einzige logische Änderung ist. Psychologisch ist ein semantisch 
+eindeitiger Commit leichter zu überprüfen und leichter
+rückgängig zu machen falls nötig (in manchen Versionsverwaltungsystemen
+ist sowieso eine besondere Art von Merge, wenn man etwas rückgängig
+macht). Etwas vorausschauende Disziplin der Beteiligten kann dem 
+Projekt später eine Menge Kopfschmerzen ersparen.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="planning">
+<title>Planung neuer Versionen</title>
+
+<para>Ein Bereich, in dem Open-Source-Projekte sich historisch von 
+proprietären Projekten 
+differenziert haben, ist die Planung neuer Versionen. Proprietäre
+Projekte haben gewöhnlich strengere Fristen. Manchmal weil einem
+Kunden zu einem bestimmten Datum ein Upgrade versprochen wurde, da die
+neue Version mit einer anderen Absicht aus Marketing-Gründen 
+koordiniert werden muss, oder weil die Risikokapitalgeber die in die
+ganze Sache investiert haben, Ergebnisse sehen müssen, bevor sie weitere
+Finanzierungsmittel hineinstecken. Freie Software-Projekte 
+hingegen waren bis zuletzt meistens durch Amateurhaftigkeit im
+wörtlichsten Sinne motiviert: Sie wurden aus Liebe geschrieben. Keiner
+hatte ein Drang, etwas zu veröffentlichen, bevor alle Funktionen fertig waren, 
+und warum sollten sie auch? Es war ja nicht so, dass hier der Arbeitsplatz
+von jemandem auf den Spiel stand.</para>
+
+<para>Heutzutage werden viele Open-Source-Projekte durch Firmen
+finanziert, und werden entsprechen mehr und mehr durch fristbewusste
+Unternehmenskulturen beeinflusst. Das mag in vielerlei Hinsicht etwas
+Gutes sein, kann aber auch Konflikte verursachen zwischen den
+Prioritäten der Entwickler, die bezahlt werden, von denen der Entwickler,
+die ihre Zeit freiwillig investieren. Diese Konflikte kommen oft bei
+der Frage auf, wann und wie die neuen Versionen geplant werden. Die
+angestellten Entwickler, die unter Druck stehen, werden natürlich 
+einfach irgendein Datum wählen wollen, an dem die Veröffentlichung
+stattfinden soll, und alle anderen Aktivitäten entsprechend einordnen.
+Die freiwilligen Entwickler können jedoch andere Pläne haben &ndash; 
+vieleicht Funktionen, die sie fertig stellen wollen, oder Tests, die sie
+gemacht haben wollen &ndash; worauf ihrer Meinung nach die 
+Veröffentlichung warten soll.</para>
+
+<para>Es gibt keine allgemeine Lösung für dieses Problem, außer 
+natürlich zu diskutieren und Kompromisse zu schließen. Sie können 
+jedoch den Grad und die Menge an Reibung die verursacht wird 
+minimieren, indem Sie die <emphasis>Existenz</emphasis> der
+vorgeschlagenen Version von dem Datum entkoppeln, an dem sie
+veröffentlicht werden soll. Das heißt, versuchen Sie die Diskussion
+in Richtung des Themas zu lenken, welche Versionen das Projekt in der
+nächsten bis mittelfristigen Zeit machen wird, und welche Funktionen
+sie haben werden, zunächst ohne über Termine zu sprechen, abgesehen von
+groben Schätzungen mit einer Menge Spielraum. 
+<footnote><para>Einen alternativen Ansatz können Sie in Martin Michlmayrs
+Dr. phil. Dissertation nachlesen <citetitle>Quality
+Improvement in Volunteer Free and Open Source Software Projects:
+Exploring the Impact of Release Management</citetitle>
+(<ulink url="http://www.cyrius.com/publications/michlmayr-phd.html"/>).
+Sie behandelt einen zeitbasierten im Gegensatz zu einem Feature-basierten
+Herausgabe-Prozess für umfangreiche free Software-Projekte. Michlmayr 
+hielt auch einen Vortrag bei Google zu diesem Thema, verfügbar als Video unter
+<ulink url="http://video.google.com/videoplay?docid=-5503858974016723264"
+/>.</para></footnote>
+Indem Sie frühzeitig den
+Funktionsumfang festlegen, reduzieren Sie die Komplexität der Diskussion,
+die sich um irgend eine bestimmte Version dreht, und verbessern dadurch
+die Berechenbarkeit. Das verursacht auch eine Art träger Voreinstellung,
+auf Leute, die vorschlagen die Definition einer Version mit neuen
+Funktionen oder andere Komplikationen zu erweitern. Wenn der Inhalt der
+Version relativ gut definiert ist, obliegt die Rechtfertigungspflicht für
+Erweiterungen dem Vorschlagenden, auch wenn das Datum
+der Version noch nicht festgelegt wurde.</para>
+
+<para>In seiner mehrbändigen Thomas-Jefferson-Biographie, 
+<citetitle>Jefferson and His Time</citetitle>, erzählt Dumas
+Malone die Geschichte, wie Jefferson das erste Treffen handhabte, 
+das abgehalten wurde, um über die Organization der zukunftigen
+Universität von Virginia zu entscheiden. Die Universität war von Anfang
+an die Idee von Jefferson gewesen, aber (wie es überall der Fall ist,
+nicht nur in Open-Source-Projekten) waren sehr schnell viele andere
+Parteien an Bord, jede mit eigenen Interessen und
+Anliegen. Als sie sich zu diesem ersten Treffen versammelten, um alles
+auszuarbeiten, erschien Jefferson mit minuziös vorbereiteten Bauplänen,
+detaillierten Budgets für die Konstruktion und den Betrieb, einem
+Lehrplanentwurf, und den Namen der einzelnen Fakultäten die
+er aus Europa importieren wollte. Kein anderer im Raum war nur
+annähernd so gut vorbereitet; die Gruppe musste im wesentlichen vor
+der Vision von Jefferson kapitulieren und die Universität wurde
+letztlich mehr oder weniger entsprechend seinen Plänen gegründet.
+Die Tatsachen, dass die Konstruktion weit über sein Budget ging, und
+viele seiner Ideen aus verschieden Gründen am Ende nicht 
+funktionierten, waren Dinge, von denen Jefferson wahrscheinlich
+anfangs genau wusste, dass sie passieren würden. Sein Vorhaben war
+strategisch: Bei der Versammlung mit etwas derart Stichhaltigem
+aufzutauchen, dass jeder ander in die Rolle verfallen müsste, lediglich
+Änderungen daran vorzuschlagen, damit die allgemeine Gestalt, und
+dadurch der Terminplan des Projekts, ungefähr so bliebe, wie er es
+wollte.</para>
+
+<para>Im Falle eines freien Software-Projekts, gibt es kein einzelnes
+"Treffen", sondern stattdessen eine Reihe kleiner Vorschläge die
+meistens durch den Bugtracker gemacht werden. Wenn Sie aber von
+Anfang an etwas Ansehen im Projekt haben, und anfangen 
+verschiedene Funktionen, Verbesserungen, und Fehler für bestimmte
+Versionen im Bugtracker festzulegen, entsprechend irgend einem
+erklärten Gesamtplan, werden die Leute meistens mitmachen. Wenn Sie
+erst alles mehr oder weniger so ausgelegt haben, wie Sie es wollen,
+werden die Unterhaltungen über echte <emphasis>Termine</emphasis> für
+neue Versionen sehr viel glatter verlaufen.</para>
+
+<para>Es ist natürlich äußerst wichtig, dass Sie niemals irgend eine
+einzelne Entscheidung als in Stein gemeißelt präsentieren. Zeigen Sie
+in den Kommentaren anlässlich der Zuordnung von Bugs zu bestimmten 
+Versionen wenn möglich stets Bereitschaft zu Diskussionen,
+Meinungsverschiedenheiten und die allgemeine Bereitschaft, überredet zu
+werden. Üben Sie niemals Kontrolle alleine um ihrer
+Ausübung willen: Je mehr andere sich an der Planung einer neuen
+Version beteiligen (siehe <xref linkend="share-management"/>
+<phrase output="printed"> im Kapitel <xref 
+linkend="managing-volunteers"/></phrase>), desto leichter wird es
+sein sie zu überreden, Ihre Prioritäten bei Angelegenheiten zu teilen,
+die Ihnen wirklich wichtig sind.</para>
+
+<para>Die andere Möglichkeit, Spannungen bei der Planung neuer Versionen
+des Projekts zu veringern ist, relativ häufig zu veröffentlichen.
+Wenn zwischen den Veröffentlichungen eine
+lange Zeit liegt, wird die Bedeutung von jeder einzenen in den Köpfen
+allern vergrößert; die Leute sind um so mehr betrübt, wenn ihr Code es
+nicht hinein schafft, weil sie wissen wie lange es dauern könnte, bis
+die nächste Gelegenheit kommt. Abhängig von der Komplexität des Ablaufs
+bei einer neuen Version und der Natur Ihres Projekts, liegt die 
+richtige Zeit zwischen den einzelnen Veröffentlichungen gewöhnlich
+irgendwo zwischen drei und sechs Monaten, obwohl in den Stabilen Zweigen
+Micro-Veröffentlichungen ein wenig schneller geschehen
+können, wenn dafür Bedarf besteht.</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+

@@ -1,0 +1,2626 @@
+<chapter id="communications">
+
+<title>Kommunikation</title>
+
+<simplesect>
+
+<para>Die Fähigkeit klar zu schreiben ist vielleicht die Wichtigste, die
+man in einer Open-Source-Umgebung haben kann. Auf lange Sicht ist sie sogar wichtiger
+als Programmierbegabung. Ein sehr guter Programmierer
+mit schlechten Kommunikationsfähigkeiten kann nur eines nach dem
+anderen erledigen, und hat selbst dann vielleicht Schwierigkeiten, 
+andere zu überzeugen. Ein schlechter Programmierer, der aber gut
+kommuniziert, kann viele Leute koordinieren und überzeugen, viele
+verschiedene Dinge zu machen , und hat dadurch einen wesentlichen Einfluss
+auf die Richtung und Dynamik des Projekts.</para>
+
+<para>Es scheint keinen großen Zusammenhang, in die eine oder andere
+Richtung, zwischen der Fähigkeit guten Code zu schreiben und der
+Fähigkeit mit seinen Mitmenschen zu kommunizieren. Es gibt einen
+gewissen Zusammenhang zwischen der Fähigkeit zu Programmieren und
+technische Angelegenheiten gut zu beschreiben, aber das ist nur ein
+winziger Teil der Kommunikation in einem Projekt. Viel wichtiger ist
+die Fähigkeit mit seinem Publikum einfühlsam umzugehen, seine 
+Nachrichten und Kommentare aus der Sicht anderer zu sehen, und andere
+dazu zu bringen ihre eigene Nachrichten mit einer ähnlichen 
+Objektivität zu sehen. Gleichermaßen wichtig ist es zu bemerken, wenn
+ein bestimmtes Nachrichtenmedium oder eine Kommunikationsmethode nicht
+mehr gut funktioniert, vielleicht weil es nicht mit einer zunehmenden 
+Anzahl an Nutzern skaliert, und sich die Zeit zu nehmen dagegen etwas
+zu tun.</para>
+
+<para>Hiervon ist alles in der Theorie offensichtlich &ndash; was in
+der Praxis schwierig macht, ist dass in Umgebungen der Entwicklung
+freier Software eine verblüffend viele verschiedene Mechanismen gibt,
+sowohl was das Publikum angeht als auch bei der Kommunikation. Soll
+eine gegebener Gedanke in einer E-Mail an den Verteiler verfasst
+werden, als Anmerkung in dem Bugtracker oder als Kommentar in dem
+Quellcode? Wenn man eine Frage in einem öffentlichem Forum
+beantwortet, wie viel Wissen kann man von "dem Lesenden" erwarten,
+vor dem Hintergrund das derjenige der die Frage gestellt hat nicht
+der einzige ist der die Rückmeldung lesen könnte? Wie können die
+Entwickler eine konstruktive Verbindung mit den Nutzern aufrecht
+erhalten, ohne von Anfragen für Funktionen, fälschliche Bug-Meldungen,
+und allgemeinem Geschwätz überschwemmt zu werden? Woran kann man
+erkennen, wann ein Medium die Grenzen seiner Kapazität erreicht hat,
+und was man dagegen machen kann?</para>
+
+<para>Lösungen zu diesen Problemen sind für gewöhnlich nur Teillösungen,
+das jede bestimmte Lösung letztendlich durch Wachstum oder Änderungen
+an der Struktur des Projekts, obsolet gemacht wird. Sie sind oftmals 
+auch <foreignphrase>ad hoc</foreignphrase>, da sie improvisierte 
+Reaktionen auf dynamische Situationen sind. Alle Beteiligten müssen sich
+darüber im klaren sein, wann und wie Kommunikationen festgefahren werden
+können, und an Lösungen beteiligt sein. Leute zu helfen das zu erreichen
+ist ein großer Teil der Verwaltung eines Open-Source-Projekts. Die 
+Abschnitte die folgen behandeln sowohl wie Sie Ihre eigene Kommunikation
+abwickeln, als auch wie Sie die Aufrechterhaltung der Kommunikationsmittel
+eine Priorität für alle im Projekt machen können.<footnote><para>Es hat
+im Bezug auf dieses Thema viel akademische Untersuchung gegeben; siehe
+zum Beispiel <citetitle>Group Awareness in Distributed Software
+Development</citetitle> von Gutwin, Penner, und Schneider (diese waren
+ehemals online verfügbar, scheinen aber mittlerweile zumindest zeitweise
+verschwunden zu sein; benutzen Sie eine Suchmaschine um es zu finden).
+</para></footnote></para>
+
+</simplesect>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="you-are-what-you-write">
+<title>Du bist was du schreibst</title>
+
+<para>Bedenken Sie folgendes: Das einzige was irgend jemand über Sie
+im Internet weiß, kommt von dem was Sie schreiben, oder was andere
+über Sie schreiben. Es mag sein, dass Sie als Person geistreich, 
+scharfsinnig und charismatisch sind &ndash; wenn Ihre E-Mails aber
+ausschweifend und unstrukturiert sind, wird man von Ihnen annehmen,
+dass Sie wirklich so sind. Oder vielleicht sind Sie wirklich persönlich
+wirklich ausschweifend und unstrukturiert, aber keiner muss das je
+erfahren, wenn Ihre Nachrichten deutlich und informativ sind.</para>
+
+<para>Ihre Nachrichten ein wenig Mühe zu widmen kann sich in großem
+Maße auszahlen. Der langjährige Hacker an freier Software Jim Blandy
+erzählt folgende Geschichte:</para>
+
+<blockquote>
+  <para>Damals 1993, arbeitete ich für die Free Software Foundation,
+  und wir machten gerade Beta-Tests der Version 19 von GNU Emacs.
+  Wir machten ungefähr jede Woche einen Release, und Leute probierten
+  es aus und reichten Bug-Meldungen bei uns ein. Es gab einen Kerl den
+  keiner von uns vorher persönlich getroffen hatte, der aber tolle 
+  Arbeit leistete: Seine Meldungen waren immer klar und brachten uns
+  direkt zum Problem, und wenn er selber einen Fix anbot, war er fast
+  immer richtig. Er war einfach erstklassig.</para>
+
+  <para>Nun, vor die FSF Code welcher von jemand anderem geschrieben
+  wurde benutzen kann, lassen wir sie etwas Papierkram erledigen, um
+  ihre urheberrechtlichen Interessen an dem Code der FSF zu zuweisen.
+  Einfach den Code von komplett Fremden einzusetzen lädt geradezu auf
+  eine rechtliche Katastrophe ein.</para>
+
+  <para>Also sandte ich dem Kerl die Formulare per E-Mail zu und sagte
+  ihm, "Hier ist ein bisschen Papierkram den wir brauchen, es hat 
+  folgendes zu bedeuten, Du unterschreibst hier, dein Arbeitgeber den
+  hier, und dann können wir anfangen deine Fixes einzusetzen. Vielen
+  Dank."</para>
+
+  <para>Er sickte mir eine Antwort zurück, indem er sagte, "Ich habe
+  keinen Arbeitgeber."</para>
+
+  <para>Also sagte ich, "In Ordnung, das macht nichts, lass es einfach
+  von deiner Universität stempeln und schicke es zurück."</para>
+
+  <para>Nach einer gewissen Zeit, schrieb er mir wieder zurück und 
+  sagte, "Naja, eigentlich... bin ich dreizehn Jahre alt und lebe noch
+  bei meinen Eltern".</para>
+</blockquote>
+
+<para>Da der Junge nicht wie ein Dreizehnjähriger schrieb, wusste
+keiner, dass er einer war. Im Folgenden sind ein paar Möglichkeiten,
+mit denen Ihr Schriftverkehr auch einen guten Eindruck hinterlassen
+kann.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="structure-and-formatting">
+<title>Struktur und Formatierung</title>
+
+<para>Tappen Sie nicht in die Falle, alles so zu schreiben, als wäre es
+eine SMS. Schreiben Sie vollständige Sätze mit Punkt und Komma, und
+nutzen Sie wo nötig einen Absatzwechsel. Am wichtigsten ist das bei 
+E-Mails und anderen ausformulierten Nachrichten. Im IRC oder anderen
+ähnliche flüchtigen Foren, ist es im allgemeinen in Ordnung wenn man
+nicht auf Großkleinschreibung achtet, sich komprimiert ausdrückt, usw.
+Achten Sie nur darauf, dass Sie diese Gewohnheiten nicht auf formalere,
+langlebigere Plattformen übertragen. E-Mails, Dokumentation, 
+Bug-Meldungen und andere Schriftstücke, für die eine längere Lebensdauer
+vorgesehen ist, sollten mit normaler Grammatik, Rechtschreibung
+und einer verständlichen Erzählstruktur geschrieben werden. Das heißt 
+nicht, dass es an und für sich gut wäre, irgendwelche
+Regeln zu befolgen, sondern dass diese Regeln eben 
+<emphasis>nicht</emphasis> willkürlich sind: Sie haben sich zu ihrer
+heutigen Form entwickelt, weil sie Text lesbarer machen, und Sie sollten 
+sich aus diesem Grunde daran halten. Lesbarkeit ist nicht nur deshalb
+erwünscht, weil es mehr Menchen ermöglicht, Ihre Texte zu lesen, 
+sondern weil Sie sich damit als eine Person darstellen, die sich die
+Zeit nimmt, auf eine klare Art zu kommunizieren: sprich, jemand 
+der seinerseits Aufmerksamkeit verdient.</para>
+
+<para>Insbesondere für E-Mail, haben sich erfahrene Open-Source-Entwickler
+auf folgende Konventionen geeinigt:</para>
+
+<para>Schicken Sie E-Mails ausschließlich im Klartext, nicht HTML,
+RichText, oder anderen Formaten die undurchsichtig wären für 
+Mail-Programme die Klartext verarbeiten. Formatieren Sie Ihre Zeilen so,
+dass sie um die 72 Spalten breit sind. Überschreiten Sie nicht 80 Spalten,
+was <foreignphrase>de facto</foreignphrase> zur Standardbreite für
+Terminals geworden ist (d.h. dass manche breitere Terminals benutzen
+werden, aber niemand schmalere). Indem Sie Ihre Zeilen
+auf etwas <emphasis>weniger</emphasis> als 80 Spalten fassen, lassen
+Sie Platz für die Einfügung einige Stufen von Zitatkennzeichnungen in den
+Rückmeldungen anderer, ohne damit Zeilenumbrüche in Ihrem Text zu
+erzwingen.</para>
+
+<para><emphasis>Benutzen Sie echte Zeilenumbrüche. </emphasis>Manche
+Mail-Programme machen eine Art von scheinbarem Umbruch, bei dem Sie als
+Schreiber der E-Mail Zeilenumbrüche angezeigt bekommen, die nicht wirklich
+da sind. Wenn die E-Mail abgeschickt wird, kann es sein, dass sie nicht
+die Zeilenumbrüche hat, die Sie erwarten, und Ihr Text wird auf manchen 
+Bildschirmen an den unmöglichsten Stellen umgebrochen werden. Wenn Ihr 
+Mail-Programm solche Schein-Umbrüche bietet, suchen Sie nach der
+Einstellung, bei der Sie die echten sehen, während Sie E-Mails
+verfassen.</para>
+
+<para>Wenn Sie Bildschirm-Ausgaben, Code-Abschnitte, oder anderen
+vorformatierten Text mit einbeziehen, setzen Sie sie eindeutig von dem
+Rest Ihres Textes ab, so dass selbst ein träges Auge leicht die
+Grenzen zwischen dem was Sie schreiben und dem was Sie zitieren 
+erkennen können. (Ich hätte nie erwartet, je diesen Ratschlag zu schreiben,
+als ich mit diesem Buch anfing, ich habe aber eine gewisse Anzahl an 
+Open-Source-Malinglisten gesehen, auf denen Leute Texte aus
+verschiedenen Quellen miteinander vermischen, ohne klarzustellen, was
+was ist. Die Auswirkungen sind sehr frustrierend. Es macht ihre
+Nachrichten wesentlich schwerer zu verstehen, und offen gesagt lässt
+es diese Personen auch ein wenig schlecht organisiert aussehen.)</para>
+
+<para>Wenn Sie E-Mails von anderen zitieren, fügen Sie Ihre 
+Stellungnahmen dort ein, wo sie am ehesten angemessen sind, an 
+verschiedenen Stellen falls nötig, und schneiden Sie die Teile heraus,
+die Sie nicht verwendet haben. Wenn Sie einen kurzen Kommentar
+schreiben, welcher sich auf die ganze vorherige E-Mail bezieht,
+ist es in Ordnung einen <firstterm>top-post</firstterm> zu machen
+(also Ihren Kommentar über den zitierten Text zu stellen); 
+ansonsten sollten Sie die relevanten Stellen des ursprünglichen
+Texts zitieren, gefolgt von Ihrer Rückmeldung.</para>
+
+<para>Verfassen Sie die Betreff-Zeilen neuer E-Mails mit Sorgfalt.
+Es ist die wichtigste Zeile in Ihrer E-Mail, da es jeder andere Person
+im Projekt erlaubt, zu entscheiden, ob sie mehr lesen soll oder nicht.
+Moderne Mailprogramme ordnet zusammenhängende E-Mails in Threads, die
+nicht nur durch die Überschrift definiert sein können, sondern auch 
+durch andere E-Mail-Header (welche manchmal nicht angezeigt werden).
+Daraus folgt, dass wenn das Thema des Threads zu sehr abschweift, Sie die
+Überschriften Ihrer E-Mails entsprechend anpassen können &ndash; und 
+sollten &ndash; wenn Sie antworten. Der Thread wird durch die anderen
+Header intakt bleiben, die neue Überschrift wird Leuten, die auf die
+Übersicht des Threads schauen, aber helfen zu erkennen, dass das Thema
+sich geändert hat. Genauso sollten Sie, wenn Sie wirklich ein neues
+Thema anreißen wollen, eine frische E-Mail schreiben, und nicht auf eine
+bereits vorliegende antworten, indem Sie die Überschrift ändern. 
+Ansonsten würde Ihre neue E-Mail in denselben Thread einsortiert werden,
+aus dem heraus Sie antworten, und dadurch Leuten vormachen, es ginge um
+etwas, um das es tatsächlich nicht geht. Wieder wäre die Strafe nicht 
+allein eine Verschwendung ihrer Zeit, sondern auch ein kleiner Kratzer
+in Ihrer Glaubwürdigkeit als jemand, der sicher im Umgang mit
+Kommunikationsmitteln ist.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="writing-content">
+<title>Inhalt</title>
+
+<para>Wohlformatierte E-Mails locken Leser an, erst Inhalte fesseln sie. 
+Natürlich kann kein Satz festgelegter Richtlinien für guten Inhalt
+garantieren, es gibt aber ein paar Prinzipien die ihn etwas 
+wahrscheinlicher machen.</para>
+
+<para>Machen Sie Ihren Lesern die Sache leicht. Es gibt Unmengen an
+Information die in jedem beliebigen aktiven Open-Source-Projekt 
+herumschwirren, Sie können nicht erwarten dass Ihre Lesern mit den 
+meisten davon vertraut wären &ndash; tatsächlich können Sie von Ihren
+Lesern auch nicht erwarten, dass sie wüssten, wie sie sich über diese 
+Dingen informieren können. Wo immer möglich, 
+sollten Ihre Nachrichten Informationen so bereit 
+stellen, wie es für die Leser am bequemsten ist. Wenn Sie zwei 
+zusätzliche Minuten damit verbringen müssen, die URL zu einem 
+bestimmten Thread aus den Archiven der Mailingliste heraus zu graben, um
+es den Lesern Ihrer E-Mail zu ersparen, ist es das wert. Wenn Sie
+5 bis 10 zusätzliche Minuten damit verbringen, die Ergebnisse eines
+komplexen Threads zusammen zu fassen, um Leuten einen Kontext zu geben,
+in dem sie Ihre Nachricht verstehen können, dann tun Sie das. Sehen
+Sie es einmal so: Je erfolgreicher ein Projekt ist, desto höher ist 
+das Leser/Autoren-Verhältnis, egal auf welcher Plattform. Wenn jede
+Nachricht von Ihnen <emphasis>n</emphasis> Personen gelesen
+wird, dann wird bei zunehmendem <emphasis>n</emphasis> der Wert zunehmen, 
+sich dem zusätzlichen Zeitaufand auszusetzen, um ihn anderen zu ersparen.
+Und wenn die Leute sehen, dass Sie sich selbst diese Regeln auferlegen,
+werden sie ihre eigene Kommunikationen dem anpassen. Das Ergebnis ist
+im Idealfall eine Zunahme der allgemeinen Effizienz des Projekts:
+Wenn es die Wahl gibt zwischen dem Aufwand von <emphasis>n</emphasis>
+Personen und dem einer Person, wird das Projekt letzteren vorziehen.</para>
+
+<para>Meiden sie Übertreibungen. Hochspielungen in Online-Nachrichten ist
+ein klassischer Fall von Wettrüsten. Zum Beispiel könnte eine Person,
+die einen Bug meldet, glauben, dass die Entwickler diesem nicht
+genügend Aufmerksamkeit aufbringen werden, und so wird sie den Bug als
+schwerwiegenden Fehler beschreiben, ein Problem welches sie
+(und all ihre Freunde/Mitarbeiter/Verwandte) daran hindert die
+Software produktiv zu nutzen, obwohl es in Wirklichkeit nur ein kleines
+Ärgernis ist. Übertreibungen beschränken sich aber nicht nur auf die
+Nutzer &ndash; Programmierer machen bei technischen Diskussionen oft das
+Gleiche, insbesondere wenn sich die Auseinandersetzung mehr um eine
+Geschmackssache dreht als um Korrektheit:</para>
+
+  <blockquote>
+     <para>"Das zu machen, würde den Code völlig unlesbar machen. Ihn
+	zu warten, würde zu einem Albtraum, im Vergleich dem Vorschlag
+	von H. Mustermann..."</para>
+  </blockquote>
+
+<para>Der gleiche Gedanke wird sogar <emphasis>stärker</emphasis> wenn
+man ihn weniger scharf formuliert:</para>
+
+  <blockquote>
+     <para>"Das geht, aber ich denke es ist bezüglich Lesbarkeit
+	und Wartbarkeit nicht so optimal. Der Vorschlag von
+	H. Mustermann vermeidet diese Probleme, da hier..."</para>
+  </blockquote>
+
+<para>Sie werden Übertreibungen nicht völlig vermeiden können, und im
+Allgemeinen ist das auch nicht nötig. Im Vergleich zu anderen Formen
+der Fehlkommunikation, ist Übertreiben nicht für die Allgemeinheit
+schädlich &ndash; es schadet hauptsächlich den Ausübenden. Die Empfänger
+können kompensieren, es ist nur dass der Sender mit jeder Nachricht
+ein wenig an Glaubwürdigkeit verliert. Sie sollten deshalb im 
+Interesse von Ihrem Einfluss im Projekt, versuchen in die moderatere
+Richtung zu gehen. Auf diese Art können Sie wenn Sie <emphasis>wirklich
+</emphasis> einen wichtigen Hinweis machen müssen, werden Leute Sie
+ernst nehmen.</para>
+
+<para>Bearbeiten Sie zwei mal. Bei jeder Nachricht, die länger ist als
+ein mittellanger Absatz, sollten Sie, nachdem Sie der Meinung sind, dass
+sie fertig ist, diese von oben bis unten erneut durchlesen, bevor Sie sie
+versenden. Dieser Ratschlag wird jedem bekannt vorkommen, der einmal
+an einem Schreibkurs teilgenommen hat, ist aber bei Online-Diskussionen
+besonders wichtig. Da das Verfassen von Online-Nachrichten
+von ständigen Unterbrechungen begleitet wird (während Sie schreiben,
+müssen Sie vielleicht in andere E-Mails nachschauen, bestimmte Webseiten
+besuchen, einen Befehl ausführen, um seine Diagnosmeldungen abzugreifen, usw.),
+passiert es besonders schnell, dass man den erzählerischen Faden verliert.
+Nachrichten, die mit Unterbrechungen verfasst und vor dem
+Versenden nicht überprüft wurden, sind, zum Verdruss der Autoren
+(möchte man zumindest hoffen), oft als solche erkennen. Nehmen Sie sich
+die Zeit zu überprüfen, was Sie abschicken. Je besser der 
+strukturelle Zusammenhalt Ihrer Nachrichten, desto mehr werden Sie
+gelesen.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="writing-tone">
+<title>Tonfall</title>
+
+<para>Nachdem Sie tausende Nachrichten geschrieben haben, werden Sie
+bemerken, dass Ihr Schreibstil zum knappen neigt. Das scheint die in
+den meisten technischen Foren der Normalfall zu sein, und an und gibt
+es daran nichts falsches. Ein Grad an Knappheit, welcher im normalen
+sozialen Umgang unzumutbar wäre ist für Hacker freier Software einfach
+der Standard. Hier ist eine vollständig zitierte Reaktion, welche ich
+einmal von einem Mailverteiler über freie Content-Management-Software
+erhielt:</para>
+
+<screen>
+Können Sie möglicherweise etwas näher auf die Probleme auf der Sie 
+gestoßen sind, usw. eingehen? 
+
+Desweiteren:
+
+Welche Version von Slash benutzen Sie? Das konnte ich aus Ihrer
+ursprünglichen Nachricht nicht erkennen.
+
+Wie genau haben Sie den Build des apache/mod_perl-Quellcode ausgeführt?
+
+Haben Sie den Apache-2.0-Patch ausprobiert, über den auf slashcode.com
+berichtet wurde?
+
+  Shane
+</screen>
+
+<para><emphasis>Das</emphasis> ist jetzt mal knapp! Keine Begrüßung, 
+abgesehen vom Namen keine Abmeldung, und die Nachricht selbst ist 
+lediglich eine Aneinanderreihung von Fragen die so kompakt wie
+möglich formuliert sind. Sein einziger Satz mit einer Aussage war eine
+implizite Kritik an meine ursprüngliche Nachricht. Trotzdem war ich
+glücklich darüber die Nachricht von Shane zu sehen, und ich fasste
+die Knappheit seiner Antwort nicht als ein Anzeichen für irgend etwas
+anderes als das er eine beschäftigte Person ist. Alleine die Tatsache,
+dass er Fragen stellte, anstatt meine Nachricht zu ignorieren 
+bedeutete, dass er bereit war etwas Zeit für meinem Problem 
+aufzubringen.</para>
+
+<para>Werden alle Leser auf diesen Schreibstil positiv reagieren? 
+Nicht unbedingt; es kommt auf die Person und den Kontext an. Wenn
+Jemand zum Beispiel eben erst geschrieben hat das sie einen Fehler
+gemacht hat (vielleicht hat sie einen Bug geschrieben), und Sie aus
+vergangener Erfahrung wissen, dass diese Person dazu neigt etwas
+Unsicher zu sein, auch wenn Sie trotzdem noch eine knappe Antwort
+schreiben, sollten Sie es durch etwas aufwiegen was ihre Gefühle
+anerkennt. Der größte Teil Ihrer Antwort mag kurz gehalten sein,
+eine Analyse der Situation aus Sicht eines Ingenieurs, so kurz wie
+Sie wollen. Melden Sie sich aber zum Schluss mit etwas ab, dass es
+nicht als Kälte aufgefasst werden soll. Wenn Sie zum Beispiel der
+Person eben erst eine Unmenge an Ratschläge gegeben haben wie sie
+einen Bug beheben soll, dann melden Sie sich mit "Viel Glück, &lt;hier
+Ihr Name&gt;" um anzudeuten, dass Sie ihnen gutes wünschen und nicht
+Sauer sind. Ein strategisch platzierter Smiley oder ein anderer 
+Hinweis auf die Gefühlslage kann oft auch ausreichen um den 
+Gesprächspartner zu beruhigen.</para>
+
+<para>Es mag komisch erscheinen derart auf die Gefühle des Beteiligten
+zu achten, als darauf was sie sagen, aber um es kahl zu sagen, 
+beeinflussen Gefühle die Produktivität. Gefühle sind auch aus anderen
+Gründen wichtig, selbst uns aber ausschließlich auf nutzungsbezogene 
+Gebiete zu beschränken, können wir anmerken, dass unglückliche Menschen
+schlechtere Software schreiben, und weniger davon. Angesichts der 
+begrenzten Natur der meisten elektronischen Medien, wird es jedoch
+keine offensichtliche offensichtlichen Hinweis darauf geben, in welcher
+Stimmung sich die Person befindet. Sie werden eine wohlbegründete 
+Vermutung darüber anstellen müssen basierend auf a) wie die meisten
+Menschen sich in einer solchen Situation fühlen, und b) was Sie über
+diese Person aus vergangenen Dialogen wissen. Manche Menschen
+bevorzugen eine eher unpersönliche Einstellung, und behandeln all
+gleichermaßen nach ihrer oberflächlichen Erscheinung, wobei die Idee
+die dahintersteckt ist, dass wenn die Beteiligte nicht offen sagt,
+dass sie sich irgendwie fühlt, hat man kein Recht sie so zu behandeln
+als ob das der Fall wäre. Ich mag diese Herangehensweise aus mehreren
+Gründen nicht. Erstens, verhalten sich Menschen im echten Leben nicht
+so, also warum sollten Sie es online machen? Zweitens, da die meisten
+Interaktionen in öffentlichen Foren stattfinden, neigen Leute dazu
+sich noch mehr zurück zu halten als das im privaten der Fall wäre.
+Um es genauer zu sagen, sie sind oft bereit auf andere gerichtete
+Gefühle auszudrücken, wie Dankbarkeit oder Unmut, nicht jedoch nach
+innen gerichtete Gefühle wie Unsicherheit oder Stolz. Trotzdem
+arbeiten die meisten Menschen besser, wenn sie wissen, dass andere
+über ihre Verfassung im klaren sind. Indem Sie auf kleine Hinweise
+achten, können Sie die meiste Zeit für gewöhnlich richtig raten,
+und andere Personen motivieren weiterhin in größeren Maße beteiligt zu
+bleiben als es sonst der Fall wäre.</para>
+
+<para>Damit meine ich natürlich nicht, dass Sie die Rolle des
+Gruppentherapeuten einnehmen sollen, der andauernd jeden dabei helfen
+soll, sich über seine Gefühle im klaren zu sein. Indem Sie aber 
+sorgfältig auf Muster im langfristigen Verhalten von Personen achten,
+werden Sie ein Gespür für sie als Individuen bekommen, selbst wenn Sie
+nie von Angesicht zu Angesicht treffen. Und indem Sie auf den Ton Ihrer
+Nachrichten achten, können Sie einen überraschenden Einfluss darauf 
+haben wie sich andere fühlen, was letztendlich dem Projekt zugute 
+kommt.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="rudeness">
+<title>Unhöflichkeiten erkennen</title>
+
+<para>Eine der bestimmenden Eigenschaften der Open-Source-Kultur ist
+ihre ausgeprägte Auffassung darüber, was unhöflich ist und was nicht.
+Obwohl die unten beschriebenen Grundsätze nicht alleine für die
+Entwicklung freier Software gelten, oder auch für Software im 
+allgemeinen &ndash; sie wären jedem bekannt der im Bereich der Mathematik,
+der technischen Wissenschaften oder im Ingenieurswesen arbeitet &ndash; 
+ist freie Software, mit seinen offenen Grenzen und ständigen Fluss an 
+Einwanderern, eine Umgebung indem diese Grundsätze besonders häufig von 
+Personen begegnet wird, die mit Ihnen nicht vertraut sind.</para>
+
+<para>Lass uns damit anfangen, was <emphasis>nicht</emphasis>
+unhöflich ist:</para>
+
+<para>Technische Kritik, selbst direkte und ungepolsterte ist nicht
+unhöflich. Es kann sogar eine Art von Kompliment sein: Der Kritiker
+sagt implizit, dass die Zielperson es wert ist ernst genommen zu
+werden, und Zeit mit auf zu bringen. Das heißt, je attraktiver es
+gewesen wäre die Nachricht von jemand zu ignorieren, desto eher ist es
+ein Kompliment sich die Zeit zu nehmen es zu kritisieren (natürlich
+ausgeschlossen ist wenn die Kritik zu einem persönlichen Angriff 
+oder einer anderen Form von Unhöflichkeit verfällt).</para>
+
+<para>Knappe, ungeschminkte Fragen, wie die in der vorhin zitierten
+E-Mail von Shane an mich, sind auch nicht unhöflich. Fragen die in einem
+anderen Kontext kalt oder rhetorisch, selbst verspottend erscheinen
+könnten, sind oft ernst gemeint, und haben kein Hintergedanke außer
+die Informationen so schnell wie möglich zu herauszulocken. Die
+berühmte Frage von technischen Support "Ist Ihr Computer angeschlossen?"
+ist ein klassisches Beispiel hierfür. Die Person von Support muss
+wirklich wissen, ob Ihr Computer angeschlossen ist, und nach den ersten
+paar Tagen bei dieser Arbeit, ist sie müde geworden höflichen 
+Schmeicheleien ihren Fragen voranzustellen ("Entschuldigen Sie, ich
+möchte lediglich vorher ein paar einfache Fragen stellen, um ein paar
+Möglichkeiten aus dem Weg zu räumen. Manche davon mögen sich ziemlich
+einfach anhören, haben Sie aber bitte Nachsicht..."). Mittlerweile
+macht sie sich aber nicht mehr die Mühe mit der Höflichkeit, sie fragt
+einfach gerade heraus: Ist es angeschlossen oder nicht? Die gleichen 
+Fragen werden andauernd auf den Mailverteilern freier Software 
+gestellt. Die Absicht ist nicht, den Empfänger zu beleidigen, sondern
+schnell einige der offensichtlichsten (und möglicherweise häufigsten)
+Erklärungen auszuschließen. Empfänger die das verstehen und 
+entsprechend reagieren ernten Punkte dafür eine aufgeschlossene Sicht,
+ohne Widerrede, eingenommen zu haben. Es ist einfach ein 
+Aufeinandertreffen verschiedener Kulturen, und nicht die Schuld von
+irgendjemand. Erklären Sie freundlich, dass Ihre Frage (oder Kritik)
+keine versteckte Bedeutung hatte; es war lediglich gedacht die
+Information so schnell und effizient wie möglich zu bekommen (oder
+übertragen) und sonst nichts.</para>
+
+<para>Was ist als Unhöflich?</para>
+
+<para>Nach dem gleichen Prinzip womit detaillierte technische Kritik
+als Kompliment aufgefasst werden kann, kann das Weglassen von
+hochwertiger Kritik eine Art von Beleidigung. Ich meine nicht nur die
+Arbeit von jemand zu ignorieren, sei es ein Vorschlag, eine Änderung
+am Code oder ein die Meldung von einem Issue oder sonstwas. Wenn Sie
+nicht vorher explizit eine detaillierte Antwort versprochen haben, ist
+es gewöhnlich in Ordnung einfach überhaupt nicht zu reagieren. Man wird
+annehmen, dass Sie einfach keine Zeit hatten etwas zu sagen. Wenn Sie
+aber <emphasis>doch</emphasis> eine Antwort geben, sollten Sie knausern:
+nehmen Sie sich die Zeit die Sachen wirklich zu untersuchen, geben Sie
+konkrete Beispiele an wo angemessen, wühlen Sie in den Archiven herum
+um verwandte Nachrichten zu finden, usw. Oder wenn Sie nicht die Zeit
+haben eine solche Mühe aufzubringen, aber trotzdem irgend eine kurze
+Antwort geben müssen, dann erklären Sie den Defizit offen in Ihrer
+Nachricht ("Entschuldigung, ich denke es gibt hierzu eine Meldung, 
+hatte aber leider nicht die Zeit um danach zu suchen"). Die Hauptsache
+ist die kulturelle Norm anzuerkennen, entweder indem man sie erfüllt,
+oder offen zuzugeben, dass man dieses mal ihr nicht gerecht geworden
+ist. In beiden Fällen wird die Norm verstärkt. Der Norm aber nicht
+gerecht zu werden und gleichzeitig nicht zu erklären <emphasis>warum
+</emphasis>, Sie es nicht geschafft haben Ihnen gerecht zu werden,
+ist das gleiche, als ob Sie sagen würden, dass das Thema (und die
+daran Beteiligten) nicht viel Ihrer Zeit wert war. Es ist besser zu
+zeigen, dass Ihre Zeit wertvoll ist, indem Sie sich kurz halten als
+indem Sie faul sind.</para>
+
+<para>Es gibt viele andere Formen der Unhöflichkeit, und der gesunde
+Menschenverstand ist ein guter Führer um sie zu vermeiden. Siehe auch
+<xref linkend="prevent-rudeness"/><phrase output="printed"> im Kapitel
+<xref linkend="getting-started"/></phrase>, wenn Sie es noch nicht
+gemacht haben.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="face">
+<title>Gesicht zeigen</title>
+
+<para>Es gibt einen Bereich im menschlichen Gehirn, der speziell
+der Erkennung von Gesichtern gewidmet ist. Es wird als "fusiformes 
+Gesichtsareal" (en. fusiform face area) bezeichnet und seine
+Fähigkeiten sind größtenteils angeboren und nicht angelernt. Es hat
+sich herausgestellt, dass die Erkennung von Gesichtern eine derart
+wichtige Fähigkeit ist um zu überleben, dass wir spezielle Hardware
+dafür entwickelt haben.</para>
+
+<para>Internet basierende Zusammenarbeit ist deshalb psychologisch 
+etwas merkwürdig, da es eine enge Mitarbeit zwischen Menschen 
+erfordert, die fast nie die Gelegenheit bekommen einander mit den
+intuitivsten Methoden zu identifizieren: erstens durch Gesichter,
+aber auch durch Stimme, Haltung, usw. Um das zu kompensieren, sollten
+Sie versuchen, überall den selben <firstterm>Bildschirm-Namen
+</firstterm> verwenden. Es sollte der vordere Teil Ihrer E-Mail-Adresse
+sein (der Teil vor dem @-Zeichen), Ihr Nutzername im IRC,
+der Name Ihres Kontos im Projektarchiv, im Bug Tracker usw. Dieser
+Name ist Ihr online "Gesicht": Ein Kürzel um Sie zu identifizieren,
+welches manche der gleichen Funktionen erfüllt wie Ihr Gesicht,
+auch wenn es leider nicht die eingebaute Hardware im Gehirn anregt.
+</para>
+
+<para>Der Bildschirm-Name sollte eine intuitive Permutation Ihres
+echten Namens sein (meiner, zum Beispiel ist "kfogel"). In manchen
+Situationen wird es sowieso von Ihrem kompletten Namen begleitet,
+zum Beispiel im Kopf einer E-Mail:</para>
+
+<screen>
+Von: "Karl Fogel" &lt;kfogel@irgendeinedomain.com&gt;
+</screen>
+
+<para>Tatsächlich gibt es zwei Sachen in dem Beispiel auf die man
+achten sollte. Wie vorhin erwähnt, gleicht der Bildschirm-Name dem 
+echten auf eine intuitive Art. Der echte Name ist aber auch 
+<emphasis>echt</emphasis>. Also kein erfundener wie:</para>
+
+<screen>
+Von: "Super Hacker" &lt;superhacker@irgendeinedomain.com&gt;
+</screen>
+
+<para>Es gibt einen berühmten von Paul Steiner, in der Ausgabe vom
+5 Juli 1993 der Zeitung <citetitle>The New Yorker</citetitle>, welches
+einen Hund an einem Terminal zeigt, der zu einem anderen 
+verschwörerisch herunterschaut und sagt: "Im Internet weiß keiner, dass
+du ein Hund bist". Diese Denkart ist es wahrscheinlich, die hinter
+einer Vielzahl an selbstverherrlichenden soll-wohl-cool-sein 
+Online-Identitäten 
+liegen, die Leute sich selber geben &ndash; als ob sich einen
+"Super Hacker" zu nennen, die Leute glauben machen würde man wäre
+<emphasis>tatsächlich</emphasis> ein toller Hacker. Tatsache bleibt
+aber: Selbst wenn keiner weiß das Sie ein Hund sind, sind Sie immer
+noch ein Hund. Eine glorreiche online Identität beeindruckt nie die
+Leser. Statt dessen, gibt es ihnen den Eindruck, als würden Sie eher
+auf das Erscheinungsbild achten als auf den Inhalt, oder dass Sie 
+einfach nur unsicher sind. Benutzen Sie Ihren echten Namen für alle
+Dialoge, oder wenn Sie aus irgend einem Grund anonym bleiben müssen,
+dann erfinden Sie einen Namen der sich wie ein gewöhnlicher anhört 
+und bleiben Sie ab da bei ihm.</para>
+
+<para>Es gibt noch ein paar weitere Sachen die Sie machen können um
+Ihr Online-Gesicht attraktiver zu machen, abgesehen davon, dass Sie es
+konsistent halten. Wenn Sie einen Titel haben (wie "Doktor" oder 
+"Professor"), sollten Sie nicht mit Ihm herum stolzieren, oder auch nur
+erwähnen, außer wenn es direkt für die Diskussion bedeutend ist. Im
+Allgemeinen neigt die Kultur von Hacker und der freien Software dazu,
+das vorzeigen von Titel als etwas ausschließendes und ein Zeichen von
+Unsicherheit zu betrachten. Es ist in Ordnung wenn Ihr Titel als Teil
+Ihrer Signatur am ende jeder E-Mail die Sie abschicken erscheint,
+benutzen Sie es jedoch niemals als um Ihre Position in einer Diskussion
+zu verstärken &ndash; der Versuch wird garantiert zurückschlagen. Sie
+wollen, dass man die Person respektiert, nicht den Titel.</para>
+
+<para>Wo wir gerade von Signaturen sprechen: halten Sie sie kurz und
+geschmackvoll, oder lassen Sie sie besser gleich weg. Vermeiden Sie
+lange rechtliche Klausel für den Haftungsausschluss die an jeder E-Mail
+angehängt werden, insbesondere wenn Sie eine Stimmung ausdrücken die
+nicht mit der Beteiligung an einem freien Software-Projekt vereinbar
+sind. Der folgende Klassiker dieser Gattung erscheint zum Beispiel am
+Ende jeder Nachricht von einem bestimmter Nutzer, auf einem 
+öffentlichen Verteiler bei dem ich angemeldet bin:</para>
+
+<screen>
+WICHTIGER HINWEIS
+
+Wenn Sie diese E-Mail fehlerhafterweise erhalten haben oder den
+Haftungsausschluss unserer E-Mails lesen wollen, wenden Sie sich bitte
+an die folgende Erklärung under nehmen Sie mit dem Absender Kontakt
+auf.
+
+This communication is from Deloitte &amp; Touche LLP.  Deloitte &amp;
+Touche LLP is a limited liability partnership registered in England
+and Wales with registered number OC303675.  A list of members' names
+is available for inspection at Stonecutter Court, 1 Stonecutter
+Street, London EC4A 4TR, United Kingdom, the firm's principal place of
+business and registered office.  Deloitte &amp; Touche LLP is
+authorised and regulated by the Financial Services Authority.
+
+This communication and any attachments contain information which is
+confidential and may also be privileged.  It is for the exclusive use
+of the intended recipient(s).  If you are not the intended
+recipient(s) please note that any form of disclosure, distribution,
+copying or use of this communication or the information in it or in
+any attachments is strictly prohibited and may be unlawful.  If you
+have received this communication in error, please return it with the
+title "received in error" to IT.SECURITY.UK@deloitte.co.uk then delete
+the email and destroy any copies of it.
+
+E-mail communications cannot be guaranteed to be secure or error free,
+as information could be intercepted, corrupted, amended, lost,
+destroyed, arrive late or incomplete, or contain viruses.  We do not
+accept liability for any such matters or their consequences.  Anyone
+who communicates with us by e-mail is taken to accept the risks in
+doing so.
+
+When addressed to our clients, any opinions or advice contained in
+this e-mail and any attachments are subject to the terms and
+conditions expressed in the governing Deloitte &amp; Touche LLP client
+engagement letter.
+
+Opinions, conclusions and other information in this e-mail and any
+attachments which do not relate to the official business of the firm
+are neither given nor endorsed by it.
+</screen>
+
+<para>Bei jemand der lediglich ab und an ein paar Fragen stellen möchte,
+erscheint dieser riesige Haftungsausschluss etwas albern verursacht 
+aber wahrscheinlich keinen dauerhaften Schaden. Wenn diese Person sich
+jedoch aktiv an dem Projekt beteiligen wollte, würde dieser Rechtliche
+Textblock eine heimtückischere Wirkung haben. Es würde mindestens zwei
+möglicherweise schädliche Signal aussenden: Erstens, dass diese Person
+nicht die komplette Kontrolle über seine Werkzeuge hat &ndash; er ist in
+irgend einem E-Mail-System von einem Unternehmen, welches an jeder E-Mail
+eine nervige Botschaft anhängt, und er hat keine Möglichkeit es zu
+umgehen &ndash; und zweitens, dass er wenig oder keine Unterstützung von
+seiner Organisation für seine Aktivitäten bei freier Software hat.
+Zugegeben, die Organisation hat ihm ganz klar nicht direkt verboten an
+öffentliche Verteiler zu schreiben, aber sie lässt seine Nachrichten
+eindeutig unfreundlich aussehen, als ob das Risiko vertrauliche
+Informationen herauszulassen über alle anderen Prioritäten steht.</para>
+
+<para>Wenn Sie für eine Organisation arbeiten, welche darauf besteht,
+solche Signaturen an alle abgehenden E-Mails anzuhängen, dann sollten
+Sie in Betracht ziehen, sich eine kostenlose E-Mail-Adresse anzulegen,
+zum Beispiel bei <ulink url="gmail.google.com"/>,
+<ulink url="www.hotmail.com"/>, oder <ulink url="www.yahoo.com"/>, und
+benutzen Sie diese Adresse für das Projekt.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+
+<sect1 id="common-pitfalls">
+<title>Vermeidung häufiger Fallstricke</title>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="post-with-purpose">
+<title>Schreiben Sie nicht ohne Veranlassung</title>
+
+<para>Eine häufiger Fehler bei der Beteiligung an einem Online-Projekt
+ist zu denken, dass Sie auf alles reagieren müssen. Das müssen Sie 
+nicht. Erstens wird es für gewöhnlich mehr Threads geben, als worüber
+Sie den Überblick behalten können, zumindest nachdem das Projekt die
+ersten paar Monate überschritten hat. Zweitens wird das meiste von dem
+was in den Threads geschrieben wird, für die Sie sich entschieden haben
+sie mit zu verfolgen, keine Antwort erfordern. Gerade Entwicklerforen
+neigen dazu von drei Arten von Nachrichten beherrscht zu werden:</para>
+
+<orderedlist>
+  <listitem><para>Nachrichten die etwas nicht triviales vorschlagen
+                  </para></listitem>
+  <listitem><para>Nachrichten die Unterstützung oder Widerstand für
+                  oder gegen etwas ausdrücken was jemand anderes
+                  gesagt hat</para></listitem>
+  <listitem><para>Zusammenfassende Nachrichten</para></listitem>
+</orderedlist>
+
+<para>Von diesen erfordert keiner <emphasis>an und für sich</emphasis>
+eine Rückmeldung, insbesondere wenn Sie sich auf der Grundlage von dem
+was Sie bisher in dem Thread gesehen haben, sicher sein können, dass
+jemand anderes wahrscheinlich sowieso das sagen wird, was Sie eh gesagt
+hätten. (Wenn Sie sich sorgen machen, dass Sie in einer Schleife 
+gefangen werden, bei dem jeder auf den anderen wartet, weil sie die
+gleiche Taktik verfolgen, sollten Sie es nicht; es gibt fast immer
+<emphasis>irgend jemand</emphasis> der das Bedürfnis hat sich in die
+Schlacht zu stürzen. Fragen Sie sich erstens: Wissen Sie was
+Sie erreichen wollen? Und zweitens: Wird dieses Ziel nicht erreicht
+werden, ohne dass Sie etwas sagen?</para>
+
+<para>Zwei gute Gründe Ihre Stimme bei einem Thread einzulegen, sind a)
+wenn Sie einen Fehler in einem Vorschlag sehen, und vermuten, dass Sie
+die einzige sind, die es sieht, und b) wenn Sie sehen, dass in der
+Kommunikation etwas schief läuft und Sie wissen, dass Sie es richten
+können indem Sie eine klärende Nachricht schreiben. Es ist im 
+allgemeinen auch in Ordnung eine Nachricht zu schicken, nur um jemanden
+für etwas zu danken, oder um "Ich auch!" zu sagen, da ein Leser bei
+solchen Nachrichten sofort erkennen kann, dass sie keiner weiteren
+Antwort oder Handlung bedürfen und deshalb endet die geistige 
+Anstrengung die sie erfordern sauber mit der letzten Zeile der E-Mail.
+Selbst dann sollten Sie zwei mal darüber nachdenken, vor Sie etwas 
+sagen; es ist immer besser Menschen wünschen zu lassen, dass Sie mehr
+schreiben, als dass die weniger schreiben. (Siehe den zweiten Teil von
+<xref linkend="bikeshed-full"/> für weiteres darüber wie man sich auf
+betriebsamen Mailverteilern verhalten soll.)</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="productive-threads">
+<title>Produktive kontra unproduktive Threads</title>
+
+<para>Auf einem betriebsamen Mailverteiler haben Sie zwei Pflichten.
+Eines ist offensichtlich herauszufinden, worauf Sie achten müssen und
+was Sie ignorieren können. Das andere ist, sich derart zu verhalten,
+dass Sie es vermeiden Rauschen zu <emphasis>erzeugen</emphasis>: Sie
+wollen nicht nur, dass Ihre eigene Nachrichten ein hohes 
+Signal/Rausch-Verhältnis
+haben, sondern, dass Sie die Art von Nachrichten sind, die
+<emphasis>andere</emphasis> dazu anregen entweder Nachrichten mit einem
+ähnlich hohen Signal/Rausch-Verhältnis zu schreiben, oder überhaupt
+nicht zu schreiben.</para>
+
+<para>Um zu sehen wie Sie das erreichen können, lass uns den Kontext
+bedenken in dem es gemacht wird. Was sind einige der Ecksteine von
+unproduktiven Threads?</para>
+
+<itemizedlist>
+  <listitem><para>Argumente die bereits aufgeworfen wurden fangen an
+	wiederholt zu werden, als ob der Absender denkt, dass keiner
+	sie beim erstem mal gehört hat.</para>
+  </listitem>
+  <listitem><para>Eine Zunahme an Übertreibung und Beteiligung während
+	die der Einsatz immer kleiner wird.</para>
+  </listitem>
+  <listitem><para>Eine Mehrheit der Kommentare stammt von Personen die
+	wenig oder gar nichts machen, während diejenigen die dazu 
+	neigen Sachen erledigt zu bekommen ruhig sind.</para>
+  </listitem>
+  <listitem><para>Viele Ideen werden diskutiert, ohne dass klare 
+	Vorschläge gemacht werden. (Natürlich fängt jede interessante
+	Idee als eine ungenaue Vision an; die wichtige Frage ist welche
+	Richtung sie von da an einschlägt. Erscheint es so als ob der
+	Thread die Vision in etwas konkreteres verwandelt, oder
+	schweift es ab in unter Visionen, neben Visionen und 
+	Auseinandersetzungen über Grundsatzfragen?)</para>
+  </listitem>
+</itemizedlist>
+
+<para>Nur weil ein Thread an Anfang nicht produktiv ist, bedeutet es 
+nicht, das es eine Zeitverschwendung ist. Es kann sich um ein wichtiges
+Thema drehen, bei dem die Tatsache, dass es nicht vorankommt um so
+beunruhigender ist.</para>
+
+<para>Einen Thread in eine nützliche Richtung zu führen, ohne aggressiv
+zu sein, ist eine Kunst. Es wird nicht funktionieren, Leute einfach
+abzumahnen, ihre Zeit nicht zu verschwenden, oder Sie darum zu bitten
+nicht zu schreiben, es sei denn Sie haben etwas konstruktives
+beizutragen. Es mag natürlich sein, dass Sie das privat denken, aber
+wenn Sie es laut sagen, werden Sie beleidigend sein. Statt dessen,
+müssen Sie Bedingungen für den weiteren Fortschritt vorschlagen &ndash; 
+geben Sie den Leuten eine Route, einen Weg welcher zu den Ergebnissen
+führt, die Sie haben wollen, jedoch ohne dass Sie sich anhören, als
+würden Sie das Verhalten diktieren. Der Unterschied liegt größtenteils
+im Ton. Folgendes ist zum Beispiel schlecht:</para>
+
+  <blockquote>
+     <para><emphasis>Diese Diskussion führt nirgendwo hin. Können wir
+	bitte dieses Thema so lange fallen lassen, bis jemand einen
+	Patch hat, um einen der Vorschläge zu implementieren? Es hat
+	keinen Sinn immer wieder die gleichen Sachen zu sagen. Code
+	spricht lauter als Worte, Leute.</emphasis></para>
+  </blockquote>
+
+<para>Wohingegen folgendes gut ist:</para>
+
+  <blockquote>
+     <para><emphasis>Verschiedene Vorschläge wurden in diesem Thread
+	gemacht, bei keinem wurden aber die Details ausgearbeitet,
+	zumindest nicht so weit um darüber abzustimmen. Trotzdem sagen
+	wir derzeit nichts neues; wir wiederholen einfach nur was 
+	vorher schon gesagt wurde. Derzeit wäre es also wahrscheinlich
+	das beste, wenn die folgenden Nachrichten entweder 
+	ausgearbeitete Vorschläge beinhalten, oder einen Patch. Dann
+	hätten wir wenigstens etwas festes worauf wir reagieren könnten
+	(d.H. Konsens über den Vorschlag erreichen oder den Patch
+	anwenden und Testen).</emphasis></para>
+  </blockquote>
+
+<para>Vergleichen Sie die zweite Herangehensweise mit der ersten. Die
+Zweite zieht keinen Strich zwischen Ihnen und die anderen, noch
+beschuldigt es Sie die Diskussion zu verzetteln. Es ist die Rede von
+"wir", was wichtig ist, ob Sie vorher tatsächlich an dem Thread
+beteiligt waren oder nicht, da es alle daran erinnert, dass selbst
+diejenigen die bisher ruhig geblieben sind, trotzdem noch einen
+Anteil an seinem Ausgang haben. Sie beschreibt warum der Thread
+nirgendwo hinführt, macht es aber ohne Abwertungen oder Verurteilungen
+ &ndash; es hält lediglich leidenschaftslos einige Tatsachen fest. Am
+wichtigsten, bietet es eine positive Vorgehensweise an, damit die Leute
+nicht das Gefühl bekommen, als würde die Diskussion abgebrochen werden
+(eine Maßnahme gegen der man nur versucht sein kann zu rebellieren),
+sondern als ob Ihnen eine Möglichkeit angeboten wird die Unterhaltung
+auf eine konstruktivere Ebene zu führen. Das ist ein Standard den 
+Leute natürlich erfüllen werden wollen.</para>
+
+<para>Sie werden nicht immer wollen, dass ein Thread es auf die nächste
+höhere konstruktive Ebene schafft &ndash; manchmal werden Sie einfach nur
+wollen das er verschwindet. Der Sinn von Ihrer Nachricht ist dann, das
+eine oder das andere herbeizuführen. Wenn Sie schon an der Art wie der
+Thread bisher verlaufen ist, erkennen können, dass keiner die von Ihnen
+vorgeschlagenen Maßnahmen wirklich <emphasis>machen</emphasis> wird,
+haben Sie den Thread effektiv beendet ohne dass es danach aussieht. Es
+gibt natürlich keinen narrensicheren Weg einen Thread zu beenden, und
+selbst wenn es den gäbe, würden Sie ihn nicht einsetzen wollen. Die
+Beteiligten aber darum zu bitten, entweder sichtbaren Fortschritt zu
+machen, oder aufzuhören Nachrichten zu schicken, ist wenn Sie es
+diplomatisch anstellen, ohne weiteres vertretbar. Hüten Sie sich jedoch
+davor Threads voreilig zu schließen. Eine gewisse Menge an spekulativem
+Gerede kann, je nach Thema, produktiv sein, und darum zu bitten, dass
+man es zu schnell klärt, wird den kreativen Ablauf ersticken, und Sie
+zusätzlich als ungeduldig erscheinen lassen.</para>
+
+<para>Erwarten Sie von keinem Thread, dass er sofort aufhört. Es wird
+wahrscheinlich immer noch ein paar Nachrichten nach Ihrem geben, 
+entweder weil sie sich in der Leitung begegnet sind, oder weil Leute
+immer das letzte Wort haben wollen. Das ist nichts, worüber Sie sich
+Sorgen machen müssten und Sie müssen nicht erneut ein Schreiben
+schicken. Lassen Sie den Thread einfach auslaufen, oder nicht auslaufen
+wie immer der Fall auch sein mag. Sie können nicht die absolute 
+Kontrolle haben; andererseits, können Sie über viele Threads gesehen, 
+eine statistisch signifikante Wirkung zu haben.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="bikeshed">
+<title>Je weicher das Thema, desto länger die Debatte</title>
+
+<para>Obwohl Diskussionen bei jedem Thema mäandrieren können, geht die
+Wahrscheinlichkeit dafür hoch wenn die technische Schwierigkeit runter
+geht. Schließlich ist die Anzahl der Teilnehmer die mitkommen können
+um so kleiner, je schwieriger das Thema ist. Diejenigen die es können,
+sind wahrscheinlich die erfahrensten Entwickler, die bereits tausende
+male vorher an solchen Diskussionen teilgenommen haben, und wissen,
+welches Verhalten wahrscheinlich zu einem Konsens führt, mit dem alle
+leben können.</para>
+
+<para>Konsens ist deshalb am schwersten zu erreichen bei technischen
+Fragen die einfach zu verstehen sind und bei dem man leicht eine
+Meinung haben kann, sowie bei "weichen" Themen, wie Organisation,
+Öffentlichkeitsarbeit, Finanzierung, usw. Menschen können sich ewig
+über solche Themen unterhalten, da es keine nötige Qualifikationen 
+dafür gibt, keine klaren Möglichkeiten um zu entscheiden (selbst im
+Nachhinein) ob eine Entscheidung richtig war oder falsch, und weil
+es manchmal eine erfolgreiche Taktik ist einfach länger zu warten
+als andere Diskussionsteilnehmer.</para>
+
+<para>Das Prinzip, dass die Menge an Diskussion umgekehrt proportional
+dazu ist, wie komplex das Thema ist, hat es schon lange gegeben, und
+ist informell unter dem Begriff <firstterm>Bikeshed Effect</firstterm>
+(de. Fahrradschuppen-Effekt) bekannt. Hier ist die Erklärung von 
+Poul-Henning Kamp davon, aus einer nunmehr berühmten E-Mail an 
+BSD-Entwickler:</para>
+
+<blockquote>
+
+<!-- all review of the translation of this quoted text should 
+be done in appc and ported back when finished -->
+
+<para>Es ist eine lange Geschichte, bzw. eher eine alte Geschichte,
+aber sie ist in Wirklichkeit ziemlich kurz. C. Northcote Parkinson 
+schrieb Anfang der 1960'er ein Buch namens "Parkinsons Gesetz", 
+welches eine Menge Einblicke in die Dynamik von Verwaltung beinhaltet.
+</para>
+
+<para>[...]</para>
+
+<para>Bei dem spezifischen Beispiel welches mit einem Fahrradschuppen
+zu tun hat, ist die andere entscheidende Komponente ein Atomkraftwerk,
+was schätze ich die Zeit in der das Buch geschrieben wurde 
+widerspiegelt.</para>
+
+<para>Parkinson zeigt, wie Sie zu einem Vorstand gehen können und
+Zustimmung für den Bau einer multi-millionen oder gar Milliarden
+Euro teuren Atomkraftwerk bekommen können, wenn Sie aber einen
+Fahrradschuppen bauen wollen, werden Sie sich in endlosen Diskussionen
+verzetteln.</para>
+
+<para>Parkinson erklärt, dass das daran liegt, dass ein Atomkraftwerk
+so gewaltig, so kostspielig und so kompliziert ist, das Menschen es
+nicht begreifen können, und eher als es zu versuchen, fallen Sie auf
+die Annahme zurück, dass jemand anderes bereits alle Details
+überprüft hat vor es so weit gekommen ist. Richard P. Feynmann gibt
+in seinen Büchern ein paar interessante und treffende Beispiele die
+mit Los Alamos zu tun haben.</para>
+
+<para>Einen Fahrradschuppen andererseits kann jeder übers Wochenende 
+bauen und trotzdem noch genügend Zeit übrig haben um das Spiel im
+Fernsehen zu schauen. Egal wie gut Sie sich vorbereiten, egal wie
+vernünftig Sie bei Ihrem Vorschlag also sind, irgend jemand wird die
+Chance ergreifen, um Ihnen zu zeigen, dass er seine Arbeit macht, dass
+er aufpasst, dass er <emphasis>da</emphasis> ist.</para>
+
+<para>In Dänemark nennen wir das "seinen Fingerabdruck hinterlassen".
+Es geht um den persönlichen Stolz und Ansehen, es geht darum irgendwo
+drauf zeigen zu können und zu sagen "Da! Das habe <emphasis>ich
+</emphasis> gemacht". Es ist ein starker Wesenszug bei Politikern,
+aber auch in den meisten Menschen vorhanden, wenn sie dazu die
+Gelegenheit bekommen. Denken Sie einfach an Fußabdrücke im nassen
+Zement.</para>
+
+</blockquote>
+
+<para>(Seine komplette Nachricht ist auch sehr lesenswert. Siehe <xref
+linkend="bikeshed-full"/>; siehe auch 
+<ulink url="http://bikeshed.com"/>.)</para>
+
+<para>Jeder der jemals an der Entscheidungsfindung in einer Gruppe
+beteiligt war, wird erkennen worüber Kamp redet. Es ist jedoch für
+gewöhnlich unmöglich <emphasis>alle</emphasis> zu überreden es zu
+vermeiden Fahrradschuppen anzumalen. Das beste was Sie machen können,
+ist darauf hinzuweisen, dass das Problem existiert sobald es auftaucht,
+und Ihre Senior-Entwickler &ndash; die Personen deren 
+Nachrichten am meisten Gewicht tragen &ndash; dazu überreden, frühzeitig
+Ihre Pinsel nieder zu legen, damit zumindest sie nicht zum Rauschen
+beitragen. Fahrradschuppen-Anmal-Partys werden nie komplett verschwinden, 
+aber Sie können sie verkürzen und weniger häufig machen, indem Sie das
+Bewusstsein für sie in der Projektkultur verinnerlichen.
+</para>
+
+</sect2>
+
+<!-- ======================== SECTION ============================== -->
+<sect2 id="holy-wars">
+<title>Vermeiden Sie Heilige Kriege</title>
+
+<para>Ein <firstterm>heiliger Krieg</firstterm> ist eine Debatte, die
+oft aber nicht immer über eine relativ unbedeutende Angelegenheit
+geführt wird, welche nicht anhand der Vorzüge verschiedener Argumente
+zu klären ist, bei dem aber Leute leidenschaftlich genug sind um
+trotzdem weiter darüber zu argumentieren, in der Hoffnung das ihre
+Seite sich durchsetzen wird. Heilige Kriege sind nicht ganz das selbe
+wie das Anmalen von Fahrradschuppen. Leute die Fahrradschuppen anmalen
+sprechen für gewöhnlich schnell Ihre Meinung (weil sie es können), 
+fühlen sich aber nicht sonderlich stark an diese Meinung gebunden,
+und werden manchmal sogar andere, nicht kompatible Meinungen äußern,
+um zu zeigen, dass Sie all Seiten der Angelegenheit verstehen. Bei
+einem heiligen Krieg hingegen, wird Verständnis für andere Seiten
+als Schwäche aufgefasst. Bei einem heiligen Krieg, weiß jeder, dass
+es eine richtige Antwort gibt; sie sind sich nur nicht darüber einig
+welche es ist.</para>
+
+<para>Wenn ein heiliger Krieg erst einmal angefangen hat, kann es im
+allgemeinen nicht zur Zufriedenheit von allen aufgelöst werden. Es
+nützt nichts während einem heiligen Krieg darauf hinzuweisen, dass
+man sich in einem heiligen Krieg befindet. Jeder weiß das schon. Ein
+leider häufiges Merkmal von heiligen Kriegen sind 
+Meinungsverschiedenheiten über die Frage <emphasis>ob</emphasis> die
+Debatte sich überhaupt durch weitere Diskussion auflösen lässt. Von
+außen betrachtet, ist es klar, dass keine Seite die Meinung der anderen
+ändert. Von innen betrachtet, benimmt sich die andere Seite 
+stumpfsinnig und denkt nicht ganz klar, sie kommt aber vielleicht zur
+Besinnung, wenn man sie nur genügend einschüchtert. Ich sage jetzt
+<emphasis>nicht</emphasis>, dass es nie eine richtige Seite bei einem
+heiligen Krieg gibt. Manchmal gibt es eine &ndash; und natürlich ist es
+bei denen an den ich bisher teilgenommen habe immer meine gewesen. Das
+macht aber keinen Unterschied, weil es kein Algorithmus gibt, um
+überzeugend zu demonstrieren, dass die eine oder andere Seite richtig
+ist.</para>
+
+<para>Eine verbreitete, aber nicht zufriedenstellende Art, indem Leute
+versuchen heilige Kriege zu lösen, ist zu sagen "Wir haben bereits viel
+mehr Zeit und Energie bei der Diskussion hiervon verbraucht, als es
+wert ist! Können wir es bitte einfach fallen lassen"? Es gibt dabei
+zwei Probleme. Erstens wurde diese Zeit und Energie bereits aufgebracht,
+und sie kann nie wieder zurückgewonnen werden &ndash; die einzige Frage
+die jetzt noch übrig bleibt ist, wieviel <emphasis>mehr</emphasis> man
+investieren muss? Wenn einige Personen der Meinung sind, dass nur ein 
+wenig mehr Diskussion das Thema zum Abschluss bringen wird, dann macht
+es immer noch Sinn (aus ihrer Sicht) weiter zu machen.</para>
+
+<para>Das andere Problem bei der Bitte das Thema fallen zu lassen ist,
+dass es gleich das gleiche ist als würde man eine Seite, den Status Quo,
+erlauben den Sieg durch Untätigkeit erklären zu lassen. Und in manchen
+Fällen, weiß man schon, dass der Status Quo sowieso nicht akzeptabel 
+ist: Alle sind sich darüber einig, dass irgend eine Entscheidung
+getroffen, irgend eine Maßnahme ergriffen werden muss. Das Thema
+fallen zu lassen, wäre schlimmer für alle als es für irgendjemand wäre
+den Streit aufzugeben. Da das Dilemma aber für alle gleichermaßen gilt,
+ist es immer noch möglich ewig darüber zu streiten, was getan werden 
+soll.</para>
+
+<para>Wie sollten Sie als heilige Kriege handhaben?</para>
+
+<para>Die erste Antwort ist, die Dinge so einzurichten, dass sie gar
+nicht erst passieren. Das ist nicht so hoffnungslos wie es sich anhört:
+</para>
+
+<para>Sie können einige immer wiederkehrende heilige Kriege 
+vorausahnen: Sie neigen über Themen wie Programmiersprachen, Lizenzen
+(siehe <xref linkend="license-compatibility"/><phrase 
+output="printed"> im Kapitel <xref linkend="legal"/></phrase>), Änderung
+des reply-to Feldes (siehe <xref linkend="reply-to"/><phrase 
+output="printed"> im Kapitel <xref 
+linkend="technical-infrastructure"/></phrase>), und ein paar andere
+Themen auf zu tauchen. Jedes Projekt hat auch ein oder zwei ganz eigene
+heilige Kriege, womit langjährige Entwickler schnell vertraut werden.
+Die Techniken um heilige Kriege aufzuhalten, oder zumindest ihren 
+Schaden zu begrenzen, sind überall ziemlich die gleichen. Selbst wenn
+Sie sich sicher sind, dass Ihre Seite recht hat, versuchen Sie 
+<emphasis>irgend eine</emphasis> Möglichkeit zu finden um Mitgefühl
+und Verständnis für die Argumente die die anderen Seite macht
+auszudrücken. Oftmals ist das Problem bei einem heiligen Krieg, dass
+weil jede Seite ihre Mauern so hoch wie möglich gebaut hat, und klar
+gemacht hat, dass jede andere Meinung schlichtweg albern ist, wird 
+Kapitulation oder die Änderung seiner Meinung psychologisch
+unerträglich: Es wäre nicht nur ein Geständnis, dass man falsch lag,
+sondern sich <emphasis>sicher</emphasis> gewesen zu sein und trotzdem
+falsch. Sie können dieses Geständnis für die andere Seite schmackhaft
+machen können, ist indem Sie selber Ungewissheit zeigen &ndash; gerade
+indem Sie zeigen, dass Sie die Argumente die sie machen verstehen und
+sie zumindest vernünftig finden, wenn auch nicht ganz überzeugend.
+Zeigen Sie eine Geste, welche Raum lässt, für eine gegenseitige
+Geste lässt, und die Situation wird sich gewöhnlich verbessern. Es ist
+nicht mehr oder weniger wahrscheinlich, dass Sie das Ergebnis welches
+Sie haben wollen, zumindest können Sie dadurch aber unnötigen 
+Kollateralschaden an der Moral des Projekts vermeiden.</para>
+
+<para>Wenn ein heiliger Krieg nicht vermieden werden kann, entscheiden
+Sie sich frühzeitig wie sehr sie die Sache kümmert, und seien Sie
+bereit öffentlich aufzugeben. Wenn Sie das tun, können Sie sagen, dass
+Sie aussteigen, weil ein heiliger Krieg es nicht wert ist, drücken Sie
+dabei aber keine Bitterkeit aus und nutzen Sie die Gelegenheit
+<emphasis>nicht</emphasis> als eine letzte Gelegenheit auf die
+Argumente der Gegenseite. Aufzugeben ist nur effektiv wenn es
+taktvoll gemacht wird.</para>
+
+<para>Heilige Kriege über Programmiersprachen sind ein Spezialfall, da
+dazu neigen sehr technisch zu sein, dennoch fühlen sich viele Leute 
+qualifiziert an Ihnen teil zu nehmen, und der Einsatz ist sehr hoch,
+da das Resultat bestimmen kann, in welcher Sprache ein Großteil des
+Codes vom Projekt geschrieben wird. Die beste Lösung ist es, die 
+Sprache frühzeitig zu wählen, mit Unterstützung durch einflussreiche
+Entwickler, und es dann auf der Grundlage zu verteidigen, dass sie
+sich alle wohl fühlen in dieser Sprache zu schreiben, 
+<emphasis>nicht</emphasis> auf der Grundlage, dass es besser ist als
+irgend eine andere Sprach, die man sich statt dessen hätte aussuchen
+können. Lassen Sie die Unterhaltung nie zu einem akademischen Vergleich
+verschiedener Programmiersprachen verfallen (das scheint, aus irgend ein
+Grund, besonders of zu passieren, wenn jemand Perl aufbringt); das ist
+einfach ein Thema des Todes in welches Sie sich weigern müssen 
+hineingezogen zu werden.</para>
+
+<para>Für ein eher historischen Hintergrund über heilige Kriege, siehe
+<ulink url="http://catb.org/~esr/jargon/html/H/holy-wars.html"/>, und
+die Veröffentlichung von Danny Cohen welches den Begriff populär <ulink
+url="http://www.ietf.org/rfc/ien/ien137.txt"/>.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="noisy-minority">
+<title>Der "Laute Minderheit"-Effekt</title>
+
+<para>Bei jedem Mailverteiler ist es leicht, für eine kleine 
+Minderheit den Eindruck zu erwecken, dass eine Menge Dissens gibt,
+indem Sie den Verteiler mit einer Menge langer E-Mails überfluten.
+Es ist ein eine art Obstruktionspolitik, mit dem Unterschied, dass
+der Eindruck von ausgedehntem Dissens noch stärker ist, da es auf eine
+beliebige Anzahl einzelner Nachrichten aufgeteilt ist und die meisten
+Leute werden sich nicht die Mühe mache mitzuverfolgen wer was wann
+gesagt hat. Sie werden nur den instinktiven Eindruck haben, dass das
+Thema sehr kontrovers ist, und warten, bis die Aufregung sich gelegt
+hat.</para>
+
+<para>Die beste Art gegen diesen Effekt anzukommen sehr klar zu 
+Belegen, wie klein die tatsächliche Anzahl der Dissidenten ist im
+Vergleich zu denen die zustimmen. Um die Ungleichheit zu vergrößern,
+sollten Sie im privaten Leute ansprechen die größtenteils ruhig
+geblieben sind, von denen Sie aber vermuten, dass Sie der Mehrheit 
+zustimmen. Sagen Sie nichts, was darauf hindeutet, dass die Dissidenten
+absichtlich versucht hatten den Eindruck den sie hinterlassen zu
+verstärken. Wahrscheinlich war das nicht der Fall, und selbst wenn,
+gäbe es keinen strategischen Vorteil darauf hinzuweisen. Alles was Sie
+tun müssen, ist eine Gegenüberstellung der echten Zahlen, und Leute
+werden erkennen, dass ihr intuitiver Eindruck der Situation nicht der
+Wirklichkeit entspricht.</para>
+
+<para>Dieser Ratschlag gilt nicht nur für Angelegenheiten mit klaren
+Positionen für oder gegen etwas. Sondern für jede Diskussion bei dem
+viel Lärm gemacht wird, aber nicht klar ist, dass die meisten die
+Angelegenheit die zur Debatte steht als echtes Problem ansieht. Nach
+einer gewissen Zeit, wenn Sie darüber einstimmen, dass die Meldung
+keine Reaktion wert ist, und sehen können, dass es es nicht geschafft
+hat an Zug zu gewinnen (selbst wenn es eine Menge E-Mails hervorgebracht
+hat), können Sie einfach öffentlich feststellen, dass es keinen Zug
+gewinnt. Wenn der "Laute Minderheit"-Effekt aufgetreten war, wird Ihre
+Nachricht wie eine Atemzug frischer Luft wirken. Der Eindruck den die
+meisten Leute bisher von der Diskussion hatten, wird etwas düster
+gewesen sein: "Hmm, is scheint eine große Sache zu sein, weil es
+wirklich eine Menge Nachrichten gibt, aber ich sehe keinen echten
+Fortschritt". Indem Sie erklären, wie die Art der Diskussion es hat
+scheinen lassen, als wäre es stürmischer als in Wirklichkeit, werden
+Sie es im Nachhinein eine neue Gestalt geben, wodurch Leute ihr
+Verständnis von dem was passiert ist neu gestalten können.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="difficult-people">
+<title>Schwierige Leute</title>
+
+<para>Schwierige Leute sind im Umgang in elektronischen Foren nicht 
+einfacher als im echten Leben. Mit "schwierig" meine ich nicht "unhöflich".
+Unhöfliche Leute nerven, aber sie sind nicht unbedingt schwierig. 
+Dieses Buch hat bereits behandelt, wie man mit denen umgeht: Machen Sie
+eine Bemerkung beim ersten mal, und ab dann, sollten Sie sie entweder 
+ignorieren oder sie wie alle anderen behandeln. Wenn sie weiterhin
+unhöflich sind, werden sie sich meistens derart unbeliebt machen, dass
+sie keinen Einfluss auf andere im Projekt haben, also sind sie ein in 
+sich abgeschlossenes Problem.</para>
+
+<para>Die wirklich schwierigen Fälle sind Leute die nicht sonderlich
+unhöflich sind, die aber die Arbeitsabläufe im Projekt derart
+manipulieren oder missbrauchen, dass es die Zeit und Energie anderer
+auffrisst, dem Projekt jedoch keinen Nutzen bringen. Solche Menschen
+suchen oft nach Lücken in den Abläufen des Projekts, um sich selber
+mehr Einfluss zu verschaffen als es sonst der Fall wäre. Das ist viel
+heimtückischer als schlichte Unhöflichkeit, weil weder das Verhalten
+noch der Schaden für einen beiläufigen Beobachter offensichtlich ist.
+Ein klassisches Beispiel ist die Verschleppungstaktik bei dem
+jemand (der sich natürlich immer so vernünftig wie möglich anhört)
+immer wieder behauptet, dass die Angelegenheit die zur Debatte steht,
+nicht für eine Klärung bereit ist und weitere mögliche Lösungen
+anbietet, oder neue Sichten auf alte Lösungen, wenn in wirklich
+derjenige merkt, dass ein Konsens oder eine Wahl sich langsam anbahnt,
+und ihm gefällt die Richtung nicht in der sie wahrscheinlich geht. Ein
+weiteres Beispiel ist, wenn eine Debatte die sich keinem Konsens
+annähert, die Gruppe aber versucht wenigstens die Eckpunkte der
+Meinungsverschiedenheit klar zu stellen und eine Zusammenfassung für
+alle zu produzieren, auf der sich alle von da an beziehen können. Der
+Quertreiber, der weiß, dass die Zusammenfassung zu einem Ergebnis 
+führen könnte, welches ihm nicht gefällt, wird oft versuchen selbst
+die Zusammenfassung hinauszuzögern, indem er schonungslos die Fragen
+verkompliziert, was darin beinhaltet sein soll, entweder indem er
+Einspruch erhebt oder indem er unerwartete neue Punkte vorstellt.</para>
+
+<sect2 id="handling-difficult-people">
+<title>Handhabung schwieriger Leute</title>
+
+<para>Um solches Verhalten entgegenzuwirken hilft es, die Mentalität
+derjenigen zu verstehen, die es ergreifen. Menschen machen es im
+Allgemeinen nicht bewusst. Keiner wacht morgens auf und sagt sich:
+"Heute werde ich Verwaltungsverfahren zynisch manipulieren, um ein
+irritierender Quertreiber zu sein". Statt dessen, geht solches
+Verhalten oftmals ein halb paranoides Gefühl voraus, von den der
+Interaktion und den Entscheidungen in der Gruppe ausgeschlossen zu
+werden. Die Person fühlt sich nicht ernst genommen, oder (in
+schwerwiegenderen Fällen), dass es fast schon eine Verschwörung gegen
+ihn ist &ndash; dass die anderen Mitglieder des Projekts sich entschieden
+haben, einen exklusiven Club zu bilden, in dem er kein Mitglied ist.
+Das rechtfertigt dann, in seinen Augen, die Regeln wörtlich zu nehmen
+und anzufangen die Abläufe des Projekts formal zu manipulieren, um alle
+anderen zu <emphasis>zwingen</emphasis> Ihn ernst zu nehmen. Im 
+Extremfall, kann die Person sogar glauben, dass er einen einsamen Kampf
+ausficht, um das Projekt vor sich selbst zu retten.</para>
+
+<para>Es liegt in der Natur solch eines Angriffs von innen, dass nicht
+jeder es zur gleichen Zeit bemerken wird, und manche werden es 
+überhaupt nicht sehen, bis man ihnen aussagekräftige Beweise vorlegt.
+Das bedeutet, dass es eine Menge Arbeit sein kann es zu neutralisieren.
+Es reicht nicht sich selbst zu überzeugen, dass es passiert; Sie müssen
+genügend Beweise sammeln, um andere auch zu überzeugen, und dann müssen
+Sie diese Beweise wohl überlegt verbreiten.</para>
+
+<para>Wenn man bedenkt wie viel Arbeit es ist dagegen anzukämpfen, ist
+es oft besser, es einfach eine weile lang zu tolerieren. Betrachten
+Sie es als eine parasitäre aber leichte Krankheit: Wenn es nicht zu
+sehr das Projekt behindert, kann das Projekt es sich leisten infiziert
+zu bleiben, und Medizin könnte schädliche Nebenwirkungen haben. Wenn es
+jedoch zu schädlich wird um es zu tolerieren, dann ist es Zeit etwas
+dagegen zu machen. Fangen Sie an Notizen und Muster zu sammeln, die Sie
+erkennen. Stellen Sie sicher Verweise auf die öffentlichen Archive mit
+ein zu beziehen &ndash; das ist eines der Gründe warum das Projekt alles
+protokolliert, also können Sie sie genau so gut auch nutzen. Sobald Sie
+einen guten Fall aufgebaut haben, fangen Sie an private Unterhaltungen
+mit den anderen Beteiligten am Projekt zu führen. Sagen Sie ihnen nicht
+was Sie beobachtet haben; statt dessen, fragen Sie zuerst, was sie
+beobachtet haben. Das kann Ihre letzte Gelegenheit sein, ungetrübte
+Rückmeldung zu erhalten, wie andere das Verhalten des Störenfrieds
+sehen; wenn Sie erst einmal angefangen haben öffentlich darüber zu
+reden, werden die Meinungen polarisiert werden und keiner wird sich
+daran erinnern können wie er vorher darüber gedacht hat.</para>
+
+<para>Wenn private Diskussionen darauf hindeuteten, dass zumindest ein
+paar andere das Problem sehen, dann ist es Zeit etwas zu unternehmen.
+Ab dann müssen Sie <emphasis>wirklich</emphasis> vorsichtig sein, denn
+es ist sehr leicht für diese Person es danach aussehen zu lassen als
+würden Sie unfairer weise auf ihr herum hacken. Was immer Sie auch tun,
+beschuldigen Sie sie nicht, die Abläufe im Projekt arglistig 
+missbraucht zu haben, paranoid zu sein oder im allgemeinen, alles was
+Sie vermuten, dass es wahrscheinlich wahr ist. Ihre Strategie sollte es
+sein, sowohl vernünftiger und eher besorgt um das Wohl des Projekts zu
+sein, mit dem Ziel entweder das Verhalten der Person zu reformieren,
+oder Sie dazu zu bringen permanent zu verschwinden. Abhängig davon, ob
+andere Entwickler, und Ihr Verhältnis mit ihnen, kann es vorteilhaft
+sein, zuerst im privaten Verbündete zu sammeln. Oder auch nicht; dass
+kann auch nur Feindseligkeit hinter den Vorhängen erzeugen, wenn Leute
+denken, dass Sie ein nicht angemessene flüster-Kampagne ergreifen.</para>
+
+<para>Denken Sie daran, dass obwohl die andere Person vielleicht 
+derjenige ist, der sich zerstörerisch verhält, werden <emphasis>Sie
+</emphasis> diejenige sein, die zerstörerisch erscheint, wenn Sie eine
+öffentliche Beschuldigung machen, welche Sie nicht untermauern können,
+und es so sanft wie möglich machen, aber trotzdem noch direkt sind. Sie
+werden die betreffende Person vielleicht nicht überzeugen können, aber
+das ist in Ordnung, so lange Sie alle anderen Überzeugen können.</para>
+
+</sect2>
+
+<sect2 id="difficult-people-case-study">
+<title>Fallbeispiel</title>
+
+<para>Ich erinnere mich nur ein eine Situation, in mehr als 10 Jahren
+Arbeit an freier Software, wo die Sachen derart schlimm wurden, dass
+wir tatsächlich jemand darum bitten mussten, komplett seine Nachrichten
+einzustellen. Wie es so oft der Fall ist, war er nicht unhöflich, und
+wollte aufrichtig hilfreich sein. Er wusste nur nicht wann er schreiben
+sollte und wann er es lieber lassen sollte. Unsere Mailinglisten waren für
+die Öffentlichkeit frei zugänglich, und er schrieb so oft Nachrichten,
+und stellte bei so vielen verschiedenen Themen Fragen, dass es für die
+Gemeinschaft zu einem Problem im Geräuschpegel führte. Wir hatten
+bereits versucht, ihn nett darum zu bitten etwas mehr vor seinen
+Nachrichten nach Antworten zu recherchieren, aber es zeigte keine
+Wirkung.</para>
+
+<para>Die Strategie die letztendlich funktionierte, ist ein perfektes
+Beispiel, wie man einen starken Fall aufbaut, basierend auf neutrale
+und messbaren Daten. Einer unserer Entwickler schürfte etwas in den
+Archiven herum, und sickte dann im privaten folgende Nachricht an ein
+paar Entwickler. Der Übeltäter (der dritte Name in der nachfolgenden
+Liste, hier als "H. Mustermann" aufgeführt) hatte eine sehr kurze
+Geschichte mit dem Projekt und hatte weder Code noch Dokumentation
+beigetragen. Trotzdem war er die drittaktivste Person auf den
+Mailinglisten:</para>
+
+<screen>
+Von: "Brian W. Fitzpatrick" &lt;fitz@collab.net&gt;
+An: [... Liste der Empfänger wegen Datenschutz ausgespart...]
+Betreff: Der Energieabfall in Subversion 
+Datum: Mit, 12 Nov 2003 23:37:47 -0600
+
+In den letzten 25 Tagen, waren die folgenden 6 Personen auf den svn
+[dev|users] Verteilern am aktivsten:
+
+    294  kfogel@collab.net
+    236  "C. Michael Pilato" &lt;cmpilato@collab.net&gt;
+    220  "H. Mustermann" &lt;hmustermann@problemposter.com&gt; <!-- de: Wie "Problembär", mit Dank an Herrn Stoiber -->
+    176  Branko &Ccaron;ibej &lt;brane@xbc.nu&gt;
+    130  Philip Martin &lt;philip@codematters.co.uk&gt;
+    126  Ben Collins-Sussman &lt;sussman@collab.net&gt;
+
+Ich würde sagen, dass fünf dieser Personen etwas zu Subversion 
+beitragen, welches bald Version 1.0 erreichen wird.
+
+Ich würde auch sagen, dass einer dieser Personen beständig Zeit und 
+Energie von den anderen 5 wegnimmt, gar nicht erst von dem Verteiler
+insgesamt zu sprechen, und dadurch (wenn auch unbeabsichtigt) die
+Entwicklung von Subversion ausbremst. Ich hab keine Analyse der
+Threads gemacht, aber ein vgrep meiner Subversion-Mails sagt mit, dass
+auf jede E-Mail von dieser Person, mindestens ein mal von mindestens zwei
+der anderen fünf Entwickler geantwortet wurde.
+
+Ich denke das irgend ein radikaler Eingriff hier nötig ist, selbst wenn
+wir die angesprochene Person verschrecken. Nettigkeiten und 
+Freundlichkeit haben bereits keine Wirkung gezeigt.
+
+dev@subversion ist ein Mailverteiler um die Entwicklung eines
+Versionsverwaltungsystems zu unterstützen, keine Gruppentherapie.
+
+-Fitz, im Versuch durch drei Tage an SVN-Mails durchzuarbeiten, welche
+ er angehäuft hat
+</screen>
+
+<para>Obwohl es zuerst nicht so aussehen mag, war das Verhalten von
+H. Mustermann ein klassisches Beispiel für den Missbrauch von Abläufen
+im Projekt. Er hat nichts offensichtliches gemacht, wir eine Abstimmung
+hinaus zu zögern, sondern machte sich die Richtlinie des Verteilers
+zunutze, dass Mitglieder selber die Moderatoren sind. Wir überließen
+es dem Urteilsvermögen von jedem einzelnen, wann man zu welchen Themen
+etwas schreibt. Wir hatten deshalb nichts worauf wir zurückgreifen
+konnten, bei jemand der ein solches Urteilsvermögen entweder nicht
+hatte, oder nicht benutzte. Es gab keine Regel auf die wir hätten
+verweisen konnten und sagen konnten, dass dieser Kerl es gebrochen
+hat, jeder wusste jedoch, dass seine häufigen Nachrichten zu einem
+echten Problem wurden.</para>
+
+<para>Die Strategie von Fitz war, im nachhinein, meisterhaft. Er 
+sammelte eindeutige und messbare Beweise, verteilte sie dann aber
+diskret, indem er sie zuerst an ein paar Leute sandte, deren
+Unterstützung bei jeder drastischen Maßnahme entscheidend wäre. Sie
+stimmten überein, dass irgend eine Maßnahme nötig war, und schließlich
+riefen wir J. Random telefonisch an, beschrieben ihm direkt das Problem,
+und baten ihn darum, seine Nachrichten einfach einzustellen. Er hat
+niemals wirklich verstanden warum; wenn er dazu in der Lage gewesen
+wäre, dann hätte er wahrscheinlich schon am Anfang ein angemessenes
+Urteilsvermögen aufgebracht. Er willigte aber ein, seine Nachrichten
+einzustellen, und die Mailinglisten wurden wieder brauchbar. Dass
+diese Strategie funktionierte, lag wohl zum Teil auch an der impliziten
+Drohung, dass wir seine Nachrichten auch durch die Moderations-Software
+hätten eingrenzen können, die normalerweise dazu benutzt
+wird, Spam zu verhindern (siehe <xref 
+linkend="spam-prevention"/><phrase output="printed"> im Kapitel <xref
+linkend="technical-infrastructure"/></phrase>). Der Grund warum wir
+diese Option als Rücklage hatten, war das Fitz die nötige Unterstützung
+zuerst von entscheidenden Personen gesammelt hatte.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="growth">
+<title>Handhabung von Wachstum</title>
+
+<para>Der Preis vom Erfolg ist bei groß in der Open-Source-Welt. 
+Während Ihre Software beliebter wird, nimmt die Anzahl der Menschen zu,
+die auftauchen um nach Informationen zu suchen, dramatisch zu,
+während die Anzahl der Menschen die in der Lage sind Informationen
+bereitzustellen sehr viel langsamer zunimmt. Desweiteren, gäbe es
+selbst wenn das Verhältnis ausgeglichen wäre immer noch das Problem,
+mit der Art wie die meisten Open-Source-Projekte Kommunikation 
+handhaben. Betrachten Sie zum Beispiel Mailverteiler. Die meisten
+Projekte haben Mailverteiler für allgemeine Fragen von Nutzern &ndash; 
+manchmal heist der Verteiler "users", "discuss", "help" oder irgend
+etwas anderes. Unabhängig von Namen, ist der Sinn des Verteilers immer
+der gleiche: Einen Ort zur Verfügung zu stellen, wo Leute auf ihre
+Fragen Antworten bekommen können, während andere zuschauen und
+(vermutlich) aus der Beobachtung dieses Austauschs Wissen aufsaugen. 
+</para>
+
+<para>Diese Mailverteiler funktionieren sehr gut, bis zu ein paar
+Tausend Nutzern, und/oder ein paar hundert Nachrichten am Tag. Irgendwo
+danach fängt das System jedoch zusammen zu brechen, weil jeder der
+angemeldet ist jede Nachricht sieht; wenn die Anzahl der Nachrichten
+an einem Verteiler über dem hinaus geht, was eine einzige Person am Tag
+verarbeiten kann, wird der Verteiler zu einer Last für seine 
+Mitglieder. Stellen Sie sich zum Beispiel vor, wenn Microsoft einen
+solchen Verteiler für Window XP hätte. Windows XP hat Hunderte von
+Millionen von Nutzern; wenn auch nur ein Promille von denen in einer
+vierundzwanzig stündigen Zeitspanne, Fragen hätte, dann bekäme dieser
+Verteiler theoretisch Hunderte von Tausende von Nachrichten am Tag!
+Solch einen Verteiler könnte es natürlich niemals geben, denn keiner
+bleibe an ihm angemeldet. Dieses Problem beschränkt sich nicht auf
+Mailverteiler; die gleiche Logik lässt sich anwenden, auf IRC, 
+Online-Diskussionsforen, sogar jedes System in dem eine Gruppe die
+Fragen von Einzelnen hört. Die Implikationen sind bedenklich: Das
+gewöhnliche Open-Source-Modell von massiv paralleler technischer
+Unterstützung skaliert schlicht und einfach nicht auf die Ebene, die
+für Weltherrschaft nötig ist.</para>
+
+<para>Es wird keine Explosion geben, wenn die Foren die anfangen
+überzulaufen. Es wird nur einen leisen Folge negativer Rückmeldungen
+geben: Leute melden sich von den Verteilern ab, oder verlassen das
+IRC, oder zumindest aufhören sich die Mühe zu machen Fragen zu stellen,
+da sie sehen können, dass man Sie in dem ganzen Lärm nicht gehört
+werden. Sowie immer mehr Leute diese im hohen maße vernünftige Wahl
+treffen, wird die Aktivität auf dem Forum aussehen als wäre es auf
+einer annehmbaren Stufe. Es es bleibt genau deshalb annehmbar, weil
+die Vernünftigen (oder zumindest erfahrenen) Leute angefangen an
+anderen Orten nach Informationen zu suchen &ndash; während die
+unerfahrenen zurück bleiben und weiterhin Nachrichten schreiben. Mit
+anderen Worten, ist eine Nebenwirkung weiterhin nicht skalierbare
+Kommunikationsmodelle zu benutzen, während das Projekt wächst, dass
+die durchschnittliche Qualität sowohl der Fragen als auch der Antworten
+dazu neigt schlechter zu werden, was es danach aussehen lässt, als
+wären die neuen Nutzer blöder als es ehemals der Fall war, wenn das
+tatsächlich, wahrscheinlich nicht der Fall ist. Es ist nur, dass das
+Kosten/Nutzen-Verhältnis dieser Foren mit einer hohen Bevölkerung
+weniger wird, also fangen diejenigen mit mehr Erfahrung natürlich
+zuerst an woanders nach Antworten zu suchen. Die 
+Kommunikationsmechanismen anzupassen, um mit dem Wachstum des Projekts
+umzugehen, beinhaltet deshalb zwei verwandte Strategien:</para>
+
+<orderedlist>
+  <listitem><para>Zu erkennen, wann bestimmte Teile eines Forums 
+	<emphasis>nicht</emphasis> unter unbegrenztem Wachstum
+	leiden, selbst wenn das für das Forum insgesamt der Fall ist,
+	und diese Teile in neue, speziellere Foren zu Trennen (d.H.
+	lassen Sie das Gute nicht vom Schlechten herunterziehen).</para>
+  </listitem>
+  <listitem><para>Stellen Sie sicher, dass viele automatisierte
+	Informationsquellen zur Verfügung stehen, und dass Sie
+	organisiert, aktuell, und leicht auffindbar gehalten werden.
+        </para>
+  </listitem>
+</orderedlist>
+
+<para>Strategie (1) ist gewöhnlich nicht all zu schwer. Die meisten
+Projekte fangen mit einem Hauptforum an: Ein Mailverteiler für
+allgemeine Diskussionen, auf dem Ideen für neue Funktionen, Fragen zum
+Aufbau der Software, und programmier-Probleme alle zerlegt werden 
+können. Jeder der an dem Projekt beteiligt ist, ist auf dem Verteiler.
+Nach einer Weile, wird es für gewöhnlich offensichtlich, dass der
+Verteiler sich in mehrere unterschiedliche Unterverteiler, auf 
+bestimmte Themen basierend, aufgeteilt hat. Zum Beispiel geht es in
+manchen Threads eindeutig um Entwicklung und Aufbau des Codes; andere
+sind eher Benutzerfragen, von der Art "Wie mache ich X?"; es gibt
+vielleicht eine dritte Familie die sich um die Verarbeitung von
+Bug-Meldungen und Erweiterungs-Wünsche dreht; und so weiter. Ein
+beliebige Person mag sich natürlich an vielen verschiedenen 
+Thread-Arten beteiligen, das Wichtige ist aber, dass nicht viel Überlappung
+zwischen den verschiedenen Arten gibt. Sie könnten in separate
+Verteiler aufgeteilt werden ohne irgend eine schädliche Balkanisierung
+zu verursachen, da die Threads selten mehrere Themen überspannen.
+</para>
+
+<para>Diese Aufteilung wirklich zu machen, ist ein Vorgang mit zwei
+Schritten. Sie werden einen neuen Verteiler (oder einen IRC-Kanal, oder
+was immer es auch sein soll), und dann müssen Sie welche Zeit auch 
+immer nötig ist, um Leute zu nerven und erinnern die neuen Foren
+entsprechend zu <emphasis>nutzen</emphasis>. Letzteres kann wochen
+andauern, letztendlich werden es die Leute aber kapieren. Sie müssen
+es sich nur zum Prinzip machen, dem Absender immer zu sagen, wenn er
+an das falsche Ziel geschickt hat, und es auf eine sichtbare Art tun,
+damit andere dazu ermutigt werden, beim umleiten mitzuhelfen. Es ist
+auch nützlich, eine Webseite mit einem Wegweiser zu allen Verteilern
+bereit zu haben; Ihre Rückmeldungen können einfach auf diese Seite
+verweisen und als Bonus, mag der Empfänger etwas darüber lernen, nach
+Richtlinien zu suchen, vor er eine Nachricht schreibt.</para>
+
+<para>Strategie (2) ist ein anhaltender Vorgang, welcher die ganze
+Lebensdauer des Projekts überdauern kann und mit vielen Beteiligten
+zu tun haben kann. Natürlich handelt es sich dabei zum Teil auch um
+die Frage eine aktuelle Dokumentation zu haben (siehe
+<xref linkend="documentation"/><phrase output="printed"> im Kapitel
+<xref linkend="getting-started"/></phrase>) und weisen Sie Leute darauf
+hin. Es ist aber auch viel mehr als das; die Abschnitte die folgen,
+behandeln diese Strategie im detail.</para>
+
+<!-- ======================== SECTION ============================== -->
+<sect2 id="using-archives">
+<title>Auffällige Nutzung der Archive</title>
+
+<para>Typischerweise, werden alle Kommunikationen in einem 
+Open-Source-Projekt 
+(außer manchmal IRC-Unterhaltungen) archiviert. Die Archive 
+sind öffentlich, können durchsucht werden und referenzen darauf bleiben
+Stabil: Dass heißt, sobald ein Stück Information unter einer bestimmten
+Adresse aufgezeichnent wird, bleibt es ewig an dieser Adresse.</para>
+
+<para>Benutzen Sie diese Archive so viel wie möglich, und so auffällig
+wie möglich. Selbst wenn Sie die Antwort auf eine Frage aus dem Kopf
+wissen, wenn Sie denken, dass es eine Referenz auf die gleiche Frage
+in den Archiven gibt, welche die Antwort beinhaltet, nehmen Sie sich
+die Zeit es auszugraben und zu präsentieren. Jedes mal wenn Sie das
+auf eine öffentlich sichtbare Art tun, lernen manche Leute zum ersten
+mal, dass es die Archive gibt, und sie zu durchsuchen, Antworten
+hervorbringen kann. Indem Sie auf die Archive referenzieren, bestärken
+Sie auch die soziale Norm, Informationen nicht zu duplizieren. Warum die
+gleiche Antwort an zwei verschiedenen Stellen haben? Wenn die Anzahl
+der Stellen an der es gefunden werden kann, auf ein minimum beschränkt
+wird, werden Leute die es vorher gefunden haben sich eher daran 
+erinnern wonach sie suchen müssen um es wieder zu finden. Gut 
+platzierte Referenzen tragen auch allgemein zu der Qualität der 
+Suchergebnisse bei, da Sie den Rang der referenzierten Ressourcen in
+Suchmachinen erhöhen.</para>
+
+<para>Es gibt Zeiten, wann die Verdopplung von Informationen jedoch
+Sinn macht. Nehmen wir zum Beispiel an, es gäbe bereits eine 
+Rückmeldung in den Archiven, nicht von Ihnen, welche sagt:</para>
+
+<screen>
+Es scheint, dass Ihre Scanley-Indexe verfrobbt wurden. Führen Sie diese
+Schritte aus, um sie zu entfrobben:
+
+1. Schalten Sie den Scanley-Server aus.
+2. Lassen Sie das 'Entfrobb'-Programm, welches mit Scanley 
+ausgeliefert wird, aus.
+3. Starten Sie den Server.
+</screen>
+
+<para>Monate später, sehen Sie dann eine weitere Nachricht, welche
+andeutet, dass die Indexe von jemand verfrobbt wurden. Sie suchen in
+den Archiven und finden obige Rückmeldung, sehen aber, dass ein paar
+Schritte Fehlen (vielleicht aus versehen, oder weil die Software sich,
+seitdem die Nachricht geschrieben wurde, geändert hat). Die eleganteste 
+Art das zu handhaben, ist es eine neue vollständigere Nachricht zu 
+schreiben, und die alte Information explizit als obsolet zu markieren,
+indem Sie es erwähnen:</para>
+
+<screen>
+Es scheint, dass Ihre Scanley Indexe verfrobbt wurden. Wir haben
+dieses Problem im July gesehen und H. Mustermann schrieb eine
+Lösung bei http://blahblahblah/blah. Unten ist eine vollständigere
+Beschreibung wie Sie Ihre Indexe entfrobben können, basierend auf
+der Anleitung von H. Mustermann aber ein wenig erweitert:
+
+1. Schalten Sie den Scanley-Server aus.
+2. Wechseln Sie zum Benutzer, unter dem Scanley normalerweise läuft.
+3. Lassen Sie mit diesem Benutzer das 'Entfrobb'-Programm über die
+Indexe laufen.
+4. Lassen Sie Scanley per Hand laufen, um zu sehen, ob die Indexe jetzt
+funktionieren.
+5. Starten Sie den Server neu.
+</screen>
+
+<para>(In einer idealen Welt wäre es möglich, eine Anmerkung an die
+alte Nachricht anzuhängen, welche sagt, dass eine neuere Version der
+Information zur Verfügung steht, und auf die neue Nachicht hinzuweisen.
+Mir ist allerdings keine Archivierungssoftware bewusst, welche eine
+"obsolet durch" Funktion anbietet, vielleicht wäre es ein wenig
+schwierig, auf eine Art zu implementieren, welche die Vorgabe eines
+Archivs, eine wortgetreue Aufzeichnung zu sein, nicht verletzen würde.
+Das ist ein weiterer Grund, warum es eine gute Idee ist, Webseiten zu
+erstellen, die der Beantwortung von häufigen Fragen gewidmet sind.)</para>
+
+<para>Archive werden wahrscheinlich am häufigsten nach Antworten zu
+technischen Fragen durchsucht, ihre Bedeutung für das Projekt geht
+jedoch weit darüber hinaus. Wenn die formalen Richtlinien eines
+Projekts seine in einer Satzung festgelegten Gesetze sind, sind die
+Archive seine allgemeinen Gesetze: Eine Aufzeichnung aller Diskussionen
+die geführt wurden, und wie sie erreicht wurden. Bei jeder 
+wiederkehrenden Diskussion, ist es heutzutage quasi bindend, mit einer
+Suchen in den Archiven anzufangen. Das erlaubt es Ihnen, die Diskussion
+mit einer Zusammenfassung des derzeitigen Standes anzufangen, 
+Einsprüche vorauszuahnen, Konterargumente vorzubereiten, und 
+möglicherweise Sichtweisen zu entdecken, an der Sie noch nicht gedacht
+hatten. Die anderen Beteiligten, werden auch <emphasis>erwarten
+</emphasis>, dass Sie eine Durchsuchung des Archivs gemacht haben. 
+Selbst wenn vorangehende Diskussionen nirgendwo hingeführt haben, 
+sollten Sie Verweise darauf einbeziehen, wenn Sie das Thema wieder
+aufgreifen, damit Leute sich selber davon überzeugen können a) dass
+sie nirgends hingeführt haben, und b) dass Sie Ihre Hausaufgaben
+gemacht haben, und desshalb wahrscheinlich etwas sagen, was noch keiner
+zuvor gesagt hat.</para>
+
+<sect3 id="all-as-archives">
+<title>Behandeln Sie alle Ressourcen wie Archive</title>
+
+<para>Alle vorhergehenden Ratschläge gelden für mehr als nur die 
+Archive von Mailverteilern. Bestimmte Informationsstücke an einer
+stabilen, leicht auffindbaren Adresse zu haben, sollte ein 
+Organisationsprinzip alle Informationen des Projekts sein. Lass uns
+die FAQ des Projekts als Fallstudie betrachten.</para>
+
+<para>Wie nutzen Leute eine FAQ?</para>
+
+<orderedlist>
+  <listitem>
+    <para>Sie wollen es nach bestimmten Worten und Begriffen 
+	  durchsuchen.</para>
+  </listitem>
+  <listitem>
+    <para>Sie wollen darin stöbern, Informationen aufsaugen, ohne
+	  zwangsläufig nach Antworten zu bestimmten Fragen zu suchen.
+          </para>
+  </listitem>
+  <listitem>
+    <para>Sie erwarten, dass Suchmachinene wie Googel über den Inhalt
+	  der FAQ bescheid wissen, damit Suchergebnisse Einträge der
+	  FAQ beinhalten können.</para>
+  </listitem>
+  <listitem>
+    <para>Sie wollen Leute direkt auf bestimmte Einträge in der FAQ
+	  verweisen können.</para>
+  </listitem>
+  <listitem>
+    <para>Sie wollen neues Material zu der FAQ hinzufügen können,
+	  bedenken Sie aber, dass das sehr viel weniger geschiedt, als
+	  die Antworten aufgerufen werden &ndash; in einer FAQ wird sehr
+	  viel öfter geschieben als gelesen.</para>
+  </listitem>
+</orderedlist>
+
+<para>Punkt 1 impliziert, dass die FAQ in irgend einem textuellen 
+Format zur verfügung stehen sollte. Punkte 2 und 3 implizieren, dass
+die FAQ als HTML Seite zur verfügung stehen sollte, zusätzlich
+impliziert Punkt 2, dass diese HTML Datei auf eine lesbare Art 
+aufgebaut sein soll, (d.H. Sie werden etwas Einfluss auf sein 
+Aussehen), und sollte ein Inhaltsverzeichnis haben. Punkt 4 bedeutet,
+dass jeder einzelne Eintrag in der FAQ einen HTML <firstterm>benannten
+Verweis (en. "anchor")</firstterm> zugewiesen haben sollte, ein tag 
+welches es Leute erlaubt, eine bestimmte Stelle in der Seite auf eine
+bequeme Art zu erreichen (siehe <xref
+linkend="version-everything"/><phrase output="printed"> im Kapitel 
+<xref linkend="technical-infrastructure"/></phrase>), in einem Format
+welches leicht zu bearbeiten ist.</para>
+
+  <sidebar id="html-named-anchors-and-ids">
+  <title>Benannte Verweise und ID-Attribute</title>
+
+  <para>Es gibt zwei Möglichkeiten einen Browser dazu zu bringen an
+  einer bestimmte Stelle in einer Webseite zu springen: benannte
+  Verweise und id Attribute.</para>
+
+  <para>Ein <firstterm>benannter Verweis</firstterm> is lediglich ein
+  normaler HTML Verweis (<literal>&lt;a&gt;...&lt;/a&gt;</literal>),
+  aber mit ein "name" Attribut:</para>
+
+  <screen>&lt;a&nbsp;name="meinEtikett"&gt;...&lt;/a&gt;</screen>
+
+  <para>Neuere Versionen von HTML unterstützen eine generisches
+  <firstterm>id-Attribut</firstterm>, welches an jedem HTML-Element
+  angehängt werden kann, nicht nur an <literal>&lt;a&gt;</literal>.
+  Zum Beispiel:</para>
+
+  <screen>&lt;p&nbsp;id="meinEtikett"&gt;...&lt;/p&gt;</screen>
+
+  <para>Sowohl benannte Verweise als auch id-Attribute werden auf die
+  gleiche Art benutzt. Eines hängt eine Raute und den Bezeichner an 
+  eine URL, um den Browser dazu zu bringen direkt zu der Stelle in der
+  Seite zu springen:</para>
+
+  <screen>http://meinprojekt.beispiel.de/faq.html#meinEtikett</screen>
+
+  <para>Praktisch alle Browser unterstützen benannte Verweise; die
+  meisten modernen Browser unterstützen das id-Attribut. Um sicher zu
+  gehen, würde ich Ihnen empfehelen, entweder nur benannte Verweise zu
+  benutzen, oder benannte Verweise <emphasis>und</emphasis> 
+  id-Attribute zusammen (natürlich mit dem gleichen Bezeichner für beide
+  bei einem gegebenen Paar). Benannte Verweise können sich nicht nicht
+  selber Abschließen &ndash; selbst wenn es keinen Text in dem Element
+  gibt, müssen Sie es trotzdem in der vollständigen form Ausschreiben:
+  </para>
+
+  <screen>&lt;a&nbsp;name="meinEtikett"&gt;&lt;/a&gt;</screen>
+
+  <para>...obwohl es normalerweise etwas Text, wie den Titel von dem
+  Abschnitt geben würde.</para>
+
+  <para>Ob Sie einen benannten Verweis benutzen oder ein id-Attribut
+  oder beides, denken Sie daran, dass der Bezeichner nicht für 
+  jemandem sichtbar ist, der zu der Stelle blättert, ohne den
+  Bezeichner zu benutzen. Solch eine Person mag aber vielleicht den
+  Bezeichner für eine bestimmte Stelle herausfinden wollen, um zum
+  Beispiel die URL an einem Freund als Antwort zu schicken. Um ihnen
+  dabei zu helfen, fügen Sie einen <firstterm>title-Attribut
+  </firstterm> an dasselbe Element bei dem Sie das "name" und/oder
+  id-Attribut hizugefügt haben:</para>
+
+  <screen>&lt;a&nbsp;name="meinEtikett"&nbsp;
+  title="#meinEtikett"&gt;...&lt;/a&gt;</screen>
+
+  <para>Wenn der Mauszeiger über den Text innerhalb des Elements platziert
+  wird, auf den das title-Attribut angewandt wurde, werden
+  die meisten Browser einen kleinen Kasten aufklappen, in dem der Titel
+  angezeigt wird. Ich füge normalerweise das Raute-Zeichen hinzu, um
+  die Leute daran zu erinnern, es am Ende der URL zu platzieren um beim
+  nächsten Mal direkt an diese Stelle zu springen.</para>
+
+  </sidebar>
+
+<para>Die FAQ zu formatieren, ist ledigleich eines der Beispiele, wie
+Sie eine Ressource vorzeigbar machen können. Die gleichen Eigenschaften
+&ndash; direkte Durchsuchbarkeit, Verfügbarkeit für größere 
+Suchmaschinen, stabile Referenzen, und (wo möglich) Bearbeitbarkeit
+&ndash; gelten für andere Webseiten, den Quellcode-Baum, den Bugtracker
+usw. Es ist zufällig so, dass die meiste Software zur 
+Archivierung von Mailinglisten schon lange erkannt haben, wie 
+wichtig diese Eigenschaften sind, weshalb Mailverteiler dazu neigen,
+diese Funktionen von sich aus eingebaut zu haben, während andere
+Formate unter Umständen etwas zusätzliche Mühe seitens des wartenden
+(<xref linkend="managing-volunteers"/> behandelt, wie Sie diese Bürde 
+der Wartung über viele Entwickler verteilen können).</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="codifying-tradition">
+<title>Festschreiben von Traditionen</title>
+
+<para>Während das Projekt Geschichte und Komplexität ansammelt, nimmt
+die Menge an Daten zu, die ein neuer Teilnehmer sich aneignen muss.
+Solche die schon seit langen bei dem Projekt sind, konnten die 
+Konventionen des Projekts im laufe der Zeit lernen und erfinden. Sie
+werden sich oft nicht der riesigen Menge an Traditionen die sich
+angesammelt hat bewusst sein, und mögen überrascht sein, wie viele
+Fehlschritte neue Mitglieder scheinbar machen. Natürlich, liegt das
+nicht daran, dass die Neuen von einer schlechteren Qualität sind als
+vorher; es ist lediglich, dass Sie einer größeren bürde der kulturellen
+Anpassung als in der Vergangenheit gegenüberstehen.</para>
+
+<para>Die Traditionen, die ein Projekt ansammelt haben genau soviel
+damit zu tun, wie man komunizieren und Informationen bewahren, wie es
+um die Festhaltung von Standards und andere technische Kleinigkeiten 
+geht. Wir haben uns bereits beide Standards im Kapitel
+<xref linkend="developer-documentation"/><phrase output="printed"> 
+sowie <xref linkend="getting-started"/></phrase> und 
+<xref linkend="written-rules"/><phrase output="printed"> im Kapitel
+<xref linkend="social-infrastructure"/></phrase> jeweils, und mit
+Beispielen angeschaut. In diesem Abschnitt, geht es darum, wie man
+solche Richtlinien aktuell hält, während das Projekt sich weiter
+entwickelt, insbesondere Richtlinien darüber, wie Kommunikation
+gehandhabt wird, denn das sind diejenigen die sich am meisten ändern
+wärend das Projekt an Größe und Komplexität zunimmt.</para>
+
+<para>Erstens, halten Sie ausschau danach, wie Leute verwirrt werden.
+Wenn Sie die gleichen Situationen immer wieder auftauchen sehen,
+insbesondere bei neue Beteiligten, ist die Wahrscheinlichteit groß,
+dass eine Richtlinie dokumentiert werden muss, es aber noch nicht
+ist. Zweitens, werden Sie nicht müde die gleichen Sachen immer wieder
+zu sagen, und <emphasis>klingen</emphasis> Sie nicht, als würden Sie
+langsam davon müde werden. Sie und die anderen Verteranen im Projekt
+werden sich oft wiederholen müssen; es ist ein unausweichliche
+Nebenwirkung von dem Ankommen von Neuankömmlinge.</para>
+
+<para>Jede Webseite, jede Nachrich im Mailverteiler, und jeder 
+IRC-Kanal sollte als eine Werbefläche betrachtet werden &ndash; nicht für
+kommerzielle Werbung, sondern für Werbung über die Ressourcen Ihres 
+eigenen Projekts. Was Sie auf dieser Fläche anbringen, hängt ab von der
+Demographie von denen die es wahrscheinlich lesen werden. Ein IRC-Kanal
+für Benutzerfragen zum Beispiel, wird wahrscheinlich Leute anlocken,
+die noch nie zuvor mit dem Projekt zu tun hatten &ndash; oftmals jemand
+der eben erst die Software installiert hat, und eine Frage hat, die er
+gleich beantwortet haben möchte (schließlich hätte er es statt dessen
+an den Mailverteiler schicken können, wenn es hätte warten können,
+was wahrscheinlich weniger von seiner Zeit insgesamt in anspruch 
+genommen hätte, obwohl es länger gedauert hätte, bis er eine Antwort
+erhalten hätte). Leute machen für gewöhnlich keine permanente 
+Investition in einem IRC-Kanal; sie tauchen auf, stellen ihre Frage und
+gehen wieder.</para>
+
+<para>Desshalb, sollte das Thema des Kanals auf Leute abgesehen sein,
+die technische Fragen <emphasis>genau jetzt</emphasis>über die Software
+haben, eher als sagen wir, Leute die sich vielleicht auf längere Sicht
+an dem Projekt beteiligen wollen und für die Richtlinien für den Umgang
+innerhalb der Gemeinschaft eher angebracht wären. Ein wirklich
+betriebsammer Kanal handhabt es folgendermaßen (Vergleichen Sie es, mit
+dem früheren Beispiel in <xref linkend="irc"/><phrase output="printed">
+im Kapitel <xref linkend="technical-infrastructure"/></phrase>):</para>
+
+<screen>
+Sie reden jetzt in #linuxhelp
+
+Das Thema für #linuxhelp ist Bitte LESEN Sie 
+http://www.catb.org/~esr/faqs/smart-questions.html &amp;&amp;
+http://www.tldp.org/docs.html#howto BEVOR Sie Fragen stellen | Regeln
+für den Kanal finden Sie bei http://www.nerdfest.org/lh_rules.html |
+Bitte schauen Sie sich http://kerneltrap.org/node/view/799 bevor Sie
+Fragen über einen Upgrade nach Kernel 2.6.x stellen | Speicher Abfrage
+möglich: http://tinyurl.com/4s6mc -&gt; update nach 2.6.8.1 oder 
+2.4.27 | hash algo Katastrophe: http://tinyurl.com/6w8rf
+| reiser4 weg
+</screen>
+
+<para>Bei Mailverteilern ist die "Werbefläche" eine kleine Fußnote,
+die an jeder Nachricht angehängt wird. Die meisten Projekte schreiben
+Anweisungen zur Anmeldung/Abmeldung dort, und vielleicht einen Hinweis
+auf die Webseite des Projekts oder auch von der FAQ. Sie denken 
+vielleicht, das jeder der an dem Veriteiler angemeldet ist, wissen
+würde, wie man diese Informationen findet, und das ist wahrscheinlich
+auch der Fall &ndash; aber viel mehr Leute als nur die angemeldeten
+sehen diese Nachrichten des Verteilers. Auf eine archivierte Nachricht,
+kann von vielen Stellen aus verwiesen werden; tatsächlich werden manche
+Nachrichten derart bekannt, dass sie letztendlich mehr Leser erhält,
+als der gesamte Verteiler angemeldete Nutzer hat.</para>
+
+<para>Formatierung kann einen großen Unterschied machen. Im 
+Subverison-Projekt zum Beispiel hatten wir eingeschränkten Erfolg
+bei der Verwendung der Methode zur Filterung von Bugs, beschrieben in
+<xref linkend="bug-filtering"/><phrase output="printed"> im Kapite 
+<xref linkend="technical-infrastructure"/></phrase>. Viele falsche 
+Bug-Meldungen wurden immer noch von unerfahrenen Personen eingereicht, und
+jedes mal, als das geschah, musste der Absender auf genau die gleiche
+Art aufgeklärt werden, wie die 500 Personen vor ihm. Eines tages,
+nahdem bei einem unserer Entwickler schließlich der Faden gerissen war,
+und irgend einen armen Nutzer zugeflamed hatte, der die Richtlinien
+für den Bugtracker nicht sorgfältig genug gelesen hatte, entschied
+sich ein anderer Entwickler, dass dieses Muster schon viel zu lange
+gelaufen war. Er schlug vor, dass wir die erste Seite des Bugtrackers
+neu formatieren sollten, so dass der wichtigste Teil, die Vorgabe den
+Bug zuerst auf dem Mailverteiler oder im IRC zu diskutieren, vor
+man einen Bug meldet, in riesigen, fetten, roten Buchstaben auf einem
+gelben Hintergrund, in der Mitte der Seite über alles andere stehen
+würde. Das machten wir (Sie können das Ergebnis bei folgender Seite
+sehen <ulink url="http://subversion.tigris.org/project_issues.html"/>),
+und das Ergebnis, war ein merklicher Abfall in der Anzahl der falschen
+Bug-Meldungen. Wir bekommen sie natürlich immer noch 
+ &ndash; das wird immer der Fall sein &ndash; aber die Menge ist wesentlich
+weniger geworden, selbst wärend die Anahl der Nutzer zunimmt. Die Folge
+ist, dass die Bug-Datenbank nicht nur weniger Müll enthält, sondern,
+dass diejenigen die auf diese Meldungen reagieren, besser gelaunt
+bleiben und eher freundlich bleiben, wenn sie auf einer der
+nunmehr seltenen Falschmeldungen reagieren. Das verbessert sowohl das
+Erscheinungsbild des Projekts als auch die psychische Verfassung seiner
+Freiwilligen.</para>
+
+<para>Die Lektion die wir hierraus ziehen konnten war, dass es nicht
+ausreichte, die Richtlinien einfach nur nieder zu schreiben. Wir 
+mussten sie auch dort platzieren wo sie von denjenigen gefunden werden,
+die sie am meisten brauchen, und sie so formatieren, dass ihr status
+als Einführungsmaterial sofort für Personen klar wird, die noch nicht
+mit dem Projekt vertraut sind.</para>
+
+<para>Statische Webseiten sind nicht die einzige Ort um für die Bräuche
+des Projekts zu werben. Eine bestimmte Menge an interaktiver Kontrolle
+(im sinne von freundlichen Hinweisen, nicht grober Zurechtweisung) ist
+auch notwendig. Jede Überprüfungm auch die Überprüfung von Commits,
+beschrieben in <xref linkend="code-review"/><phrase output="printed">
+im Kapitel <xref linkend="getting-started"/></phrase>, sollten auch
+eine Evaluierung in wiefern es mit den Normen des Projekts
+übereinstimmt oder nicht, insbesondere im Bezug auf Konventionen über
+die Kommunikation.</para>
+
+<para>Ein weiteres Beispiel aus dem Subversion-Projekt: Wie einigten
+uns auf die Konvention wonach "r12908" für "Revision 12908 des
+Projektarchivs der Versionsverwaltung." Das klein geschriebene vorangehende
+"r" ist einfach zu schreiben und da es lediglich die halbe höhe der
+Zahlen ist, ergibt es einen leicht zu ekennnenden Textblock, wenn man
+es mit den Zahlen kombiniert. Sich auf diese Konventien zu einigen,
+bedeutet natürlich nicht, dass jeder gleich anfangen wird, sie gleich
+zu benutzen. Deshalb, wenn eine Commit-E-Mail mit folgendem Kommentar
+eintrifft:</para>
+
+<screen>
+------------------------------------------------------------------------
+r12908 | qsimon | 02-02-2005 14:15:06 -0600 (Mit, 02 Feb 2005) | 4 Zeilen
+
+Patch vom Freiwilligen H. Mustermann &lt;hmustermann@gmail.com&gt;
+
+* trunk/contrib/client-side/psvn/psvn.el:
+  Einige Rechtschreibfehler in revision 12828 behoben.
+------------------------------------------------------------------------
+</screen>
+
+<para>...gehört es zur Überprüfung des Commits, zu sagen "Übrigens,
+benutze bitte die 'r12828', nicht die 'revision 12828' schreibweise um
+auf vergangene Änderungen zu verweisen." Das ist nicht einfach nur
+pedantisch; es ist genau so wichtig um es automatisch parsen zu können,
+wie für die menschliche Leserschaft.</para>
+
+<para>Indem Sie das allgemeine Prinzip verfolgen, dass es kanonische
+Methoden geben sollte, um auf häufige Entitäten zu verweisen und dass
+man diese verweis Methoden überall auf eine konsistente Art verwenden
+sollte, exportiert das Projekt in Wirklicheit gewisse Standards. Diese
+Standards ermöglichen es andere, Werkzeuge zu schreiben, welche die
+Kommunikationen des Projekts auf andere brauchbarere Arten zu
+presentieren &ndash; zum Beispiel könnte eine Revision mit dem Format
+"r12828" in einen Link zu der Seite des Projektarchivs verwandelt werden.
+Das wäre schwieriger, wenn die Revision als "revision 12828" 
+geschrieben würde, sowohl weil diese Form durch einen Zeilenumbruch
+getrennt werden könnte, und weil es weniger eindeutig ist (das Wort
+"revision" wird häufig alleine erscheinen, und gruppen von Zahlen
+erscheinen heufig alleine, wohingegen die Kombination "r12828 sich nur
+auf eine Revisionsnummer beziehen kann). Ähnliche Bedenken gelten für
+die Meldungsnummern im Bugtracker, FAQ Einträge (tipp: Benutzen Sie
+eine URL mit einem benannten Verweis, wie in <xref 
+linkend="html-named-anchors-and-ids"/> beschrieben), usw.</para>
+
+<para>Selbst bei Einträgen, wo es keinen offensichtlichen kurze,
+kanonische Form gibt, sollten Leute dazu ermutigt werden, wesentliche
+Informationen einheitlich anzugeben. Wenn man zum Beispiel auf eine
+Nachricht im Mailverteiler verweist, geben Sie nicht nur den
+Absender und die Überschrift an; geben Sie auch die URL im Archiv
+<emphasis>und</emphasis> den Message-ID-Header an. Letzteres erlaubt
+es Leute die ihre eigene Kopie des Mailverteilers haben, (manche
+Leute halten offline Kopieen, zum Beispiel auf einem Laptop für die
+Nutzung auf Reisen) eindeutig die richige Nachricht zu identifizieren,
+selbst wenn sie keinen Zugriff auf die Archive haben. Der Absender und
+die Überschrift würden dazu nicht ausreichen, weil dieselbe Person
+vielleicht mehrere Nachrichten im selben Thread schreibt, sogar am
+selben Tag.</para>
+
+<para>Je mehr ein Projekt wächst, desto wichtiger wird diese Art von
+Konsistenz. Konsistent bedeutet, dass überall wo Leute hinschauen,
+sie die gleichen Muster in verwendung sehen, also wissen sie auch sie
+selber zu befolgen. Das wiederum, verringert die Anzahl der Fragen die
+sie stellen müssen. Die Bürde millionen Leser zu haben ist nicht
+größer, als die einen zu haben; Probleme der Skalierbarkeit fangen nur
+dann aufzutreten, wann ein gewisser Prozentsatz dieser Leser Fragen
+stellen. Wärend ein Projekt wächst, muss es desshalb diesen 
+Prozentsatz verringern, indem es die Dichte und Verfügbarkeit von
+Informationen erhöht, damit jede beliebige Person eher das findet,
+wonach sie sucht, ohne fragen zu müssen.</para>
+
+<!--
+
+<para><remark>See
+<ulink
+url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
+an example of mailing list guidelines, talk about which problems such
+guidelines can solve and which they can't.  Also, log message
+guidelines (if that gets its own section, remember to adjust the xrefs
+in Version Control Vocabulary and elsewhere in Chapter 3).  Mention
+the parseability concern; point out that it can overdone, too.
+Formatting of bug tracker numbers in log messages is an excellent
+example of where parseability is an appropriate concern.  Log message
+templates.  Make sure that commit reviews apply to log messages and
+other "meta" aspects of the commit as well as to the code
+itself.</remark></para>
+
+-->
+
+</sect2>
+
+<!-- todo: A lot of projects have designated summarizers, like the
+Zack Brown (?) for the Linux kernel, and I think I've seen similar
+stuff at DebianPlanet as well.  That's another thing to talk about in
+this discussion of "Strategy (2)", and maybe something to add to the
+Project Roles examples in <xref linkend="share-management"/>.
+-->
+
+</sect1>
+
+<sect1 id="bug-tracker-usage">
+<title>Keine Unterhaltungen im Bugtracker</title>
+
+<para>Bei jedem Projekt, welches aktiv seinen Bugtracker benutzt,
+gibt es immer die Gefahr, dass dieser Tracker sich selbst in ein 
+Diskussionsforum verwandelt, obwohl der Mailverteiler in
+Wirklichkeit besser wäre. Für gewöhnlich, fängt es ganz unschuldig an:
+Jemand hängt einen Kommentar an eine Meldung, sagen wir mit einem
+Lösungsvorschlag, oder einem unvolständigen Patch. Jemand anderes
+sieht das und bemerkt, dass es Probleme mit der Lösung gibt, und hängt
+einen weiteren Kommentar an um sie zu schildern. Die erste Person
+antwortet wiederrum, auch wieder mit einem Kommentar an der Meldung...
+und so geht es weiter.</para>
+
+<para>Das Problem dabei ist erstens, dass der Bugtracker ein ziemlich 
+unbequemer Ort ist, um eine Unterhaltung zu führen, und zweitens,
+dass andere Leute vielleicht nicht zuschauen &ndash; schließlich erwarten
+Sie, dass Diskussionen über die Entwicklung auf dem Entwickler 
+Verteiler stattfinden, also ist das der Ort an dem sie suchen. Es mag
+sein, dass sie überhaupt nicht bei dem Verteiler für Änderungen im 
+Bugtracker angemeldet sind, und wenn sie es sind, kann es sein, dass sie
+es nicht sonderlich gründlich verfolgen.</para>
+
+<para>Aber wo genau bei dem Ablauf ging etwas schief? War es als die
+ursprüngliche Person ihre Lösung an die Meldung anhängte &ndash; hätte
+sie lieber eine Nachricht an den Verteiler schreiben sollen? Oder war
+es als die zweite Person in der Meldung reagierte, anstatt an den
+Verteiler?</para>
+
+<para>Es gibt keine eine richtige Antwort, aber es gibt eine allgemeine
+Regel: Wenn Sie lediglich Daten an einer Meldung anhängen, dann machen
+Sie es auf dem Tracker, wenn Sie aber eine <emphasis>Unterhaltung
+</emphasis> anfangen, dann machen Sie es auf dem Mailverteiler. Es
+mag sein, dass Sie nicht immer erkennen können, was der Fall ist, 
+nutzen Sie aber einfach Ihre Urteilsvermögen. Wenn Sie zum Beispiel,
+einen Patch anhängen, welches eine möglicherweise kontroverse Lösung
+beinhaltet, kann es sein, dass Sie vorrausahnen können, das Leute
+Fragen darüber haben werden. Obwohl Sie also normalerweise den Patch
+an die Meldung anhängen würden (angenommen Sie wollen nicht oder lönnen
+nicht direkt einen Commit der Änderung machen), wäre es in diesem Fall
+vieleicht eher angemessen statt dessen, eine Nachricht an den 
+Mailverteiler zu schicken. In jedem Fall wird es aber einen Punkt geben,
+an dem die eine oder andere Partei erkennen kann, dass es gleich von
+dem einfachen Anhängen von Informationen zu einer echten Unterhaltung
+übergeht &ndash; in dem Beispiel mit dem dieser Abschnitt anfing, wäre
+das die zweite Person, welche in dem Moment, wo er bemerkt, dass es
+Probleme mit dem Patch gibt, hätte vorrausahnen können, dass eine echte
+Diskussion sich gleich entwickelt, und desshalb in dem angemessenen
+Medium gehalten werden sollte.</para>
+
+<para>Um einen Vergleich zur Mathematik zu führen, wenn die 
+Information danach aussieht, als würde es schnell konvergieren, dann
+stellen Sie es gleich in den Bugtracker; wenn es danach aussieht
+als würde es divergieren, dann wäre ein Mailverteiler oder ein
+IRC-Kanal der bessere Ort.</para>
+
+<para>Das bedeutet nicht, dass es niemals Austausche auf dem Bug 
+Tracker geben sollte. Dem Meldenden nach weiteren Details einer
+Anleitung zur Reproduktion zu fragen, neigt beispielsweise dazu ein im
+hohen maße konvergenter Ablauf zu sein. Die Rückmeldung wird 
+wahrscheinlich keine neuen Probleme hervorbringen, es wird lediglich
+die Informationen erweitern, die bereits erfasst wurden. Es gibt
+keinen Grund den Mailverteiler mit diesem Vorgang abzulenken; Sie
+können es durchaus in den Kommentaren des Bugtrackers erledigen.
+Gleichermaßen gilt, wenn Sie sich ziemlich sicher sind, dass der Bug
+fälschlicherweise gemeldet wurde (d.h. kein Bug ist), dann können Sie
+es gleich in der Meldung sagen. Selbst auf ein kleines Problem bei einer
+vorgeschlagenen Lösung hinzuweisen ist in Ordnung, angenommen es ist
+kein Problem welches die Lösung gänzlich verhindert.</para>
+
+<para>Wenn Sie andererseits philosophische Angelegenheiten über den
+Ramen der Meldung oder das Verhalten der Anwendung aufbringen, können
+Sie sich sicher sein, dass andere Entwickler beteiligt sein wollen.
+Die Diskussion wird wahrscheinlich eine weile lang divergieren, bevor
+es konvergiert, also schreiben Sie an den Mailverteiler.</para>
+
+<para>Verlinken Sie immer von der Meldung auf den Thread im 
+Mailverteiler. Es ist immer noch wichtig für jemand der die Meldung
+verfolgt, in der Lage zu sein, die Diskussion zu erreichen, selbst wenn
+die Meldung selber nicht das Forum der Diskussion ist. Die Person die
+den Thread anfängt, mag das ein wenig aufwendig finden, aber in 
+Open-Source-Kultur hat im allgemeinen der Autor die Verantwortung: Es ist
+viel wichtiger Sachen für duntzende oder hunderte Leute die den Bug
+möglicherweise lesen als für die drei oder fünf die darüber schreiben.
+</para>
+
+<para>Es ist in Ordnung, wichtige Schlussfolgerungen oder 
+Zusammenfassungen aus der Listen-Diskussion in die Meldung zu
+übertragen, wenn das es für die Leser einfacher macht. Ein häufiger
+Ablauf ist es, eine E-Mail-Diskussion anzufangen, einen Link an den
+Thread in der Meldung zu schreiben, und dann sobald die Diskussion
+zu Ende ist, die finale Zusammenfassung in die Meldung zu kopieren
+(zusammen mit einem Link zu der Nachricht welche die Zusammenfassung
+beinhaltet), damit jemand die sich die Meldung anschaut, leicht
+erkennen kann, welche Lösung beschlossen wurde, ohne irgendwo anders
+hinclicken zu müssen. Man merke an, dass die gewöhnliche Problematik
+doppelter Informationen hier nicht gibtm da sowohl Archive als auch
+Kommentare in einer Meldung, im allgemeinen sowieso statische, 
+unveränderliche Daten sind.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="publicity">
+<title>Öffentlichkeit</title>
+
+<para>Bei freier Software gibt es einen relativ glatten Übergang
+zwischen rein internen Diskussionen und öffentlichen Bekanntmachungen.
+Das liegt zum Teil daran, dass die Zielgruppe immer schlecht bestimmbar
+ist: Angesichts, dass die meisten oder alle Nachrichten öffentlich
+zugänglich sind, hat das Projekt nicht die volle Kontrolle darüber,
+welchen Eindruck die Öffentlichkeit bekommt. Jemand &ndash; sagen wir
+ein <ulink url="heise.de"/> Mitarbeiter &ndash; kann die Aufmerksamkeit
+von Millionen Lesern auf eine Nachricht richten, von der keiner vermutet
+hätte, dass sie jemals außerhalb des Projekts gesehen werden würde.
+Das ist eine Tatsache des Lebens, mit der alle Open-Source-Projekte
+leben müssen, in der Praxis aber, ist das Risiko für gewöhnlich klein.
+Im algemeinen, sind die Bekanntgaben die das Projekt am ehesten
+öffentlich verbreiten will, diejenigen die auch am ehesten bekannt
+werden, angenommen Sie nutzen die richtigen Mechanismen darauf 
+hinzuweisen, wie berichtenswert es ist für die Öffentlichkeit ist.
+</para>
+
+<para>Für großere Bekanntgaben, gibt es allgemein vier Hauptkanäle der
+Verbreitung, auf den Melungen so gleichzeitig wie möglich gemacht 
+werden sollten:</para>
+
+<orderedlist>
+
+  <listitem><para>Die erste Seite Ihres Projekts wird wahrscheinlich
+	    von mehr leuten gesehen, als irgend ein anderer Teil des
+	    Projekts. Wenn Sie eine wirklich große Ankündigung haben,
+	    schreiben Sie einen paar kurzen Sätze dorthin. Sie sollten
+	    eine kurze Zusammenfassung sein die auf die Pressemitteilung
+	    (siehe unten) für weitere Informationen verweist.</para>
+  </listitem>
+
+  <listitem><para>Gleichzeitig, sollten Sie auch einen "Nachrichten"
+	    oder "Pressemitteilungen" Bereich auf der Webseite haben
+	    wo die Bekanntgabe im detail erläutert werden kann. Der
+	    Sinn von einer Pressemitteilung liegt zum Teil darin, ein
+	    einziges kanonisches "Bekanntgabe-Objekt" zu haben, auf
+	    das andere Seite verlinken können, also stellen Sie sicher,
+	    dass es entsprechend strukturiert ist: entweder als eine
+	    Webseite für jede neue Version, als diskreten Eintrag in
+	    einem Blog, oder als irgend eine andere Art Entität auf
+	    die verlinkt werden kann, und die trotzdem eindeutig
+            von anderen Veröffentlichungen imselben Bereich zu
+	    unterscheiden ist.</para>
+  </listitem>
+
+  <listitem><para>Wenn Ihr Projekt einen RSS-Feed hat, stellen Sie 
+	    sicher, dass die Ankündigung auch dort veröffentlicht wird.
+	    Das mag automatisch passieren wenn Sie die Pressemitteilung
+	    erstellen, abhängig davon, wie Ihre Webseite eingerichtet
+	    ist. (<firstterm>RSS</firstterm> ist eine Methode, um
+	    Nachrichten-Zusammenfassungen mit einer Menge Metadaten an
+	    "Abonenten" zu verteilen, zu verbreiten, also Leute die ein
+	    Interesse gezeigt haben, diese Zusammenfassungen zu 
+	    bekommen. Siehe <ulink 
+	url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html"/>
+            für weitere Informationen über RSS.)</para>
+  </listitem>
+
+  <listitem><para>Wenn es in der Ankündigung um eine neue Version der
+	Software geht, dann aktualisieren Sie den Eintrag Ihres Projekts
+	bei <ulink url="http://freshmeat.net/"/> (siehe <xref 
+	linkend="announcing"/> in dem es darum geht diesen Eintrag 
+	überhaupt erst anzulegen). Jedes mal, wenn Sie einen 
+        Freshmeat-Eintrag aktualisieren, geht dieser Eintrag auf die 
+	Änderungsliste von Freashmeat für den Tag. Die Änderungsliste
+	wird nicht nur auf Freashmeat selber aktualisiert, sondern auf
+	verschiedenen anderen Portalen (inklusive <ulink 
+	url="slashdot.org"/>) welches erwartungsvoll von einer Horde
+	Menschen beobachtet wird. Freshmeat bietet auch die gleichen
+	Daten mittels eines RSS-Feed an, damit Leute die den RSS-Feed
+	von Ihrem projekt aboniert haben, die Ankündigung trotzdem
+	durch den von Freshmeat sehen.</para>
+  </listitem>
+
+  <listitem><para>Schreiben Sie eine E-Mail an den Verteiler für
+	Ankündigungen (en. announcement) ihres Projekts. Der Name von
+	diesem Verteiler sollte wirklich "announce" sein, d.h. 
+	<literal>announce@ihrprojekt.org</literal>, weil das 
+	mittlerweile so ziemlich zum Standard geworden ist, und Ihr
+	Projekt sollte klarstellen, dass es einen sehr geringen
+	Betrieb hat, ausschließlich für Projekt Ankündigunen. Die
+	meisten dieser Ankündigunen werden sich um neue Versionen der
+	Software drehen, gelegentlich aber andere Ereignisse, wie eine
+	Spendaktion, die Entdeckung einer Sicherheitslücke (siehe 
+	<xref linkend="security"/>)<phrase output="printed"> später
+	in diesem Kapitel</phrase>, oder eine größere Änderung in der
+	Richtung des Projekts können dort auch gemeldet werden. Da es
+	ein Verteiler mit geringem Betrieb ist und nur für wichige
+	Sachen benutzt wird, hat der <literal>announce</literal> 
+	Verteiler typischerweise die höchste Anzahl an Anmeldungen von
+	allen Verteilern in Ihrem Projekt (das bedeutet natürlich, dass
+	Sie es nicht missbrauchen sollten &ndash; überlegen Sie genau vor
+	Sie etwas schreiben). Um zu vermeiden, dass jeder beliebige,
+	oder schlimmer noch, Spam durchkommt, muss der
+	<literal>announce</literal> Verteiler immmer moderiert werden.
+	</para>
+  </listitem>
+
+</orderedlist>
+
+<para>Versuchen Sie die Ankündigunen an all diesen Stellen zur gleichen
+Zeit zu machen, so nahe wie möglich. Manche werden vielleicht verwirrt,
+wenn Sie eine Ankündigung auf dem Verteiler sehen, aber keinen 
+entsprechenden Eintrag auf der Webseite des Projekts oder seinen
+Pressemitteilungen, welches dem entspricht. Wenn Sie die die 
+verschiedenen Änderungen (E-Mails, Bearbeitung der Webseite, usw.)
+aufreihen und alle in einem Zug abschicken, können Sie das Fenster der
+inkonsistenz sehr klein halten.</para>
+
+<para>Bei einem weniger wichtigen Ereignis, können Sie manche oder
+alle obigen Kanäle ausschließen. Das Ereignis wird immer noch von
+der Öffentlichkeit entsprechend seiner Wichtigkeit bemerkt werden.
+Während zum Beispiel eine neue Version der Software ein großes
+Ereignis ist, ist lediglich das Datum für eine neue Version 
+festzulegen, wenn auch einigermaßen Berichtenswert, nich annähernd so
+wichtig wie die neue Version selbst. Ein Datum festzulegen ist eine
+E-Mail an die täglichen Mailverteiler wert (nicht an den "announce"
+Verteiler), und eine aktualisierung der Zeitplan oder der Status-Seite,
+aber nicht mehr.</para>
+
+<para>Sie werden vielleicht trotzdem dieses Datum in anderen 
+Diskussionen im Internet auftauchen sehen, überall dort, wo Leute an
+dem Projekt interesiert sind. Leute die auf Ihren Verteilern
+herumschleichen, lediglich horchen und nie etwas sagen, sind nicht
+unbedingt an andern Stellen still. Mundpropaganda sorgt für eine sehr
+weite Verbreitung; Sie sollten darauf zählen, und selbst kleine
+Ankündigunen sorgfältig ausarbeiten, derart, dass eine korrekte
+übertragung der Informationen ermutigt wird. Insbesondere Nachrichten,
+von denen Sie erwarten, dass sie zitiert werden, sollten einen klaren
+für die Zitierung gedachten Anteil haben, genau so, als ob Sie eine
+formale Pressemitteilung schreiben würden. Zum Beispiel:</para>
+
+  <blockquote>
+     <para><emphasis>Nur eine Information über den aktuellen Stand:
+	Wir planen die Version 2.0 von Scanley mitte August 2005 zu
+	veröffentlichen. Sie können immer 
+	http://www.scanley.org/status.html auf Aktualisierungen 
+	überprüfen. Die große neue Funtion wird die Suche mit
+	Regulären Ausdrücken sein.</emphasis></para>
+
+     <para><emphasis>Andere neue Funktionen sind unter anderem:&nbsp;... 
+	Es wird auch verschiedene Bugfixes geben, unter 
+	anderem:&nbsp;...</emphasis></para>
+  </blockquote>
+
+<para>Der erste Absatz ist kurz, gibt die zwei wichtigsten Informationen
+(Datum der Veröffentlichung und die wichtige neue Funktion), und eine
+URL die man für weitere Nachrichten besuchen kann. Wenn dieser Absatz
+das einzige ist, was über den Bildschirm von jemanden läuft, sind Sie
+immer noch auf einem guten Weg. Die übrige E-Mail könnte verloren gehen
+ohne das wesentlich am Ihnalt zu beeinflussen. Manchmal werden Leute
+sowieso auf die ganze E-Mail verlinken, aber genau so oft, werden Sie
+nur einen kleinen Teil zitieren. Wenn man letztere Möglichkeit bedenkt,
+können Sie es ihnen auch genau so gut einfach machen, und bei dem
+Geschäft etwas Einfuss darüber haben, was zitiert wird.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="security">
+<title>Bekanntgabe von Sicherheitslücken</title>
+
+<para>Eine Sicherheitslücke zu handhaben ist anders, als jede andere Art
+von Bug-Meldung zu handhaben. Bei freier Software, ist es fast schon
+eine religiöse Überzeugung alles offen zu machen. Jeder Schritt der im
+Ablauf der normalen Bug handhabung ist für alle sichtbar, denen es
+interesiert: Das Eintreffen einer ersten Meldung, die darauf folgende
+Diskussion, und die letztendliche Behebung.</para>
+
+<para>Sicherheitslücken sind anders. Sie können die Daten und 
+möglicherweise die Rechner von Nutzer kompromitieren. Solche Probleme
+offen zu diskutieren käme dem weltweiten Bewerben ihrer Existenz gleich
+&ndash; inklusive gegenüber allen Parteien, die vielleicht einen
+böswilligen Nutzen aus dem Bug ziehen könnten. Selbst den Fix zu 
+commiten, kündigt effektiv die Existenz des Bugs an (es gibt potentielle
+Angreifer, welche die Commit-Kommentare öffentlicher Projekte
+verfolgen, systematisch auf der Suche nach Änderungen, die auf
+Sicherheitsprobleme in dem noch nicht geänderten Code hinweisen). Die
+meisten Projekte haben sich auf ungefär die gleichen Schritte
+festgelegt, um diesen Konflikt zwischen Offenheit und Geheimhaltung
+zu handhaben, basierend auf folgende Richtlinien:</para>
+
+<orderedlist>
+  <listitem><para>Reden Sie nicht öffentlich über den Bug bis ein Fix
+	verfügbar ist; stellen Sie dann den Fix zu genau der selben 
+	Zeit zur Verfügung wie Sie den Bug bekanntgeben.</para> 
+  </listitem>
+  <listitem><para>Denken Sie sich diesen Fix so schnell wie möglich
+	aus &ndash; insbesondere wenn jemand von außerhalb des Projekts
+	den Bug gemeldet hat, denn dann wissen Sie, dass es zumindest
+	eine Person außerhalb des Projekts gibt, der in der Lage ist
+	die Lücke auszunutzen.</para>
+  </listitem>
+</orderedlist>
+
+<para>In der Praxis, führen diese Prinzipien zu einer ziemlich 
+standardisierte reihe an Schritten, welche in den Abschnitten weiter
+unten beschrieben werden.</para>
+
+<sect3 id="security-receiving">
+<title>Empfang der Meldung</title>
+
+<para>Ein Projekt muss offensichtlich die Möglichkeit habem Meldungen
+über Sicherheitslücken von jedem zu bekommen. Die gewöhnlichen Adressen
+für Bug-Meldungen reichen aber nicht aus, da sie auch von jedem
+beobachtet werden können. Führen Sie desshalb einen getrennten 
+Mailverteiler um Bug-Meldungen über Sicherheitslücken zu bekommen. Dieser
+Verteiler darf keine öffentlich zugänglichen Archive haben, und
+seine Anmeldungen müssen strengstens überwacht werden &ndash; nur
+langjährige, vertrauenswürdige Entwickler dürfen auf den Verteiler 
+sein. Wenn Sie eine formale Definition darüber haben wollen was
+"vertrauenswürdig" ist, können Sie "jeder der seit zwei oder mehr 
+Jahren commit Zugriff hat" verwenden, um Bevorzugung zu vermeiden.
+Das ist die Gruppe die Sicherheitslücken handhaben wird.</para>
+
+<para>Im Idealfall sollte der Sicherheits-Verteiler nicht vor Spam
+geschützt oder moderiert werden, da Sie nicht wollen, dass eine 
+wichtige Meldung gefiltert oder verzögert wird, nur weil an dem
+Wochenende keine Moderatoren online waren. Wenn Sie doch Software zum
+automatischen Schutz vor Spam benutzen, versuchen Sie es mit einer
+hohen Toleranz zu konfigurieren; es ist besser ein paar Spam-Mails
+durchkommen zu lassen, als eine Meldung zu verpassen. Damit der
+Verteiler effektiv ist, müssen Sie natürlich seine Adresse bewerben;
+in anbetracht, dass er nicht moderiert wird, wenn überhaupt, nur leicht
+vor Spam geschützt wird, versuchen Sie nie seine Adresse ohne irgend
+eine Art verschleierung der Adresse zu verbreiten, wie in <xref 
+linkend="address-hiding"/><phrase output="printed"> im Kapitel <xref
+linkend="technical-infrastructure"/></phrase> beschrieben. 
+Glücklicherweise, muss die Verschleierung der Adresse sie nicht
+unbedingt unleserlich machen; siehe <ulink 
+url="http://subversion.tigris.org/security.html"/>, und schauen Sie
+sich den HTML Quellcode für die Seite als Beispiel an.</para>
+
+</sect3>
+
+<sect3 id="security-finding-a-fix">
+<title>Entwickeln Sie den Fix im stillen</title>
+
+<para>Was macht der sicherheits Verteiler also wenn es eine Meldung 
+bekommt? Die erste Aufgabe ist zu evaluieren wie schwerwiegend und
+dringend es ist:</para>
+
+<orderedlist>
+  <listitem><para>Wie ernst ist die Lücke? Erlaubt es einen
+	böswilligen Angreifer den Computer von jemanden der Ihre 
+	Software benutzt zu übernehmen? Oder gibt es lediglich
+	Informationen darüber, wie groß manche ihrer Dateien sind?
+	</para>
+  </listitem>
+
+  <listitem><para>Wie leicht ist es die Lücke auszunutzen? Kann ein
+	Angriff automatisiert werden, oder erfordert es Wissen über
+	bestimmte Umstände, wohlbegründete Vermutungen und Glück?</para>
+  </listitem>
+
+  <listitem><para><emphasis>Wer</emphasis> hat Ihnen das Problem
+	gemeldet? Die Antwort auf diese Frage ändert natürlich nichts an
+	der Natur der Lücke, aber es gibt Ihnen eine Idee davon, wie
+	viele andere darüber bescheid wissen könnten. Wenn die Meldung
+	von einem der eigenen Mitglieder des Projekts kommt, können Sie
+	es etwas gelassener nehmen (aber nur ein bisschen), da Sie
+	ihnen Vertrauen können, dass sie es keinen anderen gesagt 
+	haben. Wenn es andereseits in einer E-Mail von
+	<literal>anonymer14@globalehacker.net</literal> kam, dann 
+	sollten Sie lieber so schnell wie möglich etwas unternehmen.
+	Die Person hat Ihnen einen Gefallen getan, indem sie Ihnen
+	überhaupt über das Problem informiert hat, aber Sie haben
+	keine Ahnung wie viele weitere sie darüber bescheid gesagt hat,
+	oder wie lange sie warten wird, vor sie die schwachstelle in
+	einem laufenden System ausnutzen wird.</para>
+  </listitem>
+</orderedlist>
+
+<para>Man merke an, dass die Unteschiede von denen wir hier reden oft
+nur eine enge Spanne zwischen <emphasis>dringend</emphasis> und
+<emphasis>extrem&nbsp;dringend</emphasis> ist. Selbst wenn die Meldung
+von einer bekannten, wohl gesinnten Quelle kommt, könnte es immer noch
+andere im Netz geben, die diesen Bug schon vor langem entdeckt haben,
+und es nur nicht gemeldet haben. Der einzige Fall bei dem es nicht
+dringen ist, ist wenn der Bug von sich aus die Sicherheit nicht
+ernsthaft Kompromitiert.</para>
+
+<para>Das "<literal>anonyer@globalehacker.net</literal>" Beispiel
+ist im übrigen nicht schertzhaft gemeint. Es kann durchaus sein, dass
+Sie Bug-Meldungen von anonymen Personen bekommen, die mit Ihren Worten
+nie ganz klar stellen ob sie auf Ihrer Seite sind oder nicht. Es macht
+keinen Unterschied: Wenn Sie eine Sicherheitslücke an Sie gemeldet 
+haben, werden sie das gefühl haben Ihenen eine Gefallen getan zu haben,
+und Sie sollten entsprechend antworten. Danken Sie ihnen für die
+Meldung, geben Sie ein Datum an vor dem Sie vorhaben einen öffentlichen
+Fix freizugeben, und halten Sie sie den Kontakt. Manchmal werden sie
+<emphasis>Ihnen</emphasis> ein Datum geben &ndash; das heißt, eine
+implizite Drohung den Bug an einem bestimmten Datum bekannt zu geben,
+ob Sie bereit sind oder nicht. Das mag sich nach einschüchterndem
+Machtspiel anfühlen, aber es ist wahrscheinlich eher eine vorsorgliche
+Maßnahme die sich aus vergangener Enttäschung mit nicht reagierenden
+Software-Produzenten, welche die Sicherheitsmeldungen nicht ernst
+genug nahmen. In jedem Fall, können Sie es sich nicht leisten, dieser
+Person auf die Nerven zu gehen. Wenn der Bug ernst ist, hat er
+schließlich Wissen, welches Ihren Nutzern ernste Probleme bereiten
+könnte. Behandeln Sie solche Personen gut, und hoffen Sie darauf, dass
+sie auch gut behandelt werden.</para>
+
+<para>Eine weitere Person die häufig Bugs meldet, ist der Sicherheitsprofi, 
+jemand der davon lebt, Code zu überprüfen und sich auf dem
+Laufenden über die neusten Software-Schwachstellen hält. Diese Leute
+haben für gewöhnlich Erfahrung mit beiden Seiten des Zauns &ndash; sie
+haben sowohl Meldungen gemacht als auch bekommen, wahrscheinlich mehr
+als die meisten in Ihrem Projekt. Auch sie werden wahrscheinlich ein
+Frist setzen, vor dem eine Lücke geschlossen werden muss, vor sie an
+die öffentlichkeit gehen. Die Frist mag etwas verhandelbar sei, das
+hängt aber vom Meldenden ab; Fristen sind unter Sicherheitsexperten
+so ziemlich als die einzige Möglichkeit anerkannt worden, Organisationen 
+zuverlässig dazu zu bringen, sich um Sicherheitsprobleme zeitnah zu
+kümmern. Betrachten Sie die Frist also nicht als unhöflich, sie ist 
+eine altehrwürdige Tradition und es gibt gute Gründe dafür.</para>
+
+<para>Sobald Sie wissen wie schwehrwiegend und dringend eine Lücke ist,
+können Sie sich an den Fix zu schaffen machen. Es gibt manchmal einen
+Kompromiss zwischen einen eleganten Fix und es schnell zu machen; das
+ist der Grund warum Sie sich vorher über die Dringlichkeit einigen
+müssen vor Sie anfangen. Halten Sie die Diskussion über den Fix 
+natürlich auf die Mitglieder des sicherheits Verteilers beschränkt,
+sowie auf den ursprünglichen Meldenden (wenn die beteiligt sein möchte)
+und solche Entwickler die aus technischen Gründen herangezogen werden
+müssen.</para>
+
+<para>Committen Sie den Fix nicht zum Projektarchiv. Halten Sie ihn als
+Patch bereit bis zum Datum der Bekanntgabe. Wenn Sie es committen
+würden, selbst mit einem unscheinbaren Kommentar, könnte jemand die
+Änderung bemerken und verstehen. Sie wissen nie, wer Ihr Projektarchiv im
+Auge behält und warum sie vielleicht interesiert sein könnten. 
+Commit-E-Mails 
+abzuschalten würde nichts bringen; erstens weil sich die Lücke
+in der Reihe der E-Mails verdächtig aussehen würde, und die Daten wären
+immer noch im Projektarchiv. Machen Sie einfach die ganze Entwicklung
+in einem Patch und halten Sie ihn an einem privaten Ort, vielleicht ein
+getrenntes privates Projektarchiv, das nur denjenigen bekannt ist, die
+schon über den Bug Bescheid wissen. (Wenn Sie eine dezentralisierte
+Versionsverwaltung benutzen wie Arch oder SVK, können Sie die Arbeit
+mit kompletter Versionsverwaltung machen und dieses Projektarchiv einfach
+vorm Zugriff für Ausenstehende schützen.)</para>
+
+</sect3>
+
+<sect3 id="security-cve">
+<title>CAN/CVE-Nummer</title>
+
+<para>Sie haben vielleicht eine <firstterm>CAN-Nummer</firstterm> oder
+eine <firstterm>CVE-Nummer</firstterm> im Zusammenhang mit 
+Sicherheitsproblemen gesehen. Diese Zahlen sehen für gewöhnlich zum
+Beispiel so "CAN-2004-0397" oder so "CVE-2002-0092" aus.</para>
+
+<para>Beide Zahlenarten repräsentieren den gleichen Entitätstyp:
+Ein Eintrag in der Liste von "Common Vulnerabilities and Exposures" 
+(de. "Verbreitete Schwachstellen und Aufdeckungen") die bei
+<ulink url="http://cve.mitre.org/"/> gepflegt wird. Der Sinn dieser
+Liste ist es standardisierte Namen für alle bekannte 
+Sicherheitsprobleme zur verfügung zu stellen, damit jeder einen
+eindeutigen, kanonischen Namen bei der Diskussion eines solchen hat,
+und einen zentralen Ort zu haben, um mehr Informationen zu bekommen.
+Der einzige Unterschied zwischen einer "CAN"-Nummer und einer 
+"CVE"-Nummer ist, dass erstere einen Kandidaten-Eintrag repräsentiert, 
+welches noch nichtbestätigt wurde, und letzteres einen bestätigten
+Eintrag repräsentiert. Beide Typen sind jedoch für die Öffentlichkeit
+sichtbar, und die Nummer für einen Eintrag ändert sich nicht, wenn Sie
+bestätigt wird &ndash; der "CAN"-Prefix wird einfach mit "CVE" ersetzt.
+</para>
+
+<para>Ein CAN/CVE-Eintrag entält selber nicht eine vollständige
+Beschreibung von dem Bug und wie Sie sich vor ihm schützen. 
+Stattdessen, enthält es eine kurze Beschreibung und eine Liste von
+Verweisen auf externe Ressourcen (wie die Archive des Verteilers) wo
+Leute detalliertere Infomationen nachschlagen können. Der wirkliche
+Sinn von <ulink url="http://cve.mitre.org/"/> ist einen wohl
+organisierten Ort zu haben, in dem jede Schwachstelle einen Namen 
+haben und eine klare Route zu weiteren Daten haben kann. Siehe
+<ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"/>
+als Beispiel für einen Eintrag. Beachten Sie, dass Verweise sehr kurz
+gehalten sein können, mit Quellen die als kryptische Abkürzungen
+erscheinen. Ein Schlüssel zu diesen Abkürzungen befindet sich bei
+<ulink url="http://cve.mitre.org/cve/refs/refkey.html"/>.</para>
+
+<para>Wenn Ihre Schwachstelle die Kriterien für ein CVE erfüllt, kann
+es sein, dass Sie dafür eine CAN-Nummer bekommen wollen. Der Prozess
+dafür ist absichtlich umständlich gehalten: Im Prinzip müssen Sie
+jemanden kennen, oder jemanden kennen der jemand anderen kennt. Das ist
+nicht so verrückt wie es sich anhören mag. Damit die CVE-Redaktion
+es vermeiden kann von unechten oder schlecht geschriebenen Vorschlägen
+überwältigt wird, nehmen Sie nur Vorschläge von Quellen, die sie bereits 
+kennen und denen Sie vertrauen. Damit Ihre Lücke in der Liste aufgenommen
+wird, müssen Sie desshalb einen Pfad von Bekanntschaften von Ihrem
+Projekt hin zu der CVE-Redaktion finden. Fragen Sie bei Ihren 
+Entwicklern nach; einer von Ihnen wird wahrscheinlich jemand anderen
+kennen der bereits durch den CAN-Prozess gelaufen ist, oder der jemand
+kennt der es gemacht hat, usw. Der Vorteil dieser Methode ist auch,
+das irgendwo in der Kette jemand sein kann, der genug weiß, um Ihnen
+sagen zu können, dass a) es nicht als Lücke oder Aufdeckung nach den
+Kriterien von MITRE zählen würde, es also keinen Sinn hat es 
+vorzuschlagen, oder b) dass die Lücke bereits eine CAN- oder CVE-Nummer
+<emphasis>hat</emphasis>. Letzteres kann passieren, wenn der Bug 
+bereits auf einer andern Liste für Sicherheitsberatung veröffentlicht
+wurde, zum Beispiel bei <ulink url="http://www.cert.org/"/> oder auf
+dem BugTraq-Mailverteiler bei 
+<ulink url="http://www.securityfocus.com/"/>. (Wenn das passiert ist,
+ohne das Ihr Projekt davon erfahren hat, dann sollten Sie sich sorgen
+machen, was noch möglicherweise abläuft worüber Sie nichts wissen.)
+</para>
+
+<para>Wenn Sie überhaupt eine CAN/CVE-Nummer bekommen, werden Sie sie
+wahrscheinlich im frühen Stadium Ihrer Bug-Untersuchung bekommen, damit
+alle weitere Kommunikation sich auf diese Nummer beziehen kann. 
+CAN-Einträge stehen unter einem Embargo bis zu dem 
+Veröffentlichungsdatum; Der Eintrag wird als leerer Platzhalter 
+existieren (damit Sie den Namen nicht verlieren), es wird aber keine
+Informationen über die Lücke enthüllen, bist zu dem Datum an dem Sie
+den Bug und den Fix bekanntgeben.</para>
+
+<para>Weitere Informatione über den CAN/CVE-Prozess kann bei
+<ulink url="http://cve.mitre.org/about/candidates.html"/> gefunden
+werden, und eine besonders klare Darstellung von dem Nutzen eines
+Open-Source-Projekts der CAN/CVE-Nummern befindet sich auf <ulink
+url="http://www.debian.org/security/cve-compatibility"/>.</para>
+
+</sect3>
+
+<sect3 id="security-prenotification">
+<title>Vorankündigung</title>
+
+<para>Sobald Ihr Sicherheitsteam (also die Entwickler die auf dem
+sicherheits Verteiler sind, oder die zu einer bestimmten Meldung
+herangezogen wurden) eine Fix bereit hat, müssen Sie entscheiden
+wie Sie es Verbreiten wollen.</para>
+
+<para>Wenn Sie den Fix einfach zu Ihrem Projektarchiv committen, oder
+sonstwie der Welt bekanntgeben, zwingen Sie effektiv alle die Ihre
+Software benutzen sofort zu aktualisieren oder das Risiko einzugehen,
+gehackt zu werden. Es ist deshalb manchmal angemessen, für bestimmte
+Nutzer eine <firstterm>Vorankündigung</firstterm> zu machen. Das gilt
+insbesondere bei Client-Server-Software, bei dem es wenige wohl
+bekannte Server geben kann, die verlockende Ziele für Angreifer sind.
+Die Administratoren dieser Server wären dankbar darüber einen
+zusetzlichen Tag oder zwei für die Aktualisierung zu haben, damit
+Sie bereits geschützt sind, wenn die Lücke öffentlich bekannt wird.
+</para>
+
+<para>Vorankündigung bedeutet lediglich eine E-Mail an diese 
+Administratoren zu senden, vor dem Veröffentlichungsdatum, in dem Sie
+ihnen über die Lücke bescheid geben und wie sie es beheben können. Sie
+sollten eine Vorankündigung nur an Personen schicken, die Sie diese
+diskrete Information anvertrauen können. Die Qualifikation um eine
+Vorankündigung zu erhalten hat also zwei Bedingungen: Der Empfänger
+muss eine große Installation in Betrieb haben, wichtige Server bei dem
+eine Kompromitierung etwas ernstes wäre, <emphasis>und</emphasis> der
+Empfänger muss jemanden sein, der sich über das Sicherheitsproblem vor
+dem Veröffentlichungsdatum verplappert.</para>
+
+<para>Senden Sie jede E-Mail mit einer Vorankündigung einzeln (eines
+nach dem anderen) an jedem Empfänger. Senden Sie <emphasis>nicht
+</emphasis> an die komplette Liste von Empfängern auf ein mal, da sie
+dann ihre gegenseitigen Namen sehen würden &ndash; was zur Folge hat,
+dass Sie im Grunde genommen jedem Empfänger über die Tatsache 
+aufmerksam machen, dass jeder <emphasis>andere</emphasis> Empfänger
+möglicherweise die Sicherheitslücke auf seinem Empfänger hat. Es an
+alle mittels einem blinden CC (BCC) zu schicken ist auch keine gute
+Lösung, da manche Administratoren ihre Mail-Konten mit Spam-Filtern
+schützen, die entweder BCC-Mails blockieren, oder ihre Priorität
+reduzieren, da heutzutage sehr viel Spam mit BCC verschickt wird.
+</para>
+
+<para>Hier ist ein Beispiel E-Mail für eine Vorankündigung:</para>
+
+<screen>
+Von: Ihr Name hier
+An: admin@grosser-bekannter-server.de
+Antwort-an: Ihr Name hier (nicht die Adresse des Sicherheitsverteilers)
+Betreff: Vertrauliche Meldung einer Scanly-Sicherheitslücke.
+
+
+Diese E-Mail ist eine vertrauliche Vorankündigung einer 
+Sicherheitsmeldung zum Scanley-Server.
+
+Bitte leiten Sie keinen Teil dieser E-Mail an irgend jemand weiter. Die
+öffentliche Bekanntgabe wird nicht vor dem 19. Mai stattfinden, und
+wir würden die Information gerne bis dann unter Verschluss halten.
+
+Sie erhalten diese E-Mail, da (wir denken, dass) Sie einen Scanley-Server
+betreiben, und wir ihn lieber gepatcht hätten, bevor die Sicherheitslücke
+am 19ten Mai bekannt gegeben wird.
+
+Verweise:
+===========
+
+   CAN-2004-1771: Scanley Speicherüberlauf in Abfragen
+
+Sicherheitslücke:
+==============
+
+   Der Server kann dazu gebracht werden, beliebige Befehle auszuführen,
+   wenn die Locale des Servers falsch konfiguriert ist und der Client
+   eine fehlerhafte Abfrage macht.
+
+Sicherheitsgrad:
+=========
+
+   Sehr ernst, kann die Ausführung von beliebigen Code auf dem Server
+   zur Folge haben.
+
+Provisorische Lösungen:
+============
+
+   Die 'natural-language-processing'-Einstellung in der 
+   scanley.conf auf 'off' zu stellen, schließt die Sicherheitslücke.
+
+Patch:
+======
+
+   Der folgende Patch gilt für Scanley 3.0, 3.1, und 3.2.
+
+   Eine neu Version (Scanley 3.2.1) wird am oder kurz vor dem 19. Mai
+   veröffentlicht werden, damit es zur gleichen Zeit verfügbar istm wie
+   die Bekanntgabe der Lücke. Sie können dem Patch jetzt anwenden oder
+   einfach auf die neue Version warten. Der einzige Unterschied 
+   zwischen 3.2 und 3.2.1 wird diese Patch sein.
+
+[...Patch folgt hier...]
+</screen>
+
+<para>Wenn Sie eine CAN-Nummer haben, geben Sie sie bei der 
+Vorankündigung mit an (wie oben gezeigt), selbst wenn die Information
+unter Verschluss steht und die MITRE Seite desshalb leer sein wird. Die
+CAN-Nummer erlaubt es dem Empfänger mit sicherheit zu wissen, dass der
+Bug über den sie eine Vorankündigung bekommen haben, der gleiche ist
+von dem sie später durch öffentliche Kanäle erfahren, also müssen sie
+sich keine Sorgen darüber machen, ob weitere Schritte notwendig sind,
+was genau der Sinn einer CAN/CVE-Nummer ist.</para>
+
+</sect3>
+
+<sect3 id="security-announcing">
+<title>Verteilen Sie den Fix öffentlich</title>
+
+<para>Der letzte Schritt bei der Handhabung einer Sicherheitslücke, ist
+den fix öffentlich zu verteilen. Sie sollten in einer einzigen, 
+umfangreichen Meldung, das Problem beschreiben, die CAN/CVE-Nummer
+angeben, falls vorhanden, beschreiben wie das Problem zu umgehen ist,
+und wie es permanent 'gefixed' werden kann. 'Fix' bedeutet für
+gewöhnlich auf eine neuere Version der Software zu aktualisieren,
+obwohl es manchmal die Anwendung von einem Patch bedeuten kann,
+insbesondere wenn die Software sowieso meistens vom Quellcode-Format
+aus betrieben wird. Wenn Sie doch eine neue Version machen, sollte
+es sich von einer existierenden Version durch genau diesen
+sicherheits-Patch unterscheiden. So können konservative 
+Administratoren, aktualisieren, ohne sich sorgen zu machen, was sie
+noch beeinflussen könnten; sie müssen sich also keine Sorgen über
+zukünftige Upgrades machen, da der sicherheits Patch als Folge in
+allen zukünftigen Versionen enthalten sein wird. (Details der
+Abläufe für neue Versionen werden in 
+<xref linkend="security-releases"/><phrase output="printed"> im Kapitel
+<xref linkend="development-cycle"/></phrase> behandelt.)</para>
+
+<para>Ob der öffentliche Fix eine neue Version zur Folge hat oder 
+nicht, machen Sie die Meldung mit ungefähr der der gleichen Priorität
+wie Sie eine neue Version machen würden: Senden Sie eine E-Mail an den
+<literal>announce</literal> Verteiler des Projekts, machen Sie eine
+neue Pressemitteilung, aktualisieren Sie den Freshmeat-Eintrag, usw.
+Während Sie nie versuchen sollten, die Existenz einer Sicherheitslücke
+herunterzuspielen, aus Sorge um den Ruf des Projekts, können Sie
+durchaus den Ton und die Gewichtung der Sicherheitsmeldung anpassen,
+um den Ernst des Problems zu entsprechen. Wenn die Sicherheitslücke
+nur eine kleine Offenlegung von Informationen ist, nicht eine Lücke
+die es erlaubt den kompletten Computer des Anwenders zu übernehmen,
+mag es keinen all zu großen Wirbel gerechtfertigen. Sie können sich
+sogar Entscheiden den <literal>announce</literal> Verteiler damit
+abzulenken. Wenn das Projekt schließlich jedes mal Wolf schreit, 
+werden sich die Nutzer denken, dass die Software weniger sicher ist,
+als das tatsächlich der Fall ist, und es möglicherweise nicht glauben
+wenn Sie wirklich ein riesiges Problem ankündigen müssen. Siehe
+<ulink url="http://cve.mitre.org/about/terminology.html"/> als eine
+gute Einführung zu dem Problem der Beurteilung wie schwerwiegend eine
+Sicherheitslück ist.</para>
+
+<para>Im Allgemeinen, wenn Sie sich nicht sicher sind, wie Sie ein
+Sicherheitsproblem behandeln sollen, suchen Sie sich jemand Erfahrenen
+und reden Sie darüber. Lücken zu handhaben und zu bewerten, ist 
+größtenteils eine angelernte Fähigkeit und es ist leicht, die ersten 
+paar Male Fehler zu machen.</para>
+
+</sect3>
+
+<para>Zum Umgang mit Sicherheitslücken siehe auch die 
+Richtlinien der Apache Software Foundation unter
+<ulink url="http://www.apache.org/security/committers.html"/>.  Sie 
+bieten eine ausgezeichnete Checkliste, anhand derer Sie prüfen können,
+ob Sie alle Punkte sorgfältig bedacht haben.</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

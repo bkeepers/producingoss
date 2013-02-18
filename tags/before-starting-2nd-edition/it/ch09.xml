@@ -1,0 +1,705 @@
+<chapter id="legal">
+
+  <title>Licenze, Diritti d'Autore e Brevetti</title>
+
+  <simplesect>
+
+    <para>La licenza che scegliete probabilmente non avrà grande impatto sull'adozione del vostro progetto, finché è open source. Gli utilizzatori scelgono generalmente software basato su qualità e funzionalità, non sui dettagli della licenza. Nondimeno, avete bisogno di una comprensione dei problemi delle licenze del software libero, compresa l'assicurazione che la licenza sia compatibile con i suoi obiettivi, e che siate capaci di discutere le decisioni sulla licenza con altre persone. Prego notate, che io non sono un legale, e che niente in questo capitolo dovrebbe essere costituito come un consiglio legale. Per quello avrete bisogno di impiegare un un legale o di essere un legale.</para>
+
+  </simplesect>
+
+  <!-- ======================== SECTION ============================== -->
+  <sect1 id="licenses-terminology">
+    <title>La Terminologia</title>
+
+    <para>
+      In una discussione su licenze open source, la prima cosa che balza all'evidenza è che sembrano esserci varie parole per la medesima cosa: <firstterm>software&nbsp;libero</firstterm>,
+      <firstterm>open&nbsp;source</firstterm>,
+      <firstterm>FOSS</firstterm>, <firstterm>F/OSS</firstterm>, and
+      <firstterm>FLOSS</firstterm>.  Partite con l'ordinarle, insieme ad altri pochi termini
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <firstterm>software libero</firstterm>
+        </term>
+        <listitem>
+          <para>
+            Il software può essere liberamente condiviso e modificato, includendolo in qualche forma di codice.  Il termine fu coniato per prima da Richard Stallman, che lo codificò nella GNU
+            General Public License (GPL), e fondò la Free
+            Software Foundation (<ulink url="http://www.fsf.org/"/>)
+            per promuoverne il concetto.
+          </para>
+
+          <para>Sebbene il “software libero” copra quasi esattamente la stessa estensione dell'”open source”, la FSF, fra gli altri, preferisce il primo termine perché esso enfatizza l'idea di libertà e di software redistribuibile liberamente soprattutto come movimento sociale piuttosto che tecnico. La FSF riconosce che il termine è ambiguo&mdash;esso significherebbe “libero” nel senso di “a costo zero”, invece che “libero nel senso di “in libertà” ma ritiene che esso sia ancora il miglior termine, tutto considerato, e che le altre possibilità in inglese hanno le loro ambiguità. (In questo libro “free” è usato nel senso di “in libertà” non nel senso di “a costo zero”).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>software open source</firstterm>
+        </term>
+
+        <listitem>
+          <para>
+            Software libero sotto altro nome. Ma il nome differente riflette una importante differenza filosofica: open source fu coniato dall'Open Source Initiative (<ulink url="http://www.opensource.org/"/>)
+            come una voluta alternativa al “software libero”, per rendere tale software una scelta più gradita per le grandi imprese, presentandola come una metodologia di sviluppo, piuttosto che un movimento politico. Essi anche avevano voluto smontare un altro marchio: quello che ogni cosa “libera” debba essere di bassa qualità.
+          </para>
+
+          <para>
+            Mentre una licenza che sia libera è anche open source, e viceversa, (con piccole trascurabili eccezioni), la gente tende a raccogliere un termine e incollarlo ad essa. In generale quelli che preferiscono  “software libero”, molto verosimilmente sono per avere un atteggiamento morale verso il problema, mentre coloro che preferiscono “open source”, o non la vedono come una questione di libertà, o non sono interessati a metter in mostra il fatto che lo fanno.  Vedere
+            <xref linkend="free-vs-open-source"/><phrase
+              output="printed">
+              in
+              <xref linkend="introduction"/>
+            </phrase> per una storia più dettagliata dello scisma.
+          </para>
+
+          <para>
+            La Free Software Foundation fa una eccellente&mdash;assolutamente non oggettiva, ma sottile e completamente corretta&mdash;esegesi dei due termini, a <ulink
+   url="http://www.fsf.org/licensing/essays/free-software-for-freedom.html"/>.
+            L'iniziativa presa dall' Open Source Initiative su questa cosa è (o era nel 2002) divulgata in due pagine: <ulink
+   url="http://www.opensource.org/advocacy/case_for_hackers.php#marketing"/>
+            and <ulink
+   url="http://www.opensource.org/advocacy/free-notfree.php"/>.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>FOSS</firstterm>,
+          <firstterm>F/OSS</firstterm>,
+          <firstterm>FLOSS</firstterm>
+        </term>
+
+        <listitem>
+          <para>
+            Dove ce ne sono due di ogni cosa, lì ce ne saranno presto tre, e questo è esattamente ciò che sta avvenendo con i termini per il software libero. Il mondo accademico, forse volendo la precisione e la comprensione al di sopra dell'eleganza, sembra aver deciso per  FOSS o talvolta per F/OSS che sta per "Free / Open Source Software". Un'altra variante che sta guadagnando slancio è FLOSS che sta per "Free / Libre Open Source Software"
+            (<foreignphrase>libre</foreignphrase> è familiare in molte lingue e non soffre dell'ambiguità di “free”; vedere
+            <ulink url="http://en.wikipedia.org/wiki/FLOSS"/> per sapere di più).
+          </para>
+
+          <para>Tutti questi termini significano essenzialmente la stessa cosa: software che può essere modificato e redistribuito da chiunque, a volte ma non sempre col requisito che i lavori derivati siano liberamente redistribuibili sotto gli stessi termini.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>DFSG-compliant</firstterm>
+        </term>
+        <listitem>
+          <para>
+            Conforme elle linee guida della  Debian Free Software
+            (<ulink
+           url="http://www.debian.org/social_contract#guidelines"/>).
+            Questo è il testo largamente usato per indicare se una data licenza è veramente open source
+            (free, <foreignphrase>libre</foreignphrase>, etc.). La missione del Progetto Debian è quella di mantenere un sistema operativo completamente libero, dimodochè non ci sia bisogno per uno che lo installa di avere il dubbio se abbia il diritto di modificare o redistribuire in parte o del tutto il sistema. Le linee guida Debian Free Software sono il requisito che la licenza di un pacchetto di software deve avere per essere incluso in Debian. Poichè il progetto Debian spese una buona quantità di tempo a pensare come costruire questo testo, le linee guida cui si pervenne si dimostrarono molto robuste
+            (vedere <ulink url="http://en.wikipedia.org/wiki/DFSG"/>),
+            e da quanto mi risulta, nessuna seria obiezione è stata sollevata su di esse sia dalla Free Software Foundation, sia dalla Open Source Initiative. Se sapete che una licenza è DFSG-conforme, sapete che essa garantisce tutte le importanti libertà (come l'autirizzazione a iniziare un nuovo progetto partendo dal progetto sorgente, anche contro i desideri dell'autore originale) richiesta per sostenere le dinamiche di un progetto open source. Tutte le licenze discusse in questo capitolo sono DFSG-conformi.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>OSI-approved</firstterm>
+        </term>
+        <listitem>
+          <para>
+            Approvata dall'Open Source Initiative.  Questo è un altro testo largamente usato per dire se una liacenza permette tutte le necessarie libertà. La definizione di software open source si basa sulle linee guida del Debian Free Software, e una licenza che ha una definizione quasi sempre ha l'altra. Ci sono state poche eccezioni negli anni, ma riguardanti solo particolari licenze e nessuna di qualche rilevanza qui. Diversamente dal progetto Debian, l'OSI conserva un elenco di tutte le licenze che ha approvato, a
+            <ulink url="http://www.opensource.org/licenses/"/>, cosicché "approvata-OSI" è uno stato non ambiguo: una licenza c'è o non c'è nella lista.
+          </para>
+
+          <para>
+            Anche la Free Software Foundation tiene aggiornata una lista delle  licenza a La FSF classifica le licenza a <ulink
+              url="http://www.fsf.org/licensing/licenses/license-list.html"/>.
+            La FSF classifica le licenza non solo in base al fatto se sono libere, ma se sono compatibili con la GNU General Public License.
+            La compatibilità GPL è un importante argomento, trattato in
+            <xref
+            linkend="license-compatibility"/><phrase
+              output="printed"> più avanti in questo capitolo</phrase>.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>proprietario</firstterm>,
+          <firstterm>closed-source</firstterm>
+        </term>
+        <listitem>
+          <para>L'opposto di “free” e “open source”. Ciò significa distribuito sotto i termini delle licenze tradizionali, basate sul costo, dove gli utilizzatori pagano per una copia, o sotto altri termini restrittivi sufficienti per impedire alle dinamiche open source di operare. Anche il software distribuito gratis può essere proprietario, se la sua licenza non permette la libera redistribuzione e modifica.</para>
+
+          <para>
+            Generalmente “proprietario” e “closed source” sono sinonimi. Comunque in più “closed source” implica che il codice sorgente non può persino essere visto: poiché il codice sorgente non può essere visto nella maggior parte dei software proprietari, questa è normalmente una differenza senza distinzioni. Comunque, a volte, qualcuno rilascia del software proprietario sotto una licenza che permette ad altri di vedere il codice sorgente. Con confusione essi lo chiamano “open source” o “quasi open source”, ecc.. , ma ciò è ingannevole. La
+            <emphasis>visibilità</emphasis> del codice sorgente non è il problema; la domanda importante è cosa potete fare con esso. Così la differenza fra proprietario e closed source è in gran parte irrilevante e i due termini possono essere trattati come sinonimi.
+          </para>
+
+          <para>
+            A volte <firstterm>commerciale</firstterm> è usato come sinonimo di “proprietario”, ma, parlando appropriatamente, i due termini non sono la stessa cosa. Il software libero può essere software commerciale. Dopotutto il software libero può essere venduto, fin tanto che agli acquirenti non è impedito di dar via copie essi stessi. Esso può essere commercializzato in altre maniere, per esempio vendendo assistenza, servizi, e certificazione. Ci sono compagnie miliardarie in dollari costruite sul software libero oggi, cosicché esso non è né in modo innato anti-commerciale né anti-compagnia. D'altra parte esso <emphasis>è</emphasis> anti-proprietario per natura, e questa è la chiave per cui differisce dai modelli di licenza per-copia
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>di pubblico dominio</firstterm>
+        </term>
+        <listitem>
+          <para>Non avente un intestatario di copyright, nel senso che non c'è nessuno che abbia i diritto di limitare la copia dell'opera. Essere di pubblico dominio non è la stessa cosa di non avere un autore, e, anche se l'autore o gli autori dell'opera hanno deciso di metterla in pubblico dominio, questo non cambia il fatto che essi la hanno scritta.</para>
+
+          <para>
+            Quando un'opera è di pubblico dominio, del materiale facente parte di essa può essere incorporato in un'opera protetta da diritto d'autore, e quindi <emphasis>quella copia</emphasis> di materiale è coperta da diritto d'autore come l'intera opera. Ma ciò non cambia la disponibilità del lavoro originale, che rimane di pubblico dominio. Quindi il rilasciare qualcosa come di pubblico dominio è tecnicamente un modo per renderla “libera”, in accordo con la maggior parte delle organizzazioni che certificano software libero. Comunque usualmente ci sono buone ragioni per usare una licenza invece di rendere di pubblico dominio: anche con il software libero certe limitazioni possono essere utili non solo all'intestatario del copyright, ma anche ai destinatari, come chiarisce la prossima sezione.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <firstterm>copyleft</firstterm>
+        </term>
+        <listitem>
+          <para>
+            Una licenza che usa la legge sul copyright per ottenere un risultato opposto al copyright tradizionale. A seconda di quello che chiedete, questo significa sia licenze che permettono le libertà in discussione qui, sia, più strettamente, licenze che non solo permettono quelle libertà, ma che
+            <emphasis>le obbligano</emphasis>, con lo stipulare che le libertà devono viaggiare con l'opera. La Free Software Foundation usa esclusivamente la seconda definizione; altrove è uguale: la maggior parte delle persone usano il termine allo stesso modo della  Free Software Foundation;&mdash;ma altre, inclusi coloro ohe scrivono per i media prevalenti, tendono ad usare la prima definizione. Non è chiaro che chiunque usi il termine sia cosciente che bisogna fare la distinzione.
+          </para>
+
+          <para>
+            L'esempio canonico di più stretta e decisa definizione è la GNU General Public License che stabilisce che ogni lavoro derivato deve essere rilasciato sotto la GPL; vedere
+            <xref
+            linkend="license-compatibility"/><phrase
+              output="printed"> più avanti in questo capitolo</phrase> per maggiori ragguagli.
+          </para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect1>
+
+  <!-- ======================== SECTION ============================== -->
+  <sect1 id="license-aspects">
+    <title>Aspetti Delle Licenze</title>
+
+    <para>Sebbene ci siano molte licenze di software libero disponibili, nei punti più importati esse dicono la stessa cosa: che chiunque può modificare il codice, che chiunque può redistribuirlo sia nella forma originale che in quella modificata, e che i detentori del copyright non forniscono alcuna garanzia (evitare responsabilità dato che le persone potrebbero far girare versioni modificate senza conoscerle).  La differenza fra le licenze si riassume in due spesso-ricorrenti questioni:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>compatibilità con licenze proprietarie</term>
+        <listitem>
+          <para>Alcune licenze libere permettono al codice da esse coperto di essere usato in programmi proprietari. Ciò non intacca i termini della licenza del software proprietario: è sempre proprietaria, succede solo che contiene del software non proprietario. La licenza Apache, la licenza X Consortium, la licenza stile-BSD e la licenza stile MIT sono tutte licenze proprietarie-compatibili.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>compatibilità con altre licenze libere</term>
+        <listitem>
+          <para>
+            La maggior parte delle licenze libere sono compatibili l'una con l'altra, nel senso che il codice sotto una licenza può essere combinato con il codice sotto un'altra licenza, e il risultato distribuito sotto un'altra licenza senza violare i termini delle altre. La principale eccezione a queste è la GNU General Public License che richiede che ogni opera che usa un codice rilasciato sotto la GPL sia distribuito sotto la GPL e senza che si aggiunga ulteriore restrizione oltre quello che la GPL richiede. La GPL è compatibile con alcune licenze libere, ma non con altre.  Ciò è discusso con maggiori dettagli in
+            <xref linkend="license-compatibility"/><phrase
+              output="printed"> più avanti in questo capitolo</phrase>.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>imposizione del riconoscimento</term>
+        <listitem>
+          <para>Alcune licenze libere stabiliscono che un uso del codice protetto sia accompagnato da una nota, la cui posizione e presentazione sono usualmente specificate, che dà il riconoscimento agli autori o ai detentori del copyright. Queste licenze sono tuttavia proprietario-compatibili: esse non richiedono che il lavoro derivato sia libero, solamente che sia dato il riconoscimento al codice libero.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Protezione del marchio</term>
+        <listitem>
+          <para>Una variante dell'obbligo del riconoscimento. Le licenze a-protezione-del-marchio specificano che il nome del software originale(il suo detentore di copyright, o la loro istituzione, ecc..) può non essere usata dai lavori derivati senza previa autorizzazione scritta. Sebbene l'obbligo del riconoscimento insista sul fatto che siano usati certi nomi, e la protezione del marchio sul fatto che non siano usati, essi sono ambedue espressione dello stesso desiderio: che la reputazione del codice originale sia tutelata e trasmessa, senza essere offuscata dall'associazione. </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Protezione dell'”integrità artistica”"</term>
+        <listitem>
+          <para>Certe licenze (La Licenza Artistica, usata nella maggior parte dell'implementazione del linguaggio Perl e la licenza TeX di Donald Knut, per esempio) richiedono che la modifica e la redistribuzione siano fatte in modo da distinguere chiaramente fra la versione originaria del codice e qualunque modificazione. Esse permettono essenzialmente alcune libertà ma impongono certi requisiti che permettono facilmente di verificare l'integrità del codice originale. Queste licenze non si sono diffuse molto oltre gli specifici programmi per i quali erano state create e non saranno trattate in questo capitolo; sono menzionate qui per ragioni di completezza.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>La maggior parte di questi contratti non sono mutuamente esclusivi e alcune licenze ne includono diverse. L'argomento comune a esse è che esse pongono richieste al destinatario in cambio del diritto del destinatario di usare e/o distribuire il codice. Per esempio, alcuni progetti vogliono che il proprio nome e reputazione si trasmettano con il codice, e questo ha il valore di imporre il carico extra di un riconoscimento o una clausola di marchio; a seconda della sua onerosità, questo carico può far nascere nell'utilizzatore un scelta di una licenza che chieda meno. </para>
+
+  </sect1>
+
+  <!-- ======================== SECTION ============================== -->
+  <sect1 id="license-compatibility">
+    <title>La GPL e la compatibilità di Licenza</title>
+
+    <para>
+      La linea divisoria di gran lunga più netta in fatto di licenze è quella fra proprietarie-compatibili e proprietarie-incompatibili, cioè fra la GNU General Public License e tutte le altre. Poiché il principale obiettivo dei creatori della GPL è la promozione del software libero, essi hanno deliberatamente creato la licenza per rendere impossibile mischiare il codice sotto licenza GPL con programmi proprietari. Specificatamente, fra i requisiti della GPL (vedere
+      <ulink url="http://www.fsf.org/licensing/licenses/gpl.html"/> per il suo testo completo ) ci sono questi due:
+    </para>
+
+    <orderedlist>
+      <listitem>
+        <para>Ogni lavoro derivato&mdash; cioè ogni lavoro che contenga una quantità di codice non facile sotto licenza GPL deve essere distribuito sotto licenza GPL.</para>
+      </listitem>
+      <listitem>
+        <para>Non ulteriori restrizioni devono essere poste sulla redistribuzione sia del codice originale sia di quello derivato. (L'espressione esatta è: "Non potete imporre ulteriori restrizioni sull'eserciziodei diritti concessi o affermati sotto questa Licenza")</para>
+      </listitem>
+    </orderedlist>
+
+    <para>
+      Con queste condizioni la GPL riesce a rendere la libertà contagiosa. Una volta che il programma sia protetto dalla GPL, i suoi termini di redistribuzione sono <firstterm>virali</firstterm>&mdash;essi passano avanti a ogni altra cosa  in cui il codice è incorporato, rendendo praticamente impossibile usare il codice sotto GPL in programmi closed-source. Comunque le stesse clausole rendono la GPL incompatibile con altre licenze libere. Il modo solito in cui ciò avviene è quello in cui altre licenze impongono un requisito&mdash;per esempio una clausola di riconoscimento che richiede che l'autore originale sia menzionato in qualche modo&mdash; che è incompatibile con il “Non potete imporre interiori restrizioni..” della GPL. Dal punto di vista della Free Software Fondativo, queste conseguenze di second'ordine son auspicabili, o almeno non spiacevoli. La GPL non solo mantiene il suo software libero, ma in pratica fa in modo che il vostro software sia un agente che spinge
+      <emphasis>altri</emphasis> software a far valere la libertà.
+    </para>
+
+    <para>
+      La domanda se sia questo un buon modo di promuovere il software libero è una delle più continue guerre sante in Internet (vedere <xref linkend="holy-wars"/><phrase output="printed">
+        in <xref linkend="communications"/>
+      </phrase>), non vogliamo andare a fondo su questo. La cosa più importante per i nostri propositi è che la compatibilità GPL è un importante problema quando si sceglie una licenza. La GPL è di gran lunga la più importante licenza open source; a <ulink
+url="http://freshmeat.net/stats/#license"/>, È al 68% e la successiva licenza più importante  è al 6%. Se volete che il vostro codice sia mescolato liberamete con codice sotto GPL&mdash; e c'è una gran quantità di codice sotto GPL là&mdash;allora potete scegliere una licenza GPL compatibile. La gran parte delle licenze GPL compatibili sono anche proprietarie compatibili: cioè codice sotto una tale licenza può può essere usato sotto una licenza GPL, e può essere usata in un programma proprietario. Certamente, il <emphasis>risultato</emphasis> di questo mixing non sarebbe compatibile con qualsiasi altra licenza, poiché uno sarebbe sotto la GPL e un altro sarebbe sotto una licenza closed source. Ma quello che interessa è che si applica solo ai lavori derivati e non al codice che voi che distribuite per cominciare.
+    </para>
+
+    <para>
+      Fortunatamente la Free Software Foundation tiene aggiornata una lista delle licenze compatibili con la GPL e di quelle non compatibili,
+      a <ulink url="http://www.gnu.org/licenses/license-list.html"/>.  Tutte le licenze discusse in questo capitolo sono in quella lista, da una parte o dall'altra.
+    </para>
+
+  </sect1>
+
+  <!-- ======================== SECTION ============================== -->
+  <sect1 id="license-choosing">
+    <title>Scegliere una Licenza</title>
+
+    <para>Quando scegliete una licenza per il vostro progetto, per quanto possibile, usate una licenza esistente invece di crearne un'altra. Ci sono due ragioni per cui le licenze esistenti sono le migliori:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>La familiarità.  Se usate una delle tre o quattro licenze più popolari, la gente non avrà la sensazione di leggere roba giuridica per usare il vostro codice, perché lo ha già fatto per quella licenza da tempo.</para>
+      </listitem>
+      <listitem>
+        <para>
+          La qualità. A meno che non abbiate un team di legali a disposizione, è improbabile che voi spuntiate con una licenza legalmente solida.
+          Le licenze menzionate sono il frutto di tanto pensare e di tanta esperienza; a meno che il vostro progetto non abbia bisogno di cose speciali, è improbabile che voi fareste di meglio.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+      Per applicare una di queste licenze al vostro progetto, vedete
+      <xref linkend="license-quickstart-applying"/><phrase output="printed">
+        in <xref linkend="getting-started"/>
+      </phrase>.
+    </para>
+
+    <sect2 id="license-choosing-mit-x">
+      <title>La licenza MIT / X Window System </title>
+
+      <para>Se il vostro obiettivo è quello che il vostro codice sia accessibile dal più grande numero di sviluppatori e di lavori derivati e non date importanza al fatto che sia usato in programmi proprietari, scegliete la licenza MIT / X Window System (così chiamata perché è la licenza sotto la quale il Massachusetts Institute of Technology rilasciò il codice del sistema X Window). Il messaggio fondamentale di questa licenza è “Siete liberi di usare questo codice in qualunque modo vogliate”. Essa è compatibile con la GNU GPL, ed è breve, semplice e facile da capire:</para>
+
+      <screen>
+        Copyright (c) &lt;anno&gt; &lt;detentori del copyright&gt;
+
+        Il permesso è così garantito, gratuito, a qualunque persona che ottenga
+        una copia di questo software e i file associati di documentazione (il
+        “Software”), per commerciare col Software senza restrizioni, inclusi
+        i diritti illimitati all'uso, alla copia, alla modifica, all'unione, alla pubblicazione,
+        alle sotto licenze e/o a vendere copie del Software, e a
+        permettere a persone alle quali il Software è fornito a fare lo stesso,
+        soggetto alle seguenti condizioni:
+
+        L'avviso di copyright summenzionato e questo avviso di permesso devono essere inclusi
+        in tutte le copie o porzioni del Software sottostante.
+
+        IL SOFTWARE E' FORNITO “COSI' COM'E'”, SENZA GARANZIA DI ALCUN GENERE,
+        ESPRESSA O IMPLICITA, INCLUDENDO E SENZA ESSERE LIMITATO ALLE GARANZIE
+        DI POTER ESSERE VENDUTO, L'IDONEITA' A UN PARTICOLARE FINE E
+        LA NON VIOLAZIONE DEI DIRITTI ALTRUI. IN NESSUN CASO GLI AUTORI O I DETENTORI DEL COPYRIGHT
+        SARANNO RESPONSABILI PER QUALSIASI RECLAMO, DANNO O ALTRA RESPONSABILITA', SIA IN FORZA
+        DEL CONTRATTO, IN SITUAZIONE NON CONTEMPLATE NEL CONTRATTO O ALTRO, CHE NASCA DA, AL DI FUORI
+        O IN RIFERIMENTO AL SOFTWARE O ALL'USO O AD ALTRE QUESTIONI RIGUARDANTI IL SOFTWARE.
+      </screen>
+
+      <para>
+        (Presa da <ulink
+url="http://www.opensource.org/licenses/mit-license.php"/>.)
+      </para>
+
+    </sect2>
+
+    <sect2 id="license-choosing-gpl">
+      <title>La GNU General Public License</title>
+
+      <para>
+        Se preferite che il codice del vostro progetto non sia usato in programmi proprietari o se almeno non vi interessa se venga usato o no in programmi proprietari, scegliete la GNU General Public
+        License
+        (<ulink url="http://www.fsf.org/licensing/licenses/gpl.html"/>).  La GPL è probabilmente la licenza più largamente usata nel mondo oggi. Questo fatto di essere riconosciuta all'istante è di per se stesso uno dei più importanti vantaggi della GPL.
+      </para>
+
+      <para>
+        Quando scrivete una libreria con l'intendimento che sia usata come parte di altri programmi, considerate attentamente se le restrizioni imposte dalla GPL siano in linea con gli obiettivi del vostro progetto. In alcuni casi&mdash;per esempio, quando state cercando di sostituire una libreria proprietaria concorrente che fa le stesse cose&mdash;può essere molto più strategico licenziare il vostro codice in modo che possa essere mescolato con programmi proprietari, anche se invece non vorreste ciò. La Free Software Foundation ha anche foggiato una alternativa alla GPL in queste circostanze: la <firstterm>GNU GPL per librerie</firstterm>, più avanti rinominata <firstterm> GNU GPL Minore</firstterm> (la maggior parte della gente usa l'acronimo
+        <firstterm>LGPL</firstterm>, in ogni caso).  La  LGPL ha meno stringenti restrizioni della GPL, e può essere mescolata facilmente con codice non libero. Comunque, è un po' più complessa e ha bisogno di qualche tempo per essere compresa, cosicché se vi state orientando per usare la GPL, vi consiglio di usare la licenza tipo MIT/X.
+      </para>
+<sidebar id="gnu-affero-gpl">
+  <title>La GNU affero GPL: Una Versione della GNU GPL per codice Lato Server</title>
+  <para>Nel 2007 la Free Software Foundation rilasciò una variante della GPL chiamata <firstterm>GNU Affero GPL</firstterm>
+  (<ulink url="http://www.fsf.org/licensing/licenses/agpl.html"/>)<footnote><para>
+  La storia della licenza e del suo nome è un po' complicata. La prima versione della licenza fu rilasciata da Affero, Inc, che la basò sulla GNU GPL versione 2. A questa si fece comunemente riferimento come AGPL. Più tardi la Free Software Foundation decise di adottarne l'idea, ma fino ad allora essa aveva rilasciato la versione 3 della sua GNU GPL, così basò la sua nuova licenza Afferoizzata su quella e la chiamò "GNU AGPL". La vecchia licenza Affero è più o meno deprecata adesso. Se volete clausole tipo Affero, dovreste usare la versione GNU. Per evitare ambiguità, chiamatela "AGPLv3”,  "GNU AGPL", o con la massima precisione, "GNU AGPLv3". </para></footnote>.
+  Il suo proposito era imporre la condivisione di clausole tipo GNU al crescente numero di compagnie che offrivano servizi hostati&mdash;software che girava su loro servers, con cui gli utilizzatori interagiscono solo sul network, e che quindi non era mai distribuito come eseguibile o codice sorgente. Molti di tali servizi avevano usato software sotto GPL, spesso con modifiche, ma non avevano da mettere in comune i loro cambiamenti col mondo perché non distribuivano nessun codice.</para>
+
+  <para>La soluzione GNU AGPLv3's a ciò era prendere la normale GPL e aggiungervi la clausola “Interazione del Network Remoto”, che stabiliva: "<emphasis>...se modificate il programma, la vostra versione modificata deve in modo preminente offrire a tutti gli utilizzatori l'interazione con esso da remoto attraverso una rete di computers ...una opportunità di ricevere il Corrispondente Sorgente della vostra versione ...gratuitamente, attraverso qualche mezzo standard o personalizzato per facilitare la copia del software.</emphasis>"
+  This expanded the GPL's enforcement powers into the new world of
+  application service providers.  The Free Software Foundation
+  recommends that the GNU AGPLv3 be used for any software that will
+  commonly be run over a network.</para>
+
+  <para>Ciò allargò il potere di impegnare da parte della GPL nel nuovo mondo dei provider di servizi applicazione. La Free Software Foundation raccomanda che la GNU AGPLv3 venga usata per ogni software che sarà fatto girare su un network. Notate che la AGPLv3 non è direttamente compatibile con la GPLv2 (mentre è compatibile con la GPLv3, certo). Comunque la maggior parte dei software sotto licenza GPLv2 contengono la clausola “o ogni altra versione successiva”, così voi potete tramutarla nella GPLv3, se e quando avete bisogno di mescolarli con codice AGPLv3. Comunque, se avete bisogno di mescolarli con programmi strettamente sotto licenza GPLv2 (cioè senza la clausola “o ogni altra versione successiva”), allora la AGPLv3 non funzionerà. </para>
+
+  <para>Sebbene la storia della AGPLv3 sia un po' complicata, la licenza in se stessa è semplice: è giusto la GPLv3 con una clausola extra sulla interazione col network. L'articolo della Wikipedia sulla AGPLv3 è eccellente:
+  <ulink url="http://en.wikipedia.org/wiki/Affero_General_Public_License"/></para>
+</sidebar>
+      <sect3 id="is-the-gpl-free">
+        <title>La GPL è libera o non libera?</title>
+
+        <para>Una conseguenza della scelta della GPL è la possibilità&mdash;piccola ma non infinitamente piccola che voi stessi siate invischiati nella disputa se la GPL sia “libera” o meno, dato che essa pone delle restrizioni su ciò che potete fare con il codice&mdash;cioè la restrizione che il codice non può essere redistribuito sotto ogni altra licenza. Per qualcuno, l'esistenza di questa restrizione significa che la GPL è “meno libera” di licenze più permissive come la licenza MIT/X. Dove questo argomento funziona, certamente, è che, poiché “più libero” è meglio che “meno libero” (dopotutto chi non è a favore della libertà?), conseguentemente queste licenze sono migliori della GPL.</para>
+
+        <para>
+          Questo dibattito è un'altra popolare guerra santa (vedere
+          <xref linkend="holy-wars"/><phrase output="printed">
+            in
+            <xref linkend="communications"/>
+          </phrase>).  Evitate di parteciparvi, almeno nei forum di progetto. Non tentate di provare che la GPL è meno libera, altrettanto libera, o più libera di altre licenze. Piuttosto mettete l'accento sulle ragioni per cui il vostro progetto ha scelto la GPL. Se il fatto di essere riconosciuta per una licenza è una ragione, ditelo. Se l'obbligo di una licenza libera per lavori derivati è anche un ragione, dite anche questo, ma rifiutatevi di essere coinvolti sulla discussione se ciò rende il codice più o meno "libero". La libertà è un argomento complesso e serve a poco  parlare di esso se la terminologia sta per essere usata come pretesto al posto della sostanza.
+        </para>
+
+        <para>
+          Poiché questo è un libro e non argomento di mailing list, comunque ammetterò di non aver mai capito l'argomento “La GPL non è libera”. La sola restrizione che essa impone è che la gente non imponga <emphasis>ulteriori</emphasis>  restrizioni.  Dire che ciò dà luogo a minore libertà a me è sempre sembrato come dire che bandire la schiavitù riduce la libertà, perché impedisce a certa gente di possedere schiavi.
+        </para>
+
+        <para>(Oh, se siete coinvolti in un a discussione su questo, non rilanciate facendo  analogie incendiarie.)</para>
+
+      </sect3>
+
+    </sect2>
+
+    <sect2 id="license-bsd">
+      <title>Cosa sulla Licenza BSD?</title>
+
+      <para>
+        Una discreta quantità di software open source è distribuito sotto <firstterm>la licenza BSD</firstterm> (o, a volte
+        una <firstterm>licenza stile BSD</firstterm>). La  licenza originale BSD fu usata dalla Berkeley Software Distribution, con essa l'Università della California rilasciò importanti parti dell'implementazione Unix. La licenza (il testo esatto può essere visto nella sezione 2.2.2. di
+        <ulink url="http://www.xfree86.org/3.3.6/COPYRIGHT2.html#6"/>) era simile nello spirito alla licenza MIT/X, eccetto che in una clausola:
+      </para>
+
+      <blockquote>
+        <para>
+          <emphasis>Tutti i materiali pubblicitari devono mostrare il seguente riconoscimento: Questo prodotto include software sviluppato dall'Università della California, Laboratorio Lawrence Berkeley. </emphasis>
+        </para>
+      </blockquote>
+
+      <para>
+        La presenza di quella clausola non solo rese la licenza originale BSD incompatibile con la GPL, ma stabilì anche un pericoloso precedente: che altre organizzazioni mettono simili clausole pubblicitarie nel
+        <emphasis>loro</emphasis> software libero&mdash;mettendo il nome della propria organizzazione al posto della "l'Università della California,
+        Lawrence Berkeley Laboratory"&mdash;e i ridistributori di software furono investiti da un sempre crescente carico su quello che a loro era richiesto di esibire. Fortunatamente molti dei progetti che usarono quella licenza diventarono consci del problema, e semplicemente eliminarono la clausola pubblicitaria. Nel 1999 anche l'Università della California fece lo stesso.
+      </para>
+
+      <para>Il risultato fu una licenza BSD rivisitata, che è semplicemente una licenza originale BSD con la clausola pubblicitaria rimossa. Comunque, questa storia rende la frase “licenza BSD” un po' ambigua: si riferisce alla licenza revisionata o alla originale? Questo è il motivo per i quale io preferisco la licenza MIT/X, che è essenzialmente equivalente, e che non soffre di nessuna ambiguità. Comunque c'è forse un motivo per preferire la licenza BSD alla MIT/X, ed è quello che la licenza BSD include questa clausola:</para>
+
+      <blockquote>
+        <para>
+          <emphasis>Né il nome dell' &lt;ORGANIZZAZIONE&gt; né il nome dei suoi collaboratori può essere usato per sottoscrivere o promuovere prodotti derivati da questo software senza precedente autorizzazione scritta.</emphasis>
+        </para>
+      </blockquote>
+
+      <para>Non è chiaro il fatto che senza una tale clausola un destinatario avrebbe avuto i diritti di usare il nome del licenziatario in qualche modo, ma la clausola rimuove ogni possibile dubbio. Per organizzazioni preoccupate del controllo del marchio, quindi, la licenza BSD può essere di poco preferibile alla MIT/X. In generale, comunque, una licenza liberale di copyright non implica che il destinatario abbia il diritto di usare o indebolire il vostro marchio&mdash;  la legge sul copyright e quella sul marchio sono due bestie differenti.</para>
+
+      <para>
+        Se volete usare un licenza BSD revisionata, un modello è disponibile a <ulink
+url="http://www.opensource.org/licenses/bsd-license.php"/>.
+      </para>
+
+    </sect2>
+
+  </sect1>
+
+  <!-- ======================== SECTION ============================== -->
+  <sect1 id="copyright-assignment">
+    <title>L'Assegnazione del Copyright e la Proprietà</title>
+
+    <para>
+      Ci sono tre modi per maneggiare la proprietà del copyright per il codice libero e la documentazione che sono stati forniti da molta gente. Il primo è ignorare la questione del copyright completamente (io non lo raccomando).
+      Il secondo è raccogliere un <firstterm>contratto legale di collaborazione</firstterm> (<firstterm>CLA</firstterm>) da ogni persona che lavora al progetto, che garantisce esplicitamente al progetto il diritto di usare quel contributo della persona. Questo e usualmente sufficiente per la maggior parte dei progetti, e la cosa simpatica è che in qualche giurisdizione i CLA possono essere inviati per email. Il terzo è acquisire le vere cessioni dei diritti dai collaboratori, di modo che il progetto (cioè qualche entità legale, nonprofit) sia il possessore legale del copyright per ogni cosa. Questo è il modo legalmente più inattaccabile, ma è anche il più gravoso per i collaboratori; solo pochi progetti insistono su di esso.
+    </para>
+
+    <para>
+      Notare che anche anche sotto la proprietà centralizzata del copyright il codice<footnote>
+        <para>Userò “codice” per riferirmi sia al codice che alla documentazione, d'ora in avanti </para>
+      </footnote> rimane libero, perché le licenze open source non danno al detentore del copyright il diritto di rendere retroattivamente proprietarie tutte le copie del codice. Così anche se il progetto, come entità legale, facesse improvvisamente il dietro front e partisse con il distribuire tutto il codice sotto una licenza restrittiva, ciò non causerebbe un problema per la comunità pubblica. Gli altri sviluppatori partirebbero con una diramazione basata sull'ultima copia libera di codice, e continuerebbe come se nulla fosse successo. Poiché essi sanno che possono farlo, la maggior parte dei collaboratori cooperano quando loro viene chiesto di sottoscrivere un CLA o una assegnazione di copyright.
+    </para>
+
+    <sect2 id="copyright-assignment-none">
+      <title>Non far Nulla</title>
+
+      <para>La maggior parte dei progetti non raccolgono CLA o assegnazione di copyright dai loro collaboratori. Invece, accettano codice, ogni qualvolta sembra ragionevolmente chiaro che il collaboratore abbia inteso che esso incorporato nel progetto.</para>
+
+      <para>
+        In circostanze normali ciò è regolare. Ma ogni tanto, qualcuno può decidere per la citazione in giudizio per infrazione di copyright, adducendo il fatto che essi  sono veri proprietari del codice in questione, e che non hanno mai convenuto che esso fosse distribuito dal progetto sotto una licenza open source. Per esempio il gruppo SCO fece qualcosa di simile per il progetto Linux, vedere
+        <ulink url="http://en.wikipedia.org/wiki/SCO-Linux_controversies"/>
+        per i dettagli.  Quando ciò avvenisse, il progetto non avrà la documentazione che mostri che il collaboratore ha formalmente dato il diritto di usare il codice, cosa che potrebbe rendere più difficile una difesa legale.
+      </para>
+
+    </sect2>
+
+    <sect2 id="copyright-assignment-cla">
+      <title>Gli Accordi di Licenza per i Collaboratori</title>
+
+      <para>I CLA probabilmente offrono il miglior compromesso fra sicurezza e convenienza. Un CLA è un modulo elettronico che il collaboratore compila e invia al progetto. In molte giurisdizioni l'invio di una email è sufficiente. Una firma digitale sicura può o non può essere richiesta; consultate un legale per trovare quale metodo sarebbe migliore per il vostro progetto.</para>
+
+      <para>
+        La maggior parte dei progetti usano due tipi di CLA leggermente differenti, uno per collaboratori individuali e uno per collaboratori associati. Ma in ambedue i tipi il linguaggio base è lo stesso: il collaboratore concede al progetto  <emphasis>"...una licenza di copyright perpetua, per tutto il mondo, non esclusiva, a costo zero, senza l'onere di pagare un compenso al titolare del copyright, l'irrevocabile licenza di copyright a riprodurre, preparare lavori derivati, mostrare pubblicamente, eseguire pubblicamente, creare una sotto licenza, e distribuirne [i] Contributi come lavori derivati."</emphasis> In più, potreste ottenere che un legale ratifichi ogni CLA, ma se voi metteste tutti questi aggettivi in essi, potreste probabilmente far bene.
+      </para>
+
+      <para>
+        Quando richiedete i CLA dai collaboratori, assicuratevi di puntualizzare che <emphasis>non</emphasis> state richiedendo una assegnazione di copyright. In effetti, molti CLA partono col ricordare a chi legge questo:
+      </para>
+
+      <blockquote>
+        <para>
+          <emphasis>Questo è solo un contratto di licenza; non trasferisce la proprietà del copyright e non cambia i vostri diritti di usare i vostri Contributi per ogni altro proposito. </emphasis>
+        </para>
+      </blockquote>
+
+      <para>Qui ci sono alcuni esempi:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>CLA per collaboratori individuali:</para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                <ulink
+  url="http://apache.org/licenses/icla.txt"/>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <ulink
+  url="http://code.google.com/legal/individual-cla-v1.0.html"/>
+              </para>
+            </listitem>
+            <!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/individual-cla.txt"/>
+      </para></listitem>  -->
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>CLA per collaboratori associati:</para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                <ulink
+  url="http://apache.org/licenses/cla-corporate.txt"/>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                <ulink
+  url="http://code.google.com/legal/corporate-cla-v1.0.html"/>
+              </para>
+            </listitem>
+            <!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/corporate-cla.txt"/>
+      </para></listitem>  -->
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+    </sect2>
+
+    <sect2 id="copyright-assignment-transfer">
+      <title>Trasferimento del Copyright</title>
+
+      <para>Trasferimento del copyright significa che il collaboratore dà al progetto la proprietà del copyright sul suo contributo. Idealmente ciò viene fatto su carta e anche mediante fax o con invio per posta normale al progetto.</para>
+
+      <para>Alcuni progetti insistono sulla piena assegnazione, perché avendo una unica entità legale propria il copyright sull'intero codice base può essere utile se i termini della licenza open source hanno bisogno di essere fatti valere in una corte. Se nessuna unica entità ha il diritto di farlo, tutti i collaboratori potrebbero dover collaborare, ma qualcuno potrebbe non aver tempo o essere rintracciabile quando nasca il problema.</para>
+
+      <para>
+        Differenti organizzazioni applicano differenti quantità di rigore nel raccogliere le assegnazioni. Alcune si procurano una dichiarazione informale da parte di un collaboratore su una mailing list di liste pubbliche&mdash;qualcosa dall'effetto di “Io in tal modo assegno il copyright in questo codice al progetto, di essere rilasciato in licenza sotto gli stessi termini del restante codice” Almeno un legale con cui ho parlato dice che ciò è in effetti sufficiente, presumibilmente perché avviene in un contesto in cui la concessione del copyright è normale prevista comunque, e perché rappresenta un tentativo <foreignphrase>
+          bona
+          fide
+        </foreignphrase> da parte del progetto di accertare le vere intenzioni dello sviluppatore.  D'altra parte la Free Software Foundation va dalla parte opposta: richiede ai collaboratori di sottoscrivere e mandare per posta un pezzo di carta contenente una formale dichiarazione, a volte per un solo contributo, a volte per il contributo corrente e futuro. Se il collaboratore è un impiegato la FSF richiede che anche il collaboratore lo sottoscriva.
+      </para>
+
+      <para>La paranoia dell'FSF è incomprensibile. Se qualcuno viola i termini della GPL incorporando qualcuno del loro software in un programma proprietario, la FSF avrà bisogno di litigare su questo davanti al tribunale, e vuole che i suoi copyrights siano il più inattaccabili possibile quando ciò avviene. Siccome la FSF è la detentrice del copyright di una gran quantità di software popolari, vede ciò come una possibilità reale. Se la vostra organizzazione ha la necessità di essere scrupolosa, è un fatto che solo voi potete decidere, consultandovi con dei legali. In generale, a meno che non ci sia un motivo specifico per cui il vostro progetto abbia bisogno di una piena assegnazione del copyright, andate avanti con i CLA; essi sono più facili per tutti.</para>
+
+    </sect2>
+
+</sect1>
+
+    <!-- ======================== SECTION ============================== -->
+    <sect1 id="dual-licensing">
+      <title>Gli Schemi a Doppia Licenza</title>
+
+      <para>
+        alcuni progetti tentano di fondare se stessi usando uno schema a doppia licenza, nel quale i lavori derivati proprietari possono pagare il detentore del copyright per i diritti di usare il codice, ma il codice rimane ancora libero per l'uso da parte dei progetti open source. Ciò tende a finanziare bene sia per le librerie di codice sia per applicazioni per computer indipendenti dalla rete, naturalmente. I termini esatti differiscono da caso a caso. Spesso la licenza per i lato libero è la GNU GPL, poiché essa impedisce ad altri di incorporare il codice coperto nobel loro prodotto proprietario senza il permesso del detentore del copyright, ma a volte essa è una licenza personalizzata che ha lo steso effetto. Un esempio della prima è la licenza MySQL, descritta a
+        <ulink url="http://www.mysql.com/company/legal/licensing/"/>; un esempio della seconda è la strategia di licenza della Sleepycat Software, descritta a
+        <ulink
+        url="http://www.sleepycat.com/download/licensinginfo.shtml"/>.
+      </para>
+
+      <para>
+        Potreste starvi domandando: come può un detentore del copyright offrire una concessione di licenza proprietaria per un costo aggiuntivo se i termini della  GNU GPL stabiliscono che il codice deve essere disponibile sotto termini meno restrittivi? La risposta è che i termini della GPL sono qualcosa che il detentore del copyright impone a ogni altro; il proprietario è quindi libero di decidere di <emphasis>non</emphasis> applicare quei termini a se stesso. Un buon modo di pensare a ciò è immaginare che che il possessore proprietario abbia un numero infinito di copie ammucchiate in un secchio. Ogni volta che lui prende una copia dal secchio per inviarle nel mondo, può decider quale licenza mietervi dentro: GPL, proprietaria o qualche altra. Il suo diritto di fare ciò non è intaccato dalla GPL o da qualche altra licenza open source; è semplicemente un potere garantito dalla legge sul copyright.
+      </para>
+
+      <para>L'attrattiva della licenza doppia sta nel fatto che, al meglio delle sue possibilità, fornisce a un progetto di software libero un modo  per ottenere una fonte di profitto sicuro. Sfortunatamente ciò può anche interferire con le dinamiche normali di un progetto open source. Il problema è che ogni volontario che dà un contributo sta collaborando con due distinte entità: la versione libera del codice e quella proprietaria. Mentre il collaboratore sarà soddisfatto di collaborare alla versione free, dacché quella è la norma nei progetti open source, egli può sentirsi buffo nel collaborare al flusso di entrata semi proprietario dei qualche altro. L'imbarazzo è esacerbato dal fatto che che nelle licenze doppie, il detentore del copyright ha veramente bisogno di raccogliere copyright formali sottoscritti da tutti i collaboratori, per potersi proteggere da un collaboratore scontento che in un secondo momento reclami una percentuale dei diritti d'autore dalle entrate proprietarie. Il processo di raccolte di queste assegnazioni con un pezzo si carta significa che i collaboratori si confrontano duramente col fatto che essi stanno facendo un lavoro che crea soldi per qualcun altro. </para>
+
+      <para>Non tutti i volontari saranno seccati da ciò; dopotutto il loro contributo va all'edizione open source, e in ciò può essere che stia il loro interesse. Tuttavia la licenza doppia è una richiesta da parte del detentore del copyright di assegnare a se stesso uno speciale diritto che gli altri non hanno. Ed è così che spinge al sorgere di tensioni a un certo punto, almeno fra alcuni volontari.</para>
+
+      <para>Ciò che sembra avvenire nella pratica è  che le compagnie che si basano sul software a licenza doppia non hanno comunità di sviluppo veramente egualitario. Esse conseguono una correzione dei bugs su piccola scala e patch di ripulita da fonti esterne, ma finiscono col fare una gran parte di duro lavoro con le risorse interne. Per esempio, Zack Urlocker, vice presidente del marketing alla MySQL, mi disse che la compagnia finisce col prendere in affitto i più attivi volontari comunque. Così, anche se il prorotto di per se stesso è open source, sotto licenza GPL, il suo sviluppo è più o meno controllato dalla compagnia, sebbene con la (estremamente improbabile) possibilità che qualcuno veramente insoddisfatto dell' uso del software da parte della compagnia potrebbe fare una diramazione dal progetto. In quale grado questo minacci in modo pre&euml;stimolante le politiche della compagnia non so, ma ad ogni modo, MySQL non sembra avere problemi di consenso sia nel mondo dell'open source sia oltre.</para>
+
+    </sect1>
+
+    <!-- ======================== SECTION ============================== -->
+    <sect1 id="patents">
+      <title>I Brevetti</title>
+
+      <para>I brevetti sono il rilascio parafulmine del momento nel software libero. Perché pongono la sola minaccia reale contro la quale la comunità del software libero non può difendersi. I problemi di copyright e di marchio ci si può sempre fare l'esperienza. Se parte del vostro codice sembra poter usurpare il copyright di qualche altro, voi potete riscrivere quella parte. Se vien fuori che qualcuno che ha il marchio sul nome del vostro progetto, nel peggior caso potete cambiar nome al vostro progetto. Sebbene il cambiamento del nome potrebbe essere un inconveniente temporaneo, non sarebbe un problema nei tempi lunghi, poiché il codice stesso farebbe ancora ciò che ha sempre fatto.</para>
+
+      <para>
+        Ma una partente è una completa ingiunzione contro l'implementazione di una certa idea. Non importa chi scrive il codice, né quale linguaggio di programmazione è usato. Una volta che uno ha accusato un progetto di software libero di infrangere un brevetto, il progetto o deve smettere di implementare una data funzionalità, o trovarsi di fronte a una causa dispendiosa e che assorbe tempo. Poiché gli istigatori di tali cause sono usualmente compagnie con tasche profonde&mdash;cioè quelle che hanno le risorse e l'inclinazione ad acquistare i brevetti all'inizio&mdash;la maggior parte dei progetti di software libero non può permettersi l'ultima possibilità, e deve capitolare immediatamente anche se si pensa che è molto verosimile che il brevetto sarebbe non sacettibile di tutela giudiziaria nella corte. Per evitare di trovarsi in una tale situazione in primo luogo, i progetti di software libero, stanno incominciando a scrivere codice in modo difensivo, evitando in anticipo algoritmi patentati anche quando essi sono la migliore o l'unica soluzione disponibile per i problemi di programmazione.<footnote>
+          <para>La Sun Microsystems e l'IBM hanno almeno fatto un gesto nei confronti del problema dall'altra direzione, liberando un gran numero di brevetti, 1600 e 500 rispettivamente&mdash;per l'uso da parte delle comunità di software libero. Non sono un legale e perciò non posso valutare la reale utilità di queste concessioni, ma anche se esse sono dei brevetti importanti, e i termini delle concessioni le rendono realmente libere per l'uso da parte dei progetti open source, ciò sarebbe tuttavia solo una goccia nel secchio. </para>
+        </footnote>
+      </para>
+
+      <para>
+        Osservazione ed evidenze aneddotiche mostrano che non solo la vasta maggioranza del programmatori open source, ma una maggioranza di <emphasis>tutti</emphasis> i programmatori pensano che i brevetti dovrebbero esser abolite completamente.<footnote>
+          <para>
+            Vedere
+            <ulink url="http://groups.csail.mit.edu/mac/projects/lpf/Whatsnew/survey.html"/> per un tale esame.
+          </para>
+        </footnote> I programmatori open source tendono rendersi conto in maniera particolarmente forte di ciò, e possono rifiutarsi di lavorare a progetti che siano molto associati alla raccolta o all'imposizione dei brevetti. Se la vostra organizzazione raccoglie brevetti di software, allora chiarite, in modo pubblico irrevocabile, che i brevetti non sarebbero mai applicate ai progetti open source, e che sono solo da usare come difesa nel caso che altre parti inizino una procedura legale di infrazione contro la vostra organizzazione. Questa non solo è la cosa giusta da fare, è anche una buona pubblica relazione open source. Per esempio RedHat ha promesso che i progetti open source sono al sicuro dai suoi brevetti, vedere
+        <ulink url="http://www.redhat.com/legal/patent_policy.html"/>.
+      </para>
+   
+
+
+
+    <para>Sfortunatamente, la raccolta dei brevetti a scopo difensivo è un atto razionale. Il corrente sistema dei brevetti, almeno negli Stati Uniti, è per sua natura un confronto armato: se i vostri concorrenti hanno acquistato un sacco di brevetti, allora la vostra miglior difesa è acquistare un sacco di brevetti a vostra volta, così se siete colpiti da una azione legale di infrazione di un brevetto potete rispondere con una minaccia simile&mdash;allora le due parti si siedono ad un tavolo per un accordo commerciale di licenze incrociate in modo che nessuna di esse abbia da pagare qualcosa, eccetto che i legali della loro proprietà intellettuale, ovviamente. </para>
+
+    <para>
+      Il danno fatto al software libero dai brevetti è più insidioso che la minaccia diretta allo sviluppo del codice, comunque. I brevetti di software incoraggiano una atmosfera di segretezza fra i progettisti di firmware, che giustamente temono che pubblicando i dettagli della loro interfaccia staranno dando un aiuto ai concorrenti che stanno cercando di dar loro uno schiaffo con azioni legali di infrazione dei brevetti. Questo non è un danno teorico; è avvenuto in modo evidente per lungo tempo nell'industria delle schede video, per esempio. Molti costruttori di schede video sono riluttanti a rilasciare le specifiche di programmazione necessarie per produrre drivers open source ad alte prestazioni per le loro schede, rendendo così impossibile ai sistemi operativi liberi di supportare quelle schede al pieno delle loro potenzialità.  Perché i costruttori farebbero ciò? Non ha senso per loro lavorare <emphasis>contro</emphasis> il supporto al software; dopotutto la compatibilità con più sistemi operativi può significare solo più vendita di schede. Ma vien fuori che, dietro le porte della stanze di progettazione, questi negozi stanno tutti violando i brevetti l'uno degli altri, a volte con cognizione di fatto e altre inconsapevolmente. I brevetti sono così imprevedibili e così potenzialmente di larga portata che nessun costruttore di schede può mai essere certo do essere al sicuro, anche dopo avere fatto una ricerca del brevetto. Così, i costruttori non osano pubblicare le specifiche delle loro interfacce, perché ciò renderebbe molto più facile per i concorrenti capire se un brevetto è stata violato. (Certamente la natura di questa situazione è tale che non troverete una ammissione scritta da parte di una fonte primaria che ciò sta avvenendo; io lo ho appreso da una personale informazione).
+    </para>
+
+    <para> Alcune licenze di software hanno delle clausole per combattere, o almeno scoraggiare, i brevetti di software. La GNU GPL, per esempio, contiene questa espressione:</para>
+
+    <screen>
+      7. Se, in conseguenza di un giudizio della corte o di una dichiarazione 
+         di violazione di un brevetto o per qualche altra ragione (non limitata
+         al problema dei brevetti) sono imposte a voi condizioni (per decisione
+         della corte, accordo o altro) che vadano contro le condizioni di questa
+         licenza, esse non vi esonerano dalle condizioni di questa licenza. Se voi
+         non potete distribuire in modo da soddisfare contemporaneamente i vostri
+         obblighi con questa licenza e ogni altro obbligo pertinente, quindi di
+         conseguenza non potete distribuire punto il Programma. Per esempio, se
+         una licenza brevetto non permettesse la redistribuzione senza compenso
+         del Programma da parte di tutti quelli che ne ricevono copie direttamente
+         o indirettamente tramite voi, allora l'unico modo per voi di soddisfare sia
+         essa che questa licenza sarebbe astenersi del tutto dalla distribuzione del Programma.
+
+      [...]
+
+      Non è proposito di questa sezione indurvi a violare alcun 
+      brevetto o altri giusti  diritti di proprietà o a contestare la validità
+      di alcuni di questi diritti; questa sezione ha il solo proposito di
+      protegger il sistema di distribuzione del software libero che è
+      implementato dalla prassi delle licenze pubbliche. Molte persone hanno dato
+      generosi contributi alla larga estensione di software distribuito
+      con questo sistema confidando nella applicazione coerente di quel
+      sistema; dipende dall'autore/donatore decidere se vuol
+      distribuire il software con altri sistemi e la licenza non può
+      imporre quella scelta.
+    </screen>
+
+    <para>
+      anche La Licenza Apache, Versione 2.0
+      (<ulink url="http://www.apache.org/licenses/LICENSE-2.0"/>) ontiene requisiti anti-brevetto. Primo, stabilisce che chiunque distribuisca codice sotto la licenza debba implicitamente includervi un brevetto che liberi dal pagamento di qualsiasi copia per ogni brevetto che potrebbe contenere ciò che potrebbe applicarsi al codice. Secondo, e con moltissimo ingegno, essa punisce chiunque inizi un reclamo di violazione del brevetto sul lavoro coperto, ponendo termine automaticamente alla sua licenza brevetto nel momento in cui tale reclamo è fatto:
+    </para>
+
+    <screen>
+      3. Concessione di Licenza Brevetto. Soggetto ai termini e alle condizioni
+         di questa Licenza ogni collaboratore concede con questo mezzo a Voi una licenza
+         brevetto perpetua, per tutto il mondo, non esclusiva, gratuita, che libera 
+         dal pagamento di qualsiasi copia, irrevocabile (eccetto quanto stabilito in
+         questa sezione) a fare, aver fatto, usare, offrire per vendita, vendere, importare
+         e in altro modo trasferire il Lavoro, dove tale licenza si applica solo a quei
+         diritti di brevetto che danno facoltà di concedere diritti da parte di tale 
+         Collaboratore e che sono necessariamente violati dal suo Contributo(i) da solo
+         o in combinazione con il suo Contributo(i) al Lavoro al quale tale Contributo
+         fu inviato. Se voi create una controversia con qualche entità (incluso un
+         reclamo contro la parte che sta al vostro fianco o un contro reclamo in una corte)
+         asserendo che il Lavoro o il Contributo incorporato nel Lavoro costituisce
+         una violazione del brevetto diretta o derivante dal contributo, allora ogni
+         licenza brevetto concessa a Voi sotto questa Licenza per quel Lavoro sarà
+         terminata dalla data in cui tale controversia è depositata.
+    </screen>
+
+    <para>
+      Sebbene ciò sia utile, sia da un punto di vista legale che come politica, per costruire la difesa dei brevetti nelle licenze di software libero a questo modo, alla fine questi passi non saranno sufficienti a dissipare l'effetto scoraggiante che la minaccia di dibattimento in tribunale ha sul software libero. Ciò creerà solo dei cambiamenti nella sostanza o nell'interpersonale della legge sui brevetti.
+      Per apprendere sul problema e come sta venendo combattuto, andare a
+      <ulink url="http://www.nosoftwarepatents.com/"/>.  L'articolo della Wikipedia <ulink url="http://en.wikipedia.org/wiki/Software_patent"/>
+      ha anche un sacco di utili informazioni sui brevetti di software.  Io ho scritto anche un post in un blog che sintetizza gli argomenti contro i brevetti sul software a Questo capitolo è stato solo una introduzione ai problemi di licenza sul software libero, a
+      <ulink url="http://www.rants.org/2007/05/01/how-to-tell-that-software-patents-are-a-bad-idea/"/>.
+    </para>
+ </sect1>
+
+
+    <!-- ======================== SECTION ============================== -->
+    <sect1 id="licensing-further-resources">
+      <title>Ulteriori Risorse</title>
+
+      <para>Questo capitolo è stato solo una ontroduzione ai problemi delle licenze di software libero. Sebbene io penso che esso abbia sufficienti informazioni per permettervi di partire col vostro progetto, ogni seria ricerca sui problemi delle licenze sviscererà rapidamente ciò che questo libro può fornire. Qui c'è una ulteriore lista di risorse sulle licenze open source:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <citetitle>Comprendere l'Open Source e le Licenze del Software Libero</citetitle> di Andrew M. St. Laurent.
+            Edito da O'Reilly Media, prima edizione Agosto 2004,
+            ISBN:&nbsp;0-596-00581-4.
+          </para>
+
+          <para>
+            Questo è un libro completo sulle licenze open source in tutta la loro complessità, che include molto argomenti omessi in questo capitolo.  Vedere
+            <ulink url="http://www.oreilly.com/catalog/osfreesoft/"/>
+            per i dettagli.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <citetitle>Rendete il Vostro Software Open Source GPL Compatibile. Oppure.</citetitle> di David
+            A. Wheeler, a
+            <ulink
+            url="http://www.dwheeler.com/essays/gpl-compatible.html"/>.
+          </para>
+
+          <para>Questo capitolo tocca anche altre numerose questioni di licenza, e ha una alta densità di links ecellenti.</para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <ulink url="http://creativecommons.org/"/>
+          </para>
+
+          <para>La Creative Commons che promuove una larga estensione di copyrights più flessibili e liberali di quanto la pratica del copyright incoraggi. Essa non offre copyright per il software , ma per il testo, l'arte e la musica, tutte accessibili con un selezionatore di di licenze di facile uso; alcune licenze sono copyleft, alcune non copyleft, ma tuttavia libere, altre sono tradizionali copyrights, ma rilasciate con qualche restrizione. Il sito della Creative Commons dà spiegazioni estremamente chiare su ciò cui si riferisce. Se io avessi da scegliere un sito per dimostrare le più larghe implicazioni filosofiche del movimento del software libero, esso sarebbe questo.</para>
+        </listitem>
+
+      </itemizedlist>
+
+    </sect1>
+ 
+  </chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

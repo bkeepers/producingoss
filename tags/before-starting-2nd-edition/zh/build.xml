@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="svnbook" default="pdf">
+
+  <property file="build.properties"/>
+
+  <path id="lib.classpath">
+    <fileset dir="${ant.home}/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${fop.home}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${usr.share.java}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="usage">
+    <echo message="Use the -projecthelp option instead"/>
+  </target>
+
+  <target name="clean" description="Clean the build directory">
+    <delete dir="build"/>
+    <delete file="stylesheets/html-import.xsl"/>
+    <delete file="stylesheets/chm-import.xsl"/>
+    <delete file="stylesheets/fo-import.xsl"/>
+  </target>
+
+  <target name="clean-svn">
+    <delete>
+      <fileset dir="${basedir}" excludes="**/.svn"/>
+    </delete>
+  </target>
+
+  <target name="init" description="Check runtime class">
+    <available file="build.properties" property="properties.present"/>
+    <fail message="Please create your build.properties from build.tmpl.properties !" unless="properties.present"/>
+
+    <condition property="saxon.present">
+      <and>
+        <available classname="com.icl.saxon.StyleSheet" classpathref="lib.classpath"/>
+      </and>
+    </condition>
+    <fail message="Saxon 6.5 Support NOT Present !" unless="saxon.present"/>
+
+    <echo message="java.version: ${java.version}"/>
+  </target>
+
+  <target name="all" description="Generate document - pdf,html,chm">
+    <antcall target="pdf"/>
+    <antcall target="html"/>
+    <antcall target="chm"/>
+  </target>
+
+  <target name="pot.init" depends="init">
+    <uptodate property="pot.isUpToDate" targetfile="po/book.pot">
+      <srcfiles dir="source" includes="book.xml"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 34 seconds-->
+  <target name="pot" depends="pot.init" unless="pot.isUpToDate" description="Generate POTemplate">
+    <echo message="Making pot ..."/>
+    <exec dir="${basedir}/po" executable="python" failonerror="true">
+      <arg value="../xml2po/xml2po.py"/>
+      <arg value="-o"/>
+      <arg value="book.pot"/>
+      <arg value="../source/book.xml"/>
+    </exec>
+
+    <echo message="Merging zh_CN.po ..."/>
+    <exec dir="${basedir}/po" executable="msgmerge">
+      <arg value="--no-wrap"/>
+      <arg value="-o"/>
+      <arg value="zh_CN-tmp.po"/>
+      <arg value="zh_CN.po"/>
+      <arg value="book.pot"/>
+    </exec>
+    <move file="po/zh_CN-tmp.po" tofile="po/zh_CN.po"/>
+    <fixcrlf srcdir="${basedir}" encoding="UTF-8" includes="source/book.xml,po/book.pot,po/zh_CN.po" eol="lf"/>
+  </target>
+
+  <target name="translate.init" depends="pot">
+    <uptodate property="translate.isUpToDate" targetfile="build/zh_CN/book.xml">
+      <srcfiles dir="source" includes="book.xml"/>
+      <srcfiles dir="po" includes="zh_CN.po"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 36 second-->
+  <target name="translate" depends="translate.init" unless="translate.isUpToDate" description="Translate document">
+    <mkdir dir="build/zh_CN"/>
+    <echo message="Translating to zh_CN ..."/>
+    <exec dir="${basedir}/xml2po" executable="python" failonerror="true">
+      <arg value="xml2po.py"/>
+      <arg value="-l"/>
+      <arg value="zh-cn"/>
+      <arg value="-p"/>
+      <arg value="../po/zh_CN.po"/>
+      <arg value="-o"/>
+      <arg value="../build/zh_CN/book-tmp.xml"/>
+      <arg value="../source/book.xml"/>
+    </exec>
+
+    <exec dir="${basedir}/build/zh_CN" executable="xmllint">
+      <arg value="--nsclean"/>
+      <arg value="--format"/>
+      <arg value="--output"/>
+      <arg value="book.xml"/>
+      <arg value="book-tmp.xml"/>
+    </exec>
+    <delete file="xml2po/.xml2po.mo"/>
+    <delete file="build/zh_CN/book-tmp.xml"/>
+  </target>
+
+  <target name="html.init">
+    <uptodate property="html.isUpToDate" targetfile="build/zh_CN/svnbook/.done">
+      <srcfiles dir="." includes="book.xml"/>
+    </uptodate>
+  </target>
+  
+  <target name="single-html.init">
+    <uptodate property="single-html.isUpToDate" targetfile="build/zh_CN/svnbook/.singledone">
+      <srcfiles dir="source" includes="book.xml"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 43 seconds-->
+  <target name="html" depends="html.init" description="Generate document - html">
+    <filter token="docbook5.xsl.url" value="${docbook5.xsl.url}"/>
+    <copy file="stylesheets/html-import.tmpl.xsl" tofile="stylesheets/html-import.xsl" filtering="true" overwrite="true"/>
+	  <copy file="stylesheets/styles.css" tofile="build/zh_CN/svnbook/styles.css" />
+    <copy todir="build/zh_CN/svnbook/images">
+      <fileset dir="${docbook5.xsl}/images" includes="**/*.png"/>
+    </copy>
+
+    <echo message="Making html ..."/>
+    <java classname="com.icl.saxon.StyleSheet" fork="true" maxmemory="1024m"
+          failonerror="true" dir="${basedir}/build/zh_CN/svnbook">
+      <classpath refid="lib.classpath"/>
+      <arg value="G:/translation/oss/zh/book.xml"/>
+      <arg value="G:/translation/oss/zh/stylesheets/zh_CN/html.xsl"/>
+    </java>
+    <touch file="build/zh_CN/svnbook/.done"/>
+  </target>
+  
+  <target name="single-html" depends="single-html.init" unless="single-html.isUpToDate" description="Generate document - html">
+    <filter token="docbook5.xsl.url" value="${docbook5.xsl.url}"/>
+    <copy file="stylesheets/single-html-import.tmpl.xsl" tofile="stylesheets/single-html-import.xsl" filtering="true" overwrite="true"/>
+	<copy file="stylesheets/styles.css" tofile="build/zh_CN/svnbook/styles.css" />
+    <copy todir="build/zh_CN/svnbook/images">
+      <fileset dir="${docbook5.xsl}/images" includes="**/*.png"/>
+    </copy>
+
+    <echo message="Making single-html ..."/>
+    <java classname="com.icl.saxon.StyleSheet" fork="true" maxmemory="1024m"
+          failonerror="true" dir="${basedir}/build/zh_CN/svnbook/">
+      <classpath refid="lib.classpath"/>
+	  <arg value="-o"/>
+	  <arg value="svnbook.html"/>
+      <arg value="G:/translation/oss/zh/book.xml"/>
+      <arg value="G:/translation/oss/zh/stylesheets/zh_CN/single-html.xsl"/>
+    </java>
+    <touch file="build/zh_CN/svnbook/.singledone"/>
+  </target>
+
+  <target name="chm.init">
+    <uptodate property="chm.isUpToDate" targetfile="build/zh_CN/svnbook-zh_CN.chm">
+      <srcfiles dir="source" includes="book.xml"/>
+      <srcfiles dir="po" includes="zh_CN.po"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 53 seconds-->
+  <target name="chm" depends="translate,chm.init" unless="chm.isUpToDate" description="Generate document - chm">
+    <fail>
+      <condition>
+        <not>
+          <os family="windows"/>
+        </not>
+      </condition>
+      This target only work on windows !
+    </fail>
+
+    <filter token="docbook5.xsl.url" value="${docbook5.xsl.url}"/>
+    <copy file="stylesheets/chm-import.tmpl.xsl" tofile="stylesheets/chm-import.xsl" filtering="true" overwrite="true"/>
+    <copy todir="build/zh_CN/htmlhelp/images">
+      <fileset dir="source/images" includes="*.png"/>
+      <fileset dir="${docbook5.xsl}/images" includes="**/*.png"/>
+    </copy>
+
+    <echo message="Making chm ..."/>
+    <exec dir="${basedir}/build/zh_CN" executable="xmllint">
+      <arg value="--encode"/>
+      <arg value="GB18030"/>
+      <arg value="--format"/>
+      <arg value="--output"/>
+      <arg value="book-GB18030.xml"/>
+      <arg value="book.xml"/>
+    </exec>
+    <!--Must use GB18030 encoding and xsltproc for chm format !-->
+    <exec dir="${basedir}/build/zh_CN" executable="xsltproc" failonerror="true">
+      <arg value="../../stylesheets/zh_CN/chm.xsl"/>
+      <arg value="book-GB18030.xml"/>
+    </exec>
+
+    <exec dir="${basedir}/build/zh_CN" executable="hhc" failonerror="false">
+      <arg value="htmlhelp.hhp"/>
+    </exec>
+    <delete dir="build/zh_CN/htmlhelp"/>
+    <delete file="build/zh_CN/toc.hhc"/>
+    <delete file="build/zh_CN/index.hhk"/>
+    <delete file="build/zh_CN/htmlhelp.hhp"/>
+  </target>
+
+  <target name="fo.init">
+    <uptodate property="fo.isUpToDate" targetfile="build/zh_CN/svnbook.fo">
+      <srcfiles dir="." includes="book.xml"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 17 seconds-->
+  <target name="fo" depends="fo.init" unless="fo.isUpToDate">
+    <filter token="docbook5.xsl.url" value="${docbook5.xsl.url}"/>
+    <copy file="stylesheets/fo-import.tmpl.xsl" tofile="stylesheets/fo-import.xsl" filtering="true" overwrite="true"/>
+    <mkdir dir="build/zh_CN/pdf"/>
+
+    <echo message="Making fo ..."/>
+    <!--java classname="org.apache.xalan.xslt.Process" fork="true" maxmemory="1024m"
+                failonerror="true" dir="${basedir}">
+            <classpath refid="lib.classpath"/>
+            <arg value="-out"/>
+            <arg value="build/zh_CN/pdf/book-tmp.fo"/>
+            <arg value="-in"/>
+            <arg value="build/zh_CN/book.xml"/>
+            <arg value="-xsl"/>
+            <arg value="stylesheets/zh_CN/fo.xsl"/>
+        </java-->
+    <java classname="com.icl.saxon.StyleSheet" fork="true" maxmemory="1024m" failonerror="true" dir="${basedir}">
+      <classpath refid="lib.classpath"/>
+      <arg value="-o"/>
+      <arg value="build/zh_CN/pdf/book-tmp.fo"/>
+      <arg value="book.xml"/>
+      <arg value="stylesheets/zh_CN/fo.xsl"/>
+    </java>
+
+    <exec dir="${basedir}/build/zh_CN/pdf" executable="xmllint">
+      <arg value="--nsclean"/>
+      <arg value="--format"/>
+      <arg value="--output"/>
+      <arg value="../svnbook.fo"/>
+      <arg value="book-tmp.fo"/>
+    </exec>
+    <delete dir="build/zh_CN/pdf"/>
+  </target>
+
+  <target name="pdf.init">
+    <uptodate property="pdf.isUpToDate" targetfile="build/zh_CN/svnbook.pdf">
+      <srcfiles dir="." includes="book.xml"/>
+    </uptodate>
+  </target>
+
+  <!--Total time: 23 seconds-->
+  <target name="pdf" depends="fo,pdf.init" unless="pdf.isUpToDate" description="Generate document - pdf">
+    <copy todir="build/zh_CN/pdf/images">
+      <fileset dir="${docbook5.xsl}/images" includes="**/*.png"/>
+    </copy>
+    <copy todir="build/zh_CN/pdf">
+      <fileset dir="${fop.home}/conf">
+        <include name="*.xml"/>
+      </fileset>
+      <fileset dir="${fonts.dir}">
+        <include name="*.ttf"/>
+        <include name="*.ttc"/>
+      </fileset>
+      <fileset dir="build/zh_CN">
+        <include name="svnbook.fo"/>
+      </fileset>
+    </copy>
+
+    <echo message="Making pdf ..."/>
+    <java classname="${fop.class}" fork="true" maxmemory="512m" failonerror="true" dir="${basedir}/build/zh_CN/pdf">
+      <classpath refid="lib.classpath"/>
+      <arg value="-c"/>
+      <arg value="userconfig.xml"/>
+      <arg value="svnbook.fo"/>
+      <arg value="../svnbook.pdf"/>
+    </java>
+    <delete dir="build/zh_CN/pdf"/>
+  </target>
+</project>

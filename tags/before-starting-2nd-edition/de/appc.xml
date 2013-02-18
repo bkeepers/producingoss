@@ -1,0 +1,512 @@
+<appendix id="bikeshed-full">
+<!--
+<title>Why Should I Care What Color the Bikeshed Is?</title>
+-->
+<title>Warum sollte es mich kümmern, welche Farbe der Fahrradschuppen
+hat?</title>
+
+<simplesect>
+
+<!--
+<para>You shouldn't; it doesn't really matter, and you have better
+things to spend your time on.</para>
+-->
+<para>Es sollte Sie nicht kümmern; es macht nicht wirklich einen
+Unterschied, und Sie haben besseres mit Ihrer Zeit zu tun.</para>
+
+<!--
+<para>Poul-Henning Kamp's famous "bikeshed" post (an excerpt from
+which appears in <xref linkend="communications"/>) is an eloquent
+disquisition on what tends to go wrong in group discussions.  It is
+reprinted here with his permission.  The orginal URL is <ulink
+url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>; for easy linking,
+you can also point people to <ulink url="http://bikeshed.com">bikeshed.com</ulink>.</para>
+-->
+<para>Die berühmte E-Mail von Poul-Henning Kamp (aus der ein Ausschnitt
+in <xref linkend="communications"/> erscheint) ist eine wortgewandte
+Abhandlung darüber, was bei Gruppendiskussionen dazu neigt, schief zu
+laufen. Es ist hier mit seiner Genehmigung kopiert und übersetzt. Die
+URL des Originals ist <ulink
+url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>.</para>
+
+<!-- 
+   Enshrined in the FreeBSD documentation at:
+
+   <ulink url="http://www.freebsd.org/doc/en_US.ISO8859-1/books/faq/misc.html#BIKESHED-PAINTING"/>
+
+-->
+
+<screen>
+<!--
+Subject: A bike shed (any colour will do) on greener grass...
+From: Poul-Henning Kamp &lt;phk@freebsd.org&gt;
+Date: Sat, 02 Oct 1999 16:14:10 +0200
+Message-ID: &lt;18238.938873650@critter.freebsd.dk&gt;
+Sender: phk@critter.freebsd.dk
+Bcc: Blind Distribution List: ;
+MIME-Version: 1.0
+-->
+Betreff: Ein Fahrradschuppen (egal welche Farbe) auf grünerem Gras...
+Von: Poul-Henning Kamp &lt;phk@freebsd.org&gt;
+Datum: Sat, 02 Oct 1999 16:14:10 +0200
+Message-ID: &lt;18238.938873650@critter.freebsd.dk&gt;
+Absender: phk@critter.freebsd.dk
+Bcc: Blind Distribution List: ;
+MIME-Version: 1.0
+
+
+<!--
+[bcc'ed to committers, hackers]
+-->
+[bcc an committers und hackers]
+
+<!--
+My last pamphlet was sufficiently well received that I was not
+scared away from sending another one, and today I have the time
+and inclination to do so.
+-->
+Mein letztes Schreiben wurde aureichend gut aufgenommen, sodass ich mich
+nicht davor scheue ein weiteres zu senden, und heute habe ich die Zeit
+und Muße es zu tun.
+
+<!--
+I've had a little trouble with deciding on the right distribution
+of this kind of stuff, this time it is bcc'ed to committers and
+hackers, that is probably the best I can do.  I'm not subscribed
+to hackers myself but more on that later.
+-->
+Ich hatte ein paar Probleme zu entscheiden, wie ich so etwas
+herausgeben soll, dieses mal als bcc an committers und
+hackers, vermutlich das Beste, was ich machen kann.
+Ich bin selber nicht bei hacker angemeldet, aber dazu später mehr.
+
+<!--
+The thing which have triggered me this time is the "sleep(1) should
+do fractional seconds" thread, which have pestered our lives for
+many days now, it's probably already a couple of weeks, I can't
+even be bothered to check.
+-->
+Was mich dieses Mal angestoßen hat ist der "sleep(1) sollte mit
+Sekunden-Bruchteile funktionieren" Thread, welcher unser Leben zu viele
+Tage lang geplagt hat – wahrscheinlich sind es schon ein paar Wochen,
+ich will mir nicht mal die Mühe machen, nachzuschauen.
+
+<!--
+To those of you who have missed this particular thread: Congratulations.
+-->
+An diejenigen die diesen speziellen Thread verpasst haben: Herzlichen
+Glückwunsch.
+
+<!--
+It was a proposal to make sleep(1) DTRT if given a non-integer
+argument that set this particular grass-fire off.  I'm not going
+to say anymore about it than that, because it is a much smaller
+item than one would expect from the length of the thread, and it
+has already received far more attention than some of the *problems*
+we have around here.
+-->
+Es war ein Vorschlag, dass sleep(1) sich richtig verhalten sollte, wenn
+man ihr ein Argument gibt, das kein Integer ist, und dieses
+bestimmte Buschfeuer in Gang setzte. Ich werde nicht mehr darüber
+sagen, weil es eine viel kleinere Angelegenheit ist, als man von der
+Länge des Threads erwarten würde, und sie hat schon viel mehr
+Aufmerksamkeit geerntet, als einige der *Probleme* die wir hier gehabt
+haben.
+
+<!--
+The sleep(1) saga is the most blatant example of a bike shed
+discussion we have had ever in FreeBSD.  The proposal was well
+thought out, we would gain compatibility with OpenBSD and NetBSD,
+and still be fully compatible with any code anyone ever wrote.
+-->
+Die sleep(1) Saga ist das eklatanteste Beispiel einer Fahrradschuppen-
+Diskussion, die wir je bei FreeBSD gehabt haben. Der Vorschlag war gut
+ausgearbeitet, wir wären mit OpenBSD und NetBSD kompatibler geworden, und
+trotzdem mit jedem Code vollständig kompatibel geblieben, den irgend
+jemand je geschrieben hat. 
+
+<!--
+Yet so many objections, proposals and changes were raised and
+launched that one would think the change would have plugged all
+the holes in swiss cheese or changed the taste of Coca Cola or
+something similar serious.
+-->
+Es wurden jedoch so viele Einwände, Vorschläge und Änderungen
+aufgeworfen das man meinen könnte, die Änderungen hätten alle Löcher in einem
+schweizer Käse gestopft oder den Geschmack von Coca Cola verändert,
+oder etwas ähnlich gravierendes.
+
+<!--
+"What is it about this bike shed ?" Some of you have asked me.
+-->
+"Worum geht es bei diesem Fahrradschuppen?", haben mich einige gefragt.
+
+<!--
+It's a long story, or rather it's an old story, but it is quite
+short actually.  C. Northcote Parkinson wrote a book in the early
+1960'ies, called "Parkinson's Law", which contains a lot of insight
+into the dynamics of management.
+-->
+Es ist eine lange Geschichte, bzw. eher eine alte Geschichte,
+aber sie ist in Wirklichkeit ziemlich kurz. C. Northcote Parkinson
+schrieb Anfang der 1960er ein Buch namens "Parkinsons Gesetz",
+welches eine Menge Einblicke in die Dynamik des Management
+beinhaltet.
+
+<!--
+You can find it on Amazon, and maybe also in your dads book-shelf,
+it is well worth its price and the time to read it either way,
+if you like Dilbert, you'll like Parkinson.
+-->
+Sie können es bei Amazon finden, und vielleicht auch im Bücherregal
+ihres Vaters, es ist sowohl seinen Preis als auch die Zeit es zu lesen 
+wert. Wer Dilbert gut findet, wird auch Parkinson mögen.
+
+<!--
+Somebody recently told me that he had read it and found that only
+about 50% of it applied these days.  That is pretty darn good I
+would say, many of the modern management books have hit-rates a
+lot lower than that, and this one is 35+ years old.
+-->
+Jemand sagte mir neulich er hätte es gelesen und fand, dass
+lediglich 50% sich heutzutage anwenden ließe. Das ist verdammt gut, würde
+ich sagen, viele der modernen Bücher über Management liegen deutlich
+darunter, und dieses ist über 35 Jahre alt.
+
+<!--
+In the specific example involving the bike shed, the other vital
+component is an atomic power-plant, I guess that illustrates the
+age of the book.
+-->
+Bei dem spezifischen Beispiel, bei dem es um einen Fahrradschuppen
+geht, ist die andere entscheidende Komponente ein Atomkraftwerk,
+was denke ich die Zeit, in der das Buch geschrieben wurde, anschaulich
+macht.
+
+<!--
+Parkinson shows how you can go in to the board of directors and
+get approval for building a multi-million or even billion dollar
+atomic power plant, but if you want to build a bike shed you will
+be tangled up in endless discussions.
+-->
+Parkinson zeigt, wie Sie zum Vorstand gehen und
+Zustimmung für den Bau ein multi-millionen oder gar Milliarden
+Dollar teures Atomkraftwerk bekommen können, wenn Sie aber einen
+Fahrradschuppen bauen möchten sich in endlosen Diskussionen
+verzetteln werden.
+
+<!--
+Parkinson explains that this is because an atomic plant is so vast,
+so expensive and so complicated that people cannot grasp it, and
+rather than try, they fall back on the assumption that somebody
+else checked all the details before it got this far.   Richard P.
+Feynmann gives a couple of interesting, and very much to the point,
+examples relating to Los Alamos in his books.
+-->
+Parkinson erklärt, dass das daran liegt, dass ein Atomkraftwerk
+so gewaltig, so kostspielig und so kompliziert ist, dass Menschen es
+nicht begreifen können, und anstatt es zu versuchen eher auf 
+die Annahme zurückfallen, jemand anderes hätte bereits alle Details
+überprüft bevor es so weit gekommen ist. Richard P. Feynmann gibt
+in seinen Büchern einige interessante und treffende Beispiele, die
+mit Los Alamos zu tun haben.
+
+<!--
+A bike shed on the other hand.  Anyone can build one of those over
+a weekend, and still have time to watch the game on TV.  So no
+matter how well prepared, no matter how reasonable you are with
+your proposal, somebody will seize the chance to show that he is
+doing his job, that he is paying attention, that he is *here*.
+-->
+Einen Fahrradschuppen andererseits kann jeder übers Wochenende
+bauen, und noch genug Zeit übrig haben, um das Spiel im Fernsehen zu 
+schauen. Egal wie gut Sie sich also vorbereiten, egal wie vernünftig Sie 
+bei Ihrem Vorschlag sind, irgend jemand wird die Chance 
+ergreifen um Ihnen zu zeigen, dass er seine Arbeit macht, dass er 
+aufpasst, dass er *da* ist.
+
+<!--
+In Denmark we call it "setting your fingerprint".  It is about
+personal pride and prestige, it is about being able to point
+somewhere and say "There!  *I* did that."  It is a strong trait in
+politicians, but present in most people given the chance.  Just
+think about footsteps in wet cement.
+-->
+In Dänemark nennen wir das "seinen Fingerabdruck hinterlassen".
+Es geht um den persönlichen Stolz und Ansehen, es geht darum irgendwo
+drauf zeigen zu können und zu sagen "Da! Das habe <emphasis>ich
+</emphasis> gemacht". Es ist ein starker Wesenszug bei Politikern,
+aber auch in den meisten Menschen vorhanden, wenn sie dazu die
+Gelegenheit bekommen. Denken Sie einfach an Fußabdrücke im nassen
+Zement.
+
+<!--
+I bow my head in respect to the original proposer because he stuck
+to his guns through this carpet blanking from the peanut gallery,
+and the change is in our tree today.  I would have turned my back
+and walked away after less than a handful of messages in that
+thread.
+-->
+Ich verneige mich mit Respekt vor dem ursprünglichen Absender des
+Vorschlags, da er wärend dieser Bombardierung durch den Pöbel bei
+seinen Waffen blieb, und die Änderung mittlerweile eingepflegt wurde.
+Ich hätte der Sache schon nach weniger als einer Handvoll Nachrichten
+den Rücken gekehrt.
+
+<!--
+And that brings me, as I promised earlier, to why I am not subscribed
+to -hackers:
+-->
+Was mich wie zuvor erwähnt zurück auf den Grund bringt, warum ich nicht
+mehr bei -hackers angemeldet bin:
+
+<!--
+I un-subscribed from -hackers several years ago, because I could
+not keep up with the email load.  Since then I have dropped off
+several other lists as well for the very same reason.
+-->
+Ich habe mich von -hackers vor mehreren Jahren abgemeldet, weil ich nicht
+mehr mit der E-Mail-Flut mithalten konnte. Seitdem habe ich aus demselben
+Grund mehrere andere Mailinglisten verlassen.
+
+<!--
+And I still get a lot of email.  A lot of it gets routed to /dev/null
+by filters:  People like [omitted] will never make it onto my
+screen, commits to documents in languages I don't understand
+likewise, commits to ports as such.  All these things and more go
+the winter way without me ever even knowing about it.
+-->
+Und ich bekomme immer noch jede Menge E-Mails. Vieles wird nach /dev/null
+über Filter geleitet: Leute namens [weggelassen] werden es genau so wenig 
+auf meinem Bildschirm schaffen wie Commits an Dokumente in Sprachen, die
+ich nicht verstehe, genauso wie ähnliche Portierungen. All diese Sachen und
+mehr gehen über den Jordan, ohne dass ich je was von ihnen erfahre.
+
+<!--
+But despite these sharp teeth under my mailbox I still get too much
+email.
+-->
+Aber trotz dieser scharfen Zähne vor meinem Posteingang bekomme ich 
+immer noch zu viele E-Mails.
+
+<!--
+This is where the greener grass comes into the picture:
+-->
+Hier kommt nun das grünere Gras ins Bild:
+
+<!--
+I wish we could reduce the amount of noise in our lists and I wish
+we could let people build a bike shed every so often, and I don't
+really care what colour they paint it.
+-->
+Ich wünschte, wir könnten das Maß an Rauschen auf unserern Listen
+verringern, und ich wünschte, wir ließen die Leute gelegentlich einen
+Fahrradschuppen bauen, und es kümmert mich nicht wirklich,
+in welcher Farbe sie ihn streichen.
+
+<!--
+The first of these wishes is about being civil, sensitive and 
+intelligent in our use of email.
+-->
+Der erste dieser Wünsche zielt darauf ab, E-Mails zivilisiert,
+sensibel und intelligent zu benutzen.
+
+<!--
+If I could concisely and precisely define a set of criteria for
+when one should and when one should not reply to an email so that
+everybody would agree and abide by it, I would be a happy man, but
+I am too wise to even attempt that.
+-->
+Wenn ich griffige, präzise Kriterien definieren könnte, wann eine 
+E-Mail beantwortet werden sollte und wann nicht, denen jeder 
+zustimmen und folgen würde, wäre ich ein glücklicher Mensch, 
+aber ich bin zu weise, das auch nur zu versuchen.
+
+<!--
+But let me suggest a few pop-up windows I would like to see
+mail-programs implement whenever people send or reply to email
+to the lists they want me to subscribe to:
+-->
+Lasst mich aber ein paar Pop-Up-Meldungen vorschlagen, die ich gerne von
+E-Mail-Programmen implementiert sähe, die auftauchen, sobald
+Leute versuchen, E-Mails an Listen zu schreiben oder zu
+beantworten, von denen sie möchten dass ich sie abonniere:
+
+      +------------------------------------------------------------+
+<!--
+      | Your email is about to be sent to several hundred thousand |
+      | people, who will have to spend at least 10 seconds reading |
+      | it before they can decide if it is interesting.  At least  |
+      | two man-weeks will be spent reading your email.  Many of   |
+      | the recipients will have to pay to download your email.    |
+      |                                                            |
+      | Are you absolutely sure that your email is of sufficient   |
+      | importance to bother all these people ?                    |
+      |                                                            |
+      |                  [YES]  [REVISE]  [CANCEL]                 |
+-->
+
+      | Ihre E-Mail wird gleich an mehrere Hundertausend           | 
+      | Personen gesandt, von denen jeder mindestens 10 Sekunden   |
+      | aufbringen muss, um entscheiden zu können ob sie           |
+      | interessant ist. Mindestens zwei Mannwochen werden beim    |
+      | Lesen ihrer E-Mail aufgebracht werden. Viele der Empfänger |
+      | werden für das Herunterladen Ihrer E-Mail bezahlen müssen. |
+      |                                                            |
+      | Sind Sie sich absolut sicher, dass Ihre E-Mail hinlänglich |
+      | bedeutend ist, um all diese Personen zu belästigen?        |
+      |                                                            |
+      |            [JA]  [ÜBERARBEITEN]  [ABBRECHEN]               |
+      +------------------------------------------------------------+
+
+      +------------------------------------------------------------+
+<!--
+      | Warning:  You have not read all emails in this thread yet. |
+      | Somebody else may already have said what you are about to  |
+      | say in your reply.  Please read the entire thread before   |
+      | replying to any email in it.                               |
+      |                                                            |
+      |                      [CANCEL]                              |
+-->
+      | Achtung: Sie haben noch nicht nicht alle E-Mails in diesem |
+      | Thread gelesen. Jemand anderes könnte bereits gesagt haben,|
+      | was Sie im Begriff sind zu antworten. Lesen Sie bitte den  |
+      | ganzen Thread, bevor Sie auf irgend eine E-Mail darin      |
+      | antworten.                                                 |
+      |                                                            |
+      |                      [ABBRECHEN]                           |
+      +------------------------------------------------------------+
+
+      +------------------------------------------------------------+
+<!--
+      | Warning:  Your mail program have not even shown you the    |
+      | entire message yet.  Logically it follows that you cannot  |
+      | possibly have read it all and understood it.               |
+      |                                                            |
+      | It is not polite to reply to an email until you have       |
+      | read it all and thought about it.                          |
+      |                                                            |
+      | A cool off timer for this thread will prevent you from     |
+      | replying to any email in this thread for the next one hour |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+
+      | Achtung: Ihr E-Mail-Programm hat Ihnen nicht einmal die    |
+      | ganze Nachricht gezeigt. Es folgt logich daraus, dass Sie  |
+      | sie unmöglich komplett gelesen und verstanden haben können.|
+      |                                                            |
+      | Es ist unhöflich, auf eine E-Mail zu antworten, bevor Sie  |
+      | sie ganz gelesen und darüber nachgedacht haben.            |
+      |                                                            |
+      | Eine Zeitbeschränkung wird Sie zur Beruhigung eine Stunde  |
+      | lang daran hindern, auf irgend welche E-Mails in diesem    | 
+      | Thread zu zu antworten.                                    |
+      |                                                            |
+      |                      [ABBRECHEN]                           |
+      +------------------------------------------------------------+
+
+      +------------------------------------------------------------+
+<!--
+      | You composed this email at a rate of more than N.NN cps    |
+      | It is generally not possible to think and type at a rate   |
+      | faster than A.AA cps, and therefore you reply is likely to |
+      | incoherent, badly thought out and/or emotional.            |
+      |                                                            |
+      | A cool off timer will prevent you from sending any email   |
+      | for the next one hour.                                     |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+      +------------------------------------------------------------+
+      | Sie haben diese E-Mail mit einer Geschwindigkeit von mehr  |
+      | als N.NN zps verfasst. Es ist i.A. möglich, schneller als  |
+      | mit einer Geschwindigkeit von A.AA zps zu denken und zu    |
+      | schreiben, und Ihre Antwort ist deshalb wahrscheinlich     |
+      | unpassend, undurchdacht und/oder emotional.                |
+      |                                                            |
+      | Eine Zeitbeschränkung wird Sie zur Beruhigung eine Stunde  |
+      | am Versenden vom E-Mails hindern.                          | 
+      |                                                            |
+      |                      [ABBRECHEN]                           |
+      +------------------------------------------------------------+
+
+<!--
+The second part of my wish is more emotional.  Obviously, the
+capacities we had manning the unfriendly fire in the sleep(1)
+thread, despite their many years with the project, never cared
+enough to do this tiny deed, so why are they suddenly so enflamed
+by somebody else so much their junior doing it ?
+-->
+Der zweite Teil meines Wunsches ist eher emotional. Offensichtlich haben 
+die Kapazitäten welche wir für die Besatzung dieses unfreundlichen Feuers
+in dem sleep(1) Thread hatten, trotz ihrer vielen Jahre bei dem Projekt,
+es nie als wichtig erachtet, diese kleine Handlung durchzuführen, warum
+sind sie also jetzt derart aufgebracht über jemand anderen, sehr viel
+unerfahreneren der es erledigt ?
+
+<!--
+I wish I knew.
+-->
+Ich wünschte ich wüsste es.
+
+<!--
+I do know that reasoning will have no power to stop such "reactionaire
+conservatism".  It may be that these people are frustrated about
+their own lack of tangible contribution lately or it may be a bad
+case of "we're old and grumpy, WE know how youth should behave".
+-->
+Was ich weiß ist, dass Argumente es nicht schaffen werden, diese
+"Reaktionären Konservativen" aufzuhalten. Es mag sein, dass diese Leute
+über ihren eigenen Mangel an greifbaren Beiträgen in der letzten Zeit
+frustriert sind, oder es ist ein schlimmer Fall von "Wir sind alt und
+knauzig, WIR wissen, wie sich die Jugend verhalten sollte".
+
+<!--
+Either way it is very unproductive for the project, but I have no
+suggestions for how to stop it.  The best I can suggest is to refrain
+from fuelling the monsters that lurk in the mailing lists:  Ignore
+them, don't answer them, forget they're there.
+-->
+So oder so, ist es für das Projekt sehr unproduktiv, ich habe aber keine
+Vorschläge es aufzuhalten. Das beste was ich vorschlagen kann, ist sich
+davor zurückzuhalten, die Ungeheuer zu füttern, die auf den Mailinglisten
+lauern: Ignoriere sie, antworte nicht auf sie, vergiss dass
+sie da sind.
+
+<!--
+I hope we can get a stronger and broader base of contributors in
+FreeBSD, and I hope we together can prevent the grumpy old men
+and the [omitted]s of the world from chewing them up, spitting
+them out and scaring them away before they ever get a leg to the 
+ground.
+-->
+Ich hoffe wir können eine stärkere und breitere Basis von Mitwirkenden 
+bei FreeBSD bekommen, und ich hoffe dass wir zusammen die alten Knauser
+und die [Ausgelassen]en dieser Welt daran hindern können, sie durchzukauen,
+auszuspukken und abzuschrecken bevor sie überhaupt ein Bein auf den Boden
+kriegen.
+
+<!--
+For the people who have been lurking out there, scared away from
+participating by the gargoyles:  I can only apologise and encourage
+you to try anyway, this is not the way I want the environment in
+the project to be.
+-->
+An die Leute die da draußen gelauert haben, vor diesen Untieren zurück
+geschreckt haben: Ich kann mich nur entschuldigen und euch dazu
+ermutigen, es trotzdem zu versuchen, das ist nicht die Umgebung die ich
+in dem Projekt haben möchte.
+
+Poul-Henning
+</screen>
+
+</simplesect>
+
+</appendix>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "appendix")
+end:
+-->

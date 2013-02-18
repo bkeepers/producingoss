@@ -1,0 +1,309 @@
+<!--
+https://spreadsheets.google.com/pub?hl=ja&hl=ja&key=0AgOqPQzRjQPOdDF5SGdRYXdVSGZWZGVxWWZXWV91WHc&output=html
+-->
+
+<preface id="preface">
+<title>Preface</title>
+  
+<!-- ======================== SECTION ============================== -->
+<sect1 id="why">
+<title>Why Write This Book?</title>
+
+<para>At parties, people no longer give me a blank stare when I tell
+them I write free software.  "Oh, yes, open source&mdash;like Linux?"
+they say.  I nod eagerly in agreement.  "Yes, exactly!  That's what I
+do."  It's nice not to be completely fringe anymore.  In the past, the
+next question was usually fairly predictable: "How do you make money
+doing that?"  To answer, I'd summarize the economics of open source:
+that there are organizations in whose interest it is to have certain
+software exist, but that they don't need to sell copies, they just
+want to make sure the software is available and maintained, as a tool
+instead of a commodity.</para>
+
+<para>Lately, however, the next question has not always been about
+money.  The business case for open source software<footnote><para>The
+terms "open source" and "free" are essentially synonymous in this
+context; they are discussed more in
+<xref linkend="free-vs-open-source"/><phrase output="printed"> in
+<xref linkend="introduction"/></phrase>.</para></footnote> is no
+longer so mysterious, and many non-programmers already
+understand&mdash;or at least are not surprised&mdash;that there are
+people employed at it full time.  Instead, the question I have been
+hearing more and more often is "<emphasis>Oh, how does that
+work?</emphasis>"</para>
+
+<para>I didn't have a satisfactory answer ready, and the harder I
+tried to come up with one, the more I realized how complex a topic it
+really is.  Running a free software project is not exactly like
+running a business (imagine having to constantly negotiate the nature
+of your product with a group of volunteers, most of whom you've never
+met!).  Nor, for various reasons, is it exactly like running a
+traditional non-profit organization, nor a government.  It has
+similarities to all these things, but I have slowly come to the
+conclusion that free software is <foreignphrase>sui
+generis</foreignphrase>.  There are many things with which it can be
+usefully compared, but none with which it can be equated.  Indeed,
+even the assumption that free software projects can be "run" is a
+stretch.  A free software project can be <emphasis>started</emphasis>,
+and it can be influenced by interested parties, often quite strongly.
+But its assets cannot be made the property of any single owner, and as
+long as there are people somewhere&mdash;anywhere&mdash;interested in
+continuing it, it cannot be unilaterally shut down.  Everyone has
+infinite power; everyone has no power.  It makes for an interesting
+dynamic.</para>
+
+<para>That is why I wanted to write this book.  Free software projects
+have evolved a distinct culture, an ethos in which the liberty to make
+the software do anything one wants is a central tenet, and yet the
+result of this liberty is not a scattering of individuals each going
+their own separate way with the code, but enthusiastic collaboration.
+Indeed, competence at cooperation itself is one of the most highly
+valued skills in free software.  To manage these projects is to engage
+in a kind of hypertrophied cooperation, where one's ability not only
+to work with others but to come up with new ways of working together
+can result in tangible benefits to the software.  This book attempts
+to describe the techniques by which this may be done.  It is by no
+means complete, but it is at least a beginning.</para>
+
+<para>Good free software is a worthy goal in itself, and I hope that
+readers who come looking for ways to achieve it will be satisfied with
+what they find here.  But beyond that I also hope to convey something
+of the sheer pleasure to be had from working with a motivated team of
+open source developers, and from interacting with users in the
+wonderfully direct way that open source encourages.  Participating in
+a successful free software project is
+<emphasis>fun</emphasis>, and ultimately that's what keeps the whole
+system going.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="audience">
+<title>Who Should Read This Book?</title>
+
+<para>This book is meant for software developers and managers who are
+considering starting an open source project, or who have started one
+and are wondering what to do now.  It should also be helpful for
+people who just want to participate in an open source project but have
+never done so before.</para>
+
+<para>The reader need not be a programmer, but should know basic
+software engineering concepts such as source code, compilers, and
+patches.</para>
+
+<para>Prior experience with open source software, as either a user or
+a developer, is not necessary.  Those who have worked in free software
+projects before will probably find at least some parts of the book a
+bit obvious, and may want to skip those sections.  Because there's
+such a potentially wide range of audience experience, I've made an
+effort to label sections clearly, and to say when something can be
+skipped by those already familiar with the material.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="sources">
+<title>Sources</title>
+
+<para>Much of the raw material for this book came from five years of
+working with the Subversion project
+(<ulink url="http://subversion.tigris.org/"/>).  Subversion is an open
+source version control system, written from scratch, and intended to
+replace CVS as the <foreignphrase>de facto</foreignphrase> version
+control system of choice in the open source community.  The project
+was started by my employer, CollabNet
+(<ulink url="http://www.collab.net/"/>), in early 2000, and thank
+goodness CollabNet understood right from the start how to run it as a
+truly collaborative, distributed effort.  We got a lot of volunteer
+developer buy-in early on; today there are 50-some developers on
+the project, of whom only a few are CollabNet employees.</para>
+
+<para>Subversion is in many ways a classic example of an open source
+project, and I ended up drawing on it more heavily than I originally
+expected.  This was partly a matter of convenience: whenever I needed
+an example of a particular phenomenon, I could usually call one up
+from Subversion right off the top of my head.  But it was also a
+matter of verification.  Although I am involved in other free software
+projects to varying degrees, and talk to friends and acquaintances
+involved in many more, one quickly realizes when writing for print
+that all assertions need to be fact-checked.  I didn't want to make
+statements about events in other projects based only on what I could
+read in their public mailing list archives.  If someone were to try
+that with Subversion, I knew, she'd be right about half the time and
+wrong the other half.  So when drawing inspiration or examples from a
+project with which I didn't have direct experience, I tried to first
+talk to an informant there, someone I could trust to explain what was
+really going on.</para>
+
+<para>Subversion has been my job for the last 5 years, but I've been
+involved in free software for 12.  Other projects that influenced this
+book include:</para>
+
+<itemizedlist>
+  <listitem><para>The GNU Emacs text editor project at the Free
+            Software Foundation, in which I maintain a few small
+            packages.</para>
+  </listitem>
+  <listitem><para>Concurrent Versions System (CVS), which I worked on
+            intensely in 1994&ndash;1995 with Jim Blandy, but have been
+            involved with only intermittently since.</para>
+  </listitem>
+  <listitem><para>The collection of open source projects known as the
+            Apache Software Foundation, especially the Apache Portable
+            Runtime (APR) and Apache HTTP Server.</para> 
+  </listitem>
+  <listitem><para>OpenOffice.org, the Berkeley Database from
+            Sleepycat, and MySQL Database; I have not been
+            involved with these projects personally, but have observed
+            them and, in some cases, talked to people there.</para> 
+  </listitem>
+  <listitem><para>GNU Debugger (GDB) (likewise).</para>
+  </listitem>
+  <listitem><para>The Debian Project (likewise).</para>
+  </listitem>
+</itemizedlist>
+
+<para>This is not a complete list, of course.  Like most open source
+programmers, I keep loose tabs on many different projects, just to
+have a sense of the general state of things.  I won't name all of them
+here, but they are mentioned in the text where appropriate.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="acknowledgments">
+<title>Acknowledgments</title>
+
+<para>This book took four times longer to write than I thought it
+would, and for much of that time felt rather like a grand piano
+suspended above my head wherever I went.  Without help from many
+people, I would not have been able to complete it while staying
+sane.</para>
+
+<para>Andy Oram, my editor at O'Reilly, was a writer's dream.  Aside
+from knowing the field intimately (he suggested many of the topics),
+he has the rare gift of knowing what one meant to say and helping one
+find the right way to say it.  It has been an honor to work with him.
+Thanks also to Chuck Toporek for steering this proposal to Andy right
+away.</para>
+
+<para>Brian Fitzpatrick reviewed almost all of the material as I wrote
+it, which not only made the book better, but kept me writing when I
+wanted to be anywhere in the world but in front of the computer.  Ben
+Collins-Sussman and Mike Pilato also checked up on progress, and were
+always happy to discuss&mdash;sometimes at length&mdash;whatever topic
+I was trying to cover that week.  They also noticed when I slowed
+down, and gently nagged when necessary.  Thanks, guys.</para>
+
+<para>Biella Coleman was writing her dissertation at the same time
+I was writing this book.  She knows what it means to sit down and
+write every day, and provided an inspiring example as well as a
+sympathetic ear.  She also has a fascinating anthropologist's-eye view
+of the free software movement, giving both ideas and references that I
+was able use in the book.  Alex Golub&mdash;another anthropologist
+with one foot in the free software world, and also finishing his
+dissertation at the same time&mdash;was exceptionally supportive early
+on, which helped a great deal.</para>
+
+<para>Micah Anderson somehow never seemed too oppressed by his own
+writing gig, which was inspiring in a sick, envy-generating sort of
+way, but he was ever ready with friendship, conversation, and (on at
+least one occasion) technical support.  Thanks, Micah!</para>
+
+<para>Jon Trowbridge and Sander Striker gave both encouragement and
+concrete help&mdash;their broad experience in free software provided
+material I couldn't have gotten any other way.</para>
+
+<para>Thanks to Greg Stein not only for friendship and well-timed
+encouragement, but for showing the Subversion project how important
+regular code review is in building a programming community.  Thanks
+also to Brian Behlendorf, who tactfully drummed into our heads the
+importance of having discussions publicly; I hope that principle is
+reflected throughout this book.</para>
+
+<para>Thanks to Benjamin "Mako" Hill and Seth Schoen, for various
+conversations about free software and its politics; to Zack Urlocker
+and Louis Suarez-Potts for taking time out of their busy schedules to
+be interviewed; to Shane on the Slashcode list for allowing his post
+to be quoted; and to Haggen So for his enormously helpful comparison
+of canned hosting sites.</para>
+
+<para>Thanks to Alla Dekhtyar, Polina, and Sonya for their unflagging
+and patient encouragement.  I'm very glad that I will no longer have
+to end (or rather, try unsuccessfully to end) our evenings early to go
+home and work on "The Book."</para>
+
+<para>Thanks to Jack Repenning for friendship, conversation, and a
+stubborn refusal to ever accept an easy wrong analysis when a harder
+right one is available.  I hope that some of his long experience with
+both software development and the software industry rubbed off on this
+book.</para>
+
+<para>CollabNet was exceptionally generous in allowing me a flexible
+schedule to write, and didn't complain when it went on far longer than
+originally planned.  I don't know all the intricacies of how
+management arrives at such decisions, but I suspect Sandhya Klute, and
+later Mahesh Murthy, had something to do with it&mdash;my thanks to
+them both.</para>
+
+<para>The entire Subversion development team has been an inspiration
+for the past five years, and much of what is in this book I learned
+from working with them.  I won't thank them all by name here, because
+there are too many, but I implore any reader who runs into a
+Subversion committer to immediately buy that committer the drink of
+his choice&mdash;I certainly plan to.</para>
+
+<para>Many times I ranted to Rachel Scollon about the state of the
+book; she was always willing to listen, and somehow managed to make
+the problems seem smaller than before we talked.  That helped a
+lot&mdash;thanks.</para>
+
+<para>Thanks (again) to Noel Taylor, who must surely have wondered why
+I wanted to write another book given how much I complained the last
+time, but whose friendship and leadership of Golos&aacute; helped keep
+music and good fellowship in my life even in the busiest times.
+Thanks also to Matthew Dean and Dorothea Samtleben, friends and
+long-suffering musical partners, who were very understanding as my
+excuses for not practicing piled up.  Megan Jennings was constantly
+supportive, and genuinely interested in the topic even though it was
+unfamiliar to her&mdash;a great tonic for an insecure writer.  Thanks,
+pal!</para>
+
+<para>I had four knowledgeable and diligent reviewers for this book:
+Yoav Shapira, Andrew Stellman, Davanum Srinivas, and Ben Hyde.  If I
+had been able to incorporate all of their excellent suggestions, this
+would be a better book.  As it was, time constraints forced me to pick
+and choose, but the improvements were still significant.  Any errors
+that remain are entirely my own.</para>
+
+<para>My parents, Frances and Henry, were wonderfully supportive as
+always, and as this book is less technical than the previous one, I
+hope they'll find it somewhat more readable.</para>
+
+<para>Finally, I would like to thank the dedicatees, Karen Underhill
+and Jim Blandy.  Karen's friendship and understanding have meant
+everything to me, not only during the writing of this book but for the
+last seven years.  I simply would not have finished without her help.
+Likewise for Jim, a true friend and a hacker's hacker, who first
+taught me about free software, much as a bird might teach an airplane
+about flying.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="disclaimer">
+<title>Disclaimer</title>
+
+<para>The thoughts and opinions expressed in this book are my own.
+They do not necessarily represent the views of CollabNet or of the
+Subversion project.</para>
+
+</sect1>
+
+</preface>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

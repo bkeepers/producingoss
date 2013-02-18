@@ -1,0 +1,5272 @@
+<chapter id="communications">
+
+<!-- <title>Communications</title> -->
+<title>コミュニケーション</title>
+
+<simplesect>
+
+<!--
+<para>The ability to write clearly is perhaps the most important skill
+one can have in an open source environment.  In the long run it
+matters more than programming talent.  A great programmer with lousy
+communications skills can get only one thing done at a time, and even
+then may have trouble convincing others to pay attention.  But a lousy
+programmer with good communications skills can coordinate and persuade
+many people to do many different things, and thereby have a
+significant effect on a project's direction and momentum.</para>
+-->
+<para>
+  明瞭に、わかりやすく書くという技術は、
+  オープンソース界で暮らす上で最も重要なもののひとつといえるでしょう。
+  ある意味ではプログラミング技術よりも重要かもしれません。
+  プログラミングの技術は優れているがコミュニケーションスキルに欠ける人は、
+  一度にひとつずつのことしかこなせません。
+  また、周りの人の気を引くことにも苦労するかもしれません。
+  逆に、プログラマーとしては二流だがコミュニケーションスキルが優れている人は、
+  周りの人をうまく巻き込んでさまざまな作業をこなすことができます。
+  そして、結果としてプロジェクトをよい方向に引っ張っていってくれるのです。
+</para>
+
+<!--
+<para>There does not seem to be much correlation, in either direction,
+between the ability to write good code and the ability to communicate
+with one's fellow human beings.  There is some correlation between
+programming well and describing technical issues well, but describing
+technical issues is only a tiny part of the communications in a
+project.  Much more important is the ability to empathize with one's
+audience, to see one's own posts and comments as others see them, and
+to cause others to see their own posts with similar objectivity.
+Equally important is noticing when a given medium or communications
+method is no longer working well, perhaps because it doesn't scale as
+the number of users increases, and taking the time to do something
+about it.</para>
+-->
+<para>
+  コードを書く能力のある人が、
+  必ずしも他人とうまくやっていくためのコミュニケーション能力があるとは限りません。
+  よいプログラムを書く能力と技術的な問題をうまく説明する能力とには
+  それなりの相関関係はあるかもしれませんが、
+  「技術的な問題を説明する」ということは
+  プロジェクト内でのコミュニケーションにおけるほんの一部のことに過ぎません。
+  それよりもずっと大事なことは、次の３つ。
+  まず聞き手の気持ちになって考えること、
+  自分の投稿やコメントを客観的に見るようにすること、
+  そして他人にも自分自身の投稿やコメントを客観的に見させるようにすることです。
+</para>
+
+<!--
+<para>All of which is obvious in theory&mdash;what makes it hard in
+practice is that free software development environments are
+bewilderingly diverse both in audiences and in communications
+mechanisms.  Should a given thought be expressed in a post to the
+mailing list, as an annotation in the bug tracker, or as a comment
+in the code?  When answering a question in a public forum, how much
+knowledge can you assume on the part of the reader, given that "the
+reader" is not only the one who asked the question in the first place,
+but all those who might see your response?  How can the developers
+stay in constructive contact with the users, without getting swamped
+by feature requests, spurious bug reports, and general chatter?  How
+do you tell when a medium has reached the limits of its capacity, and
+what do you do about it?</para>
+-->
+<para>
+  ……といったことを口で言うのは簡単ですが、実際にやってみると
+  これは非常に難しいことです。というのも、フリーソフトウェアの開発には
+  さまざまな人たちが参加しており、彼らのコミュニケーション方法もそれぞれ異なるからです。
+  何か意見を述べたいときはどうすればいいのでしょう？
+  メーリングリストへ投稿する？ バグ追跡システムに登録する？
+  それともコードのコメントとして記述する？
+  掲示板での質問に回答するとき、相手がどれくらいの知識を持っていると想定したらいいのでしょう？
+  当然、ここでいう「相手」とは、質問の当事者だけでなく
+  後であなたの回答を読むであろう第三者も含まれます。
+  開発者と利用者の関係を良好な状態に保つにはどうしたらいいのでしょう？
+  利用者からの機能追加要求や勘違いのバグ報告、
+  その他の雑談などに開発者たちが悩まされないようにするには？
+  コミュニケーションの手段が尽きたら相手にどう伝えたらいいでしょうか？
+  また、どう対処したらいいのでしょうか？
+</para>
+
+<!--
+<para>Solutions to these problems are usually partial, because any
+particular solution is eventually made obsolete by project growth or
+changes in project structure.  They are also often <foreignphrase>ad
+hoc</foreignphrase>, because they're improvised responses to dynamic
+situations.  All participants need to be aware of when and how
+communications can become bogged down, and be involved in
+solutions.  Helping people do this is a big part of managing an open
+source project.  The sections that follow discuss both how to conduct
+your own communications, and how to make maintenance of communications
+mechanisms a priority for everyone in the project.<footnote><para>There
+has been some interesting academic research on this topic; for example,
+see <citetitle>Group Awareness in Distributed Software
+Development</citetitle> by Gutwin, Penner, and Schneider.  This paper
+was online for a while, then unavailable, then online again at <ulink
+url="http://www.st.cs.uni-sb.de/edu/empirical-se/2006/PDFs/gutwin04.pdf"/>.
+So try there first, but be prepared to use a search engine if it moves
+again.</para></footnote></para>
+-->
+<para>
+  これらの問題に対する解決策は、通常は一時的なものとなります。というのも、
+  どんな解決策であっても、プロジェクトの規模が大きくなったり
+  プロジェクトの体制が変わったりすれば意味がなくなってしまうからです。
+  また、これらの解決策はたいていその場しのぎのものになります。
+  刻々と変化する状況にあわせて即興で対応しなければならないからです。
+  すべてのメンバーは、コミュニケーション不全に陥っていないかどうかを常に気にかけ、
+  それに対応する必要があります。このような行動を支援することも、
+  オープンソースプロジェクトの運営の大事な一部です。
+  以下のセクションでは、あなた自身がうまくコミュニケーションを行う方法を扱います。
+  また、プロジェクト内での円滑なコミュニケーションを維持するための方法についても説明します。
+  <footnote>
+    <para>
+      これらの問題については、いくつか興味深い研究があります。たとえば
+      Gutwin、Penner および Schneider による
+      <citetitle>Group Awareness in Distributed Software Development</citetitle>
+      もそのひとつです。この論文はオンラインで公開されていましたが、
+      一時しばらく見えなくなっていました。その後、改めて
+      <ulink url="http://www.st.cs.uni-sb.de/edu/empirical-se/2006/PDFs/gutwin04.pdf"/>
+      で公開されました。もしこの URL で見つからない場合は、
+      また別の場所に移動した可能性があります。サーチエンジンを使って探してみてください。
+    </para>
+  </footnote>
+</para>
+
+</simplesect>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="you-are-what-you-write">
+<!--
+<title>You Are What You Write</title>
+-->
+<title>書いたことがすべて</title>
+
+<!--
+<para>Consider this: the only thing anyone knows about you on the
+Internet comes from what you write, or what others write about you.
+You may be brilliant, perceptive, and charismatic in person&mdash;but
+if your emails are rambling and unstructured, people will assume
+that's the real you.  Or perhaps you really are rambling and
+unstructured in person, but no one need ever know it, if your posts
+are lucid and informative.</para>
+-->
+<para>
+  考えてもみてください。インターネット上では、あなたが何者であるかを判断する基準は
+  「あなたが何を書いたか」「他人があなたのことをどのように書いたか」
+  しかありません。たとえあなたが頭脳明晰で洞察力に優れ、
+  カリスマ性のある人物だったとしても、
+  あなたの書いたメールが中身のない乱雑なものだったら
+  他の人たちはあなたのことを「中身のない乱雑な人」とみなすことでしょう。
+  逆に、実際のあなたが中身のない乱雑な人だったとしても、
+  あなたの投稿する内容が明快で有益なものなら、
+  他の人たちは実際のあなたがどうであるかなんて気にしません。
+</para>
+
+<!--
+<para>Devoting some care to your writing will pay off hugely.
+Long-time free software hacker Jim Blandy tells the following
+story:</para>
+-->
+<para>
+  自分が何かを書くときには十分注意を払うようにしましょう。
+  決して損はしません。フリーソフトウェアのハッカーとして長年の経験を持つ
+  Jim Blandy は、次のような話をしてくれました。
+</para>
+
+<blockquote>
+<!--
+  <para>Back in 1993, I was working for the Free Software Foundation,
+  and we were beta-testing version 19 of GNU Emacs.  We'd make a beta
+  release every week or so, and people would try it out and send us
+  bug reports.  There was this one guy whom none of us had met in
+  person but who did great work: his bug reports were always clear and
+  led us straight to the problem, and when he provided a fix himself,
+  it was almost always right.  He was top-notch.</para>
+-->
+  <para>
+    あれは 1993 年のこと。当時私は Free Software Foundation で働いており、
+    GNU Emacs のバージョン 19 のベータテストをしていました。
+    私たちはだいたい週に一度のペースでベータ版をリリースし、
+    それを試したユーザーからバグ報告をもらうようになっていました。
+    直接会ったことはないのですが、
+    いつもすばらしい仕事をしてくれるユーザーが一人いたのです。
+    彼のバグ報告は常に明快でわかりやすく、問題を解決する大きな助けになりました。
+    時には彼自身がバグを修正してくれることもありましたが、
+    それもまた的確なものがほとんどでした。まさに最高の奴だったんです。
+  </para>
+
+<!--
+  <para>Now, before the FSF can use code written by someone else, we
+  have them do some legal paperwork to assign their copyright interest
+  to that code to the FSF.  Just taking code from complete strangers
+  and dropping it in is a recipe for legal disaster.</para>
+-->
+  <para>
+    FSF では、誰かが書いたコードを取り込む前には、
+    そのコードの著作権を FSF に渡すための法的手続きをしてもらうことになっています。
+    見知らぬ誰かさんからもらったコードをそのまま取り込むことは、
+    破滅への第一歩だからです。
+  </para>
+
+<!--
+  <para>So I emailed the guy the forms, saying, "Here's some paperwork
+  we need, here's what it means, you sign this one, have your employer
+  sign that one, and then we can start putting in your fixes.  Thanks
+  very much."</para>
+-->
+  <para>
+    そこで私は、彼にメールで書類を送りました。
+    「ちょっとした事務手続きが必要なんだ。内容はここに説明してあるので、
+    まず君がここに署名してほしい。そしてもうひとつの書類に君の雇用主の署名をもらってほしい。
+    そうしたら君のバグフィックスを取り込めるだろう。いつもありがとう。感謝してるよ。」
+    こんな内容でした。
+  </para>
+
+<!--
+  <para>He sent me back a message saying, "I don't have an
+  employer."</para>
+-->
+  <para>
+    彼から返ってきた返事は「私には雇用主はいません」というものでした。
+  </para>
+
+<!--
+  <para>So I said, "Okay, that's fine, just have your university sign
+  it and send it back."</para>
+-->
+  <para>
+    で、私は言いました。
+    「ああ、そうかい。それなら、代わりに君の通う大学に署名をもらって送り返してくれないかな？」
+  </para>
+
+<!--
+  <para>After a bit, he wrote me back again, and said, "Well,
+  actually...  I'm thirteen years old and I live with my
+  parents."</para>
+-->
+  <para>
+    しばらくして、彼から再び返事が返ってきました。
+    「あ、あの……。僕、実はまだ 13 才で、親と同居しているんですけど……」
+  </para>
+</blockquote>
+
+<!--
+<para>Because that kid didn't write like a thirteen-year-old, no one
+knew that's what he was.  Following are some ways to make your writing
+give a good impression too.</para>
+-->
+<para>
+  彼の文面がとても 13 才のガキが書いたのようなものには見えなかったので、
+  誰もそんなことは想像していなかったのです。
+  皆に気に入られるようなものの書き方について、これからみていきましょう。
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="structure-and-formatting">
+<!--
+<title>Structure and Formatting</title>
+-->
+<title>構成や体裁</title>
+
+<!--
+<para>Don't fall into the trap of writing everything as though it were
+a cell phone text message.  Write in complete sentences, capitalizing
+the first word of each sentence, and use paragraph breaks where
+needed.  This is most important in emails and other composed writings.
+In IRC or similarly ephemeral forums, it's generally okay to leave out
+capitalization, use compressed forms of common expressions, etc.  Just
+don't carry those habits over into more formal, persistent forums.
+Emails, documentation, bug reports, and other pieces of writing that
+are intended to have a permanent life should be written using standard
+grammar and spelling, and have a coherent narrative structure.  This
+is not because there's anything inherently good about following
+arbitrary rules, but rather that these rules are
+<emphasis>not</emphasis> arbitrary: they evolved into their present
+forms because they make text more readable, and you should adhere to
+them for that reason.  Readability is desirable not only because it
+means more people will understand what you write, but because it makes
+you look like the sort of person who takes the time to communicate
+clearly: that is, someone worth paying attention to.</para>
+-->
+<para>
+  ケータイのメールじゃないんだから、
+  何も考えずにただだらだら書き連ねるといったことはやめましょう。
+  ちゃんとした文を書き、単語の先頭はちゃんと大文字にして、
+  適切に段落分けをするようにしなければなりません。
+  これは、メールだけでなくその他のちゃんとした文書においても最も重要なことです。
+  IRC のようなその場限りのやりとりの場合は、
+  あまりそんなことを気にする必要はありません。
+  略語を使いまくったりしても大丈夫です。
+  しかし、正式な掲示板上などにはそんな習慣を持ち込まないでください。
+  メールやマニュアル、バグ報告などのように後に残ることが前提の文書については、
+  標準的な文法やスペルで書く必要があります。
+  また、きちんと構成されていなければなりません。
+  これは決して「とりあえず長いものには巻かれておけ」
+  とかいう類の話ではありません。ここで挙げた規則は、
+  単なるしきたりといったものではないのです。
+  文書を読みやすくするために進めてきた結果がこれなので、
+  できるだけそれを尊重するようにしましょう。
+  読みやすく書くようにする理由は、
+  他人が理解しやすくなるからというだけではありません。
+  そうすることで、あなたが「他人としっかりコミュニケートするつもりのある人だ」
+  と認められるようになるからという面もあります。
+</para>
+
+<!--
+<para>For email in particular, experienced open source developers have
+settled on certain conventions:</para>
+-->
+<para>
+  メールを書く際には、
+  オープンソース開発者の間で暗黙の了解となっている決まりごとがいくつかあります。
+</para>
+
+<!--
+<para>Send plain text mails only, not HTML, RichText, or other formats
+that might be opaque to text-only mail readers.  Format your lines to
+be around 72 columns long.  Don't exceed 80 columns, which has become
+the <foreignphrase>de facto</foreignphrase> standard terminal width
+(that is, some people may use wider terminals, but no one uses a
+narrower one).  By making your lines a little
+<emphasis>less</emphasis> than 80 columns, you leave room for a few
+levels of quoting characters to be added in others' replies without
+forcing a rewrapping of your text.</para>
+-->
+<para>
+  メールではプレーンテキストのみを使用し、
+  HTML やリッチテキストといった形式は避けましょう。
+  テキストにのみ対応したメールソフトでは、
+  他の形式のメールがうまく見えないことがあります。
+  また、半角 72 文字程度で改行を入れるようにしましょう。
+  1 行が 80 文字を超えてはいけません。
+  これ (80 文字) は、端末の画面上で 1 行に表示できる桁数の標準値です。
+  これより広い幅の端末を使っている人もいるでしょうが、
+  これより狭いものを使っている人はいません。
+  80 文字ぎりぎりではなくもう少し余裕を持って改行しておくことで、
+  返信時に引用符を追加しても改行位置を気にする必要がなくなります。
+</para>
+
+<!--
+<para><emphasis>Use real line breaks.</emphasis> Some mailers do a
+kind of fake line wrapping, whereby when you're composing an email,
+the display shows line breaks that aren't actually there.  When the
+mail goes out, it may not have the line breaks you thought it had, and
+it will wrap awkwardly on some people's screens.  If your mailer might
+use fake line breaks, look for a setting you can tweak to make it show
+the true line breaks as you compose.</para>
+-->
+<para>
+  <emphasis>実際に改行すること。</emphasis>
+  メーラーによっては、メールの作成時にはいかにも改行しているように見せていても、
+  実際のメールでは改行されていないといったものもあります。
+  そのまま送信すると、あなたの意図したところに改行が入っていない状態の
+  メールが送信されることになります。受け取った側の画面によっては、
+  改行の位置がおかしくなってしまうことでしょう。
+  もしあなたがそのようなメーラーを使っているのなら、
+  メール作成時に実際の改行を見せるような設定項目がないか探してみましょう。
+</para>
+
+<!--
+<para>When including screen output, snippets of code, or other
+preformatted text, offset it clearly, so that even a lazy eye can
+easily see the boundaries between your prose and the material you're
+quoting.  (I never expected to write that advice when I started this
+book, but on a number of open source mailing lists lately, I've seen
+people mix texts from different sources without making it clear which
+is which.  The effect is very frustrating.  It makes their posts
+significantly harder to understand, and frankly makes those people
+look a little bit disorganized.)</para>
+-->
+<para>
+  画面の出力やコードの一部、その他フォーマット済みのテキストを記述する場合は、
+  はっきりとわかるように位置をずらしておきましょう。
+  どこからどこまでが地の文でどこからどこまでが引用なのかを明確にしておくことが大切です
+  (本書を執筆しはじめた当初は、こんなことを説明するつもりはありませんでした。
+  しかしさまざまなオープンソース関連のメーリングリストを見ていくうちに、
+  さまざまな種類のテキストを区別せずごちゃごちゃにしている人があまりにも多いことに気づきました。
+  それはそれは非常に読みづらいものでした。
+  そのおかげで彼らの投稿の内容をつかみにくくなるだけでなく、
+  率直に言って彼らはちょっとだらしない人たちだなと感じました)。
+</para>
+
+<!--
+<para>When quoting someone else's mail, insert your responses where
+they're most appropriate, at several different places if necessary,
+and trim off the parts of their mail you didn't use.  If you're
+writing a quick comment that applies to their entire post, it's okay
+to <firstterm>top-post</firstterm> (that is, to put your response
+above the quoted text of their mail); otherwise, you should quote
+the relevant portion of the original text first, followed by your
+response.</para>
+-->
+<para>
+  他人のメールを引用して返信する際は、
+  適切な場所に返信内容を書くようにしましょう。
+  必要なら、いくつかの場所に分けて書くことになってもかまいません。
+  また、不要な部分は引用しないようにしましょう。
+  もしその投稿全体に対して一言コメントしたいのなら、
+  投稿の先頭 (つまり、あなたの返信を書いた後に
+  メールの引用が続く形式) にそれを記述します。
+  それ以外の場合は、まず関連する箇所を引用したうえで、
+  その後に返信を書きます。
+</para>
+
+<!--
+<para>Construct the subject lines of new mails carefully.  It's the
+most important line in your mail, because it allows each other person
+in the project to decide whether or not to read more.  Modern
+mail reading software organizes groups of related messages into
+threads, which can be defined not only by a common subject, but by
+various other headers (which are sometimes not displayed).  It follows
+that if a thread starts to drift to a new topic, you can&mdash;and
+should&mdash;adjust the subject line accordingly when replying.  The
+thread's integrity will be preserved, due to those other headers, but
+the new subject will help people looking at an overview of the thread
+know that the topic has drifted.  Likewise, if you really want to
+start a new topic, do it by posting a fresh mail, not by replying to
+an existing mail and changing the subject.  Otherwise, your mail would
+still be grouped in to the same thread as what you're replying to, and
+thus fool people into thinking it's about something it's not.  Again,
+the penalty would not only be the waste of their time, but the slight
+dent in your credibility as someone fluent in using communications
+tools.</para>
+-->
+<para>
+  メールの件名はよく考えてつけるようにしましょう。
+  これは、メールの中でもっとも重要なものとなります。
+  というのも、プロジェクトの他のメンバーは
+  そのメールを読むかどうかを件名で判断することになるからです。
+  いまどきのメールソフトは、関連するメッセージをスレッドにまとめる機能を持っています。
+  スレッドにまとめるための基準は、
+  件名が同じというだけではなくその他のヘッダの内容も使用します
+  (このヘッダの内容は、表示されないこともあります)。
+  もしひとつのスレッド内で話題が変わるときは、
+  返信の際に件名を適切に変更することもできます (変更すべきです)。
+  その他のヘッダの内容によってスレッドの構成はそのまま保持されますが、
+  件名を変えておくと、そこで話題が変わったことがわかりやすくなります。
+  また、本当に新しい話題を始めたい場合は、新しいメールとして送信するようにします。
+  既存のメールに「返信」して件名だけを変えるというのではいけません。
+  さもないと、あなたの出したメールがスレッドに紛れ込んでしまいます。
+  これによる損失は、単に時間を浪費してしまうことだけではありません。
+  「コミュニケーションツールをうまく使いこなせる人」
+  というあなたの評判も落ちてしまいます。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="writing-content">
+<!--
+<title>Content</title>
+-->
+<title>中身</title>
+
+<!--
+<para>Well-formatted mails attract readers, but content keeps them.
+No set of fixed rules can guarantee good content, of course, but there
+are some principles that make it more likely.</para>
+-->
+<para>
+  きれいに体裁を整えたメールは読者の気を引くことでしょう。
+  しかし、実際に読んでもらうには中身が大切です。
+  「これさえ守れば中身のある内容を書ける」というようなルールはもちろんありません。
+  しかし、それに近づくための原則ならいくつかあげることができます。
+</para>
+
+<!--
+<para>Make things easy for your readers.  There's a ton of information
+floating around in any active open source project, and readers cannot
+be expected to be familiar with most of it&mdash;indeed, they cannot
+always be expected to know how to become familiar.  Wherever possible,
+your posts should provide information in the form most convenient for
+readers.  If you have to spend an extra two minutes to dig up the URL
+to a particular thread in the mailing list archives, in order to save
+your readers the trouble of doing so, it's worth it.  If you have to
+spend an extra 5 or 10 minutes summarizing the conclusions so far
+of a complex thread, in order to give people context in which to
+understand your post, then do so.  Think of it this way: the more
+successful a project, the higher the reader-to-writer ratio in any
+given forum.  If every post you make is seen by <emphasis>n</emphasis>
+people, then as <emphasis>n</emphasis> rises, the worthwhileness of
+expending extra effort to save those people time rises with it.  And
+as people see you imposing this standard on yourself, they will work
+to match it in their own communications.  The result is, ideally, an
+increase in the global efficiency of the project: when there is a
+choice between <emphasis>n</emphasis> people making an effort and one
+person doing so, the project prefers the latter.</para>
+-->
+<para>
+  読む人のことを考えて書くようにしましょう。
+  活発に活動しているオープンソースプロジェクトには、
+  さまざまな情報が付きまとっています。メールの読み手が、
+  それらの情報をすべて知っているものと期待してはいけません。
+  実際のところ、彼らはそんな情報など知ろうともしないこともあるものです。
+  可能な限り、読み手にとって便利な情報を提供するようにしましょう。
+  たとえば、ほんの数分時間を使うだけで、
+  メーリングリストのアーカイブで特定のスレッドを表す URL を調べることができます。
+  それを示すことで、読み手が同じことをする手間を省くことができるでしょう。
+  さらに 5 分から 10 分ほど余計に時間を割けば、
+  複雑になったスレッドの簡単なまとめを作成することもできるでしょう。
+  これは、あなたの投稿の背景にある話の流れを伝えるのに役立ちます。
+  こんな風に考えてみましょう。プロジェクトがうまくいけばいくほど、
+  メーリングリストや掲示板の書き手に対する読み手の比率が高くなります。
+  あなたの投稿する内容が <emphasis>n</emphasis> 人に読まれているとすると、
+  あなたがちょっと時間を使って作業をするだけで <emphasis>n</emphasis>
+  人ぶんの同じ時間を節約できるようになるわけです。<emphasis>n</emphasis>
+  が大きくなればなるほど、この価値は向上します。
+  そしてあなたがそうしているのを見れば、他の人たちも同じようにしてくれるようになるでしょう。
+  その結果、プロジェクト全体の効率が向上することになります。<emphasis>n</emphasis>
+  人が苦労するのと一人が苦労するのとどちらがいいかといえば、後者でしょう。
+</para>
+
+<!--
+<para>Don't engage in hyperbole.  Exaggerating in online posts is a
+classic arms race.  For example, a person reporting a bug may worry
+that the developers will not pay sufficient attention, so he'll
+describe it as a severe, showstopper problem that is preventing him
+(and all his friends/coworkers/cousins) from using the software
+productively, when it's actually only a mild annoyance.  But
+exaggeration is not limited to users&mdash;programmers often do the
+same thing during technical debates, particularly when the
+disagreement is over a matter of taste rather than correctness:</para>
+-->
+<para>
+  物事を誇張しないようにしましょう。
+  オンラインの投稿では、話が大げさになりがちです。
+  たとえばバグを報告する人は、開発者たちの気を引くように
+  わざと大げさに話すこともあります。ちょっと気になる点が見つかったときに
+  「この深刻な問題のおかげで、私 (そして友人や同僚や親戚一同)
+  はまともにこのソフトウェアを使うことができない」
+  といった具合に報告するわけです。
+  しかし、この問題はユーザーからの報告に限ったことではありません。
+  プログラマーたちだって、技術的な議論をしているときに同じようなことをしています。
+  特に、どちらが正しいかという問題より
+  各自の好みにかかわるような問題を扱う際にその傾向があります。
+</para>
+
+  <blockquote>
+<!--
+     <para>"Doing it that way would make the code totally
+     unreadable.  It'd be a maintenance nightmare, compared to
+     J. Random's proposal..."</para>
+-->
+     <para>
+       "そのやりかただと、コードが読みにくくなっちゃうよ。
+       保守する人はたまったもんじゃないだろうな。それに引き換え
+       J. Random の提案した方法は..."
+     </para>
+  </blockquote>
+
+<!--
+<para>The same sentiment actually becomes
+<emphasis>stronger</emphasis> when phrased less sharply:</para>
+-->
+<para>
+  もう少し控えめな言いかたにしたほうが、実際の気持ちは伝わりやすくなります。
+</para>
+
+  <blockquote>
+<!--
+     <para>"That works, but it's less than ideal in terms of
+     readability and maintainability, I think.  J. Random's proposal
+     avoids those problems because it..."</para>
+-->
+     <para>
+       "たしかにそれでも動くよ。でも、可読性や保守性を考えると、
+       それは理想的なやりかたではないと思うんだ。J. Random
+       の提案する方法だとそんな問題は発生しない。なぜなら..."
+     </para>
+  </blockquote>
+
+<!--
+<para>You will not be able to get rid of hyperbole completely, and in
+general it's not necessary to do so.  Compared to other forms of
+miscommunication, hyperbole is not globally damaging&mdash;it hurts
+mainly the perpetrator.  The recipients can compensate, it's just that
+the sender loses a little more credibility each time.  Therefore, for
+the sake of your own influence in the project, try to err on the side
+of moderation.  That way, when you <emphasis>do</emphasis> need to
+make a strong point, people will take you seriously.</para>
+-->
+<para>
+  誇大表現を完全になくすことは不可能でしょうし、また一般にそうする必要もありません。
+  他の誤解に比べると、誇大表現が及ぼす被害はそれほどでもありません。
+  主に書き手側が損をするだけのことです。
+  読み手側はそれを補正して読めるので、単に書き手が少し信頼性を失うというだけだからです。
+  プロジェクトにおけるあなたの影響力を考えると、
+  不要な誇大表現は避けるようにしておくべきです。
+  そうすると、<emphasis>あえて</emphasis>キツめに表現する必要が生じた場合に
+  周りの人たちにそれを受け入れてもらいやすくなります。
+</para>
+
+<!--
+<para>Edit twice.  For any message longer than a medium-sized
+paragraph, reread it from top to bottom before sending it but after
+you think it's done the first time.  This is familiar advice to anyone
+who's taken a composition class, but it's especially important in
+online discussion.  Because the process of online composition tends to
+be highly discontinuous (in the course of writing a message, you may
+need to go back and check other mails, visit certain web pages, run a
+command to capture its debugging output, etc.), it's especially easy to
+lose your sense of narrative place.  Messages that were composed
+discontinuously and not checked before being sent are often
+recognizable as such, much to the chagrin (or so one would hope) of
+their authors.  Take the time to review what you send.  The more your
+posts hold together structurally, the more they will be read.</para>
+-->
+<para>
+  よく見直すようにしましょう。
+  ある程度以上の量の文章を書いた場合は、完成した文章を実際に送信する前に
+  もう一度頭から読み直すようにします。作文の授業でも同じことを教わったかと思いますが、
+  これはオンラインの議論でも特に重要です。オンラインの議論は断続的なものになる傾向があるので
+  (メッセージを書いている途中で過去のメールを読み直したり、何かのウェブページを確認したり、
+  何らかのコマンドを実行してデバッグ出力を取り込んだり、……)、ついつい論旨を見失いがちです。
+  断続的に書き上げたあとで一切チェックせずに送信したメッセージは、
+  読み手にもそのように受け取られてしまいがちです。
+  これは書き手にとってもうれしいことではありません。
+  きちんと時間をとって、書いた内容を見直すようにしましょう。
+  投稿内容がきちんとまとまっていればいるほど、
+  あなたのメッセージを読んでもらいやすくなるでしょう。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="writing-tone">
+<!--
+<title>Tone</title>
+-->
+<title>口調</title>
+
+<!--
+<para>After writing thousands of messages, you will probably find your
+style tending toward the terse.  This seems to be the norm in most
+technical forums, and there's nothing wrong with it per se.  A degree
+of terseness that would be unacceptable in normal social interactions
+is simply the default for free software hackers.  Here's a response I
+once drew on a mailing list about some free content management
+software, quoted in full:</para>
+-->
+<para>
+  繰り返しメッセージを作成しているうちに、
+  おそらく自分の文面がかなり素っ気ないものになっていくことに気づくことでしょう。
+  これはほとんどの技術系フォーラムでありがちな話ですし、それ自体には特に問題はありません。
+  一般社会でのコミュニケーションではありえないような素っ気無いやり取りが、
+  フリーソフトウェアのハッカーたちの間ではごく普通なのです。以下に引用するのは、
+  とあるコンテンツ管理ソフトのメーリングリストにかつて私が投稿したときに
+  受け取った返信です。
+</para>
+
+<!--
+<screen>
+Can you possibly elaborate a bit more on exactly what problems
+you ran into, etc?
+
+Also:
+
+What version of Slash are you using? I couldn't tell from your
+original message.
+
+Exactly how did you build the apache/mod_perl source?
+
+Did you try the Apache 2.0 patch that was posted about on
+slashcode.com?
+
+  Shane
+</screen>
+-->
+<screen>
+どんな問題が発生したのか、もうちょっと詳しく正確に説明してくれませんか？
+
+それから。
+
+お使いの Slash のバージョンは何ですか？
+元の投稿からはそれを読み取ることができませんでした。
+
+apache/mod_perl のソースをビルドした手順を正確に教えてください。
+
+slashcode.com に投稿された Apache 2.0 のパッチを試してみましたか？
+
+  Shane
+</screen>
+
+<!--
+<para>Now <emphasis>that's</emphasis> terse!  No greeting, no sign-off
+other than his name, and the message itself is just a series of
+questions phrased as compactly as possible.  His one declarative
+sentence was an implicit criticism of my original message.  And yet, I
+was happy to see Shane's mail, and didn't take his terseness as a sign
+of anything other than him being a busy person.  The mere fact that he
+was asking questions, instead of ignoring my post, meant that he was
+willing to spend some time on my problem.</para>
+-->
+<para>
+  まさに簡潔そのものです！ 挨拶もなければ署名は自分の名前だけ。
+  そしてメッセージの本文はと言えば
+  一連の質問事項を可能な限り簡潔に並べただけ。
+  唯一あった質問以外の文はといえば、私の元の投稿に対する間接的な批判でした。
+  しかし、私は Shane のメールを見て気を悪くすることはありませんでした。
+  彼の素っ気ない返答を見ても「ああ、忙しい人なんだろうな」
+  というくらいのことしか思わなかったのです。
+  彼は私の投稿を無視することもできたのに、あえて質問を返してきたのです。
+  つまりこれは、彼が私の問題を解決するために時間を割いてくれているということを意味します。
+</para>
+
+<!--
+<para>Will all readers react positively to this style?  Not
+necessarily; it depends on the person and the context.  For example,
+if someone has just posted acknowledging that she made a mistake
+(perhaps she wrote a bug), and you know from past experience that
+this person tends to be a bit insecure, then while you may still write
+a compact response, you should make sure to leaven it with some sort
+of acknowledgment of her feelings.  The bulk of your response might
+be a brief, engineer's-eye analysis of the situation, as terse as you
+want.  But at the end, sign off with something indicating that your
+terseness is not to be taken as coldness.  For example, if you've just
+given reams of advice about exactly how the person should fix the bug,
+then sign off with "Good luck, &lt;your name here&gt;" to indicate
+that you wish them well and are not mad.  A strategically placed
+smiley face or other emoticlue can often be enough to reassure an
+interlocutor, too.</para>
+-->
+<para>
+  すべての読み手がこのように好意的に受け取ることができるでしょうか？
+  必ずしもそうではないでしょう。それはその人や状況によります。
+  たとえば、ある人が自分の犯した間違い (おそらく彼女はバグを書いてしまったのでしょう)
+  について説明する投稿をしたとしましょう。
+  これまでの経験から、あなたは彼女が気の小さい人であることを知っています。
+  こんな場合は、もちろん簡潔な返信を書くこともできますが
+  少しは彼女の気持ちを気にかけるようにしたほうがいいでしょう。
+  あなたの返信の大部分は、簡潔に技術者の視点で見た分析になるかもしれません。
+  かなり素っ気ないものになることもあるでしょう。そんな場合でも
+  「簡潔に書いているのは決して君を冷ややかな目で見ているからではないんだよ」
+  とわかるようなことを最後に何か示しておきましょう。
+  たとえば、バグを修正するためのアドバイスをひととおり忠告した後の締めの言葉として
+  「じゃ、がんばってね。&lt;あなたの名前&gt;より」といったことを書いておけば、
+  決してあなたに悪気があるわけじゃないことが伝わります。
+  あるいは、意図的に絵文字を使ってみたりして
+  相手に安心感を与えるという作戦も効果的です。
+</para>
+
+<!--
+<para>It may seem odd to focus as much on the participant's feelings
+as on the surface of what they say, but to put it baldly, feelings
+affect productivity.  Feelings are important for other reasons too,
+but even confining ourselves to purely utilitarian grounds, we may
+note that unhappy people write worse software, and less of it.  Given
+the restricted nature of most electronic media, though, there will
+often be no overt clue as to how a person is feeling.  You will have
+to make an educated guess based on a) how most people would feel in
+that situation, and b) what you know of this particular person from
+past interactions.  Some people prefer a more hands-off attitude, and
+simply deal with everyone at face value, the idea being that if a
+participant doesn't say outright that she feels a particular way, then
+one has no business treating her as though she does.  I don't buy this
+approach, for a couple of reasons.  One, people don't behave that way
+in real life, so why would they online?  Two, since most interactions
+take place in public forums, people tend to be even more restrained in
+expressing emotions than they might be in private.  To be more
+precise, they are often willing to express emotions directed at
+others, such as gratitude or outrage, but not emotions directed
+inwardly, such as insecurity or pride.  Yet most humans work better
+when they know that others are aware of their state of mind.  By
+paying attention to small clues, you can usually guess right most of
+the time, and motivate people to stay involved to a greater degree
+than they otherwise might.</para>
+-->
+<para>
+  参加者がどう感じるかについていちいち気にするのを変に感じるかもしれません。
+  でも、ぶっちゃけた話、人の感情というものは生産性に大きな影響を及ぼします。
+  感情は他の意味でも重要ですが、あえて実益の範囲に的を絞ったとしても、
+  不満を感じている人はよいソフトウェアを書くことができないといえるでしょう。
+  しかし、電子メディアには多くの制約があるので、
+  人が何を感じているのかを知る手がかりを常に得られるとは限りません。
+  そこで、a) こんな場合に普通の人はどんなふうに感じるだろうか？
+  b) 過去のやりとりから、この人はどんな人物だと考えられるだろうか？
+  といった内容をもとに経験から推測する必要がでてきます。
+  中にはもっと突き放した態度で、単純に額面通りの対応をすることを好む人もいます。
+  つまり、彼女が自分で「私、こう思うんです」と言わない限りは
+  決してそれに対する対応をしないというものです。
+  個人的にはこの方法はおすすめできません。それにはいくつかの理由があります。
+  まず、現実の世界ではみんなそんなことはしないでしょう？
+  何でオンラインだとそうなるんですか？
+  もうひとつ。たいていのやりとりは公開の場所で行われるので、
+  たいていの人はプライベートな場所に比べて自分の感情を抑えがちになります。
+  もう少し正確に言うと、他人に対する感情 (感謝や怒りなど)
+  は表現してもかまわないと考えているようですが、内心 (不安やプライドなど)
+  は知られたくないようです。しかし、大半の人たちは
+  周囲の人が自分のことをよくわかってくれていると感じていればよい仕事をしてくれます。
+  ちょっとしたことを気にかけるだけで、状況をうまく判断できるようになります。
+  そして、今以上に人をやる気にさせることができるようになるのです。
+</para>
+
+<!--
+<para>I don't mean, of course, that your role is to be a group
+therapist, constantly helping everyone to get in touch with their
+feelings.  But by paying careful attention to long-term patterns in
+people's behavior, you will begin to get a sense of them as
+individuals even if you never meet them face-to-face.  And by being
+sensitive to the tone of your own writing, you can have a surprising
+amount of influence over how others feel, to the ultimate benefit of
+the project.</para>
+-->
+<para>
+  もちろん、「プロジェクトのカウンセラーになれ」
+  「皆がうまくやっていけるよう常に手助けしてやれ」
+  と言いたいわけではありません。
+  しかし、皆がどのように振舞っているかを注意深く気にしていれば、
+  実際に面と向かって会ったことのない人でも
+  どんな人なのかがなんとなくわかるようになるでしょう。
+  そして、自分が何か書くときの口調に気を使うようにすれば、
+  あなたに対する周りの印象は驚くほどよくなります。
+  これは、プロジェクト全体にとってもよいことです。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="rudeness">
+<!--
+<title>Recognizing Rudeness</title>
+-->
+<title>何が失礼にあたるのか</title>
+
+<!--
+<para>One of the defining characteristics of open source culture is
+its distinctive notions of what does and does not constitute rudeness.
+While the conventions described below are not unique to free software
+development, nor even to software in general&mdash;they would be
+familiar to anyone working in mathematics, the hard sciences, or
+engineering disciplines&mdash;free software, with its porous
+boundaries and constant influx of newcomers, is an environment where
+these conventions are especially likely to be encountered by people
+unfamiliar with them.</para>
+-->
+<para>
+  オープンソース文化の特性のひとつに、
+  何が失礼で何が失礼でないかということに関する独特の基準があります。
+  以下で説明する内容は、ソフトウェア開発やソフトウェア全般に特有のものではありません
+  (数学や自然科学、工学にかかわっている人たちならおなじみのものでしょう)。
+  しかし、フリーソフトウェアの世界は人材の出入りが頻繁に行われ、
+  新しい人たちが常に流入してきます。
+  こういう考え方になじみのない人たちが流入してくることも大いにありえるでしょう。
+</para>
+
+<!--
+<para>Let's start with the things that are <emphasis>not</emphasis>
+rude:</para>
+-->
+<para>
+  まずは、失礼では <emphasis>ない</emphasis> ことについて説明します。
+</para>
+
+<!--
+<para>Technical criticism, even when direct and unpadded, is not rude.
+Indeed, it can be a form of flattery: the critic is saying, by
+implication, that the target is worth taking seriously, and is worth
+spending some time on.  That is, the more viable it would have been to
+simply ignore someone's post, the more of a compliment it becomes to
+take the time to criticize it (unless the critique descends into an
+<foreignphrase>ad hominem</foreignphrase> attack or some other form of
+obvious rudeness, of course).</para>
+-->
+<para>
+  技術的な批評については、
+  たとえそれが直接的で歯に衣着せぬものであっても失礼にはあたりません。
+  実際のところ、逆にそれはほめ言葉ともとれるかもしれません。
+  批評するということは、
+  それが時間をかけて真剣に議論する価値があるものだと暗に認めているわけです。
+  そして、それがうまく成長すると、批判よりも賞賛のほうが多くなってくるわけです
+  (もちろん、その批評が個人攻撃に成り下がってしまったり
+  その他の明らかに失礼な内容になってしまうこともありえます)。
+</para>
+
+<!--
+<para>Blunt, unadorned questions, such as Shane's questions to me in
+the previously quoted email, are not rude either.  Questions that in
+other contexts might seem cold, rhetorical, or even mocking, are often
+intended seriously, and have no hidden agenda other than eliciting
+information as quickly as possible.  The famous technical support
+question "Is your computer plugged in?" is a classic example of this.
+The support person really does need to know if your computer is
+plugged in, and after the first few days on the job, has gotten tired
+of prefixing her question with polite blandishments ("I beg your
+pardon, I just want to ask a few simple questions to rule out some
+possibilities.  Some of these might seem pretty basic, but bear with
+me...").  At this point, she doesn't bother with the padding anymore,
+she just asks straight out: is it plugged in or not?  Equivalent
+questions are asked all the time on free software mailing lists.  The
+intent is not to insult the recipient, but to quickly rule out the
+most obvious (and perhaps most common) explanations.  Recipients who
+understand this and react accordingly win points for taking a
+broad-minded view without prompting.  But recipients who react badly
+should not be reprimanded, either.  It's just a collision of cultures,
+not anyone's fault.  Explain amiably that your question (or criticism)
+had no hidden meanings; it was just meant to get (or transmit)
+information as efficiently as possible, nothing more.</para>
+-->
+<para>
+  ぶっきらぼうで素っ気ない質問、たとえば先ほど引用した Shane
+  のメールのような質問は失礼にはあたりません。
+  状況によってはちょっと非情に見えたり馬鹿にしているように感じられるような質問であっても、
+  それは真剣になされたものであり、
+  必要な情報をできるだけ手早く引き出したいという以外に隠された意図はありません。
+  サポートセンターの有名な質問である「コンピュータのコンセントはちゃんとささっていますか？」
+  というのは典型的な例です。サポート係の人は、
+  ただ単にコンセントがささっているかどうかを知りたいだけです。
+  仕事を始めたばかりのころはこの質問の前にいちいち丁寧な前置き
+  ("すみませんが、いくつかの可能性を排除するために少々質問させていただいてよろしいでしょうか？
+  中には基本的すぎるものもありますが、我慢してくださいね……")
+  をしていたのでしょうが、それにも疲れてきたのでしょう。
+  今や、彼女は単刀直入に「ささっているのかいないのか」を聞くだけになっています。
+  フリーソフトウェアのメーリングリストでも、同様の質問が散々行われています。
+  これは決して相手を侮辱しているのではありません。
+  最も明らかな (そしておそらく最もありがちな)
+  可能性をできるだけ早い段階で排除しておきたいというだけのものなのです。
+  それをよくわかっている人は、文句も言わずにその質問に従い、
+  よりよい結果を得ることになります。
+  しかし、もし文句を言う人がいてもそれをけなしてはいけません。
+  これは、単なる文化の相違であり、どちらが悪いとかいうものではありません。
+  あなたの質問 (あるいは批評) には隠れた意味はまったくないということを説明してあげましょう。
+  単に情報を効率的に取得したかった (あるいは伝えたかった) だけであり、
+  それ以上でも以下でもないと言えばいいのです。
+</para>
+
+<!--
+<para>So what is rude?</para>
+-->
+<para>では、何が失礼にあたるのでしょう？</para>
+
+<!--
+<para>By the same principle under which detailed technical criticism
+is a form of flattery, failure to provide quality criticism can be a
+kind of insult.  I don't mean simply ignoring someone's work, be it
+proposal, code change, new issue filing, or whatever.  Unless you
+explicitly promised a detailed reaction in advance, it's usually okay
+to simply not react at all.  People will assume you just didn't have
+time to say anything.  But if you <emphasis>do</emphasis> react, don't
+skimp: take the time to really analyze things, provide concrete
+examples where appropriate, dig around in the archives to find related
+posts from the past, etc.  Or if you don't have time to put in that
+kind of effort, but still need to write some sort of brief response,
+then state the shortcoming openly in your message ("I think there's an
+issue filed for this, but unfortunately didn't have time to search for
+it, sorry").  The main thing is to recognize the existence of the
+cultural norm, either by fulfilling it or by openly acknowledging
+that one has fallen short this time.  Either way, the norm is
+strengthened.  But failing to meet that norm, while at the same time
+not explaining <emphasis>why</emphasis> you failed to meet it, is like
+saying the topic (and those participating in it) was not worth much
+of your time.  Better to show that your time is valuable by being
+terse than by being lazy.</para>
+-->
+<para>
+  先ほど、技術的な批評をすることは一種のほめ言葉にあたると言いました。
+  その観点から言うと、真剣な批評をしないということは一種の侮辱になるかもしれません。
+  これは、誰かの作業 (何らかの提案やコードの変更、バグの報告など)
+  を単に無視することを言っているのではありません。
+  あとできちんと返事をすると約束したのでない限り、
+  何も反応しなくても一向に問題はありません。
+  周りの人も、単に何か言うだけの時間がなかったんだとみなしてくれるでしょう。
+  しかし、もし何か反応を返すのなら、決して手抜きをしてはいけません。
+  時間をかけてしっかり分析し、必要なら適切なサンプルを用意し、
+  過去ログのアーカイブから関連する議論を探すといった作業を欠かさないようにしましょう。
+  そんなことをしている時間はないが、でも一言だけいっておきたいという場合は、
+  メッセージの中に釈明をいれておきましょう
+  ("これ、たしかバグとして報告されていたはずなんだけど、
+  今ちょっと探しているヒマがないんだ。ごめんね" といった具合に)。
+  大事なのは、文化的な基準があることを認識することです。
+  その基準は守ること。そしてもし守れない事情があるときは、
+  守れないことを認識していると知らせること。
+  いずれにせよ、基準が大切です。
+  この基準を守れなかった上にその理由も説明していないとなると、その話題 (そして関係者たち)
+  に対して十分に時間をかけるだけの価値がないと考えているように思われてしまいます。
+  怠け者であると思われるよりも、
+  単に時間がないだけなんだということを率直に説明しておくほうがいいでしょう。
+</para>
+
+<!--
+<para>There are many other forms of rudeness, of course, but most of
+them are not specific to free software development, and common sense
+is a good enough guide to avoid them.  See also
+<xref linkend="prevent-rudeness"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase>, if you haven't
+already.</para>
+-->
+<para>
+  もちろんこれ以外にも失礼にあたることは多々あるでしょう。
+  しかしその多くはフリーソフトウェア開発に限ったものではありません。
+  一般常識の範囲で判断できるはずです。
+  もしまだご覧になっていないのなら、<phrase output="printed">
+  <xref linkend="getting-started"/></phrase> の
+  <xref linkend="prevent-rudeness"/> も参照してください。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="face">
+<!--
+<title>Face</title>
+-->
+<title>顔</title>
+
+<!--
+<para>There is a region in the human brain devoted specifically to
+recognizing faces.  It is known informally as the "fusiform face
+area," and its capabilities are mostly inborn, not learned.  It turns
+out that recognizing individual people is such a crucial survival
+skill that we have evolved specialized hardware to do it.</para>
+-->
+<para>
+  人間の脳には、表情を認知するための領域があります。
+  通称は "fusiform face area" です。
+  その機能の大半は先天的なものであり、後から身につけるものではありません。
+  個々の人物を見分けるという技能は生き延びるためにきわめて重要なものなので、
+  専用の特別なハードウェアが発達してきたということだったのです。
+</para>
+
+<!--
+<para>Internet-based collaboration is therefore psychologically odd,
+because it involves tight cooperation between human beings who almost
+never get to identify each other by the most natural, intuitive
+methods: facial recognition first of all, but also sound of voice,
+posture, etc.  To compensate for this, try to use a consistent
+<firstterm>screen name</firstterm> everywhere.  It should be the front
+part of your email address (the part before the @-sign), your IRC
+username, your repository committer name, your issue tracker username,
+and so on.  This name is your online "face": a short identifying
+string that serves some of the same purpose as your real face,
+although it does not, unfortunately, stimulate the same built-in
+hardware in the brain.</para>
+-->
+<para>
+  インターネットを使用した共同作業は、心理学的にはちょっと奇妙なものといえるでしょう。
+  だって、緊密な連携をとっている相手のことを、
+  自然で直感的な方法では決して認識できないのですから。
+  たとえばどんな顔なのかもわからなければどんな声なのかもわからない、
+  そしてどんな背格好なのかもわからないといった具合です。
+  これを補うには、特定の <firstterm>スクリーンネーム</firstterm>
+  を決めてあらゆる場所でそれを使用するように心がけましょう。
+  メールアドレスの先頭 (@ 記号より前) の部分や IRC のユーザー名、
+  リポジトリのコミッター名、バグ追跡システムのユーザー名などなど、
+  すべての場所でこのスクリーンネームを使用するようにします。
+  この名前が、オンラインでのあなたの "顔" となります。
+  短い文字列で、実際の顔と同じ働きをさせるわけです。
+  残念ながら私たちの脳にはこれに直接反応するハードウェアは内蔵されていないわけですが。
+</para>
+
+<!--
+<para>The screen name should be some intuitive permutation of your
+real name (mine, for example, is "kfogel").  In some situations it
+will be accompanied by your full name anyway, for example in mail
+headers:</para>
+-->
+<para>
+  スクリーンネームは、あなたの実名から直感的に得られるものにしましょう
+  (たとえば私は "kfogel" にしています)。メールヘッダなど、
+  場合によっては実名を実際に表記することもあるでしょう。
+</para>
+
+<!--
+<screen>
+From: "Karl Fogel" &lt;kfogel@whateverdomain.com&gt;
+</screen>
+-->
+<screen>
+From: "Karl Fogel" &lt;kfogel@whateverdomain.com&gt;
+</screen>
+
+<!--
+<para>Actually, there are two things going on in that example.  As
+mentioned earlier, the screen name matches the real name in an
+intuitive way.  But also, the real name is <emphasis>real</emphasis>.
+That is, it's not some made-up appellation like:</para>
+-->
+<para>
+  実際のところ、この例には 2 つの内容が存在します。
+  先ほど説明したように、スクリーンネームは実名と直感的に対応します。
+  しかし、実名は <emphasis>実際の</emphasis>名前です。
+  つまり、これは次のような何らかの作り上げた名称とは異なります。
+</para>
+
+<!--
+<screen>
+From: "Wonder Hacker" &lt;wonderhacker@whateverdomain.com&gt;
+</screen>
+-->
+<screen>
+From: "Wonder Hacker" &lt;wonderhacker@whateverdomain.com&gt;
+</screen>
+
+<!--
+<para>There's a famous cartoon by Paul Steiner, from the July 5, 1993
+issue of <citetitle>The New Yorker</citetitle>, that shows one dog
+logged into a computer terminal, looking down and telling another
+conspiratorially: "On the Internet, nobody knows you're a dog."  This
+kind of thought probably lies behind a lot of the self-aggrandizing,
+meant-to-be-hip online identities people give themselves&mdash;as if
+calling oneself "Wonder Hacker" will actually cause people to believe
+one <emphasis>is</emphasis> a wonderful hacker.  But the fact remains:
+even if no one knows you're a dog, you're still a dog.  A fantastical
+online identity never impresses readers.  Instead, it makes them think
+you're more into image than substance, or that you're simply insecure.
+Use your real name for all interactions, or if for some reason you
+require anonymity, then make up a name that sounds like a perfectly
+normal real name, and use it consistently.</para>
+-->
+<para>
+  <citetitle>The New Yorker</citetitle> の 1993 年 7 月 5 日号に掲載された
+  Paul Steiner の有名な漫画で、ある犬がコンピュータ端末にログインするというものがあります。
+  影の声がこう言います。"インターネット上では、誰も君が犬だなんて思わないだろう"
+  この手のことを考える人たちの頭の中にはきっと「オンライン上での立場をよりよくしたい」
+  「オンライン上で有名になりたい」といった気持ちがあるのでしょう。
+  "Wonder Hacker" と名乗っておけば周りの人たちに <emphasis>本当に</emphasis>
+  凄腕のハッカー (wonderful hacker) だと信じてもらえると思っているようです。
+  だけど事実は事実。たとえ誰も気づかなかったとしても、
+  君が犬であることには変わりありません。
+  オンラインで仮想人格を作り上げたところで、読者を感動させることはできません。
+  周りの人たちは、あなたのことを単なる夢想家かあるいは臆病者とみなすでしょう。
+  周囲とのやりとりには実名を使うようにしましょう。
+  もし何らかの理由で匿名でいたい場合は、
+  いかにも本名っぽいハンドルを作成してそれを使用するようにしましょう。
+</para>
+
+<!--
+<para>In addition to keeping your online face consistent, there are
+some things you can do to make it more attractive.  If you have an
+official title (e.g., "doctor", "professor", "director"), don't flaunt
+it, nor even mention it except when it's directly relevant to the
+conversation.  Hackerdom in general, and free software culture in
+particular, tends to view title displays as exclusionary and a sign of
+insecurity.  It's okay if your title appears as part of a standard
+signature block at the end of every mail you send, just don't ever use
+it as a tool to bolster your position in a discussion&mdash;the
+attempt is guaranteed to backfire.  You want folks to respect the
+person, not the title.</para>
+-->
+<para>
+  オンラインで一貫した "顔" を使用し続けることに加えて、
+  あなたをより認識してもらいやすくする方法がいくつかあります。
+  もしあなたが何らかの肩書き ("医師"、"教授"、"監督" など) を持っているのなら、
+  あまりそれを見せびらかさないようにしましょう。
+  また、直接それに関する話題になったときは別にして、
+  肩書きについて言及することも避けましょう。
+  ハッカー界、そして特にフリーソフトウェア文化においては、
+  肩書きに頼る人は排他的な臆病者とみなされます。
+  たとえばメールの最後に書く署名の一部として肩書きが登場するくらいなら問題ありません。
+  ただ、議論の際に自分の立場をよくするためにその肩書きを使うのは避けましょう。
+  間違いなくそれは裏目に出ます。
+  あなただって、肩書きなんかじゃなくあなた自身を認めてもらいたいでしょう？
+</para>
+
+<!--
+<para>Speaking of signature blocks: keep them small and tasteful, or
+better yet, nonexistent.  Avoid large legal disclaimers tacked on to
+the end of every mail, especially when they express sentiments
+incompatible with participation in a free software project.  For
+example, the following classic of the genre appears at the end of
+every post a particular user makes to a public mailing list I'm
+on:</para>
+-->
+<para>
+  メールの署名欄について補足します。
+  できるだけ小さくて上品なものにしておきましょう。
+  何なら署名なんてなくってもかまいません。
+  あらゆるメールの末尾に法的な注意書きをでかでかと掲載するようなことは避けましょう。
+  特に、フリーソフトウェアプロジェクトへの参加と両立しない意見を述べるようなときに、
+  これは致命的です。たとえば、私が参加している
+  ある公開メーリングリストの参加者の中には、
+  すべての投稿の末尾にこんな様式の文書をつけてくる人がいます。
+</para>
+
+<!--
+<screen>
+IMPORTANT NOTICE
+
+If you have received this e-mail in error or wish to read our e-mail
+disclaimer statement and monitoring policy, please refer to the
+statement below or contact the sender.
+
+This communication is from Deloitte &amp; Touche LLP.  Deloitte &amp;
+Touche LLP is a limited liability partnership registered in England
+and Wales with registered number OC303675.  A list of members' names
+is available for inspection at Stonecutter Court, 1 Stonecutter
+Street, London EC4A 4TR, United Kingdom, the firm's principal place of
+business and registered office.  Deloitte &amp; Touche LLP is
+authorised and regulated by the Financial Services Authority.
+
+This communication and any attachments contain information which is
+confidential and may also be privileged.  It is for the exclusive use
+of the intended recipient(s).  If you are not the intended
+recipient(s) please note that any form of disclosure, distribution,
+copying or use of this communication or the information in it or in
+any attachments is strictly prohibited and may be unlawful.  If you
+have received this communication in error, please return it with the
+title "received in error" to IT.SECURITY.UK@deloitte.co.uk then delete
+the email and destroy any copies of it.
+
+E-mail communications cannot be guaranteed to be secure or error free,
+as information could be intercepted, corrupted, amended, lost,
+destroyed, arrive late or incomplete, or contain viruses.  We do not
+accept liability for any such matters or their consequences.  Anyone
+who communicates with us by e-mail is taken to accept the risks in
+doing so.
+
+When addressed to our clients, any opinions or advice contained in
+this e-mail and any attachments are subject to the terms and
+conditions expressed in the governing Deloitte &amp; Touche LLP client
+engagement letter.
+
+Opinions, conclusions and other information in this e-mail and any
+attachments which do not relate to the official business of the firm
+are neither given nor endorsed by it.
+
+</screen>
+-->
+
+<screen>
+重要な通知:
+
+あなたが誤ってこのメールを受け取ってしまったり、我々のメールに関する
+免責条項の声明や監視ポリシーを読みたい場合は、以下の声明文を読むか、
+このメールの送信者と連絡を取って下さい。
+
+このメールでのやりとりは Deloitte &amp; Touche LLP から発信されたもの
+です。Deloitte &amp; Touche LLP は 登録番号 OC303675 でイングランドと
+ウェールズ地方に登録された有限事業組合です。組合のメンバーの名前は以下
+の住所で閲覧可能です。Stonecutter Court,1 Stonecutter Street, London
+ EC4A 4TR, United Kingdom. ここは組合の主たる営業所であり、登録済みの
+事務所です。Deloitte &amp; Touche LLP は、金融サービス機構(FSA) が認証
+し、管轄しています。
+
+このメールと添付された内容は秘密のものであり、閲覧に特別な許可が必要な
+場合があります。これは送信者が意図した受信者のみが利用できます。仮にあ
+なたがそうした人でない場合、このメールに含まれているやりとりや情報を開
+示したり、コピーしたり、利用したりすることは強く禁じられており、違法行
+為です。あなたが仮にこのメールを誤って受け取ったのであれば、"間違って受
+けとりました" というタイトルをつけて IT.SECURITY.UK@deloitte.co.uk に返
+送するとともに、このメールとそのコピーを破棄してください。
+
+電子メールによるやりとりは、盗聴されたり、破損したり、改竄されたり、配
+送の途中で失われたり、配送が遅延したり、中身が不完全な場合があったり、
+コンピューターウイルスが含まれることがあるので、エラーがなく安全である
+という保証がありません。私たちはこのような事態やそれが引き起こした結果
+生じる不利益を受け入れることは出来ません。電子メールで私たちと連絡をと
+りあう方々は、全員がこのリスクを受け入れているとみなされます。
+
+私たちの顧客と連絡を取る場合、このメールと添付される内容に含まれるいか
+なる意見やアドバイスも、Deloitte &amp; Touche LLP 顧客契約書で示されて
+いる諸条件によって制約を受けます。
+
+私たちのビジネスに関係ない意見やアドバイス、その他の情報がこのメールに
+記されている場合、それは私たちが発信したものでも、認めたものでもありま
+せん。
+
+</screen>
+
+<!--
+<para>For someone who's just showing up to ask a question now and
+then, that huge disclaimer looks a bit silly but probably doesn't do
+any lasting harm.  However, if this person wanted to participate
+actively in the project, that legal boilerplate would start to have a
+more insidious effect.  It would send at least two potentially
+destructive signals: first, that this person doesn't have full control
+over his tools&mdash;he's trapped inside some corporate mailer that
+tacks an annoying message to the end of every email, and he hasn't got
+any way to route around it&mdash;and second, that he has little or no
+organizational support for his free software activities.  True, the
+organization has clearly not banned him outright from posting to
+public lists, but it has made his posts look distinctly unwelcoming,
+as though the risk of letting out confidential information must trump
+all other priorities.</para>
+-->
+<para>
+  たまに出てきてちょっと質問するだけという人がこんなことをするのだったら、
+  馬鹿らしいとは感じるかもしれませんがそれほどの害はないでしょう。
+  しかし、もしこの人物が本格的にプロジェクトに参加したいと言い出したらどうしましょう？
+  この法的文書がきっと問題になってくるでしょうね。
+  ここには、少なくともふたつの危険信号があります。
+  まず、この人物は自分のツールを完全にコントロールできるわけではないということ。
+  もしかしたら、社内のメールサーバが強制的にこのメッセージをメールに付加しており、
+  それを迂回する手段がないのかもしれません。そしてもうひとつは、
+  彼の所属する組織はフリーソフトウェア活動に関する理解がほとんど (あるいはまったく) ないということ。
+  もちろんこの組織はメーリングリストへの投稿を明確に禁止しているわけではありませんが、
+  彼の投稿は明らかに歓迎されざるものでしょう。
+  まるで、機密情報が外部にもれるリスクの回避が最優先されているようです。
+</para>
+
+<!--
+<para>If you work for an organization that insists on adding such
+signature blocks to all outgoing mail, then consider getting a free
+email account from, for example, <ulink url="http://gmail.google.com/"
+>gmail.google.com</ulink>, <ulink url="http://www.hotmail.com/"
+>www.hotmail.com</ulink>, or <ulink url="http://www.yahoo.com/"
+>www.yahoo.com</ulink>, and using that as your address for the
+project.</para>
+-->
+<para>
+  「外向けのメールには必ずこういった文書をつけておけ」
+  というような決まりのある会社で働いている方は、
+  無料のメールアカウントを取得してそのアドレスでプロジェクトに参加することを検討しましょう。
+  無料のメールアカウントは、たとえば <ulink url="http://gmail.google.com/"
+  >gmail.google.com</ulink> や <ulink url="http://www.hotmail.com/"
+  >www.hotmail.com</ulink>、そして <ulink url="http://www.yahoo.com/"
+  >www.yahoo.com</ulink> などで取得できます。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+
+<sect1 id="common-pitfalls">
+<!--
+<title>Avoiding Common Pitfalls</title>
+-->
+<title>陥りがちな罠</title>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="post-with-purpose">
+<!--
+<title>Don't Post Without a Purpose</title>
+-->
+<title>目的のない投稿をしない</title>
+
+<!--
+<para>A common pitfall in online project participation is to think
+that you have to respond to everything.  You don't.  First of all,
+there will usually be more threads going on than you can keep track
+of, at least after the project is past its first few months.  Second,
+even in the threads that you have decided to engage in, much of what
+people say will not require a response.  Development forums in
+particular tend to be dominated by three kinds of messages:</para>
+-->
+<para>
+  オンラインのプロジェクトに参加するひとたちが陥りがちな罠のひとつに
+  「すべてのメッセージに返信しなければ！」というものがあります。
+  そんなことはありません。
+  第一、数ヶ月を経てある程度の規模になったプロジェクトについて、
+  すべてのスレッドの議論を追いかけるなんて不可能です。
+  また、自分が注目しているスレッドについても、
+  その投稿の多くは別に返信を要求しているものではないでしょう。
+  開発系のフォーラムでは特に、次のようなメッセージが多くなる傾向があります。
+</para>
+
+<orderedlist>
+<!--
+  <listitem><para>Messages proposing something non-trivial</para></listitem>
+  <listitem><para>Messages expressing support or opposition to
+                  something someone else has said</para></listitem>
+  <listitem><para>Summing-up messages</para></listitem>
+-->
+  <listitem><para>見過ごせない問題についての意見</para></listitem>
+  <listitem><para>誰かが言ったことに関する賛成意見あるいは反対意見</para></listitem>
+  <listitem><para>これまでの議論のまとめ</para></listitem>
+</orderedlist>
+
+<!--
+<para>None of these <emphasis>inherently</emphasis> requires a
+response, particularly if you can be fairly sure, based on watching
+the thread so far, that someone else is likely to say what you would
+have said anyway.  (If you're worried that you'll be caught in a
+wait-wait loop because all the others are using this tactic too, don't
+be; there's almost always <emphasis>someone</emphasis> out there
+who'll feel like jumping into the fray.)  A response should be
+motivated by a definite purpose.  Ask yourself first: do you know what
+you want to accomplish?  And second: will it not get accomplished
+unless you say something?</para>
+-->
+<para>
+  これらのいずれについても、<emphasis>本質的には</emphasis>
+  返信は不要です。注意深くスレッドを観察していれば、
+  あなたが言いたいことはきっと他のだれかが言ってくれるでしょう
+  (みんなが同じように考えていたら、結局だれも発言しなくなってしまうんじゃないの？
+  と思われるかもしれませんが、そんなことはありません。
+  たいていの場合、何か言わずにはいられない人が
+  <emphasis>誰かしら</emphasis> 存在するものです)。
+  明確な目的がある場合にのみ返信を行うようにしましょう。
+  まずは自分に問いかけることです。
+  「その返信で何を達成したいのか、きちんとわかっているのか？」
+  「その目的は、自分が返信しない限り達成できないものなのか？」
+</para>
+
+<!--
+<para>Two good reasons to add your voice to a thread are a) when you
+see a flaw in a proposal and suspect that you're the only one who sees
+it, and b) when you see that miscommunication is happening between
+others, and know that you can fix it with a clarifying post.  It's
+also generally fine to post just to thank someone for doing something,
+or to say "Me too!", because a reader can tell right away that such
+posts do not require any response or further action, and therefore the
+mental effort demanded by the post ends cleanly when the reader
+reaches the last line of the mail.  But even then, think twice before
+saying something; it's always better to leave people wishing you'd
+post more than wishing you'd post less.  (See the second half of <xref
+linkend="bikeshed-full"/> for more thoughts about how to behave on
+a busy mailing list.)</para>
+-->
+<para>
+  あなたがスレッドに口出しをするのに適切な場面は次のふたつです。
+  a) 提案内容の不備に気づいたが、おそらく他の誰もそれに気づいていないと思われるとき、
+  そして b) 誰かと誰かの間の意思疎通がうまくいっていないときに、
+  投稿内容を整理して二人の関係を修復してあげられそうなとき。
+  あとは、誰かが何かをしてくれたことに対する感謝のメッセージや
+  ただ単に "私もそう思います！" というだけのメッセージなどを送信してもよいでしょう。
+  というのも、そういった投稿をすればそのメールに対する返信が不要であることがはっきりするからです。
+  そして、そのスレッドで最後にメールを投稿した人に対して
+  「スレッドがきれいにまとまった」という安心感を与えることもできます。
+  しかし、そんな投稿の際にも、投稿の前によく考えるようにしましょう。
+  「ちょっと投稿しすぎじゃない？」と思われるより
+  「もうちょっと発言してほしいな」と思われるほうがずっとマシです
+  (活発なメーリングリスト上でどのように振舞えばいいのかについての意見は、
+  <xref linkend="bikeshed-full"/> の後半をご覧ください)。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="productive-threads">
+<!--
+<title>Productive vs Unproductive Threads</title>
+-->
+<title>生産的なスレッドとそうでないスレッド</title>
+
+<!--
+<para>On a busy mailing list, you have two imperatives.  One,
+obviously, is to figure out what you need to pay attention to and what
+you can ignore.  The other is to behave in a way that
+avoids <emphasis>causing</emphasis> noise: not only do you want your
+own posts to have a high signal/noise ratio, you also want them to be
+the sorts of messages that stimulate <emphasis>other</emphasis> people
+to either post with a similarly high signal/noise ratio, or not post
+at all.</para>
+-->
+<para>
+  活発なメーリングリストで欠かせないのは、次の 2 点です。
+  まず明らかなのは、注目すべきものとどうでもいいものを見分けること、
+  もうひとつは、できるだけノイズの <emphasis>原因</emphasis>
+  となることを避けることです。自分自身の投稿の S/N 比を高く保つだけでなく、
+  他の参加者のメッセージの S/N 比も同様に高くしたい。
+  それができないならいっそのこと投稿しないでほしい。
+</para>
+
+<!--
+<para>To see how to do that, let's consider the context in which it is
+done.  What are some of the hallmarks of an unproductive thread?</para>
+-->
+<para>
+  どうすればいいのかを考えるために、まずは状況を考えてみましょう。
+  この中で、生産的でないスレッドといえるのはどれでしょうか？
+</para>
+
+<itemizedlist>
+<!--
+  <listitem><para>Arguments that have been made already start being
+            repeated, as though the poster thinks no one heard them
+            the first time.</para>
+  </listitem>
+-->
+  <listitem><para>すでに行われている議論をもう一度繰り返す。
+            まるで、最初に投稿した内容を
+            誰も読んでいないのではないかと思われるような状態。</para>
+  </listitem>
+<!--
+  <listitem><para>Increasing levels of hyperbole and involvement as
+            the stakes get smaller and smaller.</para>
+  </listitem>
+-->
+  <listitem><para>話がどんどん誇張されていき、
+            その議論にかかわる人がどんどん減っていく状態。</para>
+  </listitem>
+<!--
+  <listitem><para>A majority of comments coming from people who do
+            little or nothing, while the people who tend to get things
+            done are silent.</para>
+  </listitem>
+-->
+  <listitem><para>実際には何もしない人たちばかりが大騒ぎし、
+            実際に動くことになる人が黙り込んだままの状態。</para>
+  </listitem>
+<!--
+  <listitem><para>Many ideas discussed without clear proposals ever
+            being made.  (Of course, any interesting idea starts out
+            as an imprecise vision; the important question is what
+            direction it goes from there.  Does the thread seem to be
+            turning the vision into something more concrete, or is it
+            spinning off into sub-visions, side-visions, and
+            ontological disputes?)</para>
+  </listitem>
+-->
+  <listitem><para>はっきりとした提案を出さないまま、
+            多くのアイデアが議論されている状態
+            (もちろん、どんな興味深いアイデアだって
+            最初はぼんやりとした想像から始まるものです。
+            ここで大事なのは、そこからどう膨らませるかです。
+            そのスレッドは、ぼんやりとした空想レベルのアイデアを
+            具体的にまとめあげる流れになっていますか？
+            それとも、別の想像や関係のない想像などの
+            どうでもいいことに振り回されていますか？)</para>
+  </listitem>
+</itemizedlist>
+
+<!--
+<para>Just because a thread is not productive at first doesn't mean
+it's a waste of time.  It might be about an important topic, in which
+case the fact that it's not making any headway is all the more
+troublesome.</para>
+-->
+<para>
+  うまく機能していないスレッドがすべて無駄なものであるとは限りません。
+  中には重要な話題が含まれているかもしれません。
+  そんな場合は、そのスレッドが盛り上がっていないということ自体が問題です。
+</para>
+
+<!--
+<para>Guiding a thread toward usefulness without being pushy is an
+art.  It won't work to simply admonish people to stop wasting their
+time, or to ask them not to post unless they have something constructive
+to say.  You may, of course, think these things privately, but if you
+say them out loud then you will be offensive.  Instead, you have to
+suggest conditions for further progress&mdash;give people a route, a
+path to follow that leads to the results you want, yet without
+sounding like you're dictating conduct.  The distinction is largely
+one of tone.  For example, this is bad:</para>
+-->
+<para>
+  あまり押し付けがましくならないようにスレッドの流れをよい方向に持っていくのは、
+  ある種の芸術といえます。単に「無駄な話をするのはやめよう」とか
+  「もっと前向きなことを投稿するようにしようよ」とか言うだけではうまくいきません。
+  もちろんこれらを個人的に行うことはできるでしょうが、
+  ちょっと強く言ってしまうと攻撃的になってしまいます。
+  そうではなく、前に進むためには次に何をすべきなのかを提案しなければなりません。
+  あなたが望む結果が得られるような道筋を
+  (無理やり指示しているような流れになるのを避けつつ)
+  示してあげるのです。
+  提案のよしあしを区別するのは、主に口調の問題となります。
+  たとえば、こんなやり方はよくありません。
+</para>
+
+  <blockquote>
+<!--
+     <para><emphasis>This discussion is going nowhere.  Can we please
+     drop this topic until someone has a patch to implement one of
+     these proposals?  There's no reason to keep going around and
+     around saying the same things.  Code speaks louder than
+     words, folks.</emphasis></para>
+-->
+     <para><emphasis>
+       これ以上議論しても、収束しないでしょう。
+       とりあえず、だれかがこの提案を実現するパッチを書くまでこの話題はやめることにしませんか？
+       同じ議論を何度も繰り返すなんて無意味です。
+       ごちゃごちゃ言うより、結局はコードでしょ？
+     </emphasis></para>
+  </blockquote>
+
+<!--
+<para>Whereas this is good:</para>
+-->
+<para>
+  それよりは、こちらのほうがいいでしょう。
+</para>
+
+  <blockquote>
+<!--
+     <para><emphasis>Several proposals have been floated in this
+     thread, but none have had all the details fleshed out, at least
+     not enough for an up-or-down vote.  Yet we're also not saying
+     anything new now; we're just reiterating what has been said
+     before.  So the best thing at this point would probably be for
+     further posts to contain either a complete specification for the
+     proposed behavior, or a patch.  Then at least we'd have a
+     definite action to take (i.e., get consensus on the
+     specification, or apply and test the patch).</emphasis></para>
+-->
+     <para><emphasis>
+       いくつかの提案はありましたが、結局どれもうまく膨らませることができず、
+       多数決をとる段階まではいきませんでした。
+       また、今や新しい意見も出てこなくなっています。
+       単にこれまでの議論を繰り返しているだけです。
+       今私たちに必要なのは、この提案に関する完全な仕様か
+       あるいはパッチを含む投稿でしょうね。そうすれば、
+       少なくともなんらかのアクション
+       (その仕様について合意をとったりパッチをテストしたり)
+       ができるでしょう。
+     </emphasis></para>
+  </blockquote>
+
+<!--
+<para>Contrast the second approach with the first.  The second way
+does not draw a line between you and the others, or accuse them of
+taking the discussion into a spiral.  It talks about "we", which is
+important whether or not you actually participated in the thread
+before now, because it reminds everyone that even those who have been
+silent thus far still have a stake in the thread's outcome.  It
+describes why the thread is going nowhere, but does so without
+pejoratives or judgements&mdash;it just dispassionately states
+some facts.  Most importantly, it offers a positive course of action,
+so that instead of people feeling like discussion is being closed off
+(a restriction against which they can only be tempted to rebel), they
+will feel as if they're being offered a way to take the conversation
+to a more constructive level.  This is a standard people will
+-->
+<para>
+  後者のアプローチを最初のものと比べてみましょう。
+  最初のほうは「私」と「その他のメンバー」の間に一線が引かれていましたが、
+  後のほうは違います。みんなをうまく議論に巻き込んでいます。
+  あなたがそのスレッドの議論に最初からかかわっていたかどうかに関係なく、
+  主語を「私たち」とすることが重要です。これによって、
+  それまでスレッドをみているだけで何も発言しなかった人たちに対しても
+  「みんなにかかわる話なんだ」ということを確認させることができるからです。
+  スレッドが煮詰まってしまった原因については説明していますが、
+  誰かをののしったり自分の意見を押し付けたりはしていません。
+  淡々と事実を述べているだけです。
+  最も重要なのは、前向きに進めるために次に行うべきことを示している点です。
+  これにより、ただ単に議論を打ち切らせる
+  (そんな制限をしても、だれも守ってくれないでしょう)
+  のではなくより建設的な方向に会話を持っていこうとしているのです。
+</para>
+
+<!--
+<para>You won't always want a thread to make it to the next level of
+constructiveness&mdash;sometimes you'll want it to just go away.  The
+purpose of your post, then, is to make it do one or the other.  If you
+can tell from the way the thread has gone so far that no one is
+actually <emphasis>going</emphasis> to take the steps you suggested,
+then your post effectively shuts down the thread without seeming to do
+so.  Of course, there isn't any foolproof way to shut down a thread,
+and even if there were, you wouldn't want to use it.  But asking
+participants to either make visible progress or stop posting is
+perfectly defensible, if done diplomatically.  Be wary of quashing
+threads prematurely, however.  Some amount of speculative chatter can
+be productive, depending on the topic, and asking for it to be
+resolved too quickly will stifle the creative process, as well as make
+you look impatient.</para>
+-->
+<para>
+  そのスレッドをもっと膨らませたいといった状況ばかりであるとは限りません。
+  時には、こんなスレッドはさっさと打ち切ってしまいたいと思うこともあるでしょう。
+  この場合には、スレッドを終了させるための投稿をします。
+  もしそのスレッドが既にみんなに忘れ去られてしまっているものなら、
+  あなたが投稿するだけでそのスレッドは事実上終了するでしょう。
+  もちろん、スレッドを打ち切るための完璧な方法なんてありません。
+  もしそんなのがあったとしても、使いたいとは思わないでしょう。
+  しかし「何か目に見える成果を出してください。
+  でなければこのフレッドを終了します」とお願いすると、うまくいくことでしょう。
+  ただ、スレッドを終了させるのは十分に考えた後にしてください。
+  話題によっては、雑談の中から生産的な内容に発展することがあるかもしれません。
+  あまりに拙速に打ち切ってしまうと、あなたはせっかちな人と思われてしまいます。
+</para>
+
+<!--
+<para>Don't expect any thread to stop on a dime.  There will probably
+still be a few posts after yours, either because mails got crossed in
+the pipe, or because people want to have the last word.  This is
+nothing to worry about, and you don't need to post again.  Just let
+the thread peter out, or not peter out, as the case may be.  You can't
+have complete control; on the other hand, you can expect to have a
+statistically significant effect across many threads.</para>
+-->
+<para>
+  どんなスレッドであっても、すぐに終了するとは期待しないでください。
+  あなたが投稿した後にも、おそらくいくつかの投稿があるでしょう。
+  あなたのメールがまだ届いていなかったり、あるいはいわゆる
+  「最後にひとこと」が言いたかったりといった人たちによるものです。
+  心配することはないですし、先ほどの投稿を繰り返す必要もありません。
+  スレッドが収束する (あるいはさらに膨らんでいく) のを黙って見守っていればいいのです。
+  完全にスレッドをコントロールすることなんてできません。
+  ただ、あなたは多くのスレッドに何らかの効果を及ぼせるはずです。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="bikeshed">
+<!--
+<title>The Softer the Topic, the Longer the Debate</title>
+-->
+<title>簡単な議題ほど長引く</title>
+
+<!--
+<para>Although discussion can meander in any topic, the probability of
+meandering goes up as the technical difficulty of the topic goes down.
+After all, the greater the technical difficulty, the fewer
+participants can really follow what's going on.  Those who can are
+likely to be the most experienced developers, who have already taken
+part in such discussions thousands of times before, and know what sort
+of behavior is likely to lead to a consensus everyone can live
+with.</para>
+-->
+<para>
+  どんな議題であっても議論は紆余曲折するものですが、
+  技術的な難度が低い話題になればなるほど
+  議論が発散する可能性があがります。
+  結局のところ、技術的な難度が高い話題になればなるほど
+  その話題についていける人の数が少なくなるということです。
+  そんな話題についていける人というのは、たいていは長年経験を積んだ開発者です。
+  彼らはこれまでに何度となくそのような議論に参加しており、
+  全員が納得のいく合意を得るにはどうしたらいいのかを知っているのです。
+</para>
+
+<!--
+<para>Thus, consensus is hardest to achieve in technical questions
+that are simple to understand and easy to have an opinion about, and
+in "soft" topics such as organization, publicity, funding, etc.
+People can participate in those arguments forever, because there are
+no qualifications necessary for doing so, no clear ways to decide (even
+afterward) if a decision was right or wrong, and because simply
+outwaiting other discussants is sometimes a successful tactic.</para>
+-->
+<para>
+  というわけで、合意を得ることが最も難しいのは、
+  誰にでもわかる (誰でも意見が言える) レベルの技術的な問題となります。
+  また同様に、組織論や広報活動、資金調達などの "やわらかめ"
+  な話題も合意を得にくいものです。
+  これらの話題については、人はいつでも気の済むまで議論に参加することができます。
+  議論に参加するための前提条件もなければ
+  何が正しくて何が間違っているのかを (後になっても) 決めることもできない、
+  そして、他人の意見を聞いてから「後出し」で議論に参加することもできるからです。
+</para>
+
+<!--
+<para>The principle that the amount of discussion is inversely
+proportional to the complexity of the topic has been around for a long
+time, and is known informally as the <firstterm>Bikeshed
+Effect</firstterm>.  Here is Poul-Henning Kamp's explanation of it,
+from a now-famous post made to BSD developers:</para>
+-->
+<para>
+  議論の量と話題の複雑さが反比例するという原則はよく知られており、俗に
+  <firstterm>Bikeshed Effect (自転車置場効果)</firstterm> と呼ばれています。
+  ここで、Poul-Henning Kamp による説明を見てみましょう。
+  もともとは BSD 開発者向けに投稿されたものですが、今や超有名になっています。
+</para>
+
+<blockquote>
+
+<!--
+<para>It's a long story, or rather it's an old story, but it is quite
+short actually.  C. Northcote Parkinson wrote a book in the early
+1960'ies, called "Parkinson's Law", which contains a lot of insight
+into the dynamics of management.</para>
+-->
+<para>
+  話せば長くなる昔話だけど、実際のところは単純な話だ。C・ノースコート・
+  パーキンソンが 1960 年代初期に書いた「パーキンソンの法則」という本があって、
+  そこにはものごとの管理に関するさまざまな洞察が書かれていたんだ。
+</para>
+
+<!--
+<para>[...]</para>
+-->
+<para>[...]</para>
+
+<!--
+<para>In the specific example involving the bike shed, the other vital
+component is an atomic power-plant, I guess that illustrates the age
+of the book.</para>
+-->
+<para>
+  自転車置場の例にでてくるもう一方の役者が、原子炉だ。なんだか、
+  いかにも時代を感じさせるなぁ。
+</para>
+
+<!--
+<para>Parkinson shows how you can go in to the board of directors and
+get approval for building a multi-million or even billion dollar
+atomic power plant, but if you want to build a bike shed you will be
+tangled up in endless discussions.</para>
+-->
+<para>
+  パーキンソンは、委員会に乗り込んで数百万から数億ドルもの原子炉建設計画を承認させる方法を説明している。
+  しかし、
+  原子炉ではなく自転車置場を作りたいと思ったら終わりのない議論に巻き込まれることになるだろうとも言っている。
+</para>
+
+<!--
+<para>Parkinson explains that this is because an atomic plant is so
+vast, so expensive and so complicated that people cannot grasp it, and
+rather than try, they fall back on the assumption that somebody else
+checked all the details before it got this far.  Richard P.  Feynmann
+gives a couple of interesting, and very much to the point, examples
+relating to Los Alamos in his books.</para>
+-->
+<para>
+  パーキンソンによると、原子炉はあまりに巨大で高価そして複雑であるために
+  みんながその内容を把握できなくなるということだ。考えようともせずに思考停止してしまい、
+  「まぁここまで来る前に誰か他の人が一部始終をチェックしただろう」
+  ということになってしまう。リチャート・P・ファインマンの著書には、
+  これに関連するロス・アラモスでの興味深い事例がいくつか紹介されている。
+</para>
+
+<!--
+<para>A bike shed on the other hand.  Anyone can build one of those
+over a weekend, and still have time to watch the game on TV.  So no
+matter how well prepared, no matter how reasonable you are with your
+proposal, somebody will seize the chance to show that he is doing his
+job, that he is paying attention, that he
+is <emphasis>here</emphasis>.</para>
+-->
+<para>
+  さぁ一方自転車置場だ。週末をつぶせばだれでも作ることができ、
+  余った時間にテレビで試合を見て楽しむことさえできるだろう。
+  どんなに用意周到であったとしても、どんなに妥当な提案だったとしても、だれかが機会をとらえては、
+  自分もなにかやっていることを示したり、自分もそれに注目してることを示したり、
+  「俺を忘れるな」と言ったりするだろう。
+</para>
+
+<!--
+<para>In Denmark we call it "setting your fingerprint".  It is about
+personal pride and prestige, it is about being able to point somewhere
+and say "There!  <emphasis>I</emphasis> did that."  It is a strong
+trait in politicians, but present in most people given the chance.
+Just think about footsteps in wet cement.</para>
+-->
+<para>
+  デンマークでは、こういったことを「指紋をつける」って言うんだ。
+  個人的なプライドや見栄のために何かをして、あとからその証拠を見せられるようにする。
+  「ほら見ろよ。これ、<emphasis>俺</emphasis>がやったんだ」てな具合にね。
+  政治家どものよくやりそうなことでもあるが、一般人だって機会があればやりそうだよ。ほら、
+  よく生乾きのセメントに足跡がついてたりするだろう？
+</para>
+
+</blockquote>
+
+<!--
+<para>(His complete post is very much worth reading, too.  See <xref
+linkend="bikeshed-full"/>; see also
+<ulink url="http://bikeshed.com"/>.)</para>
+-->
+<para>
+  (彼の投稿の完全版はかなり長くなりますが、一読の価値はあります。
+  <xref linkend="bikeshed-full"/> でご確認ください。また
+  <ulink url="http://bikeshed.com"/> も参照ください)
+</para>
+
+<!--
+<para>Anyone who's ever taken regular part in group decision-making
+will recognize what Kamp is talking about.  However, it is usually
+impossible to persuade <emphasis>everyone</emphasis> to avoid painting
+bikesheds.  The best you can do is point out that the phenomenon
+exists, when you see it happening, and persuade the senior
+developers&mdash;the people whose posts carry the most weight&mdash;to
+drop their paintbrushes early, so at least they're not contributing to
+the noise.  Bikeshed painting parties will never go away entirely, but
+you can make them shorter and less frequent by spreading an awareness
+of the phenomenon in the project's culture.</para>
+-->
+<para>
+  これまでにグループでの議論に参加したことがある人なら誰でも
+  Kamp の言っていることがよくわかるでしょう。
+  しかし、自転車置場に色を塗るようなことを避けるよう
+  <emphasis>全員</emphasis> を説得するのは不可能です。
+  できることといえば、そんな状況を見つけたときに
+  「こういう状態になっているんじゃない？」と指摘するくらいです。
+  そして、影響力の強い開発者たちに対して
+  「早めに筆をおろしてくれませんか？」とお願いするのです。
+  そうすれば、少なくとも彼らはノイズの原因とはならなくなります。
+  自転車置場の塗装大会を完全にやめさせることはできないでしょうが、
+  プロジェクトの文化をうまく育てていけばそんな羽目になる頻度を下げる 
+  (そして発生したときも早く収束できるようにする) ことができます。
+</para>
+
+</sect2>
+
+<!-- ======================== SECTION ============================== -->
+<sect2 id="holy-wars">
+<!--
+<title>Avoid Holy Wars</title>
+-->
+<title>宗教論争を回避する</title>
+
+<!--
+<para>A <firstterm>holy war</firstterm> is a dispute, often but not
+always over a relatively minor issue, which is not resolvable on the
+merits of the arguments, but where people feel passionate enough to
+continue arguing anyway in the hope that their side will prevail.
+Holy wars are not quite the same as bikeshed paintings.  People
+painting bikesheds are usually quick to jump in with an opinion
+(because they can), but they won't necessarily feel strongly about it,
+and indeed will sometimes express other, incompatible opinions, to
+show that they understand all sides of the issue.  In a holy war, on
+the other hand, understanding the other sides is a sign of weakness.
+In a holy war, everyone knows there is One Right Answer; they just
+don't agree on what it is.</para>
+-->
+<para>
+  <firstterm>宗教論争 (holy war: 聖戦)</firstterm> とはある種の論争のことです。
+  ただ、時には話し合いで解決できないほど大きな問題になることもあります。
+  お互い、相手側を打ちのめすまで議論を続けようとします。
+  これは、先ほどのいわゆる「自転車置場問題」とは多少異なるものです。
+  自転車置場の議論に加わっている人たちは、先を競って自分の意見を表明します
+  (だって簡単に意見を言えるから)。
+  でも、彼らは必ずしもそれを強く主張するわけではありません。
+  時には相手の意見に理解を示すこともあります。
+  しかし「宗教論争」においては、相手の意見に耳を傾けた時点で負けです。
+  みんな「正解はたったひとつである」という点では合意しているのですが、
+  ただ「正解がどれか」という点で争っているのです。
+</para>
+
+<!--
+<para>Once a holy war has started, it generally cannot be resolved to
+everyone's satisfaction.  It does no good to point out, in the midst
+of a holy war, that a holy war is going on.  Everyone knows that
+already.  Unfortunately, a common feature of holy wars is disagreement
+on the very question of <emphasis>whether</emphasis> the dispute is
+resolvable by continued discussion.  Viewed from outside, it is clear
+that neither side is changing the other's mind.  Viewed from inside,
+the other side is being obtuse and not thinking clearly, but they
+might come around if browbeaten enough.  Now, I am
+<emphasis>not</emphasis> saying there's never a right side in a holy
+war.  Sometimes there is&mdash;in the holy wars I've participated
+in, it's always been my side, of course.  But it doesn't matter,
+because there's no algorithm for convincingly demonstrating that one
+side or the other is right.</para>
+-->
+<para>
+  いったん宗教論争が始まってしまったら、
+  みんなが満足するようなかたちでそれを収束させることは不可能です。
+  炎上している真っ只中で「これって宗教論争じゃない？」
+  と指摘したところで無意味です。
+  そんなこと、みんなとっくに知っているわけなんだから。
+  残念なことに、宗教論争の多くは
+  「この問題は話し合いを続ければ解決できるのか」
+  という点に対しても意見の対立が発生するものなのです。
+  第三者からみれば、どちら側も相手を説得できそうにないのは明らかです。
+  当事者たちは「相手側は何もわかっちゃいない。
+  うまく説得すればきっと私たちの考えをわかってくれるだろう」とお互い考えています。
+  私は「こんな争いには正解なんてない」とは <emphasis>言いません</emphasis>。
+  時には正解があることもあるのです。
+  私も過去に何度か宗教論争に巻き込まれましたが、
+  そのときはいつも私たちのほうが正論でした。
+  とはいえ、そんなのはどうでもいいことです。
+  どちらが正しいのかを納得いくように説明する方法なんてないのですから。
+</para>
+
+<!--
+<para>A common, but unsatisfactory, way people try to resolve holy
+wars is to say "We've already spent far more time and energy
+discussing this than it's worth!  Can we please just drop it?"  There
+are two problems with this.  First, that time and energy has already
+been spent and can never be recovered&mdash;the only question now is,
+how much <emphasis>more</emphasis> effort remains?  If some people
+feel that just a little more discussion will bring the issue to a
+close, then it still makes sense (from their point of view) to
+continue.</para>
+-->
+<para>
+  宗教論争を解決しようとしてやりがちなことは
+  「こんなことをいつまでも続けていても時間のムダじゃないか！
+  もういい加減やめてしまわない？」
+  と言うことですが、これでは不十分です。
+  このやりかたには 2 つの問題があります。
+  まず、これまで議論に費やしてきた時間や気力は取り戻せないということです。
+  いま大事なのは「あとどれだけ議論しなければならないのか？」です。
+  もし「もうちょっと話をすれば解決できそうだ」と感じている人が何人かいるのなら、
+  (少なくとも彼らの視点からは) 議論を続けるのは理にかなっています。
+</para>
+
+<!--
+<para>The other problem with asking for the matter to be dropped is
+that this is often equivalent to allowing one side, the status quo, to
+declare victory by inaction.  And in some cases, the status quo is
+known to be unacceptable anyway: everyone agrees that some decision
+must be made, some action taken.  Dropping the subject would be worse
+for everyone than simply giving up the argument would be for anyone.
+But since that dilemma applies to all equally, it's still possible to
+end up arguing forever about what to do.</para>
+-->
+<para>
+  もうひとつの問題は、
+  そこで議論をやめてしまう (現状維持とする) ことが、
+  どちらか一方に事実上の勝利宣言をするのに等しいことがあるということです。
+  また時には「とにかく現状をどうにかしなければならない」という点では合意しているが
+  「どのように変えるのか」で争っているということもあります。
+  こんな場合は、議論を打ち切ってしまったら誰の得にもなりません。
+  そのことはみんなわかっているので、この場合は議論を続けることも可能でしょう。
+</para>
+
+<!--
+<para>So how should you handle holy wars?</para>
+-->
+<para>
+  じゃあ、いったいどのように処理したらいいのでしょう？
+</para>
+
+<!--
+<para>The first answer is, try to set things up so they don't happen.
+This is not as hopeless as it sounds:</para>
+-->
+<para>
+  まず言えることは、そんな議論が起こりえないようにするということです。
+  これは、皆さんが思っているほど難しいことではありません。
+</para>
+
+<!--
+<para>You can anticipate certain standard holy wars: they tend to come
+up over programming languages, licenses (see
+<xref linkend="license-compatibility"/><phrase output="printed">
+in <xref linkend="legal"/></phrase>), reply-to munging (see
+<xref linkend="reply-to"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>), and a few
+other topics.  Each project 
+usually has a holy war or two all its own, as well, which longtime
+developers will quickly become familiar with.  The techniques for
+stopping holy wars, or at least limiting their damage, are pretty much
+the same everywhere.  Even if you are positive your side is right, try
+to find <emphasis>some</emphasis> way to express sympathy and
+understanding for the points the other side is making.  Often the
+problem in a holy war is that because each side has built its walls
+as high as possible, and made it clear that any other opinion is sheer
+foolishness, the act of surrendering or changing one's mind becomes
+psychologically unbearable: it would be an admission not just of being
+wrong, but of having been <emphasis>certain</emphasis> and still being
+wrong.  The way you can make this admission palatable for the other
+side is to express some uncertainty yourself&mdash;precisely by
+showing that you understand the arguments they are making and find
+them at least sensible, if not finally persuasive.  Make a gesture
+that provides space for a reciprocal gesture, and usually the
+situation will improve.  You are no more or less likely to get the
+technical result you wanted, but at least you can avoid unnecessary
+collateral damage to the project's morale.</para>
+-->
+<para>
+  宗教論争になりがちなネタは、だいたい予想がつきます。
+  プログラミング言語についてだったりライセンスについてだったり
+  (<phrase output="printed"><xref linkend="legal"/></phrase> の
+  <xref linkend="license-compatibility"/> をご覧ください)、
+  あるいは reply-to の処理についてだったり
+  (<phrase output="printed"> in <xref linkend="technical-infrastructure"/></phrase>
+  の <xref linkend="reply-to"/> をご覧ください) などです。
+  たいていのプロジェクトは一度や二度はこういう経験をしており、
+  それによって開発者たちの結束が急速に深まったりします。
+  このような争いをやめさせたり、
+  あるいは被害をできるだけ抑えたりするための方法は、どこに行っても同じです。
+  たとえ自分側の意見が正しいと確信しているのだとしても、
+  <emphasis>とりあえずは</emphasis> 相手側の意見にも耳を傾け、
+  理解を示すようにしましょう。この手の争いでよくある問題は、
+  それぞれの側が可能な限り敷居を高くしてしまって
+  自分たち以外の考えはみんなまったくばかげていると言い切ってしまうことです。
+  このような場合、相手側を説得したり意見を変えさせるようにしたりするのも
+  難しくなってしまいます。つまり、単に相手に「まちがっていました」
+  と認めさせるだけではなく「<emphasis>心から</emphasis>
+  まちがっていました！」と認めさせなければならなくなるのです。
+  相手側に説得を受け入れてもらいやすくするには、
+  まずあなた自身の確信を押し付けないようにすることです。
+  つまり、現在行われている議論の内容をきちんと理解していること、
+  そして説得力があるかどうかはともかく、少なくとも分別はあるということを示すことです。
+  相手が返事を返す余地があるような意思表示をするようにしましょう。
+  そうすれば、状況は改善するでしょう。
+  結果としてあなたが望んでいたそのものは得られないかもしれませんが、
+  少なくとも、プロジェクトの士気に影響を及ぼすような巻き添え被害は防ぐくとができます。
+</para>
+
+<!--
+<para>When a holy war can't be avoided, decide early how much you
+care, and then be willing to publicly give up.  When you do so, you
+can say that you're backing out because the holy war isn't worth it,
+but don't express any bitterness and <emphasis>don't</emphasis> take
+the opportunity for a last parting shot at the opposing side's
+arguments.  Giving up is effective only when done gracefully.</para>
+-->
+<para>
+  宗教論争が避けられない状況になったら、
+  あなたがどの程度それにかかわるのかを早めに決断しましょう。
+  なんだったら、その手の議論を正式に放棄してしまってもかまいません。
+  そうすれば、皮肉を言ったり
+  反対意見に対して捨てゼリフを残したりせずに
+  きれいに宗教論争から身を引くことができます。
+  議論を放棄する場合は、潔く行うことが大切です。
+</para>
+
+<!--
+<para>Programming language holy wars are a bit of a special case,
+because they are often highly technical, yet many people feel
+qualified to take part in them, and the stakes are very high, since
+the result may determine what language a good portion of the project's
+code is written in.  The best solution is to choose the language
+early, with buy-in from influential initial developers, and then
+defend it on the grounds that it's what you are all comfortable
+writing in, <emphasis>not</emphasis> on the grounds that it's better
+than some other language that could have been used instead.  Never let
+the conversation degenerate into an academic comparison of programming
+languages (this seems to happen especially often when someone brings
+up Perl, for some reason); that's a death topic that you must simply
+refuse to be drawn into.</para>
+-->
+<para>
+  プログラミング言語に関する宗教論争は、少し事情が異なります。
+  というのも、彼らは技術的に高いレベルにある人であることが多く、
+  また多くの人が何らかの意見を持っており、利害関係が非常に高くなるからです。
+  その争いの結果、プロジェクトで使用する主要なプログラミング言語が決まってしまうかもしれません。
+  一番いい方法は、プロジェクトの初期段階のうちに
+  開発者間で言語を選択してしまうことです。そして
+  いったん決めた開発言語については、「それが他の言語より優れているから」
+  という理由 <emphasis>ではなく</emphasis>、
+  「それがいちばん書き慣れているから」という理由で守っていくようにします。
+  決して「プログラミング言語を学術的に比較する」といった方向に陥らないようにしましょう
+  (なぜだかよくわかりませんが、誰かが Perl を持ち出したとたんに
+  この方向に話が進むことが多いようです)。
+  この手の話題はまったく無駄なものであり、避けるべきです。
+</para>
+
+<!--
+<para>For more historical background on holy wars, see <ulink
+url="http://catb.org/~esr/jargon/html/H/holy-wars.html"/>, and the
+paper by Danny Cohen that popularized the term, <ulink
+url="http://www.ietf.org/rfc/ien/ien137.txt"/>.</para>
+-->
+<para>
+  この手の議論に関する歴史的な背景については
+  <ulink url="http://catb.org/~esr/jargon/html/H/holy-wars.html"/>
+  をご覧ください。また、Danny Cohen によるより簡単な解説が
+  <ulink url="http://www.ietf.org/rfc/ien/ien137.txt"/>
+  にあります。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+
+<sect2 id="noisy-minority">
+<!--
+<title>The "Noisy Minority" Effect</title>
+-->
+<title>"口やかましい少数派" について</title>
+
+<!--
+<para>In any mailing list discussion, it's easy for a small minority
+to give the impression that there is a great deal of dissent, by
+flooding the list with numerous lengthy emails.  It's a bit like a
+filibuster, except that the illusion of widespread dissent is even
+more powerful, because it's divided across an arbitrary number of
+discrete posts and most people won't bother to keep track of who said
+what, when.  They'll just have an instinctive impression that the topic
+is very controversial, and wait for the fuss to die down.</para>
+-->
+<para>
+  メーリングリストでの議論においては、
+  少数派の意見がいかにも大きな異議であるように見せることは簡単です。
+  長々としたメールをメーリングリストに大量に投稿すればいいのです。
+  これは議事進行妨害と似ていますが、
+  反対意見が大きくなっていると思い込ませることにはより強力な意味があります。
+  というのも、あまりにたくさんの意見が行きかうと
+  「誰がいつ何を言ったのか」を追いかけるのが面倒になってしまうからです。
+  「よくわからないけど、何だか重要なことを議論しているんだな」
+  と本能的に感じ、騒ぎがおさまるまでしばらくおとなしくしている人が多くなるのです。
+</para>
+
+<!--
+<para>The best way to counteract this effect is to point it out very
+clearly and provide supporting evidence showing how small the actual
+number of dissenters is, compared to those in agreement.  In order to
+increase the disparity, you may want to privately poll people who have
+been mostly silent, but who you suspect would agree with the majority.
+Don't say anything that suggests the dissenters were deliberately
+trying to inflate the impression they were making.  Chances are they
+weren't, and even if they were, there would be no strategic advantage
+to pointing it out.  All you need do is show the actual numbers in a
+side-by-side comparison, and people will realize that their intuition
+of the situation does not match reality.</para>
+-->
+<para>
+  このような効果をうち消す最もよい方法は、何らかの証拠をもって
+  「異議を申し立てている人がどれだけ少数であるかということ」
+  「他の大半の人たちが合意しているということ」
+  を明確に指摘することです。より状況を明確にするために、
+  明確に意見は表明していないがおそらく多数派に合意するであろうと思われる人たちに
+  個別に意見を聞いてみてもいいでしょう。
+  反対している人たちが自分の意見を故意に膨らませようとしているといったことを
+  指摘するのはやめましょう。多分彼らはそんな気持ちはないでしょう。
+  たとえ意図的にしているのだとしても、
+  それを指摘したところで戦略上なんの利点もありません。
+  あなたがすべきことは、単に実数を比較して示すこと。
+  そうすれば、他の人たちは自分の実感とずれていることをわかってくれるでしょう。
+</para>
+
+<!--
+<para>This advice doesn't just apply to issues with clear
+for-and-against positions.  It applies to any discussion where a fuss
+is being made, but it's not clear that most people consider the issue
+under discussion to be a real problem.  After a while, if you agree that
+the issue is not worthy of action, and can see that it has failed to
+get much traction (even if it has generated a lot of mails), you can
+just observe publicly that it's not getting traction.  If the "Noisy
+Minority" effect has been at work, your post will seem like a breath of
+fresh air.  Most people's impression of the discussion up to that
+point will have been somewhat murky: "Huh, it sure feels like there's
+some big deal here, because there sure are a lot of posts, but I can't
+see any clear progress happening."  By explaining how the form of the
+discussion made it appear more turbulent than it really was, you
+retrospectively give it a new shape, through which people can recast
+their understanding of what transpired.</para>
+-->
+<para>
+  この手法は、賛成か反対かがはっきりするような議論に関しては適用できません。
+  この方法がうまくいくのは、誰かが大騒ぎしているものの
+  大半の人にとってはそれが議論すべき問題なのかどうか判断できないといった場合です。
+  議論をしばらく見ていて、それが
+  (メールの数のわりには) あまり人々の気を引いていないものであって
+  どうでもいい議論であると判断したら、それをはっきりと示してあげましょう。
+  いわゆる "口うるさい少数派" が目立っているときには、あなたの投稿が一服の清涼剤となるでしょう。
+  こんな場合、たいていの人はちょっと落ち込んでいます。「なんてこった。
+  大量の投稿があるので多分重要なことを話しているんだろうけど、
+  いったい何がどうなっているのかちっともわかりゃしない」といった気分です。
+  実際の議論が必要以上に大げさになりすぎていたことを説明すれば、
+  彼らはそれまでの流れを見直して
+  何が起こっていたのかを理解してくれるでしょう。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="difficult-people">
+<!--
+<title>Difficult People</title>
+-->
+<title>扱いにくい人たち</title>
+
+<!--
+<para>Difficult people are no easier to deal with in electronic forums
+than they are in person.  By "difficult" I don't mean "rude".  Rude
+people are annoying, but they're not necessarily difficult.  This book
+has already discussed how to handle them: comment on the rudeness the
+first time, and from then on, either ignore them or treat them the same
+as anyone else.  If they continue being rude, they will usually make
+themselves so unpopular as to have no influence on others in the
+project, so they are a self-containing problem.</para>
+-->
+<para>
+  扱いにくい人たちに対して電子会議室上で対応するのは、
+  面と向かって対応することに比べて多少難しくなります。
+  ここで言う "扱いにくい" とは "失礼な" という意味ではありません。
+  確かに失礼な人たちは不快なものですが、彼らが必ずしも扱いにくいというわけではありません。
+  本書では、すでに失礼な人たちへの対処法は説明済みです。
+  とりあえず一言指摘したあとは、そのまま無視してしまうか、
+  何事もなかったかのように他の人たちと同じよう接すればいいのです。
+  それでも彼らが失礼な振る舞いを続けるようなら、
+  彼らはきっとそのプロジェクトの誰にも見向きもされなくなるでしょう。
+  自業自得です。
+</para>
+
+<!--
+<para>The really difficult cases are people who are not overtly rude,
+but who manipulate or abuse the project's processes in a way that ends
+up costing other people time and energy, yet do not bring any benefit
+to the project<footnote><para>For an extended discussion of one
+particular subspecies of difficult person, see Amy Hoy's hilariously
+on-target <citetitle><ulink
+url="http://slash7.com/2006/12/22/vampires/">Help Vampires: A
+Spotter's Guide</ulink></citetitle>.  Quoting Hoy: "It's so regular you
+could set your watch by it. The decay of a community is just as
+predictable as the decay of certain stable nuclear isotopes. As soon
+as an open source project, language, or what-have-you achieves a
+certain notoriety&nbsp;&mdash;&nbsp;its half-life, if you
+will&nbsp;&mdash;&nbsp;<emphasis>they</emphasis> swarm in, seemingly
+draining the very life out of the community itself.
+<emphasis>They</emphasis> are the Help Vampires. And I'm here to stop
+them..."</para></footnote>.</para>
+-->
+<para>
+  本当にやっかいなのは、あからさまに失礼な態度であるとはいえないが
+  プロジェクトの進み具合に悪影響を与えている人たちです。
+  彼らは他の人たちの時間や労力を余計に費やさせるだけで
+  プロジェクトに何の利益ももたらしません
+  <footnote>
+    <para>
+      扱いにくい人たちの一例について、Amy Hoy が愉快な記事
+      <citetitle><ulink url="http://slash7.com/2006/12/22/vampires/">Help Vampires: A Spotter's Guide</ulink></citetitle>
+      で的確に指摘しています。Hoy 曰く、
+      「それはきっと、時計の時刻合わせをするのと同じくらいに普通のこと。
+      コミュニティの衰退は、放射性同位体の減衰と同じくらいに予測可能なこと。
+      オープンソースのプロジェクトなり言語なりがそれなりの知名度を得るようになると
+      &nbsp;&mdash;&nbsp;半減期を迎えると、と言ってもいい&nbsp;&mdash;&nbsp;
+      <emphasis>奴ら</emphasis>はやってくる。そしてコミュニティの気力をそぐようになる。
+      <emphasis>奴ら</emphasis>は Help Vampire。そして、それを阻止するために私はここにいる...」
+    </para>
+  </footnote>。
+</para>
+
+<!--
+<para>Often, such people look for wedgepoints in the project's
+procedures, to give themselves more influence than they might
+otherwise have.  This is much more insidious than mere rudeness,
+because neither the behavior nor the damage it causes is apparent to
+casual observers.  A classic example is the filibuster, in which
+someone (always sounding as reasonable as possible, of course) keeps
+claiming that the matter under discussion is not ready for resolution,
+and offers more and more possible solutions, or new viewpoints on old
+solutions, when what is really going on is that he senses that a
+consensus or a ballot is about to form and he doesn't like where it's
+headed.  Another example is when there's a debate that won't converge
+on consensus, but the group tries to at least clarify the points of
+disagreement and produce a summary for everyone to refer to from then
+on.  The obstructionist, who knows the summary may lead to a result he
+doesn't like, will often try to delay even the summary, by
+relentlessly complicating the question of what should be in it, either
+by objecting to reasonable suggestions or by introducing unexpected
+new items.</para>
+-->
+<para>
+  そういった人たちは、プロジェクトを進めるにあたって要となる箇所を探しては
+  そこで自分の影響力を誇示しようとします。
+  このような行いは、単に失礼であるだけの人よりよっぽど油断なりません。
+  なぜなら、その振る舞いだけでなくそれによる被害も明白だからです。
+  このような行いの典型的な例は、いわゆる議事進行妨害です。
+  進行中の議題について、誰かが (いかにももっともらしく聞こえるように)
+  「まだ結論は見えていない。もっと別の解決策も検討してみるべきだ。
+  違う視点から見直してみるのもいい」といった意見を述べるが、
+  実際のところは既にほぼ合意がとれているかあるいは採決をとる準備ができているといった状況です。
+  別の例を考えてみましょう。なかなか合意が得られない議論において、
+  「まずはお互いの意見の不一致を確認してこれまでの議論のまとめを作成しよう」
+  という流れになることがあります。
+  そのまとめを作成した結果、自分が気に入らない方向に進むかもしれないと考えている人は、
+  まとめの作成作業さえも邪魔しようとするかも知れません。
+  妥当な提案に対していちいち反対したり、
+  誰も喜ばないような新たな話題を持ち出したりなどといった手段で粘着してくるわけです。
+</para>
+
+<sect2 id="handling-difficult-people">
+<!--
+<title>Handling Difficult People</title>
+-->
+<title>扱いにくい人たちへの対応</title>
+
+<!--
+<para>To counteract such behavior, it helps to understand the
+mentality of those who engage in it.  People generally do not do it
+consciously.  No one wakes up in the morning and says to himself:
+"Today I'm going to cynically manipulate procedural forms in order to
+be an irritating obstructionist."  Instead, such actions are often
+preceded by a semi-paranoid feeling of being shut out of group
+interactions and decisions.  The person feels he is not being taken
+seriously, or (in the more severe cases) that there is almost a
+conspiracy against him&mdash;that the other project members have decided to
+form an exclusive club, of which he is not a member.  This then
+justifies, in his mind, taking rules literally and engaging in a
+formal manipulation of the project's procedures, in order
+to <emphasis>make</emphasis> everyone else take him seriously.  In
+extreme cases, the person can even believe that he is fighting a
+lonely battle to save the project from itself.</para>
+-->
+<para>
+  こんな振る舞いに対抗するには、
+  何が彼らをそうさせるのかを理解することが助けになります。
+  たいていの人は、意識してそのように振舞っているわけではありません。
+  毎朝起きたときに「さあ、今日も斜に構えて議論をかき乱し、
+  みんなをいらいらさせてやろう」と考える人なんていませんよね。
+  そんな行動に彼らを導くのは、たいていの場合は
+  「自分はこのグループでの議論や意思決定の際に仲間はずれにされているのではないか」
+  という被害妄想です。彼らは自分がないがしろにされていると感じています。
+  あるいは (もっと深刻な場合は) 自分だけをのけものにして
+  他のメンバーだけで何かをしようとたくらんでいると感じることもあります。
+  そう感じている彼にとって、プロジェクトの進行に口をはさんで
+  <emphasis>何とか</emphasis> 自分のほうに目を向けてもらえるようにすることは
+  完全に正当な振る舞いです。極端な場合は、彼は
+  「自分が戦わなきゃこのプロジェクトはダメになってしまう」と思い込んでいるかもしれません。
+</para>
+
+<!--
+<para>It is the nature of such an attack from within that not everyone
+will notice it at the same time, and some people may not see it at all
+unless presented with very strong evidence.  This means that
+neutralizing it can be quite a bit of work.  It's not enough to
+persuade yourself that it's happening; you have to marshal enough
+evidence to persuade others too, and then you have to distribute that
+evidence in a thoughtful way.</para>
+-->
+<para>
+  こういった攻撃は、その性質上みんなが一斉に気づくものではありません。
+  人によっては、明白な証拠があらわれるまでそれを認めないかもしれません。
+  つまり、このような攻撃を何とか収めるのはそれなりの作業になるということです。
+  何かが起こっていると自分が気づくだけでは不十分で、
+  他のメンバーを納得させるだけの証拠を用意する必要があるのです。
+  その証拠を示す際には十分な注意が必要です。
+</para>
+
+<!--
+<para>Given that it's so much work to fight, it's often better just to
+tolerate it for a while.  Think of it like a parasitic but mild
+disease: if it's not too debilitating, the project can afford to
+remain infected, and medicine might have harmful side effects.
+However, if it gets too damaging to tolerate, then it's time for
+action.  Start gathering notes on the patterns you see.  Make sure to
+include references to public archives&mdash;this is one of the reasons
+the project keeps records, so you might as well use them.  Once you've
+got a good case built, start having private conversations with other
+project participants.  Don't tell them what you've observed; instead,
+first ask them what they've observed.  This may be your last chance to
+get unfiltered feedback about how others see the troublemaker's
+behavior; once you start openly talking about it, opinion will
+become polarized and no one will be able to remember what he
+formerly thought about the matter.</para>
+-->
+<para>
+  戦うだけの余力がない場合、とりあえずはしばらく見過ごしておくのが得策です。
+  ちょっとした感染性の病気と同じようにとらえらばいいのです。
+  プロジェクトが極端に衰弱していない限り、
+  病気に感染してもなんとかなります。
+  下手に薬に頼ると、何らかの副作用があるかもしれません。
+  しかし、無視できない程度の被害が出始めたら、それが動き出すときです。
+  まず、目にしている状況をしっかり書き留めてください。
+  公開しているアーカイブを参照するようにしましょう。
+  このような場合のためにも、プロジェクトの活動をアーカイブしておくことが大切になります。
+  よい手がかりが見つかったら、
+  次にプロジェクトの他のメンバーと個人的な話し合いをします。
+  このときに「こんな風に感じるんだけど……」と話すのではなく、まず
+  「最近何か感じることはない？」というように問いかけるようにします。
+  トラブルメーカーの行いについて他人がどう思っているのかについて聞けるのは、
+  これが最後のチャンスになるかもしれません。
+  あなたがいったんトラブルのことについて話し始めると
+  どうしても相手の意見は変化してしまい、
+  もともとどう考えていたのかを思い出せなくなってしまうでしょう。
+</para>
+
+<!--
+<para>If private discussions indicate that at least some others see
+the problem too, then it's time to do something.  That's when you
+have to get <emphasis>really</emphasis> cautious, because it's very
+easy for this sort of person to try to make it appear as though you're
+picking on them unfairly.  Whatever you do, never accuse them of
+maliciously abusing the project's procedures, of being paranoid, or, in
+general, of any of the other things that you suspect are probably
+true.  Your strategy should be to look both more reasonable and more
+concerned with the overall welfare of the project, with the goal of
+either reforming the person's behavior, or getting them to go away
+permanently.  Depending on the other developers, and your relationship
+with them, it may be advantageous to gather allies privately first.
+Or it may not; that might just create ill will behind the scenes, if
+people think you're engaging in an improper whispering
+campaign.</para>
+-->
+<para>
+  個人的な話し合いの結果、
+  同じような問題を感じている人が少なからずいるとわかったとしましょう。
+  そろそろ何か行動をおこすときです。
+  このときは <emphasis>ほんとうに</emphasis> 用心深くならなければなりません。
+  この手のトラブルメーカーは、しばしば「自分が不当にいじめられている」
+  と思い込んでしまいがちだからです。何をするにしても、
+  「プロジェクトの動きを故意に妨害している」「被害妄想に陥っている」
+  あるいはその他あなたが疑っていることが事実であると決め付けて責めたりしてはいけません。
+  あなたの最終的な目標は、もっと妥当なもので
+  かつプロジェクト全体の利益のためになるものでなければなりません。
+  彼らの振る舞いを改めさせるか、あるいは追い出してしまうか。
+  最終的にはどちらかになるでしょう。
+  あなたと他の開発者たちとの関係によっては、
+  事前に個別に手を組んで共同で責めていくことも有効かもしれません。
+  ただ、それが裏目に出ることもあります。
+  裏でこそこそと何かをして中傷しているようにとられたら、
+  あまりよく思われないかもしれません。
+</para>
+
+<!--
+<para>Remember that although the other person may be the one behaving
+destructively, <emphasis>you</emphasis> will be the one who appears
+destructive if you make a public charge that you can't back up.  Be
+sure to have plenty of examples to demonstrate what you're saying, and
+say it as gently as possible while still being direct.  You may not
+persuade the person in question, but that's okay as long as you
+persuade everyone else.</para>
+-->
+<para>
+  たとえまずい行動をしたのが手を組んだ相手のほうだったとしても、
+  言い出したのがあなたである以上、周りから見ればまずい行動をしたのは
+  <emphasis>あなた</emphasis> だということになります。
+  自分のいいたいことを示す例をできるだけ多く集めるようにしましょう。
+  そして、できるだけやさしく紳士的に説得するようにするのです。
+  もしかしたら問題の当事者を説得しきれないかもしれません。
+  しかし、その他大勢の人たちを説得できればそれで十分です。
+</para>
+
+</sect2>
+
+<sect2 id="difficult-people-case-study">
+<!--
+<title>Case study</title>
+-->
+<title>実例</title>
+
+<!--
+<para>I remember only one situation, in more than 10 years of working
+in free software, where things got so bad that we actually had to ask
+someone to stop posting altogether.  As is so often the case, he was
+not rude, and sincerely wanted only to be helpful.  He just didn't
+know when to post and when not to post.  Our lists were open to the
+public, and he was posting so often, and asking questions on so many
+different topics, that it was getting to be a noise problem for the
+community.  We'd already tried asking him nicely to do a little more
+research for answers before posting, but that had no effect.</para>
+-->
+<para>
+  私がフリーソフトウェアにかかわりだしてから 10 年以上たちますが、
+  私が覚えている限り、これまでにこのようなことが起こったのは一度だけです。
+  そのときは、実際に投稿をやめてもらうよう働きかけるはめになりました。
+  このような場合によくありがちなことですが、
+  実際のところ彼はまったく悪気はなく、良かれと思ってやっていただけでした。
+  彼は単に、投稿すべきときと控えるべきときの区別ができなかったのです。
+  私たちのメーリングリストは一般に公開されており、
+  彼は非常に頻繁にそこに投稿していました。
+  さまざまな内容について質問を繰り返すこともあり、
+  コミュニティーの間で徐々に目障りに感じられるようになってきました。
+  質問を投稿する前に少しは自分で調べるようにやさしくお願いしてはみたのですが、
+  彼には何の効果もありませんでした。
+</para>
+
+<!--
+<para>The strategy that finally worked is a perfect example of how to
+build a strong case on neutral, quantitative data.  One of our
+developers did some digging in the archives, and then sent the
+following message privately to a few developers.  The offender (the
+third name on the list below, shown here as "J. Random") had very
+little history with the project, and had contributed no code or
+documentation.  Yet he was the third most active poster on the mailing
+lists:</para>
+-->
+<para>
+  最終的に有効だったのは、完全に中立で定量的なデータを示すことでした。
+  開発者のひとりがアーカイブを調べ、
+  以下のようなメッセージを何人かの開発者に個別に送ったのです。
+  問題の人 (以下の一覧における 3 番目の人。ここでは仮に "J. Random" とします)
+  がプロジェクトにかかわり始めてから日がまだ浅いこと、
+  そしてコードやドキュメントに一切貢献していないこと。
+  なのにメーリングリストの投稿ランキングでは 3 番目になっていることがわかります。
+</para>
+
+<!--
+<screen>
+From: "Brian W. Fitzpatrick" &lt;fitz@collab.net&gt;
+To: [... recipient list omitted for anonymity ...]
+Subject: The Subversion Energy Sink
+Date: Wed, 12 Nov 2003 23:37:47 -0600
+
+In the last 25 days, the top 6 posters to the svn [dev|users] list have
+been:
+
+    294  kfogel@collab.net
+    236  "C. Michael Pilato" &lt;cmpilato@collab.net&gt;
+    220  "J. Random" &lt;jrandom@problematic-poster.com&gt;
+    176  Branko &Ccaron;ibej &lt;brane@xbc.nu&gt;
+    130  Philip Martin &lt;philip@codematters.co.uk&gt;
+    126  Ben Collins-Sussman &lt;sussman@collab.net&gt;
+
+I would say that five of these people are contributing to Subversion
+hitting 1.0 in the near future.
+
+I would also say that one of these people is consistently drawing time
+and energy from the other 5, not to mention the list as a whole, thus
+(albeit unintentionally) slowing the development of Subversion.  I did
+not do a threaded analysis, but vgrepping my Subversion mail spool tells
+me that every mail from this person is responded to at least once by at
+least 2 of the other 5 people on the above list.
+
+I think some sort of radical intervention is necessary here, even if we
+do scare the aforementioned person away.  Niceties and kindness have
+already proven to have no effect.
+
+dev@subversion is a mailing list to facilitate development of a version
+control system, not a group therapy session.
+
+-Fitz, attempting to wade through three days of svn mail that he let
+ pile up
+</screen>
+-->
+<screen>
+From: "Brian W. Fitzpatrick" &lt;fitz@collab.net&gt;
+To: [... 匿名性を確保するため、送信先は省略します ...]
+Subject: The Subversion Energy Sink
+Date: Wed, 12 Nov 2003 23:37:47 -0600
+
+過去25日間の svn [dev|users] リストの投稿数トップ6は以下のとおりです。
+
+    294  kfogel@collab.net
+    236  "C. Michael Pilato" &lt;cmpilato@collab.net&gt;
+    220  "J. Random" &lt;jrandom@problematic-poster.com&gt;
+    176  Branko &Ccaron;ibej &lt;brane@xbc.nu&gt;
+    130  Philip Martin &lt;philip@codematters.co.uk&gt;
+    126  Ben Collins-Sussman &lt;sussman@collab.net&gt;
+
+この中の5人は、近々発表予定の Subversion 1.0 に貢献してくれている人たち
+です。
+
+また、この中の1人は、他の5人の足を引っ張って時間と気力を浪費させているだ
+けの人です。彼のおかげでメーリングリストが停滞するだけでなく、無意識のう
+ちにSubversionの開発自体も速度が低下してしまっています。詳細な解析をした
+わけではありません。ただ、Subversionメーリングリストのスプールをざっと
+grepしてみたところ、この人物がメールを投稿するたびに、他の5人の中の少な
+くとも2人が返信をするはめになってしまっているようです。
+
+そろそろ何らかの行動を起こすべきときじゃないでしょうか？ たとえそれで当
+該人物がここから去ってしまうことになってもやむを得ません。控えめにやさし
+く説得するだけでは何の効果もないことはすでに証明されています。
+
+dev@subversion はバージョン管理システムの開発を手助けするためのメーリン
+グリストであり、グループセラピーを行う場所ではありません。
+
+- 3日もの間、大量のメールと格闘し続けた Fitz より
+</screen>
+
+<!--
+<para>Though it might not seem so at first, J. Random's behavior was a
+classic case of abusing project procedures.  He wasn't doing something
+obvious like trying to filibuster a vote, but he was taking advantage
+of the mailing list's policy of relying on self-moderation by its
+members.  We left it to each individual's judgement when to post and
+on what topics.  Thus, we had no procedural recourse for dealing with
+someone who either did not have, or would not exercise, such judgement.
+There was no rule one could point to and say the fellow was violating
+it, yet everyone knew that his frequent posting was getting to be a
+serious problem.</para>
+-->
+<para>
+  最初のうちは気づかなかったのですが、J. Random (仮名)
+  の振る舞いはプロジェクトの進行を妨げる典型的なものでした。
+  彼は、議事の進行を妨害しようとするなどの具体的な行動をとったわけではありません。
+  ただ「各メンバーに節度を持った対応を期待する」という
+  メーリングリストの方針をうまく利用していたということです。
+  私たちは「どんなネタをどんなときに投稿すべきか」といった判断は
+  完全に各個人に任せていたのです。
+  したがって、誰かが不適切な投稿をしたり
+  それを改善するそぶりを見せなかったりしても、
+  私たちはどうすることもできなかったのです。
+  彼が頻繁に投稿を繰り返すことを他のメンバーはみんな気にしていたのですが、
+  「それは○○という規則に違反している」と指摘する根拠はなかったのです。
+</para>
+
+<!--
+<para>Fitz's strategy was, in retrospect, masterful.  He gathered
+damning quantitative evidence, but then distributed it discreetly,
+sending it first to a few people whose support would be key in any
+drastic action.  They agreed that some sort of action was necessary,
+and in the end we called J. Random on the phone, described the problem
+to him directly, and asked him to simply stop posting.  He never
+really did understand the reasons why; if he had been capable
+of understanding, he probably would have exercised appropriate
+judgement in the first place.  But he agreed to stop posting, and the
+mailing lists became useable again.  Part of the reason this strategy
+worked was, perhaps, the implicit threat that we could start
+restricting his posts via the moderation software normally used for
+preventing spam (see
+<xref linkend="spam-prevention"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>).  But the
+reason we were able to have that option in reserve was that Fitz had
+gathered the necessary support from key people first.</para>
+-->
+<para>
+  当時の Fitz のやり方は、巧妙なものでした。
+  彼はまず定量的な証拠を集めました。そして、それを慎重に広めたのです。
+  まずは、仲間になってくれると心強いと思われるごく一部の人たちにだけ
+  それを伝えるようにしました。
+  何らかの対応が必要だと合意した彼らは、J. Random
+  に電話をかけて問題点を直接指摘し、投稿を控えてくれるよう頼みました。
+  彼は、なぜそんなことを言われなければならないのかをわかっていないようでした。
+  まあ、もしわかってくれるだけの人であれば、
+  最初からこんな問題は起こらなかったでしょうけどね。
+  結局、彼は投稿をやめることに同意してくれました。
+  そしてメーリングリストは通常どおりに戻ったのです。
+  最終的にこの作戦がうまくいった理由のひとつは
+  「彼の投稿をスパム対策用のソフトウェア
+  (<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase> の
+  <xref linkend="spam-prevention"/> をご覧ください)
+  で拒否することもできるんだよ」
+  という圧力を遠まわしに与えたことにもありました。
+  しかし、このような圧力を与えることができたのも、
+  Fitz が最初に主要人物に根回しをしておいたからこそです。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="growth">
+<!--
+<title>Handling Growth</title>
+-->
+<title>巨大化への対応</title>
+
+<!--
+<para>The price of success is heavy in the open source world.  As your
+software gets more popular, the number of people who show up looking
+for information increases dramatically, while the number of people
+able to provide information increases much more slowly.  Furthermore,
+even if the ratio were evenly balanced, there is still a fundamental
+scalability problem with the way most open source projects handle
+communications.  Consider mailing lists, for example.  Most projects
+have a mailing list for general user questions&mdash;sometimes the
+list's name is "users", "discuss", "help", or something else.
+Whatever its name, the purpose of the list is always the same: to
+provide a place where people can get their questions answered, while
+others watch and (presumably) absorb knowledge from observing these
+exchanges.</para>
+-->
+<para>
+  オープンソース界では、成功の代償は重いものです。
+  あなたの書いたソフトウェアが有名になればなるほど、
+  その情報を知りたがる人の数も劇的に増加します。
+  一方、みんながほしがっている情報を提供できる人の数は、
+  それほど急激に増えることはありません。
+  さらに、たとえ情報をほしがる人と情報を提供する人の増加率が
+  うまい具合にバランスがとれていたとしても、
+  オープンソースプロジェクトのメンバー間でのコミュニケーションは
+  人数が増えれば増えるほど面倒になります。
+  たとえばメーリングリストを考えてみましょう。
+  たいていのプロジェクトには、一般的なユーザー向けのメーリングリストがあります。
+  いわゆる "users" とか "discuss" とか "help"
+  などといった名前のメーリングリストです。
+  名前が何であるかにかかわらず、これらのメーリングリストの目的は同じです。
+  疑問がある人が質問をすれば何らかの答えが得られるということ、
+  そして、それらのやり取りをただ眺めていることで
+  それなりの知識を得られるということです。
+</para>
+
+<!--
+<para>These mailing lists work very well up to a few thousand users
+and/or a couple of hundred posts a day.  But somewhere after that, the
+system starts to break down, because every subscriber sees every post;
+if the number of posts to the list begins to exceed what any
+individual reader can process in a day, the list becomes a burden to
+its members.  Imagine, for instance, if Microsoft had such a mailing
+list for Windows XP.  Windows XP has hundreds of millions of users; if
+even one-tenth of one percent of them had questions in a given
+twenty-four hour period, then this hypothetical list would get
+hundreds of thousands of posts per day!  Such a list could never
+exist, of course, because no one would stay subscribed to it.
+This problem is not limited to mailing lists; the same logic applies
+to IRC channels, online discussion forums, indeed to any system in
+which a group hears questions from individuals.  The implications are
+ominous: the usual open source model of massively parallelized support
+simply does not scale to the levels needed for world
+domination.</para>
+-->
+<para>
+  この手のメーリングリストのメンバーは数千人になることも珍しくありません。
+  また、一日あたりの投稿数が数百になることもよくあります。
+  しかし、このくらいの規模になってくると、システムは徐々に破綻しはじめます。
+  個々のメンバーが一日にさばききれない量のメッセージを受け取るようになると、
+  メーリングリストのメッセージがその人にとって重荷になってしまうでしょう。
+  考えてもみましょう。たとえば、Microsoft が Windows XP
+  用にこの手のメーリングリストを開設したとします。
+  Windows XP を使っている人は、世界中に何億人といます。
+  そのうちのほんの 0.1% の人が 24 時間のうちにひとつの質問を投稿したとすると、
+  この仮想メーリングリストの一日の投稿数は10万通にもなってしまいます!
+  もちろん、実際にはそんなメーリングリストは存在しません。
+  もしあったとしても、だれもそんなメーリングリストのメンバーでい続けることはできないでしょう。
+  これはメーリングリストに限った問題ではありません。
+  IRC チャンネルやオンラインの掲示板、
+  その他個人からの質問を受け付けるあらゆるシステムには同じ論理があてはまります。
+  この論理が示唆するところはあまり思わしくありません。
+  オープンソースモデルでしっかりとしたサポートを続けようとすると、
+  世界征服できるほどにまでプロジェクトの規模を拡大するのは不可能だということです。
+</para>
+
+<!--
+<para>There will be no explosion when forums reach the breaking point.
+There is just a quiet negative feedback effect: people unsubscribe
+from the lists, or leave the IRC channel, or at any rate stop
+bothering to ask questions, because they can see they won't be heard
+in all the noise.  As more and more people make this highly rational
+choice, the forum's activity will seem to stay at a manageable level.
+But it is staying manageable precisely because the rational (or at
+least experienced) people have started looking elsewhere for
+information&mdash;while the inexperienced people stay behind and
+continue posting.  In other words, one side effect of continuing to
+use unscalable communications models as the project grows is that the
+average quality of both questions and answers tends to go down, which
+makes it look like new users are dumber than they used to be, when in
+fact they're probably not.  It's just that the benefit/cost ratio of
+using those high-population forums goes down, so naturally those with
+the experience to do so start to look elsewhere for answers first.
+Adjusting communications mechanisms to cope with project growth
+therefore involves two related strategies:</para>
+-->
+<para>
+  メーリングリストや掲示板の規模が臨界点に達しても、
+  大爆発が発生するといったことはありません。
+  負の反応は、静かに出てくることになります。
+  たとえばメーリングリストから脱退する人や
+  IRC チャンネルから去る人が出てきたり、
+  ノイズが目障りだという理由で質問を控える人が出てきたりといった具合です。
+  人がみなこのように合理的な選択をすれば、
+  掲示板の規模はある程度管理可能な範囲で落ち着くのでは?
+  と考える人がいるかもしれません。
+  しかし、このような場合にまずメーリングリストから去っていくのは、
+  たいていの場合は経験を積んだメンバーです。
+  一方、参加して日が浅い人たちはそのままそこに残ったままでいるでしょう。
+  つまり、プロジェクトの規模が大きくなりすぎても
+  まだ同じコミュニケーションモデルを使用していると、
+  その場における質問や回答のレベルが徐々に低下していくということになります。
+  まるで、(実際にはそうではないかもしれないのに)
+  新参者のほうが古参メンバーより劣っているというように見えてしまうかもしれません。
+  このような状況になると、古株のメンバーは
+  そこに参加するメリットをあまり感じられなくなり、
+  どこか他の場所を探すようになるでしょう。
+  プロジェクトの規模が拡大したときにコミュニケーションの仕組みをどうするか。
+  これには、次のふたつの戦略がかかわってきます。
+</para>
+
+<orderedlist>
+<!--
+  <listitem><para>Recognizing when particular parts of a forum are
+            <emphasis>not</emphasis> suffering unbounded growth, even
+            if the forum as a whole is, and separating those parts
+            off into new, more specialized forums (i.e., don't let
+            the good be dragged down by the bad).</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      全体としては巨大化の悪影響が出てきつつあるようだが、
+      特定の分野の話題についてはまだその影響を受けて<emphasis>いない</emphasis>
+      というところを見つけたら、その分野の話題だけに特化した会議室を新たに作成する
+      (つまり、被害が及ばないうちに他の場所に避難させる)。
+    </para>
+  </listitem>
+<!--
+  <listitem><para>Making sure there are many automated sources
+            of information available, and that they are kept
+            organized, up-to-date, and easy to find.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      情報を自動的に取得できる場所を多く確保し、
+      それをきちんと系統立てて管理する。
+      また、常に最新の情報を反映させ、人が見つけやすいようにする。
+    </para>
+  </listitem>
+</orderedlist>
+
+<!--
+<para>Strategy (1) is usually not too hard.  Most projects start out
+with one main forum: a general discussion mailing list, on which
+feature ideas, design questions, and coding problems can all be hashed
+out.  Everyone involved with the project is on the list.  After a
+while, it usually becomes clear that the list has evolved into several
+distinct topic-based sublists.  For example, some threads are clearly
+about development and design; others are user questions of the "How do
+I do X?" variety; maybe there's a third topic family centered around
+processing bug reports and enhancement requests; and so on.  A given
+individual, of course, might participate in many different thread
+types, but the important thing is that there is not a lot of overlap
+between the types themselves.  They could be divided into separate
+lists without causing any harmful balkanization, because the threads
+rarely cross topic boundaries.</para>
+-->
+<para>
+  作戦 (1) は、通常はそんなに難しくありません。
+  たいていのプロジェクトは、最初はメーリングリストがひとつだけで始まります。
+  そこでは、一般的な議論のほかに、機能追加の要望や設計に関する疑問、
+  コーディングに関する問題などさまざまな内容をごちゃ混ぜにして扱います。
+  そしてプロジェクトにかかわるすべての人たちがそのメーリングリストに参加しています。
+  しばらくすると、扱う内容によって
+  いくつかのメーリングリストに分割したほうがよいということがわかってきます。
+  たとえば、あるスレッドでは開発に関連する話題が盛り上がっており、
+  別のスレッドでは、いわゆる「○○をするにはどうすればいいの？」
+  的な質問が行われ、また別のスレッドではバグレポートや機能追加要求が行われていたりといった具合です。
+  中にはこれらのスレッドの複数に参加する人もいるかもしれませんが、
+  ここで重要なのは、これら異なるタイプのスレッドには
+  共通点がほとんどないということです。
+  ということで、これらの話題をそれぞれ個別のメーリングリストに分割しても、
+  特に弊害は出ないでしょう。
+</para>
+
+<!--
+<para>Actually doing this division is a two-step process.  You create
+the new list (or IRC channel, or whatever it is to be), and then you
+spend whatever time is necessary gently nagging and reminding people
+to <emphasis>use</emphasis> the new forums appropriately.  That latter
+step can last for weeks, but eventually people will get the idea.  You
+simply have to make a point of always telling the sender when a post
+is sent to the wrong destination, and do so visibly, so that other
+people are encouraged to help out with routing.  It's also useful to
+have a web page providing a guide to all the lists available; your
+responses can simply reference that web page and, as a bonus, the
+recipient may learn something about looking for guidelines before
+posting.</para>
+-->
+<para>
+  この分割は、二段階の手順を踏んで行います。
+  まず新しいメーリングリスト (あるいは IRC チャンネルなど) を作成し、
+  次にそのメーリングリストを適切に使用するよう、
+  他の人たちを誘導することになります。
+  後半の作業は数週間程度の時間をかけて行うことになりますが、
+  それくらいあれば人はみなその考えを理解してくれるでしょう。
+  あなたがすべきことは、間違った場所に投稿してきた人に対して
+  他人にも見える場所でそれを指摘してあげることです。
+  そうすれば、他の人たちはいちいち指摘されなくても新しい場所を利用することになるでしょう。
+  すべてのメーリングリストの一覧をまとめたウェブページを作成するのも有用です。
+  他の人に新しい場所を指定する代わりに、そのページを参照させるだけでよくなります。
+  うまくいけば、他のメンバーも投稿の前にそのページを参照してくれるようになるかもしれません。
+</para>
+
+<!--
+<para>Strategy (2) is an ongoing process, lasting the lifetime of the
+project and involving many participants.  Of course it is partly a
+matter of having up-to-date documentation (see
+<xref linkend="documentation"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase>) and making sure to
+point people there.  But it is also much more than that; the sections
+that follow discuss this strategy in detail.</para>
+-->
+<para>
+  作戦 (2) は、そのプロジェクトが存続する限りずっと続けることになる作業です。
+  もちろんこれは、ドキュメントを常に最新の状態に保って
+  (<phrase output="printed"><xref linkend="getting-started"/></phrase>
+  の <xref linkend="documentation"/> をご覧ください)
+  みんなをそこに誘導するという作業の一環でもあります。
+  しかし、それ以外にも考慮すべき点があります。
+  次のセクションでは、こちらの作戦について詳しく見ていきます。
+</para>
+
+<!-- ======================== SECTION ============================== -->
+<sect2 id="using-archives">
+<!--
+<title>Conspicuous Use of Archives</title>
+-->
+<title>アーカイブを目に付きやすくする方法</title>
+
+<!--
+<para>Typically, all communications in an open source project (except
+sometimes IRC conversations) are archived.  The archives are public
+and searchable, and have referential stability: that is, once a given
+piece of information is recorded at a particular address, it stays at
+that address forever.</para>
+-->
+<para>
+  通常は、オープンソースプロジェクトにおけるあらゆるやり取りの内容は
+  (IRC での会話は例外として) 保存されます。
+  そのアーカイブは、一般に公開された検索可能な場所に配置され、
+  常に参照できるようになります。すなわち、
+  なんらかの情報が特定の場所に保存されたら、
+  それは常に同じ場所に存在する必要があるということです。
+</para>
+
+<!--
+<para>Use those archives as much as possible, and as conspicuously as
+possible.  Even when you know the answer to some question off the top
+of your head, if you think there's a reference in the archives that
+contains the answer, spend the time to dig it up and present it.
+Every time you do that in a publicly visible way, some people learn
+for the first time that the archives are there, and that searching in
+them can produce answers.  Also, by referring to the archives instead
+of rewriting the advice, you reinforce the social norm against
+duplicating information.  Why have the same answer in two different
+places?  When the number of places it can be found is kept to a
+minimum, people who have found it before are more likely to remember
+what to search for to find it again.  Well-placed references also
+contribute to the quality of search results in general, because they
+strengthen the targeted resource's ranking in Internet search
+engines.</para>
+-->
+<para>
+  できるだけこれらのアーカイブを活用し、その存在を広めるようにしましょう。
+  たとえわかりきった内容の質問に答える場合であっても、
+  その答えを含むアーカイブがありそうなら
+  それを探して場所を示したほうがいいでしょう。
+  あなた自身が常にそのようにするよう心がけていると、
+  「アーカイブがそこにある」「アーカイブを検索すれば答えが得られる」
+  ということに気づいてくれる人もあらわれるでしょう。
+  また、同じ内容を改めて書き直すのではなくアーカイブを参照させるようにすることで、
+  「同じ情報を重複させない」という指針を守ることができます。
+  同じ回答をわざわざいろんな場所に分散させる必要なんてありますか?
+  このような重複をできるだけ減らすように心がければ、
+  ある回答に以前にたどり着いた人が、
+  それを再び見つけ出すことも簡単になるでしょう。
+  参照をうまく利用することは、検索結果全般にもよい影響を与えます。
+  というのも、インターネットのサーチエンジンは
+  他の場所から多く参照されているリソースを重視するからです。
+</para>
+
+<!--
+<para>There are times when duplicating information makes sense,
+however.  For example, suppose there's a response already in the
+archives, not from you, saying:</para>
+-->
+<para>
+  しかし、場合によっては情報を多重化してもいいこともあります。
+  たとえば、あなた以外の人が投稿した次のようなメッセージが
+  アーカイブ内にすでにあるとしましょう。
+</para>
+
+<!--
+<screen>
+It appears that your Scanley indexes have become frobnicated.  To
+unfrobnicate them, run these steps:
+
+1. Shut down the Scanley server.
+2. Run the 'defrobnicate' program that ships with Scanley.
+3. Start up the server.
+</screen>
+-->
+<screen>
+おそらく Scanley のインデックスが狂い始めているのでしょう。
+復旧させるには次の手順を実行してください。
+
+1. Scanley サーバを停止する
+2. Scanley に同梱されているプログラム 'defrobnicate' を実行する
+3. サーバを立ち上げる
+</screen>
+
+<!--
+<para>Then, months later, you see another post indicating that
+someone's indexes have become frobnicated.  You search the archives
+and come up with the old response above, but you realize it's missing
+some steps (perhaps by mistake, or perhaps because the software has
+changed since that post was written).  The classiest way to handle
+this is to post a new, more complete set of instructions, and
+explicitly obsolete the old post by mentioning it:</para>
+-->
+<para>
+  数ヵ月後に、また別の人が「インデックスがおかしいみたいなんです」
+  という投稿をしてきたとしましょう。アーカイブを検索したあなたは
+  先ほどのメッセージを見つけました。でも、そのメッセージの手順にはすこし不備があるようです
+  (単なる間違いなのか、あるいはその当時とは仕様が変わったのかといったところでしょう)。
+  こんなときのイケてるやりかたは、
+  作業手順をきちんとまとめなおしたメッセージを新たに投稿し、
+  そこで「以前の投稿は内容が古くなっている」と明記しておくことです。
+</para>
+
+<!--
+<screen>
+It appears that your Scanley indexes have become frobnicated.  We
+saw this problem back in July, and J. Random posted a solution at
+http://blahblahblah/blah.  Below is a more complete description of
+how to unfrobnicate your indexes, based on J. Random's instructions
+but extending them a bit:
+
+1. Shut down the Scanley server.
+2. Become the user the Scanley server normally runs as.
+3. As that user, run the 'defrobnicate' program on the indexes.
+4. Run Scanley by hand to see if the indexes work now.
+5. Restart the server.
+</screen>
+-->
+<screen>
+おそらく Scanley のインデックスが狂い始めているのでしょう。
+7 月にも同じような投稿があり、J. Random がそれに対して回答しています。
+その回答は http://blahblahblah/blah にあります。以下に示す手順は、
+J. Random が示した手順をもう少しきちんと補足したものです。
+
+1. Scanley サーバを停止する
+2. Scanley サーバを実行しているユーザーになる
+3. そのユーザーで、'defrobnicate' プログラムを実行する
+4. Scanley を手動で起動し、インデックスが正常になったことを確認する
+5. サーバを再起動する
+</screen>
+
+<!--
+<para>(In an ideal world, it would be possible to attach a note to the
+old post, saying that there is newer information available and
+pointing to the new post.  However, I don't know of any archiving
+software that offers an "obsoleted by" feature, perhaps because it
+would be mildly tricky to implement in a way that doesn't violate the
+archives' integrity as a verbatim record.  This is another reason why
+creating dedicated web pages with answers to common questions is a
+good idea.)</para>
+-->
+<para>
+  (理想を言えば、古いほうの投稿にメモをつけて
+  「この内容は古くなっています。新しい情報はこちらです」
+  といったことが指定できればいいのでしょう。
+  しかし、私の知る限り、このような「新しい情報はこちら」
+  機能を持ったアーカイブソフトウェアは存在しないようです。
+  おそらく、アーカイブの内容の整合性を失わずにこの機能を実装するのは
+  少し手間のかかることなのでしょう。
+  こういうこともあるので、よくある質問とその回答については
+  専用のウェブページを作成しておくことをお勧めするのです)
+</para>
+
+<!--
+<para>Archives are probably most often searched for answers to
+technical questions, but their importance to the project goes well
+beyond that.  If a project's formal guidelines are its statutory law,
+the archives are its common law: a record of all decisions made and
+how they were arrived at.  In any recurring discussion, it's pretty
+much obligatory nowadays to start with an archive search.  This allows
+you to begin the discussion with a summary of the current state of
+things, anticipate objections, prepare rebuttals, and possibly
+discover angles you hadn't thought of.  Also, the other participants
+will <emphasis>expect</emphasis> you to have done an archive search.
+Even if the previous discussions went nowhere, you should include
+pointers to them when you re-raise the topic, so people can see for
+themselves a) that they went nowhere, and b) that you did your
+homework, and therefore are probably saying something now that has not
+been said before.</para>
+-->
+<para>
+  アーカイブの使用法として最もよくあるのは、
+  技術的な質問に対する答えを探すというものでしょう。
+  しかし、プロジェクトにとってのアーカイブの重要性は、それをはるかに上回るものです。
+  そのプロジェクトの公式なガイドラインがいわば「制定法」であるとするなら、
+  アーカイブはそのプロジェクトの「慣習法」といえます。
+  すなわち、これまでに行われたあらゆる議論の流れとその結論がアーカイブから得られるのです。
+  以前と同じような議論を繰り返す際には、まずアーカイブを検索してみるのが義務といえるでしょう。
+  そうすれば、現在の状況や予想される反論を知ることができ、
+  それに対する反証の準備をすることができます。
+  おそらく自分では思いつかなかった角度からの意見も見つけることができるでしょう。
+  また、他のメンバーもあなたがすでにアーカイブを検索しているものとして話を進めるでしょう。
+  たとえ以前の議論で何の結論も出ていなかったとしても、
+  その議論を再開する際には以前の議論へのポインタを示すべきです。
+  そうすることで、他のメンバーは
+  「その議論の結論がまだ出ていない」そして「あなたがやるべきことをやっている」
+  つまり、あなたの意見はこれまでの議論の繰り返しではないのだろうということをわかってくれます。
+</para>
+
+<sect3 id="all-as-archives">
+<!--
+<title>Treat all resources like archives</title>
+-->
+<title>全リソースをアーカイブと同様に扱う</title>
+
+<!--
+<para>All of the preceding advice applies to more than just mailing
+list archives.  Having particular pieces of information at stable,
+conveniently findable addresses should be an organizing principle for
+all of the project's information.  Let's take the project FAQ as a
+case study.</para>
+-->
+<para>
+  これまでのアドバイスは、単なるメーリングリストのアーカイブだけにあてはまるものではありません。
+  特定の情報は常に同じ場所で得られるようにする、
+  見つけやすい場所に置くなどといった原則は、
+  プロジェクトのすべての情報に対して同様にあてはまるものです。
+  プロジェクトの FAQ を例にして考えてみましょう。
+</para>
+
+<!--
+<para>How do people use a FAQ?</para>
+-->
+<para>人は FAQ をどのように使うのでしょう?</para>
+
+<orderedlist>
+  <listitem>
+<!--
+    <para>They want to search in it for specific words and phrases.</para>
+-->
+    <para>
+      適当な単語やフレーズを入力して検索できればいいですね。
+    </para>
+  </listitem>
+  <listitem>
+<!--
+    <para>They want to browse it, soaking up information without
+          necessarily looking for answers to specific questions.</para>
+-->
+    <para>
+      単に特定の質問に対する答えを探すというだけでなく、
+      全体をざっと眺めたいこともあるでしょう。
+    </para>
+  </listitem>
+  <listitem>
+<!--
+    <para>They expect search engines such as Google to know about the
+          FAQ's content, so that searches can result in FAQ entries.</para>
+-->
+    <para>
+      Google のようなサーチエンジンでも
+      FAQ の内容を見つけられるようにしてほしいと思うことでしょう。
+    </para>
+  </listitem>
+  <listitem>
+<!--
+    <para>They want to be able to refer other people directly to specific
+          items in the FAQ.</para>
+-->
+    <para>
+      FAQ の特定の項目を直接指し示せるようにもしたいものです。
+    </para>
+  </listitem>
+  <listitem>
+<!--
+    <para>They want to be able to add new material to the FAQ, but
+          note that this happens much less often than answers are
+          looked up&mdash;FAQs are far more often read from than
+          written to.</para>
+-->
+    <para>
+      FAQ に新たな内容を追加できるようにもしたいでしょう。
+      しかし、注意すべきなのは、FAQ への新たな内容の追加は
+      FAQ の検索よりもはるかに頻度の低いものであるということです。
+      FAQ は、書き込むよりも読まれるほうが圧倒的に多いものです。
+    </para>
+  </listitem>
+</orderedlist>
+
+<!--
+<para>Point 1 implies that the FAQ should be available in some sort of
+textual format.  Points 2 and 3 imply that the FAQ should be available
+as an HTML page, with point 2 additionally indicating that the HTML
+should be designed for readability (i.e., you'll want some control
+over its look and feel), and should have a table of contents.  Point 4
+means that each individual entry in the FAQ should be assigned an HTML
+<firstterm>named anchor</firstterm>, a tag that allows people to reach
+a particular location on the page.  Point 5 means the source files for
+the FAQ should be available in a convenient way (see <xref
+linkend="version-everything"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>), in a format
+that's easy to edit.</para>
+-->
+<para>
+  1. は、つまり FAQ が何らかのテキスト形式でなければならないということです。
+  2. と 3. が言わんとしていることは、FAQ が
+  HTML ページとして存在しなければならないということです。
+  2. はさらに、HTML が読みやすい形式であること
+  (つまり、その見栄えを変更できること)
+  や目次を持っていることも要求しています。
+  4. を満たすには、FAQ の各項目に HTML の
+  <firstterm>名前付きアンカー</firstterm> を指定しておく必要があります。
+  それによって、ページ内の特定の場所に直接到達できるようになります。
+  5. が意味するところは、FAQ のソースファイルの取得が容易であり
+  (<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase>
+  の <xref linkend="version-everything"/> をご覧ください)、
+  また編集しやすいものでなければならないということです。
+</para>
+
+  <sidebar id="html-named-anchors-and-ids">
+<!--
+  <title>Named Anchors and ID Attributes</title>
+-->
+  <title>名前付きアンカーと ID 属性</title>
+
+<!--
+  <para>There are two ways to get a browser to jump to a specific
+  location within a web page: named anchors and id attributes.</para>
+-->
+  <para>
+    ウェブページ内の特定の場所に直接移動させるには、
+    名前付きアンカーを使う方法と id 属性を使う方法の二通りがあります。
+  </para>
+
+<!--
+  <para>A <firstterm>named anchor</firstterm> is just a normal HTML
+  anchor element (<literal>&lt;a&gt;...&lt;/a&gt;</literal>), but with
+  a "name" attribute:</para>
+-->
+  <para>
+    <firstterm>名前付きアンカー</firstterm> は単なる HTML の
+    アンカー要素 (<literal>&lt;a&gt;...&lt;/a&gt;</literal>)
+    と同じで、そこに "name" 属性を追加したものです。
+  </para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&gt;...&lt;/a&gt;</screen>
+
+<!--
+  <para>More recent versions of HTML support a generic <firstterm>id
+  attribute</firstterm>, which can be attached to any HTML element,
+  not just to <literal>&lt;a&gt;</literal>.  For example:</para>
+-->
+  <para>
+    最近のバージョンの HTML では、より汎用的な <firstterm>id
+    属性</firstterm> をサポートしており、<literal>&lt;a&gt;</literal>
+    だけでなく任意の HTML 要素で使用することができます。
+    たとえば次のように使用します。
+  </para>
+
+  <screen>&lt;p&nbsp;id="mylabel"&gt;...&lt;/p&gt;</screen>
+
+<!--
+  <para>Both named anchors and id attributes are used in the same
+  way.  One appends a hash mark and the label to a URL, to cause the
+  browser to jump straight to that spot in the page:</para>
+-->
+  <para>
+    名前付きアンカーと id 属性の使用法は、どちらも同じです。
+    URL の最後にハッシュマーク (#) に続けてラベルを指定すると、
+    ブラウザはページ内のその場所に直接移動するようになります。
+  </para>
+
+  <screen>http://myproject.example.com/faq.html#mylabel</screen>
+
+<!--
+  <para>Virtually all browsers support named anchors; most modern
+  browsers support the id attribute.  To play it safe, I would
+  recommend using either named anchors alone, or named anchors
+  <emphasis>and</emphasis> id attributes together (with the same label
+  for both in a given pair, of course).  Named anchors cannot be
+  self-closing&mdash;even if there's no text inside the element, you
+  must still write it in two-sided form:</para>
+-->
+  <para>
+    名前付きアンカーは事実上すべてのブラウザがサポートしており、
+    最近のブラウザのほとんどは id 属性にも対応しています。
+    万全を期すなら、名前付きアンカーだけを用いるか
+    名前付きアンカーと id 属性を <emphasis>併用</emphasis> する
+    (もちろん、そのときは両者に同じラベルを指定する)
+    ことをおすすめします。名前付きアンカーについては、
+    開始要素と終了要素をひとつにまとめることはできません。
+    たとえ要素内のテキストが存在しない場合でも、
+    以下のように開始要素と終了要素を別々に書かなければなりません。
+  </para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&gt;&lt;/a&gt;</screen>
+
+<!--
+  <para>...though normally there would be some text, such as the title
+  of a section.</para>
+-->
+  <para>
+    ……とはいえ、普通はここには (セクションのタイトルなど)
+    何らかのテキストが入るものです。
+  </para>
+
+<!--
+  <para>Whether you use a named anchor, or an id attribute, or both,
+  remember that the label will not be visible to someone who browses
+  to that location without using the label.  But such a person might
+  want to discover the label for a particular location, so they can
+  mail the URL for a FAQ answer to a friend, for example.  To help
+  them do this, add a <firstterm>title attribute</firstterm> to the
+  same element(s) where you added the "name" and/or "id" attribute,
+  for example:</para>
+-->
+  <para>
+    名前付きアンカーを使うにしても id 属性を使うにしても、
+    ラベルを指定してアクセスしない限りはブラウザ上でそのラベルは見えないことに注意しましょう。
+    しかし、たとえば FAQ の特定の回答をメールで示したい場合など、
+    その場所のラベルが何なのかを知りたいこともあるでしょう。
+    このような場合のために、"name" や "id" 属性を指定した場合は
+    <firstterm>title 属性</firstterm> も同じ要素に指定しておくとよいでしょう。
+    たとえば次のようにします。
+  </para>
+
+  <screen>&lt;a&nbsp;name="mylabel"&nbsp;title="#mylabel"&gt;...&lt;/a&gt;</screen>
+
+<!--
+  <para>When the mouse pointer is held over the text inside the
+  title-attributed element, most browsers will pop up a tiny box
+  showing the title.  I usually include the hash-sign, to remind the
+  user that this is what she would put at the end of the URL to jump
+  straight to this location next time.</para>
+-->
+  <para>
+    title 属性を指定した要素内のテキストの上をマウスポインタが通過すると、
+    たいていのブラウザでは title 属性の内容をポップアップ表示します。
+    私は、この title 属性の内容にハッシュマークも含めるよう心がけています。
+    それを見たユーザーが、URL の最後にそれをつなげれば
+    直接この場所に到達できるということに気づきやすくするためです。
+  </para>
+
+  </sidebar>
+
+<!--
+<para>Formatting the FAQ like this is just one example of how to make
+a resource presentable.  The same properties&mdash;direct
+searchability, availability to major Internet search engines,
+browsability, referential stability, and (where applicable)
+editability&mdash;apply to other web pages, the source code tree, the
+bug tracker, etc.  It just happens that most mailing list archiving
+software long ago recognized the importance of these properties, which
+is why mailing lists tend to have this functionality natively, while
+other formats may require some extra effort on the maintainer's part
+(<xref linkend="managing-volunteers"/> discusses how to spread
+that maintenance burden across many volunteers).</para>
+-->
+<para>
+  ここでは FAQ についてのみ取り上げましたが、
+  これは、リソースの体裁を整えるほんの一例にすぎません。
+  ここで取り上げた内容 (直接検索できること、
+  主要なサーチエンジンから検索できること、閲覧しやすいこと、
+  特定の場所を参照しやすいこと、適切に編集しやすいこと)
+  は、ウェブページ全般やソースツリー、
+  バグ追跡システムなどでも当てはまるものばかりです。
+  メーリングリストのアーカイブ用ソフトウェアの多くは、
+  これらの項目の重要性に大昔から気づいていました。
+  そのため、メーリングリストのアーカイブ用ソフトウェアの多くは
+  これらの機能を自前で搭載しています。
+  その他の形式の文書については、
+  担当者がそれなりに手間をかける必要があるかもしれません
+  (このような作業をボランティアに任せていくための方法については
+  <xref linkend="managing-volunteers"/> で説明します)。
+</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="codifying-tradition">
+<!--
+<title>Codifying Tradition</title>
+-->
+<title>しきたりの成文化</title>
+
+<!--
+<para>As a project acquires history and complexity, the amount of data
+each incoming participant must absorb increases.  Those who have been
+with the project a long time were able to learn, and invent, the
+project's conventions as they went along.  They will often not be
+consciously aware of what a huge body of tradition has accumulated, and
+may be surprised at how many missteps recent newcomers seem to make.
+Of course, the issue is not that the newcomers are of any lower
+quality than before; it's that they face a bigger acculturation burden
+than newcomers did in the past.</para>
+-->
+<para>
+  プロジェクトが歴史を積み重ねて複雑さを増していくにつれて、
+  新規参入する人たちが覚えなければならないデータの量も増加します。
+  長年そのプロジェクトにかかわっている人たちは、
+  プロジェクトの成長とともにそのしきたりを作り上げたり学んだりすることができました。
+  彼らは往々にして、今まで築き上げてきた伝統がどれほど巨大なものかに気づいていません。
+  そして、新たに参加してくる人たちがその伝統を守らないのをみて驚くのです。
+  もちろんこれは、最近の人たちが古株よりも劣っているということではありません。
+  プロジェクトの初期に比べ、新規参入のハードルが高くなっていることが問題なのです。
+</para>
+
+<!--
+<para>The traditions a project accumulates are as much about how to
+communicate and preserve information as they are about coding
+standards and other technical minutae.  We've already looked at both
+sorts of standards, in
+<xref linkend="developer-documentation"/><phrase output="printed"> 
+in <xref linkend="getting-started"/></phrase> and
+<xref linkend="written-rules"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase> respectively, and
+examples are given there.  What this section is about is how to keep
+such guidelines up-to-date as the project evolves, especially
+guidelines about how communications are managed, because those are the
+ones that change the most as the project grows in size and
+complexity.</para>
+-->
+<para>
+  プロジェクトが積み上げていく伝統には、
+  コミュニケーションの方法や、
+  コーディング規約および他の技術情報を蓄積する方法もあります。
+  これらについては、それぞれ
+  <phrase output="printed"><xref linkend="getting-started"/></phrase>
+  の <xref linkend="developer-documentation"/> および
+  <phrase output="printed"><xref linkend="social-infrastructure"/></phrase>
+  の <xref linkend="written-rules"/> で例を挙げて説明しました。
+  このセクションでは、プロジェクトの成長に伴って
+  これらのガイドラインをいかに最新の状態に保つかを説明します。
+  特にコミュニケーションに関するガイドラインは重要です。
+  というのも、これはプロジェクトの規模や複雑さが大きくなるにつれて変わっていくものだからです。
+</para>
+
+<!--
+<para>First, watch for patterns in how people get confused.  If you
+see the same situations coming up over and over, especially with new
+participants, chances are there is a guideline that needs to be
+documented but isn't.  Second, don't get tired of saying the same
+things over and over again, and don't <emphasis>sound</emphasis> like
+you're tired of saying them.  You and other project veterans will have
+to repeat yourselves often; this is an inevitable side effect of the
+arrival of newcomers.</para>
+-->
+<para>
+  まずは、みんなが何に困っているのかを調べましょう。
+  同じような状況で (特に新入りのメンバーが) 困っていることに気づいたら、
+  それは「ガイドラインをきちんと設定すべきなのに、まだできていない」
+  という証拠です。
+  次に、同じことを何度も何度も繰り返して言うのをいやがらないようにしましょう。
+  いやいや言っているように思われてはいけません。
+  新入りさんがどんどん入ってくる以上、
+  あなたや他のベテランメンバーが同じことを繰り返すはめになるのは避けられません。
+</para>
+
+<!--
+<para>Every web page, every mailing list message, and every IRC channel
+should be considered advertising space&mdash;not for commercial
+advertisements, but for ads about your project's own resources.  What
+you put in that space depends on the demographics of those likely to
+read it.  An IRC channel for user questions, for example, is likely to
+get people who have never interacted with the project
+before&mdash;often someone who has just installed the software, and
+has a question he'd like answered immediately (after all, if it
+could wait, he'd have sent it to a mailing list instead, which would
+probably use less of his total time, although it would take longer
+for an answer to come back).  People usually don't make a permanent
+investment in the IRC channel; they'll show up, ask their question,
+and leave.</para>
+-->
+<para>
+  すべてのウェブページ、メーリングリストへのすべての投稿、
+  そしてすべての IRC チャンネルには告知用のスペースを設けるようにしましょう。
+  これは商業的な広告を行うものではなく、
+  そのプロジェクト自身のリソースについて告知するための場所となります。
+  そこに何を載せるのかは、それをどのような人たちが読むのかにあわせて決めます。
+  たとえばユーザーからの質問を受け付ける IRC チャンネルの場合、
+  それを利用する人の多くはこれまでにそのプロジェクトにかかわったことがない人となるでしょう。
+  単にインストールしてみただけであることも多いでしょうし、
+  たいていは「今すぐに」回答を欲していることでしょう
+  (ちょっとでも待てるのなら、普通はメーリングリストに質問するでしょうから。
+  答えが返ってくるのに多少時間がかかることさえ我慢できれば、
+  こっちのほうが手間がかかりません)。
+  普通の人は IRC チャンネルに常駐することはありません。
+  ふらっと登場して質問を行い、そして去っていくだけです。
+</para>
+
+<!--
+<para>Therefore, the channel topic should be aimed at people looking
+for technical answers about the software <emphasis>right
+now</emphasis>, rather than at, say, people who might get involved
+with the project in a long term way and for whom community interaction
+guidelines might be more appropriate.  Here's how a really busy
+channel handles it (compare this with the earlier example in
+<xref linkend="irc"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>):</para>
+-->
+<para>
+  したがって、このチャンネルで扱う話題の対象は、
+  ソフトウェアについての技術的な質問の回答を
+  <emphasis>今すぐに</emphasis> ほしい人たちということになります。
+  今後ずっとプロジェクトのコミュニティーに参加するであろう人たちにくらべ、
+  この手の人たちにとってはコミュニティーのガイドラインはそれほど重要ではありません。
+  活発なチャンネルがどのようにしているのかの例を見てみましょう
+  (<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase>
+  の <xref linkend="irc"/> で示した例と見比べてみるといいでしょう)。
+</para>
+
+<!--
+<screen>
+You are now talking on #linuxhelp
+
+Topic for #linuxhelp is Please READ
+http://www.catb.org/~esr/faqs/smart-questions.html &amp;&amp;
+http://www.tldp.org/docs.html#howto BEFORE asking questions | Channel
+rules are at http://www.nerdfest.org/lh_rules.html | Please consult
+http://kerneltrap.org/node/view/799 before asking about upgrading to a
+2.6.x kernel | memory read possible: http://tinyurl.com/4s6mc -&gt;
+update to 2.6.8.1 or 2.4.27 | hash algo disaster: http://tinyurl.com/6w8rf
+| reiser4 out
+</screen>
+-->
+<screen>
+あなたはチャンネル #linuxhelp で話しています。
+
+#linuxhelp のトピックは以下の通りです。
+質問する前に、以下の二つは必ず読んでください。
+http://www.catb.org/~esr/faqs/smart-questions.html &amp;&amp;
+http://www.tldp.org/docs.html#howto | チャンネルに関するルールは
+http://www.nerdfest.org/lh_rules.html にあります | kernel 2.6.x へのアップグレードについて質問する前に
+http://kerneltrap.org/node/view/799 を調べてください | kernel のメモリ空間が参照可能になる脆弱性:
+http://tinyurl.com/4s6mc -&gt; 2.6.8.1 か 2.4.27 にアップデートすること |
+衝突するハッシュアルゴリズム: http://tinyurl.com/6w8rf | reiser4 ファイルシステムリリース)
+</screen>
+
+<!--
+<para>With mailing lists, the "ad space" is a tiny footer appended to
+every message.  Most projects put subscription/unsubscription
+instructions there, and perhaps a pointer to the project's home page
+or FAQ page as well.  You might think that anyone subscribed to the
+list would know where to find those things, and they probably
+do&mdash;but many more people than just subscribers see those mailing
+list messages.  An archived post may be linked to from many places;
+indeed, some posts become so widely known that they eventually have
+more readers off the list than on it.</para>
+-->
+<para>
+  メーリングリストの場合、この「告知スペース」にあたるのは
+  全メッセージの最後に付加されるちょっとしたフッターとなります。
+  たいていのプロジェクトでは、この部分にメーリングリストへの参加方法や
+  脱退方法を載せています。また、そのプロジェクトのホームページや
+  FAQ ページの場所を載せていることもあるでしょう。
+  そんなことなんて、メーリングリストのメンバーならみんな知っているはずだと思われるかもしれません。
+  おそらくそれは正しいでしょう。しかし、
+  メーリングリストへの投稿を見るのは、
+  何もメーリングリストの参加者だけであるとは限りません。
+  メーリングリストのアーカイブは、さまざまな場所からリンクされることになります。投稿の内容によっては、
+  メーリングリストの参加者よりもずっと多くの人たちに読まれることになるものもあるでしょう。
+</para>
+
+<!--
+<para>Formatting can make a big difference.  For example, in the
+Subversion project, we were having limited success using the
+bug-filtering technique described in
+<xref linkend="bug-filtering"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>.  Many bogus
+bug reports were still being filed by inexperienced people, and each
+time it happened, the filer had to be educated in exactly the same way
+as the 500 people before him.  One day, after one of our developers had
+finally gotten to the end of his rope and flamed some poor user who
+didn't read the issue tracker guidelines carefully enough, another
+developer decided this pattern had gone on long enough.  He suggested
+that we reformat the issue tracker front page so that the most
+important part, the injunction to discuss the bug on the mailing lists
+or IRC channels before filing, would stand out in huge, bold red
+letters, on a bright yellow background, centered prominently above
+everything else on the page.  We did so (you can see the results at
+<ulink url="http://subversion.tigris.org/project_issues.html"/>), and
+the result was a noticeable drop in the rate of bogus issue filings.
+We still get them, of course&mdash;we always will&mdash;but the rate
+has slowed considerably, even as the number of users increases.  The
+outcome is not only that the bug database contains less junk, but that
+those who respond to issue filings stay in a better mood, and are more
+likely to remain friendly when responding to one of the now-rare bogus
+filings.  This improves both the project's image and the mental health
+of its volunteers.</para>
+-->
+<para>
+  書式を整えることには絶大な効果があります。
+  たとえば Subversion プロジェクトでは、
+  <phrase output="printed"><xref linkend="technical-infrastructure"/></phrase> の
+  <xref linkend="bug-filtering"/> で説明したバグフィルタリング技術で
+  ある程度うまくいっていました。
+  ただ、それでもバグとは言えないような内容がたびたび登録されてしまっていました。
+  そんなことがあるたびに、担当者がいちいち彼らに教えてやる必要があったのです。
+  そう、これまで 500 人もの人に言ってきたのと同じことを。
+  ある日のこと。そんな状況に業を煮やしたある開発者が、
+  バグ追跡システムのガイドラインを読まずに投稿するユーザーに対してキレはじめたのです。
+  それを見た他の開発者たちは、この方式ではもはややっていけないことに気づきました。
+  彼は提案しました。バグ追跡システムのトップページの目立つところに
+  「メーリングリストや IRC で十分に議論してからバグを登録するように」と書いてやろうと。
+  そう、黄色い背景に赤の太字で。すべてのページの先頭にでかでかと。
+  私たちはそれを実行しました (その結果は
+  <ulink url="http://subversion.tigris.org/project_issues.html"/> でご覧いただけます)。
+  その結果。本来のバグ以外が登録されてしまうことが激減したのです。
+  もちろん、(期待通り) 現在もそれは続いています。
+  しかも、ユーザー数が増えているにもかかわらず、ゴミの量は目に見えて減っています。
+  その結果、バグデータベースの中に含まれるゴミの量が減っただけではなく、
+  バグに対応する人たちの空気もよくなってきたのです。
+  今でもたまにバグ以外のゴミが登録されることもありますが、
+  そんな場合の反応も暖かいものとなっています。
+  これは、そのプロジェクトのイメージとメンバーの精神衛生の両方によい影響を及ぼします。
+</para>
+
+<!--
+<para>The lesson for us was that merely writing up the guidelines was
+not enough.  We also had to put them where they'd be seen by those who
+need them most, and format them in such a way that their status as
+introductory material would be immediately clear to people unfamiliar
+with the project.</para>
+-->
+<para>
+  このことから得られた教訓は、
+  単にガイドラインを作成するだけではダメだということでした。
+  作成したガイドラインは、
+  それを最も必要としている人たちの目に付きやすいところに掲げる必要があったのです。
+  そのプロジェクトにあまりなじみのない人でも明確にわかるようにしなければならなかったのです。
+</para>
+
+<!--
+<para>Static web pages are not the only venue for advertising the
+project's customs.  A certain amount of interactive policing (in the
+friendly-reminder sense, not the handcuffs-and-jail sense) is also
+required.  All peer review, even the commit reviews described in
+<xref linkend="code-review"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase>, should include review
+of people's conformance or non-conformance with project norms,
+especially with regard to communications conventions.</para>
+-->
+<para>
+  そのプロジェクトのしきたりを説明する場所は、何も静的なウェブページだけではありません。
+  ある程度は対話的な取り締まりも必要です (ここで言う「取り締まり」とは、
+  手錠だの牢屋だのといったものではありません。単に好意的な注意をする程度のものです)。
+  <phrase output="printed"><xref linkend="getting-started"/></phrase> の
+  <xref linkend="code-review"/> で説明したコミットレビューを含むすべてのピアレビューでは、
+  特にそのプロジェクトの決まりに反していないかどうかも注意してレビューするようにしましょう。
+</para>
+
+<!--
+<para>Another example from the Subversion project: we settled on a
+convention of "r12908" to mean "revision 12908 in the version control
+repository."  The lower-case "r" prefix is easy to type, and because
+it's half the height of the digits, it makes an easily-recognizable
+block of text when combined with the digits.  Of course, settling on
+the convention doesn't mean that everyone will begin using it
+consistently right away.  Thus, when a commit mail comes in with a log
+message like this:</para>
+-->
+<para>
+  Subversion プロジェクトで利用している規約をもうひとつご紹介しましょう。
+  私たちは、"r12908" と書けばそれは
+  "バージョン管理リポジトリのリビジョン 12908" という意味であるとしています。
+  小文字の "r" は非常にタイプしやすい文字だし、
+  数字の半分の高さしかないので数字と組み合わせても識別しやすいのです。
+  もちろん、こんな決まりを作ったからといってみんながすぐそれに従うとは限りません。
+  たとえば、こんなログメッセージを含むコミットメールが届くこともあるでしょう。
+</para>
+
+<screen>
+------------------------------------------------------------------------
+r12908 | qsimon | 2005-02-02 14:15:06 -0600 (Wed, 02 Feb 2005) | 4 lines
+
+J. Random からのパッチを採用した &lt;jrcontrib@gmail.com&gt;
+
+* trunk/contrib/client-side/psvn/psvn.el:
+  revision 12828 に存在していたtypoをいくつか修正
+------------------------------------------------------------------------
+</screen>
+
+<!--
+<para>...part of reviewing that commit is to say "By the way, please
+use 'r12828', not 'revision 12828' when referring to past changes."
+This isn't just pedantry; it's important as much for automatic
+parsability as for human readership.</para>
+-->
+<para>
+  ...こんなコミットに対するレビューの返事は、次のようになるでしょう。
+  "ところで、過去の変更内容を指す場合は 'revision 12828' じゃなくて
+  'r12828' 形式にしてくれないかな?" これは、単に格好だけの問題ではありません。
+  そうすることで、人間が読みやすくなるだけでなく
+  機械で自動解析することも簡単になるのです。
+</para>
+
+<!--
+<para>By following the general principle that there should be
+canonical referral methods for common entities, and that these
+referral methods should be used consistently everywhere, the project
+in effect exports certain standards.  Those standards enable people to
+write tools that present the project's communications in more useable
+ways&mdash;for example, a revision formatted as "r12828" could be
+transformed into a live link into the repository browsing system.
+This would be harder to do if the revision were written as "revision
+12828", both because that form could be divided across a line break,
+and because it's less distinct (the word "revision" will often appear
+alone, and groups of numbers will often appear alone, whereas the
+combination "r12828" can only mean a revision number).  Similar
+concerns apply to issue numbers, FAQ items (hint: use a URL with a
+named anchor, as described in
+<xref linkend="html-named-anchors-and-ids"/>), etc.</para>
+-->
+<para>
+  このような標準にしたがって
+  共通の方式を使用するようにし、それをどこでも一貫して使うようにすると、
+  そのプロジェクトの事実上の決まりとして認められるようになります。
+  このような決まりを作っておくと、
+  プロジェクト内のコミュニケーションをより円滑にするためのツールを作りやすくなります。
+  たとえば "r12828" 形式で書かれたリビジョンを
+  リポジトリ閲覧システムへの直リンクに変換したりといったことがやりやすくなるのです。
+  もし "revision 12828" のような形式でリビジョンを表すようにすると、
+  ツールを作るのは難しくなるでしょう。たとえば途中に改行がはいったりすることもあるでしょうし、
+  文章の中から抜き出すのも難しくなります
+  ("revision" という単語は他の場面でもよく使われるでしょうし、
+  "12828" のような単なる数字もさまざまな場所で用いられます。
+  一方、リビジョン番号以外の意味で "r12828" 形式を用いることはまずないでしょう)。
+  同様のことが、バグ番号や FAQ の項目番号
+  (ヒント: <xref linkend="html-named-anchors-and-ids"/>
+  で説明したように、URL で名前付きアンカーを用いることを考えてみましょう)
+  などにも当てはまります。
+</para>
+
+<!--
+<para>Even for entities where there is not an obvious short, canonical
+form, people should still be encouraged to provide key pieces of
+information consistently.  For example, when referring to a mailing
+list message, don't just give the sender and subject; also give the
+archive URL <emphasis>and</emphasis> the Message-ID header.  The last
+allows people who have their own copy of the mailing list (people
+sometimes keep offline copies, for example to use on a laptop while
+traveling) to unambiguously identify the right message even if they
+don't have access to the archives.  The sender and subject wouldn't be
+enough, because the same person might make several posts in the same
+thread, even on the same day.</para>
+-->
+<para>
+  短めの決まった形式が存在しない情報であっても、
+  できるだけ一貫して重要な情報を提供するようにしなければなりません。
+  たとえばメーリングリストへの投稿を指すときに、
+  単に送信者と件名だけで済ませてはいけません。
+  それだけでなく、アーカイブへの URL と Message-ID
+  ヘッダも含めるようにしましょう。
+  Message-ID ヘッダを含めておけば、
+  メーリングリストへの投稿をローカルに保存している人たち
+  (旅行中でも過去のメールを読めるように、オフラインのコピーを
+  ラップトップに残している人もいます) にとって便利です。
+  アーカイブにアクセスしなくても、Message-ID
+  ヘッダからメッセージが特定できるからです。
+  この場合、送信者と件名だけでは不十分です。
+  だって、同じスレッド内で同じ人が同じ件名のメッセージを
+  一日に何度も送信することって、そんなに珍しいことではないでしょう？
+</para>
+
+<!--
+<para>The more a project grows, the more important this sort of
+consistency becomes.  Consistency means that everywhere people look,
+they see the same patterns being followed, so they know to follow
+those patterns themselves.  This, in turn, reduces the number of
+questions they need to ask.  The burden of having a million readers is
+no greater than that of having one; scalability problems start to
+arise only when a certain percentage of those readers ask questions.
+As a project grows, therefore, it must reduce that percentage by
+increasing the density and accessibility of information, so that any
+given person is more likely to find what he needs without having to
+ask.</para>
+-->
+<para>
+  プロジェクトの規模が大きくなればなるほど、この手の一貫性はより重要となります。
+  一貫性とは、プロジェクトのメンバーがどこでも同じ規則に従うこと。
+  そして規則に従わなければならないと認知していることを指します。
+  こうしておけば、無駄な質問が繰り返されることも減ります。
+  メンバーが 100 万人だろうがひとりだろうが、
+  その負荷はそれほど変わりません。本当につらくなるのは、
+  質問してくる人の数が増え始めてきたときです。
+  したがって、プロジェクトの規模が大きくなってきたら、
+  質問の量を減らす方向に進めることを心がけましょう。
+  そのためには、質の高い情報を提供し、
+  さらにその情報を見つけやすいようにしておくことです。
+  そうすれば、わざわざ質問するまでもなく
+  必要な情報をすぐに見つけられるようになります。
+</para>
+
+<!--
+
+<para><remark>See
+<ulink
+url="http://subversion.tigris.org/mailing-list-guidelines.html"/> for
+an example of mailing list guidelines, talk about which problems such
+guidelines can solve and which they can't.  Also, log message
+guidelines (if that gets its own section, remember to adjust the xrefs
+in Version Control Vocabulary and elsewhere in Chapter 3).  Mention
+the parseability concern; point out that it can overdone, too.
+Formatting of bug tracker numbers in log messages is an excellent
+example of where parseability is an appropriate concern.  Log message
+templates.  Make sure that commit reviews apply to log messages and
+other "meta" aspects of the commit as well as to the code
+itself.</remark></para>
+
+-->
+
+</sect2>
+
+<!-- todo: A lot of projects have designated summarizers, like the
+Zack Brown (?) for the Linux kernel, and I think I've seen similar
+stuff at DebianPlanet as well.  That's another thing to talk about in
+this discussion of "Strategy (2)", and maybe something to add to the
+Project Roles examples in <xref linkend="share-management"/>.
+-->
+
+</sect1>
+
+<sect1 id="bug-tracker-usage">
+<!--
+<title>No Conversations in the Bug Tracker</title>
+-->
+<title>バグ追跡システムでは議論しない</title>
+
+<!--
+<para>In any project that's making active use of its bug tracker,
+there is always a danger of the tracker turning into a discussion
+forum itself, even though the mailing lists would really be better.
+Usually it starts off innocently enough: someone annotates an issue
+with, say, a proposed solution, or a partial patch.  Someone else sees
+this, realizes there are problems with the solution, and attaches
+another annotation pointing out the problems.  The first person
+responds, again by appending to the issue...and so it goes.</para>
+-->
+<para>
+  バグ追跡システムを積極的に活用しているプロジェクトでは、
+  バグ追跡システムで議論そのものを進めてしまうようになるという危険が常にあります。
+  議論を行うための場所としてはメーリングリストのほうが適しているのにもかかわらずです。
+  きっかけはちょっとしたことです。
+  誰かが問題点を投稿する際に、何らかの提案やパッチを付け加えたとしましょう。
+  それを見た他の人が、その解決策には何らかの問題があると考え、
+  指摘します。
+  それを見た元の投稿者がさらに反論をします。
+  ……このような具合です。
+</para>
+
+<!--
+<para>The problem with this is, first, that the bug tracker is a
+pretty cumbersome place to have a discussion, and second, that other
+people may not be paying attention&mdash;after all, they expect
+development discussion to happen on the development mailing list, so
+that's where they look for it.  They may not be subscribed to the
+issue changes list at all, and even if they are, they may not follow it
+very closely.</para>
+-->
+<para>
+  問題なのは、まずバグ追跡システムは
+  議論をするには適していない場所だということです。
+  そしてもうひとつ。他人の目が届かないということもあります。
+  開発に関する議論は開発者向けメーリングリストで行うものと考えられているので、
+  議論に参加したい人は開発者向けメーリングリストのほうをチェックしているのです。
+  彼らは、バグ追跡システムの状況を扱うメーリングリストには参加していないかもしれません。
+  仮に参加していたとしても、その中身はそれほど真剣にチェックしていない可能性があります。
+</para>
+
+<!--
+<para>But exactly where in the process did something go wrong?  Was it
+when the original person attached her solution to the
+issue&mdash;should she have posted it to the list instead?  Or was it
+when the second person responded in the issue, instead of on the
+list?</para>
+-->
+<para>
+  いったいどこがマズかったというのでしょう？
+  最初にバグを報告した人が自分なりの解決策を示したのがそもそもの問題？
+  はじめからメーリングリストに投稿すべきだった？
+  それとも、最初の報告に対して反応した人のほうに問題がある？
+</para>
+
+<!--
+<para>There isn't one right answer, but there is a general principle:
+if you're just adding data to an issue, then do it in the tracker, but
+if you're starting a <emphasis>conversation</emphasis>, then do it on
+the mailing list.  You may not always be able to tell which is the
+case, but just use your best judgement.  For example, when attaching a
+patch that contains a potentially controversial solution, you might be
+able to anticipate that people are going to have questions about it.
+So even though you would normally attach the patch to the issue
+(assuming you don't want to or can't commit the change directly), in
+this case you might choose to post it to a mailing list instead.  At
+any rate, there eventually will come a point in the exchange where one
+party or the other can tell that it is about to go from mere appending
+of data to an actual conversation&mdash;in the example that started
+this section, that would be the second respondent, who on realizing
+that there were problems with the patch, could predict that a real
+conversation is about to ensue, and therefore that it should be held
+in the appropriate medium.</para>
+-->
+<para>
+  この問いに対する正解はありませんが、一般的な原則はあります。
+  問題の報告に単なるデータを追加したい場合は、バグ報告システムを使用するようにし、
+  何らかの <emphasis>会話</emphasis> を始めるつもりならメーリングリストを使用するということです。
+  どちらが適切かがはっきりしない場合もあるでしょうが、
+  自己判断でできるだけ適切なほうを選ぶようにしてください。
+  たとえば、何らかの議論を呼びそうなパッチを添付する際には、
+  おそらくそれについて何らかの質問が返されるであろうと予測できます。
+  通常は問題を報告する際にパッチも添付するのでしょうが
+  (自分で直接コミットする気がない、あるいはコミット権がない場合を仮定しています)、
+  議論を呼びそうなパッチの場合はメーリングリストを使用したほうがいいでしょう。
+  いずれにせよ、単なるデータの追加から実際の対話に移行しはじめる段階は誰かが気づくことでしょう。
+  このセクションの最初であげた例の場合、パッチに問題があることに気づいた
+  ２番目の投稿者がそれにあたります。
+  パッチに問題があることに気づいたということは、
+  その後何らかの議論が始まることも予測できるでしょうし、
+  その後の会話は適切な場所で続けるべきだということもわかるでしょう。
+</para>
+
+<!--
+<para>To use a mathematical analogy, if the information looks like it
+will be quickly convergent, then put it directly in the bug tracker;
+if it looks like it will be divergent, then a mailing list or IRC
+channel would be a better place.</para>
+-->
+<para>
+  数学にたとえてみましょう。
+  もしその情報がすぐに収束していきそうなら、バグ追跡システムに直接投稿するようにします。
+  一方その情報が発散しそうなら、メーリングリストや IRC チャンネルを使ったほうがいいでしょう。
+</para>
+
+<!--
+<para>This doesn't mean there should never be any exchanges in the
+bug tracker.  Asking for more details of the reproduction recipe
+from the original reporter tends to be a highly convergent process,
+for instance.  The person's response is unlikely to raise new issues;
+it's simply going to flesh out information already filed.  There's no
+need to distract the mailing list with that process; by all means,
+take care of it with a series of comments in the tracker.  Likewise,
+if you're fairly sure that the bug has been misreported (i.e., is not
+a bug), then you can simply say so right in the issue.  Even pointing
+out a minor problem with a proposed solution is fine, assuming the
+problem is not a showstopper for the entire solution.</para>
+-->
+<para>
+  これは決して、バグ追跡システムでは一切の意見交換を禁じるということではありません。
+  たとえば、元の報告者に対しての詳細な再現手順の問い合わせなどは、
+  たいていすぐに収束するものです。
+  その問いに対する答えが新たな問題を発生させることなどまずないでしょう。
+  単にこれまでにまとめられている情報を補足するものとなるだけです。
+  その程度の内容のやりとりで、わざわざメーリングリストをにぎわせることはありません。
+  必ず、一連のやりとりはバグ追跡システムの中で済ませるようにしてください。
+  同様に、そのバグ報告が間違い (バグではない) ことが明らかだというのなら、
+  そのバグ報告に対して直接そのように言うといいでしょう。
+  また、提案内容にちょっとした問題
+  (問題の解決を妨げるほどには重大でない問題)
+  があったときに、それを指摘するくらいならかまいません。
+</para>
+
+<!--
+<para>On the other hand, if you're raising philosophical issues about
+the bug's scope or the software's proper behavior, you can be pretty
+sure other developers will want to be involved.  The discussion is
+likely to diverge for a while before it converges, so do it on the
+mailing list.</para>
+-->
+<para>
+  一方「バグか仕様か」や「そのソフトウェアのあるべき振る舞い」
+  といった思想的な話題を扱う場合は、きっと他のメンバーも議論に参加したくなることでしょう。
+  その手の話題は、一点に収束するのではなくあちこちに寄り道しがちです。
+  ということで、これはメーリングリストのほうに振るようにしましょう。
+</para>
+
+<!--
+<para>Always link to the mailing list thread from the issue, when you
+choose to post to the mailing list.  It's still important for someone
+following the issue to be able to reach the discussion, even if the
+issue itself isn't the forum of discussion.  The person who starts the
+thread may find this laborious, but open source is fundamentally a
+writer-responsible culture: it's much more important to make things
+easy for the tens or hundreds of people who may read the bug than for
+the three or five people writing about it.</para>
+-->
+<para>
+  バグ追跡システムへの報告に関する議論をメーリングリストに移した場合は、
+  メーリングリストのスレッドへのリンクをバグ報告に追加しておきましょう。
+  たとえそのバグ報告でその後議論が展開することがないとしても、
+  後日そのバグ報告を参照した人が議論に参加したい場合などにそのリンクが重要となります。
+  最初にスレッドを立ち上げる人の負担が少し増えることになりますが、
+  オープンソースの世界には「言いだしっぺの法則」という文化があります。
+  後からそのバグを参照するであろう何千何万の人たちが利益を受けることを思えば、
+  議論に参加している数人の手間が増えることも我慢できるでしょう。
+</para>
+
+<!--
+<para>It's fine to take important conclusions or summaries from the
+list discussion and paste them into the issue, if that will make
+things convenient for readers.  A common idiom is to start a list
+discussion, put a link to the thread in the issue, and then when the
+discussion finishes, paste the final summary into the issue (along
+with a link to the message containing that summary), so someone
+browsing the issue can easily see what conclusion was reached without
+having to click to somewhere else.  Note that the usual "two masters"
+data duplication problem does not exist here, because both archives
+and issue comments are usually static, unchangeable data
+anyway.</para>
+-->
+<para>
+  メーリングリストでの議論の結果得られた結論や議論のまとめは、
+  もとのバグ報告にもコピーしておくようにしましょう。
+  後でそれを読む人たちにとって役立ちます。
+  議論をメーリングリストへ移行させるときの手順は、次のようになります。
+  まずそのスレッドへのリンクをバグ報告に追加し、
+  メーリングリストでの議論が収束したらその結論をバグ報告にコピーする
+  (そして、メーリングリスト上での結論のメッセージへのリンクを付加する)。
+  そうすれば、後でそのバグ報告を見た人は、
+  あちこちたどらなくてもそのバグがすでに収束していることを把握できます。
+  結論をコピーしても、よくある「どちらが正しい情報かわからない」
+  という情報重複の問題を引き起こすことはありません。
+  メーリングリストのアーカイブやバグ追跡システムのコメントは通常は静的なものであり、
+  後で変化することがないからです。
+</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="publicity">
+<!--
+<title>Publicity</title>
+-->
+<title>宣伝・広報</title>
+
+<!--
+<para>In free software, there is a fairly smooth continuum between
+purely internal discussions and public relations statements.  This is
+partly because the target audience is always ill-defined: given that
+most or all posts are publicly accessible, the project doesn't have
+full control over the impression the world gets.  Someone&mdash;say, a
+<ulink url="http://slashdot.org/">slashdot.org</ulink>
+editor&mdash;may draw millions of readers' attention to a post that no
+one ever expected to be seen outside the project.  This is a fact of
+life that all open source projects live with, but in practice, the
+risk is usually small.  In general, the announcements that the project
+most wants publicized are the ones that will be most publicized,
+assuming you use the right mechanisms to indicate relative
+newsworthiness to the outside world.</para>
+-->
+<para>
+  フリーソフトウェアの世界では、
+  内部での議論と一般向けのアナウンスの間に明確な違いはありません。
+  その一因としては、想定する読み手がはっきり定義できないことがあります。
+  ほぼすべての投稿が一般向けに公開されているとすれば、
+  プロジェクトの外部の人たちがその投稿をどう受け取るかなどコントロールできません。
+  プロジェクトの外部に公開するつもりなどまったくなかった投稿であっても、
+  たとえば <ulink url="http://slashdot.org/">slashdot.org</ulink>
+  へのタレコミなどの影響で何百万もの人に読まれることになるかもしれません。
+  オープンソースプロジェクトを運営していくにあたってこれは避けられないことです。
+  ただ、通常そのリスクはあまり大きくありません。
+  一般に、正しい方法で情報の報道価値を示しておきさえすれば
+  プロジェクトの外部に伝えるべき情報はきちんと伝わるようになります。
+</para>
+
+<!--
+<para>For major announcements, there tend to be four or five main
+channels of distribution, on which announcements should be made as
+nearly simultaneously as possible:</para>
+-->
+<para>
+  重要なアナウンスの場合、その公開方法は 4 通りか 5 通りくらいになることもあります。
+  そして各方面へのアナウンスはほぼ同時に行わなければなりません。
+</para>
+
+<orderedlist>
+
+<!--
+  <listitem><para>Your project's front page is probably seen by more
+            people than any other part of the project.  If you have a
+            really major announcement, put a blurb there.  The blurb
+            should be a very brief synopsis that links to the press
+            release (see below) for more information.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      プロジェクトのトップページは、おそらく最も多くの人たちが目にする場所でしょう。
+      重大なアナウンスに関しては、トップページにも掲載するようにしましょう。
+      ここに掲載するのは概要だけとし、詳細な情報を知りたい人のためには
+      プレスリリース (以下で説明します) へのリンクを用意しておきます。
+    </para>
+  </listitem>
+
+<!--
+  <listitem><para>At the same time, you should also have a "News" or
+            "Press Releases" area of the web site, where the
+            announcement can be written up in detail.  Part of the
+            purpose of a press release is to provide a single,
+            canonical "announcement object" that other sites can link
+            to, so make sure it is structured accordingly: either as
+            one web page per release, as a discrete blog entry, or
+            as some other kind of entity that can be linked to while
+            still being kept distinct from other press releases in the
+            same area.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      また、ウェブサイト上には「ニュース」や「プレスリリース」
+      と題した場所を設け、アナウンスの詳細はそこに書くようにします。
+      プレスリリースの目的のひとつは、
+      他のサイトからのリンクの際に使用する、正規の
+      「アナウンスオブジェクト」を用意することにあります。
+      したがって、プレスリリースは適切な構造にしておく必要があります。
+      プレスリリースごとに個別のウェブページを用意するにしても、
+      ひとつのblogの個別のエントリとするにしても、
+      あるいはその他の形式にするとしても、
+      他のサイトからリンクする際に
+      別のプレスリリースと区別できるようにしておかなければなりません。
+    </para>
+  </listitem>
+
+<!--
+  <listitem><para>If your project has an RSS feed (see
+            <xref linkend="rss"/>), make sure the announcement goes
+            out there too.  This may happen automatically when you
+            create the press release, depending on how things are set
+            up at your site.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      そのプロジェクトが RSS フィードを提供しているのなら
+      (<xref linkend="rss"/> をご覧ください)、
+      そこにもアナウンスを含めなければなりません。
+      サイトの構築方法によっては、
+      プレスリリースを作成したら自動的にフィードも更新されるようになっているかもしれません。
+   </para>
+  </listitem>
+
+<!--
+  <listitem><para>If the announcement is about a new release of the
+            software, then update your project's entry on
+            <ulink url="http://freecode.com/"/> (see
+            <xref linkend="announcing"/> about creating the entry
+            in the first place).  Every time you update a Freecode
+            entry, that entry goes onto the Freecode change list
+            for the day.  The change list is updated not only on
+            Freecode itself, but on various portal sites (including
+            <ulink url="http://slashdot.org"/>) which are watched eagerly by
+            hordes of people.  Freecode also offers the same data via
+            RSS feed, so people who are not subscribed to your
+            project's own RSS feed might still see the announcement
+            via Freecode's.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      新たなリリースが公開されたというアナウンスの場合は、
+      <ulink url="http://freecode.com/"/>
+      上のそのプロジェクトについてのエントリも更新しましょう
+      (Freshmeat のエントリを作成する方法については
+      <xref linkend="announcing"/> をご覧ください)。
+      Freecode のエントリを更新すると、
+      Freecode の変更履歴を扱うメーリングリストにそのエントリの内容が投稿されます。
+      このメーリングリストに投稿されるのは
+      Freecode の更新情報だけではありません。
+      それ以外にも、多数の人が注目しているポータルサイト
+      (<ulink url="http://slashdot.org"/> など)
+      の更新情報も投稿されます。
+      Freecode は、これらのデータを RSS フィードでも提供しています。
+      つまり、あなたのプロジェクトの RSS
+      フィードを購読していない人たちにも
+      Freecode 経由で情報を伝えることができるのです。
+    </para>
+  </listitem>
+
+<!--
+  <listitem><para>Send a mail to your project's announcement mailing
+            list.  This list's name should actually be "announce",
+            that is, <literal>announce@yourprojectdomain.org</literal>,
+            because that's a fairly standard convention now, and the
+            list's charter should make it clear that it is very
+            low-traffic, reserved for major project announcements.
+            Most of those announcements will be about new releases of
+            the software, but occasionally other events, such as a
+            fundraising drive, the discovery of a security
+            vulnerability (see
+            <xref linkend="security"/>)<phrase output="printed">
+            later in this chapter</phrase>, or a
+            major shift in project direction may be posted there as
+            well.  Because it is low traffic and used only for
+            important things, the <literal>announce</literal> list
+            typically has the highest subscribership of any mailing
+            list in the project (of course, this means you shouldn't
+            abuse it&mdash;consider carefully before posting).  To
+            avoid random people making announcements, or worse, spam
+            getting through, the <literal>announce</literal> list must
+            always be moderated.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      あなたのプロジェクトのアナウンス用メーリングリストにメールを送信します。
+      アナウンス用メーリングリストの名前は "announce" とします。
+      つまり <literal>announce@yourprojectdomain.org</literal>
+      のようになるというわけです。
+      これは事実上の標準として使われている名前であり、
+      この名前のメーリングリストに流されるメールは
+      重要なアナウンスのみに限定しなければなりません。
+      流れるメールのほとんどは
+      そのソフトウェアの新たなリリースに関するものとなるでしょうが、
+      それ以外にも資金集めのお知らせやセキュリティ上の脆弱性の発見
+      (<phrase output="printed">本章で後ほどとりあげる</phrase>
+      <xref linkend="security"/> をご覧ください)
+      に関するメールも送信されます。
+      あるいは、プロジェクトが大きく方向転換する際のお知らせなども投稿されるでしょう。
+      <literal>announce</literal> メーリングリストの流量はあまり多くなく、
+      また重要な内容のみに使用するものです。
+      そのプロジェクトの各種メーリングリストの中でも
+      購読者の管理に最も力を入れる必要があります
+      (あまり乱用するのではなく、熟考してから投稿するようにしましょう)。
+      誰もが好き勝手にアナウンスを作成したり
+      スパムだらけになってしまうことを避けるため、
+      <literal>announce</literal> メーリングリストは
+      必ずモデレートしなければなりません。
+    </para>
+  </listitem>
+
+</orderedlist>
+
+<!--
+<para>Try to make the announcements in all these places at the same
+time, as nearly as possible.  People might get confused if they see an
+announcement on the mailing list but then don't see it reflected on
+the project's home page or in its press releases area.  If you get the
+various changes (emails, web page edits, etc.) queued up and
+then send them all in a row, you can keep the window of inconsistency
+very small.</para>
+-->
+<para>
+  これらの各所に出すアナウンスは、できるだけ同時になるようにしましょう。
+  メーリングリストに流されたアナウンスが
+  プロジェクトのホームページやプレスリリースに反映されていなければ、
+  それを見た人は混乱してしまいます。
+  さまざまな変更 (メールの送信、ウェブページの編集など)
+  を事前に準備しておいて同時に実行すると、
+  情報の一貫性が失われることが少なくなります。
+</para>
+
+<!--
+<para>For a less important event, you can eliminate some or all of the
+above outlets.  The event will still be noticed by the outside world
+in direct proportion to its importance.  For example, while a new
+release of the software is a major event, merely setting the date of
+the next release, while still somewhat newsworthy, is not nearly as
+important as the release itself.  Setting a date is worth an email to
+the daily mailing lists (not the announce list), and an update of the
+project's timeline or status web page, but no more.</para>
+-->
+<para>
+  それほど重要でもない出来事の場合は、
+  上であげた手法のうちいくつか (あるいはすべて) を省略してもかまいません。
+  出来事の重要性に応じて、それでもプロジェクトの外部には自然に伝わっていくでしょう。
+  たとえば「新しいリリースが公開されました」というのは重要な出来事ですが、
+  ただ単に「次のリリースの公開予定日が決まりました」
+  というのは、実際のリリースに比べてそれほど重要ではありません。
+  リリース予定日が決まったという程度の情報なら
+  (アナウンス専用ではなく) 通常のメーリングリストに投稿し、
+  あとはウェブページ上のタイムラインを更新しておくくらいで十分でしょう。
+</para>
+
+<!--
+<para>However, you might still see that date appearing in discussions
+elsewhere on the Internet, wherever there are people interested in the
+project.  People who are lurkers on your mailing lists, just listening
+and never saying anything, are not necessarily silent elsewhere.  Word
+of mouth gives very broad distribution; you should count on it, and
+construct even minor announcements in such a way as to encourage
+accurate informal transmission.  Specifically, posts that you expect
+to be quoted should have a clearly meant-to-be-quoted portion, just as
+though you were writing a formal press release.  For example:</para>
+-->
+<para>
+  しかし、あなたのプロジェクトに関心を持っている人たちは、
+  リリース予定日が決まったという話題をインターネット上の他の場所で持ち出すかもしれません。
+  メーリングリストに参加しているけれども
+  ただ話を聞いているだけで自分は一切発言しないという人たちが、
+  必ずしも他の場所でも同じように黙っているとは限りません。
+  口コミの影響は侮れません。ちょっとしたアナウンスであっても、
+  それが正しい内容で周りに広まるよう心がける必要があります。
+  具体的に言うと、他の人に引用されることを想定した投稿では、
+  どの部分を引用してもらいたいのかを明確にし、
+  その部分は公式のプレスリリースと変わらないレベルで書くようにするということです。
+  たとえば次のようにします。
+</para>
+
+  <blockquote>
+<!--
+     <para><emphasis>Just a progress update: we're planning to release
+     version 2.0 of Scanley in mid-August 2005.  You can always check
+     http://www.scanley.org/status.html for updates.  The major new
+     feature will be regular-expression searches.</emphasis></para>
+-->
+     <para><emphasis>
+       開発の最新状況をお知らせします。Scanley のバージョン 2.0 を、
+       2005 年 8 月中旬にリリース予定です。詳細な情報は
+       http://www.scanley.org/status.html でもご覧いただけます。
+       このバージョンで追加される主要な機能は、正規表現による検索です。
+     </emphasis></para>
+
+<!--
+     <para><emphasis>Other new features include:&nbsp;... There will
+     also be various bugfixes, including:&nbsp;...</emphasis></para>
+-->
+     <para><emphasis>
+       その他の新機能は、&nbsp;... また、
+       次のようなバグの修正も含まれます&nbsp;...
+     </emphasis></para>
+  </blockquote>
+
+<!--
+<para>The first paragraph is short, gives the two most important
+pieces of information (the release date and the major new feature),
+and a URL to visit for further news.  If that paragraph is the only
+thing that crosses someone's screen, you're still doing pretty well.
+The rest of the mail could be lost without affecting the gist of the
+content.  Of course, sometimes people will link to the entire mail
+anyway, but just as often, they'll quote only a small part.  Given that
+the latter is a possibility, you might as well make it easy for them,
+and in the bargain get some influence over what gets quoted.</para>
+-->
+<para>
+  最初のパラグラフでは、ふたつの重要な情報
+  (リリース予定日と新機能) を簡潔に説明し、
+  さらに詳細な情報を知るための URL を示しています。
+  この部分だけしか読まなかったとしても、内容が伝わるようにしておきましょう。
+  メールの残りの部分は、他に伝わる際には無視される可能性があります。
+  もちろん、中にはメール全体へリンクする人もいるかもしれません。
+  しかし、ほとんどの人はメールの一部を引用するのみとなります。
+  そうである以上、一部を引用する人が引用しやすいようにすることを心がけましょう。
+  うまく引用してもらえば、情報を広く伝えることができます。
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="security">
+<!--
+<title>Announcing Security Vulnerabilities</title>
+-->
+<title>セキュリティ脆弱性の告知</title>
+
+<!--
+<para>Handling a security vulnerability is different from handling any
+other kind of bug report.  In free software, doing things openly and
+transparently is normally almost a religious credo.  Every step of the
+standard bug-handling process is visible to all who care to watch: the
+arrival of the initial report, the ensuing discussion, and the
+eventual fix.</para>
+-->
+<para>
+  セキュリティ脆弱性の処理のしかたは、
+  他のバグ報告の場合とは異なります。
+  通常、フリーソフトウェアの世界では、
+  物事をオープンにして誰にでも見えるようにすることが当たり前のことです。
+  一般的なバグ報告の対応状況は、興味のある人なら誰にでも見えるようになっています。
+  いつバグが報告されたのか、どのような議論がなされたのか、
+  そして最終的にどのように修正されたのか。
+  これらはすべて、知りたければ誰でも知ることができるわけです。
+</para>
+
+<!--
+<para>Security bugs are different.  They can compromise users' data,
+and possibly users' entire computers.  To discuss such a problem
+openly would be to advertise its existence to the entire
+world&mdash;including to all the parties who might make malicious use
+of the bug.  Even merely committing a fix effectively announces the
+bug's existence (there are potential attackers who watch the commit
+logs of public projects, systematically looking for changes that
+indicate security problems in the pre-change code).  Most open source
+projects have settled on approximately the same set of steps to handle
+this conflict between openness and secrecy, based on the these basic
+guidelines:</para>
+-->
+<para>
+  セキュリティに関するバグの場合は、これとは異なります。
+  セキュリティに関するバグが原因でユーザーのデータが漏洩してしまう可能性もありますし、
+  場合によってはコンピュータを破壊してしまうことになるかもしれません。
+  このような問題をオープンな場で議論してしまうと、
+  問題があることを全世界に知らしめてしまうことになります。
+  当然その中には、そのバグを悪用しようという人たちもいることでしょう。
+  単に淡々とバグを修正してコミットしただけでも、バグの存在を世にさらしてしまうことになります
+  (攻撃者の中には、公開されているプロジェクトのコミットログをチェックしている人もいます。
+  変更内容を調べれば、変更前のコードにセキュリティ上の問題があることがわかるでしょう)。
+  ほとんどのオープンソースプロジェクトでは、
+  この開放性と秘密主義の対立に折り合いをつけるために
+  同じような方針をとっています。その方針は、以下のようなものとなります。
+</para>
+
+<orderedlist>
+<!--
+  <listitem><para>Don't talk about the bug publicly until a fix is
+            available; then supply the fix at exactly the same moment
+            you announce the bug.</para> 
+  </listitem>
+-->
+  <listitem>
+    <para>
+      修正が完了するまではバグのことを口外しない。
+      そして、バグがあったことをアナウンスすると同時に修正プログラムを公開する。
+    </para> 
+  </listitem>
+<!--
+  <listitem><para>Come up with that fix as fast as you
+            can&mdash;especially if someone outside the project
+            reported the bug, because then you know there's at least
+            one person outside the project who is able to exploit the
+            vulnerability.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      修正プログラムは、可能な限り迅速に提供する。
+      そのバグが外部からの報告で発覚したものである場合は特に急ぐ必要があります。
+      というのも、プロジェクトの外部の人間の中に少なくとも
+      1 人はその脆弱性を突く攻撃ができる人がいるということがはっきりしているからです。
+    </para>
+  </listitem>
+</orderedlist>
+
+<!--
+<para>In practice, those principles lead to a fairly standardized
+series of steps, which are described in the sections below.</para>
+-->
+<para>
+  実際のところ、この規則は標準化した手順としてまとめることができます。
+  これらの手順について、以下のセクションで解説します。
+</para>
+
+<sect3 id="security-receiving">
+<!--
+<title>Receive the report</title>
+-->
+<title>バグ報告を受ける</title>
+
+<!--
+<para>Obviously, a project needs the ability to receive security bug
+reports from anyone.  But the regular bug reporting address won't do,
+because it can be watched by anyone too.  Therefore, have a separate
+mailing list for receiving security bug reports.  That mailing list
+must not have publicly readable archives, and its subscribership must
+be strictly controlled&mdash;only long-time, trusted developers can be
+on the list.  If you need a formal definition of "trusted", you can
+use "anyone who has had commit access for two years or more" or
+something like that, to avoid favoritism.  This is the group that will
+handle security bugs.</para>
+-->
+<para>
+  当然のことながら、各プロジェクトには
+  セキュリティバグの報告を一般から受け付けるための窓口が必要です。
+  しかし、これは通常のバグ報告を受け付けるアドレスと一緒にはできません。
+  というのも、通常のバグは誰にでも見えるようになっているからです。
+  そこで、セキュリティ関連のバグ報告を受け取るためのメーリングリストを別途用意します。
+  このメーリングリストのアーカイブは一般に公開してはいけません。
+  また、参加資格は厳しく制限するべきです。そのプロジェクトに長くかかわっていて
+  信頼できる開発者たちのみをメンバーに加えるようにしましょう。
+  もし "信頼できる" の具体的な定義が必要な場合は、たとえば
+  "コミット権を得てから 2 年以上経過している"
+  などといった条件を使用するといいでしょう。
+  そうすれば、参加資格に関して "えこひいきしているのでは?"
+  といった批判を避けることができます。
+  このメーリングリストに参加しているメンバーが、
+  セキュリティバグに対応するメンバーとなります。
+</para>
+
+<!--
+<para>Ideally, the security list should not be spam-protected or
+moderated, since you don't want an important report to get filtered
+out or delayed just because no moderators happened to be online that
+weekend.  If you do use automated spam-protection software, try to
+configure it with high-tolerance settings; it's better to let a few spams
+through than to miss a report.  For the list to be effective, you must
+advertise its address, of course; but given that it will be unmoderated
+and, at most, lightly spam-protected, try to never to post its address
+without some sort of address hiding transformation, as described in
+<xref linkend="address-hiding"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>.
+Fortunately, address-hiding need not make the address illegible; see
+<ulink url="http://subversion.tigris.org/security.html"/>, and view
+that page's HTML source, for an example.</para>
+-->
+<para>
+  セキュリティ関連のメーリングリストについては、
+  スパム対策やモデレートは行わないのが理想です。
+  というのも、重要な報告がスパム扱いされてしまうと困りますし、
+  たまたまその週末にすべてのモデレータがメールをチェックしなかったなどという理由で
+  重要な報告に気づくのが遅れるというのも困ります。
+  何らかのスパム対策ソフトウェアを使用するのなら、
+  可能な限り緩やか目の設定にしておきましょう。
+  重要な報告をフィルタリングしてしまうくらいなら、
+  多少のスパムが混ざってしまうほうがずっとましです。
+  作成したメーリングリストをうまく活用するためには、
+  そのアドレスを周知させる必要があります。
+  しかし、このメーリングリストはモデレートされておらず、
+  またスパム対策も甘いものです。したがって、
+  そのアドレスを宣伝するときには、アドレスを隠すために何らかの細工が必須となります。
+  詳細は <phrase output="printed"><xref linkend="technical-infrastructure"/> の</phrase>
+  <xref linkend="address-hiding"/> で説明します。
+  幸いにも、アドレスを読みにくいものになどしなくてもアドレスを隠すことは可能です。
+  <ulink url="http://subversion.tigris.org/security.html"/> をご覧になったうえで、
+  そのページの HTML ソースを確認してみてください。
+</para>
+
+</sect3>
+
+<sect3 id="security-finding-a-fix">
+<!--
+<title>Develop the fix quietly</title>
+-->
+<title>大至急それを修正する</title>
+
+<!--
+<para>So what does the security list do when it receives a report?
+The first task is to evaluate the problem's severity and
+urgency:</para>
+-->
+<para>
+  セキュリティメーリングリストに報告が来たら、次は何をすればいいのでしょう?
+  まず最初にすべきことは、その問題の重大度 (severity)
+  と緊急性 (urgency) を評価することです。
+</para>
+
+<orderedlist>
+<!--
+  <listitem><para>How serious is the vulnerability?  Does it allow a
+            malicious attacker to take over the computer of someone
+            who uses your software?  Or does it, say, merely leak
+            information about the sizes of some of their files?</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      その脆弱性はどれくらい深刻なものでしょう?
+      悪意のある攻撃者が、
+      そのソフトウェアを使用しているコンピュータを乗っ取ってしまえるほどのものですか?
+      それとも、ただ単に何らかのファイルのサイズが漏洩してしまうというだけのものですか?
+    </para>
+  </listitem>
+
+<!--
+  <listitem><para>How easy is it to exploit the vulnerability?  Can
+            an attack be scripted, or does it require circumstantial
+            knowledge, educated guessing, and luck?</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      その脆弱性を突く攻撃の難易度はどの程度ですか?
+      スクリプトを使って誰でも攻撃できる程度のもの?
+      あるいはその場の状況を熟知している人が
+      高度に頭を働かせても、ごくまれにしか成功しないもの?
+    </para>
+  </listitem>
+
+<!--
+  <listitem><para><emphasis>Who</emphasis> reported the problem to
+            you?  The answer to this question doesn't change the
+            nature of the vulnerability, of course, but it does give
+            you an idea of how many other people might know about it.
+            If the report comes from one of the project's own
+            developers, you can breathe a little easier (but only a
+            little), because you can trust them not to have told
+            anyone else about it.  On the other hand, if it came in an
+            email from <literal>anonymous14@globalhackerz.net</literal>,
+            then you'd better act as fast as you can.  The person did
+            you a favor by informing you of the problem at all, but you
+            have no idea how many other people she's told, or how long
+            she'll wait before exploiting the vulnerability on live
+            installations.</para>
+  </listitem>
+-->
+  <listitem>
+    <para>
+      <emphasis>誰が</emphasis> その問題を報告してきたのですか?
+      この問いへの答えによって脆弱性そのものの性質が変わるわけではありませんが、
+      他にどれくらいの人がその問題に気づいている可能性があるかを推測することができます。
+      もしそのプロジェクトの開発者自身から報告されたのなら、ちょっとだけ
+      (本当にちょっとだけ) 安心できます。
+      おそらく、その報告者は他人にその問題を漏らしていないでしょうから。
+      一方、もし <literal>anonymous14@globalhackerz.net</literal>
+      とかいうアドレスからのメールで報告を受けたのなら、
+      一刻も早く対応すべきでしょう。
+      あなたにその問題を報告してくれた人は、
+      あなた以外の人にもその情報を漏らしているかもしれません。
+      あるいは報告を受けたときには既にその脆弱性を突いた攻撃を始めているかもしれません。
+    </para>
+  </listitem>
+</orderedlist>
+
+<!--
+<para>Note that the difference we're talking about here is often just
+a narrow range between <emphasis>urgent</emphasis>
+and <emphasis>extremely&nbsp;urgent</emphasis>.  Even when the report
+comes from a known, friendly source, there could be other people on
+the Net who discovered the bug long ago and just haven't reported it.
+The only time things aren't urgent is when the bug inherently does not
+compromise security very severely.</para>
+-->
+<para>
+  ここで考えているのは、あくまでも
+  <emphasis>緊急 (urgent)</emphasis> と
+  <emphasis>超緊急 (extremely&nbsp;urgent</emphasis>)
+  のどちらかというレベルの話であることに注意しましょう。
+  たとえ今回の報告が既知の信頼できるところからのものであったとしても、
+  それよりずっと前に他の人が同じ問題を発見しているが
+  ただ報告していないだけなのかもしれません。
+  緊急性が低いといえるのは、
+  そのバグが本質的に深刻なセキュリティ問題を引き起こさないといえる場合のみです。
+</para>
+
+<!--
+<para>The "<literal>anonymous14@globalhackerz.net</literal>" example
+is not facetious, by the way.  You really may get bug reports from
+identity-cloaked people who, by their words and behavior, never quite
+clarify whether they're on your side or not.  It doesn't matter: if
+they've reported the security hole to you, they'll feel they've done
+you a good turn, and you should respond in kind.  Thank them for the
+report, give them a date on or before which you plan to release a
+public fix, and keep them in the loop.  Sometimes they may
+give <emphasis>you</emphasis> a date&mdash;that is, an implicit threat
+to publicize the bug on a certain date, whether you're ready or not.
+This may feel like a bullying power play, but it's more likely a
+pre&euml;mptive action resulting from past disappointment with
+unresponsive software producers who didn't take security reports
+seriously enough.  Either way, you can't afford to tick this person
+off.  After all, if the bug is severe, he has knowledge that could
+cause your users big problems.  Treat such reporters well, and hope
+that they treat you well.</para>
+-->
+<para>
+  ところで、さきほどの "<literal>anonymous14@globalhackerz.net</literal>"
+  の例は、決して冗談で言ったわけではありません。
+  実際、このようにどこの誰だかわからないような相手からバグの報告を受けることもあり得ます。
+  彼らは自分の身元を明かすこともないでしょうし、
+  あなたの味方なのか敵なのかさえはっきりさせないでしょう。
+  でもそんなの関係ありません。あなたにセキュリティホールを教えてくれたということは、
+  向こうはあなたに対してひとつ貸しを作ったと考えているはずです。
+  それに対して、誠意を持って対応する必要があります。
+  まず報告してくれたことに対して感謝し、
+  修正版を公式リリースする予定日を彼らに伝えるようにします。
+  時には <emphasis>報告者側から</emphasis> 日時を指定されることもあります。
+  つまり、「バグが修正されているかどうかにかかわらず、
+  ○月○日になればこの問題を公表する」などどして暗黙の脅しをかけてくるようなものです。
+  これは単なる弱い物いじめに感じられるかもしれませんが、
+  おそらくその報告者が過去に経験したいやな思い出
+  (せっかくセキュリティ問題を報告してやったのに、
+  ソフトウェアの作者にまともに取り合ってもらえなかったなど)
+  に基づく先制攻撃と考えたほうが適切でしょう。
+  いずれにせよ、報告者をいちいち怒らせている余裕などありません。
+  結局のところ、もしそのバグが深刻なものなのだとしたら、
+  その報告者はユーザーに問題を引き起こさせる方法を知っているということになります。
+  彼の機嫌を損ねないよう丁重に扱いましょう。
+  そうすればきっと相手もこちらを尊重してくれることでしょう。
+</para>
+
+<!--
+<para>Another frequent reporter of security bugs is the security
+professional, someone who audits code for a living and keeps up on the
+latest news of software vulnerabilities.  These people usually have
+experience on both sides of the fence&mdash;they've both received and
+sent reports, probably more than most developers in your project have.
+They too will usually give a deadline for fixing a vulnerability
+before going public.  The deadline may be somewhat negotiable, but
+that's up to the reporter; deadlines have become recognized among
+security professionals as pretty much the only reliable way to get
+organizations to address security problems promptly.  So don't treat
+the deadline as rude; it's a time-honored tradition, and there are
+good reasons for it.</para>
+-->
+<para>
+  セキュリティバグの報告者としてほかによくあるのは、
+  セキュリティの専門家です。彼らはソフトウェアのコードを監査するのを仕事にしており、
+  ソフトウェアの脆弱性についての最新情報を追いかけています。
+  この手の人たちは、バグを報告する側だけでなくバグ報告を受け取る側としての経験も豊富です。
+  おそらくあなたのプロジェクト内のどのメンバーよりも経験を積んでいることでしょう。
+  また、彼らの特徴としては、期日を指定してその日までの対応を迫り、
+  期日がくればバグを一般に公表するというやり方があります。
+  交渉次第で期日を引き延ばすこともできるかもしれませんが、それは相手によります。
+  セキュリティの専門家たちにとっては、報告先にまともに取り合ってもらうための
+  唯一効果的な方法が期日を設定することなのです。
+  彼らが期日を指定してきたとしても、それを失礼だとは思わないようにしましょう。
+  それなりの理由があって続いている伝統なのですから。
+</para>
+
+<!--
+<para>Once you know the severity and urgency, you can start working on
+a fix.  There is sometimes a tradeoff between doing a fix elegantly
+and doing it speedily; this is why you must agree on the urgency
+before you start.  Keep discussion of the fix restricted to the
+security list members, of course, plus the original reporter (if she
+wants to be involved) and any developers who need to be brought in for
+technical reasons.</para>
+-->
+<para>
+  重大度と緊急性を判定し終えたら、実際の作業に取り掛かり始めます。
+  修正をエレガントに行うか、それともとにかくすばやく修正するのかのトレードオフになることもあります。
+  このようなときのために、まず最初に緊急性を判定しておいたのです。
+  セキュリティに関する修正についての議論は、当然セキュリティメーリングリスト内でのみ行います。
+  また、問題の報告者がもし議論への参加を希望するなら、報告者もその議論に参加させましょう。
+  そして、技術的な理由でそれ以外の開発者が参加することもあるかもしれません。
+</para>
+
+<!--
+<para>Do not commit the fix to the repository.  Keep it in patch form
+until the go-public date.  If you were to commit it, even with an
+innocent-looking log message, someone might notice and understand the
+change.  You never know who is watching your repository and why they
+might be interested.  Turning off commit emails wouldn't help; first
+of all, the gap in the commit mail sequence would itself look
+suspicious, and anyway, the data would still be in the repository.
+Just do all development in a patch and keep the patch in some private
+place, perhaps a separate, private repository known only to the people
+already aware of the bug.  (If you use a decentralized version control
+system like Arch or SVK, you can do the work under full version
+control, and just keep that repository inaccessible to
+outsiders.)</para>
+-->
+<para>
+  修正内容をリポジトリにコミットしてはいけません。
+  一般に公開するまではパッチ形式で管理しておくようにします。
+  もし仮にそれをコミットしてしまったら、
+  たとえログメッセージを適当に取り繕っていたとしても
+  見る人が見ればその変更の意味するところを感づかれてしまいます。
+  どこの誰がどういう目的であなたのリポジトリをチェックしているかなんてわかりません。
+  コミットメールの送信をやめたとしても無意味です。
+  まず、コミットメールの送信が突然止まったという時点で
+  「なにか怪しい」と思われてしまうでしょう。
+  そしてコミットメールの有無にかかわらず、
+  その内容はリポジトリのデータとして残されているわけです。
+  修正の開発はすべてパッチ形式で行い、パッチは隔離された場所で管理します。
+  そのバグの対応をしている人たちだけが知っている個別のリポジトリなどがいいでしょう
+  (Arch や SVK といった中央管理型ではないバージョン管理システムを使用しているなら、
+  完全にバージョン管理された環境で作業を進めることができます。
+  バグへの対応中は、外部からはリポジトリにアクセスできないようにしておけばいいのです)。
+</para>
+
+</sect3>
+
+<sect3 id="security-cve">
+<!--
+<title>CAN/CVE numbers</title>
+-->
+<title>CAN/CVE 番号</title>
+
+<!--
+<para>You may have seen a <firstterm>CAN number</firstterm> or
+a <firstterm>CVE number</firstterm> associated with security problems.
+These numbers usually look like "CAN-2004-0397" or
+"CVE-2002-0092", for example.</para>
+-->
+<para>
+  これまでに、セキュリティの問題の中で <firstterm>CAN 番号</firstterm>
+  や <firstterm>CVE 番号</firstterm> といったものをみたことがある人がいるかもしれません。
+  たとえば "CAN-2004-0397" あるいは "CVE-2002-0092"
+  といった形式のものです。
+</para>
+
+<!--
+<para>Both kinds of numbers represent the same type of entity: an
+entry in the list of "Common Vulnerabilities and Exposures" list
+maintained at <ulink url="http://cve.mitre.org/"/>.  The purpose of
+the list is to provide standardized names for all known security
+problems, so that everyone has a unique, canonical name to use when
+discussing one, and a central place to go to find out more
+information.  The only difference between a "CAN" number and a "CVE"
+number is that the former represents a candidate entry, not yet
+approved for inclusion in the official list by the CVE Editorial
+Board, and the latter represents an approved entry.  However, both
+types of entries are visible to the public, and an entry's number does
+not change when it is approved&mdash;the "CAN" prefix is simply
+replaced with "CVE".</para>
+-->
+<para>
+  これらの番号は、どちらも同じ型の内容を表しています。これは
+  <ulink url="http://cve.mitre.org/"/> で管理されている
+  "Common Vulnerabilities and Exposures"
+  リストのエントリを表します。このリストの目的は、
+  既知のセキュリティ問題についての共通の呼び名を提供することにあります。
+  そうすることで、個々の問題をはっきり区別できるようになります。
+  また、詳細な情報を探すための中央広場としての働きもあります。
+  "CAN" 番号と "CVE" 番号の唯一の違いは、
+  前者はまだ正式に認定される前の状態であるということです。
+  CVE Editorial Board によって認定されて公式リストに登場したものが後者となります。
+  しかし、どちらの情報も一般に公開されており、
+  認定の前後で番号自体は変わりません。
+  単に、番号の前の "CAN" が "CVE" に置き換わるだけのことです。
+</para>
+
+<!--
+<para>A CAN/CVE entry does not itself contain a full description of
+the bug and how to protect against it.  Instead, it contains a brief
+summary, and a list of references to external resources (such as
+mailing list archives) where people can go to get more detailed
+information.  The real purpose of <ulink url="http://cve.mitre.org/"/>
+is to provide a well-organized space in which every vulnerability can
+have a name and a clear route to more data.  See
+<ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"/>
+for an example of an entry.  Note that the references can be very
+terse, with sources appearing as cryptic abbreviations.  A key to
+those abbreviations is at
+<ulink url="http://cve.mitre.org/data/refs/refkey.html"/>.</para>
+-->
+<para>
+  CAN/CVE のエントリ自体には、
+  バグの詳細な説明や対処方法などは含まれていません。
+  その代わりに、そのバグの概要説明と外部リソース
+  (メーリングリストのアーカイブなど) へのリンクを用意し、
+  詳細な情報が知りたい人はそちらを参照すればいいようになっています。
+  <ulink url="http://cve.mitre.org/"/> の真の目的は、
+  きちんと整理整頓された場所を用意してすべての脆弱性に名前をつけ、
+  詳細なデータを得るための道筋を示すことです。たとえば、エントリの例として
+  <ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"/>
+  を見てみましょう。その記述内容は非常に簡潔なものであり、
+  なにやら怪しげな略語をつけたリンクがあるだけです。
+  これらの略語の意味については <ulink url="http://cve.mitre.org/data/refs/refkey.html"/>
+  でご確認ください。
+</para>
+
+<!--
+<para>If your vulnerability meets the CVE criteria, you may wish to
+acquire it a CAN number.  The process for doing so is deliberately
+gated: basically, you have to know someone, or know someone who knows
+someone.  This is not as crazy as it might sound.  In order for the
+CVE Editorial Board to avoid being overwhelmed with spurious or
+poorly written submissions, they take submissions only from sources
+they already know and trust.  In order to get your vulnerability
+listed, therefore, you need to find a path of acquaintance from your
+project to the CVE Editorial Board.  Ask around among your developers;
+one of them will probably know someone else who has either done the
+CAN process before, or knows someone who has, etc.  The advantage of
+doing it this way is also that somewhere along the chain, someone may
+know enough to tell you that a) it wouldn't count as a vulnerability
+or exposure according to MITRE's criteria, so there is no point
+submitting it, or b) the vulnerability already
+<emphasis>has</emphasis> a CAN or CVE number.  The latter can happen
+if the bug has already been published on another security advisory
+list, for example at <ulink url="http://www.cert.org/"/> or on the
+BugTraq mailing list at <ulink url="http://www.securityfocus.com/"/>.
+(If that happened without your project hearing about it, then you
+should worry what else might be going on that you don't know
+about.)</para>
+-->
+<para>
+  あなたが対応した脆弱性が CVE の条件を満たすようなら、CAN 番号の取得を検討するといいでしょう。
+  取得方法は、意図的に難しくしてあります。
+  基本的に、まずあなたが誰かの知り合いであるか、誰かの知り合いの知り合いである必要があります。
+  なんだかよくわからない言い方ですが、要はこういうことです。
+  脆弱性でもない内容や中身のないような報告に対応するのを避けるため、
+  CVE Editorial Board は既知の信頼できる情報源からの報告しか受け取らないのです。
+  したがって、脆弱性をリストに載せてもらうには、
+  あなたのプロジェクトと CVE Editorial Board の橋渡しをする仲介役が必要になるということです。
+  周囲の開発者に聞いてみましょう。その中に一人くらいは、
+  「以前に一度 CAN を取得したことがある」とか
+  「知り合いが CAN を取得していた」とかいう人がいるでしょう。
+  この方式の利点は、知り合いのつてをたどっていくうちに
+  a) それは MITRE の言うところの脆弱性に該当しないから投稿する必要はない
+  とか
+  b) その脆弱性にはすでに CAN あるいは CVE 番号が割り当てられている
+  といったことを教えてくれるかもしれないということです。
+  後者の可能性としては、そのバグが既に別のセキュリティメーリングリストで報告されているといったことがあります。
+  たとえば <ulink url="http://www.cert.org/"/>、あるいは <ulink url="http://www.securityfocus.com/"/>
+  の  BugTraq メーリングリストなどがこれにあたります
+  (もしあなたのプロジェクトに対して何も連絡がないまま後者の状態になっているのだとしたら、
+  自分たちのうかがい知れないところで何かが起こっているということを心配しなければなりません)。
+</para>
+
+<!--
+<para>If you get a CAN/CVE number at all, you usually want to get it
+in the early stages of your bug investigation, so that all further
+communications can refer to that number.  CAN entries are embargoed
+until the go-public date; the entry will exist as an empty placeholder
+(so you don't lose the name), but it won't reveal any information
+about the vulnerability until the date on which you will be announcing
+the bug and the fix.</para>
+-->
+ <para>
+  どうせ CAN/CVE 番号を得るのなら、
+  普通はバグの調査段階のできるだけ早いうちに番号を取得したいものです。
+  そうすれば、その後のやりとりはその番号を使用して進めることができます。
+  CAN エントリは、一般に公開される日まで使用できません。
+  それまでは空のエントリが存在するだけ (場所を確保するだけ)
+  であり、あなたがバグの存在と修正を公表するまで、
+  そこには何の情報も掲載されません。
+</para>
+
+<!--
+<para>More information about the CAN/CVE process may be found at
+<ulink url="http://cve.mitre.org/cve/identifiers/candidates_explained.html"/>, and a
+particularly clear exposition of one open source project's use of
+CAN/CVE numbers is at
+<ulink
+url="http://www.debian.org/security/cve-compatibility"/>.</para>
+-->
+<para>
+  CAN/CVE のプロセスについてのより詳細な情報は
+  <ulink url="http://cve.mitre.org/cve/identifiers/candidates_explained.html"/>
+  で得られます。また CAN/CVE 番号を非常にうまく使っている
+  オープンソースプロジェクトの例としては
+  <ulink url="http://www.debian.org/security/cve-compatibility"/>
+  があります。
+</para>
+
+</sect3>
+
+<sect3 id="security-prenotification">
+<!--
+<title>Pre-notification</title>
+-->
+<title>事前通知</title>
+
+<!--
+<para>Once your security response team (that is, those developers who
+are on the security mailing list, or who have been brought in to deal
+with a particular report) has a fix ready, you need to decide how to
+distribute it.</para>
+-->
+<para>
+  セキュリティ対策チーム (セキュリティメーリングリストのメンバー、
+  あるいはそのセキュリティ問題の対応担当者) が修正を完了したら、
+  次はそれをどのように公表するのかを判断する必要があります。
+</para>
+
+<!--
+<para>If you simply commit the fix to your repository, or otherwise
+announce it to the world, you effectively force everyone using your
+software to upgrade immediately or risk being hacked.  It is sometimes
+appropriate, therefore, to do <firstterm>pre-notification</firstterm>
+for certain important users.  This is particularly true with
+client/server software, where there may be well-known servers that are
+tempting targets for attackers.  Those servers' administrators would
+appreciate having an extra day or two to do the upgrade, so that they
+are already protected by the time the exploit becomes public
+knowledge.</para>
+-->
+<para>
+  単に修正をリポジトリにコミットするとか全世界に公表するとかだと、
+  そのソフトウェアを使用している人たちは
+  事実上即時のアップグレードを迫られることになってしまいます。
+  さもないと、攻撃を受ける危険性が生じるわけですから。
+  したがって、ある種の重要なユーザー向けには
+  <firstterm>事前通知</firstterm> をしておくほうが適切なこともあります。
+  いわゆるクライアント/サーバ型のソフトウェアなどでは特にこれが重要です。
+  有名なサーバが、一時的にでも攻撃の対象となってしまう可能性があるからです。
+  これらのサーバの管理者にとっては、アップグレードを行うためには
+  1 日から 2 日の時間が必要となるでしょう。
+  脆弱性が一般に公開される前にそのくらいの猶予があれば、
+  サーバの管理者はありがたいと思うことでしょう。
+</para>
+
+<!--
+<para>Pre-notification simply means sending mails to those
+administrators before the go-public date, telling them of the
+vulnerability and how to fix it.  You should send pre-notification
+only to people you trust to be discreet with the information.  That
+is, the qualification for receiving pre-notification is twofold: the
+recipient must run a large, important server where a compromise would
+be a serious matter, <emphasis>and</emphasis> the recipient must be
+known to be someone who won't blab about the security problem before
+the go-public date.</para>
+-->
+<para>
+  事前通知とは、単に一般公開前にそれらの管理者向けにメールを送信することを指します。
+  通知メールでは、脆弱性の内容とその対処方法を説明しておくようにします。
+  事前通知の送信先は、その情報を適切に扱ってくれると信頼できる相手に限定しなければなりません。
+  つまり、事前通知を受け取る資格があるのは、次のふたつの条件を満たす相手だけだということです。
+  まず、攻撃を受けると深刻な問題となるような巨大で重要なサーバを運営しているということ。
+  <emphasis>さらに</emphasis>、一般公開の前にその問題をペラペラしゃべってしまうような
+  口の軽い人ではないということ。
+</para>
+
+<!--
+<para>Send each pre-notification mail individually (one at a time) to
+each recipient.  Do <emphasis>not</emphasis> send to the entire list
+of recipients at once, because then they would see each others'
+names&mdash;meaning that you would essentially be alerting each
+recipient to the fact that each <emphasis>other</emphasis> recipient
+may have a security hole in her server.  Sending it to them all via
+blind CC (BCC) isn't a good solution either, because some admins
+protect their inboxes with spam filters that either block or reduce
+the priority of BCC'd mail, since so much spam is sent via BCC these
+days.</para>
+-->
+<para>
+  事前通知のメールは、それぞれの相手に個別に (一度に一通ずつ) 送信するようにします。
+  全員に一括送信などしては <emphasis>いけません</emphasis>。
+  そんなことをすれば、それを受け取った人たちに「私のほかにどんな相手に送っているのか」
+  を知られてしまいます。これが何を意味するのか。それを受け取った人は
+  「(私以外の) 他のメンバーのサーバにも同じセキュリティホールがある」
+  ということを知ってしまうことになります。
+  全員をブラインドカーボンコピー (BCC) で指定すればいいという問題でもありません。
+  受け取り先が使用しているスパムフィルタの設定によっては、BCC
+  で送信されたメールをブロックしたり優先度を下げたりするようになっていることもあるからです
+  (最近のスパムには、BCC を使用して送られてくるものが多いのです)。
+</para>
+
+<!--
+<para>Here's a sample pre-notification mail:</para>
+-->
+<para>事前通知メールの例を、ここに示します。</para>
+
+<!--
+<screen>
+From: Your Name Here
+To: admin@large-famous-server.com
+Reply-to: Your Name Here (not the security list's address)
+Subject: Confidential Scanley vulnerability notification.
+
+
+This email is a confidential pre-notification of a security alert
+in the Scanley server.
+
+Please *do not forward* any part of this mail to anyone.  The public
+announcement is not until May 19th, and we'd like to keep the
+information embargoed until then.
+
+You are receiving this mail because (we think) you run a Scanley
+server, and would want to have it patched before this security hole is
+made public on May 19th.
+
+References:
+===========
+
+   CAN-2004-1771: Scanley stack overflow in queries
+
+Vulnerability:
+==============
+
+   The server can be made to run arbitrary commands if the server's
+   locale is misconfigured and the client sends a malformed query.
+
+Severity:
+=========
+
+   Very severe, can involve arbitrary code execution on the server.
+
+Workarounds:
+============
+
+   Setting the 'natural-language-processing' option to 'off' in
+   scanley.conf closes this vulnerability.
+
+Patch:
+======
+
+   The patch below applies to Scanley 3.0, 3.1, and 3.2.
+
+   A new public release (Scanley 3.2.1) will be made on or just before
+   May 19th, so that it is available at the same time as this
+   vulnerability is made public.  You can patch now, or just wait for
+   the public release.  The only difference between 3.2 and 3.2.1 will
+   be this patch.
+
+[...patch goes here...]
+</screen>
+-->
+<screen>
+From: あなたの名前
+To: admin@large-famous-server.com
+Reply-to: あなたの名前 (セキュリティメーリングリストのアドレスではありません)
+Subject: [機密] セキュリティ脆弱性の通知
+
+
+このメールは、Scanley サーバにおけるセキュリティ警告に関する極秘の事前
+通知です。
+
+このメールの内容は、決して他人に転送しないでください。一般向けには 5 月
+19 日に公表する予定です。それまではこの情報を口外しないようお願いいたし
+ます。
+
+あなたにこのお知らせを送信した理由は、(おそらく) あなたが Scanley サー
+バをご利用いただいており、5 月 19 日にセキュリティホールを公表する前に
+パッチを適用したいであろうと考えられるからです。
+
+参照:
+=====
+
+   CAN-2004-1771: Scanley stack overflow in queries
+
+脆弱性:
+=======
+
+   サーバのロケールの設定が正しくない場合に、クライアントから不正な
+   クエリを送信するとサーバ上で任意のコマンドを実行できるようになります。
+
+重大度:
+=======
+
+   非常に深刻。サーバ上で任意のコードの実行を許してしまいます。
+
+回避方法:
+=========
+
+   scanley.conf で 'natural-language-processing' オプションを 'off'
+   に設定することで、この脆弱性を回避可能です。
+
+パッチ:
+=======
+
+   以下のパッチは Scanley 3.0、3.1 および 3.2 に適用可能です。
+
+   新しい公開リリース (Scanley 3.2.1) が 5 月 19 日の直前に公開されます。
+   つまり、この脆弱性を公表するのと同時に公開するということです。以下の
+   パッチを適用するか、あるいは新しいリリースが発表されるのをお待ちくだ
+   さい。3.2 と 3.2.1 の違いは、以下のパッチのみです。
+
+[...ここにパッチを示します...]
+</screen>
+
+<!--
+<para>If you have a CAN number, include it in the pre-notification (as
+shown above), even though the information is still embargoed and
+therefore the MITRE page will show nothing.  Including the CAN number
+allows the recipient to know with certainty that the bug they were
+pre-notified about is the same one they later hear about through
+public channels, so they don't have to worry whether further action is
+necessary or not, which is precisely the point of CAN/CVE
+numbers.</para>
+-->
+<para>
+  CAN 番号を取得している場合は、それを事前通知に含めるようにしましょう
+  (先ほどの例で示したようにします)。まだ情報は公開されておらず
+  MITRE のページには何も掲載されていませんが、それでも含める価値があります。
+  CAN 番号を示すことで、それを受け取った相手は「この通知で知ったバグと
+  後日正式に公開されるバグが確かに同じものである」ということを確認できます。
+  正式にバグが公開されたときに、余計な心配をせずにすむというわけです。
+  まさにこれこそが、CAN/CVE 番号の重要なところです。
+</para>
+
+</sect3>
+
+<sect3 id="security-announcing">
+<!--
+<title>Distribute the fix publicly</title>
+-->
+<title>修正を一般に公開する</title>
+
+<!--
+<para>The last step in handling a security bug is to distribute the
+fix publicly.  In a single, comprehensive announcement, you should
+describe the problem, give the CAN/CVE number if any, describe how to
+work around it, and how to permanently fix it.  Usually "fix" means
+upgrading to a new version of the software, though sometimes it can
+mean applying a patch, particularly if the software is normally run in
+source form anyway.  If you do make a new release, it should differ
+from some existing release by exactly the security patch.  That way,
+conservative admins can upgrade without worrying about what else they
+might be affecting; they also don't have to worry about future upgrades,
+because the security fix will be in all future releases as a matter of
+course.  (Details of release procedures are discussed in
+<xref linkend="security-releases"/><phrase output="printed"> in
+<xref linkend="development-cycle"/></phrase>.)</para>
+-->
+<para>
+  セキュリティバグへの対応で最後に行うのが、
+  修正内容を一般に公開することです。
+  ひとつの包括的なアナウンスで、以下の内容を説明しなければなりません。
+  まずその問題の内容、そして CAN/CVE 番号を取得していればその番号、
+  当面の回避策と本質的な修正方法などを示します。
+  "修正" は、通常はそのソフトウェアの最新バージョンへのアップデートとなります。
+  しかし、ソースコード形式で実行されるソフトウェアなどでは、
+  パッチの適用をもって "修正" とすることもあります。
+  新しいリリースを作成した場合は、それが通常のリリースとは異なり
+  セキュリティパッチの適用によるものであることを明示しておく必要があります。
+  そうしておけば、保守的な管理者であっても
+  副作用を気にせずにアップグレードできるようになります。
+  当然、今回のセキュリティ修正は将来のリリースにも含まれているでしょうから、
+  将来のアップグレードの際にも心配せずにすみます
+  (リリース手続きの詳細については、<phrase output="printed">
+  <xref linkend="development-cycle"/> の</phrase> <xref linkend="security-releases"/>
+  で説明します)。
+</para>
+
+<!--
+<para>Whether or not the public fix involves a new release, do the
+announcement with roughly the same priority as you would a new
+release: send a mail to the project's <literal>announce</literal>
+list, make a new press release, update the Freecode entry, etc.
+While you should never try to play down the existence of a security
+bug out of concern for the project's reputation, you may certainly set
+the tone and prominence of a security announcement to match the actual
+severity of the problem.  If the security hole is just a minor
+information exposure, not an exploit that allows the user's entire
+computer to be taken over, then it may not warrant a lot of fuss.  You
+may even decide not to distract the <literal>announce</literal> list
+with it.  After all, if the project cries wolf every time, users might
+end up thinking the software is less secure than it actually is, and
+also might not believe you when you have a really big problem to
+announce.  See
+<ulink url="http://cve.mitre.org/about/terminology.html"/> for a good
+introduction to the problem of judging severity.</para>
+-->
+<para>
+  セキュリティ対応の修正で新バージョンをリリースするか否かにかかわらず、
+  通常の新バージョンのリリースと同程度の優先度でアナウンスを行うようにします。
+  つまり、そのプロジェクトの <literal>announce</literal>
+  メーリングリストにメールを送ったりプレスリリースを作成したり
+  Freecode のエントリを更新したりといったことです。
+  そのプロジェクトの評判を気にしてセキュリティバグの存在を甘く見るなんてことは論外ですが、
+  セキュリティに関するアナウンスの影響と実際の問題の重大度との兼ね合いには注意しましょう。
+  そのセキュリティホールが単に些細な情報が漏洩するというだけのものであって
+  コンピュータ全体がのっとられてしまうほどのものではないという場合は、
+  あまり大騒ぎしないほうがいいこともあります。場合によっては
+  <literal>announce</literal> メーリングリストへの投稿も控えるということもありえます。
+  ささいなことで毎回大騒ぎしていると、ユーザーはどう思うでしょう?
+  実際にはそれほどではないのに「このソフトウェアはあまり安全ではない」
+  と思われてしまうかもしれません。また、本当に深刻な問題が発生したときにそれをアナウンスしても、
+  「またいつものやつだろう」と無視されてしまう可能性もあります。
+  重要度の判断方法については、
+  <ulink url="http://cve.mitre.org/about/terminology.html"/>
+  にすばらしい入門文書があるので、ぜひご覧ください。
+</para>
+
+<!--
+<para>In general, if you're unsure how to treat a security problem,
+find someone with experience and talk to them about it.  Assessing and
+handling vulnerabilities is very much an acquired skill, and it's easy
+to make missteps the first few times.</para>
+-->
+<para>
+  セキュリティ問題の対処方法がよくわからない場合は、
+  経験がありそうな人を探して相談するようにしましょう。
+  脆弱性の評価やその処理の技術は、経験を積まないとなかなか得られないもので、
+  最初のうちは失敗することが多いものです。
+</para>
+
+</sect3>
+
+<!--
+<para>See also the Apache Software Foundation
+guidelines on handling security vulnerabilities at
+<ulink url="http://www.apache.org/security/committers.html"/>.  They
+are an excellent checklist you can compare against to see if you're
+doing everything carefully.</para>
+-->
+<para>
+  セキュリティ脆弱性の扱いに関する Apache Software Foundation のガイドラインが
+  <ulink url="http://www.apache.org/security/committers.html"/>
+  にあります。こちらも参照ください。この素晴らしいチェックリストを見れば、
+  自分がすべてを注意深く行っているかどうかを判断できます。
+</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

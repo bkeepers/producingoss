@@ -1,0 +1,1671 @@
+﻿<!--
+https://spreadsheets.google.com/pub?hl=ja&hl=ja&key=0AgOqPQzRjQPOdDF5SGdRYXdVSGZWZGVxWWZXWV91WHc&output=html
+-->
+
+<chapter id="development-cycle">
+
+<title>Đóng gói, Phân phối và Phát triển hàng ngày</title>
+
+<simplesect>
+
+<para>Chương này trình bày về vấn đề đóng gói dự án phần mềm 
+và phát hành phần mềm, và những loại phát triển chung xung quanh 
+mục đích dự án.</para>
+
+<para>Sự khác biệt giữa phần mềm mã mở và phần mềm bản quyền là sự quản lý
+tập trung đối với đội ngũ phát triển.</para>
+
+<para>Khi chuẩn bị một phiên bản mới, sự khác biệt này là đặc biệt
+rõ rệt: một công ty có thể yêu cầu toàn bộ đội ngũ phát triển tập trung vào
+một bản phát hành sắp tới, đặt sang một bên tính năng mới và phát triển
+không quan trọng sửa lỗi cho đến khi phát hành xong.</para>
+
+<para>Nhóm tình nguyện viên không phải là một "khối" cứng. 
+Mọi người tham gia dự án vì nhiều lý do khác nhau, 
+và những người quan tâm tới một bản phát hành cho
+vẫn muốn tiếp tục công việc phát triển thường xuyên, liên tiếp dù bản đó đã ra đời. 
+Vì tính phát triển không ngừng của dự án mã nguồn mở, phát hành mã nguồn mở
+quy trình có xu hướng tốn nhiều thời gian, nhưng ít gây rối, 
+so với các quy trình phát hành thương mại. 
+Điều đó cũng giống như việc sửa đường cao tốc. 
+Có hai cách để sửa chữa một con đường: bạn có thể chặn hoàn toàn đường, 
+sửa chữa hết công suất cho đến khi vấn đề đượcgiải quyết, 
+hoặc bạn có thể làm việc trên một số tuyến đường tại một thời điểm, 
+tuy vẫn mở các đoạn đường khác</para>
+
+<para>Cách đầu tiên là rất hiệu quả <emphasis> với đội thợ </emphasis>, 
+nhưng nó không cho bất cứ ai khác sử dụng đường cho đến khi việc sửa hoàn thành. 
+Cách làm thứ hai cần
+nhiều thời gian và rắc rối cho đội thợ (bây giờ họ phải làm việc
+ít người hơn và trang thiết bị ít hơn, trong điều kiện chật hẹp,
+tiến hành chậm do lưu lượng truy cập trực tiếp, vv), nhưng ít nhất thì đường
+vẫn sử dụng được, mặc dù không hết công suất.</para>
+
+<para>
+Dự án mã nguồn mở có xu hướng làm việc theo cách thứ hai. Trong thực tế, 
+cho một đoạn mã nguồn ổn định đựoc duy trì đồng thời, 
+dự án sẽ rơi vào tình trạng luôn phải 
+sửa chữa những đoạn đường nhỏ. Luôn luôn có một vài làn bị chặn 
+phù hợp nhưng mức độ bất tiện thấp. Việc sửa chữa đó được
+chấp nhận bởi nhóm phát triển nói chung sao cho có được bản phát hành
+theo đúng lịch trình.
+</para>
+
+<para>
+Mô hình mà làm này có thể tổng quát hóa từ việc
+phát hành. Đó là nguyên tắc làm việc song song không
+làm hai bên phụ thuộc lẫn nhau-một nguyên tắc là không có nghĩa là duy nhất
+để phát triển nguồn mở. Tất nhiên, nhưng dự án nguồn mở
+được thực hiện theo cách đặc biệt của riêng nó. Họ không thể
+gây phiền toái quá nhiều tới luồng giao thông, 
+nhưng họ cũng không thể đứng chắn đường
+và làm luồng giao thông suy giảm theo. Do đó, họ tạo ra một 
+quy trình phẳng với các cấp độ quản lý đồng cấp, không có người hơn, người kém.
+Các tình nguyện viên nói chung sẽ sẵn sàng
+làm việc với sự bất tiện nhỏ nhưng thích hợp; 
+tính có thể dự báo cho phép họ đi đến đích mà không lo lắng về
+lịch trình và những khúc mắc xảy ra trong
+dự án. 
+Nhưng nếu các dự án được đặt dưới một lình trình cứng trong đó
+một số hoạt động không cho phép một số họat động khác tiến hành, kết quả sẽ là một hay 
+rất nhiều nhà phát triển không có việc gì làm (phải đợi), làm phí phạm thời gian-điều 
+đó không những không hiệu quả mà còn nhàm chán, và do đó là nguy hiểm. 
+Và một khi một lập trình viên cảm thấy nhàm chán, họ sẽ bỏ dự án
+</para>
+
+<para>
+Công việc phát hành thường không phải là công việc đáng chú ý nhất trong quy trình phát triển phần mềm.
+Điều đó xảy ra song song với sự phát triển, do đó, các phương pháp mô tả trong
+các phần sau chủ yếu hướng tới sự phát hành liên tục suôn sẻ.
+Tuy nhiên, lưu ý rằng những điều này cũng áp dụng cho các nhiệm vụ son song khác, 
+chẳng hạn như bản dịch hay quốc tế hóa, thay đổi API diện rộng sẽ 
+dần dẫn tới sự thay đổi toàn bộ mã nguồn...
+</para>
+
+</simplesect>
+
+<!-- ========================== SECTION =========================== -->
+
+<sect1 id="release-numbering">
+<title>Đánh số phát hành</title>
+
+<para>Trước khi nói về việc làm thế làm để phát hành,
+chúng ta hãy xem tên bản phát hành có ý nghĩa như thế nào đối với người dùng cuối.
+Phát hành bao gồm:</para>
+
+<itemizedlist>
+
+  <listitem><para>Sửa lỗi cũ. Đây là điều mà người dùng mong đợi ở mọi phiên bản phát hành.</para>
+  </listitem>
+
+  <listitem><para>Thêm lỗi mới. Phát hành bao gồm cả những lỗi kèm theo trừ những phiên bản phát 
+                  hành một lần duy nhất vì lý do bảo mật(xem
+            <xref linkend="security-releases"/><phrase
+            output="printed"> trong chương sau.</phrase>).</para>
+  </listitem>
+
+  <listitem><para>Thêm chức năng mới.</para>
+  </listitem>
+
+  <listitem><para>Thêm chức năng cấu hình mới, hoặc có sự thay đổi ý nghĩa của cấu hình cũ.
+   Có thể có cả sự thay đổi thứ tự cài đặt nhưng nói chung nên tránh điều này.</para>
+  </listitem>
+
+  <listitem><para>Những thay đổi phá vỡ sự tương thích,
+   ví dụ như thay đổi cấu trúc dữ liệu làm cho phiên bản cũ và mới không thể sử dụng đồng thời nếu không
+   hoán chuyển định dạng dữ liệu.</para>
+  </listitem>
+
+</itemizedlist>
+
+<para>
+Như bạn thấy, không phải tất cả những điều này là tốt đẹp. Đây là lý do tại sao những
+người dùng có kinh nghiệm tiếp cận phiên bản mới với một số lo lắng,
+đặc biệt là khi phần mềm là trưởng thành và đã thỏa mãn những yêu cầu
+họ muốn mong muốn (hoặc nghĩ rằng họ muốn). Ngay cả sự xuất hiện của mới
+tính năng là một tín hiệu hỗn hợp, trong đó nó có thể có nghĩa là các phần mềm
+bây giờ sẽ cư xử một cách không thể lường trước.
+</para>
+
+<para>
+Mục đích của việc đánh số phát hành, do đó, gồm hai phần:
+rõ ràng là những con số rõ ràng nên giao tiếp thứ tự của
+phát hành (tức là, bằng cách nhìn vào con số bất kỳ hai phiên bản, người ta có thể biết
+đâu là bản mới, cũ), ngoài ra, số phiên bản còn thể hiện
+mức độ và tính chất của những thay đổi trong việc phát hành.
+</para>
+
+<para>Thể hiển tất cả những điều đó trong số phiên bản?
+Cũng được, và chỉ là vậy thôi. Đánh số phiên bản là một trong những chủ đề
+nhỏ nhặt nhưng được tranh luận nhiều nhất từ trước tới nay
+(xem <xref linkend="bikeshed"/><phrase output="printed"> trong
+<xref linkend="communications"/></phrase>), 
+và hiện nay, thế giới vẫn chưa thống nhất về một chuẩn đánh số duy nhất.
+Tuy nhiên, có một số chiến lược đánh số được số đông đồng tình theo nguyên tắc:
+<emphasis>Thống nhất</emphasis>.
+Hãy chọn một chiến lược đánh số, văn bản hóa nó,
+tuân thủ chặt chẽ theo nó và người dùng sẽ cảm ơn bạn.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-components">
+<title>Các thành phần của số phiên bản</title>
+
+<para>
+Phần này mô tả các quy ước chính thức phát hành
+một cách cụ thể. Chúng ta giả định chúng ta có rất ít thông tin về cách đánh số. 
+Điều này chủ yếu có tính tham khảo. Nếu bạn đã quen thuộc với các
+quy ước, bạn có thể bỏ qua phần này.
+</para>
+
+<para>Số phiên bản theo chữ số, phân cách bằng dấu chấm:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3
+Singer 5.11.4</literallayout>
+</informalexample>
+
+<para> Dấu chấm <emphasis>không</emphasis> phải là dấu ngăn cách giữa 
+chữ số thập phân và chữ số đơn vị.
+Nó chỉ đơn thuần là sự phân cách, "5.3.9" và tiếp theo là
+"5.3.10". Một vài dự án có đôi khi gợi ý khác, nhất
+hạt nhân Linux nổi tiếng với nó "0.95", "0.96" ... "0.99" và sau đó 
+là Linux 1.0, nhưng các quy ước rằng các dấu chấm không
+số thập phân hiện đã được và cần được xem xét một
+tiêu chuẩn. Không có giới hạn về số lượng các thành phần (chữ số
+phần không chứa dấu chấm), nhưng hầu hết các dự án không vượt quá ba
+hoặc bốn. Những lý do tại sao sẽ trở nên rõ ràng sau đó.</para>
+
+<para>Ngoài cách dùng chữ số thành phần,
+một vài dự án còn dùng chữ để phân biệt như
+"Alpha" hay "Beta" (xem
+<xref linkend="alpha-and-beta"/>), ví dụ:</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha)
+Singer 5.11.4 (Beta)</literallayout>
+</informalexample>
+
+<para>
+Một bản "Alpha" hay "Beta" có nghĩa rằng đây là một bản 
+<emphasis>tiền chính thức</emphasis>, và rằng một bản phát hành trong tương lai sẽ có
+cùng một số phiên bản nhưng không kèm theo "Alpha" hay "Beta". 
+Như vậy, sau "2.3.0 (Alpha)" sẽ là "2.3.0". Để cho phép một số ứng viên như vậy
+phát hành liên tiếp, có thể đặt tên các phiên bản tiền-chính-thức và tiền-tiền-chính-thức.
+Ví dụ, đây là một loạt các bản phát hành theo thứ tự mà họ sẽ
+được đóng gói sẵn có cho công chúng:
+</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha 1)
+Scanley 2.3.0 (Alpha 2)
+Scanley 2.3.0 (Beta 1)
+Scanley 2.3.0 (Beta 2)
+Scanley 2.3.0 (Beta 3)
+Scanley 2.3.0</literallayout>
+</informalexample>
+
+<para>Chú ý rằng khi phiên bản chứa "Alpha", Scanley "2.3" được viết là "2.3.0".  
+Hai phiên bản này là tương đương&mdash; và để đơn giản, các số không 
+thường được bỏ qua&mdash;.</para>
+
+<para>Các hạn định từ khác được dùng bán chính thức là "Stable" (ổn định),
+"Unstable" (không ổn định), "Development" (phát triển), và "RC" (for "Release Candidate").  
+Hạn định từ hay được dùng nhất là "Alpha" và "Beta", tiếp đó là "RC"
+đứng vị trí thứ ba. Tuy nhiên chú ý rằng "RC" luôn chứa một chữ số bán hạn định từ
+Nghĩa là, bạn sẽ không phát hành phiên bản 
+"Scanley&nbsp;2.3.0&nbsp;(RC)", mà là
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", tiếp đó là RC2, ...</para>
+
+<para>Tác giả khuyến nghị sử dụng các từ thông dụng như, "Alpha", "Beta", and "RC", are pretty widely
+vì nó được sử dụng rộng rãi và tránh không dùng các từ khác
+vì những từ này không phải là "từ lóng" được mọi người khác sử dụng.</para>
+
+<para>
+Dấu chấm ở đây không phải là ký hiệu phân cách giữa số thập phân và 
+chữ số sau dấy phảy. Các phiên bản "0.X.Y" sẽ là tiền thân của 
+"1.0" (tương đương với "1.0.0").  "3.14.158" là tiền thân kề của 
+"3.14.159", và không phải là tiền thân kề của 
+"3.14.160" hay "3.15.'số nào đo'".</para>
+
+<para>
+Cần phải có một quy định về đánh số phiên bản vì qua con số này,
+người dùng biết được sự khác nhau quan trọng giữa hai phiên bản
+chỉ cần nhìn qua số phiên bản.
+Trong hệ thống đánh số ba thành phần, thành phần thứ nhất là 
+<firstterm>major&nbsp;number</firstterm> (số phiên bản chính), thành phần thứ hai là
+<firstterm>minor&nbsp;number</firstterm>, (số phiên bản phụ) và thành phần thứ ba là
+<firstterm>micro&nbsp;number</firstterm> (số micro).  
+Ví dụ, "2.10.17" là phiên bản micro thứ 17 của chuỗi phiên bản phụ thứ 10 
+trong dòng phiên bản chính số 2. Từ "dòng" (line) và "chuỗi" (series) ở 
+đây được dùng không chính thức, nhưng ý nghĩa của nó giống như bạn đang đọc.
+Một chuỗi phiên bản chính đơn giản là các phiên bản có cùng số phiên bản chính,
+một chuỗi (phiên bản) phụ bao gồm các phiên bản có cùng số phiên bản phụ <emphasis>và</emphasis>
+số phiên bản chính. Nghĩa là, "2.4.0" và "3.4.1" không cùng số phiên bản chính
+mặc dù số phiên bản phụ giống nhau ("4").
+"2.4.0" và "2.4.2" nằm cùng dòng phiên bản chính và phiên bản phụ mặc dù chúng
+không nắm kế tiếp nhau (2.4.1 là kế tiếp của 2.4.0).</para>
+
+<para>Ý nghĩ của các con số này giống như những gì bạn đọc dược:
+Nếu số phiên bản chính tăng một nghĩa là có thay đối lớn;
+nếu số phiên bản phụ tăng một, nghĩa là có thay đổi phụ (nhỏ);
+và số phiên bản micro là
+<firstterm>patch&nbsp;number</firstterm> (số bản vá),
+Chú ý rằng một số dự án dùng số bản giống như số micro,
+điều này đôi khi gây nhầm lẫn. Một số dự án khác lại dùng số micro là 
+<firstterm>build&nbsp;number</firstterm> (số xây dựng), tăng mỗi lần
+khi dự án được "build" (nghĩa là biên dịch lại). 
+Điều này có ý nghĩa phân biệt các phiên bản đóng gói cần khi thông báo lỗi.</para>
+
+<para>
+Mặc dù có khá nhiều quy định và thói quen sử dụng các thành phần trong số phiên bản,
+nhưng sự khác biệt này là khá tiểu tiết. Hai phần tiếp theo sẽ trình bày về 
+một số quy ước được sử dụng rộng rãi.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-simple-strategy">
+<title>Chiến lược đơn giản</title>
+
+<para>
+Hầu hết các dự án có luật về việc cho phép loại thay đổi vào vào một
+lần xuất bản nếu nó chỉ chứa một số micro và có luật khác cho số minor, 
+và thậm chí khác hơn nữa cho số phiên bản chính. 
+Không có "chuẩn" chung đặt cho các luật này nhưng ở đây, chúng tôi 
+sẽ mô tả chính sách được dùng thành một ở nhiều dự án.
+Bạn có thể cải tiến chính sách này cho phù hợp với dự án của mình.
+Chính sách dưới đây được sửa đổi từ dự án APR, xem 
+<ulink url="http://apr.apache.org/versioning.html"/>.</para>
+
+<orderedlist>
+
+  <listitem><para>
+  
+  Chỉ thay đổi số micro (nghĩa là, thay đổi trong cùng dòng) phải tương thích với 
+  phiên bản trước và sau nó. Nghĩa là, thay đổi này có thể là bug fix, 
+  hoặc thay đổi rất nhỏ tới các chức năng sẵn có. Và, chức năng mới không được
+  đưa vào phiên bản micro. 
+			</para>
+  </listitem>
+
+  <listitem><para>
+  
+  
+  Thay đổi tới số minor (nghĩa là, thay đổi trong dòng chính), phải thỏa mãn
+  tính tương tích với phiên bản trước đó, nhưng không cần thiết tương thích với
+  phiên bản sau nó. Thường người ra thêm các chức năng mới vào phiên bản minor,
+  			</para>
+  </listitem>
+
+  <listitem><para>
+  Thay đổi số phiên bản chính là ranh giới đánh dấu sự tương thích.
+  Một phiên bản chính có thể không tương thích với bản cũ và mới. 
+  Một phiên bản chính thường có nhiều chức năng mới, được gộp thành một bộ.
+			</para>
+  </listitem>
+
+</orderedlist>
+
+<para><firstterm>Tương thích ngược (backward-compatible)</firstterm> là gì
+phụ thuộc vào việc bản thân phần mềm đó làm gì nhưng thông thường, nó không 
+nói lên nhiều điều. Ví dụ, nếu chương trình của bạn ở dạng máy trạm/máy chủ,
+"tương thích ngược" sẽ có nghĩa là, nếu nâng cấp máy chủ lên 2.6.0
+không được glàm cho phiên bản 2.5.4 ở máy trạm mất một chức năng bất kỳ
+hoặc chạy khác với phiên bản trước đó (trừ trường hợp sửa lỗi!)
+Mặt khác, nếu nâng cấp máy trạm lên 2.6.0 cùng với máy chủ, thì máy trạm
+sẽ có thêm chức năn mới nhưng bản 2.5.4 lại không sử dụng được chức năng mới này.
+Nếu điều đó xảy ra, chúng ta gọi bản nâng cấp là <emphasis>không</emphasis>
+"tương thích xuôi": Hiển nhiên, bạn không thể hạ phiên bản của máy trạm về 
+2.5.4 và giữ mọi chức năng mà nó có ở 2.6.0, vì một số chức năng đó đã đuợc
+thêm mới ở 2.6.0.
+</para>
+
+<para>
+Điều này nghĩa là bản nâng cấp micro chỉ cần thiết chỉ trong trường hợp sửa lỗi.
+Nó phải giữ tính tương thích cả hai hướng: Nếu nâng cấp từ 2.5.3 lên 2.5.4 và sau đó
+quay ngược trở lại 2.5.3 thì vẫn không mất chức năng nào. 
+Tất nhiên, những bản sửa lỗi với 2.5.4 xuất hiện sau khi hạ phiên bản, nhưng bạn không
+mất bất kì sức năng nào, ngoại trừ những lỗi đã được sửa làm ảnh hưởng đến 
+một số chức năng có sẵn.
+</para>
+
+<para>
+Mô hình máy chủ/máy trạm và một trong những  ví dụ về tính tương thích.
+Một ví dụ khác là định dạng dữ liệu: Dữ liệu cần ghi vĩnh cửu hay không?
+Nếu cần, phải có một hướng dẫn và chính sách cụ thể để đảm bảo tính tương thích
+sao cho phiên bản định dạng 2.6.0 và 2.5.4 tương thích với nhau.
+Nếu một chương trình cung cấp API dưới dạng một framework, nó cũng cần tính tương
+thích giữa các thư viện cũ và mới.</para>
+
+<para>
+Trong những hệ thống như vậy, chúng ta không có cơ hội đập bỏ tất cả
+và bắt đầu lại tư đầu trừ khi bắt đầu phát triển với 
+một dòng phiên bản mới. Điều này khá tiện lợi:
+Chúng ta sẽ thiết kế lại, thêm chức năng, thay đổi giao thức
+so với phiên bản cũ. Thực ra không có giải pháp nhanh chóng nhiệm màu nào
+cho bài toán này trừ khi chúng ta thiết kế mở rộng lại từ đầu (đây là một 
+đề tài rộng, đáng để viết riêng một quyển sách). 
+Chúng ta cũng cần công bố một chính sách về tương thích (ngay cả với
+những người đã quen thuộc với khái niệm này) khi công bố 
+phần mềm, điều này không thể tránh khỏi. 
+
+</para>
+
+<para>
+Cá quy định trên được ngầm định rằng nó không được áp dụng cho 
+những phiên bản trước 1.0, ví dụ như 0.1, 0.2, 0.3...
+Sự thay đổi giữa các phiên bản  trước 1.0 là tùy ý. Số phiên bản
+trước 1.0 được đánh số bất kỳ tùy theo tác giả, ví dụ 0.1.0, 0.1.1 vân vân...
+hoặc cũng có thể không đánh số. 
+Các quy định về đánh số phiên bản trước 1.0 khá lỏng lẻo và người ta ngầm
+hiểu rằng đây là bản trước-chính-thức và họ "tha thứ" cho sự
+thay đổi lớn nhỏ hay không tương thích ngược hay xuôi.</para>
+
+<para>
+Xin lưu ý rằng những điều trên chỉ áp dụng cho hệ số đánh số ba thành phần cụ thể.
+Cách đánh số sẽ khác với một hệ thống ba thành phần khác và khác nữa
+với hệ thống đánh số hai thành phần. 
+Điều quan trọng là cần phải xác định xem ý nghĩa của từng thành phần là gì,
+đặt ra quy định và thực hiện chặt chẽ theo quy định đó.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-even-odd-strategy">
+<title>Chiến lược chẵn/lẻ</title>
+
+<para>
+Một số dự án dùng số chẵn/lẻ để đánh dấu: Số chẵn là ổn định và sổ lẻ
+là không ổn định. Các con số này chỉ áp dụng cho số phiên bản minor chứ
+không áp dụng cho số phiên bản chính và macro. 
+Tăng số micro nghĩa là sửa lỗi (không thêm chức năng mới).
+Tăng số phiên bản chính nghĩa là thêm chức năng mới, những thay đổi lớn.</para>
+
+<para>
+Dự án nhân Linux là một ví dụ về cách sử dụng chiến lược chẵn lẻ.
+Với cách làm này, họ đưa ra hai dòng sản phẩm ổn định và không ổn định
+cho người cần kiểm chứng chức năng mới với mã nguồn mới. 
+Ví dụ "2.4.21" là phiên bản ổn định và có thể được khuyến nghị dùng
+làm máy chủ web trong khi "2.5.1" là bản không chính thức và chỉ nên
+cài vào máy thử nghiệm. Nhóm phát triển xử lý các bản báo lỗi và tăng dần
+số micro cho tới khi đạt được độ bão hòa nhất định họ sẽ tăng số minor
+và đặt lại số micro là 0; hàm ý rằng đây là phiên bản ổn định.</para>
+
+<para>
+Hệ số đánh số này ít nhất là không xung động với hướng dẫn về tính tương thích
+đã trình bày từ trước. Nó đơn thuần chỉ làm overload số minor bằng một số
+thông tin khác. Nó bắt số minor tăng gấp hai lần so với số lần cần thiết. 
+Chiến lược chẵn/lẻ phù hợp với những dự án có vòng đời phát hành dài 
+và hướng tới người dùng cần sự ổn định hơn là chức năng mới. 
+Tuy nhiên, đây không là cách duy nhất để phần mềm của chúng ta được
+cộng đồng kiểm thảo giúp. 
+<xref linkend="stabilizing-a-release"/><phrase output="printed">
+Trong phần sau của chương này </phrase> chúng ta sẽ đề cập tới một 
+cách đánh số khác, có thể là phổ biến hơn, sao cho mã nguồn chưa-ổn-định
+được cộng đồng đón chào hơn. </para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-branches">
+<title>Nhánh phát hành</title>
+
+<para>
+Từ cái nhìn của người phát triển, dự án phần mềm miễn phí luôn ở trong
+trạng thái phát hành liên tục. Người phát triển luôn sử dụng mã nguồn mới nhất,
+vì họ muốn thử nghiệm và tìm lỗi, theo dõi sát sao dự án và để ý tới 
+những chức năng chưa hoàn thiện. Họ thường xuyên cập nhật kho của họ hàng ngày,
+thậm chí vài lần một ngày, kiểm tra các thay đổi và luôn kỳ vọng rằng
+những người phát triển khác có được bản copy trong vòng 24 tiếng</para>
+
+<para>
+Sau đó, làm thế làm để phát hành phiên bản chính thức? Chúng ta chỉ cần
+lấy một phiên bản bất kỳ trong cây, ví dụ 3.5.0 và công bố với thế giới?
+Thông thường người ta không làm như vậy. Đàu tiên, điều kiện tiên quyết
+phải là: toàn bộ cây dự án "sạch" (nghĩa là không còn lỗi). Những chức năng
+mới có thể ở mức độ hoàn thành khác nhau. Ai đó có thể sẽ kiểm tra những thay đổi
+lớn để tìm lỗi và sửa, nhưng điều này phải làm trong quá trình phát triển,
+nghĩa là trước khi bản chính thức phát hành. Nếu làm vậy, snapshot sẽ tồn tại
+cho tới khi mọi tranh luận về nó kết thúc. Những trao đổi không liên quan
+có thể diễn ra đồng thời và chúng ta phải chờ nó kết thúc.
+Tuy nhiên, trong thực tế, những tranh luận như vậy có thể không kết thúc.</para>
+
+<para>
+Trong cả hai trường hợp dùng snapshot cho toàn bộ cây dự án sẽ ảnh hưởng
+đến những chức năng đang được phát triển ngay cả khi snapshot này đã
+sẵn sàng phát hành. Giả sử snapshot này là 3.5.0; snapshot tiếp theo sẽ 
+là 3.5.1 chứa những bản sửa lỗi của 3.5.0. Nếu cả hai phiên bản này đều 
+nằm trên một cây của kho phát triển, người phát triển sẽ nhìn nhận thế nào?
+Đâu là bản "phát triển" và đâu là bản "chính thức"? Họ không thể thêm
+chức năng mới vào cả hai phiên bản và xảy ra sự không tương thích về 
+phiên bản. Không phải tất cả mọi người đều chú ý tới những bản vá cho 3.5.0,
+họ đành phải thụ đồng chờ cho cả hai phiên bản hoàn thành.</para>
+
+<para>
+Giải pháp cho vấn đề trên là sử dụng 
+<firstterm>phát hành rẽ nhánh</firstterm>.  
+Một bản "phát hành rẽ nhánh" trong một hệ thống quản lý phiên bản 
+<xref linkend="vc-vocabulary-branch"/>)
+là luồng phát triển độc lập với luồng phát triển chính..
+Khái niệm này cũng đuợc dùng khá rộng rãi trong phát triển phần mềm thương mại.
+Tuy nhiên, trong môi trường thương mại, "rẽ nhánh" đôi khi được coi là hoang phí
+tài nguyên và họ bị ép bởi hạn nộp hàng và đành phải sử dụng một hay ít cây phát triển. </para>
+
+<para>
+Tuy nhiên, phát hành nhánh là điều bắt buộc trong các dự án mã mở. 
+Một số dự án không phát hành nhánh và hệ quả là lập trình viên phải
+"ngồi chơi xơi nước" chờ tới khi phát hành xong. Tóm lại, hậu quả là xấu
+vì vòng phát triển bị đình trệ. Thứ hai, chất lượng cần đạt mức tốt hơn
+nó hiện có, vì khá ít người làm việc trên một nhánh và họ phải làm gấp
+để những người khác có thể tiến hành tiếp công việc của họ. Thứ ba, điều 
+này phân rã đội phát triển về mặt tâm lý và họ rơi vào trình trạng phải
+tương tác với nhau một cách không cần thiết. Người phát triển, cho dù
+không có việc gì làm, vẫn phải theo dõi các bản phát hành và tự hỏi
+"không rõ nó có liên quan tới tôi và tôi có phải làm gì không?"</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-branch-mechanics">
+<title>Nguyên lý phát hành rẽ nhánh</title>
+
+<para>
+Nguyên lý để tạo bản phát hành rẽ nhánh phụ thuộc vào từng hệ thống
+quản lý phiên bản. Tuy nhiên, có những khái niệm chung cho mọi hệ thống.
+Một rẽ nhánh nói chung được triết từ nhánh chính (trunk). Ở đây, thông thường,
+"trunk" là cành chính, không bị ràng buộc bởi các phát hành. Bản phát 
+hành rẽ nhánh đầu tiên bắt đầu bằng "1.0" được triết từ nhánh chính. 
+Với CVS, lệnh nhánh chạy như sau</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_1_0_X
+</screen>
+
+<para>với Subversion</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
+</screen>
+
+<para>(All these examples assume a three-component release numbering
+system.  While I can't show the exact commands for every version
+control system, I'll give examples in CVS and Subversion and hope that
+the corresponding commands in other systems can be deduced from those
+two.)</para>
+
+<para>Notice that we created branch "1.0.x" (with a literal "x")
+instead of "1.0.0".  This is because the same minor line&mdash;i.e.,
+the same branch&mdash;will be used for all the micro releases in that
+line.  The actual process of stabilizing the branch for release is
+covered in
+<xref linkend="stabilizing-a-release"/><phrase output="printed">
+later in this chapter</phrase>.  Here we are
+concerned just with the interaction between the version control system
+and the release process.  When the release branch is stabilized and
+ready, it is time to tag a snapshot from the branch:</para>
+
+<screen>
+$ cd RELEASE_1_0_X-working-copy
+$ cvs tag RELEASE_1_0_0
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
+</screen>
+
+<para>That tag now represents the exact state of the project's source
+tree in the 1.0.0 release (this is useful in case anyone ever needs to
+get an old version after the packaged distributions and binaries have
+been taken down).  The next micro release in the same line is likewise
+prepared on the 1.0.x branch, and when it is ready, a tag is made for
+1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
+start thinking about a 1.1.x release, make a new branch from
+trunk:</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_1_1_X
+</screen>
+
+<para>or</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
+</screen>
+
+<para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
+and releases can be made independently from both lines.  In fact, it
+is not unusual to publish near-simultaneous releases from two
+different lines.  The older series is recommended for more
+conservative site administrators, who may not want to make the big
+jump to (say) 1.1 without careful preparation.  Meanwhile, more
+adventurous people usually take the most recent release on the highest
+line, to make sure they're getting the latest features, even at the
+risk of greater instability.</para>
+
+</sect2>
+
+<para>This is not the only release branch strategy, of course.  In
+some circumstances it may not even be the best, though it's worked out
+pretty well for projects I've been involved in.  Use any strategy that
+seems to work, but remember the main points: the purpose of a release
+branch is to isolate release work from the fluctuations of daily
+development, and to give the project a physical entity around which to
+organize its release process.  That process is described in detail in
+the next section.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="stabilizing-a-release">
+<title>Stabilizing a Release</title>
+
+<para><firstterm>Stabilization</firstterm> is the process of getting a
+release branch into a releasable state; that is, of deciding which
+changes will be in the release, which will not, and shaping the branch
+content accordingly.</para>
+
+<para>There's a lot of potential grief contained in that word,
+"deciding".  The last-minute feature rush is a familiar phenomenon in
+collaborative software projects: as soon as developers see that a
+release is about to happen, they scramble to finish their current
+changes, in order not to miss the boat.  This, of course, is the exact
+opposite of what you want at release time.  It would be much better
+for people to work on features at a comfortable pace, and not worry
+too much about whether their changes make it into this release or the
+next one.  The more changes one tries to cram into a release at the
+last minute, the more the code is destabilized, and (usually) the more
+new bugs are created.</para>
+
+<para>Most software engineers agree in theory on rough criteria for
+what changes should be allowed into a release line during its
+stabilization period.  Obviously, fixes for severe bugs can go in,
+especially for bugs without workarounds.  Documentation updates are
+fine, as are fixes to error messages (except when they are considered
+part of the interface and must remain stable).  Many projects also
+allow certain kinds of low-risk or non-core changes to go in during
+stabilization, and may have formal guidelines for measuring risk.  But
+no amount of formalization can obviate the need for human judgement.
+There will always be cases where the project simply has to make a
+decision about whether a given change can go into a release.  The
+danger is that since each person wants to see their own favorite
+changes admitted into the release, then there will be plenty of people
+motivated to allow changes, and not enough people motivated to bar
+them.</para>
+
+<para>Thus, the process of stabilizing a release is mostly about
+creating mechanisms for saying "no".  The trick for open source
+projects, in particular, is to come up with ways of saying "no" that
+won't result in too many hurt feelings or disappointed developers, and
+also won't prevent deserving changes from getting into the release.
+There are many different ways to do this.  It's pretty easy to design
+systems that satisfy these criteria, once the team has focused on them
+as the important criteria.  Here I'll briefly describe two of the most
+popular systems, at the extreme ends of the spectrum, but don't let
+that discourage your project from being creative.  Plenty of other
+arrangements are possible; these are just two that I've seen work in
+practice.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-owner">
+<title>Dictatorship by Release Owner</title>
+
+<para>The group agrees to let one person be the <firstterm>release
+owner</firstterm>.  This person has final say over what changes make
+it into the release.  Of course, it is normal and expected for there
+to be discussions and arguments, but in the end the group must grant
+the release owner sufficient authority to make final decisions.  For
+this system to work, it is necessary to choose someone with the
+technical competence to understand all the changes, and the social
+standing and people skills to navigate the discussions leading up to
+the release without causing too many hurt feelings.</para>
+
+<para>A common pattern is for the release owner to say "I don't think
+there's anything wrong with this change, but we haven't had enough
+time to test it yet, so it shouldn't go into this release."  It helps
+a lot if the release owner has broad technical knowledge of the
+project, and can give reasons why the change could be potentially
+destabilizing (for example, its interactions with other parts of the
+software, or portability concerns).  People will sometimes ask such
+decisions to be justified, or will argue that a change is not as risky
+as it looks.  These conversations need not be confrontational, as long
+as the release owner is able to consider all the arguments objectively
+and not reflexively dig in his heels.</para>
+
+<para>Note that the release owner need not be the same person as the
+project leader (in cases where there is a project leader at all; see
+<xref linkend="benevolent-dictator"/><phrase output="printed">
+in <xref linkend="social-infrastructure"/></phrase>).  In fact,
+sometimes it's
+good to make sure they're <emphasis>not</emphasis> the same person.
+The skills that make a good development leader are not necessarily the
+same as those that make a good release owner.  In something as
+important as the release process, it may be wise to have someone
+provide a counterbalance to the project leader's judgement.</para>
+
+<para>Contrast the release owner role with the less dictatorial role
+described in
+<xref linkend="release-manager"/><phrase output="printed"> later
+in this chapter</phrase>.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-voting">
+<title>Change Voting</title>
+
+<para>At the opposite extreme from dictatorship by release owner,
+developers can simply vote on which changes to include in the release.
+However, since the most important function of release stabilization is
+to <emphasis>exclude</emphasis> changes, it's important to design the
+voting system in such a way that getting a change into the release
+involves positive action by multiple developers.  Including a change
+should need more than just a simple majority (see <xref
+linkend="electorate"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase>).  Otherwise,
+one vote for and none against a given change would suffice to get it
+into the release, and an
+unfortunate dynamic would be set up whereby each developer would vote
+for her own changes, yet would be reluctant to vote against others'
+changes, for fear of possible retaliation.  To avoid this, the system
+should be arranged such that subgroups of developers must act in
+cooperation to get any change into the release.  This not only means
+that more people review each change, it also makes any individual
+developer less hesitant to vote against a change, because she knows
+that no particular one among those who voted for it would take her
+vote against as a personal affront.  The greater the number of people
+involved, the more the discussion becomes about the change and less
+about the individuals.</para>
+
+<para>The system we use in the Subversion project seems to have struck
+a good balance, so I'll recommend it here.  In order for a change to
+be applied to the release branch, at least three developers must vote
+in favor of it, and none against.  A single "no" vote is enough to
+stop the change from being included; that is, a "no" vote in a release
+context is equivalent to a veto (see <xref linkend="veto"/>).
+Naturally, any such vote must be accompanied by a justification, and
+in theory the veto could be overridden if enough people feel it is
+unreasonable and force a special vote over it.  In practice, this has
+never happened, and I don't expect that it ever will.  People are
+conservative around releases anyway, and when someone feels strongly
+enough to veto the inclusion of a change, there's usually a good
+reason for it.</para>
+
+<para>Because the release procedure is deliberately biased toward
+conservatism, the justifications offered for vetoes are sometimes
+procedural rather than technical.  For example, a person may feel that
+a change is well-written and unlikely to cause any new bugs, but vote
+against its inclusion in a micro release simply because it's too
+big&mdash;perhaps it adds a new feature, or in some subtle way fails
+to fully follow the compatibility guidelines.  I've occasionally even
+seen developers veto something because they simply had a gut feeling
+that the change needed more testing, even though they couldn't spot
+any bugs in it by inspection.  People grumbled a little bit, but the
+vetoes stood and the change was not included in the release (I don't
+remember if any bugs were found in later testing or not,
+though).</para>
+
+<sect3 id="release-stabilization-collaboration">
+<title>Managing collaborative release stabilization</title>
+
+<para>If your project chooses a change voting system, it is imperative
+that the physical mechanics of setting up ballots and casting votes be
+as convenient as possible.  Although there is plenty of open source
+electronic voting software available, in practice the easiest thing to
+do is just to set up a text file in the release branch,
+called <filename>STATUS</filename> or <filename>VOTES</filename> or
+something like that.  This file lists each proposed change&mdash;any
+developer can propose a change for inclusion&mdash;along with all the
+votes for and against it, plus any notes or comments.  (Proposing a
+change doesn't necessarily mean voting for it, by the way, although
+the two often go together.)  An entry in such a file might look like
+this:</para>
+
+<screen>
+* r2401 (issue #49)
+  Prevent client/server handshake from happening twice.
+  Justification:
+    Avoids extra network turnaround; small change and easy to review.
+  Notes:
+    This was discussed in http://.../mailing-lists/message-7777.html
+    and other messages in that thread.
+  Votes:
+    +1: jsmith, kimf
+    -1: tmartin (breaks compatibility with some pre-1.0 servers;
+                 admittedly, those servers are buggy, but why be
+                 incompatible if we don't have to?)
+</screen>
+
+<para>In this case, the change acquired two positive votes, but was
+vetoed by tmartin, who gave the reason for the veto in a parenthetical
+note.  The exact format of the entry doesn't matter; whatever your
+project settles on is fine&mdash;perhaps tmartin's explanation for the
+veto should go up in the "Notes:" section, or perhaps the change
+description should get a "Description:" header to match the other
+sections.  The important thing is that all the information needed to
+evaluate the change be reachable, and that the mechanism for casting
+votes be as lightweight as possible.  The proposed change is referred
+to by its revision number in the repository (in this case a single
+revision, r2401, although a proposed change could just as easily
+consist of multiple revisions).  The revision is assumed to refer to a
+change made on the trunk; if the change were already on the release
+branch, there would be no need to vote on it.  If your version control
+system doesn't have an obvious syntax for referring to individual
+changes, then the project should make one up.  For voting to be
+practical, each change under consideration must be unambiguously
+identifiable.</para>
+
+<para>Those proposing or voting for a change are responsible for
+making sure it applies cleanly to the release branch, that is, applies
+without conflicts (see <xref linkend="vc-vocabulary-conflict"/>).
+If there are conflicts, then the entry should either point to an
+adjusted patch that does apply cleanly, or to a temporary branch that
+holds an adjusted version of the change, for example:</para>
+
+<screen>
+* r13222, r13223, r13232
+  Rewrite libsvn_fs_fs's auto-merge algorithm
+  Justification:
+    unacceptable performance (>50 minutes for a small commit) in
+    a repository with 300,000 revisions
+  Branch:
+    1.1.x-r13222@13517
+  Votes:
+    +1: epg, ghudson
+</screen>
+
+<para>That example is taken from real life; it comes from the
+<filename>STATUS</filename> file for the Subversion 1.1.4 release
+process.  Notice how it uses the original revisions as canonical
+handles on the change, even though there is also a branch with a
+conflict-adjusted version of the change (the branch also combines the
+three trunk revisions into one, r13517, to make it easier to merge the
+change into the release, should it get approval).  The original
+revisions are provided because they're still the easiest entity to
+review, since they have the original log messages.  The temporary
+branch wouldn't have those log messages; in order to avoid duplication
+of information (see
+<xref linkend="vc-singularity"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>), the
+branch's log message for r13517 should simply say "Adjust r13222,
+r13223, and r13232 for backport to 1.1.x branch."  All other
+information about the changes can be chased down at their original
+revisions.</para>
+
+</sect3>
+
+<sect3 id="release-manager">
+<title>Release manager</title>
+
+<para>The actual process of merging (see
+<xref linkend="vc-vocabulary-merge"/>) approved changes into the
+release branch can be performed by any developer.  There does not need
+to be one person whose job it is to merge changes; if there are a lot
+of changes, it can be better to spread the burden around.</para>
+
+<para>However, although both voting and merging happen in a
+decentralized fashion, in practice there are usually one or two people
+driving the release process.  This role is sometimes formally blessed
+as <firstterm>release manager</firstterm>, but it is quite different
+from a release owner (see
+<xref linkend="release-owner"/><phrase output="printed"> earlier
+in this chapter</phrase>) who has
+final say over the changes.  Release managers keep track of how many
+changes are currently under consideration, how many have been
+approved, how many seem likely to be approved, etc.  If they sense
+that important changes are not getting enough attention, and might be
+left out of the release for lack of votes, they will gently nag other
+developers to review and vote.  When a batch of changes are approved,
+these people will often take it upon themselves to merge them into the
+release branch; it's fine if others leave that task to them, as
+long as everyone understands that they are not obligated to do all the
+work unless they have explicitly committed to it.  When the time comes
+to put the release out the door (see
+<xref linkend="testing-and-releasing"/><phrase output="printed">
+later in this chapter</phrase>), the release managers
+also take care of the logistics of creating the final release
+packages, collecting digital signatures, uploading the packages, and
+making the public announcement.</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="packaging">
+<title>Packaging</title>
+
+<para>The canonical form for distribution of free software is as
+source code.  This is true regardless of whether the software normally
+runs in source form (i.e., can be interpreted, like Perl, Python, PHP,
+etc.) or needs to be compiled first (like C, C++, Java, etc.).  With
+compiled software, most users will probably not compile the sources
+themselves, but will instead install from pre-built binary packages
+(see <xref linkend="binary-packages"/><phrase output="printed">
+later in this chapter</phrase>).  However, those binary
+packages are still derived from a master source distribution.  The
+point of the source package is to unambiguously define the release.
+When the project distributes "Scanley&nbsp;2.5.0", what it means,
+specifically, is "The tree of source code files that, when compiled
+(if necessary) and installed, produces Scanley 2.5.0."</para>
+
+<para>There is a fairly strict standard for how source releases
+should look.  One will occasionally see deviations from this standard,
+but they are the exception, not the rule.  Unless there is a compelling
+reason to do otherwise, your project should follow this standard
+too.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-format">
+<title>Format</title>
+
+<para>The source code should be shipped in the standard formats for
+transporting directory trees.  For Unix and Unix-like operating
+systems, the convention is to use TAR format, compressed
+by <command>compress</command>, <command>gzip</command>,
+<command>bzip</command> or <command>bzip2</command>.  For MS Windows,
+the standard method for distributing directory trees
+is <firstterm>zip</firstterm> format, which happens to do compression
+as well, so there is no need to compress the archive after creating
+it.</para>
+
+   <sidebar id="packaging-tar">
+   <title>TAR Files</title>
+
+   <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
+   because tar format represents a directory tree as a linear data
+   stream, which makes it ideal for saving directory trees to tape.
+   The same property also makes it the standard for distributing
+   directory trees as a single file.  Producing compressed tar files
+   (or <firstterm>tarballs</firstterm>) is pretty easy.  On some
+   systems, the <command>tar</command> command can produce a
+   compressed archive itself; on others, a separate compression
+   program is used.</para>
+
+   </sidebar>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-name-and-layout">
+<title>Name and Layout</title>
+
+<para>The name of the package should consist of the software's name
+plus the release number, plus the format suffixes appropriate for the
+archive type.  For example, Scanley 2.5.0, packaged for Unix using GNU
+Zip (gzip) compression, would look like this:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.gz</literallayout>
+</informalexample>
+
+<para>or for Windows using zip compression:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<para>Either of these archives, when unpacked, should create a single
+new directory tree named <filename>scanley-2.5.0</filename> in the
+current directory.  Underneath the new directory, the source code
+should be arranged in a layout ready for compilation (if compilation
+is needed) and installation.  In the top level of new directory tree,
+there should be a plain text <filename>README</filename> file
+explaining what the software does and what release this is, and giving
+pointers to other resources, such as the project's web site, other
+files of interest, etc.  Among those other files should be an
+<filename>INSTALL</filename> file, sibling to
+the <filename>README</filename> file, giving instructions on how to build
+and install the software for all the operating systems it supports.
+As mentioned in
+<xref linkend="license-quickstart-applying"/><phrase output="printed">
+in <xref linkend="getting-started"/></phrase>, there should also
+be a <filename>COPYING</filename> or <filename>LICENSE</filename>
+file, giving the software's terms of distribution.</para>
+
+<para>There should also be a <filename>CHANGES</filename> file
+(sometimes called <filename>NEWS</filename>), explaining what's new in
+this release.  The <filename>CHANGES</filename> file accumulates
+changelists for all releases, in reverse chronological order, so that
+the list for this release appears at the top of the file.  Completing
+that list is usually the last thing done on a stabilizing release
+branch; some projects write the list piecemeal as they're developing,
+others prefer to save it all up for the end and have one person write
+it, getting information by combing the version control logs.  The list
+looks something like this:</para>
+
+<screen>
+Version 2.5.0
+(20 December 2004, from /branches/2.5.x)
+http://svn.scanley.org/repos/svn/tags/2.5.0/
+
+ New features, enhancements:
+    * Added regular expression queries (issue #53)
+    * Added support for UTF-8 and UTF-16 documents
+    * Documentation translated into Polish, Russian, Malagasy
+    * ...
+
+ Bugfixes:
+    * fixed reindexing bug (issue #945)
+    * fixed some query bugs (issues #815, #1007, #1008)
+    * ...
+</screen>
+
+<para>The list can be as long as necessary, but don't bother to
+include every little bugfix and feature enhancement.  Its purpose is
+simply to give users an overview of what they would gain by upgrading
+to the new release.  In fact, the changelist is customarily included
+in the announcement email (see
+<xref linkend="testing-and-releasing"/><phrase output="printed">
+later in this chapter</phrase>), so write it with that
+audience in mind.</para>
+
+   <sidebar id="changelog">
+   <title>CHANGES Versus ChangeLog</title>
+   <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
+   lists every change ever made to a project&mdash;that is, every
+   revision committed to the version control system.  There are
+   various formats for ChangeLog files; the details of the formats
+   aren't important here, as they all contain the same information:
+   the date of the change, its author, and a brief summary (or just
+   the log message for that change).</para>
+
+   <para>A <filename>CHANGES</filename> file is different.  It too is
+   a list of changes, but only the ones thought important for a
+   certain audience to see, and often with metadata like the exact
+   date and author stripped off.  To avoid confusion, don't use the
+   terms interchangeably.  Some projects use "NEWS" instead of
+   "CHANGES"; although this avoids the potential for confusion with
+   "ChangeLog", it is a bit of a misnomer, since the CHANGES file
+   retains change information for all releases, and thus has a lot of
+   old news in addition to the new news at the top.</para>
+
+   <para>ChangeLog files may be slowly disappearing anyway.  They were
+   helpful in the days when CVS was the only choice of version control
+   system, because change data was not easy to extract from CVS.
+   However, with more recent version control systems, the data that
+   used to be kept in the ChangeLog can be requested from the version
+   control repository at any time, making it pointless for the project
+   to keep a static file containing that data&mdash;in fact, worse
+   than pointless, since the ChangeLog would merely duplicate the log
+   messages already stored in the repository.</para>
+   </sidebar>
+
+<para>The actual layout of the source code inside the tree should be
+the same as, or as similar as possible to, the source code layout one
+would get by checking out the project directly from its version
+control repository.  Usually there are a few differences, for example
+because the package contains some generated files needed for
+configuration and compilation (see
+<xref linkend="packaging-build-install"/><phrase output="printed">
+later in this chapter</phrase>), or because it includes
+third-party software that is not maintained by the project, but that
+is required and that users are not likely to already have.  But even
+if the distributed tree corresponds exactly to some development tree
+in the version control repository, the distribution itself should not
+be a working copy (see <xref linkend="vc-vocabulary-working-copy"/>).
+The release is supposed to represent a static reference point&mdash;a
+particular, unchangeable configuration of source files.  If it were a
+working copy, the danger would be that the user might update it, and
+afterward think that he still has the release when in fact he has
+something different.</para>
+
+<para>Remember that the package is the same regardless of the
+packaging.  The release&mdash;that is, the precise entity referred to
+when someone says "Scanley&nbsp;2.5.0"&mdash;is the tree created by
+unpacking a zip file or tarball.  So the project might offer all of
+these for download:</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.bz2
+scanley-2.5.0.tar.gz
+scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<para>...but the source tree created by unpacking them must be the
+same.  That source tree is the distribution; the form in which it is
+downloaded is merely a matter of convenience.  Certain trivial
+differences between source packages are allowable: for example, in the
+Windows package, text files should have lines ending with CRLF
+(Carriage Return and Line Feed), while Unix packages should use just
+LF.  The trees may be arranged slightly differently between source
+packages destined for different operating systems, too, if those
+operating systems require different sorts of layouts for compilation.
+However, these are all basically trivial transformations.  The basic
+source files should be the same across all the packagings of a given
+release.</para>
+
+<sect3 id="release-capitalization">
+<title>To capitalize or not to capitalize</title>
+
+<para>When referring to a project by name, people generally capitalize
+it as a proper noun, and capitalize acronyms if there are any:
+"MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", etc.  Whether this
+capitalization is reproduced in the package name is up to the project.
+Either <filename>Scanley-2.5.0.tar.gz</filename> or
+<filename>scanley-2.5.0.tar.gz</filename> would be fine, for example
+(I personally prefer the latter, because I don't like to make people
+hit the shift key, but plenty of projects ship capitalized packages).
+The important thing is that the directory created by unpacking the
+tarball use the same capitalization.  There should be no surprises:
+the user must be able to predict with perfect accuracy the name of the
+directory that will be created when she unpacks a distribution.</para>
+
+</sect3>
+<sect3 id="release-prereleases">
+<title>Pre-releases</title>
+
+<para>When shipping a pre-release or candidate release, the qualifier
+is truly a part of the release number, so include it in the name of
+the package's name.  For example, the ordered sequence of alpha and
+beta releases given earlier in
+<xref linkend="release-number-components"/> would result in
+package names like this:</para>
+
+<informalexample>
+<literallayout>scanley-2.3.0-alpha1.tar.gz
+scanley-2.3.0-alpha2.tar.gz
+scanley-2.3.0-beta1.tar.gz
+scanley-2.3.0-beta2.tar.gz
+scanley-2.3.0-beta3.tar.gz
+scanley-2.3.0.tar.gz</literallayout>
+</informalexample>
+
+<para>The first would unpack into a directory
+named <filename>scanley-2.3.0-alpha1</filename>, the second into
+<filename>scanley-2.3.0-alpha2</filename>, and so on.</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-build-install">
+<title>Compilation and Installation</title>
+
+<para>For software requiring compilation or installation from source,
+there are usually standard procedures that experienced users expect to
+be able to follow.  For example, for programs written in C, C++, or
+certain other compiled languages, the standard under Unix-like systems
+is for the user to type:</para>
+
+<screen>
+   $ ./configure
+   $ make
+   # make install
+</screen>
+
+<para>The first command autodetects as much about the environment as
+it can and prepares for the build process, the second command builds
+the software in place (but does not install it), and the last command
+installs it on the system.  The first two commands are done as a
+regular user, the third as root.  For more details about setting up
+this system, see the excellent <citetitle>GNU Autoconf, Automake, and
+Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
+is published as treeware by New Riders, and its content is also freely
+available online at
+<ulink url="http://sources.redhat.com/autobook/"/>.</para>
+
+<para>This is not the only standard, though it is one of the most
+widespread.  The Ant (<ulink url="http://ant.apache.org/"/>) build
+system is gaining popularity, especially with projects written in
+Java, and it has its own standard procedures for building and
+installing.  Also, certain programming languages, such as Perl and
+Python, recommend that the same method be used for most programs
+written in that language (for example, Perl modules use the
+command <command>perl&nbsp;Makefile.PL</command>).  If it's not
+obvious to you what the applicable standards are for your project, ask
+an experienced developer; you can safely assume
+that <emphasis>some</emphasis> standard applies, even if you don't
+know what it is at first.</para>
+
+<para>Whatever the appropriate standards for you project are, don't
+deviate from them unless you absolutely must.  Standard installation
+procedures are practically spinal reflexes for a lot of system
+administrators now.  If they see familiar invocations documented in
+your project's <filename>INSTALL</filename> file, that instantly
+raises their faith that your project is generally aware of
+conventions, and that it is likely to have gotten other things right
+as well.  Also, as discussed in
+<xref linkend="downloads"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase>, having a standard
+build procedure pleases potential developers.</para>
+
+<para>On Windows, the standards for building and installing are a bit
+less settled.  For projects requiring compilation, the general
+convention seems to be to ship a tree that can fit into the
+workspace/project model of the standard Microsoft development
+environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc.).
+Depending on the nature of your software, it may be possible to offer
+a Unix-like build option on Windows via the Cygwin
+(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
+if you're using a language or programming framework that comes with
+its own build and install conventions&mdash;e.g., Perl or
+Python&mdash;you should simply use whatever the standard method is for
+that framework, whether on Windows, Unix, Mac OS X, or any other
+operating system.</para>
+
+<para>Be willing to put in a lot of extra effort in order to make your
+project conform to the relevant build or installation standards.
+Building and installing is an entry point: it's okay for things to get
+harder after that, if they absolutely must, but it would be a shame
+for the user's or developer's very first interaction with the software
+to require unexpected steps.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="binary-packages">
+<title>Binary Packages</title>
+
+<para>Although the formal release is a source code package, most users
+will install from binary packages, either provided by their operating
+system's software distribution mechanism, or obtained manually from
+the project web site or from some third party.  Here "binary" doesn't
+necessarily mean "compiled"; it just means any pre-configured form of
+the package that allows a user to install it on his computer without
+going through the usual source-based build and install procedures.  On
+RedHat GNU/Linux, it is the RPM system; on Debian GNU/Linux, it is the
+APT (<filename>.deb</filename>) system; on MS Windows, it's usually
+<literal>.MSI</literal> files or self-installing
+<literal>.exe</literal> files.</para>
+
+<para>Whether these binary packages are assembled by people closely
+associated with the project, or by distant third parties, users are
+going to <emphasis>treat</emphasis> them as equivalent to the
+project's official releases, and will file issues in the project's bug
+tracker based on the behavior of the binary packages.  Therefore, it
+is in the project's interest to provide packagers with clear
+guidelines, and work closely with them to see to it that what they
+produce represents the software fairly and accurately.</para>
+
+<para>The main thing packagers need to know is that they should always
+base their binary packages on an official source release.  Sometimes
+packagers are tempted to pull a later incarnation of the code from the
+repository, or include selected changes that were committed after the
+release was made, in order to provide users with certain bug fixes or
+other improvements.  The packager thinks he is doing his users a favor
+by giving them the more recent code, but actually this practice can
+cause a great deal of confusion.  Projects are prepared to receive
+reports of bugs found in released versions, and bugs found in recent
+trunk and major branch code (that is, found by people who deliberately
+run bleeding edge code).  When a bug report comes in from these
+sources, the responder will often be able to confirm that the bug is
+known to be present in that snapshot, and perhaps that it has since
+been fixed and that the user should upgrade or wait for the
+next release.  If it is a previously unknown bug, having the precise
+release makes it easier to reproduce and easier to categorize in the
+tracker.</para>
+
+<para>Projects are not prepared, however, to receive bug reports based
+on unspecified intermediate or hybrid versions.  Such bugs can be hard
+to reproduce; also, they may be due to unexpected interactions in
+isolated changes pulled in from later development, and thereby cause
+misbehaviors that the project's developers should not have to take the
+blame for.  I have even seen dismayingly large amounts of time wasted
+because a bug was <emphasis>absent</emphasis> when it should have been
+present: someone was running a slightly patched up version, based on
+(but not identical to) an official release, and when the predicted bug
+did not happen, everyone had to dig around a lot to figure out
+why.</para>
+
+<para>Still, there will sometimes be circumstances when a packager
+insists that modifications to the source release are necessary.
+Packagers should be encouraged to bring this up with the project's
+developers and describe their plans.  They may get approval, but
+failing that, they will at least have notified the project of their
+intentions, so the project can watch out for unusual bug reports.  The
+developers may respond by putting a disclaimer on the project's web
+site, and may ask that the packager do the same thing in the
+appropriate place, so that users of that binary package know what they
+are getting is not exactly the same as what the project officially
+released.  There need be no animosity in such a situation, though
+unfortunately there often is.  It's just that packagers have a
+slightly different set of goals from developers.  The packagers mainly
+want the best out-of-the-box experience for their users.  The
+developers want that too, of course, but they also need to ensure that
+they know what versions of the software are out there, so they can
+receive coherent bug reports and make compatibility guarantees.
+Sometimes these goals conflict.  When they do, it's good to keep in
+mind that the project has no control over the packagers, and that the
+bonds of obligation run both ways.  It's true that the project is
+doing the packagers a favor simply by producing the software.  But the
+packagers are also doing the project a favor, by taking on a mostly
+unglamorous job in order to make the software more widely available,
+often by orders of magnitude.  It's fine to disagree with packagers,
+but don't flame them; just try to work things out as best you
+can.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="testing-and-releasing">
+<title>Testing and Releasing</title>
+
+<para>Once the source tarball is produced from the stabilized release
+branch, the public part of the release process begins.  But before the
+tarball is made available to the world at large, it should be tested
+and approved by some minimum number of developers, usually three or
+more.  Approval is not simply a matter of inspecting the release for
+obvious flaws; ideally, the developers download the tarball, build and
+install it onto a clean system, run the regression test suite (see
+<xref linkend="automated-testing"/>)<phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>, and do some
+manual testing.  Assuming it passes these checks, as well as any other
+release checklist criteria the project may have, the developers then
+digitally sign the tarball using GnuPG
+(<ulink url="http://www.gnupg.org/"/>), PGP
+(<ulink url="http://www.pgpi.org/"/>), or some other program capable
+of producing PGP-compatible signatures.</para>
+
+<para>In most projects, the developers just use their personal digital
+signatures, instead of a shared project key, and as many developers as
+want to may sign (i.e., there is a minimum number, but not a maximum).
+The more developers sign, the more testing the release undergoes, and
+also the greater the likelihood that a security-conscious user can
+find a digital trust path from herself to the tarball.</para>
+
+<para>Once approved, the release (that is, all tarballs, zip files,
+and whatever other formats are being distributed) should be placed
+into the project's download area, accompanied by the digital
+signatures, and by MD5/SHA1 checksums (see <ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
+There are various standards for doing this.  One way is to accompany
+each released package with a file giving the corresponding digital
+signatures, and another file giving the checksum.  For example, if one
+of the released packages is <filename>scanley-2.5.0.tar.gz</filename>,
+place in the same directory a file
+<filename>scanley-2.5.0.tar.gz.asc</filename> containing the digital
+signature for that tarball, another file
+<filename>scanley-2.5.0.tar.gz.md5</filename> containing its MD5
+checksum, and optionally another,
+<filename>scanley-2.5.0.tar.gz.sha1</filename>, containing the SHA1
+checksum.  A different way to provide checking is to collect all the
+signatures for all the released packages into a single file,
+<filename>scanley-2.5.0.sigs</filename>; the same may be done with the
+checksums.</para>
+
+<para>It doesn't really matter which way you do it.  Just keep to a
+simple scheme, describe it clearly, and be consistent from release to
+release.  The purpose of all this signing and checksumming is to give
+users a way to verify that the copy they receive has not been
+maliciously tampered with.  Users are about to run this code on their
+computers&mdash;if the code has been tampered with, an attacker could
+suddenly have a back door to all their data.  See
+<xref linkend="security-releases"/><phrase output="printed">
+later in this chapter</phrase> for more about paranoia.</para>
+
+<sect2 id="candidate-releases">
+<title>Candidate Releases</title>
+
+<para>For important releases containing many changes, many projects
+prefer to put out <firstterm>release candidates</firstterm> first,
+e.g., <filename>scanley-2.5.0-beta1</filename> before
+<filename>scanley-2.5.0</filename>.  The purpose of a candidate is to
+subject the code to wide testing before blessing it as an official
+release.  If problems are found, they are fixed on the release branch
+and a new candidate release is rolled out
+(<filename>scanley-2.5.0-beta2</filename>).  The cycle continues until
+no unacceptable bugs are left, at which point the last candidate
+release becomes the official release&mdash;that is, the only
+difference between the last candidate release and the real release
+is the removal of the qualifier from the version number.</para>
+
+<para>In most other respects, a candidate release should be treated
+the same as a real release.  The <emphasis>alpha</emphasis>,
+<emphasis>beta</emphasis>, or <emphasis>rc</emphasis> qualifier is
+enough to warn conservative users to wait until the real release, and
+of course the announcement emails for the candidate releases should
+point out that their purpose is to solicit feedback.  Other than
+that, give candidate releases the same amount of care as regular
+releases.  After all, you want people to use the candidates, because
+exposure is the best way to uncover bugs, and also because you never
+know which candidate release will end up becoming the official
+release.</para>
+
+</sect2>
+
+<sect2 id="release-announcement">
+<title>Announcing Releases</title>
+
+<para>Announcing a release is like announcing any other event, and
+should use the procedures described in
+<xref linkend="publicity"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>.  There are a few
+specific things to do for releases, though.</para>
+
+<para>Whenever you give the URL to the downloadable release tarball,
+make sure to also give the MD5/SHA1 checksums and pointers to the
+digital signatures file.  Since the announcement happens in multiple
+forums (mailing list, news page, etc.), this means users can get the
+checksums from multiple sources, which gives the most
+security-conscious among them extra assurance that the checksums
+themselves have not been tampered with.  Giving the link to the
+digital signature files multiple times doesn't make those signatures
+more secure, but it does reassure people (especially those who don't
+follow the project closely) that the project takes security
+seriously.</para>
+
+<para>In the announcement email, and on news pages that contain more
+than just a blurb about the release, make sure to include the relevant
+portion of the CHANGES file, so people can see why it might be in
+their interests to upgrade.  This is as important with candidate
+releases as with final releases; the presence of bugfixes and new
+features is important in tempting people to try out a candidate
+release.</para>
+
+<para>Finally, don't forget to thank the development team, the
+testers, and all the people who took the time to file good bug
+reports.  Don't single out anyone by name, though, unless there's
+someone who is individually responsible for a huge piece of work,
+the value of which is widely recognized by everyone in the
+project.  Just be wary of sliding down the slippery slope of credit
+inflation (see <xref linkend="credit"/><phrase output="printed">
+in <xref linkend="managing-volunteers"/></phrase>).</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-lines">
+<title>Maintaining Multiple Release Lines</title>
+
+<para>Most mature projects maintain multiple release lines in
+parallel.  For example, after 1.0.0 comes out, that line should
+continue with micro (bugfix) releases 1.0.1, 1.0.2, etc., until the
+project explicitly decides to end the line.  Note that merely
+releasing 1.1.0 is not sufficient reason to end the 1.0.x line.  For
+example, some users make it a policy never to upgrade to the first
+release in a new minor or major series&mdash;they let others shake the
+bugs out of, say 1.1.0, and wait until 1.1.1.  This isn't necessarily
+selfish (remember, they're forgoing the bugfixes and new features
+too); it's just that, for whatever reason, they've decided to be very
+careful with upgrades.  Accordingly, if the project learns of a major
+bug in 1.0.3 right before it's about to release 1.1.0, it would be a
+bit severe to just put the bugfix in 1.1.0 and tell all the old 1.0.x
+users they should upgrade.  Why not release both 1.1.0 and 1.0.4, so
+everyone can be happy?</para>
+
+<para>After the 1.1.x line is well under way, you can declare 1.0.x to
+be at <firstterm>end of life</firstterm>.  This should be announced
+officially.  The announcement could stand alone, or it could be
+mentioned as part of a 1.1.x release announcement; however you do
+it, users need to know that the old line is being phased out, so they
+can make upgrade decisions accordingly.</para>
+
+<para>Some projects set a window of time during which they pledge to
+support the previous release line.  In an open source context,
+"support" means accepting bug reports against that line, and making
+maintenance releases when significant bugs are found.  Other projects
+don't give a definite amount of time, but watch incoming bug reports
+to gauge how many people are still using the older line.  When the
+percentage drops below a certain point, they declare end of life for
+the line and stop supporting it.</para>
+
+<para>For each release, make sure to have a <firstterm>target
+version</firstterm> or <firstterm>target milestone</firstterm>
+available in the bug tracker, so people filing bugs will be able to do
+so against the proper release.  Don't forget to also have a target
+called "development" or "latest" for the most recent development
+sources, since some people&mdash;not only active developers&mdash;will
+often stay ahead of the official releases.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="security-releases">
+<title>Security Releases</title>
+
+<para>Most of the details of handling security bugs were covered in
+<xref linkend="security"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>, but there are some
+special details to discuss for doing security releases.</para>
+
+<para>A <firstterm>security release</firstterm> is a release made
+solely to close a security vulnerability.  The code that fixes the bug
+cannot be made public until the release is available, which means not
+only that the fixes cannot be committed to the repository until the
+day of the release, but also that the release cannot be publicly
+tested before it goes out the door.  Obviously, the developers can
+examine the fix among themselves, and test the release privately, but
+widespread real-world testing is not possible.</para>
+
+<para>Because of this lack of testing, a security release should
+always consist of some existing release plus the fixes for the
+security bug, with <emphasis>no other changes</emphasis>.  This is
+because the more changes you ship without testing, the more likely
+that one of them will cause a new bug, perhaps even a new security
+bug!  This conservatism is also friendly to administrators who may
+need to deploy the security fix, but whose upgrade policy prefers that
+they not deploy any other changes at the same time.</para>
+
+<para>Making a security release sometimes involves some minor
+deception.  For example, the project may have been working on a 1.1.3
+release, with certain bug fixes to 1.1.2 already publicly declared,
+when a security report comes in.  Naturally, the developers cannot
+talk about the security problem until they make the fix available;
+until then, they must continue to talk publicly as though 1.1.3 will
+be what it's always been planned to be.  But when 1.1.3 actually
+comes out, it will differ from 1.1.2 only in the security fixes, and
+all those other fixes will have been deferred to 1.1.4 (which, of
+course, will now <emphasis>also</emphasis> contain the security
+fix, as will all other future releases).</para>
+
+<para>You could add an extra component to an existing release to
+indicate that it contains security changes only.  For example, people
+would be able to tell just from the numbers that 1.1.2.1 is a security
+release against 1.1.2, and they would know that any release "higher"
+than that (e.g., 1.1.3, 1.2.0, etc.) contains the same security fixes.
+For those in the know, this system conveys a lot of information.  On
+the other hand, for those not following the project closely, it can be
+a bit confusing to see a three-component release number most of the
+time with an occasional four-component one thrown in seemingly at
+random.  Most projects I've looked at choose consistency and simply
+use the next regularly scheduled number for security releases, even
+when it means shifting other planned releases by one.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="releases-and-daily-development">
+<title>Releases and Daily Development</title>
+
+<para>Maintaining parallel releases simultaneously has implications
+for how daily development is done.  In particular, it makes
+practically mandatory a discipline that would be recommended anyway:
+have each commit be a single logical change, and never mix unrelated
+changes in the same commit.  If a change is too big or too disruptive
+to do in one commit, break it across N commits, where each commit is a
+well-partitioned subset of the overall change, and includes nothing
+unrelated to the overall change.</para>
+
+<para>Here's an example of an ill-thought-out commit:</para>
+
+<screen>
+------------------------------------------------------------------------
+r6228 | jrandom | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 lines
+
+Fix Issue #1729: Make indexing gracefully warn the user when a file
+is changing as it is being indexed.
+
+* ui/repl.py
+  (ChangingFile): New exception class.
+  (DoIndex): Handle new exception.
+
+* indexer/index.py
+  (FollowStream): Raise new exception if file changes during indexing.
+  (BuildDir): Unrelatedly, remove some obsolete comments, reformat
+  some code, and fix the error check when creating a directory.
+
+Other unrelated cleanups:
+
+* www/index.html: Fix some typos, set next release date.
+------------------------------------------------------------------------
+</screen>
+
+<para>The problem with it becomes apparent as soon as someone needs to
+port the <function>BuildDir</function> error check fix over to a
+branch for an upcoming maintenance release.  The porter doesn't want
+any of the other changes&mdash;for example, perhaps the fix to issue
+#1729 wasn't approved for the maintenance branch at all, and the
+<filename>index.html</filename> tweaks would simply be irrelevant
+there.  But she cannot easily grab just the
+<function>BuildDir</function> change via the version control tool's
+merge functionality, because the version control system was told that
+that change is logically grouped with all these other unrelated
+things.  In fact, the problem would become apparent even before the
+merge.  Merely listing the change for voting would become problematic:
+instead of just giving the revision number, the proposer would have to
+make a special patch or change branch just to isolate the portion of
+the commit being proposed.  That would be a lot of work for others to
+suffer through, and all because the original committer couldn't be
+bothered to break things into logical groups.</para>
+
+<para>In fact, that commit really should have been
+<emphasis>four</emphasis> separate commits: one to fix issue
+#1729, another to remove obsolete comments and reformat code in
+<function>BuildDir</function>, another to fix the error check in
+<function>BuildDir</function>, and finally, one to tweak
+<filename>index.html</filename>.  The third of those commits would be
+the one proposed for the maintenance release branch.</para>
+
+<para>Of course, release stabilization is not the only reason why
+having each commit be one logical change is desirable.
+Psychologically, a semantically unified commit is easier to review,
+and easier to revert if necessary (in some version control systems,
+reversion is really a special kind of merge anyway).  A little
+up-front discipline on everyone's part can save the project a lot of
+headache later.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="planning">
+<title>Planning Releases</title>
+
+<para>One area where open source projects have historically differed
+from proprietary projects is in release planning.  Proprietary
+projects usually have firmer deadlines.  Sometimes it's because
+customers were promised that an upgrade would be available by a
+certain date, because the new release needs to be coordinated with
+some other effort for marketing purposes, or because the venture
+capitalists who invested in the whole thing need to see some results
+before they put in any more funding.  Free software projects, on the
+other hand, were until recently mostly motivated by amateurism in the
+most literal sense: they were written for the love of it.  No one felt
+the need to ship before all the features were ready, and why should
+they?  It wasn't as if anyone's job was on the line.</para>
+
+<para>Nowadays, many open source projects are funded by corporations,
+and are correspondingly more and more influenced by deadline-conscious
+corporate culture.  This is in many ways a good thing, but it can
+cause conflicts between the priorities of those developers who are
+being paid and those who are volunteering their time.  These conflicts
+often happen around the issue of when and how to schedule releases.
+The salaried developers who are under pressure will naturally want to
+just pick a date when the releases will occur, and have everyone's
+activities fall into line.  But the volunteers may have other
+agendas&mdash;perhaps features they want to complete, or some testing
+they want to have done&mdash;that they feel the release should wait
+on.</para>
+
+<para>There is no general solution to this problem except discussion
+and compromise, of course.  But you can minimize the frequency and
+degree of friction caused, by decoupling the proposed
+<emphasis>existence</emphasis> of a given release from the date when
+it would go out the door.  That is, try to steer discussion toward the
+subject of which releases the project will be making in the near- to
+medium-term future, and what features will be in them, without at
+first mentioning anything about dates, except for rough guesses with
+wide margins of error<footnote><para>For an alternative approach, you
+may wish to read Martin Michlmayr's Ph.D. thesis <citetitle>Quality
+Improvement in Volunteer Free and Open Source Software Projects:
+Exploring the Impact of Release Management</citetitle>
+(<ulink url="http://www.cyrius.com/publications/michlmayr-phd.html"/>).
+It is about using time-based release processes, as opposed to
+feature-based, in large free software projects.  Michlmayr also gave a
+talk at Google on the subject, available on Google Video at
+<ulink url="http://video.google.com/videoplay?docid=-5503858974016723264"
+/>.</para></footnote>.  By nailing down feature sets early, you reduce
+the complexity of the discussion centered on any individual release,
+and therefore improve predictability.  This also creates a kind of
+inertial bias against anyone who proposes to expand the definition of
+a release by adding new features or other complications.  If the
+release's contents are fairly well defined, the onus is on the
+proposer to justify the expansion, even though the date of the release
+may not have been set yet.</para>
+
+<para>In his multi-volume biography of Thomas Jefferson,
+<citetitle>Jefferson and His Time</citetitle>, Dumas Malone tells the
+story of how Jefferson handled the first meeting held to decide the
+organization of the future University of Virginia.  The University had
+been Jefferson's idea in the first place, but (as is the case
+everywhere, not just in open source projects) many other parties had
+climbed on board quickly, each with their own interests and agendas.
+When they gathered at that first meeting to hash things out, Jefferson
+made sure to show up with meticulously prepared architectural
+drawings, detailed budgets for construction and operation, a proposed
+curriculum, and the names of specific faculty he wanted to import from
+Europe.  No one else in the room was even remotely as prepared; the
+group essentially had to capitulate to Jefferson's vision, and the
+University was eventually founded more or less in accordance with his
+plans.  The facts that construction went far over budget, and that
+many of his ideas did not, for various reasons, work out in the end,
+were all things Jefferson probably knew perfectly well would happen.
+His purpose was strategic: to show up at the meeting with something so
+substantive that everyone else would have to fall into the role of
+simply proposing modifications to it, so that the overall shape, and
+therefore schedule, of the project would be roughly as he
+wanted.</para>
+
+<para>In the case of a free software project, there is no single
+"meeting", but instead a series of small proposals made mostly by
+means of the issue tracker.  But if you have some credibility in the
+project to start with, and you start assigning various features,
+enhancements, and bugs to target releases in the issue tracker,
+according to some announced overall plan, people will mostly go along
+with you.  Once you've got things laid out more or less as you want
+them, the conversations about actual release
+<emphasis>dates</emphasis> will go much more smoothly.</para>
+
+<para>It is crucial, of course, to never present any individual
+decision as written in stone.  In the comments associated with each
+assignment of an issue to a specific future release, invite
+discussion, dissent, and be genuinely willing to be persuaded whenever
+possible.  Never exercise control merely for the sake of exercising
+control: the more deeply others participate in the release planning
+process (see
+<xref linkend="share-management"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>), the easier it
+will be to persuade them to share your priorities on the issues that
+really count for you.</para>
+
+<para>The other way the project can lower tensions around release
+planning is to make releases fairly often.  When there's a long time
+between releases, the importance of any individual release is
+magnified in everyone's minds; people are that much more crushed when
+their code doesn't make it in, because they know how long it might be
+until the next chance.  Depending on the complexity of the release
+process and the nature of your project, somewhere between every three
+and six months is usually about the right gap between releases, though
+maintenance lines may put out micro releases a bit faster, if there is
+demand for them.</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+

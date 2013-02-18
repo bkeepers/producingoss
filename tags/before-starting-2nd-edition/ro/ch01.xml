@@ -1,0 +1,784 @@
+<chapter id="introduction">
+
+<title>Introducere</title>
+
+<simplesect>
+
+<para>Cele mai multe proiecte de software gratuit eșuează.</para>
+
+<para>Nu auzim prea multe despre eșecuri. Numai proiectele cu succes 
+atrag atenția dar există atât de multe proiecte de software gratuit
+<footnote><para>SourceForge.net, un site cunoscut de găzduire, înregistrase
+79225 de proiecte până la mijlocul lunii aprilie 2004. Desigur că numărul
+acesta nu se apropie de numărul total de proiecte existente pe Internet;
+reprezintă doar numărul celor care au ales să utilizeze SourceForge.
+</para></footnote> încât chiar dacă numai un procentaj mic au succes
+tot va rezulta un număr mare de proiecte vizibile. De asemenea nu auzim
+de eșecuri pentru că eșecul nu este un eveniment în sine. Nu există un 
+moment anume de timp în care un proiect încetează să mai fie util; 
+oamenii se îndepărtează de el și încetează să mai lucreze la el. Poate 
+exista un moment când se face o ultimă modificare la un proiect dar cei
+care au făcut-o de obicei nu știu că aceasta este ultima. Nu există
+nicio definiție clară a momentului în care se consideră că un proiect
+a expirat. Să fie când la un proiect nu s-a mai lucrat timp de șase luni?
+Sau când numărul de utilizatori nu mai crește fără a fi depășit 
+capacitatea numărului de dezvoltatori de a întreține proiectul? Dar dacă
+dezvoltatorii unui proiect îl abandonează pentru că realizează că 
+replicau efortul unui altul&mdash;și dacă se alătură acelui alt 
+proiect, apoi îl extind pentru a putea să includă o parte a efortului
+anterior? Primul proiect s-a încheiat s-au și-a schimbat doar locul? </para>
+
+<para>Această complexitate duce la imposibilitatea stabilirii
+unei rate exacte a eșecului. Dar dovezile anecdotice strânse după
+mai mult de un deceniu de open-source, puțină navigare pe SourceForge.net
+și câteva căutări pe Google duc toate la aceeași concluzie: rata este
+extrem de mare, probabil ajungând la 90&ndash;95%. Numărul crește
+dacă includem proiectele existente dar disfuncționale: acele care 
+<emphasis>produc</emphasis> cod executabil dar care nu sunt plăcute 
+utilizatorului sau care nu progresează la fel de rapid sau de fiabil 
+cum ar putea.
+</para>
+
+<para>Această carte vorbește despre evitarea eșecului. Examinează nu 
+numai cum se fac lucrurile corect dar și cum se fac în mod greșit pentru
+a putea recunoaște și corecta problemele din timp. Sper că, după citirea
+cărții, veți avea un repertoriu de tehnici nu numai pentru a evita
+problemele uzuale din dezvoltarea open-source dar și pentru a vă ocupa
+de creșterea și întreținerea unui proiect de succes. Succesul nu este un
+joc cu sumă zero și această carte nu este despre cum să câștigi sau să
+îți întreci adversarii. Din contră, o parte importantă a conducerii
+unui proiect open-source o constituie interfațarea simplă cu proiecte
+înrudinte. Pe termen lung, fiecare proiect de succes contribuie la 
+binele corpului mondial de software gratuit.</para>
+
+</simplesect>
+
+<simplesect>
+
+<para>Ar fi tentant de spus faptul că proiectele de software gratuit
+eșuează din aceleași categorii de motive ca și proiectele de software
+proprietar. Cu siguranță, software-ul gratuit nu deține monopolul asupra
+cerințelor nerealiste, cerințelor vagi, administrării deficitare a
+resurselor, fazelor insuficiente de design sau altor pitici deja 
+bine cunoscuți în industria software. Există deja destule scrieri pe
+aceste teme și nu voi încerca să le reproduc în această carte. În schimb,
+voi încerca să descriu problemele caracteristice software-ului gratuit.
+Când un proiect de software gratuit dispare se întâmplă de obicei 
+pentru că dezvoltatorii (sau managerii) nu au apreciat problemele unice
+ale dezvoltării de software open-source deși poate că erau destul de bine
+pregătiți pentru dificultățile dezvoltării closed-source.</para>
+
+<para>Una dintre cele mai frecvente greșeli este de a avea așteptări
+nerealiste de la avantajul unei surse deschise. O licență deschisă nu 
+garantează faptul că hoarde de dezvoltatori activi își vor oferi brusc
+timpul lor proiectului și nici transformarea unui proiect în open-source
+nu îi rezolvă în mod magic problemele. De fapt, se poate întâmpla chiar 
+contrariul: deschiderea unui proiect poate adăuga complexitate și poate
+costa <emphasis>mai mult</emphasis> pe termen scurt decât păstrarea
+codului închis. Deschiderea către public presupune aranjarea codului
+astfel încât să poată să fie înțeles de străini, stabilirea unui site de
+dezvoltare și a unor liste de e-mail și adesea scrierea documentației 
+pentru prima dată. Toate acestea presupun multă muncă. Desigur, dacă
+totuși <emphasis>apar</emphasis> apar noi dezvoltatori, există povara
+suplimentară de a le răspunde la întrebări pentru o vreme înainte de a
+beneficia de pe urma prezenței lor. După cum spunea și dezvoltatorul
+Jamie Zawinski despre problemele din primele zile ale proiectului
+Mozilla:</para>
+
+    <blockquote>
+      <para><emphasis>Open source-ul funcționează dar nu este un panaceu.
+      Dacă există un un înțeles în această poveste este că nu se poate
+      presăra praful magic "open-source" pe un proiect aflat pe moarte
+      și totul să funcționeze în mod magic. Software-ul este complicat.
+      Problemele nu sunt atât de simple.</emphasis></para>
+
+      <para>(sursa: <emphasis role="bold"><ulink
+      url="http://www.jwz.org/gruntle/nomo.html"/></emphasis>)</para>
+    </blockquote>
+
+<para>O greșeală înrudită este aceea de a sări peste partea de prezentare
+și împachetare, considerând că acestea pot fi făcute mai târziu, când
+proiectul a demarat deja de ceva vreme. Prezentarea și împachetarea 
+aplicației cuprind destul de multe etape care toate se învârt în 
+jurul ideei de a reduce dificultatea intrării. Pentru ca proiectul să fie
+deschis celor neinițiați trebuie scrisă documentația pentru utilizatori
+și dezvoltatori, trebuie creat un site web care să ofere informațiile 
+necesare celor care sunt noi, trebuie automate procesele de compilare
+și instalare a software-ului, etc. Din păcate mulți programatori 
+consideră că această muncă este de mai puțină importanță decât codul în
+sine. Există câteva motive pentru care se întâmplă acest lucru. În primul
+rând poate să pară muncă inutilă pentru că beneficiile ei sunt mai
+degrabă vizibile celor mai puțin familiarizați cu proiectul și invers.
+Oamenii care dezvoltă codul nu au nevoie neapărat de acest proces de 
+ambalare. Ei deja știu să instaleze, administreze și să folosească
+aplicația pentru că au scris-o. În al doilea rând, deprinderile
+necesare pentru a realiza bine prezentarea și împachetarea aplicației
+sunt complet diferite de cele de care e nevoie pentru a scrie cod.
+Oamenii tind să se concentreze pe lucrurile la care sunt buni chiar dacă
+ar fi mai bine pentru proiect să petreacă și puțin timp făcând ceva
+care li se potrivește mai puțin.  <xref
+linkend="getting-started"/> discută în detaliu procesele de realizare
+a prezentării și împachetării aplicației și explică de ce e crucial
+ca ele să fie o prioritate încă de la începutul proiectului.</para>
+
+<para>Următoarea pe lista noastră de greșeli frecvente sunt presupunerile
+greșita că în open-source nu e nevoie de management de proiect, că e 
+nevoie de foarte puțin sau că aceleași practici de management folosite
+la dezvoltarea în cadrul unei firme vor funcționa la fel de bine la un
+proiect open-source. Administrarea unui proiect deschis nu este 
+întotdeauna foarte vizibilă utilizatorilor dar în proiectele de succes
+aceasta are loc în culise într-o formă sau alta. Un mic exercițiu de 
+gândire ajunge pentru a demonstra de ce. Un proiect open-source cuprinde
+un grup aleator de programatori&mdash;deja o categorie cunoscută pentru
+firea independentă&mdash;care, cel mai probabil, nu s-au întâlnit 
+niciodată unii cu alții și care pot să urmărească fiecare scopuri 
+diferite prin munca lor de la proiect. Exercițiul constă doar în a ne
+imagina ce s-ar întâmpla cu un astfel de grup <emphasis>fără</emphasis> 
+management. Dacă nu luăm în considerare miracolele, un astfel de grup 
+s-ar destrăma foarte repede. Lucrurile pur și simplu nu se vor așeza 
+singure, indiferent cât am dori noi să fie invers. Dar partea de 
+management, deși poate fi destul de activă, e adesea lipsită de
+formalitate și subtilă. Singurul lucru care menține coeziunea unui grup
+de dezvoltare este credința comună că pot face mai multe împreună
+decât fiecare individual. Astfel, scopul procesului managerial este
+de a se asigura faptul că ei împărtășesc în continuare acest crez prin
+eliminarea marginalizării dezvoltatorilor datorate idiosincraziei și,
+în general, făcând proiectul unul la care dezvoltatorii să vrea să se
+întoarcă. Tehnicile specifice pentru realizarea acestui scop sunt
+discutate pe parcursul cărții.</para>
+
+<para>Ultima categorie este a acelor probleme care ar putea fi denumite
+"eșecuri ale navigației culturale". Acum zece ani, poate chiar cinci,
+ar fi fost prematur să vorbim despre o cultură globală a software-ului
+gratuit. Ulterior a apărut o cultură ușor de recunoscut care nu este
+monolitică&mdash;este la fel de predispusă la conflicte interne ca și
+orice altă cultură delimitată geografic&mdash; dar are un miez consistent.
+Majoritatea proiectelor de succes prezintă unele dintre aceste 
+caracteristici comune. Ele recompensează anumite tipuri de comportament și
+pedepsesc altele; creează o atmosferă care încurajează participarea 
+neplanificată, uneori cu riscul reducerii gradului de coordonare; au
+concepte de politețe și impolitețe care pot să difere substanțial de cele
+care există în alte locuri. Cel mai important, cei care participă pe 
+termen lung internalizează aceste standarde astfel încât să existe un 
+consens vis-a-vis de conduita așteptată de la membri. Proiectele lipsite
+de succes deviază puternic de la acest miez de idei, chiar dacă 
+neintenționat, și adeseori nu prezintă un consens în legătură cu 
+ideea de comportament rezonabil. Asta înseamnă că, atunci când apar 
+probleme, situația poate să deterioreze rapid de vreme ce participanților
+le lipsește un set de reflexe culturale la care să recurgă pentru
+rezolvarea diferențelor.</para>
+
+<para>Această carte nu este un ghid practic, nu un studiu antropologic
+sau o istorie. Totuși e nevoie de cunoașterea originilor culturii
+free software din ziua de astăzi pentru a crea orice fel de sfaturi
+practice. O persoană care înțelege cultura poate să ajungă departe în
+lumea open-source, întâlnind multe variații locale în obiceiuri și 
+dialect, rămânând capabilă să participe confortabil și efectiv oriunde.
+O persoană care nu înțelege această cultură va considera procesul de
+organizare sau participare la un proiect dificil și plin de surprize.
+De vreme ce numărul de oameni care dezvoltă software gratuit crește 
+cu salturi și limite, există mulți oameni în această a doua categorie
+&mdash;aceasta este, în mare, o cultură a imigranților recenți și va fi
+la fel timp de ceva vreme. Dacă vă considerați a fi unul dintre ei, 
+următoarea secțiune furnizează informațiile de bază pentru discuțiile
+pe care le veți întâlni ulterior, atât în această carte cât și pe Internet.
+(Pe de altă parte, dacă deja lucrați cu software open-source de ceva
+vreme, s-ar putea să știți deja destule despre istoria mișcării așa
+că puteți sări liniștiți peste această secțiune.)</para>
+
+</simplesect>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="history">
+<title>Istorie</title>
+
+<para>Folosirea de software în comun există de aproape la fel de mult
+ca și noțiunea de software în sine. În primele zile ale calculatoarelor
+fabricanții au simțit că avantajele competitive puteau să apară doar
+în inovația hardware și nu au fost atenți la folosirea software-ului ca 
+un bun comercial. Mulți dintre clienții pentru aceste mașini timpurii
+erau oameni de știință sau tehnicieni care erau capabili să modifice sau
+ să extindă aplicațiile care erau livrate cu mașinile. Clienții uneori
+ distribuiau propriile patch-uri nu doar producătorului ci și 
+ proprietarilor unor sisteme similare. Producătorii de multe ori tolerau
+ și chiar încurajau acest fenomen: în ochii lor, îmbunătățirile aduse
+ soft-ului, indiferent de sursa de proveniență, făceau mașinile mai 
+ atractive pentru potențialii clienți.</para>
+
+<para>Deși această perioadă seamănă cu ceea ce se întâmplă astăzi în
+cultura software-ului gratuit, diferă în două aspecte cruciale. În primul
+rând, încă nu exista o standardizare a hardware-ului&mdash;era o perioadă
+de înflorire pentru inovația în design-ul calculatoarelor, dar
+diversitatea arhitecturilor de calcul însemna că totul era incompatibil
+cu orice altceva. Astfel, aplicațiile scrise pentru o mașină nu funcționau
+pe altele. Programatorii acumulau expertiza într-o arhitectură sau o 
+familie de arhitecturi (în ziua de astăzi devin experți într-un limbaj
+de programare sau într-o familie de limbaje de programare, știind că 
+expertiza lor va fi ușor de transferat pe orice arhitectură hardware cu 
+care au ocazia să lucreze). Pentru că experiența era specifică unui
+anumit tip de calculator, acumularea de expertiză avea efect asupra 
+atractivității calculatorului pentru persoana respectivă și colegii ei.
+Astfel, era în cel mai bun interes al producătorului să se disemineze 
+cât mai departe codul și cunoștințele specifice unei anumite mașini.</para>
+
+<para>În al doilea rând, nu exista Internet. Deși existau mai puține
+restricții legale decât în ziua de astăzi, existau mai multe de ordin
+tehnic: modalitățile de a transfera date dintr-un loc în altul erau 
+neconvenabile și greoaie în comparație cu ziua de astăzi. Existau niște 
+rețele micil, locale, bune pentru diseminarea informației între angajații
+de la același laborator de cercetare sau dintr-o companie. Dar existau 
+bariere de depășit dacă o persoană ar fi vrut să împartă ceva cu toată
+lumea, indiferent unde se aflau. Aceste bariere <emphasis>erau depășite
+</emphasis> în multe cazuri. Uneori diferite grupuri intrau în legătură
+unele cu altele în mod independent, trimițând dischete sau casete prin
+poștă, uneori fabricanții serveau ei înșiși ca și puncte centrale de 
+transmisie a patch-urilor. A fost de ajutor și faptul că mulți dintre
+primii dezvoltatori software lucrau la universități unde era de așteptat
+ca fiecare să-și publice cunoștințele. Dar realitatea de ordin fizic în
+transmiterea datelor însemna că întotdeauna exista un obstacol în calea
+distribuției, o problemă direct proporțională cu distanța (dificultăți 
+reale sau de ordin organizațional) pe care aplicația trebuia să o parcurgă
+până la destinație. Nu era posibilă împărțirea pe scară largă, cum se
+întâmplă în ziua de astăzi.</para>
+
+<!-- ========================== subsection ========================== -->
+<sect2 id="propertization">
+<title>Apariția software-ului proprietar și a celui gratuit</title>
+
+<para>Pe măsură ce industria s-a maturizat, mai multe schimbări 
+interrelaționale au avut loc simultan. Diversitatea modelelor hardware
+a făcut loc câtorva câștigători&mdash;prin tehnologie superioară, 
+marketing superior sau o combinație a celor două. În același timp, și
+nu în întregime printr-o coincidență, dezvoltarea așa-numitelor limbaje
+de programare "de nivel înalt" însemna că se puteau scrie programe o 
+singură dată, într-un limbaj, care să fie apoi traduse automat 
+("compilate") pentru a rula pe diferite tipuri de calculatoare. 
+Implicațiile acestui fapt nu au rămas necunoscute pentru producătorii
+de hardware: un client putea acum să inițieze un proiect de inginerie
+software de mare anvergură fără a fi nevoie să rămână blocați într-o
+anumită arhitectură de calculator. Când acest lucru s-a combinat cu 
+reducerea treptată a diferenței de performanță dintre diferitele 
+calculatoare, pe măsură ce modelele mai puțin eficiente au dispărut, 
+un producător care își trata hardware-ul ca fiind singurul bun comercial
+aflat la dispoziție putea să se aștepte la o descreștere a ratei
+profitului în viitor. Puterea de calcul pură devenea un bun fungibil
+pe când software-ul devenea un diferențiator. Vânzarea de aplicații, sau
+cel puțin tratarea acestora ca o parte integrală a vânzării de hardware,
+începea să pară o strategie bună.</para>
+
+<para>Asta însemna că producătorii trebuiau să impună mai strict reguli
+de copyright asupra codului sursă. Dacă utilizatorii continuau pur și
+simplu să împartă codul și să-l modifice liberi între ei, ar fi putut să
+reimplementeze în mod independent unele dintre îmbunătățirile care
+erau vândute acum ca și "valoare adăugată" de către furnizor. Mai rău,
+codul putea să ajungă în mâinile concurenței. Ironia face ca acest
+fenomen să aibă loc exact în perioada în care Internetul făcea primii
+pași. Când împărțirea neobstrucționată a software-ului devenea posibilă
+tehnic, schimbările din industria computerelor o făceau nedorită 
+economic, cel puțin din punctul de vedere al oricărei companii. Furnizorii
+au închis aceste portițe prin refuzul de a permite accesul utilizatorilor
+la codul care rula pe mașinile lor, sau prin impunerea unor 
+acorduri de nedivulgare a secretului care făceau utilizarea la comun
+a codului imposibilă.</para>
+
+<sect3 id="history-conscious-resistance">
+<title>Rezistența conștientă</title>
+
+<para>Pe măsură ce lumea care efectua schimburi nelimitate de cod 
+dispărea încet, în mintea a cel puțin un programator s-a cristalizat
+o contrareacție. Richard Stallman a lucrat în Laboratorul de Inteligență
+Artificială de la Institutul de Tehnologie din Massachusetts în anii '70 
+și la începutul anilor '80, în timpul a ceea ce s-a dovedit a fit epoca 
+de aur și locul potrivit pentru folosirea în comun a codului. Laboratorul
+de Inteligență Artificială avea o „etică de lucru” puternică. <footnote>
+<para>Stallman folosește cuvântul „hacker” pentru a se referi la „cineva
+căruia îi place să programeze și să facă lucrul acesta într-un mod 
+inteligent” și nu în sensul modern de „persoană care compromite
+securitatea unui computer”.</para></footnote> și oamenii nu erau 
+încurajați dar se aștepta de la ei să îi înștiințeze pe restul de 
+modificările pe care le făceau sistemului. După cum a scris mai târziu
+Stallman:</para>
+
+    <blockquote>
+      <para><emphasis>Nu ne intitulam aplicațiile ca fiind „software 
+      gratuit” pentru că termenul nu exista; dar asta era în realitate.
+      Oricând oamenii de la o altă universitate sau companie voiau să
+      transforme și să folosească un program, îi lăsam fericiți să o facă.
+      Dacă vedeai pe cineva care folosea un program necunoscut dar 
+      interesant, puteai întotdeauna să ceri să vezi codul sursă astfel
+      încât să poți să-l citești, să-l modifici sau să folosești părți 
+      din el pentru a face un nou program.
+      </emphasis></para>
+
+      <para>(sursa <emphasis role="bold"><ulink
+      url="http://www.gnu.org/gnu/thegnuproject.html"/></emphasis>)</para>
+    </blockquote>
+
+
+<para>Această comunitate Edenică s-a prăbușit în jurul lui Stallman
+puțin după 1980, când schimbările care aveau loc în restul industriei 
+au ajuns și în laborator. O companie start-up a angajat mulți dintre 
+programatorii Laboratorului pentru a lucra la un sistem de operare
+asemănător cu ceea ce lucrau acolo numai că, de data aceasta, totul
+se făcea sub o licență exclusivă. În același timp, Laboratorul achiziționa
+echipament nou care venea cu un sistem de operare proprietar.</para>
+
+<para>Stallman observa modelul mare a ceea ce se întâmpla:</para>
+
+    <blockquote>
+      <para><emphasis>Calculatoarele moderne ale erei, cum ar fi VAX sau
+      68020, aveau propriile sisteme de operare dar niciunul dintre ele
+      nu era software gratuit: trebuia să semnezi un act de 
+      confidențialitate numai pentru a obține o copie executabilă.
+      </emphasis> </para>
+
+      <para><emphasis>Asta însemna că primul pas pentru a folosi un 
+      calculator era să promiți să nu-ți ajuți vecinul. Comunitatea 
+      cooperantă era interzisă. Regula făcută de proprietarii soft-ului
+      proprietar era: „dacă împarți cu vecinii, ești un pirat; dacă vrei
+      modificări, imploră-ne să le facem.”
+      </emphasis> </para>
+
+    </blockquote>
+
+<para>Printr-o ciudățenie de personalitate, el s-a decis să reziste 
+modei. În loc să lucreze în continuare la acum-decimatul Laborator de 
+Inteligență Artificială sau să-și ia o slujbă scriind cod la una dintre
+noile companii, unde rezultatele muncii lui ar fi rămas închise într-o
+cutie, a demisionat de la laborator și a inițiat Proiectul GNU și 
+Fundația pentru Software Gratuit (Free Software Foundation - FSF). 
+Scopul GNU<footnote><para>vine de la „GNU is not Unix” &mdasu; GNU nu 
+este Unix&mdash; și GNU în extensia aceasta vine de la... același lucru.
+</para></footnote> era să dezvolte un sistem de operare complet gratuit
+și deschis și un corp de software în care utilizatorii nu erau niciodată
+împiedicați să modifice codul sau să împartă modificările cu alții. El,
+în esență, încerca să recreeze ceea ce se distrusese la laborator, dar la
+o scară globală și fără vulnerabilitățile care făcuseră cultura 
+laboratorului AI susceptibilă la dezintegrare.</para>
+
+<para>Pe lângă faptul că lucra la un sistem de operare nou, Stallman a 
+creat o licență de copyright ai cărei termeni garantau faptul că
+sursele aplicațiilor create urmau să fie întotdeauna libere. Licența
+Generală Publică GNU (GPL) este o piesă inteligentă de judo legal: spune
+că sursele pot fi copiate și modificate fără restricții și că atât copiile
+cât și lucrările derivate (i.e. versiunile modificate) trebuie să fie
+distribuite sub aceeași licență ca și originalul, fără niciun fel de
+restricții adiționale. Prin urmare, folosește legea copyright-ului pentru
+a obține un efect contrar aceluia al copyright-ului tradițional: previne
+ca <emphasis>oricine</emphasis>, chiar și autorul, să poată să limiteze 
+accesul la cod. Pentru Stallman era mai bine decât să dea drumul codului
+în domeniul public. Dacă ar fi fost proprietate din domeniul public, orice
+copie particulară putea fi copiată într-un program proprietar (după cum 
+s-a întâmplat deja cu licențele de copyright puțin restrictive). În timp
+ce această încorporare nu ar diminua deloc disponibilitatea codului 
+original, ar fi însemnat  că eforturile lui Stallman puteau beneficia
+dușmanului&mdash; software-ul proprietar. Licența GPL poate fi văzută ca 
+o formă de protecționism pentru software-ul gratuit pentru că previne ca 
+aplicațiile comerciale să folosească la maximum codul creat sub licență 
+GPL. Licența și relația ei cu alte licențe software sunt discutate în
+detaliu în
+<xref linkend="legal"/>.</para>
+
+<para>Cu ajutorul multor programatori, dintre care unii împărtășeau
+ideologia lui Stallman iar alții pur și simplu voiau să vadă mult cod
+gratuit disponibil, proiectul GNU a început să elibereze aplicații 
+gratuite care să înlocuuiască multe dintre componentele critice ale
+unui sistem de operare. Mulțumită standardizării la scară largă care 
+exista deja, era posibil pentru a folosi aplicații GNU pe alte sisteme, 
+care nu erau gratuite, iar mulți oameni au ales să facă asta. Editorul
+de text GNU (Emacs) și compilatorul C (GCC) aveau cel mai mare succes,
+adunând mulți utilizatori nu pe motive ideologice ci datorită meritelor
+lor tehnice. Până în jurul anului 1990, GNU produsese deja cea mai mare 
+parte a unui sistem de operare gratuit, cu excepția kernel-ului&mdash;
+partea pe care mașina o inițializează la pornirea sistemului de operare
+și care gestionează memoria, hard-disk-ul și alte resurse. </para>
+
+<para>Din păcate, proiectul GNU a ales un design de kernel care s-a 
+dovedit a fi mai greu de implementat decât se aștepta inițial. Întârzierea
+care a urmat a împiedicat Fundația pentru Software Liber să lanseze primul
+sistem de operare în întregime gratuit. Ultima bucată a fost pusă la
+locul ei de Linus Torvalds, un student în calculatoare finlandez care,
+cu ajutorul voluntarilor din jurul lumii, a terminat un kernel folosind
+un design mai conservator. L-a denumit Linux și astfel, când l-a combinat cu 
+programele GNU existente, a rezultat primul sistem de operare complet
+gratuit. Pentru prima dată puteai să-ți pornești calculatorul și
+să faci asta fără a folosi niciun fel de software proprietar.
+<footnote><para>Din punct de vedere tehnic, Linux nu a fost primul. Un
+sistem de operare gratuit pentru computere compatibile cu sistemul IBM,
+numit 386BSD, a apărut cu puțin timp înainte de Linux. Totuși, era mult
+mai greu de pornit 386BSD. Linux a avut un asemenea succes nu doar pentru
+că era gratuit ci și pentru că avea o șansă bună de a reuși să pornească
+atunci când îl instalai.</para></footnote></para>
+
+<para>O parte mare din software-ul acestui sistem de operare nou nu era
+produs de proiectul GNU. De fapt, GNU nu nici măcar singurul grup
+care lucra la crearea unui sistem de operare gratuit (de exemplu, codul
+care a devenit ulterior NetBSD și FreeBSD deja era în curs de dezvoltare
+la acest moment). Importanța Fundației pentru Software Gratuit nu era
+doar în codul scris ci în retorica politică. Vorbind despre software liber
+ca și despre o cauză în loc de un bun, au făcut destul de greu ca un
+programator să <emphasis>nu</emphasis> aibă o poziție politică pe această
+temă. Chiar și cei care nu erau de-acord cu Fundația erau nevoiți să
+dezbată tema, chiar dacă numai pentru a susține o poziție diferită. 
+Eficiența Fundației ca și element de propagandă se afla în legarea codului
+lor de un mesaj, cu ajutorul GPL și a altor texte. Pe măsură ce codul
+lor se răspândea, se răspândea și acel mesaj.</para>
+
+</sect3>
+
+<sect3 id="history-accidental-resistance">
+<title>Rezistența accidentală</title>
+
+<para>Existau destul de multe lucruri care se întâmplau pe scena nașterii
+software-ului liber dar puține erau explicite în mod ideologic, cum era
+proiectul GNU al lui Stallman. Unul dintre cele mai importante era
+<firstterm>Berkeley Software Distribution</firstterm>
+(<firstterm>BSD</firstterm>), o reimplementare treptată a sistemului de
+operare Unix&mdash; care, până la sfârșitul anilor 70, era un proiect
+de cercetare în mare parte proprietar al celor de la AT&amp;T&mdash;de 
+către programatorii de la Universitatea din California de la Berkeley.
+Grupul BSD nu făcea afirmații politice deschise despre nevoia ca
+programatorii să se strângă la un loc și să împartă codul unii cu alții
+dar ei <emphasis>practicau</emphasis> această idee cu fler și entuziasm,
+coordonând un efort de dezvoltare distribuit masiv în care s-au rescris
+de la zero toate utilitarele Unix de linie de comandă, librăriile de cod 
+și, ulterior, inclusiv nucleul sistemului de operare prin munca
+voluntarilor. Proiectul BSD a devenit un exemplu de primă mână de 
+dezvoltare de software gratuit neideologică și a servit ca și teren de
+antrenament pentru mulți dezvoltatori care urmau să rămână activi în
+lumea open source.</para>
+
+<para>Un alt exemplu de dezvoltare cooperativă a fost primul <firstterm>
+Sistem de ferestre X</firstterm>, un mediu de calcul grafic gratuit și
+transparent la existența unei rețele, dezvoltat la MIT la mijlocul anilor
+1980 în parteneriat cu producătorii hardware care aveau un interes comun
+în a fi capabili să ofere clienților lor un sistem de ferestre. Departe
+de a se opune software-ului proprietar, licența X permitea în mod
+intenționat extensii proprietare peste miezul gratuit&mdash; fiecare
+membru al consorțiului dorea să aibă ocazia de a extinde distribuția de 
+bază X și de a câștiga un avantaj competitiv peste alți membri. X Windows
+<footnote><para>Era preferat apelativul de "X Window System", dar, în
+practică, oamenii îi spuneau doar "X Windows" pentru că trei cuvinte
+erau prea multe.</para></footnote> reprezenta, în sine, un software 
+gratuit dar era în principal un mod de a nivela terenul de joc între
+interesele de afaceri aflate în concurență, nu o dorință de a termina 
+dominația software-ului proprietar. Un alt exemplu, care preceda GNU
+cu câțiva ani, era TeX, sistemul gratuit de tehnoredactare pentru calitatea
+publicației realizat de Donald Knuth. El l-a lansat cu o licență care
+permitea oricui să modifice și să distribuie codul dar să nu denumească
+rezultatul TeX decât dacă trecea de un set foarte strict de teste de
+compatibilitate (acesta este un exemplu al unei clase de licențe 
+gratuite care „protejează marca”, discutate mai mult în 
+<xref linkend="legal"/>) Knuth nu era de o parte a barierei sau de alta 
+în lupta dintre software proprietar și liber, el avea nevoie doar de un
+sistem mai bun de tehnoredactare pentru a-și realiza <emphasis>adevăratul
+</emphasis> țel&mdash;o carte despre programarea calculatoarelor &mdash;
+și nu vedea niciun motiv pentru care să nu pună sistemul lui la 
+dispoziția întregii lumi după ce era terminat.</para>
+
+</sect3>
+
+<para>Fără a pune pe listă fiecare proiect și fiecare licență, putem 
+spune cu siguranță că, până la sfârșitul anilor 1980, exista deja destul
+de mult software gratuit sub o gamă largă de licențe. Diversitatea 
+acestora din urmă reflecta o gamă largă de motive corespondente. Chiar
+și unii dintre programatorii care au ales licența GNU GPL erau mult mai
+puțin orientați ideologic decât proiectul GNU în sine. Deși le făcea 
+plăcere să lucreze la software gratuit, majoritatea nu considerau 
+aplicațiile proprietare ca fiind un rău social. Existau oameni care 
+simțeau un impuls moral de a scăpa lumea de „software hoarding” (termenul
+lui Stallman pentru aplicațiile comerciale), dar alții erau mai motivați
+de interesele tehnice sau de plăcerea de a lucra alături de colaboratori
+care gândeau la fel sau pur și simplu dintr-o nevoie umană simplă de
+glorie. Totuși, aceste motivații diverse nu prea interacționau în moduri
+destructive. Aceasta se datorează în mare parte faptului că, spre 
+deosebire de proză sau arte vizuale, software-ul trebuie să treacă de
+teste obiective pentru a fi considerat de succes: trebuie să ruleze și să
+fie, în mare parte, lipsit de erori. Asta dă majoritatea participanților
+la un proiect un fel de teren comun automat, un motiv și o fundație pentru
+colaborare fără a-și face prea multe griji pentru altfel de calificări
+decât cele de ordin tehnic.</para>
+
+<para>Dezvoltatorii mai aveau un motiv pentru a rămâne împreună: s-a 
+dovedit că în lumea software-ului liber se producea niște cod de calitate
+foarte bună. În unele cazuri, s-a demonstrat a fi tehnic superior celor
+mai apropiate alternative comerciale; în alte cazuri era cel puțin 
+comparabil dar costa întotdeauna mai puțin. Deși doar puțini oameni erau
+motivați să ruleze software gratuit din rațiuni pur filosofice, mulți
+oameni erau bucuroși să-l folosească pentru că făcea o treabă mai bună.
+Dintre cei care îl foloseau, unii erau întotdeauna dornici să-și doneze
+timpul și abilitățile pentru a ajuta la întreținerea și îmbunătățirea
+aplicațiilor.</para>
+
+<para>Această tendință de a produce cod bun nu era, desigur, universală
+dar se întâmpla cu o frecvență crescândă în proiectele libere din jurul
+lumii. Afacerile care depindeau din greu de software au început să
+observe acest fenomen. Multe dintre ele au descoperit că deja foloseau
+astfel de aplicații în funcționarea de zi cu zi și nu au știut (conducerea
+nu știe întotdeauna ce se întâmplă în departamentele de IT). Corporațiile
+au început să ia o poziție publică și mai activă în dezvoltarea de
+proiecte libere, contribuind timp și echipament, uneori chiar finanțând
+în mod direct dezvoltarea de aplicații gratuite. Astfel de investiții
+puteau, în cele mai bune cazuri, să se răsplătească de mai multe ori.
+Sponsorul plătește doar un număr mic de programatori experți care să
+se dedice proiectului full-time dar câștigă de pe urma beneficiilor
+aduse de contribuția <emphasis>oricui</emphasis>, inclusiv de pe urma
+muncii realizate de voluntari neplătiți și chiar de programatori
+plătiți de alte corporații.</para>
+
+</sect2>
+
+<!-- ========================== subsection ========================== -->
+<sect2 id="free-vs-open-source">
+<title>"Gratuit" Versus "Sursă deschisă"</title>
+
+<para>Pe măsură ce lumea corporatistă dedica din ce în ce mai multă
+atenție software-ului gratuit, programatorii se loveau de o noi probleme
+cu prezentarea. Una dintre acestea era cuvântul „gratuit” în sine. La
+auzul cuvintelor „software gratuit” mulți oameni se gândesc doar la
+„software fără cost”. E adevărat că toate aplicațiile libere sunt
+lipsite de cost<footnote><para>se poate cere o taxă pentru copii
+de software liber dar, cum nu se poate impune celui care îl ia să nu
+îl dea mai departe fără cost, prețul scade la zero imediat.</para>
+</footnote> dar nu tot software-ul gratuit e complet liber. De exemplu,
+în timpul „bătăliei browserelor” din anii 1990, atât Netscape cât și
+Microsoft își ofereau browserele fără cost, în graba de a câștiga cotă
+de piață. Niciunul dintre browsere nu era liber. Nu se putea face rost
+de codul sursă al aplicației și, chiar dacă ai fi reușit, nu aveai dreptul
+de a îl modifica sau redistribui.<footnote><para>Codul sursă al aplicației
+Netscape Navigator <emphasis>a fost</emphasis>, în cele din urmă, eliberat
+sub o licență open-source în 1998 și a devenit fundația pentru 
+browser-ul web Mozilla. Vezi <ulink
+url="http://www.mozilla.org/"/>.</para></footnote>  Nu se putea face mai
+mult decât să downloadezi un executabil și să îl rulezi. Browserele nu 
+erau mai libere decât software-ul care se putea cumpăra din magazine; pur
+și simplu aveau un preț mai mic.</para>
+
+<para>Această confuzie datorată termenului „free” se datorează
+unei ambiguități nefericite din limba Engleză. Majoritatea limbilor fac
+distincția între prețul mic și libertate (diferența dintre
+<emphasis>gratis</emphasis> și <emphasis>libre</emphasis> este clară 
+tuturor vorbitorilor de limbi romanice, de exemplu). Dar poziția
+limbii engleza ca și limbă care unește de facto Internetul înseamnă că
+o problemă cu limba engleză este, într-o anumită măsură, o problemă
+pentru toată lumea. Confuzia creată în jurul acestui termen a fost atât
+de mare încât programatorii de software liber și-au creat un răspuns
+standard: „E <emphasis>liber</emphasis> ca în
+<emphasis>liberate</emphasis>&mdash;gândiți-vă la <emphasis>libertatea
+cuvântului</emphasis> și nu la <emphasis>bere gratuită</emphasis>."  
+Totuși, necesitatea de a explica încă și încă o dată acest lucru e 
+obositoare. Mulți programatori au simțit, cu un anumit grad de 
+justificare, că natura ambiguă a cuvântului „free” îngreuna înțelegerea
+publicului pentru acest tip de software.</para>
+
+
+<para>Dar problema mergea mai adânc de atât. Cuvântul „free” aduce cu el
+o conotație morală de care nu se poate scăpa: dacă libertatea era un 
+scop, nu conta dacă software-ul liber era și mai bun sau mai profitabil
+pentru anumite afaceri în anumite condiții. Acesta era pur și simplu un
+efect secundar plăcut al unei motivații care, la origini, nu era nici
+tehnică nici mercantilă ci morală. Mai departe, poziția de „liber ca și
+în cuvântul libertate” a forțat corporațiile care voiau să sprijine
+anumite programe libere să fie inconsistente într-o parte din afacerile
+lor în timp ce continuau să vândă software proprietar în alta.
+</para>
+
+<para>Aceste dileme s-au pus unei comunități care se afla deja în fața
+unei crize de identitate. Programatorii care
+<emphasis>scriu</emphasis> software liber nu au avut niciodată o singură
+părere despre scopul per ansamblu, dacă există un astfel de scop, al 
+mișcării pentru software liber. Chiar dacă am spune că părerile trec
+dintr-o extremă într-alta tot am induce în eroare deoarece am sugera 
+că avem de-a face cu un domeniu liniar când, în realitate, avem o 
+împrăștiere multidimensională. Totuși, două categorii largi de păreri pot
+fi distinse, dacă dorim să ignorăm temporar nuanțele. Un grup e de
+părerea lui Stallman, că libertatea de a distribui și modifica e cea mai 
+importană și că, de aceea, dacă nu se mai vorbește de libertate s-a 
+pierdut elementul central. Alții cred că software-ul însuși este cel
+mai important argument în favoarea lui și nu se simt confortabil în a 
+cataloga software-ul proprietar ca fiind rău din oficiu. Unii, dar nu
+toți, dintre programatorii de software liber cred că autorul (sau 
+angajatorul, în cazul muncii plătite)
+<emphasis>ar trebui</emphasis> să aibă dreptul de a controla termenii
+sub care e permisă distribuirea și că nu trebuie să fie atașată o 
+judecată morală alegerii unor anumiți termeni.</para>
+
+<para>Pentru multă vreme, aceste diferențe nu trebuiau să fie atent
+examinate sau articulate, dar succesul software-ului liber în lumea
+afacerilor au făcut tema imposibil de evitat. În 1998, termenul 
+<firstterm>open&nbsp;source</firstterm> a fost creat ca o alternativă
+la „liber” de către o coaliție de programatori care au devenit în cele
+din urmă Inițiativa Open-Source (OSI).
+<footnote><para>OSI se găsește pe Internet la adresa <ulink
+url="http://www.opensource.org/"/>.</para></footnote>  OSI consideră
+nu doar că termenul „free software” poate cauza confuzie dar și că
+folosirea cuvântului „free” e doar o simptomă a problemei generale:
+că mișcarea are nevoie de un program de marketing pentru a se lega de 
+lumea corporatistă și că discuția despre moralitate și beneficiile sociale
+ale distribuirii gratuite nu ar avea niciodată succes în sălile de ședință
+corporatiste. În propriile lor cuvinte:</para>
+
+    <blockquote>
+      <para><emphasis>Inițiativa Open-Source este un program
+      de marketing pentru software liber. E un teren de tratare a 
+      software-ului liber pe un teren solid și pragmatic în locul
+      ideologiilor extremiste. Elementul câștigător nu s-a schimbat
+      ci doar atitudinea și simbolismul care duceau la înfrângere.&nbsp;
+      ...</emphasis></para>
+
+      <para><emphasis>Explicația care trebuie dată majorității celor
+      din domeniul tehnic nu este despre conceptul open source ci 
+      despre nume. De ce să nu se numească, așa cum a fost în mod 
+      tradițional, software liber?</emphasis></para>
+
+      <para><emphasis>Un motiv este că termenul de software liber
+      poate fi ușor înțeles în moduri care generează conflict.&nbsp
+      ;...</emphasis></para>
+
+      <para><emphasis>Dar adevăratul motiv pentru re-etichetare
+      este unul de marketing. Noi încercăm să lansăm un nou concept
+      către lumea corporatistă. Avem un produs câștigător, dar poziționarea
+      noastră din trecut a fost groaznică. Termenul de software liber
+      a fost prost înțeles de către oamenii de afaceri, care confundă 
+      dorința de a îpărți cu alții cu anti-comercialismul sau, chiar mai
+      rău, cu furtul.</emphasis></para>
+
+      <para><emphasis>Directorii și responsabilii tehnici ai corporațiilor
+      nu vor cumpăra niciodată software liber. Dar dacă luăm aceeași 
+      tradiție, aceiași oameni și aceleași licențe pentru software liber
+      și schimbăm eticheta în „open source”? Așa ceva vor cumpăra.
+      </emphasis></para>
+
+      <para><emphasis>Unora dintre hackeri li se va părea greu de crezut
+      așa ceva dar asta e doar pentru că ei sunt oameni tehnici, care 
+      gândesc în termeni concreți, cu substanță, și nu înțeleg
+      cât de importantă e imaginea atunci când vinzi ceva.
+      </emphasis></para>
+
+      <para><emphasis>În marketing, învelișul reprezintă realitatea.
+      Imaginea pentru care suntem dispuși să coborâm de pe baricade
+      și să lucrăm pentru lumea corporatistă contează la fel de mult
+      ca și realitatea comportamentului nostru, a convingerilor
+      noastre și a software-ului nostru.</emphasis></para>
+
+      <para>(din <emphasis role="bold"><ulink
+      url="http://opensource.feratech.com/advocacy/faq.php"/></emphasis>
+      și <emphasis role="bold"><ulink
+      url="http://opensource.feratech.com/advocacy/case_for_hackers.php#marketing"
+      /></emphasis>)</para>
+    </blockquote>
+
+<para>Vârfurile mai multor iceberg-uri de controversă sunt vizibile
+în acest text. Se referă la „convingerile noastre” dar evită în mod 
+inteligent să scrie care sunt acestea. Pentru unii, ar putea fi convingerea
+că aplicațiile dezvoltate într-un proces deschis vor fi mai de calitate;
+pentru alții, convingerea că toată informația trebuie să fie distribuită
+liber. Termenul de „furt” se folosește pentru referirea la copierea
+(presupusă) ilegală&mdash;o întrebuințare la care există multe obiecții,
+motivând că nu e furt dacă proprietarul original încă are obiectul
+după copiere. Există o indicație că mișcarea pentru software liber poate
+fi acuzată în mod greșit de anti-comercialism dar textul lasă 
+neexaminată întrebarea dacă o astfel de acuzație are vreo bază reală.
+</para>
+
+<para>Nu trebuie înțeles că site-ul OSI e inconsistent sau că induce în
+eroare Mai degrabă, e un exemplu a ceea ce OSI susține că a lipsit
+din mișcarea pentru software liber:marketing-ul bun, unde „bun” înseamnă
+viabil în mediul de afaceri. Inițiativa open-source a dat multor oameni
+exact ceea ce căutau&mdash;un vocabular care să le permită să vorbească
+despre software-ul liber ca de o metodologie de dezvoltare și o strategie
+de afaceri în loc de o cruciadă morală.</para>
+
+</sect2>
+
+<para>Apariția inițiativei open-source a schimbat mediul software-ului
+liber. A formalizat o dihotomie care era de multă vreme nenumită și
+astfel a forțat mișcarea să accepte faptul că ea are atât politici
+interne cât și externe. Efectul în ziua de astăzi este că amândouă taberele
+trebuie să găsească un teren comun, de vreme ce majoritatea proiectelor
+includ programatori veniți din ambele tabere și participanți care nu
+aparțin clar niciunei categorii. Asta nu înseamnă că oamenii nu vorbesc
+niciodată de motivația morală&mdash;de exemplu, de multe ori sunt aduse
+în discuție lipsuri din tradiționala „etică a hacker-ului”. Dar rareori
+un dezvoltator de software liber/cu surse deschise va provoca motivațiile
+de bază ale altor participanți la un proiect. Contribuția e mai importantă
+decât contribuitorul. Dacă o persoană scrie cod bun, nu îi întrebi dacă
+o fac din motivație morală sau pentru că pentru asta i-a plătit angajatorul
+sau pentru că își construiesc un curriculum vitae sau pentru alte motive.
+Le evaluezi contribuția în termeni tehnici și le răspunzi tot în termeni
+tehnici. Chiar și organizațiile politice în mod explicit, cum ar fi 
+proiectul Debian, al cărui scop e de a oferi un mediu de lucru 100%
+liber (cu sensul de „liber ca și în libertate”) sunt destul de relaxate
+când vine vorba de integrarea cu cod non-liber și colaborarea cu 
+programatori care nu împărtășesc întocmai acest scop.</para>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="today">
+<title>Situația astăzi</title>
+
+<para>Când conduci un proiect de software liber, nu trebuie să discuți
+probleme filosofice atât de dificile zilnic. Porgramatorii nu vor insista
+ca toată lumea care participă la proiect să fie de-acord cu modul în
+care văd ei lucrurile (cei care insistă descoperă repede că nu pot
+lucra la niciun proiect). Dar trebuie să fii conștient de diferența dintre
+„liber” și „cu surse deschise”, în special pentru a evita să spui lucruri
+care ar putea fi potrivnice unor participanți dar și pentru că înțelegerea
+motivațiilor dezvoltatorilor este cel mai bun mod&mdash;dacă nu chiar
+<emphasis>singurul</emphasis>
+mod&mdash;de a conduce un proiect.</para>
+
+<para>Software-ul liber este o cultură proprie. Pentru a te integra
+cu succes în ea, trebuie să înțelegi de ce oamenii au ales să facă parte
+din ea în primul rând. Tehnicile coercitive nu vor funcționa. Dacă
+oamenii sunt nefericiți într-un proiect, vor trece imediat la altul.
+Software-ul liber e remarcabil chiar și între comunitățile de voluntari
+pentru ușurința de a investi. Majoritatea persoanelor implicate nu s-au
+întâlnit niciodată cu celelalte persoane față în față și pur și simplu
+donează bucăți din timpul lor atunci când au chef. Circuitele normale
+prin care oamenii se leagă unii de alții și creează grupuri statornice
+sunt reduse la un canal minuscul: cuvântul scris, transmis prin fire de 
+curent electric. Din acest motiv, poate dura ceva vreme până se creează
+un grup strâns și dedicat. Invers, e foarte ușor pentru ca un proiect
+să piardă un potențial voluntar în primele cinci minute de făcut
+cunoștință. Dacă un proiect nu lasă o primă impresie bună, nou-veniții
+rareori îi dau o a doua șansă.</para>
+
+<para>Caracterul efemer, sau <emphasis>potențiala</emphasis>
+efemeritate a relațiilor este, poate, cea mai dificilă problemă aflată
+în calea unui nou proiect. Ce îi va convinge pe toți acești oameni
+să stea împreună suficient de mult timp încât să producă un lucru util?
+Răspunsul la această întrebare este destul de complex încât să ocupe restul
+acestei cărți dar, dacă ar trebui să fie exprimat într-o singură 
+propoziție, ea ar fi aceasta:</para>
+
+    <blockquote>
+      <para><emphasis>Oamenii trebuie să simtă că legătura lor cu un 
+      proiect și influența asupra acestuia este direct proporțională cu
+      contribuția lor.</emphasis></para> 
+    </blockquote>
+
+<para>Niciun grup de dezvoltatori, sau de potențiali dezvoltatori, nu ar 
+trebui să se simtă ignorat sau discriminat din motive non-tehnice. În mod
+clar, proiectele cu sponsorizare corporatistă și/sau dezvoltatori 
+salariați trebuie să aibă foarte mare grijă în acest sens, după cum se
+discută în detaliu aici: <xref linkend="money"/>. Desigur, asta nu
+înseamnă că, dacă nu există finanțare corporatistă, nu există niciun motiv
+de îngrijorare. Banii reprezintă doar unul dintre mulții factori care pot
+afecta succesul unui proiect. Există și întrebări legate de limbajul
+care va fi folosit, de licență, procesele de dezvoltare, ce fel de 
+infrastructură se pune la punct, cum se face publicitate începerii 
+proiectului și multe altele. Cum se începe un proiect cu dreptul înainte
+se dezbate în <link linkend="getting-started">capitolul următor
+</link>.</para>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

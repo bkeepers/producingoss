@@ -1,0 +1,1142 @@
+From nobody Sat Apr  3 22:02:44 2004
+X-From-Line: dev-return-50391-kfogel=collab.net@subversion.tigris.org Fri Apr  2 12:21:15 2004
+Return-Path: <dev-return-50391-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i32ILFi81848
+	for <kfogel@localhost>; Fri, 2 Apr 2004 12:21:15 -0600 (CST)
+	(envelope-from dev-return-50391-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Fri, 02 Apr 2004 12:21:15 -0600 (CST)
+Received: (qmail 29267 invoked from network); 2 Apr 2004 19:08:20 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 2 Apr 2004 19:08:20 -0000
+Received: (qmail 28533 invoked by uid 5302); 2 Apr 2004 19:08:19 -0000
+Mailing-List: contact dev-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+list-help: <mailto:dev-help@subversion.tigris.org>
+list-unsubscribe: <mailto:dev-unsubscribe@subversion.tigris.org>
+list-post: <mailto:dev@subversion.tigris.org>
+Delivered-To: mailing list dev@subversion.tigris.org
+Received: (qmail 28524 invoked from network); 2 Apr 2004 19:08:19 -0000
+From: Ben Collins-Sussman <sussman@collab.net>
+To: Shlomi Fish <shlomif@iglu.org.il>
+Cc: dev@subversion.tigris.org
+In-Reply-To: <200404022107.29645.shlomif@iglu.org.il>
+References: <200404021428.12816.shlomif@iglu.org.il>
+	 <200404022107.29645.shlomif@iglu.org.il>
+Content-Type: text/plain
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-Id: <1080932841.26970.22.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Ximian Evolution 1.4.6 
+Date: Fri, 02 Apr 2004 13:07:22 -0600
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] Trace Past URL From Peg Revision - rev 5
+X-Spam-Status: No, hits=-4.8 required=7.0
+	tests=AWL,IN_REP_TO,QUOTED_EMAIL_TEXT,REFERENCES,
+	      SPAM_PHRASE_00_01
+	version=2.43
+X-Spam-Level: 
+Lines: 31
+Xref: newton.ch.collab.net mail.subversion.dev:49279
+
+On Fri, 2004-04-02 at 13:07, Shlomi Fish wrote:
+> Here is a new revision:
+> 
+> http://shlomif.il.eu.org/svn-patches/peg-revision-patch-rev8.patch
+> 
+> Changes since last time:
+> 
+> 1. More tests added.
+> 
+> 2. Made the tests' interface more robust.
+> 
+> 3. The standalone command line client for the peg function can now open 
+> http:// URLs. (albeit still segfaults afterwards because the handler in the
+> vtable is not implemented.)
+
+You still haven't written a log message.  This is the single biggest
+obstacle preventing people from paying attention to the patch.  You said
+you "didn't have time" to write one yesterday, yet you've spent time
+since then adding more code instead (?)
+
+Don't underestimate the importance of the log message, or the importance
+of responding to feedback from other developers.  Participating in an
+open-source project is more than just throwing patches over a wall. :-)
+
+
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: dev-help@subversion.tigris.org
+
+From nobody Wed Apr 14 09:36:03 2004
+X-From-Line: slashcode-general-admin@lists.sourceforge.net Mon Apr 12 12:33:03 2004
+Return-path: <slashcode-general-admin@lists.sourceforge.net>
+Envelope-to: kfogel@localhost
+Received: from floss
+	([127.0.0.1] helo=localhost ident=kfogel)
+	by floss.red-bean.com with esmtp (Exim 3.34 #1 (Debian))
+	id 1BD5It-0000ki-01
+	for <kfogel@localhost>; Mon, 12 Apr 2004 12:33:03 -0500
+Received: from floss [127.0.0.1]
+	by localhost with POP3 (fetchmail-5.9.13)
+	for kfogel@localhost (single-drop); Mon, 12 Apr 2004 12:33:03 -0500 (CDT)
+Received: from sc8-sf-list1.sourceforge.net (lists.sourceforge.net [66.35.250.206])
+	by sanpietro.red-bean.com (8.12.9/8.12.9/Debian-5) with ESMTP id i3CB2Lwe025916
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <kfogel@red-bean.com>; Mon, 12 Apr 2004 06:02:22 -0500
+Received: from localhost ([127.0.0.1] helo=projects.sourceforge.net)
+	by sc8-sf-list1.sourceforge.net with esmtp (Exim 4.30)
+	id 1BCzCU-0003Xk-6R; Mon, 12 Apr 2004 04:02:02 -0700
+Received: from sc8-sf-mx2-b.sourceforge.net ([10.3.1.12] helo=sc8-sf-mx2.sourceforge.net)
+	by sc8-sf-list1.sourceforge.net with esmtp (Exim 4.30)
+	id 1BCzBa-00037V-Cs
+	for slashcode-general@lists.sourceforge.net; Mon, 12 Apr 2004 04:01:06 -0700
+Received: from slash.ohiobar.com ([216.29.23.6])
+	by sc8-sf-mx2.sourceforge.net with esmtp (TLSv1:AES256-SHA:256)
+	(Exim 4.30)
+	id 1BCzBZ-0006jO-Vz
+	for slashcode-general@lists.sourceforge.net; Mon, 12 Apr 2004 04:01:06 -0700
+Received: from [192.168.0.25] (dhcp065-024-122-068.columbus.rr.com [65.24.122.68])
+	(authenticated bits=0)
+	by slash.ohiobar.com (8.12.8/8.12.8) with ESMTP id i3CB12WS017805
+	for <slashcode-general@lists.sourceforge.net>; Mon, 12 Apr 2004 07:01:02 -0400
+Mime-Version: 1.0 (Apple Message framework v613)
+In-Reply-To: <871xmutahw.fsf@floss.red-bean.com>
+References: <E1BCkgE-0006Uk-00@floss.red-bean.com> <20040412015148.GA29090@pete.localdomain> <871xmutahw.fsf@floss.red-bean.com>
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-Gnus-Mail-Source: file:/var/spool/mail/kfogel
+Message-Id: <7A0DADD5-8C70-11D8-96F1-000A95DBD7A6@lottadot.com>
+Content-Transfer-Encoding: 7bit
+From: Shane <shane@lottadot.com>
+Subject: Re: [Slashcode-general] Installing Slashcode w/ Apache 2.0.x
+To: slashcode <slashcode-general@lists.sourceforge.net>
+X-Mailer: Apple Mail (2.613)
+X-Spam-Score: 0.0 (/)
+Sender: slashcode-general-admin@lists.sourceforge.net
+Errors-To: slashcode-general-admin@lists.sourceforge.net
+X-BeenThere: slashcode-general@lists.sourceforge.net
+X-Mailman-Version: 2.0.9-sf.net
+Precedence: bulk
+List-Unsubscribe: <https://lists.sourceforge.net/lists/listinfo/slashcode-general>,
+	<mailto:slashcode-general-request@lists.sourceforge.net?subject=unsubscribe>
+List-Id: <slashcode-general.lists.sourceforge.net>
+List-Post: <mailto:slashcode-general@lists.sourceforge.net>
+List-Help: <mailto:slashcode-general-request@lists.sourceforge.net?subject=help>
+List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/slashcode-general>,
+	<mailto:slashcode-general-request@lists.sourceforge.net?subject=subscribe>
+List-Archive: <http://sourceforge.net/mailarchive/forum.php?forum=slashcode-general>
+X-Original-Date: Mon, 12 Apr 2004 06:59:31 -0400
+Date: Mon, 12 Apr 2004 06:59:31 -0400
+X-Spam-Checker-Version: SpamAssassin 2.60 (1.212-2003-09-23-exp) on 
+	sanpietro.red-bean.com
+X-Spam-Level: 
+X-Spam-Status: No, hits=0.1 required=5.0 tests=RCVD_IN_SORBS autolearn=no 
+	version=2.60
+Lines: 39
+Xref: floss.red-bean.com mail.slashcode.general:5
+
+
+On Apr 11, 2004, at 6:28 PM, Karl Fogel wrote:
+
+> Peter Jay Salzman <p@dirac.org> writes:
+>> sorry, i don't have an answer for you.  i don't even have anything
+>> on-topic to say.
+>
+> That's okay, I think I've learned enough to answer my own post now.
+> [drumroll] And the answer is... "Don't try to run Slashcode within, or
+> even adjacent to, an Apache 2.0.48 installation, if you value your
+> site." :-)
+
+Can you possibly elaborate a bit more on exactly what problems you ran 
+into, etc?
+
+Also:
+
+What version of Slash are you using? I couldn't tell from your original 
+message.
+
+Exactly how did you build the apache/mod_perl source?
+
+Did you try the Apache 2.0 patch that was posted about on slashcode.com 
+?
+
+  Shane
+
+
+
+-------------------------------------------------------
+This SF.Net email is sponsored by: IBM Linux Tutorials
+Free Linux tutorial presented by Daniel Robbins, President and CEO of
+GenToo technologies. Learn everything from fundamentals to system
+administration.http://ads.osdn.com/?ad_id=1470&alloc_id=3638&op=click
+_______________________________________________
+Slashcode-general mailing list
+Slashcode-general@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/slashcode-general
+
+From nobody Wed Jul  7 09:49:24 2004
+X-From-Line: users-return-13719-kfogel=collab.net@subversion.tigris.org Tue Jul  6 18:02:00 2004
+Return-Path: <users-return-13719-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i66N1xU32069
+	for <kfogel@localhost>; Tue, 6 Jul 2004 18:01:59 -0500 (CDT)
+	(envelope-from users-return-13719-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Tue, 06 Jul 2004 18:01:59 -0500 (CDT)
+Received: (qmail 28345 invoked from network); 6 Jul 2004 22:17:41 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 6 Jul 2004 22:17:41 -0000
+Received: (qmail 28746 invoked by uid 5302); 6 Jul 2004 22:17:37 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 28684 invoked from network); 6 Jul 2004 22:17:36 -0000
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="us-ascii"
+Date: Tue, 6 Jul 2004 23:16:55 +0100
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <0D8F2EFD3A10E24DAEEA48EA6DA07D30035353@postman-pat.csafe.local>
+From: "Tim Alsop" <Tim.Alsop@CyberSafe.Ltd.UK>
+To: "Ben Collins-Sussman" <sussman@collab.net>
+Cc: "Sven Mueller" <sm@leogic.com>, <users@subversion.tigris.org>
+X-Scanned-By: MailControl A-05-00-00 (www.mailcontrol.com)
+Subject: RE: question about unix file permissions
+X-Spam-Status: No, hits=1.0 required=5.0
+	tests=AWL,SPAM_PHRASE_00_01
+	version=2.43
+X-Spam-Level: *
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by newton.ch.collab.net id i66N1xU32069
+Lines: 41
+Xref: newton.ch.collab.net mail.subversion.users:12980
+
+Ben,
+
+I am afraid that I don't have the time or desire to register on a new
+discussion list and engage in discussions with developers to convince
+them that this change is needed. I just wanted to pass on a comment to
+help improve this product and then leave the decision to implement, or
+not to somebody else.
+
+So, I don't intend to take any further action on this, but this doesn't
+mean I don't think it is a good idea.
+
+Regards, Tim.
+
+-----Original Message-----
+From: Ben Collins-Sussman [mailto:sussman@collab.net] 
+Sent: 06 July 2004 13:35
+To: Tim Alsop
+Cc: Sven Mueller; users@subversion.tigris.org
+Subject: RE: question about unix file permissions
+
+On Tue, 2004-07-06 at 01:55, Tim Alsop wrote:
+> I agree, so what process do we need to use so that this
+bug/enhancement
+> is taken care of ?
+
+Come to the dev@ list and try to get a consensus among developers.  If
+you can persuade, the task will be filed in the issuetracker.  :-)
+
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+From nobody Wed Jul  7 09:49:33 2004
+X-From-Line: users-return-13746-kfogel=collab.net@subversion.tigris.org Wed Jul  7 08:00:25 2004
+Return-Path: <users-return-13746-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i67D0PU33786
+	for <kfogel@localhost>; Wed, 7 Jul 2004 08:00:25 -0500 (CDT)
+	(envelope-from users-return-13746-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Wed, 07 Jul 2004 08:00:25 -0500 (CDT)
+Received: (qmail 8139 invoked from network); 7 Jul 2004 14:14:00 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 7 Jul 2004 14:14:00 -0000
+Received: (qmail 8920 invoked by uid 5302); 7 Jul 2004 14:14:00 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 8911 invoked from network); 7 Jul 2004 14:13:59 -0000
+Priority: normal
+X-MessageTextProcessor: DisclaimIt (2.00.201) on europa.healthcompartners.local
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1409
+Content-Class: urn:content-classes:message
+Importance: normal
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Date: Wed, 7 Jul 2004 09:13:58 -0500
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <173A99B095011541AFCC6F9739F602BE3D112D@europa.healthcompartners.local>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: RE: question about unix file permissions
+thread-index: AcRjpxIxpFnyAFyVTRya7KzZoB4I1gAhK10A
+From: "Simon McClenahan" <smcclenahan@healthcompartners.com>
+To: "Tim Alsop" <Tim.Alsop@CyberSafe.Ltd.UK>,
+   "Ben Collins-Sussman" <sussman@collab.net>
+Cc: "Sven Mueller" <sm@leogic.com>, <users@subversion.tigris.org>
+Subject: [META] "free" software
+X-Spam-Status: No, hits=1.2 required=5.0
+	tests=AWL,EXCUSE_16,SPAM_PHRASE_03_05,SUPERLONG_LINE
+	version=2.43
+X-Spam-Level: *
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by newton.ch.collab.net id i67D0PU33786
+Lines: 49
+Xref: newton.ch.collab.net mail.subversion.users:13006
+
+Maybe you should think about it in terms of the spirit of free software. If you don't have time to report the bug, why should you expect someone else to? Make a contribution to the evolution of this project and as a user and hence supporter of free software, do your duty and follow up on the necessary actions. And it probably is easier to do than you initially think, especially with the free support you will get from like-minded individuals who are more active than you or I.
+
+cheers,
+	Simon
+
+
+-----Original Message-----
+From: Tim Alsop [mailto:Tim.Alsop@CyberSafe.Ltd.UK]
+Sent: Tuesday, July 06, 2004 5:17 PM
+To: Ben Collins-Sussman
+Cc: Sven Mueller; users@subversion.tigris.org
+Subject: RE: question about unix file permissions
+
+
+Ben,
+
+I am afraid that I don't have the time or desire to register on a new
+discussion list and engage in discussions with developers to convince
+them that this change is needed. I just wanted to pass on a comment to
+help improve this product and then leave the decision to implement, or
+not to somebody else.
+
+So, I don't intend to take any further action on this, but this doesn't
+mean I don't think it is a good idea.
+
+Regards, Tim.
+
+-----Original Message-----
+From: Ben Collins-Sussman [mailto:sussman@collab.net] 
+Sent: 06 July 2004 13:35
+To: Tim Alsop
+Cc: Sven Mueller; users@subversion.tigris.org
+Subject: RE: question about unix file permissions
+
+On Tue, 2004-07-06 at 01:55, Tim Alsop wrote:
+> I agree, so what process do we need to use so that this
+bug/enhancement
+> is taken care of ?
+
+Come to the dev@ list and try to get a consensus among developers.  If
+you can persuade, the task will be filed in the issuetracker.  :-)
+
+--------------------------
+NOTE:  This message and any included attachments are from HealthCom Partners, LLC and are intended only for the addressee(s). The information contained herein may include trade secrets or privileged or otherwise confidential information. Unauthorized review, forwarding, printing, copying, distributing, or using such information is strictly prohibited and may be unlawful. If you received this message in error, or have reason to believe you are not authorized to receive it, please promptly delete this message and notify the sender by e-mail.
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+From nobody Wed Jul  7 09:49:34 2004
+X-From-Line: users-return-13750-kfogel=collab.net@subversion.tigris.org Wed Jul  7 09:47:34 2004
+Return-Path: <users-return-13750-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i67ElYU33955
+	for <kfogel@localhost>; Wed, 7 Jul 2004 09:47:34 -0500 (CDT)
+	(envelope-from users-return-13750-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Wed, 07 Jul 2004 09:47:34 -0500 (CDT)
+Received: (qmail 19329 invoked from network); 7 Jul 2004 14:36:44 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 7 Jul 2004 14:36:44 -0000
+Received: (qmail 2190 invoked by uid 5302); 7 Jul 2004 14:36:44 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 2181 invoked from network); 7 Jul 2004 14:36:43 -0000
+Sender: kfogel@newton.ch.collab.net
+To: "Simon McClenahan" <smcclenahan@healthcompartners.com>
+Cc: "Tim Alsop" <Tim.Alsop@CyberSafe.Ltd.UK>,
+   "Ben Collins-Sussman" <sussman@collab.net>, "Sven Mueller" <sm@leogic.com>,
+   <users@subversion.tigris.org>
+References: <173A99B095011541AFCC6F9739F602BE3D112D@europa.healthcompartners.local>
+From: kfogel@collab.net
+Reply-To: kfogel@collab.net
+X-Windows: a mistake carried out to perfection.
+Date: 07 Jul 2004 08:09:18 -0500
+In-Reply-To: <173A99B095011541AFCC6F9739F602BE3D112D@europa.healthcompartners.local>
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <85llhw0xs1.fsf@newton.ch.collab.net>
+User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.1.50
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Subject: Re: [META] "free" software
+X-Spam-Status: No, hits=-2.8 required=5.0
+	tests=AWL,EXCUSE_16,IN_REP_TO,NO_REAL_NAME,QUOTED_EMAIL_TEXT,
+	      REFERENCES,SPAM_PHRASE_03_05,SUPERLONG_LINE,USER_AGENT,
+	      USER_AGENT_GNUS_UA
+	version=2.43
+X-Spam-Level: 
+Lines: 74
+Xref: newton.ch.collab.net mail.subversion.users:13010
+
+"Simon McClenahan" <smcclenahan@healthcompartners.com> writes:
+> Maybe you should think about it in terms of the spirit of free
+> software. If you don't have time to report the bug, why should you
+> expect someone else to? Make a contribution to the evolution of this
+> project and as a user and hence supporter of free software, do your
+> duty and follow up on the necessary actions. And it probably is
+> easier to do than you initially think, especially with the free
+> support you will get from like-minded individuals who are more
+> active than you or I.
+
+Simon, I think maybe you misunderstood the tone of Tim's response.
+
+Although it's terse, it's quite amiable and merely states the facts.
+He says the enhancement is important enough to be worth describing (in
+the hopes that others will implement it), but it's not important
+enough to devote design/discussion/implementation time himself.
+
+There's nothing wrong with this.  Doing a cost/benefit analysis is not
+against the spirit of free software.  Tim has no "duty" to follow up
+further.  Of course, he also has no right to complain, but clearly he
+understands that -- he's not complaining, he's merely letting us know,
+without rancor, that he intends to take no further action.
+
+There's nothing to criticise Tim for here.
+
+-Karl
+
+> -----Original Message-----
+> From: Tim Alsop [mailto:Tim.Alsop@CyberSafe.Ltd.UK]
+> Sent: Tuesday, July 06, 2004 5:17 PM
+> To: Ben Collins-Sussman
+> Cc: Sven Mueller; users@subversion.tigris.org
+> Subject: RE: question about unix file permissions
+> 
+> 
+> Ben,
+> 
+> I am afraid that I don't have the time or desire to register on a new
+> discussion list and engage in discussions with developers to convince
+> them that this change is needed. I just wanted to pass on a comment to
+> help improve this product and then leave the decision to implement, or
+> not to somebody else.
+> 
+> So, I don't intend to take any further action on this, but this doesn't
+> mean I don't think it is a good idea.
+> 
+> Regards, Tim.
+> 
+> -----Original Message-----
+> From: Ben Collins-Sussman [mailto:sussman@collab.net] 
+> Sent: 06 July 2004 13:35
+> To: Tim Alsop
+> Cc: Sven Mueller; users@subversion.tigris.org
+> Subject: RE: question about unix file permissions
+> 
+> On Tue, 2004-07-06 at 01:55, Tim Alsop wrote:
+> > I agree, so what process do we need to use so that this
+> bug/enhancement
+> > is taken care of ?
+> 
+> Come to the dev@ list and try to get a consensus among developers.  If
+> you can persuade, the task will be filed in the issuetracker.  :-)
+> 
+> --------------------------
+> NOTE:  This message and any included attachments are from HealthCom Partners, LLC and are intended only for the addressee(s). The information contained herein may include trade secrets or privileged or otherwise confidential information. Unauthorized review, forwarding, printing, copying, distributing, or using such information is strictly prohibited and may be unlawful. If you received this message in error, or have reason to believe you are not authorized to receive it, please promptly delete this message and notify the sender by e-mail.
+> 
+> ---------------------------------------------------------------------
+> To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+> For additional commands, e-mail: users-help@subversion.tigris.org
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+From nobody Wed Jul  7 09:49:35 2004
+X-From-Line: Tim.Alsop@CyberSafe.Ltd.UK Wed Jul  7 09:47:34 2004
+Return-Path: <Tim.Alsop@CyberSafe.Ltd.UK>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i67ElYU33958
+	for <kfogel@localhost>; Wed, 7 Jul 2004 09:47:34 -0500 (CDT)
+	(envelope-from Tim.Alsop@CyberSafe.Ltd.UK)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Wed, 07 Jul 2004 09:47:34 -0500 (CDT)
+Received: (qmail 21377 invoked from network); 7 Jul 2004 14:40:13 -0000
+Received: from cluster-b.mailcontrol.com (HELO rly08b.srv.mailcontrol.com) (217.68.146.190)
+  by laswell.sfo.collab.net with SMTP; 7 Jul 2004 14:40:13 -0000
+Received: from cybersafe.ltd.uk (dsl-212-23-30-205.zen.co.uk [212.23.30.205])
+	by rly08b.srv.mailcontrol.com (MailControl) with ESMTP id i67Ee7Cu021742;
+	Wed, 7 Jul 2004 15:40:07 +0100
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="us-ascii"
+Subject: RE: [META] "free" software
+Date: Wed, 7 Jul 2004 15:40:11 +0100
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <0D8F2EFD3A10E24DAEEA48EA6DA07D30035363@postman-pat.csafe.local>
+From: "Tim Alsop" <Tim.Alsop@CyberSafe.Ltd.UK>
+To: <kfogel@collab.net>,
+   "Simon McClenahan" <smcclenahan@healthcompartners.com>
+Cc: "Ben Collins-Sussman" <sussman@collab.net>, "Sven Mueller" <sm@leogic.com>,
+   <users@subversion.tigris.org>
+X-Scanned-By: MailControl A-05-00-00 (www.mailcontrol.com)
+X-Spam-Status: No, hits=0.9 required=5.0
+	tests=AWL,EXCUSE_16,QUOTED_EMAIL_TEXT,SPAM_PHRASE_03_05
+	version=2.43
+X-Spam-Level: 
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by newton.ch.collab.net id i67ElYU33958
+Lines: 99
+Xref: newton.ch.collab.net mail.subversion.users:13011
+
+Karl,
+
+Yes, you are 100% correct in your summary. 
+
+Thanks, Tim.
+
+-----Original Message-----
+From: kfogel@newton.ch.collab.net [mailto:kfogel@newton.ch.collab.net]
+On Behalf Of kfogel@collab.net
+Sent: 07 July 2004 14:09
+To: Simon McClenahan
+Cc: Tim Alsop; Ben Collins-Sussman; Sven Mueller;
+users@subversion.tigris.org
+Subject: Re: [META] "free" software
+
+"Simon McClenahan" <smcclenahan@healthcompartners.com> writes:
+> Maybe you should think about it in terms of the spirit of free
+> software. If you don't have time to report the bug, why should you
+> expect someone else to? Make a contribution to the evolution of this
+> project and as a user and hence supporter of free software, do your
+> duty and follow up on the necessary actions. And it probably is
+> easier to do than you initially think, especially with the free
+> support you will get from like-minded individuals who are more
+> active than you or I.
+
+Simon, I think maybe you misunderstood the tone of Tim's response.
+
+Although it's terse, it's quite amiable and merely states the facts.
+He says the enhancement is important enough to be worth describing (in
+the hopes that others will implement it), but it's not important
+enough to devote design/discussion/implementation time himself.
+
+There's nothing wrong with this.  Doing a cost/benefit analysis is not
+against the spirit of free software.  Tim has no "duty" to follow up
+further.  Of course, he also has no right to complain, but clearly he
+understands that -- he's not complaining, he's merely letting us know,
+without rancor, that he intends to take no further action.
+
+There's nothing to criticise Tim for here.
+
+-Karl
+
+> -----Original Message-----
+> From: Tim Alsop [mailto:Tim.Alsop@CyberSafe.Ltd.UK]
+> Sent: Tuesday, July 06, 2004 5:17 PM
+> To: Ben Collins-Sussman
+> Cc: Sven Mueller; users@subversion.tigris.org
+> Subject: RE: question about unix file permissions
+> 
+> 
+> Ben,
+> 
+> I am afraid that I don't have the time or desire to register on a new
+> discussion list and engage in discussions with developers to convince
+> them that this change is needed. I just wanted to pass on a comment to
+> help improve this product and then leave the decision to implement, or
+> not to somebody else.
+> 
+> So, I don't intend to take any further action on this, but this
+doesn't
+> mean I don't think it is a good idea.
+> 
+> Regards, Tim.
+> 
+> -----Original Message-----
+> From: Ben Collins-Sussman [mailto:sussman@collab.net] 
+> Sent: 06 July 2004 13:35
+> To: Tim Alsop
+> Cc: Sven Mueller; users@subversion.tigris.org
+> Subject: RE: question about unix file permissions
+> 
+> On Tue, 2004-07-06 at 01:55, Tim Alsop wrote:
+> > I agree, so what process do we need to use so that this
+> bug/enhancement
+> > is taken care of ?
+> 
+> Come to the dev@ list and try to get a consensus among developers.  If
+> you can persuade, the task will be filed in the issuetracker.  :-)
+> 
+> --------------------------
+> NOTE:  This message and any included attachments are from HealthCom
+Partners, LLC and are intended only for the addressee(s). The
+information contained herein may include trade secrets or privileged or
+otherwise confidential information. Unauthorized review, forwarding,
+printing, copying, distributing, or using such information is strictly
+prohibited and may be unlawful. If you received this message in error,
+or have reason to believe you are not authorized to receive it, please
+promptly delete this message and notify the sender by e-mail.
+> 
+> ---------------------------------------------------------------------
+> To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+> For additional commands, e-mail: users-help@subversion.tigris.org
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+
+
+From nobody Tue Jul  6 14:37:02 2004
+X-From-Line: users-return-13719-kfogel=collab.net@subversion.tigris.org Tue Jul  6 18:02:00 2004
+Return-Path: <users-return-13719-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i66N1xU32069
+	for <kfogel@localhost>; Tue, 6 Jul 2004 18:01:59 -0500 (CDT)
+	(envelope-from users-return-13719-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Tue, 06 Jul 2004 18:01:59 -0500 (CDT)
+Received: (qmail 28345 invoked from network); 6 Jul 2004 22:17:41 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 6 Jul 2004 22:17:41 -0000
+Received: (qmail 28746 invoked by uid 5302); 6 Jul 2004 22:17:37 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 28684 invoked from network); 6 Jul 2004 22:17:36 -0000
+Date: Tue, 6 Jul 2004 23:16:55 +0100
+Message-ID: <0D8F2EFD3A10E24DAEEA48EA6DA07D30035353@postman-pat.csafe.local>
+From: "Tim Alsop" <Tim.Alsop@CyberSafe.Ltd.UK>
+To: "Ben Collins-Sussman" <sussman@collab.net>
+Cc: "Sven Mueller" <sm@leogic.com>, <users@subversion.tigris.org>
+X-Scanned-By: MailControl A-05-00-00 (www.mailcontrol.com)
+Subject: RE: question about unix file permissions
+X-Spam-Status: No, hits=1.0 required=5.0	tests=AWL,SPAM_PHRASE_00_01
+	version=2.43
+X-Spam-Level: *
+X-MIME-Autoconverted: from quoted-printable to 8bit by newton.ch.collab.net id i66N1xU32069
+Lines: 41
+Xref: newton.ch.collab.net mail.subversion.users:12980
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+
+Ben,
+
+I am afraid that I don't have the time or desire to register on a new
+discussion list and engage in discussions with developers to convince
+them that this change is needed. I just wanted to pass on a comment to
+help improve this product and then leave the decision to implement, or
+not to somebody else.
+
+So, I don't intend to take any further action on this, but this doesn't
+mean I don't think it is a good idea.
+
+Regards, Tim.
+
+-----Original Message-----
+From: Ben Collins-Sussman [mailto:sussman@collab.net] 
+Sent: 06 July 2004 13:35
+To: Tim Alsop
+Cc: Sven Mueller; users@subversion.tigris.org
+Subject: RE: question about unix file permissions
+
+On Tue, 2004-07-06 at 01:55, Tim Alsop wrote:
+> I agree, so what process do we need to use so that this
+bug/enhancement
+> is taken care of ?
+
+Come to the dev@ list and try to get a consensus among developers.  If
+you can persuade, the task will be filed in the issuetracker.  :-)
+
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+From nobody Wed Jul 14 14:33:22 2004
+X-From-Line: dev-return-48450-kfogel=collab.net@subversion.tigris.org Tue Mar  2 21:31:45 2004
+Return-Path: <dev-return-48450-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i233Vji01971
+	for <kfogel@localhost>; Tue, 2 Mar 2004 21:31:45 -0600 (CST)
+	(envelope-from dev-return-48450-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Tue, 02 Mar 2004 21:31:45 -0600 (CST)
+Received: (qmail 14125 invoked from network); 29 Feb 2004 23:51:06 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 29 Feb 2004 23:51:06 -0000
+Received: (qmail 21154 invoked by uid 5302); 29 Feb 2004 23:51:00 -0000
+Mailing-List: contact dev-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+list-help: <mailto:dev-help@subversion.tigris.org>
+list-unsubscribe: <mailto:dev-unsubscribe@subversion.tigris.org>
+list-post: <mailto:dev@subversion.tigris.org>
+Delivered-To: mailing list dev@subversion.tigris.org
+Received: (qmail 21145 invoked from network); 29 Feb 2004 23:51:00 -0000
+Date: Sun, 29 Feb 2004 15:50:59 -0800 (PST)
+From: Brian Behlendorf <brian@collab.net>
+X-X-Sender: brian@fez.hyperreal.org
+To: Ben Reser <ben@reser.org>
+cc: dev@subversion.tigris.org
+In-Reply-To: <20040229092231.GO13621@occipital.brain.org>
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <20040229154604.G3929@fez.hyperreal.org>
+References: <1077722902.12037.26.camel@loota.intranet> <85wu6b178n.fsf@newton.ch.collab.net>
+ <20040227155117.GU18335@deadbeast.net> <20040229092231.GO13621@occipital.brain.org>
+MIME-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-Spam-Rating: localhost.hyperreal.org 1.6.2 0/1000/N
+Subject: Re: What license should I use when including code from subversion?
+X-Spam-Status: No, hits=-1.5 required=7.0
+	tests=AWL,IN_REP_TO,QUOTED_EMAIL_TEXT,REFERENCES,
+	      SPAM_PHRASE_01_02
+	version=2.43
+X-Spam-Level: 
+Lines: 30
+Xref: newton.ch.collab.net mail.subversion.dev:47330
+
+On Sun, 29 Feb 2004, Ben Reser wrote:
+> More to the point, this discussion has already been had.  The Apache 1.1
+> license is GPL incompatable and by extension so is the Subversion
+> license with essentially identical clauses:
+>
+> http://lists.debian.org/debian-legal/2000/debian-legal-200006/msg00103.html
+
+The ASF never considered the 1.1 license to be ASF-incompatible in
+practice.  That is to say, no one has ever been sued by the ASF, or even
+asked to stop, for including Apache software inside a GPL release.
+
+Likewise, CollabNet will never sue someone for doing the same thing.  Our
+intent for the license is to give *everyone* the ability to include it in
+their works, with minimal notification and liability exemption required.
+
+We'd like to update it to the Apache 2.0 license, which is even more
+explicitly compatible with the GPL, despite the FSF's opinion on this
+front.  The ASF and the FSF are resolving their last question on this
+front.  This is not an algorithmic thing, as it depends on how courts are
+likely to interpret patent language.  But, again, the ASF's intent is to
+allow anyone to combine AL-2.0 code with GPL code and distribute it under
+the GPL.  That would be ours as well.
+
+	Brian
+
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: dev-help@subversion.tigris.org
+
+From nobody Wed Jul 14 14:35:09 2004
+X-From-Line: dev-return-50101-kfogel=collab.net@subversion.tigris.org Tue Mar 30 13:55:20 2004
+Return-Path: <dev-return-50101-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id i2UJtKi72619
+	for <kfogel@localhost>; Tue, 30 Mar 2004 13:55:20 -0600 (CST)
+	(envelope-from dev-return-50101-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Tue, 30 Mar 2004 13:55:20 -0600 (CST)
+Received: (qmail 16810 invoked from network); 30 Mar 2004 20:59:07 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 30 Mar 2004 20:59:07 -0000
+Received: (qmail 11096 invoked by uid 5302); 30 Mar 2004 20:59:06 -0000
+Mailing-List: contact dev-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+list-help: <mailto:dev-help@subversion.tigris.org>
+list-unsubscribe: <mailto:dev-unsubscribe@subversion.tigris.org>
+list-post: <mailto:dev@subversion.tigris.org>
+Delivered-To: mailing list dev@subversion.tigris.org
+Received: (qmail 10900 invoked from network); 30 Mar 2004 20:59:06 -0000
+Sender: kfogel@newton.ch.collab.net
+To: dev@subversion.tigris.org
+From: kfogel@collab.net
+Reply-To: kfogel@collab.net
+X-Windows: a terminal disease.
+Date: 30 Mar 2004 13:47:50 -0600
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <85n05y3ymx.fsf@newton.ch.collab.net>
+User-Agent: Gnus/5.09 (Gnus v5.9.0) Emacs/21.1.50
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Subject: using LGPL'd code with Subversion
+X-Spam-Status: No, hits=-2.2 required=7.0
+	tests=AWL,NO_REAL_NAME,SPAM_PHRASE_01_02,USER_AGENT,
+	      USER_AGENT_GNUS_UA
+	version=2.43
+X-Spam-Level: 
+Lines: 107
+Xref: newton.ch.collab.net mail.subversion.dev:48988
+
+As we contemplate using GNU gettext, there's some discussion of
+whether we are licence-compatible with the LGPL (in a complex way, the
+part of gettext we care about is LGPL'd, while the rest of it is
+GPL'd).  In the midst of this discussion, someone pointed out that we
+already use Neon, which is also LGPL.
+
+Before I continue, here are some references.  The LGPL v2.1:
+
+   http://www.gnu.org/licenses/lgpl.html
+
+The Subversion dev list thread:
+
+   http://tinyurl.com/3d2ey
+
+For some messages discussing license compatibility, try:
+
+   http://subversion.tigris.org/servlets/ReadMsg?list=dev&msgNo=61816
+   http://subversion.tigris.org/servlets/ReadMsg?list=dev&msgNo=61862
+
+Okay, continuing:
+
+I've just finished reading the LGPL v2.1, and I don't see any problem
+with using gettext in Subversion.  Specifically, various parts of
+sections 5 and 6 seem to apply to Subversion in an innocuous and
+non-license-shaking way.  (Note that the only part of gettext
+Subversion actually would link with at runtime is the 'intl' library,
+which is a part of gettext that is under the LGPL).  The first part of
+section 5 says:
+
+  >   5. A program that contains no derivative of any portion of the
+  > Library, but is designed to work with the Library by being compiled or
+  > linked with it, is called a "work that uses the Library".  Such a
+  > work, in isolation, is not a derivative work of the Library, and
+  > therefore falls outside the scope of this License.
+  > 
+  >   However, linking a "work that uses the Library" with the Library
+  > creates an executable that is a derivative of the Library (because it
+  > contains portions of the Library), rather than a "work that uses the
+  > library".  The executable is therefore covered by this License.
+  > Section 6 states terms for distribution of such executables.
+
+The first paragraph says we're safe for source distributions.  
+
+The second paragraph tells us that, for binary distributions, we need
+to look at section 6.  Let's go there now (the remainder of 5 is not
+important here).  Here's the beginning of section 6:
+
+  >   6. As an exception to the Sections above, you may also combine or
+  > link a "work that uses the Library" with the Library to produce a
+  > work containing portions of the Library, and distribute that work
+  > under terms of your choice, provided that the terms permit
+  > modification of the work for the customer's own use and reverse
+  > engineering for debugging such modifications.
+
+Good -- in other words, the work (executable, in our case) must be
+under a Free-ish license, but not necessarily the LGPL itself.  We
+meet that criterion easily.  Someone repackaging Subversion under a
+less permissive license might have a problem; I don't know if we
+consider that a problem ourselves.  The next pararaph lays down some
+additional requirements:
+
+  >   You must give prominent notice with each copy of the work that the
+  > Library is used in it and that the Library and its use are covered by
+  > this License.  You must supply a copy of this License.  If the work
+  > during execution displays copyright notices, you must include the
+  > copyright notice for the Library among them, as well as a reference
+  > directing the user to the copy of this License.  Also, you must do one
+  > of these things:
+
+Okay, we can do that (I'm not sure where we display such notices now,
+but we can put in a bit about gettext/intl/LGPL pretty easily).
+
+The pick-list following that offers various options, some of which are
+easy for us to meet, and we only need to meet one.  I won't detail how
+here; you can see it easily if you read over the list.
+
+So.  If anyone can think of a reason why we *would* have a problem
+using the LGPL, please offer it up now.  I am not a lawyer; the above
+is just my effort to understand the legal implications of using
+gettext and/or Neon with Subversion.
+
+Regarding Neon:
+
+I think most of the above applies to Neon as well.  But note that Neon
+actually uses LGPL v2.0 (which is the "GNU Library Public License",
+while v2.1 is now the "GNU Lesser Public License").  I have not read
+v2.0 as carefully as v2.1, but the differences do not appear to be
+great.  The main change seems to be the insertion of a new paragraph
+in section 6:
+
+  + b) Use a suitable shared library mechanism for linking with the
+  + Library.  A suitable mechanism is one that (1) uses at run time a
+  + copy of the library already present on the user's computer system,
+  + rather than copying library functions into the executable, and (2)
+  + will operate properly with a modified version of the library, if
+  + the user installs one, as long as the modified version is
+  + interface-compatible with the version that the work was made with.
+
+Not a problem (if it were a problem, we would simply choose one of the
+other options).
+
+-Karl
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: dev-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: dev-help@subversion.tigris.org
+
+From nobody Thu Dec  2 11:27:27 2004
+X-From-Line: users-return-22133-kfogel=collab.net@subversion.tigris.org Thu Dec  2 11:22:00 2004
+Return-Path: <users-return-22133-kfogel=collab.net@subversion.tigris.org>
+Received: from localhost (localhost [127.0.0.1])
+	by newton.ch.collab.net (8.11.6/8.11.6) with ESMTP id iB2HLxU84418
+	for <kfogel@localhost>; Thu, 2 Dec 2004 11:22:00 -0600 (CST)
+	(envelope-from users-return-22133-kfogel=collab.net@subversion.tigris.org)
+Delivered-To: kfogel@collab.net
+Received: from laswell.sfo.collab.net [64.125.134.138]
+	by localhost with POP3 (fetchmail-5.9.4)
+	for kfogel@localhost (single-drop); Thu, 02 Dec 2004 11:22:00 -0600 (CST)
+Received: (qmail 15477 invoked from network); 2 Dec 2004 16:44:39 -0000
+Received: from newtigris.sfo.collab.net (HELO tigris.org) (64.125.132.240)
+  by laswell.sfo.collab.net with SMTP; 2 Dec 2004 16:44:39 -0000
+Received: (qmail 27823 invoked by uid 5302); 2 Dec 2004 16:44:09 -0000
+Mailing-List: contact users-help@subversion.tigris.org; run by ezmlm
+Precedence: bulk
+X-No-Archive: yes
+list-help: <mailto:users-help@subversion.tigris.org>
+list-unsubscribe: <mailto:users-unsubscribe@subversion.tigris.org>
+list-post: <mailto:users@subversion.tigris.org>
+Delivered-To: mailing list users@subversion.tigris.org
+Received: (qmail 27602 invoked from network); 2 Dec 2004 16:44:08 -0000
+Date: Thu, 2 Dec 2004 10:43:00 -0600
+From: Steve Greenland <steveg@lsli.com>
+To: <users@subversion.tigris.org>
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-ID: <20041202164300.GA20257@lsli.com>
+References: <5.2.0.9.2.20041201164509.02112860@mail2.jpl.nasa.gov> <2325BEAF-4418-11D9-B183-000A95D699A0@collab.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2325BEAF-4418-11D9-B183-000A95D699A0@collab.net>
+User-Agent: Mutt/1.5.6+20040722i
+Subject:  Re: post-commit script to set keywords/prop-set hit and miss
+X-Spam-Checker-Version: SpamAssassin 3.0.1 (2004-10-22) on 
+	laswell.sfo.collab.net
+X-Spam-Report: 
+	* -2.8 ALL_TRUSTED Did not pass through any untrusted hosts
+	*  0.1 AWL AWL: From: address is in the auto white-list
+X-Spam-Status: No, score=-2.7 required=5.0 tests=ALL_TRUSTED,AWL 
+	autolearn=disabled version=3.0.1
+X-Spam-Level: 
+Lines: 35
+Xref: newton.ch.collab.net mail.subversion.users:21254
+
+On Wed, Dec 01, 2004 at 10:10:44PM -0600, Ben Collins-Sussman wrote:
+> 
+> On Dec 1, 2004, at 6:51 PM, Jennifer Kesterson wrote:
+> 
+> > We wrote a post-commit hook script to set keywords and EOL styles in 
+> >the current repository on files that don't have them set.
+> 
+> Yikes, this is a *really bad* strategy.
+
+And you're going to continue to see people attempt it until server-side
+default properties are available.
+
+Yes, I've read the relevant entry in the issue tracker, I understand
+that there are non-trivial issues to be solved, and no, I don't have the
+time to contribute it. I'm not try to criticize here, just explain why
+this pops up on a regular basis: trying to enforce a consistent set of
+client configurations across a large and/or diverse set of developers
+is difficult, especially if those configurations change over time, or
+are different for different projects/repositories. 
+
+It might be worth adding a big warning and
+explanation to the "post-commit" hook entry in
+http://svnbook.red-bean.com/en/1.0/ch05s02.html#svn-ch-5-sect-2.1.
+
+Steve
+
+-- 
+"Outlook not so good." That magic 8-ball knows everything! I'll ask
+about Exchange Server next.
+                           -- (Stolen from the net)
+
+---------------------------------------------------------------------
+To unsubscribe, e-mail: users-unsubscribe@subversion.tigris.org
+For additional commands, e-mail: users-help@subversion.tigris.org
+
+From nobody Wed Jan 12 09:27:51 2005
+X-From-Line: sussman@red-bean.com Wed Jan 12 09:25:12 2005
+Return-path: <sussman@red-bean.com>
+Envelope-to: kfogel@localhost
+Received: from floss
+	([127.0.0.1] helo=localhost ident=kfogel)
+	by floss.red-bean.com with esmtp (Exim 3.36 #1 (Debian))
+	id 1CokMy-0005KR-02
+	for <kfogel@localhost>; Wed, 12 Jan 2005 09:25:12 -0600
+Received: from floss [127.0.0.1]
+	by localhost with POP3 (fetchmail-5.9.13)
+	for kfogel@localhost (single-drop); Wed, 12 Jan 2005 09:25:12 -0600 (CST)
+Received: from [192.168.1.102] (dsl092-129-143.chi1.dsl.speakeasy.net [66.92.129.143])
+	(authenticated bits=0)
+	by sanpietro.red-bean.com (8.12.9/8.12.9/Debian-5) with ESMTP id j0CESF5M026635
+	(version=TLSv1/SSLv3 cipher=RC4-SHA bits=128 verify=NO)
+	for <kfogel@red-bean.com>; Wed, 12 Jan 2005 08:29:16 -0600
+Mime-Version: 1.0 (Apple Message framework v619)
+Content-Transfer-Encoding: 7bit
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-Id: <314C0F5F-64A6-11D9-86D5-000A95D699A0@red-bean.com>
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+To: Karl Fogel <kfogel@red-bean.com>
+From: Ben Collins-Sussman <sussman@red-bean.com>
+Subject: You are what you write
+Date: Wed, 12 Jan 2005 08:28:13 -0600
+X-Mailer: Apple Mail (2.619)
+X-Virus-Scanned: clamd / ClamAV version 0.70, clamav-milter version 0.70j
+X-SpamProbe: GOOD 0.0000000 1686c259e1898894c41468b75baea0f8
+X-Spam-Checker-Version: SpamAssassin 2.63 (2004-01-11) on 
+	sanpietro.red-bean.com
+X-Spam-Level: 
+X-Spam-Status: No, hits=0.0 required=5.0 tests=AWL autolearn=no version=2.63
+Lines: 17
+Xref: floss.red-bean.com mail.ben:399
+
+This quote is from one of the developers on the OpenRPG list.  It pains 
+me to read it.
+
+"Not it isnt required to add the col to the player list I mainly did it
+  for my testing so I could easaly check what groups I had added each
+  person to. I could not find a way to use the plugin code for multiple
+  whisper groups, BUT I am using it to make Group Tabs(One for each group
+  and one GM Tab) Though I am having to add a few things to the plugin
+  code so that it will function corectly, namly a meathod to let the
+  system know that the plugin posted the code so that the core will stop
+  proccessing it. I also made it so that the player_id is sent to the
+  plugin receive_msg function"
+
+
+
+  
+
+From nobody Mon Feb 28 21:57:39 2005
+X-From-Line: fitz@red-bean.com Mon Feb 28 21:53:02 2005
+Return-path: <fitz@red-bean.com>
+Envelope-to: kfogel@localhost
+Received: from floss
+	([127.0.0.1] helo=localhost ident=kfogel)
+	by floss.red-bean.com with esmtp (Exim 3.36 #1 (Debian))
+	id 1D5yLh-0004Sb-00
+	for <kfogel@localhost>; Mon, 28 Feb 2005 21:47:05 -0600
+Received: from floss [127.0.0.1]
+	by localhost with POP3 (fetchmail-5.9.13)
+	for kfogel@localhost (single-drop); Mon, 28 Feb 2005 21:47:05 -0600 (CST)
+Received: from 10.3.0.97 (newton.ch.collab.net [66.146.194.194])
+	(authenticated bits=0)
+	by sanpietro.red-bean.com (8.13.3/8.13.3/Debian-6) with ESMTP id j1SHXRA3031849
+	(version=TLSv1/SSLv3 cipher=RC4-MD5 bits=128 verify=NOT);
+	Mon, 28 Feb 2005 11:33:28 -0600
+Subject: the Files stats email.
+From: "Brian W. Fitzpatrick" <fitz@red-bean.com>
+To: kfogel@collab.net
+Cc: kfogel@red-bean.com
+Content-Type: text/plain
+Date: Mon, 28 Feb 2005 11:33:45 -0600
+X-Gnus-Mail-Source: file:/var/mail/kfogel
+Message-Id: <1109612025.30772.21.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.0.2 (2.0.2-3) 
+Content-Transfer-Encoding: 7bit
+X-SpamProbe: GOOD 0.0000000 88f3b9281d9738afadab3a54f1f78962
+X-Spam-Checker-Version: SpamAssassin 2.63 (2004-01-11) on 
+	sanpietro.red-bean.com
+X-Spam-Level: 
+X-Spam-Status: No, hits=0.0 required=5.0 tests=AWL autolearn=no version=2.63
+Lines: 42
+Xref: floss.red-bean.com mail.collab.personal:1590
+
+Reply-to: fitz@collab.net
+From: "B. W. Fitzpatrick" <fitz@collab.net>
+To: kfogel@collab.net, sussman@collab.net, cmpilato@collab.net,
+    gstein@collab.net, jrepenning@collab.net
+Subject: The Subversion Energy Sink
+X-Windows: the first fully modular software disaster.
+X-Mailer: MH-E 7.4.2; nmh 1.0.4+dev; GNU Emacs 21.2.1
+Date: Wed, 12 Nov 2003 23:37:47 -0600
+Sender: fitz@red-bean.com
+
+In the last 25 days, the top 6 posters to the svn [dev|users] list have
+been:
+
+    294  kfogel@collab.net
+    236  "C. Michael Pilato" <cmpilato@collab.net>
+    220  "Files" <files@poetryunlimited.com>
+    176  =?UTF-8?B?QnJhbmtvIMSMaWJlag==?= <brane@xbc.nu>
+    130  Philip Martin <philip@codematters.co.uk>
+    126  Ben Collins-Sussman <sussman@collab.net>
+
+I would say that five of these people are contributing to Subversion
+hitting 1.0 in the near future.
+
+I would also say that one of these people is consistently drawing time
+and energy from the other 5, not to mention the list as a whole, thus
+(albeit unintentionally) slowing the development of Subversion.  I did
+not do a threaded analysis, but vgrepping my Subversion mail spool tells
+me that every mail from this person is responded to at least once by at
+least 2 of the other 5 people on the above list.
+
+I think some sort of radical intervention is necessary here, even if we
+do scare the aforementioned person away.  Niceties and kindness have
+already proven to have no effect.
+
+dev@subversion is a mailing list to facilitate development of a version
+control system, not a group therapy session.
+
+-Fitz, attempting to wade through three days on svn mail that he let
+ pile up
+
+
+

@@ -1,0 +1,474 @@
+<appendix id="bikeshed-full">
+<!--
+<title>Why Should I Care What Color the Bikeshed Is?</title>
+-->
+<title>なんで自転車置場の色まで気にしなきゃならないの？</title>
+
+<simplesect>
+
+<!--
+<para>You shouldn't; it doesn't really matter, and you have better
+things to spend your time on.</para>
+-->
+<para>
+  別にそんな必要はありません。
+  だって、そんなのどうでもいいことじゃないですか。
+  それに、もっとマシな時間の使い方もあるでしょ？
+</para>
+
+<!--
+<para>Poul-Henning Kamp's famous "bikeshed" post (an excerpt from
+which appears in <xref linkend="communications"/>) is an eloquent
+disquisition on what tends to go wrong in group discussions.  It is
+reprinted here with his permission.  The orginal URL is <ulink
+url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>; for easy linking,
+you can also point people to <ulink url="http://bikeshed.com">bikeshed.com</ulink>.</para>
+-->
+<para>
+  Poul-Henning Kamp による、かの有名な "bikeshed" メール
+  (その一部を <xref linkend="communications"/> で取り上げました)
+  は、集団での議論が陥りがちな罠について非常にうまく説明した論考です。
+  彼の承諾を得て、ここにそれを掲載します。原文の URL は
+  <ulink url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>
+  です。リンクしやすいように、<ulink url="http://bikeshed.com">bikeshed.com</ulink> を示してもよいでしょう。
+</para>
+
+<!-- 
+   Enshrined in the FreeBSD documentation at:
+
+   <ulink url="http://www.freebsd.org/doc/en_US.ISO8859-1/books/faq/misc.html#BIKESHED-PAINTING"/>
+
+-->
+
+<screen>
+Subject: A bike shed (any colour will do) on greener grass...
+From: Poul-Henning Kamp &lt;phk@freebsd.org&gt;
+Date: Sat, 02 Oct 1999 16:14:10 +0200
+Message-ID: &lt;18238.938873650@critter.freebsd.dk&gt;
+Sender: phk@critter.freebsd.dk
+Bcc: Blind Distribution List: ;
+MIME-Version: 1.0
+
+
+<!--
+[bcc'ed to committers, hackers]
+-->
+[committers と hackers にも bcc しておいた]
+
+<!--
+My last pamphlet was sufficiently well received that I was not
+scared away from sending another one, and today I have the time
+and inclination to do so.
+-->
+この前送ったパンフレットはよく受け取ってもらえたし、また別のを送っても
+いいかなって思ってた。で、今日はその時間と気力があったんで。
+
+<!--
+I've had a little trouble with deciding on the right distribution
+of this kind of stuff, this time it is bcc'ed to committers and
+hackers, that is probably the best I can do.  I'm not subscribed
+to hackers myself but more on that later.
+-->
+この手の話題をどこに送ればいいのかちょっと迷ったけれど、結局
+committers と hackers にも bcc することにした。たぶんこれでよかったん
+だろう。実は私は hackers を購読していないんだが、それについてはまた後
+で説明する。
+
+<!--
+The thing which have triggered me this time is the "sleep(1) should
+do fractional seconds" thread, which have pestered our lives for
+many days now, it's probably already a couple of weeks, I can't
+even be bothered to check.
+-->
+このメールの発端となったのは「sleep(1) で小数点以下の秒を使えるように
+すべき」というスレッドだ。こいつは最近私たちの生活を脅かし続けてきた。
+おそらく数週間ほど。面倒なのできちんと調べてないけどね。
+
+<!--
+To those of you who have missed this particular thread: Congratulations.
+-->
+「そんなスレッドあったかなぁ」と思ったみなさん、あなたたちは幸せものだ。
+
+<!--
+It was a proposal to make sleep(1) DTRT if given a non-integer
+argument that set this particular grass-fire off.  I'm not going
+to say anymore about it than that, because it is a much smaller
+item than one would expect from the length of the thread, and it
+has already received far more attention than some of the *problems*
+we have around here.
+-->
+炎上のきっかけとなったのは「sleep(1) に非整数の引数を渡したときにも正
+しく動作するようにしよう」という提案だった。ここではそれ以上のことは言
+わない。ほんの些細な提案のためにあのスレッドで散々騒がれ続けてたから、
+もうみんな十分に知りすぎていることだろう。そのおかげで、ほんとうに重要
+な「問題」たちがかすんでしまってるよ。
+
+<!--
+The sleep(1) saga is the most blatant example of a bike shed
+discussion we have had ever in FreeBSD.  The proposal was well
+thought out, we would gain compatibility with OpenBSD and NetBSD,
+and still be fully compatible with any code anyone ever wrote.
+-->
+この sleep(1) の話は、FreeBSD が始まって以来最もわかりやすい「自転車置場
+の議論」の例といえるだろう。あの提案はとてもよく考えられたものだった
+し、OpenBSD や NetBSD との互換性を向上させるものでもあった。そして、こ
+れまでに書かれてきたコードとの互換性もまったく損なわないものだったんだ。
+
+<!--
+Yet so many objections, proposals and changes were raised and
+launched that one would think the change would have plugged all
+the holes in swiss cheese or changed the taste of Coca Cola or
+something similar serious.
+-->
+なのに、反論や別の提案や修正案などが続出した。まるで奴らは、この提案が
+「スイスチーズの穴を全部埋めてしまう」だとか「コカコーラの味を変えてし
+まう」などといったものすごく重大な話だと思い込んでいるようだった。
+
+<!--
+"What is it about this bike shed ?" Some of you have asked me.
+-->
+「ところで、いったい自転車置場ってどういうこと？」と思った人もいること
+だろう。
+
+<!--
+It's a long story, or rather it's an old story, but it is quite
+short actually.  C. Northcote Parkinson wrote a book in the early
+1960'ies, called "Parkinson's Law", which contains a lot of insight
+into the dynamics of management.
+-->
+話せば長くなる昔話だけど、実際のところは単純な話だ。C・ノースコート・
+パーキンソンが 1960 年代初期に書いた「パーキンソンの法則」という本があっ
+て、そこにはものごとの管理に関するさまざまな洞察が書かれていたんだ。
+
+<!--
+You can find it on Amazon, and maybe also in your dads book-shelf,
+it is well worth its price and the time to read it either way,
+if you like Dilbert, you'll like Parkinson.
+-->
+今でもアマゾンで買えるし、君たちの父親の本棚にも入っているかもしれない。
+この本は、お金を出して購入し時間をかけて読むだけの価値があるものだ。ディ
+ルバートが好きな人なら、きっとパーキンソンも気に入ることだろう。
+
+<!--
+Somebody recently told me that he had read it and found that only
+about 50% of it applied these days.  That is pretty darn good I
+would say, many of the modern management books have hit-rates a
+lot lower than that, and this one is 35+ years old.
+-->
+かつてこの本を読んだ誰かが「現代じゃこの本に書かれてることの 50% くら
+いしかあてはまらないね」と言ってた。上等じゃないか。いまどきの本なんか、
+もっと惨めなもんだ。しかもこの本、35年以上前のものなんだぜ？
+
+<!--
+In the specific example involving the bike shed, the other vital
+component is an atomic power-plant, I guess that illustrates the
+age of the book.
+-->
+自転車置場の例にでてくるもう一方の役者が、原子炉だ。なんだか、いかにも
+時代を感じさせるなぁ。
+
+<!--
+Parkinson shows how you can go in to the board of directors and
+get approval for building a multi-million or even billion dollar
+atomic power plant, but if you want to build a bike shed you will
+be tangled up in endless discussions.
+-->
+パーキンソンは、委員会に乗り込んで数百万から数億ドルもの原子炉建設計画
+を承認させる方法を説明している。しかし、原子炉ではなく自転車置場を作り
+たいと思ったら終わりのない議論に巻き込まれることになるだろうとも言って
+いる。
+
+<!--
+Parkinson explains that this is because an atomic plant is so vast,
+so expensive and so complicated that people cannot grasp it, and
+rather than try, they fall back on the assumption that somebody
+else checked all the details before it got this far.   Richard P.
+Feynmann gives a couple of interesting, and very much to the point,
+examples relating to Los Alamos in his books.
+-->
+パーキンソンによると、原子炉はあまりに巨大で高価そして複雑であるために
+みんながその内容を把握できなくなるということだ。考えようともせずに思考
+停止してしまい、「まぁここまで来る前に誰か他の人が一部始終をチェックし
+ただろう」ということになってしまう。リチャート・P・ファインマンの著書に
+は、これに関連するロス・アラモスでの興味深い事例がいくつか紹介されてい
+る。
+
+<!--
+A bike shed on the other hand.  Anyone can build one of those over
+a weekend, and still have time to watch the game on TV.  So no
+matter how well prepared, no matter how reasonable you are with
+your proposal, somebody will seize the chance to show that he is
+doing his job, that he is paying attention, that he is *here*.
+-->
+さぁ一方自転車置場だ。週末をつぶせばだれでも作ることができ、余った時間
+にテレビで試合を見て楽しむことさえできるだろう。どんなに用意周到であっ
+たとしても、どんなに妥当な提案だったとしても、だれかが機会をとらえては、
+自分もなにかやっていることを示したり、自分もそれに注目してることを示し
+たり、「俺を忘れるな」と言ったりするだろう。
+
+<!--
+In Denmark we call it "setting your fingerprint".  It is about
+personal pride and prestige, it is about being able to point
+somewhere and say "There!  *I* did that."  It is a strong trait in
+politicians, but present in most people given the chance.  Just
+think about footsteps in wet cement.
+-->
+デンマークでは、こういったことを「指紋をつける」って言うんだ。個人的な
+プライドや見栄のために何かをして、あとからその証拠を見せられるようにす
+る。「ほら見ろよ。これ、俺がやったんだ」てな具合にね。政治家どものよく
+やりそうなことでもあるが、一般人だって機会があればやりそうだよ。ほら、
+よく生乾きのセメントに足跡がついてたりするだろう？
+
+<!--
+I bow my head in respect to the original proposer because he stuck
+to his guns through this carpet blanking from the peanut gallery,
+and the change is in our tree today.  I would have turned my back
+and walked away after less than a handful of messages in that
+thread.
+-->
+最初にこの提案をした人には敬意を表したい。だって、くだらぬ批評家たちの
+妨害行為にもめげず自分の信念を貫き通して、その変更がいまやツリーに取り
+込まれてるわけだから。私ならあのスレッドの一握りのメッセージすら受け取
+る前に諦めて逃げてただろうね。
+
+<!--
+And that brings me, as I promised earlier, to why I am not subscribed
+to -hackers:
+-->
+さぁ、そしてさっき言ってた話。なぜ私が -hackers を購読していないのか。
+
+<!--
+I un-subscribed from -hackers several years ago, because I could
+not keep up with the email load.  Since then I have dropped off
+several other lists as well for the very same reason.
+-->
+私が数年前に -hackers の購読をやめた理由は、大量のメールをさばききれな
+くなったからだ。あれ以来、同じ理由で他のメーリングリストもいくつか購読
+をやめている。
+
+<!--
+And I still get a lot of email.  A lot of it gets routed to /dev/null
+by filters:  People like [omitted] will never make it onto my
+screen, commits to documents in languages I don't understand
+likewise, commits to ports as such.  All these things and more go
+the winter way without me ever even knowing about it.
+-->
+それでもまだ大量のメールを受け取っている。まぁ多くのメールはフィルタリ
+ングして /dev/null 行きにしてるけどな。(個人名省略) みたいな野郎からの
+メールは私の画面上には決してあらわれない。外国語のドキュメントへのコミッ
+トとか ports へのコミットとかの通知メールも同じだ。そういったメールは、
+私の目に触れることなくどこかに行ってしまうってわけだ。
+
+<!--
+But despite these sharp teeth under my mailbox I still get too much
+email.
+-->
+でも、これだけ必死になって受信箱を守ろうとしてるってのに、いまでも大量
+にメールが届いている。
+
+<!--
+This is where the greener grass comes into the picture:
+-->
+なにかいい案はないだろうか？
+
+<!--
+I wish we could reduce the amount of noise in our lists and I wish
+we could let people build a bike shed every so often, and I don't
+really care what colour they paint it.
+-->
+メーリングリストから余計なノイズをできるだけ減らしたいんだ。自転車置場
+を作りたい人は気兼ねせずに作れるようにしてあげたいんだ。自転車置場を何
+色に塗るかなんていちいち気にしなくてもいいじゃないか。
+
+<!--
+The first of these wishes is about being civil, sensitive and 
+intelligent in our use of email.
+-->
+最初の件は、メールを使うときにみんなもっと礼儀を考えようってことだ。も
+う少し気を使おうじゃないか。もう少し頭を使おうじゃないか。
+
+<!--
+If I could concisely and precisely define a set of criteria for
+when one should and when one should not reply to an email so that
+everybody would agree and abide by it, I would be a happy man, but
+I am too wise to even attempt that.
+-->
+メールに返信すべきとき/すべきでないときを、みんなが納得する形で簡潔か
+つ正確に定義できたらどんなに幸せなことだろう。でも私は、できもしないこ
+とを試みるほどのバカじゃない。
+
+<!--
+But let me suggest a few pop-up windows I would like to see
+mail-programs implement whenever people send or reply to email
+to the lists they want me to subscribe to:
+-->
+でも、こんな機能があったらいいなぁと思ってる。メーリングリストへの投稿
+に返信しようとすると、メールソフトが自動的にこんなポップアップウィンド
+ウを表示するんだ。どうだろう？
+
+<!--
+      | Your email is about to be sent to several hundred thousand |
+      | people, who will have to spend at least 10 seconds reading |
+      | it before they can decide if it is interesting.  At least  |
+      | two man-weeks will be spent reading your email.  Many of   |
+      | the recipients will have to pay to download your email.    |
+      |                                                            |
+      | Are you absolutely sure that your email is of sufficient   |
+      | importance to bother all these people ?                    |
+      |                                                            |
+      |                  [YES]  [REVISE]  [CANCEL]                 |
+-->
+      +------------------------------------------------------------+
+      | 今あなたが送ろうとしているメールは何10万人もの人に届きます.|
+      | 受け取った人がそれを読むべきかどうかを判断するのに少なくと |
+      | も10秒はかかるでしょう。つまり、あなたのメールを読むために |
+      | 少なくとも0.5人月が費やされるわけです。さらに、多くの人は  |
+      | メールをダウンロードするのにお金を払わないといけません。   |
+      |                                                            |
+      | あなたのメールは、ほんとうにみんながそれだけの手間をかけて |
+      | でも読む価値のあるものですか？                             |
+      |                                                            |
+      |              [はい]  [書き直す]  [キャンセル]              |
+      +------------------------------------------------------------+
+
+<!--
+      | Warning:  You have not read all emails in this thread yet. |
+      | Somebody else may already have said what you are about to  |
+      | say in your reply.  Please read the entire thread before   |
+      | replying to any email in it.                               |
+      |                                                            |
+      |                      [CANCEL]                              |
+-->
+      +------------------------------------------------------------+
+      | 警告：あなたはまだこのスレッドのメールを全部読み終えていま |
+      | せん。今あなたが書いている内容を、他の誰かが既に言っている |
+      | かもしれません。まずスレッドを全部読んでから返信を書くよう |
+      | にしましょう。                                             |
+      |                                                            |
+      |                    [キャンセル]                            |
+      +------------------------------------------------------------+
+
+<!--
+      | Warning:  Your mail program have not even shown you the    |
+      | entire message yet.  Logically it follows that you cannot  |
+      | possibly have read it all and understood it.               |
+      |                                                            |
+      | It is not polite to reply to an email until you have       |
+      | read it all and thought about it.                          |
+      |                                                            |
+      | A cool off timer for this thread will prevent you from     |
+      | replying to any email in this thread for the next one hour |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+      +------------------------------------------------------------+
+      | 警告：まだこのメールソフト上でメッセージ全体を表示し終えて |
+      | いません。論理的に考えて、あなたがメッセージの内容をすべて |
+      | 読んで理解するのは不可能なはずです。                       |
+      |                                                            |
+      | メールを全部読んでちゃんと考えてから返信しないと相手に失礼 |
+      | です。                                                     |
+      |                                                            |
+      | あなたに頭を冷やしてもらうためのタイマーが発動しました。今 |
+      | 後１時間、このスレッドのいかなるメールにも返信はできません.|
+      |                                                            |
+      |                     [キャンセル]                           |
+      +------------------------------------------------------------+
+
+<!--
+      | You composed this email at a rate of more than N.NN cps    |
+      | It is generally not possible to think and type at a rate   |
+      | faster than A.AA cps, and therefore you reply is likely to |
+      | incoherent, badly thought out and/or emotional.            |
+      |                                                            |
+      | A cool off timer will prevent you from sending any email   |
+      | for the next one hour.                                     |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+      +------------------------------------------------------------+
+      | あなたはこのメールを秒速 N.NN 文字以上の速さで書き終えまし |
+      | た。一般に、きちんと考えて書いていたなら秒速 A.AA 文字をこ |
+      | えることは不可能です。おそらく、あなたが今書いた返信は支離 |
+      | 滅裂で意味不明かつ感情的なものだと思われます。             |
+      |                                                            |
+      | あなたに頭を冷やしてもらうためのタイマーが発動しました。今 |
+      | 後１時間、一切メールは送信できません。                     |
+      |                                                            |
+      |                     [キャンセル]                           |
+      +------------------------------------------------------------+
+
+<!--
+The second part of my wish is more emotional.  Obviously, the
+capacities we had manning the unfriendly fire in the sleep(1)
+thread, despite their many years with the project, never cared
+enough to do this tiny deed, so why are they suddenly so enflamed
+by somebody else so much their junior doing it ?
+-->
+私の願いの２番目はもっと感情的なものだ。sleep(1) スレッドで敵対的な批判
+をした古参たちは、プロジェクトへの参加歴が長いというのに、このちょっと
+したことをやろうとなんて思わなかった。明らかにね。それなのに、自分より
+かなり下の後輩がそれをやろうとすると、なぜいきなり彼らはすごい勢いで燃
+え上がるんだろうか？
+
+<!--
+I wish I knew.
+-->
+わかっていればなぁ。
+
+<!--
+I do know that reasoning will have no power to stop such "reactionaire
+conservatism".  It may be that these people are frustrated about
+their own lack of tangible contribution lately or it may be a bad
+case of "we're old and grumpy, WE know how youth should behave".
+-->
+わかってるとも。いくらこんな分析をしたところで、あんな「反動保守主義者」
+どもの抑止力にはならないってことくらい。たぶん奴らは、最近自分が何も貢
+献できていないことにいらついているんだろう。あるいは「わしら年長者こそ
+が、若造たちを正しく導いてやらねばならぬ」などと偉ぶってるんだろう。
+
+<!--
+Either way it is very unproductive for the project, but I have no
+suggestions for how to stop it.  The best I can suggest is to refrain
+from fuelling the monsters that lurk in the mailing lists:  Ignore
+them, don't answer them, forget they're there.
+-->
+どっちにせよそれはプロジェクトにとってまったく非生産的なことであるわけ
+だが、私にはそれをやめさせる方法がわからない。とりあえず言えることは、
+メーリングリストに潜むモンスターどもに餌を与えるのはやめろってことだ。
+とにかく無視する。決して返信しない。奴らがそこにいることを忘れるんだ。
+
+<!--
+I hope we can get a stronger and broader base of contributors in
+FreeBSD, and I hope we together can prevent the grumpy old men
+and the [omitted]s of the world from chewing them up, spitting
+them out and scaring them away before they ever get a leg to the 
+ground.
+-->
+私は、FreeBSD への貢献者がもっと増えてもっと力強くなることを願っている。
+そして、彼らを気難しい爺さんどもや (個人名省略) みたいな奴らから守るん
+だ。あいつらがこの世界に足を踏み入れて彼らを脅かし、追い出してしまうよ
+うなことになってしまってはいけない。
+
+<!--
+For the people who have been lurking out there, scared away from
+participating by the gargoyles:  I can only apologise and encourage
+you to try anyway, this is not the way I want the environment in
+the project to be.
+-->
+ガーゴイルどもにおびえてプロジェクトへの参加を躊躇している皆さんへ。た
+だただごめんなさいとしか言いようがない。何とか仲間に加わって欲しい。今
+の状況は、決して私の望んだ状況ではないんだ。
+
+Poul-Henning
+</screen>
+
+</simplesect>
+
+</appendix>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "appendix")
+end:
+-->

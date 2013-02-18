@@ -1,0 +1,615 @@
+<chapter id="managing-volunteers">
+
+<title>Gestire i Volontari</title>
+
+<simplesect>
+
+<para>Riuscire a far si che le persone aderiscano a ciò di cui ha bisogno il progetto, e lavorare insieme per raggiungerlo, richiede più che la sola atmosfera cordiale e una mancanza della ovvie disfunzioni.  Richiede qualcuno o più di qualcuno, che sappiano gestire tutte le persone coinvolte. Gestire i volontari può non essere un'arte tecnica nello stesso senso della programmazione di un computer,  ma può essere un'arte che può essere migliorata con studio e pratica. </para>
+
+<para>Questo capitolo è un afferrare e mettere in borsa tecniche specifiche per la gestione dei volontari. Esso afferra, forse più fortemente che i precedenti capitoli, con Subversion come caso di studio, perché io ho lavorato a quel progetto per scrivere questo ed ho avuto tutte le fonti primarie a portata di mano, e in parte perché è più accettabile lanciale pietre di critica nelle propria serra di vetro piuttosto che in quella di altri. Ma ho visto anche in molti altri progetti i benefici dell'applicare e le conseguenze del non applicare le raccomandazioni che seguono; quando sarà politicamente fattibile dare esempi provenienti da alcuni altri progetti, io lo farò.</para>
+
+<para>Parlando di politiche, questo è un buon momento come nessuno per dilungarsi con quella molto malfamata parola per uno sguardo più da vicino. A molti ingegneri piace pensare alla politica come a qualcosa in cui la gente si imbarca.
+"<emphasis>Io sto</emphasis> solo sostenendo la causa di un miglior corso per il progetto ma <emphasis>quello</emphasis> sta sollevando obiezioni per ragioni politiche". Io credo che questa antipatia per la politica (o per quello che si immagina sia la politica) sia particolarmente forte negli ingegneri perché gli ingegneri sono acquisiti all'idea che alcune soluzioni siano oggettivamente superiori ad altre. Cosi, quando qualcuno agisce in modo da sembrare motivato da considerazioni esterne per esempio il mantenimento della sua posizione di influenza, la riduzione dell'influenza di qualche altro, il commercio aperto dei voti, o l'evitare di ferire la sensibilità di qualcuno gli altri partecipanti al progetto possono annoiarsi. Certamente, questo raramente impedisce loro di comportarsi nello stesso modo quando i loro interessi vitali sono in gioco.</para>
+
+<para>Se ritenete “politica” una parola sporca, e sperate di mantenere il vostro progetto libero da essa, arrendetevi proprio ora. La politica è inevitabile ogni volta che la gente deve gestire collettivamente un risorsa condivisa. E' assolutamente razionale che una delle considerazioni che entra nel processo del prendere decisioni da parte di ognuno è la domanda su come una data azione può incidere sulla propria futura influenza nel progetto. Dopotutto, se avete fiducia nel vostro giudizio e nelle vostre capacità, come molti programmatori fanno, allora la possibile perdita di influenza di futura influenza deve essere considerato un risultato tecnico, in un certo senso. Simili ragionamenti si applicano ad altri comportamenti che potrebbero sembrare, nel loro aspetto, come “pura” politica. In effetti non c'è cosa pura politica come questa: è precisamente perché le azioni hanno conseguenze sul mondo reale che la gente diventa politicamente consapevole in primo luogo. La politica, in fin dei conti, è semplicemente una presa di coscienza che devono essere tenute in conto <emphasis>tutte</emphasis> le conseguenze delle decisioni. Se una particolare decisione porta al risultato che molti partecipanti trovano tecnicamente soddisfacente, ma comporta un cambiamento nei rapporti di potere che lascia che persone chiave si sentano isolate, il secondo un risultato importante proprio come il primo. Ignorarlo sarebbe di nobili sentimenti, ma miope.</para>
+
+<para>Così, quando leggete il consiglio che segue, e quando lavorate con il vostro progetto personale, ricordate che non c'è nessuno al di sopra della politica. Apparire al di sopra della politica, è solamente una particolare strategia politica, e a volte è molto utile, ma non è mai la realtà. Politico è semplicemente ciò che avviene quando la gente è in disaccordo, e i progetti di successo sono quelli che sviluppano meccanismi politici per gestire costruttivamente i disaccordi.</para>
+
+</simplesect>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="volunteers">
+<title>Ottenere il Massimo dai Volontari</title>
+
+<para>Perché lavorano dei volontari in progetti di software libero?<footnote><para>Questa questione fu studiata in dettaglio, con interessanti risultati, in uno scritto di Karim Lakhani e Robert G. Wolf, dal titolo <citetitle>Perché gli Hackers Fanno Ciò che Fanno: Comprendere Lo Sforzo e le Motivazioni nei Progetti Liberi/Open Source</citetitle>. Vedere 
+<ulink url="http://freesoftware.mit.edu/papers/lakhaniwolf.pdf"
+/>.</para></footnote></para>
+
+<para>Quando viene chiesto loro, molti dichiarano che lo fanno perché vogliono produrre buon software, o vogliono essere coinvolti personalmente nel correggere i bugs che a loro interessano. Ma queste ragioni, di solito, non sono tutta la storia. Dopotutto, sapreste immaginarvi un volontario che sta in un progetto, anche se nessuno ha detto una parola di apprezzamento sul suo lavoro, o lo ha ascoltato nelle discussioni? Certo no. Chiaramente le persone spendono tempo sul software libero per ragioni che appunto vanno oltre il desiderio astratto di produrre buon codice. Il capire le vere motivazioni dei volontari vi aiuterà a mettere le cose in modo da attirarli e a mantenerli. Il desiderio di produrre buon codice può esserci fra queste motivazioni, insieme con la sfida e il valore educativo del lavorare su problemi difficili. Ma gli uomini hanno un innato desiderio di lavorare con altri uomini, e di guadagnasi rispetto attraverso attività di collaborazione. I gruppi impegnati in attività di collaborazione devono elaborare norme di comportamento in modo che quello stato sia acquisito e mantenuto attraverso azioni che giovano agli obiettivi del gruppo.</para>
+
+<para>Queste norme non nasceranno da se stesse. Per esempio, in qualche progetto&mdash;alcuni sviluppatori esperti sanno probabilmente farne il nome su due piedi &mdash;le persone a quanto pare ritengono che lo status si acquisti postando frequentemente e con ricchezza di parole. Essi non sono pervenuti a questa conclusione per caso. Ci sono arrivati perché sono gratificati dal dal fare intricate, lunghe trattazioni, indipendentemente dal fatto che ciò aiuti o meno il progetto. Poi ci sono alcune tecniche per creare un'atmosfera in cui le azioni per acquisire uno status sono azioni costruttive.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="delegation">
+<title>La Delega</title>
+
+<para>DLa delega non è solo un modo per suddividere il carico di lavoro; esso è anche uno strumento politico e sociale. Considerate tutte le conseguenze di quando chiedete a qualcuno di fare qualcosa. Il più ovvio effetto è che, se accetta, lui fa il lavoro e voi no. Ma un'altra conseguenza è che egli fa sapere che voi avete avuto fiducia in lui nell'affidargli il compito. Inoltre, se avete fatto la richiesta in un forum pubblico, allora egli sa che gli altri nel gruppo sono anche al corrente di quella fiducia. Egli può aver la sensazione di una certa pressione ad accettare, il che significa che dovete chiedere in un modo che gli permetta di declinare gentilmente se non vuole realmente il lavoro. Se il compito richiede coordinazione con gli altri nel progetto, voi in realtà state chiedendo che egli diventi più coinvolto, obblighi di forma che non avrebbero potuto esserci in altre circostanze, e che forse diventano una forma di autorità in qualche sotto dominio del progetto. Il coinvolgimento aggiuntivo potrebbe spaventarlo, o potrebbe portarlo anche ad impegnarsi in altri modi, per un aumentato senso di impegno complessivo.</para>
+
+<para>A causa di tutte queste conseguenze, spesso ha un senso chiedere a qualche altro di fare qualcosa anche quando sapete che potreste farlo più facilmente e velocemente voi stessi. Certo, c'è talvolta uno stringente argomento di efficienza economica relativamente a questa cosa comunque: forse il costo economico di farlo voi stessi sarebbe troppo alto ci potrebbe essere qualcosa di più importante che potreste fare in quel lasso di tempo. Ma anche quando non si applica l'argomento del costo economico, voi potete
+<emphasis>ancora</emphasis> voler chiedere a qualche altro di intraprendere il lavoro perché a lungo andare voi volete tirarlo più in profondità nel progetto, anche se ciò significhi spendere un tempo extra per aver cura di lui all'inizio. Si applica anche le tecnica  inversa: se voi occasionalmente vi offrite volontari per fare qualcosa che qualche altro non vuole o non ha il tempo di fare, vi guadagnerete la sua buona volontà e il rispetto. La delega e la sostituzione non esistono solo per ottenere che un compito individuale sia portato a termine; esse esistono anche per coinvolgere più strettamente la gente nel progetto.</para>
+
+<sect3 id="delegation-assignment">
+<title>Distinguere chiaramente fra richiesta e assegnazione</title>
+
+<para>A volte è giusto aspettarsi che una persona accetterà un particolare compito. Per esempio, se qualcuno scrive un bug nel codice, o invia codice che non si conforma alle linee guida del progetto in qualche modo evidente, allora è sufficiente richiamare l'attenzione sul problema e quindi comportarsi come se diate per scontato che la persona vi farà attenzione. Ma ci sono altre situazioni in cui non è in nessun modo chiaro che che voi avete il diritto di aspettarvi l'effetto. La persona potrebbe fare come chiedete, oppure no. Poiché non c'è nessuno a cui piace essere preso senza argomenti, c'è bisogno che stiate attenti a questi due tipi di situazioni e fare su misura le vostre richieste di conseguenza.</para>
+
+<para>Una cosa che quasi tutte le volte provoca una istantanea irritazione nella gente è il fatto che gli venga richiesto di fare qualcosa in un modo che presuppone che voi pensate che è chiaramente sua responsabilità farlo, quando essi la pensano diversamente. Per esempio l'assegnazione di un problema in arrivo è un terreno particolarmente fertile per questo tipo di irritazione. I partecipanti a un progetto di solito sanno chi è esperto in quei campi, così quando arriva un rapporto di bug, ci saranno spesso una o due persone  di cui ognuno sa che sono capaci di correggerli. In ogni caso se voi assegnate il problema a una di queste due persone senza il loro previo assenso, egli potrà pensare di essere stato messo in una condizione scomoda. Egli sente la pressione di una aspettativa, ma può anche pensare che è stato punito per la sua esperienza. Dopotutto il modo in cui uno acquisisce esperienza è correggendo i bugs, così qualche altro porrebbe prendersi questo compito! (Notate che il tracciatore di bugs che assegna automaticamente i problemi a persone particolari basandosi sull'informazione esistente nel rapporto di bugs è meno probabile che faccia male, perché ognuno sa che le assegnazioni furono fatte da un processo automatico, e non  è indice di aspettative umane.)</para>
+
+<para>Mentre sarebbe simpatico suddividere il carico quanto più possibile in modo regolare, ci sono certe occasioni in cui voi volete giusto incoraggiare le persone che possono correggere un bug nella maniera più veloce possibile. Dato che non potete affrontare una ristrutturazione delle comunicazioni per ogni tale assegnazione (“Vorresti dare un'occhiata questo bug?” “Si” “Okay, ti sto per assegnare questo problema” “Okay”), dovreste fare l'assegnazione nella forma di una richiesta, non comunicando nessuna pressione. Virtualmente ogni tracciatore di problemi permette che un commento sia associato con l'assegnazione di un problema. In quel commento potete dire qualcosa del genere:</para>
+
+<blockquote>
+   <para>Sto assegnando questo a te, perché tu hai la massima familiarità con questo codice. Sentiti libero di respingerlo se non hai il tempo di dargli un'occhiata, tuttavia. (E fammi sapere se non vorresti ricevere tali richieste in futuro.)</para>
+</blockquote>
+
+<para>Ciò fa distinzione fra   
+<emphasis>richiesta</emphasis> di assegnazione e
+ <emphasis>accettazione</emphasis> da parte di chi la riceve, di quella assegnazione. Il pubblico qui non è solo chi fa l'assegnazione, è ognuno: l'intero gruppo assiste a una pubblica conferma dell'esperienza di chi riceve l'assegnazione, ma il messaggio rende anche chiaro che chi riceve l'assegnazione è libero di accettare o declinare la responsabilità.</para>
+
+</sect3>
+
+<sect3 id="delegation-followup">
+<title>Seguite dopo aver delegato</title>
+
+<para>Quando chiedete a qualcuno di fare qualcosa, ricordatevi di averlo fatto e seguitelo, non importa in cosa. La maggior parte delle richieste vengono fatte in forums pubblici, e sono all'incirca della forma “Puoi prenderti cura di X?” Facci sapere in ogni caso; non c'è problema se non puoi, solo abbiamo bisogno di saperlo. Potete o non potete ricevere risposta. Se la ricevete e la risposta è negativa, il cerchio è chiuso non avete bisogno di altra strategia per trattare con X. Se c'è una risposta positiva controllate i progressi nel problema e commentate sul progresso che vedete o no (chiunque lavora meglio se sa che qualcuno sta apprezzando il suo lavoro). Se non c'è una risposta dopo pochi giorni, chiedete ancora, o postate dicendo che non avete ricevuto nessuna risposta e siete alla ricerca di qualcun altro che lo faccia. O fatelo proprio voi stessi, ma tuttavia assicuratevi di dire che non avete avuto risposta alla vostra richiesta.</para>
+
+<para>Lo scopo del rendere noto il ritardo nella risposta
+<emphasis>non</emphasis> è quello di mortificare la persona, e la vostra osservazione dovrebbe essere messa nella forma tale da non avere quell'effetto. Lo scopo è semplicemente quello di far sapere che voi tenete traccia di quello che avete chiesto, e che rendete note le reazioni che ricevete. Questo fa si che le persone più probabilmente dicano si la prossima volta, perché essi osserveranno (anche se solo inconsciamente) che voi state probabilmente rendendo noto ogni lavoro che fanno, dato che avete reso noto il molto meno visibile evento che qualcuno ha mancato di rispondere.</para>
+
+</sect3>
+
+<sect3 id="delegation-interest">
+<title>Rendete noto ciò a cui la gente è interessata</title>
+
+<para>Un'altra cosa che rende felice la gente è il fatto che vengano resi noti i loro interessi&mdash;in generale, più renderete noti e ricorderete gli aspetti della personalità di qualcuno, più egli si sentirà a suo agio, è più vorrà lavorare con un gruppo di cui voi fate parte.</para>
+
+<para>Per esempio, c'era una accentuata differenza nel progetto Subversion, fra quelli che volevano raggiungere una release definitiva 1.0 (cosa che alla fine fecero), e chi voleva principalmente aggiungervi nuove funzionalità su interessanti problemi ma che non aveva cura di quando la 1.0 sarebbe uscita. Nessuna di queste posizioni è migliore o peggiore dell'altra; essi sono solo due differenti tipi di sviluppatori, e tutti e due fanno una gran quantità di lavori nel progetto. Ma noi imparammo velocemente il fatto di  <emphasis>non</emphasis> dare per scontato che la loro eccitazione per quanto riguarda la guida della 1.0 fosse condivisa da tutti. I media elettronici possono essere molto ingannevoli: potete avere la sensazione di una finalità condivisa, quando, in effetti, essa è condivisa solo dalle persone con cui è vi successo di dover parlare, mentre altri hanno priorità completamente differenti.</para>
+
+<para>Più siete al corrente di che tipo di persone vuole uscire dal progetto, tanto più efficacemente potete far richiesta di loro. Perfino solo il dimostrare una comprensione di cosa vogliono, senza fare nessuna richiesta associata, è utile, per il fatto che conferma a una persona che non è solo una particella in una massa indifferenziata. </para>
+
+</sect3>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="praise-and-criticism">
+<title>Lode e Critica</title>
+
+<para>Lode e critica non sono opposti; sotto molti aspetti essi sono simili. Sono sia una forma primaria cdi attenzione, e sono tantissimo efficaci quando sono specifici piuttosto che generici. Sia dovrebbero essere espressi con obiettivi concreti in mente. Sia possono essere sminuiti per inflazione: lodate troppo o troppo spesso, e svaluterete la vostra lode; lo stesso vale per la critica, sebbene in pratica, la critica provochi una reazione e quindi è un po' più resistente alla svalutazione.</para>
+
+<para>Una importante caratteristica della cultura tecnica è che la critica dettagliata spassionata è spesso presa come una specie di lode (come discusso in <xref linkend="rudeness"/><phrase output="printed">
+in <xref linkend="communications"/></phrase>), a causa della conseguenza che il lavoro di chi la riceve è apprezzato per il tempo richiesto per analizzarlo. Comunque ambedue le condizioni&mdash;<emphasis>dettagliato</emphasis> e
+<emphasis>spassionato</emphasis>&mdash;devono per questa persona risultare veri. Per esempio, se qualcuno fa un cambiamento trasandato al codice è inutile (e in realtà dannoso) fargli seguire una semplice frase del tipo “Questo era  trasandato”. La trascuratezza è in fin dei conti una caratteristica della
+<emphasis>persona</emphasis>, non del suo lavoro, ed è importante mantenere le vostre reazioni focalizzate sul lavoro. E' molto più efficace descrivere tutte le cose sbagliate in quel cambiamento, tatticamente e senza malizia. Se questo è il terzo o il quarto cambio trasandato in una riga da parte delle stessa persona, è opportuno dirlo&mdash;di nuovo senza rabbia&mdash;alla fine della vostra critica, per rendere chiaro che il comportamento è stato notato.</para>
+
+<para>Se qualcuno non si migliora in risposta alla critica, la soluzione non è più critica o più forte critica. La soluzione per il gruppo è rimuovere quella persona dalla posizione di non competenza, in un modo tale da le sensazioni di risentimento quanto  più è possibile; vedere 
+<xref linkend="transitions"/><phrase output="printed"> più avanti in questo capitolo</phrase> per gli esempi.  Questa è una occorrenza rara comunque. La maggior parte della gente risponde molto bene alla critica che sia specifica, e che contenga una chiara (anche se non detta) aspettativa di miglioramento. </para>
+
+<para>La lode non dovrebbe offendere i sentimenti di nessuno, certo, ma questo non significa che dovrebbe essere usata per nulla meno con attenzione della critica. La lode è uno strumento: prima di usarla, chiedetevi perché volete usarla. Come regola, non è una buona idea lodare la gente per cose che usualmente fa, o per azioni che sono una parte normale e prevista della partecipazione al gruppo. Se voi doveste farlo, sarebbe difficile sapere quando smettere dovreste lodare
+<emphasis>ognuno</emphasis> perché fa le cose normali? Dopotutto, se lasciate fuori qualcuno, egli si chiederà perché. E' molto meglio esprimere lode e gratitudine con parsimonia, in risposta a inattesi e insoliti sforzi, con l'intento di incoraggiare più sforzi di questi. Quando un partecipante sembra essesi mosso permanentemente in uno stato di alta produttività, adattate la vostra soglia di lode per quella persona in modo consono. Lodi ripetute per comportamenti normali diventano senza senso comunque. Invece, quella persona dovrebbe avvertire che il suo alto livello di produttività è ora considerato come normale e naturale, e solo il lavoro che vada oltre quel livello dovrebbe essere notato particolarmente.</para>
+
+<para>Con questo non voglio dire che i contributi della persona non dovrebbero essere riconosciuti, certo. Ma ricordate che se il progetto è messo su bene, ogni cosa che quello persona fa è già visibile comunque, e così il gruppo  saprà (e la persona saprà che che il resto del gruppo sa) ogni cosa che fa. Ci sono anche modi per dare un riconoscimento al lavoro che uno fa per mezzo di altro al posto di lodi dirette. Potete menzionare di passaggio, mentre discutete un argomento correlato, che egli ha fatto un sacco di lavoro in un dato campo ed è l'esperto locale lì; potete pubblicamente consultarlo circa qualche questione sul codice; o magari, più efficacemente, potete fare un massiccio uso ulteriore del lavoro che ha fatto, in modo che veda che gli altri sono a proprio agio nel contare sul risultato del suo lavoro. Probabilmente non è necessario fare queste cose in modo calcolato. Qualcuno che regolarmente dà ampi contributi in un progetto lo saprà, e occuperà una funzione influente senza che faccia nulla di proposito. Di solito non c'è bisogno di fare passi espliciti per assicurare ciò, a meno che voi non abbiate la sensazione, per una qualsiasi ragione, che un collaboratore è sottostimato.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="territoriality">
+<title>Prevenire la Territorialità</title>
+
+<para>Fate attenzione a che i partecipanti non cerchino di esercitare una proprietà esclusiva su certe aree del progetto, e a coloro che sembrano voler fare tutto il lavoro in quelle aree, fino al punto di assumere la direzione del lavoro che altri incominciano. Tale comportamento può sembrare anche sano all'inizio. Dopotutto in superficie egli sembra una persona che si prede più responsabilità, e mostra una attività maggiore un una data area. Ma a lungo andare, ciò è distruttivo. Quando la gente ha la percezione di un segnale di “non sconfinamento” si astiene. Il risultato è una ridotta revisione in quell'area, e di una maggiore fragilità, perché lo sviluppatore solitario diventa un punto di fallimento che provoca il fallimento dell'intero progetto. Peggio, ciò infrange la collaborazione, lo spirito egualitario del progetto. La teoria dovrebbe essere sempre quella che ogni sviluppatore deve essere il benvenuto nell'essere di aiuto in ogni operazione in ogni momento. Certo, in pratica le cose vanno un po' diversamente: le persona hanno aree in cui sono più o meno influenti, e i non esperti rinviano agli esperti in certi domini del progetto. Ma la chiave è che ciò sia tutto volontario: l'autorità informale è data per scontata se basata sulla competenza e sul giudizio dimostrato, ma non dovrebbe mai essere  
+<emphasis>acquisita</emphasis> volontariamente. Anche se la persona che desidera l'autorità e effettivamente competente, è cruciale che eserciti quell'autorità informalmente, attraverso il consenso del gruppo, e che non sia la causa dell'escussione di altri dal lavoro in quel gruppo.</para>
+
+<para>Respingere o modificare il lavoro di qualcuno, è una roba completamente differente. Lì, il fattore decisivo è il contenuto del lavoro, non chi è sembrato agire come custode. Può avvenire che una stessa persona sembra fare la maggior parte del lavoro di revisione per una data area, ma fino a quando egli non cerca di impedire a qualcun altro di fare anche lo stesso lavoro, le cose stanno probabilmente a posto.</para>
+
+<para>Per combattere un incipiente territorialismo, o anche l'apparenza di esso, molto progetti hanno fatto il passo di bandire l'introduzione nei file sorgenti dei nomi degli autori e quelli dei manutentori designati. Io sono francamente d'accordo con questa pratica: noi la seguiamo nel progetto Subversion, ed è più o meno la politica ufficiale nella Apache Software Foundation. Il membro della ASF la presenta in questo modo:</para>
+
+<blockquote>
+   <para><emphasis>All'Apache Software Foundation noi scoraggiavamo l'uso dei tag author nel codice sorgente. C'erano molte ragioni per questo, oltre alle conseguenze legali. Lo sviluppo collettivo consiste nel lavorare sui progetti come gruppo e aver cura del progetto come gruppo. Dare riconoscimenti è giusto, e dovrebbe essere fatto, ma in un modo che non permetta false attribuzioni, anche per sottinteso. Non c'è una linea chiara su quando aggiungere o rimuovere un tag author. Aggiungete il vostro nome quando cambiate un commento? Quando inserite una correzione in linea. Rimuovete il tag di un altro autore quando cambiate un codice senza cambiare il risultato ed esso sembra al 95% differente? Che fate con persone che vanno in giro a toccare ogni file, a cambiare quanto basta per creare una quantità effettiva di tag, in modo che il loro nome appaia dappertutto? </emphasis></para>
+
+   <para><emphasis>Ci sono modo migliori di dare riconoscimenti, e la nostra preferenza è di usare questi. Da un punto di vista tecnico i tag author non sono necessari; se volete trovare chi ha scritto un pezzo particolare di codice, può essere consultato il sistema del controllo di versione per capirlo. I tags author tendono anche ad essere antiquati. Volete veramente essere contattati in privato su un pezzo di codice che avete scritto cinque anni fa ed essere felici di averlo dimenticato?</emphasis></para>
+</blockquote>
+
+<para>I files sorgente di codice di un progetto sono il cuore della sua identità. Essi dovrebbero rispecchiare il fatto che la comunità degli sviluppatori è nel complesso responsabile per essi, e non è divisa in piccoli feudi.</para>
+
+<para>La gente talvolta parla in favore dei tags author o mantainer nei files sorgente sulla base del fatto che essi danno un riconoscimento visibile a quelli che hanno fatto la maggior parte del lavoro lì. Ci sono due problemi su questo argomento. Primo, i tags inevitabilmente sollevano la imbarazzante questione di quanto lavoro uno debba fare per vedere il suo nome elencato lì pure. Secondo, essi aggiungono il problema del riconoscimento a quello della paternità: aver fatto il lavoro in passato, non implica la paternità dell'aerea in cui il lavoro fu fatto, ma è difficile se non impossibile una tale conclusione quando i nomi individuali sono elencati in cima ai files sorgenti. In ogni caso l'informazione dei riconoscimenti può essere ottenuta dai logs del controllo di versione e per mezzo di altri meccanismi messi al-di-fuori-della-banda, come gli archivi delle mailing lists, in modo tale che non si perda nessuna informazione bandendola dai files sorgente stessi.</para>
+
+<para>Se il vostro progetto decide di bandire i nomi individuali dai file sorgenti, cercate di non debordare. Per esempio, molti progetti hanno un'area  <filename>contrib/</filename> in cui sono tenuti piccoli strumenti e scripts di aiuto, spesso scritti da gente che non è per altra via associata al progetto. E' bene che quei files contengano i i nomi degli autori, perché essi non sono effettivamente in manutenzione al progetto nel suo intero. D'altra parte, se uno strumento dato come contributo incomincia ad essere modificato da altre persone nel progetto, alla fine voi potete volerlo spostare in un una locazione meno isolata, e facendo il caso che l'autore originale approvi, rimuovere il nome dell'autore, di modo che il codice appaia come ogni altra risorsa in manutenzione da parte  dalla comunità. Se l'autore è permaloso su questo, sono accettabili soluzioni di compromesso, per esempio:</para>
+
+<blockquote>
+<programlisting>
+# indexclean.py: Rimuoveere i vecchi dati da un indice Scanley.
+#
+# Autore originale: K. Maru &lt;kobayashi@yetanotheremailservice.com&gt;
+# Ora mantenuto da: The Scanley Project &lt;http://www.scanley.org/&gt;
+#                    and K. Maru.
+# 
+# ...
+</programlisting>
+</blockquote>
+
+<para>Ma è meglio evitare tali compromessi, se possibile, e molti autori si stanno persuadendo, perché sono felici del fatto che si sta facendo del loro contributo una parte più integrale del progetto.</para>
+
+<para>La cosa importante è ricordare che c'è una continuità fra il cuore e la periferia di ogni progetto. I principali files di codice sorgente del software sono chiaramente parte del cuore, e dovrebbero essere essere considerati in manutenzione da parte della comunità. D'altra parte, strumenti di accompagnamento o pezzi di documentazione possono essere il lavoro di singoli individui, che li hanno in manutenzione essenzialmente da soli, anche se i lavori possono essere associati, o anche distribuiti, dal progetto. Non c'è bisogno di applicare una regola di taglia unica a ogni file, finché vale il principio che non è permesso che le risorse in manutenzione alla comunità diventino territori personali.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="automation">
+<title>Il Rapporto di Automazione</title>
+
+<para>Cercare di non consentire agli uomini ciò che invece potrebbero fare le macchine. Come regola pratica, automatizzare una operazione comune vale dieci volte almeno lo sforzo che uno sviluppatore dovrebbe impiegare a fare manualmente quella operazione una volta. Per operazioni molto frequenti o molto complesse, il rapporto potrebbe arrivare facilmente a venti o anche di più.</para>
+
+<para>Il pensare a voi stessi come “gestori di progetto”, piuttosto che solo come ad un altro sviluppatore, potrebbe essere un utile atteggiamento qui. A volte gli sviluppatori individuali sono tropo infagottati in lavori di basso livello per vedere il quadro grande e rendersi conto che ognuno sta sprecando un sacco di energie ad eseguire manualmente operazioni automatizzabili. Anche quelli che se ne rendono conto possono non avere il tempo di risolvere il problema: perché ogni esecuzione individuale dell'operazione non è percepita come un enorme carico, nessuno si secca abbastanza di fare qualcosa che la riguarda. Ciò che rende convincente l'automazione è che quel piccolo carico è moltiplicato per il numero di volte che ogni sviluppatore incorre in essa, e quindi quel numero è moltiplicato per il numero degli sviluppatori.</para>
+
+<para>Qui sto usando il termine “automazione” in senso largo, per indicare non solo le ripetute azioni nelle quali una o due variabili cambiano ogni volta, ma ogni tipo di infrastruttura tecnica che assiste gli uomini. Il minimo standard di automazione richiesta per far girare un progetto in questi giorni è descritto in <xref linkend="technical-infrastructure"/>, ma ogni progetto può avere i suoi particolari problemi anche. Per esempio un gruppo che sta lavorando sulla documentazione, potrebbe volere un sito che mostri le più aggiornate versioni dei documenti in ogni momento. Siccome la documentazione è scritta in un linguaggio di markup come l'XML, ci può essere un passo della compilazione, spesso piuttosto intricato, relativo alla creazione di documenti che si possano esporre e che si possano scaricare. Adattare un sito in modo che tale compilazione avvenga automaticamente ad ogni invio può essere complicato e dispendioso come tempo impiegato ma ne vale la pena, anche se vi costa un giorno o più ad allestirlo. Il beneficio complessivo di avere pagine aggiornate in ogni momento è enorme, anche se il costo di <emphasis>non</emphasis> non averlo potrebbe sembrare solo un piccolo incomodo in ogni singolo momento, ad ogni singolo sviluppatore.</para>
+
+<para>Fare tali passi non solo elimina tempo sprecato, ma l'oppressione e la frustrazione che ne deriva quando gli uomini fanno dei passi sbagliati (come li faranno inevitabilmente) nel cercare di portare a termine complicate procedure manualmente. Le operazioni dai molteplici passi, deterministiche sono ciò per cui i computers sono stati inventati; riservate agli uomini cose più interessanti.</para>
+
+<sect3 id="automated-testing">
+<title>Testing automatizzato</title>
+
+<para>L'esecuzione di tests automatizzati sono utili per ogni progetto di software, perché il testing automatizzato (specialmente il testing di regressione) permette agli sviluppatori di sentirsi a proprio agio quando cambiano codice in aree  con cui non hanno familiarizzato, e così incoraggiano lo sviluppo d'esplorazione. Poiché la ricerca dei guasti è difficile da fare a mano uno essenzialmente deve azzeccare dove potrebbe aver sbagliato qualcosa, e tentare vari esperimenti per provare il contrario&mdash;l'avere modi automatizzati per individuare tali guasti risparmia al progetto <emphasis>un sacco</emphasis> di tempo. Ciò anche fa si che la gente sia più rilassata nel migliorare la leggibilità di larghe falciate di codice , e quindi contribuisce alla capacità di tenere in manutenzione il software nel lungo periodo.</para>
+
+  <sidebar id="regression-testing">
+  <title>Testing di Regressione</title>
+
+  <para><firstterm>Testing di regressione</firstterm> significa fare delle prove per il riapparire di bug già corretti. Il proposito del testing di regressione è quello di ridurre le possibilità che i cambiamenti al codice rovinino il software in modo inatteso. Nella misura in cui il software diventa più grande e complesso, le possibilità di questi effetti collaterali aumentano regolarmente. Una buona progettazione può ridurre la velocità con la quale le possibilità crescono, ma ciò non può eliminare il problema completamente. </para>
+
+  <para>Come risultato molti progetti hanno <firstterm>una suite di test</firstterm>, un programma a parte che interroga il software del progetto nei modi che si sono conosciuti in passato per provocare determinati bugs.  Se la suite di test ha successo nel far si che uno di questi bugs si verifichi, questo è noto come <firstterm>regression</firstterm>,
+  col significato che i cambiamenti di qualcuno ha tolto la correzione a un bug precedentemente corretto.</para>
+
+  <para>Vedere anche
+  <ulink url="http://en.wikipedia.org/wiki/Regression_testing"/>.</para>
+
+  </sidebar>
+
+<para>Il testing di regressione non è una panacea. Tanto per dirne una, esso funziona molto bene con programmi con una interfaccia con comandi eseguiti in serie. Il software che è fatto funzionare con una interfaccia utente grafica è molto più difficile da far funzionare da programma. Un altro problema è che la struttura della swite per il test di regressione può spesso essere piuttosto complessa, con una curva di apprendimento e un carico di manutenzione che le sono peculiari. Ridurre questa complessità è una della cose più utili che possiate fare, anche se può richiedere un considerevole ammontare di tempo. La cosa più facile è aggiungere nuovi tests alla suite, più gli sviluppatori faranno così, più pochi bugs sopravviveranno nella release. Ogni sforzo fatto per rendere i tests più facili sarà ripagato molte volte durante vita del progetto.</para>
+
+<para>Molti progetti hanno una regola <firstterm>“Non sfasciate l'allestimento!”</firstterm> ,che significa: non fare un invio che renda difficile la compilazione o l'esecuzione del software. Essere la persona che sfascia la costruzione è di solito causa di leggero imbarazzo e di burla. I progetti con una swite per i tests di regressione spesso hanno una regola corollario: non inviare cambiamenti che fanno fallire i tests. E' molto facile osservare questi fallimenti se ci sono esecuzioni automatiche notturne dell'intera suite di tests, con i risultati inviati alle mailing lists dello sviluppo, o a una mailing list dedicata di risultai del testing; questo è un altro esempio di automazione utile.</para>
+
+<para>La maggior parte degli sviluppatori volontari sono disposti a spendere un tempo extra per scrivere tests di regressione, quando il sistema di test è comprensibile ed è facile lavorare con esso. Accompagnare i cambiamenti con tests è intesa come cosa responsabile da fare, ed è una facile opportunità di collaborazione: spesso due sviluppatori si divideranno il lavoro per la correzione di un bug, con uno che scrive la correzione stessa e uno che scrive il test. Il secondo sviluppatore può spesso beccarsi il maggior lavoro, e poiché scrivere un test è già meno soddisfacente che correggere realmente il bug, è imperativo che la suite di test non renda l'esperienza più stressante di quanto debba essere.</para>
+
+<para>Alcuni progetti vanno anche oltre, richiedendo che un test accompagni <emphasis>ogni</emphasis> correzione di bug o ogni nuova funzionalità. Se questa sia una buona idea o no dipende da molti fattori: la natura del software, la composizione del team di sviluppo, e la difficoltà di scrivere nuovi tests. Il progetto CVS (<ulink url="http://www.cvshome.org/"/>)
+ha a lungo avuto questa regola. E' una buona politica in teoria, poiché CVS è un sistema di controllo di versione e quindi molto avverso al rischio di rovinare o maltrattare i dati dell'utilizzatore. Il problema in pratica è che la suite di test di regressione di CVS è un enorme script di shell (in modo divertente chiamato <filename>sanity.sh</filename>),
+difficile da leggere e difficile da modificare o estendere. La difficoltà di aggiungere nuovi tests, combinata col requisito che le patches siano accompagnate da nuovi tests, significa che CVS in effetti scoraggia le patches. Quando ebbi modo di lavorare a CVS, talvolta vidi la gente iniziare e anche completare le loro patches al proprio codice di CVS, ma arrendersi quando quando si diceva loro del requisito dell'aggiunta di un nuovo test a <filename>sanity.sh</filename>.</para>
+
+<para>E' normale impiegare più tempo a scrivere un nuovo test di regressione che a correggere il bug originale. Ma CVS portò questo fenomeno all'estremo: uno poteva impiegare ore nel cercare di scrivere il suo test in modo appropriato, e ancora trovarsi in errore, perché ci sono appunto troppo imprevedibili complessità relative al cambiamento di uno script della shell di Bourne di 35.000 linee. Anche gli sviluppatori anziani di CVS si lamentavano quando dovevano aggiungere un nuovo test. </para>
+
+<para>Questa situazione era dovuta a un nostro fallimento su tutta la linea nel considerare il rapporto di automazione. Sebbene il passare a una struttura di test reale&mdash;sia costruita personalmente sia dal di fuori, avrebbe richiesto uno sforzo maggiore.<footnote><para>Notare che lì non ci sarebbe bisogno di convertire tutti i tests esistenti alla nuova struttura; le due cose potevano esistere felicemente una a fianco a l'altra, con i vecchi tests convertiti solo se c'era bisogno che fossero cambiati. </para></footnote> Ma il non fare così è costato al progetto molto più, nel corso degli anni. Quante correzioni di bugs non ci sono in CVS oggi, a causa dell'ostacolo di una cattiva suite di test? Non non ne possiamo sapere l'esatto numero, ma è sicuramente molte volte più grande del numero di correzioni o di nuove funzionalità a cui gli sviluppatori potrebbero dover rinunciare per sviluppare un nuovo sistema di test (o integrare un sistema esterno). Quella operazione richiederebbe solo un finito ammontare di tempo, mentre la penalizzazione dell'uso della suite di test corrente continuerà per sempre se non si fa niente.</para>
+
+<para>Il punto non è quello che avere avere requisiti stringenti per scrivere tests è male, né che scrivere il vostro sistema di test come lo script della shell di Bourne è necessariamente male. Il punto è semplicemente che quando il sistema di test diventa una significativo impedimento per lo sviluppo, qualcosa deve essere fatto. Lo stesso vale per ogni processo di routine che diventa una strettoia o una barriera.</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="users-to-volunteers">
+<title>Trattate Ogni Utilizzatore Come un Potenziale Volontario</title>
+
+<para>Ogni interazione con un utilizzatore è un'opportunità per procurarsi un nuovo volontario. Quando un utilizzatore si concede il tempo di scrivere ad una delle mailing lists del progetto o di mettere un archivio un rapporto di bug, ha già indicato se stesso come possessore di un maggiore potenziale per un coinvolgimento rispetto alla maggior parte degli utilizzatori (dai quali il progetto non avrà mai notizie). Seguite questo potenziale: se egli ha descritto un bug, ringraziatelo per il report e chiedetegli de vuole correggerlo. Se egli ha scritto per dire che che una domanda importante manca nelle FAQ, o che la documentazione del programma è insufficiente in qualche modo, allora ammettete apertamente l'esistenza del problema (ammesso che esso esista realmente), e chiedetegli se è interessato a scrivere il materiale mancante. Naturalmente molte volte l'utilizzatore farà obiezione. Ma non costa molto chiedere, e ogni volta che lo fate, ciò ricorda agli altri ascoltatori in quel forum che essere coinvolti nel progetto è qualcosa che ognuno può fare.</para>
+
+<para>Non limitate i vostri obiettivi ad acquisire nuovi sviluppatori e gente che scriva la documentazione. Per esempio, anche l'addestramento della gente a scrivere buoni rapporti di bugs dà buoni risultati a lungo andare, se non impiegate
+<emphasis>troppo</emphasis> tempo per persona, e se essi procedono ad inviare più report di bugs in futuro&mdash;cosa a cui sono molto propensi se ottengono una costruttiva reazione al loro primo rapporto. Una costruttiva reazione non è necessario che sia una correzione del bug, sebbene questo sia sempre l'ideale; essa può essere anche un sollecitazione per maggiori informazioni, o solamente la conferma che quel comportamento
+<emphasis>è</emphasis> un bug.  La gente vuole essere ascoltata. Secondariamente essi vogliono che il loro bug sia corretto. Voi potrete non essere in grado di dare loro la seconda cosa in modo opportuno, ma (o il progetto intero) potete dare loro la prima cosa.</para>
+
+<para>Un corollario di questo è che gli sviluppatori non dovrebbero esprimere collera a persone che archiviano ben comprensibili ma vaghi report di bug. Questo è uno dei miei fastidi ricorrenti; vedo farlo su varie mailing lists open source, è il male che fa è palpabile. Alcuni sventurati principianti scriveranno un inuutile report:</para>
+
+<blockquote>
+   <para>non mi riesce di prendere una Scanley da far girare. Ogni volta che parte, mi dà errore. Sta qualcun altro riscontrando lo stesso problema?</para>
+</blockquote>
+
+<para>che hanno visto questo tipo di report centinaia di volte, e che non si sono trattenuti dal pensare che il principiante non li hanno visti centinaia di volte risponderanno all'incirca così:</para>
+
+<blockquote>
+   <para>Cosa avete supposto di fare con così poca informazione? E' frustrante. Dateci almeno qualche dettaglio, come la versione di Scanley, il vostro sistema operativo e l'errore.</para>
+</blockquote>
+
+<para>Lo sviluppatore ha mancato di vedere le cose dal punto di vista dell'utilizzatore, ed ha mancato anche di considerare l'effetto che una tale reazione potrebbe avere sul tutte le <emphasis>altre</emphasis> altre persone che stanno osservando lo scambio. Naturalmente un utilizzatore che non ha una esperienza di report di bugs, non saprà come scrivere un report di bug. Quale è il modo giusto di trattare questa persona? Educatelo! E fatelo in modo che egli ritorni per maggiori ragguagli:</para>
+
+<blockquote>
+   <para>Mi dispiace che state avendo problemi. Abbiamo bisogno di maggiori informazioni per renderci conto di ciò che sta succedendo qui. Prego diteci la versione di Scanley, il vostro sistema operativo, e il testo esatto dell'errore. La miglior cosa che possiate fare è quella di inviare uno scritto che mostri gli esatti comandi che avete dato, e l'uscita che hanno prodotto. Vedere http://www.scanley.org/how_to_report_a_bug.html per maggiori ragguagli.</para> 
+</blockquote>
+
+<para>Questo modo di rispondere è molto più efficace per ottenere le necessarie informazione dagli utilizzatori, perché sono scritte dal punto di vista dell'utilizzatore. Primo, esso esprime simpatia:
+<emphasis>Voi avevate un problema; non sentivamo il vostro disappunto.</emphasis>.  (Ciò non è necessario in ogni risposta a ogni rapporto di bug; dipende dalla serietà del problema e da quanto è sembrato sconvolto  l'utilizzatore. Secondo, invece di disprezzarlo perché no sa come riportare un bug, gli dice come, e abbastanza in dettaglio per essere veramente utile per esempio molti utilizzatori non si rendono conto che “mostraci l'errore” significa “mostraci l'esatto testo dell'errore, senza omissioni o riassunti.”  La prima volta che lavorate con tale utilizzatore, bisogna che siate precisi su questo. Alla fine ciò offre un puntatore a molte più dettagliate e complete istruzioni per l'invio dei rapporti sui bugs. Se avete stabilito con successo un contatto con l'utilizzatore, egli si prenderà spesso il tempo di leggere quel documento e fare ciò che dice. Ciò vuol dire che voi, certamente, dovete aver preparato quel documento in anticipo. Esso dovrebbe dare chiare istruzioni su che tipo di informazioni vuole vedere in ogni rapporto il vostro team di sviluppo. Idealmente, esso dovrebbe evolversi nel tempo in risposta a ai tipi pericolari di omissioni e di cattivi report che l'utilizzatore tende a a fare per il vostro progetto.</para>
+
+<para>Le istruzioni sui report di Subversion sono un esempio standard alla lettera della forma (vedere <xref
+linkend="bug-reporting"/>).  Notate come essi rispondono ad un invito a fornire una patch per correggere il bug. Ciò non avviene perché un tale invito porterà a un rapporto patch/report più grande la maggior parte degli utilizzatori sono in grado di correggere bugs di cui già sanno che una patch sarebbe la benvenuta, e non hanno bisogno che gli venga detto. Il reale proposito di un invito è quello di porre l'accento per tutti gli utilizzatori, specialmente quelli nuovi nel progetto, o nuovi al software libero in generale, sul fatto che che il progetto va avanti con contributi di volontari. In un certo senso, gli attuali sviluppatori del progetto non sono più responsabili della correzione dei bugs di quanto non lo siano quelli che li hanno segnalati nei report. Questo è un punto importante con il quale molti nuovi utilizzatori non avranno familiarità. Una volta che se ne rendono conto essi probabilmente contribuiranno a fa si che la correzione al bug avvenga, se non contribuendo col codice allora fornendo un più completa ricetta per la riproduzione, o offrendosi per tests di bugs che le altre persone postano. L'obiettivo è far si che ogni utilizzatore si renda conto che non c'è una <emphasis>innata</emphasis> differenza fra se stessi e la gente che lavora al progetto è una questione di quanto tempo uno ci mette dentro, non di chi uno sia.</para>
+
+<para>L'ammonizione a non rispondere in modo irritato non vale per gli utilizzatori sgarbati. Occasionalmente gli utilizzatori postano reports o rimostranze che, indipendentemente dal loro contenuto di informazione, mostrano un disprezzo con derisione nei confronti di alcune manchevolezze del progetto. Spesso tali persone alternativamente insultano e fanno complimenti, come la persona che postò alla mailing list di Subversion: </para>
+
+<blockquote>
+<para>Com'è che sono quasi 6 giorni che non ci sono ancora binari postati per la piattaforma di windows?!? E' la stessa storia ogni volta, ed è molto frustrante. Perché queste cose non sono automatizzate in modo che possano essere disponibili immediatamente?!?. Quando voi postate un allestimento “RC”, io penso che l'idea sia quella ch volete che gli utilizzatori testino l'allestimento, ma tuttavia non provvedete in nessun modo a fare così. Perché anche avete un lungo periodo testing se non fornite i mezzi per testare??</para>
+</blockquote>
+
+<para>La risposta iniziale a questa infiammatorio post fu sorprendentemente contenuta: la gente fece notare che il progetto aveva un politica esplicita di non fornire binari, e disse, con vari gradi di irritazione, che sarebbe stato compito dei volontari di produrli essi stessi se erano tanto importanti per loro. Ci credete o no, il suo post successivo partiva con queste righe:</para>
+
+<blockquote>
+<para>Prima di tutto, lasciatemi dire che Subversion è fantastico, e io apprezzo veramente l'impegno di chiunque vi sia coinvolto.  [...]</para>
+</blockquote>
+
+<para>...e quindi ritornò a redarguire il progetto
+<emphasis>di nuovo</emphasis> perché non forniva i binari, mentre non ancora si offriva volontario per fare qualcosa a proposito. Dopodiché, circa 50 persone gli saltarono addosso, e non so dire  se veramente ci feci caso. La politica di “zero tolleranza” verso la maleducazione sostenuta in
+<xref linkend="prevent-rudeness"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase> si applica a persone con cui il progetto ha una prolungata interazione (o vorrebbe averla). Ma quando qualcuno rende chiaro dall'inizio che
+sta diventando una fontana di bile, non vale la pena di farlo sentire il benvenuto.</para>
+
+<para>Tali situazioni sono fortunatamente piuttosto rare, e sono notevolmente rare in progetti e che fanno uno sforzo per ingaggiare utilizzatori con cortesia e costruttivamente sin dalla loro prima interazione.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="share-management">
+<title>Suddividete i Compiti di Management e i Compiti Tecnici</title>
+
+<para>Suddividete i Compiti di Management e i Compiti Tecnici. Suddividere il carico del management così come il carico  tecnico del mandare avanti il progetto. Nella misura in cui il progetto diventa più complesso, sempre più il lavoro è quello di amministrare la gente e il flusso delle informazioni. Non c'è motivo per non suddividere quel carico, e la suddivisione non richiede una gerarchia dall'alto in basso &mdash;ciò che avviene in pratica tende ad essere più tipico della topologia di una rete peer to peer che della struttura di un comando stile militare. </para>
+
+<para>A volte i ruoli del management sono formalizzati, e a volte si verificano spontaneamente. Nel progetto di Subversion, noi avevamo un manager delle patch, un manager delle traduzioni, un manager della documentazione, un manager dei problemi (sebbene non ufficiale) e un manager di release. Per dare avvio ad alcuni di questi ruoli non prendemmo una decisione consapevole, per altri avvenne che i ruoli avessero inizio da sé; nella misura in cui il progetto cresce, mi aspetto che si aggiungeranno altri ruoli. Qui di seguito esamineremo alcuni questi ruoli, e una coppia di altri, in dettaglio (eccetto il manager di release che è stato trattato già in
+<xref linkend="release-manager"/> e
+<xref linkend="release-owner"/><phrase output="printed"> precedentemente in questo capitolo</phrase>).</para>
+
+<para>Quando leggete la descrizione del ruolo, notate che nessuno di essi richiede il controllo esclusivo sul dominio in questione. Il manager dei problemi non impedisce ad altre persone di fare cambiamenti nel database dei problemi, il manager delle FAQ non insiste sul fatto di essere la sola persona che redige le FAQ, e così via. Questi ruoli consistono tutti nella responsabilità senza il monopolio. Una parte importante del lavoro del manager di ciascun dominio è quella di prender nota quando altre persone stanno lavorando in quel dominio, e trascinare loro a fare le cose nel modo in cui le fa il manager, in modo che gli sforzi multipli si rafforzino piuttosto che andare in conflitto. I managers di dominio dovrebbero anche documentare i processi con i quali essi fanno il loro lavoro, così che quando uno lascia qualcun altro possa colmare la mancanza subito.</para>
+
+<para>A volte c'è un conflitto: due o più persone vogliono lo stesso ruolo. Non c'è una via giusta per gestire questa cosa. Potreste suggerire ad ogni volontario di postare una proposta (una “applicazione”) e ottenere che ogni persona che fa l'invio voti su chi è il migliore. Ma ciò è scomodo e potenzialmente pericoloso. Io trovo che una tecnica migliore sia quella di chiedere ai vari candidati di sistemare la cosa fra loro stessi. Essi, di solito, saranno più soddisfatti del risultato, che se la decisione fosse stata imposta dal di fuori.</para>
+
+<sect2 id="patch-manager">
+<title>Il Manager delle Patch</title>
+
+<para>In un progetto si software libero che riceve un sacco di patch, tener traccia di quali patch sono arrivate, e cosa si è deciso su esse può essere un incubo, specialmente se lo si fa un modo decentralizzato. La maggior parte delle patch arrivano come posts alla mailing list di sviluppo (sebbene alcune possano apparire nel tracciatore di bug, o su siti esterni), e quindi ci sono un numero di differenti itinerari che la patch può percorrere dopo l'arrivo.</para>
+
+<para>A volte qualcuno revisiona le patch, trova i problemi, e li rimanda all'autore originario per la ripulita. Ciò, di solito, porta a un processo iterativo tutto visibile sulla mailing list in cui l'autore originario posta le versioni revisionate della patch fino a quando il revisore non ha nient'altro da criticare. Non è sempre facile dire quando il processo è terminato: se il revisore fa l'invio della patch, allora chiaramente il ciclo è completo. Ma se non lo fa, potrebbe essere semplicemente perché non ha tempo, o perché non ha l'accesso all'invio e non potrebbe unirsi alla cordata degli altri sviluppatori nel farlo.</para>
+
+<para>Un'altra frequente risposta a una patch è una discussione a ruota libera, non necessariamente sulla patch stessa, ma sul fatto se il concetto che sta dietro la patch è buono. Per esempio, la patch può correggere un bug, ma il progetto preferisce correggere quel bug in un altro modo, come parte della risoluzione di una classe più generale di problemi. Spesso questa non è  nota in anticipo, ed è la patch che ne stimola la scoperta.</para>
+
+<para>Occasionalmente, una patch postata è accolta con assoluto silenzio. Ciò, di solito, è dovuto al fatto che <emphasis>al momento</emphasis> nessuno sviluppatore ha il tempo di revisionare la patch. Poiché non c'è un limite particolare per quanto riguarda il tempo che ogni persona aspetta che qualcun altro raccolga la palla, e nel frattempo altre priorità stanno arrivando, è molto facile che una patch sfugga tra le crepe senza che una singola persona abbia intenzione che avvenga. Il progetto potrebbe perdere una utile patch in questo modo, e ci sono anche altri dannosi effetti collaterali anche: ciò è scoraggiante per l'autore, che ha impiegato lavoro per la patch, e fa apparire il progetto nell'insieme come se abbia perso i contatti, specialmente agli altri che stanno prendendo in considerazione la scrittura di patch.</para>
+
+<para>Il lavoro del manager di patch è quello di assicurare che le patch non “scivolino fra le crepe”. Ciò si ottiene seguendo ogni patch attraverso una sorta di stato stabile. Il manager di patch esamina ogni discussione della mailing list che consegua ad un post di patch. Se essa finisce con un invio, egli non fa niente. Se essa va in un' iterazione revisione/correzione, che termina con una versione finale della patch senza che ci sia l'invio, egli archivia un problema che punti alla versione finale, e alla mailing lista che tratta di esso, di modo che ci sia una registrazione permanente che gli sviluppatori possono seguire in seguito. Se la patch si indirizza ad un problema esistente, egli annota il problema con ricche informazioni, invece di aprire un nuovo problema.</para>
+
+<para>Quando una patch non riscuote per niente una reazione, il manager di patch aspetta pochi giorni, quindi dà seguito alla cosa chiedendo se qualcuno sta per revisionarla. Questo, di solito, riceve una reazione: uno sviluppatore può spiegare che non pensa che la patch debba essere applicata, e ne dà le ragioni, o può revisionarla, nel qual caso viene fatto uno dei precedenti percorsi. Se non c'è ancora risposta, il manager di patch può o non può archiviare un problema per la patch, a sua discrezione, ma almeno chi originariamente ha fatto l'invio ha ricevuto <emphasis>qualche</emphasis>
+reaction.</para>
+
+<para>L'avere un manager di patch ha salvato il team di sviluppo di Subversion un sacco di volte, ed fatto risparmiare energie mentali. Senza una persona designata che si prenda la responsabilità, ogni sviluppatore avrebbe da preoccuparsi continuamente “Se non ho il tempo di rispondere a questa patch subito, posso contare sul fatto che qualche altro lo faccia? Dovrei cercare di dargli un'occhiata. Ma se altre persone stanno anche tenendola d'occhio, per le stesse ragioni, noi avremmo inutilmente duplicato lo sforzo.” Il manager di patch rimuove la seconda congettura dalla situazione. Ciascuno sviluppatore può prendere la decisione giusta per lui dal primo momento che vede la patch. Se vuole dargli seguito con una revisione, può farlo il manager di patch adatterà il suo comportamento di conseguenza. Se vuole ignorare la patch completamente, andrà anche bene; il manager di patch dovrà assicurarsi che essa non sia dimenticata. </para>
+
+<para>Siccome il sistema funziona solo se la gente può far conto sul fatto che il manager di patch sia là senza errore, il ruolo dovrebbe essere detenuto formalmente. In Subversion noi facemmo richiesta per esso mediate annuncio pubblicitario sulla mailing list dello sviluppo e degli utilizzatori, raccogliemmo molti volontari, e prendemmo il primo che ci rispose. Quando quella persona dovette ritirarsi (vedere
+<xref linkend="transitions"/><phrase output="printed"> più avanti in questo capitolo</phrase>), facemmo di nuovo la stessa cosa. Non cercammo mai di avere più persone ad detenere in comune il ruolo a causa delle informazioni addizionali che sarebbero state richiesta fra loro, ma forse a un volume molto alto di invii di patch, potrebbe aver senso un manager di patch a più teste.</para>
+
+</sect2>
+
+<sect2 id="translation-manager">
+<title>Il Manager delle Traduzioni</title>
+
+<para>Nei progetti di software “traduzione” può riferirsi a due cose molto differenti. Può significare tradurre la documentazione del software in altre lingue, o può significare tradurre il software stesso cioè ottenere le segnalazioni dei errore o dei messaggi di aiuto in altre lingue preferite dall'utente. Ambedue sono complesse operazioni, ma una volta che la giusta infrastruttura è allestita, esse sono largamente separabili dall'altro sviluppo. Poiché le operazioni sono simili in qualche modo, ha senso (a seconda del vostro progetto), avere un solo manager delle traduzioni che le gestisca ambedue, o può essere meglio avere due differenti manager.</para>
+
+<para>Nel progetto di Subversion noi avevamo un manager di traduzione che gestiva ambedue le cose. Egli non deve scrivere le traduzioni egli stesso, certo, egli può dare una mano a uno o due, ma mentre questo scrive, egli dovrebbe aver bisogno di parlare dieci lingue (venti contando i dialetti) per lavorare a tutte le traduzioni. Invece, egli gestisce dei team di traduttori volontari: egli li aiuta a coordinarsi fra loro, e coordina i team fra loro e il resto del progetto. </para>
+
+<para>Una parte delle ragioni per cui il manager delle traduzioni è necessario è che i traduttori sono una entità demografica differente da quella degli sviluppatori. Essi a volte hanno qualche o nessuna esperienza nel lavorare con deposito del controllo di versione, o certamente proprio nel lavorare come parte del team di volontari distribuito. Ma sotto altri aspetti essi sono spesso la miglior specie di volontari: persone proprio con una specifica conoscenza del dominio che videro una necessità e scelsero di essere coinvolti. Essi di solito sono desiderosi di imparare, ed entusiasti di mettersi al lavoro. Tutto ciò di cui hanno bisogno è uno che gli dica come. Il manager delle traduzioni assicura che la traduzione avvenga in modo da non interferire senza necessità col regolare sviluppo. Egli anche funziona come come sorta di rappresentanza dei traduttori come corpo unificato, ogni volta che gli sviluppatori devono essere informati di cambiamenti tecnici richiesti per supportare lo sforzo di traduzione.</para>
+
+<para>Così, le abilità più importanti della posizione sono diplomatiche, non tecniche. Per esempio, in Subversion noi avevamo la politica che tutte le traduzioni dovevano avere almeno due persone a lavorarvi, perché altrimenti non c'è modo di revisionare il testo. Quando un nuovo volontario si offre per  tradurre Subversion in, diciamo, Malgascio, il manager delle traduzioni deve agganciargli qualcuno che postò sei mesi prima esprimendo interesse a tradurre in Malgascio, o anche politicamente chiedere al volontario di andare a trovare <emphasis>un altro</emphasis> traduttore in Malgascio per lavorare come suo partner. Una volta che abbastanza persone sono disponibili, il manager li sistema per un proprio tipo di accesso all'invio, li informa delle convenzioni del progetto (come per esempio scrivere i messaggi di log), e quindi tiene un occhio ad assicurarsi che essi aderiscano a queste convenzioni. </para>
+
+<para>Le conversazioni fra il manager delle traduzioni 
+e gli sviluppatori, o fra il manager delle traduzioni e i team delle traduzioni, sono di solito tenute nel linguaggio originale del progetto cioè la lingua da cui tutte le traduzioni sono fatte. Per molti progetti di software libero, questa è l'inglese, ma non importa quale sia fino a quando il progetto è d'accordo su ciò. (L'inglese comunque è probabilmente il meglio per progetti che vogliono attrarre una larga comunità internazionale di sviluppatori).</para>
+
+<para>Le conversazioni <emphasis>all'interno</emphasis> di un particolare team di traduzione avvengono nella loro lingua comune, comunque, è uno dei compiti del manager delle traduzioni quello di mettere su una mailing list dedicata per ogni team. In questo modo i traduttori possono discutere il loro lavoro liberamente, senza distrarre la  gente su altre liste principali, la maggior parte delle quali non sarebbero in grado di capire il linguaggio di traduzione, comunque.</para>
+
+  <sidebar id="i7n">
+  <title>Internazionalizzazione Verso Localizzazione</title>
+  
+  <para><firstterm>Internazionalizzazione</firstterm>
+  (<firstterm>I18N</firstterm>) and <firstterm>localizzazione</firstterm>
+  (<firstterm>L10N</firstterm>) si riferiscono ambedue all'adattare il programma in modo che funzioni in ambienti linguistici e culturali diversi da quello in cui il programma fu originariamente scritto. I termini sono spesso trattati come interscambiabili, ma in realtà essi non sono per nulla la stessa cosa.  As <ulink url="http://en.wikipedia.org/wiki/G11n"/>
+  writes:</para>
+
+  <blockquote>
+     <para>La distinzione fra di esse è sottile ma importante. L'internazionalizzazione è l'adattamento per il suo <emphasis>possibile</emphasis> uso virtualmente ovunque, mentre la localizzazione è l'aggiunta di funzionalità per l'uso in un ambiente <emphasis>specifico</emphasis></para>
+  </blockquote>
+
+  <para>Per esempio, cambiare il vostro software in un sistema di compressione senza perdite di codifica testo Unicode (<ulink url="http://en.wikipedia.org/wiki/Unicode"/>) è uno spostamento di internazionalizzazione, perché non riguarda una particolare lingua, ma piuttosto l'accettazione di testo da un qualsiasi numero di lingue. D'altra parte, facendo si che il vostro software stampi tutti i messaggi d'errore in Sloveno, quando esso accerta che sta girando in ambiente sloveno, la sua localizzazione si sposta.  </para>
+
+  <para>Così il compito del manager delle traduzioni riguarda principalmente la localizzazione, non l'internazionalizzazione.</para>
+  
+  </sidebar>
+
+</sect2>
+
+<sect2 id="documentation-manager">
+<title>Il Manager della Documentazione</title>
+
+<para>Il tenere aggiornata la documentazione è un compito senza fine. Anche nuove funzionalità o miglioramenti che entrano nel codice hanno la possibilità di causare un cambiamento nella documentazione. Anche, una volta che la documentazione del progetto raggiunge un certo livello di completezza, voi troverete che un sacco di patch che la gente manda sono per la documentazione, non per il codice. Questo perché ci sono molte più persone competenti a correggere i bug nella prosa più che nel codice: tutti gli utilizzatori sono lettori, ma solo pochi sono programmatori.</para>
+
+<para>Le patch sulla documentazione sono di solito molto più facili da revisionare e da applicare che le patch sul codice. C'è poco testing o nessun testing da fare, e la qualità dal cambiamento può essere valutata rapidamente giusto con una revisione. Poiché la quantità è alta, ma il carico di revisione abbastanza basso il rapporto informazioni addizionali amministrative-lavoro produttivo è più grande per le patch di documentazione di quello delle patch di codice. Inoltre, la maggior parte delle patch avranno probabilmente la necessità di qualche ritocco per mantenere una coerenza di voce d'autore nella documentazione. In molti casi le patch si sovrapporranno o intaccheranno altre patch, e necessiteranno di essere ritoccate una rispetto all'altra prima di essere inviate alla mailing list a e al deposito.</para>
+
+<para>Date le esigenze di gestire le patch sulla documentazione, e il fatto che il codice base ha bisogno di essere monitorato, in modo che la documentazione sia aggiornata, ha senso avere una persona, o un piccolo team, dedicato al compito. Essi possono tenere una registrazione di come e dove esattamente la documentazione resta indietro al software, ed possono avere delle procedure collaudate per gestire grandi quantità di patch in un modo integrato. </para>
+
+<para>Certo, questo non preclude ad altra gente nel progetto di applicare patch di documentazione al volo, specialmente quelle piccole, quando il tempo lo permette. E lo stesso manager di patch (vedere
+<xref linkend="patch-manager"/><phrase output="printed"> prima in questo capitolo</phrase>) può tener traccia sia di patch del codice si di patch di documentazione, archiviandole dove i team della documentazione e il team di sviluppo rispettivamente vogliono. (Se la quantità totale di patch supera la capacità di una persona di tenerne traccia, tuttavia, passare a separati manager di codice e documentazione, è probabilmente un buon primo passo. Il punto del team della documentazione è avere persone che si ritengano responsabili del mantenere la documentazione organizzata, aggiornata, e coerente. In pratica, ciò significa conoscere la documentazione profondamente con l'osservare in codice base, osservare i cambiamenti che
+<emphasis>gli altri</emphasis> inviano alla documentazione, osservare le patch di documentazione che arrivano, e usare tutte queste sorgenti di informazioni per mantenere in salute la documentazione.</para>
+
+</sect2>
+
+<sect2 id="issue-manager">
+<title>Il Manager di Problemi</title>
+
+<para>Il numero dei problemi nel tracciatore di bug del progetto cresce in proporzione al numero di persone che usano il software. Quindi, anche se correggete i bug e sistemate un programma sempre più robusto, vi dovreste aspettare che tuttavia che il numero di problemi aperti cresca essenzialmente senza limiti. La frequenza di problemi duplicati anche cresce, come crescerà la frequenza di problemi descritti in modo incompleto e con pochi particolari.</para>
+
+<para>I manager dei problemi sono di aiuto nell'alleviare questi problemi con l'osservazione di ciò che va nel database, facendovi periodicamente la rivista per vedere se ci sono problemi specifici. Il loro atto più comune probabilmente è correggere i problemi che arrivano, o perché chi ha fatto il report non riempì correttamente alcuni campi del form, o perché il problema è un duplicato di uno esistente nel database. Ovviamente, più un manager di problemi è familiare con il database dei bug del progetto, con più efficienza sarà capace di trovare i problemi duplicati. Questo è uno dei principali vantaggi di avere poche persone che si specializzino nel database dei bug, invece che chiunque cerchi di farlo <foreignphrase>ad
+hoc</foreignphrase>.  Quando il gruppo cerca di farlo in maniera decentralizzata, nessun singolo acquisisce una profonda esperienza nel contenuto del database.</para>
+
+<para>I manager di problemi possono servire da mappa fra i problemi e i singoli sviluppatori. Quando ci sono un sacco di reports di bug che arrivano, non tutti gli sviluppatori possono leggere le mailing lists di notifica dei problemi con uguale attenzione. Comunque, se qualcuno che conosce il team degli sviluppatori sta tenendo d'occhio tutti i problemi che arrivano, allora può con discrezione dirigere l'attenzione di certi sviluppatori verso specifici bugs quando è opportuno. Certo, questo deve essere fatto con sensibilità verso chiunque altro vada avanti nello sviluppo, e ai desideri e al temperamento del destinatario. Quindi, è spesso la miglior cosa che il manager di problemi sia uno sviluppatore egli stesso.</para>
+
+<para>A seconda di come il vostro progetto usa il tracciatore di bug, il manager di problemi può anche modellare il database in modo da riflettere le priorità del progetto. Per esempio, in Subversion, noi programmavamo i problemi in relaeses future specifiche, in modo che quando qualcuno chiedeva “Quando sarà corretto il bug X?, noi eravamo in grado si rispondere “Fra due releases”, anche se non gli potevamo dare la data esatta. Le releases sono rappresentate nel tracciatore di problemi come pietre miliari obiettivo, un campo disponibile in IssueZilla<footnote><para>IssueZilla è il tracciatore di bug che usiamo noi; esso è un discendente di BugZilla.</para></footnote> As a rule, every
+Subversion release has one major new feature and a list of specific
+bug fixes.  We assign the appropriate target milestone to all the
+issues planned for that release (including the new feature&mdash;it
+gets an issue too), so that people can view the bug database through
+the lens of release scheduling.  These targets rarely remain static,
+however.  As new bugs come in, priorities sometimes get shifted
+around, and issues must be moved from one milestone to another so that
+each release remains manageable.  This, again, is best done by people
+who have an overall sense of what's in the database, and how various
+issues relate to each other.</para>
+
+<para>Un'altra cosa che i manager di problemi fanno è segnalare quando i problemi diventano obsoleti. A volte un bug è corretto accidentalmente come parte di in cambiamento al software non correlato, o a volte il progetto cambia la sua mentalità su fatto che un certo comportamento sia un errore. Trovare i problemi obsoleti non è facile: il solo modo di farlo sistematicamente è di fare una spazzata a tutti i problemi nel database. Intere spazzate diventano sempre meno fattibili col tempo, nella misura in cui cresce il numero dei problemi. Dopo un certo limite, il solo modo di mantenere in salute il database è quello di usare un approccio dividi-e-conquista: classificare immediatamente i problemi all'arrivo e dirigerli all'attenzione dello sviluppatore o del team. Il destinatario allora si prende carico del problema per il resto della sua vita, custodendolo verso la risoluzione o verso l'oblio se necessario. Quando il database è così grande, il manager dei problemi diventa più che un coordinatore complessivo, spedendo meno tempo a guardare ad ogni problema da sé, e più tempo a metterlo nelle mani della persona giusta. </para>
+
+</sect2>
+
+<sect2 id="faq-manager">
+<title>Il Manager delle FAQ</title>
+
+<para>La manutenzione delle FAQ è sorprendentemente un problema difficile. Diversamente dalla maggior parte dei documenti in un progetto, il cui contenuto è pianificato in anticipo dagli autori, una FAQ è un documento del tutto reattivo (vedere
+<xref linkend="starting-a-faq"/>).  Non importa quanto grosso diventi, voi tuttavia non sapete quale sarà la nuova aggiunta. E poiché esso e costruito pezzo per pezzo, è molto facile che il documento nella sua interezza diventi incoerente e disorganizzato, e contenente anche voci duplicate o semi duplicate. Anche quando non ha nessun ovvio problema come questi, ci sono spesso interdipendenze non notate fra le voci link che dovrebbero essere creati e non lo sono perché la relativa voce fu inserita un anno lontano.</para>
+
+<para>Il ruolo del manager delle FAQ è duplice. Primo, egli mantiene la qualità complessiva delle FAQ in quanto rimanere familiare con almeno gli argomenti di tutte le domande in esse, in modo che quando la gente aggiunge nuove voci che sono un duplicato o sono correlate alle voci esistenti, possa essere fatto l'appropriato adattamento. Secondo, egli osserva la mailing list del progetto e gli altri forum per altri problemi o domande e per scrivere nuove voci delle FAQ basate su queste informazioni. Questo secondo compito può essere piuttosto complesso: uno deve essere capace di seguire un argomento, riconoscere le domande base sollevate in esso, postare una voce nuova nelle FAQ, incorporarvi i commenti da parte di altri (poiché è impossibile che il manager delle FAQ essere un esperto in ogni argomento trattato nelle FAQ), e avvertire quando il processo è finito in modo che la voce sia alla fine aggiunta.</para>
+
+<para>Il manager delle FAQ diventa anche l'esperto naturale nel formattare le FAQ. Ci sono un sacco di piccoli dettagli coinvolti nel tenere una FAQ nella forma giusta (vedere
+<xref linkend="all-as-archives"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>); quando gente a caso modifica le FAQ, a volte dimentica alcuni di questi dettagli. Questo va bene finché il manager delle FAQ è li a pulire dopo di loro.</para>
+
+<para>Sono disponibili vari software per essere di aiuto nella manutenzione delle FAQ. E' bene fare uso di essi, finché non compromettono la qualità delle FAQ, ma guardatevi dal sovra-automazione. Alcuni progetti cercano di automatizzare completamente il processo di manutenzione delle FAQ, permettendo a chiunque di contribuire e modificare le voci delle FAQ in modo simile alle wiki (vedere <xref linkend="wikis"/><phrase output="printed">
+in <xref linkend="technical-infrastructure"/></phrase>).  Ho visto che questo accade particolarmente con le Faq-O-Matic 
+(<ulink url="http://faqomatic.sourceforge.net/"/>), sebbene può essere che che i casi che ho visto fossero semplici abusi che andavano oltre ciò per cui le  Faq-O-Matic erano state concepite. In ogni caso, mentre la decentralizzazione completa della manutenzione delle FAQ riduce il carico di lavoro per il progetto, ha come risultato delle FAQ più trasandate. Non c'è una persona con una larga vedute di tutte le FAQ, nessuno che avvisa quando certe voci necessitano di aggiornamento o diventano obsolete completamente, e nessuno che osservi le interdipendenze tra le voci.  Il risultato sono delle FAQ che spesso non riescono a fornire agli utilizzatori quello che stanno cercando, e nei casi peggiori li ingannano. Usate qualunque strumento di cui avete bisogno per fare la manutenzione alle vostre FAQ, ma non permettete mai alla convenienza degli strumenti di sedurvi a compromettere la qualità delle FAQ.</para>
+
+<para>Vedere l'articolo di Sean Michael Kerner, <citetitle>Le FAQ sule
+FAQ</citetitle>, a
+<ulink url="http://osdir.com/Article1722.phtml"/>, per la descrizione e la valutazione degli strumenti di manutenzione delle FAQ.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="transitions">
+<title>Gli avvicendamenti</title>
+
+<para>Di volta in volta un volontario la cui responsabilità cresce (per es. il manager delle patch, il manager delle traduzioni, ecc..) diventeranno incapaci di portare a termine gli obblighi della posizione. Ciò può avvenire perché il lavoro è diventato più pesante di quanto egli si fosse prefigurato, o può essere dovuto a fattori completamente esterni: il matrimonio, un nuovo figlio, un nuovo datore di lavoro, o qualunque altra cosa.</para>
+
+<para>Quando un volontario è sommerso così, di solito non lo nota subito. Avviene per lenti gradi, e non c'è un punto nel quale egli si rende conto che non può più portare avanti gli obblighi del ruolo. Invece, il resto del progetto non sente proprio nulla da lui per qualche tempo. Allora ci può essere una ventata di attività improvvisa, mentre egli si sente colpevole per aver ignorato il progetto per così lungo tempo, e si mette da parte una notte per recuperare. Allora voi non sentirete di lui ancora per una altro tempo, e allora ci potrebbe o non potrebbe essere un'altra ventata. Ma c'è raramente una dimissione formalmente non sollecitata. Il volontario stava facendo il suo lavoro nel tempo libero, così le dimissioni significherebbero rendere noto apertamente a se stesso che il suo tempo libero si è permanentemente ridotto. Le persone sono spesso riluttanti a fare ciò.</para>
+
+<para>Quindi, tocca voi e agli altri nel progetto notare quello che sta avvenendo&mdash;o piuttosto, non avvenendo e chiedere al volontario cosa stia succedendo. L'indagine dovrebbe essere amichevole e al 100% priva di senso di colpevolezza. Il vostro proposito è trovare un pezzo di informazione, non far sentir male la persona. Generalmente l'indagine dovrebbe essere visibile al resto del progetto, ma se voi conoscete un motivo specifico per cui dovrebbe essere meglio che sia  privata, questo va anche bene. La principale ragione per farla pubblicamente è che se in volontario risponde dicendo che non sarà più in grado di fare il lavoro in futuro, ci sia un contesto stabilito per il vostro
+<emphasis>prossimo</emphasis> post pubblico: la richiesta di un nuovo volontario che ricopra tale ruolo.</para>
+
+<para>A volte, un volontario non è capace di fare il lavoro che ha intrapreso, ma o è inconsapevole o non vuole ammettere il fatto. Certo, chiunque più avere problemi all'inizio, specialmente se la responsabilità è complessa. Comunque, se qualcuno non sta proprio lavorando al suo compito che ha intrapreso, anche se tutti gli altri gli hanno dato tutto l'aiuto e i suggerimenti che potevano, allora la sola soluzione è che si faccia da parte e permetta a qualcun altro di provare. E se la persona non vede questo da sé, c'è bisogno che glielo si dica. Queste sono le uniche vie di base di gestire questa cosa, ma è un processo dai molti passi e ogni passo è importante. </para>
+
+<para>n primo luogo, assicuratevi di non essere pazzi. Privatamente parlate agli altri nel progetto per vedere se gli altri sono d'accordo che il problema sia serio come credete. Anche se siete già del parere che lo sia, ciò serve allo scopo di permettere agli altri di sapere che voi state pensando di chiedere alla persona di mettersi da parte, Di solito nessuno fa obiezione a ciò&mdash;essi saranno solo felici del fatto che voi stiate intraprendendo un compito scomodo, di modo che essi non abbiano a farlo!</para>
+
+<para>Poi, <emphasis>privately</emphasis> privatamente contattate il volontario in questione e parlategli, gentilmente ma direttamente, del problema che vedete. Siate specifici, dando quanti più esempi potete. Assicuratevi di evidenziare come la gente abbia cercato di essere di aiuto, ma che il problema ha continuato ad esistere, senza miglioramento. Vi dovreste aspettare di metterci molto tempo a scrivere questa email, ma con questo tipo di messaggio, se non tornate indietro su ciò che state dicendo, non dovreste dirlo punto e basta. Dite che vorreste trovare un nuovo volontario per ricoprire il ruolo, ma puntualizzare che ci sono molti altri modi per collaborare col progetto. A questo punto non dite che avete parlato cogli altri di questo; nessuno vuole che si dica che la gente sta cospirando a sua insaputa.</para>
+
+<para>Ci sono pochi modi differenti in cui le cose possano andare dopo questo. La più probabile reazione è che egli sia d'accordo con voi, o in ogni caso non voglia discutere, e voglia  dimettersi. In tal caso, suggerite che faccia l'annuncio lui stesso, e poi voi potete dar seguito con un post di ricerca di un sostituto.</para>
+
+<para>Oppure egli può essere d'accordo che ci sono stati dei problemi, ma chiede ancora un po' di tempo (o un'altra chance, nel caso di compito non continuativi in ruoli tipo manager di release). Come reagire alla cosa è una chiamata in giudizio, ma comunque facciate, non siate d'accordo su questo solo perché vi sentite come se non potete rifiutare una tale ragionevole richiesta. Ciò prolungherebbe l'agonia, non la diminuirebbe. C'è spesso una ragione molto buona per rifiutare la richiesta, vale a dire, che c'è stata una abbondanza di chance, e che è così che le cose sono arrivate al punto in cui sono ora. Qui è come lo ho messo in una email a un tale che stava ricoprendo il ruolo di manager di release ma non era proprio portato per esso:</para>
+
+<blockquote>
+<screen>
+&gt; Se vuoi sostituire me con qualcun altro, mi sarà gradito
+&gt; passare al ruolo che viene dopo. Ho una richiesta che
+&gt; spero non sia irragionevole. Mi piacerebbe tentare con una nuova
+&gt; release nel tentativo di mettermi alla prova.
+
+Io capisco completamente il desiderio (sono stato lì io stesso), ma in questo caso, non dovremmo fare la cosa “ancora un tentativo”. 
+
+Questa non è la prima o la seconda release, è la sesta o la settima...E per tutte queste, io so che anche sei stato insoddisfatto per i risultati (perché ne abbiamo parlato prima). Così siamo in effetti già arrivati alla via un-tentativo-ancora. Alla fine uno dei tentativi deve essere l'ultimo...io penso [questa passata release] dovrebbe essere quello.</screen>
+</blockquote>
+
+<para>Nel peggiore dei casi, il volontario può essere in disaccordo apertamente. Allora voi dovete prendere atto del fatto che le cose stanno per diventare scomode e andare avanti comunque. Adesso è il momento di dire alle altre persone ciò che avete detto su questo (ma non dite chi finché non avete il suo permesso, perché queste conversazioni erano confidenziali), e che voi non pensate che è bene che il progetto continui così. Siate insistenti, ma mai minacciosi. Tenete in mente che con la maggior parte dei ruoli, l'avvicendamento avviene in realtà nel momento in cui qualcuno incomincia a fare il nuovo lavoro, 
+<emphasis>non</emphasis> non nel momento in cui la vecchia persona smette di farlo. Per esempio, se il contenzioso è sul ruolo, diciamo, del manager di problemi, ad ogni momento voi e le altre influenti persone nel progetto potete far pressione per un nuovo manager di problemi. In realtà non è necessario che la persona che prima lo stava facendo smetta di farlo, purchè non saboti (deliberatamente o per altro) lo fatica del nuovo volontario. </para>
+
+<para>Il che porta a un pensiero tentatore. Invece di chiedere alla persona di dimettersi, perché non incorniciarlo nel dargli qualche aiuto? Perché non avere due manager di problemi, o qualunque sia il ruolo?</para>
+
+<para>Sebbene ciò sembri simpatico in teoria, non è generalmente una buona idea. Ciò che fa sì che il ruolo di manager funzioni ciò che lo rende utile, nei fatti&mdash;è la sua centralizzazione. Quelle cose che possono essere fatte in uno stile decentralizzato, sono già fatte in quel modo. L'avere due persone a ricoprire un ruolo manageriale introduce un sovraccarico di comunicazioni fra queste due persone, come altrettanto la possibilità di uno scivoloso spostamento delle responsabilità (“Io pensavo che avresti portato il kit di primo aiuto” “Io, no, io pensavo che
+<emphasis>tu</emphasis> tu averesti portato il kit di primo aiuto”). Certo, ci sono eccezioni. A volte due persone lavorano estremamente bene insieme, o la natura del ruolo è tale che può essere allargato a più persone. Ma questi probabilmente non possono essere di molto aiuto quando voi vedete qualcuno che si dimena in un ruolo per cui non è portato. Se egli in primo luogo si fosse reso conto del problema, avremmo cercato tale aiuto prima di adesso. In ogni caso, sarebbe stato irrispettoso permettere che qualcuno perdesse tempo nel continuare a fare un lavoro a cui nessuno prestasse attenzione.</para>
+
+<para>Il fattore più importante nel chiedere a qualcuno di dimettersi è la privacy: dargli lo spazio per prendere una decisione senza che si senta come se gli altri lo stiano osservando e aspettando. Io una volta feci l'errore un chiaro errore, in retrospettiva&mdash;di scrivere a tutte le tre parti in un sola volta per chiedere che il manager di release di Subversion si facesse da parte in favore di altri due volontari. Avevo già parlato alle altre due persone privatamente, e sapevo che essi volevano assumersene la responsabilità. Così pensai, na&iuml;sul velluto e in qualche modo intensamente che avevo risparmiato tempo e rottura inviando una email a tutti loro per iniziare l'avvicendamento. Davo per acquisito che il manager di release attuale fosse pienamente al corrente dei problemi e avrebbe visto immediatamente la ragionevolezza del mio punto di vista. </para>
+
+<para>Mi sbagliavo. L'attuale release manager fu molto offeso, e anche giustamente. Una cosa è che ti venga chiesto di passare la palla. Un'altra cosa che te lo si venga chiesto <emphasis>d'avanti</emphasis> alla persona a cui passerai la palla. Quando mi resi conto del perché si era offeso, mi scusai. Egli alla fine si fece da parte con grazia, e continua ad essere coinvolto nel progetto oggi. Ma i suoi sentimenti furono feriti, e inutile a dirsi, questo non fu il più favorevole degli inizi per nuovi i volontari per di più. </para>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="committers">
+<title>Quelli Che Fanno gli Invii</title>
+
+<para>Come sola classe formalmente distinta che si trova nei progetti open source, quelli che fanno gli invii meritano una attenzione speciale qui. Quelli che fanno gli invii sono una concessione inevitabile alla discriminazione in un sistema che diversamente è quanto meno discriminatorio possibile. Ma la “discriminazione” qui non è intesa come dispregiativo. La funzione che quelli che fanno gli invii svolgono è assolutamente necessaria, e io non penso che un progetto avrebbe successo senza di essa. Il controllo della qualità richiede, giusto, il controllo. Ci sono sempre molte persone che si ritengono competenti nel fare cambiamenti a un programma, e un qualche numero minore che effettivamente lo sono. Il progetto non può contare sul personale giudizio della gente; esso deve imporre gli standard e deve concedere l'invio solo a quelli che li soddisfano.<footnote><para>Notate che l'accesso all'invio significa qualcosa di differente in un sistema di versione decentralizzato, in cui ognuno può allestire un deposito che è collegato nel progetto, e dà a se stesso l'accesso all'invio a quel deposito. Nondimeno ancora si applica il <emphasis>concetto</emphasis> dell'accesso all'invio. L'”accesso all'invio” stenograficamente sta per “il diritto di fare cambiamenti al codice che saranno inoltrati alla prossima release del software del gruppo”. In un sistema di controllo di versione centralizzato, questo significa avere l'accesso diretto all'invio; in un sistema decentralizzato, significa avere che i cambiamenti di uno sono tirati dentro alla distribuzione automaticamente. E' la stessa idea in ogni caso; i meccanismi con cui son realizzati non sono terribilmente importanti.</para></footnote>.  D'altro canto, avere persone che possano inviare cambiamenti che funzionino direttamente fianco a fianco con persone che non lo possono introduce una ovvia dinamica di potere. La dinamica deve essere gestita in modo da non danneggiare il progetto.</para>
+
+<para>In <xref linkend="electorate"/><phrase output="printed">
+in <xref linkend="social-infrastructure"/></phrase>, noi già discutemmo i meccanismi del considerare i nuovi ammessi all'invio. Qui noi daremo un'occhiata agli standard con i quali i potenziali ammessi all'invio dovrebbero essere giudicati, e come questo procedimento debba essere presentato alla comunità allargata.</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="choosing-committers">
+<title>Scegliere Coloro che Faranno gli Invii</title>
+
+<para>Nel progetto di Subversion noi sceglievamo coloro che dovevano far gli invio sulla base del principio  Ippocratico:  <emphasis>primo non fare danni</emphasis>.  Il nostro criterio principale non è l'abilità tecnica oppure la conoscenza del codice, ma soltanto il fatto che chi fa gli invii mostri buon giudizio. Giudizio può significare semplicemente sapere cosa non intraprendere. Una persona potrebbe postare solo piccole patch, risolvendo onestamente piccoli problemi nel codice; ma se le patch si applicano un modo pulito, non  contengono bug, e sono prevalentemente in accordo con i messaggi di log del progetto e col codice, con le convenzioni, e ci sono sufficienti patch a mostrare una chiara linea di comportamento, allora uno  che fa già gli invii di solito propone quella persona per l'accesso all'invio.  Se almeno tre persone dicono si, e nessuno obietta, allora viene fatta la proposta. Giusto, voi non potreste avere l'evidenza che è capace di risolvere problemi complessi in tutte le aree del codice base, ma questo non ha importanza: la persona ha reso chiaro che almeno è capace di giudicare le sue abilità. Le capacità tecniche possono essere imparate (e insegnate), ma il giudizio, per la maggior parte, no. Quindi, è la sola cosa che volete assicurarvi la persona abbia, prima di dargli l'accesso all'invio. </para>
+
+<para>Quando la proposta di un nuovo accesso all'invio provoca discussioni, non è riguardo alle capacità tecniche, ma riguardo al comportamento della persona nella mailing list o in IRC. A volte qualcuno mostra abilità tecniche e capacità di lavorare all'interno delle linee guida formali del progetto, eppure è sostanzialmente bellicoso e non collaborativo nei forum pubblici. Questa è una faccenda seria; se la persona non sembra darsi da fare col tempo, anche in risposata ai consigli, allora noi non lo aggiungeremo come persona che fa gli invii non importa quanto capace sia. In un gruppo di volontari, capacità di socializzazione, o l'abilità di “giocare bene in un ambiente di prova”, sono importanti quanto le pure abilità tecniche. Siccome ogni cosa è sotto il controllo di versione, la penalità per l'aggiunta di uno che fa gli invii che voi non dovreste avere non è è tanto quanti problemi potrebbe causare al codice (la revisione li individuerebbe ad ogni modo), ma il fatto che potrebbe alla fine obbligare il progetto a revocare l'accesso agli invii alla persona&mdash;un atto che non è mai piacevole e che potrebbe a volte dar luogo a polemiche. </para>
+
+<para>Molti progetti insistono sul fatto che la persona che potenzialmente potrebbe fare gli invii dimostri un certo livello di esperienza tecnica e sia tenace, inviando un certo numero di patch non secondarie; cioè, non solo questi progetti vogliono sapere che la persona non procurerà danni, vogliono sapere se possibilmente è brava nel codice base. Ciò è bene, ma siate attenti a che ciò non incominci a cambiare l'appartenenza a quelli che fanno gli invii in appartenenza ad un club esclusivo.  La domanda da tenere a mente dovrebbe essere ”Cosa porterà i migliori risultati per il codice?” non “Dobbiamo svalutare lo stato sociale associato alla facoltà di fare gli invii ammettendo questa persona?” Il punto dell'accesso agli invii non è rafforzare l'autostima della gente, è consentire che buoni cambiamenti entrino nel codice senza un minimo di agitazione. Se voi avete 100 persone che fanno gli invii, 10 dei quali fanno cambiamenti su base regolare, e 90 dei quali correggono solo degli errori di stampa o dei piccoli bugs poche volte all'anno, questo è ancora meglio che avere solo i 10.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="revoking-committers">
+<title>Revocare l'Accesso all'Invio</title>
+
+<para>La prima cosa da dire sulla revoca dell'accesso all'invio è: cercate di non essere in quella situazione in primo luogo. A seconda delle persone il cui accesso all'invio sta venendo revocato, le discussioni su una tale azione possono essere molto divisive.  Anche quando non fossero divisive, esse sarebbero causa di perdita di tempo ai danni del lavoro produttivo.</para>
+
+<para>Comunque, se dovete farlo, la discussione dovrebbe tenersi privatamente fra le stesse persone che sarebbero nella posizione di votare per
+<emphasis>concedere</emphasis> a quella persona qualunque gusto dell'accesso all'invio che correntemente ha. La persona stessa non dovrebbe essere inclusa. Questo contraddice la solita ingiunzione contro la segretezza, ma in questo caso è necessario. Primo, nessuno sarebbe in grado di parlare liberamente altrimenti. Secondo, se la mozione non va a termine, voi non necessariamente volete che la persona sappia che ciò sia stato mai preso in considerazione, perché ciò potrebbe aprire domande (“Chi era dalla mia parte? Chi contro di me?) che portano al peggior tipo di faziosità. In certe rare circostanze, il gruppo può volere che qualcuno sappia che la revoca dell'acceso all'invio è stata o sta venendo considerata, come un avviso, ma questa apertura dovrebbe essere una decisione che prende il gruppo. Nessuno dovrebbe mai, di sua iniziativa, rivelare informazioni su una discussione e su un voto che gli altri presumono che siano segreti.</para>
+
+<para>Once someone's access is revoked, that fact is unavoidably
+public (see
+<xref linkend="commit-access-openness"/><phrase output="printed">
+later in this chapter</phrase>), so try to be as tactful as you can in
+how it is presented to the outside world.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="partial-committers">
+<title>Accesso all'Invio Parziale</title>
+
+<para>Alcuni progetti presentano gradazioni dell'accesso all'invio. Per esempio, ci possono essere collaboratori il cui accesso all'invio dà loro libere redini nella documentazione, ma essi non possono fare gli invii per quanto riguarda il codice stesso. Aree comuni di invio parziale sono la documentazione, le traduzioni, l'adattare il codice ad altri linguaggi di programmazione, i file di specificazione per i pacchetti (per es. i file di specificazione per RedHat RPM) ed altre aree in cui un errore non dà luogo a un problema per la base del progetto.</para>
+
+<para>Poiché l'accesso all'invio non è solo accesso all'invio ma significa anche far parte di un elettorato (vedere
+<xref linkend="electorate"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase>),
+nasce naturalmente la domanda: su cosa possono votare quelli che hanno l'invio parziale? Qui non c'è una singola risposta giusta; dipende da che tipo di dominio di invio parziale ha il vostro progetto. In Subversion noi abbiamo mantenuto le cose abbastanza semplici: uno che ha l'accesso all'invio parziale, può votare solo su questioni confinate al dominio di colui che fa gli invii, e non su ogni altro dominio. Importante, noi abbiamo meccanismi per dare voto consultivo (essenzialmente colui che fa gli invii scrive "+0" o "+1 (non impegnativo) invece che solo “+1” sulla scheda. Non c'è motivo di silenziare completamente la gente solo perché il loro voto non è formalmente impegnativo.</para>
+
+<para>Coloro che hanno il pieno invio possono votare su ogni cosa, e solo coloro che hanno il pieno invio possono votare sull'ammissione di nuove persone con diritto di voto di ogni specie. Nella pratica, tuttavia, la competenza ad ammettere nuove persone con l'invio parziale è di solito delegata: ogni persona con invio pieno può “sponsorizzare” una nuova persona con invio parziale, e quest'ultimo in un dominio può in affetti scegliere nuove persone con diritto di invio per quello stesso dominio (questo è particolarmente utile nel far si che il lavoro di traduzione funzioni regolarmente).</para>
+
+<para>Il vostro progetto può aver bisogno di piccoli differenti aggiustamenti, a seconda della natura del lavoro, ma a ogni progetto si applicano gli stessi principi generali. Ogni persona che ha l'invio dovrebbe poter votare su questioni che cadono entro la portata del suo accesso all'invio, e non su questioni all'infuori di esso, e i voti su questioni procedurali dovrebbero essere concessi solo a quelli che hanno il pieno invio, a meno che non ci sia qualche ragione (come deciso da coloro che hanno il pieno invio) di allargare l'elettorato.</para>
+
+<para>Riguardo all'applicazione dell'accesso parziale all'invio: è spesso meglio <emphasis>non</emphasis> avere che il sistema di controllo di versione faccia rispettare i domini dell'invio parziale, anche se lo può. Vedere
+<xref linkend="vc-authz"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase> le ragioni del perché.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="dormant-committers">
+<title>Persone che Hanno l'Accesso all'Invio Dormienti </title>
+
+<para>Alcuni progetti rimuovono automaticamente le persone dall'accesso all'invio se essi per un certo tempo (diciamo, un anno) non fanno invii. Penso che questo non sia di aiuto e anche controproducente, per due ragioni.</para>
+
+<para>Primo, ciò può tentare alcuni ad inviare cambiamenti accettabili ma non necessari, solo per impedire che il loro accesso all'invio si estingua. Secondo, non serve veramente a niente. Se il criterio principale per la concessione dell'accesso all'invio è il buon giudizio, allora perché presumere che il giudizio di qualcuno si deteriorerebbe solo perché egli è via dal progetto per un certo tempo? Anche se egli svanisce completamente per anni, non guardando il codice o non seguendo le discussioni dello sviluppo, quando riappare <emphasis>saprà</emphasis> quanto ha perso il contatto, ed agirà di conseguenza. Avete avuto fiducia nel suo giudizio prima, allora perché non averla sempre? Se i diplomi della scuola superiore non si estinguono, allora l'accesso all'invio certamente non lo dovrebbe.</para>
+
+<para>A volte colui che ha un accesso all'invio può chiedere di essere rimosso, o di essere esplicitamente segnalato come dormiente nella liste di quelli che fanno gli invii (vedere
+<xref linkend="commit-access-openness"/><phrase output="printed">
+sotto</phrase> per maggiori dettagli su questa lista).  In quei casi, il progetto dovrebbe acconsentire ai desideri della persona, certamente.</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="commit-access-openness">
+<title>Evitare Misteri</title>
+
+<para>Anche se la discussioni sull'ammissione di un nuova particolare persona all'invio deve essere confidenziale, i ruoli e le stesse procedure non c'è bisogno che siano segreti. Infatti, è meglio renderli pubblici, così la gente si rende conto che quelli che fanno gli invii non sono delle Camere da Star chiuse ai solo mortali, ma che chiunque può raggiungerli semplicemente postando delle buone patch e conoscendo come comportarsi nella comunità. Nel progetto di Subversion, noi mettiamo questa informazione giusto nel documento delle linee guida, dal momento la gente più adatta ad essere interessata a come l'accesso agli invii viene concesso è quella che pensa di contribuire codice al progetto.</para>
+
+<para>Oltre a pubblicare le procedure, pubblicate  <emphasis>la lista</emphasis> attuale di coloro che hanno accesso all'invio .  Il posto tradizionale per fare questo è un file chiamato <filename>MAINTAINERS</filename>
+o <filename>COMMITTERS</filename> in cima all'albero del codice sorgente del progetto. Esso dovrebbe elencare prima tutti coloro che hanno l'invio pieno, seguiti dai vari domini con accesso parziale e dai membri di ciascun dominio. Ogni persona dovrebbe essere elencata col nome e con l'indirizzo email, sebbene l'email potrebbe essere codificata per evitare spam (vedere 
+<xref linkend="address-hiding"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>) se la persona preferisce così</para>
+
+<para>Poichè la distinzione fra accesso all'invio pieno e all'invio parziale è chiara e ben definita, è proprio dell'elenco fare la distinzione anche. Oltre a ciò l'elenco non dovrebbe cercare di indicare le distinzioni non formali che inevitabilmente si presentano in un progetto, come chi è influente e come. E' una registrazione pubblica, non un file di riconoscimenti. Elencate quelli che hanno accesso all'invio in ordine alfabetico, o nell'ordine in cui sono arrivati.</para>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="credit">
+<title>Riconoscimenti</title>
+
+<para>I riconoscimenti sono la moneta principale nel mondo del software libero. Qualunque cosa una persona possa dire sulle sue motivazioni della partecipazione a un progetto, non conosco sviluppatori che sarebbero felici di fare tutto il loro lavoro anonimamente, o sotto il nome di qualcun altro. Ci sono ragioni tangibili per questo: la reputazione di uno nel progetto approssimativamente determina quanta influenza ha, e la partecipazione a un progetto open source può anche avere indirettamente un valore monetario, perché alcuni datori di lavoro guardano a questo nel curriculum. Ci sono anche ragioni non tangibili, magari anche più forti: la gente semplicemente vuole essere apprezzata, e istintivamente guarda a segni che il loro lavoro è stato riconosciuto dagli altri. La promessa di riconoscimenti è quindi è una delle migliori motivazioni che il progetto abbia. Quando sono riconosciuti piccoli contributi, la gente ritorna per fare di più.</para>
+
+<para>Una delle più importanti caratteristiche dello sviluppo in collaborazione (vedere <xref linkend="technical-infrastructure"/>) è quella che esso tiene accurate registrazioni di chi fece cosa, quando. Dovunque è possibile, usate questi meccanismi esistenti per assicurarvi che i riconoscimenti siano distribuiti accuratamente, e siano specifici sulla natura del contributo. Non scrivete solo “Grazie a J. Random &lt;jrandom@example.com&gt;" se invece potete scrivere “Grazie a J. Casuale &lt;jrandom@example.com&gt;
+per il rapporto di bug e per la ricetta per la riproduzione" in un messaggio di log.</para>
+
+<para>In Subversion, noi abbiamo la informale ma costante politica di riconoscere a chi fa un rapporto di bug o nel problema archiviato, se ce n'è uno, o nel messaggio di log dell'invio che corregge il bug, se no. Un rapido controllo dei logs di invio fino all'invio 14525 mostra che circa il 10% degli invii dà il riconoscimento a qualcuno per nome ed email, di solito la persona che ha analizzato e ha riportato il bug corretto da quell'invio. Notate che questa persona è differente dallo sviluppatore che in realtà fece l'invio, il cui nome è registrato automaticamente dal sistema di controllo della versione. Delle 80 e rotte persone che hanno il pieno o parziale invio in Subversion, 50 avevano i riconoscimenti nei log di invio (di solito molte volte) prima di diventare persone con l'invio essi stessi. Ciò, certo, non prova che l'essere riconosciuto è un fattore del loro coinvolgimento continuato, ma ciò almeno stabilisce una atmosfera in cui la gente può contare sul fatto che i suoi contributi vengono riconosciuti.</para>
+
+<para>Bisogna distinguere fra riconoscimenti di routine e ringraziamenti speciali. Quando si discute un pezzo particolare di codice, o qualche altro contributo che qualcuno ha dato, è bene riconoscere il suo lavoro. Per esempio, dicendo “I recenti cambiamenti di Daniel al codice delta significano che ora noi possiamo implementare la funzionalità X” contemporaneamente aiuta la gente a identificare di quali cambiamenti state parlando e riconosce il lavoro di Daniel. D'altra parte, postare solamente per ringraziare Daniel per i cambiamenti al codice delta non serve ad uno scopo immediato. Non aggiunge nessuna informazione, perché il sistemi di controllo della versione e altri meccanismi hanno già registrato il fatto che egli ha fatto dei cambiamenti. Ringraziare ciascuno per ogni cosa può distrarre e in ultimo può essere senza informazione, perché i ringraziamenti sono in gran parte effettivi, nela misura in cui stanno fuori dal comune, livello di base di un commento favorevole che avvenga tutte le volte. Questo non significa, certo, che voi non dovreste ringraziare la gente. Solo assicuratevi di farlo in modo che non tenda a portare ad una inflazione di riconoscimenti. Seguire queste linee guida aiuterà:</para>
+
+<itemizedlist>
+  <listitem><para>Più è effimero il forum, più vi sentirete liberi di esprimere i ringraziamenti lì. Per esempio, ringraziando qualcuno per la correzione di un bug incidentalmente durante una conversazione in IRC è cosa buona, come lo è una divagazione in una email dedicata principalmente ad altri argomenti. Ma non postate una email solo per ringraziare qualcuno, a meno che ciò non sia per una impresa eroica non solita. Nello stesso modo, non intasate le pagine web del progetto con espressioni di gratitudine. Una volta che iniziate a farlo, non sarà mai chiaro quando e dove fermarsi. E non mettete
+            <emphasis>mai</emphasis> ingraziamenti nei commenti al codice; ciò sarebbe solo una distrazione dal proposito principale dei commenti, che è aiutare il lettore a capire il codice.</para> 
+  </listitem>
+  <listitem><para>Meno qualcuno è coinvolto nel progetto, più è appropriato ringrazialo per qualcosa che ha fatto. Ciò potrebbe suonare contrario all'intuito, ma è in linea con l'opinione che l'esprimere ringraziamenti è qualcosa che voi fate quando qualcuno contribuisce ancora di più di quanto voi pensavate che facesse. Così, ringraziare costantemente i collaboratori regolari perché fanno ciò che regolarmente fanno significherebbe esprimere una minore aspettativa su di loro di quanto essi la hanno di se stessi. Se mai, voi volete puntare all'effetto opposto!</para>
+
+            <para>Ci sono eccezioni occasionali a questa regola. E' accettabile ringraziare qualcuno perché occupa soddisfacentemente il suo ruolo previsto quando quel ruolo comporta fatiche temporanee intense di volta in volta. L'esempio canonico è il manager di release che va a velocità più elevata per quanto riguarda il tempo di ciascuna release, ma altrimenti rimane dormiente (dormiente come manager di release in ogni caso egli può essere anche un attivo sviluppatore, ma questa è un'altra questione).
+            </para>
+  </listitem>
+  <listitem><para>Come per il criticismo e per i riconoscimenti, la gratitudine dovrebbe essere specifica. Non ringraziate la gente solo perché è grande, anche se lo è. Ringraziatela per qualcosa che ha fatto che era fuori dell'ordinario e per il buon punteggio, dite esattamente perché ciò che fecero era così grande.</para> 
+  </listitem>
+</itemizedlist>
+
+<para>n generale c'è sempre una tensione fra l'assicurarsi che i contributi individuali della gente siano riconosciuti, e l'assicurarsi che che il progetto sia una fatica pubblica invece che un insieme di glorie individuali. Giusto rimanete al corrente di questa tensione e cercate di sbagliare dalla parte del gruppo, e le cose non vi scapperanno di mano.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="forks">
+<title>Le Diramazioni</title>
+
+<para>In <xref linkend="forkability"/><phrase output="printed">
+in <xref linkend="social-infrastructure"/></phrase>, noi vedemmo come <emphasis>la possibilità </emphasis> di una diramazione abbia un effetto importante su come il progetto viene amministrato. Ma cosa accede quando una diramazione si verifica veramente? Come dovreste gestire la cosa? E quali effetti dovete aspettarvi che la cosa abbia? All'inverso, quando dovreste <emphasis>iniziare</emphasis> una diramazione?</para>
+
+<para>La risposta dipende da che tipo di diramazione è? Alcune diramazioni si hanno per un amichevole e inconciliabile disaccordo sulla direzione del progetto; forse la maggior parte sono dovute a disaccordi tecnici e a conflitti interpersonali. Certo, non è sempre possibile dire le differenza fra le due cose, in quanto elementi tecnici possono coinvolgere elementi personali. La cosa che tutte le diramazioni hanno in comune è che un gruppo di sviluppatori (o talvolta anche uno solo degli sviluppatori) ha deciso che i costi del lavorare con qualcuno o tutti gli altri ora non prevalgono sui benefici.</para>
+
+<para>Una volta che il progetto si biforca, non c'è una risposta definitiva alla domanda su quale diramazione è il “vero” o “originale” progetto. La gente parlerà in modo colloquiale della diramazione F che viene dal progetto P, come se P sta continuando per la sua normale traiettoria senza una marcia inferiore, mentre F diverge in nuovo territorio, ma questa è, in effetti, una dichiarazione di come quel particolare osservatore avverte la cosa. E' fondamentalmente una questione di percezione: quando una larga percentuale di osservatori è d'accordo, l'affermazione incomincia a diventare vera. Non è il caso che ci sia una verità oggettiva sin dall'inizio, una che noi siamo solo imperfettamente capaci di percepire all'inizio. Piuttosto, le percezioni <emphasis>sono</emphasis>
+la verità oggettiva, poichè in ultima analisi una diramazione&mdash;o un progetto&mdash;sono una entità che esiste solo nella mente della gente comunque.</para>
+
+<para>Se quelli che stanno iniziando una diramazione ritengono di star facendo crescere un nuovo ramo fuori dal progetto principale, la questione della percezione è risolta immediatamente e facilmente. Ognuno, sviluppatori e utilizzatori, tratterà la diramazione come un nuovo progetto, con un nome (magari basato sul vecchio nome, ma facilmente distinguibile da esso), un sito separato, e una filosofia separata per quanto riguarda gli obbiettivi. Le cose riusciranno disordinate, comunque, quando ambedue le parti riterranno di essere i guardiani legittimi del progetto originale e quindi di avere il diritto di continuare ad usare in nome originale. Se c'è qualche organizzazione con diritto di marchio sul nome, o con un controllo legale sulle pagine web o sul dominio, ciò di solito risolve il problema per decreto: quella organizzazione decide chi è nel progetto e chi nella diramazione, perché detiene tutte le carte in una guerra di pubbliche relazioni. Naturalmente, raramente le cose arrivano fino a questo punto: dal momento che ciascuno conosce quali sono le dinamiche del potere, eviterà di combattere una battaglia il cui esito è noto in partenza, e giusto salta dritto alla fine.</para>
+
+<para>Fortunatamente, nella maggior parte dei casi, c'è un piccolo dubbio su quale sia il progetto e quale la diramazione perchè una diramazione è, in essenza, un voto di fiducia. Se più della metà degli sviluppatori sono favorevoli a qualunque corso si propone di prendere la diramazione, di solito non c'è bisogno della diramazione il progetto può andare per quella strada da sé, a meno che non diventi una dittatura con un dittatore particolarmente testardo. D'altra parte, se meno della metà degli sviluppatori sono favorevoli, la diramazione è proprio una ribellione di una minoranza, e la cortesia e il senso comune indicano che essa dovrebbe ritenersi un ramo divergente piuttosto che la linea principale.</para>
+
+<sect2 id="forks-handling">
+<title>Gestire Una Diramazione</title>
+
+<para>Se qualcuno minaccia una diramazione nel vostro progetto, mantenete la calma e ricordate gli obiettivi a lungo termine. La sola 
+<emphasis>esistenza</emphasis> di una diramazione non è ciò che fa male a un progetto; piuttosto è la perdita di sviluppatori e utilizzatori. Il vostro vero scopo non è schiacciare la diramazione, ma minimizzare i suoi effetti dannosi. Potete essere furiosi, potete ritenere che la diramazione fu ingiusta e non necessaria, ma esprimere questo pubblicamente può solo alienare gli sviluppatori indecisi. Invece non obbligate la gente a fare scelte esclusive, e siate collaborativi e pratici con la diramazione. Per iniziare, non togliete l'accesso all'invio a qualcuno nel vostro progetto solo perché ha deciso di lavorare alla diramazione. Lavorare sulla diramazione non significa che la persona ha improvvisamente perso la sua competenza a lavorare al progetto originale; coloro che fanno gli invii prima dovrebbero rimanere quelli che fanno gli invii dopo. Oltre a ciò voi dovreste esprimere il desiderio di restare quanto più compatibili possibile con la diramazione, e dire che sperate che gli sviluppatori trasferiranno i cambiamenti fra il progetto e la diramazione quando è opportuno. Se avete l'accesso amministrativo ai servers, offrite a quelli della diramazione l'aiuto delle sovrastrutture al momento dell'avvio. Per esempio, offrite loro una copia completa con la storia profonda del deposito del controllo di versione, se essi non hanno altro modo di ottenerla, cosicché essi non abbiano a partire senza dati storici (ciò può essere non necessario a seconda del sistema di controllo della versione). Chiedete loro se c'è qualcos'altro di cui abbiano bisogno, e fornitelo se potete. Chinatevi all'indietro per mostrare che non state fra i piedi e per mostrare che la diramazione avrà successo o fallirà per i suoi meriti e nient'altro.</para>
+
+<para>Il motivo per fare tutto ciò e farlo pubblicamente non è in verità quello di aiutare la diramazione, ma convincere gli sviluppatori che la vostra parte è una scommessa sul sicuro, apparendo quanto meno vendicativi possibile. In guerra talvolta ha senso (senso strategico, non umano) costringere la gente a scegliere una parte, ma nel software libero quasi sempre non lo ha. Infatti, dopo una diramazione, alcuni sviluppatori spesso lavorano apertamente ad ambedue i progetti e fanno del loro meglio per tenere le due cose compatibili. Questi sviluppatori aiutano a tenere aperte le linee di comunicazione dopo la diramazione. Essi permettono al vostro progetto di beneficiare di nuove interessanti funzionalità della diramazione (si, la diramazione può avere cose che volete), e anche accrescere le possibilità di una fusione per strada.</para>
+
+<para>A volte una diramazione ha così successo, che anche se era considerata dai suoi stessi istigatori come diramazione dall'inizio, diventa la versione che ognuno preferisce, e alla fine soppianta l'originale per richiesta popolare. Un esempio famoso di ciò fu la diramazione GCC/EGCS. La <firstterm>GNU Compiler Collection</firstterm>
+(<firstterm>GCC</firstterm>, prima la <firstterm>GNU C
+Compiler</firstterm>) è il codice nativo di compiler open source più popolare, e anche uno dei più portabili compilatori del mondo. Dovuto al disaccordo fra i manutentori ufficiali del GCC e la Cygnus Software.,<footnote><para>Adesso parte di RedHat (<ulink url="http://www.redhat.com/"/>).</para></footnote> uno dei gruppi di sviluppatori più attivi, Cygnus creò una diramazione di GCC chiamata <firstterm>EGCS</firstterm>.  La diramazione era deliberatamente non antagonistica: gli sviluppatori EGCS , in qualunque momento, non cercavano di descrivere la loro versione di GCC come una nuova versione. Invece si concentrarono sul fatto di rendere EGCS quanto migliore possibile, incorporando patch ad un ritmo superiore a quello dei manutentori dello GCC ufficiale. EGCS guadagnò in popolarità, e alla fine alcuni principali distributori di sistemi operativi decisero di impacchettare EGCS  come loro compilatore di default invece di GCC. A questo punto, diventò chiaro ai manutentori di GCC che insistendo sulla denominazione "GCC" mentre ognuno passava alla diramazione EGCS avrebbe caricato ognuno con un inutile cambiamento di nome, ma non avrebbe fatto niente per impedire la migrazione. Così GCC adottò il codice base di  EGCS, e c'è ancora un solo GCC, ma grandemente migliorato con la diramazione. </para>
+
+<para>Questo esempio mostra perché non potete sempre considerare una diramazione come una assoluta cosa brutta. Una diramazione può essere dolorosa e non benvenuta al momento, ma voi non potete sapere se avrà successo. Quindi, voi e il resto del progetto dovete tenerci un occhio su, ed essere preparati non solo ad assorbirne il codice e le funzionalità quando possibile, ma nei casi più estremi, anche ad unirvi alla diramazione se essa raggiunge le dimensioni di popolarità del progetto. Certo, sarete spesso in grado di predire la probabilità di successo di una diramazione guardando chi si unisce ad essa. Se la diramazione è partita dai più grandi lamentosi del progetto e ad essa si è aggiunta una manciata di sviluppatori scontenti che non si stavano comportando costruttivamente comunque, essi hanno sostanzialmente risolto il problema con voi con la diramazione, e voi probabilmente non dovete preoccuparvi della diramazione portando via slancio al progetto originale. Ma se vedete sviluppatori influenti ed rispettati che sostengono la diramazione, ve ne dovrete chiedere il perché. Magari il progetto stava essendo eccessivamente restrittivo, e la migliore soluzione è adottare nella linea principale del progetto alcuni o tutti gli atti contemplati dalla diramazione&mdash;in sostanza evitare che la diramazione diventi tale.</para>
+
+</sect2>
+
+<sect2 id="forks-initiating">
+<title>Iniziare una Diramazione</title>
+
+<para>Tutto il consiglio qui è nell'ipotesi che stiate facendo una diramazione come ultima risorsa. Esaurite tutte le altre possibilità prima di iniziare una diramazione. Fare una diramazione significa quasi sempre perdere sviluppatori, con solo una incerta promessa di acquisirne di nuovi dopo. Essa significa anche iniziare una competizione per l'attenzione degli utilizzatori: chiunque stia per scaricare ha da chiedere a se stesso: “Hmm, voglio questo o l'altro?” Qualunque dei due voi siate, la situazione è sporca, perché è stata introdotta una domanda che non c'era prima. Alcune persone sostengono che la diramazione è salutare per l'ecosistema del software nella sua interezza, per il classico argomento della selezione naturale: sopravviverà il più adatto, che significa che, alla fine, ognuno ottiene il software migliore. Questo può essere vero dal punto di vista degli ecosistemi, ma non è vero dal punto di vista di un singolo progetto. La maggior parte delle diramazioni non riescono, e la maggior parte dei progetti non sono contenti di essere biforcati. </para>
+
+<para>Un corollario è che non dovreste usare la minaccia di una diramazione come tecnica estremistica di una discussione&mdash;“Fate le cose come dico io o io biforcherò il progetto!”&mdash;poiché chiunque è al corrente che un diramazione ch non riesce ad attrarre sviluppatori dal progetto originale è improbabile che viva a lungo. Tutti gli osservatori&mdash;non solo gli sviluppatori, ma utilizzatori e impacchettatori del sistema operativo anche&mdash;si faranno la loro idea su che parte scegliere. Voi dunque dovreste apparire estremamente riluttanti a un diramazione, così se alla fine la fate, possiate reclamare che era l'ultima via rimasta.</para>
+
+<para>Non trascurate di tenere in conto <emphasis>tutti</emphasis> i fattori nel valutare il potenziale successo della vostra diramazione. Per esempio, se molti degli sviluppatori in un progetto hanno lo stesso datore di lavoro, allora anche se sono scontenti e privatamente favorevoli alla diramazione, è improbabile che lo dicano così a voce alta se il loro datore di lavoro è contro di essa. Molti programmatori di software libero amano pensare che avere una licenza libera sul codice significa che nessuna compagnia può dominare lo sviluppo. E vero che la licenza, in un senso definitivo, è un garante di libertà&mdash;se gli altri vogliono abbastanza fortemente biforcare il progetto, ed hanno le risorse per farlo, essi possono. Ma in pratica, alcuni team di progetti furono in gran parte finanziati da una entità, e non c'è motivo di pretendere che non interessi quel supporto dell'entità. Se essa si oppone alla diramazione, è improbabile che i suoi sviluppatori vi prendano parte, anche se segretamente lo vogliono.</para>
+
+<para>Se tuttavia concludete che dovete fare la diramazione, allineatevi privatamente col supporto prima, quindi annunciate la diramazione in un modo non ostile. Anche se siete arrabbiati, o in disappunto, con i proprietari correnti, non dite questo nel messaggio. Giusto spassionatamente dichiarate ciò che vi ha portato alla decisione di una diramazione, e che non volete significare nessuna intenzione malevola verso il progetto da cui vi diramate. Dando per ipotesi che voi la considerate una diramazione (come opposta a una conservazione di emergenza del progetto originale), mettete l'accento sul fatto che non state diramando il nome ma il codice, e scegliete un nome che no vada in conflitto col nome del progetto.  Potete usare un nome che contiene o si riferisce al nome originale, finché ciò non apre la porta a una confusione di identità. Certo è bene spiegare in modo prominente sulla pagina web della diramazione che essa discende dal programma originale, e anche che essa spera di soppiantarlo. Solo non fate si che la vita degli utilizzatori sia più difficile obbligandoli a sbrogliare una disputa di identità. </para>
+
+<para>Infine, potete ottenere che le cose partano con il piede giusto concedendo automaticamente a tutti coloro che avevano l'invio nel progetto originale l'accesso all'invio nella diramazione, inclusi quelli che erano apertamente in disaccordo con la necessità di una diramazione. Anche se essi non usano mai l'accesso all'invio, il vostro messaggio è chiaro: ci sono disaccordi qui, ma non nemici, e date il benvenuto ai contributi di codice provenienti da ogni origine competente.</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->

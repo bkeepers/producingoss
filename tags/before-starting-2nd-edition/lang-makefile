@@ -1,0 +1,39 @@
+# This is meant to be invoked from one of the language-specific
+# subdirs, e.g.: 'cd zh && make -f ../lang-makefile ...'
+
+include ../tools/Makefile.base-vars
+TOOLS_DIR = ../tools
+NAME = producingoss
+OUTNAME = $(NAME)
+XML_SOURCE = book.xml
+STYLESHEET = ../styles.css
+HTML_CHUNK_DIR = .
+# Suppress svnversion for now
+VERSION_SOURCE = 
+
+# TODO: Workaround for the fact that "fop" is being problematic and
+# therefore PDF generation is sometimes broken.  While that needs to
+# be fixed, it at least shouldn't block other formats being generated.
+all-but-pdf: html html-chunk epub
+
+all: all-but-pdf pdf ps
+
+# The web site post-commit hook runs 'make www'.
+www: all-but-pdf
+
+ebook: epub
+
+adsense:
+	../tools/make-ad-sense.py producingoss.html
+	../tools/make-ad-sense.py .
+
+include ../tools/Makefile.base-rules
+
+# This overrides the 'clean' rule from tools/Makefile.base-rules,
+# but instead of removing $(HTML_CHUNK_DIR), it removes *.html.
+clean:
+	rm -f $(VERSION_SOURCE)
+	rm -f $(HTML_TARGET) $(FO_TARGET)
+	rm -f $(PDF_TARGET) $(PS_TARGET) 
+	rm -rf $(EPUB_CHUNK_DIR)
+	rm -rf *.html

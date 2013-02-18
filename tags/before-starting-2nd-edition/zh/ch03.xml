@@ -1,0 +1,1043 @@
+<chapter id="technical-infrastructure">
+
+<title>技术基础设施</title>
+
+<simplesect>
+
+<para>自由软件项目依赖于选择性捕获和信息集成的技术。对这些技术的使用越是熟练，并说服别人去使用这些技术，你的项目就越成功。随着项目的成长，这一点愈发正确。好的信息管理系统应该能够防止开源项目在布鲁克法则的重压下崩塌<footnote><para>摘自<citetitle>《人月神话》</citetitle>，1975。参见<ulink
+url="http://en.wikipedia.org/wiki/The_Mythical_Man-Month"/>和<ulink
+url="http://en.wikipedia.org/wiki/Brooks_Law"/>。</para></footnote>
+，也就是说向一个已经延期的项目增加人力，只能使项目延期更多。佛雷德·布鲁克观察到，项目的复杂性同参与人员数量的<emphasis>平方</emphasis>成正比。当项目中只有少数几个人时，大家可以容易的互相交谈，但当有上百人参与时，不可能让每个人都能知道别人正在做什么。如果说优秀的自由软件项目的管理是让每个人都感觉是在同一个屋子里共同工作，很明显问题在于：当在一间拥挤的房间内，在同一时刻每个人都想发出声音，会发生什么？</para>
+
+<para>这不是一个新问题。在现实中的拥挤房间中，解决方案是<firstterm>会议程序</firstterm>：我们需要正式的指导规则：包括如何在一个大型团队中进行即时的讨论，如何保护重要的异议不会在一片“我也是”的回复中淹没，如何形成小组委员会，如何识别出何时作出决定等等。会议程序的一个重要组成部分是指明团队如何同它的信息管理系统互动。有些评论“为了被记录”而存在的，有些则不是。记录本身经常是被直接处理的，不能根据字面意义去理解，而是代表了团队已经确立达成<emphasis>共识</emphasis>。记录并非一成不变，为不同的目的会有不同的形式。它可以包括个人会议记录、每次会议的完整记录、摘要、议程及其注解、委员会报告，来自未出席通信者的报告，活动项目列表等等。</para>
+
+<para>因为互联网并不是一个真实的房间，所以我们也无须担心去复印诸如让部分人在别人讲话时保持安静之类的议会程序。但当它和信息管理技术接合时，一个运作良好的开源项目就会是打了兴奋剂的会议程序。由于开源项目中的交流都是通过书写方式完成的，由此发展出了复杂的系统：为了恰当导向和标记数据；为了避免会造成误解的重复；为了储存和检索数据；为了纠正错误和废弃的信息；以及为了在发现不相关信息的新关系时进行关联。开源项目中的活跃参与者已经将掌握了其中的很多技术，并且经常为了确保信息被正确的导向而进行复杂的手工任务。但是所有的努力都是依赖于复杂的软件支持。交流媒体应该尽可能地依靠自身完成发送、标签和记录工作，应该确保人尽可能方便地得到这些信息。当然在实际中，在整个过程中的很多方面还是需要人的干预，并且重要之处在于软件使得这种干预也是方便的。但总得来说，如果人能确保首次进入系统时信息的导向和标签都是正确的，软件应该被配置成可以充分利用这些元数据。</para>
+
+<para>此章中的建议都是非常务实的，都是基于明确的软件和使用模式的经验。但这里不仅仅是教授实用的技术。而是通过许多小范例来演示一种总体态度，这种态度可以最大程度的促进你项目中的好的信息管理。这种态度包含了技术技巧同人力技巧的结合。并且技术技巧是关键，因为当新的需求出现时，信息管理软件总需要配置，以及一定量的持续维护和调整（例如，关于如何处理项目成长的讨论参加<phrase output="printed">本章后面的</phrase><xref linkend="bug-filtering"/>）。人力技巧也是不可或缺的，因为人类社区也需要维护：如何利用这些工具的优势有时候不是立刻就很明显，在有些项目案例中甚至有冲突的习惯（例如，参见<xref linkend="mailing-lists"/>中的关于在外发的邮件列表通告中设置<systemitem>Reply-to</systemitem>头的讨论）。应该鼓励项目相关的每一个人在正确的时间、正确的地点尽自己的职责来保持项目信息组织的良好。贡献者参与的程度越深，就越能预期她能学习更复杂和专业的技术。</para>
+
+<para>信息管理没有现成的解决方案。有着众多的不确定因素。你可能好不容易才把所有事情都按照自己的意愿完成配置，并且社区的大多数人参与进来，但随着项目的成长让某些实践不能扩展。或者本来你的项目正在稳步发展，技术基础架构也能使开发者和用户的社区关系融洽，但突然某些人出现，发明了一个全新的信息管理服务，很快新来的会质问为何你的项目不用它&mdash;例如很多在维基（参见<ulink url="http://en.wikipedia.org/wiki/Wiki"/>）发明之前建立的自由软件项目就正面临这一问题。很多问题需要决断，比如权衡生产信息的方便性还是消费信息的方便性，或者权衡花在配置信息管理软件上的时间与其为项目带来的益处。</para>
+
+<para>小心过度自动化的诱惑，请自动化那些真正需要人们关注的东西。技术基础架构是重要的，但推动一个自由软件项目运转的是参与的人的意愿&mdash;用智慧的方式表达的意愿&mdash;通过人的参与。技术基础架构只是为人门达到这个目标提供便利。</para>
+
+</simplesect>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="tools-needed">
+<title>一个项目需要什么</title>
+
+<para>大部分开源项目至少提供了最低限度的标准工具用于管理信息：</para>
+
+<variablelist>
+
+   <varlistentry><term>网站</term>
+     <listitem>
+     <para>主要是一个集中将项目信息发布给公共的单向渠道。网站也可以作为其他项目工具的管理界面使用。</para>
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>邮件列表</term>
+     <listitem>
+       <para>通常会是项目中最活跃的通讯手段，是“可记录的媒介”。</para> 
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>版本控制</term>
+     <listitem>
+       <para>让开发者可以方便地管理代码的变更，包括回复和“变更转运”。让每一个人能看到代码的变化。</para>
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>Bug跟踪</term>
+     <listitem>
+       <para>使开发者可以追踪他们正在工作的内容，互相协调，以及计划发布。让每个人都能查询Bug的状况并且记录特定Bug的信息（例如重现方法）。不仅能用于对bug的追踪，而且能用于任务、发布和新特性等等。</para>
+     </listitem>
+   </varlistentry>
+
+<!--
+   <varlistentry><term>Discussion forums</term>
+     <listitem>
+       <para><remark>Basically, bulletin board systems.  These are not
+             as widespread as one would expect, and where they are
+             found, they're not used as much as one would expect.  Why?
+             Are they worth mentioning at all?</remark></para>
+     </listitem>
+   </varlistentry>
+-->
+
+   <varlistentry><term>即时聊天</term>
+     <listitem>
+       <para>一个可以快速和方便的进行讨论和问答的地方，缺点是并不总是能完整地归档。</para>
+     </listitem>
+   </varlistentry>
+
+</variablelist>
+
+<para>这个工具集中的每个工具满足了不同的需要，但它们的功能都是相关的，这些工具必须能协同工作。下面我们将检验它们怎样做到这一点，而最重要的是如何让人们使用它。网站将放在最后讨论，因为它更多的是扮演其他组件黏合剂的角色，而不是工具本身。</para>
+
+<para>通过使用<firstterm>包装主机</firstterm>你也许能避免很多选择工具和配置的头疼事，包装主机是一个提供预包装，模板化的网页区域，以及可运行一个自由软件项目的所有工具的服务器。关于包装主机优缺点的讨论可以看<phrase output="printed">本章后面的</phrase><xref linkend="canned-hosting"/>。</para>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="mailing-lists">
+<title>邮件列表</title>
+
+<para>邮件列表有如项目交流的面包和黄油。如果用户在除了网页之外的地方浏览，最有可能是项目的某一个邮件列表。不过在体验邮件列表本身之前，他们将接触邮件列表的界面&mdash;也就是加入列表（“订阅到”）的机制。由此带来了邮件列表的#1法则：</para>
+
+<blockquote>
+   <para><emphasis>不要试图手工管理邮件列表&mdash;让软件来做。</emphasis></para>
+</blockquote>
+
+<para>放弃这一点充满诱惑，开始时就设置软件来管理邮件列表看起来有些小题大做了。手动管理小型低流量的邮件列表似乎是理所当然的：你只需设置一个指向自己的订阅地址，然后当有人向其发送邮件，你把他们的邮件地址加入（或是删除）一个保存了所有地址的文本文件中。还能比这更简单的吗？</para>
+
+<para>问题在于，人们所期望的好的列表管理并非是如此简单。它不仅只是按用户的需求订阅或是退订而已。还包括防止垃圾邮件，提供发送邮件列表摘要而不是每条信息都发送的的形式，通过自动应答机提供标准列表和项目信息，以及许多其他事情。一个由人监控的订阅地址只能支持最小数量的简陋功能，而且在可靠性和反应速度上也不如软件。</para>
+
+<para>现代化的列表管理软件至少提供了以下这些特性：</para>
+
+<variablelist>
+
+  <varlistentry><term>同时通过邮件和网页订阅</term>
+    <listitem>
+      <para>当用户订阅一个列表时，她应当能立即收到一条表示欢迎的回复，告知她订阅了什么，下一步该如何使用邮件列表软件，并且（也是最重要的）告知如何退订。当然，这个回复还应该能被定制地加入诸如项目的站点，常见问题和回答等项目的特定信息。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>可选择摘要或是每个信息单独发送的订阅模式</term>
+    <listitem>
+      <para>选择摘要模式，订阅者每天会收到一封包含当天所有列表活动的邮件。对那些并不紧跟列表，不会参与讨论的用户，摘要模式更合适他们，因为这允许他们在任何时刻一次检索所有的主题，避免了随机时间到来邮件的分神。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>审核特性</term>
+    <listitem>
+      <para>在邮件发送到整个列表之前的“审核”是检查邮件以确保：a)&nbsp;不是垃圾邮件，以及b)&nbsp;符合主题。审核必须有人参与，但软件能很大程度的使之变得容易。后面还有关于审核的更多内容。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>管理界面</term>
+    <listitem>
+      <para>不管一些其他的作用，这个特性至少能让管理员轻松地进入列表并删除一个废弃的地址。当一个订阅者的地址开始自动地对每一封列表邮件发出“我已不在这个地址”的回复时，情况就变得非常紧急了。 （有些邮件列表管理软件甚至能依靠自身捕获这种情况，并自动完成退订。）</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>邮件头处理</term>
+    <listitem>
+      <para>许多人在自己的电邮客户端中设置了精密的过滤和回复规则。为了利用这些优势，邮件列表管理软件能为这些人添加和处理某一种标准的邮件头（更多详细内容参阅下面）。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>归档</term>
+    <listitem>
+      <para>发往被管理列表的所有邮件都会被保存，并且能够通过网页访问；有些邮件列表软件以可插入的形式提供外部归档工具如MHonArc（<ulink url="http://www.mhonarc.org/"/>）的接口。就像<phrase output="printed"><xref linkend="communications"/>的</phrase><xref
+            linkend="using-archives"/>所讨论的，归档很重要。</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>所有这些的要点是为了强调邮件列表管理是一个复杂的问题，已经耗费了许多思考，而且大多数已经被解决。你确实无须成为一个专家。但你应该知道，虽然其中大部分已被解决，但总还有进步的空间，在运作一个自由软件项目的过程中列表的管理将一次次地占据你的注意力。下面我们将回答几个有关邮件列表配置的最常见问题。</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="spam-prevention">
+<title>垃圾邮件防护</title>
+
+<para>这些话从动笔到出版的这段时间里，因特网上的垃圾邮件问题很可能又严重了一倍&mdash;或至少给人的感觉是如此。有那么一段时间，就在不久之前，当时可以完全无须任何的垃圾邮件防护措就能运转一个邮件列表。偶尔会有那么几封，只能构成小小的烦恼。好日子已经一去不复返了。现在如果邮件列表没有垃圾防护措施，很快就会被乱七八糟的邮件淹没，以至于不可用。必须实施垃圾防护。</para>
+
+<para>垃圾防护分为两种类型：防止垃圾邮件出现在你的邮件列表中，防止你的邮件列表成为垃圾制造者地址收割机获取新邮件地址的一个源。前者更重要，所以我们首先研究。</para>
+
+<sect3 id="spam-filtering">
+<title>过滤邮件</title>
+
+<para>垃圾邮件防护有三种最基本的技术，大部分的邮件列表软件都会提供，最好能串联使用：</para>
+
+<orderedlist>
+
+  <listitem><para><emphasis role="bold">只自动允许来自列表订阅者的邮件。</emphasis></para>
+
+            <para>只要使用就有效，因为通常只需要在邮件列表软件的配置中做一点小小的改动，所以只需要很少的管理投入。但注意，那些不能自动认可的邮件不能简单地销毁了事。相反，必须传递给审核程序，有两个原因。首先你希望允许非订阅者的邮件。仅仅想问一个问题或是提供建议的人，不应该只为了发一封邮件而需要订阅整个列表。其次，有时甚至订阅者都有可能从非订阅时用的地址发出一封邮件。邮件地址不是鉴别人的可靠方法，它不该被如此对待。</para>
+            </listitem>
+
+  <listitem><para><emphasis role="bold">通过垃圾过滤软件过滤邮件。</emphasis></para>
+
+            <para>如果邮件列表软件允许（大部分是），你能用垃圾过滤软件来获得过滤后的邮件。由于在垃圾制造者和过滤器编写者之间进行着一场永不停息的军备竞赛，自动垃圾过滤从来不是也永远不会是完美的。然而，它可以大大减少进入审核队列的邮件数量，因为更长的列表需要更长的人工处理时间，一定程度的自动过滤总是有益的。</para>
+
+            <para>这里没有空间来详细地介绍垃圾过滤的设置。你应该查阅你的邮件列表软件的文档（见<phrase
+            output="printed">本章后面的</phrase><xref
+            linkend="mailing-list-software"/>）寻求答案。列表软件通常会有一些内置的垃圾防护功能，但也许你想要添加一些第三方的过滤器。推荐两个我有良好体验的软件：SpamAssassin
+            (<ulink url="http://spamassassin.apache.org/"/>)
+            和SpamProbe
+            (<ulink url="http://spamprobe.sourceforge.net/"/>)。这并非是对众多的其他开源垃圾过滤器的不敬，其中的一些显然也是非常好的。只是这两个是我曾经亲身使用过的，并且它们让我很满意。</para>
+  </listitem>
+
+  <listitem><para><emphasis role="bold">审核。</emphasis></para>
+            <para>由于不是列表订阅者的原因而未能自动许可的邮件，就会根据设置进入垃圾过滤软件，最后一个阶段将是<firstterm>审核</firstterm>：邮件将被发送到一个特殊的地址，那里会有人来检查和决定是许可还是拒绝。</para>
+
+            <para>许可一个邮件有两种形式：你可以只是这一次接受它，或你可以告诉列表软件为这一封邮件同一发送者以后的所有邮件开绿灯。为了减少以后的审核负担，你很可能会选择后者。具体如何许可在不同的系统之间有很大的差异，但是通常的形式是向一个特殊的地址发送一条带有命令“accept”（代表这一次许可）或是“allow”（允许这次以及以后的邮件）的回复。</para>
+
+            <para>拒绝通常只需简单的忽略所审核的邮件即可。如果列表软件没有收到确认有效的邮件，它不会让邮件通过并出现在列表上，所以简单地扔掉审核邮件就能达到目的。有时你还有其他选择，返回“reject”或是“deny”命令来杜绝以后来自同一个发送者的邮件进入审核程序。但这么做通常没什么意义，因为大部分需要审核处理的都是垃圾邮件，而垃圾邮件制造者不太会从同一个地址两次发出垃圾邮件。</para>
+            </listitem>
+</orderedlist>
+
+<para>确保审核<emphasis>只</emphasis>被用在过滤垃圾邮件和明显是和主题无关的消息上，比如有时会有人意外地在一个错误的邮件列表中发送了邮件。审核系统通常给你一个直接同发送者联系的途径，但是不要用这种方式来回答属于邮件列表本身的问题，即使那些答案就在你的头脑之中。如果这么做了，将会剥夺项目社区了解人们正在问那些类型问题的具体形式，剥夺它们自己回答问题或者获得答案的机会。邮件列表审核除了严格确保列表中没有垃圾和同主题无关的邮件，没有其他了。</para>
+
+</sect3>
+
+<sect3 id="address-hiding">
+<title>归档中的地址隐藏</title>
+
+<para>为了防止你的邮件列表成为垃圾邮件发送者的地址源，一个常见的技术是混淆用户的邮件地址，例如通过替换</para>
+
+    <blockquote>
+      <para><literal>jrandom@somedomain.com</literal></para>
+    </blockquote>
+
+<para>为</para>
+
+    <blockquote>
+      <para><literal>jrandom_AT_somedomain.com</literal></para>
+    </blockquote>
+
+<para>或</para>
+
+    <blockquote>
+      <para><literal>jrandomNOSPAM@somedomain.com</literal></para>
+    </blockquote>
+
+<para>或一些类似的明显的（对人类来说）加密。因为垃圾邮件地址收割器通常会遍寻网络&mdash;包括你的邮件列表的网络归档&mdash;它们会查找包含“@”的字符串，对地址加密是为了让人们的邮件地址对垃圾邮件发送者来说不可见或不可用。这对防止垃圾邮件发送者将邮件直接发送到邮件列表本身无用，但它可以防止直接发送到用户个人地址的垃圾邮件的增加。</para>
+
+<para>地址隐藏可能存在争议。许多人很喜欢，如果你的归档不能自动支持，他们会很惊讶。还有些人认为这样太不方便了（因为人们需要在使用之前转化地址）。有时候用户断定这样做不能产生预期的效果，因为收割器理论上可以弥补任何不变的加密模式。然而，有一个实验证据可以证明地址隐藏<emphasis>是</emphasis>有效的，见<ulink
+url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>。</para>
+
+<para>理想情况下，邮件列表软件为每个订阅者提供选择的机会，通过特别的yes/no头，或者通过订阅者列表帐户的参数选择设置。然而，我不知道有哪个软件提供了每订阅者或每邮件的选项，因此现在列表管理员必须为所有人作出决定（假定归档程序已经提供了这些特性，就不存在这个问题了）。我倾向于适度使用地址隐藏。一些人对于将自己的邮件发布到网页上或其他收割器可能会搜索的地方会非常小心，他们会因为邮件列表归档暴露它们关心的内容而感到失望，归档用户中的地址隐藏带来的不便是轻微的，因为如果你希望联系某个人，将混淆的邮件地址恢复非常容易。但是最后还是要牢记，这是一场军备竞赛：在你阅读到本文的事以后，收割器可能已经得到了进化，能够识别大多数常见的隐藏形式，我们可以想一些其他形式。</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="header-management">
+<title>身份和头管理</title>
+
+<para>列表订阅者经常希望将来自列表的邮件存放到特定的目录，能够和其他邮件区分开。他们的邮件阅读软件可以自动检查邮件的<firstterm>头</firstterm>。这个头是在邮件的顶部，用来指明发送者、接收者、主题、日期和其他邮件相关的东西。某些头是众所周知的，而且是必须有的：</para>
+
+<screen>
+From: ...
+To: ...
+Subject: ...
+Date: ...
+</screen>
+
+<para>还有一些是可选的，尽管也是标准的头。例如，邮件不必有</para>
+
+<screen>
+Reply-to: sender@email.address.here
+</screen>
+
+<para>头，但大多数情况下都有，因为这可以保证接收者（当作者必须从一个不能接收邮件的地址发送邮件的时候这特别有用）能够联系到原作者。</para>
+
+<para>一些邮件阅读软件提供了基于主题头模式的易用界面，可以用来过滤邮件。这导致人们会要求邮件列表为所有的主题提供自动前缀，所以他们可以设置的阅读器查找前缀并自动将文件归入正确的文件夹。如果原来的作者是这样写：</para>
+
+<screen>
+Subject: Making the 2.5 release.
+</screen>
+
+<para>但是列表中显示的邮件会是：</para>
+
+<screen>
+Subject: [discuss@lists.example.org] Making the 2.5 release.
+</screen>
+
+<para>尽管大多数列表管理软件提供这个选项，但我强烈反对开启这个功能。因为这个问题可以通过更自然的方式轻松解决，而且主题字段消耗的空间也太多了。有经验的邮件列表用户通常会扫视每天的列表邮件的主题，然后决定阅读和/或回复哪些邮件。主题中前置的列表名称会使得主题的正式内容脱离屏幕，无法看到。这混淆了人们赖以决定是否打开邮件的信息，从而减弱了邮件列表的整体功能。</para>
+
+<para>我们不会处理主题头，而是让你的用户利用其他标准的头，以To头说起，可以用来说明邮件列表名称：</para>
+
+<screen>
+To: &lt;discuss@lists.example.org&gt;
+</screen>
+
+<para>任何可以过滤主题的邮件阅读器一定也能轻易的处理To。</para>
+
+<para>还有一些其它的邮件列表期望的可选但标准的头。根据这些头过滤比利用“To”或“Cc”头更加可靠；因为这些头是邮件列表软件本身为每个邮件添加的，一些用户会依赖他们的出现：</para>
+
+<screen>
+list-help: &lt;mailto:discuss-help@lists.example.org&gt;
+list-unsubscribe: &lt;mailto:discuss-unsubscribe@lists.example.org&gt;
+list-post: &lt;mailto:discuss@lists.example.org&gt;
+Delivered-To: mailing list discuss@lists.example.org
+Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
+</screen>
+
+<para>绝大部分是自解释的，更多解释可以看<ulink
+url="http://www.nisto.com/listspec/list-manager-intro.html"/>，或者如果你觉得不够详细，正式的规范可以看<ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>。
+</para>
+
+<para>如果你有一个名为“list”的邮件列表，请注意这些头是如何暗示的，然后你也有了管理地址“list-help”和“list-unsubscribe”。除此之外，用来加入的“list-subscribe”和接触列表管理员的“list-owner”也非常常见。取决于你所使用的管理软件，也可能会设置一些其它的管理地址；文档应该会有详细介绍。通常情况下，每个新用户在订阅时都会收到自动的“欢迎邮件”，其中会完整解释所有的特别地址。你可能有这个欢迎邮件的一份拷贝。如果你没有，可以问其他人获取一份拷贝，这样你就知道当你的用户到来时，他们会看到什么。手中有一份拷贝，你就可以回答邮件列表功能的问题，更好一点，可以放置到网页上。这样当有人丢失了自己的指导并询问“我如何从列表退订时？”，你就可以将URL发送个他。</para>
+
+<para>一些邮件列表软件会在每个邮件的底部追加退订信息。如果有这个选项，请打开它。这样只会导致每个邮件有一段额外的行，在一个无害的位置，可以帮助你节省很多时间，减少了给你，或者更坏的情况，给邮件列表发邮件询问如何退订的人数！</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="reply-to">
+<title>伟大的Reply-to辩论</title>
+
+<para>在前面的<xref linkend="avoid-private-discussions"/>，我强调了保持在公共论坛讨论的重要性，谈论了如何防止私下邮件讨论的一些主动措施，除此之外，本章将会讨论如何设置项目交流软件来更好的做这件事。因为如果邮件列表管理软件提供了一个方法来自动导致讨论保持在列表中，你会认为开启这个功能是显而易见的选择。</para>
+
+<para>好的，有时候也不是如此认为。尽管有这个特性，但是它却有严重的Bug。问题是无论你是否在邮件列表管理中使用这个功能都会成为最热的辩论&mdash;诚然，这不大可能成为你城市里的晚间新闻那样的论战，但它会在自由软件项目中一次次的爆发。下面，我将描述这个特性，提供两方面的主要论点，提出我能作出的建议。</para>
+
+<para>这个特性本身非常简单：如果你愿意，邮件列表软件可以在每个邮件中自动设置转向到邮件列表的Reply-to头。也就是无论原来的发送者设置了什么Reply-to头（或者他们没有设置），当邮件列表的订阅者看到邮件时，它的头将会包含列表地址：</para>
+
+<screen>
+Reply-to: discuss@lists.example.org
+</screen>
+
+<para>从表面上看非常好。因为实际上所有的邮件阅读软件会注意到Reply-to头，这样当任何人回复邮件时，他们的回复都会自动来到整个列表，而不仅仅是邮件的发送者。虽然回复者仍然可以手工修改回复的地址，但重要的是<emphasis>缺省的</emphasis>回复会指向列表。这是通过技术鼓励协作的完美实例。</para>
+
+<para>不幸的是，也有一些缺点。首先是<firstterm>找不到回家的路</firstterm>问题：有时候原来的发送者会把“真正的”邮件地址存放到Reply-to字段，通常是某种原因他们不能通过发送邮件的地址接收邮件。一直从同一个地址读取和发送的人们不会有这种问题，甚至会惊讶有这种情况。但是对于有特别的邮件设置，或者不能设置他们所看邮件的From地址（或许因为他们在工作时发送，而且不能通过IT部门修改配置）时，使用Reply-to可能是保证回复能够收到的唯一方法 。当此类人在未订阅的邮件列表中发送邮件时，她的Reply-to设置就成为了关键信息。如果列表软件覆盖了它，她可能就看不到回复了。</para>
+
+<para>第二个可以预期的缺点，从我的观点看是Reply-to处理最有力的反对论点。大多数有经验的邮件用户会习惯于两个回复的基本方法：<firstterm>reply-to-all</firstterm>和<firstterm>reply-to-author</firstterm>。所有现代的邮件阅读软件对于两个动作都有单独的按键。用户知道如果是回复到所有人（也包括列表），他们会选择reply-to-all，如果是私下回复到作者，他们应该选择reply-to-author。尽管你希望鼓励人们尽可能回复到列表，但确实有情况回复者需要有权利私下回复&mdash;例如，他们希望和邮件的原作者说一些机密的事情，可能不适合出现在公共列表中。</para>
+
+<para>现在考虑一下如果列表覆盖了发送者的Reply-to时会发生什么。回复者点reply-to-author，希望向原发送者私下发送一个邮件。因为那是他所预期的行为，所以就可能不会小心查看新邮件的接收地址。他编写了他的私人的、机密信息，可能会说一些对列表中的人来说很尴尬的内容，并点击发送键。出乎意料的是，几分钟之后他的信息出现<emphasis>邮件列表中！</emphasis>诚然，他应该仔细查看接收字段，对于Reply-to头不要有任何设想值。但是作者几乎会肯定将Reply-to设置为他们的个人地址（更确切地说，他们的软件做了设置），许多资深的邮件用户都会期望这样。实际上，如果一个人直接将Reply-to设置为其他地址，他通常会邮件的正文提及这一点，这样人们就不会为回复所发生的事情感到惊讶了。</para>
+
+<para>因为可能出现的严重后果，我的观点是保证列表管理软件决不要碰Reply-to头。这是一个使用技术来鼓励协作的实例，但是对我来说有潜在的危险副作用。然而，在论战的另一面也有强有力的论据。无论你选择何种方式，你都会在列表中看到有人问你为什么不选择另一种方式。因为你肯定不希望这成为邮件列表中的主要讨论，所以最好准备好回应，诸如此类结束讨论而不是鼓励讨论。请确认你<emphasis>不是</emphasis>坚持认定你的决定，也就是无论是哪个，它都应该明显是唯一正确和明智的选择（即使你认为那是一个事实）。相反，指出这是一个老争论了，两方面都有好的论点，没有能够满足所有用户的选择，因而你只是做出了你能做出的最佳决定。有礼貌的告知不要再炒冷饭了，除非有一些独特的新内容，然后不必再参与讨论并希望它能够自然死亡。</para>
+
+<para>有些人会建议开展一个投票。如果你愿意你可以这样做，但是这个情况下我不认为这是一个满意的解决方案。对于某个人因为出人意料的行为模式的惩罚是巨大的（不小心的将私有邮件发送到公共列表），而对于所有其他人的不便是相对轻微的（偶尔需要提醒某人回复到整个列表而不仅仅是你），多数票是什么并不清楚，即使能得到多数票，少数者应该承担这样的危险吗？</para>
+
+<para>这里我没有涉及问题的所有方面，仅仅包含了看起来最重要的。完整的讨论，请看这两篇权威的文档，当人们遇到争论时经常会引用它们：
+
+<itemizedlist>
+  <listitem>
+     <para><emphasis role="bold">勿动eply-to</emphasis>,
+     <emphasis>by Chip Rosenthal</emphasis></para>
+     <para><ulink
+        url="http://www.unicom.com/pw/reply-to-harmful.html"/></para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">把Reply-to设置为列表地址</emphasis>,
+     <emphasis>by Simon Hill</emphasis></para>
+     <para><ulink
+        url="http://www.metasystema.net/essays/reply-to.mhtml"/></para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<para>无论你偏爱上面的哪一条，我不认为此问题有所谓的“正确”答案，也会很乐意参与到<emphasis>设置</emphasis>Reply-to的许多列表。最重要的事情是你尽早确立一种方式，之后再也不要陷入到争论之中。</para>
+
+<sect3 id="reply-fantasies">
+<title>两个幻想</title>
+
+<para>将来有一天，有些聪明人会在邮件阅读器实现一个<firstterm>reply-to-list</firstterm>键。它可以使用前面提到的一些自定义的列表头来指出邮件列表的地址，然后会将回复仅指向到邮件列表，同时消除所有的其他接收地址，因此，无论如何大多数都是订阅列表的地址。最终，其他邮件阅读器也会采用这个特性，整个争论也就可以偃旗息鼓了。（实际上，<ulink url="http://www.mutt.org/">Mutt</ulink>邮件阅读器已经提供了这个特性。<footnote><para>在本书出现后不久，<ulink url="http://www.michaelbernstein.com/"
+>Michael Bernstein</ulink>告诉我：“也有一些Mutt之外的其他客户端实现了reply-to-list功能。例如，Evolution的一个快捷键有这个功能，但不是一个按钮（Ctrl+L）。”</para></footnote>）</para>
+
+<para>一个更好的解决方案是让每个订阅者自己选择是否进行Reply-to处理。如果希望经过Reply-to处理（自己与他人的邮件），可以要求，而如果不希望，则可以设置为Reply-to不变。然而，我不知道有任何列表管理软件提供这个每订户基础的设置。我们还是只能使用全局设置。<footnote><para>写到这里，我已经发现至少有一个列表管理系统提供了这个特性：<ulink url="http://siesta.unixbeard.net/">Siesta</ulink>。请看这篇相关的文章：<ulink url="http://www.perl.com/pub/a/2004/02/05/siesta.html"
+/></para></footnote></para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="archiving">
+<title>归档</title>
+
+<para>运转列表的软件都有自己特定的设置邮件列表归档的技术细节，超出了本书的范围。当选择归档时，请考虑这些特性：</para>
+
+<variablelist>
+
+  <varlistentry><term>立刻更新</term>
+    <listitem>
+      <para>人们经常会引用在上个小时所做的发布归档。如果可能，归档器必须能够立刻归档每个发布，这样发布出现在邮件列表时，它也就出现在了归档中。如果没有这个特性，至少应该将其设置为每小时更新一次。 （默认情况下，一些归档器会每夜更新，对于一个活跃的邮件列表这有点太滞后了。）</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>引用稳定性</term>
+    <listitem>
+      <para>一旦一个信息已经归档到特定URL，它应该在相同的可访问URL，并尽可能的永远保持。即使归档重建，从备份中恢复，或者其他修正，任何已经公开的URL应该保持相同。稳定引用可以让Internet上的搜索引擎能够索引归档，可以方便用户查找答案。稳定引用重要的另一个原因是因为邮件列表经常会在Bug跟踪（参考<phrase output="printed">本章后面的</phrase><xref
+            linkend="bug-tracker"/>）或其他项目的文档中被引用。</para>
+
+      <para>理想情况下，邮件列表应该能够包含一个信息归档的地址，或者至少在分发到接收者的信息头上有URL的信息特定的部分。这样人们就有了信息的拷贝，已经知道了归档的位置，而无须实际访问归档，这样做很有用，因为任何操作都需要花费网络浏览器的时间。我不知道是否有邮件列表软件实际支持这个特性；不幸的是，我用过的都不行。然而，这是我要寻找的（或者，如果你正在写邮件列表软件，这应该是一个可以考虑实现的特性）。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>备份</term>
+    <listitem>
+      <para>如何备份归档必须相当清楚，而恢复方法也不能太难。换一句话说，不要把归档器当作黑盒子。你（或者你项目中的某个人）应当知道信息存放在什么地方，以及如何在必要时从信息存放处重新生成归档页。这些归档是珍贵的数据&mdash;失去了它们，就像失去了项目集体记忆中美好的一部分。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>线索支持</term>
+    <listitem>
+      <para>应该能够从任意单独的信息进入原来信息所归属的<firstterm>线索</firstterm>（一组关联的信息），每个线索必须拥有自己的URL，与线索中的其他信息区分开来。</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>可搜索性</term>
+    <listitem>
+      <para>一个不支持搜索的归档器&mdash;针对信息内容、以及作者和主题&mdash;接近于无用。注意某些归档器只是将此工作交给了诸如<ulink
+            url="http://www.google.com/">Google</ulink>的第三方搜索引擎。这是可以接受的，但是直接的搜索支持通常会更加易于调整，例如我们可以指定搜索匹配的是主题行还是正文。</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>上面是一个技术检查列表，可以帮助你评估和设置归档器，本章后面将讨论如何让人们<emphasis>利用</emphasis>归档器来使项目获益，特别是在<xref linkend="using-archives"/>。</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="mailing-list-software">
+<title>软件</title>
+
+<para>这里是一些可以进行列表管理和归档的开源工具。如果你的项目主机已经有默认的设置，你可能无法决定一个工具。但是如果你必须自己安装一个，这些是可以选择的。我实际使用过的包括ailman、Ezmlm、MHonArc和Hypermail，这并不是意味着其他工具不好（当然可能有其他一些工具只是我碰巧没有找到，所以不要把这当作完全的列表）。</para>
+
+<para>邮件列表管理软件：</para>
+
+<itemizedlist>
+ <listitem>
+   <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.list.org/"/></para>
+   <para>（有内置的归档器，以及外挂其他归档器的钩子。）</para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.procmail.org/"/></para>
+   <para>（专门用于Procmail邮件处理系统。）</para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.ecartis.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://listproc.sourceforge.net/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://cr.yp.to/ezmlm.html"/></para>
+   <para>（设计与<ulink
+         url="http://cr.yp.to/qmail.html">Qmail</ulink>邮件投递系统协同工作。）</para> 
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://mojo.skazat.com/"/></para>
+   <para>（不管网站因为什么奇怪的想法希望掩盖这个事实，这确实是一个自由软件，使用GNU许可证发布，也有内置的归档器。）</para>
+ </listitem>
+</itemizedlist>
+
+<para>邮件列表归档软件：</para>
+
+<itemizedlist>
+ <listitem>
+   <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.mhonarc.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.hypermail.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://sourceforge.net/projects/lurker/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.procmail.org/"/></para>
+   <para>（SmartList的伴侣软件，也可以是通用的邮件处理系统，很显然，被配置为归档器。）</para>
+ </listitem>
+</itemizedlist>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="vc">
+<title>版本控制</title>
+
+<para>一个<firstterm>版本控制系统</firstterm>（或<firstterm>修订控制系统</firstterm>）是跟踪和控制项目文件变更的技术与实践的组合，包括源代码、文档和网页。如果你以前从来没有使用过版本控制，那你最好赶快找一个有经验的人加入。现今，所有的人都希望你的项目源代码存放在版本控制下，如果不使用版本控制，人们将会轻视项目。</para>
+
+<para>版本控制如此广泛的原因是因为它实际上能帮助运营一个项目的所有方面：内部开发者交流、发布管理、Bug管理、代码稳定性和试验开发投入，以及对某个变更所属开发者的归因和授权。版本控制系统为这些领域提供了一个集中的协调力量。版本控制的核心是<firstterm>变更管理</firstterm>：识别对项目文件的每一个不相关的变更，使用元数据例如变更的日期和作者来注解每个变更，之后无论使用什么方法，任何人询问时，重放这个事实。这是一种变更为信息基本单元的交流机制。</para>
+
+<para>这个部分不会讨论使用版本控制的所有方面。它是如此包罗万象，我们不得在本书不时的提及。因此，我们会通过促进协作开发的方式，专注于版本控制系统的选择和设置。</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-vocabulary">
+<title>版本控制词汇表</title>
+
+<para>如果你没有用过版本控制，本书不会教你如何使用，但是如果没有一些关键术语，我们就无法讨论。这些术语独立于任何特定的版本控制系统：它们是网络交互的基本名词和动词，将会在本书剩下的部分广泛使用。即使这个世界上没有版本控制，变更管理的问题也会存在，这些术语为我们简明的讨论这些问题提供了一种语言。
+
+<variablelist>
+
+ <varlistentry id="vc-vocabulary-commit">
+  <term><firstterm>提交（commit）</firstterm></term>
+  <listitem><para>对项目做出一个变更；更正式的，以此方式在版本控制数据库存储一个变更，可以成为项目以后发布的一部分。 “提交”可以作为名词或动词。作为名词，从本质上讲可以看作是“变更（change）”同义词。例如：“我刚刚为报告的Mac OS X上的服务器宕机Bug提交了一个修订。Jay，你能评审一下提交并看一下我有没有误用内存分配吗？”</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-log-message">
+  <term><firstterm>日志信息（log message）</firstterm></term>
+  <listitem><para>每次提交所附的注释，描述了提交的性质和目的。日志信息是任何项目最重要的文档：它是单个代码变更的高度技术语言与特性、Bug修订和项目进展这类更面向用户的语言的桥梁。本节的后半部分，我们会关注将日志信息发布给适当读者的方法；另外，<phrase output="printed"><xref linkend="communications"/>的</phrase><xref
+  linkend="codifying-tradition"/>将会讨论鼓励贡献者填写简明和有用日志信息的方法。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-update">
+  <term><firstterm>更新（update）</firstterm></term>
+  <listitem><para>请求将其他人的变更（提交）和项目的本地拷贝进行组合；也就是将你的拷贝“保持最新”。这是一个非常常见的操作；大多数开发者每天都会多次更新代码，因此，可以确认他们运行的代码与别人的相同，因此他们看到一个Bug，他们可以确信它还没有被修正。例如：“嗨，我发现索引代码一直会丢掉最后一个字节。这是一个新的bug吗？”“是的，但已经在上周修正了&mdash;更新一下，一定是好了。”</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-repository">
+  <term><firstterm>版本库（repository）</firstterm></term> <listitem><para>一个存放变更的数据库。一些版本控制是集中式的：有一个单独的主版本库，会存放项目的所有变更。也有一些分布式的系统：每个开发者都有自己的版本库，变更可以在版本库之间任意交换。版本控制系统跟踪了变更之间的依赖关系，当需要发布时，确认一部分变更集进入发布。集中式还是分布式的问题也是一场不朽的软件开发圣战；也要防止落入在你的项目列表中讨论这个问题的陷阱。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-checkout">
+  <term><firstterm>检出（checkout）</firstterm></term>
+  <listitem><para>从版本库获取项目拷贝的过程。一个检出通常会产生一个叫做“工作拷贝”（看后面）的目录树，可以从这个目录将变更提交回原来的版本库。在一些分布式的版本控制系统，每个工作拷贝本身都是一个版本库，变更可以推出（拖入）到任何愿意接受的版本库。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-working-copy">
+  <term><firstterm>工作拷贝（working copy）</firstterm></term>
+  <listitem><para>一个包含项目源代码文件或者网页及其他文档的开发者的私有目录树。一个工作拷贝也可能会包含由版本控制系统管理的元数据信息，可以说明工作拷贝所对应的版本库，以及所展现文件的“修订版本（看后面）”等等。通常情况下，每个开发者都有自己的工作拷贝，他可以在其中进行变更以及测试，并提交。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-revision">
+  <term><firstterm>修订版本（revision）</firstterm>,
+        <firstterm>变更（change）</firstterm>,
+        <firstterm>变更集（changeset）</firstterm></term>
+  <listitem><para>一个“修订版本”通常是一个特定文件或目录的具体化身。例如，如果开始时一个项目有一个文件F，修订版本是6，然后如果有一个文件对文件F提交了一个变更，那么就会产生F的修订版本7。一些系统也使用“修订版本”，“变更”或“变更集”来引用作为一个逻辑概念的一组变更。</para> 
+
+  <para>这些术语在不同的版本控制系统可能有不同的技术含义，但是大意基本相同：他们提供了一个方法可以精确的描述一个文件或一组文件历史中的精确位置（比方说，恰恰在一个Bug修正之前或之后）。例如：“她在修订版本10修正了那个”或者“他在文件foo.c的修订版本10修正了那个。”</para>
+
+  <para>当一个人在不指定特定修订版本的时候谈论一个文件或一组文件时，通常假定是指最近的修订版本。</para></listitem>
+ </varlistentry>
+
+  <sidebar id="version-vs-revision">
+  <title>“版本”对“修订版本”</title>
+  <para>单词<firstterm>版本（version）</firstterm>有时候作为“修订版本”的同义词使用，但是在本书我不会这样使用，因为这太容易与一个软件的版本混淆&mdash;也就是软件的发布或版本号，例如在“版本 1.0（Version 1.0）”。不管怎样，因为短语“版本控制”已经标准化了，所以我会继续将其视为“修订版本控制”和“变更控制”的同义词。</para>
+  </sidebar>
+
+ <varlistentry id="vc-vocabulary-diff">
+  <term><firstterm>差异（diff）</firstterm></term>
+  <listitem><para>变更的文本化展现。一个差异显示了哪些行发生了怎样的改变，以及围绕上下文两侧的几行。一个已经熟悉代码的开发者通常可以阅读区别，并理解变更完成的事情，甚至定位Bug。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-tag">
+  <term><firstterm>标签（tag）</firstterm></term>
+  <listitem><para>一组特定修订版本的文件的标签。标签通常用来保存人们感兴趣的项目快照。例如，为每个公开发布使用标签，这样人们就可以从版本控制系统获取发布对应的文件/修订版本。常见的标签名称有<literal>Release_1_0</literal>、<literal>Delivery_00456</literal>等等。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-branch">
+  <term><firstterm>分支（branch）</firstterm></term>
+  <listitem><para>项目的一个拷贝，在版本控制之下，但却是孤立的，所以分支上的变更不会影响项目的其他部分，或者相反，除非你故意将变更“合并”过去（看后面）。分支也被称为“开发线（lines of development）”。即使当一个项目没有明确的分支，开发也可以被认为是发生在“主分支”，也称为“主线”或“<firstterm>主干（trunk）</firstterm>”。</para>
+
+  <para>分支提供了一个将开发线隔离的方法。例如，一个分支可以用来进行对于主干不够稳定的实验开发。或者一个分支可以用来稳定新的发布。在发布过程中，有规律的开发可以继续不受干扰的在版本库的主线进行；与此同时，在发布分支，除非经过发布管理员的确认，不允许任何变更。通过这种方式，让发布不必干扰正在进行的开发工作。关于分支的详细讨论见<phrase output="printed">本章后面的</phrase><xref
+  linkend="branches"/>。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-merge">
+  <term><firstterm>合并（又名搬运）（merge, a.k.a. port）</firstterm></term>
+  <listitem><para>用来将变更从一个分支搬运到另一个。这包括从主干合并到分支，或者相反。实际上，这是最常见的合并类型；在两个非主分支之间搬运变更的情况很少见。关于此类合并的更多信息可以看<xref
+  linkend="vc-singularity"/>。</para>
+
+  <para>“合并”也有另一种相关的含义：也就是当两个人对于同一个文件作出没有交叠的变更时，版本控制系统所作的事情。因为两个变更没有互相干扰，当一个人更新其拷贝中的这个文件（已经包含他自己的变更）时，其他人的变更会自动合并进去。这非常常见，特别是当多个人编辑同一代码时。当两个变更<emphasis>确实</emphasis>交叠了，结果就是“冲突”了；看下面。</para>
+  </listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-conflict">
+  <term><firstterm>冲突（conflict）</firstterm></term>
+  <listitem><para>当两个人希望对于代码的同一个地方作出不同的修改时。所有的版本控制系统会自动监测到冲突，并至少让一个人意识到他们的变更与其他人的冲突了。这依赖于<firstterm>解决（resolve）</firstterm>冲突的人，以及与版本控制系统解决的交流。</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-lock">
+  <term><firstterm>锁定（lock）</firstterm></term>
+  <listitem><para>对于某个文件或目录进行排他变更声明的方法。例如，“我现在不能对网页文件提交任何变更。似乎Alfred已经锁定了所有文件，因为他要修改背景图片。”不是所有的版本控制系统都提供了锁定能力，它们并不都需要使用锁定特性。这是因为平行，同时开发是行为准则，而将人们锁定在文件之外违背了这个思想。</para>
+
+  <para>需要锁定才能提交的版本控制系统，我们称之使用<firstterm>锁定-修改-解锁</firstterm>模型。而其他的我们称之为<firstterm>拷贝-修改-合并</firstterm>模型。两种模型的一个完美的深入解释和比较可以看<ulink
+  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>。通常情况下，拷贝-修改-合并适合于开源开发，在本书讨论的版本控制工具都支持这个模型。</para></listitem>
+ </varlistentry>
+
+</variablelist>
+
+</para>
+
+</sect2>
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-choosing">
+<title>选择一个版本控制系统</title>
+
+<para>在写本文的时候，自由软件世界中两个最流行的版本控制系统是<firstterm>并行版本系统</firstterm>（<firstterm>CVS</firstterm>，<ulink url="http://www.cvshome.org/"/>）和<firstterm>Subversion</firstterm>（<firstterm>SVN</firstterm>，<ulink url="http://subversion.tigris.org/"/>）。</para>
+
+<para>CVS已经存在很长时间了。大多数有经验的开发者已经熟悉了它，它或多或少满足了你的需要，而且因为它已经流行了很长时间了，你可能不会陷入它是否为正确选择的争论。CVS有一些缺点。它不支持简单的引用多个文件的变更；它不支持版本控制下的文件重命名和拷贝（这种情况下如果你需要识别出项目开始后的代码树，会非常头痛）；它对合并的支持很弱；它处理大文件和二进制文件不佳；以及在操作很多文件时操作会非常慢。</para>
+
+<para>CVS的这些Bug都不是致命的，所以它一直非常流行。然而，最近几年Subversion逐渐被人们所接受，特别是在新创建的项目中。<footnote><para>关于这种增长的证据可以看<ulink url="http://cia.vc/stats/vcs"/>和<ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>。</para></footnote>如果你新开始一个项目，我推荐Subversion。</para>
+
+<para>在另一方面，因为我参与了Subversion项目，我的客观性有理由值得怀疑。在最近几年，许多新的开源版本控制系统已经出现。<xref linkend="vc-systems"/>列出了所有我知道的，大体上根据流行性排序。就像列表说明的，决定使用何种版本控制系统可能成为一项终身的研究项目。有可能你也会省掉选择的过程，因为你的主站已经做出了选择。但如果你必须做出选择，请咨询那些有经验的人，然后选择一个并使用起来。任何稳定的产品状态的版本控制系统可以实现；你不必担心会做出灾难性的错误决定。如果你无法下决心，那就Subversion吧。它学起来相对简单，在近几年里还应该保持标准的地位。</para>
+
+</sect2>
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-using">
+<title>使用版本控制系统</title>
+
+<para>这一部分的建议不针对任何特定版本控制系统，它们都应当可以简单的实现。详细信息请参考特定系统的文档。</para>
+
+<sect3 id="version-everything">
+<title>版本化所有的东西</title>
+
+<para>不要仅仅将项目的源代码纳入到版本控制下，也应该包括网页、文档、FAQ、设计注释和任何人们希望编辑的内容。让他们与源代码尽量接近，在同一个版本库树中。任何值得写下来的信息都应该纳入版本控制&mdash;也就是任何可能会变更的信息。不会发生变更的东西都应该归档，而非版本化。例如，一个邮件一旦发布，就不会变更；因此，将其版本化没有任何意义（除非它成为一个较大的、进化文档的一部份）。</para>
+
+<para>在一个地方版本化所有的东西的原因非常重要，这样人们只需要学习一种提交变更的方式。例如，经常是一个贡献者开始编辑一个网页或者文档，然后接着做一些代码变更。当项目对于所有的提交使用相同的提交方式时，人们只需要学习一次。一起版本化所有的东西也意味着随着文档的更新，新特性可以一起提交，而代码分支时也是对文档分支等等。</para>
+
+<para>不要将<firstterm>生成的文件</firstterm>置入版本控制。那些应该不是可编辑的数据，因为它们是程序方式由其他文件产生的。例如，一些构建系统根据模板<filename>configure.in</filename>文件产生<filename>configure</filename>。为了改变<filename>configure</filename>，我们需要编辑<filename>configure.in</filename>，然后重新生成；因此，只有文件<filename>configure.in</filename>是“可编辑文件。”只版本化模板&mdash;如果你也版本化结果文件，人们在对模板进行修改后会不可避免的忘记重新生成它，结果的不一致会导致无休止的混淆。<footnote><para>对于版本化<filename>configure</filename>的不同意见，可以看Alexey Makhotkin的文章，在<ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>的“<citetitle>configure.in and version
+control</citetitle>”。</para></footnote></para>
+
+<para>所有可编辑数据必须存放在版本控制下的规则也有一个不幸的例外：Bug跟踪。Bug数据库保存了大量的可编辑数据，但是因为技术原因不能将数据存放在版本控制系统。 （一些跟踪工具有一些原始的版本控制特性，然而，独立于项目的主版本库。）</para>
+
+</sect3>
+
+<sect3 id="vc-browsing">
+<title>可浏览性</title>
+
+<para>项目的版本库应该能够通过web浏览。这不仅是意味着浏览最新修订的能力，也包括回到过去查看早先的版本，查看修订之间的区别，以及阅读针对特定变更的日志信息等等。</para>
+
+<para>可浏览性非常重要，因为它是一个轻量级的项目数据门户。如果不能通过web浏览版本库，那一个人如果希望检查特定的文件（例如，看一下某个bug修正是否已经进入代码），他必须在本地安装版本控制客户端，这会让一项只需要两分钟的任务变成一项半小时或更长的任务。</para>
+
+<para>可浏览性也暗示了浏览文件特定修订版本的标准URL，以及任意给定时间最近的修订。在技术讨论或向人们指明作为证据时这非常有用。例如我们不会说“关于调试服务器的提示，可以看你工作拷贝中的www/hacking.html”，而会说“关于调试服务器的提示，可以看<emphasis>http://svn.collab.net/repos/svn/trunk/www/hacking.html</emphasis>，”给定一个会一直指向<filename>hacking.html</filename>最新修订的URL会更好。因为它不会导致混淆，也避免了用户是否有最新工作拷贝的问题。</para>
+
+<para>一些版本控制系统包含内置的版本库浏览机制，而其他一些依赖于第三方的工具实现。这类工具有<firstterm>ViewCVS</firstterm>（<ulink
+url="http://viewcvs.sourceforge.net/"/>）、<firstterm>CVSWeb</firstterm>（<ulink
+url="http://www.freebsd.org/projects/cvsweb.html"/>）以及<firstterm>WebSVN</firstterm>（<ulink
+url="http://websvn.tigris.org/"/>）。第一个工具可以支持CVS和Subversion，而第二个只支持CVS，而第三个只支持Subversion。</para>
+
+</sect3>
+
+<sect3 id="commit-emails">
+<title>提交邮件</title>
+
+<para>对版本库的每一次提交应当能够产生一个邮件，包含谁做出修改的、何时作出的修改、修改的文件和目录以及为什么修改。邮件必须发送到专注于提交邮件的特别邮件列表，在邮件列表中能够同普通人的邮件区分开来。必须鼓励开发者和其他感兴趣的参与者订阅这个提交列表，这是从代码级别来跟踪项目的最有效方法。除了同级评审（见<xref linkend="code-review"/>）这一明显的技术益处，提交邮件帮助我们建立了一种社区意识，因为他们创建了一个共享环境，在其中人们可以对其他人也可见的事件（提交）作出反应。</para>
+
+<para>设置提交邮件的具体方法依赖于你的版本控制系统，但通常有一些脚本或其他工具可以完成这个工作。如果你在寻找过程中遇到困难，可以查一下<firstterm>钩子（hooks）</firstterm>的文档，特别是<firstterm>post-commit hook</firstterm>，CVS中也称作<firstterm>loginfo hook</firstterm>。Post-commit钩子大意上就是对提交做出自动化的响应。这个钩子会由每个提交出发，并提供关于提交的所有信息，你可以自由的使用这些信息做任何事情&mdash;例如，发送一个邮件。</para>
+
+<para>通过预先包装的提交邮件系统，你可能会希望修改一些默认的行为：</para>
+
+<orderedlist>
+
+  <listitem>
+  <para>一些提交邮件程序会在邮件中包含实际的区别，而不是提供在web上使用版本库浏览系统查看变更的URL。虽然提供URL非常好，这样后面就可以引用这个变更，但是在邮件本身中包含区别同样<emphasis>非常</emphasis>重要。阅读邮件已经成为人们的例行的一部分，如果变更的内容在提交邮件中，开发者可以立刻进行评审，不需要离开邮件阅读器。如果他们需要点击一个URL来评审变更，大多数人就不会作了，因为需要开始一个新动作，而不是延续一个已发生的动作。此外，如果评审者希望询问变更的某些事情，可以直接选择带原文回复并注解区别，这样就不必访问网页并辛勤的从web浏览器拷贝粘贴到邮件客户端。</para>
+
+  <para>（当然，如果区别非常大，诸如大片的新代码正文添加到了版本库，那么省掉区别而只提供URL就比较有意义。大多数提交邮件程序可以自动执行这种限制。如果你的不支持，那包含区别也没有关系，只是偶尔会有些大邮件，比完全没有区别更好。便利的评审和回复是协作开发的奠基石，是否存在十分关键。）</para>
+  </listitem>
+
+  <listitem><para>提交邮件必须将Reply-to头设置为普通的开发邮件列表，而不是提交邮件列表。那是因为，当有人评审一个提交并撰写了一个回复，这个回复应当自动转向到人们的开发邮件列表，也就是通常人们讨论技术问题的地方。有这么几个原因。首先，你希望将技术讨论保持在一个邮件列表中，因为这也是人们所期望的情况，而且这种情况下只需要搜索一个归档。其次，有一些感兴趣的参与者可能没有订阅提交邮件列表。第三，提交邮件列表把自己当作一个监视提交的服务，而不是用来关注提交<emphasis>并</emphasis>偶尔进行技术讨论。订阅提交邮件列表的人除了提交邮件没有订阅其他东西；通过那个列表发送其他内容违反了隐含的契约。第四，人们经常写程序来阅读提交邮件列表并处理结果（例如为了显示一个网页）。这些程序预备好了处理一致格式的提交邮件，但与人写的邮件不匹配。</para>
+
+  <para>请注意这里设置Reply-to的建议与<phrase output="printed">本章前面</phrase><xref linkend="reply-to"/>中说的并不矛盾。对于信息的<emphasis>发送者</emphasis>来说，设置Reply-to非常正常。在这个情况下，发送者是版本控制系统本身，它设置Reply-to是为了说明回复的合适地方是开发邮件列表，而不是提交列表。</para>
+
+  </listitem>
+
+</orderedlist>
+
+<sidebar id="cia">
+<title>CIA：另一种变更公示机制</title>
+
+<para>提交邮件不是传播变更新闻的唯一方式。最近一种叫做CIA（<ulink
+url="http://cia.navi.cx/"/>）的机制被开发了出来。CIA是一个实时提交统计信息的聚合器和分发器。CIA最流行的用处是发送提交提醒到IRC频道，所以登陆到频道的人都可以实时的看到发生的提交。尽管比提交邮件有较少的技术功效，因为观察者不一定会在提交提醒弹出时就在频道上，但是这项技术仍然有巨大的<emphasis>社会</emphasis>功效。人们得到了成为某个存在并活跃事务一部分的感觉，并且他们能够感到正在发生的进展。</para>
+
+<para>工作原理是通过你的post-commit钩子调用CIA通知程序。通知器会将提交信息格式化为XML信息，并发送到中央服务器（通常是<literal>cia.navi.cx</literal>）。然后服务器将提交信息分发到其他论坛。</para>
+
+<para>CIA也可以设置来发送<ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>供稿，更多细节可以看在<ulink url="http://cia.navi.cx/"/>的文档。</para>
+
+<para>如果你想参考CIA的一个实例，将你的IRC客户端指向<literal>irc.freenode.net</literal>，频道<literal>#commits</literal>。</para>
+
+</sidebar>
+
+</sect3>
+
+<sect3 id="branches">
+<title>使用分支来避免瓶颈</title>
+
+<para>非专家的版本控制用户有时候会担心分支与合并。这可能是CVS流行性的副作用：CVS对于分支和合并的接口和我们的知觉不太一致，所以很多人学着完全避免此类操作。</para>
+
+<para>如果你周围有很多这类人，立即下决心战胜所有恐惧，并花时间学会如何分支和合并。它们不是什么困难的操作，一旦你习惯了，对于项目获取更多的开发者这日益重要。</para>
+
+<para>分支非常有价值，因为它将一项稀缺的资源&mdash;项目代码的工作空间&mdash;变得充足。一般情况下，所有的开发者在同一个沙盒一起工作，建设同一座城堡。当某个人希望添加一个新的吊桥，但是不能确认其他人是否正在工作，分支使她被隔离到一个角落并做出尝试成为可能。如果这种投入成功了，她可以要求其他开发者检验这个结果。如果所有人认可结果，他们可以告诉版本控制系统将吊桥从分支城堡移动（“合并”）到主城堡。</para>
+
+<para>很容易看到这项能力是如何帮助协作开发的。人们需要自由尝试新问题的感觉，而无须担心干扰其他人的工作。同样重要的是，当为了完成bug修正或发布稳定化（见&lt;<phrase output="printed"><xref linkend="development-cycle"/>的</phrase><xref linkend="stabilizing-a-release"/>和<xref linkend="release-lines"/>），代码需要从日常的开发中分离出来时，所花费的时间数倍于无需担心跟踪一个移动目标的情况。</para>
+
+<para>不受限制的使用分支，并鼓励其他人也这样做。但是要确保任何特定分支只保持必要的最短时间。任何活动分支都会让社区分神。即使不是在分支工作的人也需要对此有所了解。这种了解是应该的，当然，对于分支的提交应该能和其他提交一样发送提交邮件。但是分支不应该成为分割开发社区的机制。除了很少的例外，大多数分支最终必须合并回它们的主干并消失。</para>
+
+</sect3>
+
+<sect3 id="vc-singularity">
+<title>信息单一性</title>
+
+<para>合并有一个推论：不要将同一个变更提交两次。也就是一个修改只进入一次版本控制系统。变更的修订（或一组修订）可以在其进入版本控制系统之后拥有唯一标示。如果它需要应用到还没有应用过的分支，那么它应该从最初的入口点合并到其他目标&mdash;而不是直接提交相同的文本，这样虽然对代码的效果是一样的，但会导致我们无法进行精确的记录和发布管理。</para>
+
+<para>这个建议对于不同版本控制系统的实践效果不尽相同。在一些系统，合并是特殊的事件，从根本上与提交不同，并包含他们自己的元数据。而另外一些系统，合并的结果就像其他变更一样是提交到了系统，所以区别“合并提交”和“新变更提交”的主要方法是使用日志信息。在合并的日志信息中，不会再重复原始变更的信息。而只是指明这是一个合并，并提供原始变更的修订版本，以及一段说明其效果的文字。如果有人希望看到完整的日志信息，她应该参考原来的修订。</para>
+
+<para>避免在提交之后再重复日志信息的原因非常重要，因为日志会在提交后被修改。如果变更日志在每个合并目标中重复，那有朝一日她修改了最初的信息，而那些重复还是会保持错误&mdash;混淆就会持续下去。</para>
+
+<para>同样的原理也适用于撤销一个变更。如果一个变更从代码中撤销，那么这个撤销的日志信息也应该仅仅是指明撤销的是哪些特定的修订版本，而<emphasis>不是</emphasis>描述撤销过程中实际变更的代码，因为变更的内容可以通过阅读原来的日志信息和修订获得。当然，修订版本日志信息也应当说明恢复变更的原因，但它不应该从原始变更日志信息复制任何东西。如果可能，回到原来的变更日志信息，并指明它已经撤销了。</para>
+
+<para>前面所说的都暗示了你应该使用一致的语法来引用这些修订版本。这不仅仅在日志信息中有益，在邮件、Bug跟踪和其他地方也同样重要。如果你使用CVS，我建议使用“<literal>path/to/file/in/project/tree:REV</literal>”，其中的REV就是CVS的修订版本好吗，例如“1.76”。如果你使用Subversion，修订版本1729的标准语法是“r1729”（文件路径不是必需的，因为Subversion使用全局修订版本号）。在其他系统中，也都有一些表达变更集的标准语法。无论对你的系统合适的语法是什么，鼓励人们使用它们来引用变更。对变更名一致的表达方法可以帮助项目更简单的纪录（在<xref linkend="communications"/>和<xref linkend="development-cycle"/>我们将会看到），而且因为许多纪录是由志愿者完成的，它应该尽可能的简单。</para>
+
+<para>在<phrase
+output="printed"><xref linkend="development-cycle"/>的</phrase><xref
+linkend="releases-and-daily-development"/>也有介绍。</para>
+
+</sect3>
+
+<sect3 id="vc-authz">
+<title>授权</title>
+
+<para>大多数版本控制系统提供了控制特定人可以从版本库特定子区域提交的特性。根据这个原理，当人们手握锤子时，就开始到处找钉子，许多项目开始恣意使用这种特性，小心的为每个人只赋予他们被确认的权限，而不能在任何其他地方提交。 （看<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="committers"/>来确认何人可以在何处提交。）</para>
+
+<para>执行这样严格的控制可能会有一些害处，一个宽松的政策也足够好。一些项目会简单得使用一个荣誉系统：当一个人被赋予提交权限，即使只是版本库的一个子区域，他也会收到一个可以在项目所有地方可以提交的密码。他们只是被告知要在自己的区域提交。请记住这里没有真正的危险：在一个活跃的项目里，所有的提交会被审核。如果有人在不被允许的地方提交，其他人会发现这一点并说出来。如果这个变更需要被回退，很简单&mdash;因为所有地变更都在版本控制之下，只需要回退。</para>
+
+<para>这种宽松的方法有许多好处。首先，当开发者扩展了他们的活动范围（如果他们一直在项目中，这是一个通常的情况），赋予更宽泛的权限无需额外的管理工作。一旦作出了这样的决定，这个人就可以立刻在新区域提交。</para>
+
+<para>第二，扩展可以以一种更细致的方式实现。通常情况下，区域X的提交者如果希望扩展到区域Y，他会通过发表对Y的一个补丁并寻求评审开始。如果对区域Y有提交权限的人看到这个补丁并确认，他可以直接让提交者直接提交这个变更（当然也要在日志信息中提及评审者/确认者的名字）。这样，这个提交就会成为实际编写变更者的作品，无论从信息管理角度还是审计角度这样都更好。</para>
+
+<para>最后，可能是最重要的，使用荣誉系统来鼓励互相尊重和信任的氛围。给一个人对某一区域的访问权限是对他们已经完成技术准备的证明&mdash;这是说：“我们已经看到了你已经具备了对某一领域做出修改的专业知识，那就继续吧。”但设置严格的授权控制则是暗示：“我们不仅仅确认你专业知识的限制，而且我们对你的<emphasis>目的</emphasis>也保持怀疑。”如果可以避免的话，你一定不愿意做出这样的评价。将一个人引入为项目的提交者是将其引入互相信任循环的机会。好的方法是给他们比期望所能发挥作用更大的权力，然后告诉他们是否保持在规定的限制内完全依赖于他们自己。</para>
+
+<para>Subversion项目按照荣誉系统的方式已经运作超过4年了，在写作时包含了33个完全的和43个部分提交者。系统实际强制的只是提交者和非提交者的区别；更细的划分只由人为控制。但是我们从来没有遇到故意在领域外提交的问题。只是有一两次由于对个人提交权限范围的误解造成的错误，而且都能够迅速和亲切的得到解决。</para>
+
+<para>很明显，当自律的方式不够实际时，那你就需要严格的授权控制。但这种情形非常少见。即使当有几百万行的代码，以及数百或上千的开发者时，对于任何给定模块的提交，也必须经过模块上工作的人们的评审，而且他们可以识别出提交者是否得当。如果<emphasis>没有</emphasis>有规律的提交评审，那么项目恐怕就会遇到比没有授权系统更大的问题了。</para>
+
+<para>归纳起来，不要在版本控制的授权系统上花费太多时间，除非你有特别的原因。复杂的授权系统不能带来实际的好处，依赖人为控制有更多的优点。</para>
+
+<para>当然，上面所说的并不意味着限制本身不重要。项目不应该鼓励人们在不够格的地方提交。此外，在很多项目中，完全（无限制）的提交访问有一个特别的状态：它隐含了项目范围问题的投票权。提交访问的政治方面将会在<phrase output="printed"><xref linkend="social-infrastructure"/>的</phrase><xref
+linkend="electorate"/>详细讨论。</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="bug-tracker">
+<title>Bug跟踪</title>
+
+<para>Bug跟踪是一个宽泛的话题；贯穿本书会讨论此问题的各个方面。尽管这里我们要着重于配置和技术因素，但是首先要从一个策略问题开始：Bug跟踪系统中应该包含哪些信息？</para>
+
+<para>术语<firstterm>Bug跟踪</firstterm>很有误导性。Bug跟踪系统也通常会用来跟踪哪些初始与结束状态不同，包含可选的中间状态，并在生命周期中积累信息的问题，例如新特性请求、一次性任务以及被动性的补丁。由于这些原因，Bug跟踪也被称为<firstterm>问题跟踪（issue
+trackers）</firstterm>、<firstterm>缺陷跟踪（defect 
+trackers）</firstterm>、<firstterm>制品跟踪（artifact trackers）</firstterm>、<firstterm>请求跟踪（request
+trackers）</firstterm>以及<firstterm>问题票跟踪（trouble ticket systems）</firstterm>。<xref linkend="bug-trackers"/>包含了一个此类软件的列表。
+</para>
+
+<para>在本书中，我会继续使用“Bug跟踪（bug tracker）”这个名称，因为大多数人这样称呼，但我会使用<firstterm>问题（issue）</firstterm>来称呼Bug跟踪数据库中的单个条目。这让我们可以把用户遇到的（Bug本身）正常或不良行为与跟踪系统中Bug的发现、诊断和最终解决的<emphasis>记录</emphasis>区分开来。请牢记，尽管大多数问题与实际的Bug相关，我们也可以用其来跟踪其它类型的任务。</para>
+
+<para>典型的问题生命周期如下：
+
+<orderedlist>
+  <listitem><para>某人发起了一个问题。他提供了摘要，初始描述（如果合适则包含重现方法；如何激励好的Bug报告请看<phrase
+            output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref
+            linkend="users-to-volunteers"/>），以及其它跟踪系统要求的信息。项目可能对发起人一无所知&mdash;Bug报告和特性请求既可能来自用户社区，也可能来自开发者。</para>
+
+            <para>一旦发起，这个问题就进入了<firstterm>打开（open）</firstterm>状态。因为还没有作出任何行动，一些跟踪系统也将其标示为<firstterm>未验证（unverified）</firstterm>或<firstterm>未开始（unstarted）</firstterm>。它还没有分配给任何人；或者在某些系统中将起分配给一个冒牌用户来表示其还没有真正的分配。此刻，它存在于一个保留区：这个问题已经记录，但是还没有成为项目关注的一部分。</para>
+  </listitem>
+  <listitem><para>其他人读到这个问题，并做出回复，或许会再向发起者询问来澄清一些问题。</para>
+  </listitem>
+  <listitem><para>Bug得到<firstterm>重现（reproduced）</firstterm>。这可能是其生命周期中最重要的一个时刻。尽管bug还没有修正，但发起者之外的人重现这个事实可以证明这个bug的真实性，此外，可以确认原发起者通过报告真实的bug为项目做出了贡献。</para>
+  </listitem>
+  <listitem><para>Bug得到<firstterm>诊断（diagnosed）</firstterm>：它的原因得到确认，如果可能，会对修正这个bug所需的工作量做出评估。请确认这些内容会在问题中得到记录；如果诊断人要离开项目一会儿（对于志愿开发者这很普遍），其他人应该能够接手。</para>
+
+            <para>在本阶段，或者前一个阶段，开发者可以“获取”问题所有权并将其<firstterm>分配（assign）</firstterm>给自己（<phrase
+            output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref
+            linkend="delegation-assignment"/>详细描述了分配过程的细节）。问题<firstterm>优先级（priority）</firstterm>也可以在本阶段设置。例如，如果某个问题严重到足以影响下一个版本的及时发布，则需要尽早标示出来，跟踪系统必须能够使其突出显示。</para>
+  </listitem>
+  <listitem><para>问题纳入解决的日程（schedule）。纳入日程并不是意味着规定一个解决的日期。有时候只是决定未来的那个版本（下一个版本不是必须的）必须解决这个bug，或者这个bug将会阻碍哪些特定版本。如果很容易修正，也可以取消纳入日程这一步。</para>
+  </listitem>
+  <listitem><para>Bug得到修正（任务完成、或应用了补丁、或者其他类似的事情）。变更或者变更集必须记录在问题的回复中，其后是问题被标注为<firstterm>解决（resolved）</firstterm>而得到<firstterm>关闭（closed）</firstterm>。</para>
+  </listitem>
+</orderedlist>
+
+</para>
+
+<para>这个生命周期有许多变种。有时候一个问题再发起之后很快就会关闭，例如发现它不是一个bug，而只是部分用户的误解。随着项目获得了越来越多的用户，就会带来更多无效的问题，开发者会用日益缺乏耐心的回应来关闭这些问题。要尝试预防这后一种趋势。这对谁都没有好处，每个案例中的每个单独用户对于此前的无效问题没有任何责任；统计学的趋势只是从开发者而不是用户的视点有效。 （<phrase output="printed">在本章后的</phrase><xref linkend="bug-filtering"/>将会看到减少这种无效问题的技巧。）另外，如果不同的用户反复经历同样的误解，这或许意味着软件的某方面需要重新设计。如果有一个问题经理监视着bug数据库，就会很容易发现这种模式；见<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="issue-manager"/>。</para>
+
+<para>生命周期的另一种常见变种是问题在步骤1之后直接以<firstterm>重复（duplicate）</firstterm>状态关闭，重复是某人发起了一个项目已知的问题。重复不仅限于开放的问题：它也可能来自已经修正的bug重现（这个称为<firstterm>衰退（regression）</firstterm>），无论何种情况最佳的解决方式是重新打开最初的问题，并将新的报告复制到最初的问题中。Bug跟踪系统应当能够双向保持联系，这样重复的重现信息中就可以在原问题中看到，反之亦然。</para>
+
+<para>开发者关闭这个问题的第三种情况是他们认为已经修正了问题，只是让原报告者拒绝这个修正并重新打开它。这通常仅仅是因为开发者不能访问重现bug的环境，或者因为他们不能通过报告者的再现描述测试这个修正。</para>
+
+<para>除了这些情况，不同的跟踪软件也有一些其它小的生命周期细节。但基本的生命周期是相同的，生命周期本身并不特定于开源软件，只是暗示了开源项目如何使用他们的bug跟踪系统。</para>
+
+<para>就像步骤1暗示的，跟踪系统和邮件列表或网页一样，是项目的门面。任何人可以发起一个问题，任何人可以浏览当前打开的问题列表。由此我们也能推断我们无法知道有多少人在等待给定问题的进展。而开发社区的规模和技巧限制了问题解决的速率，项目至少应该知道每个出现的问题。即使问题会缓慢小时，一个回复也会鼓励报告者保持参与，因为她能感觉到有人已经为其所作的事情登记（请牢记填写一份问题远比发一封邮件更麻烦）。此外，一旦开发者看到一个问题，它就进入了项目的意识中，也就是开发者会查看此问题的类似情况，或者会与其他开发者讨论，等等。</para>
+
+<para>及时反应的需求意味着两件事：
+
+<itemizedlist>
+  <listitem>
+    <para>跟踪系统必须能够连接到邮件列表，这样问题的每个变更，包括初始的填写，都会导致描述发生情况的邮件。这些邮件列表通常与正规的开发列表不同，因为不是所有的开发者会希望接收自动bug邮件，但是（就像提交邮件）Reply-to头应该设置为开发邮件列表。</para>
+  </listitem>
+  <listitem>
+    <para>填写问题的表单一定能够捕捉开发者的邮件地址，这样她可以联系到更多信息。 （然而，它不应当<emphasis>要求</emphasis>输入报告者的邮件地址，因为一些人喜欢匿名报告问题。匿名访问的重要性可以看<phrase output="printed">本章后面的</phrase><xref linkend="anonymity"/>。）</para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<sect2 id="bug-tracker-mailing-list-interaction">
+<title>与邮件列表交互</title>
+
+<para>请确保bug跟踪系统不会成为讨论论坛。尽管让人参与bug跟踪很重要，但从根本上它不适合实时讨论。更应该将其当作归档，组织证据和其他讨论（通常发生在邮件列表）的引用。</para>
+
+<para>做出这种区别有两个原因。首先，Bug跟踪系统的使用比邮件列表（或者实时讨论论坛）更加笨拙。这不是因为bug跟踪系统都没有好的用户界面设计，而是因为它们的界面设计用来捕捉和展示分离的状态，而不是自由流动的讨论。第二，不是每个参与到特定问题讨论的人都必须注意bug跟踪系统。优良的问题管理（见<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="share-management"/>）是让每个问题被恰当的人注意到，而不是让所有的开发者监视所有的问题。在<phrase output="printed"><xref linkend="communications"/>的</phrase><xref linkend="bug-tracker-usage"/>，我们会关注确保人们不会脱离合适的论坛而陷入在bug跟踪系统内讨论的问题。</para>
+
+<para>有一些bug跟踪系统可以监控邮件列表并自动记录关于已知问题的邮件。他们通常是通过在邮件列表中，将邮件标题出现的问题标示号码作为特殊字符串来识别问题；开发者学着在他们的邮件中包含这类字符串来触动跟踪系统的注意。Bug跟踪系统可以保存整个邮件，或（更好一点）只是记录邮件在邮件列表归档中的链接。无论何种方式，这是一个非常有用的特性；如果你的跟踪系统有这个功能，要确保在开启它的同时提醒人们利用这个特性。</para>
+
+</sect2>
+
+<sect2 id="bug-filtering">
+<title>Bug跟踪的预过滤</title>
+
+<para>大多数问题数据库最终会遭遇相同的困境：由好心但没经验或消息不灵通用户所发起的重复和无效问题的洪流。与这种趋势斗争的第一步通常是在bug跟踪系统的前页放置一个显著的提醒，解释如何知道一个bug是否确实是bug、如何查找bug是否已经被发起、以及如果依然认为是新bug时如何有效的报告。</para>
+
+<para>这会暂时减少噪音，但是当用户数增加后，问题还是会出现。每个单独的用户都不应该因此被谴责。即使他们的第一个bug报告没有用处，你还是要鼓励他们保持参与并在以后提出更好的问题。同时，项目需要保持问题数据库的垃圾越少越好。</para>
+
+<para>这两件事可以最大程度的防止这些问题：请确认监视bug跟踪系统的人有足够的知识，能在问题无效或重复时关闭它，而且能够要求（或强烈的鼓励）用户在填入跟踪系统前确认他们的bug。</para>
+
+<para>第一种技术看起来被广泛使用。即使项目有巨大的问题数据库（例如，Debian在<ulink url="http://bugs.debian.org/"/>的bug跟踪系统，目前有315,929个问题）也是这样安排的，这样<emphasis>某人</emphasis>进入时就能看到所有的问题。不同的问题类别可能是不同的人。例如，Debian项目包含了一组软件包，这样Debian就能够自动路由每个问题到合适的包维护者。当然，用户有时会把问题类别搞错，这样一开始问题就会发送到错误的人，而他可以再将其转向到其他人。然而，最重要的事情是负担被分担了&mdash;无论用户在填写的时候是对是错，问题监视的任务还是会在开发者之间分配，所以每个问题都能够得到及时的回复。</para>
+
+<para>第二种技术应用的没有那么广泛，可能因为它很难被自动化。本质思想是每个新问题都是经过伙伴处理后进入到的数据库中。当用户认为他发现了一个问题，他就会被要求在邮件列表或IRC频道中对其进行描述，然后得到某个人对其是bug确认。尽早引入第二双眼睛可以防止许多虚假的报告。有时候第二方可以识别出这个行为不是一个bug，或者已经在最近的发布中被修正。或者她可能由于类似症状bug而感到熟悉，而且可以通过给用户指明老的问题来防止重复的填写。通常仅仅是询问用户“你查找过bug跟踪系统以确定这个问题是否已经报告过了吗？”许多用户不会想到这个一点，如果有人<emphasis>期望</emphasis>，你可以愉快的为他们查找一下。</para>
+
+<para>这种伙伴系统确实可以保证问题数据库的清洁，但是也有一些不利的地方。许多用户无论如何也要独立发起问题，对为发起新问题而寻找伙伴的指南看不到或者视而不见。因此，还是需要有志愿者关注问题数据库。此外，因为许多新报告者不理解维护问题数据库的难度，对他们忽略指南的行为进行过于严厉的斥责是不公平的。所以志愿者必须保持警觉，联系如何反弹未经搭档处理的问题给报告者。目标是训练每个报告者在未来使用伙伴系统，这样就有一个日益增长的能够理解问题过滤系统的用户池。当看到一个未经伙伴系统处理的问题时，理想的步骤是：</para>
+
+<orderedlist>
+  <listitem>
+    <para>立刻回复问题，礼貌的感谢用户的填写，但是向他们指出伙伴系统的操作指南（当然应该在网站的显著位置）。</para>
+  </listitem>
+  <listitem>
+    <para>如果问题是明显有效而且没有重复，想办法证明它，使之开始正常的生命周期。毕竟，报告者没有被告知伙伴系统，所有浪费工作量关闭有效的问题是没有意义的。</para>
+  </listitem>
+  <listitem>
+    <para>否则，如果问题不是很清楚的有效，关闭它，但是要求报告者在得到伙伴的确认后重新打开它。当他们这样做时，他们应当放置一个确认邮件列表线索的引用（例如一个邮件列表归档的URL）。</para>
+  </listitem>
+</orderedlist>
+
+<para>请记住尽管系统会逐渐改善问题数据库的信/噪比，但是不会阻止误填的发生。完全防止误填的唯一方法是关闭bug跟踪系统，只开放给开发者&mdash;治愈几乎永远比疾病本身更坏。应当接受无效问题的清理是项目日常维护的一部分，并努力得到更多的人们来帮忙。</para>
+
+<para>在<phrase output="printed"><xref linkend="managing-volunteers"/>的</phrase><xref linkend="issue-manager"/>也有介绍。</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="irc">
+<title>IRC / 实时聊天系统</title>
+
+<para>许多项目使用<firstterm>互联网多线交谈</firstterm>（<firstterm>IRC</firstterm>）提供实时聊天室，作为用户和开发者互相提问并得到及时答复的讨论场所。即使你<emphasis>可以</emphasis>在你的服务器运行IRC服务器时，也不必为此事麻烦。而应该象其他人一样：在Freenode（<ulink url="http://freenode.net/"/>）运行你的IRC频道。Freenode给了你足够的权利来管理你项目的IRC频道，<footnote><para>没有要求或期望你能够为Freenode捐献，但是如果你或你的项目能够负担，请考虑贡献一下。他们在美国有一个免税的慈善团体，提供有价值的服务。</para></footnote>可以让你摆脱维护IRC服务器这类无意义的麻烦。</para>
+
+<para>首先要选择一个频道名称。最明显的选择是你的项目名&mdash;如果在Freenode存在，就使用它。如果不存在，可以选择一个与项目名接近的名称，尽可能的易于记忆。在你的项目网站上将频道广而告之，这样期望快速提问的访问者可以立刻看到它。例如，Subversion主页上显著放置的方框中所出现的：</para>
+
+  <blockquote>
+    <para><emphasis>If you&apos;re using Subversion, we recommend that you
+    join the</emphasis> <literal>users@subversion.tigris.org</literal>
+    <emphasis>mailing list, and read the <ulink
+    url="http://svnbook.red-bean.com/">Subversion Book</ulink> and
+    <ulink
+    url="http://subversion.tigris.org/faq.html">FAQ</ulink>.
+    You can also ask questions on IRC at</emphasis>
+    <literal>irc.freenode.net</literal>
+    <emphasis>channel</emphasis>&nbsp;<literal>#svn</literal>.</para>
+  </blockquote>
+
+<para>一些项目有多个频道，每个子主题一个。例如，一个频道关注安装问题，另一个是使用问题，还有一个是开发聊天，等等。 （<phrase output="printed"><xref linkend="communications"/>的</phrase><xref
+linkend="growth"/>讨论了如何划分多个频道）。当你的项目还年轻时，应该只有一个频道，所有人在一起讨论。之后，随着用户到开发者比率增加，也就有必要分开单独的频道。</para>
+
+<para>人们如何知道所有的已有频道，以及在哪个频道讨论？他们何时交谈，如何知道当地的习惯？</para>
+
+<para>答案是通过设定<firstterm>频道主题</firstterm>告诉他们。<footnote><para>使用<literal>/topic</literal>命令设定频道主题。IRC频道中的所有的命令以“<literal>/</literal>”开头。如果你不熟悉IRC的使用和管理，可以看<ulink url="http://www.irchelp.org/"/>；而<ulink url="http://www.irchelp.org/irchelp/irctutorial.html"/>是一份完美的教程。</para></footnote>频道主题是每个用户在进入频道时看到的一些信息。可以给每个新人一份快速指南，指出更进一步的信息。例如：</para>
+
+<screen>
+You are now talking on #svn
+
+Topic for #svn is Forum for Subversion user questions, see also
+http://subversion.tigris.org/. || Development discussion happens in
+#svn-dev. || Please don&apos;t paste long transcripts here, instead use
+a pastebin site like http://pastebin.ca/. || NEWS: Subversion 1.1.0
+is released, see http://svn110.notlong.com/ for details.
+</screen>
+
+<para>内容很扼要，但是它告诉新人所必需知道的东西。它精确的说明频道的目的，提供了项目的主页（如果某人是游荡近来，而并非从项目网页过来），提及相关的频道，并给出一些指导。</para>
+
+<sidebar id="paste-sites">
+<title>粘贴站点</title>
+
+<para>一个IRC频道是一个共享空间：任何人可以看到每个人的谈话。通常情况下，这是一个好事情，这允许人们在感到能做出贡献时跳入谈话，也可以通过观察学习。但如果某人希望一次提供一大段信息时，例如调试会话脚本，因为会输出很多行，会扰乱其他人的对话。</para>
+
+<para>解决办法是使用<firstterm>pastebin</firstterm>或<firstterm>pastebot</firstterm>站点。当向某人要求一大块数据时，告知他们不要粘贴到频道中，而是去（例如）<ulink url="http://pastebin.ca/"/>，将数据粘到那里的表单中，并在IRC频道中告知结果的URL。任何人可以访问这个URL并察看数据。</para>
+
+<para>现在有许多免费的粘贴站点，完整地例子太多了，这里是我曾经用过的：<ulink url="http://www.nomorepasting.com/"/>、
+<ulink url="http://pastebin.ca/"/>、
+<ulink url="http://nopaste.php.cd/"/>、
+<ulink url="http://rafb.net/paste/"/>、
+<ulink url="http://sourcepost.sytes.net/"/>、
+<ulink url="http://extraball.sunsite.dk/notepad.php"/>、
+和
+<ulink url="http://www.pastebin.com/"/>。</para>
+
+</sidebar>
+
+<sect2 id="bots">
+<title>机器人（Bots）</title>
+
+<para>许多面向技术的IRC频道有一个非人的成员，叫做<firstterm>机器人（bot）</firstterm>，它可以对特定的命令返回信息。通常情况下，这个机器人就像频道中的其它成员一样，命令是通过谈话传递给的机器人。例如：</para>
+
+<screen>
+&lt;kfogel&gt; ayita: learn diff-cmd = http://subversion.tigris.org/faq.html#diff-cmd
+&lt;ayita&gt;  Thanks!
+</screen>
+
+<para>这是告诉机器人（以ayita登入了频道）记住以特定的URL回答“diff-cmd”的提问，现在其他用户可以向ayita讯问，并获取diff-cmd的信息：</para>
+
+<screen>
+&lt;kfogel&gt; ayita: tell jrandom about diff-cmd
+&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+</screen>
+
+<para>通过速记法可以得到同样的结果：</para>
+
+<screen>
+&lt;kfogel&gt; !a jrandom diff-cmd
+&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+</screen>
+
+<para>准确的命令集和行为方式各不相同。以上的例子来自<literal>ayita</literal>（<ulink url="http://hix.nu/svn-public/alexis/trunk/"/>），通常在freenode的<literal>#svn</literal>运行着一个实例。其它机器人包括Dancer（<ulink url="http://dancer.sourceforge.net/"/>）和Supybot（<ulink url="http://supybot.com/"/>）。请注意，运行机器人无需服务器的权限。一个机器人就是一个客户端程序；任何人可以设置一个并监听特定的服务器/频道。</para>
+
+<para>如果你的频道一次次的得到同样的问题，我强烈推荐你设置一个机器人。只有一小部分频道用户会获得需要处理机器人的专业技能，而这些用户会回答不成比例的大部分问题，因为机器人可以帮助他们有效率的回复。</para>
+
+</sect2>
+
+<sect2 id="irc-archiving">
+<title>归档IRC</title>
+
+<para>尽管可以将IRC频道发生的任何事情都归档，但这不是必要的。IRC对话名义上是公开的，但是许多用户认为这是非正式的，半私密的对话。用户会对语法不是很在意，而且经常会表达意见（例如，关于其它软件或其他程序员），这些都不是他们希望永久保存归档的。</para>
+
+<para>当然，有时候<emphasis>摘要</emphasis>必须能够保存。大多数IRC客户端可以在用户要求的情况下记录对话到一个文件，如果不能，人们也可以仅仅是将对华拷贝和粘贴到固定的论坛（经常是bug跟踪系统）中。但是不加区分的归档所有内容会让某些用户不悦。如果你需要归档所有的事情，请确认你已经在频道主题明确说明，并给出了归档的URL。</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="rss">
+<title>RSS供稿</title>
+
+<para><firstterm>RSS</firstterm>（Really Simple Syndication）是一种将元数据新闻摘要发布给“订阅者”（那些自己说明对某些摘要感兴趣的人）的机制。一个给定的RSS源通常被称作<firstterm>供稿（feed）</firstterm>而用户的订阅界面被称为<firstterm>供稿阅读器</firstterm>或<firstterm>供稿聚合器</firstterm>。例如<ulink url="http://www.rssbandit.org/">RSS
+Bandit</ulink>和eponymous
+<ulink url="http://www.feedreader.com/">Feedreader</ulink>两个开源RSS阅读器。</para>
+
+<para>这里没有更多的空间解释RSS的技术细节<footnote><para>可以看<ulink url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html"/>。</para></footnote>，但是，你应当意识到两件事。首先，供稿阅读软件是由订阅者选择的，这个阅读软件<emphasis>也</emphasis>会用来监控他的所有供稿&nbsp;&mdash;&nbsp;事实上，这正是RSS的主要卖点：订阅者选择一种界面使用他的所有供稿，而每个供稿只需要将精力集中于分发内容。第二，RSS现在是独一无二的，用的如此之多以至于很多人都不知道他们正在使用它。在世界范围内，RSS看起来像网页上的一个小按钮，标签上写着“Subscribe to this site”或“News feed”。你在按钮上点击，自此之后，你的供稿阅读器（可能是嵌入在你主页上的一个小应用）会根据自动从站点更新。</para>
+
+<para>这意味着你的开源项目应当提供RSS供稿（注意，很多包装主机站点&nbsp;&mdash;&nbsp;，见<xref linkend="canned-hosting"/>&nbsp;&mdash;&nbsp;恰恰提供）。确保不要每天发布过过多的内容，以至于订阅者感到龙蛇混杂，找不到重点。如果有太多的新闻事件，人们会忽略供稿，甚至会激怒订阅者取消订阅。理想情况下，项目应该分开供稿，一个用来做较大的声明，另一个对应每一个邮件列表等等。在实践中，很难做好：不仅对访问项目网站的访问者和管理员都会造成界面混淆。但至少项目应该在首页提供一个RSS供稿，用于发送重要的声明和安全提醒。<footnote><para>荣誉应当属于有功之人：这一部分并出现在本书的第一次发布版本中，但是Brian Aker的博文<ulink url="http://krow.livejournal.com/564980.html">&quot;Release Criteria,
+Open Source, Thoughts On...&quot;</ulink>提醒了我RSS对开源项目的作用。</para></footnote></para>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="wikis">
+<title>Wikis</title>
+
+<para>一个<firstterm>wiki</firstterm>就是允许任何访问者都可以编辑或扩展其内容的站点；术语“wiki”（来自夏威夷词汇，意思是“快”或“非常迅速”）也用来特指支持这种编辑功能的软件。Wikis在1995年发明，但它们的流行是从2000或2001年开始的，一定程度上由维基百科（Wikipedia，<ulink
+url="http://www.wikipedia.org/"/>）的成功推动，维基百科是以wiki为基础的自由内容的百科全书。可以把wiki看作介于IRC和网页之间：wikis不会实时发生，所以人们可以仔细考虑并润色他们的贡献，但是他们也可以很容易的添加，比正规的网页需要较少的界面操作。</para>
+
+<para>wikis还不是开源项目的标准配置，但是可能很快就会。因为它还是相对新的技术，人们还在实验使用它的多种方式，这里我只提供一些劝诫&mdash;在本阶段，更容易分析wiki的误用，而不是他们的成功。</para>
+
+<para>如果你决定运行wiki，需要花费很多力量在保持清洁的页面和可视化的布局上，这样访问者（也就是潜在的编辑者）才可以凭直觉知道如何提供贡献。同样重要的是，在wiki上发表这些标准，这样人们可以访问这些指导。经常是，wiki管理员成为幻想的牺牲品，他们相信因为大群访问者各自为站点添加高质量的内容，所以这些贡献的组合也是高质量的。但那不是网站工作的方式。每个单独的页面或段落可能单独看来不错，但是如果在一个没有组织的或迷惑的整体中它就不是了。wikis经常遇到的困境有：</para>
+
+<itemizedlist>
+  <listitem>
+     <para><emphasis role="bold">缺乏导航原则。</emphasis>一个组织良好的站点可以让访问者永远知道自己在哪里。例如，如果页面设计良好，用户会凭本能说出“目录”和“内容”区域的区别。wiki的贡献者也会尊重这种区别，但是这要求以这些区别作为开始。</para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">信息重复。</emphasis>wikis经常会变得有很多页面讨论相似的内容，因为每个单独的贡献者不会注意到重复。这可能部分由于缺乏前面提到的导航原则，人们可能无法在预期的地方找到重复的内容。</para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">不一致的目标读者。</emphasis>当有许多作者时，某种程度上这个问题是不可避免的，但是如果存在关于创建新内容的编写指南时可以减少这种情况。如果能够首先就做出贡献作为实例也非常好，这就成为标准被理解。</para>
+  </listitem>
+</itemizedlist>
+
+<para>对所有这些问题的一般解决办法完全相同：有编辑标准，不仅仅是发表出来，而且要让编辑页包含它。通常情况下，wikis会放大原始材料中的所有缺陷，因为撰稿者会模仿任何眼前的模式。不要期望设置了wikis就会发现所有的事情来到恰当的位置。你还需要编写好例子，这样人们可以将其作为遵从的模板。</para>
+
+<para>一个运行良好的闪耀实例是维基百科，尽管可能是部分因为它的内容（百科条目）本身就适合wiki的格式。但是如果你深入维基百科，你会发现管理员为合作提供了<emphasis>非常</emphasis>完整的基础。有关于如何编写新条目，如何维护合适的视角，做何种编辑，避免怎样的编辑，争议编辑解决过程（涉及许多步骤，包含最终的裁决）等问题的大量文档。他们也有授权控制，如果某个页面反复成为不当编辑的目标，他们会锁定它，直到问题解决。换句话说，他们不只是在网站上抛出了几个模板就希望坐享其成。维基百科能够成功是因为它的创建者仔细思考过如何让几千陌生人调整他们的写作来实现共同的梦想。虽然对于自由软件项目，你可能不需要同样级别的准备，但是其精神值得模仿。</para>
+
+<para>关于wiki的更多信息可以看<ulink url="http://en.wikipedia.org/wiki/Wiki"/>。另外，第一个wiki还活得很好，包含了许多运行wiki的讨论，在<ulink
+url="http://www.c2.com/cgi/wiki?WelcomeVisitors"/>、<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorks"/>和<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorksNot"/>有许多不同的视点。</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="web-site">
+<title>网站</title>
+
+<para>从技术角度上看，对于设置项目网站没有可以多说的：设置网站服务器并编写网页都是相当简单的任务，大多数需要说的重要事情如布局和安排已经在前面的章节提过。网站的主要功能是为项目提供一个清新和友好的概况，并组合其他工具（版本控制系统、bug跟踪系统等等）。如果你没有设置网站的技能，通常不难能找到有能力的人乐意帮助你。虽然如此，为了节省时间和工作量，人们通常会选择一个包装主机站点。</para>
+
+<sect2 id="canned-hosting">
+<title>包装主机</title>
+
+<para>使用包装站点有两个主要的好处。首先是服务器容量和带宽：他们的服务器通常位于非常宽的管道上。无论你的项目多么成功，你都不会用完你的磁盘并消耗完网络带宽。第二个好处是简单。他们已经选择了bug跟踪、版本控制系统、邮件列表管理器、归档程序以及其他运行一个站点所需的所有东西。他们已经配置好了工具，并且会小心的备份其保管的所有数据。你不需要作出任何选择。你所需要的只是填写表单，点击按钮，你就立刻得到了一个项目网站。</para>
+
+<para>这些是很明显的益处。坏处当然也有，你必须接受<emphasis>他们的</emphasis>选择和配置，即使有时候不同的方式更适合你的项目。通常情况下，包装主站可以通过特定较少的参数进行调整，但是你永远无法得到细致的控制，就像你自己搭建站点并对服务器有完全管理权限时的那样。</para>
+
+<para>这里的一个完美例子是对生成文件的处理。特定项目网页可以是生成的文件&mdash;例如，有系统可以保持FAQ数据为易于编辑的原格式，而不是HTML、PDF、和其他可以生成的展示格式。<phrase output="printed">本章后的</phrase><xref linkend="version-everything"/>会有解释，你不会希望版本化这些生成格式，而只要保存原文件。但是当你的网站存放在其他人的服务器上，就不能设置一个自定义的钩子，当原格式文件变更时，来生成在线的HTML版本的FAQ。唯一的解决办法是也版本化生成的格式，这样，它们才可以在网站上展示。</para>
+
+<para>也可能有更大的后果。你可能无法控制你所展示的内容。一些包装主站允许你自定义网页，但是站点的缺省布局通常是通过许多蹩脚的方法完成。例如，一些SourceForge上的项目拥有完全的自定义主页，但仍然将开发者指向他们的“SourceForge页面”来获得进一步信息。SourceForge页面是项目的主页，使得项目不能使用自定义主页。SourceForge页面包含到bug跟踪、CVS版本库、下载等链接。不幸的是，SourceForge页面也包含了太多外来的噪音。顶上有一个广告条，通常是一个图像动画。左面垂直布局的是项目中的某人感兴趣的一些相关链接。右侧可能是另一个广告。只有中央才是项目特定的材料，甚至让访问者无法确定下一步应该点击什么。</para>
+
+<para>SourceForge设计的每个方面后面，无疑有一个好的原因&mdash;从SourceForge的视点是好的，例如广告。但是从每个项目的视点，结果可能不是一个理想的网页。我不是要招惹SourceForge；类似的关注会在许多包装主站出现。关键是代价。你省去了运行项目站点的负担，但是要接受其他人运行它的方式。</para>
+
+<para>你唯一可以决定的是哪个包装主站适合你的项目。如果你选择了一个包装站点，可以保留将站点转移到你自己服务器的选项，通过使用自定义域名作为项目的“主地址”。你可以将URL转向到包装主站，或者你在公共URL上有完全自定义的主页，只在复杂功能时才将用户转移到包装主站。只要确保这样安排，如果之后你希望使用不同的主机方案，项目地址不需要改变。</para>
+
+<sect3 id="canned-hosting-choosing">
+<title>选择一个包装站点</title>
+
+<para>最大最著名的主机站点是<ulink
+url="http://www.sourceforge.net/">SourceForge</ulink>。<ulink
+url="http://savannah.gnu.org/">savannah.gnu.org</ulink>和<ulink
+url="http://www.berlios.de/">BerliOS.de</ulink>这两个站点提供了相同或类似的服务。一些组织，例如<ulink url="http://www.apache.org/">Apache Software基金会</ulink>和<ulink
+url="http://www.tigris.org/">Tigris.org</ulink>。<footnote><para>免责生命：我由<ulink
+url="http://www.collab.net/">CollabNet</ulink>雇佣，它是Tigris.org的赞助商，我经常会用Tigris。</para></footnote>也会为开源项目提供免费主机，但要符合他们的目标和他们社区已有的项目。</para>
+
+<para>Haggen So对于各式包装站点有一个完全的评估，作为他的博士论文研究的一部分，<citetitle>Construction of an Evaluation Model for Free/Open Source
+Project Hosting (FOSPHost) sites</citetitle>。结果在<ulink url="http://www.ibiblio.org/fosphost/"/>，还可以看非常易读的比较图<ulink
+url="http://www.ibiblio.org/fosphost/exhost.htm"/>。</para>
+
+</sect3>
+
+<sect3 id="anonymity">
+<title>匿名和参与</title>
+
+<para>一个不仅是包装主战，而且许多其他地方也能看到的问题是对于用户登录功能的滥用。这个功能本身很简单：站点允许每个访问者自己通过用户名和密码注册。此后他就保存了一份用户信息，项目管理员可以为用户赋予特定的权限，例如，提交版本库的权利。</para>
+
+<para>这非常有用，实际上这也是包装主站的一个好处。问题是有时候有一些附加给注册用户的任务本应该由未注册访问者执行，特别是如在bug跟踪系统发起问题和对已有问题进行回复。如果对此类活动要求输入登陆用户名，项目就为这类快速方便的任务设置了障碍。当然，人们希望可以联系到输入数据的人，但只要保留一个输入邮件地址（如果她愿意）的字段就够了。如果一个新的用户发现一个bug，并希望报告它，她会被在输入bug之前被要求填写帐户信息惹恼。她可能会放弃发起这个bug。</para>
+
+<para>用户管理的好处被过高估计了。但是如果你可以选择哪些动作可以匿名完成，请确保不仅只有<emphasis>所有的</emphasis>只读动作对于未登陆用户是允许的，也包括一些数据条目动作，特别是在bug跟踪系统，可能的话还有你的wiki页。</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+
+

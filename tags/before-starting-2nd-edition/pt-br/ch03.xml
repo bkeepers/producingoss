@@ -1,0 +1,2657 @@
+<chapter id="technical-infrastructure">
+
+<title>Infra-estrutura técnica</title>
+
+<simplesect>
+
+<para>Projetos de software livre dependem de tecnologia que suportem
+a captura e integração seletiva de informação. Quanto mais experiente
+você for para usar estas tecnologias, e em persuadir os outras a 
+usá-las, mais sucesso terá o seu projeto. Isso só torna mais 
+verdadeiro a medida que o projeto cresce. Um bom gerenciamento das
+informações é o que garante que os projetos não quebrem sob o peso
+da Lei de Brooks,<footnote><para>Do seu livro <citetitle>O Mítico 
+Homem-Mês</citetitle>, 1975.  Veja <ulink
+url="http://en.wikipedia.org/wiki/The_Mythical_Man-Month"/> e <ulink
+url="http://en.wikipedia.org/wiki/Brooks_Law"/>.</para></footnote>
+que diz que adicionar recursos em um projeto atrasado o torna ainda
+mais atrasado. Fred Brooks observou que a complexidade de um projeto
+aumenta <emphasis>ao quadrado</emphasis> do númeto de participantes.
+Quando apenas algumas pessoas estão envolvidas, todos podem falar
+facilmente entre si, mas quando centenas de pessoas estão envolvidas,
+não é mais possível para cada pessoa permanecer constantemente a par
+do que todos os outros estão fazendo. Se um bom gerenciamento de
+software é sobre fazer com que todos sintam-se como se estivessem
+trabalhando juntos na mesma sala, a questão óbvia é: o que acontece
+quando todos em uma sala lotada tentam falar de uma só vez?</para>
+
+
+<para>Este problema não é novo. Em salas lotadas reais, a solução
+é solução é um <firstterm>procedimento parlamentar</firstterm>:
+guias formais de como ter discussões em tempo real para grupos
+grandes, como assegurar que dissidências importantes não se percam
+em inundações de comentários de "eu também", como formar 
+subcomissões, como reconhecer quando as decisões são formadas, etc.
+Uma parte importante do procedimento parlamentar é especificar como
+o grupo interage com seu sistema de gerenciamento de informações.
+Alguns comentários são feitos "para registros", outros não. O
+registro em si é subjetivo a manipulação direta, e é entendido para
+não ser uma transcrição literal do que ocorreu, mas uma 
+representação do que o grupo está disposto a 
+<emphasis>concordar</emphasis> do ocorrido. O registro não é 
+monolítico, mas assume diferentes formas para diferentes propósitos.
+Ele compreende os minutos de todas as reuniões, resumos, agendas e
+suas anotações, relatório das comissões, relatório de correspondentes
+ausentes, lista com ítens de ação, etc.</para>
+
+<para>Como a Internet não é realmente uma sala, não precisamos nos
+preocupar em replicar os procedimentos parlamentares que mantém 
+algumas pessoas caladas enquanto outras estão falando. Mas quando 
+defrontamos com técnicas de gerenciamento de informações, projetos
+de código aberto bem executados são procedimentos parlamentares com
+esteróides. Desde que quase toda a comunicação em projetos de código
+aberto ocorrem na escrita, sistemas elaborados evoluitam para rotear
+e identificar o dado corretamente; para minimizar repetições assim
+como evitar falsas divergências; para armazenar e recuperar dados;
+para corrigir informações ruins ou obsoletas; e para associar 
+diferentes pedaços informação a medida que novas conexões são
+observadas. Participantes ativos em projetos de código aberto
+assumem muito destas técnicar, e irão frequentemente realizar 
+tarefas manuais complexas para assegurar que a informação será
+roteada corretamente. Mas o grande esforço ultimamente depende de
+suporte sofisticado de softwares.
+
+As mídias de comunicações sozinhas deveriam realizar o máximo de
+roteamento das informações, identificando, e gravando, e devem
+disponibilizar para as pessoas no modo mais conveniente possível.
+Claro que na prática, as pessoas ainda precisam intervir em diversos
+pontos no processo, e é importante que o software faça com que essas
+intervenções sejam convenientes também. Mas em geral, se as pessoas
+cuidarem da identificação e roteamento das informações de maneira
+minuciosa já na primeira aparição no sistema, então o software
+deve ser configurado para utilizar o máximo possível estes metadados.
+</para>
+
+<para>O conselho neste capítulo é intensamente prático, baseado em
+experiências em um software específico e padrões de uso. Mas o ponto
+não é ensinar uma coleção de técnicas particulares. Ele também 
+demonstra, através de diversos pequenos exemplos, a atitude geral
+que melhor encorajará o bom gerenciamento da informação em seu 
+projeto. Esta atitude envolverá uma combinação de conhecimento
+técnico com o conhecimento das pessoas. O conhecimento técnico é
+essencial pois o software de gerenciamento de informações sempre
+requer configuração, além de uma certa quantidade de manutenção e
+melhorias a medida que surgem novas necessidades (por exemplo, veja
+a discussão de como lidar com o crescimento do projeto em
+<xref linkend="bug-filtering"/><phrase output="printed"> adiante
+neste capítulo</phrase>). O conhecimento das pessoas são necessários
+pois uma comunidade também requer manutenção: nem sempre é óbvio
+como usar estas ferramentas como total vantagem, e em alguns casos
+os projetos possui convenções conflitantes (por exemplo, veja a
+discussão sobre configurar o cabeçalho <systemitem>Responder 
+a</systemitem> em e-mails enviados a listas de discussão, em
+<xref linkend="mailing-lists"/>). Todos os envolvidos com o projeto
+precisarão ser encorajados, no momento certo e da maneira correta,
+para que eles façam sua parte em manter as informações do projeto
+bem organizada. Quanto mais envolvido estiver colaborador, maior a
+possibilidade de que ele aprenda as técnicas mais complexas e 
+especializadas.</para>
+
+<para>O gerenciamento de informação não possui uma solução pronta.
+Existem muitas variáveis. Você pode ter tudo finalmente configurado
+da maneira que queria, e ter a comunidade mais participativa, e
+então o crescimento do projeto fará com que algumas destas práticas
+sejam impraticáveis. Ou o crescimento do projeto pode estabilizar, e
+as comunidades de usuários e desenvolvedores estabeleçam uma relação
+confortável com a infra-estrutura técnica, e de repente alguém vem
+com uma idéia um novo serviço de gerenciamento de informação, e
+logo os recém-chegados estarão perguntando por que o seu projeto
+não está usando-a&mdash;por exemplo, isto está ocorrendo agora com
+diversos projetos de softwares livre que antecedem a invenção do
+wiki (veja <ulink url="http://en.wikipedia.org/wiki/Wiki"/>). Muitas
+questões merecem uma análise, envolvendo negociações entra a 
+conveniência daqueles que geram informação e a conveniência daqueles
+que a consomem, ou entre o tempo requerido para configurar o software
+de gerenciamento de informação e o benefício que ele traz ao projeto.
+</para>
+
+<para>Cuidado com a tentação de automatizar demais, isto é, automatizar
+aquilo que realmente requer uma atenção humana. A infra-estrutura
+técnica é importante, mas o que faz o um projeto de software livre
+funcionar é o cuidado&mdash;e a expressão inteligente deste 
+cuidado&mdash;pelas pessoas envolvidas. A infra-estrutura técnica é
+principalmente sobre dar as pessoas formas convenientes de fazer isso.
+</para>
+
+</simplesect>
+
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="tools-needed">
+<title>O Quê Um Projeto Precisa</title>
+
+<para>A maioria dos projetos de código aberto oferecem ao menos um 
+conjunto mínimo de ferramentas padrão para gerenciamento da 
+informação:</para>
+
+<variablelist>
+
+   <varlistentry><term>Web site</term>
+     <listitem>
+     <para>Forma principal e centralizar de levar a informação do
+           projeto ao público. O web site também pode servir como
+           uma interface administrativa para outras ferramentas
+           do projeto.</para>
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>Listas de e-mail</term>
+     <listitem>
+       <para>Geralmente o forum de comunicação mais ativo no
+             projeto, e o "meio de registro."</para>
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>Controle de versão</term>
+     <listitem>
+       <para>Permite aos desenvolvedores gerenciar as mudanças de
+             código convenientemente, incluindo a volta de uma versão
+             anterior e uma "mudança portátil". Permite com que todos
+             possam acompanhar o que está acontecendo com o código.
+             </para>
+     </listitem>
+   </varlistentry>
+
+   <varlistentry><term>Bug tracker</term>
+     <listitem>
+       <para>Permite aos desenvolvedores acompanhar em que eles estão
+             trabalhando, coordenar uns aos outros, e planejar 
+             lançamentos. Permite a qualquer um consultar o status de
+             bugs e registrar informações (ex.: reproduzir um erro)
+             sobre bugs em particular. Pode ser usado para rastrear
+             além de bugs, tarefas, lançamentos, novas funcionalidades,
+             etc.</para>
+     </listitem>
+   </varlistentry>
+
+<!--
+   <varlistentry><term>Discussion forums</term>
+     <listitem>
+       <para><remark>Basically, bulletin board systems.  These are not
+             as widespread as one would expect, and where they are
+             found, they're not used as much as one would expect.  Why?
+             Are they worth mentioning at all?</remark></para>
+     </listitem>
+   </varlistentry>
+-->
+
+   <varlistentry><term>Chat em tempo real</term>
+     <listitem>
+       <para>Um local para discussões rápidas e simples, e para
+             troca de perguntas e respostas. Nem sempre é
+             arquivado por completo.
+             </para>
+     </listitem>
+   </varlistentry>
+
+</variablelist>
+
+<para>Cada ferramenta deste conjunto é endereçada para uma necessidade
+específica, mas suas funções são inter-relacionadas, e as ferramentas
+precisam ser feitas para trabalharem junto. A seguir examinaremos como
+elas podem fazer isso, e mais importante, como colocar as pessoas para
+utilizá-las. O web site não é discutido até o fim, pois ele atua mais
+como uma cola para os outros componentes do que uma ferramenta em si.
+</para>
+
+<para>Você poderá evitar um monte de dores de cabeça para escolher
+e configurar estas ferramentas ao fazer uso de sites de 
+<firstterm>hospedagem enlatada</firstterm>: um servidor que oferece
+áreas web previamente empacotadas e modeladas com todas as ferramentas
+de acompanhamento necessárias para manter um projeto de software livre.
+Veja <xref linkend="canned-hosting"/><phrase output="printed"> adiante
+neste capítulo</phrase> para uma discussão das vantagens e desvantagens
+da hospedagem enlatada.</para>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="mailing-lists">
+<title>Listas de E-mail</title>
+
+<para>Listas de e-mail são o pão com mantega das comunicações do
+projeto. Se um usuário é exposto a qualquer fórum além das páginas
+web, é bem provável que seja uma das listas de e-mail do projeto.
+Mas antes que eles experimentes a lista em si, eles irão se deparar
+com a interface da lista de e-mail&mdash;isto é, o mecanismo pelo 
+qual eles se juntarão ("increver a") a lista. Isso nos leva a Regra
+no. 1 de listas de e-mail:</para>
+
+<blockquote>
+   <para><emphasis>Não tente gerenciar listas de e-mail 
+   manualmente&mdash;use um software de gerenciamento de 
+   lista.</emphasis></para>
+</blockquote>
+
+<para>Será tentador descartar esta possibilidade. Configurar um
+software de gerenciamento de lista de e-mail pode parecer um pouco
+exagerado no início. Gerenciar listas pequenas e com pouco tráfego
+manualmente parecerá muito fácil: você só precisa configurar um
+endereço de inscrição que encaminhe as mensagens para você, e quando
+alguém envia um e-mail, você adiciona (ou remove) o endereço e-mail 
+em algum arquivo texto que contém todos os endereços da lista. O
+que poderia ser mais simples que isso?</para>
+
+<para>A pegadinha é que um bom gerenciamento da lista de 
+e-mail&mdash;que é o que as pessoas esperam&mdash;não é nem um pouco
+simples. Não se trata apenas de adicionar ou remover usuários quando
+eles pedem. Trata-se também de moderar para evitar spam, oferecer um
+e-mail com resumos ou mensagem a mensagem, fornecer a lista padrão e
+informações do projeto através de auto-resposta, e várias outras
+coisas. Uma monitoração humana do endereço de inscrição pode fornecer
+apenas um mínimo de funcionalidade, e ainda assim não tão confiável
+e rápido quanto pode fazer um software.</para>
+
+<para>Um software moderno de gerenciamento de listas oferece no 
+mínimo as seguintes funcionalidades:</para>
+
+<variablelist>
+
+  <varlistentry><term>Inscrição por e-mail e através da web</term>
+    <listitem>
+      <para>Quando um usuário se inscreve a uma lista, ele pode
+            <emphasis>imediatamente</emphasis> receber uma mensagem
+            de boas vindas, dizendo que ele foi inscrito, como 
+            interagir com o software da lista de e-mail, e (mais
+            importante) como cancelar a inscrição. Esta resposta
+            automática pode ser customizada para conter informações
+            específicas do projeto, tais como o web site, 
+            localização do FAQ, etc.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Inscrição em modo digerido (digest) ou
+                      mensagem a mensagem</term>
+    <listitem>
+      <para>No modo digerido, o inscrito recebe um e-mail por dia, 
+            contento toda a atividade da lista naquele dia. Para 
+            pessoas que estão acompanhando vagamente a lista, sem
+            participar, este modo é geralmente mais adequado, pois
+            permite a eles olharem todos os assuntos de uma só vez
+            e evitar a distração de e-mails chegando em horários 
+            aleatórios.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Funcionalidades de moderação</term>
+    <listitem>
+      <para>"Moderar" é verificar os envios e assegurar que eles
+            a)&nbsp;não&nbsp;sejam spam, e 
+            b)&nbsp;estejam&nbsp;dentro do tópico, antes que eles
+            sejam enviados para toda a lista. A moderação envolve
+            necessariamente humanos, mas o software pode ajudar
+            bastante para torná-la mais fácil. Haverá mais conteúdo
+            sobre moderação adiante.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Interface administrativa</term>
+    <listitem>
+      <para>Entre outras coisas, ela permite que o administrador acesse
+            e remova endereços obsoletos facilmente. Isso pode tornar-se
+            urgente quando um endereço destinatário passa a enviar
+            respostas automáticas com "Eu não utilizo mais este e-mail"
+            de volta para a lista para todas as outras mensagens. (Alguns
+            softwares conseguem detectar este comportamente e remover
+            a pessoa automaticamente.)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Manipulação de cabeçalho</term>
+    <listitem>
+      <para>Muitas pessoas possuem filtros sofisticados e regras de
+            resposta configuradas em seus clientes de e-mail. Os 
+            softwares de listas de e-mail podem adicionar e manipular
+            alguns cabeçalhos padrões para que essas pessoas possam
+            obter alguma vantagem disso (mais detalhes a seguir).
+            </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Arquivamento</term>
+    <listitem>
+      <para>Todos os enviados para uma lista gerenciada são armazenados
+            e disponibilizados na web; alternativamente, alguns 
+            softwares de listas de e-mail oferecem interfaces especiais
+            para conectar uma ferramenta externa de arquivamento como
+            o MHonArc
+            (<ulink url="http://www.mhonarc.org/"/>). Como 
+             <xref
+            linkend="using-archives"/><phrase output="printed">
+            discute no <xref linkend="communications"/></phrase>,
+            o arquivamento é crucial.</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>O ponto de tudo isto é meramente para enfatizar que o 
+gerenciamento de listas de e-mail é um problema complexo o qual foi
+pensado bastante, e resolvido em sua maioria. Você certamente não 
+precisa se tornar um especialista nisso. Mas você deve estar a par
+que sempre há espaço para aprender mais, e que o gerenciamento da
+lista irá ocupar a sua atenção de tempos em tempos no curso da
+execução de um projeto de software livre. A seguir nós examinaremos
+um pouco dos problemas mais comum na configuração das listas de
+e-mail.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="spam-prevention">
+<title>Prevenção de Spam</title>
+
+<para>No intervalo em que esta sentença é publicada, o tamanho do
+problema de spam provavelmente terá sua gravidade dobrada&mdash; ou
+ao menos estará neste camninho. Há não muito tempo atrás era possível
+que alguém abrisse uma lista de e-mails sem precisar tomar nenhuma
+medida de prevenção. Os e-mails de spam ainda iriam aparecer, com
+com tão pouca frequência que era um problema de nível bem baixo.
+Este tempo se foi para sempre. Hoje, uma lista de e-mail que não
+toma medidas de prevenção de spam será rapidamente submersa por
+lixos de e-mail, ao ponto de ficar inutilizável. A prevenção de
+spam é obrigatória.</para>
+
+<para>Dividimos a prevenção de spam em duas categorias: previnindo
+que envios de spam apareçam na sua lista de e-amils, e previnindo
+a sua lista de e-mails de ser a fonte de novos endereços de e-mails
+para spammers. A primeira é a mais importante, e iremos examiná-la 
+primeiro.</para>
+
+<sect3 id="spam-filtering">
+<title>Filtrando os envios</title>
+
+<para>Existem três técnicas básicas de previnir envios de spam, e a
+maior parte de software de listas de e-mail oferece todas elas. Elas
+são melhores se usadas em conjunto:</para>
+
+<orderedlist>
+
+  <listitem><para><emphasis role="bold">Permita apenas que os inscritos
+            enviem e-mails para lista.</emphasis></para>
+
+            <para>Isso é muito efetivo efetivo, e envolve apenas um
+            pequeno esforço administrativo, pois geralmente é apenas 
+            uma questão de configuração no software de gerenciamento
+            da lista de e-mails. Mas perceba que os envios que não são
+            aprovados automaticamente não podem ser simplesmente 
+            descartados. Ao invés disso, eles devem passar por uma
+            moderação, por duas razões. Primeiro, você quer que os
+            não inscritos possam enviar e-mails. Uma pessoa com uma 
+            questão ou uma sugestão não precisa se inscrever na lista
+            apenas para deixar uma única mensagem. Segundo, mesmo os
+            inscritos poder de vez em quando enviar mensagens de um
+            endereço diferente que não está inscrito. Endereços de
+            e-mail não são métodos confiáveis de se identificar as 
+            pessoas, e não deveriam ser usados para tal fim.</para>
+            </listitem>
+
+  <listitem><para><emphasis role="bold">Filtre os envios através de
+            um software de filtro de spams.</emphasis></para>
+
+            <para>Se o software de lista de e-mail permitir (a 
+            maioria permite), você pode filtrar as mensagens com um
+            software de filtro de spams. O filtro de spam automático
+            não é perfeito, e nunca será, pois existe uma guerra
+            sem fim entre spammers e escritores de filtros. Contanto,
+            pode ser ótimo em reduzir a quantidade de spam que chegam
+            através da fila de moderação, e como maior o tamanho da
+            fila, mais tempo uma pessoa levará para examiná-la, 
+            qualquer quantidade de filtragem automática é benéfica.
+            </para>
+
+            <para>Não há espaço aqui para instruções detalhadas de
+            configuraraçã dos filtros de spam. Você terá de consultar
+            a documentação do seu software de lista de e-mails para 
+            isso (veja  <xref
+            linkend="mailing-list-software"/><phrase
+            output="printed"> adiante neste capítulo</phrase>).
+            Os softwares de listas geramente vem embutido com 
+            funcionalidades de prevenção de spam, mas você pode 
+            querer colocar filtros de terceiros. Eu tive boas 
+            experiências com esses dois:
+            SpamAssassin
+            (<ulink url="http://spamassassin.apache.org/"/>)
+            e SpamProbe
+            (<ulink url="http://spamprobe.sourceforge.net/"/>). 
+
+            Este não é um comentário a respeito de diversos outros 
+            filtros de spam existentes por aí, alguns dos quais são
+            aparentemente muito bons. Eu apenas usei esses dois e
+            fiquei satisfeito com eles.</para>
+
+  </listitem>
+
+  <listitem><para><emphasis role="bold">Moderação.</emphasis></para>
+            <para>Para e-mais que não são automaticamente autorizados
+            por não ser de um inscrito, e que passou pelos softwares
+            de filtro de spam, caso haja algum, o último estágio é a
+            <firstterm>moderação</firstterm>: o e-mail é direcionado
+            para um endereço especial, onde uma pessoa o examina e
+            o confirma ou o rejeita.</para>
+
+            <para>Confirmar um envio pode ser uma das duas formas:
+            você pode aceitar a mensagem apenas desta vez, ou você
+            pode dizer ao software da lista para permitir este e
+            todas as mensagens futuras provenientes do mesmo 
+            remetente. Você quase sempre irá preferir a última forma,
+            com objetivo de reduzir o fardo da moderação futura. 
+            Detalhes de como confirmar variam de sistema para 
+            sistema, mas geralmente é uma questão de responder a um
+            endereço especial com o comando "accept" (significando
+            a confirmação apenas desta mensagem) ou "allow",
+            (permitindo a mensagem atual e futuras).</para>
+            
+            <para>A rejeição é geralmente feita simplesmente 
+            ignorando o e-mail de moderação. Se o software de lista 
+            nunca receber a confirmação de que não é uma mensagem
+            válida, então ele não irá repassar a mensagem para a 
+            lista, o que simplesmente excluir o e-mail de moderação
+            surte o efeito desejado. Algumas vezes você também tem a
+            opção de responder com os comandos "reject" ou "deny", 
+            para desaprovar automaticamente e-mails futuros deste
+            remetente sem precisar passar novamente pela moderação.
+            Raramente há um sentido em fazer isso, pois a moderação
+            trata na maioria de prevenção de spam, e spammers não
+            costumam realizar envios do mesmo endereço mais de uma
+            vez.</para>
+            </listitem>
+</orderedlist>
+
+<para>Certifique-se de usar a moderação <emphasis>apenas</emphasis> 
+para filtrar spams e mensagens que estão claramente fora do escopo,
+tais como quando alguém envia uma mensagem acidentalmente para a
+lista errada. O sistema de moreração geralmente fornece uma forma
+de se responder diretamente ao remetente, mas não use este método 
+para responder questões que realmente pertencem a lista em si, mesmo
+se você souber a resposta de cabeça. Fazer isso privaria a comunidade
+do projeto de uma visão apurada dos tipos de questões que as pessoas
+estão fazendo, e irá privá-las de uma chance de responder as questões
+elas mesmas e/ou ver a resposta dos demais. A moderação da lista é
+estritamente sobre manter a lista livre de e-mails de lixo e fora
+do tópico, e nada mais.</para>
+
+</sect3>
+
+<sect3 id="address-hiding">
+<title>Camuflando endereços em arquivos da lista</title>
+
+<para>Para evitar que suas listas de e-mail sejam uma fonte de
+endereços para spammers, uma técnica comum é camuflar os endereços
+das pessoas nos arquivos, substituindo por exemplo</para>
+
+    <blockquote>
+      <para><literal>jrandom@somedomain.com</literal></para>
+    </blockquote>
+
+<para>por</para>
+
+    <blockquote>
+      <para><literal>jrandom_AT_somedomain.com</literal></para>
+    </blockquote>
+
+<para>ou</para>
+
+    <blockquote>
+      <para><literal>jrandomNOSPAM@somedomain.com</literal></para>
+    </blockquote>
+
+<para>ou alguma codificação similar e óbvia (para humanos). Como os
+caçadores de e-mails para spam geralmente trabalham rastreando páginas
+da internet&mdash;incluindo os arquivos online se suas listas de 
+e-mail&mdash;e procurando por sequências que contenham "@", camuflar
+os endereços é uma forma de deixar os endereços de e-mail das pessoas 
+invisível ou sem utilidade para os spammers. Claro que isto não faz 
+nada para evitar que spams sejam enviados da própria lista de e-mail, 
+mas evita o aumento do número de spams enviados diretamente para os 
+e-mails pessoais dos usuários da lista.</para>
+
+<para>A camuflagem de endereços pode ser controversa. Algumas pessoas
+gostam bastante e ficarão surpresas se seus arquivos não fizerem isso
+automaticamente. Outras pessoas acham muito incoveniente (pois elas
+também devem traduzí-los antes de o usarem). Algumas vezes as pessoas
+asseguram que não tem efeito, uma vez que os caçadores podem em teoria
+compensar qualquer padrão de camuflagem consistente. Entretanto, note
+que há uma evidência empírica que a camuflagem de endereços
+<emphasis>é</emphasis> efetiva, veja <ulink
+url="http://www.cdt.org/speech/spam/030319spamreport.shtml"/>.</para>
+
+<para>Idealmente, o software de gerenciamento da lista deixará a 
+escolha a cada inscrito, tanto por um cabeçalho especial com um
+Sim/Não ou então nas preferências da conta daquele inscrito. Contanto,
+eu não conheço um software que oferece uma opção por inscrito ou por
+mensagem em relação a isso, deixando uma decisão a ser tomada pelo
+administrador para todos (assumindo que o arquivador oferece esta
+funcionalidade, o que nem sempre é o caso). Eu fico levemente 
+inclinado em direção a ligar a opção de camuflagem. Algumas pessoas
+são muito cuidadosas e evitam colocar seus endereços de e-mail em
+uma página web ou qualquer outra local que um caçador de e-mails para
+spam possa vê-lo, e eles ficarão desapontados ao ter todo o trabalho
+jogado fora por um arquivo de lista de e-mails; enquanto isso, a 
+incoveniência que a camuflagem e e-mails impõe aos usuários de
+arquivos são bem leves, pois é fácil transformar um e-mail camuflado
+em um e-mail válido se você precisar contatar diretamente a pessoa.
+Mas tenha em mente que, no final, ainda é uma corrida de armamentos:
+no momento que estiver lendo isto, os caçadores podem muito bem ter
+evoluído ao ponto que eles possam reconhecer as formas mais comuns
+de camuflagem, e nós teremos de pensar em alguma outra coisa.</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="header-management">
+<title>Gerenciamento de Identificação e de Cabeçalho</title>
+
+<para>Os assinantes de listas geralmente querem deixar os e-mails da 
+lista em uma pasta específica do projeto, separando-os dos demais
+e-mails. O software de e-mail pode fazer isto automaticamente examinando
+os <firstterm>cabeçalhos</firstterm> dos e-mails. Os cabeçalhos são 
+campos especiais no topo do e-mail que identifica o remetente, 
+destinatário, assunto, data, e várias outras informações sobre a 
+mensagem. Certos cabeçalhos são bem conhecidos e obrigatótios 
+efetivamente:</para>
+
+<screen>
+De: ...
+Para: ...
+Assunto: ...
+Data: ...
+</screen>
+
+<para>outros são opcionais, mas ainda assim padrões. Por exemplo,
+e-mails não requerem estritamente ter o cabeçalho</para>
+
+<screen>
+Responder a: sender@email.address.here
+</screen>
+
+<para>mas a maioria o faz, porque isso dá aos destinatários uma
+forma infalível de se chegar ao autor (isto é especialmente útil
+quando o autor teve que enviar de um endereço diferente ao qual
+as respostas deveriam ser direcionadas).</para>
+
+<para>Alguns softwares de leitura de e-mail ofecerem uma interface
+amigavel para arquivamento de e-mails baseado em padrões no cabeçalho
+Assunto. Isso leva as pessoas a solicitarem que a lista de e-mail
+adicione automaticamente um prefixo em todos os Assuntos, e então
+eles poderão configurar os leitores para buscar por aquele prefixo
+e automaticamente arquivar a mensagem na pasta correta. A idéia é
+que o autor original escreveria:</para>
+
+<screen>
+Assunto: Construindo o release 2.5.
+</screen>
+
+<para>mas o e-mail apareceria na lista desta forma:</para>
+
+<screen>
+Assunto: [discuss@lists.example.org] Construindo o release 2.5.
+</screen>
+
+<para>Apesar da maioria de software de gerenciamento de listas 
+oferecer uma opção para isso, eu sou fortemente contra este opção
+habilitada. O problema que ela resolve pode facilmente ser 
+resolvido de uma maneira menos importuna, e o preço de se perder boa 
+parte do campo de Assunto é extremamente alto. Usuários experientes
+de listas de e-mail normalmente olham os assuntos de e-mails que
+chegaram no dia para decidir quais ler e/ou responder. Prefixar o
+nome da lista no assunto pode empurrar o Assunto para a direita
+na tela, deixando-o invisível. Isso ofusca a informação que as
+pessoas dependem para decidir quais e-mails serão abertos, reduzindo
+assim a funcionalidade geral da lista para todo mundo.</para>
+
+<para>Ao invés de adulterar o cabeçalho Assunto, ensine aos seus
+usuários a usarem a vantagem de outros cabeçalhos padrões, começando
+com o "Para", que deve informar o nome da lista:</para>
+
+<screen>
+Para: &lt;discuss@lists.example.org&gt;
+</screen>
+
+<para>Qualquer leitor de e-mail que pode filtrar o Assunto deve ser
+capaz de filtrar o Para facilmente.</para>
+
+<para>Existem outro cabeçalhos opcionais mas padrões para listas de
+e-mail. Filtrar por eles é ainda mais confiável que usar os cabeçalhos
+"Para" ou "Cc"; como esses cabeçalhos são colocados em cada mensagem
+pelo próprio software de gerenciamento da lista, alguns usuários 
+podem estar contando com a presença deles:</para>
+
+<screen>
+list-help: &lt;mailto:discuss-help@lists.example.org&gt;
+list-unsubscribe: &lt;mailto:discuss-unsubscribe@lists.example.org&gt;
+list-post: &lt;mailto:discuss@lists.example.org&gt;
+Delivered-To: mailing list discuss@lists.example.org
+Mailing-List: contact discuss-help@lists.example.org; run by ezmlm
+</screen>
+
+<para>Eles são auto-explicativos na sua maioria. Veja <ulink
+url="http://www.nisto.com/listspec/list-manager-intro.html"/> para 
+maiores esclarecimentos, ou se você precisa de uma especificação 
+formal e realmente detalhada, veja
+<ulink url="http://www.faqs.org/rfcs/rfc2369.html"/>.
+</para>
+
+<para>Perceba em quanto esses cabeçalhos complicam caso você tenha
+uma lista de e-mail com o nome de "list", e que você tenha os
+endereços administrativos "list-help" e "list-subscribe", para
+inscrições, e "list-owner", para contatar os administradores da lista.
+Dependendo do software de gerenciamento da lista que você usa, esses
+e/ou vários outros endereços administrativos poderiam estar 
+encrencados; a documentação terá os detalhes. Normalmente uma 
+explicação completa de todos estes endereços especiais é enviado para
+cada novo usuário como parte de um e-mail automático de "boas vindas"
+na inscrição. Provavelmente você terá uma cópia deste e-mail de boas
+vindas. Se não tiver, peça uma cópia a alguém, para saber o que os
+seus usuários estão vendo quando eles assinam a lista. Mantenha a 
+cópia por perto para poder responder questões sobre a lista de e-mails,
+ou melhor ainda, coloque-a em uma página web em algum lugar. Desta
+forma quando alguém perder a própria cópia das instruções e perguntar
+"Como eu cancelo a inscrição nesta lista?", você apenas envia a ela
+a URL.</para>
+
+<para>Alguns softwares de lista de e-mail oferecem a opção de anexar
+as instruções de cancelamento ao final de todas as mensagens. Se 
+esta opção estiver disponível, habilite-a. Ele coloca apenas algumas
+linhas extras por mensagem, em um local inofensivo, e te ajuda a
+ganhar tempo, diminuindo o número de pessoas que enviam mensagens para 
+você&mdash;ou pior, enviam para lista!&mdash;peguntando sobre como
+cancelam a inscrição.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="reply-to">
+<title>O Longo Debate do Responder a</title>
+
+<para>Anteriormente em  <xref linkend="avoid-private-discussions"/>, eu
+enfatizei a importância de certificar-se de que as discussões fiquem nos
+forums públicos, e falei sobre a necessidade de algumas medidas ativas
+para evitar que as conversas passem para um ambiente com discussão 
+privada; além disso, este capítulo tratou da configuração de softwares
+de comunicação do projeto para fazer o máximo de trabalho possível
+para você. Por isso, se o software de gerenciamento de lista oferece
+uma maneira de manter as discussões na lista automaticamente, você
+certamente pensará que deixar esta opção ligada é a uma escolha óbvia.
+</para>
+
+<para>Bem, não é bem assim. A tal opção existe, mas ela possui algumas
+desvantagens graves. A questão de usá-la ou não é uma das discussões
+mais fervorosas sobre gerenciamento de listas de e-mail.&mdash;na
+verdade, não é uma controvérsia que iria ao noticiário do horário 
+nobre na sua cidade, mas ele pode vir a tona de tempos em tempos
+em projetos de software livre. A seguir, descreverei esta opção,
+elucidando os argumentos dos dois lados, e farei a melhor recomendação
+que puder.</para>
+
+<para>A opção em si é bem simples: o software da lista de e-mails pode,
+se você quiser, colocar automaticamente o cabeçalho "Responder a" em
+todas as mensagens para redirecionar as respostas para a lista de 
+e-mail. Isto é, não importa o que o remetente original coloque no
+cabeçalho "Responder a" (ou mesmo se ele não incluir nenhum), quando
+os assinantes da lista virem a mensagem, o cabeçalho irá conter o
+endereço da lista:</para>
+
+<screen>
+Reply-to: discuss@lists.example.org
+</screen>
+
+<para>A primeira vista, isto parece ser algo bom. Por que 
+virtualmente todo leitor de e-mail reconhece o cabeçalho "Responder a",
+então quando alguém responder a mensagem, a resposta irá diretamente
+para toda a lista automaticamente, e não apenas ao remetente da
+mensagem original. Claro que quem responde ainda pode mudar manualmente
+para onde vai a mensagem, mas o que é importante aqui é que as 
+respostas serão direcionadas a lista <emphasis>por padrão</emphasis>.
+É um exemplo perfeito de utilizar a tecnologia para encorajar a
+colaboração.</para>
+
+<para>Infelizmente, existem algumas desvantagens. A primeira é
+conhecida como o problema <firstterm>Não consigo encontrar o
+caminho de volta pra casa</firstterm>: Algumas vezes, o remetente
+original irá colocar o seu endereço de e-mail "real" no campo
+"Responder a", pois por uma razão ou outra ele envia e-mails de
+um endereço diferente do qual ele usa para recebê-los. Pessoas 
+que sempre leem e enviam do mesmo local não tem este problema,
+e podem até ficar surpresos que isso possa existir. Mas para aqueles
+que possuem configurações de e-mail diferenciadas, ou que não 
+possuem controle para alterar o endereço de envio (talvez 
+porque enviem do trabalho e não possuem nenhuma influência no
+departamento de TI), usando o "Responder a" pode ser a única
+forma que eles tem de assegurar que as respostas cheguem até
+eles. Quando tal pessoa envia mensagem para a lista de e-mails
+o qual ela não está inscrivta, sua configuração de "Responder a"
+torna-se uma informação essencial. Se o software da lista o
+sobrescreve, pode ser que ele nunca veja as respostas para
+sua mensagem.</para>
+
+<para>A segunda desvantagem tem a ver com as expectativas, e na
+minha opinião é o argumento mais forte contra a alteração do 
+"Responder a". Usuários de e-mails mais experientes estão acostumados
+a dois métodos básicos de resposta: <firstterm>responder a 
+todos</firstterm> e <firstterm>responder ao autor</firstterm>.
+Todos os softwares modernos de leitura de e-mail possuem formas
+diferenciadas para estas duas ações. O usuários sabem que para 
+responder a todos (isto é, incluindo a lista), eles precisam
+escolher "Responder a todos", e para responder somente ao autor, eles
+precisam escolher "Responder ao autor". Embora você queira encorajar
+as pessoas a responder para a lista sempre que possível, existem
+certas circunstâncias onde uma resposta privada é a prerrogativa do 
+autor&mdash;por exemplo, eles podem querer dizer algo confidencial 
+para o autor da mensagem original, algo que seria inapropriado para
+para a lista pública.</para>
+
+<para>Agora considere o que acontece quando a lista sobreescreveu o
+"Reponder a" original do rementente. Quem responder irá acionar a
+opção "responder ao autor", com a expectativa de estar enviando uma
+mensagem privada de volta ao autor original. Como este é o 
+comportamento experado, ele pode nem mesmo se importar em olhar
+cuidadosamente para o endereço do destinatários na nova mensagem. 
+Ele compõe sua mensagem confidencial e privada, da qual talvez diga
+algo embaraçoso sobre alguém da lista, e envia o e-mail. 
+Inexperadamente, alguns minutos depois a mensagem aparece 
+<emphasis>na lista de e-mails!</emphasis> É verdade que na teoria
+ele deveria olhar atentamente ao campo de destinatário, e não deveria
+aceitar qualquer coisa sobre o cabeçalho "responder a". Mas os autores
+quase sempre colocam o "Responder a" para seu endereço pessoal (ou
+então, o software de e-mails configura isso para eles), e muitos 
+usuários antigos de e-mail vem a esperar por isso. Na verdade, quando
+alguém propositalmente configura o "responde a" para algum outro 
+endereço, ele geralmente cita isso no corpo da mensagem, para que as
+pessoas não fiquem surpreendidas com o que acontece quando elas 
+responderem a nebsagem.</para>
+
+<para>Devido a possibilidades de consequências sérias por este 
+comportamento inexperado, minha preferência pessoal é conifigurar o
+software para nunca todas no cabeçalho "responder a". Esta é uma área
+onde usar a tecnologia para encorajar a colaboração possui ao meu 
+ver, efeitos colaterais altamente perigosos. Entretanto, existem 
+fortes argumentos do outro lado desta discussão. Independente de qual
+você escolha, sempre haverão pessoas perguntando porque você não 
+utilizou a outra maneira. Como isto não é algo que você irá querer
+como tópico perincipal de discussão na sua lista de e-mail, pode
+ser interessante ter uma responta pronta para isso, uma do tipo que
+irá frear a discussão ao invés de encorajá-la. Certifique-se que você
+<emphasis>não</emphasis> insista que a sua decisão, independende de
+qual seja, é obviamente a única e a mais sensata (mesmo que você
+realmente ache isto). Ao invè disso, diga que isto é um debate antigo,
+e que há bons argumentos dos dois lados, e nenhuma escolha irá
+satisfazer a todos os usuários, e que você procurou tomar a melhor 
+decisão que você pode. Educadamente peça que o assunto não seja 
+levado adianta a menos que alguém tenha algo genuinamente novo a
+dizer, e então fique fora da discussão e espere que ele morra de
+morte natural.</para>
+
+<para>Alguém pode sugerir em votar em uma maneira ou na outra. Você
+pode fazer isso se quiser, mas eu pessoalmente não acho que contar
+votos é uma solução adequada neste caso. A penalidade para quem
+for surpreendido por este comportamento é tão grande (enviar 
+acidentalmente um e-mail para uma lista pública), e a inconveniência
+para todos os outros é razoavelmente pequena (ocasionalmente ter que
+lembrar alguém a responder para toda a lista ao invés de a você
+somente), que não é claro que a maioria, mesmo que eles sejam a 
+maioria, deveriam ser capazes de colocar a minoria em risco.</para>
+
+<para>Eu não enderecei todos os aspectos deste problema aqui, apenas
+os que parecem ser de extrema importância. Para uma discussão completa,
+verifique estes dois documentos ortodoxos, os quais são sempre citados
+quando as pessoas entram neste debate:
+
+<itemizedlist>
+  <listitem>
+     <para><emphasis role="bold">Leave Reply-to alone (Deixe o Responder a em paz)</emphasis>,
+     <emphasis>por Chip Rosenthal</emphasis></para>
+     <para><ulink
+        url="http://www.unicom.com/pw/reply-to-harmful.html"/></para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">Set Reply-to to list (Configure o Responder a para lista)</emphasis>,
+     <emphasis>por Simon Hill</emphasis></para>
+     <para><ulink
+        url="http://www.metasystema.net/essays/reply-to.mhtml"/></para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<para>Apesar a leve preferência indicada acima, eu não acho que haja 
+uma resposta "certa" para esta questão, e participo com felicidade em
+muitas listas que <emphasis>realmente</emphasis> configuram o "responder 
+a". A coisa mais importante que você pode fazer é configurar uma das
+formas logo no início, e procurar não se envolver em futuros debates 
+depois disso.</para>
+
+<sect3 id="reply-fantasies">
+<title>Duas fantasias</title>
+
+<para>Algum dia, alguém terá a idéia brilante de implementar o botão
+<firstterm>responder a lista</firstterm> no leitor de e-mails. Isto
+utilizarias um dos cabeçalhos de lista customizados mencionados 
+anteriormente para identificar o endereço da lista de e-mails, e 
+então responde diretamente e apenas para a lista, deixando de lado
+todos os outros e-mails de destinatários, pois a maioria está inscrita
+de qualquer forma. Eventualmente, outros leitores de e-mail irão
+adotar a característica, e todo esta discussão irá embora. (Na verdade,
+o leitor de e-mail <ulink url="http://www.mutt.org/">Mutt</ulink>
+oferece esta funcionalidade.<footnote><para>Logo depois que este livro
+apareceu, <ulink url="http://www.michaelbernstein.com/"
+>Michael Bernstein</ulink> me escreveu para dizer: "Existem outros
+clientes de e-mail que implementam a função de responder a lista além
+do Mytt. Por exemplo, o Evolution tem esta função como um atalho de
+teclado, mas não um botão (Ctrl+L)."</para></footnote>)</para>
+
+<para>Uma outra solução ainda melhor seria a configuração para cada
+usuário quanto a alteração do "Responder a". Aqueles que quiserem
+configurar a alteração automática da lista (tanto das próprias 
+mensagens de e-mail quanto dos demais) poderia solicitar isso, e
+aqueles que não quiserem a alteração, não mexem em nada. No entanto,
+eu não conheço um software de gerenciamento de lista que oferece
+isto no nível de perfil de inscritos. No momento, parece que estamos
+presos a uma configuração global.<footnote><para>Desde que escrevi
+isso, eu descobri que existe ao menos um sistema de gerenciamento
+de lista que oferece isto: 
+<ulink url="http://siesta.unixbeard.net/">Siesta</ulink>.
+Veja também este artigo sobre ele:
+<ulink url="http://www.perl.com/pub/a/2004/02/05/siesta.html"
+/></para></footnote></para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="archiving">
+<title>Arquivamento</title>
+
+<para>Os detalhes técnicos da configuração de arquivamento de listas de email são específicas do software que está gerenciando a lista, e vão além do escopo deste livro. Ao escolher ou condigurar um sistema de arquivamento, considere as seguintes qualidades:</para>
+
+<variablelist>
+
+  <varlistentry><term>Atualização imediata</term>
+    <listitem>
+      <para>As pessoas irão frequentemente se referir a uma mensagem
+            arquivada enviada nas últimas uma ou duas horas. Se 
+            possível, o arquivador deve arquivar cada mensagem
+            instantaneamente, de forma que no momento em que a
+            mensagem aparecer na lista de e-mails, ela já estará
+            presente nos arquivos. Se esta opção não estiver 
+            disponível, então procure ao menos configurar o 
+            arquivador para executar de hora em hora. (Por padrão,
+            alguns arquivadores executam seu processo uma única vez
+            a noite, mas na prática isto é um espaço muito grande de 
+            tempo para uma lista de e-mails ativa.)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Estabilidade das referências</term>
+    <listitem>
+      <para>Uma vez que a mensagem é arquivada em uma URL em 
+            particular, ela deve permanecer acessível na mesma URL
+            para sempre, ou o mais próximo disso. Mesmo que os 
+            arquivos sejam reconstruídos, restaurados de backup ou
+            fixos de alguma forma, qualquer URL que já tenha se
+            tornado pública deve permanecer a mesma. Referências
+            estáveis fazem com que seja possível que os motores de
+            busca da Internet possam indexar os arquivos, o que é
+            um grande benefício para usuários que buscam respostas.
+            Referências estáveis também são importantes porque as
+            mensagems e discussões da lista de e-mails são 
+            frequentemente conectadas ao Bug Tracker (veja
+
+            <xref
+            linkend="bug-tracker"/>)<phrase output="printed">
+            adiante neste capítulo</phrase> ou
+            de outros a outros documentros do projeto.</para>
+
+      <para>Idealmente, o software de lista de e-mail irá incluir a
+            URL da mensagem arquivada, ou ao menos a parte específica
+            da URL da mensagem, em um cabeçalho quando ele distribui
+            as mensagens para os destinatários. Desta forma as pessoas 
+            que possuem uma cópia da mensagem serão capazes de saber
+            sua localização no arquivo sem ter que visitar os arquivos,
+            o que é muito útil pois qualquer operação que envolve um
+            navegador web é automaticamente demorado. Se há esta opção
+            em algum software de lista de e-mails, eu não sei; 
+            infelizmente, o que eu utilizo não a possui. Entretanto,
+            é algo a se procurar (ou, se você escreve um software de
+            lista de e-mails, por favor, é uma opção a se considerar
+            a implementação).</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Backups</term>
+    <listitem>
+      <para>Deveria ser óbvio sobre como manter um backup dos arquivos,
+            e a receita para sua restauração não deveria ser tão
+            complicada. Em outras palavras, não trate o seu arquivo 
+            como uma caixa preta. Você (ou alguém do projeto) deve
+            saber os as mensagens são armazenadas, e como regerar as
+            páginas atuais do arquivo se isso alguma vez for necessário.
+            Estes arquivos são dados preciosos&mdash;um projeto que os
+            perdem, perde também uma boa parte de sua memória coletiva.
+            </para>
+
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Suporte a threads</term>
+    <listitem>
+      <para>Deve ser possível ir de qualquer mensagem individual para
+            a <firstterm>thread</firstterm> (grupo de mensagens 
+            relacionadas) de que a mensagem original faz parte. Cada
+            thread deve possuir também sua própria URL, separada das
+            URLs de mensagens individuais dentro da thread.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>Opção de busca</term>
+    <listitem>
+      <para>Um arquivo que não suporta buscas&mdash;tanto no corpo das
+            mensagens assim como de autores e assuntos&mdash; é um
+            arquivo quase que inútil. Note que alguns arquivadores
+            suportam a busca simplesmente deixando o trabalho para
+            um motor de busca externo como o <ulink
+            url="http://www.google.com/">Google</ulink>. Isto é
+            aceitável, mas o suporte a busca direta é geralmente mais
+            aperfeiçoado, pois permite ao pesquisador especificar que
+            o termo apareça no assunto ao invés do corpo, por exemplo.
+            </para>
+
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para>O que foi descrito é apenas uma checagem técnica para 
+ajudar você a avaliar e configurar um arquivador. Fazer com que
+as pessoas <emphasis>usem</emphasis> o arquivador com vantagens
+para o projeto é discutido mais tarde nos capítulos, em particular
+no <xref linkend="using-archives"/>.</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="mailing-list-software">
+<title>Software</title>
+
+<para>Aqui estão algumas ferramentes de código aberto para realizar
+o gerenciamento e arquivamento da lista. Se o site onde você está
+hospedando o seu projeto já possui uma configuração padrão, então
+talvez você não poderá escolher a ferramenta. Mas se você mesmo 
+precisa instalar, estas são algumas possibilidades. A que eu 
+já utilizei são Mailman, Ezmlm, MHonArc, e Hypermail, mas isto não
+significa que as demais não são boas também (e claro que 
+provavelmente existem outras ferramentas por aí que eu apenas
+não encontrei, então não considere esta uma lista completa).</para>
+
+<para>Softwares de gerenciamento de listas de e-mail:</para>
+
+<itemizedlist>
+ <listitem>
+   <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.list.org/"/></para>
+   <para>(Possui um arquivador embutido, e ganchos para
+         conectar arquivadores externos.)</para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.procmail.org/"/></para>
+   <para>(Feito para ser usado com o sistema de processamento de e-mail
+         Procmail.)</para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.ecartis.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://listproc.sourceforge.net/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://cr.yp.to/ezmlm.html"/></para>
+   <para>(Desenhado para trabalhar com o sistema de entrega de e-mail<ulink
+         url="http://cr.yp.to/qmail.html">Qmail</ulink>.)</para> 
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://mojo.skazat.com/"/></para>
+   <para>(Apesar das bizzarras tentativas do site web de esconder
+         o fato, este é um software livre, lançado sob a GNU
+         General Public License.  Ele também possui um
+         arquivador interno.)</para>
+ </listitem>
+</itemizedlist>
+
+<para>Software para arquivamento de lista de e-mails:</para>
+
+<itemizedlist>
+ <listitem>
+   <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.mhonarc.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.hypermail.org/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://sourceforge.net/projects/lurker/"/></para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.procmail.org/"/></para>
+   <para>(Companheiro de software do SmartList, este é um sistema de
+         processamento de e-mail genérico, que pode aparentemente,
+         ser configurado com um arquivador.)</para>
+ </listitem>
+</itemizedlist>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="vc">
+<title>Controle de Versão</title>
+
+<para>Um <firstterm>sistema de controle de versão</firstterm> (ou
+<firstterm>sistema de controle de revisão</firstterm>) é uma 
+combinação de práticas e tecnologias para rastrear e controlar as 
+mudanças nos arquivos do projeto, em particular o código fonte,
+documentação, e páginas da web. Se você nunca usou um controle de 
+versão antes, a primeira coisa que vocÇe deve fazer é encontrar alguém
+que o tenha, e colocá-lo para participar do projeto. Hoje em dia, 
+todos esperam que ao menos o código fonte do projeto esteja em um 
+controle de versão, e provavelmente não irá levar o projeto a sério
+se ele não usar um controle de versão com o mínimo de competência.
+</para>
+
+<para>O motivo do controle de versão ser tão universal é que ele ajuda
+virtualmente com todos os aspectos de tocar um projeto: comunicação
+entre desenvolvedores, gererenciamento de lançamentos, gerenciamento 
+de bugs, estabilidade de código e esforços experimentais de 
+desenvolvimento, e atribuição e autorização de mudanças para
+desenvolvedores em particular. O sistema de controle de versões 
+fornece um força de coordenação central entre todas essas áreas. O
+coração de um controle de versão é o <firstterm>gerenciamento de
+mudança</firstterm>: identificando cada modificação sutil realizada
+nos arquivos do projeto, anotando toda e cada alteração com metadados
+como a data da alteração e o autor, e então reproduzindo o fato para
+qualquer um que perguntar, da maneira que ele quiser. É um mecanismo
+de comunicação onde é mudança é a unidade básica de informação.</para>
+
+<para>Esta seção não discute todos os aspectos da utilização de um
+sistema de controle de versão. Ele é tão abrangente que será tratada
+topicamente no decorrer do livro. Aqui, iremos nos concentrar em
+escolher e configurar um sistema de controle de versões de uma 
+forma que irá promover o desenvolvimento estrada abaixo.</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-vocabulary">
+<title>Vocabulário do Controle de Versão</title>
+
+<para>Este livro não o ensina como usar o controle de versão se você
+nunca o utilizou antes, mas seria impossível discutir sobre o assunto
+sem conhecer alguns termos chaves. Estes termos são úteis 
+independentemente de qualquer sistema de controle de versão em 
+particular: eles são os substantivos e verbos básicos de uma 
+colaboração em rede, e será utilizada de forma genérica no decorrer do
+livro. Mesmo se não houvesse sistemas de controle de versão no mundo,
+a questão do gerenciamento de mudanças iria permanecer, e estas 
+palavras nos fornece a linguagem para falar sobre o assunto de
+maneira concisa.
+
+<variablelist>
+
+ <varlistentry id="vc-vocabulary-commit">
+  <term><firstterm>commit</firstterm></term>
+  <listitem><para>Realizar uma mudança no projeto; mais formalmente, 
+  armazenar uma mudança no banco de dados de controle de versão de uma
+  forma que ela possa ser incorporada em versões futuras do projeto. O
+  "Commit" pode ser usado com um verbo ou como um substantivo. Como um
+  substantivo, ele é essencialmente um sinônimo de "mudança". Por 
+  exemplo: "Eu acabei de comitar uma correção para corrigir o bug de
+  crash do servidor que o pessoal tem reportado no Mac OS X. Jay, você
+  pode por favor revisar o commit e verificar se eu não estou usando
+  o alocador indevidamente?"</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-log-message">
+  <term><firstterm>log&nbsp;message</firstterm></term>
+  <listitem><para>Um pequeno comentário anexado a cada commit, 
+  descrevendo a natureza e o propósito do commit. Log messages estão
+  entre os documentos mais importantes no projeto: elas são a ponte
+  entre a linguagem altamente técnica das mudanças individuais de um
+  código e uma linguagem mais direcionada aos usuários de
+  funcionalidades, correções de bugs, e progresso do projeto. Mais
+  adiante nesta seção, veremos maneiras de distribuir log messages
+  para os públicos apropriados; o <xref
+  linkend="codifying-tradition"/><phrase output="printed"> no
+  <xref linkend="communications"/></phrase> também discute maneiras
+  de encorajar os contribuidores a escrever log messages concisas e
+  úteis.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-update">
+  <term><firstterm>update</firstterm></term>
+  <listitem><para>Solicitar que as mudanças dos demais (commits) sejam
+  incorporadas em sua cópia local do projeto; ou seja, deixar a sua
+  cópia "atualizada". Esta é uma operação muito comum; a maioria dos
+  desenvolvedores atualizam seus códigos diversas vezes por dia, de
+  maneira que eles  sabem que estão executando algo muito próximo do
+  que os demais estão trabalhando, e caso eles encontrem um bug, eles
+  tem certeza que ele ainda não foi corrigido. Por exemplo: "Olá, eu
+  notei que o código de indexação está sempre desprezando o último
+  byte. Este é um novo bug?" "Sim, mas ele foi corrigido na semana 
+  passada&mdash;atualize seu código e ele deve desaparecer."</para>
+  </listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-repository">
+  <term><firstterm>repositório</firstterm></term> <listitem><para>Um 
+banco de dados no qual mudanças são armazenadas. Alguns sistemas de 
+controle de versão são centralizados:há um único repositório mestre 
+que armazena todas as mudanças feitas no projeto. Outros são 
+descentralizados: cada desenvolvedor tem seu próprio repositório, e 
+alterações podem ser trocadas entre repositórios arbitrariamente. O 
+sistema de controle de versão manté controle das dependências entre as
+ alterações, e quando é hora de lançar uma versão, um conjunto 
+particular de alterações é aprovado para aquele lançamento. O 
+questionamento referente a se centralizado ou descentralizado é melhor
+ é uma das duradouras guerras santas do desenvolvimento de software; 
+tente não cair na armadilha de discutir sobre isso em suas listas de 
+projetos.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-checkout">
+  <term><firstterm>checkout</firstterm></term>
+  <listitem><para>O processo de se obter uma cópia do projeto a partir
+ de um repositório. Um checkout geralmente gera uma árvore de 
+diretórios chamada de cópia de trabalho (working copy), a partir da qual alterações podem ser comitadas de volta ao repositório 
+original. Em alguns sistemas de controle de versão descentralizados, 
+cada cópia é em sí mesma um repositório, e mudanças podem ser 
+extraídas de (ou enviadas a) qualquer repositório que esteja disposto 
+a aceitá-las.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-working-copy">
+  <term><firstterm>Cópia de Trabalho</firstterm></term>
+  <listitem><para>Uma árvore de diretórios privada do desenvolvedor contendo
+	o código fonte do projeto, e possivelmente suas páginas da web ou outros
+	documentos. Uma cópia de trabalho também contém um pouco de metadata
+	gerenciado pelo sistema de controle de versão, que conta de que repositório
+	vem a cópia de trabalho, que "revisões" (veja abaixo) dos arquivos estão
+	presentes, etc. Geralmente, cada desenvolvedor tem sua própria cópia de
+	trabalho, na qual ele faz e testa mudanças, e da qual ele
+	envia.</para></listitem>
+ </varlistentry>
+<!--### Continue translation from here ######################################-->
+ <varlistentry id="vc-vocabulary-revision">
+  <term><firstterm>revision (revisão)</firstterm>,
+        <firstterm>change (mudança)</firstterm>,
+        <firstterm>changeset (grupo de mudança)</firstterm></term>
+  <listitem><para>Uma "revision" é geralmente uma encarnação específica
+  de um arquivo ou diretório em particular. Por exemplo, se um projeto
+  iniciar na revisão 6 do arquivo F, e então alguém efetua uma mudança
+  e o commit do arquivo F, isto produz a revisão 7 de F. Alguns sistemas
+  também usam "revision", "change", or "changeset" para se referir a
+  um conjunto de modificações em que se é efetuado o commit uma única vez, 
+  como uma unidade conceitual.</para> 
+
+  <para>Estes termos ocasionalmente possuem significados técnicos distintos
+  nos diversos sistemas de controle de versões, mas a idéia principal é 
+  sempre a mesma: eles fornecem uma forma precisa de dizer exatamente em
+  uma linha histórica as modificações de um arquivo ou de um conjunto de
+  arquivos (traduzindo, imediatamente antes ou depois que um bug é corrigido).
+  Por exemplo: "Ah sim, ela corrigiu isto na revisão 10" ou "Ela corrigiu
+  isso na revisão 10 do foo.c."</para>
+
+  <para>Quando alguém fala sobre um arquivo ou um conjunto de arquivos
+  sem especificar uma revisão em particular, geralmente se assume que
+  se trata da revisão mais recente disponível.</para></listitem>
+ </varlistentry>
+
+  <sidebar id="version-vs-revision">
+  <title>"Versão" Versus "Revisão"</title>
+  <para>O termo <firstterm>versão</firstterm> é algumas vezes
+  utilizado como sinônimo para "revisão", mas eu não o usarei desta
+  forma neste livro, pois é facilmente confundido com "versão" no 
+  sentido de versão do software&mdash;ou seja, o lançamento (release)
+  ou número da edição, como em "Versão 1.0". Entretanto, como o
+  termo "controle de versão" é um padrão adotado, eu continuarei a usá-lo
+  como um sinônimo de "controle de revisão" e "controle de mudança".</para>
+  </sidebar>
+
+ <varlistentry id="vc-vocabulary-diff">
+  <term><firstterm>diff</firstterm></term>
+  <listitem><para>Uma representação textual de uma mudança. Uma diff
+  mostra quais linhas foram modificadas e como elas foram modificadas, 
+  e adiciona algumas linhas próximas para contextualizar em ambos os
+  lados. Um desenvolvedor que já está familiarizado com o código pode
+  geralmente confrontar uma diff com o código e identificar do que se
+  trata a mudança, e até identificar possíveis bugs.</para></listitem>
+ </varlistentry>
+
+ <!-- NT: gostaria de melhorar a tradução para snapshot, ou utilizar
+ uma palavra melhor para se enquadrar aqui. Dizendo que snapshot é
+ uma fotografia daquele momento que se queira preservar para voltar
+ atras caso precise, algo neste sentido. -->
+ <varlistentry id="vc-vocabulary-tag">
+  <term><firstterm>tag (ou etiqueta)</firstterm></term>
+  <listitem><para>Uma informação para uma coleção em particular de 
+  arquivos para revisões especificadas. Tags são usadas geralmente
+  para preservar snapshots interessantes do projetos. Por exemplo,
+  uma tag é gerada para cada release pública, exatamente com os
+  conjuntos de arquivos/revisões que compreendem aquela release.
+  Nomes comuns de tags são escritas como   <literal>Release_1_0</literal>, 
+  <literal>Delivery_00456</literal>,  etc.</para></listitem>
+ </varlistentry>
+  
+ <varlistentry id="vc-vocabulary-branch">
+  <term><firstterm>branch (ou ramo)</firstterm></term>
+  <listitem><para>Uma cópia do projeto sob o controle de versão,
+  porém isolada de uma maneira que as mudanças realizadas no
+  branch não afetem o resto do projeto e vice-versa, exceto quando
+  as mudanças são deliberadamente mescladas ("merge") de um lado
+  para o outro (veja abaixo). Branches (ou ramos) também são conhecidas
+  como "linhas de desenvolvimento". Mesmo quando um projeto não possui
+  branches explícitas, o desenvolvimento ainda é considerado como 
+  sendo executado no "branch principal", também conhecido como
+  "linha principal" ou "<firstterm>trunk</firstterm>".</para>
+
+  <para>Branches oferecem uma maneira isolada de diferentes linhas de
+  desenvolvimento entre eles. Por exemplo, um branch pode ser usado
+  para um desenvolvimento experimental que poderia desestabilizar 
+  muito a linha principal (ou trunk). Assim como uma branch pode
+  ser usada como um local para estabilizar uma nova release. Durante
+  o processo de release, o desenvolvimento regular continua sem
+  interrupções no branch principal do repositório; enquanto isso,
+  na branch da release, nenhuma mudança é permitida com exceção daquelas
+  que são aprovadas pelos gerentes de releases. Desta forma, disponibilizar
+  uma release não precisa interferir no andamento dos trabalhos de 
+  desenvolvimento. Veja em <xref
+  linkend="branches"/><phrase output="printed"> mais adiante neste
+  capítulo</phrase> para uma discussão mais detalhada sobre
+  branches.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-merge">
+  <term><firstterm>merge (a.k.a. port)</firstterm></term>
+  <listitem><para>To move a change from one branch to another.  This
+  includes merging from the main trunk to some other branch, or vice
+  versa.  In fact, those are the most common kinds of merges; it is
+  rare to port a change between two non-main branches.  See <xref
+  linkend="vc-singularity"/> for more about this kind of
+  merging.</para>
+
+  <para>"Merge" has a second, related meaning: it is what the version
+  control system does when it sees that two people have changed the
+  same file but in non-overlapping ways.  Since the two changes do not
+  interfere with each other, when one of the people updates their copy
+  of the file (already containing their own changes), the other
+  person's changes will be automatically merged in.  This is very
+  common, especially on projects where multiple people are hacking on
+  the same code.  When two different changes <emphasis>do</emphasis>
+  overlap, the result is a "conflict"; see below.</para>
+  </listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-conflict">
+  <term><firstterm>conflict</firstterm></term>
+  <listitem><para>What happens when two people try to make different
+  changes to the same place in the code.  All version control systems
+  automatically detect conflicts, and notify at least one of the
+  humans involved that their changes conflict with someone else's.  It
+  is then up to that human to <firstterm>resolve</firstterm> the
+  conflict, and to communicate that resolution to the version control
+  system.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-lock">
+  <term><firstterm>lock</firstterm></term>
+  <listitem><para>A way to declare an exclusive intent to change a
+  particular file or directory.  For example, "I can't commit any
+  changes to the web pages right now.  It seems Alfred has them all
+  locked while he fixes their background images."  Not all version
+  control systems even offer the ability to lock, and of those that
+  do, not all require the locking feature to be used.  This is because
+  parallel, simultaneous development is the norm, and locking people
+  out of files is (usually) contrary to this ideal.</para>
+
+  <para>Version control systems that require locking to make commits
+  are said to use the <firstterm>lock-modify-unlock</firstterm> model.
+  Those that do not are said to use the
+  <firstterm>copy-modify-merge</firstterm> model.  An excellent
+  in-depth explanation and comparison of the two models may be found
+  at <ulink
+  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"/>.  In
+  general, the copy-modify-merge model is better for open source
+  development, and all the version control systems discussed in this
+  book support that model.</para></listitem>
+ </varlistentry>
+
+</variablelist>
+
+</para>
+
+</sect2>
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-choosing">
+<title>Choosing a Version Control System</title>
+
+<para>As of this writing, the two most popular version control systems
+in the free software world are <firstterm>Concurrent Versions
+System</firstterm> (<firstterm>CVS</firstterm>,
+<ulink url="http://www.cvshome.org/"/>)
+and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
+<ulink url="http://subversion.tigris.org/"/>).</para>
+
+<para>CVS has been around for a long time.  Most experienced
+developers are already familiar with it, it does more or less what you
+need, and since it's been popular for a long time, you probably won't
+end up in any long debates about whether or not it was the right
+choice.  CVS has some disadvantages, however.  It doesn't provide an
+easy way to refer to multi-file changes; it doesn't allow you to
+rename or copy files under version control (so if you need to
+reorganize your code tree after starting the project, it can be a real
+pain); it has poor merging support; it doesn't handle large files or
+binary files very well; and some operations are slow when large
+numbers of files are involved.</para>
+
+<para>None of CVS's flaws is fatal, and it is still quite popular.
+However, in the last few years the more recent Subversion has been
+gaining ground, especially in newer
+projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"/> and
+<ulink url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"/>
+for evidence of this growth.</para></footnote>.  If you're starting a
+new project, I recommend Subversion.</para>
+
+<para>On the other hand, since I'm involved in the Subversion project,
+my objectivity might reasonably be questioned.  And in the last few
+years a number of new open-source version control systems have
+appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
+in rough order of popularity.  As the list makes clear, deciding on a
+version control system could easily become a lifelong research
+project.  Possibly you will be spared the decision because it will be
+made for you by your hosting site.  But if you must choose, consult
+with your other developers, ask around to see what people have
+experience with, then pick one and run with it.  Any stable,
+production-ready version control system will do; you don't have to
+worry too much about making a drastically wrong decision.  If you
+simply can't make up your mind, then go with Subversion.  It's fairly
+easy to learn, and is likely to remain a standard for at least a few
+years.</para>
+
+</sect2>
+
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="vc-using">
+<title>Using the Version Control System</title>
+
+<para>The recommendations in this section are not targeted toward a
+particular version control system, and should be simple to implement
+in any of them.  Consult your specific system's documentation for
+details.</para>
+
+<sect3 id="version-everything">
+<title>Version everything</title>
+
+<para>Keep not only your project's source code under version control,
+but also its web pages, documentation, FAQ, design notes, and anything
+else that people might want to edit.  Keep them right next to the
+source code, in the same repository tree.  Any piece of information
+worth writing down is worth versioning&mdash;that is, any piece of
+information that could change.  Things that don't change should be
+archived, not versioned.  For example, an email, once posted, does not
+change; therefore, versioning it wouldn't make sense (unless it becomes
+part of some larger, evolving document).</para>
+
+<para>The reason versioning everything together in one place is
+important is so people only have to learn one mechanism for submitting
+changes.  Often a contributor will start out making edits to the web
+pages or documentation, and move to small code contributions later,
+for example.  When the project uses the same system for all kinds of
+submissions, people only have to learn the ropes once.  Versioning
+everything together also means that new features can be committed
+together with their documentation updates, that branching the code
+will branch the documentation too, etc.</para>
+
+<para>Don't keep <firstterm>generated files</firstterm> under version
+control.  They are not truly editable data, since they are produced
+programmatically from other files.  For example, some build systems
+create <filename>configure</filename> based on the template
+<filename>configure.in</filename>.  To make a change to the
+<filename>configure</filename>, one would edit
+<filename>configure.in</filename> and then regenerate; thus, only the
+template <filename>configure.in</filename> is an "editable file."
+Just version the templates&mdash;if you version the result files as
+well, people will inevitably forget to regenerate when they commit a
+change to a template, and the resulting inconsistencies will cause no
+end of confusion.<footnote><para>For a different opinion on the
+question of versioning <filename>configure</filename> files, see
+Alexey Makhotkin's post "<citetitle>configure.in and version
+control</citetitle>" at
+<ulink url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"/>.</para></footnote></para>
+
+<para>The rule that all editable data should be kept under version
+control has one unfortunate exception: the bug tracker.  Bug databases
+hold plenty of editable data, but for technical reasons generally
+cannot store that data in the main version control system.  (Some
+trackers have primitive versioning features of their own, however,
+independent of the project's main repository.)</para>
+
+</sect3>
+
+<sect3 id="vc-browsing">
+<title>Browsability</title>
+
+<para>The project's repository should be browsable on the Web.  This
+means not only the ability to see the latest revisions of the
+project's files, but to go back in time and look at earlier revisions,
+view the differences between revisions, read log messages for selected
+changes, etc.</para>
+
+<para>Browsability is important because it is a lightweight portal to
+project data.  If the repository cannot be viewed through a web
+browser, then someone wanting to inspect a particular file (say, to
+see if a certain bugfix had made it into the code) would first have to
+install version control client software locally, which could turn
+their simple query from a two-minute task into a half-hour or longer
+task.</para>
+
+<para>Browsability also implies canonical URLs for viewing specific
+revisions of files, and for viewing the latest revision at any given
+time.  This can be very useful in technical discussions or when
+pointing people to documentation.  For example, instead of saying "For
+tips on debugging the server, see the www/hacking.html file in your
+working copy," one can say "For tips on debugging the server, see
+<emphasis>http://subversion.apache.org/docs/community-guide/</emphasis>,"
+giving a URL that always points to the latest revision of
+the <filename>hacking.html</filename> file.  The URL is better because
+it is completely unambiguous, and avoids the question of whether the
+addressee has an up-to-date working copy.</para>
+
+<para>Some version control systems come with built-in
+repository-browsing mechanisms, while others rely on third-party tools
+to do it.  Three such tools are <firstterm>ViewCVS</firstterm> (<ulink
+url="http://viewcvs.sourceforge.net/"/>),
+<firstterm>CVSWeb</firstterm> (<ulink
+url="http://www.freebsd.org/projects/cvsweb.html"/>), and
+<firstterm>WebSVN</firstterm> (<ulink
+url="http://websvn.tigris.org/"/>).  The first works with both CVS and
+Subversion, the second with CVS only, and the third with Subversion
+only.</para>
+
+</sect3>
+
+<sect3 id="commit-emails">
+<title>Commit emails</title>
+
+<para>Every commit to the repository should generate an email showing
+who made the change, when they made it, what files and directories
+changed, and how they changed.  The email should go to a special
+mailing list devoted to commit emails, separate from the mailing lists
+to which humans post.  Developers and other interested parties should
+be encouraged to subscribe to the commits list, as it is the most
+effective way to keep up with what's happening in the project at the
+code level.  Aside from the obvious technical benefits of peer review
+(see <xref linkend="code-review"/>), commit emails help create a
+sense of community, because they establish a shared environment in
+which people can react to events (commits) that they know are visible
+to others as well.</para>
+
+<para>The specifics of setting up commit emails will vary depending on
+your version control system, but usually there's a script or other
+packaged facility for doing it.  If you're having trouble finding it,
+try looking for documentation on <firstterm>hooks</firstterm>,
+specifically a <firstterm>post-commit hook</firstterm>, also called
+the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
+a general means of launching automated tasks in response to commits.
+The hook is triggered by an individual commit, is fed all the
+information about that commit, and is then free to use that
+information to do anything&mdash;for example, to send out an
+email.</para>
+
+<para>With pre-packaged commit email systems, you may want to
+modify some of the default behaviors:</para>
+
+<orderedlist>
+
+  <listitem>
+  <para>Some commit mailers don't include the actual diffs in the
+  email, but instead provide a URL to view the change on the web using
+  the repository browsing system.  While it's good to provide the URL,
+  so the change can be referred to later, it is also
+  <emphasis>very</emphasis> important that the commit email include
+  the diffs themselves.  Reading email is already part of people's
+  routine, so if the content of the change is visible right there in
+  the commit email, developers will review the commit on the spot,
+  without leaving their mail reader.  If they have to click on a URL to
+  review the change, most won't do it, because that requires a new
+  action instead of a continuation of what they were already doing.
+  Furthermore, if the reviewer wants to ask something about the
+  change, it's vastly easier to hit reply-with-text and simply
+  annotate the quoted diff than it is to visit a web page and
+  laboriously cut-and-paste parts of the diff from web browser to
+  email client.</para>
+
+  <para>(Of course, if the diff is huge, such as when a large body of
+  new code has been added to the repository, then it makes sense to
+  omit the diff and offer only the URL.  Most commit mailers can do
+  this kind of limiting automatically.  If yours can't, then it's
+  still better to include diffs, and live with the occasional huge
+  email, than to leave the diffs off entirely.  Convenient reviewing
+  and commenting is a cornerstone of cooperative development, much
+  too important to do without.)</para>
+  </listitem>
+
+  <listitem><para>The commit emails should set their Reply-to header
+  to the regular development list, not the commit email list.  That
+  is, when someone reviews a commit and writes a response, their
+  response should be automatically directed toward the human
+  development list, where technical issues are normally discussed.
+  There are a few reasons for this.  First, you want to keep all
+  technical discussion on one list, because that's where people expect
+  it to happen, and because that way there's only one archive to
+  search.  Second, there might be interested parties not subscribed to
+  the commit email list.  Third, the commit email list advertises
+  itself as a service for watching commits, not for watching commits
+  <emphasis>and</emphasis> occasional technical discussions.  Those who
+  subscribed to the commit email list did not sign up for anything but
+  commit emails; sending them other material via that list would
+  violate an implicit contract.  Fourth, people often write programs
+  that read the commit email list and process the results (for
+  display on a web page, for example).  Those programs are prepared to
+  handle consistently-formatted commit emails, but not inconsistent
+  human-written mails.</para>
+
+  <para>Note that this advice to set Reply-to does not contradict the
+  recommendations in
+  <xref linkend="reply-to"/><phrase output="printed"> earlier in
+  this chapter</phrase>.  It's
+  always okay for the <emphasis>sender</emphasis> of a message to set
+  Reply-to.  In this case, the sender is the version control system
+  itself, and it sets Reply-to in order to indicate that the
+  appropriate place for replies is the development mailing list, not
+  the commit list.</para>
+
+  </listitem>
+
+</orderedlist>
+
+<sidebar id="cia">
+<title>CIA: Another Change Publication Mechanism</title>
+
+<para>Commit emails are not the only way to propagate change news.
+Recently, another mechanism called CIA (<ulink
+url="http://cia.navi.cx/"/>) has been developed.  CIA is a real-time
+commit statistics aggregator and distributor.  The most popular use of
+CIA is to send commit notifications to IRC channels, so that people
+logged into those channels see the commits happening in real time.
+Though of somewhat less technical utility than commit emails, since
+observers might or might not be around when a commit notice pops up in
+IRC, this technique is of immense <emphasis>social</emphasis> utility.
+People get the sense of being part of something alive and active, and
+feel that they can see progress being made right before their
+eyes.</para>
+
+<para>The way it works is that you invoke the CIA notifier program
+from your post-commit hook.  The notifier formats the commit
+information into an XML message, and sends to a central server
+(typically <literal>cia.navi.cx</literal>).  That server then
+distributes the commit information to other forums.</para>
+
+<para>CIA can also be configured to send out <ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
+feeds.  See the documentation at <ulink url="http://cia.navi.cx/"/>
+for details.</para>
+
+<para>To see an example of CIA in action, point your IRC
+client at <literal>irc.freenode.net</literal>, channel
+<literal>#commits</literal>.</para>
+
+</sidebar>
+
+</sect3>
+
+<sect3 id="branches">
+<title>Use branches to avoid bottlenecks</title>
+
+<para>Non-expert version control users are sometimes a bit afraid of
+branching and merging.  This is probably a side effect of CVS's
+popularity: CVS's interface for branching and merging is somewhat
+counterintuitive, so many people have learned to avoid those
+operations entirely.</para>
+
+<para>If you are among those people, resolve right now to conquer any
+fears you may have and take the time to learn how to do branching and
+merging.  They are not difficult operations, once you get used to
+them, and they become increasingly important as a project acquires
+more developers.</para>
+
+<para>Branches are valuable because they turn a scarce
+resource&mdash;working room in the project's code&mdash;into an
+abundant one.  Normally, all developers work together in the same
+sandbox, constructing the same castle.  When someone wants to add a
+new drawbridge, but can't convince everyone else that it would be an
+improvement, branching makes it possible for her to go to an isolated
+corner and try it out.  If the effort succeeds, she can invite the
+other developers to examine the result.  If everyone agrees that the
+result is good, they can tell the version control system to move
+("merge") the drawbridge from the branch castle over to the main
+castle.</para>
+
+<para>It's easy to see how this ability helps collaborative
+development.  People need the freedom to try new things without
+feeling like they're interfering with others' work.  Equally
+importantly, there are times when code needs to be isolated from the
+usual development churn, in order to get a bug fixed or a release
+stabilized (see <xref linkend="stabilizing-a-release"/> and
+<xref linkend="release-lines"/><phrase output="printed"> in
+<xref linkend="development-cycle"/></phrase>) without worrying
+about tracking a moving target.</para>
+
+<para>Use branches liberally, and encourage others to use them.  But
+also make sure that a given branch is only active for exactly as long
+as needed.  Every active branch is a slight drain on the community's
+attention.  Even those who are not working in a branch still maintain
+a peripheral awareness of what's going on in it.  Such awareness is
+desirable, of course, and commit emails should be sent out for branch
+commits just as for any other commit.  But branches should not become
+a mechanism for dividing the development community.  With rare
+exceptions, the eventual goal of most branches should be to merge
+their changes back into the main line and disappear.</para>
+
+</sect3>
+
+<sect3 id="vc-singularity">
+<title>Singularity of information</title>
+
+<para>Merging has an important corollary: never commit the same change
+twice.  That is, a given change should enter the version control
+system exactly once.  The revision (or set of revisions) in which the
+change entered is its unique identifier from then on.  If it needs to
+be applied to branches other than the one on which it entered, then it
+should be merged from its original entry point to those other
+destinations&mdash;as opposed to committing a textually identical
+change, which would have the same effect in the code, but would make
+accurate bookkeeping and release management impossible.</para>
+
+<para>The practical effects of this advice differ from one version
+control system to another.  In some systems, merges are special
+events, fundamentally distinct from commits, and carry their own
+metadata with them.  In others, the results of merges are committed
+the same way other changes are committed, so the primary means of
+distinguishing a "merge commit" from a "new change commit" is in the
+log message.  In a merge's log message, don't repeat the log message
+of the original change.  Instead, just indicate that this is a merge,
+and give the identifying revision of the original change, with at most
+a one-sentence summary of its effect.  If someone wants to see the
+full log message, she should consult the original revision.</para>
+
+<para>The reason it's important to avoid repeating the log message is
+that log messages are sometimes edited after they've been committed.
+If a change's log message were repeated at each merge destination,
+then even if someone edited the original message, she'd still leave
+all the repeats uncorrected&mdash;which would only cause confusion
+down the road.</para>
+
+<para>The same principle applies to reverting a change.  If a change
+is withdrawn from the code, then the log message for the reversion
+should merely state that some specific revision(s) is being reverted,
+<emphasis>not</emphasis> describe the actual code change that results
+from the reversion, since the semantics of the change can be derived
+by reading the original log message and change.  Of course, the
+reversion's log message should also state the reason why the change is
+being reverted, but it should not duplicate anything from the original
+change's log message.  If possible, go back and edit the original
+change's log message to point out that it was reverted.</para>
+
+<para>All of the above implies that you should use a consistent syntax
+for referring to revisions.  This is helpful not only in log messages,
+but in emails, the bug tracker, and elsewhere.  If you're using
+CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
+where REV is a CVS revision number such as "1.76".  If you're using
+Subversion, the standard syntax for revision 1729 is "r1729" (file
+paths are not needed because Subversion uses global revision numbers).
+In other systems, there is usually a standard syntax for expressing
+the changeset name.  Whatever the appropriate syntax is for your
+system, encourage people to use it when referring to changes.
+Consistent expression of change names makes project bookkeeping much
+easier (as we will see in <xref linkend="communications"/> and
+<xref linkend="development-cycle"/>), and since a lot of the
+bookkeeping will be done by volunteers, it needs to be as easy as
+possible.</para>
+
+<para>See also
+<xref
+linkend="releases-and-daily-development"/><phrase
+output="printed"> in
+<xref linkend="development-cycle"/></phrase>.</para>
+
+</sect3>
+
+<sect3 id="vc-authz">
+<title>Authorization</title>
+
+<para>Most version control systems offer a feature whereby certain
+people can be allowed or disallowed from committing in specific
+sub-areas of the repository.  Following the principle that when handed
+a hammer, people start looking around for nails, many projects use
+this feature with abandon, carefully granting people access to just
+those areas where they have been approved to commit, and making sure
+they can't commit anywhere else.  (See
+<xref linkend="committers"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase> for how projects
+decide who can commit where.)</para>
+
+<para>There is probably little harm done by exercising such tight
+control, but a more relaxed policy is fine too.  Some projects simply
+use an honor system: when a person is granted commit access, even for
+a sub-area of the repository, what they actually receive is a password
+that allows them to commit anywhere in the project.  They're just
+asked to keep their commits in their area.  Remember that there is no
+real risk here: in an active project, all commits are reviewed anyway.
+If someone commits where they're not supposed to, others will
+notice it and say something.  If a change needs to be undone, that's
+simple enough&mdash;everything's under version control anyway, so
+just revert.</para>
+
+<para>There are several advantages to the relaxed approach.  First, as
+developers expand into other areas (which they usually will if they
+stay with the project), there is no administrative overhead to
+granting them wider privileges.  Once the decision is made, the person
+can just start committing in the new area right away.</para>
+
+<para>Second, expansion can be done in a more fine-grained manner.
+Generally, a committer in area X who wants to expand to area Y will
+start posting patches against Y and asking for review.  If someone who
+already has commit access to area Y sees such a patch and approves of
+it, they can just tell the submitter to commit the change directly
+(mentioning the reviewer/approver's name in the log message, of
+course).  That way, the commit will come from the person who actually
+wrote the change, which is preferable from both an information
+management standpoint and from a crediting standpoint.</para>
+
+<para>Last, and perhaps most important, using the honor system
+encourages an atmosphere of trust and mutual respect.  Giving someone
+commit access to a subdomain is a statement about their technical
+preparedness&mdash;it says: "We see you have expertise to make commits
+in a certain domain, so go for it."  But imposing strict authorization
+controls says: "Not only are we asserting a limit on your expertise,
+we're also a bit suspicious about
+your <emphasis>intentions</emphasis>."  That's not the sort of
+statement you want to make if you can avoid it.  Bringing someone into
+the project as a committer is an opportunity to initiate them into a
+circle of mutual trust.  A good way to do that is to give them more
+power than they're supposed to use, then inform them that it's up to
+them to stay within the stated limits.</para>
+
+<para>The Subversion project has operated on the honor system way for
+more than four years, with 33 full and 43 partial committers as of
+this writing.  The only distinction the system actually enforces is
+between committers and non-committers; further subdivisions are
+maintained solely by humans.  Yet we've never had a problem with
+someone deliberately committing outside their domain.  Once or twice
+there's been an innocent misunderstanding about the extent of
+someone's commit privileges, but it's always been resolved quickly and
+amiably.</para>
+
+<para>Obviously, in situations where self-policing is impractical, you
+must rely on hard authorization controls.  But such situations are
+rare.  Even when there are millions of lines of code and hundreds or
+thousands of developers, a commit to any given code module should
+still be reviewed by those who work on that module, and they can
+recognize if someone committed there who wasn't supposed to.  If
+regular commit review <emphasis>isn't</emphasis> happening, then the
+project has bigger problems to deal with than the authorization system
+anyway.</para>
+
+<para>In summary, don't spend too much time fiddling with the version
+control authorization system, unless you have a specific reason to.  It
+usually won't bring much tangible benefit, and there are advantages to
+relying on human controls instead.</para>
+
+<para>None of this should be taken to mean that the restrictions
+themselves are unimportant, of course.  It would be bad for a project
+to encourage people to commit in areas where they're not qualified.
+Furthermore, in many projects, full (unrestricted) commit access has a
+special status: it implies voting rights on project-wide questions.
+This political aspect of commit access is discussed more in <xref
+linkend="electorate"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase>.</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="bug-tracker">
+<title>Bug Tracker</title>
+
+<para>Bug tracking is a broad topic; various aspects of it are
+discussed throughout this book.  Here I'll try to concentrate mainly
+on setup and technical considerations, but to get to those, we have to
+start with a policy question: exactly what kind of information should
+be kept in a bug tracker?</para>
+
+<para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
+tracking systems are also frequently used to track new feature
+requests, one-time tasks, unsolicited patches&mdash;really anything
+that has distinct beginning and end states, with optional transition
+states in between, and that accrues information over its lifetime.
+For this reason, bug trackers are also called <firstterm>issue
+trackers</firstterm>, <firstterm>defect trackers</firstterm>,
+<firstterm>artifact trackers</firstterm>, <firstterm>request
+trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
+etc.  See <xref linkend="bug-trackers"/> for a list of software.
+</para>
+
+<para>In this book, I'll continue to use "bug tracker" for the
+software that does the tracking, because that's what most people call
+it, but will use <firstterm>issue</firstterm> to refer to a single
+item in the bug tracker's database.  This allows us to distinguish
+between the behavior or misbehavior that the user encountered (that is,
+the bug itself), and the tracker's <emphasis>record</emphasis> of the
+bug's discovery, diagnosis, and eventual resolution.  Keep in mind
+that although most issues are about actual bugs, issues can be used to
+track other kinds of tasks too.</para>
+
+<para>The classic issue life cycle looks like this:
+
+<orderedlist>
+  <listitem><para>Someone files the issue.  They provide a summary, an
+            initial description (including a reproduction recipe, if
+            applicable; see
+            <xref
+            linkend="users-to-volunteers"/><phrase
+            output="printed"> in
+            <xref linkend="managing-volunteers"/></phrase> for
+            how to encourage good bug reports), and whatever other
+            information the tracker asks for.  The person who files
+            the issue may be totally unknown to the project&mdash;bug
+            reports and feature requests are as likely to come from
+            the user community as from the developers.</para>
+
+            <para>Once filed, the issue is in what's called an
+            <firstterm>open</firstterm> state.  Because no action has
+            been taken yet, some trackers also label it as
+            <firstterm>unverified</firstterm> and/or
+            <firstterm>unstarted</firstterm>.  It is not assigned to
+            anyone; or, in some systems, it is assigned to a fake
+            user to represent the lack of real assignation.  At this
+            point, it is in a holding area: the issue has been
+            recorded, but not yet integrated into the project's
+            consciousness.</para>
+  </listitem>
+  <listitem><para>Others read the issue, add comments to it, and
+            perhaps ask the original filer for clarification on some
+            points.</para>
+  </listitem>
+  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
+            This may be the most important moment in its
+            life cycle.  Although the bug is not actually fixed yet,
+            the fact that someone besides the original filer was able
+            to make it happen proves that it is genuine, and, no less
+            importantly, confirms to the original filer that they've
+            contributed to the project by reporting a real bug.</para>
+  </listitem>
+  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
+            cause is identified, and if possible, the effort required
+            to fix it is estimated.  Make sure these things get
+            recorded in the issue; if the person who diagnosed the
+            bug suddenly has to step away from the project for a
+            while (as can often happen with volunteer developers),
+            someone else should be able to pick up where she left
+            off.</para>
+
+            <para>In this stage, or sometimes the previous one, a
+            developer may "take ownership" of the issue and
+            <firstterm>assign</firstterm> it to herself (<xref
+            linkend="delegation-assignment"/><phrase
+            output="printed"> in
+            <xref linkend="managing-volunteers"/></phrase>
+            examines the assignment process in more detail).  The issue's
+            <firstterm>priority</firstterm> may also be set at this
+            stage.  For example, if it is so severe that it should
+            delay the next release, that fact needs to be identified
+            early, and the tracker should have some way of noting
+            it.</para>
+  </listitem>
+  <listitem><para>The issue gets scheduled for resolution.
+            Scheduling doesn't necessarily mean naming a date by which
+            it will be fixed.  Sometimes it just means deciding which
+            future release (not necessarily the next one) the bug
+            should be fixed by, or deciding that it need not block any
+            particular release.  Scheduling may also be dispensed
+            with, if the bug is quick to fix.</para>
+  </listitem>
+  <listitem><para>The bug gets fixed (or the task completed, or
+            the patch applied, or whatever).  The change or set of
+            changes that fixed it should be recorded in a comment in
+            the issue, after which the issue is
+            <firstterm>closed</firstterm> and/or marked as
+            <firstterm>resolved</firstterm>.</para>
+  </listitem>
+</orderedlist>
+
+</para>
+
+<para>There are some common variations on this life cycle.  Sometimes
+an issue is closed very soon after being filed, because it turns out
+not to be a bug at all, but rather a misunderstanding on the part of
+the user.  As a project acquires more users, more and more such
+invalid issues will come in, and developers will close them with
+increasingly short-tempered responses.  Try to guard against the
+latter tendency.  It does no one any good, as the individual user in
+each case is not responsible for all the previous invalid issues; the
+statistical trend is visible only from the developers' point of view,
+not the user's.  (In
+<xref linkend="bug-filtering"/><phrase output="printed"> later
+in this chapter,</phrase> we'll look at
+techniques for reducing the number of invalid issues.)  Also, if
+different users are experiencing the same misunderstanding over and
+over, it might mean that that aspect of the software needs to be
+redesigned.  This sort of pattern is easiest to notice when there is
+an issue manager monitoring the bug database; see
+<xref linkend="issue-manager"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>.</para>
+
+<para>Another common life cycle variation is for the issue to be closed
+as a <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate
+is when someone files an issue that's already known to the project.
+Duplicates are not confined to open issues: it's possible for a bug to
+come back after having been fixed (this is known as a
+<firstterm>regression</firstterm>), in which case the preferred course
+is usually to reopen the original issue and close any new reports as
+duplicates of the original one.  The bug tracking system should keep
+track of this relationship bidirectionally, so that reproduction
+information in the duplicates is available to the original issue, and
+vice versa.</para>
+
+<para>A third variation is for the developers to close the issue,
+thinking they have fixed it, only to have the original reporter reject
+the fix and reopen it.  This is usually because the developers simply
+don't have access to the environment necessary to reproduce the bug,
+or because they didn't test the fix using the exact same reproduction
+recipe as the reporter.</para>
+
+<para>Aside from these variations, there may be other small details of
+the life cycle that vary depending on the tracking software.  But the
+basic shape is the same, and while the life cycle itself is not
+specific to open source software, it has implications for how open
+source projects use their bug trackers.</para>
+
+<para>As Step 1 implies, the tracker is as much a public face of the
+project as the mailing lists or web pages.  Anyone may file an issue,
+anyone may look at an issue, and anyone may browse the list of currently
+open issues.  It follows that you never know how many people are
+waiting to see progress on a given issue.  While the size and skill of
+the development community constrains the rate at which issues can be
+resolved, the project should at least try to acknowledge each issue the
+moment it appears.  Even if the issue lingers for a while, a response
+encourages the reporter to stay involved, because she feels that a
+human has registered what she has done (remember that filing an
+issue usually involves more effort than, say, posting an email).
+Furthermore, once an issue is seen by a developer, it enters the
+project's consciousness, in the sense that that developer can be on
+the lookout for other instances of the issue, can talk about it with
+other developers, etc.</para>
+
+<para>The need for timely reactions implies two things:
+
+<itemizedlist>
+  <listitem>
+    <para>The tracker must be connected to a mailing list, such that
+    every change to an issue, including its initial filing, causes a
+    mail to go out describing what happened.  This mailing list
+    is usually different from the regular development list, since not
+    all developers may want to receive automated bug mails, but (just
+    as with commit mails) the Reply-to header should be set to the
+    development mailing list.</para>
+  </listitem>
+  <listitem>
+    <para>The form for filing issues should capture the reporter's
+    email address, so she can be contacted for more information.
+    (However, it should not <emphasis>require</emphasis> the
+    reporter's email address, as some people prefer to report issues
+    anonymously.  See
+    <xref linkend="anonymity"/><phrase output="printed"> later
+    in this chapter</phrase> for more on the importance of
+    anonymity.)</para>
+  </listitem>
+</itemizedlist>
+
+</para>
+
+<sect2 id="bug-tracker-mailing-list-interaction">
+<title>Interaction with Mailing Lists</title>
+
+<para>Make sure the bug tracker doesn't turn into a discussion forum.
+Although it is important to maintain a human presence in the bug
+tracker, it is not fundamentally suited to real-time discussion.
+Think of it rather as an archiver, a way to organize facts and
+references to other discussions, primarily those that take place on
+mailing lists.</para>
+
+<para>There are two reasons to make this distinction.  First, the bug
+tracker is more cumbersome to use than the mailing lists (or than
+real-time chat forums, for that matter).  This is not because bug
+trackers have bad user interface design, it's just that their
+interfaces were designed for capturing and presenting discrete states,
+not free-flowing discussions.  Second, not everyone who should be
+involved in discussing a given issue is necessarily watching the bug
+tracker.  Part of good issue management (see
+<xref linkend="share-management"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>) is to make sure
+each issue is brought to the right peoples' attention, rather than
+requiring every developer to monitor all issues.  In
+<xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
+sure people don't accidentally siphon discussions out of appropriate
+forums and into the bug tracker.</para>
+
+<para>Some bug trackers can monitor mailing lists and automatically
+log all emails that are about a known issue.  Typically they do this
+by recognizing the issue's identifying number in the subject line of
+the mail, as part of a special string; developers learn to include
+these strings in their mails to attract the tracker's notice.  The bug
+tracker may either save the entire email, or (even better) just record
+a link to the mail in the regular mailing list archive.  Either way,
+this is a very useful feature; if your tracker has it, make sure
+both to turn it on and to remind people to take advantage of
+it.</para>
+
+</sect2>
+
+<sect2 id="bug-filtering">
+<title>Pre-Filtering the Bug Tracker</title>
+
+<para>Most issue databases eventually suffer from the same problem: a
+crushing load of duplicate or invalid issues filed by well-meaning but
+inexperienced or ill-informed users.  The first step in combatting
+this trend is usually to put a prominent notice on the front page of
+the bug tracker, explaining how to tell if a bug is really a bug, how
+to search to see if it's already been filed, and finally, how to
+effectively report it if one still thinks it's a new bug.</para>
+
+<para>This will reduce the noise level for a while, but as the number
+of users increases, the problem will eventually come back.  No
+individual user can be blamed for it.  Each one is just trying to
+contribute to the project's well-being, and even if their first bug
+report isn't helpful, you still want to encourage them to stay
+involved and file better issues in the future.  In the meantime,
+though, the project needs to keep the issue database as free of junk
+as possible.</para>
+
+<para>The two things that will do the most to prevent this problem
+are: making sure there are people watching the bug tracker who have
+enough knowledge to close issues as invalid or duplicates the moment
+they come in, and requiring (or strongly encouraging) users to confirm
+their bugs with other people before filing them in the tracker.</para>
+
+<para>The first technique seems to be used universally.  Even projects
+with huge issue databases (say, the Debian bug tracker at
+<ulink url="http://bugs.debian.org/"/>, which contained 315,929 issues
+as of this writing) still arrange things so that
+<emphasis>someone</emphasis> sees each issue that comes in.  It may be
+a different person depending on the category of the issue.  For
+example, the Debian project is a collection of software packages, so
+Debian automatically routes each issue to the appropriate package
+maintainers.  Of course, users can sometimes misidentify an issue's
+category, with the result that the issue is sent to the wrong person
+initially, who may then have to reroute it.  However, the important
+thing is that the burden is still shared&mdash;whether the user
+guesses right or wrong when filing, issue watching is still
+distributed more or less evenly among the developers, so each issue is
+able to receive a timely response.</para>
+
+<para>The second technique is less widespread, probably because it's
+harder to automate.  The essential idea is that every new issue gets
+"buddied" into the database.  When a user thinks he's found a problem,
+he is asked to describe it on one of the mailing lists, or in an IRC
+channel, and get confirmation from someone that it is indeed a bug.
+Bringing in that second pair of eyes early can prevent a lot of
+spurious reports.  Sometimes the second party is able to identify that
+the behavior is not a bug, or is fixed in recent releases.  Or she may
+be familiar with the symptoms from a previous issue, and can prevent a
+duplicate filing by pointing the user to the older issue.  Often it's
+enough just to ask the user "Did you search the bug tracker to see if
+it's already been reported?"  Many people simply don't think of that,
+yet are happy to do the search once they know someone's
+<emphasis>expecting</emphasis> them to.</para>
+
+<para>The buddy system can really keep the issue database clean, but
+it has some disadvantages too.  Many people will file solo anyway,
+either through not seeing, or through disregarding, the instructions
+to find a buddy for new issues.  Thus it is still necessary for
+volunteers to watch the issue database.  Furthermore, because most new
+reporters don't understand how difficult the task of maintaining the
+issue database is, it's not fair to chide them too harshly for
+ignoring the guidelines.  Thus the volunteers must be vigilant, and
+yet exercise restraint in how they bounce unbuddied issues back to
+their reporters.  The goal is to train each reporter to use the
+buddying system in the future, so that there is an ever-growing pool
+of people who understand the issue-filtering system.  On seeing an
+unbuddied issue, the ideal steps are:</para>
+
+<orderedlist>
+  <listitem>
+    <para>Immediately respond to the issue, politely thanking the user
+          for filing, but pointing them to the buddying guidelines
+          (which should, of course, be prominently posted on the web
+          site).</para>
+  </listitem>
+  <listitem>
+    <para>If the issue is clearly valid and not a duplicate, approve it
+          anyway, and start it down the normal life cycle.  After all,
+          the reporter's now been informed about buddying, so there's
+          no point wasting the work done so far by closing a valid
+          issue.</para>
+  </listitem>
+  <listitem>
+    <para>Otherwise, if the issue is not clearly valid, close it, but
+          ask the reporter to reopen it if they get confirmation from
+          a buddy.   When they do, they should put a reference to the
+          confirmation thread (e.g., a URL into the mailing list
+          archives).</para>
+  </listitem>
+</orderedlist>
+
+<para>Remember that although this system will improve the signal/noise
+ratio in the issue database over time, it will never completely stop
+the misfilings.  The only way to prevent misfilings entirely is to
+close off the bug tracker to everyone but developers&mdash;a cure that
+is almost always worse than the disease.  It's better to accept that
+cleaning out invalid issues will always be part of the project's
+routine maintenance, and to try to get as many people as possible to
+help.</para>
+
+<para>See also
+<xref linkend="issue-manager"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="irc">
+<title>IRC / Real-Time Chat Systems</title>
+
+<para>Many projects offer real-time chat rooms using <firstterm>Internet
+Relay Chat</firstterm> (<firstterm>IRC</firstterm>), forums where users
+and developers can ask each other questions and get instant responses.
+While you <emphasis>can</emphasis> run an IRC server from your own
+web site, it is generally not worth the hassle.  Instead, do what
+everyone else does: run your IRC channels at Freenode
+(<ulink url="http://freenode.net/"/>).  Freenode gives you the control
+you need to administer your project's IRC
+channels,<footnote><para>There is no requirement or expectation that
+you donate to Freenode, but if you or your project can afford it,
+please consider a contribution.  They are a tax-exempt charity in the
+U.S., and they perform a valuable service.</para></footnote> while
+sparing you the not-insignificant trouble of maintaining an IRC server
+yourself.</para>
+
+<para>The first thing to do is choose a channel name.  The most
+obvious choice is the name of your project&mdash;if that's available
+at Freenode, then use it.  If not, try to choose something as close to
+your project's name, and as easy to remember, as possible.  Advertise
+the channel's availabity from your project's web site, so a visitor
+with a quick question will see it right away.  For example, this
+appears in a prominently placed box at the top of Subversion's home
+page:</para>
+
+  <blockquote>
+    <para><emphasis>If you're using Subversion, we recommend that you
+    join the</emphasis> <literal>users@subversion.tigris.org</literal>
+    <emphasis>mailing list, and read the <ulink
+    url="http://svnbook.red-bean.com/">Subversion Book</ulink> and
+    <ulink
+    url="http://subversion.tigris.org/faq.html">FAQ</ulink>.
+    You can also ask questions on IRC at</emphasis>
+    <literal>irc.freenode.net</literal>
+    <emphasis>channel</emphasis>&nbsp;<literal>#svn</literal>.</para>
+  </blockquote>
+
+<para>Some projects have multiple channels, one per subtopic.  For
+example, one channel for installation problems, another for usage
+questions, another for development chat, etc. (<xref
+linkend="growth"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase> discusses and how to
+divide into multiple channels).  When your project is young, there
+should only be one channel, with everyone talking together.  Later, as
+the user-to-developer ratio increases, separate channels may become
+necessary.</para>
+
+<para>How will people know all the available channels, let alone which
+channel to talk in?  And when they talk, how will they know what the
+local conventions are?</para>
+
+<para>The answer is to tell them by setting the <firstterm>channel
+topic</firstterm>.<footnote><para>To set a channel topic, use the
+<literal>/topic</literal> command.  All commands in IRC start with
+"<literal>/</literal>".  See <ulink url="http://www.irchelp.org/"/> if
+you're not familiar with IRC usage and administration; in particular,
+<ulink url="http://www.irchelp.org/irchelp/irctutorial.html"/> is an
+excellent tutorial.</para></footnote>  The channel topic is a brief
+message each user sees when they first enter the channel.  It gives
+quick guidance to newcomers, and pointers to further information.  For
+example:</para>
+
+<screen>
+You are now talking on #svn
+
+Topic for #svn is Forum for Subversion user questions, see also
+http://subversion.tigris.org/. || Development discussion happens in
+#svn-dev. || Please don't paste long transcripts here, instead use
+a pastebin site like http://pastebin.ca/. || NEWS: Subversion 1.1.0
+is released, see http://svn110.notlong.com/ for details.
+</screen>
+
+<para>That's terse, but it tells newcomers what they need to know.  It
+says exactly what the channel is for, gives the project home page (in
+case someone wanders into the channel without having first been to the
+project web site), mentions a related channel, and gives some guidance
+about pasting.</para>
+
+<sidebar id="paste-sites">
+<title>Paste Sites</title>
+
+<para>An IRC channel is a shared space: everyone can see what everyone
+else is saying.  Normally, this is a good thing, as it allows people
+to jump into a conversation when they think they have something to
+contribute, and allows spectators to learn by watching.  But it
+becomes problematic when someone has to provide a large quantity of
+information at once, such as a debugging session transcript, because
+pasting too many lines of output into the channel will disrupt other
+conversations.</para>
+
+<para>The solution is to use one of the
+<firstterm>pastebin</firstterm> or <firstterm>pastebot</firstterm>
+sites.  When requesting a large amount of data from someone, ask them
+not to paste it into the channel, but instead to go to (for example)
+<ulink url="http://pastebin.ca/"/>, paste their data into the form
+there, and tell the resulting new URL to the IRC channel.  Anyone can
+then visit the URL and view the data.</para>
+
+<para>There are a number of free paste sites available now, too many
+for a comprehensive list, but here are some of the ones I've seen used:
+<ulink url="http://www.nomorepasting.com/"/>,
+<ulink url="http://pastebin.ca/"/>,
+<ulink url="http://nopaste.php.cd/"/>
+<ulink url="http://rafb.net/paste/"/>
+<ulink url="http://sourcepost.sytes.net/"/>,
+<ulink url="http://extraball.sunsite.dk/notepad.php"/>,
+and
+<ulink url="http://www.pastebin.com/"/>.</para>
+
+</sidebar>
+
+<sect2 id="bots">
+<title>Bots</title>
+
+<para>Many technically-oriented IRC channels have a non-human member,
+a so-called <firstterm>bot</firstterm>, that is capable of storing and
+regurgitating information in response to specific commands.
+Typically, the bot is addressed just like any other member of the
+channel, that is, the commands are delivered by "speaking to" the bot.
+For example:</para>
+
+<screen>
+&lt;kfogel&gt; ayita: learn diff-cmd = http://subversion.tigris.org/faq.html#diff-cmd
+&lt;ayita&gt;  Thanks!
+</screen>
+
+<para>That told the bot (who is logged into the channel as ayita) to
+remember a certain URL as the answer to the query "diff-cmd".  Now we
+can address ayita, asking the bot to tell another user about
+diff-cmd:</para>
+
+<screen>
+&lt;kfogel&gt; ayita: tell jrandom about diff-cmd
+&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+</screen>
+
+<para>The same thing can be accomplished via a convenient shorthand:</para>
+
+<screen>
+&lt;kfogel&gt; !a jrandom diff-cmd
+&lt;ayita&gt;  jrandom: http://subversion.tigris.org/faq.html#diff-cmd
+</screen>
+
+<para>The exact command set and behaviors differ from bot to bot.  The
+above example is with <literal>ayita</literal>
+(<ulink url="http://hix.nu/svn-public/alexis/trunk/"/>), of which
+there is usually an instance running in <literal>#svn</literal> at
+freenode.  Other bots include Dancer
+(<ulink url="http://dancer.sourceforge.net/"/>) and Supybot
+(<ulink url="http://supybot.com/"/>).  Note that no special server
+privileges are required to run a bot.  A bot is a client program;
+anyone can set one up and direct it to listen to a particular
+server/channel.</para>
+
+<para>If your channel tends to get the same questions over and over,
+I highly recommend setting up a bot.  Only a small percentage of
+channel users will acquire the expertise needed to manipulate the bot,
+but those users will answer a disproportionately high percentage of
+questions, because the bot enables them to respond so much more
+efficiently.</para>
+
+</sect2>
+
+<sect2 id="irc-archiving">
+<title>Archiving IRC</title>
+
+<para>Although it is possible to archive everything that happens in an
+IRC channel, it's not necessarily expected.  IRC conversations may be
+nominally public, but many people think of them as informal,
+semi-private conversations.  Users may be careless with grammar, and
+often express opinions (for example, about other software or other
+programmers) that they wouldn't want preserved forever in an online
+archive.</para>
+
+<para>Of course, there will sometimes be <emphasis>excerpts</emphasis>
+that should be preserved, and that's fine.  Most IRC clients can log a
+conversation to a file at the user's request, or failing that, one can
+always just cut and paste the conversation from IRC into a more
+permanent forum (most often the bug tracker).  But indiscriminate
+logging may make some users uneasy.  If you do archive everything,
+make sure you state so clearly in the channel topic, and give a URL to
+the archive.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="wikis">
+<title>Wikis</title>
+
+<para>A <firstterm>wiki</firstterm> is a web site that allows any
+visitor to edit or extend its content; the term "wiki" (from a
+Hawaiian word meaning "quick" or "super-fast") is also used to refer
+to the software that enables such editing.  Wikis were invented in
+1995, but their popularity has really started to take off since 2000
+or 2001, boosted partly by the success of Wikipedia (<ulink
+url="http://www.wikipedia.org/"/>), a wiki-based free-content
+encyclopedia.  Think of a wiki as falling somewhere between IRC and
+web pages: wikis don't happen in realtime, so people get a chance to
+ponder and polish their contributions, but they are also very easy to
+add to, involving less interface overhead than editing a regular web
+page.</para>
+
+<para>Wikis are not yet standard equipment for open source projects,
+but they probably will be soon.  As they are relatively new
+technology, and people are still experimenting with different ways of
+using them, I will just offer a few words of caution here&mdash;at
+this stage, it's easier to analyze misuses of wikis than to analyze
+their successes.</para>
+
+<para>If you decide to run a wiki, put a lot of effort into having a
+clear page organization and pleasing visual layout, so that visitors
+(i.e., potential editors) will instinctively know how to fit in their
+contributions.  Equally important, post those standards on the wiki
+itself, so people have somewhere to go for guidance.  Too often, wiki
+administrators fall victim to the fantasy that because hordes of
+visitors are individually adding high quality content to the site,
+the sum of all these contributions must therefore also be of high
+quality.  That's not how web sites work.  Each individual page or
+paragraph may be good when considered by itself, but it will not be
+good if embedded in a disorganized or confusing whole.  Too often,
+wikis suffer from:</para>
+
+<itemizedlist>
+  <listitem>
+     <para><emphasis role="bold">Lack of navigational principles.</emphasis>
+     A well-organized web site makes visitors feel like they know
+     where they are at any time.  For example, if the pages are
+     well-designed, people can intuitively tell the difference
+     between a "table of contents" region and a "content" region.
+     Contributors to a wiki will respect such differences too, but
+     only if the differences are present to begin with.</para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">Duplication of information.</emphasis>
+     Wikis frequently end up with different pages saying similar
+     things, because the individual contributors did not notice the
+     duplications.  This can be partly a consequence of the lack of
+     navigational principles noted above, in that people may not find
+     the duplicate content if it is not where they expect it to
+     be.</para>
+  </listitem>
+  <listitem>
+     <para><emphasis role="bold">Inconsistent target audience.</emphasis>
+     To some degree this problem is inevitable when there are so many
+     authors, but it can be lessened if there are written guidelines
+     about how to create new content.  It also helps to aggressively
+     edit new contributions at the beginning, as an example, so that
+     the standards start to sink in.</para>
+  </listitem>
+</itemizedlist>
+
+<para>The common solution to all these problems is the same: have
+editorial standards, and demonstrate them not only by posting them,
+but by editing pages to adhere to them.  In general, wikis will
+amplify any failings in their original material, since contributors
+imitate whatever patterns they see in front of them.  Don't just
+set up the wiki and hope everything falls into place.  You must also
+prime it with well-written content, so people have a template to
+follow.</para>
+
+<para>The shining example of a well-run wiki is Wikipedia, though this
+may be partly 
+because the content (encyclopedia entries) is naturally well-suited to
+the wiki format.  But if you examine Wikipedia closely, you'll see
+that its administrators laid a <emphasis>very</emphasis> thorough
+foundation for cooperation.  There is extensive documentation on how
+to write new entries, how to maintain an appropriate point of view,
+what sorts of edits to make, what edits to avoid, a dispute resolution
+process for contested edits (involving several stages, including
+eventual arbitration), and so forth.  They also have authorization
+controls, so that if a page is the target of repeated inappropriate
+edits, they can lock it down until the problem is resolved.  In other
+words, they didn't just throw some templates onto a web site and hope
+for the best.  Wikipedia works because its founders thought carefully
+about how to get thousands of strangers to tailor their writing to a
+common vision.  While you may not need the same level of preparedness
+to run a wiki for a free software project, the spirit is worth
+emulating.</para>
+
+<para>For more information about wikis, see
+<ulink url="http://en.wikipedia.org/wiki/Wiki"/>.  Also, the first
+wiki remains alive and well, and contains a lot of discussion about
+running wikis: see <ulink
+url="http://www.c2.com/cgi/wiki?WelcomeVisitors"/>, 
+<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorks"/>, and
+<ulink url="http://www.c2.com/cgi/wiki?WhyWikiWorksNot"/> for
+various points of view.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="web-site">
+<title>Web Site</title>
+
+<para>There is not much to say about setting up the project web site
+from a technical point of view: setting up a web server and writing
+web pages are fairly simple tasks, and most of the important things to
+say about layout and arrangement were covered in the previous chapter.
+The web site's main function is to present a clear and welcoming
+overview of the project, and to bind together the other tools (the
+version control system, bug tracker, etc.).  If you don't have the
+expertise to set up a web server yourself, it's usually not hard to
+find someone who does and is willing to help out.  Nonetheless, to
+save time and effort, people often prefer to use one of the canned
+hosting sites.</para>
+
+<sect2 id="canned-hosting">
+<title>Canned Hosting</title>
+
+<para>There are two main advantages to using a canned site.  The first
+is server capacity and bandwidth: their servers are beefy boxes sitting
+on really fat pipes.  No matter how successful your project gets,
+you're not going to run out of disk space or swamp the network
+connection.  The second advantage is simplicity.  They have already
+chosen a bug tracker, a version control system, a mailing list manager,
+an archiver, and everything else you need to run a site.  They've
+configured the tools, and are taking care of backups for all the data
+stored in the tools.  You don't need to make many decisions.  All you
+have to do is fill in a form, press a button, and suddenly you've got
+a project web site.</para>
+
+<para>These are pretty significant benefits.  The disadvantage, of
+course, is that you must accept <emphasis>their</emphasis> choices and
+configurations, even if something different would be better for your
+project.  Usually canned sites are adjustable within certain narrow
+parameters, but you will never get the fine-grained control you would
+have if you set up the site yourself and had full administrative
+access to the server.</para>
+
+<para>A perfect example of this is the handling of generated files.
+Certain project web pages may be generated files&mdash;for example,
+there are systems for keeping FAQ data in an easy-to-edit master
+format, from which HTML, PDF, and other presentation formats can be
+generated.  As explained in
+<xref linkend="version-everything"/><phrase output="printed">
+earlier in this chapter</phrase>,
+you wouldn't want to version the generated formats, only the master
+file.  But when your web site is hosted on someone else's server, it
+may be impossible to set up a custom hook to regenerate the online
+HTML version of the FAQ whenever the master file is changed.  The only
+workaround is to version the generated formats too, so that they show
+up on the web site.</para>
+
+<para>There can be larger consequences as well.  You may not have as
+much control over presentation as you would wish.  Some of the canned
+hosting sites allow you to customize your web pages, but the site's
+default layout usually ends up showing through in various awkward
+ways.  For example, some projects that host themselves at SourceForge
+have completely customized home pages, but still point developers to
+their "SourceForge page" for more information.  The SourceForge page
+is what would be the project's home page, had the project not used a
+custom home page.  The SourceForge page has links to the bug tracker,
+the CVS repository, downloads, etc.  Unfortunately, a SourceForge page
+also contains a great deal of extraneous noise.  The top is a banner
+ad, often an animated image.  The left side is a vertical arrangement
+of links of little relevance to someone interested in the project.
+The right side is often another advertisement.  Only the center of the
+page is devoted to truly project-specific material, and even that is
+arranged in a confusing way that often makes visitors unsure of what
+to click on next.</para>
+
+<para>Behind every individual aspect of SourceForge's design, there is
+no doubt a good reason&mdash;good from SourceForge's point of view,
+such as the advertisements.  But from an individual project's point of
+view, the result can be a less-than-ideal web page.  I don't mean to
+pick on SourceForge; similar concerns apply to many of the canned
+hosting sites.  The point is that there's a tradeoff.  You get relief
+from the technical burdens of running a project site, but only at the
+price of accepting someone else's way of running it.</para>
+
+<para>Only you can decide whether canned hosting is best for your
+project.  If you choose a canned site, leave open the option of
+switching to your own servers later, by using a custom domain name for
+the project's "home address".  You can forward the URL to the canned
+site, or have a fully customized home page at the public URL and hand
+users off to the canned site for sophisticated functionality.  Just
+make sure to arrange things such that if you later decide to use a
+different hosting solution, the project's address doesn't need to
+change.</para>
+
+<sect3 id="canned-hosting-choosing">
+<title>Choosing a canned hosting site</title>
+
+<para>The largest and most well-known hosting site is <ulink
+url="http://www.sourceforge.net/">SourceForge</ulink>.  Two other
+sites providing the same or similar services are <ulink
+url="http://savannah.gnu.org/">savannah.gnu.org</ulink> and <ulink
+url="http://www.berlios.de/">BerliOS.de</ulink>.  A few organizations,
+such as the <ulink url="http://www.apache.org/">Apache Software
+Foundation</ulink> and <ulink
+url="http://www.tigris.org/">Tigris.org</ulink><footnote><para>Disclaimer:
+I am employed by <ulink
+url="http://www.collab.net/">CollabNet</ulink>, which sponsors
+Tigris.org, and I use Tigris regularly.</para></footnote>, give free
+hosting to open source projects that fit well with their missions and
+their community of existing projects.</para>
+
+<para>Haggen So did a thorough evaluation of various canned hosting
+sites, as part of the research for his Ph.D. thesis,
+<citetitle>Construction of an Evaluation Model for Free/Open Source
+Project Hosting (FOSPHost) sites</citetitle>.  The results are at
+<ulink url="http://www.ibiblio.org/fosphost/"/>, and see especially
+the very readable comparison chart at <ulink
+url="http://www.ibiblio.org/fosphost/exhost.htm"/>.</para>
+
+</sect3>
+
+<sect3 id="anonymity">
+<title>Anonymity and involvement</title>
+
+<para>A problem that is not strictly limited to the canned sites, but
+is most often found there, is the abuse of user login functionality.
+The functionality itself is simple enough: the site allows each
+visitor to register herself with a username and password.  From
+then on it keeps a profile for that user, and project administrators
+can assign the user certain permissions, for example, the right to
+commit to the repository.</para>
+
+<para>This can be extremely useful, and in fact it's one of the prime
+advantages of canned hosting.  The problem is that sometimes user
+login ends up being required for tasks that ought to be permitted to
+unregistered visitors, specifically the ability to file issues in the
+bug tracker, and to comment on existing issues.  By requiring a
+logged-in username for such actions, the project raises the
+involvement bar for what should be quick, convenient tasks.  Of
+course, one wants to be able to contact someone who's entered data
+into the issue tracker, but having a field where she can enter her
+email address (if she wants to) is sufficient.  If a new user spots a
+bug and wants to report it, she'll only be annoyed at having to fill
+out an account creation form before she can enter the bug into the
+tracker.  She may simply decide not to file the bug at all.</para>
+
+<para>The advantages of user management generally outweigh the
+disadvantages.  But if you can choose which actions can be done
+anonymously, make sure not only that <emphasis>all</emphasis>
+read-only actions are permitted to non-logged-in visitors, but also
+some data entry actions, especially in the bug tracker and, if you
+have them, wiki pages.</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+
+<!-- ======================== SECTION ============================== -->
+
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+

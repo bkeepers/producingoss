@@ -1,0 +1,3484 @@
+<chapter id="development-cycle">
+
+<title>パッケージの作成、リリース、日々の開発</title>
+
+<simplesect>
+
+<!--
+<para>This chapter is about how free software projects package and
+release their software, and how overall development patterns organize
+around those goals.</para>
+-->
+
+<para>
+    この章では、フリーソフトウェアのプロジェクトが、
+    ソフトウェアをパッケージングしてリリースする方法と、
+    開発パターン全体がこうした目標にどう繋がっているのかについて述べていきます。
+</para>
+<!--
+<para>A major difference between open source projects and proprietary
+ones is the lack of centralized control over the development team.
+When a new release is being prepared, this difference is especially
+stark: a corporation can ask its entire development team to focus on
+an upcoming release, putting aside new feature development and
+non-critical bug fixing until the release is done.  Volunteer groups
+are not so monolithic.  People work on the project for all sorts of
+reasons, and those not interested in helping with a given release
+still want to continue regular development work while the release is
+going on.  Because development doesn't stop, open source release
+processes tend to take longer, but be less disruptive, than commercial
+release processes.  It's a bit like highway repair.  There are two
+ways to fix a road: you can shut it down completely, so that a repair
+crew can swarm all over it at full capacity until the problem is
+solved, or you can work on a couple of lanes at a time, while leaving the
+others open to traffic.  The first way is very efficient <emphasis>for
+the repair crew</emphasis>, but not for anyone else&mdash;the road is
+entirely shut down until the job is done.  The second way involves
+much more time and trouble for the repair crew (now they have to work
+with fewer people and less equipment, in cramped conditions, with
+flaggers to slow and direct traffic, etc.), but at least the road
+remains useable, albeit not at full capacity.</para>
+-->
+
+<para>
+    オープンソースプロジェクトと独占的なソフトウェアのプロジェクトとの主な違いは、
+    開発チームに対して中央集権的な管理が行なわれているかどうかにあります。
+    新しいリリースを準備しているとき、この違いは特にはっきりします。
+    独占的なソフトウェアのプロジェクトでは、企業は今度のリリースにかかわる作業に集中し、
+    新機能の開発や重大でないバグフィックスは、
+    リリースが終わるまで脇に置いてくれと開発チーム全体に求めることができます。
+    ボランティアの集団はそんな一枚岩ではありません。
+    オープンソースプロジェクトの人々は様々な理由で働いています。
+    よってリリース作業を手伝うことに興味がない人たちは、
+    たとえリリース作業が進行中でも日々の開発作業を続けたいと考えます。
+    開発が止まることはないので、
+    オープンソースソフトウェアのリリース作業は、
+    独占的なソフトウェアのそれに比べて時間がかかりがちですが、
+    混沌としたものではありません。
+    これは高速道路の修復にちょっと似ています。
+    道路を直すには二つやり方があります。
+    ひとつは、道路全体に作業員が群がって問題が解決するまで全力で働けるように、
+    道路を完全に閉鎖することです。
+    もうひとつは、一度にひとつの車線でだけ作業を行い、
+    もう一方は通行できるようにしておくことです。
+    はじめのやり方は <emphasis>修理を行なう作業員にとっては</emphasis> 効率がいいやり方ですが、
+    それ以外の人にはよくありません &mdash; 作業が終わるまで道路全体が閉鎖されるからです。
+    ふたつめのやり方は時間がかかり、修理する作業員は大変です（少ない人数、少ない機械、
+    窮屈な環境での作業を強いられる上、
+    通行する車を徐行させて交通整理をする旗振り役も置かなければいけない、など）が、
+    作業員が全力を出さなくても少なくとも道路は使いやすい状態のままです。
+</para>
+    
+
+<!--
+<para>Open source projects tend to work the second way.  In fact, for
+a mature piece of software with several different release lines being
+maintained simultaneously, the project is sort of in a permanent state
+of minor road repair.  There are always a couple of lanes closed; a
+consistent but low level of background inconvenience is always being
+tolerated by the development group as a whole, so that releases get
+made on a regular schedule.</para>
+-->
+
+<para>
+    オープンソースプロジェクトはよくふたつめのやり方で動いています。
+    実際、複数の異なったリリースラインがある状態で、
+    成熟したソフトウェアのモジュールを管理するために、
+    プロジェクトはずっと小規模な道路修理を続けているような状態です。
+    いつも二つの車線が閉鎖して作業をしています。つまり、
+    リリースを定期的なスケジュールに従って行なえるように、
+    開発チームは裏で起こるささいな不都合にはいつも目をつぶっているのです。
+</para>
+
+<!--
+<para>The model that makes this possible generalizes to more than just
+releases.  It's the principle of parallelizing tasks that are not
+mutually interdependent&mdash;a principle that is by no means unique
+to open source development, of course, but one which open source
+projects implement in their own particular way.  They cannot afford to
+annoy either the roadwork crew or the regular traffic too much, but
+they also cannot afford to have people dedicated to standing by the
+orange cones and flagging traffic along.  Thus they gravitate toward
+processes that have flat, constant levels of administrative overhead,
+rather than peaks and valleys.  Volunteers are generally willing to
+work with small but consistent amounts of inconvenience; the
+predictability allows them to come and go without worrying about
+whether their schedule will clash with what's happening in the
+project.  But if the project were subject to a master schedule in
+which some activities excluded other activities, the result would be a
+lot of developers sitting idle a lot of the time&mdash;which would be
+not only inefficient but boring, and therefore dangerous, in that a
+bored developer is likely to soon be an ex-developer.</para>
+-->
+
+<para>
+    この作業モデルはリリース作業以外にも一般化できます。
+    互いに依存していないタスクは平行して処理をするという原則です。&mdash;
+    これはオープンソースソフトウェアの開発に限ったものではありませんが、
+    オープンソースプロジェクトは、独自のやり方でこの原則を実践しています。
+    プロジェクトで作業をしているボランティア達は、
+    道路工事の作業員や通行する車を気にする余裕はそんなにありませんし、
+    カラーコーンの傍に待機して車に旗を振らせることに作業員を専念させる余裕もないのです。
+    つまり、彼らはプロジェクト管理の負荷の変化が激しい管理プロセスよりは、
+    負荷が一定か、変化が少なくなるようなプロセスを好みます。
+    ボランティアたちは、ちょっと不便だなと思う状態が続いても嫌がりません。
+    自分にかかる負荷が予想できるからこそ、
+    彼らはプロジェクトで起こっていることがスケジュールと衝突しているかどうかを気にせずに作業できるのです。
+    プロジェクトが別の作業をやめてある作業に専念させるようなマスタースケジュールに縛られていると、
+    多くの開発者が長い間何もしない状態が発生します &mdash; これは非効率であるばかりか、
+    退屈なので危険です。退屈した開発者は、すぐに辞めてしまうでしょう。
+</para>
+
+<!--
+<para>Release work is usually the most noticeable non-development task
+that happens in parallel with development, so the methods described in
+the following sections are geared mostly toward enabling releases.
+However, note that they also apply to other parallelizable tasks, such
+as translations and internationalization, broad API changes made
+gradually across the entire code base, etc.</para>
+-->
+
+<para>
+    リリース作業は、
+    平行して行なわれる作業のなかでも開発とは関係ないもっとも目立つタスクです。
+    よって次のセクションで説明するやり方で、
+    リリース作業を行なうタイミングを調整しています。
+    しかし、リリース作業と平行して行なえる作業、
+    たとえば翻訳や国際化、
+    コードベース全体に徐々に浸透するようにAPIを大規模に変更する、
+    などが同時に行なわれていることに注意してください。
+</para>
+
+</simplesect>
+
+<!-- ========================== SECTION =========================== -->
+
+<sect1 id="release-numbering">
+<title>リリースに番号を付ける</title>
+
+<!--
+<para>Before we talk about how to make a release, let's look at how to
+name releases, which requires knowing what releases actually mean to
+users.  A release means that:</para>
+-->
+
+<para>
+    リリースを行なう方法を議論する前に、
+    リリースに対する名前の付け方をみておきましょう。
+    これは、リリースがユーザーにとって何を意味するのかを知らせるのに必要なものです。
+    リリースとは、次のようなものです。  
+</para>
+
+<itemizedlist>
+
+  <listitem>
+            <!--
+            <para>Old bugs have been fixed.  This is probably the one
+            thing users can count on being true of every release.</para>
+            -->
+
+            <para>
+            古いバグが直っています。
+            これは全てのリリースに当てはまると多分ユーザーが期待していいことでしょう。
+            </para>
+  </listitem>
+
+  <listitem>
+            <!--
+            <para>New bugs have been added.  This too can usually
+            be counted on, except sometimes in the case of security
+            releases or other one-offs (see
+            <xref linkend="security-releases"/><phrase
+            output="printed"> later in this chapter</phrase>).</para>
+            -->
+
+            <para>
+            新しいバグが入り込んでいます。
+            これは時々行なわれるセキュリティリリース(<phrase output="printed">この章の後半の</phrase><xref linkend="security-releases"/>を参照してください)や他の単発リリースを除いて、普通は十分過ぎるほどあり得ることです。
+            </para>
+  </listitem>
+
+  <listitem>
+      <!--
+      <para>New features may have been added.</para>
+      -->
+
+      <para>
+      新機能が追加されているかもしれません。
+      </para>
+  </listitem>
+
+  <listitem>
+      <!--
+      <para>New configuration options may have been added, or
+            the meanings of old options may have changed subtly.  The
+            installation procedures may have changed slightly since
+            the last release too, though one always hopes not.</para>
+      -->
+
+      <para>
+      新しい設定オプションが追加され、
+      古いオプションの意味が微妙に変わっているかもしれません。
+      あって欲しくないことですが、
+      直前のリリースと比べてインストール手順も変わっている可能性があります。
+      </para>
+  </listitem>
+
+  <listitem>
+      <!--
+      <para>Incompatible changes may have been introduced, such
+            that the data formats used by older versions of the
+            software are no longer useable without undergoing some
+            sort of (possibly manual) one-way conversion step.</para>
+      -->
+
+      <para>
+      互換性のない変更が入っているかもしれません。たとえば、
+      古いバージョンで使われていたデータフォーマットはある種の変換を（多分手動で）しないともはや使えなくなっているといったものです。
+      </para>
+  </listitem>
+
+</itemizedlist>
+
+<!--
+<para>As you can see, not all of these are good things.  This is why
+experienced users approach new releases with some trepidation,
+especially when the software is mature and was already mostly doing
+what they wanted (or thought they wanted).  Even the arrival of new
+features is a mixed blessing, in that it may mean the software
+will now behave in unexpected ways.</para>
+-->
+
+<para>
+    見てわかる通り、全てが良いことばかりではありません。
+    よって経験豊富なユーザーは、新しいリリースを少し恐る恐る扱います。
+    特にそのソフトウェアが成熟しており、
+    既にユーザーが求めた（または欲しいと思った）動きをほとんどしてくれていた場合はなおさらです。
+    たとえ新機能が追加されても、
+    それによってソフトウェアが意図しない振舞いをするかもしれないという点で、
+    ありがた迷惑なものなのです。
+</para>
+
+<!--
+<para>The purpose of release numbering, therefore, is twofold:
+obviously the numbers should unambiguously communicate the ordering of
+releases (i.e., by looking at any two releases' numbers, one can know
+which came later), but also they should indicate as compactly as
+possible the degree and nature of the changes in the release.</para>
+-->
+
+<para>
+    よって、リリースに番号を付ける目的はふたつあります。
+    当然、
+    リリース番号はリリースの順番を明確に伝える（i.e. ふたつのリリース番号を見れば、
+    どちらが新しいものかがわかる）べきものですが、
+    それだけではなくて、
+    変更の性質や程度をできるだけ簡潔に示すものでなければなりません。
+</para>
+
+<!--
+<para>All that in a number?  Well, more or less, yes.  Release
+numbering strategies are one of the oldest bikeshed discussions around
+(see <xref linkend="bikeshed"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>), and the world is
+unlikely to settle on a single, complete standard anytime soon.
+However, a few good strategies have emerged, along with one
+universally agreed-on principle: <emphasis>be consistent</emphasis>.
+Pick a numbering scheme, document it, and stick with it.  Your users
+will thank you.</para>
+-->
+
+<para>
+    そんなことを全部数字で表現するのかって？
+    まあ、程度の差はありますが答えはYESです。
+    リリース番号の付け方は、
+    些細な話題なのに最も古くからあちこちで議論されてきた（<phrase output="printed"><xref linkend="communications"/> の </phrase> <xref linkend="bikeshed"/> を参照してください）もののひとつですが、
+    近い将来、唯一の完全な標準に落ち着く気配はありません。
+    しかし、<emphasis>一貫していること</emphasis> という普遍的に受け入れられた原則に基づいて、
+    優れた戦略がいくつか出てきています。
+    番号の付け方を選び、それを文書化し、守るようにしましょう。
+    番号の付け方をはっきりさせれば、ユーザーはあなたに感謝することでしょう。
+</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-components">
+<title>リリース番号の構成要素</title>
+
+<!--
+<para>This section describes the formal conventions of release
+numbering in detail, and assumes very little prior knowledge.  It is
+intended mainly as a reference.  If you're already familiar with these
+conventions, you can skip this section.</para>
+-->
+
+<para>
+    このセクションではリリース番号を付ける規約を説明しますが、
+    読者に前提となる知識が殆どないことを想定しています。
+    主に参考資料として読まれることを意図していますが、
+    あなたが既にこうした規約に馴染んでいるのなら、飛ばして読んでも構いません。
+</para>
+
+<para>リリース番号はドットで区切られた数字の集まりです。</para>
+
+<informalexample>
+<literallayout>Scanley 2.3
+Singer 5.11.4</literallayout>
+</informalexample>
+
+<!--
+<para>...and so on.  The dots are <emphasis>not</emphasis> decimal
+points, they are merely separators; "5.3.9" would be followed by
+"5.3.10".  A few projects have occasionally hinted otherwise, most
+famously the Linux kernel with its "0.95", "0.96"... "0.99" sequence
+leading up to Linux 1.0, but the convention that the dots are not
+decimals is now firmly established and should be considered a
+standard.  There is no limit to the number of components (digit
+portions containing no dots), but most projects do not go beyond three
+or four.  The reasons why will become clear later.</para>
+-->
+
+<para>
+    ... などです。ドットは 小数点では <emphasis>なく</emphasis>、
+    単なる区切りです。"5.3.9" の次は "5.3.10" となります。
+    プロジェクトによっては、ドットを小数点ととしてあらわすところもあります。
+    もっとも有名な Linux Kernel では、Linux 1.0 に至るまでに、
+    "0.95", "0.96" ... "0.99" と番号が続きますが、
+    ドットが小数点ではないという規約は今や確固としたものとして確立され、
+    標準となっているはずです。
+    バージョン番号の構成要素（ドットを除いた数字の部分）の数に制限はありませんが、
+    殆どのプロジェクトでは3つか4つにとどめています。
+    その理由は後に明らかにしていきます。
+</para>
+
+<!--
+<para>In addition to the numeric components, projects sometimes tack
+on a descriptive label such as "Alpha" or "Beta" (see
+<xref linkend="alpha-and-beta"/>), for example:</para>
+-->
+
+<para>
+    数字の部分に加えて、
+    "Alpha" とか "Beta"（<xref linkend="alpha-and-beta"/> を参照してください） といった、
+    バージョンの状態を説明するラベルを付加するプロジェクトもあります。
+    たとえば次のようなものです。
+</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha)
+Singer 5.11.4 (Beta)</literallayout>
+</informalexample>
+
+<!--
+<para>An Alpha or Beta qualifier means that this
+release <emphasis>precedes</emphasis> a future release that will have
+the same number without the qualifier.  Thus, "2.3.0&nbsp;(Alpha)"
+leads eventually to "2.3.0".  In order to allow several such candidate
+releases in a row, the qualifiers themselves can have meta-qualifiers.
+For example, here is a series of releases in the order that they would
+be made available to the public:</para>
+-->
+
+<para>
+    Alpha や Beta といった識別子は、
+    同じバージョン番号ながら、
+    こうした識別子がつかないものが将来リリースされることを示しています。
+    よって、"2.3.0&nbsp;(Alpha)" は結局 "2.3.0" になります。
+    このように、複数の最終リリースの候補となるものを一行であらわすために、
+    識別子そのものが メタ識別子 を持つことができます。
+    例として、一般の人が利用できるようになるまでの順番で、
+    一連のリリースを以下に示します。
+</para>
+
+<informalexample>
+<literallayout>Scanley 2.3.0 (Alpha 1)
+Scanley 2.3.0 (Alpha 2)
+Scanley 2.3.0 (Beta 1)
+Scanley 2.3.0 (Beta 2)
+Scanley 2.3.0 (Beta 3)
+Scanley 2.3.0</literallayout>
+</informalexample>
+
+<!--
+<para>Notice that when it has the "Alpha" qualifier, Scanley "2.3" is
+written as "2.3.0".  The two numbers are equivalent&mdash;trailing
+all-zero components can always be dropped for brevity&mdash;but when a
+qualifier is present, brevity is out the window anyway, so one might
+as well go for completeness instead.</para>
+-->
+
+<para>
+    "Alpha" という識別子がついているときに、
+    Scanley "2.3" は "2.3.0" と記されていることに注意してください。
+    "2.3" と "2.3.0" は等しいものです。 &mdash;
+    つまり、番号にくっついているゼロの部分は簡潔にするためにいつでも省略できます。&mdash;
+    しかし、識別子があるときは、簡潔さはもはや問題ではありません。
+    よって、"2.3" という簡潔な記述ではなく、"2.3.0" と完全な形で表記する方がよいでしょう。
+</para>
+
+<!--
+<para>Other qualifiers in semi-regular use include "Stable",
+"Unstable", "Development", and "RC" (for "Release Candidate").  The
+most widely used ones are still "Alpha" and "Beta", with "RC" running
+a close third place, but note that "RC" always includes a numeric
+meta-qualifier.  That is, you don't release
+"Scanley&nbsp;2.3.0&nbsp;(RC)", you release
+"Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)", followed by RC2, etc.</para>
+-->
+
+<para>
+    比較的よく使われる他の識別子には "Stable", "Unstable",
+    "Development", そして "RC"（リリース候補 という意味）があります。
+    もっとも広く使われているのは 未だ "Alpha" と "Beta" で、
+    "RC" が3番目あたりの位置にきますが、
+    "RC" の後には常に数字のメタ修飾子が付くことに注意してください。
+    つまり、"Scanley&nbsp;2.3.0&nbsp;(RC)" をリリースするのではなく、
+    "Scanley&nbsp;2.3.0&nbsp;(RC&nbsp;1)" をリリースしてから RC2 を、という具合です。
+</para>
+
+<!--
+<para>Those three labels, "Alpha", "Beta", and "RC", are pretty widely
+known now, and I don't recommend using any of the others, even though
+the others might at first glance seem like better choices because they
+are normal words, not jargon.  But people who install software from
+releases are already familiar with the big three, and there's no
+reason to do things gratuitously differently from the way everyone
+else does them.</para>
+-->
+
+<para>
+    "Alpha", "Beta", "RC" という3つのラベルは今や広く知られているので、
+    たとえ他のラベルが、内輪の用語ではなく、
+    普通の用語だからという理由で一見よい選択のように見えても、
+    他のラベルを使うのはお薦めしません。
+    ソフトウェアをインストールする人々はこの3つのラベルに既に馴染んでいますし、
+    根拠無しに他のプロジェクトがやっていることと違ったことをする理由はありません。
+</para>
+
+<!--
+<para>Although the dots in release numbers are not decimal points,
+they do indicate place-value significance.  All "0.X.Y" releases
+precede "1.0" (which is equivalent to "1.0.0", of course).  "3.14.158"
+immediately precedes "3.14.159", and non-immediately precedes
+"3.14.160" as well as "3.15.anything", and so.</para>
+-->
+
+<para>
+    リリース番号にあるドットは小数点ではありませんが、
+    数字の位置には重要な意味があります。
+    バージョン "1.0"（これはもちろん、"1.0.0" と等しいです） より前のリリースは全て "0.X.Y" というリリースです。
+    "3.14.158" のすぐ後は、"3.14.159" であって、
+    "3.14.160" や、"3.15.XXXXXX" などではないのです。
+</para>
+
+<!--
+<para>A consistent release numbering policy enables a user to look at
+two release numbers for the same piece of software and tell, just from
+the numbers, the important differences between those two releases.  In
+a typical three-component system, the first component is
+the <firstterm>major&nbsp;number</firstterm>, the second is
+the <firstterm>minor&nbsp;number</firstterm>, and the third is the
+<firstterm>micro&nbsp;number</firstterm>.  For example, release
+"2.10.17" is the seventeenth micro release in the tenth minor release
+line within the second major release series.  The words "line" and
+"series" are used informally here, but they mean what one would
+expect.  A major series is simply all the releases that share the same
+major number, and a minor series (or minor line) consists of all the releases
+that share the same minor <emphasis>and</emphasis> major number.  That
+is, "2.4.0" and "3.4.1" are not in the same minor series,
+even though they both have "4" for their minor number; on the other
+hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
+not adjacent if "2.4.1" was released between them.</para>
+-->
+
+<para>
+    リリース番号を付ける一貫した決まりがあれば、
+    ユーザーは同じソフトウェアのふたつのリリース番号を見て、
+    数字だけでふたつの重要な違いを区別できるようになります。
+    3つの数字からなる典型的なリリース番号では、
+    はじめの数字は <firstterm>メジャー番号</firstterm>、
+    ふたつめは <firstterm>マイナー番号</firstterm>、
+    そして三つめは <firstterm>マイクロ番号</firstterm> になります。
+    たとえば、バージョン "2.10.17" は 2番目のメジャーリリースシリーズのうち、
+    10番目のマイナーリリースラインであり、
+    そのライン上での17番目のリリースということになります。
+    "ライン" と "シリーズ" という言葉は、ここではくだけた使い方をしていますが、
+    文字通りの意味です。メジャーシリーズというのは、
+    単に同じメジャー番号を共有するリリース全てを指し、
+    マイナーシリーズ（またはマイナーライン）は、
+    同じメジャー番号 <emphasis>と</emphasis> マイナー番号を共有する全てのリリースを指します。
+    つまり、"2.4.0" と "3.4.1" は "4" というマイナー番号は同じですが、
+    同じマイナーシリーズではありません。
+    一方、"2.4.0" と "2.4.2" は 、
+    "2.4.1" がそれらの間にリリースされる場合には隣り合うリリースにはなりませんが、
+    同じマイナーシリーズに属しています。
+</para>
+
+<!--
+<para>The meanings of these numbers are exactly what you'd expect: an
+increment of the major number indicates that major changes happened;
+an increment of the minor number indicates minor changes; and an
+increment of the micro number indicates really trivial changes.  Some
+projects add a fourth component, usually called
+the <firstterm>patch&nbsp;number</firstterm>, for especially
+fine-grained control over the differences between their releases
+(confusingly, other projects use "patch" as a synonym for "micro" in a
+three-component system).  There are also projects that use the last
+component as a <firstterm>build&nbsp;number</firstterm>, incremented
+every time the software is built and representing no change other than
+that build.  This helps the project link every bug report with a
+specific build, and is probably most useful when binary packages are
+the default method of distribution.</para>
+-->
+
+<para>
+    これらの数字の意味は、あなたが期待する通りの意味になります。
+    つまり、メジャー番号をひとつ増やすことは、大きな変更が行われたことを示しています。
+    マイナー番号をひとつ増やすことは、小さな変更が行われたことを意味しています。
+    そしてマイクロ番号をひとつ増やすことは、
+    本当につまらない変更が行われたということになります。
+    プロジェクトによっては、特にリリース間の違いをきめ細かく管理するために、
+    <firstterm>パッチ番号</firstterm> と通常呼ばれる4番目の番号を追加しているところもあります。
+    （混乱しやすいのですが、"パッチ番号" を、
+    3番目のマイクロ番号と同じ意味で用いているプロジェクトもあります。）
+    最後の数字を <firstterm>ビルド番号</firstterm> として用いるプロジェクトもあります。
+    ビルド番号はソフトウェアがビルドされるたびにひとつ増えていき、
+    ビルド以外の変更がないことをあらわしています。
+    ビルド番号はバグレポートを特定のビルド番号に結びつけるのに役立ちますし、
+    バイナリパッケージを通常配布しているプロジェクトで、恐らくもっとも役に立つでしょう。
+</para>
+
+<!--
+<para>Although there are many different conventions for how many
+components to use, and what the components mean, the differences tend
+to be minor&mdash;you get a little leeway, but not a lot.  The next
+two sections discuss some of the most widely used conventions.</para>
+-->
+
+<para>
+    いくつ数字を使うのか、それぞれの数字が何を意味するのかについては、
+    多くの異なる規約がありますが、その違いの多くはマイナー番号に関するものです。
+    &mdash; マイナー番号については裁量の余地がありますが、そう多くはありません。
+    次の2つのセクションでは、
+    もっとも広く使われている規約のうち、いくつかを議論します。
+</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-simple-strategy">
+<title>単純なやり方</title>
+
+<!--
+<para>Most projects have rules about what kinds of changes are allowed
+into a release if one is only incrementing the micro number, different
+rules for the minor number, and still different ones for the major
+number.  There is no set standard for these rules yet, but here I will
+describe a policy that has been used successfully by multiple
+projects.  You may want to just adopt this policy in your own
+project, but even if you don't, it's still a good example of the kind
+of information release numbers should convey.  This policy is adapted
+from the numbering system used by the APR project, see
+<ulink url="http://apr.apache.org/versioning.html"/>.</para>
+-->
+
+<para>
+    ほとんどのプロジェクトには、たとえマイクロ番号をひとつ増やすだけの場合であっても、
+    どんな修正をリリースに取り込むかについてのルールがあります。
+    マイナー番号を増やす場合にはまた違ったルールがありますし、
+    メジャー番号を増やす場合はさらにルールが違います。
+    こうしたルールに決まった基準はありませんが、
+    複数のプロジェクトでうまく使われてきたルールをここで説明します。
+    あなたのプロジェクトでこのルールを単純に採用してもよいのですが、
+    たとえそうしなくても、これはリリース番号が伝える情報をうまく表現する見本になります。
+    このルールは、APRプロジェクトで使われているものです。
+    <ulink url="http://apr.apache.org/versioning.html"/> を参照してください。
+</para>
+
+<orderedlist>
+  <listitem>
+            <!--
+            <para>Changes to the micro number only (that is, changes
+            within the same minor line) must be both forward- and
+            backward-compatible.  That is, the changes should be bug
+            fixes only, or very small enhancements to existing
+            features.  New features should not be introduced in a
+            micro release.</para>
+            -->
+
+            <para>
+                マイクロ番号だけに影響する（つまり、
+                同じマイナーライン上で行う）変更は、
+                前方互換性と後方互換性の両方がなければなりません。
+                つまり、変更はバグ修正のみか、
+                既にある機能に対するわずかな改善にとどめるべきです。
+                新機能は、マイクロ番号を変更するリリースに取り込んではいけません。
+            </para>
+  </listitem>
+
+  <listitem>
+            <!--
+            <para>Changes to the minor number (that is, within the
+            same major line) must be backward-compatible, but not
+            necessarily forward-compatible.  It's normal to introduce
+            new features in a minor release, but usually not too many
+            new features at once.</para>
+            -->
+
+            <para>
+                マイナー番号に影響する（つまり、
+                同じメジャーラインで行う）変更には、
+                後方互換性がなければなりませんが、前方互換性は必ずしも必要ありません。
+                マイナー番号を変更するリリースでは、
+                新機能を取り込むのが普通ですが、
+                一度にたくさん取り込んだりはしません。
+            </para>
+  </listitem>
+
+  <listitem>
+            <!--
+            <para>Changes to the major number mark compatibility
+            boundaries.  A new major release can be forward- and
+            backward-incompatible.  A major release is expected to
+            have new features, and may even have entire new feature
+            sets.</para>
+            -->
+
+            <para>
+                互換性を維持するには限度があります。
+                メジャー番号に影響する変更がその境目となります。
+                新しいメジャーリリースには前方互換性も後方互換性もありません。
+                メジャーリリースには新機能が含まれているはずですが、
+                全ての機能が新しくなっている場合さえあります。
+            </para>
+  </listitem>
+
+</orderedlist>
+
+<!--
+<para>What <firstterm>backward-compatible</firstterm>
+and <firstterm>forward-compatible</firstterm> mean, exactly, depends on
+what your software does, but in context they are usually not open to
+much interpretation.  For example, if your project is a client/server
+application, then "backward-compatible" means that upgrading the
+server to 2.6.0 should not cause any existing 2.5.4 clients to lose
+functionality or behave differently than they did before (except for
+bugs that were fixed, of course).  On the other hand, upgrading one of
+those clients to 2.6.0, along with the server, might
+make <emphasis>new</emphasis> functionality available for that client,
+functionality that 2.5.4 clients don't know how to take advantage of.
+If that happens, then the upgrade is <emphasis>not</emphasis>
+"forward-compatible": clearly you can't now downgrade that client
+back to 2.5.4 and keep all the functionality it had at 2.6.0, since
+some of that functionality was new in 2.6.0.</para>
+-->
+
+<para>
+    <firstterm>後方互換性</firstterm> と <firstterm>前方互換性</firstterm> の正確な意味は、
+    ソフトウェアが実現することに依存しますが、解釈の余地がないのが普通です。
+    たとえば、あなたのプロジェクトがクライアント/サーバ アプリケーションを作っているとすると、
+    "後方互換性" とは、サーバを 2.6.0 にアップグレードしても
+    既にあるバージョン 2.5.4 のクライアントが以前と異なる振舞い（もちろんバグを直した場合は別です）をしたり、
+    動かなくなる機能があってはいけないということです。
+    一方、サーバを 2.6.0 にアップグレードすると同時に、クライアントも2.6.0にすると、
+    <emphasis>新しい</emphasis> 機能がクライアントで使えるようになるかもしれませんが、
+    2.5.4で使えていたクライアントの機能は 2.6.0 でどう扱われるかわかりません。
+    こういうことが起こると、このクライアントのアップグレードには 前方互換性が <emphasis>ない</emphasis> ことになります。
+    つまり、クライアントを 2.5.4 にダウングレードしても、
+    2.6.0 で使えていた全ての機能は使えないということになります。
+    なぜなら、2.6.0 の機能には新機能が含まれているからです。
+</para>
+
+<!--
+<para>This is why micro releases are essentially for bug fixes only.
+They must remain compatible in both directions: if you upgrade from
+2.5.3 to 2.5.4, then change your mind and downgrade back to 2.5.3, no
+functionality should be lost.  Of course, the bugs fixed in 2.5.4
+would reappear after the downgrade, but you wouldn't lose any
+features, except insofar as the restored bugs prevent the use of some
+existing features.</para>
+-->
+
+<para>
+    こういうわけで、マイクロリリースは本来バグフィックスのためだけに存在します。
+    マイクロリリースでは前方、後方互換性の両方を維持しなければなりません。
+    つまり、2.5.3 から 2.5.4 にアップグレードしたあとで気が変わって 2.5.3 に戻したとしても、
+    特定の機能が失われてはいけません。
+    もちろん、2.5.4 で直したバグはダウングレードするとまた再現するでしょうが、
+    そのバグがあっても既に動いている機能が使えていれば、
+    機能が失われたことにはならないのです。
+</para>
+
+<!--
+<para>Client/server protocols are just one of many possible
+compatibility domains.  Another is data formats: does the software
+write data to permanent storage?  If so, the formats it reads and
+writes need to follow the compatibility guidelines promised by the
+release number policy.  Version 2.6.0 needs to be able to read the
+files written by 2.5.4, but may silently upgrade the format to
+something that 2.5.4 cannot read, because the ability to downgrade is
+not required across a minor number boundary.  If your project
+distributes code libraries for other programs to use, then APIs are a
+compatibility domain too: you must make sure that source and binary
+compatibility rules are spelled out in such a way that the informed
+user need never wonder whether or not it's safe to upgrade in place.
+She will be able to look at the numbers and know instantly.</para>
+-->
+
+<para>
+    クライアント/サーバ 間のプロトコルは、
+    互換性の問題が起きる可能性がある分野のひとつです。
+    別の分野として、データフォーマットがあります。
+    ソフトウェアがデータを永続的なストレージに保存するでしょうか？
+    もしそうなら、読み書きを行うフォーマットはリリース番号のルールで決まっている互換性のガイドラインに従う必要があります。
+    バージョン 2.6.0 は 2.5.4 が保存したファイルを読み込める必要がありますが、
+    2.5.4 が読めないフォーマットに黙ってアップグレードしているかもしれません。
+    なぜなら、マイナー番号をまたがるとダウングレードできる必要はないからです。
+    あなたのプロジェクトが他のプログラムで使われているライブラリを配布しているとすると、
+    その API も互換性の問題が起こる領域に入ります。
+    新しいバージョンに古いバージョンを置き換える形でアップグレードしても安全かどうか、
+    詳しいユーザーがわかるように、
+    ソース、バイナリレベルでの互換性に関するルールを詳しく説明しておかなければいけません。
+    詳しいユーザーは、バージョン番号をみれば互換性があるかどうかがすぐにわかるでしょう。
+</para>
+
+<!--
+<para>In this system, you don't get a chance for a fresh start until
+you increment the major number.  This can often be a real
+inconvenience: there may be features you wish to add, or protocols
+that you wish to redesign, that simply cannot be done while
+maintaining compatibility.  There's no magic solution to this, except
+to try to design things in an extensible way in the first place (a
+topic easily worth its own book, and certainly outside the scope of
+this one).  But publishing a release compatibility policy, and
+adhering to it, is an inescapable part of distributing software.  One
+nasty surprise can alienate a lot of users.  The policy just described
+is good partly because it's already quite widespread, but also because
+it's easy to explain and to remember, even for those not already familiar
+with it.</para>
+-->
+
+<para>
+    このしくみでは、メジャー番号を増やすまで過去のしがらみなしに再出発する機会はありません。
+    このため不便な状況になることもたびたびあります。
+    自分が本当に追加したいと思っている新機能があったり、
+    プロトコルを再設計したいと思ったとしても、互換性を維持している間はそう簡単にできません。
+    最初から拡張可能な方法で設計すること（このトピックに関しては一冊本を書く価値がありますし、
+    この本の範囲外でしょう）以外に、この問題に対する魔法の解は存在しません。
+    しかし、リリース間の互換性に関するルールを示し、
+    それを守ることはソフトウェアを配布するにあたって不可欠です。
+    不愉快な思いを一度させてしまうと、多くのユーザーが離れていってしまいます。
+    ここまで説明してきた互換性に関するルールは、
+    広く知られているだけでなく、まだそういったルールに馴染みがない人にも説明しやすく、
+    覚えてもらいやすいという点で優れています。
+</para>
+
+<!--
+<para>It is generally understood that these rules do not apply to
+pre-1.0 releases (although your release policy should probably state
+so explicitly, just to be clear).  A project that is still in initial
+development can release 0.1, 0.2, 0.3, and so on in sequence, until
+it's ready for 1.0, and the differences between those releases can be
+arbitrarily large.  Micro numbers in pre-1.0 releases are optional.
+Depending on the nature of your project and the differences between
+the releases, you might find it useful to have 0.1.0, 0.1.1, etc., or
+you might not.  Conventions for pre-1.0 release numbers are fairly
+loose, mainly because people understand that strong compatibility
+constraints would hamper early development too much, and because early
+adopters tend to be forgiving anyway.</para>
+-->
+
+<para>
+    互換性に関するルールは、バージョン 1.0 以前には適用されないことが一般に知られています。
+    （しかし、はっきりさせておくために、
+    リリースポリシーではこのことを明示的に宣言しておくべきです）
+    開発の初期段階にあるプロジェクトは、 バージョン 0.1, 0.2, 0.3 といった順で、
+    1.0 の準備ができるまでリリースを行うことができますし、
+    リリース間の違いを適宜大きくすることができます。
+    バージョン 1.0 以前は、マイクロ番号を使うかどうかは任意です。
+    プロジェクトの性質とリリース間の差異によっては、
+    0.1.0, 0.1.1 といった番号があれば便利かもしれませんし、そうでないかもしれません。
+    バージョン 1.0 以前のリリース番号のルールはかなりルーズです。
+    これは互換性に関する制約をきつくすると初期段階の開発を著しく妨げることと、
+    早くから使っている人はどちらにせよ寛大な傾向にあることが主な理由です。
+</para>
+
+<!--
+<para>Remember that all these injunctions only apply to this
+particular three-component system.  Your project could easily come up
+with a different three-component system, or even decide it doesn't
+need such fine granularity and use a two-component system instead.
+The important thing is to decide early, publish exactly what the
+components mean, and stick to it.</para>
+-->
+
+<para>
+    こうした制約は、３つの数字を使った番号の付け方にだけ当てはまります。
+    あなたのプロジェクトでは、３つの数字を使って、
+    これとは違った番号の付け方を簡単に思い付くでしょう。
+    もしくは、細かい粒度は必要ないので、
+    代わりに２つの番号を使おうと決めることもできるでしょう。
+    重要なのは、こういうことは早めに決めておいて、
+    それぞれの数字が意味するところを正確に皆に知らせ、それを守ることです。
+</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="release-number-even-odd-strategy">
+<title>奇数/偶数 に意味を持たせるやり方</title>
+
+<!--
+<para>Some projects use the parity of the minor number component to
+indicate the stability of the software: even means stable, odd means
+unstable.  This applies only to the minor number, not the major and
+micro numbers.  Increments in the micro number still indicate bug
+fixes (no new features), and increments in the major number still
+indicate big changes, new feature sets, etc.</para>
+-->
+
+<para>
+    プロジェクトによっては、
+    マイナー番号の 偶数/奇数 をソフトウェアの安定度を示すために使うことがあります。
+    つまり、偶数は安定版で、奇数は不安定版ということです。
+    これはマイナー番号にのみ当てはまることで、
+    メジャー番号とマイクロ番号には当てはまりません。
+    マイクロ番号をひとつ増やすことは、
+    バグフィックスが行われた（新機能はない）ことを示しますし、
+    メジャー番号をひとつ増やすことは、
+    大きな変更が行われたか、新機能が揃っていることをあらわしています。
+</para>
+
+<!--
+<para>The advantage of the even/odd system, which has been used by the
+Linux kernel project among others, is that it offers a way to release
+new functionality for testing without subjecting production users to
+potentially unstable code.  People can see from the numbers that
+"2.4.21" is okay to install on their live web server, but that "2.5.1"
+should probably stay confined to home workstation experiments.  The
+development team handles the bug reports that come in from the
+unstable (odd-minor-numbered) series, and when things start to settle
+down after some number of micro releases in that series, they
+increment the minor number (thus making it even), reset the micro
+number back to "0", and release a presumably stable package.</para>
+-->
+
+<para>
+    数あるプロジェクトの中でも、
+    特に Linux Kernel プロジェクトで使われてきたこの仕組みの利点は、
+    製品版を使うユーザーが潜在的に不安定なコードの影響を受けることなく、
+    新しい機能をテスト用にリリースできることです。
+    ユーザーは、リリース番号から、
+    "2.4.21" は現在動いているWebサーバのマシンにインストールしていいが、
+    "2.5.1" は多分家のワークステーションの実験用に限るべきだろう、
+    ということがわかります。
+    開発チームは不安定版（マイナー番号が奇数のもの）に関するバグレポートを扱い、
+    不安定版でいくつかのマイクロ番号のリリースを重ねて安定してきたら、
+    マイナー番号をひとつ増やし（つまり、マイナー番号を偶数にします）、
+    マイクロ番号を "0" にリセットします。
+    そして恐らくは、安定版のパッケージをリリースしていくことになるでしょう。
+</para>
+
+<!--
+<para>This system preserves, or at least, does not conflict with, the
+compatibility guidelines given earlier.  It simply overloads the minor
+number with some extra information.  This forces the minor number to
+be incremented about twice as often as would otherwise be necessary,
+but there's no great harm in that.  The even/odd system is probably
+best for projects that have very long release cycles, and which by
+their nature have a high proportion of conservative users who value
+stability above new features.  It is not the only way to get new
+functionality tested in the wild, however.
+<xref linkend="stabilizing-a-release"/><phrase output="printed">
+later in this chapter</phrase> describes another, perhaps more common,
+method of releasing potentially unstable code to the public, marked so
+that people have an idea of the risk/benefit trade-offs immediately on
+seeing the release's name.</para>
+-->
+
+<para>
+    この仕組みは少なくとも、以前説明した互換性のガイドラインと衝突しないことを保証します。
+    これはマイナー番号にいくらか追加情報を付加したものです。
+    これによって、他の仕組みよりマイナー番号がひとつ増える回数が２倍多くなりますが、
+    大きな害はありません。
+    奇数/偶数に意味を持たせる仕組みは、
+    リリースサイクルがとても長いプロジェクトでもっとも有効でしょうし、
+    プロジェクトの性質上、
+    新機能よりも安定性に重きを置く保守的なユーザーの割合が高いところでも有効です。
+    この仕組みが、新機能を大胆にテストする唯一の方法ではありません。
+    <phrase output="printed">この章の後半の</phrase> <xref linkend="stabilizing-a-release"/> でも説明していますが、
+    潜在的に不安定なコードをリリースするもっと一般的な方法は、
+    ユーザーがリスクと利益のトレードオフをリリース名からすぐに把握できるように、
+    リリースにマークを付けることです。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-branches">
+<title>リリースブランチ</title>
+
+<!--
+<para>From a developer's point of view, a free software project is in
+a state of continuous release.  Developers usually run the latest
+available code at all times, because they want to spot bugs, and
+because they follow the project closely enough to be able to stay away
+from currently unstable areas of the feature space.  They often update
+their copy of the software every day, sometimes more than once a day,
+and when they check in a change, they can reasonably expect that every
+other developer will have it within 24 hours.</para>
+-->
+
+<para>
+    開発者の視点から見ると、
+    フリーソフトウェアプロジェクトは継続してソフトウェアをリリースしている状態です。
+    開発者は通常、最新の利用可能なコードをいつも実行しています。
+    なぜならバグを発見したいですし、
+    最新だが機能として不安定な領域を避けつつ、
+    間近なところでプロジェクトの状態を追いかけているからです。
+    彼らは毎日ソフトウェアのコピーを更新していますが、
+    一日に一回以上更新することもあります。
+    よって変更をコミットするときは、
+    他の開発者も２４時間以内にコミットした変更のコピーを入手すると期待できるのです。
+</para>
+
+<!--
+<para>How, then, should the project make a formal release?  Should it
+simply take a snapshot of the tree at a moment in time, package it up,
+and hand it to the world as, say, version "3.5.0"?  Common sense says
+no.  First, there may be no moment in time when the entire development
+tree is clean and ready for release.  Newly-started features could be
+lying around in various states of completion.  Someone might have
+checked in a major change to fix a bug, but the change could be
+controversial and under debate at the moment the snapshot is taken.
+If so, it wouldn't work to simply delay the snapshot until the debate
+ends, because another, unrelated debate could start in the meantime,
+and then you'd have wait for <emphasis>that</emphasis> one to end too.
+This process is not guaranteed to halt.</para>
+-->
+
+<para>
+    では、プロジェクトはソフトウェアをどうやって正式にリリースすべきなのでしょうか。
+    ある時点のソースツリーのスナップショットを取得してパッケージにまとめ、
+    たとえばバージョン "3.5.0" として世界中に配布すべきなのでしょうか。
+    常識からいって答えはNOです。第一、開発ツリー全体が綺麗になっていて、
+    リリースの準備ができている瞬間なんて多分ありません。
+    開発を始めた新機能のコードが、様々な完成度でそこらじゅうに転がっているでしょう。
+    バグを直すために大きな変更をコミットする人もいますが、
+    その変更には議論の余地があり、スナップショットをとったときには議論中の場合もあります。
+    この場合、議論が終わるまでスナップショットの取得を遅らせるだけではうまくいきません。
+    なぜなら、別の関係ない議論がその間に始まってしまう可能性がありますし、
+    そうなると <emphasis>その議論も</emphasis> 終わるまで待たねばならなくなります。
+    このプロセスはいつ終わるのか保証できません。
+</para>
+
+<!--
+<para>In any case, using full-tree snapshots for releases would
+interfere with ongoing development work, even if the tree could be put
+into a releasable state.  Say this snapshot is going to be "3.5.0";
+presumably, the next snapshot would be "3.5.1", and would contain
+mostly fixes for bugs found in the 3.5.0 release.  But if both are
+snapshots from the same tree, what are the developers supposed to do
+in the time between the two releases?  They can't be adding new
+features; the compatibility guidelines prevent that.  But not everyone
+will be enthusiastic about fixing bugs in the 3.5.0 code.  Some people
+may have new features they're trying to complete, and will become
+irate if they are forced to choose between sitting idle and working on
+things they're not interested in, just because the project's release
+processes demand that the development tree remain unnaturally
+quiescent.</para>
+-->
+
+<para>
+    とにかく、ソースツリーの完全なスナップショットを使ってしまうと、
+    たとえツリーをリリースできる状態にもっていけたとしても、
+    そのとき進行している開発を妨げてしまいがちです。
+    たとえば、現在のスナップショットを仮に "3.5.0" とし、
+    次のスナップショットが "3.5.1" になるとして、
+    "3.5.1" にはリリース 3.5.0 で見つかったバグの修正が殆ど含まれているとしましょう。
+    しかし、この両方のスナップショットが同じツリーにあると、
+    開発者はこのふたつがリリースされている間何をすべきでしょうか？
+    互換性に関するガイドラインがあるため、新機能を追加することはできません。
+    しかし、開発者全員が 3.5.0 のコードに入っているバグを熱心に修正するとは限りません。
+    新機能を完成させようとしている開発者もいます。
+    リリース作業がソースツリーを不自然な休止状態にする必要があるという理由だけで、
+    自分が興味がないことに取り組むか、
+    ぼけっとしているかを選ばねばならなくなったら、開発者は怒ってしまうでしょう。
+</para>
+
+<!--
+<para>The solution to these problems is to always use
+a <firstterm>release branch</firstterm>.  A release branch is just a
+branch in the version control system (see
+<xref linkend="vc-vocabulary-branch"/>), on which the code
+destined for this release can be isolated from mainline development.
+The concept of release branches is certainly not original to free
+software; many commercial development organizations use them too.
+However, in commercial environments, release branches are sometimes
+considered a luxury&mdash;a kind of formal "best practice" that can,
+in the heat of a major deadline, be dispensed with while everyone on
+the team scrambles to stabilize the main tree.</para>
+-->
+
+<para>
+    こうした問題に対する解は、
+    いつも <firstterm>リリースブランチ</firstterm> を使うことです。
+    リリースブランチは、バージョン管理システムの単なるブランチ（<xref linkend="vc-vocabulary-branch"/> を参照してください）です。
+    そこでは、リリースされることになっているコードが開発の本線から隔離されます。
+    リリースブランチの概念は、フリーソフトウェアプロジェクトで生まれたものではありません。
+    たくさんの商用ソフトウェアの開発チームもリリースブランチを使っています。
+    しかし、商用ソフトウェアの開発では、
+    リリースブランチは贅沢なものだと考えられることがあります
+    &mdash; つまり、開発チームがメインツリーを安定させる作業を急いでいる間は、
+    大きな締切に追われて省略されてしまう一種の "ベストプラクティス" になってしまう可能性があるのです。
+</para>
+
+<!--
+<para>Release branches are pretty much required in open source
+projects, however.  I have seen projects do releases without them, but
+it has always resulted in some developers sitting idle while
+others&mdash;usually a minority&mdash;work on getting the release out
+the door.  The result is usually bad in several ways.  First, overall
+development momentum is slowed.  Second, the release is of poorer
+quality than it needed to be, because there were only a few people
+working on it, and they were hurrying to finish so everyone else could
+get back to work.  Third, it divides the development team
+psychologically, by setting up a situation in which different types of
+work interfere with each other unnecessarily.  The developers sitting
+idle would probably be happy to contribute <emphasis>some</emphasis>
+of their attention to a release branch, as long as that were a choice
+they could make according to their own schedules and interests.  But
+without the branch, their choice becomes "Do I participate in the
+project today or not?"  instead of "Do I work on the release today, or
+work on that new feature I've been developing in the mainline
+code?"</para>
+-->
+
+<para>
+    しかし、リリースブランチはオープンソースプロジェクトに不可欠なものです。
+    私はリリースブランチ無しでリリースを行っているプロジェクトを見たことがありますが、
+    いつもぼけっとしている開発者がいる一方で &mdash;
+    通常は少数の &mdash; 開発者がリリースを世に出すために働いていたのです。
+    これは複数の点で悪い結果をもたらしてしまいます。
+    まず第一に、開発全体の勢いが衰えてしまいます。
+    ふたつめに、リリースの質が必要以上に下がってしまいます。なぜなら、
+    開発者は２, ３人しか働いていませんし、
+    他の開発者が早く開発に復帰できるように急いで作業を終えようとしてしまうからです。
+    ３つめは、異なった仕事が開発者同士を不必要に衝突させてしまうため、
+    開発者チームが精神的に分裂してしまうことです。
+    ぼーっとしている開発者は、自分達のスケジュールや興味に沿って行動を選べるのであれば、
+    リリースブランチに <emphasis>少し</emphasis> 注意を向けるだけで多分幸せなのです。
+    しかしブランチがなければ、彼らが選べるのは "俺は今日リリース作業をやろうか、
+    それとも本線で開発している新機能の作業をしようか？" という二択ではなく、
+    "俺は今日プロジェクトに参加しようか、それともやめちゃおうか？" となってしまいます。  
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-branch-mechanics">
+<title>リリースブランチの使い方</title>
+
+<!--
+<para>The exact mechanics of creating a release branch depend on your
+version control system, of course, but the general concepts are the
+same in most systems.  A branch usually sprouts from another branch or
+from the trunk.  Traditionally, the trunk is where mainline
+development goes on, unfettered by release constraints.  The first
+release branch, the one leading to the "1.0" release, sprouts off the
+trunk.  In CVS, the branch command would be something like this</para>
+-->
+
+<para>
+    リリースブランチを作る正確な手順は、
+    利用しているバージョン管理システムに依存しますが、
+    ほとんどのシステムでは、一般的な概念は勿論同じです。
+    ブランチは通常別のブランチか、trunk（幹）から派生します。
+    伝統的に、trunk では本線の開発が進んでおり、リリースの制限を受けません。
+    リリース "1.0" 用のはじめてのリリースブランチは trunk から派生します。
+    CVS では、ブランチを作成するコマンドは次のようになります。
+</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_1_0_X
+</screen>
+
+<!--
+<para>or in Subversion, like this:</para>
+-->
+
+<para>Subversionでは、次のようにします。</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
+</screen>
+
+<!--
+<para>(All these examples assume a three-component release numbering
+system.  While I can't show the exact commands for every version
+control system, I'll give examples in CVS and Subversion and hope that
+the corresponding commands in other systems can be deduced from those
+two.)</para>
+-->
+
+<para>
+    （これらの例はすべて、３つの数でリリース番号を付けるやり方を想定したものです。
+    それぞれのバージョン管理システムで使われる正確なコマンドを示すことはできませんが、
+    CVS と Subversion の例を示すことで、
+    他のシステムで対応するコマンドが予測できればいいなと思っています。）
+</para>
+
+<!--
+<para>Notice that we created branch "1.0.x" (with a literal "x")
+instead of "1.0.0".  This is because the same minor line&mdash;i.e.,
+the same branch&mdash;will be used for all the micro releases in that
+line.  The actual process of stabilizing the branch for release is
+covered in
+<xref linkend="stabilizing-a-release"/><phrase output="printed">
+later in this chapter</phrase>.  Here we are
+concerned just with the interaction between the version control system
+and the release process.  When the release branch is stabilized and
+ready, it is time to tag a snapshot from the branch:</para>
+-->
+
+<para>
+    "1.0.0" ではなく、
+    (文字通り "x" という文字を使って）"1.0.x" ブランチを作成したことに注意してください。
+    これは同じマイナーライン &mdash; つまり、同じブランチということです &mdash;
+    が全てのマイクロリリースで使われるということです。
+    リリースのためにブランチを安定させる実際のプロセスについては、
+    <phrase output="printed">この章の後半の</phrase> <xref linkend="stabilizing-a-release"/> で説明しています。
+    ここでは、バージョン管理システムとリリースプロセスの関係にだけ注意を払うことにします。
+    ブランチが安定し、リリースの準備ができたら、
+    ブランチのスナップショットにタグを打つときです。
+    CVS では、次のようにします。
+</para>
+
+<screen>
+$ cd RELEASE_1_0_X-working-copy
+$ cvs tag RELEASE_1_0_0
+</screen>
+
+<para>Subversion では、次のようにします。</para>
+
+<screen>
+$ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
+</screen>
+
+<!--
+<para>That tag now represents the exact state of the project's source
+tree in the 1.0.0 release (this is useful in case anyone ever needs to
+get an old version after the packaged distributions and binaries have
+been taken down).  The next micro release in the same line is likewise
+prepared on the 1.0.x branch, and when it is ready, a tag is made for
+1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
+start thinking about a 1.1.x release, make a new branch from
+trunk:</para>
+-->
+
+<para>
+    このタグは 1.0.0 がリリースされた時点の、
+    プロジェクトのソースツリーの正確な状態を表しています。
+    （これはパッケージ化された配布物やバイナリが削除された後で、
+    古いバージョンを取得したい場合に役立ちます。）
+    同じリリースラインでの次のマイクロリリースは、
+    同じく 1.0.x ブランチ上で準備され、リリースの準備が出来次第、
+    1.0.1 のタグが打たれます。
+    1.0.2 に向けて繰り返しブランチを綺麗にしていきましょう。
+    1.1.x リリースラインについて考え始める時期が来たら、
+    新しいブランチを trunk から作ります。
+    CVS では、次のようにします。
+</para>
+
+<screen>
+$ cd trunk-working-copy
+$ cvs tag -b RELEASE_1_1_X
+</screen>
+
+<para>Subversion では、次のようにします。</para>
+
+<screen>
+$ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
+</screen>
+
+<!--
+<para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
+and releases can be made independently from both lines.  In fact, it
+is not unusual to publish near-simultaneous releases from two
+different lines.  The older series is recommended for more
+conservative site administrators, who may not want to make the big
+jump to (say) 1.1 without careful preparation.  Meanwhile, more
+adventurous people usually take the most recent release on the highest
+line, to make sure they're getting the latest features, even at the
+risk of greater instability.</para>
+-->
+
+<para>
+    メンテナンスは 1.0.x と 1.1.x ラインに対して並行して続けられ、
+    リリースは両方のラインから独立して行えます。
+    実際、ふたつの異なったラインからほとんど同時にリリースが行われることも珍しくありません。
+    古いラインからのリリースは、
+    一気に（たとえば）1.1 へバージョンアップしたいときは、
+    必ず周到な準備をしたいと望む保守的なサイト管理者にお薦めです。
+    一方で大胆なユーザーは通常、
+    不安定なバージョンであるというリスクを負ってでも、
+    必ず最新の機能を使うために、
+    より新しいラインの最新のリリースを採用します。
+</para>
+
+</sect2>
+
+<!--
+<para>This is not the only release branch strategy, of course.  In
+some circumstances it may not even be the best, though it's worked out
+pretty well for projects I've been involved in.  Use any strategy that
+seems to work, but remember the main points: the purpose of a release
+branch is to isolate release work from the fluctuations of daily
+development, and to give the project a physical entity around which to
+organize its release process.  That process is described in detail in
+the next section.</para>
+-->
+
+<para>
+    ここで説明したことが、リリースブランチの唯一の使い方ではありません。
+    自分が参加していたプロジェクトではとてもうまくいっていたのに、
+    ある状況下ではうまくいかないことがあるかもしれません。
+    うまくいきそうなやり方を使ってください。
+    しかし、以下の点は重要なので覚えておきましょう。
+    つまり、リリースブランチの目的は、
+    日々の開発作業によって生まれる変化からリリース作業を分離することと、
+    リリース作業を組織的に行うために、
+    物理的な作業スペースをプロジェクトに与えることです。
+    このプロセスは次のセクションで説明します。
+</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="stabilizing-a-release">
+<title>リリースを安定させるプロセス</title>
+
+<!--
+<para><firstterm>Stabilization</firstterm> is the process of getting a
+release branch into a releasable state; that is, of deciding which
+changes will be in the release, which will not, and shaping the branch
+content accordingly.</para>
+-->
+
+<para>
+    <firstterm>リリースを安定させるプロセス</firstterm> とは、
+    リリースブランチをリリースできる状態に持っていく作業です。
+    つまり、どの変更をリリースに含めるか、含めないかを決定し、
+    その方針に従ってブランチを整備することです。
+</para>
+
+<!--
+<para>There's a lot of potential grief contained in that word,
+"deciding".  The last-minute feature rush is a familiar phenomenon in
+collaborative software projects: as soon as developers see that a
+release is about to happen, they scramble to finish their current
+changes, in order not to miss the boat.  This, of course, is the exact
+opposite of what you want at release time.  It would be much better
+for people to work on features at a comfortable pace, and not worry
+too much about whether their changes make it into this release or the
+next one.  The more changes one tries to cram into a release at the
+last minute, the more the code is destabilized, and (usually) the more
+new bugs are created.</para>
+-->
+
+<para>
+    この "決定" という言葉には、厄介なことがたくさん含まれています。
+    リリース直前に新機能がたくさん出てくるのは、
+    協調的なソフトウェアプロジェクトでは日常茶飯事です。
+    開発者はリリースが近いことを知ると、
+    それに乗り遅れまいとして大急ぎで変更作業を終えようとします。
+    これは勿論、リリースするときにはまさに起こって欲しくないことです。
+    開発者は自分の好きなペースで新機能を実装していればいいのであって、
+    自分の変更が今回、または次のリリースに含まれるかどうかは心配しない方がいいのです。
+    ひとつのリリースに多くの変更を直前に詰め込もうとすればするほど、
+    コードは不安定になり、（普通）多くのバグが発生してしまうのです。
+</para>
+
+<!--
+<para>Most software engineers agree in theory on rough criteria for
+what changes should be allowed into a release line during its
+stabilization period.  Obviously, fixes for severe bugs can go in,
+especially for bugs without workarounds.  Documentation updates are
+fine, as are fixes to error messages (except when they are considered
+part of the interface and must remain stable).  Many projects also
+allow certain kinds of low-risk or non-core changes to go in during
+stabilization, and may have formal guidelines for measuring risk.  But
+no amount of formalization can obviate the need for human judgement.
+There will always be cases where the project simply has to make a
+decision about whether a given change can go into a release.  The
+danger is that since each person wants to see their own favorite
+changes admitted into the release, then there will be plenty of people
+motivated to allow changes, and not enough people motivated to bar
+them.</para>
+-->
+
+<para>
+    ほとんどのソフトウェアエンジニアは、
+    リリースを安定化する過程でどの変更をリリースに取り込むべきかについて、
+    おおまかな点で一致しています。深刻なバグ、
+    特に回避しようがないバグの修正は含めていいでしょう。
+    ドキュメントの更新も含めていいでしょうし、エラーメッセージの修正（但し、それがインターフェイスの一部と考えられていて、
+    安定していなければいけない場合は別です）も同様です。
+    多くのプロジェクトでは、リスクが低いか、コアに影響しない変更も受け入れますし、
+    リスクを測るための正式なガイドラインもあるでしょう。
+    しかし、どんな基準があったとしても人間の判断は必ず必要です。
+    変更をリリースに取り込むか否かをプロジェクトが決めなければいけないのは日常茶飯事でしょう。
+    危険なのは、開発者それぞれが自分の変更をリリースに含めたいと思っているので、
+    変更を受け入れることを望む人は多いのに、それに対して NO という人が少ないことです。
+</para>
+
+<!--
+<para>Thus, the process of stabilizing a release is mostly about
+creating mechanisms for saying "no".  The trick for open source
+projects, in particular, is to come up with ways of saying "no" that
+won't result in too many hurt feelings or disappointed developers, and
+also won't prevent deserving changes from getting into the release.
+There are many different ways to do this.  It's pretty easy to design
+systems that satisfy these criteria, once the team has focused on them
+as the important criteria.  Here I'll briefly describe two of the most
+popular systems, at the extreme ends of the spectrum, but don't let
+that discourage your project from being creative.  Plenty of other
+arrangements are possible; these are just two that I've seen work in
+practice.</para>
+-->
+
+<para>
+    そういうわけで、リリースを安定化させるプロセスは、
+    ほとんどが "NO" と言う仕組みを作ることと同じです。
+    オープンソースプロジェクトに特有なのは、
+    開発者を傷つけたり、がっかりさせることなく "NO" といいつつ、
+    価値がある変更はリリースに取り込むようにする方法に知恵を絞っていることです。
+    たくさんの方法がありますが、いったん開発チームがそれらを重要な基準として注目すれば、
+    基準を満たす仕組みを作るのは簡単です。
+    ここではもっとも人気のある、両極端なやり方をふたつ簡単に説明しますが、
+    二つだけにすることで、プロジェクトが創造性をなくしてはいけません。
+    他のやり方はたくさんあるでしょうから、
+    私が実際に使われているのを見たことがあるふたつだけに留めておきます。
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-owner">
+<title>リリースオーナーによる独裁</title>
+
+<!--
+<para>The group agrees to let one person be the <firstterm>release
+owner</firstterm>.  This person has final say over what changes make
+it into the release.  Of course, it is normal and expected for there
+to be discussions and arguments, but in the end the group must grant
+the release owner sufficient authority to make final decisions.  For
+this system to work, it is necessary to choose someone with the
+technical competence to understand all the changes, and the social
+standing and people skills to navigate the discussions leading up to
+the release without causing too many hurt feelings.</para>
+-->
+
+<para>
+    開発者グループは特定の人物が<firstterm>リリースオーナー</firstterm>になることに同意します。
+    リリースオーナーはどの変更をリリースに取り込むかを決める最終的な権限を持ちます。
+    勿論、それについては通常議論が行われますし、期待されていますが、
+    開発者グループは結局、リリースオーナーに最終的な決断を行うための十分な権限を与えなければなりません。
+    この仕組みがうまく機能するには、加えられた全ての変更を理解できる卓越した技術力を持ち、
+    社会的にうまくやっており、多くの人を傷つけずにリリースにもっていけるよう議論を導くコミュニケーション能力がある人を選ばなければいけません。
+</para>
+
+<!--
+<para>A common pattern is for the release owner to say "I don't think
+there's anything wrong with this change, but we haven't had enough
+time to test it yet, so it shouldn't go into this release."  It helps
+a lot if the release owner has broad technical knowledge of the
+project, and can give reasons why the change could be potentially
+destabilizing (for example, its interactions with other parts of the
+software, or portability concerns).  People will sometimes ask such
+decisions to be justified, or will argue that a change is not as risky
+as it looks.  These conversations need not be confrontational, as long
+as the release owner is able to consider all the arguments objectively
+and not reflexively dig in his heels.</para>
+-->
+
+<para>
+    よくあるのは、"この変更は間違ってないけど、テストをする十分な時間がとれていない。
+    だから、今回のリリースに含めるべきではない。" というものです。
+    これは、リリースオーナーがプロジェクトに関連した技術の知識を広く持っている場合に大いに役立ちますし、
+    その変更が潜在的にコードを不安定にする（たとえば、ソフトウェアの他の部分に与える影響や、移植性に関することなど）理由を得ることができます。
+    場合によっては、リリースオーナーの決定が正しいことを証明せよという人や、
+    見た目ほどその変更はリスキーでないと主張する人も現れます。
+    リリースーオーナーは、こうした主張のすべてが自分の決定に反対しているか、
+    反対に固執しているわけではないと判断できれば、
+    こうした主張に真正面からぶつかる必要はありません。
+</para>
+
+<!--
+<para>Note that the release owner need not be the same person as the
+project leader (in cases where there is a project leader at all; see
+<xref linkend="benevolent-dictator"/><phrase output="printed">
+in <xref linkend="social-infrastructure"/></phrase>).  In fact,
+sometimes it's
+good to make sure they're <emphasis>not</emphasis> the same person.
+The skills that make a good development leader are not necessarily the
+same as those that make a good release owner.  In something as
+important as the release process, it may be wise to have someone
+provide a counterbalance to the project leader's judgement.</para>
+-->
+
+<para>
+    プロジェクトリーダーがリリースオーナーになる必要はないことに注意してください。
+    (そもそもプロジェクトリーダーがいる場合は、<phrase output="printed"><xref linkend="social-infrastructure"/></phrase> の <xref linkend="benevolent-dictator"/> を参照してください)
+    実際、プロジェクトリーダーとリリースオーナーは兼任 <emphasis>しない</emphasis> ほうがよいことがあります。
+    優れたプロジェクトリーダーになるのに必要なスキルは、リリースオーナーになるのに必要なそれと同じではありません。
+    リリースプロセスと同じくらい重要な局面では、
+    誰かがプロジェクトリーダーの判断を相殺するくらいの方が賢いかもしれません。
+</para>
+
+<!--
+<para>Contrast the release owner role with the less dictatorial role
+described in
+<xref linkend="release-manager"/><phrase output="printed"> later
+in this chapter</phrase>.</para>
+-->
+
+<para>
+    <phrase output="printed">この章の後半にある</phrase>
+    <xref linkend="release-manager"/> で説明するリリースマネージャーは、
+    リリースオーナーとは対照的に独裁的ではありません。
+</para>
+
+</sect2>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="release-voting">
+
+<!--
+<title>Change Voting</title>
+-->
+<title>リリースに含める変更を投票で決める</title>
+
+<!--
+<para>At the opposite extreme from dictatorship by release owner,
+developers can simply vote on which changes to include in the release.
+However, since the most important function of release stabilization is
+to <emphasis>exclude</emphasis> changes, it's important to design the
+voting system in such a way that getting a change into the release
+involves positive action by multiple developers.  Including a change
+should need more than just a simple majority (see <xref
+linkend="electorate"/><phrase output="printed"> in
+<xref linkend="social-infrastructure"/></phrase>).  Otherwise,
+one vote for and none against a given change would suffice to get it
+into the release, and an
+unfortunate dynamic would be set up whereby each developer would vote
+for her own changes, yet would be reluctant to vote against others'
+changes, for fear of possible retaliation.  To avoid this, the system
+should be arranged such that subgroups of developers must act in
+cooperation to get any change into the release.  This not only means
+that more people review each change, it also makes any individual
+developer less hesitant to vote against a change, because she knows
+that no particular one among those who voted for it would take her
+vote against as a personal affront.  The greater the number of people
+involved, the more the discussion becomes about the change and less
+about the individuals.</para>
+-->
+
+<para>
+    リリースオーナーの独裁と正反対のやり方ですが、
+    開発者はどの変更をリリースに取り込むかを投票することができます。
+    しかし、リリースの安定化するプロセスで一番重要なのは変更を除外することなので、
+    複数の開発者が積極的に賛成した変更をリリースに取り込めるように投票システムを設計することが重要になります。
+    変更をリリースに取り込むには、過半数以上の賛成が必要とすべきです(<phrase output="printed"><xref linkend="social-infrastructure"/></phrase> の <xref linkend="electorate"/>) を参照してください)。
+    別のやり方として、一人が賛成し、他の人が反対しなければ十分という考え方もあるでしょうが、
+    不幸な政治力学によって、各々の開発者は自分が加えた変更に賛成票を投じるが、
+    報復を恐れて他の開発者の変更には反対票を投じたがらなくなるという状況が生まれます。
+    これを避けるには、開発者達にあらゆる変更をリリースに取り込めるよう協力して行動させるように、システムを変えるべきです。
+    これは多くの開発者が個々の変更をレビューするだけでなく、
+    それぞれの開発者が変更に対して反対票をためらわずに投じることも意味します。
+    なぜなら、自分の意見とは反対の票を投じる人が、自分を侮辱していると思う人はいないからです。
+    参加する人が多くなればなるほど、個人に関する議論ではなく、
+    変更に関する議論が多く行われるようになります。
+</para>
+
+<!--
+<para>The system we use in the Subversion project seems to have struck
+a good balance, so I'll recommend it here.  In order for a change to
+be applied to the release branch, at least three developers must vote
+in favor of it, and none against.  A single "no" vote is enough to
+stop the change from being included; that is, a "no" vote in a release
+context is equivalent to a veto (see <xref linkend="veto"/>).
+Naturally, any such vote must be accompanied by a justification, and
+in theory the veto could be overridden if enough people feel it is
+unreasonable and force a special vote over it.  In practice, this has
+never happened, and I don't expect that it ever will.  People are
+conservative around releases anyway, and when someone feels strongly
+enough to veto the inclusion of a change, there's usually a good
+reason for it.</para>
+-->
+
+<para>
+    Subversion プロジェクトで使われているシステムは、
+    うまくバランスがとれているようなので、私はここでそれをお勧めします。
+    ある変更をリリースブランチに適用するには、
+    少なくとも３人の開発者が賛成しなければならず、反対する人がひとりもいてはいけません。
+    "反対" の票がひとつでもあれば、リリースに含めるのを止めるのに十分です。つまり、
+    リリースにおける "反対" 票は拒否権と同じになります(<xref linkend="veto"/> を参照してください)。
+    当然のことですが、この手の反対票を投じるには正当な理由がなければなりませんし、
+    理屈の上では十分多くの人が不当だと感じれば覆すことができますし、
+    特別な投票があっても同様です。実際、こんなことは決して起こりませんし、
+    起こって欲しくもありません。どちらにせよ人々はリリースに対しては保守的ですし、
+    誰かがある変更をリリースに含めることに拒否権を投じたいと強く感じるときは、
+    普通は十分な理由があるときです。
+</para>
+
+<!--
+<para>Because the release procedure is deliberately biased toward
+conservatism, the justifications offered for vetoes are sometimes
+procedural rather than technical.  For example, a person may feel that
+a change is well-written and unlikely to cause any new bugs, but vote
+against its inclusion in a micro release simply because it's too
+big&mdash;perhaps it adds a new feature, or in some subtle way fails
+to fully follow the compatibility guidelines.  I've occasionally even
+seen developers veto something because they simply had a gut feeling
+that the change needed more testing, even though they couldn't spot
+any bugs in it by inspection.  People grumbled a little bit, but the
+vetoes stood and the change was not included in the release (I don't
+remember if any bugs were found in later testing or not,
+though).</para>
+-->
+
+<para>
+    リリースの手続きはわざと保守主義に偏っているので、
+    正当な理由が付けられた反対票は、技術的というより手続き的に扱われることがあります。
+    たとえば、ある変更はよく書かれていて、バグは起こさないだろうけど、
+    マイクロリリースに含めるには変更の規模が大きいからという理由で反対票を投じる人がいるかもしれません。
+    &mdash; 多分その変更は新機能を加えるものか、
+    微妙な点で互換性のガイドラインに完全に準拠していないのでしょう。
+    ある変更にもっとテストが必要だと直感で思ったという理由で反対票を投じる開発者を見たことがありますが、
+    綿密に調べても何のバグも見付けられなかったのです。
+    開発者たちはちょっと不平をいいましたが、反対票は有効なまま、
+    その変更はリリースに含められなかったのです。
+    （ですが、後のテストでバグが見付かったかどうかを私は覚えていません）
+</para>
+
+<sect3 id="release-stabilization-collaboration">
+<!--
+<title>Managing collaborative release stabilization</title>
+-->
+<title>
+    リリースを安定させるプロセスを管理する
+</title>
+
+<!--
+<para>If your project chooses a change voting system, it is imperative
+that the physical mechanics of setting up ballots and casting votes be
+as convenient as possible.  Although there is plenty of open source
+electronic voting software available, in practice the easiest thing to
+do is just to set up a text file in the release branch,
+called <filename>STATUS</filename> or <filename>VOTES</filename> or
+something like that.  This file lists each proposed change&mdash;any
+developer can propose a change for inclusion&mdash;along with all the
+votes for and against it, plus any notes or comments.  (Proposing a
+change doesn't necessarily mean voting for it, by the way, although
+the two often go together.)  An entry in such a file might look like
+this:</para>
+-->
+
+<para>
+    プロジェクトで投票システムを変える選択をした場合、
+    投票用紙や決選投票を行う物理的な仕組みをできるだけ便利にすることが求められます。
+    たくさんの電子投票システムがオープンソースで公開されていますが、
+    実際もっとも簡単なのは、
+    リリースブランチに <filename>STATUS</filename> または <filename>VOTES</filename> といったテキストファイルを用意することです。
+    このファイルは提案されている変更を一覧にしています。&mdash;
+    開発者であれば誰でも変更をリリースに取り込むよう提案することができます。
+    &mdash; このファイルには、全ての投票と、それに対する賛成、反対意見、それに加えてあらゆるメモ、そしてコメントが書き込まれています。
+    （ところで、変更を提案することは、
+    必ずしもその変更に賛成票を投じているというわけではありません。しかし、
+    そのふたつは同時に行われることがよくあります。）
+    こうしたファイルのエントリは、次のようになるでしょう。
+</para>
+
+<screen>
+* r2401 (問題 #49)
+  クライアント/サーバのハンドシェイクが２度行われるのを避ける。
+  変更する理由:
+    余計なネットワークのターンアラウンド時間を減らす。変更の規模は小さく、レビューしやすい。
+  メモ:
+    これについては http://.../mailing-lists/message-7777.html
+    及びこのスレッドにある他のメッセージで議論された。
+  投票:
+    +1: jsmith, kimf
+    -1: tmartin (バージョン 1.0以前のサーバとの互換性が壊れてしまう。
+                 確かに、1.0以前のサーバはバグが多いが、だからといって
+                 何故必要もないのに互換性を壊すのか？)
+</screen>
+
+<!--
+<para>In this case, the change acquired two positive votes, but was
+vetoed by tmartin, who gave the reason for the veto in a parenthetical
+note.  The exact format of the entry doesn't matter; whatever your
+project settles on is fine&mdash;perhaps tmartin's explanation for the
+veto should go up in the "Notes:" section, or perhaps the change
+description should get a "Description:" header to match the other
+sections.  The important thing is that all the information needed to
+evaluate the change be reachable, and that the mechanism for casting
+votes be as lightweight as possible.  The proposed change is referred
+to by its revision number in the repository (in this case a single
+revision, r2401, although a proposed change could just as easily
+consist of multiple revisions).  The revision is assumed to refer to a
+change made on the trunk; if the change were already on the release
+branch, there would be no need to vote on it.  If your version control
+system doesn't have an obvious syntax for referring to individual
+changes, then the project should make one up.  For voting to be
+practical, each change under consideration must be unambiguously
+identifiable.</para>
+-->
+
+<para>
+    この場合、提案された変更は賛成票を2つ得ていますが、
+    tmartin によって拒否権を行使されています。
+    tmartin は括弧つきのメモで拒否権を行使した理由を述べています。
+    正確なフォーマットは問題ではありません。
+    つまり、プロジェクトでどのように決めてもよいのです &mdash; 多分、
+    tmartin が拒否権を行使した理由は "メモ:" のセクションに移すか、
+    変更の理由は他のセクションに合わせて "説明:" ヘッダをつけるべきでしょう。
+    重要なのは、変更を評価するのに必要な全ての情報を到達可能にしておくことと、
+    決選投票をする仕組みをできるだけ簡単にしておくことです。
+    提案されている変更はリポジトリのリビジョン番号で参照します。
+    （今回の場合は、単一のリビジョン r2401 ですが、複数のリビジョンでも簡単にできます）
+    リビジョン番号は、trunk に加えられた変更を参照することが想定されています。
+    既にリリースブランチに変更が加えられている場合は、投票する必要はないでしょう。
+    もしバージョン管理システムが個々の変更を参照する明示的な文法を持ってない場合は、
+    プロジェクトが作るべきです。投票を実効性のあるものにするためには、
+    対象となる各々の変更は曖昧でない状態で識別できなければならないのです。
+</para>
+
+<!--
+<para>Those proposing or voting for a change are responsible for
+making sure it applies cleanly to the release branch, that is, applies
+without conflicts (see <xref linkend="vc-vocabulary-conflict"/>).
+If there are conflicts, then the entry should either point to an
+adjusted patch that does apply cleanly, or to a temporary branch that
+holds an adjusted version of the change, for example:</para>
+-->
+
+<para>
+    こうした変更の提案、もしくは投票の対象になる変更は、
+    必ずリリースブランチに綺麗に適用できなければなりません。つまり、
+    衝突せずに適用できるということです（<xref linkend="vc-vocabulary-conflict"/> を参照してください）
+    もし衝突がある場合は、綺麗に適用するよう調整したパッチか、
+    変更を調整したバージョンを格納した一時ブランチを投票のエントリに記述すべきです。
+    たとえば次のようなものです。
+</para>
+
+<screen>
+* r13222, r13223, r13232
+  libsvn_fs_fs の自動マージアルゴリズムを書き直した
+  変更する理由:
+    30万リビジョンが格納されたリポジトリのパフォーマンスが許容できない
+    (小さなコミットをしても50分以上かかる)
+  変更を加えたブランチ:
+    1.1.x-r13222@13517
+  投票:
+    +1: epg, ghudson
+</screen>
+
+<!--
+<para>That example is taken from real life; it comes from the
+<filename>STATUS</filename> file for the Subversion 1.1.4 release
+process.  Notice how it uses the original revisions as canonical
+handles on the change, even though there is also a branch with a
+conflict-adjusted version of the change (the branch also combines the
+three trunk revisions into one, r13517, to make it easier to merge the
+change into the release, should it get approval).  The original
+revisions are provided because they're still the easiest entity to
+review, since they have the original log messages.  The temporary
+branch wouldn't have those log messages; in order to avoid duplication
+of information (see
+<xref linkend="vc-singularity"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase>), the
+branch's log message for r13517 should simply say "Adjust r13222,
+r13223, and r13232 for backport to 1.1.x branch."  All other
+information about the changes can be chased down at their original
+revisions.</para>
+-->
+
+<para>
+    この例は実在のプロジェクト、
+    つまり Subversion 1.1.4 のリリースプロセスで作られた STATUS ファイルから引用したものです。
+    変更が起こした衝突を調整したブランチがあるにもかかわらず、
+    オリジナルのリビジョンを、どうやって変更を表現する規則的な名前にしているかに注意してください。
+    （そのブランチも、変更をリリースにマージするのを容易にするために３つのtrunkリビジョンを r13517 というリビジョンにまとめていますが、これは許されるはずです）
+    この例にはオリジナルのリビジョンが記述されています。
+    なぜなら、ログメッセージが残っているので、もっともレビューしやすいからです。
+    一時的なブランチにはそうしたログメッセージはないでしょう。
+    情報の重複を避けるため（<phrase output="printed"><xref linkend="technical-infrastructure"/></phrase> の <xref linkend="vc-singularity"/> を参照してください）、
+    ブランチのログメッセージは"r13222, r13223, r13232 を 1.1.x ブランチ用に調整した" と簡単にすべきでしょう。
+    変更に関する情報は全てオリジナルのリビジョンから追いかけることができます。
+</para>
+
+</sect3>
+
+<sect3 id="release-manager">
+<title>リリースマネージャー</title>
+
+<!--
+<para>The actual process of merging (see
+<xref linkend="vc-vocabulary-merge"/>) approved changes into the
+release branch can be performed by any developer.  There does not need
+to be one person whose job it is to merge changes; if there are a lot
+of changes, it can be better to spread the burden around.</para>
+-->
+
+<para>
+    リリースに取り込む変更を実際にリリースブランチにマージする(<xref linkend="vc-vocabulary-merge"/> を参照してください)プロセスは、開発者であれば誰でもできます。
+    変更をマージする専門の人を置く必要はありません。もし変更がたくさんあれば、
+    マージする負担を分散させた方がよいかもしれません。
+</para>
+
+<!--
+<para>However, although both voting and merging happen in a
+decentralized fashion, in practice there are usually one or two people
+driving the release process.  This role is sometimes formally blessed
+as <firstterm>release manager</firstterm>, but it is quite different
+from a release owner (see
+<xref linkend="release-owner"/><phrase output="printed"> earlier
+in this chapter</phrase>) who has
+final say over the changes.  Release managers keep track of how many
+changes are currently under consideration, how many have been
+approved, how many seem likely to be approved, etc.  If they sense
+that important changes are not getting enough attention, and might be
+left out of the release for lack of votes, they will gently nag other
+developers to review and vote.  When a batch of changes are approved,
+these people will often take it upon themselves to merge them into the
+release branch; it's fine if others leave that task to them, as
+long as everyone understands that they are not obligated to do all the
+work unless they have explicitly committed to it.  When the time comes
+to put the release out the door (see
+<xref linkend="testing-and-releasing"/><phrase output="printed">
+later in this chapter</phrase>), the release managers
+also take care of the logistics of creating the final release
+packages, collecting digital signatures, uploading the packages, and
+making the public announcement.</para>
+-->
+
+<para>
+    投票することと変更をマージすることは別々に行われますが、
+    実際にはリリースプロセスを指揮する人がひとりかふたりはいます。
+    この役割を正式に <firstterm>リリースマネージャー</firstterm> と呼ぶことがありますが、
+    どの変更を取り込むかに関する最終的な決定権があるリリースオーナー（<phrase output="printed">この章のはじめの方の</phrase> <xref linkend="release-owner"/> を参照してください）とは全く別物です。
+    リリースマネージャーは、リリースに取り込む候補になる変更の数や、
+    実際に取り込まれた変更の数、そして取り込まれる可能性が高い変更の数などを追いかけています。
+    重要な変更に対して開発者が十分に注意を払わず、
+    投票もされずに放置されるかもしれないとリリースマネージャーが感じた場合、
+    彼らは他の開発者に小言を言ってレビューや投票をするよう促します。
+    リリースに取り込む変更がたまってきたら、
+    リリースマネージャーが引き取ってまとめてリリースブランチにマージすることもあります。
+    変更を明示的にコミットする以外の仕事を全て彼らにやらせる必要はないと理解しているのなら、
+    他の開発者がそうした仕事をリリースマネージャーに任せられるのはよい状態です。
+    リリースを世に出す時がきたら(<phrase output="printed">この章の後半の</phrase> <xref linkend="testing-and-releasing"/> を参照してください)、
+    リリースマネージャーは最終的なリリースパッケージを作成したり、
+    デジタル署名を集めたり、パッケージをアップロードしたり、
+    公式にアナウンスを出す作業に注意を払います。
+</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="packaging">
+<!--
+<title>Packaging</title>
+-->
+<title>パッケージング</title>
+
+<!--
+<para>The canonical form for distribution of free software is as
+source code.  This is true regardless of whether the software normally
+runs in source form (i.e., can be interpreted, like Perl, Python, PHP,
+etc.) or needs to be compiled first (like C, C++, Java, etc.).  With
+compiled software, most users will probably not compile the sources
+themselves, but will instead install from pre-built binary packages
+(see <xref linkend="binary-packages"/><phrase output="printed">
+later in this chapter</phrase>).  However, those binary
+packages are still derived from a master source distribution.  The
+point of the source package is to unambiguously define the release.
+When the project distributes "Scanley&nbsp;2.5.0", what it means,
+specifically, is "The tree of source code files that, when compiled
+(if necessary) and installed, produces Scanley 2.5.0."</para>
+-->
+
+<para>
+    フリーソフトウェアを配布する標準的なやり方は、ソースコードを配布することです。
+    これはソフトウェアがソースコードをそのまま実行できる(i.e. Perl, Python, PHP などのように、
+    インタプリタによって解釈できるもの)か、
+    はじめに(C, C++, Javaなどによって）コンパイルする必要があるかどうかに関わらず当てはまります。
+    コンパイルする必要があるソフトウェアの場合、
+    ほとんどのユーザーが多分自分でソースをコンパイルせず、
+    あらかじめビルドされたバイナリパッケージをインストールするでしょう。
+    (<phrase output="printed">この章の後半にある</phrase> <xref linkend="binary-packages"/> を参照してください)
+    しかしながら、バイナリパッケージはオリジナルのソースコードを元にして作られています。
+    ソースパッケージで重要なのは、曖昧でない形でリリースを定義していることです。
+    プロジェクトが "Scanley 2.5.0" を配布する場合、それが特に意味するところは "コンパイルして（必要であれば）インストールすると、Scanley 2.5.0 を生成するソースファイルのツリーである" ということです。
+</para>
+
+<!--
+<para>There is a fairly strict standard for how source releases
+should look.  One will occasionally see deviations from this standard,
+but they are the exception, not the rule.  Unless there is a compelling
+reason to do otherwise, your project should follow this standard
+too.</para>
+-->
+
+<para>
+    どういう形でソースファイルをリリースすべきかについては、かなり厳格な基準があります。
+    基準から外れた部分も時折見つかるでしょうが、それはルールではなく例外です。
+    やむを得ない理由がなければ、あなたのプロジェクトでもこの基準に従うべきです。
+</para>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-format">
+<!--
+<title>Format</title>
+-->
+<title>パッケージのフォーマット</title>
+
+<!--
+<para>The source code should be shipped in the standard formats for
+transporting directory trees.  For Unix and Unix-like operating
+systems, the convention is to use TAR format, compressed
+by <command>compress</command>, <command>gzip</command>,
+<command>bzip</command> or <command>bzip2</command>.  For MS Windows,
+the standard method for distributing directory trees
+is <firstterm>zip</firstterm> format, which happens to do compression
+as well, so there is no need to compress the archive after creating
+it.</para>
+-->
+
+<para>
+    ソースコードはディレクトリツリーを保存してくれる標準的なフォーマットでリリースすべきです。
+    Unix または Unixライクなオペレーティングシステムでは、
+    <command>compress</command> コマンドや、<command>gzip</command>、
+    <command>bzip</command> または <command>bzip2</command> コマンドを使って圧縮した TAR フォーマットを使うという決まりがあります。Microsoft Windows では、
+    ディレクトリツリーを保存した状態で配布する標準的なやり方として <firstterm>zip</firstterm> フォーマットを使う方法があります。これはたまたま圧縮もしてくれるので、
+    アーカイブを作った後に圧縮を行う必要がありません。
+</para>
+
+   <sidebar id="packaging-tar">
+   <!--
+   <title>TAR Files</title>
+   -->
+   <title>TAR ファイル</title>
+   
+   <!--
+   <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
+   because tar format represents a directory tree as a linear data
+   stream, which makes it ideal for saving directory trees to tape.
+   The same property also makes it the standard for distributing
+   directory trees as a single file.  Producing compressed tar files
+   (or <firstterm>tarballs</firstterm>) is pretty easy.  On some
+   systems, the <command>tar</command> command can produce a
+   compressed archive itself; on others, a separate compression
+   program is used.</para>
+   -->
+
+   <para>
+       <firstterm>TAR</firstterm> とは、"Tape&nbsp;ARchive" を略したものです。
+       なぜなら、tar フォーマットはディレクトリツリーを磁気テープに保存するのに理想的な直列のデータストリームとして表現するからです。
+       また、この性質ゆえにディレクトリツリーを単一のファイルとして配布することが標準となっています。
+       圧縮された tar ファイル(または<firstterm>tarボール</firstterm>)を提供するのは非常に簡単です。
+       システムによっては、<command>tar</command>コマンド自体が圧縮済みのtarボールを生成するものもありますし、
+       圧縮するのにtarコマンドとは別のコマンドを使うシステムもあります。
+   </para>
+   </sidebar>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-name-and-layout">
+<!--
+<title>Name and Layout</title>
+-->
+<title>パッケージ名とレイアウト</title>
+
+<!--
+<para>The name of the package should consist of the software's name
+plus the release number, plus the format suffixes appropriate for the
+archive type.  For example, Scanley 2.5.0, packaged for Unix using GNU
+Zip (gzip) compression, would look like this:</para>
+-->
+
+<para>
+    パッケージの名前は、ソフトウェアの名前とリリース番号の後で、
+    アーカイブのやり方に合った適切なフォーマットの拡張子を最後につけるようにしましょう。
+    たとえば、Scanley 2.5.0 を Unix向けにパッケージングし、
+    GNU Zip(gzip) フォーマットで圧縮したときの名前は次のようになるでしょう。
+</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.gz</literallayout>
+</informalexample>
+
+<!--
+<para>or for Windows using zip compression:</para>
+-->
+
+<para>
+    また、Windows 向けに zip フォーマットで圧縮した場合の名前は次のようになるでしょう。
+</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<!--
+<para>Either of these archives, when unpacked, should create a single
+new directory tree named <filename>scanley-2.5.0</filename> in the
+current directory.  Underneath the new directory, the source code
+should be arranged in a layout ready for compilation (if compilation
+is needed) and installation.  In the top level of new directory tree,
+there should be a plain text <filename>README</filename> file
+explaining what the software does and what release this is, and giving
+pointers to other resources, such as the project's web site, other
+files of interest, etc.  Among those other files should be an
+<filename>INSTALL</filename> file, sibling to
+the <filename>README</filename> file, giving instructions on how to build
+and install the software for all the operating systems it supports.
+As mentioned in
+<xref linkend="license-quickstart-applying"/><phrase output="printed">
+in <xref linkend="getting-started"/></phrase>, there should also
+be a <filename>COPYING</filename> or <filename>LICENSE</filename>
+file, giving the software's terms of distribution.</para>
+-->
+
+<para>
+    どちらのアーカイブを展開しても、
+    カレントディレクトリに scanley-2.5.0 という名前の単一のディレクトリツリーが生成されるはずです。
+    このディレクトリには、ソースコードを(必要なら)コンパイルし、
+    インストールできる状態でソースコードを配置すべきでしょう。
+    ディレクトリツリーの最上部には、このソフトウェアが何をするもので、
+    今回のリリース内容がどういうものか、
+    そしてプロジェクトのWebサイトやその他面白いファイルなどのリソースについて説明した <filename>README</filename> ファイルをプレーンテキストで配置します。
+    他の面白いファイルとしては、<filename>README</filename> ファイルの兄弟分にあたり、
+    サポートする全てのオペレーティングシステム上でソフトウェアをビルドし、
+    インストールする方法を説明した <filename>INSTALL</filename> ファイルがあげられます。
+    <phrase output="printed"><xref linkend="getting-started"/> の</phrase> <xref linkend="license-quickstart-applying"/> でも説明していますが、
+    ソフトウェアの配付条件を示した <filename>COPYING</filename> や <filename>LICENSE</filename>ファイルもツリーの最上部に配置します。
+</para>
+
+<!--
+<para>There should also be a <filename>CHANGES</filename> file
+(sometimes called <filename>NEWS</filename>), explaining what's new in
+this release.  The <filename>CHANGES</filename> file accumulates
+changelists for all releases, in reverse chronological order, so that
+the list for this release appears at the top of the file.  Completing
+that list is usually the last thing done on a stabilizing release
+branch; some projects write the list piecemeal as they're developing,
+others prefer to save it all up for the end and have one person write
+it, getting information by combing the version control logs.  The list
+looks something like this:</para>
+-->
+
+<para>
+    今回のリリースで新しくなったことを説明する <filename>CHANGES</filename> (<filename>NEWS</filename> と呼ばれることもあります) ファイルもツリーの最上部に配置します。
+    この <filename>CHANGES</filename> ファイルは、
+    これまで行われたリリース全ての変更点を集めたもので、
+    今回のリリースの変更点の一覧が一番最初になるように、
+    リリースされた順番とは逆順に記されています。
+    この変更点一覧を完成させるのは、
+    リリースブランチをリリースできる状態にする作業の最後に行うのが普通です。
+    開発している間に少しずつ変更点を書き足していくプロジェクトもあれば、
+    バージョン管理システムのログを組み合わせることで情報を集め、
+    最後にひとりの人間がまとめるまで作業を保留するのを好むプロジェクトもあります。
+    変更点の一覧は、次のようになるでしょう。
+</para>
+
+<screen>
+Version 2.5.0
+(2004年12月20日に /branches/2.5.x からリリース)
+http://svn.scanley.org/repos/svn/tags/2.5.0/
+
+ 新機能、改良点:
+    * 正規表現による問い合わせを追加 (問題 #53)
+    * UTF-8 と UTF-16 で書かれたドキュメントのサポートを追加
+    * ドキュメントが ポーランド語、ロシア語、マダガスカル語に翻訳された。
+    * ...
+
+ バグ修正:
+    * 再インデックス時のバグを修正 (問題 #945)
+    * 問い合わせに関するバグをいくつか修正 (問題 #815, #1007, #1008)
+    * ...
+</screen>
+
+<!--
+<para>The list can be as long as necessary, but don't bother to
+include every little bugfix and feature enhancement.  Its purpose is
+simply to give users an overview of what they would gain by upgrading
+to the new release.  In fact, the changelist is customarily included
+in the announcement email (see
+<xref linkend="testing-and-releasing"/><phrase output="printed">
+later in this chapter</phrase>), so write it with that As mentioned in
+<xref linkend="license-quickstart-applying"/><phrase output="printed">
+in <xref linkend="getting-started"/></phrase>
+audience in mind.</para>
+-->
+
+<para>
+    変更点の一覧は、必要であればどれだけ長くても構いませんが、
+    小さなバグ修正や機能追加を全て含めてしまうことで、内容が退屈にならないようにしましょう。
+    このファイルの目的は、新しいリリースにアップグレードすることで得られるものの概要をユーザーに示すだけです。
+    実際、変更点の一覧はリリースアナウンスの電子メールに書くことが普通なので、
+    それを見る人のことを考えて書くようにしましょう。
+</para>
+
+   <sidebar id="changelog">
+   <!--
+   <title>CHANGES Versus ChangeLog</title>
+   -->
+   <title>CHANGES ファイルと ChangeLog ファイル</title>
+
+   <!--
+   <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
+   lists every change ever made to a project&mdash;that is, every
+   revision committed to the version control system.  There are
+   various formats for ChangeLog files; the details of the formats
+   aren't important here, as they all contain the same information:
+   the date of the change, its author, and a brief summary (or just
+   the log message for that change).</para>
+   -->
+
+   <para>
+       伝統的に <firstterm>ChangeLog</firstterm> ファイルは、
+       プロジェクトでこれまで行われたあらゆる変更を一覧にします。
+       &mdash; つまり、バージョン管理システムにコミットされた全てのリビジョンです。
+       ChangeLog ファイルには様々なフォーマットがあります。
+       どんなフォーマットでも同じ情報が含まれているので、
+       フォーマットの詳細はここでは重要ではありません。
+       その情報とは、変更日、変更した人、変更に関する簡単な要約(または単にその変更のログメッセージ）です。
+   </para>
+
+   <!--
+   <para>A <filename>CHANGES</filename> file is different.  It too is
+   a list of changes, but only the ones thought important for a
+   certain audience to see, and often with metadata like the exact
+   date and author stripped off.  To avoid confusion, don't use the
+   terms interchangeably.  Some projects use "NEWS" instead of
+   "CHANGES"; although this avoids the potential for confusion with
+   "ChangeLog", it is a bit of a misnomer, since the CHANGES file
+   retains change information for all releases, and thus has a lot of
+   old news in addition to the new news at the top.</para>
+   -->
+
+   <para>
+       <filename>CHANGES</filename> ファイルは違います。
+       このファイルは変更点を一覧にするだけでなく、
+       ある人達が見て重要だと思われるものも一覧に加えます。
+       そして正確な変更日や変更した人のようなメタデータはよく省略されます。
+       混乱を避けるため、CHANGES と ChangeLog ファイルを同じ意味で使わないでください。
+       プロジェクトによっては、"CHANGELOG" ではなく、
+       "NEWS" というファイル名を使うところもあります。
+       こうすることで "ChangeLog" との混同は避けられますが、
+       この名前はぴったり来る名前ではありません。なぜなら、
+       CHANGES ファイルは全てのリリースの変更点を保持しているので、
+       先頭に書いてある最新のニュースに加えて、
+       たくさんの古いニュースも掲載することになるからです。
+   </para>
+
+   <!--
+   <para>ChangeLog files may be slowly disappearing anyway.  They were
+   helpful in the days when CVS was the only choice of version control
+   system, because change data was not easy to extract from CVS.
+   However, with more recent version control systems, the data that
+   used to be kept in the ChangeLog can be requested from the version
+   control repository at any time, making it pointless for the project
+   to keep a static file containing that data&mdash;in fact, worse
+   than pointless, since the ChangeLog would merely duplicate the log
+   messages already stored in the repository.</para>
+   -->
+  
+   <para>
+       ChangeLog ファイルは、どちらにせよ徐々に消えつつあるものかもしれません。
+       このファイルはCVSがバージョン管理システムの唯一の選択肢だった時代には役に立つものでした。
+       なぜなら、CVSでは変更点の情報が展開しにくかったからです。
+       しかし、最近のバージョン管理システムを使うと、
+       ChangeLogで保存されていたデータは、
+       バージョン管理システムのリポジトリに要求することでいつでも引き出すことができます。
+       これによって、プロジェクトが変更点を静的なファイルに保存する意味がなくなります。
+       &mdash; 実際には、リポジトリに保存されたログメッセージは、
+       ChangeLog ファイルの内容と重複するだけなので、もっと無意味なことが起こります。
+   </para>
+
+   </sidebar>
+
+<!--
+<para>The actual layout of the source code inside the tree should be
+the same as, or as similar as possible to, the source code layout one
+would get by checking out the project directly from its version
+control repository.  Usually there are a few differences, for example
+because the package contains some generated files needed for
+configuration and compilation (see
+<xref linkend="packaging-build-install"/><phrase output="printed">
+later in this chapter</phrase>), or because it includes
+third-party software that is not maintained by the project, but that
+is required and that users are not likely to already have.  But even
+if the distributed tree corresponds exactly to some development tree
+in the version control repository, the distribution itself should not
+be a working copy (see <xref linkend="vc-vocabulary-working-copy"/>).
+The release is supposed to represent a static reference point&mdash;a
+particular, unchangeable configuration of source files.  If it were a
+working copy, the danger would be that the user might update it, and
+afterward think that he still has the release when in fact he has
+something different.</para>
+-->
+
+<para>
+    ツリーにあるソースコードのレイアウトは、
+    バージョン管理システムのリポジトリから直接プロジェクトをチェックアウトしたときに得られるものと同じか、
+    できるだけ似たものにすべきです。
+    これらの間には少し違いがあるのが普通です。
+    たとえば、リリースされるパッケージには設定やコンパイルに必要な自動生成されたファイル(<phrase output="printed">この章の後半の</phrase><xref linkend="packaging-build-install"/> を参照してください) が含まれていたり、
+    プロジェクトが管理していないが、必須のものであったり、
+    ユーザーがまだインストールしていないかもしれないサードパーティーのソフトウェアが含まれているからです。
+    しかしながら、たとえ配布されたディレクトリツリーが、
+    バージョン管理システムのリポジトリにある開発ツリーと全く同じだったとしても、
+   その配布物は作業コピーと同じであってはいけません(<xref linkend="vc-vocabulary-working-copy"/> を参照してください)。
+    あるリリースは、開発ツリーへの静的な参照ポイントです。
+    &mdash; これは特に、ある時点の固定されたソースファイルの設定 を表したものです。
+    もし配布物が作業コピーと同じだと、ユーザーがそれを変更するかもしれません。
+    また、実際に変更した後でリリースがあることを考えると危険です。
+</para>
+
+<!--
+<para>Remember that the package is the same regardless of the
+packaging.  The release&mdash;that is, the precise entity referred to
+when someone says "Scanley&nbsp;2.5.0"&mdash;is the tree created by
+unpacking a zip file or tarball.  So the project might offer all of
+these for download:</para>
+-->
+
+<para>
+    パッケージの中身は、パッケージングのやり方に関わらず同じであることを忘れないでください。
+    リリース&mdash;つまり、"Scanley&nbsp;2.5.0" と呼ぶ場合に参照する正確なものは、
+    zipやtarボールを展開したときに生成されるディレクトリツリーと同じです。
+    よって、プロジェクトはこれら全てのフォーマットをダウンロード用に提供しても構いません。
+</para>
+
+<informalexample>
+<literallayout>scanley-2.5.0.tar.bz2
+scanley-2.5.0.tar.gz
+scanley-2.5.0.zip</literallayout>
+</informalexample>
+
+<!--
+<para>...but the source tree created by unpacking them must be the
+same.  That source tree is the distribution; the form in which it is
+downloaded is merely a matter of convenience.  Certain trivial
+differences between source packages are allowable: for example, in the
+Windows package, text files should have lines ending with CRLF
+(Carriage Return and Line Feed), while Unix packages should use just
+LF.  The trees may be arranged slightly differently between source
+packages destined for different operating systems, too, if those
+operating systems require different sorts of layouts for compilation.
+However, these are all basically trivial transformations.  The basic
+source files should be the same across all the packagings of a given
+release.</para>
+-->
+
+<para>
+    しかし、パッケージを展開して生成されるソースツリーは全て同じでなければなりません。
+    このソースツリーは配布物です。つまり、ダウンロードするパッケージのフォーマットは、
+    ユーザーの便宜のためだけに存在します。
+    ソースパッケージにちょっとした違いがあっても許される場合があります。
+    たとえば、Windows用のパッケージでは、
+    テキストファイルの行はCRLF(キャリッジリターンとラインフィード)コードで終わるべきです。
+    一方でUnix用のパッケージでは、LFで終了します。
+    仮に異なったオペレーティングシステム間で違うコンパイル用のレイアウトが必要なら、
+    異なったオペレーティングシステム用のソースパッケージでは、
+    ソースツリーが少し異なっていても構いません。
+    しかし、こうした違いは基本的にちょっとした変換で済ませるものです。
+    基本的なソースファイルは、同じリリースのパッケージの範囲では同じにしておくべきです。
+</para>
+
+<sect3 id="release-capitalization">
+<!--
+<title>To capitalize or not to capitalize</title>
+-->
+<title>大文字にするか、小文字のままにするか</title>
+
+<!--
+<para>When referring to a project by name, people generally capitalize
+it as a proper noun, and capitalize acronyms if there are any:
+"MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0", etc.  Whether this
+capitalization is reproduced in the package name is up to the project.
+Either <filename>Scanley-2.5.0.tar.gz</filename> or
+<filename>scanley-2.5.0.tar.gz</filename> would be fine, for example
+(I personally prefer the latter, because I don't like to make people
+hit the shift key, but plenty of projects ship capitalized packages).
+The important thing is that the directory created by unpacking the
+tarball use the same capitalization.  There should be no surprises:
+the user must be able to predict with perfect accuracy the name of the
+directory that will be created when she unpacks a distribution.</para>
+-->
+
+<para>
+    プロジェクトの名前を引用する場合、普通は適当な名詞を大文字にし、
+    もし頭文字だけを大文字にする単語があれば、そのようにします。
+    たとえば "MySQL&nbsp;5.0", "Scanley&nbsp;2.5.0" などです。
+    大文字の表現をパッケージ名でも使うかどうかは、プロジェクトによって異なります。
+    たとえば、<filename>Scanley-2.5.0.tar.gz</filename> と <filename>scanley-2.5.0.tar.gz</filename> のどちらがよいか、ということです。(私は後者が好きです。
+    なぜなら、シフトキーを人に打たせるのが嫌だからではなく、
+    大文字を使うパッケージをたくさんのプロジェクトに出荷させることになるからです)
+    重要なのは、tarボールを展開したときに作られるディレクトリが同じ名前を使っているかどうかです。
+    ユーザーを驚かせないようにすべきです。つまり、配布物を展開して生成されるディレクトリ名は、
+    ユーザーが正確に予測できるようにしておかなければなりません。
+</para>
+
+</sect3>
+<sect3 id="release-prereleases">
+<!--
+<title>Pre-releases</title>
+-->
+<title>プレリリース版</title>
+
+<!--
+<para>When shipping a pre-release or candidate release, the qualifier
+is truly a part of the release number, so include it in the name of
+the package's name.  For example, the ordered sequence of alpha and
+beta releases given earlier in
+<xref linkend="release-number-components"/> would result in
+package names like this:</para>
+-->
+
+<para>
+    プレリリース版またはリリース候補のパッケージをリリースする場合は、
+    その識別子はリリース番号の一部になります。
+    よって、パッケージ名にその識別子を含めるようにしましょう。
+    たとえば、<xref linkend="release-number-components"/> で説明したアルファ版やベータ版のリリースの順番は、パッケージ名では以下のように表現します。
+</para>
+
+<informalexample>
+<literallayout>scanley-2.3.0-alpha1.tar.gz
+scanley-2.3.0-alpha2.tar.gz
+scanley-2.3.0-beta1.tar.gz
+scanley-2.3.0-beta2.tar.gz
+scanley-2.3.0-beta3.tar.gz
+scanley-2.3.0.tar.gz</literallayout>
+</informalexample>
+
+<!--
+<para>The first would unpack into a directory
+named <filename>scanley-2.3.0-alpha1</filename>, the second into
+<filename>scanley-2.3.0-alpha2</filename>, and so on.</para>
+-->
+
+<para>
+    はじめのパッケージは、<filename>scanley-2.3.0-alpha1</filename>というディレクトリに展開され、ふたつめは <filename>scanley-2.3.0-alpha2</filename> に展開される ... などです。
+</para>
+
+</sect3>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="packaging-build-install">
+<!--
+<title>Compilation and Installation</title>
+-->
+<title>コンパイルとインストール</title>
+
+<!--
+<para>For software requiring compilation or installation from source,
+there are usually standard procedures that experienced users expect to
+be able to follow.  For example, for programs written in C, C++, or
+certain other compiled languages, the standard under Unix-like systems
+is for the user to type:</para>
+-->
+
+<para>
+    ソースコードをコンパイルし、インストールを行う必要があるソフトウェアは、
+    経験豊富なユーザーが従う標準的な手順があります。
+    たとえば、C, C++, その他のコンパイル言語で書かれたプログラムでは、
+    Unixライクなシステムでユーザーがタイプする標準的な手順は次のようなものです。
+</para>
+
+<screen>
+   $ ./configure
+   $ make
+   # make install
+</screen>
+
+<!--
+<para>The first command autodetects as much about the environment as
+it can and prepares for the build process, the second command builds
+the software in place (but does not install it), and the last command
+installs it on the system.  The first two commands are done as a
+regular user, the third as root.  For more details about setting up
+this system, see the excellent <citetitle>GNU Autoconf, Automake, and
+Libtool</citetitle> book by Vaughan, Elliston, Tromey, and Taylor.  It
+is published as treeware by New Riders, and its content is also freely
+available online at
+<ulink url="http://sources.redhat.com/autobook/"/>.</para>
+-->
+
+<para>
+    はじめのコマンドは、自動的に実行環境をできるだけ把握し、ビルドの準備を行います。
+    ふたつめのコマンドはソフトウェアをビルドします。（しかしインストールは行いません）
+    最後のコマンドはシステムにソフトウェアをインストールします。
+    最初のふたつのコマンドは通常のユーザーで実行し、最後はrootユーザーで実行します。
+    このシステムをセットアップする作業の詳細は、Vaughan, Elliston, Tromey,
+    Taylor が書いた <citetitle>GNU Autoconf, Automake,
+    and Libtool</citetitle> という優れた本があるので、それを参照してください。
+    この本は 出版社 New Riders によってツリーウェア<footnote><para>ドキュメントやその他の印刷物を指すハッカー用語</para></footnote>として公開されており、
+    <ulink url="http://sources.redhat.com/autobook/"/> でもオンラインで利用可能です。
+</para>
+
+<!--
+<para>This is not the only standard, though it is one of the most
+widespread.  The Ant (<ulink url="http://ant.apache.org/"/>) build
+system is gaining popularity, especially with projects written in
+Java, and it has its own standard procedures for building and
+installing.  Also, certain programming languages, such as Perl and
+Python, recommend that the same method be used for most programs
+written in that language (for example, Perl modules use the
+command <command>perl&nbsp;Makefile.PL</command>).  If it's not
+obvious to you what the applicable standards are for your project, ask
+an experienced developer; you can safely assume
+that <emphasis>some</emphasis> standard applies, even if you don't
+know what it is at first.</para>
+-->
+
+<para>
+    この手順が唯一の標準というわけではありませんが、
+    もっとも普及しているもののひとつです。
+    Ant (<ulink url="http://ant.apache.org/"/>) ビルドシステムが特にJavaで書かれたプロジェクトで人気を得つつありますが、Antもビルドとインストールの標準的な手順を持っています。
+    同様に、PerlやPythonのようなプログラミング言語では、
+    その言語で書かれた殆どのプログラムで同じ手順を使うことを勧めています(たとえば、Perlモジュールは次のようなコマンドを使います。
+    <command>perl&nbsp;Makefile.PL</command>)
+    自分のプロジェクトにどの標準を使うかがわからない場合は、
+    経験豊富な開発者に尋ねてみましょう<footnote><para> Python では <command>python&nbsp;setup.py&nbsp;install</command> という、Distutils を使った標準的なコマンドがあります。Ruby の場合は Rubygems 経由で <command>gem&nbsp;install&nbsp;[パッケージ名]</command> というコマンドを使います。</para></footnote>。
+    たとえどの標準を使うかがはじめわからなくても、
+    適用できる標準が <emphasis>存在する</emphasis> と思っても大丈夫です。
+</para>
+
+<!--
+<para>Whatever the appropriate standards for you project are, don't
+deviate from them unless you absolutely must.  Standard installation
+procedures are practically spinal reflexes for a lot of system
+administrators now.  If they see familiar invocations documented in
+your project's <filename>INSTALL</filename> file, that instantly
+raises their faith that your project is generally aware of
+conventions, and that it is likely to have gotten other things right
+as well.  Also, as discussed in
+<xref linkend="downloads"/><phrase output="printed"> in
+<xref linkend="getting-started"/></phrase>, having a standard
+build procedure pleases potential developers.</para>
+-->
+
+<para>
+    自分のプロジェクトに適した標準が何であれ、
+    やむを得ない場合以外はそれを破ってはいけません。
+    標準的なインストール手順は、たくさんのシステム管理者が反射的に実践しているものです。
+    プロジェクトの <filename>INSTALL</filename>ファイル に自分が馴染んだ手順が書かれているのがわかれば、
+    このプロジェクトは標準的な規約を守っているという信頼をすぐに得られます。
+    標準的な手順をドキュメントに記すことで、他のことも理解しやすくなるでしょう。
+    また、<phrase output="printed"><xref linkend="getting-started"/>の</phrase> <xref linkend="downloads"/> でも議論していますが、
+    標準的なビルド手順があると、開発者になる可能性がある人も喜んでくれます。
+</para>
+
+<!--
+<para>On Windows, the standards for building and installing are a bit
+less settled.  For projects requiring compilation, the general
+convention seems to be to ship a tree that can fit into the
+workspace/project model of the standard Microsoft development
+environments (Developer Studio, Visual Studio, VS.NET, MSVC++, etc.).
+Depending on the nature of your software, it may be possible to offer
+a Unix-like build option on Windows via the Cygwin
+(<ulink url="http://www.cygwin.com/"/>) environment.  And of course,
+if you're using a language or programming framework that comes with
+its own build and install conventions&mdash;e.g., Perl or
+Python&mdash;you should simply use whatever the standard method is for
+that framework, whether on Windows, Unix, Mac OS X, or any other
+operating system.</para>
+-->
+
+<para>
+    Windows では、ビルドとインストールの標準的な手順がUnixライクなシステムほど決まっているわけではありません。
+    コンパイルする必要があるプロジェクトでは、
+    Microsoft の標準的な開発環境(Developer Studio, Visual Studio, VS.NET, MSVC++,
+    など)の ワークスペース/プロジェクトモデルに合った形でソースツリーをリリースすることが標準的な規約のようです。
+    ソフトウェアの性質にもよりますが、Cygwin環境(<ulink url="http://www.cygwin.com/"/>)経由でUnixライクなビルドオプションを提供することもできるでしょう。
+    もちろん、自前のビルドとインストール手順があるプログラミング言語やフレームワーク&mdash;e.g Perl や Python のような&mdash; があるときは、
+    環境が Windows, Unix, Mac OS X, あるいは他のオペレーティングシステム上であっても、
+    それが提供している標準的な手順を採用すべきです。
+</para>
+    
+<!--
+<para>Be willing to put in a lot of extra effort in order to make your
+project conform to the relevant build or installation standards.
+Building and installing is an entry point: it's okay for things to get
+harder after that, if they absolutely must, but it would be a shame
+for the user's or developer's very first interaction with the software
+to require unexpected steps.</para>
+-->
+
+<para>
+    標準的なビルド、インストール手順にプロジェクトを合わせる努力を惜しまないようにしましょう。
+    ビルドとインストールはソフトウェアを使う入口となる作業です。
+    それを終えたら、やむを得ないならソフトウェアが扱いにくくてもよいのです。
+    しかし、ユーザーや開発者がソフトウェアに触れる最初の段階で、
+    予想外の手順を踏む必要があるなら、それは恥ずかしいことなのです。
+</para>
+
+</sect2>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="binary-packages">
+<!--
+<title>Binary Packages</title>
+-->
+<title>バイナリパッケージ</title>
+
+<!--
+<para>Although the formal release is a source code package, most users
+will install from binary packages, either provided by their operating
+system's software distribution mechanism, or obtained manually from
+the project web site or from some third party.  Here "binary" doesn't
+necessarily mean "compiled"; it just means any pre-configured form of
+the package that allows a user to install it on his computer without
+going through the usual source-based build and install procedures.  On
+RedHat GNU/Linux, it is the RPM system; on Debian GNU/Linux, it is the
+APT (<filename>.deb</filename>) system; on MS Windows, it's usually
+<literal>.MSI</literal> files or self-installing
+<literal>.exe</literal> files.</para>
+-->
+
+<para>
+    ソースコードをパッケージングしてリリースするのが正式なやり方ですが、
+    ほとんどのユーザーは、オペレーティングシステムのソフトウェア配布システムや、
+    プロジェクト自体や、サードパーティーから取得したバイナリパッケージをインストールします。
+    ここでいう "バイナリ" というのは必ずしも "コンパイルして生成したもの" という意味ではありません。
+    ここでは単に、ソースコードをビルドしてインストールする手順を経ずに、
+    コンピューターにインストールすることができる設定済みのパッケージのことをいいます。
+    RedHat GNU/Linux では、その仕組みはRPMシステムと呼ばれ、Debian GNU/Linux では、
+    APT (<filename>.deb</filename>) システムといいます。Microsoft Windows では、
+    <literal>.MSI</literal> ファイル や、実行すればインストールを行ってくれる <literal>.exe</literal> ファイルであることが普通です。
+</para>
+
+<!--
+<para>Whether these binary packages are assembled by people closely
+associated with the project, or by distant third parties, users are
+going to <emphasis>treat</emphasis> them as equivalent to the
+project's official releases, and will file issues in the project's bug
+tracker based on the behavior of the binary packages.  Therefore, it
+is in the project's interest to provide packagers with clear
+guidelines, and work closely with them to see to it that what they
+produce represents the software fairly and accurately.</para>
+-->
+
+<para>
+    バイナリパッケージを作る人がプロジェクトに深く関わっている人であれ、
+    サードパーティーであれ、
+    ユーザーはそれらをプロジェクトの公式なリリースとして<emphasis>扱い</emphasis>、
+    バイナリパッケージの振る舞いをベースにしてバグ報告システムに問題を登録してきます。
+    よって、パッケージャーに明確なガイドラインを提供し、
+    彼らが提供するパッケージが、
+    プロジェクトのソフトウェアを適切に表現してくれるように、
+    彼らと緊密に連携することがプロジェクトの関心事になります。
+</para>
+    
+<!--
+<para>The main thing packagers need to know is that they should always
+base their binary packages on an official source release.  Sometimes
+packagers are tempted to pull a later incarnation of the code from the
+repository, or include selected changes that were committed after the
+release was made, in order to provide users with certain bug fixes or
+other improvements.  The packager thinks he is doing his users a favor
+by giving them the more recent code, but actually this practice can
+cause a great deal of confusion.  Projects are prepared to receive
+reports of bugs found in released versions, and bugs found in recent
+trunk and major branch code (that is, found by people who deliberately
+run bleeding edge code).  When a bug report comes in from these
+sources, the responder will often be able to confirm that the bug is
+known to be present in that snapshot, and perhaps that it has since
+been fixed and that the user should upgrade or wait for the
+next release.  If it is a previously unknown bug, having the precise
+release makes it easier to reproduce and easier to categorize in the
+tracker.</para>
+-->
+
+<para>
+    パッケージャーが主に知っておくべきことは、生成するバイナリパッケージは、
+    プロジェクトからリリースされたオフィシャルなソースコードを元にすべきだということです。
+    ユーザーにバグ修正や機能追加を提供するために、
+    パッケージャーはソースコードリポジトリのコピーや、
+    リリース後にコミットされた修正を選んでバイナリパッケージに取り込むことがあります。
+    しかしこうした習慣は、実際には多くの混乱を引きおこします。
+    プロジェクトはリリース済みのバージョンで見つかったバグ報告や、
+    最近の trunk や主要なブランチのソースコードのバグ報告（つまり、
+    注意深く最先端のコードを実行している人が見つけたバグ）を受け付ける準備をしています。
+    バグ報告があがってくると、
+    応答する人はそのバグがある時点のスナップショットで発生したということや、
+    修正済みであること、そしてユーザーがアップグレードすべきか、
+    次のリリースを待つべきかを確認することができます。
+    仮にまだ報告されていないバグの場合は、
+    リリースの時点が明確であれば、
+    それの再現やバグ報告システム上でのバグの分類もやりやすくなります。
+</para>
+
+<!--
+<para>Projects are not prepared, however, to receive bug reports based
+on unspecified intermediate or hybrid versions.  Such bugs can be hard
+to reproduce; also, they may be due to unexpected interactions in
+isolated changes pulled in from later development, and thereby cause
+misbehaviors that the project's developers should not have to take the
+blame for.  I have even seen dismayingly large amounts of time wasted
+because a bug was <emphasis>absent</emphasis> when it should have been
+present: someone was running a slightly patched up version, based on
+(but not identical to) an official release, and when the predicted bug
+did not happen, everyone had to dig around a lot to figure out
+why.</para>
+-->
+
+<para>
+    しかしながら、ユーザーが改造を加えたものや、
+    バージョンが決まっていない中間的なコードに対するバグ報告は、
+    プロジェクトは受け付ける準備ができていません。こうした報告は再現させるのが難しく、
+    後の開発で加えられる別の変更に予想外の影響を与える可能性もあります。
+    このため、開発者が責任を取る必要がない不正な振舞いをソフトウェアが起こしてしまうのです。
+    過去に発生していたはずのバグが <emphasis>発生しなくなってしまった</emphasis> ために、
+    多くの時間を浪費してしまってげんなりしたことがあります。
+    これはユーザーが公式のリリース(全く同じではない)にちょっと改造を加えたバージョンを使っていたためです。
+    バグが発生しなかったのが予想外だったので、
+    開発者全員がその理由を調べるために詳細な調査をしなければなりませんでした。
+</para>
+
+<!--
+<para>Still, there will sometimes be circumstances when a packager
+insists that modifications to the source release are necessary.
+Packagers should be encouraged to bring this up with the project's
+developers and describe their plans.  They may get approval, but
+failing that, they will at least have notified the project of their
+intentions, so the project can watch out for unusual bug reports.  The
+developers may respond by putting a disclaimer on the project's web
+site, and may ask that the packager do the same thing in the
+appropriate place, so that users of that binary package know what they
+are getting is not exactly the same as what the project officially
+released.  There need be no animosity in such a situation, though
+unfortunately there often is.  It's just that packagers have a
+slightly different set of goals from developers.  The packagers mainly
+want the best out-of-the-box experience for their users.  The
+developers want that too, of course, but they also need to ensure that
+they know what versions of the software are out there, so they can
+receive coherent bug reports and make compatibility guarantees.
+Sometimes these goals conflict.  When they do, it's good to keep in
+mind that the project has no control over the packagers, and that the
+bonds of obligation run both ways.  It's true that the project is
+doing the packagers a favor simply by producing the software.  But the
+packagers are also doing the project a favor, by taking on a mostly
+unglamorous job in order to make the software more widely available,
+often by orders of magnitude.  It's fine to disagree with packagers,
+but don't flame them; just try to work things out as best you
+can.</para>
+-->
+
+<para>
+    さらに、リリースされたソースコードには変更が必要だとパッケージャーが主張することもあります。
+    パッケージャーは、プロジェクトの開発者にこうした変更を報告し、変更の計画を説明すべきです。
+    パッケージャーが加えた変更は、開発者が受け入れてくれるかもしれませんが、
+    受け入れてもらえなくても、自分がソースコードに変更を加える理由をプロジェクトに知らせておくべきです。
+    これは、プロジェクトが予想外のバグ報告を見張ることができるようにするためです。
+    開発者はプロジェクトのウェブサイトに免責事項を記載することで、
+    こうしたバグ報告に対応してもよいでしょう。また、バイナリパッケージのユーザーに、
+    自分たちが使っているパッケージがプロジェクトが公式にリリースしたものとは正確に同じものではないことを知らせるために、
+    適切な場所で作業をするようにパッケージャーに求めることもできます。
+    こういう状況で、パッケージャーと開発者がいがみ合う必要はありませんが、
+    残念なことに対立してしまうこともあります。
+    パッケージャーは、目指すものが開発者と少し違うだけなのです。
+    パッケージャーはユーザーがインストールすればすぐに使えるものを主に求めています。
+    開発者ももちろんそれを追求してはいますが、彼らは一貫したバグ報告を受付け、
+    互換性を保証するためにパッケージャーが使っているバージョンを知らなればいけません。
+    このふたつの目標はたびたび対立します。対立が起きたときには、
+    プロジェクトはパッケージャーを拘束していないし、パッケージャーと開発者は、
+    持ちつ持たれつの関係にあることを思い出すとよいでしょう。
+    プロジェクトは、ソフトウェアを作るだけであっても、
+    パッケージャーにとって良いことをしているのは事実です。
+    しかし、パッケージャーもユーザーにソフトウェアを広めるために地道な作業のほとんどをこなすことで、
+    開発者にとってよいことをしているのです。この作業は、とてつもない数のユーザーを対象にすることもあります。パッケージャーに反対の意思を示すのはよいことですが、喧嘩をしてはいけません。
+    開発者は自分が出せる最良のソフトウェアを世に送り出すことのみに注力すればよいのです。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="testing-and-releasing">
+<!--
+<title>Testing and Releasing</title>
+-->
+<title>テストとリリース</title>
+
+<!--
+<para>Once the source tarball is produced from the stabilized release
+branch, the public part of the release process begins.  But before the
+tarball is made available to the world at large, it should be tested
+and approved by some minimum number of developers, usually three or
+more.  Approval is not simply a matter of inspecting the release for
+obvious flaws; ideally, the developers download the tarball, build and
+install it onto a clean system, run the regression test suite (see
+<xref linkend="automated-testing"/>)<phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>, and do some
+manual testing.  Assuming it passes these checks, as well as any other
+release checklist criteria the project may have, the developers then
+digitally sign the tarball using GnuPG
+(<ulink url="http://www.gnupg.org/"/>), PGP
+(<ulink url="http://www.pgpi.org/"/>), or some other program capable
+of producing PGP-compatible signatures.</para>
+-->
+
+<para>
+    安定版のリリースブランチから、ソースコードのtarボールがいったん作成されると、
+    正式なリリースの手続きが始まります。しかし、tarボールを世界中で利用できるように
+    する前にはテストを行い、最低限の、通常は3人以上の開発者からリリースしてよいとの同
+    意をもらっておくべきです。この手続きは、明らかな欠陥を探すために単にリリースを調
+    べることではありません。理想を言えば、開発者がtarボールをダウンロードし、インスト
+    ールしたばかりのシステム上でそれをビルドし、インストールして自動回帰テスト(<xref linkend="managing-volunteers"/> の <xref linkend="automated-testing"/> を参照してください) を実行し、
+    さらに手動でテストをいくらかしておくべきでしょう。これらのチェックや、プロジ
+    ェクトが持っているリリース時のチェックリストの項目をすべてクリアすれば、開発者は
+    GnuPG(<ulink url="http://www.gnupg.org/"/>) や PGP(<ulink url="http://www.pgpi.org/"/>)、
+    または PGP と互換性のある他のプログラムを使ってtarボールに電子署名を行います。
+</para>
+
+<!--
+<para>In most projects, the developers just use their personal digital
+signatures, instead of a shared project key, and as many developers as
+want to may sign (i.e., there is a minimum number, but not a maximum).
+The more developers sign, the more testing the release undergoes, and
+also the greater the likelihood that a security-conscious user can
+find a digital trust path from herself to the tarball.</para>
+-->
+
+<para>
+    ほとんどのプロジェクトでは、開発者はプロジェクトが共有している鍵を使わず、
+    自分の鍵を使って電子署名をします。そしてできるだけ多くの (すなわち、最低限
+    の人数が必要という意味であって、署名する開発者の数を限ればいいという意味で
+    はありません) 開発者が同じtarボールに署名します。署名する開発者が多くなれば
+    なるほど、多くテストされているということになり、セキュリティに関心があるユー
+    ザーが、そのtarボールから自分が信頼するルートを見つけられる可能性が高くなります。
+</para>
+
+<!--
+<para>Once approved, the release (that is, all tarballs, zip files,
+and whatever other formats are being distributed) should be placed
+into the project's download area, accompanied by the digital
+signatures, and by MD5/SHA1 checksums (see <ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/>).
+There are various standards for doing this.  One way is to accompany
+each released package with a file giving the corresponding digital
+signatures, and another file giving the checksum.
+  For example, if one
+of the released packages is <filename>scanley-2.5.0.tar.gz</filename>,
+place in the same directory a file
+<filename>scanley-2.5.0.tar.gz.asc</filename> containing the digital
+signature for that tarball, another file
+<filename>scanley-2.5.0.tar.gz.md5</filename> containing its MD5
+checksum, and optionally another,
+<filename>scanley-2.5.0.tar.gz.sha1</filename>, containing the SHA1
+checksum.  A different way to provide checking is to collect all the
+signatures for all the released packages into a single file,
+<filename>scanley-2.5.0.sigs</filename>; the same may be done with the
+checksums.</para>
+-->
+
+<para>
+    開発者達からリリースしてよいとの同意をもらったら、リリース(つまり、
+    すべてのtarボール、zipファイル、そして配布される他のあらゆるフォー
+    マットのファイル) は、電子署名と MD5/SHA1のチェックサム(<ulink
+url="http://en.wikipedia.org/wiki/Cryptographic_hash_function"/> を参照
+    してください) と一緒にプロジェクトのダウンロードエリアに置きましょう。
+    これには標準的なやり方がいくつかあります。ひとつは、それぞれのリリー
+    スするパッケージを、対応する電子署名を記したファイルと、チェックサム
+    が書かれたファイルと一緒に置くことです。
+    たとえば、リリースするパッケージのひとつが、<filename>scanley-2.5.0.tar.gz</filename>
+    だとすると、同じディレクトリにそのtarボールに行った電子署名が含まれている
+    <filename>scanley-2.5.0.tar.gz.asc</filename>  と、MD5 チェックサムを記した
+    <filename>scanley-2.5.0.tar.gz.md5</filename> や、 SHA1チェックサムを記した
+    <filename>scanley-2.5.0.tar.gz.sha1</filename> を置いておきます。
+    別の方法として、リリースするパッケージに対する全ての電子署名を
+    <filename>scanley-2.5.0.sigs</filename> のようなひとつのファイルに集めておく
+    ことがあります。同じやり方がチェックサムにも使えます。
+</para>
+
+<!--
+<para>It doesn't really matter which way you do it.  Just keep to a
+simple scheme, describe it clearly, and be consistent from release to
+release.  The purpose of all this signing and checksumming is to give
+users a way to verify that the copy they receive has not been
+maliciously tampered with.  Users are about to run this code on their
+computers&mdash;if the code has been tampered with, an attacker could
+suddenly have a back door to all their data.  See
+<xref linkend="security-releases"/><phrase output="printed">
+later in this chapter</phrase> for more about paranoia.</para>
+-->
+
+<para>
+    どの方法を使っても構いません。単純な手続きに留めるようにし、それを
+    明確に文書化するようにしましょう。そして、以後のリリースに対しても
+    それを一貫して適用するようにします。このように、電子署名とチェック
+    サムをつける目的は、自分が受け取ったコピーが悪意がある人間によって
+    改竄されていないことを確認する手段をユーザーに与えることです。
+    ユーザーはダウンロードしたコードをすぐに自分のマシンで実行してしま
+    います &mdash; つまり、コードが改竄されていれば、攻撃者がそのデータ
+    にバックドアを仕掛けることができてしまいます。
+    セキュリティに関して偏執的なユーザーについては、<phrase output="printed">この章の後の方にある</phrase> <xref linkend="security-releases"/> を参照してください。
+</para>
+
+<sect2 id="candidate-releases">
+<!--
+<title>Candidate Releases</title>
+-->
+<title>リリース候補</title>
+
+<!--
+<para>For important releases containing many changes, many projects
+prefer to put out <firstterm>release candidates</firstterm> first,
+e.g., <filename>scanley-2.5.0-beta1</filename> before
+<filename>scanley-2.5.0</filename>.  The purpose of a candidate is to
+subject the code to wide testing before blessing it as an official
+release.  If problems are found, they are fixed on the release branch
+and a new candidate release is rolled out
+(<filename>scanley-2.5.0-beta2</filename>).  The cycle continues until
+no unacceptable bugs are left, at which point the last candidate
+release becomes the official release&mdash;that is, the only
+difference between the last candidate release and the real release
+is the removal of the qualifier from the version number.</para>
+-->
+
+<para>
+    多くの変更が加えられた重要なリリースでは、多くのプロジェクトは好んで <firstterm>リリース候補</firstterm> をはじめにリリースします。
+    たとえば、<filename>scanley-2.5.0</filename> をリリースする前に <filename>scanley-2.5.0-beta1</filename> をリリースするといった具合です。
+    リリース候補を出す目的は、正式なリリースを行う前に、コードを広くテストしてもらうことです。
+    問題が見つかれば、それはリリースブランチで修正され、新しいリリース候補が(<filename>scanley-2.5.0-beta2</filename>のような形で)リリースされます。
+    このサイクルは、見過ごせないバグが残っていない状態になるまで続けられ、その時点で最後のリリース候補が正式なリリースとなります &mdash; つまり、最後のリリース候補と正式なリリースの唯一の違いは、バージョン番号の識別子を除いた点だけ、ということになります。
+</para>
+
+<!--
+<para>In most other respects, a candidate release should be treated
+the same as a real release.  The <emphasis>alpha</emphasis>,
+<emphasis>beta</emphasis>, or <emphasis>rc</emphasis> qualifier is
+enough to warn conservative users to wait until the real release, and
+of course the announcement emails for the candidate releases should
+point out that their purpose is to solicit feedback.  Other than
+that, give candidate releases the same amount of care as regular
+releases.  After all, you want people to use the candidates, because
+exposure is the best way to uncover bugs, and also because you never
+know which candidate release will end up becoming the official
+release.</para>
+-->
+
+<para>
+     ほとんどの点で、リリース候補は実際の正式リリースと同じように扱うようにします。
+     <emphasis>alpha</emphasis>、<emphasis>beta</emphasis>、そして <emphasis>rc</emphasis> といった識別子は、保守的なユーザーに対して正式リリースまで待つように警告するものであればそれで十分です。
+     そしてもちろん、リリース候補をアナウンスする電子メールは、リリース候補を出す目的がフィードバックを求めるためのものであることを記しておきましょう。
+     それ以外は、リリース候補に対して正式なリリースと同じだけの注意を払うようにします。
+     結局は、衆目の眼に晒すことはバグを発見する最高の方法ですし、
+     リリース候補が最終的に正式りリースになるかどうかわからないからこそ、
+     開発者はリリース候補を人々に使ってもらいたいと願うのです。
+</para>
+
+</sect2>
+
+<sect2 id="release-announcement">
+<!--
+<title>Announcing Releases</title>
+-->
+<title>リリースを告知する</title>
+
+<!--
+<para>Announcing a release is like announcing any other event, and
+should use the procedures described in
+<xref linkend="publicity"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>.  There are a few
+specific things to do for releases, though.</para>
+-->
+
+<para>
+    リリースを告知するのは、オープンソースソフトウェアを開発するときに起こる他のイベントと似ていますし、 
+    その手続きも <phrase output="printed"><xref linkend="communications"/> の </phrase> <xref linkend="publicity"/> で説明している方法に従うとよいでしょう。
+    ただ、リリースを告知する場合には特別な点がいくつかあります。
+</para>
+
+<!--
+<para>Whenever you give the URL to the downloadable release tarball,
+make sure to also give the MD5/SHA1 checksums and pointers to the
+digital signatures file.  Since the announcement happens in multiple
+forums (mailing list, news page, etc.), this means users can get the
+checksums from multiple sources, which gives the most
+security-conscious among them extra assurance that the checksums
+themselves have not been tampered with.  Giving the link to the
+digital signature files multiple times doesn't make those signatures
+more secure, but it does reassure people (especially those who don't
+follow the project closely) that the project takes security
+seriously.</para>
+-->
+
+<para>
+    リリースしたtarボールのダウンロード先URLを示す場合は、必ず MD5/SHA1 チェックサムと、
+    電子署名ファイルの場所も同時に示すようにしましょう。
+    リリースの告知は複数の場所 (メーリングリストやニュースページなど) で行われるため、
+    こうすることでユーザーがチェックサムの情報を複数の情報源から得ることができ、
+    最も強くセキュリティに関心を持つユーザーが、
+    チェックサムが改竄されていなかったことを確信できるようになります。
+    電子署名ファイルへのリンクを複数回張ったとしても、
+    その電子署名ファイルがより安全になるわけではありませんが、
+    プロジェクトがセキュリティに真面目に取り組んでいることを人々 (特にプロジェクトを間近で追いかけていない人) が再び確認できます。
+</para>
+
+<!--
+<para>In the announcement email, and on news pages that contain more
+than just a blurb about the release, make sure to include the relevant
+portion of the CHANGES file, so people can see why it might be in
+their interests to upgrade.  This is as important with candidate
+releases as with final releases; the presence of bugfixes and new
+features is important in tempting people to try out a candidate
+release.</para>
+-->
+
+<para>
+    電子メールとニュースページで告知をするときは、
+    リリースを宣伝する文章以上の情報も含めるようにし、
+    ユーザーがなぜアップグレードすべきかがわかるように、
+    関連する CHANGES ファイルの部分を必ず含めるようにしましょう。
+    この重要性は、正式なリリースのときも、リリース候補の場合でも同様に当てはまります。
+    バグ修正と新機能の内容を示すことは、ユーザーにリリース候補を試すように誘う意味で重要です。
+</para>
+
+<!--
+<para>Finally, don't forget to thank the development team, the
+testers, and all the people who took the time to file good bug
+reports.  Don't single out anyone by name, though, unless there's
+someone who is individually responsible for a huge piece of work,
+the value of which is widely recognized by everyone in the
+project.  Just be wary of sliding down the slippery slope of credit
+inflation (see <xref linkend="credit"/><phrase output="printed">
+in <xref linkend="managing-volunteers"/></phrase>).</para>
+-->
+
+<para>
+    最後に、開発チームとテスター、そして優れたバグ報告に時間を割いてくれた全てのユーザーに対して感謝の言葉を忘れないようにしましょう。
+    しかし、個人で巨大な仕事をする責任があった人がいない限り、特定の人を名指ししてはいけません。その仕事の価値はプロジェクトのメンバー全員がよーく知っていることですから。
+    クレジットの洪水に脚をとられないように注意しましょう。(<phrase output="printed"><xref linkend="managing-volunteers"/> の </phrase><xref linkend="credit"/> を参照してください)
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="release-lines">
+<!--
+<title>Maintaining Multiple Release Lines</title>
+-->
+<title>複数のリリースラインを管理する</title>
+
+<!--
+<para>Most mature projects maintain multiple release lines in
+parallel.  For example, after 1.0.0 comes out, that line should
+continue with micro (bugfix) releases 1.0.1, 1.0.2, etc., until the
+project explicitly decides to end the line.  Note that merely
+releasing 1.1.0 is not sufficient reason to end the 1.0.x line.  For
+example, some users make it a policy never to upgrade to the first
+release in a new minor or major series&mdash;they let others shake the
+bugs out of, say 1.1.0, and wait until 1.1.1.  This isn't necessarily
+selfish (remember, they're forgoing the bugfixes and new features
+too); it's just that, for whatever reason, they've decided to be very
+careful with upgrades.  Accordingly, if the project learns of a major
+bug in 1.0.3 right before it's about to release 1.1.0, it would be a
+bit severe to just put the bugfix in 1.1.0 and tell all the old 1.0.x
+users they should upgrade.  Why not release both 1.1.0 and 1.0.4, so
+everyone can be happy?</para>
+-->
+
+<para>
+    ほとんどの成熟したプロジェクトは、複数のリリースラインを平行して管理しています。
+    たとえば バージョン 1.0.0 がリリースされた後は、
+    プロジェクトが明示的にリリースラインの維持をやめるまで、
+    マイクロ(バグ修正)リリースを 1.0.1, 1.0.2 などの形でリリースするようにします。
+    ただ (マイナー番号が上がった) 1.1.0 をリリースすることが、
+    1.0.x ラインの維持をやめる十分な理由にはならないことに注意してください。
+    たとえば、新しいマイナー(メジャー)シリーズのはじめのリリースは絶対にアップグレードの対象にしないことをポリシーにしているユーザーもいます &mdash;
+    つまり、彼らはたとえば 1.1.0 の間は他のユーザーにバグを探させ、
+    1.1.1 のリリースを待っているのです。これは必ずしも自分勝手な行動とは言えません。
+    (彼らは、新機能や、バグ修正の恩恵を受けることを控えていることも覚えておきましょう)
+    ただ、理由が何であれ、彼らはアップグレードをとても慎重に行うと決めただけなのです。
+    よって、プロジェクトが 1.1.0 のリリースを目前にして 1.0.3 で重大なバグを発見した場合は、
+    ちょっと厳しいですが 1.1.0 でその修正を行い、
+    すべての 1.0.x 系を使っているユーザーにアップグレードを推奨することになるでしょう。
+    この場合、1.1.0 と 1.0.4 を両方リリースしたとして、開発者とユーザーの双方がハッピーでしょうか？
+    そうではないですよね。
+</para>
+
+<!--
+<para>After the 1.1.x line is well under way, you can declare 1.0.x to
+be at <firstterm>end of life</firstterm>.  This should be announced
+officially.  The announcement could stand alone, or it could be
+mentioned as part of a 1.1.x release announcement; however you do
+it, users need to know that the old line is being phased out, so they
+can make upgrade decisions accordingly.</para>
+-->
+
+<para>
+    1.1.x ラインの維持がうまくいくと、プロジェクトは 1.0.x ラインの <firstterm>維持をやめる</firstterm> と宣言することができます。
+    この宣言は公式なものとして行いましょう。その告知は単独で行うこともできますし、
+    1.1.x ラインのリリース告知と一緒に行うこともできます。どの方法をとるにしても、
+    ユーザーは古いリリースラインが維持されなくなることを知らなければいけません。
+    なぜなら、その告知に従って、ユーザーはアップグレードをする決断ができるからです。
+</para>
+
+<!--
+<para>Some projects set a window of time during which they pledge to
+support the previous release line.  In an open source context,
+"support" means accepting bug reports against that line, and making
+maintenance releases when significant bugs are found.  Other projects
+don't give a definite amount of time, but watch incoming bug reports
+to gauge how many people are still using the older line.  When the
+percentage drops below a certain point, they declare end of life for
+the line and stop supporting it.</para>
+-->
+
+<para>
+    プロジェクトによっては、以前のリリースラインのサポートを保証する期間を設定するところもあります。
+    オープンソースの文脈でいえば、"サポート" とはそのリリースラインに対するバグ報告を受け付け、
+    バグが十分出尽くすまでメンテナンスリリースを行うということです。
+    一方で、明示的にサポート期間は設定しないものの、
+    古いリリースラインを使っているユーザーの数を把握するため、
+    バグ報告の数を見張るプロジェクトもあります。
+    古いリリースラインを使うユーザーの率がある値より下がった時点で、
+    プロジェクトはそのラインの維持をやめると宣言し、サポートをやめるのです。
+</para>
+
+<!--
+<para>For each release, make sure to have a <firstterm>target
+version</firstterm> or <firstterm>target milestone</firstterm>
+available in the bug tracker, so people filing bugs will be able to do
+so against the proper release.  Don't forget to also have a target
+called "development" or "latest" for the most recent development
+sources, since some people&mdash;not only active developers&mdash;will
+often stay ahead of the official releases.</para>
+-->
+
+<para>
+    リリースを行うごとに、必ず <firstterm>ターゲットバージョン</firstterm> または <firstterm>ターゲットとなるマイルストーン</firstterm> をバグ報告システムに設定するようにしましょう。
+    これは、ユーザーが適切なリリースに対してバグを報告できるようにするためです。
+    開発中の最新のソースコードに対しては、
+     "development" や "latest" と呼ばれるターゲット名を設定することも忘れないでください。
+    なぜなら、ユーザーによっては、 &mdash; 活発な開発者だけではありません &mdash; 公式なリリースより新しいコードを実行しているからです。
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="security-releases">
+<!--
+<title>Security Releases</title>
+-->
+<title>セキュリティリリース</title>
+
+<!--
+<para>Most of the details of handling security bugs were covered in
+<xref linkend="security"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>, but there are some
+special details to discuss for doing security releases.</para>
+-->
+
+<para>
+    セキュリティに関わるバグを扱う方法の詳細は<phrase output="printed"><xref linkend="communications"/> の </phrase> <xref linkend="security"/> で扱っていますが、
+    セキュリティリリースを行うにあたっては、特に議論すべきことがいくつかあります。
+</para>
+
+<!--
+<para>A <firstterm>security release</firstterm> is a release made
+solely to close a security vulnerability.  The code that fixes the bug
+cannot be made public until the release is available, which means not
+only that the fixes cannot be committed to the repository until the
+day of the release, but also that the release cannot be publicly
+tested before it goes out the door.  Obviously, the developers can
+examine the fix among themselves, and test the release privately, but
+widespread real-world testing is not possible.</para>
+-->
+
+<para>
+    <firstterm>セキュリティリリース</firstterm> とは、
+    セキュリティ脆弱性を修正するためだけに行われるリリースです。
+    脆弱性を修正したコードはリリースが公になるまで明らかにできません。
+    これは修正がリリースの日までリポジトリにコミットできないだけでなく、
+    リリースされるまで公の場でテストできないことも意味しています。
+    開発者は、当然のことながら自分たちで修正箇所を調べ、内部でテストすることができますが、
+    広くユーザーにテストしてもらうことはできないのです。
+</para>
+
+<!--
+<para>Because of this lack of testing, a security release should
+always consist of some existing release plus the fixes for the
+security bug, with <emphasis>no other changes</emphasis>.  This is
+because the more changes you ship without testing, the more likely
+that one of them will cause a new bug, perhaps even a new security
+bug!  This conservatism is also friendly to administrators who may
+need to deploy the security fix, but whose upgrade policy prefers that
+they not deploy any other changes at the same time.</para>
+-->
+
+<para>
+    このようにテストが不足することから、
+    セキュリティリリースは常に既に存在するリリースに対して修正を行い、
+    それ以外には <emphasis>何も変更しない</emphasis> ようにすべきです。
+    これは、テストなしに多くの変更をリリースすればするほど、新しいバグが発生する可能性が高くなるうえ、
+    新しいセキュリティ上の脆弱性が発生する可能性すらあるからです！
+    この保守的なやり方は、セキュリティ上の修正を展開する必要があるシステム管理者だけでなく、
+    セキュリティ上の修正とそれ以外の修正を同時にマシンに展開しないというアップグレードポリシーを持つ管理者にも馴染みやすいものです。
+</para>
+
+<!--
+<para>Making a security release sometimes involves some minor
+deception.  For example, the project may have been working on a 1.1.3
+release, with certain bug fixes to 1.1.2 already publicly declared,
+when a security report comes in.  Naturally, the developers cannot
+talk about the security problem until they make the fix available;
+until then, they must continue to talk publicly as though 1.1.3 will
+be what it's always been planned to be.  But when 1.1.3 actually
+comes out, it will differ from 1.1.2 only in the security fixes, and
+all those other fixes will have been deferred to 1.1.4 (which, of
+course, will now <emphasis>also</emphasis> contain the security
+fix, as will all other future releases).</para>
+-->
+
+<para>
+    セキュリティリリースを行うために、ユーザーをちょっと騙す場合もあります。
+    たとえば、プロジェクトが 1.1.3 のリリースに向けて動いていて、
+    1.1.2 に対するバグ修正を行うと公に宣言しているときに、
+    セキュリティに関わるバグ報告が行われた場合です。
+    当然、開発者達はその修正がリリースされるまでセキュリティ問題について話すことはできません。
+    つまり、そのときまで 1.1.3 は計画通り 1.1.2 のバグ修正が含まれたものになると言い続けなければならないのです。
+    しかし、実際に 1.1.3 が出てみると、1.1.2 にセキュリティバグの修正が加わったことだけが変更点で、
+    他の修正は 1.1.4 に先送りされてしまっていました。(これはもちろん、セキュリティバグの修正に加え、
+    <emphasis>他の修正も</emphasis> 1.1.4 には含まれることになるということです)
+</para>
+
+<!--
+<para>You could add an extra component to an existing release to
+indicate that it contains security changes only.  For example, people
+would be able to tell just from the numbers that 1.1.2.1 is a security
+release against 1.1.2, and they would know that any release "higher"
+than that (e.g., 1.1.3, 1.2.0, etc.) contains the same security fixes.
+For those in the know, this system conveys a lot of information.  On
+the other hand, for those not following the project closely, it can be
+a bit confusing to see a three-component release number most of the
+time with an occasional four-component one thrown in seemingly at
+random.  Most projects I've looked at choose consistency and simply
+use the next regularly scheduled number for security releases, even
+when it means shifting other planned releases by one.</para>
+-->
+
+<para>
+    セキュリティの修正だけが含まれたリリースであることを示すために、
+    リリース番号に追加の構成要素を加えることもできます。
+    たとえば、 1.1.2.1 というリリース番号は、 
+    1.1.2 に対してセキュリティ修正だけが加わったリリースだと区別できます。
+    そしてそれより "大きい" リリース番号 (e.g. 1.1.3, 1.2.0 など) は、
+    同じセキュリティ修正が加えられたリリースであるとわかります。
+    一方、プロジェクトを間近で追いかけていない人にとっては、
+    ほとんどの場合は3つの数字でリリース番号が構成されているのに、
+    ランダムに、ときどき4つの番号を見ると少し混乱する可能性があります。
+    私が見てきたほとんどのプロジェクトは、リリース番号を一貫させる方針を採用し、
+    セキュリティの修正が含まれたリリースの場合も、
+    たとえそれが他のリリース計画を番号ひとつ分ずらすことを意味するとしても、
+    最新リリースの次の番号を使っています。
+</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="releases-and-daily-development">
+<!--
+<title>Releases and Daily Development</title>
+-->
+<title>リリースと日々の開発</title>
+
+<!--
+<para>Maintaining parallel releases simultaneously has implications
+for how daily development is done.  In particular, it makes
+practically mandatory a discipline that would be recommended anyway:
+have each commit be a single logical change, and never mix unrelated
+changes in the same commit.  If a change is too big or too disruptive
+to do in one commit, break it across N commits, where each commit is a
+well-partitioned subset of the overall change, and includes nothing
+unrelated to the overall change.</para>
+-->
+
+<para>
+    平行して行われるリリースを同時に管理するということから、
+    日々の開発のやり方を推測することができます。
+    特に、次のことはどんなときでも推奨される強制的な規律になります。
+    つまり、コミットのひとつひとつは、論理的な変更単位であること、
+    そして関連のない変更をごっちゃにして一度にコミットしてはいけない、ということです。
+    変更する量がとても多い、または一度にコミットするのが破壊的である場合は、
+    それをN回のコミットに分割し、
+    それぞれのコミットが変更全体をうまく分割したサブセットであるようにします。
+    そして変更全体に関係のないものは一切含まれないようにします。
+</para>
+
+<!--
+<para>Here's an example of an ill-thought-out commit:</para>
+-->
+
+<para>
+    次に示すのは、まとまりのない悪いコミットの例です。:
+</para>
+
+<screen>
+------------------------------------------------------------------------
+r6228 | jrandom | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 lines
+
+問題 #1729 を修正 : インデックス作成を上品に行うようにした。これに伴い、
+ファイルにインデックスを作成している最中にユーザーがファイルを変更していたら警告するようにした。
+
+* ui/repl.py
+  (ChangingFile): 新しい例外クラス
+  (DoIndex): 新しい例外を処理するようにした
+
+* indexer/index.py
+  (FollowStream): インデックスを作成中にファイルが変更されたら、例外を生成するようにした
+  (BuildDir): 上記とは関係ないが、いくつかの古いコメントを削除し、
+  コードのフォーマットをいくつか修正した。また、ディレクトリ作成時のエラーチェックを修正した。
+
+その他関連のないクリーンアップ:
+
+* www/index.html: typoを修正し、次のリリース日を設定。
+------------------------------------------------------------------------
+</screen>
+
+<!--
+<para>The problem with it becomes apparent as soon as someone needs to
+port the <function>BuildDir</function> error check fix over to a
+branch for an upcoming maintenance release.  The porter doesn't want
+any of the other changes&mdash;for example, perhaps the fix to issue
+#1729 wasn't approved for the maintenance branch at all, and the
+<filename>index.html</filename> tweaks would simply be irrelevant
+there.  But she cannot easily grab just the
+<function>BuildDir</function> change via the version control tool's
+merge functionality, because the version control system was told that
+that change is logically grouped with all these other unrelated
+things.  
+
+In fact, the problem would become apparent even before the
+merge.  Merely listing the change for voting would become problematic:
+instead of just giving the revision number, the proposer would have to
+make a special patch or change branch just to isolate the portion of
+the commit being proposed.  That would be a lot of work for others to
+suffer through, and all because the original committer couldn't be
+bothered to break things into logical groups.</para>
+-->
+
+<para>
+    問題点が浮き彫りになるのは、来るべきメンテナンスリリースに備えて、
+    <function>BuildDir</function> 関数のエラーチェックをリリースブランチに移植する必要が出てきたときです。
+    移植する人は、それ以外の変更点はいらないのです。
+    たとえば、問題 #1729 の修正自体をメンテナンスブランチに取り込むことは認められず、
+    <filename>index.html</filename> の調整もここでは関係ありません。
+    しかし、<function>BuildDir</function> の変更を、
+    バージョン管理システムのマージ機能を使って容易に取り出すことはできません。
+    なぜなら、バージョン管理システムは、
+    この変更を他の関係のないものとグループ化するように指示されているからです。
+    実際には、マージする前でさえ問題が出てくるでしょう。投票を行うために変更点を羅列する場合です。:
+    投票を提案する人は、該当する変更のリビジョン番号を与える代わりに、
+    提案されているコミットの一部分を分離するためだけに、特別なパッチを作ったり、
+    変更用のブランチを切らなければならなくなります。
+    このため、他の人がうんざりする量の仕事をすることになります。
+    それというのもすべて、変更点を論理的なグループに分割するのを面倒臭がったコミッターのせいなのです。
+</para>
+
+<!--
+<para>In fact, that commit really should have been
+<emphasis>four</emphasis> separate commits: one to fix issue
+#1729, another to remove obsolete comments and reformat code in
+<function>BuildDir</function>, another to fix the error check in
+<function>BuildDir</function>, and finally, one to tweak
+<filename>index.html</filename>.  The third of those commits would be
+the one proposed for the maintenance release branch.</para>
+-->
+
+<para>
+    実際には、このコミットは <emphasis>4つ</emphasis> に分割すべきでした。
+    ひとつは 問題 #1729 の修正、
+    もうひとつは 古いコメントの削除と <function>BuildDir</function> 関数のコードフォーマットの修正、
+    そして <function>BuildDir</function> 関数のエラーチェックの修正、
+    最後に <filename>index.html</filename> の微調整です。
+    3番目のコミットこそが、メンテナンスリリースのブランチに含めるよう提案されているものなのです。
+</para>
+
+<!--
+<para>Of course, release stabilization is not the only reason why
+having each commit be one logical change is desirable.
+Psychologically, a semantically unified commit is easier to review,
+and easier to revert if necessary (in some version control systems,
+reversion is really a special kind of merge anyway).  A little
+up-front discipline on everyone's part can save the project a lot of
+headache later.</para>
+-->
+
+<para>
+    それぞれのコミットを論理的な変更単位に分割するのが望ましいのは、
+    もちろんリリースブランチを安定させるためだけではありません。
+    心理的にも、意味がまとまっているコミットはレビューしやすく、
+    必要な時に元に戻しやすい (バージョン管理システムによっては、変更を元に戻すことで、特殊なマージを行うものもあります) ということもあります。
+    前もって皆が規律をちょっと守っておけば、プロジェクトが後に頭痛の種を多く抱えずに済むのです。
+</para>
+
+<!-- ======================== subsection ============================== -->
+<sect2 id="planning">
+<!--
+<title>Planning Releases</title>
+-->
+<title>リリースの計画を立てる</title>
+
+<!--
+<para>One area where open source projects have historically differed
+from proprietary projects is in release planning.  Proprietary
+projects usually have firmer deadlines.  Sometimes it's because
+customers were promised that an upgrade would be available by a
+certain date, because the new release needs to be coordinated with
+some other effort for marketing purposes, or because the venture
+capitalists who invested in the whole thing need to see some results
+before they put in any more funding.  Free software projects, on the
+other hand, were until recently mostly motivated by amateurism in the
+most literal sense: they were written for the love of it.  No one felt
+the need to ship before all the features were ready, and why should
+they?  It wasn't as if anyone's job was on the line.</para>
+-->
+
+<para>
+    オープンソースプロジェクトが、歴史的に独占的なソフトウェアのプロジェクトと異なる点は、
+    リリースの計画に関するものです。
+    独占的なソフトウェアのプロジェクトでは、確固とした〆切があるのが普通です。
+    その理由は、顧客にある時点でアップグレードを提供すると約束している場合もあれば、
+    新しいリリースをマーケティング上の理由から他の仕事と連携させる必要があったりとか、
+    プロジェクトにお金を出しているベンチャーキャピタルの人が、
+    さらに投資をする前に成果を見る必要がある場合もあります。
+    一方、フリーソフトウェアプロジェクトでは、
+    ほとんど文字通りの意味での「道楽」が最近までほとんどの動機付けとなってきました。:
+    つまり、好きだからコードを書いてきたのです。
+    全ての機能が揃う前にリリースする必要性を感じる人はいませんし、
+    そもそもなぜそうすべきなのでしょう？
+    フリーソフトウェアプロジェクトでは、皆の仕事がひとつの生産ラインに乗っているわけではないのです。
+</para>
+
+<!--
+<para>Nowadays, many open source projects are funded by corporations,
+and are correspondingly more and more influenced by deadline-conscious
+corporate culture.  This is in many ways a good thing, but it can
+cause conflicts between the priorities of those developers who are
+being paid and those who are volunteering their time.  These conflicts
+often happen around the issue of when and how to schedule releases.
+The salaried developers who are under pressure will naturally want to
+just pick a date when the releases will occur, and have everyone's
+activities fall into line.  But the volunteers may have other
+agendas&mdash;perhaps features they want to complete, or some testing
+they want to have done&mdash;that they feel the release should wait
+on.</para>
+-->
+
+<para>
+    最近では、多くのオープンソースプロジェクトが企業からお金を出してもらうようになり、
+    それに伴って企業の〆切文化の影響をより多く受けるようになってきています。
+    これは多くの点では良いことなのですが、
+    お金を貰って雇われている開発者とボランティアの開発者の間で、
+    優先順位の衝突が起きる可能性があります。
+    こうした衝突はリリーススケジュールをいつ、どのようにするかという問題でよく発生します。
+    プレッシャーが強い雇われ開発者は、当然リリースする日程を決めたがりますが、
+    ボランティアの開発者は他の問題意識の方が強いかもしれません &mdash; 
+    それは自分たちが求める機能や、仕上げておきたいテストであったりします &mdash; 
+    よって、ボランティアの開発者達はリリースを待つべきだと感じることになります。
+</para>
+
+<!--
+<para>There is no general solution to this problem except discussion
+and compromise, of course.  But you can minimize the frequency and
+degree of friction caused, by decoupling the proposed
+<emphasis>existence</emphasis> of a given release from the date when
+it would go out the door.  That is, try to steer discussion toward the
+subject of which releases the project will be making in the near- to
+medium-term future, and what features will be in them, without at
+first mentioning anything about dates, except for rough guesses with
+wide margins of error<footnote><para>For an alternative approach, you
+may wish to read Martin Michlmayr's Ph.D. thesis <citetitle>Quality
+Improvement in Volunteer Free and Open Source Software Projects:
+Exploring the Impact of Release Management</citetitle>
+(<ulink url="http://www.cyrius.com/publications/michlmayr-phd.html"/>).
+It is about using time-based release processes, as opposed to
+feature-based, in large free software projects. Michlmayr also gave a
+talk at Google on the subject, available on Google Video at
+<ulink url="http://video.google.com/videoplay?docid=-5503858974016723264"
+/>.</para></footnote>.
+  By nailing down feature sets early, you reduce
+the complexity of the discussion centered on any individual release,
+and therefore improve predictability.  This also creates a kind of
+inertial bias against anyone who proposes to expand the definition of
+a release by adding new features or other complications.  If the
+release's contents are fairly well defined, the onus is on the
+proposer to justify the expansion, even though the date of the release
+may not have been set yet.</para>
+-->    
+
+<para>
+    もちろんこの問題については、議論し、妥協する以外に一般的な解決策はありません。
+    しかし、提案されているリリースの <emphasis>存在</emphasis> から、
+    日付を切り離すことで、衝突の頻度や度合いを最小限にすることができます。
+    つまり、はじめはざっくりとした見積り<footnote><para>別のアプローチとして、
+    Martin Michlmayr の Ph.D論文 <citetitle>Quality Improvement in Volunteer Free and Open Source Software Projects: Exploring the Impact of Release Management</citetitle> (<ulink url="http://www.cyrius.com/publications/michlmayr-phd.html"/>) を読むとよいかもしれません。
+    これは巨大なソフトウェアプロジェクトにおいて、
+    機能ベースのリリースプロセスとは正反対の、
+    時間軸をベースとしたリリースプロセスを採用することに関する論文です。
+    Michlmayr は、Google でこれを題材にした講演も行っています。Google Video で視聴可能です。<ulink url="http://video.google.com/videoplay?docid=-5503858974016723264"/>
+    </para></footnote> 以外は日付について触れず、
+    直近から中期的な段階で、プロジェクトはどういった形のリリースができるか、
+    そしてそのリリースにどんな機能を含めるのか、という方向に議論を誘導してみるのです。
+    機能について早期に確定しておくことで、
+    個々のリリースに関する議論が複雑になる度合いを減らすことができ、
+    予測可能性を高めることができます。
+    また、新機能や他の複雑なことをリリースに追加することで、
+    リリースの定義を拡大解釈する提案に反対させるある種の先入観を植え付けることができます。
+    たとえリリースの日取りが決まっていなくても、
+    その内容がうまく決まっていれば、
+    リリースの内容を拡大するのを正当化するのはそれを提案する人の責任になります。
+</para>
+
+<!--
+<para>In his multi-volume biography of Thomas Jefferson,
+<citetitle>Jefferson and His Time</citetitle>, Dumas Malone tells the
+story of how Jefferson handled the first meeting held to decide the
+organization of the future University of Virginia.  The University had
+been Jefferson's idea in the first place, but (as is the case
+everywhere, not just in open source projects) many other parties had
+climbed on board quickly, each with their own interests and agendas.
+When they gathered at that first meeting to hash things out, Jefferson
+made sure to show up with meticulously prepared architectural
+drawings, detailed budgets for construction and operation, a proposed
+curriculum, and the names of specific faculty he wanted to import from
+Europe. No one else in the room was even remotely as prepared; the
+group essentially had to capitulate to Jefferson's vision, and the
+University was eventually founded more or less in accordance with his
+plans.  The facts that construction went far over budget, and that
+many of his ideas did not, for various reasons, work out in the end,
+were all things Jefferson probably knew perfectly well would happen.
+His purpose was strategic: to show up at the meeting with something so
+substantive that everyone else would have to fall into the role of
+simply proposing modifications to it, so that the overall shape, and
+therefore schedule, of the project would be roughly as he
+wanted.</para>
+-->
+
+
+<para>
+    トマス・ジェファーソン の伝記 <citetitle>Jefferson and His Time</citetitle> では、
+    Dumas Malone が、バージニア大学の組織を決めるための初ミーティングを彼がどのように進めたかについて語っています。
+    大学を設立するというアイディアはもともとジェファーソンのアイディアでしたが、
+    (オープンソースプロジェクトに限らず、どこででもあることですが) 
+    他の多くの関係者が、自分たちの興味があることや議題を持って会議に乗り込んできたのです。
+    彼らがミーティングに集まってそれらを徹底的に議論していると、
+    ジェファーソンは周到に準備した建築図面や、その予算や実作業、提案されているカリキュラム、
+    そして自分がヨーロッパから輸入したいと考えていた特別な学部の名前を示して見せたのです。
+    会議室にいた人の中に、彼以外でそうした議題についてほんのわずかでも準備にした人はいませんでした。
+    つまり、彼らはそうした議題についてはジェファーソンのビジョンに従わざるを得ません。結局、
+    バージニア大学設立は多かれ少なかれ彼の計画通りに進んだのです。
+    建築費が予算をオーバーしていたり、彼のアイディアの多くは様々な理由で実現しなかったりしましたが、
+    ジェファーソンはそれらすべてが起こることをあらかじめ完全に予想していたのでしょう。
+    彼の狙いは戦略的でした。ミーティングで他の人が修正を提案せざるをえないような現実的な路線を提示するようにしたのです。
+    その結果、全体の枠組み、そしてプロジェクトのスケジュールも、だいたい彼が望むものになったのです。
+</para>
+
+<!--
+<para>In the case of a free software project, there is no single
+"meeting", but instead a series of small proposals made mostly by
+means of the issue tracker.  But if you have some credibility in the
+project to start with, and you start assigning various features,
+enhancements, and bugs to target releases in the issue tracker,
+according to some announced overall plan, people will mostly go along
+with you.  Once you've got things laid out more or less as you want
+them, the conversations about actual release
+<emphasis>dates</emphasis> will go much more smoothly.</para>
+-->
+
+<para>
+    フリーソフトウェアプロジェクトの場合、"ミーティング" はありませんが、
+    小さな提案の積み重ねは、そのほとんどがバグ追跡システムで行われます。
+    プロジェクトであなたがちょっと信頼されていて、
+    いろいろな新機能や改善やバグ修正をターゲットとなるリリースに割り当てはじめれば、
+    アナウンスした全体のプランに従って、人々はあなたについてくるでしょう。
+    いったんそれらが多かれ少なかれあなたの思い通りに進めば、
+    実際のリリース <emphasis>時期</emphasis> に関する議論もより進みやすくなるでしょう。
+</para>
+
+<!--
+<para>It is crucial, of course, to never present any individual
+decision as written in stone.  In the comments associated with each
+assignment of an issue to a specific future release, invite
+discussion, dissent, and be genuinely willing to be persuaded whenever
+possible.  Never exercise control merely for the sake of exercising
+control: the more deeply others participate in the release planning
+process (see
+<xref linkend="share-management"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>), the easier it
+will be to persuade them to share your priorities on the issues that
+really count for you.</para>
+-->
+
+<para>
+    もちろん、個々の決定をまるで文書で確定したかのように示さないのが重要です。
+    特定のリリースで問題の解決をすると決めるときには、
+    コメントで議論に参加してもらい、反対意見を述べてもらったりし、
+    可能な時はいつでも、真摯に説得に応じましょう。
+    単に権力を行使するために、力を振りかざしてはいけません。
+    リリース計画を立てる過程で他の人が議論に参加すればするほど 
+    (<phrase output="printed"><xref linkend="managing-volunteers"/> の</phrase> <xref linkend="share-management"/> を参照してください) 、
+    自分が本当に重視している問題の優先度を高めることに賛同するよう説得することも容易になるのです。
+</para>
+
+<!--
+<para>The other way the project can lower tensions around release
+planning is to make releases fairly often.  When there's a long time
+between releases, the importance of any individual release is
+magnified in everyone's minds; people are that much more crushed when
+their code doesn't make it in, because they know how long it might be
+until the next chance.  Depending on the complexity of the release
+process and the nature of your project, somewhere between every three
+and six months is usually about the right gap between releases, though
+maintenance lines may put out micro releases a bit faster, if there is
+demand for them.</para>
+-->
+
+<para>
+    リリース計画を立てるときに緊張を緩める別の方法として、
+    リリースを頻繁に行うことがあります。リリースする間隔が長期間空くと、
+    それぞれのリリースの重要性がメンバーの中で増してしまいます。
+    つまり、自分たちのコードが取り込まれなかったときのショックが大きくなってしまうのです。
+    なぜなら、次に取り込まれるチャンスまでどれくらい時間がかかるかがわかってしまうからです。
+    リリースプロセスの複雑さと、プロジェクトの性質にもよりますが、
+    3ヶ月から6ヶ月の間くらいが、普通は適切なリリース間隔です。しかし、
+    安定版のリリースラインは、もうすこし早い間隔でマイクロリリースを出した方がよいかもしれません。
+</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+

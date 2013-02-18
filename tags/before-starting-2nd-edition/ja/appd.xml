@@ -1,0 +1,213 @@
+<appendix id="bug-reporting">
+<!--
+<title>Example Instructions for Reporting Bugs</title>
+-->
+<title>バグ報告のやり方を説明した例</title>
+
+<simplesect>
+
+<!--
+<para>This is a lightly-edited copy of the Subversion project's online
+instructions to new users on how to report bugs.  See
+<xref linkend="users-to-volunteers"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase> for why it is
+important that a project have such instructions.  The original
+document is located at
+<ulink url="http://svn.collab.net/repos/svn/trunk/www/bugs.html"/>.</para>
+-->
+
+<para>
+    以下に示すのは、Subversion プロジェクトが新しいユーザー向けに作った、
+    バグ報告に関する説明書をちょっと編集したものです。
+    こうした説明書がなぜ重要なのかについては、
+    <phrase output="printed"><xref linkend="managing-volunteers"/> の </phrase>
+    <xref linkend="users-to-volunteers"/> を参照してください。
+    オリジナルの文書は、
+    <ulink url="http://svn.collab.net/repos/svn/trunk/www/bugs.html"/>
+    にあります。
+</para>
+
+<screen>
+
+<!--
+                       Reporting Bugs in Subversion
+
+This document tells how and where to report bugs. (It is not a list of
+all outstanding bugs — you can get that here instead.)
+-->
+
+                    Subversion に関するバグ報告のやり方
+
+この文書は、どこに、どうやってバグを報告すればいいかを説明したものです。(未解決のバグをすべて一覧
+にしているわけではありません ー そのかわり、バグを報告する方法がわかります。)
+
+<!--
+Where To Report A Bug
+
+    * If the bug is in Subversion itself, send mail to
+      users@subversion.tigris.org. Once it's confirmed as a bug,
+      someone, possibly you, can enter it into the issue tracker. (Or
+      if you're pretty sure about the bug, go ahead and post directly
+      to our development list, dev@subversion.tigris.org. But if
+      you're not sure, it's better to post to users@ first; someone
+      there can tell you whether the behavior you encountered is
+      expected or not.)
+
+    * If the bug is in the APR library, please report it to both of
+      these mailing lists: dev@apr.apache.org, dev@subversion.tigris.org.
+
+    * If the bug is in the Neon HTTP library, please report it to:
+      neon@webdav.org, dev@subversion.tigris.org.
+
+    * If the bug is in Apache HTTPD 2.0, please report it to both of
+      these mailing lists: dev@httpd.apache.org,
+      dev@subversion.tigris.org. The Apache httpd developer mailing
+      list is high-traffic, so your bug report post has the
+      possibility to be overlooked. You may also file a bug report at
+      http://httpd.apache.org/bug_report.html.
+
+    * If the bug is in your rug, please give it a hug and keep it snug.
+-->
+
+どこにバグを報告すべきか
+------------------------
+
+    * バグが Subversion そのものに関することなら、users@subversion.tigris.org にメールを送ってく
+      ださい。それがバグだと確認したら、誰かが (たぶんあなたが) バグ追跡システムに登録することができます。
+      (バグであることを確信している場合は、私達の開発用メーリングリスト dev@subversion.tiglis.org
+      に直接メールしてください。しかし、バグかどうか自信がない場合は、users@subversion.tigris.org
+      にはじめにメールした方がよいです。なぜなら、そこにいる誰かが、あなたが遭遇した subversion の
+      挙動が正しいかそうでないかを教えてくれるからです。)
+
+    * バグが APR ライブラリに関することなら、以下のメーリングリスト両方にメールを送ってください:
+      dev@apr.apache.org, dev@subversion.tigris.org
+
+    * バグが Neon HTTPライブラリに関することなら、以下にメールを送ってください:
+      neon@webdav.org, dev@subversion.tigris.org
+
+    * バグが Apache HTTPD 2.0 に関することから、以下のメーリングリスト両方にメールを送ってください:
+      dev@httpd.apache.org, dev@subversion.tigris.org
+      Apache httpd 向けの開発者メーリングリストは非常にたくさんのメールが流れています。よって、あ
+      なたのバグ報告のメールは見落とされるかもしれません。その場合は、バグ報告を 
+      http://httpd.apache.org/bug_report.html に投稿することもできます。
+
+    * バグが敷物(rug)の下にあったら、抱きしめて(hug)あげて、快適なもの(snug)にしましょう。
+
+<!--
+How To Report A Bug
+
+First, make sure it's a bug. If Subversion does not behave the way you
+expect, look in the documentation and mailing list archives for
+evidence that it should behave the way you expect. Of course, if it's
+a common-sense thing, like Subversion just destroyed your data and
+caused smoke to pour out of your monitor, then you can trust your
+judgement. But if you're not sure, go ahead and ask on the users
+mailing list first, users@subversion.tigris.org, or ask in IRC,
+irc.freenode.net, channel #svn.
+
+Once you've established that it's a bug, the most important thing you
+can do is come up with a simple description and reproduction
+recipe. For example, if the bug, as you initially found it, involves
+five files over ten commits, try to make it happen with just one file
+and one commit. The simpler the reproduction recipe, the more likely a
+developer is to successfully reproduce the bug and fix it.
+
+When you write up the reproduction recipe, don't just write a prose
+description of what you did to make the bug happen. Instead, give a
+literal transcript of the exact series of commands you ran, and their
+output. Use cut-and-paste to do this. If there are files involved, be
+sure to include the names of the files, and even their content if you
+think it might be relevant. The very best thing is to package your
+reproduction recipe as a script, that helps us a lot.
+
+<emphasis>Quick sanity check: you *are* running the most recent version of
+Subversion, right? :-) Possibly the bug has already been fixed; you
+should test your reproduction recipe against the most recent
+Subversion development tree.</emphasis>
+
+In addition to the reproduction recipe, we'll also need a complete
+description of the environment in which you reproduced the bug. That
+means:
+
+    * Your operating system
+    * The release and/or revision of Subversion
+    * The compiler and configuration options you built Subversion with
+    * Any private modifications you made to your Subversion
+    * The version of Berkeley DB you're running Subversion with, if any
+    * Anything else that could possibly be relevant. Err on the side
+      of too much information, rather than too little.
+
+Once you have all this, you're ready to write the report. Start out
+with a clear description of what the bug is. That is, say how you
+expected Subversion to behave, and contrast that with how it actually
+behaved. While the bug may seem obvious to you, it may not be so
+obvious to someone else, so it's best to avoid a guessing game. Follow
+that with the environment description, and the reproduction recipe. If
+you also want to include speculation as to the cause, and even a patch
+to fix the bug, that's great — see
+http://subversion.apache.org/docs/community-guide/#patches for
+instructions on sending patches.
+
+Post all of this information to dev@subversion.tigris.org, or if you
+have already been there and been asked to file an issue, then go to
+the Issue Tracker and follow the instructions there.
+
+Thanks. We know it's a lot of work to file an effective bug report,
+but a good report can save hours of a developer's time, and make the
+bug much more likely to get fixed.
+-->
+
+バグ報告のやり方
+----------------
+
+まず、バグかどうかを確認してください。Subversion があなたの思ったように動かないなら、ドキュメント
+とメーリングリストのアーカイブを調べて、subversion があなたの思ったように動くはず、という証拠を探
+してください。勿論、subversion があなたのデータを壊してしまったとか、モニターから煙が出てきた、な
+ど常識の範囲であれば、あなたの判断を信じてよいでしょう。しかし、自信がないのであれば、まずはユーザ
+ー向けのメーリングリスト、users@subversion.tigris.org か、irc.freenode.net の IRC チャンネル #svn
+で聞いてみましょう。
+
+いったんそれがバグだとわかったら、もっとも重要なのは、バグに関する簡単な説明と再現方法を考えること
+です。たとえば、仮にバグであれば、はじめに見つけたときには5つのファイルに対して10回以上のコミット
+をしていた場合、1ファイルに対して1回だけコミットして現象を再現させてみましょう。再現手順が簡単なも
+のであればあるほど、開発者がバグを再現し、修正する確率が高くなります。
+
+<emphasis>バグかどうかの簡易チェック: Subversion の最新バージョンを使ってますか? ホントに? :-) そ
+のバグは既に修正されているかもしれませんよ。最新の Subversion 開発ツリーでもあなたのバグの再現手順
+が再現できるかを確認してみましょう。</emphasis>
+
+再現手順に加えて、そのバグを再現させた環境を完璧に説明する必要もあります。つまり、以下のような情報です:
+
+    * あなたのオペレーティングシステム
+    * Subversion のバージョン、かつ/または リビジョン番号
+    * ビルドに使ったコンパイラと、ビルドの設定オプション
+    * あなたが独自に加えたあらゆる変更
+    * もしあれば、一緒に使っている Barkley DB のバージョン
+    * 関連がありそうなその他全ての情報。できるだけ多くの情報を含んだエラー情報。
+
+この情報が全て揃えば、バグレポートを書く準備ができました。どんなバグであるかの説明をわかりやすく書
+くことから始めましょう。つまり、Subversion がどう動いてほしいのか、それに対して実際はどう動いてい
+るのかを書きましょう。あなたにとっては明らかにバグであっても、他の人にとってはそうでないかもしれま
+せん。よって、推測ゲームになるのを避けるのがベストです。次に再現した環境に関する説明をして、再現手
+順を書きます。バグの原因に関する考察や、それを修正するためのプログラムを含めたいのなら、それは素晴
+らしい！ 修正プログラムの送り方を http://subversion.apache.org/docs/community-guide/#patches 
+で見てください。
+
+これら全ての情報を dev@subversion.tigris.org に投稿しましょう。もしあなたが既にそうしているか、バ
+グ追跡システムに登録するように頼まれたのなら、バグ追跡システムのページに行き、そこの指示に従ってく
+ださい。
+
+ここまで読んでくれてありがとう。優れたバグ報告を行うには、たくさんの努力が必要なのはわかっています。
+しかし、優れた報告は開発者の時間を多く節約でき、バグが修正される確率を一層高めるものなのです。
+
+</screen>
+
+</simplesect>
+
+</appendix>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "appendix")
+end:
+-->

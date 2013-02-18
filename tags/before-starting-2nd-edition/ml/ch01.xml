@@ -1,0 +1,746 @@
+<chapter id="introduction">
+<title>Pengenalan</title>
+
+<simplesect>
+<para>
+Kebanyakan projek perisian tidak berbayar gagal.
+</para>
+
+<para>
+Kita seolah-olah tidak banyak mendengar berkenaan kegagalan tersebut. 
+Hanya projek yang memperoleh kejayaan mendapat perhatian, dan secara keseluruhannya terdapat sangat banyak projek perisian yang tidak berbayar
+<footnote><para>
+SourceForge.net, salah satu laman hosting yang popular, mempunyai sebanyak 79,225 projek yang mendaftar semenjak pertengahan April 2004.
+Nilai ini masih jauh berbanding jumlah sebenar projek perisian tidak berbayar di atas Internet, ini sudah pasti; nilai tersebut hanyalah bilangan yang memilih untuk menggunakan SourceForge.
+</para></footnote> 
+walaupun peratusan kecil sahaja yang berjaya, hasilnya ialah masih banyak projek nampak.
+Kita juga tidak mendengar akan hal kegagalan kerana kegagalan bukanlah satu peristiwa.
+Tiada satu saat yang apabila satu projek berhenti untuk boleh berjaya; orang yang terlibat sepertinya hanyut dan berhenti melaksanakannya.
+Mungkin ada saat yang perubahan akhir dibuat terhadap projek, namun si perubah kebiasaannya tidak tahu pada masa itu bahawa itu adalah yang terakhir.
+Malah tiada takrifan yang jelas berkenaan bilakah suatu projek itu tamat tempoh.  
+Adakah bila ia telah tidak aktif digunakan untuk selama enam bulan? 
+Bila asas penggunanya berhenti daripada berkembang, tanpa mengatasi asas pembangun? (When its user base stops growing, without having exceeded the developer base?)
+Bagaimana  pula jika pembangun bagi satu projek mengabaikan projeknya kerana menyedari mereka menduplikasi kerja orang lain&mdash;
+dan bagaimana jika mereka ikut serta projek lain, kemudian mengembangkannya dengan memasukkan usaha awal mereka?
+Adakah projek yang pertama tamat, atau hanya bertukar rumah?
+</para>
+
+<para>
+Akibat kerumitan ini, adalah mustahil untuk menentukkan bilangan tepat bagi kadar kegagalan ini.
+Namun, bukti beranekdot daripada hampir sedekad dalam sumber terbuka, sebahagian lemparan dalam SourceForge.net, dan sedikit Googling,
+semuanya mengarah kepada kesimpulan yang sama: kadarnya amat tinggi, mungkin dalam 90&ndash;95%.
+Nombor ini meningkat jika anda mengmabilkira projek yang dapat bertahan tetapi tidak berfungsi: 
+projek <emphasis>yang</emphasis> menghasilkan kod yang boleh laksana, tetapi berada pada tempat yang tidak menyenangkan, 
+atau tidak membuat sebarang kemajuan secepat atau sebanyak yang mereka boleh.
+</para>
+
+<para>
+Buku ini berkenaan mengelakkan kegagalan. Ia meneliti bukan hanya bagaimana melakukan dengan betul, namun bagaimana melakukannya dengan salah,  
+agar anda boleh cam dan betulkan masalah lebih awal. Harapan saya adalah selepas membacanya, anda akan memiliki sejumlah teknik yang bukan hanya untuk mengelakkan kesulitan biasa dalam pembangunan sumber terbuka, namun juga untuk mengendalikan pertumbuhan dan
+penyenggaraan projek yang berjaya. Kejayaan bukanlah a zero-sum game,
+dan buku ini bukan berkenaan memenangi atau berada dihadapan bagi suatu pertandingan.
+Memang, bahagian penting dalam menjalankan projek sumber terbuka ialah bekerja dengan lancar bersama yang lain, projek berkaitan.
+Dalam jangka panjang, setiap projek yang berjaya menyumbang kepada kesejahteraan keseluruhan, badan sedunia bagi perisian percuma.
+</para>
+</simplesect>
+
+<simplesect>
+
+<para>
+Adalah menarik untuk mengatakan yang projek perisian tidak berbayar gagal atas alasan perkara yang dilakukan oleh pemilik projek perisian. (proprietary software projects do).
+Pasti, perisian percuma tidak menguasai keperluan yang tak realistik, spesifikasi kabur, pengrusan sumber yang lemah, fasa rekabentuk yang tak mencukupi, 
+, atau sebarang alasan yang memang telah diketahui dalam industri perisian.
+Terdapat satu badan yang amat besar yang menulis berkenaan topik ini, dan saya cuba untuk tidak menulis perkara yang sama dalam buku ini.
+Sebaliknya, saya akan berusaha untuk menjelaskan masalah khusus berkenaan perisian percuma. 
+Apabila projek perisian percuma kandas, biasanya ia disebabkan oleh pembangun (atau pengurus) tidak menghargai masalah unik bagi pembangunan perisian sumber,
+walaupun mereka mungkin telah bersedia dengan kerumitan yang biasa diketahui bagi pembangunan sumber tertutup.
+</para>
+
+<para>
+Salah satu kesilapan yang kerap berlaku ialah jangkaan yang tak realistik, faedah sumber terbuka itu sendiri.
+Lesen terbuka tidak menjamin yang berduyun-duyun pembangun aktif, tiba-tiba saja sukarela menyumbangkan masanya ke atas projek anda,  
+tidak juga dengan men'sumberterbuka'kan projek bermasalah, secara automatik masalah akan selesai.
+Malah, besar kemungkinan sebaliknya berlaku: membuka suatu projek boleh menambah keseluruhan set kerumitan yang baru, dan
+<emphasis>lebih</emphasis> kos dalam jangka pendek berbanding mengekalkannya sebagi projek dalaman.
+Membuka bermakna menyusun kod supaya agar boleh difahami oleh orang yang begitu asing, menyediakan laman web pembangunan dan senarai email,
+dan kerap juga menulis dokumentasi untuk pertama kalinya.
+Ini semua melibatkan kerja yang banyak. 
+Sudah pasti, jika mana-mana pembangun yang berminat <emphasis>menonjolkan</emphasis> dirinya, akan terdapat bebanan tambahan untuk menjawab 
+persoalan mereka untuk sementara waktu sebelum melihat sebarang faedah atas kehadiran mereka.
+Sebagai pembangun Jamie Zawinski menyatakan masalah ini pada peringkat awal projek Mozilla:
+</para>
+
+<blockquote>
+<para>
+<emphasis>
+Sumber terbuka memang berkesan, namun ianya pasti bukan penyelesaian.
+Sekiranya ada kisah-kisah yang memberi peringatan, ianya adalah anda tidak boleh mengambil projek yang hampir mati, semburnya dengan debu 
+pari-pari ajaib "sumber terbuka", dan secara ajaib semuanya menjadi elok.
+Perisian adalah susah. Isunya tidaklah semudah itu.
+</emphasis>
+</para>
+
+<para>(from <emphasis role="bold"><ulink
+      url="http://www.jwz.org/gruntle/nomo.html"/></emphasis>)
+</para>
+</blockquote>
+
+<para>
+Kesilapan yang berkaitan adalah persembahan dan pembungkusan, membayangkan yang perkara ini boleh dilakukan kemudian, tatkala projek sedang lancar.
+Persembahan dan pembungkusan melibatkan tugasan yang luas, semuanya bersekitar tema mengurangkan halangan hinggalah kemasukan.
+(Making the project inviting to the uninitiated means
+writing user and developer documentation)
+Membuat projek bermakna menulis dokumentasi pengguna dan pembangun dengan cara yang tidak biasa, 
+menyediakan laman web projek yang bermaklumat kepada pendatang baru, 
+mengautomasi sebanyak mungkin kompilasi dan instalasi perisian, dan sebagainya.  
+Malangnya kebanyakan pengaturcara melayan tugas ini kurang penting berbanding kod itu sendiri.
+Terdapat beberapa penyebabnya. Pertama, ia dirasai seperti kerja yang sibuk, kerana manafaatnya lebih kepada mereka yang tidak biasa dengan projek tersebut, 
+dan begitulah sebaliknya. Lagipun, mereka yang membangunkan kod tidak memerlukan sangat pembungkusan.
+Mereka sudah tahu bagaimana untuk menginstal, mentadbir, dan menggunakan perisian tersebut, kerana mereka yang menulisnya.
+Kedua, kemahiran yang diperlukan untuk membuat persembahan dan pembungkusan yang baik sangat berbeza dengan mereka yang perlu menulis kod.
+Manusia lebih memfokus kepada apa yang mereka tahu, walaupun mungkin projek yang lebih baik dapat dihasilkan dengan meluangkan sedikit masa untuk sesuatu
+yang kurang sesuai dengan mereka.
+<xref
+linkend="getting-started"/> membincangkan persembahan dan pembungkusan dengan terperinci, dan menjelaskan kenapa ianya perlu diutamakan di peringkat awal projek.
+</para>
+
+<para>
+Kemudian muncul pula salah anggap iaitu sedikit atau tiada pengurusan projek diperlukan dalam sumber terbuka, atau sebaliknya, iaitu pengurusan sama yang 
+diamalkan untuk pembangunan dalaman akan berkesan sama seperti dalam projek sumber terbuka.
+Pengurusan dalam projek sumber terbuka tidak selalunya nampak, namun bagi projek yang berjaya, ia biasanya berlaku di belakang tabir dalam bentuk tertentu.
+Satu experimentasi pemikiran kecil cukup untuk menunjukkan sebabnya.
+Suatu projek sumber terbuka mengandungi koleksi rawak pengaturcara&mdash;yang terkenal dengan kategori fikiran-tersendiri&mdash;mereka yang hampir tidak 
+pernah bersua muka, dan mereka yang mungkin memiliki matlamat peribadi yang berbeza dalam menjalankan projek.
+Experimentasi pemikiran ini adalah dengan hanya membayangkan apa akan terjadi kepada kumpulan sedemikian <emphasis>tanpa</emphasis> pengurusan.
+
+Kecuali adanya keajaiban, ia akan hancur atau menjadi renggang dengan cepatnya. Tiada perkara yang boleh terurus sendiri, sebagaimana yang kita harapkan sebaliknya.
+Namun pengurusan, walaupun ianya mungkin aktif, biasanya tidak rasmi, tidak ketara, and low-key.  Satu perkara yang dapat mengekalkan kumpulan pembangunan bersama adalah 
+kepercayaang yang dikongsi iaitu mereka boleh melakukan lebih baik secara konsert berbanding individu.
+Oleh itu matlamat pengurusan lebih untuk memastikan mereka terus percaya perkara ini, dengan menyediakan standard untuk komunikasi,
+dengan memastikan pembangun yang berguna tidak mendapat sedikit akibat daripada keganjilan (idiosyncracies) peribadi
+dan secara umumnya dengan menjadikan projek tersebut satu tempat di mana pembangun ingin selalu kembali.
+Teknik khusus untuk melakukan perkara ini dibincangkan dalam buku ini.
+</para>
+
+<para>
+Akhirnya, terdapat kategori am masalah yang boleh dipanggil "kegagalan pandu-arah budaya."
+Sepuluh tahun dahulu, malah lima, adalah terlalu awal untuk mengatakan berkenaan budaya global perisian percuma, namun kini tidak lagi.
+Budaya yang boleh dikenalpasti berkembang secara perlahan, dan sedang ia pastinya ia tidak teguh&mdash;ianya paling tidak terbuka kepada perselisihan dalaman dan berpuak sebagaimana budaya 
+yang bersempadan secara geografi&mdash;ia tetap mempunyai teras yang konsisten.
+Kebanyakan projek sumber terbuka yang berjaya, memaparkan sebahagian atau kesemua ciri-ciri teras ini.
+Mereka memberi ganjaran bagi kelakuan yang tertentu, dan menghukum selainnya;
+mereka mencipta suasana yang merangsang penyertaan yang tidak dirancang, kadang kala (sometimes at the expense of central coordination); 
+mereka mempunyai konsep tentang kebiadapan dan kesopanan yang mungkin terlalu berbeza daripada yang biasa diketahui.
+Yang penting, penyertaan dalam jangka masa yang lama secara amnya memperdalamkan lagi standard ini, agar mereka berkongsi setuju secara kasarnya berkenaan 
+kelakuan yang dijangka.
+
+Projek yang gagal biasanya melencong daripada teras ini dengan cara yang signifikan,
+meskipun tidak disengajakan, dan selalu tiada persetujuan berkaitan apa yang sepatutnya bagi kelakuan yang munasabah.
+Ini bermakna apabila masalah muncul, suasana tersebut dengan cepatnya boleh bertambah buruk, oleh sebab peserta kekurangan 
+budaya yang mantap  untuk dirujuk bagi menyelesaikan perbezaan itu.
+</para>
+
+
+<para>
+Buku ini adalah panduan praktikal, bukannya kajian secara antroplogi atau sejarah.
+Namun, pengetahuan (working knowledge) bagi asal-usul budaya perisian percuma adalah asas yang penting bagi mana-mana nasihat praktikal.
+Seseorang yang memahami sesuatu budaya boleh mengembara jauh dan luas ke dalam dunia sumber terbuka,
+bertemu dengan budaya yang banyak variasi tempatan dan dialek,namun masih mampu menyertai dengan selesa dan berkesan di setiap tempat.
+Sebaliknya, seseorang yang tidak memahami budaya tersebut akan mendapati proses menganjur dan menyertai satu projek adalah susah dan dipenuhi kejutan
+Ini kerana bilangan manusia yang membangunkan perisian percuma masih bertambah pesat, terdapat ramai orang berada dalam kategori yang kedua&mdash;
+sebahagian besarnya adalah budaya bagi pendatang akhir-akhir ini, dan akan terus begini untuk beberapa ketika.
+Jika anda rasa anda adalah salah seorang daripadanya, bahagian selepas ini menyediakan latarbelakang untuk perbincangan yang akan 
+anda temui kemudian, kedua-duanya dalam buku ini dan atas Internet.
+(Sebaliknya, jika anda pernah bekerja dengan sumber terbuka untuk suatu masa, anda mungkin telah mengetahui banyak sejarahnya, 
+oleh itu langkau sahaja ke bahagian seterusnya.)
+</para>
+</simplesect>
+<!-- ========================== SECTION =========================== -->
+
+<sect1 id="history">
+
+<title>Sejarah</title>
+
+<para>
+Perkongsian perisian telah wujud selama mana perisian itu sendiri wujud.
+Pada peringkat awal komputer, pengilang merasakan kelebihan persaingan hanyalah kepada inovasi perkakasan, dan oleh itu tidak 
+banyak memberi perhatian terhadap perisian sebagai aset bisnes.
+Kebanyakan pelanggan mesin yang awal ini adalah saintis atau juruteknik, iaitu mereka yang mampu mengubahsuai dan memperluaskan sendiri 
+perisian yang dihantar bersama mesin.
+Pelanggan ada kalanya mengedarkan pembetulan yang telah mereka lakukan bukan saja kepada pengilang, tetapi juga kepada pemilik 
+mesin yang setara.
+Pengilang selalunya bertoleransi, malah menggalakan hal ini: pada mereka, pembaikan kepada perisian, daripada man jua sumber, 
+hanya membuatkan mesin berkenaan lebih menarik kepada pelanggan berpotensi yang lain.
+</para>
+
+<para>
+Walaupun tempoh awal ini dalam banyak bentuk sama seperi budaya perisian percuma, ianya berbeza dari dua aspek genting.
+Pertama, dahulu sangat sedikit piawaian bagi perkakasan&mdash;
+masa itu adalah perkembangan inovasi dalam rekabentuk komputer, namun kepelbagaian senibina komputer bermakna semua tidak
+serasi dengan semua yang lain. Oleh itu, perisian yang ditulis untuk satu mesin biasanya tidak boleh digunakan ke atas mesin lain.
+Pengaturcara lebih ke arah memperolehi kepakaran dalam satu senibina yang khusus atau keluarga senibina
+(yang mana pada masa ini mereka lebih ke arah memperoleh kemahiran dalam satu bahasa pengaturcaraan atau keluarganya,
+yakin yang kepakaran mereka akan boleh beralih kepada mana-mana perkakasan komputeran yang mana mereka bekerja).  
+Oleh kerana kepakaran seseorang ke arah mengkhusus kepada satu jenis komputer, pengumpulan kepakaran mereka memberi kesan
+terhadap pembuatan komputer yang lebih menarik kepada mereka dan rakan-rakannya.
+Maka, masa itu adalah minat pengilang untuk menghasilkan kod yang khusus kepada mesin dan menghasilkan pengetahuan untuk 
+disebarkan secara meluas yang mungkin.
+</para>
+
+
+<para>
+Kedua, pada masa itu tiada Internet. Tetapi sangat kurang kekangan undang-undang berkaitan perkongsian berbanding sekarang,
+yang banyaknya adalah perkara teknikal:
+sebagai perbandingan, cara untuk membolehkan data berpindah dari satu tempat ke satu tempat lain tidak mudah dan sukar.
+Terdapat rangkaian setempat yang kecil, sesuai untuk berkongsi maklumat antara pekerja dalam satu makmal penyelidikan atau syarikat.
+Namun masih terdapat halangan perlu diatasi jika seseorang ingin berkongsi dengan setiap orang lain, dimana jua mereka berada.
+Dalam kebanyakan kes, halangan ini <emphasis>berjaya</emphasis> diatasi. 
+Kadang kala kumpulan berbeza menghubungi satu sama lain secara bebas, menghantar disket, pita melalui mel biasa, dan kadang kala 
+pengilang sendiri menjadi pusat setempat untuk pembetulan tersebut.
+Jua elemen yag membantu adalah kebanyakan pembangun komputer pada masa itu bekerja di universiti, yang mana penerbitan pengetahuan adalah dijangka.
+Namun hakikat fizikal bagi transmisi data bermakna sentiasa ada galangan untuk dikongsi, galangan berkadar dengan jarak (merujuk yang nyata atau struktur organisasi)
+yang perisian tersebut perlu bergerak. Perkongsian meluas, tanpa bergesek, seperti yang kita tahu pada hari ini, adalah mustahil.
+</para>
+
+<!-- ========================== subsection ========================== -->
+<sect2 id="propertization">
+<title>
+Kebangkitan Perisian Hak Milik dan Perisian Percuma
+</title>
+<para>
+Tatkala industri menjadi matang, beberapa perubahan yang saling berkait berlaku secara serentak.
+Kepelbagaian rekabentuk perkakasan beransur-ansur memberi laluan kepada sejumlah kecil pemenang yang jelas&mdash;
+pemenang melalui teknologi unggul, pemasaran hebat, atau gabungan keduanya.
+Pada masa yang sama, dan bukanlah keseluruhannya kebetulan, pembangunan apa yang dipanggil bahasa pengaturcaraan "paras tinggi"
+bermakna yang seseorang boleh menulis satu aturcara sekali, dan secara automatik diterjemah ("kompil") untuk dilarikan atas komputer yang berbeza jenis.
+Implikasi perkara ini tidak merugikan pengilang perkakasan: pelanggan sekarang boleh menjalankan usaha kejuruteraan perisian yang utama tanpa
+perlu menumpu kepada satu senibina komputer tertentu.
+Apabila ini digabungkan dengan perbezaan prestasi antara pelbagai komputer yang semakin mengurang, dengan rekabentuk yang tidak cekap menjadi terbuang,
+pengilang yang menganggap perkakasan sebagai satu-satunya aset mereka, boleh melihat ke arah penurunan marjin untung pada masa hadapan.
+Kuasa komputeran data mentah semakin menjadi (Raw computing power was becoming a fungible good), 
+sedangkan perisian menjadi pembeza (while software was becoming the differentiator).  
+Menjual perisian, atau paling kurang menganggapnya sebagai satu bahagian daripada jualan perkakasan, mula nampak seperti strategi yang bagus.
+</para>
+
+<para>
+Ini bermakna pengilang perlu memulakan penguatkuasaan hakcipta kod mereka dengan lebih tegas.
+Jika pengguna dengan mudahnya terus berkongsi dan mengubahsuai kod secara bebas antara mereka, mereka mungkin mengimplemen semula sebahagian 
+penambahbaikan yang mana pada masa ini dijual sebagai "nilai tambah" oleh pembekal.
+Lebih teruk lagi, kod yang dikongsi jatuh ke tangan pesaing mereka. 
+Ironinya adalah semua ini berlaku sewaktu Internet mula berkembang.
+Hanya apabila perkongsian perisian yang benar-benar tidak dihalang menjadi satu kemungkinan secara teknikal, perubahan dalam bisnes komputer
+membuatnya secara ekonomi tidak diingini (ecomonically undesirable), sekurang-kurangnya dari kacamata sebarang syarikat tunggal.
+Pembekal mengetatkan kawalan, sama ada menghalang capaian pengguna ke atas kod yang dilarikan pada mesin mereka, atau menegaskan perjanjian ketakdedahan
+yang tak memungkinkan perkongsian berkesan. 
+</para>
+
+<sect3 id="history-conscious-resistance">
+
+<title>
+Tentangan Dalam Sedar
+</title>
+<para>
+Dengan dunia pertukaran kod tanpa sekatan semakin melenyap, satu tindakan balas terbuku di dalam minda sekurang-kurangnya seorang pengaturcara.
+Richard Stallman bekerja dalam Makmal Artificial Intelligence di Massachusetts Institute of Technology pada tahun 1970-an dan pada awal 80-an,
+semasa apa yang kini dipanggil zaman emas dan lokasi emas untuk perkongsian kod.
+Makmal AI mempunyai "etika penggodam" yang kukuh,
+<footnote>
+<para>
+Stallman menggunakan perkataan "penggodam" dalam maksud "sesiapa yang suka membuat aturcara dan seronok pandai tentangnya," bukannya maksud yang agak baru
+"seseorang yang menceroboh komputer."
+</para>
+</footnote> 
+dan orang ramai bukan saja digalakkan malah diharap berkongsi apa sahaja pembaikan yang mereka lakukan kepada sistem.
+Yang mana Stallman kemudiannya menulis
+</para>
+
+<blockquote>
+<para>
+<emphasis>
+kami tidak menyebut perisian kami "perisian percuma",
+kerana istilah tersebut belum wujud lagi; tapi itulah ianya.
+apabila sesiapa daripada universiti lain atau syarikat lain mahu meletakkan atau mahu menggunakan suatu aturcara, kami berbesar hati membenarkannya.
+Jika anda melihat seseorang menggunakan aturcara yang  tidak dikenali dan menarik, anda boleh sentiasa bertanya untuk mlihat kod sumbernya, 
+agar anda boleh membacanya, mengubahnya, atau cannibalize sebahagian daripadanya bagi menghasilkan aturcara yang baru.
+</emphasis>
+</para>
+
+<para>(from <emphasis role="bold"><ulink
+      url="http://www.gnu.org/gnu/thegnuproject.html"/></emphasis>)
+</para>
+</blockquote>
+<para>
+Komuniti Edenic ini runtuh sekitar Stallman, sebaik saja selepas 1980, apabila perubahan yang berlaku dalam industri yang lain akhirnya menyaingi
+Makmal AI Lab.  
+Satu syarikat yang baru bermula mengupah ramai pengaturcara Makmal tersebut untuk membangunkan sistem pengoperasian yang setara 
+dengan apa yan telah mereka hasilkan dalam Lab itu, cumanya sekarang di bawah lesen yang esklusif.
+Pada masa yang sama, Makmal AI memerlukan kelengkapan baru yang datang bersama sistem pengoperasian yang mempunyai hak milik.
+</para>
+
+<para>
+Stallman melihat pola yang lebih besar dalam apa yang telah berlaku:
+</para>
+
+<blockquote>
+<para>
+<emphasis>
+Komputer moden pada era tersebut seperti VAX atau 68020, mempunyai sistem pengoperasian mereka sendiri, namun tiada antara sistem itu yang percuma:
+anda perlu menandatangani perjanjian sulit walaupun untuk mendapatkan salinan yang bolehlaksana.
+</emphasis>
+</para>
+
+<para>
+<emphasis>
+Ini bermakna yang langkah pertama untuk menggunakan komputer adalah dengan berjanji untuk tidak membantu jiran anda. Masyarakat yang bekerjasama adalah
+dilarang.
+Peraturan yang dibuat oleh pemilik perisian adalah, "Jika anda berkongsi dengan jiran anda, anda adalah lanun. Jika anda mahu sebarang perubahan
+merayulah pada kami untuk melakukannya."
+</emphasis>
+</para>
+</blockquote>
+
+<para>Dengan personaliti yang aneh, beliau menolak aliran tersebut.
+Daripada terus bekerja di the now-decimated AI Lab, atau bekerja menulis kod dalam salah satu syarikat baru yang mana hasil kerjanya akan dikunci
+di dalam kotak, beliau berhenti kerja daripada makmal dan memulakan Projek GNU dan Free Software Foundation (FSF). 
+Matlamat GNU adalah
+
+<footnote><para>
+Ianya bermaksud "GNU's Not Unix", dan "GNU" dalam makna panjangnya adalah...perkara yang sama juga.
+</para>
+</footnote> 
+untuk membangunkan sistem pengoperasian yang sepenuhnya percuma dan terbuka dan badan bagi perisian aplikasi, yang mana pengguna tidak akan dilarang
+daripada menceroboh atau berkongsi pengubahsuaian yang telah mereka lakukan.
+Secara intipatinya, beliau membina semula apa yang telah musnah dalam makmal AI, namun kali ini dengan skala seluruh dunia dan tanpa 
+terdedah kepada budaya makmal AI yang percaya kepada disintegrasi.
+</para>
+
+
+<para>
+Tambahan kepada tugasan ke atas sistem pengoperasian yang baru, Stallman mereka lesen hakcipta yang mana termanya menjamin yang kod beliau 
+would be perpetually free.  
+GNU General Public License (GPL) adalah satu helaian undang-undang yang bijak: ia mangatakan yang kod berkaitan boleh disalin dan diubahsuai
+tanpa halangan, dan kedua-dua salinan dan kerja yang terbit daripadanya (i.e., versi yang diubah) mesti diagihkan dengan lesen yang sama seperti
+asal, tanpa ada sebarang kekangan tambahan. 
+Kesannya, ia menggunakan undang-undang hakcipta untuk mencapai kesan bertentangan dengan hakcipta tradisi: Daripada menghadkan edaran perisian,
+ianya menghalang <emphasis>seseorang</emphasis>, walau penulis itu sendiri, daripada menghadkannya.  
+Bagi Stallman, ini lebih baik daripada hanya meletakkan kod dalam domain awam. Jika ia berada dalam domain awam, mana-mana salinannya yang tertentu
+mungkin akan digabungkan dalam aturcara berhakmilik (sebagaimana yang diketahui terjadi kepada kod di bawah lesen hakcipta permisif).
+
+
+While such incorporation wouldn't in any way diminish the
+original code's continued availability, it would have meant that
+Stallman's efforts could benefit the enemy&mdash;proprietary software.
+The GPL can be thought of as a form of protectionism for free
+software, because it prevents non-free software from taking full
+advantage of GPLed code.  The GPL and its relationship to other free
+software licenses are discussed in detail in
+<xref linkend="legal"/>.</para>
+
+<para>With the help of many programmers, some of whom shared
+Stallman's ideology and some of whom simply wanted to see a lot of
+free code available, the GNU Project began releasing free replacements
+for many of the most critical components of an operating system.
+Because of the now-widespread standardization in computer hardware and
+software, it was possible to use the GNU replacements on otherwise
+non-free systems, and many people did.  The GNU text editor (Emacs)
+and C compiler (GCC) were particularly successful, gaining large and
+loyal followings not on ideological grounds, but simply on their
+technical merits.  By about 1990, GNU had produced most of a free
+operating system, except for the kernel&mdash;the part that the
+machine actually boots up, and that is responsible for managing memory,
+disk, and other system resources.</para>
+
+<para>Unfortunately, the GNU project had chosen a kernel design that
+turned out to be harder to implement than expected.  The ensuing delay
+prevented the Free Software Foundation from making the first release
+of an entirely free operating system.  The final piece was put into
+place instead by Linus Torvalds, a Finnish computer science student
+who, with the help of volunteers around the world, had completed a
+free kernel using a more conservative design.  He named it Linux, and
+when it was combined with the existing GNU programs, the result was a
+completely free operating system.  For the first time, you could boot
+up your computer and do work without using any proprietary
+software.<footnote><para>Technically, Linux was not the first.  A free
+operating system for IBM-compatible computers, called 386BSD, had come
+out shortly before Linux.  However, it was a lot harder to get 386BSD
+up and running.  Linux made such a splash not only because it was
+free, but because it actually had a high chance of booting your
+computer when you installed it.</para></footnote></para>
+
+<para>Much of the software on this new operating system was not
+produced by the GNU project.  In fact, GNU wasn't even the only group
+working on producing a free operating system (for example, the code
+that eventually became NetBSD and FreeBSD was already under
+development by this time).  The importance of the Free Software
+Foundation was not only in the code they wrote, but in their political
+rhetoric.  By talking about free software as a cause instead of a
+convenience, they made it difficult for
+programmers <emphasis>not</emphasis> to have a political consciousness
+about it.  Even those who disagreed with the FSF had to engage the
+issue, if only to stake out a different position.  The FSF's
+effectiveness as propagandists lay in tying their code to a message,
+by means of the GPL and other texts.  As their code spread widely,
+that message spread as well.</para>
+
+</sect3>
+
+<sect3 id="history-accidental-resistance">
+<title>Accidental resistance</title>
+
+<para>There were many other things going on in the nascent free
+software scene, however, and few were as explictly ideological as
+Stallman's GNU Project.  One of the most important was
+the <firstterm>Berkeley Software Distribution</firstterm>
+(<firstterm>BSD</firstterm>), a gradual re-implementation of the Unix
+operating system&mdash;which up until the late 1970's had been a
+loosely proprietary research project at AT&amp;T&mdash;by programmers
+at the University of California at Berkeley.  The BSD group did not
+make any overt political statements about the need for programmers to
+band together and share with one another, but they
+<emphasis>practiced</emphasis> the idea with flair and
+enthusiasm, by coordinating a massive distributed development effort
+in which the Unix command-line utilities and code libraries, and
+eventually the operating system kernel itself, were rewritten from
+scratch mostly by volunteers.  The BSD project became a prime example
+of non-ideological free software development, and also served as a
+training ground for many developers who would go on to remain active
+in the open source world.</para>
+
+<para>Another crucible of cooperative development was the <firstterm>X
+Window System</firstterm>, a free, network-transparent graphical
+computing environment, developed at MIT in the mid-1980's in
+partnership with hardware vendors who had a common interest in being
+able to offer their customers a windowing system.  Far from opposing
+proprietary software, the X license deliberately allowed proprietary
+extensions on top of the free core&mdash;each member of the consortium
+wanted the chance to enhance the default X distribution, and thereby
+gain a competitive advantage over the other members.  X
+Windows<footnote><para>They prefer it to be called the "X Window
+System", but in practice, people usually call it "X Windows", because
+three words is just too cumbersome.
+</para>
+</footnote> 
+itself was free
+software, but mainly as a way to level the playing field between
+competing business interests, not out of some desire to end the
+dominance of proprietary software.  Yet another example, predating the
+GNU project by a few years, was TeX, Donald Knuth's free,
+publishing-quality typesetting system.  He released it under a license
+that allowed anyone to modify and distribute the code, but not to call
+the result "TeX" unless it passed a very strict set of compatibility
+tests (this is an example of the "trademark-protecting" class of free
+licenses, discussed more in <xref linkend="legal"/>).  Knuth wasn't
+taking a stand one way or the other on the question of
+free-versus-proprietary software, he just needed a better typesetting
+system in order to complete his
+<emphasis>real</emphasis> goal&mdash;a book on computer
+programming&mdash;and saw no reason not to release his system to the
+world when done.
+</para>
+</sect3>
+
+<para>
+Without listing every project and every license, it's safe to
+say that by the late 1980's, there was a lot of free software
+available under a wide variety of licenses.  The diversity of licenses
+reflected a corresponding diversity of motivations.  Even some of the
+programmers who chose the GNU GPL were much less ideologically driven
+than the GNU project itself.  Although they enjoyed working on free
+software, many developers did not consider proprietary software a
+social evil.  There were people who felt a moral impulse to rid the
+world of "software hoarding" (Stallman's term for non-free software),
+but others were motivated more by technical excitement, or by the
+pleasure of working with like-minded collaborators, or even by a
+simple human desire for glory.  Yet by and large these disparate
+motivations did not interact in destructive ways.  This is partly
+because software, unlike other creative forms like prose or the visual
+arts, must pass semi-objective tests in order to be considered
+successful: it must run, and be reasonably free of bugs.  This gives
+all participants in a project a kind of automatic common ground, a
+reason and a framework for working together without worrying too much
+about qualifications beyond the technical.</para>
+
+<para>Developers had another reason to stick together as well: it
+turned out that the free software world was producing some very
+high-quality code.  In some cases, it was demonstrably technically
+superior to the nearest non-free alternative; in others, it was at
+least comparable, and of course it always cost less.  While only a few
+people might have been motivated to run free software on strictly
+philosophical grounds, a great many people were happy to run it
+because it did a better job.  And of those who used it, some
+percentage were always willing to donate their time and skills to help
+maintain and improve the software.</para>
+
+<para>This tendency to produce good code was certainly not universal,
+but it was happening with increasing frequency in free software
+projects around the world.  Businesses that depended heavily on
+software gradually began to take notice.  Many of them discovered that
+they were already using free software in day-to-day operations, and
+simply hadn't known it (upper management isn't always aware of
+everything the IT department does).  Corporations began to take a more
+active and public role in free software projects, contributing time
+and equipment, and sometimes even directly funding the development of
+free programs.  Such investments could, in the best scenarios, repay
+themselves many times over.  The sponsor only pays a small number of
+expert programmers to devote themselves to the project full time, but
+reaps the benefits of <emphasis>everyone's</emphasis> contributions,
+including work from unpaid volunteers and from programmers being paid
+by other corporations.</para>
+
+</sect2>
+
+<!-- ========================== subsection ========================== -->
+<sect2 id="free-vs-open-source">
+<title>"Free" Versus "Open Source"</title>
+
+<para>As the corporate world gave more and more attention to free
+software, programmers were faced with new issues of presentation.  One
+was the word "free" itself.  On first hearing the term "free software"
+many people mistakenly think it means just "zero-cost software."  It's
+true that all free software is zero-cost,<footnote><para>One may charge
+a fee for giving out copies of free software, but since one cannot
+stop the recipients from offering it at no charge afterwards, the
+price is effectively driven to zero immediately.</para></footnote>
+but not all zero-cost software is free.  For example, during the
+battle of the browsers in the 1990s, both Netscape and Microsoft gave
+away their competing web browsers at no charge, in a scramble to gain
+market share.  Neither browser was free in the "free software" sense.
+You couldn't get the source code, and even if you could, you didn't
+have the right to modify or redistribute it.<footnote><para>The source
+code to Netscape Navigator
+<emphasis>was</emphasis> eventually released under an open source
+license, in 1998, and became the foundation for the Mozilla web
+browser.  See <ulink
+url="http://www.mozilla.org/"/>.</para></footnote>  The only thing
+you could do was download an executable and run it.  The browsers were
+no more free than shrink-wrapped software bought in a store; they
+merely had a lower price.</para>
+
+<para>This confusion over the word "free" is due entirely to an
+unfortunate ambiguity in the English language.  Most other tongues
+distinguish low prices from liberty (the distinction between
+<emphasis>gratis</emphasis> and <emphasis>libre</emphasis> is
+immediately clear to speakers of Romance languages, for example).  But
+English's position as the de facto bridge language of the Internet
+means that a problem with English is, to some degree, a problem for
+everyone.  The misunderstanding around the word "free" was so
+prevalent that free software programmers eventually evolved a standard
+formula in response: "It's <emphasis>free</emphasis> as in
+<emphasis>freedom</emphasis>&mdash;think <emphasis>free
+speech</emphasis>, not <emphasis>free beer</emphasis>."  Still, having
+to explain it over and over is tiring.  Many programmers felt, with
+some justification, that the ambiguous word "free" was hampering the
+public's understanding of this software.</para>
+
+<para>But the problem went deeper than that.  The word "free" carried
+with it an inescapable moral connotation: if freedom was an end in
+itself, it didn't matter whether free software also happened to
+be better, or more profitable for certain businesses in certain
+circumstances.  Those were merely pleasant side effects of a motive
+that was, at bottom, neither technical nor mercantile, but moral.
+Furthermore, the "free as in freedom" position forced a glaring
+inconsistency on corporations who wanted to support particular free
+programs in one aspect of their business, but continue marketing
+proprietary software in others.</para>
+
+<para>These dilemmas came to a community that was already poised for
+an identity crisis.  The programmers who actually
+<emphasis>write</emphasis> free software have never been of one mind
+about the overall goal, if any, of the free software movement.  Even
+to say that opinions run from one extreme to the other would be
+misleading, in that it would falsely imply a linear range where there
+is instead a multidimensional scattering.  However, two broad
+categories of belief can be distinguished, if we are willing to ignore
+subtleties for the moment.  One group takes Stallman's view, that the
+freedom to share and modify is the most important thing, and that
+therefore if you stop talking about freedom, you've left out the core
+issue.  Others feel that the software itself is the most important
+argument in its favor, and are uncomfortable with proclaiming
+proprietary software inherently bad.  Some, but not all, free
+software programmers believe that the author (or employer, in the case
+of paid work)
+<emphasis>should</emphasis> have the right to control the terms of
+distribution, and that no moral judgement need be attached to the
+choice of particular terms.
+</para>
+
+<para>
+For a long time, these differences did not need to be carefully
+examined or articulated, but free software's burgeoning success in the
+business world made the issue unavoidable.  In 1998, the term
+<firstterm>open&nbsp;source</firstterm> was created as an alternative
+to "free", by a coalition of programmers who eventually became The
+Open Source Initiative (OSI).<footnote><para>OSI's web home is <ulink
+url="http://www.opensource.org/"/>.
+</para>
+</footnote>
+
+The OSI felt
+not only that "free software" was potentially confusing, but that the
+word "free" was just one symptom of a general problem: that the
+movement needed a marketing program to pitch it to the corporate
+world, and that talk of morals and the social benefits of sharing
+would never fly in corporate boardrooms.  In their own words:</para>
+
+    <blockquote>
+      <para><emphasis>The Open Source Initiative is a marketing
+      program for free software. It's a pitch for "free software" on
+      solid pragmatic grounds rather than ideological
+      tub-thumping. The winning substance has not changed, the losing
+      attitude and symbolism have.&nbsp;...</emphasis></para>
+
+      <para><emphasis>The case that needs to be made to most techies
+      isn't about the concept of open source, but the name. Why not
+      call it, as we traditionally have, free software?</emphasis></para>
+
+      <para><emphasis>One direct reason is that the term "free
+      software" is easily misunderstood in ways that lead to
+      conflict.&nbsp;...</emphasis></para>
+
+      <para><emphasis>But the real reason for the re-labeling is a
+      marketing one. We're trying to pitch our concept to the
+      corporate world now. We have a winning product, but our
+      positioning, in the past, has been awful. The term "free
+      software" has been misunderstood by business persons, who
+      mistake the desire to share with anti-commercialism, or worse,
+      theft.</emphasis></para>
+
+      <para><emphasis>Mainstream corporate CEOs and CTOs will never
+      buy "free software." But if we take the very same tradition, the
+      same people, and the same free-software licenses and change the
+      label to "open source" ? that, they'll buy.</emphasis></para>
+
+      <para><emphasis>Some hackers find this hard to believe, but
+      that's because they're techies who think in concrete,
+      substantial terms and don't understand how important image is
+      when you're selling something.</emphasis></para>
+
+      <para><emphasis>In marketing, appearance is reality. The
+      appearance that we're willing to climb down off the barricades
+      and work with the corporate world counts for as much as the
+      reality of our behavior, our convictions, and our
+      software.</emphasis></para>
+
+      <para>(from <emphasis role="bold"><ulink
+      url="http://www.opensource.org/advocacy/faq.php"/></emphasis>
+      and <emphasis role="bold"><ulink
+      url="http://www.opensource.org/advocacy/case_for_hackers.php#marketing"
+      /></emphasis>)</para>
+    </blockquote>
+
+<para>The tips of many icebergs of controversy are visible in that
+text.  It refers to "our convictions", but smartly avoids spelling out
+exactly what those convictions are.  For some, it might be the
+conviction that code developed according to an open process will be
+better code; for others, it might be the conviction that all
+information should be shared.  There's the use of the word "theft" to
+refer (presumably) to illegal copying&mdash;a usage that many object
+to, on the grounds that it's not theft if the original possessor still
+has the item afterwards.  There's the tantalizing hint that the free
+software movement might be mistakenly accused of anti-commercialism,
+but it leaves carefully unexamined the question of whether such an
+accusation would have any basis in fact.</para>
+
+<para>None of which is to say that the OSI's web site is inconsistent
+or misleading.  It's not.  Rather, it is an example of exactly what
+the OSI claims had been missing from the free software movement: good
+marketing, where "good" means "viable in the business world."  The
+Open Source Initiative gave a lot of people exactly what they had been
+looking for&mdash;a vocabulary for talking about free software as a
+development methodology and business strategy, instead of as a moral
+crusade.</para>
+
+</sect2>
+
+<para>The appearance of the Open Source Initiative changed the
+landscape of free software.  It formalized a dichotomy that had long
+been unnamed, and in doing so forced the movement to acknowledge that
+it had internal politics as well as external.  The effect today is
+that both sides have had to find common ground, since most projects
+include programmers from both camps, as well as participants who don't
+fit any clear category.  This doesn't mean people never talk about
+moral motivations&mdash;lapses in the traditional "hacker ethic" are
+sometimes called out, for example.  But it is rare for a free software
+/ open source developer to openly question the basic motivations of
+others in a project.  The contribution trumps the contributor.  If
+someone writes good code, you don't ask them whether they do it for
+moral reasons, or because their employer paid them to, or because
+they're building up their resum&eacute;, or whatever.  You evaluate
+the contribution on technical grounds, and respond on technical
+grounds.  Even explicitly political organizations like the Debian
+project, whose goal is to offer a 100% free (that is, "free as in
+freedom") computing environment, are fairly relaxed about integrating
+with non-free code and cooperating with programmers who don't share
+exactly the same goals.</para>
+
+</sect1>
+
+<!-- ========================== SECTION =========================== -->
+<sect1 id="today">
+
+
+<title>The Situation Today</title>
+
+<para>When running a free software project, you won't need to talk
+about such weighty philosophical matters on a daily basis.
+Programmers will not insist that everyone else in the project agree
+with their views on all things (those who do insist on this quickly
+find themselves unable to work in any project).  But you do need to be
+aware that the question of "free" versus "open source" exists, partly
+to avoid saying things that might be inimical to some of the
+participants, and partly because understanding developers' motivations
+is the best way&mdash;in some sense, the <emphasis>only</emphasis>
+way&mdash;to manage a project.</para>
+
+<para>Free software is a culture by choice.  To operate successfully
+in it, you have to understand why people choose to be in it in the
+first place.  Coercive techniques don't work.  If people are unhappy in
+one project, they will just wander off to another one.  Free software
+is remarkable even among volunteer communities for its lightness of
+investment.  Most of the people involved have never actually met the
+other participants face-to-face, and simply donate bits of time
+whenever they feel like it.  The normal conduits by which humans bond
+with each other and form lasting groups are narrowed down to a tiny
+channel: the written word, carried over electronic wires.  Because of
+this, it can take a long time for a cohesive and dedicated group to
+form.  Conversely, it's quite easy for a project to lose a potential
+volunteer in the first five minutes of acquaintanceship.  If a project
+doesn't make a good first impression, newcomers rarely give it a
+second chance.</para>
+
+<para>The transience, or rather the <emphasis>potential</emphasis>
+transience, of relationships is perhaps the single most daunting task
+facing a new project.  What will persuade all these people to stick
+together long enough to produce something useful?  The answer to that
+question is complex enough to occupy the rest of this book, but if it
+had to be expressed in one sentence, it would be this:
+</para>
+
+<blockquote>
+<para><emphasis>People should feel that their connection to a
+      project, and influence over it, is directly proportional to
+      their contributions.</emphasis></para> 
+    </blockquote>
+
+<para>No class of developers, or potential developers, should ever
+feel discounted or discriminated against for non-technical reasons.
+Clearly, projects with corporate sponsorship and/or salaried
+developers need to be especially careful in this regard, as <xref
+linkend="money"/> discusses in detail.  Of course, this doesn't
+mean that if there's no corporate sponsorship then you have nothing to
+worry about.  Money is merely one of many factors that can affect the
+success of a project.  There are also questions of what language to
+choose, what license, what development process, precisely what kind of
+infrastructure to set up, how to publicize the project's inception
+effectively, and much more.  Starting a project out on the right foot
+is the topic of 
+<link linkend="getting-started">the next
+chapter</link>.
+</para>
+</sect1>
+</chapter>
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
