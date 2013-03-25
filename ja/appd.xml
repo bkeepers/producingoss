@@ -1,205 +1,466 @@
-<appendix id="bug-reporting">
+<appendix id="bikeshed-full">
 <!--
-<title>Example Instructions for Reporting Bugs</title>
+<title>Why Should I Care What Color the Bikeshed Is?</title>
 -->
-<title>バグ報告のやり方を説明した例</title>
+<title>なんで自転車置場の色まで気にしなきゃならないの？</title>
 
 <simplesect>
 
 <!--
-<para>This is a lightly-edited copy of the Subversion project's online
-instructions to new users on how to report bugs.  See
-<xref linkend="users-to-volunteers"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase> for why it is
-important that a project have such instructions.  The original
-document is located at
-<ulink url="http://svn.collab.net/repos/svn/trunk/www/bugs.html"/>.</para>
+<para>You shouldn't; it doesn't really matter, and you have better
+things to spend your time on.</para>
 -->
-
 <para>
-    以下に示すのは、Subversion プロジェクトが新しいユーザー向けに作った、
-    バグ報告に関する説明書をちょっと編集したものです。
-    こうした説明書がなぜ重要なのかについては、
-    <phrase output="printed"><xref linkend="managing-volunteers"/> の </phrase>
-    <xref linkend="users-to-volunteers"/> を参照してください。
-    オリジナルの文書は、
-    <ulink url="http://svn.collab.net/repos/svn/trunk/www/bugs.html"/>
-    にあります。
+  別にそんな必要はありません。
+  だって、そんなのどうでもいいことじゃないですか。
+  それに、もっとマシな時間の使い方もあるでしょ？
 </para>
 
+<!--
+<para>Poul-Henning Kamp's famous "bikeshed" post (an excerpt from
+which appears in <xref linkend="communications"/>) is an eloquent
+disquisition on what tends to go wrong in group discussions.  It is
+reprinted here with his permission.  The orginal URL is <ulink
+url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>; for easy linking,
+you can also point people to <ulink url="http://bikeshed.com">bikeshed.com</ulink>.</para>
+-->
+<para>
+  Poul-Henning Kamp による、かの有名な "bikeshed" メール
+  (その一部を <xref linkend="communications"/> で取り上げました)
+  は、集団での議論が陥りがちな罠について非常にうまく説明した論考です。
+  彼の承諾を得て、ここにそれを掲載します。原文の URL は
+  <ulink url="http://www.freebsd.org/cgi/getmsg.cgi?fetch=506636+517178+/usr/local/www/db/text/1999/freebsd-hackers/19991003.freebsd-hackers"/>
+  です。リンクしやすいように、<ulink url="http://bikeshed.com">bikeshed.com</ulink> を示してもよいでしょう。
+</para>
+
+<!-- 
+   Enshrined in the FreeBSD documentation at:
+
+   <ulink url="http://www.freebsd.org/doc/en_US.ISO8859-1/books/faq/misc.html#BIKESHED-PAINTING"/>
+
+-->
+
 <screen>
+Subject: A bike shed (any colour will do) on greener grass...
+From: Poul-Henning Kamp &lt;phk@freebsd.org&gt;
+Date: Sat, 02 Oct 1999 16:14:10 +0200
+Message-ID: &lt;18238.938873650@critter.freebsd.dk&gt;
+Sender: phk@critter.freebsd.dk
+Bcc: Blind Distribution List: ;
+MIME-Version: 1.0
+
 
 <!--
-                       Reporting Bugs in Subversion
-
-This document tells how and where to report bugs. (It is not a list of
-all outstanding bugs — you can get that here instead.)
+[bcc'ed to committers, hackers]
 -->
-
-                    Subversion に関するバグ報告のやり方
-
-この文書は、どこに、どうやってバグを報告すればいいかを説明したものです。(未解決のバグをすべて一覧
-にしているわけではありません ー そのかわり、バグを報告する方法がわかります。)
+[committers と hackers にも bcc しておいた]
 
 <!--
-Where To Report A Bug
-
-    * If the bug is in Subversion itself, send mail to
-      users@subversion.tigris.org. Once it's confirmed as a bug,
-      someone, possibly you, can enter it into the issue tracker. (Or
-      if you're pretty sure about the bug, go ahead and post directly
-      to our development list, dev@subversion.tigris.org. But if
-      you're not sure, it's better to post to users@ first; someone
-      there can tell you whether the behavior you encountered is
-      expected or not.)
-
-    * If the bug is in the APR library, please report it to both of
-      these mailing lists: dev@apr.apache.org, dev@subversion.tigris.org.
-
-    * If the bug is in the Neon HTTP library, please report it to:
-      neon@webdav.org, dev@subversion.tigris.org.
-
-    * If the bug is in Apache HTTPD 2.0, please report it to both of
-      these mailing lists: dev@httpd.apache.org,
-      dev@subversion.tigris.org. The Apache httpd developer mailing
-      list is high-traffic, so your bug report post has the
-      possibility to be overlooked. You may also file a bug report at
-      http://httpd.apache.org/bug_report.html.
-
-    * If the bug is in your rug, please give it a hug and keep it snug.
+My last pamphlet was sufficiently well received that I was not
+scared away from sending another one, and today I have the time
+and inclination to do so.
 -->
-
-どこにバグを報告すべきか
-------------------------
-
-    * バグが Subversion そのものに関することなら、users@subversion.tigris.org にメールを送ってく
-      ださい。それがバグだと確認したら、誰かが (たぶんあなたが) バグ追跡システムに登録することができます。
-      (バグであることを確信している場合は、私達の開発用メーリングリスト dev@subversion.tiglis.org
-      に直接メールしてください。しかし、バグかどうか自信がない場合は、users@subversion.tigris.org
-      にはじめにメールした方がよいです。なぜなら、そこにいる誰かが、あなたが遭遇した subversion の
-      挙動が正しいかそうでないかを教えてくれるからです。)
-
-    * バグが APR ライブラリに関することなら、以下のメーリングリスト両方にメールを送ってください:
-      dev@apr.apache.org, dev@subversion.tigris.org
-
-    * バグが Neon HTTPライブラリに関することなら、以下にメールを送ってください:
-      neon@webdav.org, dev@subversion.tigris.org
-
-    * バグが Apache HTTPD 2.0 に関することから、以下のメーリングリスト両方にメールを送ってください:
-      dev@httpd.apache.org, dev@subversion.tigris.org
-      Apache httpd 向けの開発者メーリングリストは非常にたくさんのメールが流れています。よって、あ
-      なたのバグ報告のメールは見落とされるかもしれません。その場合は、バグ報告を 
-      http://httpd.apache.org/bug_report.html に投稿することもできます。
-
-    * バグが敷物(rug)の下にあったら、抱きしめて(hug)あげて、快適なもの(snug)にしましょう。
+この前送ったパンフレットはよく受け取ってもらえたし、また別のを送っても
+いいかなって思ってた。で、今日はその時間と気力があったんで。
 
 <!--
-How To Report A Bug
-
-First, make sure it's a bug. If Subversion does not behave the way you
-expect, look in the documentation and mailing list archives for
-evidence that it should behave the way you expect. Of course, if it's
-a common-sense thing, like Subversion just destroyed your data and
-caused smoke to pour out of your monitor, then you can trust your
-judgement. But if you're not sure, go ahead and ask on the users
-mailing list first, users@subversion.tigris.org, or ask in IRC,
-irc.freenode.net, channel #svn.
-
-Once you've established that it's a bug, the most important thing you
-can do is come up with a simple description and reproduction
-recipe. For example, if the bug, as you initially found it, involves
-five files over ten commits, try to make it happen with just one file
-and one commit. The simpler the reproduction recipe, the more likely a
-developer is to successfully reproduce the bug and fix it.
-
-When you write up the reproduction recipe, don't just write a prose
-description of what you did to make the bug happen. Instead, give a
-literal transcript of the exact series of commands you ran, and their
-output. Use cut-and-paste to do this. If there are files involved, be
-sure to include the names of the files, and even their content if you
-think it might be relevant. The very best thing is to package your
-reproduction recipe as a script, that helps us a lot.
-
-<emphasis>Quick sanity check: you *are* running the most recent version of
-Subversion, right? :-) Possibly the bug has already been fixed; you
-should test your reproduction recipe against the most recent
-Subversion development tree.</emphasis>
-
-In addition to the reproduction recipe, we'll also need a complete
-description of the environment in which you reproduced the bug. That
-means:
-
-    * Your operating system
-    * The release and/or revision of Subversion
-    * The compiler and configuration options you built Subversion with
-    * Any private modifications you made to your Subversion
-    * The version of Berkeley DB you're running Subversion with, if any
-    * Anything else that could possibly be relevant. Err on the side
-      of too much information, rather than too little.
-
-Once you have all this, you're ready to write the report. Start out
-with a clear description of what the bug is. That is, say how you
-expected Subversion to behave, and contrast that with how it actually
-behaved. While the bug may seem obvious to you, it may not be so
-obvious to someone else, so it's best to avoid a guessing game. Follow
-that with the environment description, and the reproduction recipe. If
-you also want to include speculation as to the cause, and even a patch
-to fix the bug, that's great — see
-http://subversion.apache.org/docs/community-guide/#patches for
-instructions on sending patches.
-
-Post all of this information to dev@subversion.tigris.org, or if you
-have already been there and been asked to file an issue, then go to
-the Issue Tracker and follow the instructions there.
-
-Thanks. We know it's a lot of work to file an effective bug report,
-but a good report can save hours of a developer's time, and make the
-bug much more likely to get fixed.
+I've had a little trouble with deciding on the right distribution
+of this kind of stuff, this time it is bcc'ed to committers and
+hackers, that is probably the best I can do.  I'm not subscribed
+to hackers myself but more on that later.
 -->
+この手の話題をどこに送ればいいのかちょっと迷ったけれど、結局
+committers と hackers にも bcc することにした。たぶんこれでよかったん
+だろう。実は私は hackers を購読していないんだが、それについてはまた後
+で説明する。
 
-バグ報告のやり方
-----------------
+<!--
+The thing which have triggered me this time is the "sleep(1) should
+do fractional seconds" thread, which have pestered our lives for
+many days now, it's probably already a couple of weeks, I can't
+even be bothered to check.
+-->
+このメールの発端となったのは「sleep(1) で小数点以下の秒を使えるように
+すべき」というスレッドだ。こいつは最近私たちの生活を脅かし続けてきた。
+おそらく数週間ほど。面倒なのできちんと調べてないけどね。
 
-まず、バグかどうかを確認してください。Subversion があなたの思ったように動かないなら、ドキュメント
-とメーリングリストのアーカイブを調べて、subversion があなたの思ったように動くはず、という証拠を探
-してください。勿論、subversion があなたのデータを壊してしまったとか、モニターから煙が出てきた、な
-ど常識の範囲であれば、あなたの判断を信じてよいでしょう。しかし、自信がないのであれば、まずはユーザ
-ー向けのメーリングリスト、users@subversion.tigris.org か、irc.freenode.net の IRC チャンネル #svn
-で聞いてみましょう。
+<!--
+To those of you who have missed this particular thread: Congratulations.
+-->
+「そんなスレッドあったかなぁ」と思ったみなさん、あなたたちは幸せものだ。
 
-いったんそれがバグだとわかったら、もっとも重要なのは、バグに関する簡単な説明と再現方法を考えること
-です。たとえば、仮にバグであれば、はじめに見つけたときには5つのファイルに対して10回以上のコミット
-をしていた場合、1ファイルに対して1回だけコミットして現象を再現させてみましょう。再現手順が簡単なも
-のであればあるほど、開発者がバグを再現し、修正する確率が高くなります。
+<!--
+It was a proposal to make sleep(1) DTRT if given a non-integer
+argument that set this particular grass-fire off.  I'm not going
+to say anymore about it than that, because it is a much smaller
+item than one would expect from the length of the thread, and it
+has already received far more attention than some of the *problems*
+we have around here.
+-->
+炎上のきっかけとなったのは「sleep(1) に非整数の引数を渡したときにも正
+しく動作するようにしよう」という提案だった。ここではそれ以上のことは言
+わない。ほんの些細な提案のためにあのスレッドで散々騒がれ続けてたから、
+もうみんな十分に知りすぎていることだろう。そのおかげで、ほんとうに重要
+な「問題」たちがかすんでしまってるよ。
 
-<emphasis>バグかどうかの簡易チェック: Subversion の最新バージョンを使ってますか? ホントに? :-) そ
-のバグは既に修正されているかもしれませんよ。最新の Subversion 開発ツリーでもあなたのバグの再現手順
-が再現できるかを確認してみましょう。</emphasis>
+<!--
+The sleep(1) saga is the most blatant example of a bike shed
+discussion we have had ever in FreeBSD.  The proposal was well
+thought out, we would gain compatibility with OpenBSD and NetBSD,
+and still be fully compatible with any code anyone ever wrote.
+-->
+この sleep(1) の話は、FreeBSD が始まって以来最もわかりやすい「自転車置場
+の議論」の例といえるだろう。あの提案はとてもよく考えられたものだった
+し、OpenBSD や NetBSD との互換性を向上させるものでもあった。そして、こ
+れまでに書かれてきたコードとの互換性もまったく損なわないものだったんだ。
 
-再現手順に加えて、そのバグを再現させた環境を完璧に説明する必要もあります。つまり、以下のような情報です:
+<!--
+Yet so many objections, proposals and changes were raised and
+launched that one would think the change would have plugged all
+the holes in swiss cheese or changed the taste of Coca Cola or
+something similar serious.
+-->
+なのに、反論や別の提案や修正案などが続出した。まるで奴らは、この提案が
+「スイスチーズの穴を全部埋めてしまう」だとか「コカコーラの味を変えてし
+まう」などといったものすごく重大な話だと思い込んでいるようだった。
 
-    * あなたのオペレーティングシステム
-    * Subversion のバージョン、かつ/または リビジョン番号
-    * ビルドに使ったコンパイラと、ビルドの設定オプション
-    * あなたが独自に加えたあらゆる変更
-    * もしあれば、一緒に使っている Barkley DB のバージョン
-    * 関連がありそうなその他全ての情報。できるだけ多くの情報を含んだエラー情報。
+<!--
+"What is it about this bike shed ?" Some of you have asked me.
+-->
+「ところで、いったい自転車置場ってどういうこと？」と思った人もいること
+だろう。
 
-この情報が全て揃えば、バグレポートを書く準備ができました。どんなバグであるかの説明をわかりやすく書
-くことから始めましょう。つまり、Subversion がどう動いてほしいのか、それに対して実際はどう動いてい
-るのかを書きましょう。あなたにとっては明らかにバグであっても、他の人にとってはそうでないかもしれま
-せん。よって、推測ゲームになるのを避けるのがベストです。次に再現した環境に関する説明をして、再現手
-順を書きます。バグの原因に関する考察や、それを修正するためのプログラムを含めたいのなら、それは素晴
-らしい！ 修正プログラムの送り方を http://subversion.apache.org/docs/community-guide/#patches 
-で見てください。
+<!--
+It's a long story, or rather it's an old story, but it is quite
+short actually.  C. Northcote Parkinson wrote a book in the early
+1960'ies, called "Parkinson's Law", which contains a lot of insight
+into the dynamics of management.
+-->
+話せば長くなる昔話だけど、実際のところは単純な話だ。C・ノースコート・
+パーキンソンが 1960 年代初期に書いた「パーキンソンの法則」という本があっ
+て、そこにはものごとの管理に関するさまざまな洞察が書かれていたんだ。
 
-これら全ての情報を dev@subversion.tigris.org に投稿しましょう。もしあなたが既にそうしているか、バ
-グ追跡システムに登録するように頼まれたのなら、バグ追跡システムのページに行き、そこの指示に従ってく
-ださい。
+<!--
+You can find it on Amazon, and maybe also in your dads book-shelf,
+it is well worth its price and the time to read it either way,
+if you like Dilbert, you'll like Parkinson.
+-->
+今でもアマゾンで買えるし、君たちの父親の本棚にも入っているかもしれない。
+この本は、お金を出して購入し時間をかけて読むだけの価値があるものだ。ディ
+ルバートが好きな人なら、きっとパーキンソンも気に入ることだろう。
 
-ここまで読んでくれてありがとう。優れたバグ報告を行うには、たくさんの努力が必要なのはわかっています。
-しかし、優れた報告は開発者の時間を多く節約でき、バグが修正される確率を一層高めるものなのです。
+<!--
+Somebody recently told me that he had read it and found that only
+about 50% of it applied these days.  That is pretty darn good I
+would say, many of the modern management books have hit-rates a
+lot lower than that, and this one is 35+ years old.
+-->
+かつてこの本を読んだ誰かが「現代じゃこの本に書かれてることの 50% くら
+いしかあてはまらないね」と言ってた。上等じゃないか。いまどきの本なんか、
+もっと惨めなもんだ。しかもこの本、35年以上前のものなんだぜ？
 
+<!--
+In the specific example involving the bike shed, the other vital
+component is an atomic power-plant, I guess that illustrates the
+age of the book.
+-->
+自転車置場の例にでてくるもう一方の役者が、原子炉だ。なんだか、いかにも
+時代を感じさせるなぁ。
+
+<!--
+Parkinson shows how you can go in to the board of directors and
+get approval for building a multi-million or even billion dollar
+atomic power plant, but if you want to build a bike shed you will
+be tangled up in endless discussions.
+-->
+パーキンソンは、委員会に乗り込んで数百万から数億ドルもの原子炉建設計画
+を承認させる方法を説明している。しかし、原子炉ではなく自転車置場を作り
+たいと思ったら終わりのない議論に巻き込まれることになるだろうとも言って
+いる。
+
+<!--
+Parkinson explains that this is because an atomic plant is so vast,
+so expensive and so complicated that people cannot grasp it, and
+rather than try, they fall back on the assumption that somebody
+else checked all the details before it got this far.   Richard P.
+Feynmann gives a couple of interesting, and very much to the point,
+examples relating to Los Alamos in his books.
+-->
+パーキンソンによると、原子炉はあまりに巨大で高価そして複雑であるために
+みんながその内容を把握できなくなるということだ。考えようともせずに思考
+停止してしまい、「まぁここまで来る前に誰か他の人が一部始終をチェックし
+ただろう」ということになってしまう。リチャート・P・ファインマンの著書に
+は、これに関連するロス・アラモスでの興味深い事例がいくつか紹介されてい
+る。
+
+<!--
+A bike shed on the other hand.  Anyone can build one of those over
+a weekend, and still have time to watch the game on TV.  So no
+matter how well prepared, no matter how reasonable you are with
+your proposal, somebody will seize the chance to show that he is
+doing his job, that he is paying attention, that he is *here*.
+-->
+さぁ一方自転車置場だ。週末をつぶせばだれでも作ることができ、余った時間
+にテレビで試合を見て楽しむことさえできるだろう。どんなに用意周到であっ
+たとしても、どんなに妥当な提案だったとしても、だれかが機会をとらえては、
+自分もなにかやっていることを示したり、自分もそれに注目してることを示し
+たり、「俺を忘れるな」と言ったりするだろう。
+
+<!--
+In Denmark we call it "setting your fingerprint".  It is about
+personal pride and prestige, it is about being able to point
+somewhere and say "There!  *I* did that."  It is a strong trait in
+politicians, but present in most people given the chance.  Just
+think about footsteps in wet cement.
+-->
+デンマークでは、こういったことを「指紋をつける」って言うんだ。個人的な
+プライドや見栄のために何かをして、あとからその証拠を見せられるようにす
+る。「ほら見ろよ。これ、俺がやったんだ」てな具合にね。政治家どものよく
+やりそうなことでもあるが、一般人だって機会があればやりそうだよ。ほら、
+よく生乾きのセメントに足跡がついてたりするだろう？
+
+<!--
+I bow my head in respect to the original proposer because he stuck
+to his guns through this carpet blanking from the peanut gallery,
+and the change is in our tree today.  I would have turned my back
+and walked away after less than a handful of messages in that
+thread.
+-->
+最初にこの提案をした人には敬意を表したい。だって、くだらぬ批評家たちの
+妨害行為にもめげず自分の信念を貫き通して、その変更がいまやツリーに取り
+込まれてるわけだから。私ならあのスレッドの一握りのメッセージすら受け取
+る前に諦めて逃げてただろうね。
+
+<!--
+And that brings me, as I promised earlier, to why I am not subscribed
+to -hackers:
+-->
+さぁ、そしてさっき言ってた話。なぜ私が -hackers を購読していないのか。
+
+<!--
+I un-subscribed from -hackers several years ago, because I could
+not keep up with the email load.  Since then I have dropped off
+several other lists as well for the very same reason.
+-->
+私が数年前に -hackers の購読をやめた理由は、大量のメールをさばききれな
+くなったからだ。あれ以来、同じ理由で他のメーリングリストもいくつか購読
+をやめている。
+
+<!--
+And I still get a lot of email.  A lot of it gets routed to /dev/null
+by filters:  People like [omitted] will never make it onto my
+screen, commits to documents in languages I don't understand
+likewise, commits to ports as such.  All these things and more go
+the winter way without me ever even knowing about it.
+-->
+それでもまだ大量のメールを受け取っている。まぁ多くのメールはフィルタリ
+ングして /dev/null 行きにしてるけどな。(個人名省略) みたいな野郎からの
+メールは私の画面上には決してあらわれない。外国語のドキュメントへのコミッ
+トとか ports へのコミットとかの通知メールも同じだ。そういったメールは、
+私の目に触れることなくどこかに行ってしまうってわけだ。
+
+<!--
+But despite these sharp teeth under my mailbox I still get too much
+email.
+-->
+でも、これだけ必死になって受信箱を守ろうとしてるってのに、いまでも大量
+にメールが届いている。
+
+<!--
+This is where the greener grass comes into the picture:
+-->
+なにかいい案はないだろうか？
+
+<!--
+I wish we could reduce the amount of noise in our lists and I wish
+we could let people build a bike shed every so often, and I don't
+really care what colour they paint it.
+-->
+メーリングリストから余計なノイズをできるだけ減らしたいんだ。自転車置場
+を作りたい人は気兼ねせずに作れるようにしてあげたいんだ。自転車置場を何
+色に塗るかなんていちいち気にしなくてもいいじゃないか。
+
+<!--
+The first of these wishes is about being civil, sensitive and 
+intelligent in our use of email.
+-->
+最初の件は、メールを使うときにみんなもっと礼儀を考えようってことだ。も
+う少し気を使おうじゃないか。もう少し頭を使おうじゃないか。
+
+<!--
+If I could concisely and precisely define a set of criteria for
+when one should and when one should not reply to an email so that
+everybody would agree and abide by it, I would be a happy man, but
+I am too wise to even attempt that.
+-->
+メールに返信すべきとき/すべきでないときを、みんなが納得する形で簡潔か
+つ正確に定義できたらどんなに幸せなことだろう。でも私は、できもしないこ
+とを試みるほどのバカじゃない。
+
+<!--
+But let me suggest a few pop-up windows I would like to see
+mail-programs implement whenever people send or reply to email
+to the lists they want me to subscribe to:
+-->
+でも、こんな機能があったらいいなぁと思ってる。メーリングリストへの投稿
+に返信しようとすると、メールソフトが自動的にこんなポップアップウィンド
+ウを表示するんだ。どうだろう？
+
+<!--
+      | Your email is about to be sent to several hundred thousand |
+      | people, who will have to spend at least 10 seconds reading |
+      | it before they can decide if it is interesting.  At least  |
+      | two man-weeks will be spent reading your email.  Many of   |
+      | the recipients will have to pay to download your email.    |
+      |                                                            |
+      | Are you absolutely sure that your email is of sufficient   |
+      | importance to bother all these people ?                    |
+      |                                                            |
+      |                  [YES]  [REVISE]  [CANCEL]                 |
+-->
+      +------------------------------------------------------------+
+      | 今あなたが送ろうとしているメールは何10万人もの人に届きます.|
+      | 受け取った人がそれを読むべきかどうかを判断するのに少なくと |
+      | も10秒はかかるでしょう。つまり、あなたのメールを読むために |
+      | 少なくとも0.5人月が費やされるわけです。さらに、多くの人は  |
+      | メールをダウンロードするのにお金を払わないといけません。   |
+      |                                                            |
+      | あなたのメールは、ほんとうにみんながそれだけの手間をかけて |
+      | でも読む価値のあるものですか？                             |
+      |                                                            |
+      |              [はい]  [書き直す]  [キャンセル]              |
+      +------------------------------------------------------------+
+
+<!--
+      | Warning:  You have not read all emails in this thread yet. |
+      | Somebody else may already have said what you are about to  |
+      | say in your reply.  Please read the entire thread before   |
+      | replying to any email in it.                               |
+      |                                                            |
+      |                      [CANCEL]                              |
+-->
+      +------------------------------------------------------------+
+      | 警告：あなたはまだこのスレッドのメールを全部読み終えていま |
+      | せん。今あなたが書いている内容を、他の誰かが既に言っている |
+      | かもしれません。まずスレッドを全部読んでから返信を書くよう |
+      | にしましょう。                                             |
+      |                                                            |
+      |                    [キャンセル]                            |
+      +------------------------------------------------------------+
+
+<!--
+      | Warning:  Your mail program have not even shown you the    |
+      | entire message yet.  Logically it follows that you cannot  |
+      | possibly have read it all and understood it.               |
+      |                                                            |
+      | It is not polite to reply to an email until you have       |
+      | read it all and thought about it.                          |
+      |                                                            |
+      | A cool off timer for this thread will prevent you from     |
+      | replying to any email in this thread for the next one hour |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+      +------------------------------------------------------------+
+      | 警告：まだこのメールソフト上でメッセージ全体を表示し終えて |
+      | いません。論理的に考えて、あなたがメッセージの内容をすべて |
+      | 読んで理解するのは不可能なはずです。                       |
+      |                                                            |
+      | メールを全部読んでちゃんと考えてから返信しないと相手に失礼 |
+      | です。                                                     |
+      |                                                            |
+      | あなたに頭を冷やしてもらうためのタイマーが発動しました。今 |
+      | 後１時間、このスレッドのいかなるメールにも返信はできません.|
+      |                                                            |
+      |                     [キャンセル]                           |
+      +------------------------------------------------------------+
+
+<!--
+      | You composed this email at a rate of more than N.NN cps    |
+      | It is generally not possible to think and type at a rate   |
+      | faster than A.AA cps, and therefore you reply is likely to |
+      | incoherent, badly thought out and/or emotional.            |
+      |                                                            |
+      | A cool off timer will prevent you from sending any email   |
+      | for the next one hour.                                     |
+      |                                                            |
+      |                       [Cancel]                             |
+-->
+      +------------------------------------------------------------+
+      | あなたはこのメールを秒速 N.NN 文字以上の速さで書き終えまし |
+      | た。一般に、きちんと考えて書いていたなら秒速 A.AA 文字をこ |
+      | えることは不可能です。おそらく、あなたが今書いた返信は支離 |
+      | 滅裂で意味不明かつ感情的なものだと思われます。             |
+      |                                                            |
+      | あなたに頭を冷やしてもらうためのタイマーが発動しました。今 |
+      | 後１時間、一切メールは送信できません。                     |
+      |                                                            |
+      |                     [キャンセル]                           |
+      +------------------------------------------------------------+
+
+<!--
+The second part of my wish is more emotional.  Obviously, the
+capacities we had manning the unfriendly fire in the sleep(1)
+thread, despite their many years with the project, never cared
+enough to do this tiny deed, so why are they suddenly so enflamed
+by somebody else so much their junior doing it ?
+-->
+私の願いの２番目はもっと感情的なものだ。sleep(1) スレッドで敵対的な批判
+をした古参たちは、プロジェクトへの参加歴が長いというのに、このちょっと
+したことをやろうとなんて思わなかった。明らかにね。それなのに、自分より
+かなり下の後輩がそれをやろうとすると、なぜいきなり彼らはすごい勢いで燃
+え上がるんだろうか？
+
+<!--
+I wish I knew.
+-->
+わかっていればなぁ。
+
+<!--
+I do know that reasoning will have no power to stop such "reactionaire
+conservatism".  It may be that these people are frustrated about
+their own lack of tangible contribution lately or it may be a bad
+case of "we're old and grumpy, WE know how youth should behave".
+-->
+わかってるとも。いくらこんな分析をしたところで、あんな「反動保守主義者」
+どもの抑止力にはならないってことくらい。たぶん奴らは、最近自分が何も貢
+献できていないことにいらついているんだろう。あるいは「わしら年長者こそ
+が、若造たちを正しく導いてやらねばならぬ」などと偉ぶってるんだろう。
+
+<!--
+Either way it is very unproductive for the project, but I have no
+suggestions for how to stop it.  The best I can suggest is to refrain
+from fuelling the monsters that lurk in the mailing lists:  Ignore
+them, don't answer them, forget they're there.
+-->
+どっちにせよそれはプロジェクトにとってまったく非生産的なことであるわけ
+だが、私にはそれをやめさせる方法がわからない。とりあえず言えることは、
+メーリングリストに潜むモンスターどもに餌を与えるのはやめろってことだ。
+とにかく無視する。決して返信しない。奴らがそこにいることを忘れるんだ。
+
+<!--
+I hope we can get a stronger and broader base of contributors in
+FreeBSD, and I hope we together can prevent the grumpy old men
+and the [omitted]s of the world from chewing them up, spitting
+them out and scaring them away before they ever get a leg to the 
+ground.
+-->
+私は、FreeBSD への貢献者がもっと増えてもっと力強くなることを願っている。
+そして、彼らを気難しい爺さんどもや (個人名省略) みたいな奴らから守るん
+だ。あいつらがこの世界に足を踏み入れて彼らを脅かし、追い出してしまうよ
+うなことになってしまってはいけない。
+
+<!--
+For the people who have been lurking out there, scared away from
+participating by the gargoyles:  I can only apologise and encourage
+you to try anyway, this is not the way I want the environment in
+the project to be.
+-->
+ガーゴイルどもにおびえてプロジェクトへの参加を躊躇している皆さんへ。た
+だただごめんなさいとしか言いようがない。何とか仲間に加わって欲しい。今
+の状況は、決して私の望んだ状況ではないんだ。
+
+Poul-Henning
 </screen>
 
 </simplesect>
