@@ -32,12 +32,6 @@ if not os.path.isdir(lang):
   raise Exception("Error: Invalid language code: " \
                     "we don't support '%s'\n" % lang)
 
-# There must be a more elegant way to do this, hmmm.
-def escape_html(s):
-  return string.replace(string.replace(string.replace(s, '&', '&amp;'),
-                                       '<', '&lt;'),
-                        '>', '&gt;')
-
 proc = subprocess.Popen(["echo -n 'Build started '; "
                          + "date; "                   
                          + "echo; "                   
