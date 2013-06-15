@@ -14,19 +14,18 @@ doing that?"  To answer, I'd summarize the economics of open source:
 that there are organizations in whose interest it is to have certain
 software exist, but that they don't need to sell copies, they just
 want to make sure the software is available and maintained, as a tool
-instead of a commodity.</para>
+instead of as a commodity.</para>
 
-<para>Lately, however, the next question has not always been about
-money.  The business case for open source software<footnote><para>The
-terms "open source" and "free" are essentially synonymous in this
-context; they are discussed more in
-<xref linkend="free-vs-open-source"/><phrase output="printed"> in
-<xref linkend="introduction"/></phrase>.</para></footnote> is no
-longer so mysterious, and many non-programmers already
-understand&mdash;or at least are not surprised&mdash;that there are
-people employed at it full time.  Instead, the question I have been
-hearing more and more often is "<emphasis>Oh, how does that
-work?</emphasis>"</para>
+<para>The next question is not always about money, though.  The
+business case for open source software<footnote><para>The terms "open
+source software" and "free software" are essentially synonymous in
+this context; they are discussed more in <xref
+linkend="free-vs-open-source"/><phrase output="printed"> in <xref
+linkend="introduction"/></phrase>.</para></footnote> is no longer so
+mysterious, and even non-programmers already understand&mdash;or at
+least are not surprised&mdash;that there are people employed at it
+full time.  Instead, the next question is often "<emphasis>Oh, how
+does that work?</emphasis>"</para>
 
 <para>I didn't have a satisfactory answer ready, and the harder I
 tried to come up with one, the more I realized how complex a topic it
@@ -45,21 +44,22 @@ and it can be influenced by interested parties, often quite strongly.
 But its assets cannot be made the property of any single owner, and as
 long as there are people somewhere&mdash;anywhere&mdash;interested in
 continuing it, it cannot be unilaterally shut down.  Everyone has
-infinite power; everyone has no power.  It makes for an interesting
+infinite power; everyone has no power.  It's an interesting
 dynamic.</para>
 
-<para>That is why I wanted to write this book.  Free software projects
-have evolved a distinct culture, an ethos in which the liberty to make
-the software do anything one wants is a central tenet, and yet the
-result of this liberty is not a scattering of individuals each going
-their own separate way with the code, but enthusiastic collaboration.
-Indeed, competence at cooperation itself is one of the most highly
-valued skills in free software.  To manage these projects is to engage
-in a kind of hypertrophied cooperation, where one's ability not only
-to work with others but to come up with new ways of working together
-can result in tangible benefits to the software.  This book attempts
-to describe the techniques by which this may be done.  It is by no
-means complete, but it is at least a beginning.</para>
+<para>That is why I wanted to write this book in the first place, and
+seven years later, wanted to update it.  Free software projects have
+evolved a distinct culture, an ethos in which the liberty to make the
+software do anything one wants is a central tenet.  Yet the result of
+this liberty is not a scattering of individuals each going their own
+separate way with the code, but enthusiastic collaboration.  Indeed,
+competence at cooperation itself is one of the most highly valued
+skills in free software.  To manage these projects is to engage in a
+kind of hypertrophied cooperation, where one's ability not only to
+work with others but to come up with new ways of working together can
+result in tangible benefits to the software.  This book attempts to
+describe the techniques by which this may be done.  It is by no means
+complete, but it is at least a beginning.</para>
 
 <para>Good free software is a worthy goal in itself, and I hope that
 readers who come looking for ways to achieve it will be satisfied with
@@ -67,9 +67,8 @@ what they find here.  But beyond that I also hope to convey something
 of the sheer pleasure to be had from working with a motivated team of
 open source developers, and from interacting with users in the
 wonderfully direct way that open source encourages.  Participating in
-a successful free software project is
-<emphasis>fun</emphasis>, and ultimately that's what keeps the whole
-system going.</para>
+a successful free software project is a deep pleasure, and ultimately
+that's what keeps the whole system going.</para>
 
 </sect1>
 
@@ -101,18 +100,18 @@ skipped by those already familiar with the material.</para>
 <sect1 id="sources">
 <title>Sources</title>
 
-<para>Much of the raw material for this book came from five years of
-working with the Subversion project
-(<ulink url="http://subversion.tigris.org/"/>).  Subversion is an open
-source version control system, written from scratch, and intended to
-replace CVS as the <foreignphrase>de facto</foreignphrase> version
-control system of choice in the open source community.  The project
-was started by my employer, CollabNet
-(<ulink url="http://www.collab.net/"/>), in early 2000, and thank
-goodness CollabNet understood right from the start how to run it as a
-truly collaborative, distributed effort.  We got a lot of volunteer
-developer buy-in early on; today there are 50-some developers on
-the project, of whom only a few are CollabNet employees.</para>
+<para>Much of the raw material for the first edition of this book came
+from five years of working with the Subversion project (<ulink
+url="http://subversion.tigris.org/"/>).  Subversion is an open source
+version control system, written from scratch, and intended to replace
+CVS as the <foreignphrase>de facto</foreignphrase> version control
+system of choice in the open source community.  The project was
+started by my employer, CollabNet (<ulink
+url="http://www.collab.net/"/>), in early 2000, and thank goodness
+CollabNet understood right from the start how to run it as a truly
+collaborative, distributed effort.  We got a lot of volunteer
+developer buy-in early on; today there are 50-some developers on the
+project, of whom only a few are CollabNet employees.</para>
 
 <para>Subversion is in many ways a classic example of an open source
 project, and I ended up drawing on it more heavily than I originally
@@ -131,9 +130,13 @@ project with which I didn't have direct experience, I tried to first
 talk to an informant there, someone I could trust to explain what was
 really going on.</para>
 
-<para>Subversion has been my job for the last 5 years, but I've been
-involved in free software for 12.  Other projects that influenced this
-book include:</para>
+<para>While Subversion was my full time job from 2000-2006, I've been
+involved in free software for more than twenty years, including the
+seven years since 2006 (when the first edition of this book was
+published).  Other projects and organizations that have influenced
+this book include:</para>
+
+<!-- TODO When go over clients in ots.org, adjust the list below. -->
 
 <itemizedlist>
   <listitem><para>The GNU Emacs text editor project at the Free
@@ -141,15 +144,34 @@ book include:</para>
             packages.</para>
   </listitem>
   <listitem><para>Concurrent Versions System (CVS), which I worked on
-            intensely in 1994&ndash;1995 with Jim Blandy, but have been
-            involved with only intermittently since.</para>
+            intensely in 1994&ndash;1995 with Jim Blandy and was
+            involved with intermittently for a few years afterwards.</para>
   </listitem>
   <listitem><para>The collection of open source projects known as the
             Apache Software Foundation, especially the Apache Portable
             Runtime (APR) and Apache HTTP Server.</para> 
   </listitem>
-  <listitem><para>OpenOffice.org, the Berkeley Database from
-            Sleepycat, and MySQL Database; I have not been
+  <listitem><para>The Launchpad.net project at Canonical, Ltd.</para> 
+  </listitem>
+  <listitem><para>Code for America and O'Reilly Media, which gave me
+            an inside view on open source civic technology development
+            starting in 2010, and kindly kept me in the loop after I
+            became a full-time consultant in 2012.</para>
+  </listitem>
+  <listitem><para>The many open source anti-surveillance and
+            censorship-circumvention tools supported by the Open
+            Internet Tools Project.</para>
+  </listitem>
+  <listitem><para>Checkbook NYC, the municipal financial transparency
+            software released by the New York City Office of the
+            Comptroller.</para>
+  </listitem>
+  <listitem><para>The Arches Project, an open source web application
+            for managing archeological digs, created by the Getty
+            Conservation Institute and the World Monuments Fund.</para>
+  </listitem>
+  <listitem><para>OpenOffice.org / LibreOffice.org, the Berkeley
+            Database from Sleepycat, and MySQL Database; I have not been
             involved with these projects personally, but have observed
             them and, in some cases, talked to people there.</para> 
   </listitem>
@@ -160,15 +182,18 @@ book include:</para>
 </itemizedlist>
 
 <para>This is not a complete list, of course.  Like most open source
-programmers, I keep loose tabs on many different projects, just to
-have a sense of the general state of things.  I won't name all of them
-here, but they are mentioned in the text where appropriate.</para>
+programmers, I also keep loose tabs on many different projects of
+interest to me, just to have a sense of the general state of things.
+I won't name all of them here, but they are mentioned in the text
+where appropriate.</para>
 
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
 <sect1 id="acknowledgments">
 <title>Acknowledgments</title>
+
+<!-- TODO Obviously, update this -->
 
 <para>This book took four times longer to write than I thought it
 would, and for much of that time felt rather like a grand piano
@@ -291,8 +316,10 @@ about flying.</para>
 <title>Disclaimer</title>
 
 <para>The thoughts and opinions expressed in this book are my own.
-They do not necessarily represent the views of CollabNet or of the
-Subversion project.</para>
+They do not necessarily represent the views of my clients, past
+employers, the New America Foundation, or the open source projects
+discussed here.  They do, however, represent the views of Jim Blandy.
+Seriously: he agrees with everything in this book.  Ask him.</para>
 
 </sect1>
 
