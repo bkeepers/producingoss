@@ -8,34 +8,39 @@
 
 <para>We tend not to hear very much about the failures.  Only
 successful projects attract attention, and there are so many free
-software projects in total<footnote><para>SourceForge.net, one popular
-hosting site, had 79,225 projects registered as of mid-April 2004.
-This is nowhere near the total number of free software projects on the
-Internet, of course; it's just the number that chose to use
-SourceForge.</para></footnote> that even though only a small
-percentage succeed, the result is still a lot of visible projects.  We
-also don't hear about the failures because failure is not an event.
-There is no single moment when a project ceases to be viable; people
-just sort of drift away and stop working on it.  There may be a moment
-when a final change is made to the project, but those who made it
-usually didn't know at the time that it was the last one.  There is
-not even a clear definition of when a project is expired.  Is it when
-it hasn't been actively worked on for six months?  When its user base
-stops growing, without having exceeded the developer base?  What if
-the developers of one project abandon it because they realized they
-were duplicating the work of another&mdash;and what if they join that
-other project, then expand it to include much of their earlier effort?
-Did the first project end, or just change homes?</para>
+software projects in total<footnote><para>I tried to estimate the
+number, by looking at just the number of projects registered at the
+most popular hosting sites, and the closest I could calculate to an
+answer was somewhere between one hundred thousand and two hundred
+thousand.  That would still be far lower the total number of free
+software projects on the Internet, of course, as it only counts the
+ones that chose to use one of the major hosting
+sites.</para></footnote> that even though only a small percentage
+succeed, the result is still a lot of visible projects.  We also don't
+hear about the failures because failure is not an event.  There is no
+single moment when a project ceases to be viable; people just sort of
+drift away and stop working on it.  There may be a moment when a final
+change is made to the project, but those who made it usually didn't
+know at the time that it was the last one.  There is not even a clear
+definition of when a project is expired.  Is it when it hasn't been
+actively worked on for six months?  When its user base stops growing,
+without having exceeded the developer base?  What if the developers of
+one project abandon it because they realized they were duplicating the
+work of another&mdash;and what if they join that other project, then
+expand it to include much of their earlier effort?  Did the first
+project end, or just change homes?</para>
 
 <para>Because of such complexities, it's impossible to put a precise
-number on the failure rate.  But anecdotal evidence from over a decade
-in open source, some casting around on SourceForge.net, and a little
-Googling all point to the same conclusion: the rate is extremely high,
-probably on the order of 90&ndash;95%.  The number climbs higher if you
-include surviving but dysfunctional projects: those
-which <emphasis>are</emphasis> producing running code, but which are
-not pleasant places to be, or are not making progress as quickly or as
-dependably as they could.</para>
+number on the failure rate.  But anecdotal evidence from two decades
+in open source, some casting around on multi-project hosting sites
+(see <xref linkend="canned-hosting"/><phrase output="printed"> in
+<xref linkend="technical-infrastructure"/></phrase> for more about
+them), and a little Googling all point to the same conclusion: the
+rate is extremely high, probably on the order of 90&ndash;95%.  The
+number climbs higher if you include surviving but dysfunctional
+projects: those which <emphasis>are</emphasis> producing running code,
+but which are not pleasant places to be, or are not making progress as
+quickly or as dependably as they could.</para>
 
 <para>This book is about avoiding failure.  It examines not only how
 to do things right, but how to do them wrong, so you can recognize and
@@ -59,8 +64,8 @@ and I will try not to duplicate it in this book.  Instead, I will
 attempt to describe the problems peculiar to free software.  When a
 free software project runs aground, it is often because the developers
 (or the managers) did not appreciate the unique problems of open
-source software development, even though they might have been quite
-prepared for the better-known difficulties of closed-source
+source software development, even though they might be quite
+well-prepared for the better-known difficulties of closed-source
 development.</para>
 
 <para>One of the most common mistakes is unrealistic expectations
@@ -71,7 +76,7 @@ automatically cure its ills.  In fact, quite the opposite: opening up
 a project can add whole new sets of complexities, and cost
 <emphasis>more</emphasis> in the short term than simply keeping it
 in-house.  Opening up means arranging the code to be comprehensible to
-complete strangers, setting up a development web site and email lists,
+complete strangers, setting up development documentation and email lists,
 and often writing documentation for the first time.  All this is a lot
 of work.  And of course, if any interested developers
 <emphasis>do</emphasis> show up, there is the added burden of
@@ -95,23 +100,24 @@ packaging, figuring that these can always be done later, when the
 project is well under way.  Presentation and packaging comprise a wide
 range of tasks, all revolving around the theme of reducing the barrier
 to entry.  Making the project inviting to the uninitiated means
-writing user and developer documentation, setting up a project web
-site that's informative to newcomers, automating as much of the
-software's compilation and installation as possible, etc.  Many
-programmers unfortunately treat this work as being of secondary
-importance to the code itself.  There are a couple of reasons for
-this.  First, it can feel like busywork, because its benefits are most
-visible to those least familiar with the project, and vice versa.
-After all, the people who develop the code don't really need the
-packaging.  They already know how to install, administer, and use the
-software, because they wrote it.  Second, the skills required to do
-presentation and packaging well are often completely different from
-those required to write code.  People tend to focus on what they're
-good at, even if it might serve the project better to spend a little
-time on something that suits them less.  <xref
-linkend="getting-started"/> discusses presentation and packaging
-in detail, and explains why it's crucial that they be a priority from
-the very start of the project.</para>
+writing user and developer documentation, setting up docs that are
+informative to newcomers, automating as much of the
+software's compilation and installation as possible, etc.</para>
+
+<para>Many programmers unfortunately treat this kind of work as being
+of secondary importance to the code itself.  There are a couple of
+reasons for this.  First, it can feel like busywork, because its
+benefits are most visible to those least familiar with the
+project&nbsp;&mdash;&nbsp;and vice versa: after all, the people who
+develop the code don't really need the packaging.  They already know
+how to install, administer, and use the software, because they wrote
+it.  Second, the skills required to do presentation and packaging well
+are often completely different from those required to write code.
+People tend to focus on what they're good at, even if it might serve
+the project better to spend a little time on something that suits them
+less.  <xref linkend="getting-started"/> discusses presentation and
+packaging in detail, and explains why it's crucial that they be a
+priority from the very start of the project.</para>
 
 <para>Next comes the fallacy that little or no project management is
 required in open source, or conversely, that the same management
@@ -121,7 +127,7 @@ always very visible, but in the successful projects, it's usually
 happening behind the scenes in some form or another.  A small thought
 experiment suffices to show why.  An open source project consists of a
 random collection of programmers&mdash;already a notoriously
-independent-minded category&mdash;who have most likely never met each
+independent-minded species&mdash;who have most likely never met each
 other, and who may each have different personal goals in working on
 the project.  The thought experiment is simply to imagine what would
 happen to such a group <emphasis>without</emphasis> management.
@@ -139,7 +145,7 @@ techniques for doing this are discussed throughout the rest of this
 book.</para>
 
 <para>Finally, there is a general category of problems that may be
-called "failures of cultural navigation."  Ten years ago, even five,
+called "failures of cultural navigation."  Twenty years ago, even ten,
 it would have been premature to talk about a global culture of free
 software, but not anymore.  A recognizable culture has slowly emerged,
 and while it is certainly not monolithic&mdash;it is at least as prone
@@ -159,6 +165,22 @@ constitutes reasonable default behavior.  This means that when
 problems arise, the situation can quickly deteriorate, as the
 participants lack an already established stock of cultural reflexes to
 fall back on for resolving differences. </para>
+
+<para>That last category, failures of cultural navigation, includes an
+interesting phenomenon: certain types of organizations are
+structurally less compatible with open source development than others.
+One of the great surprises for me in preparing the second edition of
+this book was realizing that, on the whole, my experiences indicated
+that governments are less naturally suited to participating in free
+software projects than private-sector, for-profit corporations, with
+non-profits somewhere in between the two.  There are many reasons for
+this (see <xref linkend="governments-and-open-source"/>), and the
+problems are certainly surmountable, but it's worth noting that when
+an existing organization&nbsp;&mdash;&nbsp;particularly a hierarchical
+one, and <emphasis>particularly</emphasis> a hierarchical,
+risk-averse, and publicity-sensitive one&nbsp;&mdash;&nbsp;starts or
+joins an open source project, some adjustments will usually be
+needed.</para>
 
 <para>This book is a practical guide, not an anthropological study or
 a history.  However, a working knowledge of the origins of today's
