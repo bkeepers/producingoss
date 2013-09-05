@@ -1596,45 +1596,71 @@ will be maintained by everyone.</para>
 <title>Practice Conspicuous Code Review</title>
 
 <para>One of the best ways to foster a productive development
-community is to get people looking at each others' code.  Some
-technical infrastructure is required to do this effectively&mdash;in
-particular, commit emails must be turned on; see
-<xref linkend="commit-emails"/> for more details.  The effect of
-commit emails is that every time someone commits a change to the
-source code, an email goes out showing the log message and diffs for
-the change (see <xref linkend="vc-vocabulary-diff"/>, in
-<xref linkend="vc-vocabulary"/>).  <firstterm>Code review</firstterm>
-is the practice of reviewing commit emails as they come in, looking
-for bugs and possible improvements.<footnote><para>This is how code
-review is usually done in open source projects, at any rate.  In more
-centralized projects, "code review" can also mean multiple people
-sitting down together and going over printouts of source code, looking
-for specific problems and patterns.</para></footnote></para>
+community is to get people looking at each others'
+code&nbsp;&mdash;&nbsp;ideally, to get them looking at each others'
+code <emphasis>changes</emphasis> as those changes arrive.
+<firstterm>Commit review</firstterm> (sometimes just called
+<firstterm>code review</firstterm>) is the practice of reviewing
+commits as they come in, looking for bugs and possible
+improvements.</para>
 
-<para>Code review serves several purposes simultaneously.  It's the
-most obvious example of peer review in the open source world, and
+<para>There are a couple of reasons to focus on reviewing changes,
+rather than on reviewing code that's been around for a while.  First,
+it just works better socially: when someone reviews your change, she
+is interacting with work you did recently.  That means if she comments
+on it right away, you will be maximally interested in hearing what she
+has to say; six months later, you might not feel as motivated to
+engage, and in any case might not remember the change very well.
+Second, looking at what changes in a codebase is a gateway to looking
+at the rest of the code anyway&nbsp;&mdash;&nbsp;reviewing a change
+often causes one to look at the surrounding code, at the affected
+callers and callees elsewhere, at related module interfaces,
+etc.<footnote><para>None of this is an argument against top-to-bottom
+code review, of course, for example to do a security audit.  But while
+that kind of review is important too, it's more of a generic
+development best practice, and is not as specifically relevant to
+running an open source project as change-by-change review
+is.</para></footnote></para>
+
+<para>Commit review thus serves several purposes simultaneously.  It's
+the most obvious example of peer review in the open source world, and
 directly helps to maintain software quality.  Every bug that ships in
 a piece of software got there by being committed and not detected;
 therefore, the more eyes watch commits, the fewer bugs will ship.  But
-code review also serves an indirect purpose: it confirms to people
+commit review also serves an indirect purpose: it confirms to people
 that what they do matters, because one obviously wouldn't take time to
 review a commit unless one cared about its effect.  People do their
 best work when they know that others will take the time to evaluate
 it.</para>
 
 <para>Reviews should be public.  Even on occasions when I have been
-sitting in the same physical room with developers, and one of us has
-made a commit, we take care not to do the review verbally in the room,
-but to send it to the development mailing list instead.  Everyone
-benefits from seeing the review happen.  People follow the commentary
-and sometimes find flaws in it, and even when they don't, it still
-reminds them that review is an expected, regular activity, like
-washing the dishes or mowing the lawn.</para>
+sitting in the same physical room with another developer, and one of
+us has made a commit, we take care not to do the review verbally in
+the room, but to send it to the appropriate online review forum
+instead.  Everyone benefits from seeing the review happen.  People
+follow the commentary and sometimes find flaws in it; even when they
+don't, it still reminds them that review is an expected, regular
+activity, like washing the dishes or mowing the lawn.</para>
+
+<para>Some technical infrastructure is required to do change-by-change
+review effectively.  In particular, setting up commit emails is
+extremely useful.  The effect of commit emails is that every time
+someone commits a change to the central repository, an email goes out
+showing the log message and diffs (unless the diff is too large; see
+<xref linkend="vc-vocabulary-diff"/>, in <xref
+linkend="vc-vocabulary"/>).  The review itself might take place on a
+mailing list, or in a review tool such as Gerrit or the GitHub "pull
+request" interface.  See <xref linkend="commit-emails" /><phrase
+output="printed" > in <xref linkend="technical-infrastructure"
+/></phrase> for details.</para>
+
+<sect3 id="subversion-commit-review">
+<title>Case study</title>
 
 <para>In the Subversion project, we did not at first make a regular
 practice of code review.  There was no guarantee that every commit
 would be reviewed, though one might sometimes look over a change if
-one was particularly interested in that area of the code.  Bugs
+one were particularly interested in that area of the code.  Bugs
 slipped in that really could and should have been caught.  A developer
 named Greg Stein, who knew the value of code review from past work,
 decided that he was going to set an example by reviewing every line of
@@ -1647,8 +1673,9 @@ otherwise have slipped by without ever being noticed.  Pointedly, he
 never complained about being the only person reviewing every commit,
 even though it took a fair amount of his time, but he did sing the
 praises of code review whenever he had the chance.  Pretty soon, other
-people, myself included, started reviewing commits regularly too.
-What was our motivation?  It wasn't that Greg had consciously shamed
+people, myself included, started reviewing commits regularly too.</para>
+
+<para>What was our motivation?  It wasn't that Greg had consciously shamed
 us into it.  But he had proven that reviewing code was a valuable way
 to spend time, and that one could contribute as much to the project by
 reviewing others' changes as by writing new code.  Once he
@@ -1659,6 +1686,8 @@ review it yet.  Later, Greg got a job that didn't leave him as much
 time for Subversion, and had to stop doing regular reviews.  But by
 then, the habit was so ingrained for the rest of us as to seem that it
 had been going on since time immemorial.</para>
+
+</sect3>
 
 <para>Start doing reviews from very first commit.  The sorts of
 problems that are easiest to catch by reviewing diffs are security
