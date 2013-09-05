@@ -1475,139 +1475,6 @@ and the third with Subversion only.</para>
 
 </sect3>
 
-<sect3 id="commit-emails">
-<title>Commit emails</title>
-
-<para>Every commit to the repository should generate an email showing
-who made the change, when they made it, what files and directories
-changed, and how they changed.  The email should go to a special
-mailing list devoted to commit emails, separate from the mailing lists
-to which humans post.  Developers and other interested parties should
-be encouraged to subscribe to the commits list, as it is the most
-effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review
-(see <xref linkend="code-review"/>), commit emails help create a
-sense of community, because they establish a shared environment in
-which people can react to events (commits) that they know are visible
-to others as well.</para>
-
-<para>The specifics of setting up commit emails will vary depending on
-your version control system, but usually there's a script or other
-packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm>,
-specifically a <firstterm>post-commit hook</firstterm>, also called
-the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
-a general means of launching automated tasks in response to commits.
-The hook is triggered by an individual commit, is fed all the
-information about that commit, and is then free to use that
-information to do anything&mdash;for example, to send out an
-email.</para>
-
-<para>With pre-packaged commit email systems, you may want to
-modify some of the default behaviors:</para>
-
-<orderedlist>
-
-  <listitem>
-  <para>Some commit mailers don't include the actual diffs in the
-  email, but instead provide a URL to view the change on the web using
-  the repository browsing system.  While it's good to provide the URL,
-  so the change can be referred to later, it is also
-  <emphasis>very</emphasis> important that the commit email include
-  the diffs themselves.  Reading email is already part of people's
-  routine, so if the content of the change is visible right there in
-  the commit email, developers will review the commit on the spot,
-  without leaving their mail reader.  If they have to click on a URL to
-  review the change, most won't do it, because that requires a new
-  action instead of a continuation of what they were already doing.
-  Furthermore, if the reviewer wants to ask something about the
-  change, it's vastly easier to hit reply-with-text and simply
-  annotate the quoted diff than it is to visit a web page and
-  laboriously cut-and-paste parts of the diff from web browser to
-  email client.</para>
-
-  <para>(Of course, if the diff is huge, such as when a large body of
-  new code has been added to the repository, then it makes sense to
-  omit the diff and offer only the URL.  Most commit mailers can do
-  this kind of limiting automatically.  If yours can't, then it's
-  still better to include diffs, and live with the occasional huge
-  email, than to leave the diffs off entirely.  Convenient reviewing
-  and commenting is a cornerstone of cooperative development, much
-  too important to do without.)</para>
-  </listitem>
-
-  <listitem><para>The commit emails should set their Reply-to header
-  to the regular development list, not the commit email list.  That
-  is, when someone reviews a commit and writes a response, their
-  response should be automatically directed toward the human
-  development list, where technical issues are normally discussed.
-  There are a few reasons for this.  First, you want to keep all
-  technical discussion on one list, because that's where people expect
-  it to happen, and because that way there's only one archive to
-  search.  Second, there might be interested parties not subscribed to
-  the commit email list.  Third, the commit email list advertises
-  itself as a service for watching commits, not for watching commits
-  <emphasis>and</emphasis> occasional technical discussions.  Those who
-  subscribed to the commit email list did not sign up for anything but
-  commit emails; sending them other material via that list would
-  violate an implicit contract.  Fourth, people often write programs
-  that read the commit email list and process the results (for
-  display on a web page, for example).  Those programs are prepared to
-  handle consistently-formatted commit emails, but not inconsistent
-  human-written mails.</para>
-
-  <para>Note that this advice to set Reply-to does not contradict the
-  recommendations in
-  <xref linkend="reply-to"/><phrase output="printed"> earlier in
-  this chapter</phrase>.  It's
-  always okay for the <emphasis>sender</emphasis> of a message to set
-  Reply-to.  In this case, the sender is the version control system
-  itself, and it sets Reply-to in order to indicate that the
-  appropriate place for replies is the development mailing list, not
-  the commit list.</para>
-
-  </listitem>
-
-</orderedlist>
-
-<sidebar id="cia">
-<title>CIA: A Standardized Change Publication Mechanism</title>
-
-<para>Commit emails are not the only way to propagate change news.
-You can also install CIA (<ulink url="http://cia.vc/"
->cia.vc</ulink>), a real-time 
-commit statistics aggregator and distributor.  The most popular use of
-CIA is to send commit notifications to IRC channels, so that people
-logged into those channels see the commits happening in real time.
-Though of somewhat less technical utility than commit emails, since
-observers might or might not be around when a commit notice pops up in
-IRC, this technique is of immense <emphasis>social</emphasis> utility.
-People get the sense of being part of something alive and active, and
-feel that they can see progress being made right before their
-eyes.  And because the notifications appear in a shared space, people
-in the chat room often react in real time, reviewing the commit and
-commenting on it on the spot.</para>
-
-<para>The way CIA works is that you invoke its notifier program
-from your post-commit hook.  The notifier formats the commit
-information into an XML message, which it sends to a central server
-(typically <literal>cia.vi</literal>).  That server then
-distributes the commit information to other forums.</para>
-
-<para>CIA can also be configured to send out <ulink
-url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
-feeds.  See the documentation at <ulink url="http://cia.vc/"
->cia.vc</ulink> for details.</para>
-
-<para>To see an example of CIA in action, point your IRC
-client at <literal>irc.freenode.net</literal>, channel
-<literal>#commits</literal>, which shows activity across all the
-projects CIA is watching.</para>
-
-</sidebar>
-
-</sect3>
-
 <sect3 id="branches">
 <title>Use branches to avoid bottlenecks</title>
 
@@ -1814,6 +1681,177 @@ special status: it implies voting rights on project-wide questions.
 This political aspect of commit access is discussed more in <xref
 linkend="electorate"/><phrase output="printed"> in
 <xref linkend="social-infrastructure"/></phrase>.</para>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="commit-review-tools">
+<title>Tools for commit review</title>
+
+<para><emphasis>9 September 2013: If you're reading this note, then
+you've encountered this section while it's in the process of being
+written as part of the overall update of this book (see <ulink
+url="http://producingoss.com/v2.html"
+>producingoss.com/v2.html</ulink>).</emphasis></para>
+
+<para>poss2 todo: there are three main things to cover here: Gerrit
+and similar tools, the GitHub PR model, and commit emails.  Intro
+paragraph should give an overview and describe how they interact, then
+a short section on each.  The section for commit emails is already
+done as it was just moved here from its old home as a subsection of
+the "Using the Version Control System" section.  Discuss how
+human-centered commit review can be linked with automated buildbots
+that may or may not be a hard gateway to the central repository.</para>
+
+<!-- http://programmers.stackexchange.com/questions/173262/gerrit-code-review-or-githubs-fork-and-pull-model is worth looking at -->
+
+<sect3 id="pull-requests">
+<title>Pull requests</title>
+
+<!-- http://julien.danjou.info/blog/2013/rant-about-github-pull-request-workflow-implementation is an interesting read for this -->
+
+</sect3>
+
+<sect3 id="commit-review-tbd">
+<title>TBD (Gerrit et al)</title>
+
+<!-- See http://en.wikipedia.org/wiki/List_of_tools_for_code_review ,
+as Gerrit isn't the only thing out there, though it's probably the
+most popular.  I guess Review Board is the other. -->
+
+</sect3>
+
+<sect3 id="commit-emails">
+<title>Commit emails</title>
+
+<para>Every commit to the repository should generate an email showing
+who made the change, when they made it, what files and directories
+changed, and how they changed.  The email should go to a special
+mailing list devoted to commit emails, separate from the mailing lists
+to which humans post.  Developers and other interested parties should
+be encouraged to subscribe to the commits list, as it is the most
+effective way to keep up with what's happening in the project at the
+code level.  Aside from the obvious technical benefits of peer review
+(see <xref linkend="code-review"/>), commit emails help create a
+sense of community, because they establish a shared environment in
+which people can react to events (commits) that they know are visible
+to others as well.</para>
+
+<para>The specifics of setting up commit emails will vary depending on
+your version control system, but usually there's a script or other
+packaged facility for doing it.  If you're having trouble finding it,
+try looking for documentation on <firstterm>hooks</firstterm>,
+specifically a <firstterm>post-commit hook</firstterm>, also called
+the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
+a general means of launching automated tasks in response to commits.
+The hook is triggered by an individual commit, is fed all the
+information about that commit, and is then free to use that
+information to do anything&mdash;for example, to send out an
+email.</para>
+
+<para>With pre-packaged commit email systems, you may want to
+modify some of the default behaviors:</para>
+
+<orderedlist>
+
+  <listitem>
+  <para>Some commit mailers don't include the actual diffs in the
+  email, but instead provide a URL to view the change on the web using
+  the repository browsing system.  While it's good to provide the URL,
+  so the change can be referred to later, it is also
+  <emphasis>very</emphasis> important that the commit email include
+  the diffs themselves.  Reading email is already part of people's
+  routine, so if the content of the change is visible right there in
+  the commit email, developers will review the commit on the spot,
+  without leaving their mail reader.  If they have to click on a URL to
+  review the change, most won't do it, because that requires a new
+  action instead of a continuation of what they were already doing.
+  Furthermore, if the reviewer wants to ask something about the
+  change, it's vastly easier to hit reply-with-text and simply
+  annotate the quoted diff than it is to visit a web page and
+  laboriously cut-and-paste parts of the diff from web browser to
+  email client.</para>
+
+  <para>(Of course, if the diff is huge, such as when a large body of
+  new code has been added to the repository, then it makes sense to
+  omit the diff and offer only the URL.  Most commit mailers can do
+  this kind of limiting automatically.  If yours can't, then it's
+  still better to include diffs, and live with the occasional huge
+  email, than to leave the diffs off entirely.  Convenient reviewing
+  and commenting is a cornerstone of cooperative development, much
+  too important to do without.)</para>
+  </listitem>
+
+  <listitem><para>The commit emails should set their Reply-to header
+  to the regular development list, not the commit email list.  That
+  is, when someone reviews a commit and writes a response, their
+  response should be automatically directed toward the human
+  development list, where technical issues are normally discussed.
+  There are a few reasons for this.  First, you want to keep all
+  technical discussion on one list, because that's where people expect
+  it to happen, and because that way there's only one archive to
+  search.  Second, there might be interested parties not subscribed to
+  the commit email list.  Third, the commit email list advertises
+  itself as a service for watching commits, not for watching commits
+  <emphasis>and</emphasis> occasional technical discussions.  Those who
+  subscribed to the commit email list did not sign up for anything but
+  commit emails; sending them other material via that list would
+  violate an implicit contract.  Fourth, people often write programs
+  that read the commit email list and process the results (for
+  display on a web page, for example).  Those programs are prepared to
+  handle consistently-formatted commit emails, but not inconsistent
+  human-written mails.</para>
+
+  <para>Note that this advice to set Reply-to does not contradict the
+  recommendations in
+  <xref linkend="reply-to"/><phrase output="printed"> earlier in
+  this chapter</phrase>.  It's
+  always okay for the <emphasis>sender</emphasis> of a message to set
+  Reply-to.  In this case, the sender is the version control system
+  itself, and it sets Reply-to in order to indicate that the
+  appropriate place for replies is the development mailing list, not
+  the commit list.</para>
+
+  </listitem>
+
+</orderedlist>
+
+<sidebar id="cia">
+<title>CIA: A Standardized Change Publication Mechanism</title>
+
+<para>Commit emails are not the only way to propagate change news.
+You can also install CIA (<ulink url="http://cia.vc/"
+>cia.vc</ulink>), a real-time 
+commit statistics aggregator and distributor.  The most popular use of
+CIA is to send commit notifications to IRC channels, so that people
+logged into those channels see the commits happening in real time.
+Though of somewhat less technical utility than commit emails, since
+observers might or might not be around when a commit notice pops up in
+IRC, this technique is of immense <emphasis>social</emphasis> utility.
+People get the sense of being part of something alive and active, and
+feel that they can see progress being made right before their
+eyes.  And because the notifications appear in a shared space, people
+in the chat room often react in real time, reviewing the commit and
+commenting on it on the spot.</para>
+
+<para>The way CIA works is that you invoke its notifier program
+from your post-commit hook.  The notifier formats the commit
+information into an XML message, which it sends to a central server
+(typically <literal>cia.vi</literal>).  That server then
+distributes the commit information to other forums.</para>
+
+<para>CIA can also be configured to send out <ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
+feeds.  See the documentation at <ulink url="http://cia.vc/"
+>cia.vc</ulink> for details.</para>
+
+<para>To see an example of CIA in action, point your IRC
+client at <literal>irc.freenode.net</literal>, channel
+<literal>#commits</literal>, which shows activity across all the
+projects CIA is watching.</para>
+
+</sidebar>
 
 </sect3>
 
