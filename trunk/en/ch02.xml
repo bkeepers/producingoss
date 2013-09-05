@@ -1713,21 +1713,176 @@ own.</para>
 </sect2>
 
 <!-- ======================== SECTION ============================== -->
+<sect2 id="be-open-from-day-one">
+<title>Be Open From Day One</title>
+
+<para>Start your project out in the open from the very first day.  The
+longer a project is run in a closed source manner, the harder it is to
+open source later.<footnote><para>This section started out as a blog
+post, <ulink
+url="http://blog.civiccommons.org/2011/01/be-open-from-day-one/"
+>blog.civiccommons.org/2011/01/be-open-from-day-one</ulink>, though
+it's been edited a lot for inclusion here.</para>
+</footnote></para>
+
+<para>Being open source from the start doesn't mean your developers
+must immediately take on the extra responsibilities of community
+management.  People often think that "open source" means "strangers
+distracting us with questions", but that's
+optional&nbsp;&mdash;&nbsp;it's something you might do down the road,
+if and when it makes sense for your project.  It's under your control.
+There are still major advantages to be had by running the project out
+in open, publicly-visible forums from the beginning.  Conversely, the
+longer the project is run closed-source, the more difficult it will be
+to open up later.</para>
+
+<para>I think there's one underlying cause for this:</para>
+
+<para>At each step in a project, programmers face a choice: to do that
+step in a manner compatible with a hypothetical future open-sourcing,
+or do it in a manner incompatible with open-sourcing.  And every time
+they choose the latter, the project gets just a little bit harder to
+open source.</para>
+
+<para>The crucial thing is, they can't help choosing the latter
+occasionally&nbsp;&mdash;&nbsp;all the pressures of development propel
+them that way.  It's very difficult to give a future event the same
+present-day weight as, say, fixing the incoming bugs reported by the
+testers, or finishing that feature the customer just added to the
+spec.  Also, programmers struggling to stay on budget will inevitably
+cut corners here and there (in Ward Cunningham's phrase, they will
+incur "<ulink url="http://en.wikipedia.org/wiki/Technical_debt"
+>technical debt</ulink>"), with the intention of cleaning it up
+later.</para>
+
+<para>Thus when it's time to open source, you'll suddenly find there
+are things like:</para>
+
+<itemizedlist>
+  <listitem>Customer-specific configurations and passwords checked
+            into the code repository;</listitem>
+  <listitem>Sample data constructed from live (and confidential)
+            information;</listitem>
+  <listitem>Bug reports containing sensitive information that cannot
+            be made public;</listitem>
+  <listitem>Comments in the code expressing perhaps overly-honest
+            reactions to the customer's latest urgent request;</listitem>
+  <listitem>Archives of correspondence among the developer team, in
+            which useful technical information is interleaved with
+            personal opinions not intended for strangers;</listitem>
+  <listitem>Licensing issues due to dependency libraries whose terms
+            might have been fine for internal deployment (or not even
+            that), but aren't compatible with open source
+            distribution;</listitem>
+  <listitem>Documentation written in the wrong format (e.g., that
+            proprietary internal wiki your department uses), with no
+            easy translation tool available to get it into formats
+            appropriate for public distribution;</listitem>
+  <listitem>Non-portable build dependencies that only become apparent
+            when you try to move the software out of your internal
+            build environment;</listitem>
+  <listitem>Modularity violations that everyone knows need cleaning
+            up, but that there just hasn't been time to take care of
+            yet...</listitem>
+  <listitem>(This list could go on.)</listitem>
+</itemizedlist>
+
+<para>The problem isn't just the work of doing the cleanups; it's the
+extra decision-making they sometimes require.  For example, if
+sensitive material was checked into the code repository in the past,
+your team now faces a choice between cleaning it out of the historical
+revisions entirely, so you can open source the entire (sanitized)
+history, or just cleaning up the latest revision and open-sourcing
+from that (sometimes called a "top-skim").  Neither method is wrong or
+right&nbsp;&mdash;&nbsp;and that's the problem: now you've got one
+more discussion to have and one more decision to make.  In some
+projects, that decision gets made and reversed several times before
+the final release. The thrashing itself is part of the cost.</para>
+
+<sect3 id="avoid-exposure-events">
+<title>Waiting Just Creates an Exposure Event</title>
+
+<para>The other problem with opening up a developed code base is that
+it creates a needlessly large exposure event.  Whatever issues there
+may be in the code (modularity corner-cutting, security
+vulnerabilities, etc), they are all exposed to public scrutiny at
+once&nbsp;&mdash;&nbsp;the open-sourcing event becomes an opportunity
+for the technical blogosphere to pounce on the code and see what they
+can find.</para>
+
+<para>Contrast that with the scenario where development was done in
+the open from the beginning: code changes come in one at a time, so
+problems are handled as they come up (and are often caught sooner,
+since there are more eyeballs on the code).  Because changes reach the
+public at a low, continuous rate of exposure, no one blames your
+development team for the occasional corner-cutting or flawed code
+checkin.  Everyone's been there, after all; these tradeoffs are
+inevitable in real-world development.  As long as the technical debt
+is properly recorded in "FIXME" comments and bug reports, and any
+security issues are addressed promptly, it's fine.  Yet if those same
+issues were to appear suddenly all at once, unsympathetic observers
+may jump on the aggregate exposure in a way they never would have if
+the issues had come up piecemeal in the normal course of
+development.</para>
+
+<para>(These concerns apply even more strongly to government software
+projects; see <ulink url="starting-open-for-govs"
+>starting-open-for-govs</ulink> <phrase output="printed" > in <xref
+linkend="governments-and-open-source" /></phrase>.)</para>
+
+</sect3>
+
+<para>The good news is that these are all unforced errors.  A project
+incurs little extra cost by avoiding them in the simplest way
+possible: by running in the open from Day One.</para>
+
+<para>"In the open" means the following things are publicly
+accessible, in standard formats, from the first day of the project:
+the code repository, bug tracker, design documents, user
+documentation, wiki, and developer discussion forums. It also means
+the code and documentation are placed under an open source license, of
+course. It also means your team's day-to-day work takes place in the
+publicly visible area.</para>
+
+<para>"In the open" does not have to mean: allowing strangers to check
+code into your repository (they're free to copy it into their own
+repository, if they want, and work with it there); allowing anyone to
+file bug reports in your tracker (you're free to choose your own QA
+process, and if allowing reports from strangers doesn't help you, you
+don't have to do it); reading and responding to every bug report
+filed, even if you do allow strangers to file; responding to every
+question people ask in the forums (even if you moderate them through);
+reviewing every patch or suggestion posted, when doing so may cost
+valuable development time; etc.</para>
+
+<para>One way to think of it is that you're open sourcing your code,
+not your time.  One of those resources is infinitely replicable, the
+other is not.  You'll have to determine the point at which engaging
+with outside users and developers makes sense for your project.  In
+the long run it usually does, and most of this book is about how to do
+it effectively.  But it's still under your control.  Developing in the
+open does not change this, it just ensures that everything done in the
+project is, by definition, done in a way that's compatible with being
+open source.</para>
+
+</sect2>
+
+<!-- ======================== SECTION ============================== -->
 <sect2 id="opening-closed-projects">
 <title>When Opening a Formerly Closed Project, be Sensitive to the
 Magnitude of the Change</title>
 
-<!-- TODO But first, don't be in this postion!  Add a "Be Open from
-     Day One" section here, or right before this section. -->
-
 <!-- TODO from hardcopy: Add a section or subsection on the mechanical
      details of how to open up a formerly closed project. -->
 
-<para>If you're opening up an existing project, one that already has
-active developers accustomed to working in a closed-source
-environment, make sure everyone understands that a big change is
-coming&mdash;and make sure that you understand how it's going to
-feel from their point of view.</para>
+<para>As per <xref linkend="be-open-from-day-one" />, it's best to
+avoid being in the situation of opening up a closed project in the
+first place; just start the project in the open if you can.  But if
+it's too late for that, and you find yourself opening up an existing
+project that already has active developers accustomed to working in a
+closed-source environment, make sure everyone understands that a big
+change is coming&mdash;and make sure that you understand how it's
+going to feel from their point of view.</para>
 
 <para>Try to imagine how the situation looks to them: formerly, all
 code and design decisions were made with a group of other programmers
