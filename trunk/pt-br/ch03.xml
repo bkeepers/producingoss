@@ -1681,160 +1681,155 @@ their changes back into the main line and disappear.</para>
 </sect3>
 
 <sect3 id="vc-singularity">
-<title>Singularity of information</title>
+<title>Singularidade de Informação</title>
 
-<para>Merging has an important corollary: never commit the same change
-twice.  That is, a given change should enter the version control
-system exactly once.  The revision (or set of revisions) in which the
-change entered is its unique identifier from then on.  If it needs to
-be applied to branches other than the one on which it entered, then it
-should be merged from its original entry point to those other
-destinations&mdash;as opposed to committing a textually identical
-change, which would have the same effect in the code, but would make
-accurate bookkeeping and release management impossible.</para>
+<!-- NT: Bookkeeping foi traduzido como "estruturação", no entanto "escrituração" foi considerada.
+Caso haja uma melhor interpretação do termo, favor atualizar. -->
 
-<para>The practical effects of this advice differ from one version
-control system to another.  In some systems, merges are special
-events, fundamentally distinct from commits, and carry their own
-metadata with them.  In others, the results of merges are committed
-the same way other changes are committed, so the primary means of
-distinguishing a "merge commit" from a "new change commit" is in the
-log message.  In a merge's log message, don't repeat the log message
-of the original change.  Instead, just indicate that this is a merge,
-and give the identifying revision of the original change, with at most
-a one-sentence summary of its effect.  If someone wants to see the
-full log message, she should consult the original revision.</para>
+<para>Merging tem um corolário importante: nunca comite a mesma mudança duas vezes. 
+Isto é, uma mudança deve entrar no sistema de controle de versionamento 
+exatamente uma única vez. A revisão (ou conjunto de revisões) na qual a mudança 
+foi efetuada é o seu único identificador. Caso seja necessária a sua efetuação
+em uma branch diferente da que foi feita, então ela deve ser merged
+do seu ponto de criação original para os outros pontos de destino
+&mdash;ao contrário de comitar uma mudança textualmente idêntica,
+que teria o mesmo efeito no código, mas tornaria impossíveis a precisão de estruturação  
+e o gerenciamento de releases.</para>
 
-<para>The reason it's important to avoid repeating the log message is
-that log messages are sometimes edited after they've been committed.
-If a change's log message were repeated at each merge destination,
-then even if someone edited the original message, she'd still leave
-all the repeats uncorrected&mdash;which would only cause confusion
-down the road.</para>
+<para>Os efeitos práticos desta recomendação variam de um sistema 
+de controle de versão para o outro. Em alguns sistemas, merges são
+eventos especiais, distintos de commits, e têm seus proprios metadados. 
+Em outros, os resultados de merges são comitados da mesma forma que outras
+mudanças são commitadas, então o principal modo de diferenciar um 
+"merge commit" de um "commit de novas mudanças" é a log message. 
+Na log message de um merge, não repita a mesma existente na mudança original.
+Ao contrário, apenas indique que está sendo realizado um merge, e forneça
+a revisão que contenha a mudança original, com um sumário de no máximo uma frase 
+do que ela faz. Se alguém quiser ler a mensagem completa, deverá então
+consultar a revisão original.</para> 
 
-<para>The same principle applies to reverting a change.  If a change
-is withdrawn from the code, then the log message for the reversion
-should merely state that some specific revision(s) is being reverted,
-<emphasis>not</emphasis> describe the actual code change that results
-from the reversion, since the semantics of the change can be derived
-by reading the original log message and change.  Of course, the
-reversion's log message should also state the reason why the change is
-being reverted, but it should not duplicate anything from the original
-change's log message.  If possible, go back and edit the original
-change's log message to point out that it was reverted.</para>
+<para>A razão da importância de se evitar a repetição da log message 
+é que às vezes elas são modificadas após serem comitadas. Se a 
+log message de uma mudança fosse repetida a cada efetuação de merge, 
+então até se alguém editasse a mensagem original, ainda seria necessário
+atualizar todas as repetições&mdash;o que causaria um
+monte de confusão.</para>
 
-<para>All of the above implies that you should use a consistent syntax
-for referring to revisions.  This is helpful not only in log messages,
-but in emails, the bug tracker, and elsewhere.  If you're using
-CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
-where REV is a CVS revision number such as "1.76".  If you're using
-Subversion, the standard syntax for revision 1729 is "r1729" (file
-paths are not needed because Subversion uses global revision numbers).
-In other systems, there is usually a standard syntax for expressing
-the changeset name.  Whatever the appropriate syntax is for your
-system, encourage people to use it when referring to changes.
-Consistent expression of change names makes project bookkeeping much
-easier (as we will see in <xref linkend="communications"/> and
-<xref linkend="development-cycle"/>), and since a lot of the
-bookkeeping will be done by volunteers, it needs to be as easy as
-possible.</para>
+<para>O mesmo princípio se aplica para reverter uma mudança. Se uma mudança é
+retirada do código, a log message da reversão deve apenas indicar, especificamente, 
+qual é a revisão (ou revisões) que está sendo revertida, e 
+<emphasis>não</emphasis> descrever a mudança gerada no arquivo derivada da reversão,
+uma vez que a semântica da mudança pode ser obtida através da leitura da log message
+original. É claro que a log message da reversão deve indificar a razão 
+pela qual a mudança está sendo revertida, mas ela não deve conter duplicações derivadas 
+da log message original. Se possível, volte e edite a log message original 
+para evidenciar o que foi revertido.</para>
 
-<para>See also
+<para>Tudo dito acima significa que você deve usar uma sintaxe consistente quando
+se referir a revisões. Isto é útil não somente em log messages, mas também em emails,
+no bug tracker, e em todos os outros lugares. Se você está usando CVS, sugiro 
+"<literal>path/to/file/in/project/tree:REV</literal>",
+onde REV é um número de revisão no CVS, como "1.76". Se você está usando Subversion,
+a sintaxe padrão para a revisão 1729 é "r1729" (endereços de arquivos não são necessários 
+por que o Subversion usa números de revisão globais). Em outros sistemas, normalmente 
+há uma sintaxe padrão para expressar o nome das alterações. Seja qual for a sintaxe 
+apropriada para o seu sistema, estimule as pessoas a usá-la quando forem aplicar mudanças. 
+Uma nomeação de mudanças consistente facilita a estruturação do projeto (como veremos em <xref linkend="communications"/> e
+<xref linkend="development-cycle"/>), e como muita da estruturação será feita
+por voluntários, se torna necessário deixá-la o simples possível.</para>
+
+<para>Veja também
 <xref
 linkend="releases-and-daily-development"/><phrase
-output="printed"> in
+output="printed"> em
 <xref linkend="development-cycle"/></phrase>.</para>
 
 </sect3>
 
 <sect3 id="vc-authz">
-<title>Authorization</title>
+<title>Autorização</title>
 
-<para>Most version control systems offer a feature whereby certain
-people can be allowed or disallowed from committing in specific
-sub-areas of the repository.  Following the principle that when handed
-a hammer, people start looking around for nails, many projects use
-this feature with abandon, carefully granting people access to just
-those areas where they have been approved to commit, and making sure
-they can't commit anywhere else.  (See
-<xref linkend="committers"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase> for how projects
-decide who can commit where.)</para>
+<para>A maioria dos sistemas de controle de versão oferecem uma funcionalidade 
+para que certas pessoas sejam autorizadas ou não a comitar em sub-áreas do repositório. 
+Seguindo o princípio de que, quando na posse de um martelo, as pessoas começam a procurar
+por pregos, muitos projetos usam esta funcionalidade com vigor, garantindo cuidadosamente
+acesso às pessoas apenas para as áreas as quais foram aprovadas a comitar, e 
+certificando-se de que elas não podem comitar em nenhum outro lugar. (Veja 
+<xref linkend="committers"/><phrase output="printed"> em
+<xref linkend="managing-volunteers"/></phrase> para ver como é decidido quem pode
+comitar aonde.)</para>
 
-<para>There is probably little harm done by exercising such tight
-control, but a more relaxed policy is fine too.  Some projects simply
-use an honor system: when a person is granted commit access, even for
-a sub-area of the repository, what they actually receive is a password
-that allows them to commit anywhere in the project.  They're just
-asked to keep their commits in their area.  Remember that there is no
-real risk here: in an active project, all commits are reviewed anyway.
-If someone commits where they're not supposed to, others will
-notice it and say something.  If a change needs to be undone, that's
-simple enough&mdash;everything's under version control anyway, so
-just revert.</para>
+<para>Provavelmente poucos danos ocorrerão com o uso de um controle tão rigoroso, 
+no entanto uma política mais descontraída também é aceita. Alguns projetos 
+simplesmente usam um sistema de honra: quando uma pessoa é autorizada 
+a comitar, até para uma sub-área do repositório, o que ela recebe, 
+na verdade, é uma senha que a possibilita comitar em qualquer 
+lugar do projeto. Só lhe é pedido que mantenha os seus commits 
+na área determinada. Lembre-se que na verdade não há nenhum risco aqui: 
+em um projeto ativo, todos os commits são revisados, 
+de qualquer modo. Se alguém ver um commit onde não deveria estar, 
+isto será percebido e então será falado algo. Se uma mudança precisar 
+ser desfeita, isto é muito simples &mdash;tudo está sob versionamento 
+de controle mesmo, então é só reverter.</para>
 
-<para>There are several advantages to the relaxed approach.  First, as
-developers expand into other areas (which they usually will if they
-stay with the project), there is no administrative overhead to
-granting them wider privileges.  Once the decision is made, the person
-can just start committing in the new area right away.</para>
+<para>Existem diversas vantagens à abordagem mais descontraída. Primeiro, 
+como desenvolvedores evoluem para outras áreas (o que provavelmente acontecerá 
+caso eles continuem no projeto), não haverá sobrecarga administrativa para 
+garantir maiores privilégios. Uma vez tomada a decisão, a pessoa pode 
+começar a comitar na nova área imediatamente.</para>
 
-<para>Second, expansion can be done in a more fine-grained manner.
-Generally, a committer in area X who wants to expand to area Y will
-start posting patches against Y and asking for review.  If someone who
-already has commit access to area Y sees such a patch and approves of
-it, they can just tell the submitter to commit the change directly
-(mentioning the reviewer/approver's name in the log message, of
-course).  That way, the commit will come from the person who actually
-wrote the change, which is preferable from both an information
-management standpoint and from a crediting standpoint.</para>
+<para>Em segundo lugar, a expansão pode ser feita de um modo mais refinado. 
+Geralmente, um committer na área X que quer evoluir para a área Y
+começará a enviar patches para a área Y e pedir por review. Se alguém
+que já tem permissão a commits na área Y ver o patch e aprová-lo, eles podem
+avisar a quem o enviou para comitá-lo diretamente (mencionando o nome
+de quem revisou/aprovou na log message, obviamente). Deste modo, o commit
+virá diretamente da pessoa que fez a mudança, o que é preferível tanto
+de um ponto de vista gerencial quanto de um ponto de vista de creditação 
+justa.</para>
 
-<para>Last, and perhaps most important, using the honor system
-encourages an atmosphere of trust and mutual respect.  Giving someone
-commit access to a subdomain is a statement about their technical
-preparedness&mdash;it says: "We see you have expertise to make commits
-in a certain domain, so go for it."  But imposing strict authorization
-controls says: "Not only are we asserting a limit on your expertise,
-we're also a bit suspicious about
-your <emphasis>intentions</emphasis>."  That's not the sort of
-statement you want to make if you can avoid it.  Bringing someone into
-the project as a committer is an opportunity to initiate them into a
-circle of mutual trust.  A good way to do that is to give them more
-power than they're supposed to use, then inform them that it's up to
-them to stay within the stated limits.</para>
+<para>Por último, e talvez a mais importante, usar o sistema de honra
+estimula uma atmosfera de confiança e respeito mútuo. Dar permissão de commit à alguém
+ para um subdomínio é uma confirmação feita sobre o preparamento técnico
+desta pessoa &mdash;isto quer dizer: "Nós vemos que você tem proficiência para comitar 
+em uma certa parte do projeto, então vá fundo." No entanto, impor um controle rígido
+de autorização diz: "Não apenas estamos impondo um limite sobre a sua proficiência, como 
+também estamos um pouco suspeitos das suas <emphasis>intenções</emphasis>." 
+Isto não é algo que você quer dizer se você puder evitar. Trazer alguém para o projeto
+como um committer é uma oportunidade de iniciá-los em um círculo de confiança. 
+Uma boa maneira de fazer isto é dar mais poder à esta pessoa do que ela deveria ter,
+ e então informá-la que cabe à ela continuar nestes limites.</para>
 
-<para>The Subversion project has operated on the honor system way for
-more than four years, with 33 full and 43 partial committers as of
-this writing.  The only distinction the system actually enforces is
-between committers and non-committers; further subdivisions are
-maintained solely by humans.  Yet we've never had a problem with
-someone deliberately committing outside their domain.  Once or twice
-there's been an innocent misunderstanding about the extent of
-someone's commit privileges, but it's always been resolved quickly and
-amiably.</para>
+<para>O projeto Subversion tem operado através sistema de honra há mais
+de quatro anos, com 33 committers integrais e 43 committers parciais 
+até o tempo de escrita deste livro. A única distinção que o 
+sistema realmente impõe é a entre committers e não-committers; 
+subdivisões adicionais são mantidas apenas por humanos. 
+Ainda assim, nós nunca tivemos problemas com alguém deliberadamente 
+comitar algo fora do seu domínio. Uma ou duas vezes já aconteceram 
+inocentes mal-entendidos sobre o grau de privilégios de commit de 
+alguém, mas tudo sempre foi resolvido de forma rápida e amigável.</para>
 
-<para>Obviously, in situations where self-policing is impractical, you
-must rely on hard authorization controls.  But such situations are
-rare.  Even when there are millions of lines of code and hundreds or
-thousands of developers, a commit to any given code module should
-still be reviewed by those who work on that module, and they can
-recognize if someone committed there who wasn't supposed to.  If
-regular commit review <emphasis>isn't</emphasis> happening, then the
-project has bigger problems to deal with than the authorization system
-anyway.</para>
+<para>Obviamente, em situações onde auto-policiamento é impraticável, você
+deve contar com controles de autorização rígidos. Mas tais situação são raras. 
+Até quando existem milhões de linhas de código e centenas ou milhares de desenvolvedores, 
+um commit feito a algum módulo deverá ser revisado por quem trabalha neste mesmo módulo, 
+e então pode-se reconhecer caso alguém tenha feito um commit onde não deveria. Se 
+revisões de commit <emphasis>não estão</emphasis> acontecendo frequentemente, então 
+o projeto tem problemas maiores do que lidar com o sistema de autorização.</para>
 
-<para>In summary, don't spend too much time fiddling with the version
-control authorization system, unless you have a specific reason to.  It
-usually won't bring much tangible benefit, and there are advantages to
-relying on human controls instead.</para>
+<para>Em resumo, não perca muito tempo mexendo com o sistema de autorização do 
+controlador de versões, a não ser que você tenha uma razão específica para tal. 
+Isto normalmente não traz benefícios perceptíveis, e existem vantagens em, 
+ao invés disto, confiar em controles humanos.</para>
 
-<para>None of this should be taken to mean that the restrictions
-themselves are unimportant, of course.  It would be bad for a project
-to encourage people to commit in areas where they're not qualified.
-Furthermore, in many projects, full (unrestricted) commit access has a
-special status: it implies voting rights on project-wide questions.
-This political aspect of commit access is discussed more in <xref
-linkend="electorate"/><phrase output="printed"> in
+<para>É claro que nada disto deve ser interpretado de modo que 
+pareça que as restrições, especificamente, não tenham importância nenhuma. 
+Seria muito ruim para um projeto estimular pessoas a comitarem em áreas nas quais 
+não são qualificadas. Além do mais, em muitos projetos, permissão de commit integral (sem 
+restrições) tem um destaque especial: implica em direito de voto em questões de alto nível, 
+que afetam todo o projeto. Este aspecto político de commit é mais discutido em <xref
+linkend="electorate"/><phrase output="printed"> em
 <xref linkend="social-infrastructure"/></phrase>.</para>
 
 </sect3>
