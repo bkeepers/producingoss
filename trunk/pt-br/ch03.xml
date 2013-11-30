@@ -1700,7 +1700,7 @@ e o gerenciamento de releases.</para>
 de controle de versão para o outro. Em alguns sistemas, merges são
 eventos especiais, distintos de commits, e têm seus proprios metadados. 
 Em outros, os resultados de merges são comitados da mesma forma que outras
-mudanças são commitadas, então o principal modo de diferenciar um 
+mudanças são comitadas, então o principal modo de diferenciar um 
 "merge commit" de um "commit de novas mudanças" é a log message. 
 Na log message de um merge, não repita a mesma existente na mudança original.
 Ao contrário, apenas indique que está sendo realizado um merge, e forneça
@@ -1709,7 +1709,7 @@ do que ela faz. Se alguém quiser ler a mensagem completa, deverá então
 consultar a revisão original.</para> 
 
 <para>A razão da importância de se evitar a repetição da log message 
-é que às vezes elas são modificadas após serem comitadas. Se a 
+é que, às vezes, elas são modificadas após serem comitadas. Se a 
 log message de uma mudança fosse repetida a cada efetuação de merge, 
 então até se alguém editasse a mensagem original, ainda seria necessário
 atualizar todas as repetições&mdash;o que causaria um
@@ -1751,7 +1751,7 @@ output="printed"> em
 
 <para>A maioria dos sistemas de controle de versão oferecem uma funcionalidade 
 para que certas pessoas sejam autorizadas ou não a comitar em sub-áreas do repositório. 
-Seguindo o princípio de que, quando na posse de um martelo, as pessoas começam a procurar
+Seguindo o princípio de que quando na posse de um martelo as pessoas começam a procurar
 por pregos, muitos projetos usam esta funcionalidade com vigor, garantindo cuidadosamente
 acesso às pessoas apenas para as áreas as quais foram aprovadas a comitar, e 
 certificando-se de que elas não podem comitar em nenhum outro lugar. (Veja 
@@ -1789,16 +1789,16 @@ de um ponto de vista gerencial quanto de um ponto de vista de creditação
 justa.</para>
 
 <para>Por último, e talvez a mais importante, usar o sistema de honra
-estimula uma atmosfera de confiança e respeito mútuo. Dar permissão de commit à alguém
- para um subdomínio é uma confirmação feita sobre o preparamento técnico
+estimula uma atmosfera de confiança e respeito mútuo. Dar permissão de commit à alguém 
+para um subdomínio é uma confirmação feita sobre o preparamento técnico
 desta pessoa &mdash;isto quer dizer: "Nós vemos que você tem proficiência para comitar 
 em uma certa parte do projeto, então vá fundo." No entanto, impor um controle rígido
 de autorização diz: "Não apenas estamos impondo um limite sobre a sua proficiência, como 
 também estamos um pouco suspeitos das suas <emphasis>intenções</emphasis>." 
 Isto não é algo que você quer dizer se você puder evitar. Trazer alguém para o projeto
 como um committer é uma oportunidade de iniciá-los em um círculo de confiança. 
-Uma boa maneira de fazer isto é dar mais poder à esta pessoa do que ela deveria ter,
- e então informá-la que cabe à ela continuar nestes limites.</para>
+Uma boa maneira de fazer isto é dar mais poder à esta pessoa do que ela deveria ter, 
+e então informá-la que cabe à ela continuar ou não nestes limites.</para>
 
 <para>O projeto Subversion tem operado através sistema de honra há mais
 de quatro anos, com 33 committers integrais e 43 committers parciais 
@@ -1843,109 +1843,106 @@ linkend="electorate"/><phrase output="printed"> em
 <sect1 id="bug-tracker">
 <title>Bug Tracker</title>
 
-<para>Bug tracking is a broad topic; various aspects of it are
-discussed throughout this book.  Here I'll try to concentrate mainly
-on setup and technical considerations, but to get to those, we have to
-start with a policy question: exactly what kind of information should
-be kept in a bug tracker?</para>
+<para>Bug tracking (perseguir/acompanhar bugs) é um tópico extenso; muitos de seus aspectos
+são discutidos neste livro. Aqui, concentrarei-me principalmente na parte 
+de setup e considerações técnicas, mas para chegarmos nelas devemos começar 
+com a seguinte pergunta: exatamente que tipo de informação devemos 
+manter em um bug tracker?</para>
 
-<para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
-tracking systems are also frequently used to track new feature
-requests, one-time tasks, unsolicited patches&mdash;really anything
-that has distinct beginning and end states, with optional transition
-states in between, and that accrues information over its lifetime.
-For this reason, bug trackers are also called <firstterm>issue
-trackers</firstterm>, <firstterm>defect trackers</firstterm>,
-<firstterm>artifact trackers</firstterm>, <firstterm>request
-trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
-etc.  See <xref linkend="bug-trackers"/> for a list of software.
+<para>O termo <firstterm>bug tracker</firstterm> pode enganar. Sistemas de
+Bug tracking também são frequentemente usados para acompanhamento de pedidos 
+de novas funcionalidades, tarefas casuais, patches não solicitados&mdash;realmente 
+qualquer coisa que tenha estados distintos de início e fim, com transações de estados
+entre estes dois pontos, e que acumule informação durante seu tempo de vida. 
+Por esta razão, bug trackers também são chamados de <firstterm>issue
+trackers</firstterm>(rastreadores de problemas), <firstterm>defect trackers</firstterm> (rastreadores 
+de defeitos), <firstterm>artifact trackers</firstterm> (rastreadores de 
+produção), <firstterm>request trackers</firstterm> (rastreadores de 
+pedidos), <firstterm>trouble ticket systems</firstterm> (sistemas de bilhetes de problemas), 
+etc.  Veja <xref linkend="bug-trackers"/> para uma lista de softwares. 
 </para>
 
-<para>In this book, I'll continue to use "bug tracker" for the
-software that does the tracking, because that's what most people call
-it, but will use <firstterm>issue</firstterm> to refer to a single
-item in the bug tracker's database.  This allows us to distinguish
-between the behavior or misbehavior that the user encountered (that is,
-the bug itself), and the tracker's <emphasis>record</emphasis> of the
-bug's discovery, diagnosis, and eventual resolution.  Keep in mind
-that although most issues are about actual bugs, issues can be used to
-track other kinds of tasks too.</para>
+<para>Neste livro, continuarei a usar o termo "bug tracker" como referência
+ao software que faz o acompanhamento, já que este é o principal termo que 
+as pessoas usam, mas usarei <firstterm>issue</firstterm> para me referir a
+um único item no banco de dados do bug tracker. Isto nos permite identificar a diferença 
+entre o comportamento ou mau comportamento que o usuário encontrou (ou seja, 
+o bug propriamente dito), e o <emphasis>registro</emphasis> do tracker em relação 
+à descoberta, diagnóstico e eventual solução do bug. Tenha em mente que apesar da grande 
+maioria de issues sejam referidas à bugs propriamente ditos, issues também podem 
+ser usadas para acompanhar outros tipos de tarefas também.</para>
 
-<para>The classic issue life cycle looks like this:
+<para>O ciclo de vida clássico de uma issue é parecido com isso:
 
 <orderedlist>
-  <listitem><para>Someone files the issue.  They provide a summary, an
-            initial description (including a reproduction recipe, if
-            applicable; see
+  <listitem><para>Alguém abre a issue. É provido um sumário, uma descrição inicial 
+			(incluindo informações de reprodução do bug, caso seja adequado; 
+			veja
             <xref
             linkend="users-to-volunteers"/><phrase
-            output="printed"> in
-            <xref linkend="managing-volunteers"/></phrase> for
-            how to encourage good bug reports), and whatever other
-            information the tracker asks for.  The person who files
-            the issue may be totally unknown to the project&mdash;bug
-            reports and feature requests are as likely to come from
-            the user community as from the developers.</para>
+            output="printed"> em
+            <xref linkend="managing-volunteers"/></phrase> para ler sobre
+			 como encorajar bons relatórios de bug) e qualquer outra 
+			 informação que o tracker pedir. A pessoa que abriu a issue 
+			 pode ser completamente desconhecida ao projeto&mdash;relatos 
+			 de bug e pedidos de funcionalidades podem vir tanto da comunidade de 
+			 usuários quanto da de desenvolvedores.</para>
+			
+            <para>Assim que preenchida, a issue está no que é chamado de estado 
+			<firstterm>aberto</firstterm> (open state).  Como nenhuma ação 
+			foi tomada ainda, alguns trackers também a identificam como 
+            <firstterm>não verificada</firstterm> (unverified) e/ou 
+            <firstterm>não iniciado</firstterm> (unstarted). Ela ainda não 
+			foi atribuída a ninguém; ou, em alguns sistemas, ela é atribuída 
+			a um usuário falso que representa a falta de real atribuição. 
+			Neste ponto, a issue está em uma área de espera: ela foi registrada,
+			mas ainda não foi integrada à consciência do projeto.</para>
+  </listitem>
+  <listitem><para>Outras pessoas leem a issue, adicionam comentários, e talvez 
+			façam alguma pergunta à pessoa que identificou o problema caso algo 
+			precise ser esclarecido.</para>
+  </listitem>
+  <listitem><para>O bug é <firstterm>reproduzido</firstterm>.
+			Talvez este seja o momento mais importante do seu ciclo de vida. 
+			Apesar do bug ainda não ter sido corrigido, o fato de 
+			quem alguém, além do identificador original, conseguiu 
+			fazer com que o bug se repetisse é a prova de que se trata de um defeito 
+			autêntico, e, não menos importante, confirma a quem relatou o bug 
+			que foi feita uma contribuição ao projeto através 
+			do relato de um bug genuíno.</para>
+  </listitem>
+  <listitem><para>O bug então é <firstterm>diagnosticado</firstterm>: sua 
+            causa é definida, e, se possível, o esforço requirido para
+			sua correção é estimado. Tenha certeza que estes dados sejam
+			registrados na issue; se a pessoa que diagnosticou o bug precise
+			se afastar do projeto por algum tempo (como acontece frequentemente
+			com desenvolvedores voluntários), outra pessoa deve ser capaz de
+			continuar daonde a outra parou.</para>
 
-            <para>Once filed, the issue is in what's called an
-            <firstterm>open</firstterm> state.  Because no action has
-            been taken yet, some trackers also label it as
-            <firstterm>unverified</firstterm> and/or
-            <firstterm>unstarted</firstterm>.  It is not assigned to
-            anyone; or, in some systems, it is assigned to a fake
-            user to represent the lack of real assignation.  At this
-            point, it is in a holding area: the issue has been
-            recorded, but not yet integrated into the project's
-            consciousness.</para>
-  </listitem>
-  <listitem><para>Others read the issue, add comments to it, and
-            perhaps ask the original filer for clarification on some
-            points.</para>
-  </listitem>
-  <listitem><para>The bug gets <firstterm>reproduced</firstterm>.
-            This may be the most important moment in its
-            life cycle.  Although the bug is not actually fixed yet,
-            the fact that someone besides the original filer was able
-            to make it happen proves that it is genuine, and, no less
-            importantly, confirms to the original filer that they've
-            contributed to the project by reporting a real bug.</para>
-  </listitem>
-  <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
-            cause is identified, and if possible, the effort required
-            to fix it is estimated.  Make sure these things get
-            recorded in the issue; if the person who diagnosed the
-            bug suddenly has to step away from the project for a
-            while (as can often happen with volunteer developers),
-            someone else should be able to pick up where she left
-            off.</para>
-
-            <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the issue and
-            <firstterm>assign</firstterm> it to herself (<xref
-            linkend="delegation-assignment"/><phrase
-            output="printed"> in
+            <para>Neste estágio, ou, às vezes, no anterior, um desenvolvedor pode 
+			"ficar dono" da issue e <firstterm>atribuí-la</firstterm> para si
+			(<xref linkend="delegation-assignment"/><phrase
+            output="printed"> em
             <xref linkend="managing-volunteers"/></phrase>
-            examines the assignment process in more detail).  The issue's
-            <firstterm>priority</firstterm> may also be set at this
-            stage.  For example, if it is so severe that it should
-            delay the next release, that fact needs to be identified
-            early, and the tracker should have some way of noting
-            it.</para>
+            explora o processo de designação mais detalhadamente).  A 
+            <firstterm>prioridade</firstterm> da issue também pode ser 
+			determinada neste estágio. Por exemplo, se ela é tão grave que 
+			pode atrasar a próxima release, este fato deve ser identificado 
+			cedo, e o tracker deve ter algum modo de identificar isto.</para>
   </listitem>
-  <listitem><para>The issue gets scheduled for resolution.
-            Scheduling doesn't necessarily mean naming a date by which
-            it will be fixed.  Sometimes it just means deciding which
-            future release (not necessarily the next one) the bug
-            should be fixed by, or deciding that it need not block any
-            particular release.  Scheduling may also be dispensed
-            with, if the bug is quick to fix.</para>
+  <listitem><para>A issue então é agendada para correção. 
+			Agendar não quer dizer, necessariamente, associar uma data 
+			para a correção. Às vezes, apenas significa decidir em qual 
+			release futura (não necessariamente a próxima) o bug deverá 
+			estar corrigido, ou decidir que ele não bloqueará alguma release 
+			em particular. Agendamento também pode ser dispensado caso 
+			o bug seja de rápida correção.</para>
   </listitem>
-  <listitem><para>The bug gets fixed (or the task completed, or
-            the patch applied, or whatever).  The change or set of
-            changes that fixed it should be recorded in a comment in
-            the issue, after which the issue is
-            <firstterm>closed</firstterm> and/or marked as
-            <firstterm>resolved</firstterm>.</para>
+  <listitem><para>O bug então é fixado (ou a tarefa concluída, ou o patch executado, 
+			ou o que quer que seja). A mudança ou conjunto de mudanças que o corrigiram devem 
+			ser registradas em um comentário na issue, e então ela é 
+            <firstterm>fechada</firstterm> e/ou marcada como
+            <firstterm>resolvida</firstterm>.</para>
   </listitem>
 </orderedlist>
 
