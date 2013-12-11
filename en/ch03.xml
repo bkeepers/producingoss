@@ -873,8 +873,8 @@ nothing more.</para>
 <title>Address hiding in archives</title>
 
 <para>To prevent your mailing lists from being a source of addresses
-for spammers, a common technique is for the archives to obscure
-people's email addresses, for example by replacing</para>
+for spammers, a common technique is for the archiving software to
+obscure people's email addresses, for example by replacing</para>
 
     <blockquote>
       <para><literal>jrandom@somedomain.com</literal></para>
@@ -918,7 +918,7 @@ or a setting in that subscriber's list account preferences.  However,
 I don't know of any software which offers per-subscriber or per-post
 choice in the matter, so for now the list manager must make a decision
 for everyone (assuming the archiver offers the feature at all, which
-is not always the case).  I lean very mildly toward turning
+is not always the case).  For what it's worth, I lean toward turning
 address hiding on.  Some people are very careful to avoid posting
 their email addresses on web pages or anywhere else a spam harvester
 might see it, and they would be disappointed to have all that care
@@ -938,13 +938,14 @@ of hiding, and we'll have to think of something else.</para>
 <sect3 id="header-management">
 <title>Identification and Header Management</title>
 
-<para>List subscribers often want to put mails from the list into a
-project-specific folder, separate from their other mail.  Their
-mail reading software can do this automatically by examining the mail's
-<firstterm>headers</firstterm>.  The headers are the fields at the top
-of the mail that indicate the sender, recipient, subject, date, and
-various other things about the message.  Certain headers are
-well known and effectively mandatory:</para>
+<para>When interacting with the forum by email, subscribers often want
+to put mails from the list into a project-specific folder, separate
+from their other mail.  Their mail reading software can do this
+automatically by examining the mail's <firstterm>headers</firstterm>.
+The headers are the fields at the top of the mail that indicate the
+sender, recipient, subject, date, and various other things about the
+message.  Certain headers are well known and are effectively
+mandatory:</para>
 
 <screen>
 From: ...
@@ -979,24 +980,23 @@ Subject: Making the 2.5 release.
 <para>but the mail would show up on the list looking like this:</para>
 
 <screen>
-Subject: [discuss@lists.example.org] Making the 2.5 release.
+Subject: [Scanley Discuss] Making the 2.5 release.
 </screen>
 
 <para>Although most list management software offers the option to do
-this, I strongly recommend against turning the option on.  The problem
-it solves can easily be solved in much less obtrusive ways, and the
-cost of eating space in the Subject field is far too high.
-Experienced mailing list users typically scan the Subjects of the
-day's incoming list mail to decide what to read and/or respond to.
-Prepending the list's name to the Subject can push the right side of
-the Subject off the screen, rendering it invisible.  This obscures
-information that people depend on to decide what mails to open, thus
-reducing the overall functionality of the mailing list for
-everyone.</para>
+this, you may decide against turning the option on.  The problem
+it solves can often be solved in less obtrusive ways (see below), and
+there is a cost to eating space in the Subject field.  Experienced
+mailing list users typically scan the Subjects of the day's incoming
+list mail to decide what to read and/or respond to.  Prepending the
+list's name to the Subject can push the right side of the Subject off
+the screen, rendering it invisible.  This obscures information that
+people depend on to decide what mails to open, thus reducing the
+overall functionality of the mailing list for everyone.</para>
 
-<para>Instead of munging the Subject header, teach your users to take
+<para>Instead of munging the Subject header, your project could take
 advantage of the other standard headers, starting with the To header,
-which should say the mailing list's name:</para>
+which should say the mailing list's address:</para>
 
 <screen>
 To: &lt;discuss@lists.example.org&gt;
@@ -1006,10 +1006,11 @@ To: &lt;discuss@lists.example.org&gt;
 To just as easily.</para>
 
 <para>There are a few other optional-but-standard headers expected for
-mailing lists.  Filtering on these is even more reliable than using
-the "To" or "Cc" headers; since these headers are added to each post
-by the mailing list management software itself, some users may be
-counting on their presence:</para>
+mailing lists; they are sometimes not displayed by most mailreader
+software, but they are present nonetheless.  Filtering on them is
+even more reliable than using the "To" or "Cc" headers, and since these
+headers are added to each post by the mailing list management software
+itself, some users may be counting on their presence:</para>
 
 <screen>
 list-help: &lt;mailto:discuss-help@lists.example.org&gt;
@@ -1027,22 +1028,30 @@ see <ulink url="http://www.faqs.org/rfcs/rfc2369.html"
 >faqs.org/rfcs/rfc2369.html</ulink>.
 </para>
 
-<para>Notice how these headers imply that if you have a mailing list
+<para>Having said all that, these days I find that most subscribers
+just request that the Subject header include a list-identifying
+prefix.  That's increasingly how people are accustomed to filtering
+email: Subject-based filtering is what many of the major online email
+services (like Gmail) offer users by default, and those services tend
+not to make it easy to see the presence of less-commonly used headers
+like the ones I mentioned above&nbsp;&mdash;&nbsp;thus making it hard
+for people to figure out that they would even have the option of
+filtering on those other headers.</para>
+
+<para>Therefore, reluctantly, I recommend using a Subject prefix (keep
+it as short as you can) if that's what your community wants.  But if
+your project highly technical and most of its participants are
+comfortable using the other headers, then that option is always there
+as a more space-efficient alternative.</para>
+
+<para>It also used to be the case that if you have a mailing list
 named "list", then you also have administrative addresses "list-help"
-and "list-unsubscribe" available.  In addition to these, it is normal
-to have "list-subscribe", for joining, and "list-owner", for reaching
-the list administrators.  Depending on the list management software
-you use, these and/or various other administrative addresses may be
-set up; the documentation will have details.  Usually a complete
-explanation of all these special addresses is mailed to each new user
-as part of an automated "welcome mail" on subscribing.  You yourself
-will probably get a copy of this welcome mail.  If you don't, then ask
-someone else for a copy, so you know what your users are seeing when
-they join the list.  Keep the copy handy so you can answer questions
-about the mailing list functions, or better yet, put it on a web page
-somewhere.  That way when people lose their own copy of the
-instructions and post to ask "How do I unsubscribe from this list?",
-you can just hand them the URL.</para>
+and "list-unsubscribe" available.  In addition to these, it was
+traditional to have "list-subscribe" for joining, and "list-owner",
+for reaching the list administrators.  Increasingly, however,
+subscribers manage their list membership via Web-based interfaces, so
+even if the list management software you use sets up these
+administrative addresses, they may go largely unused.</para>
 
 <para>Some mailing list software offers an option to append
 unsubscription instructions to the bottom of every post.  If that
