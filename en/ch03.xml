@@ -560,19 +560,22 @@ have them, wiki pages.</para>
 <title>Mailing Lists / Message Forums</title>
 
 <para>Discussion forums in which participants post and respond to
-messages are the bread and butter of project communications.  Until
-recently, these were usually email-based discussion lists, but the
-distinction between online (usually Web-based) forums and mailing
-lists is, thankfully, slowly disappearing.  Services like <ulink
+messages are the bread and butter of project communications.  For a
+long time these were mainly email-based discussion lists, but the
+distinction between Web-based forums and mailing lists is, thankfully,
+slowly disappearing.  Services like <ulink
 url="https://groups.google.com/" >Google Groups</ulink> (which is not
 itself open source) and <ulink url="http://Gmane.org/"
->Gmane.org</ulink> (which is) have now established a standard for
-cross-accessibility of message forums as mailing lists and vice versa,
-and modern discussion management software like GroupServer and Sympa
-reflects a clear understanding that offering only one access method or
-the other would at this point be a regression.</para>
+>Gmane.org</ulink> (which is) have now established that
+cross-accessibility of message forums as mailing lists and vice versa
+is the minimum bar to meet, and modern discussion management systems
+like GroupServer and Sympa<footnote><para>And perhaps Mailman 3, by
+the time you read this; version 3 has been in development for many
+years, but appears to be in production beta-testing as of late
+2013.</para></footnote> reflect this.</para>
 
-<para>Because of this unification<footnote><para>Which was a long time
+<para>Because of this nearly-completed unification between email lists
+and web-based forums<footnote><para>Which was a long time
 coming&nbsp;&mdash;&nbsp;see <ulink
 url="http://www.rants.org/2008/03/06/thread_theory/"
 >rants.org/2008/03/06/thread_theory</ulink> for more.  And no, I'm not
@@ -581,45 +584,75 @@ use the terms <firstterm>message&nbsp;forum</firstterm> and
 <firstterm>mailing&nbsp;list</firstterm> more or less interchangeably.
 They refer to any kind of message-based forum where posts are linked
 together in threads (topics), people can subscribe, archives of past
-messages can be browsed, etc.</para>
+messages can be browsed, and the forum can be interacted with via
+email or via a web browser.</para>
 
-<para>If a user is exposed to any forum beyond the web pages, it is
-most likely to be one of the project's message forums.  But before she
-experiences the mailing list itself, she will experience the mailing
-list interface&mdash;that is, the mechanism by which she joins
-("subscribes to") the list, or at least browses it as an anonymous
-reader.  This brings us to Rule #1 of message forums:</para>
+<para>If a user is exposed to any channel besides a project's web
+pages, it is most likely to be one of the project's message forums.
+But before she experiences the forum itself, she will experience the
+process of finding the right forums to watch.  Your project should
+have a prominently-placed description of all the available public
+forums, to give newcomers guidance in deciding which ones to browse or
+post to first.  A typical such description might say something like
+this:</para>
 
-<para><emphasis>possv2 30 November 2013: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
+<screen>
+  The mailing lists are the main day-to-day communication channels for
+  the Scanley community.  You don't have to be subscribed to post to a
+  list, but if it's your first time posting (whether you're subscribed
+  or not), your message may be held in a moderation queue until a
+  human moderator has a chance to confirm that the message is not spam.
+  We're sorry for this delay; blame the spammers who make it necessary.
 
-<blockquote>
-   <para><emphasis>Don't try to manage mailing lists by hand&mdash;get
-   list management software.</emphasis></para>
-</blockquote>
+  Scanley has the following lists:
 
-<para>It will be tempting to put this off.  Setting up a real mailing
-list might seem like overkill at first.  Managing small, low-traffic
-lists by hand will seem seductively easy: you just set up a
-subscription address that forwards to you, and when someone asks to be
-subscribed to or unsubscribed from the list, you add or remove their
-email address in some text file that holds all the addresses on the
-list.  What could be simpler?</para>
+  <emphasis role="bold"><literal>users&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
+    Discussion about using Scanley or programming with the Scanley
+    API, suggestions of possible improvements, etc.  You can browse the
+    users@ archives at <emphasis role="bold">&lt;&lt;&lt;link to archive&gt;&gt;&gt;</emphasis> or subscribe here:
+    <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
 
-<para>The trick is that good mailing list management&mdash;which is
-what people have come to expect&mdash;is not simple at all.  It's not
-just about subscribing and unsubscribing users when they request.
-It's also about having searchable archives, moderating to prevent
-spam, offering the mailing list in digest versus message-by-message
-form, providing standard list and project information by means of
-auto-responders, and various other things.  A human being monitoring a
-subscription address can supply only a bare minimum of functionality,
-and even then not as reliably and promptly as software could.</para>
+  <emphasis role="bold"><literal>dev&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
+    Discussion about developing Scanley.  Maintainers and contributors
+    are subscribed to this list.  You can browse the dev@ archives at
+    <emphasis role="bold">&lt;&lt;&lt;link to archive&gt;&gt;&gt;</emphasis> or subscribe here: <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
 
-<para>Modern list management software usually offers at least the
-following features:</para>
+    (Sometimes threads cross over between users@ and dev@, and
+    Scanley's developers will often participate in discussions on both
+    lists.  In general if you're unsure where a question or post
+    should go, start it out on <literal>users@</literal>.  If it should be a
+    development discussion, someone will suggest moving it over to
+    <literal>dev@</literal>.)
+
+  <emphasis role="bold"><literal>announcements&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
+    This is a low-traffic, subscribe-only list.  The Scanley
+    developers post announcements of new releases and occasional other
+    news items of interest to the entire Scanley community here, but
+    followup discussion takes place on users@ or dev@.
+    <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
+
+  <emphasis role="bold"><literal>notifications&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
+    All code commit messages, bug tracker issues, automated
+    build/integration failures, etc, are sent to this list.  Most
+    developers should subscribe: <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
+
+  There is also a non-public list you may need to send to, although
+  only developers are subscribed:
+
+  <emphasis role="bold"><literal>security&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
+    Where the Scanley project receives confidential reports of
+    security vulnerabilities.  Of course, the report will be made
+    public eventually, but only after a fix is released; see our
+    security procedures page for more [...]
+</screen>
+
+<!-- ========================== subsection =========================== -->
+<sect2 id="message-forum-software">
+<title>Forum Management Software</title>
+
+<para>It's worth investing some time in choosing the right mailing
+list management system for your project.  Modern list management
+software offers at least the following features:</para>
 
 <variablelist>
 
@@ -629,10 +662,11 @@ following features:</para>
             <emphasis>promptly</emphasis> get an automated welcome
             message in reply, telling her what she has subscribed
             to, how to interact further with the mailing list
-            software, and (most importantly) how to unsubscribe.  This
-            automatic reply can be customized to contain
-            project-specific information, of course, such as the
-            project's web site, FAQ location, etc.</para>
+            software both via email and via the web, and (most
+            importantly) how to unsubscribe.  This automatic reply may
+            be customized to contain project-specific information, of
+            course, such as the project's web site, FAQ location,
+            etc.</para>
     </listitem>
   </varlistentry>
 
@@ -650,12 +684,12 @@ following features:</para>
 
   <varlistentry><term>Moderation features</term>
     <listitem>
-      <para>To "moderate" is to check posts to make sure they are
-            a)&nbsp;not&nbsp;spam, and b)&nbsp;on&nbsp;topic, before
-            they go out to the entire list.  Moderation necessarily
-            involves humans, but software can do a lot to make it
-            easier.  There is more said about moderation
-            later.</para>
+      <para>To "moderate" is to check posts, especially first-time
+            posts, to make sure they are not spam before they go out
+            to the entire list.  Moderation necessarily involves
+            humans, but software can do a great deal to make it easier
+            on the moderators.  There is more said about moderation in
+            <xref linkend="spam-prevention"/> later in this chapter.</para>
     </listitem>
   </varlistentry>
 
@@ -683,30 +717,26 @@ following features:</para>
   <varlistentry><term>Archiving</term>
     <listitem>
       <para>All posts to the managed lists are stored and made
-            available on the web; alternatively, some mailing list
-            software offers special interfaces for plugging in an
-            external archiving tool such as MHonArc
-            (<ulink url="http://www.mhonarc.org/"
-            >mhonarc.org</ulink>).  As <xref
-            linkend="using-archives"/><phrase output="printed">
-            in <xref linkend="communications"/></phrase>
-            discusses, archiving is crucial.</para>
+            available on the web (see <xref
+            linkend="using-archives"/><phrase output="printed"> in
+            <xref linkend="communications"/></phrase> for more on the
+            importance of public archives).  Usually the archiver is a
+            native part of the message forum system; occasionally, it
+            is a separate tool that needs to be integrated.</para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 
-<para>The point of all this is merely to emphasize that mailing list
-management is a complex problem that has been given a lot of thought,
-and mostly been solved.  You certainly don't need to become an expert
-in it.  But you should be aware that there's always room to learn
-more, and that list management will occupy your attention from time to
-time in the course of running a free software project.  Below we'll
-examine a few of the most common mailing list configuration
-issues.</para>
+<para>The point of the above is partly just to show that forum
+management is a complex problem that has already been given a lot of
+thought, and to some degree been solved.  You don't need to become an
+expert in it, but you will have to learn at least a little bit about
+it, and you should expect list management to occupy your attention
+from time to time in the course of running any free software project.
+Below we'll examine a few of the most common issues.</para>
 
-<!-- ========================== subsection =========================== -->
-<sect2 id="spam-prevention">
+<sect3 id="spam-prevention">
 <title>Spam Prevention</title>
 
 <para>Between when this sentence is written and when it is published,
@@ -726,7 +756,7 @@ mailing list from being a source of new email addresses for spammers'
 harvesters.  The former is more important to your project, so we
 examine it first.</para>
 
-<sect3 id="spam-filtering">
+<sect4 id="spam-filtering">
 <title>Filtering posts</title>
 
 <para>There are three basic techniques for preventing spam posts, and
@@ -743,11 +773,11 @@ tandem:</para>
             usually just a matter of changing a setting in the mailing
             list software's configuration.  But note that posts which
             aren't automatically approved must not be simply
-            discarded.  Instead, they should be passed along for
-            moderation, for two reasons.  First, you want to allow
-            non-subscribers to post.  A person with a question or
+            discarded.  Instead, they should go into a moderation
+            queue, for two reasons.  First, you want to allow
+            non-subscribers to post: a person with a question or
             suggestion should not need to subscribe to a mailing list
-            just to make a single post there.  Second, even
+            just to ask a question there.  Second, even
             subscribers may sometimes post from an address other than
             the one by which they're subscribed.  Email addresses are
             not a reliable method of identifying people, and shouldn't
@@ -755,14 +785,14 @@ tandem:</para>
             </listitem>
 
   <listitem><para><emphasis role="bold">Filter posts through
-            spam-filtering software.</emphasis></para>
+            spam-detection software.</emphasis></para>
 
             <para>If the mailing list software makes it possible (most
             do), you can have posts filtered by spam-filtering
             software.  Automatic spam-filtering is not perfect, and
             never will be, since there is a never-ending arms race
             between spammers and filter writers.  However, it can
-            greatly reduce the amount of spam that gets through to the
+            greatly reduce the amount of spam that makes it through to the
             moderation queue, and since the longer that queue is the
             more time humans must spend examining it, any amount of
             automated filtering is beneficial.</para>
@@ -775,13 +805,11 @@ tandem:</para>
             output="printed"> later in this chapter</phrase>).  List
             software often comes with some built-in spam prevention
             features, but you may want to add some third-party
-            filters.  I've had good experiences with these two:
-            SpamAssassin
+            filters.  I've had good experiences with SpamAssassin
             (<ulink url="http://spamassassin.apache.org/"
-            >spamassassin.apache.org</ulink>)
-            and SpamProbe
+            >spamassassin.apache.org</ulink>) and SpamProbe
             (<ulink url="http://spamprobe.sourceforge.net/"
-            >spamprobe.sourceforge.net</ulink>).  This
+            >spamprobe.sourceforge.net</ulink>), but this
             is not a comment on the many other open source spam
             filters out there, some of which are apparently also quite
             good.  I just happen to have used those two myself and
@@ -793,49 +821,55 @@ tandem:</para>
             virtue of being from a list subscriber, and which make it
             through the spam filtering software, if any, the last stage
             is <firstterm>moderation</firstterm>: the mail is routed
-            to a special address, where a human examines it and
+            to a special holding area, where a human examines it and
             confirms or rejects it.</para>
 
-            <para>Confirming a post takes one of two forms: you can
-            accept the post just this once, or you can tell the list
-            software to allow this and all future posts from the same
-            sender.  You almost always want to do the latter, in order
-            to reduce the future moderation burden.  Details on how
-            to confirm vary from system to system, but it's usually a
-            matter of replying to a special address with the command
-            "accept" (meaning accept just this one post) or "allow"
-            (allow this and future posts).</para>
+            <para>Confirming a post usually takes one of two forms:
+            you can accept the sender's post just this once, or you
+            can tell the system to allow this and all future posts
+            from the same sender.  You almost always want to do the
+            latter, in order to reduce the future moderation
+            burden&nbsp;&mdash;&nbsp;after all, someone who has made a
+            valid post to a forum is unlikely to suddenly turn into a
+            spammer later.</para>
 
-            <para>Rejecting is usually done by simply ignoring the
-            moderation mail.  If the list software never receives
-            confirmation that something is a valid post, then it won't
-            pass that post on to the list, so simply dropping the
-            moderation mail achieves the desired effect.  Sometimes
-            you also have the option of responding with a "reject" or
-            "deny" command, to automatically disapprove future mails
-            from the same sender without even running them through
-            moderation.  There is rarely any point doing this, since
-            moderation is mostly about spam prevention, and spammers
-            tend not to send from the same address twice anyway.</para>
+            <para>Rejecting is done by either marking the item to be
+            discarded, or by explicitly telling the system the message
+            was spam so the system can improve its ability to
+            recognize future spams.  Sometimes
+            you also have the option to automatically discard future
+            mails from the same sender without them ever being held in
+            the moderation queue, but there is rarely any point doing
+            this, since spammers don't send from the same address
+            twice anyway.</para>
+
+            <para>Oddly, most message-forum systems have not yet given
+            the moderation queue administrative interface the
+            attention it deserves, considering how common the task is,
+            so moderation often still requires more clicks and UI
+            gestures than it should.  I hope this situation will
+            improve in the future.  In the meantime, perhaps knowing
+            you're not alone in your frustration will temper your
+            disappointment somewhat.</para>
             </listitem>
 </orderedlist>
 
 <para>Be sure to use moderation <emphasis>only</emphasis> for
-filtering out spams and clearly off-topic messages, such as when
-someone accidentally posts to the wrong mailing list.  The moderation
-system will usually give you a way to respond directly to the sender,
-but don't use that method to answer questions that really belong on
-the mailing list itself, even if you know the answer off the top of
-your head.  To do so would deprive the project's community of an
-accurate picture of what sorts of questions people are asking, and
-deprive them of a chance to answer questions themselves and/or see
-answers from others.  Mailing list moderation is strictly about
-keeping the list free of junk and off-topic emails, nothing
-more.</para>
+filtering out spams, and perhaps for clearly off-topic messages such
+as when someone accidentally posts to the wrong mailing list.
+Although the moderation system may give you a way to respond directly
+to the sender, you should never use that method to answer questions
+that really belong on the mailing list itself, even if you know the
+answer off the top of your head.  To do so would deprive the project's
+community of an accurate picture of what sorts of questions people are
+asking, and deprive people of a chance to answer questions themselves
+and/or see answers from others.  Mailing list moderation is strictly
+about keeping the list free of spam and of wildly off-topic emails,
+nothing more.</para>
 
-</sect3>
+</sect4>
 
-<sect3 id="address-hiding">
+<sect4 id="address-hiding">
 <title>Address hiding in archives</title>
 
 <para>To prevent your mailing lists from being a source of addresses
@@ -896,12 +930,12 @@ still an arms race: by the time you read this, harvesters might well
 have evolved to the point where they can recognize most common forms
 of hiding, and we'll have to think of something else.</para>
 
+</sect4>
+
 </sect3>
 
-</sect2>
-
 <!-- ========================== subsection =========================== -->
-<sect2 id="header-management">
+<sect3 id="header-management">
 <title>Identification and Header Management</title>
 
 <para>List subscribers often want to put mails from the list into a
@@ -1017,10 +1051,10 @@ lines per message, in a harmless location, and it can save you a lot
 of time, by cutting down on the number of people who mail you&mdash;or
 worse, mail the list!&mdash;asking how to unsubscribe.</para>
 
-</sect2>
+</sect3>
 
 <!-- ========================== subsection =========================== -->
-<sect2 id="reply-to">
+<sect3 id="reply-to">
 <title>The Great Reply-to Debate</title>
 
 <para>Earlier, in <xref linkend="avoid-private-discussions"/>, I stressed the
@@ -1175,7 +1209,7 @@ to get entangled in debates about it after that.</para>
 https://mailman.stanford.edu/pipermail/liberationtech/2013-March/007792.html
 -->
 
-<sect3 id="reply-fantasies">
+<sect4 id="reply-fantasies">
 <title>Two fantasies</title>
 
 <para>Someday, someone will get the bright idea to implement a
@@ -1206,12 +1240,12 @@ See also this article about it:
 <ulink url="http://www.perl.com/pub/a/2004/02/05/siesta.html"
 >perl.com/pub/a/2004/02/05/siesta.html</ulink></para></footnote></para>
 
+</sect4>
+
 </sect3>
 
-</sect2>
-
 <!-- ========================== subsection =========================== -->
-<sect2 id="archiving">
+<sect3 id="archiving">
 <title>Archiving</title>
 
 <para>The technical details of setting up mailing list archiving are
@@ -1316,10 +1350,9 @@ actually <emphasis>use</emphasis> the archiver to the project's
 advantage is discussed in later chapters, in particular
 <xref linkend="using-archives"/>.</para>
 
-</sect2>
+</sect3>
 
-<!-- ========================== subsection =========================== -->
-<sect2 id="message-forum-software">
+<sect3 id="message-forum-software">
 <!-- For link compatibility with the old section ID. -->
 <anchor id="mailing-list-software" />
 <title>Mailing List / Message Forum Software</title>
@@ -1421,10 +1454,11 @@ list).</para>
  </listitem>
 </itemizedlist>
 
+</sect3>
+
 </sect2>
 
 </sect1>
-
 
 <!-- ========================== SECTION =========================== -->
 <sect1 id="vc">
