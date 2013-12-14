@@ -91,7 +91,7 @@ because the human community also requires maintenance: it's not always
 immediately obvious how to use these tools to full advantage, and in
 some cases projects have conflicting conventions (for example, see the
 discussion of setting <systemitem>Reply-to</systemitem> headers on
-outgoing mailing list posts, in <xref linkend="mailing-lists"/>).
+outgoing mailing list posts, in <xref linkend="message-forums"/>).
 Everyone involved with the project will need to be encouraged, at the
 right times and in the right ways, to do their part to keep the
 project's information well organized.  The more involved the
@@ -1071,10 +1071,10 @@ importance of making sure discussions stay in public forums, and
 talked about how active measures are sometimes needed to prevent
 conversations from trailing off into private email threads;
 furthermore, this chapter is all about setting up project
-communications software to do as much of the work for you as possible.
+communications software to do as much of the work for people as possible.
 Therefore, if the mailing list management software offers a way to
 automatically cause discussions to stay on the list, you would think
-turning that feature on would be the obvious choice.</para>
+turning on that feature would be the obvious choice.</para>
 
 <para>Well, not quite.  There is such a feature, but it has some
 pretty severe disadvantages.  The question of whether or not to use it
@@ -1119,7 +1119,12 @@ do not have any influence over the IT department), using Reply-to may
 be the only way they have to ensure that responses reach them.  When
 such a person posts to a mailing list that he's not subscribed to, his
 setting of Reply-to becomes essential information.  If the list
-software overwrites it, he may never see the responses to his post.</para>
+software overwrites it<footnote><para>In theory, the list software
+could <emphasis>add</emphasis> the lists's address to whatever
+Reply-to destination were already present, if any, instead of
+overwriting.  In practice, for reasons I don't know, most list
+software overwrites instead of appending.</para></footnote>, he may
+never see the responses to his post.</para>
 
 <para>The second disadvantage has to do with expectations, and in my
 opinion is the most powerful argument against Reply-to munging.  Most
@@ -1150,8 +1155,8 @@ about the Reply-to header.  But authors almost always set Reply-to to
 their own personal address (or rather, their mail software sets it for
 them), and many longtime email users have come to expect that.  In
 fact, when a person deliberately sets Reply-to to some other address,
-such as the list, he usually makes a point of mentioning this in the
-body of the message, so people won't be surprised at what happens when
+such as the list, she usually makes a point of mentioning this in the
+body of her message, so people won't be surprised at what happens when
 they reply.</para>
 
 <para>Because of the possibly severe consequences of this unexpected
@@ -1212,11 +1217,9 @@ when they're having this debate:
 is a "right" answer to this question, and happily participate in many
 lists that <emphasis>do</emphasis> set Reply-to.  The most important
 thing you can do is settle on one way or the other early, and try not
-to get entangled in debates about it after that.</para>
-
-<!-- TODO Note the mis-framing of the vote on Lib Tech in March 2013:
-https://mailman.stanford.edu/pipermail/liberationtech/2013-March/007792.html
--->
+to get entangled in debates about it after that.  When the debate
+re-arises every few years, as it inevitably will, you can point people
+to the archived discussion from last time.</para>
 
 <sect4 id="reply-fantasies">
 <title>Two fantasies</title>
@@ -1266,8 +1269,8 @@ consider these qualities:</para>
 
   <varlistentry><term>Prompt updating</term>
     <listitem>
-      <para>People will often want to refer to an archived post made
-            within the last hour or two.  If possible, the archiver
+      <para>People will often want to refer to an archived message
+            that was posted recently.  If possible, the archiver
             should archive each post instantaneously, so that by the
             time a post appears on the mailing list, it's already
             present in the archives.  If that option isn't available,
@@ -1309,20 +1312,6 @@ consider these qualities:</para>
             However, it's something to look for (or, if you write
             mailing list software, it's a feature to consider
             implementing, please).</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry><term>Backups</term>
-    <listitem>
-      <para>It should be reasonably obvious how to back up the
-            archives, and the restoration recipe should not be too
-            difficult.  In other words, don't treat your archiver as a
-            black box.  You (or someone in your project) should know
-            where it's storing the messages, and how to regenerate the
-            actual archive pages from the message store if it should
-            ever become necessary.  Those archives are precious
-            data&mdash;a project that loses them loses a good part of
-            its collective memory.</para>
     </listitem>
   </varlistentry>
 
@@ -1380,14 +1369,22 @@ list).</para>
 
 <itemizedlist>
  <listitem>
-   <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.list.org/" >list.org</ulink></para>
-   <para>Has a built-in archiver, Pipermail, and has hooks for
-         plugging in external archivers.  Mailman has been the
-         standard for a long time; its administration interfaces,
-         especially for spam moderation and subscription moderation,
-         are showing their age and can be frustrating to use for those
-         accustomed to more modern interfaces.</para> 
+   <para><emphasis role="bold">Google&nbsp;Groups</emphasis>&nbsp;&mdash;&nbsp;<ulink url="http://groups.google.com/" >groups.google.com</ulink></para>
+   <para>Listing Google Groups here was a tough call: the service is
+         not itself open source, and a few of its administrative
+         functions can be a bit hard to use.  However, its advantages
+         make it usually worth considering: your group's archives are
+         always online and searchable; you don't have to worry about
+         scalability, backups, or other run-time infrastructure
+         issues; the moderation and spam-prevention features are
+         pretty good (with the latter constantly being improved, which
+         is important in the neverending spam arms race); and it is
+         easily accessible via both email and web, in ways that are
+         already likely to be familiar to many participants.  These
+         are strong advantages.  If you just want to get your project
+         started, and don't want to spend too much time thinking about
+         what message forum software or service to use, Google Groups
+         is a good default choice.</para> 
  </listitem>
  <listitem>
    <para><emphasis role="bold">GroupServer</emphasis>&nbsp;&mdash;&nbsp;<ulink
@@ -1407,6 +1404,31 @@ list).</para>
          with a variety of dependencies; for example, you can run it
          with sendmail, postfix, qmail or exim as the underlying
          message transfer agent.  Built-in Web-based archiving.</para>
+ </listitem>
+ <listitem>
+   <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
+         url="http://www.list.org/" >list.org</ulink></para>
+   <para>Has a built-in archiver, Pipermail, and has hooks for
+         plugging in external archivers.  Mailman has been the
+         standard for a long time; its administration interfaces,
+         especially for spam moderation and subscription moderation,
+         are showing their age and can be frustrating to use for those
+         accustomed to more modern interfaces.</para> 
+ </listitem>
+ <listitem>
+   <para><emphasis role="emphasis">TBD</emphasis></para>
+   <para><emphasis>possv2 14 December 2013: If you're reading this
+         note, then you've encountered this list while it's undergoing
+         substantial revision; see <ulink
+         url="http://producingoss.com/v2.html"
+         >producingoss.com/v2.html</ulink> for more about these
+         revisions.  The specific change coming here is that this list
+         is being updated, in sync with <ulink
+         url="http://wiki.civiccommons.org/Open_Source_Development_Guidelines"
+         >wiki.civiccommons.org/Open_Source_Development_Guidelines</ulink>.
+         However, that update has already been started, and the
+         information here, especially the items above, should be
+         useful right now.</emphasis></para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
