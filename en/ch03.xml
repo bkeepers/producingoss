@@ -569,10 +569,7 @@ itself open source) and <ulink url="http://Gmane.org/"
 >Gmane.org</ulink> (which is) have now established that
 cross-accessibility of message forums as mailing lists and vice versa
 is the minimum bar to meet, and modern discussion management systems
-like GroupServer and Sympa<footnote><para>And perhaps Mailman 3, by
-the time you read this; version 3 has been in development for many
-years, but appears to be in production beta-testing as of late
-2013.</para></footnote> reflect this.</para>
+like GroupServer and Sympa reflect this.</para>
 
 <para>Because of this nearly-completed unification between email lists
 and web-based forums<footnote><para>Which was a long time
@@ -590,7 +587,7 @@ email or via a web browser.</para>
 <para>If a user is exposed to any channel besides a project's web
 pages, it is most likely to be one of the project's message forums.
 But before she experiences the forum itself, she will experience the
-process of finding the right forums to watch.  Your project should
+process of finding the right forums.  Your project should
 have a prominently-placed description of all the available public
 forums, to give newcomers guidance in deciding which ones to browse or
 post to first.  A typical such description might say something like
@@ -648,37 +645,20 @@ this:</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="message-forum-software">
-<title>Forum Management Software</title>
+<title>Choosing the Right Forum Management Software</title>
 
 <para>It's worth investing some time in choosing the right mailing
-list management system for your project.  Modern list management
-software offers at least the following features:</para>
+list management system for your project.  Modern list management tools
+offer at least the following features:</para>
 
 <variablelist>
 
-  <varlistentry><term>Both email- and web-based subscription</term>
+  <varlistentry><term>Both email- and web-based access</term>
     <listitem>
-      <para>When a user subscribes to a list, she should
-            <emphasis>promptly</emphasis> get an automated welcome
-            message in reply, telling her what she has subscribed
-            to, how to interact further with the mailing list
-            software both via email and via the web, and (most
-            importantly) how to unsubscribe.  This automatic reply may
-            be customized to contain project-specific information, of
-            course, such as the project's web site, FAQ location,
-            etc.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry><term>Subscription in either digest mode or
-                      message-by-message mode</term>
-    <listitem>
-      <para>In digest mode, the subscriber receives one email per day,
-            containing all the list activity for that day.  For people
-            who are following a list loosely, without participating,
-            digest mode is often preferable, because it allows them to
-            scan all the subjects at once and avoid the distraction
-            of emails coming in at random times.</para>
+      <para>Users should be able to subscribe to the forums by email,
+            and read them on the web (where they are organized into
+            conversations or "threads", just as they would be in a
+            mailreader).</para>
     </listitem>
   </varlistentry>
 
@@ -687,30 +667,35 @@ software offers at least the following features:</para>
       <para>To "moderate" is to check posts, especially first-time
             posts, to make sure they are not spam before they go out
             to the entire list.  Moderation necessarily involves
-            humans, but software can do a great deal to make it easier
-            on the moderators.  There is more said about moderation in
-            <xref linkend="spam-prevention"/> later in this chapter.</para>
+            human administrators, but software can do a great deal to
+            make it easier on the moderators.  There is more said
+            about moderation in <xref linkend="spam-prevention"/>
+            later in this chapter.</para>
     </listitem>
   </varlistentry>
 
-  <varlistentry><term>Administrative interface</term>
+  <varlistentry><term>Rich administrative interface</term>
     <listitem>
-      <para>Among other things, this enables an administrator to go in
-            and remove obsolete addresses easily.  This can become
-            urgent when a recipient's address starts sending automatic
-            "I am no longer at this address" replies back to the list
-            in response to every list post.  (Some mailing list
-            software can even detect this by itself and unsubscribe
-            the person automatically.)</para>
+      <para>There are many things administrators need to do besides
+            spam moderation&nbsp;&mdash;&nbsp;for example, removing
+            obsolete addresses, a task that can become urgent when a
+            recipient's address starts sending "I am no longer at this
+            address" bounces back to the list in response to every
+            list post (though some systems can even detect this and
+            unsubscribe the person automatically).  If your forum
+            software doesn't have decent administrative capabilities,
+            you will quickly realize it, and should consider switching
+            to software that does.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry><term>Header manipulation</term>
     <listitem>
-      <para>Many people have sophisticated filtering and replying
-            rules set up in their mail readers.  Mailing list software
-            can add and manipulate certain standard headers for these
-            people to take advantage of (more details below).</para>
+      <para>Some people have sophisticated filtering and replying
+            rules set up in their mail readers, and rely on the forum
+            adding or manipulating certain standard headers.  See 
+            <xref linkend="header-management"/> later in this chapter
+            for more on this.</para>
     </listitem>
   </varlistentry>
 
@@ -728,10 +713,10 @@ software offers at least the following features:</para>
 
 </variablelist>
 
-<para>The point of the above is partly just to show that forum
+<para>The point of the above list is really just to show that forum
 management is a complex problem that has already been given a lot of
 thought, and to some degree been solved.  You don't need to become an
-expert in it, but you will have to learn at least a little bit about
+expert, but you will have to learn at least a little bit about
 it, and you should expect list management to occupy your attention
 from time to time in the course of running any free software project.
 Below we'll examine a few of the most common issues.</para>
@@ -908,7 +893,7 @@ also have to translate the addresses back before using them).
 Sometimes people assert that it's ineffective, because a harvester
 could in theory compensate for any consistent encoding pattern.
 However, note that there is empirical evidence that address hiding
-<emphasis>is</emphasis> effective, see <ulink
+<emphasis>is</emphasis> effective; see <ulink
 url="http://www.cdt.org/speech/spam/030319spamreport.shtml"
 >cdt.org/speech/spam/030319spamreport.shtml</ulink>.</para>
 
@@ -1262,7 +1247,7 @@ See also this article about it:
 
 <para>The technical details of setting up mailing list archiving are
 specific to the software that's running the list, and are beyond the
-scope of this book.  When choosing or configuring an archiver,
+scope of this book.  If you have to choose or configure an archiver,
 consider these qualities:</para>
 
 <variablelist>
@@ -1355,133 +1340,81 @@ advantage is discussed in later chapters, in particular
 <anchor id="mailing-list-software" />
 <title>Mailing List / Message Forum Software</title>
 
-<para>Here are some open source tools for doing list management and
-archiving.  If the site where you're hosting your project already has
-a default setup, then you may not ever have to decide on a tool at
-all.  But if you must install one yourself, these are some
-possibilities.  The ones I have actually used are Mailman, Ezmlm,
-MHonArc, and Hypermail, but that doesn't mean the others aren't good
-too (and of course, there are probably other tools out there that I
-just didn't happen to find, so don't take this as a complete
-list).</para>
-
-<para>Mailing list management software:</para>
+<para>Here are some tools for running message forums.  If the site
+where you're hosting your project already has a default setup, then
+you can just use that and avoid having to choose.  But if you need to
+install one yourself, below are some possibilities.  (Of course, there
+are probably other tools out there that I just didn't happen to find,
+so don't take this as a complete list).</para>
 
 <itemizedlist>
  <listitem>
    <para><emphasis role="bold">Google&nbsp;Groups</emphasis>&nbsp;&mdash;&nbsp;<ulink url="http://groups.google.com/" >groups.google.com</ulink></para>
-   <para>Listing Google Groups here was a tough call: the service is
+   <para>Listing Google Groups first was a tough call.  The service is
          not itself open source, and a few of its administrative
          functions can be a bit hard to use.  However, its advantages
-         make it usually worth considering: your group's archives are
-         always online and searchable; you don't have to worry about
-         scalability, backups, or other run-time infrastructure
-         issues; the moderation and spam-prevention features are
-         pretty good (with the latter constantly being improved, which
-         is important in the neverending spam arms race); and it is
-         easily accessible via both email and web, in ways that are
-         already likely to be familiar to many participants.  These
-         are strong advantages.  If you just want to get your project
-         started, and don't want to spend too much time thinking about
-         what message forum software or service to use, Google Groups
+         are substantial: your group's archives are always online and
+         searchable; you don't have to worry about scalability,
+         backups, or other run-time infrastructure issues; the
+         moderation and spam-prevention features are pretty good (with
+         the latter constantly being improved, which is important in
+         the neverending spam arms race); and Google Groups are easily
+         accessible via both email and web, in ways that are likely to
+         be already familiar to many participants.  These are strong
+         advantages.  If you just want to get your project started,
+         and don't want to spend too much time thinking about what
+         message forum software or service to use, Google Groups
          is a good default choice.</para> 
  </listitem>
  <listitem>
    <para><emphasis role="bold">GroupServer</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.groupserver.org/"/></para>
    <para>Has built-in archiver and integrated Web-based interface.
-         GroupServer is somewhat harder to set up than Mailman, and
-         as of early 2012 required a very specific set of
-         prerequisites, but once you have it running it offers users
-         a better experience.</para>
+         GroupServer is a bit of work to set up, but once you have it
+         up and running it offers users a good experience.
+         You may  able to find free or low-cost hosted GroupServer
+         hosting for your project's forums, for example from <ulink
+         url="https://OnlineGroups.net/" >OnlineGroups.net</ulink>.</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">Sympa</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.sympa.org/" >sympa.org</ulink></para>
    <para>Developed and maintained by a consortium of French
-         universities, and designed to handle both very large lists
-         (> 700000 members) and a large number of lists.  Can work
-         with a variety of dependencies; for example, you can run it
-         with sendmail, postfix, qmail or exim as the underlying
-         message transfer agent.  Built-in Web-based archiving.</para>
+         universities, and designed for a given instance to handle
+         both very large lists (> 700000 members, they claim) and a
+         large number of lists.  Sympa can work with a variety of
+         dependencies; for example, you can run it with sendmail,
+         postfix, qmail or exim as the underlying message transfer
+         agent.  It has built-in Web-based archiving.</para>
  </listitem>
  <listitem>
    <para><emphasis role="bold">Mailman</emphasis>&nbsp;&mdash;&nbsp;<ulink
          url="http://www.list.org/" >list.org</ulink></para>
-   <para>Has a built-in archiver, Pipermail, and has hooks for
-         plugging in external archivers.  Mailman has been the
-         standard for a long time; its administration interfaces,
-         especially for spam moderation and subscription moderation,
-         are showing their age and can be frustrating to use for those
-         accustomed to more modern interfaces.</para> 
- </listitem>
- <listitem>
-   <para><emphasis role="emphasis">TBD</emphasis></para>
-   <para><emphasis>possv2 14 December 2013: If you're reading this
-         note, then you've encountered this list while it's undergoing
-         substantial revision; see <ulink
-         url="http://producingoss.com/v2.html"
-         >producingoss.com/v2.html</ulink> for more about these
-         revisions.  The specific change coming here is that this list
-         is being updated, in sync with <ulink
-         url="http://wiki.civiccommons.org/Open_Source_Development_Guidelines"
-         >wiki.civiccommons.org/Open_Source_Development_Guidelines</ulink>.
-         However, that update has already been started, and the
-         information here, especially the items above, should be
-         useful right now.</emphasis></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">SmartList</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.procmail.org/" >procmail.org</ulink></para>
-   <para>Meant to be used with the Procmail mail processing system.</para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Ecartis</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.ecartis.org/" >ecartis.org</ulink></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">ListProc</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://listproc.sourceforge.net/"
-         >listproc.sourceforge.net</ulink></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Ezmlm</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://cr.yp.to/ezmlm.html" >cr.yp.to/ezmlm.html</ulink></para>
-   <para>Designed to work with the <ulink
-         url="http://cr.yp.to/qmail.html" >Qmail</ulink> mail
-         delivery system.</para> 
+   <para>For many years, Mailman was the standard for open source
+         project mailing lists.  It comes with a built-in archiver,
+         Pipermail, and hooks for plugging in external archivers.
+         Unfortunately, Mailman is showing its age now, and while
+         it is very reliable in terms of message delivery and other
+         under-the-hood functionality, its administrative
+         interfaces&nbsp;&mdash;&nbsp;especially for spam moderation
+         and subscription moderation&nbsp;&mdash;&nbsp;are frustrating
+         for those accustomed to the modern Web.  As of this writing
+         in late 2013, the long-awaited Mailman 3 was still in
+         development but was about to enter beta-testing; by the time
+         you read this, Mailman 3 may be released, and would be worth
+         a look.  It is supposed to solve many of the problems of
+         Mailman 2, and may make Mailman a reasonable choice again.</para> 
  </listitem>
  <listitem>
    <para><emphasis role="bold">Dada</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://mojo.skazat.com/" >mojo.skazat.com</ulink></para>
-   <para>Despite the web site's bizarre attempts to hide the fact,
-         this is free software, released under the GNU General
-         Public License.  It also has a built-in archiver.</para>
- </listitem>
-</itemizedlist>
-
-<para>Mailing list archiving software:</para>
-
-<itemizedlist>
- <listitem>
-   <para><emphasis role="bold">MHonArc</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.mhonarc.org/" >mhonarc.org</ulink></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Hypermail</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.hypermail.org/" >hypermail.org</ulink></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Lurker</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://sourceforge.net/projects/lurker/"
-         >sourceforge.net/projects/lurker</ulink></para>
- </listitem>
- <listitem>
-   <para><emphasis role="bold">Procmail</emphasis>&nbsp;&mdash;&nbsp;<ulink
-         url="http://www.procmail.org/" >procmail.org</ulink></para>
-   <para>Companion software to SmartList, this is a general mail
-         processing system that can, apparently, be configured as an
-         archiver.</para>
+         url="http://dadamailproject.com/" >dadamailproject.com</ulink></para>
+   <para>I've not used Dada myself, but it is actively maintained and,
+         at least from outward appearances, quite spiffy.  Note that
+         to use it for particiatory lists, as opposed to announcement
+         lists, you apparently need to activate the plug-in "Dada
+         Bridge".  Commercial Dada hosting and installation offerings
+         are available, or you can download the code and install it
+         yourself.</para>
  </listitem>
 </itemizedlist>
 
