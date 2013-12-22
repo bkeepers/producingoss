@@ -1470,7 +1470,15 @@ verbs of networked collaboration, and will be used generically
 throughout the rest of this book.  Even if there were no version
 control systems in the world, the problem of change management would
 remain, and these words give us a language for talking about that
-problem concisely.
+problem concisely.</para>
+
+<para>If you're comfortably experienced with version control already,
+you can probably skip this section.  If you're not sure, then read
+through this section at least once.  Certain version control terms
+have gradually changed in meaning since the early 2000s, and you may
+occasionally find people using them in incompatible ways in the same
+conversation.  Being able to detect that phenomenon early in a
+discussion can often be helpful.</para>
 
 <variablelist>
 
@@ -1479,98 +1487,136 @@ problem concisely.
   <listitem><para>To make a change to the project; more formally, to
   store a change in the version control database in such a way that it
   can be incorporated into future releases of the project.  "Commit"
-  can be used as a verb or a noun.  As a noun, it is essentially
-  synonymous with "change".  For example: "I just committed a fix for
-  the server crash bug people have been reporting on Mac OS X.  Jay,
-  could you please review the commit and check that I'm not misusing
-  the allocator there?"</para></listitem>
+  can be used as a verb or a noun.  For example: "I just committed a
+  fix for the server crash bug people have been reporting on Mac OS X.
+  Jay, could you please review the commit and check that I'm not
+  misusing the allocator there?"</para></listitem>
  </varlistentry>
 
- <varlistentry id="vc-vocabulary-log-message">
-  <term><firstterm>log&nbsp;message</firstterm></term>
+ <varlistentry id="vc-vocabulary-push">
+  <term><firstterm>push</firstterm></term>
+  <listitem><para>To publish a commit to a publicly online repository,
+  from which others can incorporate it into their copy of the
+  project's code.  When one says one has pushed a commit, the
+  destination repository is usually implied.  Often it is the
+  project's master repository, the one from which public releases are
+  made, but not always.</para>
+  <para>Note that in some version control systems (e.g., Subversion),
+  commits are automatically and unavoidably pushed up to a
+  predetermined central repository, while in others (e.g., Git,
+  Mercurial) the developer chooses when and where to push commits.
+  Because the former types privilege a particular central repository,
+  they are known as "centralized" version control systems, while the
+  latter are known as "decentralized".  In general, 
+  decentralized systems are the modern trend, especially for open
+  source projects, which benefit from the peer-to-peer relationship
+  between developers' repositories.</para></listitem> 
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-pull">
+  <!-- For link compatibility with the old varlistentry ID. -->
+  <anchor id="vc-vocabulary-update" />
+  <term><firstterm>pull</firstterm>&nbsp;<emphasis>or</emphasis>&nbsp;<firstterm>update</firstterm></term>
+  <listitem><para>To pull others' changes (commits) into your local
+  copy of the project.  When pulling changes from a project's mainline
+  development branch (see <xref linkend="vc-vocabulary-branch"/>),
+  people often say "update" instead of "pull", for example: "Hey, I
+  noticed the indexing code is always dropping the last byte.  Is this
+  a new bug?" "Yes, but it was fixed last week&mdash;try updating and
+  it should go away."</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-commit-message">
+  <!-- For link compatibility with the old varlistentry ID. -->
+  <anchor id="vc-vocabulary-log-message" />
+  <term><firstterm>commit&nbsp;message</firstterm>&nbsp;<emphasis>or</emphasis>&nbsp;<firstterm>log&nbsp;message</firstterm></term>
   <listitem><para>A bit of commentary attached to each commit,
-  describing the nature and purpose of the commit.  Log messages are
-  among the most important documents in any project: they are the
-  bridge between the highly technical language of individual code
-  changes and the more user-oriented language of features, bugfixes,
-  and project progress.  Later in this section, we'll look at ways to
-  distribute log messages to the appropriate audiences; also, <xref
-  linkend="codifying-tradition"/><phrase output="printed"> in
-  <xref linkend="communications"/></phrase> discusses ways to
-  encourage contributors to write concise and useful log
-  messages.</para></listitem>
- </varlistentry>
-
- <varlistentry id="vc-vocabulary-update">
-  <term><firstterm>update</firstterm></term>
-  <listitem><para>To ask that others' changes (commits) be
-  incorporated into your local copy of the project; that is, to bring
-  your copy "up-to-date".  This is a very common operation; most
-  developers update their code several times a day, so that they know
-  they're running roughly the same thing the other developers are
-  running, and so that if they see a bug, they can be pretty sure it
-  hasn't been fixed already.  For example: "Hey, I noticed the
-  indexing code is always dropping the last byte.  Is this a new bug?"
-  "Yes, but it was fixed last week&mdash;try updating, it should go
-  away."</para></listitem>
+  describing the nature and purpose of the commit (both terms are used
+  about equally often; I'll use them interchangeably in this book).
+  Log messages are among the most important documents in any project:
+  they are the bridge between the detailed, highly technical meaning
+  of each individual code changes and the more user-visible world of
+  bugfixes, features and project progress.  Later in this section,
+  we'll look at ways to distribute them to the appropriate audiences;
+  also, <xref linkend="codifying-tradition"/><phrase
+  output="printed"> in <xref linkend="communications"/></phrase>
+  discusses ways to encourage contributors to write concise and useful
+  commit messages.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-repository">
   <term><firstterm>repository</firstterm></term> <listitem><para>A
-  database in which changes are stored.  Some version control systems
-  are centralized: there is a single, master repository, which stores
-  all changes to the project.  Others are decentralized: each
-  developer has his own repository, and changes can be swapped back
-  and forth between repositories arbitrarily.  The version control
-  system keeps track of dependencies between changes, and when it's
-  time to make a release, a particular set of changes is approved for
-  that release.  The question of whether centralized or decentralized
-  is better is one of the enduring holy wars of software development;
-  try not to fall into the trap of arguing about it on your project
-  lists.</para></listitem>
+  database in which changes are stored and from which they are
+  published.  In centralized version control systems, there is a
+  single, master repository, which stores all changes to the project,
+  and each developer works with a kind of latest summary on her own
+  machine.  In decentralized systems, each developer has her own
+  repository, changes can be swapped back and forth between
+  repositories arbitrarily, and the question of which repository is
+  the "master" (that is, the one from which public releases are
+  rolled) is defined purely by social convention, instead of by a
+  combination of social convention and technical
+  enforcement.</para></listitem>
+ </varlistentry>
+
+ <varlistentry id="vc-vocabulary-clone">
+  <term><firstterm>clone</firstterm>&nbsp;<emphasis>(see also
+  <xref linkend="vc-vocabulary-checkout">"checkout"</xref>)</emphasis></term>
+  <listitem><para>To obtain one's own development repository by making
+  a copy of the project's central repository.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-checkout">
   <term><firstterm>checkout</firstterm></term>
-  <listitem><para>The process of obtaining a copy of the project from
-  a repository.  A checkout usually produces a directory tree called a
-  "working copy" (see below), from which changes may be committed back
-  to the original repository.  In some decentralized version control
-  systems, each working copy is itself a repository, and changes can
-  be pushed out to (or pulled into) any repository that's willing
-  to accept them.</para></listitem>
+  <listitem><para>When used in discussion, "checkout" usually means
+  something like "clone", except that centralized systems don't really
+  clone the full repository, they just obtain a <xref
+  linkend="vc-vocabulary-working-copy">working copy</xref>.  When
+  decentralized systems use the word "checkout", they also mean the
+  process of obtaining working files from a repository, but since the
+  repository is local in that case, the user experience is quite
+  different because the network is not involved.</para>
+  <para>In the centralized sense, a checkout produces a directory tree
+  called a "working copy" (see below), from which changes may be
+  sent back to the original repository.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-working-copy">
-  <term><firstterm>working copy</firstterm></term>
+  <anchor id="vc-vocabulary-working-files" />
+  <term><firstterm>working copy</firstterm>&nbsp;<emphasis>or</emphasis>&nbsp;<firstterm>working files</firstterm></term>
   <listitem><para>A developer's private directory tree containing the
   project's source code files, and possibly its web pages or other
-  documents.  A working copy also contains a little bit of metadata
-  managed by the version control system, telling the working copy what
-  repository it comes from, what "revisions" (see below) of the files
-  are present, etc.  Generally, each developer has his own working
-  copy, in which he makes and tests changes, and from which he
-  commits.</para></listitem>
+  documents, in a form that allows the developer to edit them.  A
+  working copy also contains some version control metadata saying what
+  repository it comes from, what branch it represents, and a few other
+  things.  Typically, each developer has her own working copy, from
+  which she edits, tests, commits, pulls, pushes,
+  etc.</para>
+  <para>In decentralized systems, working copies and repositories are
+  usually colocated anyway, so the term "working copy" is less often
+  used.  Developers instead tend to say "my clone" or "my copy" or
+  sometimes "my fork".</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-revision">
   <term><firstterm>revision</firstterm>,
         <firstterm>change</firstterm>,
-        <firstterm>changeset</firstterm></term>
-  <listitem><para>A "revision" is usually one specific incarnation of
-  a particular file or directory.  For example, if the project starts
-  out with revision 6 of file F, and then someone commits a change to
-  F, this produces revision 7 of F.  Some systems also use
-  "revision", "change", or "changeset" to refer to a set of changes
-  committed together as one conceptual unit.</para> 
+        <firstterm>changeset</firstterm>,
+        or (again) <emphasis>commit</emphasis></term>
+  <listitem><para>A "revision" is a precisely specified incarnation of
+  the project at a point in time, or of a particular file or directory
+  in the project.  These days, most systems also use "revision",
+  "change", "changeset", or "commit" to refer to a set of changes
+  committed together as one conceptual unit, if multiple files were
+  involved, though colloquially most people would refer to changeset
+  12's effect on file F as "revision 12 of F".</para>
 
   <para>These terms occasionally have distinct technical meanings in
   different version control systems, but the general idea is always
   the same: they give a way to speak precisely about exact points in
   time in the history of a file or a set of files (say, immediately
   before and after a bug is fixed).  For example: "Oh yes, she fixed
-  that in revision 10" or "She fixed that in revision 10 of
-  foo.c."</para>
+  that in revision 10" or "She fixed that in commit fa458b1fac".</para>
 
   <para>When one talks about a file or collection of files without
   specifying a particular revision, it is generally assumed that one
@@ -1585,7 +1631,9 @@ problem concisely.
   of a version of a piece of software&mdash;that is, the release or
   edition number, as in "Version 1.0".  However, since the phrase
   "version control" is already standard, I will continue to use it as
-  a synonym for "revision control" and "change control".</para>
+  a synonym for "revision control" and "change control".  Sorry.  One
+  of open source's most endearing characteristics is that it has two
+  words for everything, and one word for every two things.</para>
   </sidebar>
 
  <varlistentry id="vc-vocabulary-diff">
@@ -1594,57 +1642,58 @@ problem concisely.
   which lines were changed and how, plus a few lines of surrounding
   context on either side.  A developer who is already familiar with
   some code can usually read a diff against that code and understand
-  what the change did, and even spot bugs.</para></listitem>
+  what the change did, and often even spot bugs.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-tag">
-  <term><firstterm>tag</firstterm></term>
-  <listitem><para>A label for a particular collection of files at
-  specified revisions.  Tags are usually used to preserve
-  interesting snapshots of the project.  For example, a tag is usually
-  made for each public release, so that one can obtain, directly from
-  the version control system, the exact set of files/revisions
-  comprising that release.  Common tag names are things like
-  <literal>Release_1_0</literal>, <literal>Delivery_00456</literal>,
+  <term><firstterm>tag</firstterm>&nbsp;<emphasis>or</emphasis>&nbsp;<firstterm>snapshot</firstterm></term>
+  <listitem><para>A label for a particular state of the project at a
+  point in time.  Tags are generally used to mark interesting
+  snapshots of the project.  For example, a tag is usually made for
+  each public release, so that one can obtain, directly from the
+  version control system, the exact set of files/revisions comprising
+  that release.  Tag names are often things like
+  <literal>Release_1_0</literal>, <literal>Delivery_20130630</literal>,
   etc.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-branch">
   <term><firstterm>branch</firstterm></term>
   <listitem><para>A copy of the project, under version control but
-  isolated, so that changes made to the branch don't affect the rest
-  of the project, and vice versa, except when changes are
-  deliberately "merged" from one side to the other (see below).
+  isolated so that changes made to the branch don't affect other
+  branches of the project, and vice versa, except when changes are
+  deliberately "merged" from one branch to another (see below).
   Branches are also known as "lines of development".  Even when a
   project has no explicit branches, development is still considered
   to be happening on the "main branch", also known as the "main line"
-  or "<firstterm>trunk</firstterm>".</para>
+  or "<firstterm>trunk</firstterm>" or
+  "<firstterm>master</firstterm>".</para>
 
-  <para>Branches offer a way to isolate different lines of development
-  from each other.  For example, a branch can be used for experimental
-  development that would be too destabilizing for the main trunk.  Or
-  conversely, a branch can be used as a place to stabilize a new
-  release.  During the release process, regular development would
-  continue uninterrupted in the main branch of the repository;
-  meanwhile, on the release branch, no changes are allowed except
-  those approved by the release managers.  This way, making a release
-  needn't interfere with ongoing development work.  See <xref
+  <para>Branches offer a way to keep different lines of development
+  from interfering with each other.  For example, a branch can be used
+  for experimental development that would be too destabilizing for the
+  main trunk.  Or conversely, a branch can be used as a place to
+  stabilize a new release.  During the release process, regular
+  development would continue uninterrupted in the main branch of the
+  repository; meanwhile, on the release branch, no changes are allowed
+  except those approved by the release managers.  This way, making a
+  release needn't interfere with ongoing development work.  See <xref
   linkend="branches"/><phrase output="printed"> later in this
   chapter</phrase> for a more detailed discussion of
   branching.</para></listitem>
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-merge">
-  <term><firstterm>merge (a.k.a. port)</firstterm></term>
+  <anchor id="vc-vocabulary-port" />
+  <term><firstterm>merge</firstterm>&nbsp;<emphasis>or</emphasis>&nbsp;<firstterm>port</firstterm></term>
   <listitem><para>To move a change from one branch to another.  This
   includes merging from the main trunk to some other branch, or vice
   versa.  In fact, those are the most common kinds of merges; it is
-  rare to port a change between two non-main branches.  See <xref
-  linkend="vc-singularity"/> for more about this kind of
-  merging.</para>
+  less common to port a change between two non-trunk branches.  See
+  <xref linkend="vc-singularity"/> for more on change porting.</para>
 
-  <para>"Merge" has a second, related meaning: it is what the version
-  control system does when it sees that two people have changed the
+  <para>"Merge" has a second, related meaning: it is what some version
+  control systems do when they see that two people have changed the
   same file but in non-overlapping ways.  Since the two changes do not
   interfere with each other, when one of the people updates their copy
   of the file (already containing their own changes), the other
@@ -1683,16 +1732,14 @@ problem concisely.
   <firstterm>copy-modify-merge</firstterm> model.  An excellent
   in-depth explanation and comparison of the two models may be found
   at <ulink
-  url="http://svnbook.red-bean.com/svnbook-1.0/ch02s02.html"
-  >svnbook.red-bean.com/svnbook-1.0/ch02s02.html</ulink>.  In
+  url="http://svnbook.red-bean.com/nightly/en/svn.basic.version-control-basics.html#svn.basic.vsn-models"
+  >svnbook.red-bean.com/nightly/en/svn.basic.version-control-basics.html#svn.basic.vsn-models</ulink>.  In
   general, the copy-modify-merge model is better for open source
   development, and all the version control systems discussed in this
   book support that model.</para></listitem>
  </varlistentry>
 
 </variablelist>
-
-</para>
 
 </sect2>
 
