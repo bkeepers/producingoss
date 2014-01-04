@@ -1,4 +1,4 @@
-LANGUAGES=ta
+LANGUAGES=de en es fr he ja ml pl pt-pt pt-br ca da fa id ru it gr ar gl hu nl ro vi zh ta
 
 default: all
 
