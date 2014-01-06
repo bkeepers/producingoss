@@ -288,10 +288,8 @@ desensitized to weaknesses in introductory
 pages!&nbsp;&mdash;&nbsp;then you can divide it up however seems
 best.</para>
 
-<para>TBD: working here</para>
-
-<para>There is not much to say about setting up the project web site
-from a technical point of view: setting up a web server and writing
+<para>From a technical point of view there is not much to say about
+setting up the project web site.  Configuring a web server and writing
 web pages are fairly simple tasks, and most of the important things to
 say about layout and arrangement were covered in the previous chapter.
 The web site's main function is to present a clear and welcoming
@@ -302,37 +300,28 @@ find someone who does and is willing to help out.  Nonetheless, to
 save time and effort, people often prefer to use one of the canned
 hosting sites.</para>
 
-<para>TODO: talk about when users <emphasis>are</emphasis> developers
-(e.g., all those JS projects on GitHub).</para>
-
 <sect2 id="canned-hosting">
 <title>Canned Hosting</title>
 
-<!-- poss2 todo: These days canned hosting sites have APIs for many
-     things (e.g., github issue tracker, the fact that wikis tend to
-     be under version control, google code's commit hooks, etc).  So
-     what we have is usually a central repository + bug tracker, and
-     maybe a wiki, and then a bunch of satellite services (buildbots,
-     often mailing lists though SourceForge has them natively, IRC +
-     bots, demo sandboxes, etc).  Describe this universe; help people
-     understand that the complexity of choices before them is the same
-     one shared by everyone and that there are settled solutions now.
-
-     GitHub, Launchpad, Gitorious, Google Code, BitBucket,
-     SourceForge, maybe a few others.  Point out that Gitorious and
-     Launchpad are themselves free software. -->
+<para>A <firstterm>canned hosting</firstterm> site is an online
+service that offers some or all of the online collaboration tools
+needed to run a free software project.  At a minimal, a canned hosting
+site offers public version control repositories and bug tracking; most
+also offer wiki space, many offer mailing list hosting too, and some
+offer continuous integration testing and other services.</para>
 
 <para>There are two main advantages to using a canned site.  The first
-is server capacity and bandwidth: their servers are beefy boxes sitting
-on really fat pipes.  No matter how successful your project gets,
-you're not going to run out of disk space or swamp the network
+is server capacity and bandwidth: their servers are beefy boxes
+sitting on really fat pipes.  No matter how successful your project
+gets, you're not going to run out of disk space or swamp the network
 connection.  The second advantage is simplicity.  They have already
-chosen a bug tracker, a version control system, a mailing list manager,
-an archiver, and everything else you need to run a site.  They've
-configured the tools, and are taking care of backups for all the data
-stored in the tools.  You don't need to make many decisions.  All you
-have to do is fill in a form, press a button, and suddenly you've got
-a project web site.</para>
+chosen a bug tracker, a version control system, perhaps discussion
+forum software, and everything else you need to run a project.
+They've configured the tools, arranged single-sign-on authentication
+where appropriate, are taking care of backups for all the data stored
+in the tools, etc.  You don't need to make many decisions.  All you
+have to do is fill in a registration form, press a button, and
+suddenly you've got a project development web site.</para>
 
 <para>These are pretty significant benefits.  The disadvantage, of
 course, is that you must accept <emphasis>their</emphasis> choices and
@@ -351,169 +340,111 @@ generated.  As explained in
 earlier in this chapter</phrase>,
 you wouldn't want to version the generated formats, only the master
 file.  But when your web site is hosted on someone else's server, it
-may be impossible to set up a custom hook to regenerate the online
-HTML version of the FAQ whenever the master file is changed.  The only
-workaround is to version the generated formats too, so that they show
-up on the web site.</para>
+may be difficult to set up a custom hook to regenerate the online
+HTML version of the FAQ whenever the master file is changed.</para>
 
-<para>There can be larger consequences as well.  You may not have as
-much control over presentation as you would wish.  Some of the canned
-hosting sites allow you to customize your web pages, but the site's
-default layout usually ends up showing through in various awkward
-ways.  For example, some projects that host themselves at SourceForge
-have completely customized home pages, but still point developers to
-their "SourceForge page" for more information.  The SourceForge page
-is what would be the project's home page, had the project not used a
-custom home page.  The SourceForge page has links to the bug tracker,
-the CVS repository, downloads, etc.  Unfortunately, a SourceForge page
-also contains a great deal of extraneous noise.  The top is a banner
-ad, often an animated image.  The left side is a vertical arrangement
-of links of little relevance to someone interested in the project.
-The right side is often another advertisement.  Only the center of the
-page is devoted to truly project-specific material, and even that is
-arranged in a confusing way that often makes visitors unsure of what
-to click on next.</para>
-
-<para>Behind every individual aspect of SourceForge's design, there is
-no doubt a good reason&mdash;good from SourceForge's point of view,
-such as the advertisements.  But from an individual project's point of
-view, the result can be a less-than-ideal web page.  I don't mean to
-pick on SourceForge; similar concerns apply to many of the canned
-hosting sites.  The point is that there's a tradeoff.  You get relief
-from the technical burdens of running a project site, but only at the
-price of accepting someone else's way of running it.</para>
-
-<para>Only you can decide whether canned hosting is best for your
-project.  If you choose a canned site, leave open the option of
-switching to your own servers later, by using a custom domain name for
-the project's "home address".  You can forward the URL to the canned
-site, or have a fully customized home page at the public URL and hand
-users off to the canned site for sophisticated functionality.  Just
-make sure to arrange things such that if you later decide to use a
-different hosting solution, the project's address doesn't need to
+<para>If you choose a canned site, leave open the option of switching
+to a different site later, by using a custom domain name as the
+project's development home address.  You can forward that URL to the
+canned site, or have a fully customized development home page at the
+main URL and link to the canned site for specific functionality.  Just
+try to arrange things such that if you later decide to use a different
+hosting solution, the project's main address doesn't need to
 change.</para>
+
+<para>And if you're not sure whether to use canned hosting, then you
+should probably use canned hosting.  These sites have integrated their
+services in myriad ways (just one example: if a commit mentions a bug
+ticket number using a certain format, then people browsing that commit
+later will find that it automatically links to that ticket), ways that
+would be laborious for you to reproduce, especially if it's your first
+time running an open source project.  The universe of possible
+configurations of collaboration tools is vast and complex, but the
+same set of choices has faced everyone running an open source project
+and there are some settled solutions now.  Each of the canned hosting
+sites implements a reasonable subset of that solution space, and
+unless you have reason to believe you can do better, your project will
+probably run best just using one of those sites.</para>
 
 <sect3 id="canned-hosting-choosing">
 <title>Choosing a canned hosting site</title>
 
-<!-- TODO Check that this is still true in 2013, update "2011" below. -->
+<para>There are now so many sites providing free-of-charge canned
+hosting for projects released under open source licenses that there is
+not space here to review the field.</para>
 
-<para>There are now (as of early 2011) an established Big Three of
-free canned hosting sites.  All three offer free-of-charge hosting for
-projects released under open source licenses.  They provide version
-control, bug tracking, and wikis (some also offer other features, such
-as binary downloads):</para>
+<para>So I'll make this easy: choose <a href="http://github.com/"
+>GitHub</a>.  It's by far the most popular and appears set to stay
+that way, or even grow in dominance, for some years to come.  It has a
+good set of features and integrations.  Many developers are already
+familiar with GitHub and have an account there.  It has an <ulink
+url="http://develop.github.com/" >API</ulink> for interacting
+programmatically with project resources, and while it does not
+currently offer mailing lists, there are plenty of other places you
+can host those, such as <ulink url="http://groups.google.com/" >Google
+Groups</ulink>.</para>
 
-<itemizedlist>
-  <listitem>
-     <para><ulink url="http://github.com/"
-           >GitHub</ulink>
-     Version control is Git only&mdash;but if you're using
-     Git anyway, this is probably the right place for your project.
-     GitHub has become the center of the universe for Git projects,
-     and has integrated all their services with Git.  GitHub also
-     offers a full <ulink url="http://develop.github.com/"
-     >API</ulink> for interacting programmatically with their service.
-     It does not provide mailing lists; however, they are available so
-     many other places that it shouldn't matter much.
-     </para>
-  </listitem>
-  <listitem>
-     <para><ulink url="http://code.google.com/hosting/"
-           >Google Code Hosting</ulink>
-     Offers Subversion and Mercurial version control systems (no Git,
-     at least not yet), wikis, a downloads area, and a rather nice bug
-     tracker.  It also comes with APIs: the version control systems
-     are naturally their own API; the issue tracker has 
-     <ulink url="http://code.google.com/p/support/wiki/IssueTrackerAPI"
-     >its own API</ulink>; the wiki content is offered <ulink
-     url="http://code.google.com/p/support/wiki/WikiFAQ#How_do_I_edit_a_wiki_page_directly_through_subversion?"
-     >directly in the version control system</ulink> and is thus
-     editable by scripts; and the downloads area offers <ulink
-     url="http://code.google.com/p/support/wiki/ScriptedUploads"
-     >scripted uploads</ulink>, in other words, an API.
-     Mailing lists are provided via <ulink
-     url="http://groups.google.com/">Google Groups</ulink> (then
-     again, the same statement could be made of any hosting site).
-     </para>
-  </listitem>
-  <listitem>
-     <para><ulink url="http://sourceforge.net/"
-           >SourceForge</ulink>
-     This is the oldest, and by some measures still the largest, of
-     the free hosting sites.  It provides all the features the others
-     do, and its interface is quite usable; however, some people find
-     the advertising blocks on project pages to be distracting.  It
-     appears to be the only one of the Big Three that offers all the
-     major version control systems (Git, Subversion, Mercurial, and
-     CVS) right now.  SourceForge also provides its own mailing lists,
-     though you could of course use some other mailing list service.
-     </para>
-  </listitem>
-</itemizedlist>
-
-<para>A few organizations, for example the <ulink
-url="http://www.apache.org/">Apache Software Foundation</ulink>, also
-offer free hosting to open source projects that fit well with their
-missions and their community of existing projects.</para>
-
-<para>If you're in doubt about where to host, I strongly recommend
-just going with one of the big three.  If you want even more guidance:
-use GitHub if your project uses Git for version control, otherwise use
-Google Code Hosting.  SourceForge is also perfectly acceptable, but at
-this point it has no significant advantage over the others, and the
-advertising can be annoying.</para>
-
-<para>Many people have observed that free project hosting sites
-themselves often do not make all the software that runs the site
-available under a free software license (some that do are <ulink
-url="http://launchpad.net" >Launchpad</ulink>, <ulink
-url="http://gitorious.org/" >Gitorious</ulink> and <ulink
-url="http://savannah.gnu.org/" >GNU Savannah</ulink>).  My feeling is
-that while it would be ideal to have access to all the code that runs
-the site, the crucial thing is to have a way export your data, and to
-be able to interact with your data in an automated way.  Such a site
-can never truly lock you in, and will even be extensible to a degree,
-through the programmatic interface.  While there is some value in
-having all the code that runs a hosting site available under open
-source terms, in practice, the demands of actually deploying that code
-in a production environment are prohibitive for most users.  These
-sites need multiple servers, customized networks, and full-time staffs
-to keep them running; merely having the code would not be sufficient
-to duplicate or "fork" the service anyway.  The main thing is just to
-make sure your data isn't trapped.</para>
-
-<para>Wikipedia has a thorough <ulink
+<para>If you're not convinced by GitHub (for example because your
+project uses, say, Mercurial instead of Git), but you aren't sure
+where to host, take a look at Wikipedia's thorough <ulink
 url="http://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities"
->comparison of hosting facilities</ulink>; it's the first place to
-look for up-to-date, comprehensive information on open source project
-hosting options.  Haggen So also did a thorough evaluation of various
-canned hosting sites, as part of the research for his Ph.D. thesis,
-<citetitle>Construction of an Evaluation Model for Free/Open Source
-Project Hosting (FOSPHost) sites</citetitle>.  Although it was done in
-2005, he appears to have updated it as recently as 2007, and his
-criteria are likely to remain valid for a long time.  His results are
-at <ulink url="http://www.ibiblio.org/fosphost/"
->ibiblio.org/fosphost/</ulink>, and see especially
-the very readable comparison chart at <ulink
-url="http://www.ibiblio.org/fosphost/exhost.htm"
->ibiblio.org/fosphost/exhost.htm</ulink>.</para>
-
-<para><emphasis>possv2 24 March 2013: If you're reading this note, then
-you've encountered this chapter while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
-
-<para>poss2 todo: Note the possibility of mixing services from
-different canned hosting sites.  Also, talk about the importance of
-APIs for an exit export.  Mention the Google Groups conundrum.  Maybe
-replace some of the above commentary with a reference to <xref
-linkend="canned-hosting-sites"/>.</para>
+>comparison of open source software hosting facilities</ulink>; it's
+the first place to look for up-to-date, comprehensive information on
+open source project hosting options.  Currently the two most popular
+other hosting sites are <ulink url="http://code.google.com/hosting/"
+>Google Code Hosting</ulink>, <ulink url="http://sourceforge.net/"
+>SourceForge</ulink>, but consult the Wikipedia page before making a
+decision.</para>
 
 </sect3>
 
-<para>TODO: talk about single-sign-on and when/how it might be
-important.</para>
+<sect3 id="hosting-on-freedom">
+<title>Hosting on fully open source infrastructure</title>
+
+<para>Although all the canned hosting sites use plenty of free
+software in their stack, most of them also wrote their own proprietary
+software to glue it all together, which means the hosting environment
+is not easily reproducible by others.  For example, while Git itself
+is free software, GitHub is a hosted service running partly with
+proprietary software&nbsp;&mdash;&nbsp;if you leave GitHub, you can't
+take it with you, at least not all of it.</para>
+
+<para>Some projects prefer a canned hosting site that runs an entirely
+free software infrastructure and that could, in theory, be reproduced
+independently were that ever to become necessary.  Fortunately, there
+are such sites, the most well-known being <ulink
+url="http://gitorious.org/" >Gitorious</ulink>, <ulink
+url="http://savannah.gnu.org/" >GNU Savannah</ulink>, and <ulink
+url="http://gitlab.com/" >GitLab</ulink> (as of this writing in early
+2014).  Furthermore, any service that offers hosting of the <ulink
+url="http://redmine.org/" >Redmine</ulink> or <ulink
+url="http://trac.edgewall.org" >Trac</ulink> code collaboration
+platforms effectively offers fully freedom-preserving project hosting,
+because those platforms include most of the features needed to run an
+open source project; some companies offer that kind of commercial
+platform hosting with a zero-cost or very cheap rate for open source
+projects.</para>
+
+<para>Should you host your project on fully open source
+infrastructure?  While it would be ideal to have access to all the
+code that runs the site, my opinion is that the crucial thing is to
+have a way to export project data, and to be able to interact with the
+data in automatable ways.  A site that meets these criteria can never
+truly lock you in, and will even be extensible, to some degree,
+through its programmatic interface.  While there is some value in
+having all the code that runs a hosting site available under open
+source terms, in practice the demands of actually deploying that code
+in a production environment are prohibitive for most projects anyway.
+These sites need multiple servers, customized networks, and full-time
+staffs to keep them running; merely having the code would not be
+sufficient to duplicate or "fork" the service anyway.  The main thing
+is just to make sure your data isn't trapped.</para>
+
+<para>Of course, all the above applies only to the servers.  Your
+project should never require participants to run proprietary
+collaboration software on their own machines.</para>
+
+</sect3>
 
 <sect3 id="anonymity">
 <title>Anonymity and involvement</title>
@@ -544,8 +475,9 @@ tracker.  She may simply decide not to file the bug at all.</para>
 disadvantages.  But if you can choose which actions can be done
 anonymously, make sure not only that <emphasis>all</emphasis>
 read-only actions are permitted to non-logged-in visitors, but also
-some data entry actions, especially in the bug tracker and, if you
-have them, wiki pages.</para>
+some data entry actions, especially in the bug tracker and wiki pages
+(though anti-spam techniques, such as captchas, may of course be
+necessary).</para>
 
 </sect3>
 
@@ -644,7 +576,7 @@ this:</para>
 </screen>
 
 <!-- ========================== subsection =========================== -->
-<sect2 id="message-forum-software">
+<sect2 id="message-forum-choosing">
 <title>Choosing the Right Forum Management Software</title>
 
 <para>It's worth investing some time in choosing the right mailing
@@ -1748,52 +1680,38 @@ discussion can often be helpful.</para>
 <sect2 id="vc-choosing">
 <title>Choosing a Version Control System</title>
 
-<para>As of this writing, the two most popular version control systems
-in the free software world are <firstterm>Concurrent Versions
-System</firstterm> (<firstterm>CVS</firstterm>,
-<ulink url="http://cvs.nongnu.org/" >cvs.nongnu.org</ulink>)
-and <firstterm>Subversion</firstterm> (<firstterm>SVN</firstterm>,
-<ulink url="http://subversion.apache.org/"
->subversion.apache.org</ulink>).</para>
+<para>If you don't already have a strong opinion about which version
+control system your project should use, then choose Git (<ulink
+url="http://git-scm.com/" >git-scm.com</ulink>), and host your
+project's repositories at <ulink url="http://github.com/"
+>GitHub.com</ulink>, which offers unlimited free hosting for open
+source projects.</para>
 
-<para>CVS has been around for a long time.  Most experienced
-developers are already familiar with it, it does more or less what you
-need, and since it's been popular for a long time, you probably won't
-end up in any long debates about whether or not it was the right
-choice.  CVS has some disadvantages, however.  It doesn't provide an
-easy way to refer to multi-file changes; it doesn't allow you to
-rename or copy files under version control (so if you need to
-reorganize your code tree after starting the project, it can be a real
-pain); it has poor merging support; it doesn't handle large files or
-binary files very well; and some operations are slow when large
-numbers of files are involved.</para>
+<para>Git is by now the <foreignphrase>de facto</foreignphrase>
+standard in the open source world, as is hosting one's repositories at
+GitHub.  Because so many developers are already comfortable with that
+combination, choosing it sends the signal that your project is ready
+for participants.  But Git-at-GitHub is not the only viable
+combination.  Two other reasonable choices of version control system
+are <ulink url="http://mercurial.selenic.com/" >Mercurial</ulink> and
+<ulink url="http://subversion.apache.org/" >Subversion</ulink>.
+Mercurial and Git are both decentralized systems, whereas Subversion
+is centralized.  All three are offered at many different free hosting
+services; some services even support more than one of them (though
+GitHub only supports Git, as its name suggests).  While some projects
+host their repositories on their own servers, most just put their
+repositories on one of the free hosting services, as described in
+<xref linkend="canned-hosting-sites"/>.</para>
 
-<para>None of CVS's flaws is fatal, and it is still quite popular.
-However, in the last few years the more recent Subversion has been
-gaining ground, especially in newer
-projects.<footnote><para>See <ulink url="http://cia.vc/stats/vcs"
->cia.vc/stats/vcs</ulink> and
-<ulink
-url="http://subversion.tigris.org/svn-dav-securityspace-survey.html"
->subversion.tigris.org/svn-dav-securityspace-survey.html</ulink>
-for evidence of this growth.</para></footnote>.  If you're starting a
-new project, I recommend Subversion.</para>
-
-<para>On the other hand, since I'm involved in the Subversion project,
-my objectivity might reasonably be questioned.  And in the last few
-years a number of new open-source version control systems have
-appeared.  <xref linkend="vc-systems"/> lists all the ones I know of,
-in rough order of popularity.  As the list makes clear, deciding on a
-version control system could easily become a lifelong research
-project.  Possibly you will be spared the decision because it will be
-made for you by your hosting site.  But if you must choose, consult
-with your other developers, ask around to see what people have
-experience with, then pick one and run with it.  Any stable,
-production-ready version control system will do; you don't have to
-worry too much about making a drastically wrong decision.  If you
-simply can't make up your mind, then go with Subversion.  It's fairly
-easy to learn, and is likely to remain a standard for at least a few
-years.</para>
+<para>There isn't space here for an in-depth exploration of whether
+you should consider using something other than Git.  If you have a
+reason to do so, then you already know what that reason is.  If you
+don't, then just use Git (and probably on GitHub).  If you find
+yourself using something other than Git, Mercurial, or Subversion, ask
+yourself why&nbsp;&mdash;&nbsp;because whatever that other version
+control system is, most other developers won't be familiar with it,
+and it likely has a smaller and less stable community of support
+around it than the big three do.</para>
 
 </sect2>
 
