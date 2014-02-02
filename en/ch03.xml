@@ -1702,15 +1702,15 @@ host their repositories on their own servers, most just put their
 repositories on one of the free hosting services, as described in
 <xref linkend="canned-hosting-sites"/>.</para>
 
-<para>There isn't space here for an in-depth exploration of whether
-you should consider using something other than Git.  If you have a
-reason to do so, then you already know what that reason is.  If you
-don't, then just use Git (and probably on GitHub).  If you find
-yourself using something other than Git, Mercurial, or Subversion, ask
-yourself why&nbsp;&mdash;&nbsp;because whatever that other version
-control system is, most other developers won't be familiar with it,
-and it likely has a smaller and less stable community of support
-around it than the big three do.</para>
+<para>There isn't space here for an in-depth exploration of why you
+might choose something other than Git.  If you have a reason to do so,
+then you already know what that reason is.  If you don't, then just
+use Git (and probably on GitHub).  If you find yourself using
+something other than Git, Mercurial, or Subversion, ask yourself
+why&nbsp;&mdash;&nbsp;because whatever that other version control
+system is, most other developers won't be familiar with it, and it
+likely has a smaller and less stable community of support around it
+than the big three do.</para>
 
 </sect2>
 
@@ -1720,8 +1720,8 @@ around it than the big three do.</para>
 <title>Using the Version Control System</title>
 
 <para>The recommendations in this section are not targeted toward a
-particular version control system, and should be simple to implement
-in any of them.  Consult your specific system's documentation for
+particular version control system, and should be implementable in any
+of them.  Consult your specific system's documentation for
 details.</para>
 
 <sect3 id="version-everything">
@@ -1737,11 +1737,11 @@ archived, not versioned.  For example, an email, once posted, does not
 change; therefore, versioning it wouldn't make sense (unless it becomes
 part of some larger, evolving document).</para>
 
-<para>The reason versioning everything together in one place is
-important is so people only have to learn one mechanism for submitting
-changes.  Often a contributor will start out making edits to the web
-pages or documentation, and move to small code contributions later,
-for example.  When the project uses the same system for all kinds of
+<para>The reason to version everything together in one place is so
+that people only have to learn one mechanism for submitting changes.
+Often a contributor will start out making edits to the web pages or
+documentation, and move to small code contributions later, for
+example.  When the project uses the same system for all kinds of
 submissions, people only have to learn the ropes once.  Versioning
 everything together also means that new features can be committed
 together with their documentation updates, that branching the code
@@ -1750,28 +1750,26 @@ will branch the documentation too, etc.</para>
 <para>Don't keep <firstterm>generated files</firstterm> under version
 control.  They are not truly editable data, since they are produced
 programmatically from other files.  For example, some build systems
-create <filename>configure</filename> based on the template
-<filename>configure.in</filename>.  To make a change to the
+create a file named <filename>configure</filename> based on a template
+in <filename>configure.in</filename>.  To make a change to the
 <filename>configure</filename>, one would edit
 <filename>configure.in</filename> and then regenerate; thus, only the
 template <filename>configure.in</filename> is an "editable file."
-Just version the templates&mdash;if you version the result files as
-well, people will inevitably forget to regenerate when they commit a
+Just version the templates&mdash;if you version the generated files as
+well, people will inevitably forget to regenerate them when they commit a
 change to a template, and the resulting inconsistencies will cause no
-end of confusion.<footnote><para>For a different opinion on the
-question of versioning <filename>configure</filename> files, see
-Alexey Makhotkin's post "<citetitle>configure.in and version
-control</citetitle>" at
-<ulink
-url="http://versioncontrolblog.com/2007/01/08/configurein-and-version-control/"
->versioncontrolblog.com/2007/01/08/configurein-and-version-control</ulink>.</para></footnote></para>
+end of confusion.</para>
 
-<para>The rule that all editable data should be kept under version
-control has one unfortunate exception: the bug tracker.  Bug databases
-hold plenty of editable data, but for technical reasons generally
-cannot store that data in the main version control system.  (Some
-trackers have primitive versioning features of their own, however,
-independent of the project's main repository.)</para>
+<para>There are technical exceptions to the rule that all editable
+data should be kept in the same version control system as the code.
+For example, a project's bug tracker and its wiki hold plenty of
+editable data, but usually do not store that data in the main version
+control system<footnote><para>There are development environments that
+integrate everything into one unified version control world; see <xref
+linkend="vc-veracity"/> for an example.</para></footnote>.  However,
+they should still have versioning systems of their own, e.g., the
+comment history in a bug ticket, and the ability to browse past
+revisions and view differences between them in a wiki.</para>
 
 </sect3>
 
@@ -1792,9 +1790,10 @@ install version control client software locally, which could turn
 their simple query from a two-minute task into a half-hour or longer
 task.</para>
 
-<para>Browsability also implies canonical URLs for viewing specific
-revisions of files, and for viewing the latest revision at any given
-time.  This can be very useful in technical discussions or when
+<para>Browsability also implies canonical URLs for viewing a particular
+change (i.e., a commit), and for viewing the latest revision at any given
+time without specifying its commit identifier.  This can be very
+useful in technical discussions or when
 pointing people to documentation.  For example, instead of saying "For
 bug management guidelines, see the community-guide/index.html file
 in your working copy," one can say "For bug management guidelines,
@@ -1806,15 +1805,19 @@ better because it is completely unambiguous, and avoids the question
 of whether the addressee has an up-to-date working copy.</para>
 
 <para>Some version control systems come with built-in
-repository-browsing mechanisms, while others rely on third-party tools
-to do it.  Three such tools are <firstterm>ViewVC</firstterm> (<ulink
-url="http://viewvc.org/" >viewvc.org</ulink>),
-<firstterm>CVSWeb</firstterm> (<ulink
-url="http://www.freebsd.org/projects/cvsweb.html" >freebsd.org/projects/cvsweb.html</ulink>), and
-<firstterm>WebSVN</firstterm> (<ulink
-url="http://websvn.tigris.org/" >websvn.tigris.org</ulink>).  The
-first works with both CVS and Subversion, the second with CVS only,
-and the third with Subversion only.</para>
+repository-browsing mechanisms, and in any case most hosting sites
+offer a good web interface.  But if you need to install a third-party
+tool for repository browsing, there are many out there.  Three that
+support Git are <firstterm>GitLab</firstterm> (<ulink
+url="http://gitlab.org/" >gitlab.org</ulink>),
+<firstterm>GitWeb</firstterm> (<ulink
+url="https://git.wiki.kernel.org/index.php/Gitweb"
+>git.wiki.kernel.org/index.php/Gitweb</ulink>), and
+<firstterm>GitList</firstterm> (<ulink url="http://gitlist.org/"
+>gitlist.org</ulink>).  For Subversion, there is
+<firstterm>ViewVC</firstterm> (<ulink url="http://viewvc.org/"
+>viewvc.org</ulink>).  A web search will turn up plenty of others
+besides these.</para>
 
 </sect3>
 
@@ -1822,28 +1825,27 @@ and the third with Subversion only.</para>
 <title>Use branches to avoid bottlenecks</title>
 
 <para>Non-expert version control users are sometimes a bit afraid of
-branching and merging.  This is probably a side effect of CVS's
-popularity: CVS's interface for branching and merging is somewhat
-counterintuitive, so many people have learned to avoid those
-operations entirely.</para>
-
-<para>If you are among those people, resolve right now to conquer any
-fears you may have and take the time to learn how to do branching and
-merging.  They are not difficult operations, once you get used to
-them, and they become increasingly important as a project acquires
-more developers.</para>
+branching and merging.  If you are among those people, resolve right
+now to conquer any fears you may have and take the time to learn how
+to do branching and merging.  They are not difficult operations, once
+you get used to them, and they become increasingly important as a
+project acquires more developers.</para>
 
 <para>Branches are valuable because they turn a scarce
 resource&mdash;working room in the project's code&mdash;into an
 abundant one.  Normally, all developers work together in the same
 sandbox, constructing the same castle.  When someone wants to add a
 new drawbridge, but can't convince everyone else that it would be an
-improvement, branching makes it possible for her to go to an isolated
-corner and try it out.  If the effort succeeds, she can invite the
-other developers to examine the result.  If everyone agrees that the
-result is good, they can tell the version control system to move
-("merge") the drawbridge from the branch castle over to the main
-castle.</para>
+improvement, branching makes it possible for her to make a copy of the
+castle, take it off to an isolated corner, and try out the new
+drawbridge design.  If the effort succeeds, she can invite the
+other developers to examine the result (in GitHub-speak, this
+invitation is known as a "pull request"&nbsp;&mdash;&nbsp;see <xref
+linkend="pull-requests"/>).  If everyone agrees that the
+result is good, she or someone else can tell the version control
+system to move ("merge") the drawbridge from the branch version of the
+castle over to the main version, sometimes called the
+<firstterm>master branch</firstterm>.</para>
 
 <para>It's easy to see how this ability helps collaborative
 development.  People need the freedom to try new things without
@@ -1853,14 +1855,17 @@ usual development churn, in order to get a bug fixed or a release
 stabilized (see <xref linkend="stabilizing-a-release"/> and
 <xref linkend="release-lines"/><phrase output="printed"> in
 <xref linkend="development-cycle"/></phrase>) without worrying
-about tracking a moving target.</para>
+about tracking a moving target.  At the same time, people need to be
+able to review and comment on experimental work, whether it's
+happening in the master branch or somewhere else.  Treating branches
+as first-class, publishable objects makes all this possible.</para>
 
 <para>Use branches liberally, and encourage others to use them.  But
-also make sure that a given branch is only active for exactly as long
-as needed.  Every active branch is a slight drain on the community's
+also make sure that a given branch is only active for as long as
+needed.  Every active branch is a slight drain on the community's
 attention.  Even those who are not working in a branch still maintain
 a peripheral awareness of what's going on in it.  Such awareness is
-desirable, of course, and commit emails should be sent out for branch
+desirable, of course, and commit notices should be sent out for branch
 commits just as for any other commit.  But branches should not become
 a mechanism for dividing the development community.  With rare
 exceptions, the eventual goal of most branches should be to merge
@@ -1879,7 +1884,7 @@ be applied to branches other than the one on which it entered, then it
 should be merged from its original entry point to those other
 destinations&mdash;as opposed to committing a textually identical
 change, which would have the same effect in the code, but would make
-accurate bookkeeping and release management impossible.</para>
+accurate bookkeeping and release management much harder.</para>
 
 <para>The practical effects of this advice differ from one version
 control system to another.  In some systems, merges are special
@@ -1893,12 +1898,16 @@ and give the identifying revision of the original change, with at most
 a one-sentence summary of its effect.  If someone wants to see the
 full log message, she should consult the original revision.</para>
 
-<para>The reason it's important to avoid repeating the log message is
-that log messages are sometimes edited after they've been committed.
-If a change's log message were repeated at each merge destination,
-then even if someone edited the original message, she'd still leave
-all the repeats uncorrected&mdash;which would only cause confusion
-down the road.</para>
+<para>One reason it's important to avoid repeating the log message is
+that, in some systems, log messages are sometimes edited after they've
+been committed.  If a change's log message were repeated at each merge
+destination, then even if someone edited the original message, she'd
+still leave all the repeats uncorrected&mdash;which would only cause
+confusion down the road.  Another reason is that non-duplication makes
+it easier to be sure when one has tracked down the original source of
+a change.  When you're looking at a complete log message that doesn't
+refer to a some other merge source, you can know that it must be the
+original change, and handle it accordingly.</para>
 
 <para>The same principle applies to reverting a change.  If a change
 is withdrawn from the code, then the log message for the reversion
@@ -1913,19 +1922,18 @@ change's log message to point out that it was reverted.</para>
 
 <para>All of the above implies that you should use a consistent syntax
 for referring to revisions.  This is helpful not only in log messages,
-but in emails, the bug tracker, and elsewhere.  If you're using
-CVS, I suggest "<literal>path/to/file/in/project/tree:REV</literal>",
-where REV is a CVS revision number such as "1.76".  If you're using
-Subversion, the standard syntax for revision 1729 is "r1729" (file
-paths are not needed because Subversion uses global revision numbers).
-In other systems, there is usually a standard syntax for expressing
-the changeset name.  Whatever the appropriate syntax is for your
-system, encourage people to use it when referring to changes.
-Consistent expression of change names makes project bookkeeping much
-easier (as we will see in <xref linkend="communications"/> and
-<xref linkend="development-cycle"/>), and since a lot of the
-bookkeeping will be done by volunteers, it needs to be as easy as
-possible.</para>
+but in emails, the bug tracker, and elsewhere.  If you're using Git,
+the syntax is "commit bb2377" (where the commit hash code on the right
+is long enough to be unique in the relevant context); in Subversion,
+revision numbers are linearly incremented integers and the standard
+syntax for, say, revision 1729 is "r1729".  In other systems, there is
+usually a standard syntax for expressing the changeset name.  Whatever
+the appropriate syntax is for your system, encourage people to use it
+when referring to changes.  Consistent expression of change names makes
+project bookkeeping much easier (as we will see in <xref
+linkend="communications"/> and <xref linkend="development-cycle"/>),
+and since a lot of the bookkeeping may be done by volunteers, it
+needs to be as easy as possible.</para>
 
 <para>See also
 <xref
@@ -1938,32 +1946,32 @@ output="printed"> in
 <sect3 id="vc-authz">
 <title>Authorization</title>
 
-<para>Most version control systems offer a feature whereby certain
+<para>Many version control systems offer a feature whereby certain
 people can be allowed or disallowed from committing in specific
-sub-areas of the repository.  Following the principle that when handed
-a hammer, people start looking around for nails, many projects use
+sub-areas of the master repository.  Following the principle that when
+handed a hammer, people start looking around for nails, many projects use
 this feature with abandon, carefully granting people access to just
 those areas where they have been approved to commit, and making sure
 they can't commit anywhere else.  (See
 <xref linkend="committers"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase> for how projects
-decide who can commit where.)</para>
+decide who can put changes where.)</para>
 
-<para>There is probably little harm done by exercising such tight
-control, but a more relaxed policy is fine too.  Some projects simply
-use an honor system: when a person is granted commit access, even for
-a sub-area of the repository, what they actually receive is a password
-that allows them to commit anywhere in the project.  They're just
-asked to keep their commits in their area.  Remember that there is no
-real risk here: in an active project, all commits are reviewed anyway.
-If someone commits where they're not supposed to, others will
-notice it and say something.  If a change needs to be undone, that's
-simple enough&mdash;everything's under version control anyway, so
-just revert.</para>
+<para>Exercising such tight control is usually unnecessary, and may
+even be harmful.  Some projects simply use an honor system: when a
+person is granted commit access, even for a sub-area of the project,
+what they actually receive is the ability to commit anywhere in the
+master repository.  They're just asked to keep their commits in their
+area.  Remember that there is little real risk here: the repository
+provides an audit trail, and in an active project, all commits are
+reviewed anyway.  If someone commits where they're not supposed to,
+others will notice it and say something.  If a change needs to be
+undone, that's simple enough&mdash;everything's under version control
+anyway, so just revert.</para>
 
-<para>There are several advantages to the relaxed approach.  First, as
-developers expand into other areas (which they usually will if they
-stay with the project), there is no administrative overhead to
+<para>There are several advantages to this more relaxed approach.
+First, as developers expand into other areas (which they usually will
+if they stay with the project), there is no administrative overhead to
 granting them wider privileges.  Once the decision is made, the person
 can just start committing in the new area right away.</para>
 
@@ -1971,7 +1979,7 @@ can just start committing in the new area right away.</para>
 Generally, a committer in area X who wants to expand to area Y will
 start posting patches against Y and asking for review.  If someone who
 already has commit access to area Y sees such a patch and approves of
-it, they can just tell the submitter to commit the change directly
+it, she can just tell the submitter to commit the change directly
 (mentioning the reviewer/approver's name in the log message, of
 course).  That way, the commit will come from the person who actually
 wrote the change, which is preferable from both an information
@@ -1991,15 +1999,16 @@ circle of mutual trust.  A good way to do that is to give them more
 power than they're supposed to use, then inform them that it's up to
 them to stay within the stated limits.</para>
 
-<para>The Subversion project has operated on the honor system way for
-more than four years, with 33 full and 43 partial committers as of
-this writing.  The only distinction the system actually enforces is
+<para>The Subversion project has operated on this honor system way or
+well over a decade, with more than 40 full committers and many more
+partial committers as of this writing.  The only distinction the
+system actually enforces is
 between committers and non-committers; further subdivisions are
-maintained solely by humans.  Yet we've never had a problem with
-someone deliberately committing outside their domain.  Once or twice
-there's been an innocent misunderstanding about the extent of
-someone's commit privileges, but it's always been resolved quickly and
-amiably.</para>
+maintained solely by human judgement.  Yet the project never had a
+serious problem with someone deliberately committing outside their
+domain.  Once or twice there's been an innocent misunderstanding about
+the extent of someone's commit privileges, but it's always been
+resolved quickly and amiably.</para>
 
 <para>Obviously, in situations where self-policing is impractical, you
 must rely on hard authorization controls.  But such situations are
@@ -2020,9 +2029,9 @@ relying on human controls instead.</para>
 themselves are unimportant, of course.  It would be bad for a project
 to encourage people to commit in areas where they're not qualified.
 Furthermore, in many projects, full (unrestricted) commit access has a
-special status: it implies voting rights on project-wide questions.
-This political aspect of commit access is discussed more in <xref
-linkend="electorate"/><phrase output="printed"> in
+special corollary status: it implies voting rights on project-wide
+questions.  This political aspect of commit access is discussed more
+in <xref linkend="electorate"/><phrase output="printed"> in
 <xref linkend="social-infrastructure"/></phrase>.</para>
 
 </sect3>
@@ -2085,11 +2094,11 @@ to others as well.</para>
 <para>The specifics of setting up commit emails will vary depending on
 your version control system, but usually there's a script or other
 packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm>,
-specifically a <firstterm>post-commit hook</firstterm>, also called
-the <firstterm>loginfo hook</firstterm> in CVS.  Post-commit hooks are
-a general means of launching automated tasks in response to commits.
-The hook is triggered by an individual commit, is fed all the
+try looking for documentation on <firstterm>hooks</firstterm> (or
+sometimes <firstterm>triggers</firstterm>) specifically a
+<firstterm>post-commit hook</firstterm> hook.  Post-commit hooks are a
+general means of launching automated tasks in response to commits.
+The hook is triggered when a given commit finalizes, is fed all the
 information about that commit, and is then free to use that
 information to do anything&mdash;for example, to send out an
 email.</para>
@@ -2103,8 +2112,8 @@ modify some of the default behaviors:</para>
   <para>Some commit mailers don't include the actual diffs in the
   email, but instead provide a URL to view the change on the web using
   the repository browsing system.  While it's good to provide the URL,
-  so the change can be referred to later, it is also
-  <emphasis>very</emphasis> important that the commit email include
+  so the change can be referred to later, it is also important that
+  the commit email include
   the diffs themselves.  Reading email is already part of people's
   routine, so if the content of the change is visible right there in
   the commit email, developers will review the commit on the spot,
@@ -2120,10 +2129,10 @@ modify some of the default behaviors:</para>
   <para>(Of course, if the diff is huge, such as when a large body of
   new code has been added to the repository, then it makes sense to
   omit the diff and offer only the URL.  Most commit mailers can do
-  this kind of limiting automatically.  If yours can't, then it's
+  this kind of size-limiting automatically.  If yours can't, then it's
   still better to include diffs, and live with the occasional huge
   email, than to leave the diffs off entirely.  Convenient reviewing
-  and commenting is a cornerstone of cooperative development, much
+  and commenting is a cornerstone of cooperative development, and much
   too important to do without.)</para>
   </listitem>
 
@@ -2138,14 +2147,10 @@ modify some of the default behaviors:</para>
   search.  Second, there might be interested parties not subscribed to
   the commit email list.  Third, the commit email list advertises
   itself as a service for watching commits, not for watching commits
-  <emphasis>and</emphasis> occasional technical discussions.  Those who
-  subscribed to the commit email list did not sign up for anything but
-  commit emails; sending them other material via that list would
-  violate an implicit contract.  Fourth, people often write programs
-  that read the commit email list and process the results (for
-  display on a web page, for example).  Those programs are prepared to
-  handle consistently-formatted commit emails, but not inconsistent
-  human-written mails.</para>
+  <emphasis>and</emphasis> having occasional technical discussions.
+  Those who subscribed to the commit email list did not sign up for
+  anything but commit emails; sending them other material via that
+  list would violate an implicit contract.</para>
 
   <para>Note that this advice to set Reply-to does not contradict the
   recommendations in
@@ -2160,42 +2165,6 @@ modify some of the default behaviors:</para>
   </listitem>
 
 </orderedlist>
-
-<sidebar id="cia">
-<title>CIA: A Standardized Change Publication Mechanism</title>
-
-<para>Commit emails are not the only way to propagate change news.
-You can also install CIA (<ulink url="http://cia.vc/"
->cia.vc</ulink>), a real-time 
-commit statistics aggregator and distributor.  The most popular use of
-CIA is to send commit notifications to IRC channels, so that people
-logged into those channels see the commits happening in real time.
-Though of somewhat less technical utility than commit emails, since
-observers might or might not be around when a commit notice pops up in
-IRC, this technique is of immense <emphasis>social</emphasis> utility.
-People get the sense of being part of something alive and active, and
-feel that they can see progress being made right before their
-eyes.  And because the notifications appear in a shared space, people
-in the chat room often react in real time, reviewing the commit and
-commenting on it on the spot.</para>
-
-<para>The way CIA works is that you invoke its notifier program
-from your post-commit hook.  The notifier formats the commit
-information into an XML message, which it sends to a central server
-(typically <literal>cia.vi</literal>).  That server then
-distributes the commit information to other forums.</para>
-
-<para>CIA can also be configured to send out <ulink
-url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
-feeds.  See the documentation at <ulink url="http://cia.vc/"
->cia.vc</ulink> for details.</para>
-
-<para>To see an example of CIA in action, point your IRC
-client at <literal>irc.freenode.net</literal>, channel
-<literal>#commits</literal>, which shows activity across all the
-projects CIA is watching.</para>
-
-</sidebar>
 
 </sect3>
 
@@ -2724,6 +2693,59 @@ channel users will acquire the expertise needed to manipulate the bot,
 but those users will answer a disproportionately high percentage of
 questions, because the bot enables them to respond so much more
 efficiently.</para>
+
+<sidebar id="cia">
+<title>CIA: A Standardized Change Publication Mechanism</title>
+
+<para><emphasis>poss2 todo: 2 February 2014: If you're reading this
+note, then you've encountered this sidebar while it's undergoing
+substantial revision; see <ulink url="http://producingoss.com/v2.html"
+>producingoss.com/v2.html</ulink> for details.  In this case, the
+detail is that CIA.vc as a service effectively shut down in
+2012.  <ulink url="https://lwn.net/Articles/518955/"
+>lwn.net/Articles/518955</ulink> documents how other less centralized
+replacements have since filled the gap.  So what needs to happen here
+is that this sidebar probably needs to be turned into a subsection,
+with the non-technical advice remaining the same but recommending
+things other than CIA to implement that advice.  (However, the "cia"
+subsection ID will remain for link compatibility, although the new canonical
+ID will probably be "irc-activity-notices" or
+something.)  Somewhere, maybe not here, we should mention OhLoh too,
+since it's a decent aggregator of project activity and offers a
+contributor-focused view.</emphasis></para>
+
+<para>Commit emails are not the only way to propagate change news.
+You can also install CIA (<ulink url="http://cia.vc/"
+>cia.vc</ulink>), a real-time 
+commit statistics aggregator and distributor.  The most popular use of
+CIA is to send commit notifications to IRC channels, so that people
+logged into those channels see the commits happening in real time.
+Though of somewhat less technical utility than commit emails, since
+observers might or might not be around when a commit notice pops up in
+IRC, this technique is of immense <emphasis>social</emphasis> utility.
+People get the sense of being part of something alive and active, and
+feel that they can see progress being made right before their
+eyes.  And because the notifications appear in a shared space, people
+in the chat room often react in real time, reviewing the commit and
+commenting on it on the spot.</para>
+
+<para>The way CIA works is that you invoke its notifier program
+from your post-commit hook.  The notifier formats the commit
+information into an XML message, which it sends to a central server
+(typically <literal>cia.vi</literal>).  That server then
+distributes the commit information to other forums.</para>
+
+<para>CIA can also be configured to send out <ulink
+url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html">RSS</ulink>
+feeds.  See the documentation at <ulink url="http://cia.vc/"
+>cia.vc</ulink> for details.</para>
+
+<para>To see an example of CIA in action, point your IRC
+client at <literal>irc.freenode.net</literal>, channel
+<literal>#commits</literal>, which shows activity across all the
+projects CIA is watching.</para>
+
+</sidebar>
 
 </sect2>
 
