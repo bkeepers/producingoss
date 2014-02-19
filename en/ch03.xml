@@ -459,12 +459,12 @@ commit to the repository.</para>
 <para>This can be extremely useful, and in fact it's one of the prime
 advantages of canned hosting.  The problem is that sometimes user
 login ends up being required for tasks that ought to be permitted to
-unregistered visitors, specifically the ability to file issues in the
-bug tracker, and to comment on existing issues.  By requiring a
+unregistered visitors, specifically the ability to file tickets in the
+bug tracker, and to comment on existing tickets.  By requiring a
 logged-in username for such actions, the project raises the
 involvement bar for what should be quick, convenient tasks.  Of
 course, one wants to be able to contact someone who's entered data
-into the issue tracker, but having a field where she can enter her
+into the ticket tracker, but having a field where she can enter her
 email address (if she wants to) is sufficient.  If a new user spots a
 bug and wants to report it, she'll only be annoyed at having to fill
 out an account creation form before she can enter the bug into the
@@ -560,7 +560,7 @@ this:</para>
     <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
 
   <emphasis role="bold"><literal>notifications&nbsp;{_AT_}&nbsp;scanley.org</literal></emphasis>:
-    All code commit messages, bug tracker issues, automated
+    All code commit messages, bug tracker tickets, automated
     build/integration failures, etc, are sent to this list.  Most
     developers should subscribe: <emphasis role="bold">&lt;&lt;&lt;link to subscribe&gt;&gt;&gt;</emphasis>.
 
@@ -2178,37 +2178,41 @@ modify some of the default behaviors:</para>
 <title>Bug Tracker</title>
 
 <para>Bug tracking is a broad topic; various aspects of it are
-discussed throughout this book.  Here I'll try to concentrate mainly
-on setup and technical considerations, but to get to those, we have to
-start with a policy question: exactly what kind of information should
-be kept in a bug tracker?</para>
+discussed throughout this book.  Here I'll concentrate mainly on the
+features your project should look for in a bug tracker, and how to
+approach the general problem of managing your bug database.  But to
+get to those, we have to start with a policy question: exactly what
+kind of information should be kept in a bug tracker?</para>
 
 <para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
-tracking systems are also frequently used to track new feature
-requests, one-time tasks, unsolicited patches&mdash;really anything
-that has distinct beginning and end states, with optional transition
-states in between, and that accrues information over its lifetime.
-For this reason, bug trackers are also called <firstterm>issue
+tracking systems are used to track not only bug reports, but new
+feature requests, one-time tasks, unsolicited patches&mdash;really
+anything that has distinct beginning and end states, with optional
+transition states in between, and that accrues information over its
+lifetime.  For this reason, bug trackers are also called
+<firstterm>issue trackers</firstterm>, <firstterm>ticket
 trackers</firstterm>, <firstterm>defect trackers</firstterm>,
 <firstterm>artifact trackers</firstterm>, <firstterm>request
-trackers</firstterm>, <firstterm>trouble ticket systems</firstterm>,
-etc.  See <xref linkend="bug-trackers"/> for a list of software.
-</para>
+trackers</firstterm>, etc.</para>
 
-<para>In this book, I'll continue to use "bug tracker" for the
-software that does the tracking, because that's what most people call
-it, but will use <firstterm>issue</firstterm> to refer to a single
-item in the bug tracker's database.  This allows us to distinguish
-between the behavior or misbehavior that the user encountered (that is,
-the bug itself), and the tracker's <emphasis>record</emphasis> of the
-bug's discovery, diagnosis, and eventual resolution.  Keep in mind
-that although most issues are about actual bugs, issues can be used to
-track other kinds of tasks too.</para>
+<para>In this book, I'll generally use the word
+<firstterm>ticket</firstterm> to refer the items in the tracker's
+database, because that distinguishes between the behavior that the
+user encountered or proposed&nbsp;&mdash;&nbsp;that is, the bug or
+feature itself&nbsp;&mdash;&nbsp;and the tracker's ongoing
+<emphasis>record</emphasis> of that discovery, diagnosis, discussion,
+and eventual resolution.  But note that many projects use the word
+<emphasis>bug</emphasis> or <emphasis>issue</emphasis> to refer to
+both the ticket itself and to the underlying behavior or goal that the
+ticket is tracking.  In fact, that usage is probably more common than
+"ticket"; it's just that in this book we need to be able to talk about
+those things distinctly in a way that projects themselves usually
+don't.</para>
 
-<para>The classic issue life cycle looks like this:
+<para>The classic ticket life cycle looks like this:
 
 <orderedlist>
-  <listitem><para>Someone files the issue.  They provide a summary, an
+  <listitem><para>Someone files the ticket.  They provide a summary, an
             initial description (including a reproduction recipe, if
             applicable; see
             <xref
@@ -2217,22 +2221,22 @@ track other kinds of tasks too.</para>
             <xref linkend="managing-volunteers"/></phrase> for
             how to encourage good bug reports), and whatever other
             information the tracker asks for.  The person who files
-            the issue may be totally unknown to the project&mdash;bug
+            the ticket may be totally unknown to the project&mdash;bug
             reports and feature requests are as likely to come from
             the user community as from the developers.</para>
 
-            <para>Once filed, the issue is in what's called an
+            <para>Once filed, the ticket is in what's called an
             <firstterm>open</firstterm> state.  Because no action has
             been taken yet, some trackers also label it as
             <firstterm>unverified</firstterm> and/or
             <firstterm>unstarted</firstterm>.  It is not assigned to
             anyone; or, in some systems, it is assigned to a fake
             user to represent the lack of real assignation.  At this
-            point, it is in a holding area: the issue has been
+            point, it is in a holding area: the ticket has been
             recorded, but not yet integrated into the project's
             consciousness.</para>
   </listitem>
-  <listitem><para>Others read the issue, add comments to it, and
+  <listitem><para>Others read the ticket, add comments to it, and
             perhaps ask the original filer for clarification on some
             points.</para>
   </listitem>
@@ -2247,26 +2251,26 @@ track other kinds of tasks too.</para>
   <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
             cause is identified, and if possible, the effort required
             to fix it is estimated.  Make sure these things get
-            recorded in the issue; if the person who diagnosed the
+            recorded in the ticket; if the person who diagnosed the
             bug suddenly has to step away from the project for a
             while (as can often happen with volunteer developers),
             someone else should be able to pick up where she left
             off.</para>
 
             <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the issue and
+            developer may "take ownership" of the ticket and
             <firstterm>assign</firstterm> it to herself (<xref
             linkend="delegation-assignment"/><phrase
             output="printed"> in
             <xref linkend="managing-volunteers"/></phrase>
-            examines the assignment process in more detail).  The issue's
+            examines the assignment process in more detail).  The ticket's
             <firstterm>priority</firstterm> may also be set at this
             stage.  For example, if it is so severe that it should
             delay the next release, that fact needs to be identified
             early, and the tracker should have some way of noting
             it.</para>
   </listitem>
-  <listitem><para>The issue gets scheduled for resolution.
+  <listitem><para>The ticket gets scheduled for resolution.
             Scheduling doesn't necessarily mean naming a date by which
             it will be fixed.  Sometimes it just means deciding which
             future release (not necessarily the next one) the bug
@@ -2277,7 +2281,7 @@ track other kinds of tasks too.</para>
   <listitem><para>The bug gets fixed (or the task completed, or
             the patch applied, or whatever).  The change or set of
             changes that fixed it should be recorded in a comment in
-            the issue, after which the issue is
+            the ticket, after which the ticket is
             <firstterm>closed</firstterm> and/or marked as
             <firstterm>resolved</firstterm>.</para>
   </listitem>
@@ -2286,38 +2290,38 @@ track other kinds of tasks too.</para>
 </para>
 
 <para>There are some common variations on this life cycle.  Sometimes
-an issue is closed very soon after being filed, because it turns out
+a ticket is closed very soon after being filed, because it turns out
 not to be a bug at all, but rather a misunderstanding on the part of
 the user.  As a project acquires more users, more and more such
-invalid issues will come in, and developers will close them with
+invalid tickets will come in, and developers will close them with
 increasingly short-tempered responses.  Try to guard against the
 latter tendency.  It does no one any good, as the individual user in
-each case is not responsible for all the previous invalid issues; the
+each case is not responsible for all the previous invalid tickets; the
 statistical trend is visible only from the developers' point of view,
 not the user's.  (In
 <xref linkend="bug-filtering"/><phrase output="printed"> later
 in this chapter,</phrase> we'll look at
-techniques for reducing the number of invalid issues.)  Also, if
+techniques for reducing the number of invalid tickets.)  Also, if
 different users are experiencing the same misunderstanding over and
 over, it might mean that aspect of the software needs to be
 redesigned.  This sort of pattern is easiest to notice when there is
-an issue manager monitoring the bug database; see
-<xref linkend="issue-manager"/><phrase output="printed"> in
+a ticket manager monitoring the bug database; see
+<xref linkend="ticket-manager"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>.</para>
 
-<para>Another common life cycle variation is for the issue to be closed
+<para>Another common life cycle variation is for the ticket to be closed
 as a <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate
-is when someone files an issue that's already known to the project.
-Duplicates are not confined to open issues: it's possible for a bug to
+is when someone reports something that's already known to the project.
+Duplicates are not confined to open tickets: it's possible for a bug to
 come back after having been fixed (this is known as a
 <firstterm>regression</firstterm>), in which case the preferred course
-is usually to reopen the original issue and close any new reports as
+is usually to reopen the original ticket and close any new reports as
 duplicates of the original one.  The bug tracking system should keep
 track of this relationship bidirectionally, so that reproduction
-information in the duplicates is available to the original issue, and
+information in the duplicates is available to the original ticket, and
 vice versa.</para>
 
-<para>A third variation is for the developers to close the issue,
+<para>A third variation is for the developers to close the ticket,
 thinking they have fixed it, only to have the original reporter reject
 the fix and reopen it.  This is usually because the developers simply
 don't have access to the environment necessary to reproduce the bug,
@@ -2331,19 +2335,19 @@ specific to open source software, it has implications for how open
 source projects use their bug trackers.</para>
 
 <para>As Step 1 implies, the tracker is as much a public face of the
-project as the mailing lists or web pages.  Anyone may file an issue,
-anyone may look at an issue, and anyone may browse the list of currently
-open issues.  It follows that you never know how many people are
-waiting to see progress on a given issue.  While the size and skill of
-the development community constrains the rate at which issues can be
-resolved, the project should at least try to acknowledge each issue the
-moment it appears.  Even if the issue lingers for a while, a response
+project as the mailing lists or web pages.  Anyone may file a ticket,
+anyone may look at a ticket, and anyone may browse the list of currently
+open tickets.  It follows that you never know how many people are
+waiting to see progress on a given ticket.  While the size and skill of
+the development community constrains the rate at which tickets can be
+resolved, the project should at least try to acknowledge each ticket the
+moment it appears.  Even if the ticket lingers for a while, a response
 encourages the reporter to stay involved, because she feels that a
-human has registered what she has done (remember that filing an
-issue usually involves more effort than, say, posting an email).
-Furthermore, once an issue is seen by a developer, it enters the
+human has registered what she has done (remember that filing a
+ticket usually involves more effort than, say, posting an email).
+Furthermore, once a ticket is seen by a developer, it enters the
 project's consciousness, in the sense that the developer can be on
-the lookout for other instances of the issue, can talk about it with
+the lookout for other instances of the ticket, can talk about it with
 other developers, etc.</para>
 
 <para>The need for timely reactions implies two things:
@@ -2351,7 +2355,7 @@ other developers, etc.</para>
 <itemizedlist>
   <listitem>
     <para>The tracker must be connected to a mailing list, such that
-    every change to an issue, including its initial filing, causes a
+    every change to a ticket, including its initial filing, causes a
     mail to go out describing what happened.  This mailing list
     is usually different from the regular development list, since not
     all developers may want to receive automated bug mails, but (just
@@ -2359,14 +2363,13 @@ other developers, etc.</para>
     development mailing list.</para>
   </listitem>
   <listitem>
-    <para>The form for filing issues should capture the reporter's
+    <para>The form for filing tickets should capture the reporter's
     email address, so she can be contacted for more information.
     (However, it should not <emphasis>require</emphasis> the
-    reporter's email address, as some people prefer to report issues
-    anonymously.  See
-    <xref linkend="anonymity"/><phrase output="printed"> later
-    in this chapter</phrase> for more on the importance of
-    anonymity.)</para>
+    reporter's email address, as some people prefer to report
+    anonymously.  See <xref linkend="anonymity"/><phrase
+    output="printed"> later in this chapter</phrase> for more on the
+    importance of anonymity.)</para>
   </listitem>
 </itemizedlist>
 
@@ -2388,19 +2391,19 @@ real-time chat forums, for that matter).  This is not because bug
 trackers have bad user interface design, it's just that their
 interfaces were designed for capturing and presenting discrete states,
 not free-flowing discussions.  Second, not everyone who should be
-involved in discussing a given issue is necessarily watching the bug
-tracker.  Part of good issue management (see
+involved in discussing a given ticket is necessarily watching the bug
+tracker.  Part of good ticket management (see
 <xref linkend="share-management"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>) is to make sure
-each issue is brought to the right peoples' attention, rather than
-requiring every developer to monitor all issues.  In
+each ticket is brought to the right peoples' attention, rather than
+requiring every developer to monitor all tickets.  In
 <xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
 sure people don't accidentally siphon discussions out of appropriate
 forums and into the bug tracker.</para>
 
 <para>Some bug trackers can monitor mailing lists and automatically
-log all emails that are about a known issue.  Typically they do this
-by recognizing the issue's identifying number in the subject line of
+log all emails that are about a known ticket.  Typically they do this
+by recognizing the ticket's identifying number in the subject line of
 the mail, as part of a special string; developers learn to include
 these strings in their mails to attract the tracker's notice.  The bug
 tracker may either save the entire email, or (even better) just record
@@ -2414,8 +2417,8 @@ it.</para>
 <sect2 id="bug-filtering">
 <title>Pre-Filtering the Bug Tracker</title>
 
-<para>Most issue databases eventually suffer from the same problem: a
-crushing load of duplicate or invalid issues filed by well-meaning but
+<para>Most ticket databases eventually suffer from the same problem: a
+crushing load of duplicate or invalid tickets filed by well-meaning but
 inexperienced or ill-informed users.  The first step in combatting
 this trend is usually to put a prominent notice on the front page of
 the bug tracker, explaining how to tell if a bug is really a bug, how
@@ -2427,77 +2430,77 @@ of users increases, the problem will eventually come back.  No
 individual user can be blamed for it.  Each one is just trying to
 contribute to the project's well-being, and even if their first bug
 report isn't helpful, you still want to encourage them to stay
-involved and file better issues in the future.  In the meantime,
-though, the project needs to keep the issue database as free of junk
+involved and file better tickets in the future.  In the meantime,
+though, the project needs to keep the ticket database as free of junk
 as possible.</para>
 
 <para>The two things that will do the most to prevent this problem
 are: making sure there are people watching the bug tracker who have
-enough knowledge to close issues as invalid or duplicates the moment
+enough knowledge to close tickets as invalid or duplicates the moment
 they come in, and requiring (or strongly encouraging) users to confirm
 their bugs with other people before filing them in the tracker.</para>
 
 <para>The first technique seems to be used universally.  Even projects
-with huge issue databases (say, the Debian bug tracker at
+with huge ticket databases (say, the Debian bug tracker at
 <ulink url="http://bugs.debian.org/" >bugs.debian.org</ulink>, which
-contained 712,440 issues as of this writing) still arrange things so that
-<emphasis>someone</emphasis> sees each issue that comes in.  It may be
-a different person depending on the category of the issue.  For
+contained 739,542 tickets as of this writing) still arrange things so that
+<emphasis>someone</emphasis> sees each ticket that comes in.  It may be
+a different person depending on the category of the ticket.  For
 example, the Debian project is a collection of software packages, so
-Debian automatically routes each issue to the appropriate package
-maintainers.  Of course, users can sometimes misidentify an issue's
-category, with the result that the issue is sent to the wrong person
+Debian automatically routes each ticket to the appropriate package
+maintainers.  Of course, users can sometimes misidentify a ticket's
+category, with the result that the ticket is sent to the wrong person
 initially, who may then have to reroute it.  However, the important
 thing is that the burden is still shared&mdash;whether the user
-guesses right or wrong when filing, issue watching is still
-distributed more or less evenly among the developers, so each issue is
+guesses right or wrong when filing, ticket watching is still
+distributed more or less evenly among the developers, so each ticket is
 able to receive a timely response.</para>
 
 <para>The second technique is less widespread, probably because it's
-harder to automate.  The essential idea is that every new issue gets
+harder to automate.  The essential idea is that every new ticket gets
 "buddied" into the database.  When a user thinks he's found a problem,
 he is asked to describe it on one of the mailing lists, or in an IRC
 channel, and get confirmation from someone that it is indeed a bug.
 Bringing in that second pair of eyes early can prevent a lot of
 spurious reports.  Sometimes the second party is able to identify that
 the behavior is not a bug, or is fixed in recent releases.  Or she may
-be familiar with the symptoms from a previous issue, and can prevent a
-duplicate filing by pointing the user to the older issue.  Often it's
+be familiar with the symptoms from a previous ticket, and can prevent a
+duplicate filing by pointing the user to the older ticket.  Often it's
 enough just to ask the user "Did you search the bug tracker to see if
 it's already been reported?"  Many people simply don't think of that,
 yet are happy to do the search once they know someone's
 <emphasis>expecting</emphasis> them to.</para>
 
-<para>The buddy system can really keep the issue database clean, but
+<para>The buddy system can really keep the ticket database clean, but
 it has some disadvantages too.  Many people will file solo anyway,
 either through not seeing, or through disregarding, the instructions
-to find a buddy for new issues.  Thus it is still necessary for
-volunteers to watch the issue database.  Furthermore, because most new
+to find a buddy for new tickets.  Thus it is still necessary for
+volunteers to watch the ticket database.  Furthermore, because most new
 reporters don't understand how difficult the task of maintaining the
-issue database is, it's not fair to chide them too harshly for
+ticket database is, it's not fair to chide them too harshly for
 ignoring the guidelines.  Thus the volunteers must be vigilant, and
-yet exercise restraint in how they bounce unbuddied issues back to
+yet exercise restraint in how they bounce unbuddied tickets back to
 their reporters.  The goal is to train each reporter to use the
 buddying system in the future, so that there is an ever-growing pool
-of people who understand the issue-filtering system.  On seeing an
-unbuddied issue, the ideal steps are:</para>
+of people who understand the ticket-filtering system.  On seeing an
+unbuddied ticket, the ideal steps are:</para>
 
 <orderedlist>
   <listitem>
-    <para>Immediately respond to the issue, politely thanking the user
+    <para>Immediately respond to the ticket, politely thanking the user
           for filing, but pointing them to the buddying guidelines
           (which should, of course, be prominently posted on the web
           site).</para>
   </listitem>
   <listitem>
-    <para>If the issue is clearly valid and not a duplicate, approve it
+    <para>If the ticket is clearly valid and not a duplicate, approve it
           anyway, and start it down the normal life cycle.  After all,
           the reporter's now been informed about buddying, so there's
           no point wasting the work done so far by closing a valid
-          issue.</para>
+          ticket.</para>
   </listitem>
   <listitem>
-    <para>Otherwise, if the issue is not clearly valid, close it, but
+    <para>Otherwise, if the ticket is not clearly valid, close it, but
           ask the reporter to reopen it if they get confirmation from
           a buddy.   When they do, they should put a reference to the
           confirmation thread (e.g., a URL into the mailing list
@@ -2506,16 +2509,16 @@ unbuddied issue, the ideal steps are:</para>
 </orderedlist>
 
 <para>Remember that although this system will improve the signal/noise
-ratio in the issue database over time, it will never completely stop
+ratio in the ticket database over time, it will never completely stop
 the misfilings.  The only way to prevent misfilings entirely is to
 close off the bug tracker to everyone but developers&mdash;a cure that
 is almost always worse than the disease.  It's better to accept that
-cleaning out invalid issues will always be part of the project's
+cleaning out invalid tickets will always be part of the project's
 routine maintenance, and to try to get as many people as possible to
 help.</para>
 
 <para>See also
-<xref linkend="issue-manager"/><phrase output="printed"> in
+<xref linkend="ticket-manager"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>.</para>
 
 </sect2>
@@ -2815,7 +2818,7 @@ subscribers can't separate the wheat from the chaff.  If there are too
 many news events, people will just ignore the feed, or even
 unsubscribe in exasperation.  Ideally, a project would offer separate
 feeds, one for big announcements, another following (say) events in
-the issue tracker, another for each mailing list, etc.  In practice,
+the ticket tracker, another for each mailing list, etc.  In practice,
 this is hard to do well: it can result in interface confusion both for
 visitors to the project's web site and for the administrators.  But at
 a minimum, the project should offer one RSS feed on the front page,
