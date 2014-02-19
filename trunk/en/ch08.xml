@@ -165,17 +165,17 @@ your requests accordingly.</para>
 <para>One thing that almost always causes people instant annoyance is
 being asked to do something in a way that implies that you think it is
 clearly their responsibility to do it, when they feel otherwise.  For
-example, assignment of incoming issues is particularly fertile ground
+example, assignment of incoming tickets is particularly fertile ground
 for this kind of annoyance.  The participants in a project usually
 know who is expert in what areas, so when a bug report comes in, there
 will often be one or two people whom everyone knows could probably fix
-it quickly.  However, if you assign the issue over to one of those
+it quickly.  However, if you assign the ticket over to one of those
 people without her prior permission, she may feel she has been
 put into an uncomfortable position.  She senses the pressure of
 expectation, but also may feel that she is, in effect, being
 punished for her expertise.  After all, the way one acquires
 expertise is by fixing bugs, so perhaps someone else should take this
-one!  (Note that issue trackers that automatically assign issues to
+one!  (Note that ticket trackers that automatically assign tickets to
 particular people based on information in the bug report are less
 likely to offend, because everyone knows that the assignment was made
 by an automated process, and is not an indication of human
@@ -185,11 +185,11 @@ expectations.)</para>
 there are certain times when you just want to encourage the person who
 can fix a bug the fastest to do so.  Given that you can't afford a
 communications turnaround for every such assignment ("Would you be
-willing to look at this bug?"  "Yes."  "Okay, I'm assigning the issue
+willing to look at this bug?"  "Yes."  "Okay, I'm assigning the ticket
 over to you then." "Okay."), you should simply make the assignment in
-the form of an inquiry, conveying no pressure.  Virtually all issue
+the form of an inquiry, conveying no pressure.  Virtually all ticket
 trackers allow a comment to be associated with the assignment of an
-issue.  In that comment, you can say something like this:</para>
+ticket.  In that comment, you can say something like this:</para>
 
 <blockquote>
    <para>Assigning this over to you, jrandom, because you're most
@@ -858,7 +858,7 @@ military-style command structure.</para>
 
 <para>Sometimes management roles are formalized, and sometimes they
 happen spontaneously.  In the Subversion project, we have a patch
-manager, a translation manager, documentation managers, issue managers
+manager, a translation manager, documentation managers, ticket managers
 (albeit unofficial), and a release manager.  Some of these roles we
 made a conscious decision to initiate, others just happened by
 themselves; as the project grows, I expect more roles to be added.
@@ -869,9 +869,9 @@ Below we'll examine these roles, and a couple of others, in detail
 in this chapter</phrase>).</para>
 
 <para>As you read the role descriptions, notice that none of them
-requires exclusive control over the domain in question.  The issue
+requires exclusive control over the domain in question.  The ticket
 manager does not prevent other people from making changes in the
-issues database, the FAQ manager does not insist on being the only
+tickets database, the FAQ manager does not insist on being the only
 person to edit the FAQ, and so on.  These roles are all about
 responsibility without monopoly.  An important part of each domain
 manager's job is to notice when other people are working in that domain,
@@ -897,7 +897,7 @@ imposed on them from the outside.</para>
 keeping track of which patches have arrived and what has been decided
 about them can be a nightmare, especially if done in a decentralized
 way.  Most patches arrive as posts to the project's development
-mailing list (though some may appear first in the issue tracker, or on
+mailing list (though some may appear first in the ticket tracker, or on
 external web sites), and there are a number of different routes a
 patch can take after arrival.</para>
 
@@ -938,11 +938,11 @@ some sort of stable state.  The patch manager watches every mailing
 list thread that results from a patch posting.  If it ends in a commit
 of the patch, he does nothing.  If it goes into a review/revise
 iteration, ending with a final version of the patch but no commit, he
-files an issue pointing to the final version, and to the mailing list
+files a ticket pointing to the final version, and to the mailing list
 thread around it, so that there is a permanent record for developers
-to follow up on later.  If the patch addresses an existing issue, he
-annotates that issue with the relevant information, instead of opening
-a new issue.</para>
+to follow up on later.  If the patch addresses an existing ticket, he
+annotates that ticket with the relevant information, instead of opening
+a new ticket.</para>
 
 <para>When a patch gets no reaction at all, the patch manager waits a
 few days, then follows up asking if anyone is going to review it.
@@ -950,7 +950,7 @@ This usually gets a reaction: a developer may explain that she doesn't
 think the patch should be applied, and give the reasons why, or she may
 review it, in which case one of the previously described paths is
 taken.  If there is still no response, the patch manager may or may
-not file an issue for the patch, at his discretion, but at
+not file a ticket for the patch, at his discretion, but at
 least the original submitter got <emphasis>some</emphasis>
 reaction.</para>
 
@@ -1138,75 +1138,82 @@ healthy.</para>
 
 </sect2>
 
-<sect2 id="issue-manager">
-<title>Issue Manager</title>
+<sect2 id="ticket-manager">
+<!-- For link compatibility with the old section ID. -->
+<anchor id="issue-manager" />
+<title>Ticket Manager / Issue Manager)</title>
 
-<para>The number of issues in a project's bug tracker grows in
+<para>The number of tickets in a project's bug tracker grows in
 proportion to the number of people using the software.  Therefore,
 even as you fix bugs and ship an increasingly robust program, you
-should still expect the number of open issues to grow essentially
-without bound.  The frequency of duplicate issues will also increase,
-as will the frequency of incomplete or poorly described issues.</para>
+should still expect the number of open tickets to grow essentially
+without bound.  The frequency of duplicate tickets will also increase,
+as will the frequency of incomplete or poorly described tickets.</para>
 
-<para>Issue managers help alleviate these problems by watching what
-goes into the database, and periodically sweeping through it looking
-for specific problems.  Their most common action is probably to fix up
-incoming issues, either because the reporter didn't set some of the
-form fields correctly, or because the issue is a duplicate of one
-already in the database.  Obviously, the more familiar an issue
-manager is with the project's bug database, the more efficiently she
-will be able to detect duplicate issues&mdash;this is one of the main
-advantages of having a few people specialize in the bug database,
-instead of everyone trying to do it <foreignphrase>ad
-hoc</foreignphrase>.  When the group tries to do it in a decentralized
-manner, no single individual acquires a deep expertise in the content
-of the database.</para>
+<para>A <firstterm>ticket manager</firstterm><footnote><para>In
+practice most projects call them "Issue Managers", but keeping to the
+distinction described in <xref linkend="bug-tracker" /><phrase
+output="printed"> in <xref
+linkend="technical-infrastructure"/></phrase>, I'll use "ticket
+manager" here.</para></footnote> helps alleviate these problems by
+watching what goes into the database, and periodically sweeping
+through it looking for specific problems.  Their most common action is
+probably to fix up incoming tickets, either because the reporter
+didn't set some of the form fields correctly, or because the ticket is
+a duplicate of one already in the database.  Obviously, the more
+familiar a ticket manager is with the project's bug database, the
+more efficiently she will be able to detect duplicate
+tickets&mdash;this is one of the main advantages of having a few
+people specialize in the bug database, instead of everyone trying to
+do it <foreignphrase>ad hoc</foreignphrase>.  When the group tries to
+do it in a decentralized manner, no single individual acquires a deep
+expertise in the content of the database.</para>
 
-<para>Issue managers can also help map between issues and individual
+<para>Ticket managers can also help map between tickets and individual
 developers.  When there are a lot of bug reports coming in, not every
-developer may read the issue notification mailing list with equal
+developer may read the ticket notification mailing list with equal
 attention.  However, if someone who knows the development team is
-keeping an eye on all incoming issues, then she can discreetly direct
+keeping an eye on all incoming tickets, then she can discreetly direct
 certain developers' attention to specific bugs when appropriate.  Of
 course, this has to be done with a sensitivity to everything else
 going on in development, and to the recipient's desires and
-temperament.  Therefore, it is often best for issue managers to be
+temperament.  Therefore, it is often best for ticket managers to be
 developers themselves.</para>
 
-<para>Depending on how your project uses the issue tracker, issue
+<para>Depending on how your project uses the ticket tracker, ticket
 managers can also shape the database to reflect the project's
-priorities.  For example, in Subversion we schedule issues into
+priorities.  For example, in Subversion we schedule tickets into
 specific future releases, so that when someone asks "When will bug X
 be fixed?" we can say "Two releases from now," even if we can't give
-an exact date.  The releases are represented in the issue tracker as
+an exact date.  The releases are represented in the ticket tracker as
 target milestones, a field available in
-IssueZilla.<footnote><para>IssueZilla is the issue tracker we use; it
+IssueZilla.<footnote><para>IssueZilla is the ticket tracker we use; it
 is a descendant of BugZilla.</para></footnote> As a rule, every
 Subversion release has one major new feature and a list of specific
 bug fixes.  We assign the appropriate target milestone to all the
-issues planned for that release (including the new feature&mdash;it
-gets an issue too), so that people can view the bug database through
+tickets planned for that release (including the new feature&mdash;it
+gets a ticket too), so that people can view the bug database through
 the lens of release scheduling.  These targets rarely remain static,
 however.  As new bugs come in, priorities sometimes get shifted
-around, and issues must be moved from one milestone to another so that
+around, and tickets must be moved from one milestone to another so that
 each release remains manageable.  This, again, is best done by people
 who have an overall sense of what's in the database, and how various
-issues relate to each other.</para>
+tickets relate to each other.</para>
 
-<para>Another thing issue managers do is notice when issues become
+<para>Another thing ticket managers do is notice when tickets become
 obsolete.  Sometimes a bug is fixed accidentally as part of an
 unrelated change to the software, or sometimes the project changes its
 mind about whether a certain behavior is buggy.  Finding obsoleted
-issues is not easy: the only way to do it systematically is by making
-a sweep over all the issues in the database.  Full sweeps become less
-and less feasible over time, however, as the number of issues grows.
+tickets is not easy: the only way to do it systematically is by making
+a sweep over all the tickets in the database.  Full sweeps become less
+and less feasible over time, however, as the number of tickets grows.
 After a certain point, the only way to keep the database sane is to use a
-divide-and-conquer approach: categorize issues immediately on arrival
+divide-and-conquer approach: categorize tickets immediately on arrival
 and direct them to the appropriate developer's or team's attention.
-The recipient then takes charge of the issue for the rest of its
+The recipient then takes charge of the ticket for the rest of its
 lifetime, shepherding it to resolution or oblivion as necessary.  When
-the database is that large, the issue manager becomes more of an
-overall coordinator, spending less time looking at each issue herself
+the database is that large, the ticket manager becomes more of an
+overall coordinator, spending less time looking at each ticket herself
 and more time getting it into the right person's hands.</para>
 
 </sect2>
@@ -1393,16 +1400,16 @@ good for the project to continue as things are.  Be insistent, but
 never threatening.  Keep in mind that with most roles, the transition
 really happens the moment someone new starts doing the job,
 <emphasis>not</emphasis> the moment the old person stops doing it.
-For example, if the contention is over the role of, say, issue
+For example, if the contention is over the role of, say, ticket
 manager, at any point you and other influential people in the project
-can solicit for a new issue manager.  It's not actually necessary that
+can solicit for a new ticket manager.  It's not actually necessary that
 the person who was previously doing it stop doing it, as long as he
 does not sabotage (deliberately or otherwise) the efforts of the new
 volunteer.</para>
 
 <para>Which leads to a tempting thought: instead of asking the person
 to resign, why not just frame it as a matter of getting him some help?
-Why not just have two issue managers, or patch managers, or whatever
+Why not just have two ticket managers, or patch managers, or whatever
 the role is?</para>
 
 <para>Although that may sound nice in theory, it is generally not a
@@ -1742,7 +1749,7 @@ instead you can write "Thanks to J. Random &lt;jrandom@example.com&gt;
 for the bug report and reproduction recipe" in a log message.</para>
 
 <para>In Subversion, we have an informal but consistent policy of
-crediting the reporter of a bug in either the issue filed, if there is
+crediting the reporter of a bug in either the ticket filed, if there is
 one, or the log message of the commit that fixes the bug, if not.  A
 quick survey of Subversion commit logs up to commit number 14525 shows
 that about 10% of commits give credit to someone by name and email
