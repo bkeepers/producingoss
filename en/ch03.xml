@@ -2180,8 +2180,8 @@ modify some of the default behaviors:</para>
 <para>Bug tracking is a broad topic; various aspects of it are
 discussed throughout this book.  Here I'll concentrate mainly on the
 features your project should look for in a bug tracker, and how to
-approach the general problem of managing your bug database.  But to
-get to those, we have to start with a policy question: exactly what
+approach the general problem of managing the bug ticket database.  But
+to get to those, we have to start with a policy question: exactly what
 kind of information should be kept in a bug tracker?</para>
 
 <para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
@@ -2204,10 +2204,10 @@ feature itself&nbsp;&mdash;&nbsp;and the tracker's ongoing
 and eventual resolution.  But note that many projects use the word
 <emphasis>bug</emphasis> or <emphasis>issue</emphasis> to refer to
 both the ticket itself and to the underlying behavior or goal that the
-ticket is tracking.  In fact, that usage is probably more common than
+ticket is tracking.  (In fact, that usage is probably more common than
 "ticket"; it's just that in this book we need to be able to talk about
 those things distinctly in a way that projects themselves usually
-don't.</para>
+don't.)</para>
 
 <para>The classic ticket life cycle looks like this:
 
@@ -2246,7 +2246,11 @@ don't.</para>
             the fact that someone besides the original filer was able
             to make it happen proves that it is genuine, and, no less
             importantly, confirms to the original filer that they've
-            contributed to the project by reporting a real bug.</para>
+            contributed to the project by reporting a real bug.
+            <emphasis>(This step and some of the others don't apply to
+            feature proposals, task tickets, etc, of course.  But most
+            filings are for genuine bugs, so we'll focus on that
+            here.)</emphasis></para>
   </listitem>
   <listitem><para>The bug gets <firstterm>diagnosed</firstterm>: its
             cause is identified, and if possible, the effort required
@@ -2265,7 +2269,7 @@ don't.</para>
             <xref linkend="managing-volunteers"/></phrase>
             examines the assignment process in more detail).  The ticket's
             <firstterm>priority</firstterm> may also be set at this
-            stage.  For example, if it is so severe that it should
+            stage.  For example, if it is so important that it should
             delay the next release, that fact needs to be identified
             early, and the tracker should have some way of noting
             it.</para>
@@ -2305,17 +2309,17 @@ techniques for reducing the number of invalid tickets.)  Also, if
 different users are experiencing the same misunderstanding over and
 over, it might mean that aspect of the software needs to be
 redesigned.  This sort of pattern is easiest to notice when there is
-a ticket manager monitoring the bug database; see
-<xref linkend="ticket-manager"/><phrase output="printed"> in
+an issue manager monitoring the bug database; see
+<xref linkend="issue-manager"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>.</para>
 
-<para>Another common life cycle variation is for the ticket to be closed
+<para>Another common life event for the ticket to be closed
 as a <firstterm>duplicate</firstterm> soon after Step 1.  A duplicate
 is when someone reports something that's already known to the project.
 Duplicates are not confined to open tickets: it's possible for a bug to
 come back after having been fixed (this is known as a
-<firstterm>regression</firstterm>), in which case the preferred course
-is usually to reopen the original ticket and close any new reports as
+<firstterm>regression</firstterm>), in which case a reasonable course
+is to reopen the original ticket and close any new reports as
 duplicates of the original one.  The bug tracking system should keep
 track of this relationship bidirectionally, so that reproduction
 information in the duplicates is available to the original ticket, and
@@ -2354,22 +2358,21 @@ other developers, etc.</para>
 
 <itemizedlist>
   <listitem>
-    <para>The tracker must be connected to a mailing list, such that
+    <para>The tracker should be connected to email, such that
     every change to a ticket, including its initial filing, causes a
-    mail to go out describing what happened.  This mailing list
-    is usually different from the regular development list, since not
-    all developers may want to receive automated bug mails, but (just
-    as with commit mails) the Reply-to header should be set to the
-    development mailing list.</para>
+    notification mail to go out to some set of appropriate
+    recipients.  The recipient can be a designated mailing list, but
+    it shouldn't be the main day-to-day development list, since not
+    all developers will want to receive automated tracker mails.</para>
   </listitem>
   <listitem>
-    <para>The form for filing tickets should capture the reporter's
-    email address, so she can be contacted for more information.
-    (However, it should not <emphasis>require</emphasis> the
-    reporter's email address, as some people prefer to report
-    anonymously.  See <xref linkend="anonymity"/><phrase
-    output="printed"> later in this chapter</phrase> for more on the
-    importance of anonymity.)</para>
+    <para>The form for filing tickets should have a place to record
+    the reporter's email address or other contact information, so she
+    can be contacted for more details. (However, it should not
+    <emphasis>require</emphasis> the reporter's email address, as some
+    people prefer to report anonymously.  See <xref
+    linkend="anonymity"/><phrase output="printed"> later in this
+    chapter</phrase> for more on the importance of anonymity.)</para>
   </listitem>
 </itemizedlist>
 
@@ -2378,39 +2381,29 @@ other developers, etc.</para>
 <sect2 id="bug-tracker-mailing-list-interaction">
 <title>Interaction with Mailing Lists</title>
 
-<para>Make sure the bug tracker doesn't turn into a message forum.
-Although it is important to maintain a human presence in the bug
-tracker, it is not fundamentally suited to real-time discussion.
-Think of it rather as an archiver, a way to organize facts and
-references to other discussions, primarily those that take place on
-mailing lists.</para>
+<para>Don't use the bug tracker as a substitute for the main
+development mailing list.  Many trackers now have decent email
+integration features&nbsp;&mdash;&nbsp;at a minimum, the ability to
+receive and create new ticket comments by email&nbsp;&mdash;&nbsp;and
+this makes it easy to have a technical discussion right there in the
+ticket, using just one's email client.  That's fine, but if the
+discussion starts to get into questions beyond the scope of just that
+one bug, then get the discussion over to the main development list.
+You can continue to CC the ticket, or otherwise link to the dev list
+discussion from the ticket, but the important thing is to make sure
+that people who <emphasis>haven't</emphasis> been following that
+particular ticket, but who might have an interest in the larger
+questions it raises, have a chance to participate.</para>
 
-<para>There are two reasons to make this distinction.  First, the bug
-tracker is more cumbersome to use than the mailing lists (or than
-real-time chat forums, for that matter).  This is not because bug
-trackers have bad user interface design, it's just that their
-interfaces were designed for capturing and presenting discrete states,
-not free-flowing discussions.  Second, not everyone who should be
-involved in discussing a given ticket is necessarily watching the bug
-tracker.  Part of good ticket management (see
-<xref linkend="share-management"/><phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>) is to make sure
-each ticket is brought to the right peoples' attention, rather than
-requiring every developer to monitor all tickets.  In
-<xref linkend="bug-tracker-usage"/><phrase output="printed"> in <xref linkend="communications"/>,</phrase> we'll look at ways to make
-sure people don't accidentally siphon discussions out of appropriate
-forums and into the bug tracker.</para>
-
-<para>Some bug trackers can monitor mailing lists and automatically
-log all emails that are about a known ticket.  Typically they do this
-by recognizing the ticket's identifying number in the subject line of
-the mail, as part of a special string; developers learn to include
-these strings in their mails to attract the tracker's notice.  The bug
-tracker may either save the entire email, or (even better) just record
-a link to the mail in the regular mailing list archive.  Either way,
-this is a very useful feature; if your tracker has it, make sure
-both to turn it on and to remind people to take advantage of
-it.</para>
+<para>The exact occasions and methods by which you link an ephemeral,
+ticket-specific discussion community with others in the permanent,
+project-specific community will depend on many things: the tracking
+software, the way your community is organized, etc.  I can't predict
+it here, I can merely say that your project should be alert to the
+need for such linking.  Not everyone who should be involved in
+discussing a given ticket is necessarily watching that part of the
+tracker&nbsp;&mdash;&nbsp;so make sure everyone knows how to bring
+other people into a discussion.</para>
 
 </sect2>
 
@@ -2518,7 +2511,7 @@ routine maintenance, and to try to get as many people as possible to
 help.</para>
 
 <para>See also
-<xref linkend="ticket-manager"/><phrase output="printed"> in
+<xref linkend="issue-manager"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>.</para>
 
 </sect2>
