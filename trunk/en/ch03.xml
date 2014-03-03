@@ -2179,10 +2179,10 @@ modify some of the default behaviors:</para>
 
 <para>Bug tracking is a broad topic; various aspects of it are
 discussed throughout this book.  Here I'll concentrate mainly on the
-features your project should look for in a bug tracker, and how to
-approach the general problem of managing the bug ticket database.  But
-to get to those, we have to start with a policy question: exactly what
-kind of information should be kept in a bug tracker?</para>
+features your project should look for in a bug tracker, and how to use
+them.  But to get to those, we have to start with a policy question:
+exactly what kind of information should be kept in a bug
+tracker?</para>
 
 <para>The term <firstterm>bug tracker</firstterm> is misleading.  Bug
 tracking systems are used to track not only bug reports, but new
@@ -2204,9 +2204,9 @@ feature itself&nbsp;&mdash;&nbsp;and the tracker's ongoing
 and eventual resolution.  But note that many projects use the word
 <emphasis>bug</emphasis> or <emphasis>issue</emphasis> to refer to
 both the ticket itself and to the underlying behavior or goal that the
-ticket is tracking.  (In fact, that usage is probably more common than
-"ticket"; it's just that in this book we need to be able to talk about
-those things distinctly in a way that projects themselves usually
+ticket is tracking.  (In fact, those usages are probably more common than
+"ticket"; it's just that in this book we need to be able to make that
+distinction explicitly in a way that projects themselves usually
 don't.)</para>
 
 <para>The classic ticket life cycle looks like this:
@@ -2256,13 +2256,12 @@ don't.)</para>
             cause is identified, and if possible, the effort required
             to fix it is estimated.  Make sure these things get
             recorded in the ticket; if the person who diagnosed the
-            bug suddenly has to step away from the project for a
-            while (as can often happen with volunteer developers),
-            someone else should be able to pick up where she left
-            off.</para>
+            bug suddenly has to step away from it for a
+            while, someone else should be able to pick up where she
+            left off.</para>
 
-            <para>In this stage, or sometimes the previous one, a
-            developer may "take ownership" of the ticket and
+            <para>In this stage, or sometimes in the previous one,
+            a developer may "take ownership" of the ticket and
             <firstterm>assign</firstterm> it to herself (<xref
             linkend="delegation-assignment"/><phrase
             output="printed"> in
@@ -2284,8 +2283,8 @@ don't.)</para>
   </listitem>
   <listitem><para>The bug gets fixed (or the task completed, or
             the patch applied, or whatever).  The change or set of
-            changes that fixed it should be recorded in a comment in
-            the ticket, after which the ticket is
+            changes that fixed it should be discoverable from
+            the ticket.  After this, the ticket is
             <firstterm>closed</firstterm> and/or marked as
             <firstterm>resolved</firstterm>.</para>
   </listitem>
@@ -2338,72 +2337,115 @@ basic shape is the same, and while the life cycle itself is not
 specific to open source software, it has implications for how open
 source projects use their bug trackers.</para>
 
-<para>As Step 1 implies, the tracker is as much a public face of the
-project as the mailing lists or web pages.  Anyone may file a ticket,
-anyone may look at a ticket, and anyone may browse the list of currently
-open tickets.  It follows that you never know how many people are
-waiting to see progress on a given ticket.  While the size and skill of
-the development community constrains the rate at which tickets can be
-resolved, the project should at least try to acknowledge each ticket the
-moment it appears.  Even if the ticket lingers for a while, a response
-encourages the reporter to stay involved, because she feels that a
-human has registered what she has done (remember that filing a
+<para>The tracker is as much a public face of the project as the
+mailing lists or web pages.  Anyone may file a ticket, anyone may look
+at a ticket, and anyone may browse the list of currently open tickets.
+It follows that you never know how many people are waiting to see
+progress on a given ticket.  While the size and skill of the
+development community constrains the rate at which tickets can be
+resolved, the project should at least try to acknowledge each ticket
+the moment it appears.  Even if the ticket lingers for a while, a
+response encourages the reporter to stay involved, because she feels
+that a human has registered what she has done (remember that filing a
 ticket usually involves more effort than, say, posting an email).
 Furthermore, once a ticket is seen by a developer, it enters the
-project's consciousness, in the sense that the developer can be on
-the lookout for other instances of the ticket, can talk about it with
+project's consciousness, in the sense that the developer can be on the
+lookout for other instances of the ticket, can talk about it with
 other developers, etc.</para>
 
-<para>The need for timely reactions implies two things:
+<para>This centrality to the life of the project implies a few things
+about trackers' technical features:
 
 <itemizedlist>
   <listitem>
     <para>The tracker should be connected to email, such that
     every change to a ticket, including its initial filing, causes a
     notification mail to go out to some set of appropriate
-    recipients.  The recipient can be a designated mailing list, but
-    it shouldn't be the main day-to-day development list, since not
-    all developers will want to receive automated tracker mails.</para>
+    recipients.  See <xref linkend="bug-tracker-email-interaction"/>
+    later in this chapter for more on this.</para>
   </listitem>
   <listitem>
     <para>The form for filing tickets should have a place to record
     the reporter's email address or other contact information, so she
-    can be contacted for more details. (However, it should not
-    <emphasis>require</emphasis> the reporter's email address, as some
-    people prefer to report anonymously.  See <xref
+    can be contacted for more details.  But if possible, it should not
+    <emphasis>require</emphasis> the reporter's email address or real
+    identity, as some people prefer to report anonymously.  See <xref
     linkend="anonymity"/><phrase output="printed"> later in this
-    chapter</phrase> for more on the importance of anonymity.)</para>
+    chapter</phrase> for more on the importance of anonymity.</para>
+  </listitem>
+  <listitem>
+    <para>The tracker should have APIs.  I cannot stress the
+    importance of this enough.  If there is no way to interact with
+    the tracker programmatically, then in the long run there is no way
+    to interact with it scalably.  APIs provide a route to customizing
+    the behavior of the tracker by, in effect, expanding it to include
+    third-party software.  Instead of being just the specific ticket
+    tracking software running on a server somewhere, it's that
+    software <emphasis>plus</emphasis> whatever custom behaviors your
+    project implements elsewhere and plugs in to the tracker via the
+    APIs.</para>
+    <para>Also, if your project uses a proprietary ticket tracker,
+    as is becoming more common now that so many projects host their
+    code on proprietary-but-free-of-charge hosting sites and just use
+    the site's built-in tracker, APIs provide a way to avoid being
+    locked in to that hosting platform.  You can, in theory, take the
+    ticket history with you if you choose to go somewhere else (you
+    may never exercise this option, but think of it as
+    insurance&nbsp;&mdash;&nbsp;and some projects have actually done
+    it).</para>
+    <para>Currently, the ticket trackers of the big three hosting
+    sites (GitHub, Google Code Hosting, and SourceForge) all have
+    APIs, fortunately.  Of them, only SourceForge is itself open
+    source, running a platform called
+    <firstterm>Allura</firstterm><footnote><para>Oddly, SourceForge's
+    API was also the hardest to find documentation for, though it
+    helps once you know the platform's name is "Allura".  For
+    reference, their API documentation is here: <ulink
+    url="http://sourceforge.net/p/forge/documentation/Allura%20API/"
+    >sourceforge.net/p/forge/documentation/Allura%20API</ulink
+    ></para></footnote>.</para>
   </listitem>
 </itemizedlist>
 
 </para>
 
-<sect2 id="bug-tracker-mailing-list-interaction">
-<title>Interaction with Mailing Lists</title>
+<sect2 id="bug-tracker-email-interaction">
+<!-- For link compatibility with the old section ID. -->
+<anchor id="bug-tracker-mailing-list-interaction" />
+<title>Interaction with Email</title>
 
-<para>Don't use the bug tracker as a substitute for the main
-development mailing list.  Many trackers now have decent email
-integration features&nbsp;&mdash;&nbsp;at a minimum, the ability to
-receive and create new ticket comments by email&nbsp;&mdash;&nbsp;and
-this makes it easy to have a technical discussion right there in the
-ticket, using just one's email client.  That's fine, but if the
-discussion starts to get into questions beyond the scope of just that
-one bug, then get the discussion over to the main development list.
-You can continue to CC the ticket, or otherwise link to the dev list
-discussion from the ticket, but the important thing is to make sure
-that people who <emphasis>haven't</emphasis> been following that
-particular ticket, but who might have an interest in the larger
-questions it raises, have a chance to participate.</para>
+<para>Most trackers now have at least decent email integration
+features: at a minimum, the ability to receive and create new ticket
+comments by email, the ability to "subscribe" to a ticket to receive
+emails about activity on that ticket, and the ability to add new
+comments to the ticket by email.  Some trackers even allow users to
+manipulate ticket state (e.g., change the status field, the assignee,
+etc) by email, and for people who use the tracker a lot, such as an
+<xref linkend="issue-manager" >issue manager</xref>, that can make a
+huge difference in their ability to stay on top of tracker activity
+and keep things organized.</para>
 
-<para>The exact occasions and methods by which you link an ephemeral,
-ticket-specific discussion community with others in the permanent,
+<para>The tracker email feature that is likely to be used by everyone,
+though, is simply the ability to read a ticket's activity by email and
+respond by email.  This is a valuable time-saver for everyone in the
+project.  But if a discussion starts to get into questions beyond the
+scope of just that one ticket, then make sure to consciously move the
+conversation over to the main development list.  You can continue to
+CC the ticket, or just link to the dev list discussion thread from the
+ticket, but the important thing is to make sure that people who
+<emphasis>haven't</emphasis> been following that particular ticket,
+but who might have an interest in the larger questions it raises, have
+a chance to participate.</para>
+
+<para>The exact occasions on which you should link an ephemeral,
+ticket-specific discussion community with the permanent,
 project-specific community will depend on many things: the tracking
 software, the way your community is organized, etc.  I can't predict
-it here, I can merely say that your project should be alert to the
+it here.  I can merely say that your project should be alert to the
 need for such linking.  Not everyone who should be involved in
 discussing a given ticket is necessarily watching that part of the
 tracker&nbsp;&mdash;&nbsp;so make sure everyone knows how to bring
-other people into a discussion.</para>
+others into a discussion when necessary.</para>
 
 </sect2>
 
