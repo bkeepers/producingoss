@@ -15,14 +15,19 @@ nothing about how conflicts are resolved.</para>
 
 <para>This chapter tries to show the structural underpinnings
 successful projects have in common.  I mean "successful" not just in
-terms of technical quality, but also operational health and
+terms of technical quality, but in terms of operational health and
 survivability.  Operational health is the project's ongoing ability to
 incorporate new code contributions and new developers, and to be
 responsive to incoming bug reports.  Survivability is the project's
 ability to exist independently of any individual participant or
 sponsor&mdash;think of it as the likelihood that the project would
 continue even if all of its founding members were to move on to other
-things.  Technical success is not hard to achieve, but without a
+things<footnote><para>This is also known as the "Bus Factor", that is,
+how many participants would have to get hit by a bus (figuratively
+speaking) for the project to be unable to continue.  See
+<ulink url="https://en.wikipedia.org/wiki/Bus_factor"
+       >en.wikipedia.org/wiki/Bus_factor</ulink>.</para></footnote>.
+Technical success is not hard to achieve, but without a
 robust developer base and social foundation, a project may be unable
 to handle the growth that initial success brings, or the departure of
 charismatic individuals.</para>
@@ -50,8 +55,8 @@ ability of anyone to take a copy of the source code and use it to
 start a competing project, known as a <firstterm>fork</firstterm>.
 The paradoxical thing is that the <emphasis>possibility</emphasis> of
 forks is usually a much greater force in free software projects than
-actual forks, which are very rare.  Because a fork is bad for everyone
-(for reasons examined in detail in
+actual forks, which are very rare.  Because a fork is usually bad for
+everyone (for reasons examined in detail in
 <xref linkend="forks"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>), the more serious
 the threat of a fork becomes, the more willing people are to
@@ -60,13 +65,13 @@ compromise to avoid it.</para>
 <para>Forks, or rather the potential for forks, are the reason there
 are no true dictators in free software projects.  This may seem like a
 surprising claim, considering how common it is to hear someone called
-the "dictator" or "tyrant" in a given open source project.  But this
-kind of tyranny is special, quite different from the conventional
-understanding of the word.  Imagine a king whose subjects could copy
-his entire kingdom at any time and move to the copy to rule as they
-see fit.  Would not such a king govern very differently from one whose
-subjects were bound to stay under his rule no matter what he
-did?</para>
+the "dictator" (sometimes softened to "benevolent dictator") in a
+given open source project.  But this kind of dictatorship is special,
+quite different from the conventional understanding of the word.
+Imagine a king whose subjects could copy his entire kingdom at any
+time and move to the copy to rule as they see fit.  Would not such a
+king govern very differently from one whose subjects were bound to
+stay under his rule no matter what he did?</para>
 
 <para>This is why even projects that are not formally organized as
 democracies are, in practice, democracies when it comes to important
@@ -80,14 +85,14 @@ source licenses is that they do not give one party more power than any
 other in deciding how the code can be changed or used.  If the dictator
 were to suddenly start making bad decisions, there would be
 restlessness, followed eventually by revolt and a fork.  Except, of
-course, things rarely get that far, because the dictator compromises
+course, that things rarely get that far, because the dictator compromises
 first.</para>
 
 <para>But just because forkability puts an upper limit on how much
 power anyone can exert in a project doesn't mean there aren't
 important differences in how projects are governed.  You don't want
-every decision to come down to the last-resort question of who is
-considering a fork.  That would get tiresome very quickly, and sap
+every decision to come down to the last-resort question of who might
+consider a fork.  That would get tiresome very quickly, and sap
 energy away from real work.  The next two sections examine different
 ways to organize projects such that most decisions go smoothly.  These
 two examples are somewhat idealized extremes; many projects fall
@@ -123,9 +128,9 @@ possible.  They participate in those discussions themselves, but as
 regular developers, often deferring to an area maintainer who has more
 expertise.  Only when it is clear that no consensus can be reached,
 and that most of the group <emphasis>wants</emphasis> someone to guide
-the decision so that development can move on, do they put their foot
+the decision so that development can move on, does she put her foot
 down and say "This is the way it's going to be."  Reluctance to make
-decisions by fiat is a trait shared by virtually all successful
+decisions by fiat is a trait shared by almost all successful
 benevolent dictators; it is one of the reasons they manage to keep the
 role.</para>
 
@@ -159,41 +164,47 @@ change under consideration, but that's all.  The BD position is
 neither acquired nor held by virtue of intimidating coding skills.
 What <emphasis>is</emphasis> important is experience and overall
 design sense&mdash;not necessarily the ability to produce good
-design on demand, but the ability to recognize good design, whatever
-its source.</para>
+design on demand, but the ability to recognize and endorse good
+design, whatever its source.</para>
 
 <para>It is common for the benevolent dictator to be a founder of the
 project, but this is more a correlation than a cause.  The sorts of
 qualities that make one able to successfully start a
 project&mdash;technical competence, ability to persuade other people
-to join, etc.&mdash;are exactly the qualities any BD would need.  And
+to join, and so on.&mdash;are exactly the qualities any BD would need.  And
 of course, founders start out with a sort of automatic seniority,
-which can often be enough to make benevolent dictatorship appear the
-path of least resistance for all concerned.</para>
+which can often be enough to make benevolent dictatorship by the
+founder appear the path of least resistance for all concerned.</para>
 
 <para>Remember that the potential to fork goes both ways.  A BD can
 fork a project just as easily as anyone else, and some have
 occasionally done so, when they felt that the direction they wanted to
 take the project was different from where the majority of other
 developers wanted to go.  Because of forkability, it does not matter
-whether the benevolent dictator has root (system administrator
-privileges) on the project's main servers or not.  People sometimes
-talk of server control as though it were the ultimate source of power
-in a project, but in fact it is irrelevant.  The ability to add or
-remove people's commit passwords on one particular server affects only
-the copy of the project that resides on that server.  Prolonged abuse
-of that power, whether by the BD or someone else, would simply lead to
-development moving to a different server.</para>
+whether the benevolent dictator has control over the currently
+accepted "master" project repository.  People sometimes talk of such
+control as though it were the ultimate source of power in a project,
+but in fact it is irrelevant.  The ability to add or remove people's
+commit passwords for one project on a particular hosting site affects
+only that copy of the project on that site.  Prolonged abuse of that
+power, whether by the BD or someone else, would simply lead to
+development moving to a different copy of the project.</para>
+
+<para><emphasis>poss2 TODO: 16 March 2014: There should be a short
+discussion of, or a link to discussion of, control over
+project-related trademarks here.  See other todo at the end of this
+chapter mentioning non-profits and referring to trademarks
+too.</emphasis></para>
 
 </sect2>
 
 <para>Whether your project should have a benevolent dictator, or would
-run better with some less centralized system, largely depends on who
-is available to fill the role.  As a general rule, if it's simply
-obvious to everyone who should be the BD, then that's the way to go.
-But if no candidate for BD is immediately obvious, then the project
-should probably use a decentralized decision-making process, as
-described in the next section.</para>
+run better with some less centralized form of governance, largely
+depends on who is available to fill the role.  As a general rule, if
+it's simply obvious to everyone who should be the BD, then that's the
+way to go.  But if no candidate for BD is immediately obvious, then
+the project should probably use a decentralized decision-making
+process, as described in the next section.</para>
 
 </sect1>
 
@@ -227,13 +238,13 @@ two common elements: one, the group works by consensus most of the
 time; two, there is a formal voting mechanism to fall back on when
 consensus cannot be reached.</para>
 
-<para><firstterm>Consensus</firstterm> merely means an agreement that
+<para><firstterm>Consensus</firstterm> simply means an agreement that
 everyone is willing to live with.  It is not an ambiguous state: a
 group has reached consensus on a given question when someone proposes
-that consensus has been reached, and no one contradicts the assertion.
+that consensus has been reached and no one contradicts the assertion.
 The person proposing consensus should, of course, state specifically
 what the consensus is, and what actions would be taken in consequence
-of it, if they're not obvious.</para>
+of it, if those are not obvious.</para>
 
 <para>Most conversation in a project is on technical topics, such as
 the right way to fix a certain bug, whether or not to add a feature,
@@ -270,13 +281,19 @@ out with an obligatory apology for having missed out on prior
 discussion, though this may be omitted if the objector finds no record
 of such a discussion in the mailing list archives.  Either way, there
 is no reason for the tone of the discussion to be different after the
-change has been committed than before.  Any change can be reverted, at
-least until dependent changes are introduced (i.e., new code that
-would break if the original change were suddenly removed).  The
-version control system gives the project a way to undo the effects of
-bad or hasty judgement.  This, in turn, frees people to trust their
-instincts about how much feedback is necessary before doing
-something.</para>
+change has been committed than before.  Any change can be
+reverted<footnote><para>Of course, it's good manners and good sense to
+discuss before reverting.  Reverting a change is not the way to start
+a conversation about whether it should be reverted.  There are
+sometimes situation where it may be appropriate to perform the reversion
+before the conversation about it has definitively concluded, but even
+then it's still important to have started the conversation
+first.</para></footnote>, at least until dependent changes are
+introduced (i.e., new code that would break if the original change
+were suddenly removed).  The version control system gives the project
+a way to undo the effects of bad or hasty judgement.  This, in turn,
+frees people to trust their instincts about how much feedback is
+necessary before doing something.</para>
 
 <para>This also means that the process of establishing consensus need
 not be very formal.  Most projects handle it by feel.  Minor changes
@@ -287,15 +304,15 @@ day or two before assuming there is consensus, the rationale being
 that no one should be marginalized in an important conversation simply
 because he didn't check email frequently enough.</para>
 
-<para>Thus, when someone is confident he knows what needs to be done,
-he should just go ahead and do it.  This applies not only to software
+<para>Thus, when someone is confident she knows what needs to be done,
+she should just go ahead and do it.  This applies not only to software
 fixes, but to web site updates, documentation changes, and anything
 else unlikely to be controversial.  Usually there will be only a few
-instances where an action needs to be undone, and these can be handled on
+instances where an action draws disapproval, and these can be handled on
 a case-by-case basis.  Of course, one shouldn't encourage people to be
 headstrong.  There is still a psychological difference between a
-decision under discussion and one that has already taken effect, even
-if it is technically reversible.  People always feel that momentum is
+decision under discussion and one that has already taken effect but is
+technically reversible.  People always feel that momentum is
 allied to action, and will be slightly more reluctant to revert a
 change than to prevent it in the first place.  If a developer abuses
 this fact by committing potentially controversial changes too quickly,
@@ -318,7 +335,8 @@ usually one or two people playing the role of <firstterm>honest
 broker</firstterm>: posting periodic summaries of the various
 arguments and keeping track of where the core points of disagreement
 (and agreement) lie.  These summaries help everyone measure how much
-progress has been made, and remind everyone of what issues remain to
+progress has been made toward resolving the issues, and remind
+everyone of what questions remain to 
 be addressed.  Those same summaries can serve as prototypes for a
 ballot sheet, should a vote become necessary.  If the honest brokers
 have been doing their job well, they will be able to credibly call for
@@ -334,7 +352,7 @@ fashion.</para>
 By the time matters reach a vote, the disagreement has usually boiled
 down to a few key issues, with recognizable labels and brief
 descriptions.  Occasionally a developer will object to the form of the
-ballot itself.  Sometimes his concern is legitimate, for example,
+ballot itself.  Sometimes his concern is legitimate, for example
 that an important choice was left off or not described accurately.
 But other times a developer may be merely trying to stave off the
 inevitable, perhaps knowing that the vote probably won't go his way.
@@ -673,7 +691,8 @@ the developers already know how to do.  Explain fiscal sponsorship
 when talking about fundraising.  Note trademark ownership as well as
 copyright ownership, and link to this section as appropriate from the
 licensing/copyrights chapter and from the money / corporate
-involvement chapter.</emphasis></para>
+involvement chapter.  (See also other todo earlier in this chapter,
+from 16 March 2014, about trademarks.)</emphasis></para>
 
 </sect1>
 
