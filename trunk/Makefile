@@ -27,6 +27,7 @@ ebook:
 
 # The web site post-commit hook runs 'make www'.
 www: lang-www dist
+	@svnversion > revision.txt
 lang-www:
 	@for name in ${LANGUAGES}; do                \
           cd $${name}; make -f ../lang-makefile www; \
