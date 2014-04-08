@@ -1,0 +1,1295 @@
+<chapter id="legal">
+
+<title>Licenses, Copyrights, and Patents</title>
+
+<simplesect>
+
+<para>The license you select probably won't have a major impact on the
+adoption of your project, as long as the license is open source.
+Users generally choose software based on quality and features, not on
+the details of the license.  Nevertheless, you still need a basic
+understanding of free software licensing issues, both to ensure that
+the project's license is compatible with its goals, and to be able to
+discuss licensing decisions with other people.  Please note, however,
+that I am not a lawyer, and that nothing in this chapter should be
+construed as formal legal advice.  For that, you'll need to hire a
+lawyer or be one.</para>
+
+</simplesect>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="licenses-terminology">
+<title>Terminology</title>
+
+<para>In any discussion of open source licensing, the first thing that
+becomes apparent is that there seem to be many different words for the
+same thing: <firstterm>free&nbsp;software</firstterm>,
+<firstterm>open&nbsp;source</firstterm>,
+<firstterm>FOSS</firstterm>, <firstterm>F/OSS</firstterm>, and
+<firstterm>FLOSS</firstterm>.  Let's start by sorting those
+out, along with a few other terms.</para>
+
+<variablelist>
+  <varlistentry><term><firstterm>free software</firstterm></term>
+    <listitem><para>Software that can be freely shared and modified,
+              including in source code form.  The term was first
+              coined by Richard Stallman, who codified it in the GNU
+              General Public License (GPL), and who founded the Free
+              Software Foundation (<ulink url="http://www.fsf.org/"
+              >fsf.org</ulink>) to promote the concept.</para>
+
+              <para>Although "free software" covers almost exactly the
+              same range of software as "open source", the FSF, among
+              others, prefers the former term because it emphasizes
+              the idea of freedom, and the concept of
+              freely redistributable software as primarily a social
+              movement rather than a technical one.  The FSF
+              acknowledges that the term is ambiguous&mdash;it could
+              mean "free" as in "zero-cost", instead of "free" as in
+              "freedom"&mdash;but feels that it's still the best term,
+              all things considered, and that the other possibilities
+              in English have their own ambiguities.  (Throughout this
+              book, "free" is used in the "freedom" sense, not the
+              "zero-cost" sense.)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>open source software</firstterm></term>
+
+    <listitem><para>Free software under another name.  But the
+              different name reflects an important philosophical
+              difference: "open source" was coined by the Open Source
+              Initiative (<ulink url="http://www.opensource.org/"
+              >opensource.org</ulink>)
+              as a deliberate alternative to "free software," in order
+              to make such software a more palatable choice for
+              corporations, by presenting it as a development
+              methodology rather than a political movement.  They may
+              also have wanted to overcome another stigma: that
+              anything "free" must be low quality.</para>
+
+              <para>While any license that is free is also open
+              source, and vice versa (with a few minor exceptions),
+              people tend to pick one term and stick with it.  In
+              general, those who prefer "free software" are more
+              likely to have a philosophical or moral stance on the
+              issue, while those who prefer "open source" either don't
+              view it as a matter of freedom, or are not interested in
+              advertising the fact that they do.  See
+              <xref linkend="free-vs-open-source"/><phrase
+              output="printed"> in
+              <xref linkend="introduction"/></phrase> for a more
+              detailed history of this schism.</para>
+
+              <para>The Free Software Foundation has an
+              excellent&mdash;utterly unobjective, but nuanced and
+              quite fair&mdash;exegesis of the two terms, at <ulink
+              url="http://www.fsf.org/licensing/essays/free-software-for-freedom.html"
+              >www.fsf.org/licensing/essays/free-software-for-freedom.html</ulink>.
+              The Open Source Initiative's take on it is (or was, in
+              2002) spread across two pages: <ulink
+              url="http://web.archive.org/web/20021204155022/http://www.opensource.org/advocacy/case_for_hackers.php#marketing"
+              >web.archive.org/web/20021204155022/http://www.opensource.org/advocacy/case_for_hackers.php#marketing</ulink>
+              and <ulink
+              url="http://web.archive.org/web/20021204155022/http://www.opensource.org/advocacy/free-notfree.php"
+              >web.archive.org/web/20021204155022/http://www.opensource.org/advocacy/free-notfree.php</ulink>
+              [sic].</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>FOSS</firstterm>,
+                      <firstterm>F/OSS</firstterm>,
+                      <firstterm>FLOSS</firstterm></term>
+
+    <listitem><para>Where there are two of anything, there will soon
+              be three, and that is exactly what is happening with
+              terms for free software.  The academic world, perhaps
+              wanting precision and inclusiveness over elegance, seems
+              to have settled on FOSS, or sometimes F/OSS, standing
+              for "Free / Open Source Software".  Another variant
+              gaining momentum is FLOSS, which
+              stands for "Free / Libre Open Source Software"
+              (<foreignphrase>libre</foreignphrase> is familiar in
+              many languages and does not suffer from the ambiguities
+              of "free"; see
+              <ulink url="http://en.wikipedia.org/wiki/FLOSS"
+              >en.wikipedia.org/wiki/FLOSS</ulink> for more).</para>
+
+              <para>All these terms mean essentially the same thing:
+              software that can be modified and redistributed by
+              everyone, sometimes&mdash;but not always&mdash;with the
+              requirement that derivative works be freely
+              redistributable under the same terms.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>DFSG-compliant</firstterm></term>
+    <listitem><para>Compliant with the Debian Free Software Guidelines
+              (<ulink
+              url="http://www.debian.org/social_contract#guidelines"
+              >debian.org/social_contract#guidelines</ulink>).
+              This is a widely-used test for whether a given license
+              is truly open source
+              (free, <foreignphrase>libre</foreignphrase>, etc.).  The
+              Debian Project's mission is to maintain an entirely free
+              operating system, such that someone installing it need
+              never doubt that she has the right to modify and
+              redistribute any or all of the system.  The Debian Free
+              Software Guidelines are the requirements that a software
+              package's license must meet in order to be included in
+              Debian.  Because the Debian Project spent a good deal of
+              time thinking about how to construct such a test, the
+              guidelines they came up with have proven very robust
+              (see <ulink url="http://en.wikipedia.org/wiki/DFSG"
+              >en.wikipedia.org/wiki/DFSG</ulink>),
+              and as far as I'm aware, no serious objection to them has
+              been raised either by the Free Software Foundation or
+              the Open Source Initiative.  If you know that a given
+              license is DFSG-compliant, you know that it guarantees
+              all the important freedoms (such as forkability even
+              against the original author's wishes) required to
+              sustain the dynamics of an open source project.  All of
+              the licenses discussed in this chapter are
+              DFSG-compliant.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>OSI-approved</firstterm></term>
+    <listitem><para>Approved by the Open Source Initiative.  This is
+              another widely-used test of whether a license permits
+              all the necessary freedoms.  The OSI's definition of
+              open source software is based on the Debian Free
+              Software Guidelines, and any license that meets one
+              definition almost always meets the other.  There have
+              been a few exceptions over the years, but only involving
+              niche licenses and none of any relevance here.  Unlike
+              the Debian Project, the OSI maintains a list of all
+              licenses it has ever approved, at
+              <ulink url="http://www.opensource.org/licenses/"
+              >opensource.org/licenses/</ulink>, so
+              that being "OSI-approved" is an unambiguous state: a
+              license either is or isn't on the list.</para>
+
+              <para>The Free Software Foundation also maintains a list
+              of licenses at <ulink
+              url="http://www.fsf.org/licensing/licenses/license-list.html"
+              >fsf.org/licensing/licenses/license-list.html</ulink>.
+              The FSF categorizes licenses not only by whether they
+              are free, but whether they are compatible with the GNU
+              General Public License.  GPL compatibility is an
+              important topic, covered in
+              <xref
+              linkend="license-compatibility"/><phrase
+              output="printed"> later in this chapter</phrase>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>proprietary</firstterm>,
+                      <firstterm>closed-source</firstterm></term>
+    <listitem><para>The opposite of "free" or "open source."  It means
+              software distributed under traditional, royalty-based
+              licensing terms, where users pay per copy, or under any
+              other terms sufficiently restrictive to prevent open
+              source dynamics from operating.  Even software
+              distributed at no charge can still be proprietary, if
+              its license does not permit free redistribution and
+              modification.</para>
+
+              <para>Generally "proprietary" and "closed-source" are
+              synonyms.  However, "closed-source" additionally implies
+              that the source code cannot even be seen.  Since the
+              source code cannot be seen with most proprietary
+              software, this is normally a distinction without a
+              difference.  However, occasionally someone releases
+              proprietary software under a license that allows others
+              to view the source code.  Confusingly, they sometimes
+              call this "open source" or "nearly open source," etc.,
+              but that's misleading. The
+              <emphasis>visibility</emphasis> of the source code is
+              not the issue; the important question is what you're
+              allowed to do with it.  Thus, the difference between
+              proprietary and closed-source is mostly irrelevant, and
+              the two can be treated as synonyms.</para>
+
+              <para>Sometimes <firstterm>commercial</firstterm> is
+              used as a synonym for "proprietary," but properly
+              speaking, the two are not the same thing.  Free software
+              can be commercial software.  After all, free software
+              can be sold, as long as the buyers are not restricted
+              from giving away copies themselves.  It can be
+              commercialized in other ways as well, for example by
+              selling support, services, and certification.  There are
+              multimillion dollar companies built on free software
+              today, so it is clearly neither inherently
+              anti-commercial nor anti-corporate.  On the other hand,
+              it <emphasis>is</emphasis> anti-proprietary by its
+              nature, and this is the key way in which it differs from
+              traditional per-copy license models.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>public domain</firstterm></term>
+    <listitem><para>Having no copyright holder, meaning that there is
+              no one who has the right to restrict copying of the
+              work.  Being in the public domain is not the same as
+              having no author.  Everything has an author, and even if a
+              work's author or authors choose to put it in the public
+              domain, that doesn't change the fact that they wrote
+              it.</para>
+
+              <para>When a work is in the public domain, material from
+              it can be incorporated into a copyrighted work, and
+              thereafter <emphasis>that copy</emphasis> of the
+              material is covered under the same copyright as the
+              whole work.  But this does not affect the availability
+              of the original work, which remains in the public
+              domain.  Thus, releasing something into the public
+              domain is technically one way to make it "free,"
+              according to the guidelines of most free software
+              certifying organizations.  However, there are usually
+              good reasons to use a license instead of just releasing
+              into the public domain: even with free software, certain
+              restrictions can be useful, not only to the copyright
+              holder but even to recipients as well, as the next
+              section makes clear.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>copyleft</firstterm></term>
+    <listitem><para>A license that uses copyright law to achieve a
+              result opposite to traditional copyright, by granting
+              the freedoms under discussion here and furthermore
+              requiring that those freedoms apply to derivative
+              works.  While some people still use this term for any
+              license that simply permits those freedoms, whether or not
+              it also requires them for derivative works, these days the
+              term is mostly used in the stricter sense: licenses that
+              not only permit those freedoms but
+              <emphasis>enforce</emphasis> them by stipulating that
+              the freedoms must travel with the work.  The Free
+              Software Foundation has been instrumental in this
+              linguistic shift, using the second definition
+              exclusively.  However, as you get further from software
+              and technology circles, usage becomes looser&mdash;there
+              are still journalists who use the first definition.
+              (Often when people use the term in that sense, they're
+              also not aware that there is a distinction to be
+              made.</para>
+
+              <para>The canonical example of the narrower, stricter
+              definition is the GNU General Public License, which
+              stipulates that any derivative works must also be
+              licensed under the GPL; see
+              <xref
+              linkend="license-compatibility"/><phrase
+              output="printed"> later in this chapter</phrase> for
+              more.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term><firstterm>non-copyleft</firstterm> or <firstterm>permissive</firstterm></term>
+    <listitem><para>A license that grants the freedoms under
+              discussion here but does <emphasis>not</emphasis>
+              have a clause requiring that they apply to derivative
+              works as well.</para>
+
+              <!-- TODO Emphasize that "free software" and "open
+                   source" are not respectively copyleft and
+                   non-copyleft.  This is a frequent mistake, so it
+                   probably should have a subsubsect id too. -->
+
+              <!-- TODO Keep these references? The whole presentation
+                   of licensing might need reorganization.  -->
+              <para>Two early and popular examples of permissive
+              licenses are the BSD and MIT licenses (see <xref
+              linkend="license-choosing-mit-x"/> and <xref
+              linkend="license-bsd"/> <phrase
+              output="printed"> elsewhere in this chapter</phrase>),
+              but the more recent Apache Software License version 2
+              (<ulink
+              url="http://www.apache.org/licenses/LICENSE-2.0"
+              >apache.org/licenses/LICENSE-2.0</ulink>) is
+              also very popular&mdash;increasingly so&mdash;and
+              somewhat better adapted to the legal landscape of modern
+              open source software development.</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="license-aspects">
+<title>Aspects of Licenses</title>
+
+<para>Although there are many different free software licenses
+available, in the important respects they all say the same things:
+that anyone can modify the code, that anyone can redistribute it both
+in original and modified form, and that the copyright holders and
+authors provide no warranties whatsoever (avoiding liability is
+especially important given that people might run modified versions
+without even knowing it).  The differences between licences boil down
+to a few oft-recurring issues:</para>
+
+<variablelist>
+  <varlistentry><term>compatibility with proprietary licenses</term>
+    <listitem><para>Some free licenses allow the covered code to be
+              used in proprietary programs.  This does not affect the
+              licensing terms of the proprietary program: it is still
+              as proprietary as ever, it just happens to contain some
+              code from a non-proprietary source.  The Apache License,
+              X Consortium License, BSD-style license, and the
+              MIT-style license are all examples of
+              proprietary-compatible licenses.</para> 
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>compatibility with other free licenses</term>
+    <listitem><para>Most free licenses are compatible with each other,
+              meaning that code under one license can be combined with
+              code under another, and the result distributed under
+              either license without violating the terms of the
+              other.  The major exception to this is the GNU General
+              Public License, which requires that any work using GPLed
+              code be itself distributed under the GPL, and without
+              adding any further restrictions beyond what the GPL
+              requires.  The GPL is compatible with some free
+              licenses, but not with others.  This is discussed in more
+              detail in
+              <xref linkend="license-compatibility"/><phrase
+              output="printed"> later in this chapter</phrase>.</para> 
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>enforcement of crediting</term>
+    <listitem><para>Some free licenses stipulate that any use of the
+              covered code be accompanied by a notice, whose placement
+              and display is usually specified, giving credit to the
+              authors or copyright holders of the code.  These
+              licenses are often still proprietary-compatible: they do
+              not necessarily demand that the derivative work be free,
+              merely that credit be given to the free code.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>protection of trademark</term>
+    <listitem><para>A variant of credit enforcement.
+              Trademark-protecting licenses specify that the name of
+              the original software (or its copyright holders, or
+              their institution, etc.) may <emphasis>not</emphasis> be
+              used by derivative works without prior written
+              permission.  Although credit enforcement insists that a
+              certain name be used, and trademark protection insists
+              that it not be used, they are both expressions of the
+              same desire: that the original code's reputation be
+              preserved and transmitted, but not tarnished by
+              association.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>patent snapback</term>
+    <listitem><para>Both the GNU General Public License version 3 and
+              the Apache License version 2 contain language designed
+              to prevent people from using patent law to take away the
+              rights granted (under copyright law) by the
+              licenses.  They require contributors to grant patent
+              licenses along with their contribution, covering any
+              patents licenseable by the contributor that would be
+              infringed by their contribution (or by the incorporation
+              of their contribution into the work as a whole).  Then
+              they go further: if someone using software under the
+              license initiates patent litigation against another party,
+              claiming that the covered work infringes, the initiator
+              automatically <emphasis>loses</emphasis> all the
+              patent grants otherwise provided for that work by the
+              license, and in the case of the GPLv3 loses their right
+              to distribute under the license altogether.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry><term>protection of "artistic integrity"</term>
+    <listitem><para>Some licenses (the Artistic License, used
+              for the most popular implementation of the Perl
+              programming language, and Donald Knuth's TeX license,
+              for example) require that modification and
+              redistribution be done in a manner that distinguishes
+              clearly between the pristine original version of the
+              code and any modifications.  They permit essentially the
+              same freedoms as other free license, but impose certain
+              requirements that make the integrity of the original
+              code easy to verify.  These licenses have not caught on
+              much beyond the specific programs they were made for,
+              and will not be discussed in this chapter; they are
+              mentioned here only for the sake of completeness.</para> 
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para>Most of these stipulations are not mutually exclusive, and some
+licenses include several.  The common thread among them is that they
+place demands on the recipient in exchange for the recipient's right
+to use and/or redistribute the code.  For example, some projects want
+their name and reputation to be transmitted along with the code, and
+this is worth imposing the extra burden of a credit or trademark
+clause; depending on its onerousness, that burden may result in some
+users choosing a package with a less demanding license.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="license-compatibility">
+<title>The GPL and License Compatibility</title>
+
+<para>By far the sharpest dividing line in licensing is that between
+proprietary-incompatible and proprietary-compatible licenses, that is,
+between the GNU General Public License and everything else.  Because
+the primary goal of the GPL's authors is the promotion of free
+software, they deliberately crafted the license to make it impossible
+to mix GPLed code into proprietary programs.  Specifically, among the
+GPL's requirements (see
+<ulink url="http://www.fsf.org/licensing/licenses/gpl.html"
+>fsf.org/licensing/licenses/gpl.html</ulink> for its
+full text) are these two:</para>
+
+<orderedlist>
+  <listitem><para>Any derivative work&mdash;that is, any work
+            containing a nontrivial amount of GPLed code&mdash;must
+            itself be distributed under the GPL.</para> 
+  </listitem>
+  <listitem><para>No additional restrictions may be placed on the
+            redistribution of either the original work or a derivative
+            work.  (The exact language is: "You may not impose any
+            further restrictions on the exercise of the rights granted
+            or affirmed under this License.")</para>
+  </listitem>
+</orderedlist>
+
+<para>With these conditions, the GPL succeeds in making freedom
+contagious.  Once a program is copyrighted under the GPL, its terms of
+redistribution are <firstterm>viral</firstterm>&mdash;they are passed
+on to anything else the code gets incorporated into, making it
+effectively impossible to use GPLed code in closed-source programs.
+However, these same clauses also make the GPL incompatible with
+certain other free licenses.  The usual way this happens is that the
+other license imposes a requirement&mdash;for example, a credit clause
+requiring the original authors to be mentioned in some way&mdash;that
+is incompatible with the GPL's "You may not impose any further
+restrictions..." language.  From the point of view of the Free
+Software Foundation, these second-order consequences are desirable, or
+at least not regrettable.  The GPL not only keeps your software free,
+but effectively makes your software an agent in pushing
+<emphasis>other</emphasis> software to enforce freedom as well.</para>
+
+<para>The question of whether or not this is a good way to
+promote free software is one of the most persistent holy wars on the
+Internet (see <xref linkend="holy-wars"/><phrase output="printed">
+in <xref linkend="communications"/></phrase>), and we won't
+investigate it here.  What's important for our purposes is that
+GPL compatibility is an important issue when choosing a license.  The
+GPL is by far the most popular open source license; at one point
+Freecode had it at 68%, with the next highest license at 6%
+<footnote><para>License statistics used to be available from
+Freecode.com, back when it was called Freshmeat.net, but in 2008 they
+switched to a freeform method of tagging projects that made it harder
+to generate reliable license statistics.  See <ulink
+url="http://help.freecode.com/discussions/questions/187-where-did-the-license-statistics-page-go"
+>help.freecode.com/discussions/questions/187-where-did-the-license-statistics-page-go</ulink>
+for a discussion of possible restoration of those stats.</para></footnote>.
+If you want your code to be able to be
+mixed freely with GPLed code&mdash;and there's a lot of GPLed code out
+there&mdash;then you should pick a GPL-compatible license.  Most of
+the GPL-compatible open source licenses are also
+proprietary-compatible: that is, code under such a license can be used
+in a GPLed program, and it can be used in a proprietary program.  Of
+course, the <emphasis>results</emphasis> of these mixings would not be
+compatible with each other, since one would be under the GPL and the
+other would be under a closed-source license.  But that concern
+applies only to the derivative works, not to the code you distribute
+in the first place.</para>
+
+<para>Fortunately, the Free Software Foundation maintains a list
+showing which licenses are compatible with the GPL and which are not,
+at <ulink url="http://www.gnu.org/licenses/license-list.html"
+>gnu.org/licenses/license-list.html</ulink>.  All
+of the licenses discussed in this chapter are present on that list, on
+one side or the other.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="license-choosing">
+<title>Choosing a License</title>
+
+<para>When choosing a license to apply to your project, if at all
+possible use an existing license instead of making up a new one.
+There are two reasons why existing licenses are better:</para>
+
+<itemizedlist>
+  <listitem><para>Familiarity.  If you use one of the three or four
+            most popular licenses, people won't feel they have to read
+            the legalese in order to use your code, because they'll
+            have already done so for that license a long time ago.</para>
+  </listitem>
+  <listitem><para>Quality.  Unless you have a team of lawyers at your
+            disposal, you are unlikely to come up with a legally solid
+            license.  The licenses mentioned here are the products of
+            much thought and experience; unless your project has truly
+            unusual needs, it is unlikely you would do better.</para> 
+  </listitem>
+</itemizedlist>
+   
+<para>To apply one of these licenses to your project, see
+<xref linkend="license-quickstart-applying"/><phrase output="printed">
+in <xref linkend="getting-started"/></phrase>.</para>
+
+<sect2 id="license-choosing-mit-x">
+<title>The MIT / X Window System License</title>
+
+<para>If your goal is that your code be accessible by the greatest
+possible number of developers and derivative works, and you do not
+mind the code being used in proprietary programs, choose the MIT / X
+Window System license (so named because it is the license under which
+the Massachusetts Institute of Technology released the original X
+Window System code).  This license's basic message is "You are free to
+use this code however you want."  It is compatible with the GNU GPL,
+and it is short, simple, and easy to understand:</para>
+
+<screen>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</screen>
+
+<para>(Taken from <ulink
+url="http://www.opensource.org/licenses/mit-license.php"
+>opensource.org/licenses/mit-license.php</ulink>.)</para>
+
+</sect2>
+
+<sect2 id="license-choosing-gpl">
+<title>The GNU General Public License</title>
+
+<para><emphasis>29 August 2013: If you're reading this note, then
+you've encountered this subsection while it's undergoing revision; see
+<ulink url="http://producingoss.com/v2.html"
+>producingoss.com/v2.html</ulink> for details.</emphasis>
+TODO: mention the "or (at your option) any later version" clause early
+in this section, both so that the AGPL discussion later makes more
+sense, and so that people who jumped here here from
+license-quickstart-gpl in chapter 2 see that advice early on.</para>
+
+<para>If you prefer that your project's code not be used in
+proprietary programs, or if you at least don't care whether or not it
+can be used in proprietary programs, choose the GNU General Public
+License
+(<ulink url="http://www.fsf.org/licensing/licenses/gpl.html"
+>fsf.org/licensing/licenses/gpl.html</ulink>).  The
+GPL is probably the most widely-used free software license in the
+world today; this instant recognizability is itself one of the GPL's
+major advantages.</para>
+
+<para>When writing a code library that is meant mainly to be used as
+part of other programs, consider carefully whether the restrictions
+imposed by the GPL are in line with your project's goals.  In some
+cases&mdash;for example, when you're trying to unseat a competing,
+proprietary library that does the same thing&mdash;it may make more
+strategic sense to license your code in such a way that it can be
+mixed into proprietary programs, even though you would otherwise not
+wish this.  The Free Software Foundation even fashioned an alternative
+to the GPL for such circumstances: the <firstterm>GNU Library
+GPL</firstterm>, later renamed to the <firstterm>GNU Lesser
+GPL</firstterm> (most people just use the acronym
+<firstterm>LGPL</firstterm>, in any case).  The LGPL has looser
+restrictions than the GPL, and can be mixed more easily with non-free
+code.  However, it's also a bit complex and takes some time to
+understand, so if you're not going to use the GPL, I recommend just
+using the MIT/X-style license.</para>
+
+<sidebar id="gnu-affero-gpl">
+  <title>The GNU Affero GPL: A Version of the GNU GPL for Server-Side
+  Code</title>
+  <para>In 2007, the Free Software Foundation released a variant of
+  the GPL called the <firstterm>GNU Affero GPL</firstterm>
+  (<ulink url="http://www.fsf.org/licensing/licenses/agpl.html"
+  >fsf.org/licensing/licenses/agpl.html</ulink>)<footnote><para>
+  The history of the license and its name is a bit complicated.  The
+  first version of the license was originally released by Affero, Inc,
+  who based it on the GNU GPL version 2.  This was commonly referred
+  to as the AGPL.  Later, the Free Software Foundation decided to
+  adopt the idea, but by then they had released version 3 of their GNU
+  GPL, so they based their new Affero-ized license on that and called
+  it the "GNU AGPL".  The old Affero license is more or less
+  deprecated now.  If you want Affero-like provisions, you should use
+  the GNU version.  To avoid ambiguity, call it the "AGPLv3", the "GNU
+  AGPL", or for maximum precision, "GNU AGPLv3".</para></footnote>.
+  Its purpose is to enforce GPL-like sharing provisions on the growing
+  number of companies that offered hosted services&mdash;software that
+  runs on their servers, that users interact with only over the
+  network, and that therefore is never directly distributed to users
+  as executable or source code.  Many such services had been using
+  GPL'd software, often with modifications, yet didn't have to share
+  their changes with the world because they weren't distributing any
+  code.</para>
+
+  <para>The GNU AGPLv3's solution to this was to take the regular GPL
+  and add a "Remote Network Interaction" clause, stating
+  "<emphasis>...if you modify the Program, your modified version must
+  prominently offer all users interacting with it remotely through a
+  computer network ... an opportunity to receive the Corresponding
+  Source of your version ... at no charge, through some standard or
+  customary means of facilitating copying of software.</emphasis>"
+  This expanded the GPL's enforcement powers into the new world of
+  application service providers.  The Free Software Foundation
+  recommends that the GNU AGPLv3 be used for any software that will
+  commonly be run over a network.</para>
+
+  <para>Note that the AGPLv3 is not directly compatible with GPLv2
+  (though it is compatible with GPLv3, of course).  However, most
+  software licensed under the GPLv2 includes the "or any later
+  version" clause anyway, so you can just shift it to GPLv3 if and
+  when you need to mix it with AGPLv3 code.  However, if you need to
+  mix with programs licensed strictly under the GPLv2 (that is,
+  without the "or any later version" clause), then the AGPLv3 won't
+  work.</para>
+
+  <para>Although the history of the AGPLv3 is a bit complicated, the
+  license itself is simple: it's just the GPLv3 with one extra clause
+  about network interaction.  The Wikipedia article on the AGPLv3 is
+  excellent:
+  <ulink
+  url="http://en.wikipedia.org/wiki/Affero_General_Public_License"
+  >en.wikipedia.org/wiki/Affero_General_Public_License</ulink></para>
+</sidebar>
+
+<sect3 id="is-the-gpl-free">
+<title>Is the GPL free or not free?</title>
+
+<para>One consequence of choosing the GPL is the
+possibility&mdash;small, but not infinitely small&mdash;of finding
+yourself or your project embroiled in a dispute about whether or not
+the GPL is truly "free", given that it places some restrictions on
+what you can do with the code&mdash;namely, the restriction that the
+code cannot be distributed under any other license.  For some people,
+the existence of this restriction means the GPL is "less free" than
+more permissive licenses such as the MIT/X license.  Where this
+argument usually goes, of course, is that since "more free" must be
+better than "less free" (after all, who's not in favor of freedom?),
+it follows that those licenses are better than the GPL.</para>
+
+<para>This debate is another popular holy war (see
+<xref linkend="holy-wars"/><phrase output="printed"> in
+<xref linkend="communications"/></phrase>).  Avoid participating
+in it, at least in project forums.  Don't attempt to prove that the
+GPL is less free, as free, or more free than other licenses.  Instead,
+emphasize the specific reasons your project chose the GPL.  If the
+recognizability of license was a reason, say that.  If the enforcement
+of a free license on derivative works was also a reason, say that too,
+but refuse to be drawn into discussion about whether this makes the
+code more or less "free".  Freedom is a complex topic, and there is
+little point talking about it if terminology is going to be used as a
+stalking horse for substance.</para>
+
+<para>Since this is a book and not a mailing list thread, however, I
+will admit that I've never understood the "GPL is not free" argument.
+The only restriction the GPL imposes is that it prevents people from
+imposing <emphasis>further</emphasis> restrictions.  To say that this
+results in less freedom has always seemed to me like saying that
+outlawing slavery reduces freedom, because it prevents some people
+from owning slaves.</para>
+
+<para>(Oh, and if you do get drawn into a debate about it, don't raise
+the stakes by making inflammatory analogies.)</para>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="license-bsd">
+<title>What About The BSD License?</title>
+
+<para>A fair amount of open source software is distributed under
+a <firstterm>BSD license</firstterm> (or sometimes
+a <firstterm>BSD-style license</firstterm>).  The original BSD license
+was used for the Berkeley Software Distribution, in which the
+University of California released important portions of a Unix
+implementation.  This license (the exact text may be seen in section
+2.2.2 of
+<ulink url="http://www.xfree86.org/3.3.6/COPYRIGHT2.html#6"
+>xfree86.org/3.3.6/COPYRIGHT2.html#6</ulink>) was
+similar in spirit to the MIT/X license, except for one
+clause:</para>
+
+<blockquote>
+<para><emphasis>All advertising materials mentioning features or use
+of this software must display the following acknowledgement: This
+product includes software developed by the University of California,
+Lawrence Berkeley Laboratory.</emphasis></para>
+</blockquote>
+
+<para>The presence of that clause not only made the original BSD
+license GPL-incompatible, it also set a dangerous precedent: as other
+organizations put similar advertising clauses into
+<emphasis>their</emphasis> free software&mdash;substituting their own
+organization's name in place of "the University of California,
+Lawrence Berkeley Laboratory"&mdash;software redistributors faced an
+ever-increasing burden in what they were required to display.
+Fortunately, many of the projects that used this license became aware
+of the problem, and simply dropped the advertising clause.  In 1999,
+even the University of California did so.</para>
+
+<para>The result is the revised BSD license, which is simply the
+original BSD license with the advertising clause removed.  However,
+this history makes the phrase "BSD license" a bit ambiguous: does it
+refer to the original, or the revised version?  This is why I prefer
+the MIT/X license, which is essentially equivalent, and which does not
+suffer from any ambiguity.  However, there is perhaps one reason to
+prefer the revised BSD license to the MIT/X license, which is that the
+BSD includes this clause:</para>
+
+<blockquote>
+<para><emphasis>Neither the name of the &lt;ORGANIZATION&gt; nor the
+names of its contributors may be used to endorse or promote products
+derived from this software without specific prior written
+permission.</emphasis></para>
+</blockquote>
+
+<para>It's not clear that without such a clause, a recipient of the
+software would have had the right to use the licensor's name anyway,
+but the clause removes any possible doubt.  For organizations worried
+about trademark control, therefore, the revised BSD license may be
+slightly preferable to MIT/X.  In general, however, a liberal
+copyright license does not imply that recipients have any right to use
+or dilute your trademarks &mdash; copyright law and trademark law are
+two different beasts.</para>
+
+<!-- TODO This doesn't address the fact that there have really been
+     *two* revisions of BSD.  Check the text, make sure it's okay. -->
+
+<para>If you wish to use the most recent revised BSD license, a
+template is available at <ulink
+url="http://www.opensource.org/licenses/BSD-2-Clause"
+>opensource.org/licenses/BSD-2-Clause</ulink>.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="contributor-agreements">
+<title>Contributor Agreements</title>
+
+<!-- For link compatibility with the old section id. -->
+<anchor id="copyright-assignment" />
+
+<para><emphasis>possv2 22 July 2013: If you're reading this note, then
+you've encountered this section while it's undergoing substantial
+revision; see <ulink url="http://producingoss.com/v2.html"
+>producingoss.com/v2.html</ulink> for details.</emphasis></para>
+
+<para>There are three ways to handle copyright ownership for free code
+and documentation that were contributed to by many people.  The first
+is to ignore the issue of copyright entirely (I don't recommend this).
+The second is to collect a <firstterm>contributor license
+agreement</firstterm> (<firstterm>CLA</firstterm>) from each person
+who works on the project, explicitly granting the project the right to
+use that person's contributions.  This is usually enough for most
+projects, and the nice thing is that in some jurisdictions, CLAs can
+be sent in by email.  The third way is to get actual copyright
+assignments from contributors, so that the project (i.e., some legal
+entity, usually a nonprofit) is the copyright owner for everything.
+This is the most legally airtight way, but it's also the most
+burdensome for contributors; only a few projects insist on
+it.<footnote><para>Also, actual copyright transferral is subject to
+national law, and licenses designed for the United States may
+encounter problems elsewhere (e.g., in Germany, where it's apparently
+not possible to transfer copyright).</para></footnote></para>
+
+<para>Note that even under centralized copyright ownership, the
+code<footnote><para>I'll use "code" to refer to both code and
+documentation, from now on.</para></footnote> remains free, because
+open source licenses do not give the copyright holder the right to
+retroactively proprietize all copies of the code.  So even if the
+project, as a legal entity, were to suddenly turn around and started
+distributing all the code under a restrictive license, that wouldn't
+cause a problem for the public community.  The other developers would
+simply start a fork based on the latest free copy of the code, and
+continue as if nothing had happened.  Because they know they can do
+this, most contributors cooperate when asked to sign a CLA or an
+assignment of copyright.</para>
+
+<sect2 id="copyright-assignment-none">
+<title>Doing Nothing</title>
+
+<para>Most projects never collect CLAs or copyright assignments from
+their contributors.  Instead, they accept code whenever it seems
+reasonably clear that the contributor intended it to be incorporated
+into the project.</para>
+
+<para>Under normal circumstances, this is okay.  But every now and
+then, someone may decide to sue for copyright infringement, alleging
+that they are the true owner of the code in question and that they
+never agreed to its being distributed by the project under an open
+source license.  For example, the SCO Group did something like this to
+the Linux project, see
+<ulink url="http://en.wikipedia.org/wiki/SCO-Linux_controversies"
+>en.wikipedia.org/wiki/SCO-Linux_controversies</ulink>
+for details.  When this happens, the project will have no
+documentation showing that the contributor formally granted the right
+to use the code, which could make some legal defenses more
+difficult.</para>
+
+</sect2>
+
+<sect2 id="copyright-assignment-cla">
+<title>Contributor License Agreements</title>
+
+<para>CLAs probably offer the best tradeoff between safety and
+convenience.  A CLA is typically an electronic form that a developer
+fills out and sends in to the project.  In many jurisdictions, email
+submission is enough.  A secure digital signature may or may not be
+required; consult a lawyer to find out what method would be best for
+your project.</para>
+
+<para>Most projects use two slightly different CLAs, one for
+individuals, and one for corporate contributors.  But in both types,
+the core language is the same: the contributor grants the
+project <emphasis>"...perpetual, worldwide, non-exclusive, no-charge,
+royalty-free, irrevocable copyright license to reproduce, prepare
+derivative works of, publicly display, publicly perform, sublicense,
+and distribute [the] Contributions and such derivative
+works."</emphasis> Again, you should have a lawyer approve any CLA,
+but if you get all those adjectives into it, you're probably
+fine.</para>
+
+<para>When you request CLAs from contributors, make sure to emphasize
+that you are <emphasis>not</emphasis> asking for actual copyright
+assignment.  In fact, many CLAs start out by reminding the reader of
+this:</para>
+
+<blockquote>
+<para><emphasis>This is a license agreement only; it does not transfer
+copyright ownership and does not change your rights to use your own
+Contributions for any other purpose.</emphasis></para>
+</blockquote>
+
+<para>Here are some examples:</para>
+
+<itemizedlist>
+  <listitem><para>Individual contributor CLAs:</para>
+    <itemizedlist>
+      <listitem><para><ulink
+        url="http://apache.org/licenses/icla.txt"
+        >apache.org/licenses/icla.txt</ulink>
+      </para></listitem>
+      <listitem><para><ulink
+        url="http://code.google.com/legal/individual-cla-v1.0.html"
+        >code.google.com/legal/individual-cla-v1.0.html</ulink>
+      </para></listitem>
+<!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/individual-cla.txt"/>
+      </para></listitem>  -->
+    </itemizedlist>
+  </listitem>
+  <listitem><para>Corporate contributor CLAs:</para>
+    <itemizedlist>
+      <listitem><para><ulink
+        url="http://apache.org/licenses/cla-corporate.txt"
+        >apache.org/licenses/cla-corporate.txt</ulink>
+      </para></listitem>
+      <listitem><para><ulink
+        url="http://code.google.com/legal/corporate-cla-v1.0.html"
+        >code.google.com/legal/corporate-cla-v1.0.html</ulink>
+      </para></listitem>
+<!--  <listitem><para><ulink
+ url="http://svn.collab.net/repos/svn-org/trunk/documents/corporate-cla.txt"/>
+      </para></listitem>  -->
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+<!-- TODO Include a government CLA too? -->
+
+</sect2>
+
+<sect2 id="copyright-assignment-transfer">
+<title>Transfer of Copyright</title>
+
+<para>Copyright transfer means that the contributor assigns to the
+project copyright ownership on her contributions.  Ideally, this is
+done on paper and either faxed or snail-mailed to the project.</para>
+
+<para>Some projects insist on full assignment because having a single
+legal entity own the copyright on the entire code base can make
+enforcement of the license terms somewhat more convenient, if they
+ever need to be enforced in court.  Different organizations apply
+different amounts of rigor to the task of collecting assignments.
+Some simply get an informal statement from a contributor on a public
+list mailing list&mdash;something to the effect of "I hereby assign
+copyright in this code to the project, to be licensed under the same
+terms as the rest of the code."  At least one lawyer I've talked to
+says that's really enough, presumably because it happens in a context
+where copyright assignment is normal and expected anyway, and because
+it represents a <foreignphrase>bona fide</foreignphrase> effort on the
+project's part to ascertain the developer's true intentions.  On the
+other hand, the Free Software Foundation goes to the opposite extreme:
+they require contributors to physically sign and mail in (or fax) a
+piece of paper containing a formal statement of copyright assignment,
+sometimes for just one contribution, sometimes for current and future
+contributions.  If the developer is employed, the FSF asks that the
+employer sign it too.</para>
+
+<para>The FSF's paranoia is understandable.  If someone violates the
+terms of the GPL by incorporating some of their software into a
+proprietary program, the FSF will need to fight that in court, and
+they want their copyrights to be as airtight as possible when that
+happens.  Since the FSF is copyright holder for a lot of popular
+software, they view this as a real possibility.  Whether your
+organization needs to be similarly scrupulous is something only you
+can decide, in consultation with lawyers.  In general, unless there's
+some specific reason why your project needs full copyright assignment,
+just go with CLAs; they're easier for everyone.</para>
+
+</sect2>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="dual-licensing">
+<title>Dual Licensing Schemes</title>
+
+<para>Some projects try to fund themselves by using a dual licensing
+scheme, in which proprietary derivative works may pay the copyright
+holder for the right to use the code, but the code still remains free
+for use by open source projects.  This tends to work better with code
+libraries than with standalone applications, naturally.  The exact
+terms differ from case to case.  Usually the license for the free side
+is the GNU GPL, since it already bars others from incorporating the
+covered code into their proprietary product without permission from
+the copyright holder.  An example is the MySQL license,
+described at
+<ulink url="http://www.mysql.com/company/legal/licensing/"
+>mysql.com/company/legal/licensing</ulink>.</para>
+
+<para><emphasis>15 June 2013: If you're reading this note, then
+you've encountered this section while it's undergoing substantial
+revision; see <ulink url="http://producingoss.com/v2.html"
+>producingoss.com/v2.html</ulink> for details.</emphasis></para>
+
+<para>poss2 todo: Note how that page, and so many other dual-licensing
+pages, refer to the proprietary license as "commercial".  Need a
+subsection here about why it's important <emphasis>not</emphasis> to
+call it that.</para>
+
+<para>You might be wondering: how can the copyright holder offer
+proprietary licensing for a mandatory fee if the terms of the GNU GPL
+stipulate that the code must be available under less restrictive
+terms?  The answer is that the GPL's terms are something the copyright
+holder imposes on everyone else; the owner is therefore free to
+decide <emphasis>not</emphasis> to apply those terms to itself.  A
+good way to think of it is to imagine that the copyright owner has an
+infinite number of copies of the software stored in a bucket.  Each
+time it takes one out of the bucket to send into the world, it can
+decide what license to put on it: GPL, proprietary, or something else.
+Its right to do this is not tied to the GPL or any other open source
+license; it is simply a power granted by copyright law.</para>
+
+<para>The attractiveness of dual licensing is that, at its best, it
+provides a way for a free software project to get a reliable income
+stream.  Unfortunately, it can also interfere with the normal dynamics
+of open source projects.  The problem is that any volunteer who makes
+a code contribution is now contributing to two distinct entities: the
+free version of the code and the proprietary version.  While the
+contributor will be comfortable contributing to the free version,
+since that's the norm in open source projects, she may feel funny
+about contributing to someone else's semi-proprietary revenue stream.
+The awkwardness is exacerbated by the fact that in dual licensing, the
+copyright owner really needs to gather formal, signed copyright
+assignments from all contributors, in order to protect itself from a
+disgruntled contributor later claiming a percentage of royalties from
+the proprietary stream.  The process of collecting these assignment
+papers means that contributors are starkly confronted with the fact
+that they are doing work that makes money for someone else.</para>
+
+<para>Not all volunteers will be bothered by this; after all, their
+contributions go into the open source edition as well, and that may be
+where their main interest lies.  Nevertheless, dual licensing is an
+instance of the copyright holder assigning itself a special right that
+others in the project do not have, and is thus bound to raise
+tensions at some point, at least with some volunteers.</para>
+
+<para>What seems to happen in practice is that companies based on
+dual licensed software do not have truly egalitarian development
+communities.  They get small-scale bug fixes and cleanup patches from
+external sources, but end up doing most of the hard work with internal
+resources.  For example, Zack Urlocker, then vice president of marketing at
+MySQL, told me that the company generally ends up hiring the most
+active volunteers anyway.  Thus, although the product itself is open
+source, licensed under the GPL, its development is more or less
+controlled by the company, albeit with the (extremely unlikely)
+possibility that someone truly dissatisfied with the company's
+handling of the software could fork the project.  To what degree this
+threat pre&euml;mptively shapes the company's policies I don't know,
+but at any rate, MySQL does not seem to be having acceptance problems
+either in the open source world or beyond.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="patents">
+<title>Patents</title>
+
+<para>Software patents are the lightning rod issue of the moment in
+free software, because they pose the only real threat against which
+the free software community cannot defend itself.  Copyright and
+trademark problems can always be gotten around.  If part of your code
+looks like it may infringe on someone else's copyright, you can just
+rewrite that part.  If it turns out someone has a trademark on your
+project's name, at the very worst you can just rename the project.
+Although changing names would be a temporary inconvenience, it
+wouldn't matter in the long run, since the code itself would still do
+what it always did.</para>
+
+<para>But a patent is a blanket injunction against implementing a
+certain idea.  It doesn't matter who writes the code, nor even what
+programming language is used.  Once someone has accused a free
+software project of infringing a patent, the project must either stop
+implementing that particular feature, or face an expensive and
+time-consuming lawsuit.  Since the instigators of such lawsuits are
+usually corporations with deep pockets&mdash;that's who has the
+resources and inclination to acquire patents in the first
+place&mdash;most free software projects cannot afford the latter
+possibility, and must capitulate immediately even if they think it
+highly likely that the patent would be unenforceable in court.  To
+avoid getting into such a situation in the first place, free software
+projects are starting to code defensively, avoiding patented
+algorithms in advance even when they are the best or only available
+solution to a programming problem.<footnote><para>Sun Microsystems and
+IBM have also made at least a gesture at the problem from the other
+direction, by freeing large numbers of software patents&mdash;1600 and
+500 respectively&mdash;for use by the open source community.  I am not
+a lawyer and thus can't evaluate the real utility of these grants, but
+even if they are all important patents, and the terms of the grants
+make them truly free for use by any open source project, it would
+still be only a drop in the bucket.</para></footnote></para>
+
+<para>Surveys and anecdotal evidence show that not only the vast
+majority of open source programmers, but a majority
+of <emphasis>all</emphasis> programmers, think that software patents
+should be abolished entirely.<footnote><para>See
+<ulink
+url="http://groups.csail.mit.edu/mac/projects/lpf/Whatsnew/survey.html"
+>groups.csail.mit.edu/mac/projects/lpf/Whatsnew/survey.html</ulink>
+for one such survey.</para></footnote> Open source programmers tend to feel
+particularly strongly about it, and may refuse to work on projects
+that are too closely associated with the collection or enforcement of
+software patents.  If your organization collects software patents,
+then make it clear, in a public and irrevocable way, that the patents
+would never be enforced on open source projects, and that they are
+only to be used as a defense in case some other party initiates an
+infringement suit against your organization.  This is not only the
+right thing to do, it's also good open source public relations.<footnote>
+<para>For example, RedHat has pledged that open source projects are
+safe from its patents, see
+<ulink url="http://www.redhat.com/legal/patent_policy.html"
+>redhat.com/legal/patent_policy.html</ulink>.</para>
+</footnote></para>
+
+<para>Unfortunately, collecting patents for defensive purposes is a
+rational action.  The current patent system, at least in the United
+States, is by its nature an arms race: if your competitors have
+acquired a lot of patents, then your best defense is to acquire a lot
+of patents yourself, so that if you're ever hit with a patent
+infringement suit you can respond with a similar threat&mdash;then the
+two parties usually sit down and work out a cross-licensing deal so
+that neither of them has to pay anything, except to their intellectual
+property lawyers of course.</para>
+
+<para>The harm done to free software by software patents is more
+insidious than just direct threats to code development, however.
+Software patents encourage an atmosphere of secrecy among firmware
+designers, who justifiably worry that by publishing details of their
+interfaces they will be giving technical help to competitors seeking
+to slap them with patent infringement suits.  This is not just a
+theoretical danger; it has apparently been happening for a long time
+in the video card industry, for example.  Many video card
+manufacturers are reluctant to release the detailed programming
+specifications needed to produce high-performance open source drivers
+for their cards, thus making it impossible for free operating systems
+to support those cards to their full potential.  Why would the
+manufacturers do this?  It doesn't make sense for them to
+work <emphasis>against</emphasis> software support; after all,
+compatibility with more operating systems can only mean more card
+sales.  But it turns out that, behind the design room door, these
+shops are all violating one another's patents, sometimes knowingly and
+sometimes accidentally.  The patents are so unpredictable and so
+potentially broad that no card manufacturer can ever be certain it's
+safe, even after doing a patent search.  Thus, manufacturers dare not
+publish their full interface specifications, since that would make it
+much easier for competitors to figure out whether any patents are
+being infringed.  (Of course, the nature of this situation is such
+that you will not find a written admission from a primary source that
+it is going on; I learned it through a personal communication.)</para>
+
+<para>Some free software licenses have special clauses to combat, or at
+least discourage, software patents.  The GNU GPL, for example, contains
+this language:</para>
+
+<screen>
+  7. If, as a consequence of a court judgment or allegation of patent
+infringement or for any other reason (not limited to patent issues),
+conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot
+distribute so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you
+may not distribute the Program at all.  For example, if a patent
+license would not permit royalty-free redistribution of the Program by
+all those who receive copies directly or indirectly through you, then
+the only way you could satisfy both it and this License would be to
+refrain entirely from distribution of the Program.
+
+[...]
+
+It is not the purpose of this section to induce you to infringe any
+patents or other property right claims or to contest validity of any
+such claims; this section has the sole purpose of protecting the
+integrity of the free software distribution system, which is
+implemented by public license practices.  Many people have made
+generous contributions to the wide range of software distributed
+through that system in reliance on consistent application of that
+system; it is up to the author/donor to decide if he or she is willing
+to distribute software through any other system and a licensee cannot
+impose that choice.
+</screen>
+
+<para>The Apache License, Version 2.0
+(<ulink url="http://www.apache.org/licenses/LICENSE-2.0"
+>apache.org/licenses/LICENSE-2.0</ulink>) also
+contains anti-patent requirements.  First, it stipulates that anyone
+distributing code under the license must implicitly include a
+royalty-free patent license for any patents they might hold that could
+apply to the code.  Second, and most ingeniously, it punishes anyone
+who initiates a patent infringement claim on the covered work, by
+automatically terminating their implicit patent license the moment
+such a claim is made:</para>
+
+<screen>
+3. Grant of Patent License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except
+as stated in this section) patent license to make, have made, use,
+offer to sell, sell, import, and otherwise transfer the Work, where
+such license applies only to those patent claims licensable by such
+Contributor that are necessarily infringed by their Contribution(s)
+alone or by combination of their Contribution(s) with the Work to
+which such Contribution(s) was submitted. If You institute patent
+litigation against any entity (including a cross-claim or counterclaim
+in a lawsuit) alleging that the Work or a Contribution incorporated
+within the Work constitutes direct or contributory patent
+infringement, then any patent licenses granted to You under this
+License for that Work shall terminate as of the date such litigation
+is filed.
+</screen>
+
+<para>Although it is useful, both legally and politically, to build
+patent defenses into free software licenses this way, in the end these
+steps will not be enough to dispel the chilling effect that the threat
+of patent lawsuits has on free software.  Only changes in the
+substance or interpretation of international patent law will do that.
+To learn more about the problem, and how it's being fought, go to
+<ulink url="http://endsoftpatents.org/" >endsoftpatents.org/</ulink>.
+The Wikipedia article <ulink url="http://en.wikipedia.org/wiki/Software_patent"
+>en.wikipedia.org/wiki/Software_patent</ulink>
+also has a lot of useful information on software patents.  I've also
+written a blog post summarizing the arguments against software
+patents, at
+<ulink
+url="http://www.rants.org/2007/05/01/how-to-tell-that-software-patents-are-a-bad-idea/"
+>www.rants.org/2007/05/01/how-to-tell-that-software-patents-are-a-bad-idea/</ulink>.</para>
+
+</sect1>
+
+<!-- ======================== SECTION ============================== -->
+<sect1 id="licensing-further-resources">
+<title>Further Resources</title>
+
+<para>This chapter has only been an introduction to free software
+licensing issues.  Although I hope it contains enough information to
+get you started on your own open source project, any serious
+investigation of licensing issues will quickly exhaust what this book
+can provide.  Here is a list of further resources on open source
+licensing:</para>
+
+<itemizedlist>
+  <listitem><para><citetitle>Understanding Open Source and Free
+            Software Licensing</citetitle> by Andrew M. St. Laurent.
+            Published by O'Reilly Media, first edition August 2004,
+            ISBN:&nbsp;0-596-00581-4.</para>
+
+            <para>This is a full-length book on open source licensing
+            in all its complexity, including many topics omitted from
+            this chapter.  See
+            <ulink url="http://www.oreilly.com/catalog/osfreesoft/"
+            >oreilly.com/catalog/osfreesoft/</ulink>
+            for details.</para>
+  </listitem>
+
+  <listitem><para><citetitle>Make Your Open Source Software
+            GPL-Compatible.  Or Else.</citetitle> by David
+            A. Wheeler, at
+            <ulink
+            url="http://www.dwheeler.com/essays/gpl-compatible.html"
+            >dwheeler.com/essays/gpl-compatible.html</ulink>.</para>
+
+            <para>This is a detailed and well-written article on why
+            it is important to use a GPL-compatible license even if
+            you don't use the GPL itself.  The article also touches on
+            many other licensing questions, and has a high density of
+            excellent links.</para>
+  </listitem>
+
+  <listitem><para><ulink url="http://creativecommons.org/"
+            >creativecommons.org</ulink></para>
+
+            <para>Creative Commons is an organization that promotes a
+            range of more flexible and liberal copyrights than
+            traditional copyright practice encourages.  They offer
+            licenses not just for software, but for text, art, and
+            music as well, all accessible via a user-friendly license
+            selector; some of the licenses are copylefts, some are
+            non-copyleft but still free, others are simply traditional
+            copyrights but with some restrictions relaxed.  The
+            Creative Commons web site gives extremely clear
+            explanations of what it's about.  If I had to pick one
+            site to demonstrate the broader philosophical implications
+            of the free software movement, this would be it.</para>
+  </listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
+<!--
+local variables: 
+sgml-parent-document: ("book.xml" "chapter")
+end:
+-->
+
