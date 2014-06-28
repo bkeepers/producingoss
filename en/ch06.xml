@@ -1989,8 +1989,8 @@ guidelines:</para>
 
 <orderedlist>
   <listitem><para>Don't talk about the bug publicly until a fix is
-            available; then supply the fix at exactly the same moment
-            you announce the bug.</para> 
+            available; then supply the fix (packaged as a release) at
+            exactly the same moment you announce the bug.</para> 
   </listitem>
   <listitem><para>Come up with that fix as fast as you
             can&mdash;especially if someone outside the project
@@ -2007,10 +2007,10 @@ series of steps, which are described in the sections below.</para>
 <title>Receive the report</title>
 
 <para>Obviously, a project needs the ability to receive security bug
-reports from anyone.  But the regular bug reporting address won't do,
-because it can be watched by anyone too.  Therefore, have a separate
-mailing list for receiving security bug reports.  That mailing list
-must not have publicly readable archives, and its subscribership must
+reports from anyone.  But the regular bug reporting channels won't do,
+because they can be watched by anyone too.  Therefore, have a separate
+mailing list or contact form for receiving security bug reports.  That
+forum must not have publicly readable archives, and its subscribership must
 be strictly controlled&mdash;only long-time, trusted developers can be
 on the list.  If you need a formal definition of "trusted", you can
 use "anyone who has had commit access for two years or more" or
@@ -2022,12 +2022,7 @@ moderated, since you don't want an important report to get filtered
 out or delayed just because no moderators happened to be online that
 weekend.  If you do use automated spam-protection software, try to
 configure it with high-tolerance settings; it's better to let a few spams
-through than to miss a report.  For the list to be effective, you must
-advertise its address, of course; but given that it will be unmoderated
-and, at most, lightly spam-protected, try to never to post its address
-without some sort of address-disguising transformation, as described in
-<xref linkend="address-hiding"/><phrase output="printed"> in
-<xref linkend="technical-infrastructure"/></phrase>.</para>
+through than to miss a vulnerability report.</para>
 
 </sect3>
 
@@ -2089,7 +2084,7 @@ This may feel like a bullying power play, but it's more likely a
 pre&euml;mptive action resulting from past disappointment with
 unresponsive software producers who didn't take security reports
 seriously enough.  Either way, you can't afford to tick this person
-off.  After all, if the bug is severe, he has knowledge that could
+off.  After all, if the bug is severe, she has knowledge that could
 cause your users big problems.  Treat such reporters well, and hope
 that they treat you well.</para>
 
@@ -2104,7 +2099,8 @@ that's up to the reporter; deadlines have become recognized among
 security professionals as pretty much the only reliable way to get
 organizations to address security problems promptly.  So don't treat
 the deadline as rude; it's a time-honored tradition, and there are
-good reasons for it.</para>
+good reasons for it.  Negotiate if you absolutely must, but remember
+that the reporter holds all the cards.</para>
 
 <para>Once you know the severity and urgency, you can start working on
 a fix.  There is sometimes a tradeoff between doing a fix elegantly
@@ -2114,102 +2110,101 @@ security list members, of course, plus the original reporter (if she
 wants to be involved) and any developers who need to be brought in for
 technical reasons.</para>
 
-<para>Do not commit the fix to the repository.  Keep it in patch form
-until the go-public date.  If you were to commit it, even with an
+<para><emphasis>Do not commit the fix to any public
+repository</emphasis> before the go-public date.  If you were to
+commit it publicly, even with an
 innocent-looking log message, someone might notice and understand the
 change.  You never know who is watching your repository and why they
 might be interested.  Turning off commit emails wouldn't help; first
 of all, the gap in the commit mail sequence would itself look
 suspicious, and anyway, the data would still be in the repository.
-Just do all development in a patch and keep the patch in some private
-place, perhaps a separate, private repository known only to the people
-already aware of the bug.  (If you use a decentralized version control
-system like Arch or SVK, you can do the work under full version
-control, and just keep that repository inaccessible to
-outsiders.)</para>
+Just do all development in some private place known only to the people
+already aware of the bug.</para>
 
 </sect3>
 
 <sect3 id="security-cve">
-<title>CAN/CVE numbers</title>
+<title>CVE numbers</title>
 
-<para>You may have seen a <firstterm>CAN number</firstterm> or
-a <firstterm>CVE number</firstterm> associated with security problems.
-These numbers usually look like "CAN-2004-0397" or
-"CVE-2002-0092", for example.</para>
+<para>You may have seen a <firstterm>CVE number</firstterm> associated
+with a particular security problems&nbsp;&mdash;&nbsp;e.g., a number
+like "CVE-2014-0160", where the first numeric part is the year, and
+the second is an increasing sequence number (it may exceed four digits
+if more than 10,000 numbers are handed out in a given year).</para>
 
-<para>Both kinds of numbers represent the same type of entity: an
-entry in the list of "Common Vulnerabilities and Exposures" list
-maintained at <ulink url="http://cve.mitre.org/"
->cve.mitre.org</ulink>.  The purpose of
-the list is to provide standardized names for all known security
-problems, so that everyone has a unique, canonical name to use when
-discussing one, and a central place to go to find out more
-information.  The only difference between a "CAN" number and a "CVE"
-number is that the former represents a candidate entry, not yet
-approved for inclusion in the official list by the CVE Editorial
-Board, and the latter represents an approved entry.  However, both
-types of entries are visible to the public, and an entry's number does
-not change when it is approved&mdash;the "CAN" prefix is simply
-replaced with "CVE".</para>
+<para>A CVE number is an entry in the "Common Vulnerabilities and
+Exposures" list maintained at <ulink url="http://cve.mitre.org/"
+>cve.mitre.org</ulink>.  The purpose of the list is to a provide
+standardized name for every known computer security problem, so that
+everyone has a unique, canonical name to use when discussing it, and a
+central place to go to find out more information.<footnote><para>In
+the past, a CVE number would start out as a CAN number ("CAN" for
+"candidate") until it was approved for inclusion in the official list,
+at which point the "CAN" would be replaced with "CVE" while the number
+portion remained the same.  However, nowadays they are just assigned a
+"CVE-" prefix from the start, although that prefix does not guarantee
+that the vulnerability will be included in the official list.  (For
+example, it might be later discovered to be a duplicate of an existing
+CVE, in which case the earlier one&nbsp;&mdash;&nbsp;the lower
+number&nbsp;&mdash;&nbsp;should be used.)</para></footnote></para>
 
-<para>A CAN/CVE entry does not itself contain a full description of
-the bug and how to protect against it.  Instead, it contains a brief
-summary, and a list of references to external resources (such as
-mailing list archives) where people can go to get more detailed
-information.  The real purpose of <ulink url="http://cve.mitre.org/"
->cve.mitre.org</ulink>
-is to provide a well-organized space in which every vulnerability can
-have a name and a clear route to more data.  See
-<ulink url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092"
->cve.mitre.org/cgi-bin/cvename.cgi?name=2002-0092</ulink>
-for an example of an entry.  Note that the references can be very
-terse, with sources appearing as cryptic abbreviations.  A key to
-those abbreviations is at
-<ulink url="http://cve.mitre.org/data/refs/refkey.html"
+<para>A CVE entry does not itself contain a full description of the
+bug and how to protect against it.  Instead, it contains a brief
+summary, and a list of references to external resources (such as a
+announcement post from the project in question) where people can go to
+get more detailed information.  The real purpose of <ulink
+url="http://cve.mitre.org/" >cve.mitre.org</ulink> is to provide a
+well-organized space in which every vulnerability has a single name,
+and people have a clear route to get more data about it.  See <ulink
+url="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2014-0160"
+>cve.mitre.org/cgi-bin/cvename.cgi?name=2014-0160</ulink> for an
+example of an entry.  Note that the references can be very terse, with
+sources appearing as cryptic abbreviations.  A key to those
+abbreviations is at <ulink
+url="http://cve.mitre.org/data/refs/refkey.html"
 >cve.mitre.org/data/refs/refkey.html</ulink>.</para>
 
-<para>If your vulnerability meets the CVE criteria, you may wish to
-acquire it a CAN number.  The process for doing so is deliberately
-gated: basically, you have to know someone, or know someone who knows
-someone.  This is not as crazy as it might sound.  In order for the
-CVE Editorial Board to avoid being overwhelmed with spurious or
-poorly written submissions, they take submissions only from sources
-they already know and trust.  In order to get your vulnerability
-listed, therefore, you need to find a path of acquaintance from your
-project to the CVE Editorial Board.  Ask around among your developers;
-one of them will probably know someone else who has either done the
-CAN process before, or knows someone who has, etc.  The advantage of
-doing it this way is also that somewhere along the chain, someone may
-know enough to tell you that a) it wouldn't count as a vulnerability
-or exposure according to MITRE's criteria, so there is no point
-submitting it, or b) the vulnerability already
-<emphasis>has</emphasis> a CAN or CVE number.  The latter can happen
-if the bug has already been published on another security advisory
-list, for example at <ulink url="http://www.cert.org/"
->www.cert.org</ulink> or on the
-BugTraq mailing list at <ulink url="http://www.securityfocus.com/"
->www.securityfocus.com</ulink>.
+<para>If your vulnerability meets the criteria, you may wish to obtain
+a CVE number for it.  You can request one using the instructions at
+<ulink url="http://cve.mitre.org/cve/request_id.html"
+>cve.mitre.org/cve/request_id.html</ulink>, but if there is someone in
+your project who has already obtained CVE numbers, or who knows
+someone who has, let them do it. The CVE Editorial Board gets a lot of
+submissions, many of them spurious or poorly written submissions; by
+approaching them through a trusted source, you are saving them time
+and possibly getting your CVE number assigned more quickly.  The other
+advantage of doing it this way is that somewhere along the chain,
+someone may know enough to tell you that a) it wouldn't count as a
+vulnerability or exposure according to MITRE's criteria, so there is
+no point submitting it, or b) the vulnerability already
+<emphasis>has</emphasis> a CVE number.  The latter can happen if the
+bug has already been published on another security advisory list, for
+example at <ulink url="http://www.cert.org/" >www.cert.org</ulink> or
+on the BugTraq mailing list at <ulink
+url="http://www.securityfocus.com/" >www.securityfocus.com</ulink>.
 (If that happened without your project hearing about it, then you
 should worry what else might be going on that you don't know
 about.)</para>
 
-<para>If you get a CAN/CVE number at all, you usually want to get it
-in the early stages of your bug investigation, so that all further
-communications can refer to that number.  CAN entries are embargoed
-until the go-public date; the entry will exist as an empty placeholder
-(so you don't lose the name), but it won't reveal any information
-about the vulnerability until the date on which you will be announcing
-the bug and the fix.</para>
+<para>If you get a CVE number at all, you usually want to get it in
+the early stages of your bug investigation, so that all further
+communications can refer to that number.  CVE entries are embargoed
+until the go-public date: the number will be reserved, but MITRE will
+allow some time (within reason) before revealing information about the
+vulnerability&nbsp;&mdash;&nbsp;so make sure you or your intermediary
+communicate clearly with the CVE Editorial Board about how long you
+need before publicly announcing.</para>
 
-<para>More information about the CAN/CVE process may be found at
-<ulink
-url="http://cve.mitre.org/cve/identifiers/candidates_explained.html"
->cve.mitre.org/cve/identifiers/candidates_explained.html</ulink>,
-and a particularly clear exposition of one open source project's use of
-CAN/CVE numbers is at <ulink
+<para>See <ulink url="http://cve.mitre.org/" >cve.mitre.org</ulink>
+for more information about the CVE process.  See also <ulink
 url="http://www.debian.org/security/cve-compatibility"
->debian.org/security/cve-compatibility</ulink>.</para>
+>debian.org/security/cve-compatibility</ulink> for a particularly
+clear exposition of one open source project's use of CVE numbers, and
+see <ulink
+url="https://securityblog.redhat.com/2013/01/30/a-minimal-security-response-process/"
+>securityblog.redhat.com/2013/01/30/a-minimal-security-response-process</ulink>
+for a good writeup of a minimal security response process, from a
+security engineer at RedHat.</para>
 
 </sect3>
 
@@ -2226,32 +2221,39 @@ announce it to the world, you effectively force everyone using your
 software to upgrade immediately or risk being hacked.  It is sometimes
 appropriate, therefore, to do <firstterm>pre-notification</firstterm>
 for certain important users.  This is particularly true with
-client/server software, where there may be well-known servers that are
-tempting targets for attackers.  Those servers' administrators would
-appreciate having an extra day or two to do the upgrade, so that they
-are already protected by the time the exploit becomes public
-knowledge.</para>
+client/server software, where there may be well-known services using
+your software and who are tempting targets for attackers.  Those
+service's administrators would appreciate having an extra day or two
+to do the upgrade, so that they are already protected by the time the
+exploit becomes public knowledge.</para>
 
 <para>Pre-notification simply means sending mails to those
 administrators before the go-public date, telling them of the
 vulnerability and how to fix it.  You should send pre-notification
-only to people you trust to be discreet with the information.  That
-is, the qualification for receiving pre-notification is twofold: the
-recipient must run a large, important server where a compromise would
-be a serious matter, <emphasis>and</emphasis> the recipient must be
-known to be someone who won't blab about the security problem before
-the go-public date.</para>
+only to people you trust to be discreet with the information, and with
+whom you can communicate securely.  That is, the qualification for
+receiving pre-notification is threefold: the recipient must run a
+large, important service where a compromise would be a serious matter;
+the recipient must be known to be someone who won't blab about the
+security problem before the go-public date; and you must have a way
+(such as via <ulink url="https://gnupg.org/" >GnuPG</ulink>-encrypted
+email) to communicate securely with the recipient, so that any
+eavesdroppers between you and your recipient can't read the
+message.<footnote><para>Remember that Subject lines in emails aren't
+encrypted, so don't put too much information about the vulnerability
+in the Subject line.</para></footnote></para>
 
 <para>Send each pre-notification mail individually (one at a time) to
 each recipient.  Do <emphasis>not</emphasis> send to the entire list
 of recipients at once, because then they would see each others'
 names&mdash;meaning that you would essentially be alerting each
 recipient to the fact that each <emphasis>other</emphasis> recipient
-may have a security hole in her server.  Sending it to them all via
+may have a security hole in her service.  Sending it to them all via
 blind CC (BCC) isn't a good solution either, because some admins
 protect their inboxes with spam filters that either block or reduce
-the priority of BCC'd mail, since so much spam is sent via BCC these
-days.</para>
+the priority of BCC'd mail, since so much spam is sent via BCC.  If
+you have a phone number or other out-of-band way to contact the
+administrator to let them know the mail is coming, use it.</para>
 
 <para>Here's a sample pre-notification mail:</para>
 
@@ -2259,11 +2261,12 @@ days.</para>
 From: Your Name Here
 To: admin@large-famous-server.com
 Reply-to: Your Name Here (not the security list's address)
-Subject: Confidential Scanley vulnerability notification.
+Subject: Confidential vulnerability notification.
 
+[[[ BEGIN ENCRYPTED MAIL ]]]
 
 This email is a confidential pre-notification of a security alert
-in the Scanley server.
+in the Scanley server software.
 
 Please *do not forward* any part of this mail to anyone.  The public
 announcement is not until May 19th, and we'd like to keep the
@@ -2276,7 +2279,7 @@ made public on May 19th.
 References:
 ===========
 
-   CAN-2004-1771: Scanley stack overflow in queries
+   CVE-2015-892346: Scanley stack overflow in queries
 
 Vulnerability:
 ==============
@@ -2287,7 +2290,7 @@ Vulnerability:
 Severity:
 =========
 
-   Very severe, can involve arbitrary code execution on the server.
+   Very severe; can involve arbitrary code execution on the server.
 
 Workarounds:
 ============
@@ -2309,14 +2312,14 @@ Patch:
 [...patch goes here...]
 </screen>
 
-<para>If you have a CAN number, include it in the pre-notification (as
+<para>If you have a CVE number, include it in the pre-notification (as
 shown above), even though the information is still embargoed and
-therefore the MITRE page will show nothing.  Including the CAN number
-allows the recipient to know with certainty that the bug they were
-pre-notified about is the same one they later hear about through
-public channels, so they don't have to worry whether further action is
-necessary or not, which is precisely the point of CAN/CVE
-numbers.</para>
+therefore the corresponding MITRE page will show nothing at the time
+of pre-notification.  Including the CVE number allows the recipient to
+know with certainty that the bug they were pre-notified about is the
+same one they later hear about through public channels, so they don't
+have to worry whether further action is necessary or not, which is
+precisely the point of CVE numbers.</para>
 
 </sect3>
 
@@ -2325,7 +2328,7 @@ numbers.</para>
 
 <para>The last step in handling a security bug is to distribute the
 fix publicly.  In a single, comprehensive announcement, you should
-describe the problem, give the CAN/CVE number if any, describe how to
+describe the problem, give the CVE number if any, describe how to
 work around it, and how to permanently fix it.  Usually "fix" means
 upgrading to a new version of the software, though sometimes it can
 mean applying a patch, particularly if the software is normally run in
@@ -2341,21 +2344,20 @@ course.  (Details of release procedures are discussed in
 <para>Whether or not the public fix involves a new release, do the
 announcement with roughly the same priority as you would a new
 release: send a mail to the project's <literal>announce</literal>
-list, make a new press release, update the Freecode entry, etc.
-While you should never try to play down the existence of a security
-bug out of concern for the project's reputation, you may certainly set
-the tone and prominence of a security announcement to match the actual
-severity of the problem.  If the security hole is just a minor
-information exposure, not an exploit that allows the user's entire
-computer to be taken over, then it may not warrant a lot of fuss.  You
-may even decide not to distract the <literal>announce</literal> list
-with it.  After all, if the project cries wolf every time, users might
-end up thinking the software is less secure than it actually is, and
-also might not believe you when you have a really big problem to
-announce.  See
+list, make a new press release, etc.  While you should never try to
+play down the existence of a security bug out of concern for the
+project's reputation, you may certainly set the tone and prominence of
+a security announcement to match the actual severity of the problem.
+If the security hole is just a minor information exposure, not an
+exploit that allows the user's entire computer to be taken over, then
+it may not warrant a lot of fuss.  You may even decide not to distract
+the <literal>announce</literal> list with it.  After all, if the
+project cries wolf every time, users might end up thinking the
+software is less secure than it actually is, and also might not
+believe you when you have a really big problem to announce.  See
 <ulink url="http://cve.mitre.org/about/terminology.html"
->cve.mitre.org/about/terminology.html</ulink> for a good
-introduction to the problem of judging severity.</para>
+>cve.mitre.org/about/terminology.html</ulink> for a good introduction
+to the problem of judging and describing severity.</para>
 
 <para>In general, if you're unsure how to treat a security problem,
 find someone with experience and talk to them about it.  Assessing and
