@@ -78,7 +78,7 @@ users.  A release means that:</para>
 
 <itemizedlist>
 
-  <listitem><para>Old bugs have been fixed.  This is probably the one
+  <listitem><para>Some old bugs have been fixed.  This is probably the one
             thing users can count on being true of every release.</para>
   </listitem>
 
@@ -98,7 +98,8 @@ users.  A release means that:</para>
             the last release too, though one always hopes not.</para>
   </listitem>
 
-  <listitem><para>Incompatible changes may have been introduced, such
+  <listitem><para>Incompatible changes may have been introduced, for
+            example such 
             that the data formats used by older versions of the
             software are no longer useable without undergoing some
             sort of (possibly manual) one-way conversion step.</para>
@@ -224,10 +225,12 @@ a typical three-component system, the first component is
 the <firstterm>major&nbsp;number</firstterm>, the second is
 the <firstterm>minor&nbsp;number</firstterm>, and the third is the
 <firstterm>micro&nbsp;number</firstterm>.  For example, release
-"2.10.17" is the seventeenth micro release in the tenth minor release
-line within the second major release series.  The words "line" and
+"2.10.17" is the eighteenth micro release in the eleventh minor release
+line within the second major release series<footnote><para>Not
+seventeenth and tenth, because numbering starts from 0, not
+1.</para></footnote>.  The words "line" and
 "series" are used informally here, but they mean what one would
-expect.  A major series is simply all the releases that share the same
+expect: a major series is simply all the releases that share the same
 major number, and a minor series (or minor line) consists of all the releases
 that share the same minor <emphasis>and</emphasis> major number.  That
 is, "2.4.0" and "3.4.1" are not in the same minor series,
@@ -235,7 +238,8 @@ even though they both have "4" for their minor number; on the other
 hand, "2.4.0" and "2.4.2" are in the same minor line, though they are
 not adjacent if "2.4.1" was released between them.</para>
 
-<para>The meanings of these numbers are exactly what you'd expect: an
+<para>The meanings of these numbers themselves are also roughly what
+you'd expect: an
 increment of the major number indicates that major changes happened;
 an increment of the minor number indicates minor changes; and an
 increment of the micro number indicates really trivial changes.  Some
@@ -277,7 +281,7 @@ from the numbering system used by the APR project, see
 
   <listitem><para>Changes to the micro number only (that is, changes
             within the same minor line) must be both forward- and
-            backward-compatible.  That is, the changes should be bug
+            backward-compatible.  The changes should be bug
             fixes only, or very small enhancements to existing
             features.  New features should not be introduced in a
             micro release.</para>
@@ -379,7 +383,7 @@ components mean, and stick to it.</para>
 
 <para>Some projects use the parity of the minor number component to
 indicate the stability of the software: even means stable, odd means
-unstable.  This applies only to the minor number, not the major and
+unstable.  This applies only to the minor number, not the major or
 micro numbers.  Increments in the micro number still indicate bug
 fixes (no new features), and increments in the major number still
 indicate big changes, new feature sets, etc.</para>
@@ -400,16 +404,16 @@ number back to "0", and release a presumably stable package.</para>
 compatibility guidelines given earlier.  It simply overloads the minor
 number with some extra information.  This forces the minor number to
 be incremented about twice as often as would otherwise be necessary,
-but there's no great harm in that.  The even/odd system is probably
+but there's no real harm in that.  The even/odd system is probably
 best for projects that have very long release cycles, and which by
 their nature have a high proportion of conservative users who value
 stability above new features.  It is not the only way to get new
-functionality tested in the wild, however.
+functionality tested in the wild, however.  In
 <xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase> describes another, perhaps more common,
-method of releasing potentially unstable code to the public, marked so
-that people have an idea of the risk/benefit trade-offs immediately on
-seeing the release's name.</para>
+later in this chapter</phrase> we will examine another, perhaps more common,
+method of releasing potentially unstable code to the public, in which
+the release number is further marked so that people have an idea of
+the risk/benefit trade-offs immediately on seeing the release's name.</para>
 
 </sect2>
 
@@ -426,7 +430,7 @@ because they follow the project closely enough to be able to stay away
 from currently unstable areas of the feature space.  They often update
 their copy of the software every day, sometimes more than once a day,
 and when they check in a change, they can reasonably expect that every
-other developer will have it within 24 hours.</para>
+other developer will have it within a day or two.</para>
 
 <para>How, then, should the project make a formal release?  Should it
 simply take a snapshot of the tree at a moment in time, package it up,
@@ -462,9 +466,9 @@ branch in the version control system (see
 <xref linkend="vc-vocabulary-branch"/>), on which the code
 destined for this release can be isolated from mainline development.
 The concept of release branches is certainly not original to free
-software; many commercial development organizations use them too.
-However, in commercial environments, release branches are sometimes
-considered a luxury&mdash;a kind of formal "best practice" that can,
+software; many proprietary development organizations use them too.
+However, in closed-source environments, release branches are sometimes
+considered a luxury&mdash;a kind of theoretical "best practice" that can,
 in the heat of a major deadline, be dispensed with while everyone on
 the team scrambles to stabilize the main tree.</para>
 
@@ -495,78 +499,42 @@ code?"</para>
 version control system, of course, but the general concepts are the
 same in most systems.  A branch usually sprouts from another branch or
 from the trunk.  Traditionally, the trunk is where mainline
-development goes on, unfettered by release constraints.  The first
-release branch, the one leading to the "1.0" release, sprouts off the
-trunk.  In CVS, the branch command would be something like this</para>
+development goes on, unfettered by release constraints, and, say, the
+first release branch, the one leading to the "1.0" release, sprouts
+off the trunk.  (The details of how to create and manage branches in
+your particular version control system are beyond the scope of this
+book, but the semantics are roughly the same everywhere.)  Note that
+you might want to name the branch "1.0.x" (with a literal "x") instead
+of "1.0.0".  That way you can use the same minor line&mdash;i.e., the
+same branch&mdash;for all the micro releases in that line.</para>
 
-<screen>
-$ cd trunk-working-copy
-$ cvs tag -b RELEASE_1_0_X
-</screen>
-
-<para>or in Subversion, like this:</para>
-
-<screen>
-$ svn copy http://.../repos/trunk http://.../repos/branches/1.0.x
-</screen>
-
-<para>(All these examples assume a three-component release numbering
-system.  While I can't show the exact commands for every version
-control system, I'll give examples in CVS and Subversion and hope that
-the corresponding commands in other systems can be deduced from those
-two.)</para>
-
-<para>Notice that we created branch "1.0.x" (with a literal "x")
-instead of "1.0.0".  This is because the same minor line&mdash;i.e.,
-the same branch&mdash;will be used for all the micro releases in that
-line.  The actual process of stabilizing the branch for release is
-covered in
-<xref linkend="stabilizing-a-release"/><phrase output="printed">
-later in this chapter</phrase>.  Here we are
-concerned just with the interaction between the version control system
-and the release process.  When the release branch is stabilized and
-ready, it is time to tag a snapshot from the branch:</para>
-
-<screen>
-$ cd RELEASE_1_0_X-working-copy
-$ cvs tag RELEASE_1_0_0
-</screen>
-
-<para>or</para>
-
-<screen>
-$ svn copy http://.../repos/branches/1.0.x http://.../repos/tags/1.0.0
-</screen>
-
-<para>That tag now represents the exact state of the project's source
-tree in the 1.0.0 release (this is useful in case anyone ever needs to
-get an old version after the packaged distributions and binaries have
-been taken down).  The next micro release in the same line is likewise
-prepared on the 1.0.x branch, and when it is ready, a tag is made for
-1.0.1.  Lather, rinse, repeat for 1.0.2, and so on.  When it's time to
-start thinking about a 1.1.x release, make a new branch from
-trunk:</para>
-
-<screen>
-$ cd trunk-working-copy
-$ cvs tag -b RELEASE_1_1_X
-</screen>
-
-<para>or</para>
-
-<screen>
-$ svn copy http://.../repos/trunk http://.../repos/branches/1.1.x
-</screen>
+<para>The social and technical process of stabilizing the branch for
+release is covered in <xref linkend="stabilizing-a-release"/><phrase
+output="printed"> later in this chapter</phrase>.  Here we are
+concerned just with the high-level version control actions that relate
+tothe release process.  When the release branch is stabilized and
+ready, it is time to tag a snapshot from the branch (see <xref
+linkend="vc-vocabulary-tag"/><phrase output="printed">in <xref
+linkend="technical-infrastructure"/></phrase>) with a name like, e.g.,
+"1.0.0".  The resultant tag represents the exact state of the
+project's source tree in the 1.0.0 release (this is useful when
+developers need to compare against an old version while tracking down
+a bug).  The next micro release in the same line is likewise prepared
+on the 1.0.x branch, and when it is ready, a tag is made for 1.0.1.
+Lather, rinse, repeat for 1.0.2, and so on.  When it's time to start
+thinking about a 1.1.x release, make a new branch from trunk.</para>
 
 <para>Maintenance can continue in parallel along both 1.0.x and 1.1.x,
-and releases can be made independently from both lines.  In fact, it
-is not unusual to publish near-simultaneous releases from two
-different lines.  The older series is recommended for more
-conservative site administrators, who may not want to make the big
-jump to (say) 1.1 without careful preparation.  Meanwhile, more
-adventurous people usually take the most recent release on the highest
-line, to make sure they're getting the latest features, even at the
-risk of greater instability.</para>
+and releases can be made independently from both lines (while regular
+development work happens, as always, on the main
+trunk&nbsp;&mdash;&nbsp;in Git, the "master" branch).  In fact, it is
+not unusual to publish near-simultaneous releases from two different
+lines.  The older series is recommended for more conservative site
+administrators, who may not want to make the big jump to (say) 1.1
+without careful preparation.  Meanwhile, more adventurous people
+usually take the most recent release on the highest line, to make sure
+they're getting the latest features, even at the risk of greater
+instability.</para>
 
 </sect2>
 
@@ -575,9 +543,9 @@ some circumstances it may not even be the best, though it's worked out
 pretty well for projects I've been involved in.  Use any strategy that
 seems to work, but remember the main points: the purpose of a release
 branch is to isolate release work from the fluctuations of daily
-development, and to give the project a physical entity around which to
-organize its release process.  That process is described in detail in
-the next section.</para>
+development, and to give the project a physical entity&mdash;the
+release branch&mdash;around which to organize its release process.
+That process is described in detail in the next section.</para>
 
 </sect1>
 
@@ -590,8 +558,8 @@ release branch into a releasable state; that is, of deciding which
 changes will be in the release, which will not, and shaping the branch
 content accordingly.</para>
 
-<para>There's a lot of potential grief contained in that word,
-"deciding".  The last-minute feature rush is a familiar phenomenon in
+<para>There's a lot of potential grief contained in the word "deciding".  
+The last-minute feature rush is a familiar phenomenon in
 collaborative software projects: as soon as developers see that a
 release is about to happen, they scramble to finish their current
 changes, in order not to miss the boat.  This, of course, is the exact
@@ -655,7 +623,7 @@ software, or portability concerns).  People will sometimes ask such
 decisions to be justified, or will argue that a change is not as risky
 as it looks.  These conversations need not be confrontational, as long
 as the release owner is able to consider all the arguments objectively
-and not reflexively dig in his heels.</para>
+and not reflexively dig in her heels.</para>
 
 <para>Note that the release owner need not be the same person as the
 project leader (in cases where there is a project leader at all; see
@@ -666,7 +634,11 @@ good to make sure they're <emphasis>not</emphasis> the same person.
 The skills that make a good development leader are not necessarily the
 same as those that make a good release owner.  In something as
 important as the release process, it may be wise to have someone
-provide a counterbalance to the project leader's judgement.</para>
+provide a counterbalance to the project leader's judgement.  In that
+case, the project leader needs to remember that overriding a decision
+by the release owner will undermine the release owner's authority;
+that alone may be enough reason, in most situations, to let the
+release owner win when there is a disagreement.</para>
 
 <para>Contrast the release owner role with the less dictatorial role
 described in
@@ -677,7 +649,7 @@ in this chapter</phrase>.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="release-voting">
-<title>Change Voting</title>
+<title>Voting on Changes</title>
 
 <para>At the opposite extreme from dictatorship by release owner,
 developers can simply vote on which changes to include in the release.
@@ -702,7 +674,8 @@ vote against as a personal affront.  The greater the number of people
 involved, the more the discussion becomes about the change and less
 about the individuals.</para>
 
-<para>The system we use in the Subversion project seems to have struck
+<para>The system used for many years in the Subversion project seems
+to have struck
 a good balance, so I'll recommend it here.  In order for a change to
 be applied to the release branch, at least three developers must vote
 in favor of it, and none against.  A single "no" vote is enough to
@@ -710,8 +683,8 @@ stop the change from being included; that is, a "no" vote in a release
 context is equivalent to a veto (see <xref linkend="veto"/>).
 Naturally, any such vote must be accompanied by a justification, and
 in theory the veto could be overridden if enough people feel it is
-unreasonable and force a special vote over it.  In practice, this has
-never happened, and I don't expect that it ever will.  People are
+unreasonable and force a special vote over it.  In practice, this 
+never happens.  People are
 conservative around releases anyway, and when someone feels strongly
 enough to veto the inclusion of a change, there's usually a good
 reason for it.</para>
@@ -747,7 +720,7 @@ the two often go together.)  An entry in such a file might look like
 this:</para>
 
 <screen>
-* r2401 (issue #49)
+* commit b31910a7180fc (issue #49)
   Prevent client/server handshake from happening twice.
   Justification:
     Avoids extra network turnaround; small change and easy to review.
@@ -768,24 +741,26 @@ project settles on is fine&mdash;perhaps tmartin's explanation for the
 veto should go up in the "Notes:" section, or perhaps the change
 description should get a "Description:" header to match the other
 sections.  The important thing is that all the information needed to
-evaluate the change be reachable, and that the mechanism for casting
+evaluate the change be easily accessible, and that the mechanism for casting
 votes be as lightweight as possible.  The proposed change is referred
-to by its revision number in the repository (in this case a single
-revision, r2401, although a proposed change could just as easily
-consist of multiple revisions).  The revision is assumed to refer to a
+to by its revision number in the repository (in the above case a single
+commit, b31910a7180fc, although a proposed change could just as easily
+consist of multiple commits).  The revision is assumed to refer to a
 change made on the trunk; if the change were already on the release
 branch, there would be no need to vote on it.  If your version control
 system doesn't have an obvious syntax for referring to individual
 changes, then the project should make one up.  For voting to be
 practical, each change under consideration must be unambiguously
-identifiable.</para>
+identifiable.<footnote><para>For projects in Git, a "merge request"
+or "pull request" is usually the right unit for uniquely identifying a
+change.</para></footnote></para>
 
 <para>Those proposing or voting for a change are responsible for
 making sure it applies cleanly to the release branch, that is, applies
 without conflicts (see <xref linkend="vc-vocabulary-conflict"/>).
 If there are conflicts, then the entry should either point to an
-adjusted patch that does apply cleanly, or to a temporary branch that
-holds an adjusted version of the change, for example:</para>
+adjusted patch that does apply cleanly, or better yet to a temporary
+branch that holds an adjusted version of the change, for example:</para>
 
 <screen>
 * r13222, r13223, r13232
@@ -843,7 +818,8 @@ left out of the release for lack of votes, they will gently nag other
 developers to review and vote.  When a batch of changes are approved,
 these people will often take it upon themselves to merge them into the
 release branch; it's fine if others leave that task to them, as
-long as everyone understands that they are not obligated to do all the
+long as everyone understands that the release managers are not
+obligated to do all the
 work unless they have explicitly committed to it.  When the time comes
 to put the release out the door (see
 <xref linkend="testing-and-releasing"/><phrase output="printed">
@@ -884,6 +860,9 @@ too.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-format">
+<!-- For link compatibility with a now-vanished sidebar. -->
+<anchor id="packaging-tar" />
+
 <title>Format</title>
 
 <para>The source code should be shipped in the standard formats for
@@ -892,30 +871,20 @@ systems, the convention is to use TAR format, compressed
 by <command>compress</command>, <command>gzip</command>,
 <command>bzip</command> or <command>bzip2</command>.  For MS Windows,
 the standard method for distributing directory trees
-is <firstterm>zip</firstterm> format, which happens to do compression
-as well, so there is no need to compress the archive after creating
-it.</para>
-
-   <sidebar id="packaging-tar">
-   <title>TAR Files</title>
-
-   <para><firstterm>TAR</firstterm> stands for "Tape&nbsp;ARchive",
-   because tar format represents a directory tree as a linear data
-   stream, which makes it ideal for saving directory trees to tape.
-   The same property also makes it the standard for distributing
-   directory trees as a single file.  Producing compressed tar files
-   (or <firstterm>tarballs</firstterm>) is pretty easy.  On some
-   systems, the <command>tar</command> command can produce a
-   compressed archive itself; on others, a separate compression
-   program is used.</para>
-
-   </sidebar>
+is <firstterm>zip</firstterm> format, which compresses
+automatically.  For JavaScript projects, it is customary to ship the
+"minified"<footnote><para>See <ulink
+url="https://en.wikipedia.org/wiki/Minification_%28programming%29"
+>en.wikipedia.org/wiki/Minification_%28programming%29</ulink>.</para></footnote>
+versions of the files together with the human-readable source files.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="packaging-name-and-layout">
 <title>Name and Layout</title>
+<!-- For link compatibility with a now-vanished sidebar. -->
+<anchor id="changelog" />
 
 <para>The name of the package should consist of the software's name
 plus the release number, plus the format suffixes appropriate for the
@@ -948,7 +917,13 @@ As mentioned in
 <xref linkend="license-quickstart-applying"/><phrase output="printed">
 in <xref linkend="getting-started"/></phrase>, there should also
 be a <filename>COPYING</filename> or <filename>LICENSE</filename>
-file, giving the software's terms of distribution.</para>
+file, giving the software's terms of distribution.<footnote><para>Your
+all-caps files&nbsp;&mdash;&nbsp;README, INSTALL,
+etc&nbsp;&mdash;&nbsp;may of course have ".txt" extensions, or ".md"
+to indicate Markdown (<ulink
+url="http://daringfireball.net/projects/markdown/"
+>daringfireball.net/projects/markdown</ulink>) format,
+etc.</para></footnote></para>
 
 <para>There should also be a <filename>CHANGES</filename> file
 (sometimes called <filename>NEWS</filename>), explaining what's new in
@@ -963,8 +938,8 @@ looks something like this:</para>
 
 <screen>
 Version 2.5.0
-(20 December 2004, from /branches/2.5.x)
-http://svn.scanley.org/repos/svn/tags/2.5.0/
+(20 December 2014, from branches 2.5.x)
+http://scanley.org/repos/tags/2.5.0/
 
  New features, enhancements:
     * Added regular expression queries (issue #53)
@@ -980,52 +955,21 @@ http://svn.scanley.org/repos/svn/tags/2.5.0/
 
 <para>The list can be as long as necessary, but don't bother to
 include every little bugfix and feature enhancement.  Its purpose is
-simply to give users an overview of what they would gain by upgrading
-to the new release.  In fact, the changelist is customarily included
-in the announcement email (see
-<xref linkend="testing-and-releasing"/><phrase output="printed">
+to give users an overview of what they would gain by upgrading to
+the new release, and to tell them about any incompatible changes.  In
+fact, the changelist is customarily included in the announcement email
+(see <xref linkend="testing-and-releasing"/><phrase output="printed">
 later in this chapter</phrase>), so write it with that
 audience in mind.</para>
-
-   <sidebar id="changelog">
-   <title>CHANGES Versus ChangeLog</title>
-   <para>Traditionally, a file named <firstterm>ChangeLog</firstterm>
-   lists every change ever made to a project&mdash;that is, every
-   revision committed to the version control system.  There are
-   various formats for ChangeLog files; the details of the formats
-   aren't important here, as they all contain the same information:
-   the date of the change, its author, and a brief summary (or just
-   the log message for that change).</para>
-
-   <para>A <filename>CHANGES</filename> file is different.  It too is
-   a list of changes, but only the ones thought important for a
-   certain audience to see, and often with metadata like the exact
-   date and author stripped off.  To avoid confusion, don't use the
-   terms interchangeably.  Some projects use "NEWS" instead of
-   "CHANGES"; although this avoids the potential for confusion with
-   "ChangeLog", it is a bit of a misnomer, since the CHANGES file
-   retains change information for all releases, and thus has a lot of
-   old news in addition to the new news at the top.</para>
-
-   <para>ChangeLog files may be slowly disappearing anyway.  They were
-   helpful in the days when CVS was the only choice of version control
-   system, because change data was not easy to extract from CVS.
-   However, with more recent version control systems, the data that
-   used to be kept in the ChangeLog can be requested from the version
-   control repository at any time, making it pointless for the project
-   to keep a static file containing that data&mdash;in fact, worse
-   than pointless, since the ChangeLog would merely duplicate the log
-   messages already stored in the repository.</para>
-   </sidebar>
 
 <para>The actual layout of the source code inside the tree should be
 the same as, or as similar as possible to, the source code layout one
 would get by checking out the project directly from its version
-control repository.  Usually there are a few differences, for example
+control repository.  Sometimes there are a few differences, for example
 because the package contains some generated files needed for
 configuration and compilation (see
 <xref linkend="packaging-build-install"/><phrase output="printed">
-later in this chapter</phrase>), or because it includes
+later in this chapter</phrase>), or because the distribution includes
 third-party software that is not maintained by the project, but that
 is required and that users are not likely to already have.  But even
 if the distributed tree corresponds exactly to some development tree
@@ -1049,12 +993,12 @@ scanley-2.5.0.tar.gz
 scanley-2.5.0.zip</literallayout>
 </informalexample>
 
-<para>...but the source tree created by unpacking them must be the
-same.  That source tree is the distribution; the form in which it is
-downloaded is merely a matter of convenience.  Certain trivial
+<para>...but the source tree created by unpacking them would be the
+same.  That source tree itself is the distribution; the form in which it is
+downloaded is merely a matter of convention or convenience.  Certain minor
 differences between source packages are allowable: for example, in the
-Windows package, text files should have lines ending with CRLF
-(Carriage Return and Line Feed), while Unix packages should use just
+Windows package, text files may have lines ending with CRLF
+(Carriage Return and Line Feed), while Unix packages would use just
 LF.  The trees may be arranged slightly differently between source
 packages destined for different operating systems, too, if those
 operating systems require different sorts of layouts for compilation.
@@ -1083,7 +1027,7 @@ directory that will be created when she unpacks a distribution.</para>
 <title>Pre-releases</title>
 
 <para>When shipping a pre-release or candidate release, the qualifier
-is truly a part of the release number, so include it in the name of
+is a part of the release number, so include it in the name of
 the package's name.  For example, the ordered sequence of alpha and
 beta releases given earlier in
 <xref linkend="release-number-components"/> would result in
@@ -1135,18 +1079,12 @@ available online at
 >sources.redhat.com/autobook</ulink>.</para>
 
 <para>This is not the only standard, though it is one of the most
-widespread.  The Ant (<ulink url="http://ant.apache.org/"
->ant.apache.org</ulink>) build
-system is gaining popularity, especially with projects written in
-Java, and it has its own standard procedures for building and
-installing.  Also, certain programming languages, such as Perl and
-Python, recommend that the same method be used for most programs
-written in that language (for example, Perl modules use the
-command <command>perl&nbsp;Makefile.PL</command>).  If it's not
-obvious to you what the applicable standards are for your project, ask
-an experienced developer; you can safely assume
-that <emphasis>some</emphasis> standard applies, even if you don't
-know what it is at first.</para>
+widespread.  Other programming languages often have their own
+standards for building and installing packages.  If it's not obvious
+to you what the applicable standards are for your project, ask an
+experienced developer; you can safely assume that
+<emphasis>some</emphasis> standard applies, even if you don't know
+what it is at first.</para>
 
 <para>Whatever the appropriate standards for you project are, don't
 deviate from them unless you absolutely must.  Standard installation
@@ -1188,17 +1126,16 @@ to require unexpected steps.</para>
 <sect2 id="binary-packages">
 <title>Binary Packages</title>
 
-<para>Although the formal release is a source code package, most users
-will install from binary packages, either provided by their operating
+<para>Although the formal release is a source code package, users often
+install software from binary packages, either provided by their operating
 system's software distribution mechanism, or obtained manually from
 the project web site or from some third party.  Here "binary" doesn't
-necessarily mean "compiled"; it just means any pre-configured form of
+necessarily mean "compiled"; it's a general term for
+pre-configured form of
 the package that allows a user to install it on his computer without
 going through the usual source-based build and install procedures.  On
 RedHat GNU/Linux, it is the RPM system; on Debian GNU/Linux, it is the
-APT (<filename>.deb</filename>) system; on MS Windows, it's usually
-<literal>.MSI</literal> files or self-installing
-<literal>.exe</literal> files.</para>
+APT (<filename>.deb</filename>) system; etc.</para>
 
 <para>Whether these binary packages are assembled by people closely
 associated with the project, or by distant third parties, users are
@@ -1211,8 +1148,8 @@ produce represents the software fairly and accurately.</para>
 
 <para>The main thing packagers need to know is that they should always
 base their binary packages on an official source release.  Sometimes
-packagers are tempted to pull a later incarnation of the code from the
-repository, or include selected changes that were committed after the
+packagers are tempted to pull an unstable incarnation of the code from the
+repository, or to include selected changes that were committed after the
 release was made, in order to provide users with certain bug fixes or
 other improvements.  The packager thinks he is doing his users a favor
 by giving them the more recent code, but actually this practice can
@@ -1220,16 +1157,17 @@ cause a great deal of confusion.  Projects are prepared to receive
 reports of bugs found in released versions, and bugs found in recent
 trunk and major branch code (that is, found by people who deliberately
 run bleeding edge code).  When a bug report comes in from these
-sources, the responder will often be able to confirm that the bug is
+sources, the responder will often be able to confirm immediately that
+the bug is
 known to be present in that snapshot, and perhaps that it has since
 been fixed and that the user should upgrade or wait for the
-next release.  If it is a previously unknown bug, having the precise
+next release.  If it is a previously unknown bug, knowing the precise
 release makes it easier to reproduce and easier to categorize in the
 tracker.</para>
 
 <para>Projects are not prepared, however, to receive bug reports based
 on unspecified intermediate or hybrid versions.  Such bugs can be hard
-to reproduce; also, they may be due to unexpected interactions in
+to reproduce; also, they may be due to unexpected interactions between
 isolated changes pulled in from later development, and thereby cause
 misbehaviors that the project's developers should not have to take the
 blame for.  I have even seen dismayingly large amounts of time wasted
@@ -1240,7 +1178,11 @@ did not happen, everyone had to dig around a lot to figure out
 why.</para>
 
 <para>Still, there will sometimes be circumstances when a packager
-insists that modifications to the source release are necessary.
+insists that modifications to the source release are necessary<footnote><para>
+<ulink
+    url="https://en.wikipedia.org/wiki/Mozilla_Corporation_software_rebranded_by_the_Debian_project#Iceweasel"
+    >en.wikipedia.org/wiki/Mozilla_Corporation_software_rebranded_by_the_Debian_project#Iceweasel</ulink>
+gives a well-known example of this.</para></footnote>.
 Packagers should be encouraged to bring this up with the project's
 developers and describe their plans.  They may get approval, but
 failing that, they will at least have notified the project of their
@@ -1274,19 +1216,19 @@ can.</para>
 <sect1 id="testing-and-releasing">
 <title>Testing and Releasing</title>
 
-<para>Once the source tarball is produced from the stabilized release
+<para>Once the source distribution is produced from the stabilized release
 branch, the public part of the release process begins.  But before the
-tarball is made available to the world at large, it should be tested
+distribution is made available to the world at large, it should be tested
 and approved by some minimum number of developers, usually three or
 more.  Approval is not simply a matter of inspecting the release for
-obvious flaws; ideally, the developers download the tarball, build and
+obvious flaws; ideally, the developers download the package, build and
 install it onto a clean system, run the regression test suite (see
-<xref linkend="automated-testing"/>)<phrase output="printed"> in
-<xref linkend="managing-volunteers"/></phrase>, and do some
+<xref linkend="automated-testing"/><phrase output="printed"> in
+<xref linkend="managing-volunteers"/></phrase>), and do some
 manual testing.  Assuming it passes these checks, as well as any other
 release checklist criteria the project may have, the developers then
-digitally sign the tarball using GnuPG
-(<ulink url="http://www.gnupg.org/" >gnupg.org</ulink>), PGP
+digitally sign each container (the .tar.gz file, .zip file, etc) using
+GnuPG (<ulink url="http://www.gnupg.org/" >gnupg.org</ulink>), PGP
 (<ulink url="http://www.pgpi.org/" >pgpi.org</ulink>), or some other
 program capable of producing PGP-compatible signatures.</para>
 
@@ -1295,7 +1237,7 @@ signatures, instead of a shared project key, and as many developers as
 want to may sign (i.e., there is a minimum number, but not a maximum).
 The more developers sign, the more testing the release undergoes, and
 also the greater the likelihood that a security-conscious user can
-find a digital trust path from herself to the tarball.</para>
+find a digital trust path from herself to the release.</para>
 
 <para>Once approved, the release (that is, all tarballs, zip files,
 and whatever other formats are being distributed) should be placed
@@ -1367,13 +1309,13 @@ should use the procedures described in
 <xref linkend="communications"/></phrase>.  There are a few
 specific things to do for releases, though.</para>
 
-<para>Whenever you give the URL to the downloadable release tarball,
-make sure to also give the MD5/SHA1 checksums and pointers to the
+<para>Whenever you write the URL to the downloadable release tarball,
+make sure to also write the MD5/SHA1 checksums and pointers to the
 digital signatures file.  Since the announcement happens in multiple
 forums (mailing list, news page, etc.), this means users can get the
 checksums from multiple sources, which gives the most
 security-conscious among them extra assurance that the checksums
-themselves have not been tampered with.  Giving the link to the
+themselves have not been tampered with.  Meanwhile, giving the link to the
 digital signature files multiple times doesn't make those signatures
 more secure, but it does reassure people (especially those who don't
 follow the project closely) that the project takes security
@@ -1392,7 +1334,7 @@ testers, and all the people who took the time to file good bug
 reports.  Don't single out anyone by name, though, unless there's
 someone who is individually responsible for a huge piece of work,
 the value of which is widely recognized by everyone in the
-project.  Just be wary of sliding down the slippery slope of credit
+project.  Be wary of sliding down the slippery slope of credit
 inflation (see <xref linkend="credit"/><phrase output="printed">
 in <xref linkend="managing-volunteers"/></phrase>).</para>
 
@@ -1468,8 +1410,8 @@ security bug, with <emphasis>no other changes</emphasis>.  This is
 because the more changes you ship without testing, the more likely
 that one of them will cause a new bug, perhaps even a new security
 bug!  This conservatism is also friendly to administrators who may
-need to deploy the security fix, but whose upgrade policy prefers that
-they not deploy any other changes at the same time.</para>
+need to deploy the security fix, but whose upgrade policy stipulates
+that they not deploy any other changes at the same time.</para>
 
 <para>Making a security release sometimes involves some minor
 deception.  For example, the project may have been working on a 1.1.3
@@ -1494,7 +1436,7 @@ a bit confusing to see a three-component release number most of the
 time with an occasional four-component one thrown in seemingly at
 random.  Most projects I've looked at choose consistency and simply
 use the next regularly scheduled number for security releases, even
-when it means shifting other planned releases by one.</para>
+when it means shifting other planned releases by one number.</para>
 
 </sect2>
 
@@ -1507,7 +1449,7 @@ when it means shifting other planned releases by one.</para>
 <para>Maintaining parallel releases simultaneously has implications
 for how daily development is done.  In particular, it makes
 practically mandatory a discipline that would be recommended anyway:
-have each commit be a single logical change, and never mix unrelated
+have each commit be a single logical change, and don't mix unrelated
 changes in the same commit.  If a change is too big or too disruptive
 to do in one commit, break it across N commits, where each commit is a
 well-partitioned subset of the overall change, and includes nothing
@@ -1516,11 +1458,14 @@ unrelated to the overall change.</para>
 <para>Here's an example of an ill-thought-out commit:</para>
 
 <screen>
-------------------------------------------------------------------------
-r6228 | jrandom | 2004-06-30 22:13:07 -0500 (Wed, 30 Jun 2004) | 8 lines
+commit 3b1917a01f8c50e25db0b71edce32357d2645759
+Author: J. Random &lt;jrandom@example.com&gt;
+Date:   Sat 2014-06-28 15:53:07 -0500
 
-Fix Issue #1729: Make indexing gracefully warn the user when a file
-is changing as it is being indexed.
+Fix Issue #1729: warn on change during re-indexing.
+
+Make indexing gracefully warn the user when a file is changing as it
+is being indexed.
 
 * ui/repl.py
   (ChangingFile): New exception class.
@@ -1568,8 +1513,8 @@ having each commit be one logical change is desirable.
 Psychologically, a semantically unified commit is easier to review,
 and easier to revert if necessary (in some version control systems,
 reversion is really a special kind of merge anyway).  A little
-up-front discipline on everyone's part can save the project a lot of
-headache later.</para>
+up-front discipline on each developer's part can save the project a
+lot of headache later.</para>
 
 <!-- ======================== subsection ============================== -->
 <sect2 id="planning">
@@ -1583,14 +1528,14 @@ certain date, because the new release needs to be coordinated with
 some other effort for marketing purposes, or because the venture
 capitalists who invested in the whole thing need to see some results
 before they put in any more funding.  Free software projects, on the
-other hand, were until recently mostly motivated by amateurism in the
-most literal sense: they were written for the love of it.  No one felt
-the need to ship before all the features were ready, and why should
-they?  It wasn't as if anyone's job was on the line.</para>
+other hand, are concerned with maintaining a cooperative working
+atmosphere among many parties, some of them possibly business
+competitors, and the preservation of the working relationship can
+trump and single party's deadlines.</para>
 
-<para>Nowadays, many open source projects are funded by corporations,
-and are correspondingly more and more influenced by deadline-conscious
-corporate culture.  This is in many ways a good thing, but it can
+<para>Of course, many open source projects are funded by corporations,
+and are correspondingly by deadline-conscious management.  This is in
+many ways a good thing, but it can
 cause conflicts between the priorities of those developers who are
 being paid and those who are volunteering their time.  These conflicts
 often happen around the issue of when and how to schedule releases.
@@ -1654,10 +1599,11 @@ therefore schedule, of the project would be roughly as he
 wanted.</para>
 
 <para>In the case of a free software project, there is no single
-"meeting", but instead a series of small proposals made mostly by
-means of the ticket tracker.  But if you have some credibility in the
+"meeting", but instead a series of small proposals made in the
+discussion forums and in the ticket tracker.  But if you have some
+credibility in the
 project to start with, and you start assigning various features,
-enhancements, and bugs to target releases in the ticket tracker,
+enhancements, and bugs to target releases in the tracker,
 according to some announced overall plan, people will mostly go along
 with you.  Once you've got things laid out more or less as you want
 them, the conversations about actual release
@@ -1668,8 +1614,8 @@ decision as written in stone.  In the comments associated with each
 assignment of a ticket to a specific future release, invite
 discussion, dissent, and be genuinely willing to be persuaded whenever
 possible.  Never exercise control merely for the sake of exercising
-control: the more deeply others participate in the release planning
-process (see
+control: the more deeply others feel they can participate in the
+release planning process (see
 <xref linkend="share-management"/><phrase output="printed"> in
 <xref linkend="managing-volunteers"/></phrase>), the easier it
 will be to persuade them to share your priorities on the issues that
