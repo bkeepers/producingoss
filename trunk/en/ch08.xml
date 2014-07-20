@@ -880,31 +880,34 @@ useful, but don't confuse audiences.</emphasis>
 <title>Share Management Tasks as Well as Technical Tasks</title>
 
 <para>Share the management burden as well as the technical burden of
-running the project.  As a project becomes more complex, more and more
-of the work is about managing people and information flow.  There is
-no reason not to share that burden, and sharing it does not
-necessarily require a top-down hierarchy either&mdash;what happens in
+running the project.  As a project becomes more complex, an increasing
+proportion of the work becomes about managing people and information flow.
+There is no reason not to share that burden, and sharing it does not
+necessarily require a top-down hierarchy either.  In fact, what happens in
 practice tends to be more of a peer-to-peer network topology than a
 military-style command structure.</para>
 
-<para>Sometimes management roles are formalized, and sometimes they
+<para>Sometimes management roles are formalized and sometimes they
 happen spontaneously.  In the Subversion project, we have a patch
 manager, a translation manager, documentation managers, issue managers
 (albeit unofficial), and a release manager.  Some of these roles we
 made a conscious decision to initiate, others just happened by
-themselves; as the project grows, I expect more roles to be added.
-Below we'll examine these roles, and a couple of others, in detail
-(except for release manager, which was already covered in
-<xref linkend="release-manager"/> and
-<xref linkend="release-owner"/><phrase output="printed"> earlier
-in this chapter</phrase>).</para>
+themselves.  Here we'll examine these roles, and a couple of others,
+in detail (except for release manager, which was already covered in
+<xref linkend="release-manager"/> and <xref
+linkend="release-owner"/><phrase output="printed"> earlier in this
+chapter</phrase>).</para>
 
-<para>As you read the role descriptions, notice that none of them
+<sect2 id="manager-is-not-owner">
+<title>"Manager" Does Not Mean "Owner"</title>
+
+<para>As you read the role descriptions below, notice that none of them
 requires exclusive control over the domain in question.  The issue
 manager does not prevent other people from making changes in the
 tickets database, the FAQ manager does not insist on being the only
 person to edit the FAQ, and so on.  These roles are all about
-responsibility without monopoly.  An important part of each domain
+<emphasis>responsibility without monopoly</emphasis>.  An important
+part of each domain
 manager's job is to notice when other people are working in that domain,
 and train them to do the things the way the manager does, so that the
 multiple efforts reinforce rather than conflict.  Domain managers
@@ -913,28 +916,31 @@ that when one leaves, someone else can pick up the slack right
 away.</para>
 
 <para>Sometimes there is a conflict: two or more people want the same
-role.  There is no one right way to handle this.  You could suggest
-that each volunteer post a proposal (an "application") and have all
-the committers vote on which is best.  But this is cumbersome and
-potentially awkward.  I find that a better technique is just to ask the
-multiple candidates to settle it among themselves.  They usually will,
-and will be more satisfied with the result than if a decision had been
-imposed on them from the outside.</para>
+role.  There is no one right way to handle this.  You just have to
+draw on your knowledge of the project and of the people involved and
+suggest a resolution.  In some cases it will work to just put on your
+"benevolent dictator" hat and choose one of the people.  But I find
+that a better technique is just to ask the multiple candidates to
+settle it among themselves.  They usually will, and will be more
+satisfied with the result than if a decision had been imposed on them
+from the outside.  They may even decide on a co-management
+arrangement, which is fine if it works, and if it doesn't then you're
+right back where you started and can try a different resolution.</para>
 
-<sect2 id="patch-manager">
+<sect3 id="patch-manager">
 <title>Patch Manager</title>
 
 <para>In a free software project that receives a lot of patches,
 keeping track of which patches have arrived and what has been decided
 about them can be a nightmare, especially if done in a decentralized
-way.  Most patches arrive as posts to the project's development
-mailing list (though some may appear first in the ticket tracker, or on
-external web sites), and there are a number of different routes a
-patch can take after arrival.</para>
+way.  Most patches arrive either as posts to the project's development
+mailing list or as a pull request submitted through the version
+control system, but there are a number of different routes a patch can
+take after arrival.</para>
 
 <para>Sometimes someone reviews the patch, finds problems, and bounces
 it back to the original author for cleanup.  This usually leads to an
-iterative process&mdash;all visible on the mailing list&mdash;in which
+iterative process&mdash;all visible in a public forum&mdash;in which
 the original author posts revised versions of the patch until the
 reviewer has nothing more to criticize.  It is not always easy to tell
 when this process is done: if the reviewer commits the patch, then
@@ -965,15 +971,13 @@ writing patches.</para>
 
 <para>The patch manager's job is to make sure that patches don't "slip
 through the cracks."  This is done by following every patch through to
-some sort of stable state.  The patch manager watches every mailing
-list thread that results from a patch posting.  If it ends in a commit
-of the patch, he does nothing.  If it goes into a review/revise
-iteration, ending with a final version of the patch but no commit, he
-files a ticket pointing to the final version, and to the mailing list
-thread around it, so that there is a permanent record for developers
-to follow up on later.  If the patch addresses an existing ticket, he
-annotates that ticket with the relevant information, instead of opening
-a new ticket.</para>
+some sort of stable state.  The patch manager watches every issue
+tracker discussion ormailing list thread that results from a patch
+posting.  If it ends in a commit of the patch, he does nothing.  If it
+goes into a review/revise iteration, ending with a final version of
+the patch but no commit, he creates or updates a ticket to point to
+the final version, and to any discussion around it, so that there is a
+permanent record for developers to follow up on later.</para>
 
 <para>When a patch gets no reaction at all, the patch manager waits a
 few days, then follows up asking if anyone is going to review it.
@@ -1011,9 +1015,9 @@ the communications overhead that would be required between them; but
 perhaps at very high volumes of patch submission, a multiheaded patch
 manager might make sense.</para>
 
-</sect2>
+</sect3>
 
-<sect2 id="translation-manager">
+<sect3 id="translation-manager">
 <title>Translation Manager</title>
 
 <para>In software projects, "translation" can refer to two very
@@ -1115,9 +1119,9 @@ translation language anyway.</para>
   
   </sidebar>
 
-</sect2>
+</sect3>
 
-<sect2 id="documentation-manager">
+<sect3 id="documentation-manager">
 <title>Documentation Manager</title>
 
 <para>Keeping software documentation up-to-date is a never-ending
@@ -1167,9 +1171,9 @@ incoming documentation patches, and using all these information
 sources to do whatever is necessary to keep the documentation
 healthy.</para>
 
-</sect2>
+</sect3>
 
-<sect2 id="issue-manager">
+<sect3 id="issue-manager">
 <title>Issue Manager</title>
 
 <para>The number of tickets in a project's bug tracker grows in
@@ -1244,9 +1248,9 @@ the database is that large, the issue manager becomes more of an
 overall coordinator, spending less time looking at each ticket herself
 and more time getting it into the right person's hands.</para>
 
-</sect2>
+</sect3>
 
-<sect2 id="faq-manager">
+<sect3 id="faq-manager">
 <title>FAQ Manager</title>
 
 <para>FAQ maintenance is a surprisingly difficult problem.  Unlike
@@ -1311,6 +1315,8 @@ FAQs</citetitle>, at
 <ulink url="http://osdir.com/Article1722.phtml"
 >osdir.com/Article1722.phtml</ulink>, for descriptions
 and evaluations of open source FAQ maintenance tools.</para>
+
+</sect3>
 
 </sect2>
 
