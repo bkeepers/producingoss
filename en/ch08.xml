@@ -1199,32 +1199,43 @@ changes may land without going through a pre-change review process.</para>
 <sect3 id="issue-manager">
 <title>Issue Manager</title>
 
-<para>The number of tickets in a project's bug tracker grows in
-proportion to the number of people using the software.  Therefore,
-even as you fix bugs and ship an increasingly robust program, you
-should still expect the number of open tickets to grow essentially
-without bound.  The frequency of duplicate tickets will also increase,
-as will the frequency of incomplete or poorly described tickets.</para>
+<para>Bug report growth is proportional to user base growth, rather
+than to the number of actual bugs in the software.  That is, the
+number of tickets in a project's bug tracker grows in proportion to
+the number of people <emphasis>using</emphasis> the
+software.<footnote><para> See <ulink
+url="http://www.rants.org/2010/01/10/bugs-users-and-tech-debt/"
+>rants.org/2010/01/10/bugs-users-and-tech-debt</ulink> for a more
+detailed discussion of this.</para></footnote> Therefore, even as you
+fix bugs and ship an increasingly robust, mature program, you should
+still expect the number of open tickets to grow essentially without
+bound.  The frequency of duplicate tickets will thus also increase, as
+will the frequency of incomplete or poorly described tickets.</para>
 
 <para>An <firstterm>issue manager</firstterm><footnote><para>In the
 nomenclature I've been using elsewhere in this book, this position
 might be called "ticket manager", but in practice no project calls it
 that, and most call it "issue manager", so that's what we'll use here
-too.</para></footnote> helps alleviate these problems by
-watching what goes into the database, and periodically sweeping
-through it looking for specific problems.  Their most common action is
-probably to fix up incoming tickets, either because the reporter
-didn't set some of the form fields correctly, or because the ticket is
-a duplicate of one already in the database.  Obviously, the more
-familiar an issue manager is with the project's bug database, the
-more efficiently she will be able to detect duplicate
-tickets&mdash;this is one of the main advantages of having a few
-people specialize in the bug database, instead of everyone trying to
-do it <foreignphrase>ad hoc</foreignphrase>.  When the group tries to
-do it in a decentralized manner, no single individual acquires a deep
-expertise in the content of the database.</para>
+too.</para></footnote> helps cope with this situation by watching what
+goes into the database, and periodically sweeping through it looking
+for specific problems.  Their most common action is probably to fix up
+incoming tickets, either because the reporter didn't set some of the
+form fields correctly, or because the ticket is a duplicate of one
+already in the database.  Obviously, the more familiar an issue
+manager is with the project's bug database, and with the
+issue-tracking software's user interface and APIs, the more
+efficiently she will be able to detect and handle duplicate tickets.
+This is why it is often good to have a few people specialize in the
+bug database, instead of everyone trying to do it <foreignphrase>ad
+hoc</foreignphrase>.  Although every developer in the project needs a
+certain basic level of competence in manipulating the issue tracker,
+having a few specialists becomes increasingly important as the project
+matures.  When a project tries to spread collective responsibility for
+the bug database across everyone, no single individual acquires a deep
+enough expertise in the content of the database or the tracker's
+features.</para>
 
-<para>issue managers can also help map between tickets and individual
+<para>Issue managers can help map between tickets and individual
 developers.  When there are a lot of bug reports coming in, not every
 developer may read the ticket notification mailing list with equal
 attention.  However, if someone who knows the development team is
@@ -1237,31 +1248,29 @@ developers themselves.</para>
 
 <para>Depending on how your project uses the ticket tracker, issue
 managers can also shape the database to reflect the project's
-priorities.  For example, in Subversion we schedule tickets into
+priorities.  For example, in Subversion we scheduled tickets into
 specific future releases, so that when someone asks "When will bug X
-be fixed?" we can say "Two releases from now," even if we can't give
+be fixed?" we could say "Two releases from now," even if we can't give
 an exact date.  The releases are represented in the ticket tracker as
-target milestones, a field available in
-IssueZilla.<footnote><para>IssueZilla is the ticket tracker we use; it
-is a descendant of BugZilla.</para></footnote> As a rule, every
-Subversion release has one major new feature and a list of specific
-bug fixes.  We assign the appropriate target milestone to all the
-tickets planned for that release (including the new feature&mdash;it
-gets a ticket too), so that people can view the bug database through
-the lens of release scheduling.  These targets rarely remain static,
-however.  As new bugs come in, priorities sometimes get shifted
-around, and tickets must be moved from one milestone to another so that
-each release remains manageable.  This, again, is best done by people
-who have an overall sense of what's in the database, and how various
-tickets relate to each other.</para>
+target milestones (something most ticket trackers support).  As a
+rule, every Subversion release has one major new feature and a list of
+specific bug fixes.  We assigned the appropriate target milestone to
+all the tickets planned for that release (including the new
+feature&mdash;it got a ticket too), so that people could view the bug
+database through the lens of release scheduling.  These targets rarely
+remain static, however.  As new bugs come in, priorities sometimes get
+shifted around, and tickets must be moved from one milestone to
+another so that each release remains manageable.  This, again, is best
+done by people who have an overall sense of what's in the database,
+and how various tickets relate to each other.</para>
 
 <para>Another thing issue managers do is notice when tickets become
 obsolete.  Sometimes a bug is fixed accidentally as part of an
 unrelated change to the software, or sometimes the project changes its
 mind about whether a certain behavior is buggy.  Finding obsoleted
 tickets is not easy: the only way to do it systematically is by making
-a sweep over all the tickets in the database.  Full sweeps become less
-and less feasible over time, however, as the number of tickets grows.
+a sweep over all the tickets in the database.  But full sweeps become less
+and less feasible over time, as the number of tickets grows.
 After a certain point, the only way to keep the database sane is to use a
 divide-and-conquer approach: categorize tickets immediately on arrival
 and direct them to the appropriate developer's or team's attention.
