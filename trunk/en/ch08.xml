@@ -1461,23 +1461,45 @@ auspicious of beginnings for the new release managers either.</para>
 <sect1 id="committers">
 <title>Committers</title>
 
-<para><emphasis>poss todo: 2 February 2014: If you're reading this note, then 
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.  The particular change
-that needs to happen here is that this section needs to make a
-terminology point: that "committer" in this context really means
-"maintainer".  That is, the footnote below probably needs to be
-brought out into its own paragraph, and early on.  This is because the
-term "commit" is used slightly differently in decentralized version
-control systems than in centralized ones (and it certainly won't work
-to call that class of people "pushers", ahem).  Interestingly, the
-term "committer" is still widely used even in decentralized systems to
-mean "someone who can put changes in the socially-accepted master
-repository".</emphasis></para>
+<sidebar id="committer">
+  <title>Defining "committer" and "commit access".</title>
+  <para>For the purposes of this section, the word
+  <firstterm>committer</firstterm> means one of the official
+  maintainers of the software&nbsp;&mdash;&nbsp;a committer is someone
+  who has <firstterm>commit access</firstterm>: the right to make
+  changes to the copy of the code that will be used for the project's
+  next official release.</para>
+
+  <para>This precise definition is important because, after all,
+  anyone can set up a repository containing a copy of the project's
+  code and allow themselves to commit to that repository; indeed,
+  doing so is a standard development procedure with decentralized
+  version control systems such as Git.  But what really matters for
+  the project's purposes is who has the ability to put changes into
+  the <emphasis>master</emphasis> copy&nbsp;&mdash;&nbsp;that is, the
+  central shared copy into which contributors' changes are merged and
+  from which releases are made.</para>
+
+  <para>Because in older, centralized version control systems, there
+  was normally only one repository anyway, the term "commit access"
+  corresponded closely to who was actually using the "commit" command
+  (see <xref linkend="vc-vocabulary-commit"/><phrase output="printed">
+  in <xref linkend="technical-infrastructure"/></phrase>) to put
+  changes into the group's shared repository.  These days it
+  corresponds to those who run the "push" or "pull" commands (see
+  <xref linkend="vc-vocabulary-push"/> and <xref
+  linkend="vc-vocabulary-pull"/><phrase output="printed"> in <xref
+  linkend="technical-infrastructure"/></phrase>) to put changes into
+  that repository.  It is the same idea either way: the master
+  repository is a social concept, not a technical concept, and the
+  mechanics of how changes get into it are not important here.  Open
+  source projects continue to use the term "committer" as a synonym
+  for "official maintainer", even though formally speaking the
+  "commit" command is no longer where the gating happens.</para>
+</sidebar>
 
 <para>As the only formally distinct class of people found in all open
-source projects, committers deserve special attention here.
+source projects, committers deserve special attention in this book.
 Committers are an unavoidable concession to discrimination in a system
 which is otherwise as non-discriminatory as possible.  But
 "discrimination" is not meant as a pejorative here.  The function
@@ -1486,18 +1508,7 @@ could succeed without it.  Quality control requires, well, control.
 There are always many people who feel competent to make changes to a
 program, and some smaller number who actually are.  The project cannot
 rely on people's own judgement; it must impose standards and grant
-commit access only to those who meet them<footnote><para>Note that the
-commit access means something a bit different in decentralized version
-control systems, where anyone can set up a repository that is linked
-into the project, and give themselves commit access to that
-repository.  Nevertheless, the <emphasis>concept</emphasis> of commit
-access still applies: "commit access" is shorthand for "the
-right to make changes to the code that will ship in the group's next
-release of the software."  In centralized version control systems,
-this means having direct commit access; in decentralized ones, it
-means having one's changes pulled into the main distribution by
-default.  It is the same idea either way; the mechanics by which it is
-realized are not terribly important.</para></footnote>.  On the other
+commit access only to those who meet them.  On the other
 hand, having people who can commit changes directly working
 side-by-side with people who cannot sets up an obvious power dynamic.
 That dynamic must be managed so that it does not harm the
@@ -1517,53 +1528,53 @@ community.</para>
 <para>In the Subversion project, we choose committers primarily on the
 Hippocratic Principle: <emphasis>first, do no harm</emphasis>.  Our
 main criterion is not technical skill or even knowledge of the code,
-but merely that the committer show good judgement.  Judgement can mean
-simply knowing what not to take on.  A person might post only small
-patches, fixing fairly simple problems in the code; but if the patches
-apply cleanly, do not contain bugs, and are mostly in accord with the
+but merely that the person show good judgement.  Judgement includes
+knowing what not to take on.  Someone might post only small patches,
+fixing fairly simple problems in the code, but if her patches apply
+cleanly, do not contain bugs, and are mostly in accord with the
 project's log message and coding conventions, and there are enough
 patches to show a clear pattern, then an existing committer will
-usually propose that person for commit access.  If at least three
-people say yes, and no one objects, then the offer is made.  True, we
-might have no evidence that the person is able to solve complex
-problems in all areas of the code base, but that does not matter: the
-person has made it clear that he is capable of at least judging
-his own abilities.  Technical skills can be learned (and taught),
+usually propose her for commit access.  If at least three people say
+yes, and no one objects, then the offer is made.  True, we might have
+no evidence that the person is able to solve complex problems in all
+areas of the code base, but that is irrelevant: the person has made it
+clear that she is capable of judging her own abilities, and that is
+the important thing.  Technical skills can be learned (and taught),
 but judgement, for the most part, cannot.  Therefore, it is the one
-thing you want to make sure a person has before you give him commit
+thing you want to make sure a person has before you give her commit
 access.</para>
 
 <para>When a new committer proposal does provoke a discussion, it is
 usually not about technical ability, but rather about the person's
-behavior on the mailing lists or in IRC.  Sometimes someone shows
+behavior in the project's discussion forums.  Sometimes someone shows
 technical skill and an ability to work within the project's formal
 guidelines, yet is also consistently belligerent or uncooperative in
-public forums.  That's a serious concern; if the person doesn't
-seem to shape up over time, even in response to hints, then we won't
-add him as a committer no matter how skilled he is.  In a
-volunteer group, social skills, or the ability to "play well in the
-sandbox", are as important as raw technical ability.  Because
-everything is under version control, the penalty for adding a
-committer you shouldn't have is not so much the problems it could
-cause in the code (review would spot those quickly anyway), but that
-it might eventually force the project to revoke the person's commit
+public forums.  That's a serious concern; if the person doesn't seem
+to shape up over time, even in response to hints, then we won't add
+her as a committer no matter how skilled she is.  In a volunteer
+group, social skills, or the ability to "play well in the sandbox",
+are as important as raw technical ability.  Because everything is
+under version control, the penalty for adding a committer you
+shouldn't have added is not so much the problems it could cause in the
+code (review would spot those quickly anyway), but that it might
+eventually force the project to revoke the person's commit
 access&mdash;an action that is never pleasant and can sometimes be
 confrontational.</para>
 
-<para>Many projects insist that the potential committer demonstrate a
+<para>Some projects insist that the potential committer demonstrate a
 certain level of technical expertise and persistence, by submitting
 some number of nontrivial patches&mdash;that is, not only do these
 projects want to know that the person will do no harm, they want to
-know that she is likely to do good across the code base.  This is
-fine, but be careful that it doesn't start to turn committership into
-a matter of membership in an exclusive club.  The question to keep in
-everyone's mind should be "What will bring the best results for the
-code?" not "Will we devalue the social status associated with
-committership by admitting this person?"  The point of commit access
-is not to reinforce people's self-worth, it's to allow good changes to
-enter the code with a minimum of fuss.  If you have 100
-committers, 10 of whom make large changes on a regular basis, and the
-other 90 of whom just fix typos and small bugs a few times a year,
+know that she is likely to do good across the code base.  This isn't
+necessarily harmful, but be careful that it doesn't start to turn
+committership into a matter of membership in an exclusive club.  The
+question to keep in everyone's mind should be "What will bring the
+best results for the code?" not "Will we devalue the social status
+associated with committership by admitting this person?"  The point of
+commit access is not to reinforce people's self-worth, it's to allow
+good changes to enter the code with a minimum of fuss.  If you have
+100 committers, 10 of whom make large changes on a regular basis, and
+the other 90 of whom just fix typos and small bugs a few times a year,
 that's still better than having only the 10.</para>
 
 </sect2>
