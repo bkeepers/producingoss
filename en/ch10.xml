@@ -950,83 +950,125 @@ Contributions for any other purpose.</emphasis></para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="dual-licensing">
-<title>Dual Licensing Schemes</title>
+<sect1 id="proprietary-relicensing">
+<!-- For link compatibility with a deprecated section ID. -->
+<anchor id="dual-licensing" />
+<title>Proprietary Relicensing Schemes</title>
 
-<para>Some projects try to fund themselves by using a dual licensing
-scheme, in which proprietary derivative works may pay the copyright
-holder for the right to use the code, but the code still remains free
-for use by open source projects.  This tends to work better with code
-libraries than with standalone applications, naturally.  The exact
-terms differ from case to case.  Usually the license for the free side
-is the GNU GPL, since it already bars others from incorporating the
-covered code into their proprietary product without permission from
-the copyright holder.  An example is the MySQL license,
-described at
-<ulink url="http://www.mysql.com/company/legal/licensing/"
->mysql.com/company/legal/licensing</ulink>.</para>
+<para>Some companies offer open source code with a
+<firstterm>proprietary relicensing</firstterm>
+scheme<footnote><para>This is sometimes also called <firstterm>dual
+licensing</firstterm>, but that term is ambiguous, as it has
+historically also referred to releasing open source software under two
+or more open source licenses simultaneously.  I am grateful to Bradley
+Kuhn for pointing out this ambiguity and suggesting the more accurate
+term.</para></footnote>, in which an open source version of the
+software is available under the usual open source terms, while a
+proprietary version is available for a fee.</para>
 
-<para><emphasis>15 June 2013: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
+<para>Why would anyone want a proprietary version, when an open source
+version is already out there?  There are two separate answers,
+reflecting the two different types of proprietary relicensing.</para>
 
-<para>poss2 todo: Note how that page, and so many other dual-licensing
-pages, refer to the proprietary license as "commercial".  Need a
-subsection here about why it's important <emphasis>not</emphasis> to
-call it that.</para>
+<para>The first kind is about <firstterm>selling
+exceptions</firstterm> to copyleft requirements, and is typically used
+with code libraries rather than with standalone applications.  The way
+it works is that the library's owner (i.e., copyright holder), seeing
+that some of the library's users want to incorporate it into their own
+proprietary applications, sells them a promise to
+<emphasis>not</emphasis> enforce the redistribution requirements of
+the open source version's license.  This only works when the open
+source code is under a copyleft-style license, of
+course&nbsp;&mdash;&nbsp;in practice it is usually the GPL or
+AGPL.</para>
 
-<para>You might be wondering: how can the copyright holder offer
-proprietary licensing for a mandatory fee if the terms of the GNU GPL
+<para>With this promise in hand, the downstream users can use the
+library in their proprietary product without worry that they might be
+forced to share the source code to the full product under the copyleft
+license.  One well-known example of "selling exceptions" is the MySQL
+database engine, which is distributed under the GPL version 2, but
+with a proprietary license offering available for many years, first
+from the Swedish company MySQL AB, and later from Oracle, Inc, which
+purchased MySQL AB in 2008.</para>
+
+<para>The second kind of proprietary relicensing, sometimes called the
+<firstterm>freemium</firstterm> model, uses an open source version to
+drive sales of a presumably fancier proprietary version.  Usually the
+company offering the proprietary version is also the primary
+maintainer of the open source version, in the sense of supplying most
+of the developer attention (this is usually inevitable, for reasons
+we'll get to in a moment).  Furthermore, although in theory the
+company <emphasis>could</emphasis> offer paid support for both the
+open source and proprietary versions, in practice they almost
+always only offer it for the proprietary version, because then they
+can charge two fees: a subscription fee for the software itself and a
+fee for the support services, with only the latter having any marginal
+cost to the supplier.</para>
+
+<para>You might be wondering: how can the copyright holder offer the
+software under a proprietary license if the terms of the GNU GPL
 stipulate that the code must be available under less restrictive
 terms?  The answer is that the GPL's terms are something the copyright
-holder imposes on everyone else; the owner is therefore free to
-decide <emphasis>not</emphasis> to apply those terms to itself.  A
-good way to think of it is to imagine that the copyright owner has an
-infinite number of copies of the software stored in a bucket.  Each
-time it takes one out of the bucket to send into the world, it can
-decide what license to put on it: GPL, proprietary, or something else.
-Its right to do this is not tied to the GPL or any other open source
-license; it is simply a power granted by copyright law.</para>
+holder imposes on everyone else; the owner is therefore free to decide
+<emphasis>not</emphasis> to apply those terms to itself.  In other
+words, one always has the right to not sue one's self for copyright
+infringement.  This right is not tied to the GPL or any other open
+source license; it is simply in the nature of copyright law.</para>
 
-<para>The attractiveness of dual licensing is that, at its best, it
-provides a way for a free software project to get a reliable income
-stream.  Unfortunately, it can also interfere with the normal dynamics
-of open source projects.  The problem is that any volunteer who makes
-a code contribution is now contributing to two distinct entities: the
-free version of the code and the proprietary version.  While the
-contributor will be comfortable contributing to the free version,
-since that's the norm in open source projects, she may feel funny
-about contributing to someone else's semi-proprietary revenue stream.
-The awkwardness is exacerbated by the fact that in dual licensing, the
-copyright owner really needs to gather formal, signed copyright
-assignments from all contributors, in order to protect itself from a
-disgruntled contributor later claiming a percentage of royalties from
-the proprietary stream.  The process of collecting these assignment
-papers means that contributors are starkly confronted with the fact
-that they are doing work that makes money for someone else.</para>
+<para>Proprietary relicensing of both kinds tends to discourage the
+normal dynamics of open source projects, however.  The problem is that
+any code contributors from outside the company are now effectively
+contributing to two distinct entities: the free version of the code
+and the proprietary version.  While the contributor will be
+comfortable helping the free version, since that's the norm in open
+source projects, she may feel less enthusiastic about her
+contributions being useable by a monopolized proprietary
+product&nbsp;&mdash;&nbsp;that is, unlike a straight non-copyleft
+license by which anyone has the right to use the code as part of a
+proprietary work, here exactly one party controls that right, and
+other participants in the project are thus being asked to contribute
+to an asymmetric result.  This awkwardness is reflected and in some
+ways amplified by the fact that in a proprietary relicensing scheme,
+the copyright owner must collect some kind of formal agreement from
+each contributor (see <xref linkend="contributor-agreements"/> earlier
+in this chapter), in order to have the right to redistribute that
+contributor's code under a proprietary license.  Because such an
+agreement needs to give the collecting entity special rights that a
+typical open source contributor agreement doesn't include, the process
+of collecting agreements means that contributors are starkly
+confronted with the imbalance of the situation, and some of them may
+decline to sign.  (Remember, they don't need to sign a contribution
+agreement in order to distribute their own changes along with the
+original code; rather, the company needs the agreement in order to
+redistribute the <emphasis>contributor's</emphasis> changes,
+especially under a proprietary license.  Asymmetry cuts both
+ways.)</para>
 
-<para>Not all volunteers will be bothered by this; after all, their
-contributions go into the open source edition as well, and that may be
-where their main interest lies.  Nevertheless, dual licensing is an
-instance of the copyright holder assigning itself a special right that
-others in the project do not have, and is thus bound to raise
-tensions at some point, at least with some volunteers.</para>
+<para>There is also a deeper motivational issue with open source
+projects that operate in the shadow of a proprietarily relicensed
+version: the sense that most of the salaried development attention is
+going to the proprietary version anyway, and that therefore spending
+time contributing to the open source version is a fool's
+game&nbsp;&mdash;&nbsp;that one is just helping a commercial entity
+free up its own developers to work on features that the open source
+community will never see.  This fear is reasonable on its face, but it
+also becomes a self-fulfilling prophecy: as more outside developers
+stay away, the company sees less reason to invest in the open source
+code base, because they're not getting the community multiplier
+effect.  Their disengagement in turn discourages outside developers,
+and so on.</para>
 
-<para>What seems to happen in practice is that companies based on
-dual licensed software do not have truly egalitarian development
-communities.  They get small-scale bug fixes and cleanup patches from
-external sources, but end up doing most of the hard work with internal
-resources.  For example, Zack Urlocker, then vice president of marketing at
-MySQL, told me that the company generally ends up hiring the most
-active volunteers anyway.  Thus, although the product itself is open
-source, licensed under the GPL, its development is more or less
-controlled by the company, albeit with the (extremely unlikely)
-possibility that someone truly dissatisfied with the company's
-handling of the software could fork the project.  To what degree this
-threat pre&euml;mptively shapes the company's policies I don't know,
-but at any rate, MySQL does not seem to be having acceptance problems
-either in the open source world or beyond.</para>
+<para>What seems to happen in practice is that companies that offer
+proprietarily relicensed software do not get truly active development
+communities with external participants.  They get occasional
+small-scale bug fixes and cleanup patches from the outside, but end up
+doing most of the hard work with internal resources.  Since this book
+is about running free software projects, I will just say that in my
+experience, proprietary relicensing schemes inevitably have a negative
+effect on the level of community engagement and the level of technical
+quality on the open source side.  If you conclude that for business
+reasons you want to try it anyway, then I hope this section will at
+least help you mitigate some of those effects.</para>
 
 </sect1>
 
@@ -1037,7 +1079,7 @@ either in the open source world or beyond.</para>
 <!-- possv2 todo: write this section -->
 
 <para><emphasis>1 Sep 2014: If you're reading this note, then you've
-encountered this section while it's still bein gwritetn; see <ulink
+encountered this section while it's still being written; see <ulink
 url="http://producingoss.com/v2.html"
 >producingoss.com/v2.html</ulink> for details.</emphasis></para>
 
