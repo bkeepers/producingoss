@@ -180,18 +180,6 @@ of tools for managing information:</para>
      </listitem>
    </varlistentry>
 
-<!-- TODO: Add blogs/planets to this list?  At least mention them
-     later in the chapter. -->
-
-<!-- TODO: What about Q&A software like OSQA and other things
-     similar to Stack Exchange?  Worth mentioning.  See:
-
-     http://projects.opensource.org/cgi-bin/mailman/private/infrastructure/2014-January/thread.html#1586
-
-     (Thread "Q&A-style software for eventual qa.opensource.org site."
-     on OSI infrastructure@ list.)
--->
-
 </variablelist>
 
 <para>Each tool in this set addresses a distinct need, but their functions
@@ -307,13 +295,14 @@ service that offers some or all of the online collaboration tools
 needed to run a free software project.  At a minimal, a canned hosting
 site offers public version control repositories and bug tracking; most
 also offer wiki space, many offer mailing list hosting too, and some
-offer continuous integration testing and other services.</para>
-
-<!-- possv2 todo: link to 'fund-servers' in Chapter 5, re the mention
-     of continuous integration above?  Should one be firstterm? -->
+offer continuous integration testing and other
+services.<footnote><para>Note that for successful free software
+projects, interested commercial entities will eventually often step to
+fund many of these services anyway; see <xref linkend="fund-servers"/>
+for further discussion of this.</para></footnote></para>
 
 <para>There are two main advantages to using a canned site.  The first
-is server capacity and bandwidth: their servers are beefy boxes
+is server capacity and bandwidth: their servers are hefty boxes
 sitting on really fat pipes.  No matter how successful your project
 gets, you're not going to run out of disk space or swamp the network
 connection.  The second advantage is simplicity.  They have already
@@ -345,8 +334,8 @@ file.  But when your web site is hosted on someone else's server, it
 may be difficult to set up a custom hook to regenerate the online
 HTML version of the FAQ whenever the master file is changed.</para>
 
-<para>If you choose a canned site, leave open the option of switching
-to a different site later, by using a custom domain name as the
+<para>If you choose a canned site, try to leave open the option of
+switching to a different site later, by using a custom domain name as the
 project's development home address.  You can forward that URL to the
 canned site, or have a fully customized development home page at the
 main URL and link to the canned site for specific functionality.  Just
@@ -371,49 +360,32 @@ probably run best just using one of those sites.</para>
 <sect3 id="canned-hosting-choosing">
 <title>Choosing a canned hosting site</title>
 
-<para><emphasis>possv2 todo 26 September 2014: If you're reading this
-note, then you've encountered this section while it's undergoing
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.  The specific todo item
-here is: update this to talk more about <ulink
-url="https://about.gitlab.com/" >GitLab.com</ulink> (and similarly
-well-integrated and easy-to-use services that are themselves open
-source).  I'm not sure that the recommendation toward GitHub below
-should be as strong as it is.  GitHub is still dominant, but that is
-not the important question; the important question is the degree to
-which choosing GitHub is in itself a factor in your project's
-success&nbsp;&mdash;&nbsp;that is, would some developers be slower to
-contribute if one is hosted somewhere other than GitHub?  I'm not sure
-it makes that much of a difference anymore.  All the good forge sites
-are looking basically alike now.  And GitLab is open source, whereas
-GitHub is not.</emphasis></para>
-
 <para>There are now so many sites providing free-of-charge canned
 hosting for projects released under open source licenses that there is
 not space here to review the field.</para>
 
-<para>So I'll make this easy: choose <ulink url="http://github.com/"
->GitHub</ulink>.  It's by far the most popular and appears set to stay
-that way, or even grow in dominance, for some years to come.  It has a
-good set of features and integrations.  Many developers are already
-familiar with GitHub and have an account there.  It has an <ulink
-url="http://develop.github.com/" >API</ulink> for interacting
+<para>So I'll make this easy:</para>
+
+<para>If you don't know what to choose, then choose <ulink
+url="http://github.com/" >GitHub</ulink>.  It's by far the most
+popular and appears set to stay that way for some years to come.  It
+has a good set of features and integrations.  Many developers are
+already familiar with GitHub and have an account there.  It has an
+<ulink url="http://develop.github.com/" >API</ulink> for interacting
 programmatically with project resources, and while it does not
 currently offer mailing lists, there are plenty of other places you
-can host those, such as <ulink url="http://groups.google.com/" >Google
-Groups</ulink>.</para>
+can provision those, such as <ulink url="https://discourse.org/"
+>discourse.org</ulink> and <ulink url="http://groups.google.com/"
+>Google Groups</ulink>.</para>
 
 <para>If you're not convinced by GitHub (for example because your
-project uses, say, Mercurial instead of Git), but you aren't sure
-where to host, take a look at Wikipedia's thorough <ulink
+project uses, say, Mercurial instead of Git for version control), but
+you aren't sure where to host, take a look at Wikipedia's thorough
+<ulink
 url="http://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities"
 >comparison of open source software hosting facilities</ulink>; it's
 the first place to look for up-to-date, comprehensive information on
-open source project hosting options.  Currently the two most popular
-other hosting sites are <ulink url="http://code.google.com/hosting/"
->Google Code Hosting</ulink>, <ulink url="http://sourceforge.net/"
->SourceForge</ulink>, but consult the Wikipedia page before making a
-decision.</para>
+open source project hosting options.</para>
 
 </sect3>
 
@@ -429,40 +401,69 @@ a hosted service running partly with proprietary
 software&nbsp;&mdash;&nbsp;if you leave GitHub, you can't take a copy
 of their infrastructure with you, at least not all of it.</para>
 
-<para>Some projects prefer a canned hosting site that runs an entirely
-free software infrastructure and that could, in theory, be reproduced
-independently were that ever to become necessary.  Fortunately, there
-are such sites, the most well-known being <ulink
-url="http://gitlab.com/" >GitLab</ulink>, <ulink
-url="http://gitorious.org/" >Gitorious</ulink>, and <ulink
-url="http://savannah.gnu.org/" >GNU Savannah</ulink> (as of this
-writing in 2014).  Furthermore, any service that offers hosting
-of the <ulink url="http://redmine.org/" >Redmine</ulink> or <ulink
+<para>Some projects would prefer a canned hosting site that runs an
+entirely free software infrastructure and that could, in theory, be
+reproduced independently were that ever to become necessary.
+Fortunately, there are a few such sites.  As of mid-2015, <ulink
+url="http://phacility.com" >phacility.com</ulink> offers low-cost
+project hosting in <ulink url="http://phabricator.org/"
+>Phabricator</ulink>, a fully open source web platform for open-source
+style collaboration.</para>
+
+<para>There is also <ulink url="http://gitlab.com/" >GitLab</ulink>,
+which until recently was fully open source.  However, they now seem to
+offer an open source edition for self-hosting and an "enterprise
+edition" that they host and that has a few features the open source
+edition doesn't have.  Unfortunately, GitLab.com doesn't currently
+seem to offer a hosting package based on the strictly open source
+edition, which is too bad, because that would be the best choice for
+an open source project that wants to outsource hosting while
+preserving its commitment, both philosophical and utilitarian, to
+software freedom.</para>
+
+<para>Furthermore, any service that offers hosting of the <ulink
+url="http://redmine.org/" >Redmine</ulink> or <ulink
 url="http://trac.edgewall.org" >Trac</ulink> code collaboration
 platforms effectively offers fully freedom-preserving project hosting,
 because those platforms include most of the features needed to run an
-open source project; some companies offer that kind of commercial
+open source project.  Some companies offer that kind of commercial
 platform hosting with a zero-cost or very cheap rate for open source
 projects.</para>
 
 <para>Should you host your project on fully open source
-infrastructure?  While it would be ideal to have access to all the
-code that runs the site, my opinion is that the crucial thing is to
-have a way to export project data, and to be able to interact with the
-data in automatable ways.  A site that meets these criteria can never
-truly lock you in, and will even be extensible via its programmatic
-interface.  While there is some value in
-having all the code that runs a hosting site available under open
-source terms, in practice the demands of actually deploying that code
-in a production environment are prohibitive for most projects anyway.
-These sites need multiple servers, customized networks, and full-time
+infrastructure?  While it would be ideal, from the free software
+philosophical perspective, to have access to all the code that runs
+the site, I cannot say I've seen any evidence that hosting or not
+hosting on that kind of site has any effect on a project's success.
+The vast majority of developers who work on free software projects are
+willing to participate through a non-free hosting platform when that's
+what the project is using.</para>
+
+<para>In my opinion, the crucial thing is to be able to interact with
+project data in automatable ways, and to have a way to export the
+data.  A site that meets these criteria can never truly lock you in,
+and will even be somewhat extensible, via its programmatic interface.
+While there is some value in having all the code that runs a hosting
+site available under open source terms, in practice the demands of
+actually deploying that code in a production environment are difficult
+and sometimes prohibitive for most projects anyway.  The largest of
+these sites need multiple servers, customized networks, and full-time
 staffs to keep them running; merely having the code would not be
-sufficient to duplicate or "fork" the service anyway.  The main thing
-is just to make sure your data isn't trapped.</para>
+sufficient to duplicate or "fork" them anyway.  The main thing is just
+to make sure your data isn't trapped.</para>
 
 <para>Of course, all the above applies only to the servers of the
 hosting site.  Your project itself should never require participants
-to run proprietary collaboration software on their own machines.</para>
+to run proprietary collaboration software on their own
+machines.<footnote><para>The exception to this is proprietary
+Javascript code that is received from the hosting site and run
+confined or "sandboxed" in one tab in the user's browser.  The
+question of whether such code is conceptually an extension of the
+server, or should be thought of as running on the client machine even
+though in some senses it has more access to server resources than to
+client resources, is a deep and ongoing debate.  We won't settle it
+here, but it's at least more complex than just which CPU is executing
+the instructions.</para></footnote></para>
 
 </sect3>
 
@@ -1473,14 +1474,15 @@ discussion can often be helpful.</para>
   <term><firstterm>pull</firstterm></term>
   <listitem><para><emphasis>(or
            "<firstterm>update</firstterm>")</emphasis></para>
-  <para>To pull others' changes (commits) into your local
-  copy of the project.  When pulling changes from a project's mainline
+  <para>To pull others' changes (commits) into your copy of the 
+  project.  When pulling changes from a project's mainline
   development branch (see <xref linkend="vc-vocabulary-branch"/>),
   people often say "update" instead of "pull", for example: "Hey, I
   noticed the indexing code is always dropping the last byte.  Is this
   a new bug?" "Yes, but it was fixed last week&mdash;try updating and
-  it should go away."</para></listitem>
-  <!-- possv2 todo: link to 'pull-requests' from here? -->
+  it should go away."</para>
+  <para>See also <xref linkend="pull-requests"/>.</para></listitem>
+
  </varlistentry>
 
  <varlistentry id="vc-vocabulary-commit-message">
@@ -1816,34 +1818,21 @@ install version control client software locally, which could turn
 their simple query from a two-minute task into a half-hour or longer
 task.</para>
 
-<para>Browsability also implies canonical URLs for viewing a particular
-change (i.e., a commit), and for viewing the latest revision at any given
-time without specifying its commit identifier.  This can be very
-useful in technical discussions or when
-pointing people to documentation.  For example, instead of saying "For
-bug management guidelines, see the community-guide/index.html file
-in your working copy," one can say "For bug management guidelines,
-see
-<emphasis>http://subversion.apache.org/docs/community-guide/</emphasis>,"
-giving a URL that always points to the latest revision of the
-<filename>community-guides/index.html</filename> file.  The URL is
-better because it is completely unambiguous, and avoids the question
-of whether the addressee has an up-to-date working copy.</para>
+<para>Browsability also implies canonical URLs for viewing a
+particular change (i.e., a commit), and for viewing the latest
+revision at any given time without specifying its commit identifier.
+This can be very useful in technical discussions or when pointing
+people to documentation or examples.  If you tell someone a URL that
+always points to the latest revision of the a file, or to a particular
+known version, the communication is completely unambiguous, while
+avoiding the issue of whether the recipient has an up-to-date working
+copy of the code themselves.</para>
 
 <para>Some version control systems come with built-in
-repository-browsing mechanisms, and in any case most hosting sites
-offer a good web interface.  But if you need to install a third-party
-tool for repository browsing, there are many out there.  Three that
-support Git are <firstterm>GitLab</firstterm> (<ulink
-url="http://gitlab.org/" >gitlab.org</ulink>),
-<firstterm>GitWeb</firstterm> (<ulink
-url="https://git.wiki.kernel.org/index.php/Gitweb"
->git.wiki.kernel.org/index.php/Gitweb</ulink>), and
-<firstterm>GitList</firstterm> (<ulink url="http://gitlist.org/"
->gitlist.org</ulink>).  For Subversion, there is
-<firstterm>ViewVC</firstterm> (<ulink url="http://viewvc.org/"
->viewvc.org</ulink>).  A web search will turn up plenty of others
-besides these.</para>
+repository-browsing mechanisms, and in any case all hosting sites
+offer it via their web interfaces.  But if you need to install a
+third-party tool to get repository browsing, do so; it's worth
+it.</para>
 
 </sect3>
 
@@ -1862,7 +1851,7 @@ resource&mdash;working room in the project's code&mdash;into an
 abundant one.  Normally, all developers work together in the same
 sandbox, constructing the same castle.  When someone wants to add a
 new drawbridge, but can't convince everyone else that it would be an
-improvement, branching makes it possible for her to make a copy of the
+improvement, branching makes it possible for her to copy the
 castle, take it off to an isolated corner, and try out the new
 drawbridge design.  If the effort succeeds, she can invite the
 other developers to examine the result (in GitHub-speak, this
@@ -1889,13 +1878,15 @@ as first-class, publishable objects makes all this possible.</para>
 <para>Use branches liberally, and encourage others to use them.  But
 also make sure that a given branch is only active for as long as
 needed.  Every active branch is a slight drain on the community's
-attention.  Even those who are not working in a branch still maintain
-a peripheral awareness of what's going on in it.  Such awareness is
+attention.  Even those who are not working in a branch still stumble
+across it occasionally; it enters their peripheral awareness from time
+to time and draws some attention.  Sometimes such awareness is
 desirable, of course, and commit notices should be sent out for branch
 commits just as for any other commit.  But branches should not become
-a mechanism for dividing the development community.  With rare
-exceptions, the eventual goal of most branches should be to merge
-their changes back into the main line and disappear.</para>
+a mechanism for dividing the development community's efforts.  With
+rare exceptions, the eventual goal of most branches should be to merge
+their changes back into the main line and disappear, as soon as
+possible.</para>
 
 </sect3>
 
@@ -1922,29 +1913,21 @@ log message.  In a merge's log message, don't repeat the log message
 of the original change.  Instead, just indicate that this is a merge,
 and give the identifying revision of the original change, with at most
 a one-sentence summary of its effect.  If someone wants to see the
-full log message, she should consult the original revision.</para>
-
-<para>One reason it's important to avoid repeating the log message is
-that, in some systems, log messages are sometimes edited after they've
-been committed.  If a change's log message were repeated at each merge
-destination, then even if someone edited the original message, she'd
-still leave all the repeats uncorrected&mdash;which would only cause
-confusion down the road.  Another reason is that non-duplication makes
-it easier to be sure when one has tracked down the original source of
-a change.  When you're looking at a complete log message that doesn't
-refer to a some other merge source, you can know that it must be the
-original change, and handle it accordingly.</para>
+full log message, she should consult the original revision.
+Non-duplication makes it easier to be sure when one has tracked down
+the original source of a change: when you're looking at a complete log
+message that doesn't refer to a some other merge source, you can know
+that it must be the original change, and treat it accordingly.</para>
 
 <para>The same principle applies to reverting a change.  If a change
 is withdrawn from the code, then the log message for the reversion
 should merely state that some specific revision(s) is being reverted,
-<emphasis>not</emphasis> describe the actual code change that results
-from the reversion, since the semantics of the change can be derived
-by reading the original log message and change.  Of course, the
-reversion's log message should also state the reason why the change is
-being reverted, but it should not duplicate anything from the original
-change's log message.  If possible, go back and edit the original
-change's log message to point out that it was reverted.</para>
+and explain why.  It should not describe the semantic code change that
+results from the reversion, since that can be derived by consulting
+the original log message and change.  (And if you're using a system in
+which editing past log messages is possible, such as Subversion, go
+back and edit the original change's log message to mention the future
+reversion.</para>
 
 <para>All of the above implies that you should use a consistent syntax
 for referring to changes.  This is helpful not only in log messages,
@@ -2068,69 +2051,111 @@ in <xref linkend="electorate"/><phrase output="printed"> in
 <sect2 id="receiving-changes">
 <title>Receiving and reviewing contributions</title>
 
-<para><emphasis>15 March 2015: If you're reading this note, then
-you've encountered this section while it's in the process of being
-written as part of the overall update of this book (see <ulink
-url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink>).</emphasis></para>
-
-<para>poss2 todo: there are three main things to cover here: pull
-requests (GitHub-style), Gerrit and similar tools, and commit emails.
-Intro  paragraph should give an overview and describe how they interact, then
-a short section on each.  The section for commit emails is already
-done as it was just moved here from its old home as a subsection of
-the "Using the Version Control System" section.  Discuss how
-human-centered commit review can be linked with automated buildbots
-that may or may not be a hard gateway to the central repository.</para>
-
-<!-- http://programmers.stackexchange.com/questions/173262/gerrit-code-review-or-githubs-fork-and-pull-model is worth looking at -->
+<para>These days the primary means by which
+changes&nbsp;&mdash;&nbsp;code contributions, documentation
+contributions, etc&nbsp;&mdash;&nbsp;reach a project is via "pull
+requests" (described in more detail below), though some older projects
+still prefer to receive a patch posted to a mailing list or attached
+in a bug tracker.  Once a contribution arrives, it typically goes
+through a review-and-revise process, involving communication between
+the contributor and various members of the project.  At some point
+during the process, if all goes well, the contribution is eventually
+deemed ready for incorporation into the main code base and is merged
+in.  This does not mean that discussion and work on the contribution
+cease at that point.  The contribution may well continue to be
+improved, it's just that that improvement now takes place within the
+project rather than off to one side.  The moment when a code change is
+merged to the project's master branch is when it becomes officially
+part of the project.  It is no longer the sole responsibility of
+whoever submitted it; it is the collective responsibility of the
+project as a whole.</para>
 
 <sect3 id="pull-requests">
 <title>Pull requests</title>
 
-<!-- http://julien.danjou.info/blog/2013/rant-about-github-pull-request-workflow-implementation is an interesting read for this -->
+<para>A <firstterm>pull request</firstterm> is a request
+<emphasis>from</emphasis> a contributor <emphasis>to</emphasis> the
+project that a certain change be "pulled" into the project (usually
+into the project's master branch, though sometimes pull requests are
+targeted at some other branch).</para>
 
-<!-- In the now-defunct Gitorious, and perhaps elsewhere
-     (Phabricator?  GitLab?), these are called by the IMHO more
-     intuitive name "merge requests".  Make sure to mention that
-     too. -->
+<para>The change is offered in the form of the difference between the
+contributor's copy (or "clone") of the project and the project's own
+copy.  The two copies share most of their change history, of course,
+but at a certain point the contributor's diverges&nbsp;&mdash;&nbsp;it
+contains the change the contributor has implemented and that the
+project does not have yet.  The project may also have moved on since
+the clone was made and contain new changes that the contributor does
+not have, but these can be ignored for the purposes of discussion
+here.  A pull request is directional: it is for sending changes the
+contributor has that the receiver does not, and is not about changes
+flowing in the reverse direction.</para>
+
+<para>In practice, the two copies are usually stored on the same
+hosting site, and the contributor can initiate the pull request by
+simply clicking a button.  On GitHub, and perhaps on other hosting
+sites, creating a pull request automatically creates a corresponding
+ticket in the project's bug tracker, so that a pending pull request
+can be conveniently tracked using the same workflow as any other
+issue.  Some projects have also contributions enter through a
+collaborative code review tool, such as <ulink
+url="https://en.wikipedia.org/wiki/Gerrit_%28software%29"
+>Gerrit</ulink> or <ulink url="https://www.reviewboard.org/" >Review
+Board</ulink>, although GitHub has started building some of the
+features of code-review tools into its pull request management
+interface.</para>
+
+<para>Pull requests are so frequent a topic of discussion that you
+will often see people abbreviate them as "PR", as in "Yeah, your
+proposed fix sounds good.  Would you send me a PR please?"  For
+newcomers, however, the term "pull request" is sometimes confusing,
+however, because it sounds like it is request by the contributor to
+pull a change from someone else, when actually it is a request the
+contributor makes to to someone else (the project) to pull the change
+from the contributor.  Some systems use the term <firstterm>merge
+request</firstterm> to mean the same thing.  I actually find that term
+much more natural, but alas, "pull request" appears to have won, and
+we all need to just get used to it.  I'm not bitter.</para>
 
 </sect3>
 
-<sect3 id="commit-review-systems">
-<title>Review systems</title>
+<sect3 id="commit-notifications">
+<!-- For link compatibility with the old ID. -->
+<anchor id="commit-emails" />
+<title>Commit notifications / commit emails</title>
 
-<!-- See http://en.wikipedia.org/wiki/List_of_tools_for_code_review ,
-as Gerrit isn't the only thing out there, though it's probably the
-most popular.  I guess Review Board is the other. -->
+<para>Every commit to the repository&nbsp;&mdash;&nbsp;or every push
+containing a group of commits&nbsp;&mdash;&nbsp;should generate a
+notification that goes out to a subscribable forum, such as an email
+sent to a mailing list.  The notification should show who made the
+change, when they made it, what files and directories changed, and the
+actual content of the change.</para>
 
-</sect3>
+<para>The most common form of commit notifications is just to have a
+mailing list that developers or any interested party can subscribe to,
+and send an email to that list for each commit or push.  This is a
+special mailing list devoted to commit emails, separate from the
+mailing lists to which humans post.  Developers should be encouraged
+to subscribe to the commits list, as it is the most effective way to
+keep up with what's happening in the project at the code level.  Aside
+from the obvious technical benefits of peer review (see <xref
+linkend="code-review"/>), commit emails help create a sense of
+community, because they establish a shared environment in which people
+can react to events that they know are visible to others as
+well.</para>
 
-<sect3 id="commit-emails">
-<title>Commit emails</title>
-
-<para>Every commit to the repository should generate an email showing
-who made the change, when they made it, what files and directories
-changed, and how they changed.  The email should go to a special
-mailing list devoted to commit emails, separate from the mailing lists
-to which humans post.  Developers and other interested parties should
-be encouraged to subscribe to the commits list, as it is the most
-effective way to keep up with what's happening in the project at the
-code level.  Aside from the obvious technical benefits of peer review
-(see <xref linkend="code-review"/>), commit emails help create a
-sense of community, because they establish a shared environment in
-which people can react to events (commits) that they know are visible
-to others as well.</para>
-
-<para>The specifics of setting up commit emails will vary depending on
-your version control system, but usually there's a script or other
-packaged facility for doing it.  If you're having trouble finding it,
-try looking for documentation on <firstterm>hooks</firstterm> (or
+<para>Whether your project should use an email list or some other kind
+of subscribable notification forum depends on the demographics of your
+developers, but when in doubt, email is usually a good default choice.
+The specifics of setting up notifications will vary depending on your
+version control system, but usually there's a script or other packaged
+facility for doing it.  If you're having trouble finding it, try
+looking for documentation on <firstterm>hooks</firstterm> (or
 sometimes <firstterm>triggers</firstterm>) specifically a
-<firstterm>post-commit hook</firstterm> hook.  Post-commit hooks are a
-general means of launching automated tasks in response to commits.
-The hook is triggered when a given commit finalizes, is fed all the
-information about that commit, and is then free to use that
+<firstterm>post-merge hook</firstterm> or <firstterm>post-commit
+hook</firstterm> hook.  These hooks are a general means of launching
+automated tasks in response to receiving changes.  The hook is fed all
+the information about the merge, and is then free to use that
 information to do anything&mdash;for example, to send out an
 email.</para>
 
@@ -2801,66 +2826,6 @@ channel topic, and give a URL to the archive.</para>
 </sect1>
 
 <!-- ========================== SECTION =========================== -->
-<sect1 id="rss">
-<title>RSS Feeds</title>
-
-<para><firstterm>RSS</firstterm> (Really Simple Syndication) is a
-mechanism for distributing meta-data-rich news summaries to
-"subscribers", that is, people who have indicated an interest in
-receiving those summaries.  A given RSS source is usually called
-a <firstterm>feed</firstterm>, and the user's subscription interface
-is called a <firstterm>feed reader</firstterm> or <firstterm>feed
-aggregator</firstterm>.  <ulink url="http://www.rssbandit.org/">RSS
-Bandit</ulink> and the eponymous
-<ulink url="http://www.feedreader.com/">Feedreader</ulink> are two
-open source RSS readers, for example.</para>
-
-<para>There is not space here for a detailed technical explanation of
-RSS<footnote><para>See
-<ulink url="http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html"
->xml.com/pub/a/2002/12/18/dive-into-xml.html</ulink>
-for that.</para></footnote>, but you should be aware of two main
-things.  First, the feed reading software is chosen by the subscriber
-and is <emphasis>the same</emphasis> for all the feeds that subscriber
-monitors&nbsp;&mdash;&nbsp;in fact, this is the major selling point of
-RSS: that the subscriber chooses one interface to use for all their
-feeds, so each feed can concentrate just on delivering content.
-Second, RSS is now ubiquitous, so much so that most people who use it
-don't even know they're using it.  To the world at large, RSS looks
-like a little button on a web page, with a label saying "Subscribe to
-this site" or "News feed".  You click on the button, and from then on,
-your feed reader (which may well be an applet embedded in your home
-page) automatically updates whenever there's news from the
-site.</para>
-
-<para>This means that your open source project should probably offer
-an RSS feed (note that many of the canned hosting
-sites&nbsp;&mdash;&nbsp;see
-<xref linkend="canned-hosting"/>&nbsp;&mdash;&nbsp;offer it right out
-of the box).  Be careful not to post so many news items each day that
-subscribers can't separate the wheat from the chaff.  If there are too
-many news events, people will just ignore the feed, or even
-unsubscribe in exasperation.  Ideally, a project would offer separate
-feeds, one for big announcements, another following (say) events in
-the ticket tracker, another for each mailing list, etc.  In practice,
-this is hard to do well: it can result in interface confusion both for
-visitors to the project's web site and for the administrators.  But at
-a minimum, the project should offer one RSS feed on the front page,
-for sending out major announcements such as releases and security
-alerts.<footnote><para>Credit where credit is due: this section wasn't
-in the first published edition of the book, but Brian Aker's blog
-entry
-<ulink url="http://krow.livejournal.com/564980.html">"Release Criteria,
-Open Source, Thoughts On..."</ulink> reminded me of the usefulness of
-RSS feeds for open source projects.</para></footnote></para>
-
-<!-- TODO Rex Karz recommends http://lzone.de/liferea/ as a mature
-     feedreader; is using it as a replacement for Google Reader.
-     Not sure if we want to recommend feed readers though. -->
-
-</sect1>
-
-<!-- ========================== SECTION =========================== -->
 <sect1 id="wikis">
 <title>Wikis</title>
 
@@ -2995,14 +2960,17 @@ as your project's FAQ, or have the FAQ consist mostly of pointers to
 the forum's most popular items.</para>
 
 <para>A project can certainly host its own forums, and many do, using
-free software such as <ulink url="http://askbot.com" >Askbot</ulink>,
-<ulink url="http://osqa.net" >OSQA</ulink>, <ulink
-url="http://shapado.com/" >Shapado</ulink>, or <ulink
-url="http://www.coordino.com/" >Coordino</ulink>.  However, there are
-also some third-party services that aggregate questions and answers,
-the best-known of which, <ulink url="http://stackoverflow.com/"
->stackoverflow.com</ulink>, frequently has its answers coming up first
-in generic search engine results for popular questions.</para>
+free software such as <ulink url="http://askbot.com" >Askbot</ulink>
+<footnote><para>See <ulink
+url="http://ask.libreoffice.org/en/questions/"
+>ask.libreoffice.org</ulink>, for example.</para></footnote>, <ulink
+url="http://osqa.net" >OSQA</ulink>, <ulink url="http://shapado.com/"
+>Shapado</ulink>, or <ulink url="http://www.coordino.com/"
+>Coordino</ulink>.  However, there are also some third-party services
+that aggregate questions and answers, the best-known of which, <ulink
+url="http://stackoverflow.com/" >stackoverflow.com</ulink>, frequently
+has its answers coming up first in generic search engine results for
+popular questions.</para>
 
 <para>While Stack Overflow hosts Q&amp;A about many things, not just
 about open source projects, it seems to have found the right
@@ -3036,26 +3004,37 @@ responses.</para>
 <sect1 id="social-networking">
 <title>Social Networking Services</title>
 
-<para><emphasis>24 March 2013: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
+<para>Perhaps surprisingly for such social endeavors, open source
+projects typically make only limited use of what most people think of
+as "social networking" services.  But this seeming omission is really
+a matter of definition: most of the infrastructure that open source
+projects have been using for decades, since long before "social
+networking" became a recognized category of software, is actually
+social networking software even if it isn't called that.  The reason
+open source projects tend not to have much presence <em>as
+projects</em> on, say, Facebook is just that the services Facebook
+offers are not well-tuned to what open source projects need.  On the
+other hand, as you might expect, the infrastructure these projects
+have been using and improving for many years <emphasis>is</emphasis>
+quite well-tuned to their needs.</para>
 
-<para>poss2 todo: subsections for Twitter, Facebook, any others.
-Twitter is useful; Facebook appears not to be so relevant to open
-source projects but check this with people who use it more.  Identi.ca
-(if will persist).  Others?  Eventbrite (mention from
-"meeting-in-person" section), what else?  Acknowledge that many of
-these services are not open source; times have changed, the train has
-left the barn or the horse has left the station or whatever.  One good
-example: LibreOffice's "@AskLibreOffice" tweet stream at <ulink
-url="https://twitter.com/AskLibreOffice"
->twitter.com/AskLibreOffice</ulink>.  See also <ulink
-url="http://ask.libreoffice.org/en/questions/"
->ask.libreoffice.org</ulink>
-</para>
+<para>Most projects do use Twitter and similar microblog services,
+because sending out short quips and announcements that can be easily
+forwarded and replied to is a good way for a project to have
+conversations with its community; see LibreOffice's "@AskLibreOffice"
+tweet stream at <ulink url="https://twitter.com/AskLibreOffice"
+>twitter.com/AskLibreOffice</ulink> for an example of this.  Projects
+also sometimes use services such as <ulink
+url="https://www.eventbrite.com" >Eventbrite.com</ulink> and <ulink
+url="http://www.Meetup.com" >Meetup.com</ulink> to arrange in-person
+meetings of users and developers.</para>
 
-<!-- ======================== SECTION ============================== -->
+<para>But beyond lightweight services such as those, most free
+software projects do not maintain a large presence on mainstream
+social media platforms (though individual developers sometimes do, of
+course, and they may discuss the project there).  The reward the
+project gets in exchange for that investment of time and attention
+appears not to be high enough to be worth the effort.</para>
 
 </sect1>
 
