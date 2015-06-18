@@ -13,8 +13,13 @@ import cgitb; cgitb.enable()
 
 # EZT comes from the ezt/ subdir here.
 sys.path.insert(0, "ezt")
-import ezt
-
+try:
+  import ezt
+except:
+  sys.stderr.write("Error importing 'ezt'.  "
+                   "Run 'pip install -t ezt ezt' and try again.\n")
+  sys.stderr.flush()
+  sys.exit(1)
 
 form = cgi.FieldStorage()
 
