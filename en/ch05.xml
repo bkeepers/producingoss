@@ -120,25 +120,6 @@ other.</para></footnote></para>
 </simplesect>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="crowdfunding">
-<title>Crowdfunding: Kickstarter, etc</title>
-
-<para><emphasis>24 March 2013: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
-
-<para>poss2 todo</para>
-
-<para><emphasis>Kickstarter is the obvious place to start, but there
-are other funding systems too.  Look at campaigns that have used
-indiegogo, snowdrift (if in production by then), ask around for
-others.  Use Michael Bernstein's tips on how to do it
-right.</emphasis></para>
-
-</sect1>
-
-<!-- ======================== SECTION ============================== -->
 <sect1 id="types-of-corporate-involvement">
 <!-- For link compatibility with a previous misconceived ID. -->
 <anchor id="types-of-involvement" />
@@ -1444,20 +1425,112 @@ above into here.  Look at gun.io.</para>
 </sect1>
 
 <!-- ======================== SECTION ============================== -->
-<sect1 id="bounties">
-<title>Bounties</title>
+<sect1 id="crowdfunding-and-bounties">
+<title>Crowdfunding and Bounties</title>
 
-<para><emphasis>24 March 2013: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.</emphasis></para>
+<para>Perhaps unfairly, I will group crowdfunding campaigns and
+bounty-based development incentives together here, not because they
+are the same thing, but because to the extent that they are
+problematic as ways of funding free software development, their
+problems are similar.</para>
 
-<para>poss2 todo: Theory: bounties usually don't work in practice.
-Ask around, look for counterexamples.  What about gun.io?  See the
-amazing snowdrift.coop research survey: <ulink
-url="https://snowdrift.coop/p/snowdrift/w/othercrowdfunding"
->snowdrift.coop/p/snowdrift/w/othercrowdfunding</ulink> (though it's
-about crowdfunding in general, not just bounties).</para>
+<para><firstterm>Crowdfunding</firstterm> refers to many
+funders&nbsp;&mdash;&nbsp;often mostly
+individuals&nbsp;&mdash;&nbsp;coming together to fund a particular
+piece of development.  Crowdfunding campaigns are usually either "all
+or nothing", meaning that each funder pledges money toward a total
+threshold and the pledges are collected only if the threshold is met,
+or "keep it all", which is essentially traditional donation: funds go
+immediately to the recipient whether or not a stated goal amount is
+ever met.  <ulink url="http://goteo.org/" >Goteo.org</ulink> and
+<ulink url="https://Kickstarter.com/" >Kickstarter.com</ulink> are
+probably the best-known examples of all-or-nothing crowdfunding
+services, though there are many others (I like Goteo because their
+platform is itself free software, and because it is meant specifically
+for freely-licensed projects, whereas Kickstarter does not take a
+position on restrictiveness of licensing).  There are also sites like
+<ulink url="https://www.indiegogo.com/" >Indiegogo</ulink> that
+support both models<footnote><para><ulink
+url="https://en.wikipedia.org/wiki/Comparison_of_crowdfunding_services"
+>en.wikipedia.org/wiki/Comparison_of_crowdfunding_services</ulink>.</para></footnote>
+<firstterm>Bounties</firstterm> are a one-time rewards for completing
+specific tasks, such as fixing a bug or implementing a new feature.
+Bounties are often offered on a one-time basis directly by the
+interested parties, since there is no need for a pledge-collecting
+system, but the site <ulink url="https://www.bountysource.com/"
+>BountySource.com</ulink> serves as a clearinghouse for open source
+development bounties.</para>
+
+<para>While both crowdfunding and bounties have funded some open
+source work, they have not been a major economic force compared to
+salaried or contracted development.  This does not mean you shouldn't
+consider them: depending on the problem you're trying to solve, and on
+the shapes of solutions you're willing to accept, crowdfunding or
+bounty funding might be a good answer.  The problem they share is that
+they are structured around coding as a <emphasis>one-time
+event</emphasis> rather than as an ongoing process.  This would be
+problematic for any kind of software development, but is especially so
+for open source development, which if anything is is optimized more
+for low-intensity, long-term investment rather than for high-intensity
+burst investment.  Both crowdfunding campaigns and bounty prizes are
+more compatible with high-intensity, one-time bursts of activity, and
+cannot easily provide for ongoing maintenance or investment past the
+completion of the campaign goal or prize condition.<footnote><para>One
+service trying to solve that problem is <ulink
+url="https://snowdrift.coop/" >Snowdrift.coop</ulink>, which aims to
+provide sustainable funding for freely-licensed works using a
+carefully designed matching pledge model.  Whether Snowdrift will
+succeed is unknowable as of this writing in mid-2015, since the
+service is still in a preliminary stage, but I am watching it with
+interest.  Snowdrift also did a thorough survey, in the Fall of 2013,
+of funding platforms for free software, and posted their results at
+<ulink url="https://snowdrift.coop/p/snowdrift/w/en/othercrowdfunding"
+>snowdrift.coop/p/snowdrift/w/en/othercrowdfunding</ulink>; it's worth
+a read if you're interested in this topic.</para></footnote></para>
+
+<para>A crowdfunding campaign can sometimes be a good way to get a
+project launched, but there still has to be some plausible model for
+funding development after the initial launch.  Successive crowdfunding
+campaigns for later stages of development or for releases will
+inevitably tire out even a willing and supportive audience.  There is
+a reason why long-running charities, for example the public radio
+network in the United States, seek to develop sustaining funders
+(euphemistically called "members" even though they often have no
+governance role) to provide a long-term, stable revenue stream, and
+then raise funds for specific one-time efforts separately from
+that.</para>
+
+<para>If you do launch a crowdfunding campaign, take a close look at
+how other open source projects have run their campaigns.  There are a
+number of useful techniques that can be learned from the successful
+ones.  For example, most campaign sites have a mechanism for offering
+different rewards to backers at different monetary levels.  You could
+offer a mention in a <filename>SUPPORTERS</filename> file in the
+project, and perhaps at higher levels a mention on a thank-you page on
+the project's web site.  But more creatively&nbsp;&mdash;&nbsp;I first
+heard this idea from Michael Bernstein, and used
+it&nbsp;&mdash;&nbsp;you can offer to dedicate a commit to each backer
+at or above a certain level, by thanking the backer directly in the
+commit's log message.  The nice thing about this is that it's
+decentralized and easy to administer: any developer on the project can
+help fulfill that reward.  Individual developers can also offer free
+or discounted consulting about the project as a reward, though be
+careful not to sell too much of your time: the point of the campaign
+is to raise funds for development, not to turn the development team
+into a consulting team.</para>
+
+<para>One thing that many crowdfunding campaigns do that I think is
+not appropriate for free software projects is to sell early access.
+That is, one of the rewards will be a "sneak preview" or "beta access"
+to in-progress versions, before the public release.  The problem with
+this is that, for open source projects, the public is supposed to
+already have access to in-progress work.  Access to an open source
+project should be limited by the time and interest of the parties
+<emphasis>seeking</emphasis> the access, not by the project.  So learn
+what you can from other crowdfunding campaigns, but remember that some
+of the techniques used by most campaigns may not be suitable for an
+open source project that wants to keep the good will of its users and
+development community.</para>
 
 </sect1>
 
