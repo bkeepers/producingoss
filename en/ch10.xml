@@ -300,8 +300,6 @@ out, along with a few other terms.</para>
               discussion here but that does <emphasis>not</emphasis>
               have a clause requiring that they apply to derivative
               works as well.</para>
-              <!-- possv2 todo: make an Apache-2.0 reference,
-                   replacing BSD and MIT, and point to it from here.  -->
               <para>Two early and well-known examples of permissive
               licenses are the BSD and MIT licenses, but the more
               recent Apache Software License version 2
@@ -353,7 +351,7 @@ to a few oft-recurring issues:</para>
 
 <variablelist>
   <varlistentry><term>compatibility with proprietary licenses</term>
-    <listitem><para>Some free licenses allow the covered code to be
+    <listitem><para>The permissive (non-copyleft) free licenses allow the covered code to be
               used in proprietary programs.  This does not affect the
               licensing terms of the proprietary program: it is still
               as proprietary as ever, it just happens to contain some
@@ -364,20 +362,23 @@ to a few oft-recurring issues:</para>
     </listitem>
   </varlistentry>
 
-  <!-- possv2 todo: is the below completely true?  Check, and even if
-       it is true, update to include AGPL. -->
   <varlistentry><term>compatibility with other types of free licenses</term>
-    <listitem><para>Most free licenses are compatible with each other,
-              meaning that code under one license can be combined with
-              code under another, and the result distributed under
-              either license without violating the terms of the
-              other.  The major exception to this is the GNU General
-              Public License, which requires that any work using GPLed
-              code be itself distributed under the GPL, and without
-              adding any further restrictions beyond what the GPL
-              requires.  The GPL is compatible with some free
-              licenses, but not with others.  This is discussed in more
-              detail in
+    <listitem><para>Most of the commonly-used permissive free licenses
+              are compatible with each other, meaning that code under
+              one license can be combined with code under another, and
+              the result distributed under either license without
+              violating the terms of the other.  Some of them are also
+              compatible with some of the copyleft licenses, meaning
+              that a work comprised of code under the permissive
+              license and code under the copyleft license can be
+              distributed as a combined work under the copyleft
+              license (since that's the license that places more
+              conditions), with the original code in each case
+              remaining under its original license.  Typically these
+              compatibility issues come up between some permissive
+              license and the GNU General Public License (or its
+              variant the <xref linkend="license-compatibility">AGPL</xref>).  
+              This topic is discussed in more detail in
               <xref linkend="license-compatibility"/><phrase
               output="printed"> later in this chapter</phrase>.</para> 
     </listitem>
@@ -815,12 +816,6 @@ the stakes by making inflammatory analogies.)</para>
 <anchor id="copyright-assignment-transfer" />
 <title>Contributor Agreements</title>
 
-<para><emphasis>possv2 6 Sep 2014: If you're reading this note, then
-you've encountered this section while it's undergoing substantial
-revision; see <ulink url="http://producingoss.com/v2.html"
->producingoss.com/v2.html</ulink> for details.  possv2 todo: discuss
-Developer Certificates of Origin (DCOs) too.</emphasis></para>
-
 <para>There are three ways to handle copyright ownership for free code
 and documentation that were contributed to by many people.  The first
 is to ignore the issue of copyright entirely (I don't recommend this).
@@ -848,29 +843,24 @@ open source licenses do not give the copyright holder the right to
 retroactively proprietize all copies of the code.  So even if the
 project, as a legal entity, were to suddenly turn around and start
 distributing all the code under a restrictive license, that wouldn't
-cause a problem for the public community.  The other developers would
-simply start a fork based on the latest free copy of the code, and
-continue as if nothing had happened.</para>
+necessarily cause a problem for the public community.  The other
+developers can start a fork based on the latest free copy of the code,
+and continue as if nothing had happened.</para>
 
 <sect2 id="copyright-assignment-none">
 <title>Doing Nothing</title>
 
-<para><emphasis>possv2 todo 6 Sep 2014: I'm not so sure about the
-advice in this section anymore.  The legal landscape has changed, and
-I've learned more.  For the moment I'm letting it stand, until I have
-a chance to talk to a few more people.</emphasis></para>
-
-<para>Most projects never collect CLAs or CAs from
+<para>Some projects never collect CLAs or CAs from
 their contributors.  Instead, they accept code whenever it seems
 reasonably clear that the contributor intended it to be incorporated
 into the project.</para>
 
-<para>Under normal circumstances, this is okay.  But every now and
-then, someone may decide to sue for copyright infringement, alleging
-that they are the true owner of the code in question and that they
-never agreed to its being distributed by the project under an open
-source license.  For example, the SCO Group did something like this to
-the Linux project, see
+<para>This can seem to work for a long time, as long as the project
+has no enemies.  But I don't recommend it.  Someone may eventually
+decide to sue for copyright infringement, alleging that they are the
+true owner of the code in question and that they never agreed to its
+being distributed by the project under an open source license.  For
+example, the SCO Group did something like this to the Linux project, see
 <ulink url="http://en.wikipedia.org/wiki/SCO-Linux_controversies"
 >en.wikipedia.org/wiki/SCO-Linux_controversies</ulink>
 for details.  When this happens, the project will have no
@@ -885,12 +875,13 @@ difficult.</para>
 
 <para>CLAs probably offer the best tradeoff between safety and
 convenience.  A CLA is typically an electronic form that a developer
-fills out and sends in to the project.  In many jurisdictions, email
-submission or an online form is enough.  A secure digital signature
-may or may not be required; consult a lawyer to find out what method
-would be best for `your project.</para>
+fills out and sends in to the project, or even a web-based checkbox
+that the developer checks before completing their first contribution
+to the project.  In many jurisdictions, such email
+submission or an online form is enough, though you should consult with
+a lawyer to see what method would be best for your project.</para>
 
-<para>Most projects use two slightly different CLAs, one for
+<para>Some projects use two slightly different CLAs, one for
 individuals, and one for corporate contributors.  But in both types,
 the core language is the same: the contributor grants the
 project a <emphasis>"...perpetual, worldwide, non-exclusive, no-charge,
@@ -903,7 +894,7 @@ but if you get all those adjectives into it, you're off to a good start.</para>
 <para>When you request CLAs from contributors, make sure to emphasize
 that you are <emphasis>not</emphasis> asking for actual copyright
 assignment.  In fact, many CLAs start out by reminding the reader of
-this:</para>
+this, for example like so:</para>
 
 <blockquote>
 <para><emphasis>This is a license agreement only; it does not transfer
@@ -911,45 +902,40 @@ copyright ownership and does not change your rights to use your own
 Contributions for any other purpose.</emphasis></para>
 </blockquote>
 
-<para>Here are some examples:</para>
+<sect3 id="developer-certificate-of-origin">
+<title>Developer Certificates of Origin (DCO): A Simpler Style of CLA</title>
 
-<!-- possv2 todo 6 Sep 2014: Ask Karen, James, Bradley, Aaron for
-     their advice on what CLAs to use as examples? -->
+<para>More and more projects are now using a particularly convenient
+style of simple CLA known as a <firstterm>Developer Certificate of
+Origin</firstterm> (<firstterm>DCO</firstterm>).</para>
 
-<itemizedlist>
-  <listitem><para>Individual contributor CLAs:</para>
-    <itemizedlist>
-      <listitem><para><ulink
-        url="http://apache.org/licenses/icla.txt"
-        >apache.org/licenses/icla.txt</ulink>
-      </para></listitem>
-      <listitem><para><ulink
-        url="http://code.google.com/legal/individual-cla-v1.0.html"
-        >code.google.com/legal/individual-cla-v1.0.html</ulink>
-      </para></listitem>
-<!--  <listitem><para><ulink
- url="http://svn.collab.net/repos/svn-org/trunk/documents/individual-cla.txt"/>
-      </para></listitem>  -->
-    </itemizedlist>
-  </listitem>
-  <listitem><para>Corporate contributor CLAs:</para>
-    <itemizedlist>
-      <listitem><para><ulink
-        url="http://apache.org/licenses/cla-corporate.txt"
-        >apache.org/licenses/cla-corporate.txt</ulink>
-      </para></listitem>
-      <listitem><para><ulink
-        url="http://code.google.com/legal/corporate-cla-v1.0.html"
-        >code.google.com/legal/corporate-cla-v1.0.html</ulink>
-      </para></listitem>
-<!--  <listitem><para><ulink
- url="http://svn.collab.net/repos/svn-org/trunk/documents/corporate-cla.txt"/>
-      </para></listitem>  -->
-    </itemizedlist>
-  </listitem>
-</itemizedlist>
+<para>A DCO is essentially an attestation that the contributor intends
+to contribute the enclosed code under the project's license, and that
+the contributor has the right to do so.  The contributor indicates her
+understanding of the DCO once, early on, for example by emailing its
+text from her usual contribution address to a special archive at the
+project<footnote><para>The DCO text is provided by the project, but
+you don't have to write your own from scratch; see <ulink
+url="http://developercertificate.org/"
+>developercertificate.org</ulink> for example.</para></footnote>.
+Thereafter, the contributor includes a "Signed-Off-By:" line in her
+patches or commits, using the same identity, to indicate that the
+corresponding contribution is certified under the DCO.  This gives the
+project the legal cover it needs, while giving contributors a
+low-bureaucracy process for submitting their contributions.  The DCO
+relies on the project's native open source license for any trademark
+or patent provisions, which in most cases is fine.</para>
 
-<!-- TODO Include a government CLA too? -->
+<para>The simplification that makes DCOs work so well is that they set
+the inbound license of the contribution to be the same as the outbound
+license of the project.  This avoids the sticky issues that a more
+complex CLA can create, whereby the recipient of the CLA might reserve
+the right to relicense the project (and thus all the past
+contributions) under some different license in the future, possibly
+even a proprietary license.  DCOs are perfect for a free software
+project whose contributors expect it to stay that way.</para>
+
+</sect3>
 
 </sect2>
 
