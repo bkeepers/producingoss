@@ -906,81 +906,162 @@ possible).</remark></para>
 <title>Update Your RFI, RFP and Contract Language</title>
 
 <para>If you're hiring outside contractors to create software for you,
-the language in your Requests For Information (RFIs), Requests For
-Proposals (RFPs), and in the contracts themselves becomes crucially
+the language you put in your Requests For Information (RFIs), Requests
+For Proposals (RFPs), and contracts becomes crucially
 important.</para>
 
-<para>There is one key thing you must understand at the outset: most
-large-scale vendors don't really want their work to be open source.
-They would prefer that a customer contract with them to produce
-bespoke software that, under the hood, shares many components with the
+<para>There is one key thing you must understand at the outset: the
+decision makers at most large-scale vendors don't really want their
+work to be open source.  (The programming staff may feel differently,
+of course, but the path to the executive suite is usually smoother
+for those with an instinct for monopoly.)  Instead, the vendors would
+prefer that a customer contract with them to produce bespoke software
+that, under the hood, shares many components with the
 <emphasis>other</emphasis> bespoke software they're producing for
 other customers.<footnote><para>By the way, those common components
 are quite often open source libraries themselves.  These days, it's
 typical for a proprietary software product to contain a lot of open
 source code, with a layer of proprietary custom code wrapped around
 the outside.</para></footnote> That way the vendor can sell mostly the
-same product at full price to multiple customers.  This is especially
+same product at full price many times.  This is especially
 true of vendors to government agencies, because the needs of
 government agencies are so similar, and because jurisdictional
-boundaries create an artificial multiplicity of customers.  For
-example, because the United States is composed of fifty states and
-numerous counties and cities, often a vendor can effectively sell the
-same piece of software hundreds of times.  Even though only minor
-customizations may be needed for each sale, the different customers
-will pay full price each time.</para>
+boundaries create an artificial multiplicity of customers who all have
+pretty much the same needs.  Only minor customizations may be needed
+for each instance, but the different customers will pay full price
+each time.</para>
 
-<para>As a customer, your starting point for a successful project is
-to set very clear requirements about open source development from the
-beginning.  Starting from the RFI or RFP stage, all the way through
-the contract and final delivery and maintenance, you must explicitly
-require the elements and behaviors that will result in a truly open
-source product&nbsp;&mdash;&nbsp;meaning, among other things, a
-product that has the potential to be supported and customized by
-vendors other than the one who originally developed it.  Some of those
-requirements are:</para>
+<para>As a customer, then, your starting point for a successful
+large-scale open source project is to set clear, explicit requirements
+about open source development from the beginning.  From the RFI or RFP
+stage, all the way through the contract and into delivery and
+maintenance, you must require behaviors and deliverables that will
+result in a truly open source product&nbsp;&mdash;&nbsp;meaning, among
+other things, a product that has the potential to be supported and
+customized by vendors other than the one who originally developed it.
+Some of those requirements are:</para>
 
 <itemizedlist>
   <listitem>Design and development must be done in the open from the
-  start of the project (see <xref linkend="be-open-from-day-one"
-  /><phrase output="printed" > in <xref linkend="getting-started"
-  /></phrase></listitem>
-  <listitem>The code shall be open-source licensed from the start of
-  development through delivery and deployment.</listitem>
+            start of the project (see <xref
+            linkend="be-open-from-day-one" /><phrase output="printed"
+            > in <xref linkend="getting-started" /></phrase></listitem>
+  <listitem>The code shall be licensed for open source distribution
+            from the start of development through delivery and
+            deployment.</listitem> 
   <listitem>If the same vendor is both writing the software and
-  deploying the production instances, require that deployed code
-  must match the open source code.  Don't let proprietary
-  tweaks&nbsp;&mdash;&nbsp;and thus vendor
-  lock-in&nbsp;&mdash;&nbsp;slip in via the back door.</listitem>
-  <listitem>Vendor supervision in managing third-party involvement in
-  the code is expected, and should be described and budgeted for.
-  E.g., setting up a participation workflow, reviewing contributions,
-  etc.</listitem>
-  <listitem>Documentation must be sufficient to allow third parties to
-  understand, configure, and deploy the software.</listitem>
+            deploying the production instances, require that deployed
+            code must match the open source code.  Don't let
+            proprietary tweaks&nbsp;&mdash;&nbsp;and thus vendor
+            lock-in&nbsp;&mdash;&nbsp;slip in via the back door.</listitem> 
   <listitem>The product should have no dependencies on proprietary
-  software modules; written permission from you must be obtained
-  before any such dependencies are introduced.</listitem>
+            software modules; written permission from you must be
+            obtained before any such dependencies are
+            introduced.</listitem> 
+  <listitem>Documentation must be sufficient to allow third parties to
+            understand, configure, and deploy the software.</listitem>
+  <listitem>The vendor's engagement with third parties who become
+            involved in the project should be described and budgeted
+            for.  If it is a successful open source project, there
+            will eventually be community management overhead, so
+            anticipate it: e.g., specify that the vendor must
+            establish a participation workflow, review and prioritize
+            contributions, etc.</listitem>
   <listitem>Describe the extent to which the vendor is expected to
-  participate in publicity about the project, both among technical
-  developer communities and among potential users.</listitem>
+            participate in publicity about the project, both among
+            technical developer communities and among potential
+            users.</listitem>
   <listitem>You, the customer, should be the copyright owner of the
-  code written by the vendor.</listitem>
+            code written by the vendor.</listitem>
   <listitem>For any patents controlled by the vendor and affecting the
-  project, there must be an unambiguous, non-restrictive patent grant
-  not just to you but to everyone who receives the code.</listitem>
+            project, there must be an unambiguous, non-restrictive
+            patent grant not just to you but to everyone who receives
+            the code.</listitem>
 </itemizedlist>
 
-<para>(TODO: this list is incomplete.  And ability to enforce these
-reqs is important, of course.)</para>
+<para>Although this is not a complete list&nbsp;&mdash;&nbsp;every
+project is different&nbsp;&mdash;&nbsp;it should give you some idea of
+how to set expectations with your partners.  The ability to recognize
+whether these expectations are being met, in spirit not just in
+letter, is also important of course, and is the subject of the next
+section.</para>
 
 </sect2>
 
 <!-- ========================== subsection =========================== -->
-<sect2 id="third-party-deployability-review">
-<title>Third-Party Deployability Review</title>
+<sect2 id="third-party-review">
+<title>Third-Party Review</title>
 
-<para>possv2 todo</para>
+<para>When a vendor who normally does proprietary development is hired
+to do open source development, by default the result is almost always
+be a product that is not truly open source and that no third party can
+actually deploy<footnote><para>While some selection bias no doubt
+informs my experience&nbsp;&mdash;&nbsp;after all, the consultant
+tends to get brought in when things are going wrong, not when they're
+going right&nbsp;&mdash;&nbsp;my assertion that proprietary vendors
+don't get open source right if left to their own habits is based not
+just on my own experiences but also on reports from many other people,
+who report the same finding with remarkable
+consistency.</para></footnote>.  This section is about how to avoid
+that problem.  While in some instances the vendor&nbsp;&mdash;&nbsp;or
+at least factions within the vendor&nbsp;&mdash;&nbsp;may be
+deliberately obstructive, more often it is that they simply don't know
+what they don't know, and have no internal source for the knowledge
+they need.  Thus the most effective solutions is to bring in that
+knowledge from the outside: have a separate contract with a different
+company, one entirely independent of the primary vendor, to play the
+role of third-party open source participant.</para>
+
+<para>The cost of this kind of independent review is much smaller than
+the main contract&nbsp;&mdash;&nbsp;generally, expect on the order of
+5% to 10%&nbsp;&mdash;&nbsp;and the benefit can be large: the
+difference between an end product that is not useably open source and
+one that is truly open source and deployable by anyone.</para>
+
+<para>During development, the reviewers participate the way any third
+party would, posting in the project's public discussion forums, using
+the installation documentation to try to get the software up and
+running, reporting bugs, supplying bugfixes and expecting them to be
+responded to, and so on.  As the project nears completion, the
+reviewer's job is to confirm that the software can be deployed without
+reliance on proprietary dependencies or undocumented environmental
+conditions, that any necessary per-deployment configurations can be
+made and sample data loaded, and so on&nbsp;&mdash;&nbsp;in other
+words, that all the expectations anyone would have of an open source
+project are truly met.</para>
+
+<para>The reviewer's job is not simply to review.  The reviewer is
+there to <emphasis>help</emphasis> the primary vendor meet these
+expectations throughout development, and to report back to you, the
+customer, as to whether the vendor is doing so.  In far too many
+cases, I have seen a nominally open source project be contracted for
+and developed, only for the customer to discover at the
+end&nbsp;&mdash;&nbsp;too late to do anything about
+it&nbsp;&mdash;&nbsp;that literally no party besides than the original
+vendor can actually deploy, maintain, or extend the software, because
+the vendor never came close to meeting normal open source standards.
+Had parallel, independent review been built into the process from the
+start, the problems would have been detected early, and an
+unsatisfactory outcome prevented.</para>
+
+<para>Note that the primary vendor may often be quite unconscious of
+this failure.  In their mind, they developed and delivered software
+the way they usually do, so what's the problem?  The fact that no one
+other than them can deploy or modify the end result doesn't register
+as a failure, because in all their other projects that was never
+expected anyway.  The fact that the contract requires it is
+meaningless unless the customer has some way to test and enforce the
+requirement.  Most customers do not have the technical capability
+in-house to do that, so without some kind of external review process,
+the open source clauses in the contract are effectively void.</para>
+
+<para>Independent review is not merely a sort of open source
+insurance, however, though it would be worthwhile even if it were only
+that.  It is also an investment in the success of future partnerships
+with the primary vendor.  The vendor becomes more inherently capable
+of performing quality open source work in the future, because the
+reviewer's participation provides a practical education in open source
+development.</para>
 
 </sect2>
 
