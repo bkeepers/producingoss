@@ -15,6 +15,13 @@ all:
           (cd $${name} && make -f ../lang-makefile pdf)         \
         done
 
+# Note that running this command in the relevant lang dir works too:
+# 'fop -xml book.xml -xsl ../tools/fo-stylesheet.xsl -pdf producingoss.pdf'
+# r2881 has more background on how we discovered that command.  Whether
+# we want to switch our PDF production method to it, instead of running
+# 'xsltproc  --output ./producingoss.fo ../tools/fo-stylesheet.xsl book.xml'
+# as we currently do (if you trace down into tools/Makefile.base-*
+# you'll see how that happens) is an open question.
 pdf: 
 	@for name in ${LANGUAGES}; do                           \
           (cd $${name} && make -f ../lang-makefile pdf)         \
