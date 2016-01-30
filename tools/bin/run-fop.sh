@@ -42,9 +42,7 @@ if [ "${FOP_PGM}X" = X ]; then
   FOP_PGM=${DESPERATION_FOP_PGM}
 fi
 
-echo "(Using '${FOP_PGM}' for FOP)"
+echo "(Running '${FOP_PGM} $@')"
 
-# FOP is noisy on stdout, and -q doesn't seem to help, so stuff that
-# garbage into /dev/null.
-${FOP_PGM} $@ | grep -v "\[ERROR\]"
-
+# FOP is noisy on stdout, and -q seems to do nothing.
+${FOP_PGM} $@
