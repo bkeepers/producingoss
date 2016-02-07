@@ -1951,19 +1951,48 @@ series of steps, which are described in the sections below.</para>
 reports from anyone.  But the regular bug reporting channels won't do,
 because they can be watched by anyone too.  Therefore, have a separate
 mailing list or contact form for receiving security bug reports.  That
-forum must not have publicly readable archives, and its subscribership must
-be strictly controlled&mdash;only long-time, trusted developers can be
-on the list.  If you need a formal definition of "trusted", you can
-use "anyone who has had commit access for two years or more" or
-something like that, to avoid favoritism.  This is the group that will
-handle security bugs.</para>
+forum must not have publicly readable archives, and its subscribership
+must be strictly controlled&mdash;only long-time, trusted developers
+can be on the list, and people whom such developers have consensus
+that they trust<footnote><para>E.g., a release manager who maybe isn't
+a core developer but who is already trusted to roll releases anyway.
+I've seen cases where companies who had been long involved in a
+project had managers as members of its security group, even though
+those managers had never committed a line of code, because by common
+consent the project's maintainers trusted them and felt it was to the
+project's benefit for them to see vulnerability reports as soon as
+possible.  There is no one rule that be appropriate for all projects,
+but in general, the core maintainers should follow the principle that
+anyone who receives security reports must be trustable both in terms
+of intention and in terms of their technical ability to not
+accidentally leak information (e.g., someone whose email gets hacked
+regularly should probably not be on the security
+list).</para></footnote>.  If you need a formal definition of "trusted
+developer", you can use "anyone who has had commit access for two
+years or more" or something like that, to avoid favoritism.  This is
+the group that will handle security bugs.</para>
 
-<para>Ideally, the security list should not be spam-protected or
+<para>Ideally, that reporting gateway should not be spam-protected or
 moderated, since you don't want an important report to get filtered
 out or delayed just because no moderators happened to be online that
 weekend.  If you do use automated spam-protection software, try to
 configure it with high-tolerance settings; it's better to let a few spams
 through than to miss a vulnerability report.</para>
+
+<para>The submission mechanism should itself be secure.  That is, if
+it is a contact form, it should be on an <code>https://</code>
+(TLS-protected) page, or if it is an email address, there should be a
+well-advertised public key (digitally signed by as many of the core
+developers as possible) so people can send encrypted mails to that
+address.<footnote><para>If you don't know what all of these terms
+mean, find people you trust who do and get them to help your project.
+Handling security vulnerablities competently requiries a working
+knowledge of these concepts.</para></footnote> A web form submission
+or an email sent to your project may travel over many Internet hops on
+its way there; you have no reason to trust whoever runs those
+intermediate servers, and there is a flourishing market for new
+security vulnerabilities.  Assume the worst and design
+accordingly.</para>
 
 </sect3>
 
@@ -2184,17 +2213,20 @@ message.<footnote><para>Remember that Subject lines in emails aren't
 encrypted, so don't put too much information about the vulnerability
 in the Subject line.</para></footnote></para>
 
-<para>Send each pre-notification mail individually (one at a time) to
-each recipient.  Do <emphasis>not</emphasis> send to the entire list
-of recipients at once, because then they would see each others'
-names&mdash;meaning that you would essentially be alerting each
-recipient to the fact that each <emphasis>other</emphasis> recipient
-may have a security hole in her service.  Sending it to them all via
-blind CC (BCC) isn't a good solution either, because some admins
-protect their inboxes with spam filters that either block or reduce
-the priority of BCC'd mail, since so much spam is sent via BCC.  If
-you have a phone number or other out-of-band way to contact the
-administrator to let them know the mail is coming, use it.</para>
+<para>Pre-notification should be done via secure means.  If email,
+then encrypt it, for the same reasons explained in <xref
+linkend="security-receiving"/>, but if you have a phone number or
+other out-of-band secure way to contact the administrator, use that.
+When sending encrypted pre-notification emails, send them individually
+(one at a time) to each recipient.  Do <emphasis>not</emphasis> send
+to the entire list of recipients at once, because then they would see
+each others' names&mdash;meaning that you would essentially be
+alerting each recipient to the fact that each
+<emphasis>other</emphasis> recipient may have a security hole in her
+service.  Sending it to them all via blind CC (BCC) isn't a good
+solution either, because some admins protect their inboxes with spam
+filters that either block or reduce the priority of BCC'd mail, since
+so much spam is sent via BCC.</para>
 
 <para>Here's a sample pre-notification mail:</para>
 
@@ -2202,7 +2234,7 @@ administrator to let them know the mail is coming, use it.</para>
 From: Your Name Here
 To: admin@large-famous-server.com
 Reply-to: Your Name Here (not the security list's address)
-Subject: Confidential vulnerability notification.
+Subject: Confidential important notification.
 
 [[[ BEGIN ENCRYPTED MAIL ]]]
 
