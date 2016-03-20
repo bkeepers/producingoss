@@ -1137,7 +1137,7 @@ section.</para>
 
 <!-- ========================== subsection =========================== -->
 <sect2 id="third-party-review">
-<title>Get Third-Party Review During Development</title>
+<title>IV&amp;V: Use Third-Party Review Throughout Development</title>
 
 <para>When a vendor who normally does proprietary development is hired
 to do open source development, by default the result is almost always
@@ -1147,39 +1147,58 @@ informs my experience&nbsp;&mdash;&nbsp;after all, the consultant
 tends to get brought in when things are going wrong, not when they're
 going right&nbsp;&mdash;&nbsp;my assertion that proprietary vendors
 don't get open source right if left to their own habits is based not
-just on my own experiences but also on reports from many other people,
+just on my own experiences but also on talking to many other people,
 who report the same finding with remarkable
 consistency.</para></footnote>.  This section is about how to avoid
 that problem.  While in some instances the vendor&nbsp;&mdash;&nbsp;or
 at least factions within the vendor&nbsp;&mdash;&nbsp;may be
-deliberately obstructive, more often it is that they simply don't know
-what they don't know, and have no internal source for the knowledge
-they need.  Thus the most effective solutions is to bring in that
+deliberately obstructive, more often the problem is that they simply
+don't know what they don't know, and have no internal way to find out.
+Thus the most effective solutions is to bring in that
 knowledge from the outside: have a separate contract with a different
 company, one entirely independent of the primary vendor, to play the
 role of third-party open source participant.</para>
 
-<para>The cost of this kind of independent review is much smaller than
-the main contract&nbsp;&mdash;&nbsp;generally, expect on the order of
-5% to 10%&nbsp;&mdash;&nbsp;and the benefit can be large: the
-difference between an end product that is not useably open source and
-one that is truly open source and deployable by anyone.</para>
+<para>There is a long tradition of such outside review in technical
+contracting.  It's known as <firstterm>IV&amp;V</firstterm>, for
+"<firstterm>Independent Verification and
+Validation</firstterm>"<footnote><para>For a more general discussion
+of IV&amp;V, see <ulink
+url="https://en.wikipedia.org/wiki/Verification_and_validation"
+>en.wikipedia.org/wiki/Verification_and_validation</ulink> and <ulink
+url="https://en.wikipedia.org/wiki/Software_verification_and_validation"
+>en.wikipedia.org/wiki/Software_verification_and_validation</ulink>.
+Note that neither of those discusses open source specifically,
+however</para></footnote>, and what keeps it independent is that the
+IV&amp;V vendor is responsible to the customer,
+<emphasis>not</emphasis> to the primary development vendor.  That part
+is crucial: even if the two vendors are contracting through the same
+prime vehicle, or one is a subcontractor to the other, it must be
+clear in the contracts that the IV&amp;V function reports directly to
+the client, interacting with the primary development vendor only to
+<emphasis>perform</emphasis> the IV&amp;V function.</para>
 
-<para>During development, the reviewers participate the way any third
-party would, posting in the project's public discussion forums, using
-the installation documentation to try to get the software up and
-running, reporting bugs, supplying bugfixes and expecting them to be
-responded to, submitting pull requests, and so on.  As the project
-nears completion, the
-reviewer's job is to confirm that the software can be deployed without
-reliance on proprietary dependencies or undocumented environmental
-conditions, that any necessary per-deployment configurations can be
-made and sample data loaded, that there exist documented paths by
-which third parties can participate in the project, and so
-on&nbsp;&mdash;&nbsp;in other words, that all the expectations one
-would have of an open source project are truly met.</para>
+<para>The cost of IV&amp;V review is much smaller than the cost of the
+main contract&nbsp;&mdash;&nbsp;generally, expect on the order of 5%
+to 10%&nbsp;&mdash;&nbsp;and the benefit is large: the difference
+between an end product that is not useably open source and one that is
+truly open source, able to be deployed and supported by anyone.</para>
 
-<para>The reviewer's job is not simply to review.  The reviewer is
+<para>During development, the IV&amp;V reviewers participate the way
+any third party would, posting in the project's public discussion
+forums, using the installation documentation to try to get the
+software up and running, reporting bugs via the public tracker,
+submitting pull requests, and so on.  As the project reaches the alpha
+or beta stage, the reviewer confirms that the software can be deployed
+as documented, without reliance on proprietary dependencies or
+vendor-specific environmental conditions; that necessary
+per-deployment configurations can be made; that sample data can be
+loaded; that there exist documented paths by which third parties can
+participate in the project; and so on&nbsp;&mdash;&nbsp;in other
+words, that all the expectations one would have of an open source
+project are truly met.</para>
+
+<para>But the reviewer's job is not just to review.  The reviewer is
 there to <emphasis>help</emphasis> the primary vendor meet these
 expectations throughout development, and to report back to you, the
 customer, as to whether the vendor is doing so.  In far too many
@@ -1201,26 +1220,28 @@ the way they usually do, so what's the problem?  The fact that no one
 other than them can deploy or modify the end result doesn't register
 as a failure, because in all their other projects that was never
 expected anyway.  The fact that the contract requires it is
-meaningless unless the customer has some way to test and enforce the
-requirement.  Most customers do not have the technical capability
-in-house to do that, so without some kind of external review process,
+meaningless unless the customer has some way to test and enforce that
+requirement.  As most customers do not have the in-house technical
+capability to do so, without some kind of external review process
 the open source clauses in the contract are effectively void.</para>
 
 <para>Independent review is not merely a sort of open source
-insurance, however, though it would be worthwhile even if it were only
-that.  It is also an investment in the success of future partnerships
-with the primary vendor.  The vendor becomes more inherently capable
-of performing quality open source work in the future, because the
-reviewer's participation provides a practical education in open source
-development.  Thus, done right, third-party review results in both a healthier
-long-term relationship with the primary vendor and a healthier open
-source project.  It is also part of the process of fostering
-concentrations of expertise outside that primary contractor right from
-the start, as discussed in <xref
-linkend="foster-expertise-diversity"/>.  Although some contractors are
-able and willing to do that as part of the contract, many are not.
-They either don't have the experience to do it well, or simply don't
-want to.  It is up to you, the customer, to make sure it happens.</para>
+insurance, though it would be worthwhile even if it were only that.
+It is also an investment in the success of future partnerships with
+the primary vendor.  The vendor becomes more inherently capable of
+performing quality open source work in the future, because the
+IV&amp;V process provides a practical education in open source
+development.  Thus, done right, third-party review results in both a
+healthier open source project and a healthier long-term relationship
+with the primary vendor.  It also helps foster concentrations of
+expertise outside that primary contractor right from the start, as
+discussed in <xref linkend="foster-expertise-diversity"/>.  Ideally,
+at the end of development for a new open source product, you should
+have at least two independent commercial entities able to deploy and
+support the software: the primary development vendor, and the IV&amp;V
+vendor.  That's already twice as much supplier diversity as most
+projects have coming out of the gate, and it will be much easier to
+add a third vendor than a second.</para>
 
 </sect2>
 
