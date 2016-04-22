@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for input in en/*.xml; do
+  output=$(echo $input | sed 's/\(.*\.\)xml/\1adoc/')
+  echo "converting $input"
+  cat $input | \
+    perl -C -MHTML::Entities -pe 'decode_entities($_);' | \
+    pandoc -f docbook -t asciidoc --atx-headers  --base-header-level=2 -o $output
+  #rm $input
+done
