@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Converting to HTML..."
+bundle exec asciidoctor book.adoc
+echo " -- HTML output at book.html"
+
+echo "Converting to EPub..."
+bundle exec asciidoctor-epub3 book.adoc
+echo " -- Epub output at book.epub"
+
+echo "Converting to Mobi..."
+bundle exec asciidoctor-epub3 -a ebook-format=kf8 book.adoc -o book.mobi
+echo " -- Mobi output at book.mobi"
+
+echo "Converting to PDF... (this one takes a while)"
+bundle exec asciidoctor-pdf book.adoc 2>/dev/null
+echo " -- PDF  output at book.pdf"
