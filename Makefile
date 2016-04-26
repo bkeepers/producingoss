@@ -1,9 +1,9 @@
-LANGUAGES=de en es fr he ja ml pl pt-pt pt-br ca da fa id ru it gr ar gl hu nl ro vi zh ta ko
+LANGUAGES=en
 
 default: all
 
 .PHONY: ${LANGUAGES}
-${LANGUAGES}: 
+${LANGUAGES}:
 	@(cd $@ && make -f ../lang-makefile all-but-pdf)
 	@(cd $@ && make -f ../lang-makefile pdf)
 
@@ -15,7 +15,7 @@ all:
           (cd $${name} && make -f ../lang-makefile pdf)         \
         done
 
-pdf: 
+pdf:
 	@for name in ${LANGUAGES}; do                           \
           (cd $${name} && make -f ../lang-makefile pdf)         \
         done
