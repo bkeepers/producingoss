@@ -9,9 +9,10 @@ bundle exec asciidoctor-epub3 book.adoc
 echo " -- Epub output at book.epub"
 
 echo "Converting to Mobi..."
-bundle exec asciidoctor-epub3 -a ebook-format=kf8 book.adoc -o book.mobi
+bundle exec asciidoctor-epub3 -o book.mobi -a ebook-format=kf8 book.adoc > /dev/null
+rm book-kf8.epub
 echo " -- Mobi output at book.mobi"
 
 echo "Converting to PDF... (this one takes a while)"
-bundle exec asciidoctor-pdf book.adoc 2>/dev/null
+bundle exec asciidoctor-pdf book.adoc
 echo " -- PDF  output at book.pdf"
