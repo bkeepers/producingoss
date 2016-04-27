@@ -1,0 +1,175 @@
+[[documentation]]
+==== Documentation
+
+Documentation is essential. There needs to be _something_ for people to
+read, even if it's rudimentary and incomplete. This falls squarely into
+the "drudgery" category referred to earlier, and is often the first area
+where a new open source project falls down. Coming up with a mission
+statement and feature list, choosing a license, summarizing development
+status—these are all relatively small tasks, which can be definitively
+completed and usually need not be revisited once done. Documentation, on
+the other hand, is never really finished, which may be one reason people
+sometimes delay starting it at all.
+
+The most insidious thing is that documentation's utility to those
+writing it is the reverse of its utility to those who will read it. The
+most important documentation for initial users is the basics: how to
+quickly set up the software, an overview of how it works, perhaps some
+guides to doing common tasks. Yet these are exactly the things the
+_writers_ of the documentation know all too well—so well that it can be
+difficult for them to see things from the reader's point of view, and to
+laboriously spell out the steps that (to the writers) seem so obvious as
+to be unworthy of mention.
+
+There's no magic solution to this problem. Someone just needs to sit
+down and write the stuff, and then, most importantly, incorporate
+feedback from readers. Use a simple, easy-to-edit format such as HTML,
+plain text, Markdown, ReStructuredText, or some variant of XML—something
+that's convenient for lightweight, quick improvements on the spur of the
+momentfootnote:[Don't worry too much about choosing the right format the
+first time. If you change your mind later, you can always do an
+automated conversion using http://johnmacfarlane.net/pandoc/[Pandoc].].
+This is not only to remove any overhead that might impede the original
+writers from making incremental improvements, but also for those who
+join the project later and want to work on the documentation.
+
+One way to ensure basic initial documentation gets done is to limit its
+scope in advance. That way, writing it at least won't feel like an
+open-ended task. A good rule of thumb is that it should meet the
+following minimal criteria:
+
+* Tell the reader clearly how much technical expertise they're expected
+to have.
+* Describe clearly and thoroughly how to set up the software, and
+somewhere near the beginning of the documentation, tell the user how to
+run some sort of diagnostic test or simple command to confirm that
+they've set things up correctly. Startup documentation is in some ways
+more important than actual usage documentation. The more effort someone
+has invested in installing and getting started with the software, the
+more persistent she'll be in figuring out advanced functionality that's
+not well-documented. When people abandon, they abandon early; therefore,
+it's the earliest stages, like installation, that need the most support.
+* Give one tutorial-style example of how to do a common task. Obviously,
+many examples for many tasks would be even better, but if time is
+limited, pick one task and walk through it thoroughly. Once someone sees
+that the software _can_ be used for one thing, they'll start to explore
+what else it can do on their own—and, if you're lucky, start filling in
+the documentation themselves. Which brings us to the next point...
+* Label the areas where the documentation is known to be incomplete. By
+showing the readers that you are aware of its deficiencies, you align
+yourself with their point of view. Your empathy reassures them that they
+don't face a struggle to convince the project of what's important. These
+labels needn't represent promises to fill in the gaps by any particular
+date —it's equally legitimate to treat them as open requests for
+volunteer help.
+
+The last point is of wider importance, actually, and can be applied to
+the entire project, not just the documentation. An accurate accounting
+of known deficiencies is the norm in the open source world. You don't
+have to exaggerate the project's shortcomings, just identify them
+scrupulously and dispassionately when the context calls for it (whether
+in the documentation, in the bug tracking database, or on a mailing list
+discussion). No one will treat this as defeatism on the part of the
+project, nor as a commitment to solve the problems by a certain date,
+unless the project makes such a commitment explicitly. Since anyone who
+uses the software will discover the deficiencies for themselves, it's
+much better for them to be psychologically prepared—then the project
+will look like it has a solid knowledge of how it's doing.
+
+A FAQ ("Frequently Asked Questions" document) can be one of the best
+investments a project makes in terms of educational payoff. FAQs are
+highly tuned to the questions users and developers actually ask—as
+opposed to the questions you might have _expected_ them to ask—and
+therefore, a well-maintained FAQ tends to give those who consult it
+exactly what they're looking for. The FAQ is often the first place users
+look when they encounter a problem, often even in preference to the
+official manual, and it's probably the document in your project most
+likely to be linked to from other sites.
+
+Unfortunately, you cannot make the FAQ at the start of the project. Good
+FAQs are not written, they are grown. They are by definition reactive
+documents, evolving over time in response to the questions people ask
+about the software. Since it's impossible to correctly anticipate those
+questions, it is impossible to sit down and write a useful FAQ from
+scratch.
+
+Therefore, don't waste your time trying to. You may, however, find it
+useful to set up a mostly blank FAQ template with just a few questions
+and answers, so there will be an obvious place for people to contribute
+questions and answers after the project is under way. At this stage, the
+most important property is not completeness, but __convenience__: if the
+FAQ is easy to add to, people will add to it. (Proper FAQ maintenance is
+a non-trivial and intriguing problem: see <<faq-manager>> in
+<<managing-volunteers>>, <<q-and-a-forums>> in
+<<technical-infrastructure>>, and <<all-as-archives>> in
+<<communications>>.)
+
+[[documentation-availability]]
+===== Availability of documentation
+
+Documentation should be available from two places: online (directly from
+the web site), _and_ in the downloadable distribution of the software
+(see <<packaging>> in <<development-cycle>>). It needs to
+be online, in browsable form, because people often read documentation
+_before_ downloading software for the first time, as a way of helping
+them decide whether to download at all. But it should also accompany the
+software, on the principle that downloading should supply (i.e., make
+locally accessible) everything one needs to use the package.
+
+For online documentation, make sure that there is a link that brings up
+the _entire_ documentation in one HTML page (put a note like
+"monolithic" or "all-in-one" or "single large page" next to the link, so
+people know that it might take a while to load). This is useful because
+people often want to search for a specific word or phrase across the
+entire documentation. Generally, they already know what they're looking
+for; they just can't remember what section it's in. For such people,
+nothing is more frustrating than encountering one HTML page for the
+table of contents, then a different page for the introduction, then a
+different page for installation instructions, etc. When the pages are
+broken up like that, their browser's search function is useless. The
+separate-page style is useful for those who already know what section
+they need, or who want to read the entire documentation from front to
+back in sequence. But this is not necessarily the most common way
+documentation is accessed. Often, someone who is basically familiar with
+the software is coming back to search for a specific word or phrase, and
+to fail to provide them with a single, searchable document would only
+make their lives harder.
+
+[[developer-documentation]]
+===== Developer documentation
+
+Developer documentation is written by programmers to help other
+programmers understand the code, so they can repair and extend it. This
+is somewhat different from the _developer guidelines_ discussed earlier,
+which are more social than technical. Developer guidelines tell
+programmers how to get along with each other; developer documentation
+tells them how to get along with the code itself. The two are often
+packaged together in one document for convenience (as with the
+http://subversion.apache.org/docs/community-guide/[subversion.apache.org/docs/community-guide]
+example given earlier), but they don't have to be.
+
+Although developer documentation can be very helpful, there's no reason
+to delay a release to do it. As long as the original authors are
+available (and willing) to answer questions about the code, that's
+enough to start with. In fact, having to answer the same questions over
+and over is a common motivation for writing documentation. But even
+before it's written, determined contributors will still manage to find
+their way around the code. The force that drives people to spend time
+learning a code base is that the code does something useful for them. If
+people have faith in that, they will take the time to figure things out;
+if they don't have that faith, no amount of developer documentation will
+get or keep them.
+
+So if you have time to write documentation for only one audience, write
+it for users. All user documentation is, in effect, developer
+documentation as well; any programmer who's going to work on a piece of
+software will need to be familiar with how to use it too. Later, when
+you see programmers asking the same questions over and over, take the
+time to write up some separate documents just for them.
+
+Some projects use wikis for their initial documentation, or even as
+their primary documentation. In my experience, this works best if the
+wiki is actively maintained by a few people who agree on how the
+documentation is to be organized and what sort of "voice" it should
+have. See <<wikis>> in <<technical-infrastructure>> for
+more.

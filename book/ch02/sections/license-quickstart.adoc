@@ -1,0 +1,135 @@
+[[license-quickstart]]
+=== Choosing a License and Applying It
+
+This section is intended to be a very quick, very rough guide to
+choosing a license. Read <<legal>> to understand the detailed
+legal implications of the different licenses, and how the license you
+choose can affect people's ability to mix your software with other
+software.
+
+The terms "free software license" and "open source license" are
+essentially synonymous, and I treat them so throughout this book.
+
+Technically, the former term refers to licenses confirmed by the Free
+Software Foundation as offering the "four freedoms" necessary for free
+software (see
+http://www.gnu.org/philosophy/free-sw.html[gnu.org/philosophy/free-sw.html]),
+while the latter term refers to licenses approved by the Open Source
+Initiative as meeting the Open Source Definition
+(http://opensource.org/osd[opensource.org/osd]). However, if you read
+the FSF's definition of free software, and the OSI's definition of open
+source software, it becomes obvious that the two definitions delineate
+the same freedoms — not surprisingly, as
+<<free-vs-open-source>> in <<introduction>> explains. The
+inevitable, and in some sense deliberate, result is that the two
+organizations have approved the same set of licenses.footnote:[There are
+actually some minor differences between the sets of approved licenses,
+but they are not significant for our purposes — or indeed for most
+practical purposes. In some cases, one or the other organization has
+simply not gotten around to considering a given license, usually a
+license that is not widely-used anyway. And apparently (so I'm told)
+there historically was a license that at least one of the organizations,
+and possibly both, agreed fit one definition but not the other. Whenever
+I try to get the details on this, though, I seem to get a different
+answer as to what that license was, except that the license named is
+always one that was not many people used anyway. So today, for any
+license you are likely to be using, the terms "OSI-approved" and
+"FSF-approved" can be treated as implying each other.]
+
+There are a great many free software licenses to choose from. Most of
+them we needn't consider here, as they were written to satisfy the
+particular legal needs of some corporation or person, and wouldn't be
+appropriate for your project. We will restrict ourselves to just the
+most commonly used licenses; in most cases, you will want to choose one
+of them.
+
+[[license-quickstart-non-gpl]]
+==== The "Do Anything" Licenses
+
+_29 August 2013: If you're reading this note, then you've encountered
+this subsection while it's undergoing substantial revision; see
+http://producingoss.com/v2.html[producingoss.com/v2.html] for details._
+TODO: is MIT or BSD still really the best default, given the modern
+patent landscape? Would Apache-2.0 be better — but then what about the
+FSF's claim of GPL-incompatibility? Need to get some advice here.
+
+If you're comfortable with your project's code potentially being used in
+proprietary programs, then use an MIT/X-style license. It is the
+simplest of several minimal licenses that do little more than assert
+nominal copyright (without actually restricting copying) and specify
+that the code comes with no warranty. See
+<<license-choosing-mit-x>> for details.
+
+[[license-quickstart-gpl]]
+==== The GPL
+
+If you don't want your code to be used in proprietary programs, use the
+GNU General Public License, version 3
+(http://www.gnu.org/licenses/gpl.html[gnu.org/licenses/gpl.html]). The
+GPL is probably the most widely recognized free software license in the
+world today. This is in itself a big advantage, since many potential
+users and contributors will already be familiar with it, and therefore
+won't have to spend extra time to read and understand your license. See
+<<license-choosing-gpl>> in <<legal>> for details.
+
+If users interact with your code primarily over a network—that is, the
+software is usually part of a hosted service, rather than being
+distributed as a binary—then consider using the GNU Affero GPL instead.
+The AGPL is just the GPL with one extra clause establishing network
+accessibility as a form of distribution for the purposes of the license.
+See <<gnu-affero-gpl>> in <<legal>> for more.
+
+[[license-quickstart-applying]]
+==== How to Apply a License to Your Software
+
+Once you've chosen a license, you'll need to apply it to the software.
+
+The first thing to do is state the license clearly on the project's
+front page. You don't need to include the actual text of the license
+there; just give its name and make it link to the full license text on
+another page. That tells the public what license you _intend_ the
+software to be released under—but it's not quite sufficient for legal
+purposes. The other step is that the software itself should include the
+license.
+
+The standard way to do this is to put the full license text in a file
+called `COPYING` (or `LICENSE`) included with the source code, and then
+put a short notice in a comment at the top of each source file, naming
+the copyright date, holder, and license, and saying where to find the
+full text of the license.
+
+There are many variations on this pattern, so we'll look at just one
+example here. The GNU GPL says to put a notice like this at the top of
+each source file:
+
+....
+Copyright (C)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see /www.gnu.org/licenses/>
+....
+
+It does not say specifically that the copy of the license you received
+along with the program is in the file `COPYING` or `LICENSE`, but that's
+where it's usually put. (You could change the above notice to state that
+directly, but there's no real need to.)
+
+In general, the notice you put in each source file does not have to look
+exactly like the one above, as long as it starts with the same notice of
+copyright holder and datefootnote:[The date should show the dates the
+file was modified, for copyright purposes. In other words, for a file
+modified in 2008, 2009, and 2013, you would write "2008, 2009,
+2013" — __not__ "2008-2013", because the file wasn't modified in most of
+the years in that range.], states the name of the license, and makes
+clear where to view the full license terms. It's always best to consult
+a lawyer, of course, if you can afford one.
