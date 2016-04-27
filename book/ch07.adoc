@@ -72,7 +72,7 @@ release means that:
 can count on being true of every release.
 * New bugs have been added. This too can usually be counted on, except
 sometimes in the case of security releases or other one-offs (see
-link:#security-releases[Security Releases]later in this chapter).
+<<security-releases>> later in this chapter).
 * New features may have been added.
 * New configuration options may have been added, or the meanings of old
 options may have changed subtly. The installation procedures may have
@@ -98,7 +98,7 @@ nature of the changes in the release.
 
 All that in a number? Well, more or less, yes. Release numbering
 strategies are one of the oldest bikeshed discussions around (see
-link:#bikeshed[???]in link:#communications[???]), and the world is
+<<bikeshed>> in <<communications>>), and the world is
 unlikely to settle on a single, complete standard anytime soon. However,
 a few good strategies have emerged, along with one universally agreed-on
 principle: __be consistent__. Pick a numbering scheme, document it, and
@@ -136,7 +136,7 @@ go beyond three or four. The reasons why will become clear later.
 
 In addition to the numeric components, projects sometimes tack on a
 descriptive label such as "Alpha" or "Beta" (see
-link:#alpha-and-beta[???]), for example:
+<<alpha-and-beta>>), for example:
 
 ....
 Scanley 2.3.0 (Alpha)
@@ -347,7 +347,7 @@ projects that have very long release cycles, and which by their nature
 have a high proportion of conservative users who value stability above
 new features. It is not the only way to get new functionality tested in
 the wild, however. In
-link:#stabilizing-a-release[Stabilizing a Release]later in this chapter
+<<stabilizing-a-release>> later in this chapter
 we will examine another, perhaps more common, method of releasing
 potentially unstable code to the public, in which the release number is
 further marked so that people have an idea of the risk/benefit
@@ -393,7 +393,7 @@ tree remain unnaturally quiescent.
 
 The solution to these problems is to always use a release branch. A
 release branch is just a branch in the version control system (see
-link:#vc-vocabulary-branch[???]), on which the code destined for this
+<<vc-vocabulary-branch>>), on which the code destined for this
 release can be isolated from mainline development. The concept of
 release branches is certainly not original to free software; many
 proprietary development organizations use them too. However, in
@@ -436,12 +436,12 @@ use the same minor line—i.e., the same branch—for all the micro releases
 in that line.
 
 The social and technical process of stabilizing the branch for release
-is covered in link:#stabilizing-a-release[Stabilizing a Release]later in
+is covered in <<stabilizing-a-release>> later in
 this chapter. Here we are concerned just with the high-level version
 control actions that relate tothe release process. When the release
 branch is stabilized and ready, it is time to tag a snapshot from the
-branch (see link:#vc-vocabulary-tag[???]in
-link:#technical-infrastructure[???]) with a name like, e.g., "1.0.0".
+branch (see <<vc-vocabulary-tag>> in
+<<technical-infrastructure>>) with a name like, e.g., "1.0.0".
 The resultant tag represents the exact state of the project's source
 tree in the 1.0.0 release (this is useful when developers need to
 compare against an old version while tracking down a bug). The next
@@ -542,7 +542,7 @@ dig in her heels.
 
 Note that the release owner need not be the same person as the project
 leader (in cases where there is a project leader at all; see
-link:#benevolent-dictator[???]in link:#social-infrastructure[???]). In
+<<benevolent-dictator>> in <<social-infrastructure>>). In
 fact, sometimes it's good to make sure they're _not_ the same person.
 The skills that make a good development leader are not necessarily the
 same as those that make a good release owner. In something as important
@@ -554,7 +554,7 @@ may be enough reason, in most situations, to let the release owner win
 when there is a disagreement.
 
 Contrast the release owner role with the less dictatorial role described
-in link:#release-manager[Release manager]later in this chapter.
+in <<release-manager>> later in this chapter.
 
 [[release-voting]]
 ==== Voting on Changes
@@ -565,8 +565,8 @@ since the most important function of release stabilization is to
 _exclude_ changes, it's important to design the voting system in such a
 way that getting a change into the release involves positive action by
 multiple developers. Including a change should need more than just a
-simple majority (see link:#electorate[???]in
-link:#social-infrastructure[???]). Otherwise, one vote for and none
+simple majority (see <<electorate>> in
+<<social-infrastructure>>). Otherwise, one vote for and none
 against a given change would suffice to get it into the release, and an
 unfortunate dynamic would be set up whereby each developer would vote
 for her own changes, yet would be reluctant to vote against others'
@@ -585,7 +585,7 @@ struck a good balance, so I'll recommend it here. In order for a change
 to be applied to the release branch, at least three developers must vote
 in favor of it, and none against. A single "no" vote is enough to stop
 the change from being included; that is, a "no" vote in a release
-context is equivalent to a veto (see link:#veto[???]). Naturally, any
+context is equivalent to a veto (see <<veto>>). Naturally, any
 such vote must be accompanied by a justification, and in theory the veto
 could be overridden if enough people feel it is unreasonable and force a
 special vote over it. In practice, this never happens. People are
@@ -657,7 +657,7 @@ for uniquely identifying a change.]
 
 Those proposing or voting for a change are responsible for making sure
 it applies cleanly to the release branch, that is, applies without
-conflicts (see link:#vc-vocabulary-conflict[???]). If there are
+conflicts (see <<vc-vocabulary-conflict>>). If there are
 conflicts, then the entry should either point to an adjusted patch that
 does apply cleanly, or better yet to a temporary branch that holds an
 adjusted version of the change, for example:
@@ -683,8 +683,8 @@ it easier to merge the change into the release, should it get approval).
 The original revisions are provided because they're still the easiest
 entity to review, since they have the original log messages. The
 temporary branch wouldn't have those log messages; in order to avoid
-duplication of information (see link:#vc-singularity[???]in
-link:#technical-infrastructure[???]), the branch's log message for
+duplication of information (see <<vc-singularity>> in
+<<technical-infrastructure>>), the branch's log message for
 r13517 should simply say "Adjust r13222, r13223, and r13232 for backport
 to 1.1.x branch." All other information about the changes can be chased
 down at their original revisions.
@@ -692,7 +692,7 @@ down at their original revisions.
 [[release-manager]]
 ===== Release manager
 
-The actual process of merging (see link:#vc-vocabulary-merge[???])
+The actual process of merging (see <<vc-vocabulary-merge>>)
 approved changes into the release branch can be performed by any
 developer. There does not need to be one person whose job it is to merge
 changes; if there are a lot of changes, it can be better to spread the
@@ -702,7 +702,7 @@ However, although both voting and merging happen in a decentralized
 fashion, in practice there are usually one or two people driving the
 release process. This role is sometimes formally blessed as release
 manager, but it is quite different from a release owner (see
-link:#release-owner[Dictatorship by Release Owner]earlier in this
+<<release-owner>> earlier in this
 chapter) who has final say over the changes. Release managers keep track
 of how many changes are currently under consideration, how many have
 been approved, how many seem likely to be approved, etc. If they sense
@@ -714,7 +714,7 @@ release branch; it's fine if others leave that task to them, as long as
 everyone understands that the release managers are not obligated to do
 all the work unless they have explicitly committed to it. When the time
 comes to put the release out the door (see
-link:#testing-and-releasing[Testing and Releasing]later in this
+<<testing-and-releasing>> later in this
 chapter), the release managers also take care of the logistics of
 creating the final release packages, collecting digital signatures,
 uploading the packages, and making the public announcement.
@@ -728,7 +728,7 @@ form (i.e., can be interpreted, like Perl, Python, PHP, etc.) or needs
 to be compiled first (like C, C++, Java, etc.). With compiled software,
 most users will probably not compile the sources themselves, but will
 instead install from pre-built binary packages (see
-link:#binary-packages[Binary Packages]later in this chapter). However,
+<<binary-packages>> later in this chapter). However,
 those binary packages are still derived from a master source
 distribution. The point of the source package is to unambiguously define
 the release. When the project distributes "Scanley 2.5.0", what it
@@ -781,7 +781,7 @@ project's web site, other files of interest, etc. Among those other
 files should be an `INSTALL` file, sibling to the `README` file, giving
 instructions on how to build and install the software for all the
 operating systems it supports. As mentioned in
-link:#license-quickstart-applying[???]in link:#getting-started[???],
+<<license-quickstart-applying>> in <<getting-started>>,
 there should also be a `COPYING` or `LICENSE` file, giving the
 software's terms of distribution.footnote:[Your all-caps files — README,
 INSTALL, etc — may of course have ".txt" extensions, or ".md" to
@@ -821,7 +821,7 @@ little bugfix and feature enhancement. Its purpose is to give users an
 overview of what they would gain by upgrading to the new release, and to
 tell them about any incompatible changes. In fact, the changelist is
 customarily included in the announcement email (see
-link:#testing-and-releasing[Testing and Releasing]later in this
+<<testing-and-releasing>> later in this
 chapter), so write it with that audience in mind.
 
 The actual layout of the source code inside the tree should be the same
@@ -830,13 +830,13 @@ by checking out the project directly from its version control
 repository. Sometimes there are a few differences, for example because
 the package contains some generated files needed for configuration and
 compilation (see
-link:#packaging-build-install[Compilation and Installation]later in this
+<<packaging-build-install>> later in this
 chapter), or because the distribution includes third-party software that
 is not maintained by the project, but that is required and that users
 are not likely to already have. But even if the distributed tree
 corresponds exactly to some development tree in the version control
 repository, the distribution itself should not be a working copy (see
-link:#vc-vocabulary-working-copy[???]). The release is supposed to
+<<vc-vocabulary-working-copy>>). The release is supposed to
 represent a static reference point—a particular, unchangeable
 configuration of source files. If it were a working copy, the danger
 would be that the user might update it, and afterward think that he
@@ -886,7 +886,7 @@ created when she unpacks a distribution.
 When shipping a pre-release or candidate release, the qualifier is a
 part of the release number, so include it in the name of the package's
 name. For example, the ordered sequence of alpha and beta releases given
-earlier in link:#release-number-components[Release Number Components]
+earlier in <<release-number-components>>
 would result in package names like this:
 
 ....
@@ -939,8 +939,8 @@ are practically spinal reflexes for a lot of system administrators now.
 If they see familiar invocations documented in your project's `INSTALL`
 file, that instantly raises their faith that your project is generally
 aware of conventions, and that it is likely to have gotten other things
-right as well. Also, as discussed in link:#downloads[???]in
-link:#getting-started[???], having a standard build procedure pleases
+right as well. Also, as discussed in <<downloads>> in
+<<getting-started>>, having a standard build procedure pleases
 potential developers.
 
 On Windows, the standards for building and installing are a bit less
@@ -1049,7 +1049,7 @@ tested and approved by some minimum number of developers, usually three
 or more. Approval is not simply a matter of inspecting the release for
 obvious flaws; ideally, the developers download the package, build and
 install it onto a clean system, run the regression test suite (see
-link:#automated-testing[???]in link:#managing-volunteers[???]), and do
+<<automated-testing>> in <<managing-volunteers>>), and do
 some manual testing. Assuming it passes these checks, as well as any
 other release checklist criteria the project may have, the developers
 then digitally sign each container (the .tar.gz file, .zip file, etc)
@@ -1087,7 +1087,7 @@ The purpose of all this signing and checksumming is to give users a way
 to verify that the copy they receive has not been maliciously tampered
 with. Users are about to run this code on their computers—if the code
 has been tampered with, an attacker could suddenly have a back door to
-all their data. See link:#security-releases[Security Releases]later in
+all their data. See <<security-releases>> later in
 this chapter for more about paranoia.
 
 [[candidate-releases]]
@@ -1118,8 +1118,8 @@ will end up becoming the official release.
 ==== Announcing Releases
 
 Announcing a release is like announcing any other event, and should use
-the procedures described in link:#publicity[???]in
-link:#communications[???]. There are a few specific things to do for
+the procedures described in <<publicity>> in
+<<communications>>. There are a few specific things to do for
 releases, though.
 
 Whenever you write the URL to the downloadable release tarball, make
@@ -1145,8 +1145,8 @@ all the people who took the time to file good bug reports. Don't single
 out anyone by name, though, unless there's someone who is individually
 responsible for a huge piece of work, the value of which is widely
 recognized by everyone in the project. Be wary of sliding down the
-slippery slope of credit inflation (see link:#credit[???]in
-link:#managing-volunteers[???]).
+slippery slope of credit inflation (see <<credit>> in
+<<managing-volunteers>>).
 
 [[release-lines]]
 === Maintaining Multiple Release Lines
@@ -1192,7 +1192,7 @@ official releases.
 ==== Security Releases
 
 Most of the details of handling security bugs were covered in
-link:#security[???]in link:#communications[???], but there are some
+<<security>> in <<communications>>, but there are some
 special details to discuss for doing security releases.
 
 A security release is a release made solely to close a security
@@ -1392,7 +1392,7 @@ ticket to a specific future release, invite discussion, dissent, and be
 genuinely willing to be persuaded whenever possible. Never exercise
 control merely for the sake of exercising control: the more deeply
 others feel they can participate in the release planning process (see
-link:#share-management[???]in link:#managing-volunteers[???]), the
+<<share-management>> in <<managing-volunteers>>), the
 easier it will be to persuade them to share your priorities on the
 issues that really count for you.
 
