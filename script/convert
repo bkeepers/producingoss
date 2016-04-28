@@ -1,10 +1,19 @@
 #!/bin/sh
 
-for input in en/*.xml; do
+set -e
+
+for input in ??{,-??}/*.xml; do
   output=$(echo $input | sed 's/\(.*\.\)xml/\1adoc/')
   echo "converting $input"
+
+  # Convert to Asciidoc
   cat $input | \
     perl -C -MHTML::Entities -pe 'decode_entities($_);' | \
-    pandoc -f docbook -t asciidoc --atx-headers  --base-header-level=3 -o $output
+    pandoc -f docbook -t asciidoc --atx-headers  --base-header-level=2 -o $output
+
+  # Convert first heading in each file to level 0 heading
+  awk '/^==/ && !done { gsub(/^=/, ""); done=1;}; 1;' $output > $output.tmp
+  mv $output.tmp $output
+
   #rm $input
 done
